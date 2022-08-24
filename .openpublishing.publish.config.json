@@ -1,5 +1,20 @@
 {
-  "docsets_to_publish": [],
+  "docsets_to_publish": [
+    {
+      "docset_name": "data-api-builder-docs",
+      "build_source_folder": "data-api-builder",
+      "build_output_subfolder": "data-api-builder-docs",
+      "locale": "en-us",
+      "monikers": [],
+      "moniker_ranges": [],
+      "open_to_public_contributors": false,
+      "type_mapping": {
+        "Conceptual": "Content"
+      },
+      "build_entry_point": "docs",
+      "template_folder": "_themes"
+    }
+  ],
   "notification_subscribers": [
     "abhtiwar@microsoft.com",
     " damauri@microsoft.com",
