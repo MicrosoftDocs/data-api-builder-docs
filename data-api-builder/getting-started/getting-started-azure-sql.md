@@ -381,7 +381,7 @@ Congratulations, you've now created a fully working backend to support your mode
 
 If you want to practice what you have learned, here's a little exercise you can do on your own
 
-- Using the database setup script `/samples/getting-started/azure-sql-db/exercise/exercise.library.azure-sql.sql`:
+- Using the database setup script available in the source code repo [excercise folder](https://github.com/Azure/data-api-builder/tree/main/samples/getting-started/azure-sql-db/exercise/exercise.library.azure-sql.sql):
   - add the table `dbo.series`, which stores series names (for example: [Foundation Series](https://en.wikipedia.org/wiki/Foundation_series))
   - update the `dbo.books` table by adding a column named `series_id`
   - update the `dbo.books` table by adding a foreign key constraint on the `dbo.series` table
