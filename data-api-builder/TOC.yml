@@ -20,8 +20,6 @@
       href: getting-started/getting-started-azure-cosmos-db.md
     - name: Getting started with Azure MySQL database
       href: getting-started/getting-started-azure-mysql-db.md
-    - name: Getting started with dab CLI
-      href: getting-started/getting-started-dab-cli.md
 - name: Troubleshooting
   href: troubleshooting.md
   items:

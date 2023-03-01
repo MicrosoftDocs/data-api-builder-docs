@@ -31,7 +31,7 @@ For Data API Builder, the format used for a MySQL connection is based on SSL con
 
 ## Create the database objects
 
-Create the database `booksdb` with tables to represent Authors, Books and the many-to-many relationship between Authors and Books. Execute this [sample script for books schema and data](../samples/getting-started/azure-mysql-db/exercise/exercise-library.azure-mysql.sql) in the MySQL Database you decided to use.
+Create the database `booksdb` with tables to represent Authors, Books and the many-to-many relationship between Authors and Books. Execute this [sample script for books schema and data](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-mysql-db/library.azure-mysql.sql) in the MySQL Database you decided to use.
 
 - `authors`: Table containing authors
 - `books`: Table containing books
@@ -89,7 +89,7 @@ The command will generate a config file called dab-config.MySql.json looking lik
 ```
 As you can see there the `data-source` property specifies that our chosen `database-type` is `mysql`, with the `connection-string` we passed to DAB CLI.
 
-> Take a look at the [DAB Configuration File Guide](../configuration-file.md) document to learn more. With the configuration file in place, then it's time to start defining which entities you want to expose via the API.
+> Take a look at the [DAB Configuration File Guide](https://github.com/Azure/data-api-builder/blob/main/docs/configuration-file.md) document to learn more. With the configuration file in place, then it's time to start defining which entities you want to expose via the API.
     
 ## Add Book entities
 
@@ -130,7 +130,7 @@ within the `entities` object you can create any entity with any name (as long as
 
 After that, the permissions for the exposed entity are defined via the `permissions` element; it allows you to be sure that only those users making a request with the right claims will be able to access the entity and its data. 
 
-> **BEST PRACTICE**: It is recommeneded to use the *singular* form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behaviour in the [GraphQL documentation](./../graphql.md).
+> **BEST PRACTICE**: It is recommeneded to use the *singular* form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behaviour in the [GraphQL documentation](../graphql.md).
 
 ## Start Data API builder for Azure MySQL Database
 
