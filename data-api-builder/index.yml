@@ -1,0 +1,39 @@
+### YamlMime:Landing
+
+title: Data API builder documentation
+summary: Data API builder for Azure Databases provides modern REST and GraphQL endpoints to your Azure Databases.
+
+metadata:
+  title: Data API builder documentation
+  description: With Data API builder, database objects can be exposed via REST or GraphQL endpoints so that your data can be accessed using modern techniques on any platform, any language, and any device.
+  ms.topic: landing-page
+  ms.author: damauri
+  ms.service: data-api-builder
+  ms.date: 02/27/2023
+
+landingContent:
+  - title: About Data API builder
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: Data API builder overview
+            url: overview-to-data-api-builder.md
+      - linkListType: whats-new
+        links:
+          - text: What's new in Data API builder
+            url: whats-new.md
+
+  - title: Get started
+    linkLists:
+      - linkListType: quickstart
+        links:
+          - text: Get started with Data API builder
+            url: ./getting-started-with-data-api-builder.md
+          - text: Use Data API builder with Azure SQL DB
+            url: ./getting-started/getting-started-azure-sql.md
+          - text: Use Data API builder with Cosmos DB
+            url: ./getting-started/getting-started-cosmos-db.md   
+          - text: Use Data API builder with PostgreSQL
+            url: ./getting-started/getting-started-postgresql.md
+          - text: Use Data API builder with MySQL 
+            url: ./getting-started/getting-started-mysql-db.md

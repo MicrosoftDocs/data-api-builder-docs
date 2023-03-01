@@ -1,2 +1,32 @@
-- name: Index
-  href: index.md
+- name: Data API builder Documentation
+  href: index.yml
+- name: Overview 
+  items:
+  - name: What is Data API builder?
+    href: overview-to-data-api-builder.md
+  - name: What's new in Data API builder
+    href: whats-new.md
+- name: Quickstarts
+  items:
+  - name: Getting started with Data API builder
+    href: getting-started-with-data-api-builder.md
+  - name: Getting started with databases 
+    items:
+    - name: Getting started with Azure SQL database
+      href: getting-started/getting-started-azure-sql.md
+    - name: Getting started with Azure Postgresql database
+      href: getting-started/getting-started-azure-postgresql.md
+    - name: Getting started with Azure Cosmos database
+      href: getting-started/getting-started-azure-cosmos-db.md
+    - name: Getting started with Azure MySQL database
+      href: getting-started/getting-started-azure-mysql-db.md
+    - name: Getting started with dab CLI
+      href: getting-started/getting-started-dab-cli.md
+- name: Troubleshooting
+  href: troubleshooting.md
+  items:
+  - name: Troubleshooting installation
+    href: troubleshooting-installation.md
+  - name: Troubleshooting usage
+    href: troubleshooting-usage.md
+  
