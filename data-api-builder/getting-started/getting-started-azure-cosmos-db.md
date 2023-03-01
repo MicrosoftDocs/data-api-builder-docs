@@ -1,61 +1,61 @@
 ---
-title: Quickstart to Data API builder for Azure Cosmos DB 
-description: This quickstart will help you build a backend to support your modern applications with Data API builder for Azure Cosmos DB.
-author: anagha-todalbagi
-ms.author: atodalbagi
-ms.service: data-api-builder
-ms.topic: quickstart
-ms.date: 02/22/2023
+title: Quickstart to Data API builder for Azure Cosmos DB #Required; page title displayed in search results. Include the word "quickstart". Include the brand.
+description: This quickstart will help you build a backend to support your modern applications with Data API builder for Azure Cosmos DB. #Required; article description that is displayed in search results. Include the word "quickstart".
+author: sajeetharan #Required; your GitHub user alias, with correct capitalization.
+ms.author: sasinnat #Required; microsoft alias of author; optional team alias.
+ms.service: data-api-builder #Required; service per approved list. service slug assigned to your service by ACOM.
+ms.topic: quickstart #Required; leave this attribute/value as-is.
+ms.date: 02/22/2023 #Required; mm/dd/yyyy format.
 ---
 
 # Quickstart: Build a backend to support your modern applications with Data API builder for Azure Cosmos DB.
 
+Make sure you have read the [Getting Started](getting-started.md) document.
 
-Make sure you have read the [Getting Started](../getting-started-with-data-api-builder.md) document.
+This tutorial assumes that you have already a [Cosmos DB NoSQL API database account](https://learn.microsoft.com/azure/cosmos-db/sql/create-cosmosdb-resources-portal#create-an-azure-cosmos-db-account) that can be used as a playground.
 
-This tutorial assumes that you have already a [Cosmos DB SQL API database account](/azure/cosmos-db/sql/create-cosmosdb-resources-portal#create-an-azure-cosmos-db-account) that can be used as a playground.
+## Create the database container
 
-## Create the database containers
+Create the necessary database container needed to represent Books. There are different ways to model this sample and you can learn more about data modeling from [here](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/modeling-data). We will use the [embedded data model](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/modeling-data#embedding-data) in this sample.
 
-Create the necessary database containers needed to represent Authors and Books.
+- `books`: Collection containing books and it's authors with 'id' as the partition key
 
-- `authors`: Collection containing authors with 'ID' as the partition key
-- `books`: Collection containing books with 'ID' as the partition key
+Read more about [choosing partition key](https://docs.microsoft.com/en-us/azure/cosmos-db/partitioning-overview#choose-partitionkey) and [data modeling](https://docs.microsoft.com/en-us/azure/cosmos-db/sql/modeling-data)
 
-Read more about [choosing partition key](/azure/cosmos-db/partitioning-overview#choose-partitionkey) and [data modeling](/azure/cosmos-db/sql/modeling-data)
+Once the container is created, we can import the sample data which are placed in the 'azure-cosmos-db' folder to the book collection by using the add new item option (Make sure you add one by one item) in the Azure Data Explorer.
 
-Once the containers are created, you can import the sample data placed in the 'azure-cosmos-db' folder into their respective collections by using the [Data Import Tool](/azure/cosmos-db/import-data#JSON).
+![Cosmos DB Add New Document](../media/cosmos-insert-new.png)
 
-## Add Book and Author schema files
+## Add Book schema file
 
-We need to expose the books and the authors collections so that they can be used via GraphQL. Cosmos DB, being schema agnostic, requires us to provide the schema definition for the collections. These schema definitions need to be added in the `schema.gql` file.
+We need to expose the books collection so that it can be used via GraphQL. Cosmos DB, being schema agnostic, requires us to provide the schema definition for the collection. The schema definition needs to be added in the `schema.gql` file.
 
-Start by adding the `Author` and `Book` schema:
+Start by adding the `Book` schema:
 
 ```graphql
-type Author @model {
+type Book @model {
+  id: ID
+  title: String
+  Authors: [Author]
+}
+
+type Author {
   id: ID
   first_name: String
   middle_name: String
   last_name: String
-  Books: [Book]
-}
-
-type Book @model {
-  id: ID
-  title: String
-  Authors: [String]
 }
 ```
-> **BEST PRACTICE**: It is recommended to use the _singular_ form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a _list_ of entity items will be returned. More on this behavior in the [GraphQL documentation] (./../graphql.md).
+
+> **BEST PRACTICE**: It is recommended to use the _singular_ form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a _list_ of entity items will be returned. More on this behavior in the [GraphQL documentation](./../graphql.md).
 
 ## Get the Cosmos DB Account connection string
 
-You can obtain the connection string by navigating to your Azure Cosmos DB account page, and select Primary connection string. Copy the value to use in the Data API Builder.
+You can obtain the connection string by navigating to your Azure Cosmos DB account page's key blade, and select Primary connection string. Copy the value to use in the Data API Builder.
 
 ![Cosmos DB connection string](../media/cosmos-connection.png)
 
-You can also use Azure Cosmos DB emulator connection string if you're testing locally. The Azure Cosmos DB Emulator supports a [single fixed account and a well-known authentication key](/azure/cosmos-db/local-emulator?tabs=ssl-netstd21#authenticate-requests)
+You can also use Azure Cosmos DB emulator connection string if you are testing locally. The Azure Cosmos DB Emulator supports a [single fixed account and a well-known authentication key](https://learn.microsoft.com/en-us/azure/cosmos-db/local-emulator?tabs=ssl-netstd21#authenticate-requests)
 
 The connection string looks like,
 
@@ -63,19 +63,19 @@ The connection string looks like,
 AccountEndpoint=AccountEndpoint=https://localhost:8081/;AccountKey=REPLACEME;
 ```
 
-Now that you've all the required pieces in place, it's time to create the configuration file for DAB.
+Now that you have all the required pieces in place, it's time to create the configuration file for DAB.
 
 ## Creating a configuration file for DAB
 
 The Data API builder for Azure Databases engine needs a [configuration file](../configuration-file.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
 
-For this getting started guide, you'll use DAB CLI to initialize your configuration file. Run the following command:
+For this getting started guide you will use DAB CLI to initialize your configuration file. Run the following command:
 
 ```bash
 dab init --database-type "cosmosdb_nosql" --graphql-schema schema.gql --cosmosdb_nosql-database PlaygroundDB --connection-string "AccountEndpoint=https://localhost:8081/;AccountKey=REPLACEME;" --host-mode "Development"
 ```
 
-The command generates a config file called `dab-config.json` looking like this:
+The command will generate a config file called `dab-config.json` looking like this:
 
 ```json
 {
@@ -117,50 +117,20 @@ As you can see there the `data-source` property specifies that our chosen `datab
 
 With the configuration file in place, then it's time to start defining which entities you want to expose via the API.
 
-## Add Book and Author entities
+## Add Book entity
 
-We want to expose the books and the authors collections so that they can be used via GraphQL. For doing that, all we need is to add the related information to the entities section of the configuration file.
+We want to expose the books collection so that they can be used via GraphQL. For doing that, all we need is to add the related information to the entities section of the configuration file.
 
 > **NOTE**: REST operations are not supported for Cosmos DB via the
-> Data API Builder, You can use the existing [REST API](/rest/api/cosmos-db/)
+> Data API Builder, You can use the existing [REST API](https://learn.microsoft.com/rest/api/cosmos-db/)
 
-You can proceed either by using the CLI with the add command:
-
-```bash
-  dab add Author --source authors --permissions "anonymous:*"
-```
-
-or by adding the `Author` entity manually to the configuration file under entities section:
-
-```json
-    "Author": {
-      "source": "authors",
-      "rest": false,
-      "graphql": true,
-      "permissions": [
-        {
-          "role": "anonymous",
-          "actions": [ "*" ]
-        }
-      ]
-    }
-```
- 
-within the `entities` object you can create any entity with any name (as long as it's valid for GraphQL). Here, the name `Author`, is used to build the GraphQL type. Within the entity, you have the `source` element that specifies which container contains the entity data. In our case, it's `authors`.
-
-> **NOTE**: Entities names are case sensitive and they will be exposed via GraphQL as you have typed them.
-
-After that, you need to specify the permission for the exposed entity, so that you can be sure only those users making a request with the right claims will be able to access the entity and its data. In this getting started tutorial we're just allowing anyone, without the need to be authenticated, to perform all the CRUD operations to the `Author` entity.
-
-You can also add the `Book` entity now, applying the same concepts you just learned for the `Author` entity.
-
-CLI add command:
+You can do this either by using the CLI with the add command :
 
 ```bash
-  dab add Book --source books --permissions "anonymous:*"
+dab add Book --source books --permissions "anonymous:*"
 ```
 
-or by adding the `Book` entity manually to the configuration file:
+or by adding the `Book` entity manually to the configuration file under entities section:
 
 ```json
     "Book": {
@@ -176,21 +146,16 @@ or by adding the `Book` entity manually to the configuration file:
     }
 ```
 
-Once you've added the `Author` entity, the `entities` object of configuration file looks like the following:
+within the `entities` object you can create any entity with any name (as long as it is valid for GraphQL). The name `Book`, in this case, will be used to build the GraphQL type. Within the entity you have the `source` element that specifies which container contains the entity data. In our case it is `books`.
+
+> **NOTE**: Entity names are case sensitive and they will be exposed via GraphQL as you have typed them.
+
+After that, you need to specify the permission for the exposed entity, so that you can be sure only those users making a request with the right claims will be able to access the entity and its data. In this getting started tutorial we're just allowing anyone, without the need to be authenticated, to perform all the CRUD operations to the `Book` entity.
+
+Once you have added the `Book` entity, the `entities` object of configuration file will look like the following:
 
 ```json
  "entities": {
-    "Author": {
-      "source": "authors",
-      "rest": false,
-      "graphql": true,
-      "permissions": [
-        {
-          "role": "anonymous",
-          "actions": [ "*" ]
-        }
-      ]
-    },
     "Book": {
       "source": "books",
       "rest": false,
@@ -207,17 +172,17 @@ Once you've added the `Author` entity, the `entities` object of configuration fi
 
 that's all is needed at the moment. Data API builder is ready to be run.
 
-> **BEST PRACTICE**: It is recommended to use the _singular_ form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a _list_ of entity items will be returned. More on this behavior in the [GraphQL documentation](./../graphql.md).
+> **BEST PRACTICE**: It is recommended to use the _singular_ form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a _list_ of entity items will be returned. More on this behaviour in the [GraphQL documentation](./../graphql.md).
 
 ## Start Data API builder for Azure Cosmos DB
 
-Run the below command (this starts the engine with default config `dab-config.json`, use option --config otherwise):
+Run the below command (this will start the engine with default config `dab-config.json`, use option --config otherwise):
 
 ```dos
 dab start
 ```
 
-Once it's successfully started, then you'll see something like:
+Once it is successfully started, then you'll see something like:
 
 ```text
 info: Azure.DataApiBuilder.Service.Startup[0]
@@ -238,7 +203,7 @@ Now that the Data API builder engine is running, you can use your favorite REST 
 
 ### REST Endpoint
 
-Unlike other databases, Data API Builder for Azure Cosmos DB doesn't support generating REST endpoints because there's already a[REST API endpoint](/rest/api/cosmos-db/) capability built-in to the Azure Cosmos DB service.
+Unlike other databases, Data API Builder for Azure Cosmos DB does not support generating REST endpoints because there is already a[REST API endpoint](https://learn.microsoft.com/rest/api/cosmos-db/) capability built-in to the Azure Cosmos DB service.
 
 ### GraphQL endpoint
 
@@ -249,7 +214,6 @@ GraphQL endpoint is available at
 ```
 
 Use a GraphQL-capable REST client like Postman or Insomnia to query the database using full GraphQL introspection capabilities and to get IntelliSense and validation. For example:
-
 
 ```graphql
 {
@@ -262,11 +226,11 @@ Use a GraphQL-capable REST client like Postman or Insomnia to query the database
 }
 ```
 
-This returns the first five books ordered by title in descending order.
+will return the first five books ordered by title in descending order.
 
 ## GraphQL operations on entity relationships
 
-With your GraphQL endpoint operational, you probably want to take advantage of GraphQL's ability to handle complex requests. For example, you may want to get all the Books in your library along with the Authors they've written. In order to achieve that, you need to let Data API Builder know that you want that relationship to be available to be used in queries. We've defined the
+With your GraphQL endpoint operational, you probably want to take advantage of GraphQL's ability to handle complex requests.For example, you may want to get all the Books in your library along with the Authors they have written. In order to achieve that, you need to let Data API Builder know that you want that relationship to be available to be used in queries. We have defined the
 data models in such a way that they can be queried at once.
 
 Using GraphQL you can now execute queries like:
@@ -277,7 +241,7 @@ Using GraphQL you can now execute queries like:
     items {
       id
       title
-      authors {
+      Authors {
         first_name
         last_name
       }
@@ -286,6 +250,14 @@ Using GraphQL you can now execute queries like:
 }
 ```
 
-This query returns list of Books and its Authors.
+This query will return list of Books and its Authors.
 
-Congratulations, you've just created a fully working backend to support your modern applications!
+Congratulations, you have just created a fully working backend to support your modern applications!
+
+## Exercise
+
+If you want to practice what you have learned, here's a little exercise you can do on your own
+
+- add the collection `series` which will store series names (for example: [Foundation Series](https://en.wikipedia.org/wiki/Foundation_series)) and respective ids.
+- update the `books` collection by adding a field named `series_id` and update with matching series_id.
+- Update the configuration file with a new entity named `Series`, supported by the `series` source collection you just created.
