@@ -9,7 +9,7 @@
 - name: Quickstarts
   items:
   - name: Getting started with Data API builder
-    href: getting-started-with-data-api-builder.md
+    href: getting-started/getting-started-with-data-api-builder.md
   - name: Getting started with databases 
     items:
     - name: Getting started with Azure SQL database
