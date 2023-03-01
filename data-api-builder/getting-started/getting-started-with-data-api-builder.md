@@ -1,6 +1,6 @@
 ---
 title: Quickstart to Azure data API builder
-description: In this quickstart we will help you get started with Data API builder (DAB) for Azure Databases
+description: In this quickstart, we help you get started with Data API builder (DAB) for Azure Databases
 author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
@@ -10,11 +10,11 @@ ms.date: 02/22/2023
 
 # Quickstart: Build modern end point support with Data API builder for Azure Databases
 
-Welcome! In this guide we will help you get started with Data API builder (DAB) for Azure Databases. First you are going to get DAB running locally on your machine. Then you will use DAB to create an API for your application. You will have the option to choose between Azure SQL Database or Azure Cosmos DB as the database backend.
+Welcome! This guide helps you get started with Data API builder (DAB) for Azure Databases. First you're going to get DAB running locally on your machine. It then uses DAB to create an API for your application using the Azure Database of your choice.
 
 ## Use case scenario
 
-In this tutorial we'll be creating the backend API for a small solution that allows end-users to keep track of books in their bookshelf. Therefore, the business entities we'll be dealing with are:
+In this tutorial we're creating the backend API for a small solution that allows end-users to keep track of books in their bookshelf. Therefore, the business entities we're dealing with are:
 
 - Books
 - Authors
@@ -41,7 +41,7 @@ Data API Builder provides a CLI tool to simplify configuration and execution of 
 dotnet tool install --global Microsoft.DataApiBuilder 
 ```
 
-or, if you have already installed a previous version, you can update DAB CLI to the latest version via the following:
+or, if you've already installed a previous version, you can update DAB CLI to the latest version via the following:
 
 ```shell
 dotnet tool update --global Microsoft.DataApiBuilder
@@ -51,7 +51,7 @@ dotnet tool update --global Microsoft.DataApiBuilder
 
 ## Verifying the installation
 
-Installing the package will make the `dab` command available on your development machine. To validate your installation, you can run the following command:
+Installing the package makes the `dab` command available on your development machine. To validate your installation, you can run the following sample command:
 
 ```shell
 dab --version
@@ -65,7 +65,7 @@ Microsoft.DataApiBuilder x.y.z
 
 Where `x.y.z` is your version of DAB CLI.
 
-## Azure Database
+## Next Steps
 
 As the Data API builder for Azure Databases generates REST and GraphQL endpoints for database objects, you need to have a database ready for the tutorial. You can choose either a relational or non-relational database. 
 
