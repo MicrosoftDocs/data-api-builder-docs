@@ -29,7 +29,7 @@ landingContent:
         links:
           - text: Get started with Data API builder
             url: ./getting-started/getting-started-with-data-api-builder.md
-          - text: Use Data API builder with Azure SQL DB
+          - text: Use Data API builder with Azure SQL
             url: ./getting-started/getting-started-azure-sql.md
           - text: Use Data API builder with Cosmos DB
             url: ./getting-started/getting-started-azure-cosmos-db.md   

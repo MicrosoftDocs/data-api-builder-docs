@@ -12,7 +12,7 @@
     href: getting-started/getting-started-with-data-api-builder.md
   - name: Getting started with databases 
     items:
-    - name: Getting started with Azure SQL database
+    - name: Use Data API builder with Azure SQL
       href: getting-started/getting-started-azure-sql.md
     - name: Getting started with Azure Postgresql database
       href: getting-started/getting-started-azure-postgresql.md

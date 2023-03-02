@@ -8,7 +8,7 @@ ms.topic: quickstart
 ms.date: 02/22/2023
 ---
 
-# Quickstart: Build a backend to support your modern applications with Data API builder for Azure SQL Database
+# Quickstart: Use Data API builder with Azure SQL
 
 Make sure you have read the [Getting Started](./getting-started-with-data-api-builder.md) document.
 
