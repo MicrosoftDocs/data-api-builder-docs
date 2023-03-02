@@ -47,7 +47,8 @@ or, if you've already installed a previous version, you can update DAB CLI to th
 dotnet tool update --global Microsoft.DataApiBuilder
 ```
 
-> [!IMPORTANT]: if you are running on Linux or MacOS, you may need to add .NET global tools to your PATH to call `dab` directly. Take a look at the troubleshooting guide for more information: [Troubleshoot Data API builder installation](../troubleshooting-installation.md)
+> [!IMPORTANT]
+> if you are running on Linux or MacOS, > you may need to add .NET global tools to your PATH to call `dab` directly, take a look at the troubleshooting guide for more information: [Troubleshoot Data API builder installation](../troubleshooting-installation.md)
 
 ## Verifying the installation
 
