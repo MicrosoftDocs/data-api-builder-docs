@@ -14,7 +14,7 @@ This article provides solutions to common problems that might arise when you're 
 
 ## REST endpoints
 
-### HTTP 400 “Bad Request” Errors 
+### HTTP 400 “Bad Request” Errors
 
 An HTTP 400 error is returned when the URL path points to an invalid route. Routes indicate if the request is set using REST or GraphQL protocols.
 
@@ -35,15 +35,15 @@ Make sure that the URL being used by the request points to a route that has been
 }
 ```
 
-Requires that URL path uses the format: 
+Requires that URL path uses the format:
 
-```
+```shell
 /api/<entity>
 ```
 
 or
 
-```
+```shell
 /graphql
 ```
 
@@ -69,7 +69,7 @@ An HTTP 404 error is returned if the requested URL points to a route not associa
 
 The entity `Todo` is reachable via the following route:
 
-```
+```shell
 /<rest-route>/Todo
 ```
 
@@ -94,19 +94,19 @@ If you've specified the `rest.path` option in the entity configuration, for exam
 
 Then the URL route to use the `Todo` entity is:
 
-```
+```shell
 /<rest-route>/todo
 ```
 
 ## GraphQL endpoints
 
-## HTTP 400 “Bad Request” Errors 
+## HTTP 400 “Bad Request” Error
 
 A request set the GraphQL endpoint return HTTP 400 "Bad Request" error every time the GraphQL request isn't done properly. It could be that a non-existing entity field is specified, or that the entity name is misspelled. Data API builder returns a descriptive error in the response payload with details about the error itself.
 
 If the return GraphQL error is *"Either the parameter query or the parameter ID has to be set."*, make sure the GraphQL request is sent using the HTTP POST method.
 
-## HTTP 404 “Not Found” Errors 
+## HTTP 404 “Not Found” Error
 
 Make sure the GraphQL request is sent using the HTTP POST method.
 
@@ -116,10 +116,10 @@ Make sure the GraphQL request is sent using the HTTP POST method.
 
 HTTP 500 errors indicate that Data API builder can't properly operate on the backend database. Make sure that
 
--	Data API builder can still connect to the configured database
--	The database objects used by Data API builder are still available and accessible 
+- Data API builder can still connect to the configured database
+- The database objects used by Data API builder are still available and accessible
 
-To avoid potential security risk, when configured to run in `production` mode, which is the default setting, Data API builder doesn't return detailed errors in the response payload, to avoid disclosing potential sensitive information. 
+To avoid potential security risk, when configured to run in `production` mode, which is the default setting, Data API builder doesn't return detailed errors in the response payload, to avoid disclosing potential sensitive information.
 
 To have the underlying error raised by the database also returned in the response payload, set the `runtime.host.mode`  configuration option to `development`.
 
@@ -149,7 +149,7 @@ Make sure the GraphQL clients are using support GraphQL introspections. Well kno
     },
     [...]
 }
-``` 
+```
 
 ## Request aren't authorized
 
@@ -171,7 +171,7 @@ Make sure that you've generated a bearer token using the audience defined in the
 
 You must generate a token valid for the defined audience. Using AZ CLI, for example, you can do it by specifying the audience in the `resource` parameter:
 
-```
+```shell
 az account get-access-token --resource "b455fa3c-15fa-4864-8bcd-88fd83d686f3"
 ```
 
@@ -204,4 +204,4 @@ For example, if you've a configuration file as shown in the following example:
 
 The X-MS-API-ROLE must be set to `role1` to be able to access the Todo entity using the `role1` role.
 
-**ATTENTION**: Roles name matching is case-sensitive 
+**ATTENTION**: Roles name matching is case-sensitive
