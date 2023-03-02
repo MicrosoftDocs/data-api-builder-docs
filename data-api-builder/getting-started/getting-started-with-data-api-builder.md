@@ -25,7 +25,7 @@ Both the business entities need a modern endpoint, REST and/or GraphQL, to allow
 
 ### .NET 6 SDK
 
-Make sure you have .NET 6.0 SDK installed on your machine (https://dotnet.microsoft.com/en-us/download/dotnet/6.0.)
+Make sure you have .NET 6.0 SDK installed on your machine. If you don't have .NET 6 installed, you can install it by following the instructions in the [.NET 6 installation guide](/dotnet/core/install/).
 
 You can list the SDKs installed on your machine by using the following command:
 
