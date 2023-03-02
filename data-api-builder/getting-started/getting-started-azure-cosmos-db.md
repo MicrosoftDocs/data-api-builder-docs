@@ -1,6 +1,6 @@
 ---
 title: Quickstart to Data API builder for Azure Cosmos DB
-description: This quickstart will help you build a backend to support your modern applications with Data API builder for Azure Cosmos DB.
+description: This quickstart will help use Data API builder with Azure Cosmos DB.
 author: sajeetharan
 ms.author: sasinnat
 ms.service: data-api-builder
@@ -8,7 +8,7 @@ ms.topic: quickstart
 ms.date: 02/22/2023
 ---
 
-# Quickstart: Build a backend to support your modern applications with Data API builder for Azure Cosmos DB
+# Quickstart: Use Data API builder with Azure Cosmos DB
 
 Make sure you have read the [Getting Started](./getting-started-with-data-api-builder.md) document.
 
@@ -22,7 +22,7 @@ Create the necessary database container needed to represent Books. There are dif
 
 Read more about [choosing partition key](/azure/cosmos-db/partitioning-overview#choose-partitionkey) and [data modeling](/azure/cosmos-db/sql/modeling-data)
 
-Once the container is created, we can import the sample data that is placed in the 'azure-cosmos-db' folder to the book collection by using the add new item option (Make sure you add one by one item) in the Azure Data Explorer.
+Once the container is created, we can import the sample data that is placed in the 'azure-cosmos-db' folder to the book collection by using the 'add new item' option (Make sure you add one by one item) in the Azure Data Explorer.
 
 ![Cosmos DB Add New Document](../media/cosmos-insert-new.png)
 

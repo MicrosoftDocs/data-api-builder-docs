@@ -1,11 +1,11 @@
 ---
-title: Overview to Azure data API builder #Required;
-description: In this overview, we help you get started with Data API builder (DAB) for Azure Databases #Required; article description that is displayed in search results. Include the word "quickstart".
-author: anagha-todalbagi #Required; your GitHub user alias, with correct capitalization.
-ms.author: atodalbagi #Required; microsoft alias of author; optional team alias.
-ms.service: data-api-builder #Required; service per approved list. service slug assigned to your service by ACOM.
-ms.topic: overview #Required; leave this attribute/value as-is.
-ms.date: 02/22/2023 #Required; mm/dd/yyyy format.
+title: Overview to Azure data API builder
+description: In this overview, we help you get started with Data API builder (DAB) for Azure Databases
+author: anagha-todalbagi
+ms.author: atodalbagi
+ms.service: data-api-builder
+ms.topic: overview
+ms.date: 02/22/2023
 ---
 
 # What is Data API builder?

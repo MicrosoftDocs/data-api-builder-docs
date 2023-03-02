@@ -1,6 +1,6 @@
 ---
 title: Quickstart to Data API builder for Azure Database PostgreSQL
-description: This quickstart will help you build a backend to support your modern applications with Data API builder for Azure Database PostgreSQL.
+description: This quickstart will help you use Data API builder with Azure Database PostgreSQL.
 author: anagha-todalbagi 
 ms.author: atodalbagi 
 ms.service: data-api-builder 
@@ -8,7 +8,7 @@ ms.topic: quickstart
 ms.date: 02/22/2023
 ---
 
-# Quickstart: build a backend to support your modern applications with Data API builder for Azure Database PostgreSQL
+# Quickstart: Use Data API builder with Azure Database PostgreSQL
 
 Make sure you have read the [Getting Started](./getting-started-with-data-api-builder.md) document.
 
@@ -375,7 +375,7 @@ that returns all the authors of "Nightfall" book, or like:
 }
 ```
 
-that will return all the books written by Isaac Asimov.
+that returns all the books written by Isaac Asimov.
 
 Congratulations, you've now created a fully working backend to support your modern applications!
 

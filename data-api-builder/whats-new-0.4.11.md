@@ -31,9 +31,9 @@ JSON Schema has been published here:
 https://dataapibuilder.azureedge.net/schemas/v0.4.11-alpha/dab.draft.schema.json
 ```
 
-JSON schema provides intellisense if you're using an IDE, like VS Code, that supports JSON Schemas. Take a look at `basic-empty-dab-config.json` in the `samples` folder, to have a starting point when manually creating the `dab-config.json` file.
+JSON schema provides 'intellisense', if you're using an IDE like VS Code that supports JSON Schemas. Take a look at `basic-empty-dab-config.json` in the `samples` folder, to have a starting point when manually creating the `dab-config.json` file.
 
-Note that if you're using DAB CLI to create and manage the `dab-config.json` file, DAB CLI isn't yet creating the configuration file using the aforementioned reference to the JSON schema file.
+If you're using DAB CLI to create and manage the `dab-config.json` file, DAB CLI isn't yet creating the configuration file using the aforementioned reference to the JSON schema file.
 
 ## Updated JSON schema for `data-source` section
 
