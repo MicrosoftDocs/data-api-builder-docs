@@ -1,6 +1,6 @@
 ---
 title: Quickstart to Data API builder for Azure SQL Database 
-description: This quickstart will help you build a backend to support your modern applications with Data API builder for Azure SQL Database.
+description: This quickstart will help you use Data API builder with Azure SQL.
 author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
@@ -248,7 +248,7 @@ returns the first five books ordered by title in descending order.
 
 ## Adding entities relationships
 
-Everything is now up and working, and now you probably want to take advantage as much as possible of GraphQL capabilities to handle complex queries by sending just one request. For example, you may want to get all the Authors in your library along with the Books they've written. In order to achieve that you need to let Data API Builder know that you want such relationship to be available to be used in queries.
+Everything is now up and working, and now you probably want to take advantage as much as possible of GraphQL capabilities to handle complex queries by sending just one request. For example, you may want to get all the Authors in your library along with the Books they've written. In order to achieve that, you need to let Data API Builder know that you want such relationship to be available to be used in queries.
 
 Stop the engine (`Ctrl+C`).
 
@@ -270,7 +270,7 @@ which creates the `relationships` section in the `Author` entity:
 }
 ```
 
-The element under `relationship` is used to add a field - `books` in the sample - to the generated GraphQL object, so that one will be able to navigate the relationship between an Author and their Books. Within the `books` element there are three fields:
+The element under `relationship` is used to add a field - `books` in the sample - to the generated GraphQL object, so that one can navigate the relationship between an Author and their Books. Within the `books` element there are three fields:
 
 - `cardinality`: set to `many` as an author can be associated with more than one book
 - `target.entity`: Which entity, defined in the same configuration file, will be used in this relationship. For this sample is `book` as we're creating the relationship on the `Author` entity.
