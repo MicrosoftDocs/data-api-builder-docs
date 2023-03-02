@@ -10,17 +10,17 @@ ms.date: 02/22/2023
 
 # Quickstart: build a backend to support your modern applications with Data API builder for Azure Database PostgreSQL
 
-Make sure you have read the [Getting Started](../getting-started-with-data-api-builder.md) document.
+Make sure you have read the [Getting Started](./getting-started-with-data-api-builder.md) document.
 
 As mentioned before, this tutorial assumes that you already have a PostgreSQL server or an Azure Database for PostgreSQL database that can be used as playground.
 
 ## Get the database connection string
 
-There are several ways to get an Azure Database for PostgreSQL database connection string. 
+There are several ways to get an Azure Database for PostgreSQL database connection string.
 
 If you're connecting to Azure Database for PostgreSQL Flexible Server, the connection string looks like:
 
-```text 
+```text
 `Server={your_server}.postgres.database.azure.com;Database={your_database};Port=5432;User Id={your_username};Password={your_password};Ssl Mode=Require;`
 ```
 
@@ -36,8 +36,6 @@ To connect to a local PostgreSQL Server, the connection string looks like:
 `Server={your_server};Database={your_database};Port=5432;User Id={your_username};Password={your_password};Ssl Mode=Require;`
 ```
 
-
-
 ## Create the database objects
 
 Create the database tables needed to represent Authors, Books and the many-to-many relationship between Authors and Books. You can find the `library.azure-postgresql.sql` script in the `azure-postgresql-db` folder in the GitHub repo. You can use it to create three tables, along with sample data:
@@ -50,7 +48,7 @@ Execute the script in the PostgreSQL Server or Azure Database for PostgreSQL as 
 
 ## Creating a configuration file for DAB
 
-The Data API builder for Azure Databases engine needs a [configuration file](../configuration-file.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
+The Data API builder for Azure Databases engine needs a [configuration file](https://github.com/Azure/data-api-builder/blob/main/docs/configuration-file.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
 
 For this getting started guide, you'll use DAB CLI to initialize your configuration file. Run the following command:
 
@@ -97,7 +95,7 @@ The command generates a config file called `dab-config.json` and looks like this
 
 As you can see there the `data-source` property specifies that our chosen `database-type` is `postgresql`, with the `connection-string` we passed to DAB CLI.
 
->Take a look at the [DAB Configuration File Guide](../configuration-file.md) document to learn more.
+>Take a look at the [DAB Configuration File Guide](https://github.com/Azure/data-api-builder/blob/main/docs/configuration-file.md) document to learn more.
 
 With the configuration file in place, it's time to start defining which entities you want to expose via the API.
 
@@ -129,7 +127,7 @@ or by adding the `Author` entity manually to the config file:
 
 within the `entities` object you can create any entity with any name (as long as it's valid for REST and GraphQL). The name `Author`, in this case, is used to build the REST path and the GraphQL type. Within the entity, you have the `source` element that specifies which table in the database contains the entity data. In our case, it's `authors`.
 
-> **NOTE**: Entities names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them. Take a look at the [Best Practices](../best-practices.md) document to learn the best practices on entities names.
+> **NOTE**: Entities names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them. Take a look at the [Best Practices](https://github.com/Azure/data-api-builder/blob/main/docs/best-practices.md) document to learn the best practices on entities names.
 
 After that, the permissions for the exposed entity are defined via the `permission` element; it allows you to be sure that only those users making a request with the right claims will be able to access the entity and its data. In this getting started tutorial, we're allowing anyone, without the need to be authenticated, to perform all the CRUD operations to the `Author` entity.
 
@@ -160,7 +158,7 @@ You can also add the `Book` entity now, applying the same concepts you just lear
 
 that's all is needed at the moment. Data API builder is ready to be run.
 
-> **BEST PRACTICE**: It is recommended to use the *singular* form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](./../graphql.md).
+> **BEST PRACTICE**: It is recommended to use the *singular* form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](https://github.com/Azure/data-api-builder/blob/main/docs/graphql.md).
 
 > **BEST PRACTICE**: It is recommended to use Pascal Casing for the entity names, so that the generated GraphQL types, queries and mutations will be easier to read.
 
@@ -226,8 +224,8 @@ The GET verb also supports several query parameters that allow you to manipulate
 - `$first`: the top `n` items to return
 - `$filter`: expression to filter the returned items
 - `$select`:  list of field names to be returned
- 
-For more details on how they can be used, see [REST documentation](../rest.md)
+
+For more details on how they can be used, see [REST documentation](https://github.com/Azure/data-api-builder/blob/main/docs/rest.md)
 
 ### GraphQL endpoint
 
@@ -282,7 +280,7 @@ The element under `relationship` is used to add a field - `books` in the sample 
 - `target.entity`: Which entity, defined in the same configuration file, is used in this relationship. For this sample is `book` as we're creating the relationship on the `Author` entity.
 - `linking.object`: the database table used to support the many-to-many relationship. That table is the `books_authors`.
 
-Data API Builder automatically figures out which columns are used to support the relationship between all the involved parts. This is done by analyzing the foreign key constraints that exist between the involved tables. For this reason, the configuration is done! (If you don't have foreign keys you can always manually specify the columns you want to use to navigate from one table to another. For more details see [relationships documentation](../relationships.md)).
+Data API Builder automatically figures out which columns are used to support the relationship between all the involved parts. This is done by analyzing the foreign key constraints that exist between the involved tables. For this reason, the configuration is done! (If you don't have foreign keys you can always manually specify the columns you want to use to navigate from one table to another. For more details, see [relationships documentation](https://github.com/Azure/data-api-builder/blob/main/docs/relationships.md)).
 
 The `author` entity should now look like the following:
 
@@ -387,7 +385,7 @@ Congratulations, you've now created a fully working backend to support your mode
 
 If you want to practice what you have learned, here's a little exercise you can do on your own
 
-- Using the database setup script `/samples/getting-started/azure-postgresql-db/exercise/exercise.library.azure-postgresql.sql`:
+- Using the database setup script available in the source code repo [exercise folder](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-postgresql/exercise-library.postgresql.sql):
   - add the table `series`, which stores series names (for example: [Foundation Series](https://en.wikipedia.org/wiki/Foundation_series))
   - update the `books` table by adding a column named `series_id`
   - update the `books` table by adding a foreign key constraint on the `series` table

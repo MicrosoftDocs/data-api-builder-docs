@@ -10,13 +10,13 @@ ms.date: 02/22/2023
 
 # Quickstart: Build a backend to support your modern applications with Data API builder for Azure SQL Database
 
-Make sure you have read the [Getting Started](../getting-started-with-data-api-builder.md) document.
+Make sure you have read the [Getting Started](./getting-started-with-data-api-builder.md) document.
 
 As mentioned before, this tutorial assumes that you already have a SQL Server or an Azure SQL database that can be used as playground.
 
 ## Get the database connection string
 
-There are several ways to get an Azure SQL database connection string. More details here: [Azure SQL Database and Azure SQL Managed Instance connect and query articles](/azure/azure-sql/database/connect-query-content-reference-guide?view=azuresql)
+There are several ways to get an Azure SQL database connection string. More details here: [Azure SQL Database and Azure SQL Managed Instance connect and query articles](/azure/azure-sql/database/connect-query-content-reference-guide?view=azuresql&preserve-view=true)
 
 If you're connecting to Azure SQL DB, Azure SQL MI, or SQL Server, the connection string looks like:
 
@@ -44,7 +44,7 @@ Execute the script in the SQL Server or Azure SQL database you decided to use, s
 
 ## Creating a configuration file for DAB
 
-The Data API builder for Azure Databases engine needs a [configuration file](../configuration-file.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
+The Data API builder for Azure Databases engine needs a [configuration file](https://github.com/Azure/data-api-builder/blob/main/docs/configuration-file.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
 
 For this getting started guide, you'll use DAB CLI to initialize your configuration file. Run the following command:
 
@@ -91,7 +91,7 @@ The command generates a config file called `dab-config.json` looking like this:
 
 As you can see there the `data-source` property specifies that our chosen `database-type` is `mssql`, with the `connection-string` we passed to DAB CLI.
 
->Take a look at the [DAB Configuration File Guide](../configuration-file.md) document to learn more.
+>Take a look at the [DAB Configuration File Guide](https://github.com/Azure/data-api-builder/blob/main/docs/configuration-file.md) document to learn more.
 
 With the configuration file in place, then it's time to start defining which entities you want to expose via the API.
 
@@ -123,7 +123,7 @@ or by adding the `Author` entity manually to the config file:
 
 within the `entities` object you can create any entity with any name (as long as it's valid for REST and GraphQL). The name `Author`, in this case, is used to build the REST path and the GraphQL type. Within the entity, you have the `source` element that specifies which table contains the entity data. In our case is `dbo.authors`.
 
-> **NOTE**: Entities names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them. Take a look at the [Best Practices](../best-practices.md) document to learn the best practices on entities names.
+> **NOTE**: Entities names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them. Take a look at the [Best Practices](https://github.com/Azure/data-api-builder/blob/main/docs/best-practices.md) document to learn the best practices on entities names.
 
 After that, the permissions for the exposed entity are defined via the `permission` element; it allows you to be sure that only those users making a request with the right claims will be able to access the entity and its data. In this getting started tutorial, we're allowing anyone, without the need to be authenticated, to perform all the CRUD operations to the `Author` entity.
 
@@ -154,7 +154,7 @@ You can also add the `Book` entity now, applying the same concepts you just lear
 
 that's all is needed at the moment. Data API builder is ready to be run.
 
-> **BEST PRACTICE**: It is recommended to use the *singular* form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](./../graphql.md).
+> **BEST PRACTICE**: It is recommended to use the *singular* form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](https://github.com/Azure/data-api-builder/blob/main/docs/graphql.md).
 
 > **BEST PRACTICE**: It is recommended to use Pascal Casing for the entity names, so that the generated GraphQL types, queries and mutations will be easier to read.
 
@@ -221,7 +221,7 @@ The GET verb also supports several query parameters (also case sensitive) that a
 - `$filter`: expression to filter the returned items
 - `$select`:  list of field names to be returned
  
-For more information on how they can be used, see the [REST documentation](../rest.md)
+For more information on how they can be used, see the [REST documentation](https://github.com/Azure/data-api-builder/blob/main/docs/rest.md)
 
 ### GraphQL endpoint
 
@@ -276,7 +276,7 @@ The element under `relationship` is used to add a field - `books` in the sample 
 - `target.entity`: Which entity, defined in the same configuration file, will be used in this relationship. For this sample is `book` as we're creating the relationship on the `Author` entity.
 - `linking.object`: the database table used to support the many-to-many relationship. That table is the `dbo.books_authors`.
 
-Data API Builder will automatically figure out what are the columns that are used to support the relationship between all the involved parts by analyzing the foreign key constraints that exist between the involved tables. For this reason, the configuration is done! (If you don't have foreign keys you can always manually specify the columns you want to use to navigate from one table to another. More on this in the [relationships documentation](../relationships.md))
+Data API Builder will automatically figure out what are the columns that are used to support the relationship between all the involved parts by analyzing the foreign key constraints that exist between the involved tables. For this reason, the configuration is done! (If you don't have foreign keys you can always manually specify the columns you want to use to navigate from one table to another. More on this in the [relationships documentation](https://github.com/Azure/data-api-builder/blob/main/docs/relationships.md))
 
 The `author` entity should now look like the following:
 
@@ -381,7 +381,7 @@ Congratulations, you've now created a fully working backend to support your mode
 
 If you want to practice what you have learned, here's a little exercise you can do on your own
 
-- Using the database setup script available in the source code repo [excercise folder](https://github.com/Azure/data-api-builder/tree/main/samples/getting-started/azure-sql-db/exercise/exercise.library.azure-sql.sql):
+- Using the database setup script available in the source code repo [exercise folder](https://github.com/Azure/data-api-builder/tree/main/samples/getting-started/azure-sql-db/exercise/exercise.library.azure-sql.sql):
   - add the table `dbo.series`, which stores series names (for example: [Foundation Series](https://en.wikipedia.org/wiki/Foundation_series))
   - update the `dbo.books` table by adding a column named `series_id`
   - update the `dbo.books` table by adding a foreign key constraint on the `dbo.series` table

@@ -25,7 +25,7 @@ Both the business entities need a modern endpoint, REST and/or GraphQL, to allow
 
 ### .NET 6 SDK
 
-Make sure you have .NET 6.0 SDK installed on your machine: https://dotnet.microsoft.com/en-us/download/dotnet/6.0.
+Make sure you have .NET 6.0 SDK installed on your machine (https://dotnet.microsoft.com/en-us/download/dotnet/6.0.)
 
 You can list the SDKs installed on your machine by using the following command:
 
@@ -47,7 +47,7 @@ or, if you've already installed a previous version, you can update DAB CLI to th
 dotnet tool update --global Microsoft.DataApiBuilder
 ```
 
-> [!ATTENTION]: if you are running on Linux or MacOS, you may need to add .NET global tools to your PATH to call `dab` directly. Take a look at the troubleshooting guide for more information: [Troubleshoot Data API builder installation](./troubleshooting-installation.md)
+> [!IMPORTANT]: if you are running on Linux or MacOS, you may need to add .NET global tools to your PATH to call `dab` directly. Take a look at the troubleshooting guide for more information: [Troubleshoot Data API builder installation](../troubleshooting-installation.md)
 
 ## Verifying the installation
 
@@ -67,7 +67,7 @@ Where `x.y.z` is your version of DAB CLI.
 
 ## Next Steps
 
-As the Data API builder for Azure Databases generates REST and GraphQL endpoints for database objects, you need to have a database ready for the tutorial. You can choose either a relational or non-relational database. 
+As the Data API builder for Azure Databases generates REST and GraphQL endpoints for database objects, you need to have a database ready for the tutorial. You can choose either a relational or non-relational database.
 
 It's time for you to choose which database you want to use, so you can continue the getting started guide from there:
 
@@ -75,4 +75,3 @@ It's time for you to choose which database you want to use, so you can continue 
 - [Getting Started with Data API builder for with Azure Cosmos DB](./getting-started-azure-cosmos-db.md)
 - [Getting Started with Data API builder for with Azure Database PostgreSQL](./getting-started-azure-postgresql.md)
 - [Getting Started with Data API builder for with Azure MySQL Database](./getting-started-mysql-db.md)
-
