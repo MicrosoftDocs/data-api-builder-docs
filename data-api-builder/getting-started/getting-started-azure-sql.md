@@ -220,7 +220,7 @@ The GET verb also supports several query parameters (also case sensitive) that a
 - `$first`: the top `n` items to return
 - `$filter`: expression to filter the returned items
 - `$select`:  list of field names to be returned
- 
+
 For more information on how they can be used, see the [REST documentation](https://github.com/Azure/data-api-builder/blob/main/docs/rest.md)
 
 ### GraphQL endpoint
