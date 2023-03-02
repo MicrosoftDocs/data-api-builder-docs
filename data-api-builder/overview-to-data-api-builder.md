@@ -52,7 +52,7 @@ dotnet tool update -g Microsoft.DataApiBuilder
 
 Data API builder requires .NET Core 6 to run. If you don't have it installed, you can download it from [here](https://dotnet.microsoft.com/download/dotnet/6.0). If you're using Ubuntu 22, take a look at the [Troubleshooting](./troubleshooting.md) page if you're having issues.
 
-## CLI interface
+## Run Data API builder on-premises
 
 Data API builder comes with a friendly CLI interface that allows the configuration of everything needed to securely create REST and GraphQL endpoints for your database.
 
@@ -61,6 +61,12 @@ dab init --database-type mssql --connection-string "Server=localhost;Database=Li
 dab add Book --source dbo.Books --permissions "anonymous:*"
 dab start
 ```
+
+## Run Data API builder on Azure
+
+Data API builder can be deployed in Azure using the new *Database Connection* feature offered by Azure Static Web Apps. With this feature you don't have to worry about running Data API builder in Azure at all: it's all taken care of for you. You can find more information about this feature [here](/azure/static-web-apps/database-overview).
+
+Another option to run Data API builder on Azure is to deploy it in a container. Data API builder image is available on the Microsoft Registry: https://mcr.microsoft.com/product/azure-databases/data-api-builder/about
 
 ## Getting started
 
@@ -73,5 +79,5 @@ Data API builder is open source and released under the MIT license. The reposior
 ## Next steps
 
 Once you're familiar with the basic features of Data API builder, you want to dive into the [Authentication](https://github.com/Azure/data-api-builder/blob/main/docs/authentication.md) and [Authorization](https://github.com/Azure/data-api-builder/blob/main/docs/authorization.md) process, the details of the [configuration file](https://github.com/Azure/data-api-builder/blob/main/docs/configuration-file.md) that is at the core of Data API builder engine. You can also check out the [Best Practices](https://github.com/Azure/data-api-builder/blob/main/docs/best-practices.md) also make sure to check out the end-to-end samples available here: 
-- [Jamstack Todo-List Sample](https://github.com/Azure/data-api-builder/tree/main/samples).
+- [Jamstack Todo-List Sample](https://github.com/Azure-Samples/dab-swa-todo).
 - [Jamstack Library Management Sample](https://github.com/Azure-Samples/dab-swa-library-demo)
