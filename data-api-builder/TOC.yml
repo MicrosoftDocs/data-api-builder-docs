@@ -14,11 +14,11 @@
     items:
     - name: Use Data API builder with Azure SQL
       href: getting-started/getting-started-azure-sql.md
-    - name: Use Data API builder with Azure Postgresql
+    - name: Use Data API builder with PostgreSQL
       href: getting-started/getting-started-azure-postgresql.md
-    - name: Use Data API builder with Azure Cosmos database
+    - name: Use Data API builder with Azure Cosmos DB
       href: getting-started/getting-started-azure-cosmos-db.md
-    - name: Use Data API builder with Azure Azure MySQL
+    - name: Use Data API builder with MySQL
       href: getting-started/getting-started-azure-mysql.md
 - name: Troubleshooting
   href: troubleshooting.md
