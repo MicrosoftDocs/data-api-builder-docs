@@ -19,7 +19,7 @@ ms.date: 02/28/2023
 
 The full list of release notes for this version is available here: [version 0.3.7 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.3.7-alpha)
 
-Details on how to install the latest version are here: [Installing DAB CLI](./getting-started/getting-started.md#installing-dab-cli)
+Details on how to install the latest version are here: [Installing DAB CLI](./getting-started/getting-started-with-data-api-builder.md#installing-dab-cli)
 
 ## Public JSON Schema
 
@@ -35,7 +35,7 @@ Note that if you're using DAB CLI to create and manage the `dab-config.json` fil
 
 ## View Support
 
-Views are now supported both in REST and GraphQL. If you have a view, for example [`dbo.vw_books_details`](../samples/getting-started/azure-sql-db/library.azure-sql.sql#L112) it can be exposed using the following `dab` command:
+Views are now supported both in REST and GraphQL. If you have a view, for example [`dbo.vw_books_details`](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-sql-db/library.azure-sql.sql#L115) it can be exposed using the following `dab` command:
 
 ```sh
 dab add BookDetail --source dbo.vw_books_details --source.type View --source.key-fields "id" --permissions "anonymous:read"
@@ -45,7 +45,7 @@ the `source.key-fields` option is used to specify which fields from the view are
 
 ## Stored Procedures Support
 
-Stored procedures are now supported for REST requests. If you have a stored procedure, for example [`dbo.stp_get_all_cowritten_books_by_author`](../samples/getting-started/azure-sql-db/library.azure-sql.sql#L138) it can be exposed using the following `dab` command:
+Stored procedures are now supported for REST requests. If you have a stored procedure, for example [`dbo.stp_get_all_cowritten_books_by_author`](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-sql-db/library.azure-sql.sql#L141) it can be exposed using the following `dab` command:
 
 ```sh
 
@@ -62,11 +62,11 @@ It's the responsibility of the developer configuring DAB to enable or disable ac
 
 ## Azure Active Directory Authentication
 
-Azure AD authentication is now fully working. Read how to use it here: [Authentication with Azure AD](./authentication-azure-ad.md)
+Azure AD authentication is now fully working. Read how to use it here: [Authentication with Azure AD](https://github.com/Azure/data-api-builder/blob/8c44bc882da718f86bbfba48756c0796ef24e058/docs/authentication-azure-ad.md)
 
 ## New "Simulator" Authentication Provider for local authentication
 
-To simplify testing of authenticated requests when developing locally, a new `simulator` authentication provider has been created; `simulator` is a configurable authentication provider, which instructs the Data API builder engine to treat all requests as authenticated. More details here: [Local Authentication](./local-authentication.md)
+To simplify testing of authenticated requests when developing locally, a new `simulator` authentication provider has been created; `simulator` is a configurable authentication provider, which instructs the Data API builder engine to treat all requests as authenticated. More details here: [Local Authentication](https://github.com/Azure/data-api-builder/blob/8c44bc882da718f86bbfba48756c0796ef24e058/docs/local-authentication.md)
 
 ## Support for filter on nested objects within a document in Cosmos DB
 

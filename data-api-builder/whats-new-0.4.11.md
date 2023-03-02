@@ -21,7 +21,7 @@ ms.date: 02/28/2023
 
 The full list of release notes for this version is available here: [version 0.4.11 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.4.11-alpha)
 
-Details on how to install the latest version are here: [Installing DAB CLI](./getting-started/getting-started.md#installing-dab-cli)
+Details on how to install the latest version are here: [Installing DAB CLI](./getting-started/getting-started-with-data-api-builder.md#installing-dab-cli)
 
 ## Public JSON Schema
 
@@ -73,7 +73,7 @@ query {
 
 ## Improved Stored Procedure support
 
-Full support for stored procedure in REST and GraphQL. Stored procedure with parameters now 100% supported. Check out the [Stored Procedures](./views-and-stored-procedures.md#stored-procedures) documentation to learn how to use Data API builder with stored procedures.
+Full support for stored procedure in REST and GraphQL. Stored procedure with parameters now 100% supported. Check out the [Stored Procedures](https://github.com/Azure/data-api-builder/blob/main/docs/views-and-stored-procedures.md#stored-procedures) documentation to learn how to use Data API builder with stored procedures.
 
 ## `database-type` value renamed for Cosmos DB
 

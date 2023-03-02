@@ -8,7 +8,7 @@ ms.topic: overview #Required; leave this attribute/value as-is.
 ms.date: 02/22/2023 #Required; mm/dd/yyyy format.
 ---
 
-# What is Data API builder? 
+# What is Data API builder?
 
 **Data API builder for Azure Databases provides modern REST and GraphQL endpoints to your Azure Databases.**
 
@@ -21,7 +21,7 @@ Data API builder is Open Source and works on any platform. It can be executed on
 ## Features
 
 - Allow collections, tables, views and stored procedures to be accessed via REST and GraphQL
-- Support authentication via OAuth2/JWT 
+- Support authentication via OAuth2/JWT
 - Support for EasyAuth when running in Azure
 - Role-based authorization using received claims
 - Item-level security via policy expressions
@@ -44,13 +44,13 @@ Data API builder is built using .NET Core and is distributed as a NuGet package.
 dotnet tool install -g Microsoft.DataApiBuilder
 ```
 
-if you have already installed the tool, you can update it to the latest version with the following command:
+if you've already installed the tool, you can update it to the latest version with the following command:
 
 ```shell
 dotnet tool update -g Microsoft.DataApiBuilder
 ```
 
-Data API builder requires .NET Core 6 to run. If you don't have it installed, you can download it from [here](https://dotnet.microsoft.com/download/dotnet/6.0). If you are using Ubuntu 22, take a look at the [Troubleshooting](./troubleshooting.md) page if you are having issues.
+Data API builder requires .NET Core 6 to run. If you don't have it installed, you can download it from [here](https://dotnet.microsoft.com/download/dotnet/6.0). If you're using Ubuntu 22, take a look at the [Troubleshooting](./troubleshooting.md) page if you're having issues.
 
 ## CLI interface
 
@@ -64,9 +64,8 @@ dab start
 
 ## Getting started
 
-To get started quickly with Data API builder for Azure Databases, you can use the [Getting Started](./getting-started-with-data-api-builder.md) tutorial. The tutorial helps to get familiar with some basic tools and concepts while giving you a good experience on how much Data API builder for Azure Databases can make you more efficient, removing the need to write plumbing code.
-
+To get started quickly with Data API builder for Azure Databases, you can use the [Getting Started](./getting-started/getting-started-with-data-api-builder.md) tutorial. The tutorial helps to get familiar with some basic tools and concepts while giving you a good experience on how much Data API builder for Azure Databases can make you more efficient, removing the need to write plumbing code.
 
 ## Next steps
 
-Once you're familiar with the basic features of Data API builder, you want to dive into the Authentication and Authorization process, the details of the configuration file. You can also check out the [FAQ](./faq.md) for some common questions and also make sure to check out the end-to-end samples available here: [Samples](./samples.md).
+Once you're familiar with the basic features of Data API builder, you want to dive into the Authentication and Authorization process, the details of the configuration file. You can also check out the [FAQ](https://github.com/Azure/data-api-builder/blob/main/docs/best-practices.md) for some common questions and also make sure to check out the end-to-end samples available here: [Samples](https://github.com/Azure/data-api-builder/tree/main/samples).
