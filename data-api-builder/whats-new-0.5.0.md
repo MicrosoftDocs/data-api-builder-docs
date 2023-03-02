@@ -38,7 +38,7 @@ The Json schema is available here:
 https://dataapibuilder.azureedge.net/schemas/v0.5.0-beta/dab.draft.schema.json
 ```
 
-JSON schema gives you support for intellisense if you're using an IDE, like VS Code, that supports JSON Schemas. Take a look at `basic-empty-dab-config.json` in the `samples` folder, to have a starting point when manually creating the `dab-config.json` file.
+JSON schema gives you support for 'intellisense', if you're using an IDE like VS Code that supports JSON Schemas. Take a look at `basic-empty-dab-config.json` in the `samples` folder, to have a starting point when manually creating the `dab-config.json` file.
 
 ## New `execute` action for stored procedures in Azure SQL
 
@@ -65,7 +65,7 @@ means the `title` field in the related database object is mapped to `description
 
 ## Support for Session Context in Azure SQL
 
-To enable an additional layer of Security (e.g. Row Level Security aka RLS), DAB now supports sending data to the underlying Sql Server database via SESSION_CONTEXT. For more details, please refer to this detailed document on SESSION_CONTEXT: [Runtime to Database Authorization](https://github.com/Azure/data-api-builder/blob/cc7ec4f5a12c3e0fe87e1452f8989199d0aba8e6/docs/runtime-to-database-authorization.md).  
+To enable an additional layer of Security (for example, Row Level Security also known as RLS), DAB now supports sending data to the underlying Sql Server database via SESSION_CONTEXT. For more details, please refer to this detailed document on SESSION_CONTEXT: [Runtime to Database Authorization](https://github.com/Azure/data-api-builder/blob/cc7ec4f5a12c3e0fe87e1452f8989199d0aba8e6/docs/runtime-to-database-authorization.md).  
 
 ## Support for filter on nested objects within a document in PostgreSQL
 
@@ -114,7 +114,7 @@ query ($id: ID, $partitionKeyValue: String) {
 - The default log levels for the engine when `host.mode` is `Production` and `Development` are updated to `Error` and `Debug` respectively.
 - During engine start-up, for every column of an entity, information such as exposed field names, type, whether it's auto-generated, and the primary key is logged.
 - In the local execution scenario, all the queries that are generated and executed during engine start-up are logged at `Debug` level.
-- For every entity, relationship fields such as `source.fields`, `target.fields` and `cardinality` are logged. In case of many-many relationships, `linking.object`, `linking.source.fields` and `linking.target.fields` inferred from the database (or from config file) are logged.
+- For every entity, relationship fields such as `source.fields`, `target.fields` and `cardinality` are logged. If there are many-many relationships, `linking.object`, `linking.source.fields` and `linking.target.fields` inferred from the database (or from config file) are logged.
 - For every incoming request, the role and the authentication status of the request are logged.
 - In CLI, the `Microsoft.DataAPIBuilder` version is logged along with the logs associated with the respective command's execution.
 
