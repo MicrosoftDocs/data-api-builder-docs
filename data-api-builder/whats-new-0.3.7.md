@@ -62,11 +62,11 @@ It's the responsibility of the developer configuring DAB to enable or disable ac
 
 ## Azure Active Directory Authentication
 
-Azure AD authentication is now fully working. Read how to use it here: [Authentication with Azure AD](./authentication-azure-ad.md)
+Azure AD authentication is now fully working. Read how to use it here: [Authentication with Azure AD](https://github.com/Azure/data-api-builder/blob/8c44bc882da718f86bbfba48756c0796ef24e058/docs/authentication-azure-ad.md)
 
 ## New "Simulator" Authentication Provider for local authentication
 
-To simplify testing of authenticated requests when developing locally, a new `simulator` authentication provider has been created; `simulator` is a configurable authentication provider, which instructs the Data API builder engine to treat all requests as authenticated. More details here: [Local Authentication](./local-authentication.md)
+To simplify testing of authenticated requests when developing locally, a new `simulator` authentication provider has been created; `simulator` is a configurable authentication provider, which instructs the Data API builder engine to treat all requests as authenticated. More details here: [Local Authentication](https://github.com/Azure/data-api-builder/blob/8c44bc882da718f86bbfba48756c0796ef24e058/docs/local-authentication.md)
 
 ## Support for filter on nested objects within a document in Cosmos DB
 
