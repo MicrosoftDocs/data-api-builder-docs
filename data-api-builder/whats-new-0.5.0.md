@@ -42,7 +42,7 @@ JSON schema gives you support for intellisense if you're using an IDE, like VS C
 
 ## New `execute` action for stored procedures in Azure SQL
 
-A new `execute` action is introduced as the only allowed action in the `permissions` section of the configuration file only when an entity is backed by a source type of `stored-procedure`. By default, only `POST` method is allowed for such entities and only the GraphQL `mutation` operation is configured with the prefix `execute` added to their name. This behavior can be overridden by explicitly specifying the allowed `methods` in the `rest` section of the configuration file. Similarly, for GraphQL, the `operation` in the `graphql` section, can be overridden to be `query` instead. For more information, see [here].(./views-and-stored-procedures.md/#stored-procedures)
+A new `execute` action is introduced as the only allowed action in the `permissions` section of the configuration file only when an entity is backed by a source type of `stored-procedure`. By default, only `POST` method is allowed for such entities and only the GraphQL `mutation` operation is configured with the prefix `execute` added to their name. This behavior can be overridden by explicitly specifying the allowed `methods` in the `rest` section of the configuration file. Similarly, for GraphQL, the `operation` in the `graphql` section, can be overridden to be `query` instead. For more information, see [here](https://github.com/Azure/data-api-builder/blob/cc7ec4f5a12c3e0fe87e1452f8989199d0aba8e6/docs/views-and-stored-procedures.md)
 
 ## New `mappings` section
 
@@ -65,7 +65,7 @@ means the `title` field in the related database object is mapped to `description
 
 ## Support for Session Context in Azure SQL
 
-To enable an additional layer of Security (e.g. Row Level Security aka RLS), DAB now supports sending data to the underlying Sql Server database via SESSION_CONTEXT. For more details, please refer to this detailed document on SESSION_CONTEXT: [Runtime to Database Authorization](./runtime-to-database-authorization.md).  
+To enable an additional layer of Security (e.g. Row Level Security aka RLS), DAB now supports sending data to the underlying Sql Server database via SESSION_CONTEXT. For more details, please refer to this detailed document on SESSION_CONTEXT: [Runtime to Database Authorization](https://github.com/Azure/data-api-builder/blob/cc7ec4f5a12c3e0fe87e1452f8989199d0aba8e6/docs/runtime-to-database-authorization.md).  
 
 ## Support for filter on nested objects within a document in PostgreSQL
 
@@ -99,7 +99,7 @@ type Planet @model(name:"Planet") {
 }
 ```
 
-it's now possible to run a query that fetches a List such as 
+it's now possible to run a query that fetches a List such as
 
 ```graphql
 query ($id: ID, $partitionKeyValue: String) {
