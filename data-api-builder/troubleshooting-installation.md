@@ -16,7 +16,6 @@ Data API builder is distributed as a NuGet package and installed via .NET tool a
 
 Data API builder requires .NET 6 to be installed on your machine. If you don't have .NET 6 installed, you can install it by following the instructions in the [.NET 6 installation guide](/dotnet/core/install/).
 
-
 ### Installing .NET 6 on Ubuntu 22
 
 Installing .NET 6 on Ubuntu 22 can be tricky as the .NET package are available both in the Ubuntu repo and also in the Microsoft repo, which can lead to conflicts. If you're having issues, and when executing `dotnet` on Linux if you have error like `A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist`  make sure to take a look at this post on StackOverflow: [How to install .NET 6 on Ubuntu 22](https://stackoverflow.com/questions/73753672/a-fatal-error-occurred-the-folder-usr-share-dotnet-host-fxr-does-not-exist?answertab=scoredesc#tab-top).
