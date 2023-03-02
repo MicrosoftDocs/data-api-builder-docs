@@ -66,6 +66,12 @@ dab start
 
 To get started quickly with Data API builder for Azure Databases, you can use the [Getting Started](./getting-started/getting-started-with-data-api-builder.md) tutorial. The tutorial helps to get familiar with some basic tools and concepts while giving you a good experience on how much Data API builder for Azure Databases can make you more efficient, removing the need to write plumbing code.
 
+## Open source
+
+Data API builder is open source and released under the MIT license. The reposiority is available [here](https://github.com/Azure/data-api-builder)
+
 ## Next steps
 
-Once you're familiar with the basic features of Data API builder, you want to dive into the Authentication and Authorization process, the details of the configuration file. You can also check out the [FAQ](https://github.com/Azure/data-api-builder/blob/main/docs/best-practices.md) for some common questions and also make sure to check out the end-to-end samples available here: [Samples](https://github.com/Azure/data-api-builder/tree/main/samples).
+Once you're familiar with the basic features of Data API builder, you want to dive into the [Authentication](https://github.com/Azure/data-api-builder/blob/main/docs/authentication.md) and [Authorization](https://github.com/Azure/data-api-builder/blob/main/docs/authorization.md) process, the details of the [configuration file](https://github.com/Azure/data-api-builder/blob/main/docs/configuration-file.md) that is at the core of Data API builder engine. You can also check out the [Best Practices](https://github.com/Azure/data-api-builder/blob/main/docs/best-practices.md) also make sure to check out the end-to-end samples available here: 
+- [Jamstack Todo-List Sample](https://github.com/Azure/data-api-builder/tree/main/samples).
+- [Jamstack Library Management Sample](https://github.com/Azure-Samples/dab-swa-library-demo)
