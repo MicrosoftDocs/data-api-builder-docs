@@ -1,26 +1,26 @@
 ---
-title: Quickstart to Data API builder for Azure Cosmos DB #Required; page title displayed in search results. Include the word "quickstart". Include the brand.
-description: This quickstart will help you build a backend to support your modern applications with Data API builder for Azure Cosmos DB. #Required; article description that is displayed in search results. Include the word "quickstart".
-author: sajeetharan #Required; your GitHub user alias, with correct capitalization.
-ms.author: sasinnat #Required; microsoft alias of author; optional team alias.
-ms.service: data-api-builder #Required; service per approved list. service slug assigned to your service by ACOM.
-ms.topic: quickstart #Required; leave this attribute/value as-is.
-ms.date: 02/22/2023 #Required; mm/dd/yyyy format.
+title: Quickstart to Data API builder for Azure Cosmos DB
+description: This quickstart will help you build a backend to support your modern applications with Data API builder for Azure Cosmos DB.
+author: sajeetharan
+ms.author: sasinnat
+ms.service: data-api-builder
+ms.topic: quickstart
+ms.date: 02/22/2023
 ---
 
-# Quickstart: Build a backend to support your modern applications with Data API builder for Azure Cosmos DB.
+# Quickstart: Build a backend to support your modern applications with Data API builder for Azure Cosmos DB
 
-Make sure you have read the [Getting Started](getting-started.md) document.
+Make sure you have read the [Getting Started](./getting-started-with-data-api-builder.md) document.
 
-This tutorial assumes that you have already a [Cosmos DB NoSQL API database account](https://learn.microsoft.com/azure/cosmos-db/sql/create-cosmosdb-resources-portal#create-an-azure-cosmos-db-account) that can be used as a playground.
+This tutorial assumes that you have already a [Cosmos DB NoSQL API database account](/azure/cosmos-db/sql/create-cosmosdb-resources-portal#create-an-azure-cosmos-db-account) that can be used as a playground.
 
 ## Create the database container
 
-Create the necessary database container needed to represent Books. There are different ways to model this sample and you can learn more about data modeling from [here](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/modeling-data). We will use the [embedded data model](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/modeling-data#embedding-data) in this sample.
+Create the necessary database container needed to represent Books. There are different ways to model this sample and you can learn more about data modeling from [here](/azure/cosmos-db/nosql/modeling-data). We will use the [embedded data model](/azure/cosmos-db/nosql/modeling-data#embedding-data) in this sample.
 
 - `books`: Collection containing books and it's authors with 'id' as the partition key
 
-Read more about [choosing partition key](https://docs.microsoft.com/en-us/azure/cosmos-db/partitioning-overview#choose-partitionkey) and [data modeling](https://docs.microsoft.com/en-us/azure/cosmos-db/sql/modeling-data)
+Read more about [choosing partition key](/azure/cosmos-db/partitioning-overview#choose-partitionkey) and [data modeling](/azure/cosmos-db/sql/modeling-data)
 
 Once the container is created, we can import the sample data which are placed in the 'azure-cosmos-db' folder to the book collection by using the add new item option (Make sure you add one by one item) in the Azure Data Explorer.
 
@@ -47,7 +47,7 @@ type Author {
 }
 ```
 
-> **BEST PRACTICE**: It is recommended to use the _singular_ form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a _list_ of entity items will be returned. More on this behavior in the [GraphQL documentation](./../graphql.md).
+> **BEST PRACTICE**: It is recommended to use the _singular_ form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a _list_ of entity items will be returned. More on this behavior in the [GraphQL documentation](https://github.com/Azure/data-api-builder/blob/main/docs/graphql.md).
 
 ## Get the Cosmos DB Account connection string
 
@@ -55,11 +55,11 @@ You can obtain the connection string by navigating to your Azure Cosmos DB accou
 
 ![Cosmos DB connection string](../media/cosmos-connection.png)
 
-You can also use Azure Cosmos DB emulator connection string if you are testing locally. The Azure Cosmos DB Emulator supports a [single fixed account and a well-known authentication key](https://learn.microsoft.com/en-us/azure/cosmos-db/local-emulator?tabs=ssl-netstd21#authenticate-requests)
+You can also use Azure Cosmos DB emulator connection string if you are testing locally. The Azure Cosmos DB Emulator supports a [single fixed account and a well-known authentication key](/azure/cosmos-db/local-emulator?tabs=ssl-netstd21#authenticate-requests)
 
 The connection string looks like,
 
-```
+```shell
 AccountEndpoint=AccountEndpoint=https://localhost:8081/;AccountKey=REPLACEME;
 ```
 
@@ -67,7 +67,7 @@ Now that you have all the required pieces in place, it's time to create the conf
 
 ## Creating a configuration file for DAB
 
-The Data API builder for Azure Databases engine needs a [configuration file](../configuration-file.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
+The Data API builder for Azure Databases engine needs a [configuration file](https://github.com/Azure/data-api-builder/blob/main/docs/configuration-file.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
 
 For this getting started guide you will use DAB CLI to initialize your configuration file. Run the following command:
 
@@ -113,7 +113,7 @@ The command will generate a config file called `dab-config.json` looking like th
 
 As you can see there the `data-source` property specifies that our chosen `database-type` is `cosmosdb_nosql`, with the `connection-string` we passed to DAB CLI.
 
-> Take a look at the [DAB Configuration File Guide](../configuration-file.md) document to learn more about the configuration file.
+> Take a look at the [DAB Configuration File Guide](https://github.com/Azure/data-api-builder/blob/main/docs/configuration-file.md) document to learn more about the configuration file.
 
 With the configuration file in place, then it's time to start defining which entities you want to expose via the API.
 
@@ -122,7 +122,7 @@ With the configuration file in place, then it's time to start defining which ent
 We want to expose the books collection so that they can be used via GraphQL. For doing that, all we need is to add the related information to the entities section of the configuration file.
 
 > **NOTE**: REST operations are not supported for Cosmos DB via the
-> Data API Builder, You can use the existing [REST API](https://learn.microsoft.com/rest/api/cosmos-db/)
+> Data API Builder, You can use the existing [REST API](/rest/api/cosmos-db/)
 
 You can do this either by using the CLI with the add command :
 
@@ -172,7 +172,7 @@ Once you have added the `Book` entity, the `entities` object of configuration fi
 
 that's all is needed at the moment. Data API builder is ready to be run.
 
-> **BEST PRACTICE**: It is recommended to use the _singular_ form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a _list_ of entity items will be returned. More on this behaviour in the [GraphQL documentation](./../graphql.md).
+> **BEST PRACTICE**: It is recommended to use the _singular_ form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a _list_ of entity items will be returned. More on this behavior in the [GraphQL documentation](https://github.com/Azure/data-api-builder/blob/main/docs/graphql.md).
 
 ## Start Data API builder for Azure Cosmos DB
 
@@ -203,7 +203,7 @@ Now that the Data API builder engine is running, you can use your favorite REST 
 
 ### REST Endpoint
 
-Unlike other databases, Data API Builder for Azure Cosmos DB does not support generating REST endpoints because there is already a[REST API endpoint](https://learn.microsoft.com/rest/api/cosmos-db/) capability built-in to the Azure Cosmos DB service.
+Unlike other databases, Data API Builder for Azure Cosmos DB does not support generating REST endpoints because there is already a[REST API endpoint](/rest/api/cosmos-db/) capability built-in to the Azure Cosmos DB service.
 
 ### GraphQL endpoint
 
