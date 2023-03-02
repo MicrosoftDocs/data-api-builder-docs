@@ -36,4 +36,4 @@ landingContent:
           - text: Use Data API builder with PostgreSQL
             url: ./getting-started/getting-started-azure-postgresql.md
           - text: Use Data API builder with MySQL 
-            url: ./getting-started/getting-started-azure-mysql-db.md
+            url: ./getting-started/getting-started-azure-mysql.md

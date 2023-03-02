@@ -8,7 +8,7 @@ ms.topic: quickstart
 ms.date: 02/22/2023
 ---
 
-# Quickstart: Build modern end point support with Data API builder for Azure Databases
+# Quickstart: Use Data API builder with Azure Databases
 
 Welcome! This guide helps you get started with Data API builder (DAB) for Azure Databases. First you're going to get DAB running locally on your machine. It then uses DAB to create an API for your application using the Azure Database of your choice.
 
@@ -75,4 +75,4 @@ It's time for you to choose which database you want to use, so you can continue 
 - [Getting Started with Data API builder for Azure SQL](./getting-started-azure-sql.md)
 - [Getting Started with Data API builder for with Azure Cosmos DB](./getting-started-azure-cosmos-db.md)
 - [Getting Started with Data API builder for with Azure Database PostgreSQL](./getting-started-azure-postgresql.md)
-- [Getting Started with Data API builder for with Azure MySQL Database](./getting-started-azure-mysql-db.md)
+- [Getting Started with Data API builder for with Azure MySQL Database](./getting-started-azure-mysql.md)

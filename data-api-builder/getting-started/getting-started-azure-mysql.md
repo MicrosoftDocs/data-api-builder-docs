@@ -8,7 +8,7 @@ ms.topic: quickstart
 ms.date: 02/22/2023
 ---
 
-# Quickstart: Build a backend to support your modern applications with Data API builder for Azure MySQL Database
+# Quickstart: Use Data API builder with Azure MySQL
 
 Make sure you have read the [Getting Started](./getting-started-with-data-api-builder.md) document. As mentioned before, this tutorial assumes that you already have an Azure MySQL Database that can be used as a playground.
 
