@@ -10,7 +10,7 @@ ms.date: 02/22/2023
 
 # Quickstart: Use Data API builder with Azure Cosmos DB
 
-Make sure you have read the [Getting Started](./getting-started-with-data-api-builder.md) document.
+Make sure you have read the [Get Started](./get-started-with-data-api-builder.md) document.
 
 This tutorial assumes that you have already a [Cosmos DB NoSQL API database account](/azure/cosmos-db/sql/create-cosmosdb-resources-portal#create-an-azure-cosmos-db-account) that can be used as a playground.
 
@@ -121,8 +121,8 @@ With the configuration file in place, then it's time to start defining which ent
 
 We want to expose the books collection so that they can be used via GraphQL. For doing that, all we need is to add the related information to the entities section of the configuration file.
 
-> **NOTE**: REST operations are not supported for Cosmos DB via the
-> Data API Builder, You can use the existing [REST API](/rest/api/cosmos-db/)
+> [!NOTE]
+> REST operations are not supported for Cosmos DB via the Data API Builder, You can use the existing [REST API](/rest/api/cosmos-db/)
 
 You can do this either by using the CLI with the add command:
 
@@ -148,7 +148,8 @@ or by adding the `Book` entity manually to the configuration file under entities
 
 within the `entities` object you can create any entity with any name (as long as it's valid for GraphQL). The name `Book`, in this case, this is used to build the GraphQL type. Within the entity, you have the `source` element that specifies which container contains the entity data. In our case, it's `books`.
 
-> **NOTE**: Entity names are case sensitive and they will be exposed via GraphQL as you have typed them.
+> [!NOTE]
+> Entity names are case sensitive and they will be exposed via GraphQL as you have typed them.
 
 After that, you need to specify the permission for the exposed entity, so that you can be sure only those users making a request with the right claims will be able to access the entity and its data. In this getting started tutorial we're just allowing anyone, without the need to be authenticated, to perform all the CRUD operations to the `Book` entity.
 
@@ -201,7 +202,7 @@ you are now good to go, Data API Builder is up and running, ready to serve your 
 
 Now that the Data API builder engine is running, you can use your favorite REST client (Postman, Insomnia, etc.) to query the GraphQL endpoints.
 
-### REST Endpoint
+### REST endpoint
 
 Unlike other databases, Data API Builder for Azure Cosmos DB doesn't support generating REST endpoints because there's already a[REST API endpoint](/rest/api/cosmos-db/) capability built-in to the Azure Cosmos DB service.
 

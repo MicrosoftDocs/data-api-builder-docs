@@ -1,6 +1,6 @@
 ---
 title: Release notes for Data API builder 0.4.11 
-description: Release notes for Data API builder 0.4.11 
+description: Release notes for Data API builder 0.4.11 are available here.
 author: yorek 
 ms.author: damauri
 ms.service: data-api-builder 
@@ -21,7 +21,7 @@ ms.date: 02/28/2023
 
 The full list of release notes for this version is available here: [version 0.4.11 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.4.11-alpha)
 
-Details on how to install the latest version are here: [Installing DAB CLI](./getting-started/getting-started-with-data-api-builder.md#installing-dab-cli)
+Details on how to install the latest version are here: [Installing DAB CLI](./get-started/get-started-with-data-api-builder.md#installing-dab-cli)
 
 ## Public JSON Schema
 
@@ -37,7 +37,7 @@ If you're using DAB CLI to create and manage the `dab-config.json` file, DAB CLI
 
 ## Updated JSON schema for `data-source` section
 
-The `data-source` section in the configuration file has been updated to be consistent across all supported databases but still allow each database to have custom configurations. A new section `option` has been introduced to group all the properties that are specific to a database. For example:
+The `data-source` section in the configuration file has been updated to be consistent across all supported databases but still allow each database to have custom configurations. A new section `options` has been introduced to group all the properties that are specific to a database. For example:
 
 ```json
 {
@@ -53,7 +53,7 @@ The `data-source` section in the configuration file has been updated to be consi
 }
 ```
 
-The elements available in the `options` section depends on the chosen `database-type`.
+The elements available in the `options` section depend on the chosen `database-type`.
 
 ## Support for filter on nested objects within a document in Azure SQL and SQL Server
 

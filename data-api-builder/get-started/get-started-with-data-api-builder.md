@@ -1,6 +1,6 @@
 ---
 title: Quickstart to Azure data API builder
-description: In this quickstart, we help you get started with Data API builder (DAB) for Azure Databases
+description: In this quickstart, we help you get started with Data API builder (DAB) for Azure Databases.
 author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
@@ -48,7 +48,7 @@ dotnet tool update --global Microsoft.DataApiBuilder
 ```
 
 > [!IMPORTANT]
-> if you are running on Linux or MacOS, > you may need to add .NET global tools to your PATH to call `dab` directly, take a look at the troubleshooting guide for more information: [Troubleshoot Data API builder installation](../troubleshooting-installation.md).
+> if you are running on Linux or MacOS, > you may need to add .NET global tools to your PATH to call `dab` directly, take a look at the troubleshooting guide for more information: [Troubleshoot Data API builder installation](../troubleshoot-installation.md).
 
 ## Verifying the installation
 
@@ -72,7 +72,7 @@ As the Data API builder for Azure Databases generates REST and GraphQL endpoints
 
 It's time for you to choose which database you want to use, so you can continue the getting started guide from there:
 
-- [Getting Started with Data API builder for Azure SQL](./getting-started-azure-sql.md)
-- [Getting Started with Data API builder for with Azure Cosmos DB](./getting-started-azure-cosmos-db.md)
-- [Getting Started with Data API builder for with Azure Database PostgreSQL](./getting-started-azure-postgresql.md)
-- [Getting Started with Data API builder for with Azure MySQL Database](./getting-started-azure-mysql.md)
+- [Get Started with Data API builder for Azure SQL](./get-started-azure-sql.md)
+- [Get Started with Data API builder for with Azure Cosmos DB](./get-started-azure-cosmos-db.md)
+- [Get Started with Data API builder for with Azure Database PostgreSQL](./get-started-azure-postgresql.md)
+- [Get Started with Data API builder for with Azure MySQL Database](./get-started-azure-mysql.md)

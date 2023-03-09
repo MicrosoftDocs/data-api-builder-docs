@@ -8,23 +8,23 @@
     href: whats-new.md
 - name: Quickstarts
   items:
-  - name: Getting started with Data API builder
-    href: getting-started/getting-started-with-data-api-builder.md
-  - name: Getting started with databases 
+  - name: Get started with Data API builder
+    href: get-started/get-started-with-data-api-builder.md
+  - name: Get started with databases 
     items:
     - name: Use Data API builder with Azure SQL
-      href: getting-started/getting-started-azure-sql.md
+      href: get-started/get-started-azure-sql.md
     - name: Use Data API builder with PostgreSQL
-      href: getting-started/getting-started-azure-postgresql.md
+      href: get-started/get-started-azure-postgresql.md
     - name: Use Data API builder with Azure Cosmos DB
-      href: getting-started/getting-started-azure-cosmos-db.md
+      href: get-started/get-started-azure-cosmos-db.md
     - name: Use Data API builder with MySQL
-      href: getting-started/getting-started-azure-mysql.md
-- name: Troubleshooting
-  href: troubleshooting.md
+      href: get-started/get-started-azure-mysql.md
+- name: Troubleshoot
+  href: troubleshoot.md
   items:
-  - name: Troubleshooting installation
-    href: troubleshooting-installation.md
-  - name: Troubleshooting usage
-    href: troubleshooting-usage.md
+  - name: Troubleshoot installation
+    href: troubleshoot-installation.md
+  - name: Troubleshoot usage
+    href: troubleshoot-usage.md
   

@@ -204,4 +204,5 @@ For example, if you've a configuration file as shown in the following example:
 
 The X-MS-API-ROLE must be set to `role1` to be able to access the Todo entity using the `role1` role.
 
-**ATTENTION**: Roles name matching is case-sensitive
+> [!CAUTION]
+> Roles name matching is case-sensitive

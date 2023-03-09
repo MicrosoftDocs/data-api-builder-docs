@@ -14,9 +14,9 @@ This article provides solutions to common problems that might arise when you're 
 
 ## Troubleshooting topics
 
-For help on installation, see [Troubleshoot Data API builder installation](troubleshooting-installation.md).
+For help on installation, see [Troubleshoot Data API builder installation](troubleshoot-installation.md).
 
-For help on using Data API builder, see [Troubleshoot Data API builder usage](troubleshooting-usage.md).
+For help on using Data API builder, see [Troubleshoot Data API builder usage](troubleshoot-usage.md).
 
 ## Get help and give feedback
 

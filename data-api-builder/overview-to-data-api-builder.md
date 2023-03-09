@@ -1,6 +1,6 @@
 ---
 title: Overview to Azure data API builder
-description: In this overview, we help you get started with Data API builder (DAB) for Azure Databases
+description: In this overview, we help you get started with Data API builder (DAB) for Azure Databases.
 author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
@@ -50,7 +50,7 @@ if you've already installed the tool, you can update it to the latest version wi
 dotnet tool update -g Microsoft.DataApiBuilder
 ```
 
-Data API builder requires .NET Core 6 to run. If you don't have it installed, you can download it from [here](https://dotnet.microsoft.com/download/dotnet/6.0). If you're using Ubuntu 22, take a look at the [Troubleshooting](./troubleshooting.md) page if you're having issues.
+Data API builder requires .NET Core 6 to run. If you don't have it installed, you can download it from [here](https://dotnet.microsoft.com/download/dotnet/6.0). If you're using Ubuntu 22, take a look at the [Troubleshoot](./troubleshoot.md) page if you're having issues.
 
 ## Run Data API builder on-premises
 
@@ -70,7 +70,7 @@ Another option to run Data API builder on Azure is to deploy it in a container. 
 
 ## Getting started
 
-To get started quickly with Data API builder for Azure Databases, you can use the [Getting Started](./getting-started/getting-started-with-data-api-builder.md) tutorial. The tutorial helps to get familiar with some basic tools and concepts while giving you a good experience on how much Data API builder for Azure Databases can make you more efficient, removing the need to write plumbing code.
+To get started quickly with Data API builder for Azure Databases, you can use the [Get Started](./get-started/get-started-with-data-api-builder.md) tutorial. The tutorial helps to get familiar with some basic tools and concepts while giving you a good experience on how much Data API builder for Azure Databases can make you more efficient, removing the need to write plumbing code.
 
 ## Open source
 
