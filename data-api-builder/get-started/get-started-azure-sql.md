@@ -123,7 +123,8 @@ or by adding the `Author` entity manually to the config file:
 
 within the `entities` object you can create any entity with any name (as long as it's valid for REST and GraphQL). The name `Author`, in this case, is used to build the REST path and the GraphQL type. Within the entity, you have the `source` element that specifies which table contains the entity data. In our case is `dbo.authors`.
 
-> **NOTE**: Entities names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them. Take a look at the [Best Practices](https://github.com/Azure/data-api-builder/blob/main/docs/best-practices.md) document to learn the best practices on entities names.
+> [!NOTE]
+> Entities names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them. Take a look at the [Best Practices](https://github.com/Azure/data-api-builder/blob/main/docs/best-practices.md) document to learn the best practices on entities names.
 
 After that, the permissions for the exposed entity are defined via the `permission` element; it allows you to be sure that only those users making a request with the right claims will be able to access the entity and its data. In this getting started tutorial, we're allowing anyone, without the need to be authenticated, to perform all the CRUD operations to the `Author` entity.
 
@@ -154,9 +155,11 @@ You can also add the `Book` entity now, applying the same concepts you just lear
 
 that's all is needed at the moment. Data API builder is ready to be run.
 
-> **BEST PRACTICE**: It is recommended to use the *singular* form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](https://github.com/Azure/data-api-builder/blob/main/docs/graphql.md).
+> [!TIP]
+> It is recommended to use the *singular* form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](https://github.com/Azure/data-api-builder/blob/main/docs/graphql.md).
 
-> **BEST PRACTICE**: It is recommended to use Pascal Casing for the entity names, so that the generated GraphQL types, queries and mutations will be easier to read.
+> [!TIP]
+> It is recommended to use Pascal Casing for the entity names, so that the generated GraphQL types, queries and mutations will be easier to read.
 
 ## Start Data API builder for Azure SQL Database
 
