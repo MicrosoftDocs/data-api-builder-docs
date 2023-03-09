@@ -10,7 +10,7 @@ ms.date: 02/27/2023
 
 # Troubleshoot Data API builder installation
 
-Data API builder is distributed as a NuGet package and installed via .NET tool as described in the [Install Data API builder](./getting-started/getting-started-with-data-api-builder.md) article. This article provides solutions to common problems that might arise when you're installing Data API builder.
+Data API builder is distributed as a NuGet package and installed via .NET tool as described in the [Install Data API builder](./get-started/get-started-with-data-api-builder.md) article. This article provides solutions to common problems that might arise when you're installing Data API builder.
 
 ## Installing .NET 6 on your machine
 
