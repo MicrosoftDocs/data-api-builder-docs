@@ -24,7 +24,7 @@ Read more about [choosing partition key](/azure/cosmos-db/partitioning-overview#
 
 Once the container is created, we can import the sample data that is placed in the 'azure-cosmos-db' folder to the book collection by using the 'add new item' option (Make sure you add one by one item) in the Azure Data Explorer.
 
-![Cosmos DB Add New Document](../media/cosmos-insert-new.png)
+![Screenshot showing how to add new document using Cosmos DB.](../media/cosmos-insert-new.png)
 
 ## Add Book schema file
 
@@ -53,7 +53,7 @@ type Author {
 
 You can obtain the connection string by navigating to your Azure Cosmos DB account page, and select Primary connection string. Copy the value to use in the Data API Builder.
 
-![Cosmos DB connection string](../media/cosmos-connection.png)
+![Screenshot of Cosmos DB connection string.](../media/cosmos-connection.png)
 
 You can also use Azure Cosmos DB emulator connection string if you're testing locally. The Azure Cosmos DB Emulator supports a [single fixed account and a well-known authentication key](/azure/cosmos-db/local-emulator?tabs=ssl-netstd21#authenticate-requests)
 
