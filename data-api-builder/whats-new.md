@@ -1,6 +1,6 @@
 ---
 title: What's New in Data API builder 
-description: Release notes summary for the latest version of Data API builder  
+description: Release notes summary for the latest version of Data API builder are available here.  
 author: yorek 
 ms.author: damauri
 ms.service: data-api-builder 

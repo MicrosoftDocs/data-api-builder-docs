@@ -1,6 +1,6 @@
 ---
 title: Quickstart to Azure data API builder
-description: In this quickstart, we help you get started with Data API builder (DAB) for Azure Databases
+description: In this quickstart, we help you get started with Data API builder (DAB) for Azure Databases.
 author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder

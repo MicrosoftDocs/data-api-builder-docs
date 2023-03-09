@@ -202,7 +202,7 @@ you are now good to go, Data API Builder is up and running, ready to serve your 
 
 Now that the Data API builder engine is running, you can use your favorite REST client (Postman, Insomnia, etc.) to query the GraphQL endpoints.
 
-### REST Endpoint
+### REST endpoint
 
 Unlike other databases, Data API Builder for Azure Cosmos DB doesn't support generating REST endpoints because there's already a[REST API endpoint](/rest/api/cosmos-db/) capability built-in to the Azure Cosmos DB service.
 

@@ -1,6 +1,6 @@
 ---
 title: Release notes for Data API builder 0.3.7 
-description: Release notes for Data API builder 0.3.7 
+description: Release notes for Data API builder 0.3.7 are available here.
 author: yorek 
 ms.author: damauri
 ms.service: data-api-builder 
