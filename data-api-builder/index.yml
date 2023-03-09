@@ -28,12 +28,12 @@ landingContent:
       - linkListType: quickstart
         links:
           - text: Get started with Data API builder
-            url: ./getting-started/getting-started-with-data-api-builder.md
+            url: ./get-started/get-started-with-data-api-builder.md
           - text: Use Data API builder with Azure SQL
-            url: ./getting-started/getting-started-azure-sql.md
+            url: ./get-started/get-started-azure-sql.md
           - text: Use Data API builder with Cosmos DB
-            url: ./getting-started/getting-started-azure-cosmos-db.md   
+            url: ./get-started/get-started-azure-cosmos-db.md   
           - text: Use Data API builder with PostgreSQL
-            url: ./getting-started/getting-started-azure-postgresql.md
+            url: ./get-started/get-started-azure-postgresql.md
           - text: Use Data API builder with MySQL 
-            url: ./getting-started/getting-started-azure-mysql.md
+            url: ./get-started/get-started-azure-mysql.md

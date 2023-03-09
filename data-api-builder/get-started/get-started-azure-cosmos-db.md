@@ -10,7 +10,7 @@ ms.date: 02/22/2023
 
 # Quickstart: Use Data API builder with Azure Cosmos DB
 
-Make sure you have read the [Getting Started](./getting-started-with-data-api-builder.md) document.
+Make sure you have read the [Get Started](./get-started-with-data-api-builder.md) document.
 
 This tutorial assumes that you have already a [Cosmos DB NoSQL API database account](/azure/cosmos-db/sql/create-cosmosdb-resources-portal#create-an-azure-cosmos-db-account) that can be used as a playground.
 

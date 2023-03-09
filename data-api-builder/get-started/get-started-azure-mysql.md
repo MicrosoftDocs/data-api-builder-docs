@@ -10,7 +10,7 @@ ms.date: 02/22/2023
 
 # Quickstart: Use Data API builder with Azure MySQL
 
-Make sure you have read the [Getting Started](./getting-started-with-data-api-builder.md) document. As mentioned before, this tutorial assumes that you already have an Azure MySQL Database that can be used as a playground.
+Make sure you have read the [Get Started](./get-started-with-data-api-builder.md) document. As mentioned before, this tutorial assumes that you already have an Azure MySQL Database that can be used as a playground.
 
 ## Get the database connection string
 
