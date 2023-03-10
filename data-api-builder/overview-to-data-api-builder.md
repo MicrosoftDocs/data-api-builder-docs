@@ -16,7 +16,7 @@ With Data API builder, database objects can be securely exposed via REST or Grap
 
 Data API builder is Open Source and works on any platform. It can be executed on-premises, in container or as a Managed Service in Azure, via the new *Database Connection* feature available in Azure Static Web Apps.
 
-![Data API Builder Architecture Overview Diagram.](./media/data-api-builder-architecture-overview.png)
+![Diagram that shows an overview of the Data API Builder Architecture.](./media/data-api-builder-architecture-overview.png)
 
 ## Features
 
