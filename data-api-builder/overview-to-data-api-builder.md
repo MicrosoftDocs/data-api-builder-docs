@@ -64,7 +64,7 @@ dab start
 
 ## Run Data API builder on Azure
 
-Data API builder can be deployed in Azure using the new *Database Connection* feature offered by Azure Static Web Apps. With this feature you don't have to worry about running Data API builder in Azure at all: it's all taken care of for you. You can find more information about this feature [here](/azure/static-web-apps/database-overview).
+Data API builder can be deployed in Azure using the new *Database Connection* feature offered by Azure Static Web Apps. With this feature, you don't have to worry about running Data API builder in Azure at all: it's all taken care of for you. You can find more information about this feature [here](/azure/static-web-apps/database-overview).
 
 Another option to run Data API builder on Azure is to deploy it in a container. Data API builder image is available on the Microsoft Registry: https://mcr.microsoft.com/product/azure-databases/data-api-builder/about
 
@@ -74,7 +74,7 @@ To get started quickly with Data API builder for Azure Databases, you can use th
 
 ## Open source
 
-Data API builder is open source and released under the MIT license. The reposiority is available [here](https://github.com/Azure/data-api-builder)
+Data API builder is open source and released under the MIT license. The repository is available [here](https://github.com/Azure/data-api-builder)
 
 ## Next steps
 
