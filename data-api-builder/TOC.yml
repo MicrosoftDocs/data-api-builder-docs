@@ -1,2 +1,30 @@
-- name: Index
-  href: index.md
+- name: Data API builder Documentation
+  href: index.yml
+- name: Overview 
+  items:
+  - name: What is Data API builder?
+    href: overview-to-data-api-builder.md
+  - name: What's new in Data API builder
+    href: whats-new.md
+- name: Quickstarts
+  items:
+  - name: Get started with Data API builder
+    href: get-started/get-started-with-data-api-builder.md
+  - name: Get started with databases 
+    items:
+    - name: Use Data API builder with Azure SQL
+      href: get-started/get-started-azure-sql.md
+    - name: Use Data API builder with PostgreSQL
+      href: get-started/get-started-azure-postgresql.md
+    - name: Use Data API builder with Azure Cosmos DB
+      href: get-started/get-started-azure-cosmos-db.md
+    - name: Use Data API builder with MySQL
+      href: get-started/get-started-azure-mysql.md
+- name: Troubleshoot
+  href: troubleshoot.md
+  items:
+  - name: Troubleshoot installation
+    href: troubleshoot-installation.md
+  - name: Troubleshoot usage
+    href: troubleshoot-usage.md
+  
