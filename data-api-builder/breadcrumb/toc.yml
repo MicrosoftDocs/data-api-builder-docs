@@ -18,34 +18,34 @@
     tocHref: /azure/data-api-builder/
     topicHref: /azure/data-api-builder/
     items:
-      - name: What's New in Data API builder: Version 0.3.7
-        tocHref: /azure/data-api-builder/
-        topicHref: /azure/data-api-builder/whats-new-0-3-7
-      - name: What's New in Data API builder: Version 0.4.11
-        tocHref: /azure/data-api-builder/
-        topicHref: /azure/data-api-builder/whats-new-0-4-11
-      - name: What's New in Data API builder: Version 0.5.0
-        tocHref: /azure/data-api-builder/
-        topicHref: /azure/data-api-builder/whats-new-0-5-0
-      - name: What's New in Data API builder: Version 0.5.32
-        tocHref: /azure/data-api-builder/
-        topicHref: /azure/data-api-builder/whats-new-0-5-32
-      - name: What's New in Data API builder: Version 0.5.34
-        tocHref: /azure/data-api-builder/
-        topicHref: /azure/data-api-builder/whats-new-0-5-34
+    - name: What's New in Data API builder - Version 0.3.7
+      tocHref: /azure/data-api-builder/
+      topicHref: /azure/data-api-builder/whats-new-0-3-7
+    - name: What's New in Data API builder - Version 0.4.11
+      tocHref: /azure/data-api-builder/
+      topicHref: /azure/data-api-builder/whats-new-0-4-11
+    - name: What's New in Data API builder - Version 0.5.0
+      tocHref: /azure/data-api-builder/
+      topicHref: /azure/data-api-builder/whats-new-0-5-0
+    - name: What's New in Data API builder - Version 0.5.32
+      tocHref: /azure/data-api-builder/
+      topicHref: /azure/data-api-builder/whats-new-0-5-32
+    - name: What's New in Data API builder - Version 0.5.34
+      tocHref: /azure/data-api-builder/
+      topicHref: /azure/data-api-builder/whats-new-0-5-34
   - name: Quickstart: Use Data API builder with Azure Databases
     tocHref: /azure/data-api-builder/
     topicHref: /azure/data-api-builder/get-started/get-started-with-data-api-builder
     items:
-    - name: Quickstart: Use Data API builder with Azure Cosmos DB
+    - name: Quickstart - Use Data API builder with Azure Cosmos DB
       tocHref: /azure/data-api-builder/
       topicHref: /azure/data-api-builder/get-started/get-started-azure-cosmos-db
-    - name: Quickstart: Use Data API builder with Azure SQL
+    - name: Quickstart - Use Data API builder with Azure SQL
       tocHref: /azure/data-api-builder/
       topicHref: /azure/data-api-builder/get-started/get-started-azure-mysql
-    - name: Quickstart: Use Data API builder with Azure Database PostgreSQL
+    - name: Quickstart - Use Data API builder with Azure Database PostgreSQL
       tocHref: /azure/data-api-builder/
       topicHref: /azure/data-api-builder/get-started/get-started-azure-postgresql
-    - name: Quickstart: Use Data API builder with Azure MySQL
+    - name: Quickstart - Use Data API builder with Azure MySQL
       tocHref: /azure/data-api-builder/
       topicHref: /azure/data-api-builder/get-started/get-started-azure-sql
