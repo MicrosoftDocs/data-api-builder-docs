@@ -156,7 +156,7 @@ within the `entities` object you can create any entity with any name (as long as
 After that, you need to specify the permission for the exposed entity, so that you can be sure only those users making a request with the right claims will be able to access the entity and its data. In this getting started tutorial we're just allowing anyone, without the need to be authenticated, to perform all the CRUD operations to the `Book` entity.
 
 > [!NOTE]
-> The aforementioned permissions settings are only to be used for learning purposes. We do not recommend that unauthenticated entities are allowed to perform CRUD operations on a database in a production environment, as this poses a security risk. To read more on SQL security baselines, go to [Azure security baseline for Azure Cosmos DB](/security/benchmark/azure/baselines/azure-cosmos-db-security-baseline)
+> The aforementioned permissions settings are only to be used for learning purposes. We do not recommend that unauthenticated entities are allowed to perform CRUD operations on a database in a production environment, as this poses a security risk. To read more on security baselines, go to [Azure security baseline for Azure Cosmos DB](/security/benchmark/azure/baselines/azure-cosmos-db-security-baseline)
 
 Once you've added the `Book` entity, the `entities` object of configuration file looks like the following:
 
