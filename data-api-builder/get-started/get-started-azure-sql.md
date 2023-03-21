@@ -128,6 +128,9 @@ within the `entities` object you can create any entity with any name (as long as
 
 After that, the permissions for the exposed entity are defined via the `permission` element; it allows you to be sure that only those users making a request with the right claims will be able to access the entity and its data. In this getting started tutorial, we're allowing anyone, without the need to be authenticated, to perform all the CRUD operations to the `Author` entity.
 
+> [!NOTE]
+> The aforementioned permissions settings are only to be used for learning purposes. We do not recommend that unauthenticated entities are allowed to perform CRUD operations on a database in a production environment, as this poses a security risk. To read more on SQL security baselines, go to [Azure security baseline for Azure SQL](/security/benchmark/azure/baselines/azure-sql-security-baseline)
+
 You can also add the `Book` entity now, applying the same concepts you just learned for the `Author` entity. Once you've added the `Author` entity, the `entities` object of configuration file looks like the following:
 
 ```json
