@@ -30,6 +30,9 @@ To connect to a local SQL Server, for example:
 Server=localhost;Database=Library;User ID=dab_user;Password=<password>;TrustServerCertificate=true
 ```
 
+> [!NOTE]
+> User IDs and passwords specified here are recommended for sample purpose only. For details, refer [Azure Active Directory authentication](/azure/azure-sql/database/authentication-aad-overview?view=azuresql&preserve-view=true).
+
 More details on Azure SQL and SQL Server connection strings can be found here: [/sql/connect/ado-net/connection-string-syntax]
 
 ## Create the database objects
