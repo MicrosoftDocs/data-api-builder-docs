@@ -36,6 +36,9 @@ To connect to a local PostgreSQL Server, the connection string looks like:
 `Server={your_server};Database={your_database};Port=5432;User Id={your_username};Password={your_password};Ssl Mode=Require;`
 ```
 
+> [!NOTE]
+> User IDs and passwords specified here are recommended for sample purpose only. For details, refer [Azure Active Directory authentication](/azure/postgresql/single-server/how-to-configure-sign-in-azure-ad-authentication).
+
 ## Create the database objects
 
 Create the database tables needed to represent Authors, Books and the many-to-many relationship between Authors and Books. You can find the `library.azure-postgresql.sql` script in the `azure-postgresql-db` folder in the GitHub repo. You can use it to create three tables, along with sample data:
