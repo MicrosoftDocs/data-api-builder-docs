@@ -30,6 +30,9 @@ For Data API Builder, the format used for a MySQL connection is based on SSL con
     Server=<server-address>;Database=<database-name>;User ID=<username>;Password=<password>;
     ```
 
+> [!NOTE]
+> User IDs and passwords specified here are recommended for sample purpose only. For details, refer [Azure Active Directory authentication](/azure/mysql/single-server/how-to-configure-sign-in-azure-ad-authentication).
+
 ## Create the database objects
 
 Create the database `booksdb` with tables to represent Authors, Books and the many-to-many relationship between Authors and Books. Execute this [sample script for books schema and data](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-mysql-db/library.azure-mysql.sql) in the MySQL Database you decided to use.
@@ -128,6 +131,9 @@ within the `entities` object you can create any entity with any name (as long as
 > It is recommended to use the *singular* form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](https://github.com/Azure/data-api-builder/blob/main/docs/graphql.md).
 
 After that, the permissions for the exposed entity are defined via the `permissions` element; it allows you to be sure that only those users making a request with the right claims will be able to access the entity and its data. In this getting started tutorial, we're allowing anyone, without the need to be authenticated, to perform all the CRUD operations on the `Book` entity.
+
+> [!NOTE]
+> The aforementioned permissions settings are only to be used for learning purposes. We do not recommend that unauthenticated entities are allowed to perform CRUD operations on a database in a production environment, as this poses a security risk. To read more on security baselines, go to [Azure security baseline for MySQl](/security/benchmark/azure/baselines/azure-database-for-mysql-flexible-server-security-baseline)
 
 You can also add the `Author` entity now, applying the same concepts you just learnt for the `Book` entity. Once you have added the `Author` entity, the `entities` object of configuration file will look like the following:
 
