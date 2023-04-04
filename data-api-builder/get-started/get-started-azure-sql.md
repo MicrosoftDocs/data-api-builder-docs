@@ -14,6 +14,10 @@ Make sure you have read the [Get Started](./get-started-with-data-api-builder.md
 
 As mentioned before, this tutorial assumes that you already have a SQL Server or an Azure SQL database that can be used as playground.
 
+## Create a sample database
+
+If you don't have a SQL Server or Azure SQL database, you can create one in Azure. You can use the Azure Portal or the Azure CLI. More details here: [Quickstart: Create a single database - Azure SQL Database](/azure/azure-sql/database/single-database-create-quickstart?view=azuresql&tabs=azure-portal&preserve-view=true)
+
 ## Get the database connection string
 
 There are several ways to get an Azure SQL database connection string. More details here: [Azure SQL Database and Azure SQL Managed Instance connect and query articles](/azure/azure-sql/database/connect-query-content-reference-guide?view=azuresql&preserve-view=true)
@@ -29,6 +33,9 @@ To connect to a local SQL Server, for example:
 ```text
 Server=localhost;Database=Library;User ID=dab_user;Password=<password>;TrustServerCertificate=true
 ```
+
+> [!NOTE]
+> User IDs and passwords specified here are recommended for sample purpose only. For details, refer [Azure Active Directory authentication](/azure/azure-sql/database/authentication-aad-overview?view=azuresql&preserve-view=true).
 
 More details on Azure SQL and SQL Server connection strings can be found here: [/sql/connect/ado-net/connection-string-syntax]
 
@@ -51,6 +58,8 @@ For this getting started guide, you'll use DAB CLI to initialize your configurat
 ```bash
 dab init --database-type "mssql" --connection-string "Server=localhost;Database=PlaygroundDB;User ID=PlaygroundUser;Password=<Password>;TrustServerCertificate=true" --host-mode "Development"
 ```
+
+Make sure to replace the placehoders (`<database-name>`, `<user>` and `<password>`) with the correct values for your database.
 
 The command generates a config file called `dab-config.json` looking like this:
 

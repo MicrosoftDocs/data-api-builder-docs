@@ -30,6 +30,9 @@ For Data API Builder, the format used for a MySQL connection is based on SSL con
     Server=<server-address>;Database=<database-name>;User ID=<username>;Password=<password>;
     ```
 
+> [!NOTE]
+> User IDs and passwords specified here are recommended for sample purpose only. For details, refer [Azure Active Directory authentication](/azure/mysql/single-server/how-to-configure-sign-in-azure-ad-authentication).
+
 ## Create the database objects
 
 Create the database `booksdb` with tables to represent Authors, Books and the many-to-many relationship between Authors and Books. Execute this [sample script for books schema and data](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-mysql-db/library.azure-mysql.sql) in the MySQL Database you decided to use.
@@ -46,12 +49,6 @@ For this getting started guide, you'll use DAB CLI to initialize your configurat
 
 ```bash
 dab init  --config "dab-config.MySql.json" --database-type mysql --connection-string "<mysql-connection-string-ssl-or-non-ssl>" --host-mode "Development" --authenticate-devmode-requests false --cors-origin "http://localhost:5000"
-
-The output would look like 
-```shell
-    Using config file: dab-config.MySql.json
-    Config file generated.
-    SUGGESTION: Use 'dab add <options>' to add new entities in your config.
 ```
 
 The command generates a config file called dab-config.MySql.json looking like this:
@@ -100,14 +97,11 @@ Now, you'll want to expose the `books` table as REST and/or GraphQL endpoints. T
 
 Run the DAB CLI command as shown to create the entity called Books
 
-```shell
+```bash
     dab add Book --config "dab-config.MySql.json" --source books --permissions "anonymous:create,read,update,delete"
-    Using config file: dab-config.MySql.json
-    Added new entity: Book with source: books to config: dab-config.MySql.json with permissions: anonymous:create,read,update,delete.
-    SUGGESTION: Use 'dab update <options>' to update any entities in your config.
 ```
 
-Start by adding the `Book` entity:
+This will add the following information to the `entities` section of the configuration file.
 
 ```json
 "entities": {
@@ -133,13 +127,40 @@ within the `entities` object you can create any entity with any name (as long as
 > [!NOTE]
 > Entities names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them.
 
-After that, the permissions for the exposed entity are defined via the `permissions` element; it allows you to be sure that only those users making a request with the right claims will be able to access the entity and its data.
+> [!TIP]
+> It is recommended to use the *singular* form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](https://github.com/Azure/data-api-builder/blob/main/docs/graphql.md).
+
+After that, the permissions for the exposed entity are defined via the `permissions` element; it allows you to be sure that only those users making a request with the right claims will be able to access the entity and its data. In this getting started tutorial, we're allowing anyone, without the need to be authenticated, to perform all the CRUD operations on the `Book` entity.
 
 > [!NOTE]
 > The aforementioned permissions settings are only to be used for learning purposes. We do not recommend that unauthenticated entities are allowed to perform CRUD operations on a database in a production environment, as this poses a security risk. To read more on security baselines, go to [Azure security baseline for MySQl](/security/benchmark/azure/baselines/azure-database-for-mysql-flexible-server-security-baseline)
 
-> [!TIP]
-> It is recommended to use the *singular* form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](https://github.com/Azure/data-api-builder/blob/main/docs/graphql.md).
+You can also add the `Author` entity now, applying the same concepts you just learnt for the `Book` entity. Once you have added the `Author` entity, the `entities` object of configuration file will look like the following:
+
+```json
+"entities": {
+    "Author": {
+      "source": "authors",
+      "permissions": [
+        {
+          "actions": ["*"],
+          "role": "anonymous"
+        }
+      ]
+    },
+    "Book": {
+      "source": "books",
+      "permissions": [
+        {
+          "actions": ["*"],
+          "role": "anonymous"
+        }
+      ]
+    }
+  }
+```
+
+that's all is needed at the moment. Data API builder is ready to be run.
 
 ## Start Data API builder for Azure MySQL Database
 
@@ -151,11 +172,7 @@ To start the DAB API builder with the configuration file, run the following comm
 
 The output would look like
 
-```shell
-Using config file: dab-config.MySql.json
-Starting the runtime engine...
-info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[63]
-      User profile is available. Using 'xxxxxxxxxxxxxxxxxxxxxxx' as key repository and Windows DPAPI to encrypt keys at rest.
+```bash
 info: Azure.DataApiBuilder.Service.Services.ISqlMetadataProvider[0]
       Book path: /api/Book
 info: Azure.DataApiBuilder.Service.Configurations.RuntimeConfigValidator[0]
