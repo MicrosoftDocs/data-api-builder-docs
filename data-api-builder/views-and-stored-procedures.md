@@ -19,7 +19,7 @@ ms.date: 04/06/2023
 
 Views can be used similar to how a table can be used in Data API builder. View usage must be defined by specifying the source type for the entity as `view`. Along with that the `key-fields` property must be provided, so that Data API builder knows how it can identify and return a single item, if needed.
 
-If you have a view, for example [`dbo.vw_books_details`](../samples/getting-started/azure-sql-db/library.azure-sql.sql#L112) it can be exposed using the following `dab` command:
+If you have a view, for example [`dbo.vw_books_details`](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-sql-db/library.azure-sql.sql#L112) it can be exposed using the following `dab` command:
 
 ```shell
 dab add BookDetail --source dbo.vw_books_details --source.type View --source.key-fields "id" --permissions "anonymous:read"
@@ -58,7 +58,7 @@ A view, from a GraphQL perspective, behaves like a table. All GraphQL operations
 
 Stored procedures can be used as objects related to entities exposed by Data API builder. Stored Procedure usage must be defined specifying that the source type for the entity is `stored-procedure`.
 
-If you have a stored procedure, for example [`dbo.stp_get_all_cowritten_books_by_author`](../samples/getting-started/azure-sql-db/library.azure-sql.sql#L138) it can be exposed using the following `dab` command:
+If you have a stored procedure, for example [`dbo.stp_get_all_cowritten_books_by_author`](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-sql-db/library.azure-sql.sql#L138) it can be exposed using the following `dab` command:
 
 ```shell
 dab add GetCowrittenBooksByAuthor --source dbo.stp_get_all_cowritten_books_by_author --source.type "stored-procedure" source.params "searchType:s" --permissions "anonymous:execute" --rest.methods "get" --graphql.operation "query"
@@ -93,7 +93,7 @@ The `parameters` defines which parameters should be exposed and also provides de
 **Limitations**:
 
 1. Only the first result set returned by the stored procedure will be used by Data API builder.
-2. Only those stored procedures whose metadata for the first result set can be described by [`sys.dm_exec_describe_first_result_set`](https://learn.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-describe-first-result-set-transact-sql) are supported. 
+2. Only those stored procedures whose metadata for the first result set can be described by [`sys.dm_exec_describe_first_result_set`](/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-describe-first-result-set-transact-sql) are supported.
 3. For both REST and GraphQL endpoints: when a stored procedure parameter is specified both in the configuration file and in the URL query string, the parameter in the URL query string will take precedence.
 4. Entities backed by a stored procedure don't have all the capabilities automatically provided for entities backed by tables, collections or views.
     1. Stored procedure backed entities don't support pagination, ordering, or filtering. Nor do such entities support returning items specified by primary key values.

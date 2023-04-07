@@ -14,7 +14,7 @@ The easiest option that doesn't require cloning the repo is to use the `dab` [CL
 
 ## Install `dab` CLI
 
-You can install the latest `dab` CLI using [.NET tools](https://learn.microsoft.com/dotnet/core/tools/global-tools):
+You can install the latest `dab` CLI using [.NET tools](/dotnet/core/tools/global-tools):
 
 ```bash
 dotnet tool install --global  Microsoft.DataApiBuilder
@@ -48,7 +48,8 @@ dab start
 ```
 
 For providing a custom configuration file, you can use the option `-c` or `--config` followed by the config file name.
-```
+
+```bash
 dab start -c my-custom-dab-config.json
 ```
 
@@ -82,7 +83,7 @@ This logs the information as follows:
 
 ## Get started using `dab` CLI
 
-To quickly get started using the CLI, make sure you have read the [Getting Started](./getting-started/getting-started.md) guide to become familiar with basic Data API builder concepts and then use [`dab` CLI](./dab-cli.md) to learn how to use the CLI tool.
+To quickly get started using the CLI, make sure you have read the [Getting Started](./get-started/get-started-with-data-api-builder.md) guide to become familiar with basic Data API builder concepts and then use [`dab` CLI](./dab-cli.md) to learn how to use the CLI tool.
 
 ## Uninstall `dab` CLI
 
