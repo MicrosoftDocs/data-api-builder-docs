@@ -28,4 +28,4 @@
   - name: Troubleshoot usage
     href: troubleshoot-usage.md
 - name: Azure SQL Session Context and Row Level Security
-  href: azure-sql-session-context-rls.md  
+  href: azure-sql-session-context-rls.md
