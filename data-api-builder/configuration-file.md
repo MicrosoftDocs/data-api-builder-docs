@@ -59,7 +59,7 @@ using the minimum amount of code.
 
 ## Environments Support
 
-Data API builder configuration file is able to support multiple environments, following the same behavior offered by ASP.NET Core for the `appSettings.json` file, as per: [Default Configuration](/aspnet/core/fundamentals/configuration/?view=aspnetcore-6.0#default-configuration). For example:
+Data API builder configuration file is able to support multiple environments, following the same behavior offered by ASP.NET Core for the `appSettings.json` file, as per: [Default Configuration](/aspnet/core/fundamentals/configuration/?view=aspnetcore-6.0#default-configuration&preserve-view=true). For example:
 
 1. dab-config.json
 2. dab-config.Development.json
@@ -553,8 +553,8 @@ The `policy` section, defined per `action`, defines item-level security rules (d
 - `database` policy: an OData expression that is translated into a query predicate that will be evaluated by the database.
   - for example The policy expression `@item.OwnerId eq 2000` is translated to the query predicate `WHERE Table.OwnerId  = 2000`
 
-> A *predicate* is an expression that evaluates to TRUE, FALSE, or UNKNOWN. Predicates are used in the search condition of [WHERE](https://learn.microsoft.com/sql/t-sql/queries/where-transact-sql) clauses and [HAVING](https://learn.microsoft.com/sql/t-sql/queries/select-having-transact-sql) clauses, the join conditions of [FROM](https://learn.microsoft.com/sql/t-sql/queries/from-transact-sql) clauses, and other constructs where a Boolean value is required.
-([Microsoft Learn Docs](https://learn.microsoft.com/sql/t-sql/queries/predicates?view=sql-server-ver16))
+> A *predicate* is an expression that evaluates to TRUE, FALSE, or UNKNOWN. Predicates are used in the search condition of [WHERE](/sql/t-sql/queries/where-transact-sql) clauses and [HAVING](/sql/t-sql/queries/select-having-transact-sql) clauses, the join conditions of [FROM](/sql/t-sql/queries/from-transact-sql) clauses, and other constructs where a Boolean value is required.
+([Microsoft Learn Docs](/sql/t-sql/queries/predicates?view=sql-server-ver16&preserve-view=true))
 
 In order for results to be returned for a request, the request's query predicate resolved from a database policy must evaluate to `true` when executing against the database.
 
@@ -584,8 +584,8 @@ Database policies are only supported for the `actions` **read**, **update**, and
 
 Database policy OData expression syntax supports:
 
-- Binary operators [BinaryOperatorKind - Microsoft Learn](/dotnet/api/microsoft.odata.uriparser.binaryoperatorkind?view=odata-core-7.0) such as `and`, `or`, `eq`, `gt`, `lt`, and more.
-- Unary operators [UnaryOperatorKind - Microsoft Learn](/dotnet/api/microsoft.odata.uriparser.unaryoperatorkind?view=odata-core-7.0) such as the negate (`-`) and `not` operators.
+- Binary operators [BinaryOperatorKind - Microsoft Learn](/dotnet/api/microsoft.odata.uriparser.binaryoperatorkind?view=odata-core-7.0&preserve-view=true) such as `and`, `or`, `eq`, `gt`, `lt`, and more.
+- Unary operators [UnaryOperatorKind - Microsoft Learn](/dotnet/api/microsoft.odata.uriparser.unaryoperatorkind?view=odata-core-7.0&preserve-view=true) such as the negate (`-`) and `not` operators.
 
 #### Mappings
 
