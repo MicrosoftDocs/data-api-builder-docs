@@ -1,3 +1,13 @@
+---
+title: Authentication Azure AD
+description: This document assists in usage of Authentication Azure AD.
+author: anagha-todalbagi
+ms.author: atodalbagi
+ms.service: data-api-builder
+ms.topic: authentication-azure-ad
+ms.date: 04/06/2023
+---
+
 # Authentication with Azure AD
 
 For authentication with Azure AD to work properly, Azure AD needs to be configured so that it can authenticate a request sent to Data API builder (the "Server App").
@@ -5,60 +15,60 @@ For authentication with Azure AD to work properly, Azure AD needs to be configur
 The first step is to configure Azure AD to perform authentication for Data API builder
 
 1. [Create Azure AD tenant (Optional)](#create-azure-ad-tenant-optional)
-1. [Create Server App Registration](#create-server-app-registration)
-1. [Configure Server App Registration](#configure-server-app-registration)
-1. [Assign roles to your account](#assign-roles-to-your-account)
+2. [Create Server App Registration](#create-server-app-registration)
+3. [Configure Server App Registration](#configure-server-app-registration)
+4. [Assign roles to your account](#assign-roles-to-your-account)
 
 Azure AD can now perform authentication on behalf of Data API builder. In order to send authenticated request, a client application (the "Client App") must be registered too, so that Azure AD can properly identify and authorize it.
 
-One way to get a JWT token that can be used to send authenticate request to Data API builder is to use AZ CLI:
+One way to get a JWT token that can be used to send an authenticate request to Data API builder is to use AZ CLI:
 
 1. [Configure AZ CLI to get an authentication token](#configure-az-cli-to-get-an-authentication-token)
 
 Now that you have a way to get a valid JWT token, you can use it to call a Data API builder endpoint:
 
 1. [Update Data API builder configuration file](#update-data-api-builder-configuration-file)
-1. [Send authenticated request to Data API builder](#send-authenticated-request-to-data-api-builder)
+2. [Send authenticated request to Data API builder](#send-authenticated-request-to-data-api-builder)
 
 If you prefer to use a third party application like PostMan to send authenticated request to Data API builder, follow these steps:
 
 1. [Create Postman Client App Registration](#create-postman-client-app-registration)
-1. [Postman Configuration](#postman-configuration)
+2. [Postman Configuration](#postman-configuration)
 
 ## Create Azure AD tenant (Optional)
 
 Make sure you have an Azure Tenant that you can use. If you want or need to create a new Tenant, use the following instructions
 
- 1. Create an Azure AD tenant in your Azure Subscription by following [this guide](https://learn.microsoft.com/azure/active-directory/fundamentals/active-directory-access-create-new-tenant).
- 2. Make note of your Tenant ID which can be found on the Overview page of your newly created tenant resource in the Azure Portal.
+ 1. Create an Azure AD tenant in your Azure Subscription by following [this guide](/azure/active-directory/fundamentals/active-directory-access-create-new-tenant).
+ 2. Make note of your Tenant ID, this can be found on the Overview page of your newly created tenant resource in the Azure portal.
 
 ## Create Server App Registration
 
 1. Switch to the Azure AD tenant that you want to use
-1. Open the "Azure Active Directory" resource blade
-1. Select: **App Registration**
-1. Select: **New Registration**
-1. *Name*: `Data API builder`
-1. *Supported Account Types*: Leave default selection "Accounts in this organizational directory only."
-1. *Redirect URI*: Leave default (empty)
-1. Select: Register
+2. Open the "Azure Active Directory" resource page
+3. Select: **App Registration**
+4. Select: **New Registration**
+5. *Name*: `Data API builder`
+6. *Supported Account Types*: Leave default selection "Accounts in this organizational directory only."
+7. *Redirect URI*: Leave default (empty)
+8. Select: Register
 
 ## Configure Server App Registration
 
 Note: The following steps can also be found in the Microsoft Doc: [QuickStart: Configure an application to expose a web API](https://learn.microsoft.com/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
 
 1. Navigate to `Expose an API` from your App Registration (`Data API builder`) overview page.
-1. Create an `Application ID URI`, by clicking on **Set**, just before the section *Scopes defined by this API*,
-1. Under *Scopes defined by this API*, select **Add a scope**. For more details on why scopes are defined, see this [Microsoft Identity Platform doc](https://learn.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#request-the-permissions-from-a-directory-admin).
+2. Create an `Application ID URI`, by clicking on **Set**, just before the section *Scopes defined by this API*,
+3. Under *Scopes defined by this API*, select **Add a scope**. For more information on why scopes are defined, see this [Microsoft Identity Platform doc](https://learn.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#request-the-permissions-from-a-directory-admin).
    1. Scope name: `Endpoint.Access`
-   1. Who can consent?: `Admins and users`
-   1. Admin consent display name: `Execute requests against Data API builder`
-   1. Admin consent description: `Allows client app to send requests to Data API builder endpoint.`
-   1. User consent display name: `Execute requests against Data API builder`
-   1. User consent description: `Allows client app to send requests to DataAPIbuilder endpoint.`
-   1. State: `Enabled`
-   1. Click on **Add scope**
-1. Navigate to `App roles` from your App Registration overview page.
+   2. Who can consent?: `Admins and users`
+   3. Admin consent display name: `Execute requests against Data API builder`
+   4. Admin consent description: `Allows client app to send requests to Data API builder endpoint.`
+   5. User consent display name: `Execute requests against Data API builder`
+   6. User consent description: `Allows client app to send requests to DataAPIbuilder endpoint.`
+   7. State: `Enabled`
+   8. Click on **Add scope**
+4. Navigate to `App roles` from your App Registration overview page.
    1. Click on **Create app role**
       1. DisplayName: `SampleRole`
       2. Allowed member types: **Users/Groups**
@@ -66,12 +76,12 @@ Note: The following steps can also be found in the Microsoft Doc: [QuickStart: C
       4. Description: `A Sample Role to be used with Data API builder.`
       5. Do you want to enable this app role?: Ensure checkbox is checked.
       6. Select **Apply**
-1. Navigate to `Manifest` from your App Registration overview page.
+5. Navigate to `Manifest` from your App Registration overview page.
     1. Update the JSON document so that `accessTokenAcceptedVersion` is set to `2`
 
 ## Assign roles to your account
 
-1. Open the Azure Active Directory resource blade and then select **Enterprise Applications**
+1. Open the Azure Active Directory resource page and then select **Enterprise Applications**
 2. Search for `Data API builder` (An Enterprise App has been created automatically when you did the "Data API builder App" Registration)
 3. Navigate to **Users and groups**
 4. Select **Add user/group** to add a role assignment
@@ -79,17 +89,17 @@ Note: The following steps can also be found in the Microsoft Doc: [QuickStart: C
    2. Select a role: choose a role you want to assign to your account. (Note: if you don't see your role, wait a few minutes for Azure AD replication to finish from when you added the role to your App Registration earlier.)
    3. Repeat this step for all the roles you want to add to your account.
 
-Where the`APP_ID` is the "Application (client) ID" and the `TENANT_ID` is the "Directory (tenant) ID". Both values can be found in the App Registration overview page in the Azure Active Directory blade.
+Where the`APP_ID` is the "Application (client) ID" and the `TENANT_ID` is the "Directory (tenant) ID". Both values can be found in the App Registration overview page in the Azure Active Directory page.
 
 ## Configure AZ CLI to get an authentication token
 
-Make sure you are logged in to AZ CLI with the account that you want to use to authenticate against Data API builder.
+Make sure you're logged in to AZ CLI with the account that you want to use to authenticate against Data API builder.
 
 ```shell
 az login
 ```
 
-and select the subscription where you have [configured the Data API builder App Registration](#configure-server-app-registration).
+and select the subscription where you've [configured the Data API builder App Registration](#configure-server-app-registration).
 
 ```shell
 az account set --subscription <subscription name or id>
@@ -107,7 +117,7 @@ It should return an error like the following:
 AADSTS65001: The user or administrator has not consented to use the application with ID '<AZ CLI Application ID GUID>' named 'Microsoft Azure CLI'. Send an interactive authorization request for this user and resource.
 ```
 
-The '\<AZ CLI Application ID GUID\>', which represents AZ CLI, must be allowed to authenticate against the Data API builder Azure AD Application. To do that, search for the "Data API builder" application in the Azure Portal or go to the Azure Active Directory portal blade and select **App Registrations**. Select the "Data API builder" application and then:
+The '\<AZ CLI Application ID GUID\>', which represents AZ CLI, must be allowed to authenticate against the Data API builder Azure AD Application. To do that, search for the "Data API builder" application in the Azure portal or go to the Azure Active Directory portal page and select **App Registrations**. Select the "Data API builder" application and then:
 
 1. Navigate to **Expose an API** from your App Registration overview page.
    1. Under *Authorized client applications*, select **Add a client application**
@@ -115,7 +125,7 @@ The '\<AZ CLI Application ID GUID\>', which represents AZ CLI, must be allowed t
       2. Authorized Scopes: `api://<Application ID>/Endpoint.Access`
       3. Select **Add application**
 
-If you now run the AZ CLI command again, you'll get an access token:
+If you now run the AZ CLI command again, you get an access token:
 
 ```json
 {
@@ -127,7 +137,7 @@ If you now run the AZ CLI command again, you'll get an access token:
 }
 ```
 
-you can inspect the token using a online debugging tool like [jwt.ms](http://jwt.ms). The decoded token will contain something like:
+you can inspect the token using an online debugging tool like [jwt.ms](http://jwt.ms). The decoded token contains something like:
 
 ```json
 {
@@ -138,13 +148,13 @@ you can inspect the token using a online debugging tool like [jwt.ms](http://jwt
 }
 ```
 
-that shows you can access the scope "Endpoint.Access" and that you have been assigned the "Sample.Role".
+that shows you can access the scope "Endpoint.Access" and that you've been assigned the "Sample.Role".
 
 You can now use the generated Bearer Token to send authenticated request against your Data API builder.
 
 ## Update Data API builder configuration file
 
-Update the `dab-config.json` file so that in the `authentication` section you'll have something like:
+Update the `dab-config.json` file so that in the `authentication` section you have something like:
 
 ```json
 "authentication": {
@@ -156,7 +166,7 @@ Update the `dab-config.json` file so that in the `authentication` section you'll
 }
 ```
 
-To test out that authentication is working fine, you can update your configuration file so that an entity will allow access only to authenticated request with the `Sample.Role` assigned. For example:
+To test out that authentication is working fine, you can update your configuration file so that an entity allows access only to authenticated request with the `Sample.Role` assigned. For example:
 
 ```json
 "entities": {
@@ -190,27 +200,27 @@ curl -k -r GET -H 'Authorization: Bearer ey...' -H 'X-MS-API-ROLE: Sample.Role' 
 
 This step creates the app registration for the application that sends requests to the Data API builder.
 
-1. Navigate to your Azure AD tenant in the Azure Portal
-1. Select: **App Registration**
-1. Select: **New Registration**
-1. *Name*: `Postman`
-1. *Supported Account Types*: Leave default selection "Accounts in this organizational directory only."
-1. *Redirect URI*: Leave default (empty)
-1. Select: Register
+1. Navigate to your Azure AD tenant in the Azure portal
+2. Select: **App Registration**
+3. Select: **New Registration**
+4. *Name*: `Postman`
+5. *Supported Account Types*: Leave default selection "Accounts in this organizational directory only."
+6. *Redirect URI*: Leave default (empty)
+7. Select: Register
 
 ### Configure Client App Registration
 
 1. Navigate to your App Registration (`Postman`) overview page.
-2. Save the client app id value for use later.
+2. Save the client app ID value for use later.
 3. Under *Authentication*, click on **Add a platform**, and choose **Web**  for configuring Redirect URIs.
    1. Redirect URI: `https://oauth.pstmn.io/v1/callback`
    2. Select **Configure**
 4. Under *Certificates & secrets* and *Client Secrets*, select **New client secret**
    1. Add a description and expiration setting.
    2. Select **Add**
-   3. Save the **Value** of the created secret somewhere as it will be needed later, and it will not be visible anymore once you navigate to another page
+   3. Save the **Value** of the created secret somewhere as it's needed later, and it is not be visible anymore once you navigate to another page
 
-The following steps configure [delegated permissions](https://learn.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#permission-types) for the client app registration. This means that the client app will be delegated with the permission to act as a signed-in user when it makes calls to the target resource (Data API builder).
+The following steps configure [delegated permissions](https://learn.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#permission-types) for the client app registration. This means that the client app is delegated with the permission to act as a signed-in user when it makes calls to the target resource (Data API builder).
 
 1. Navigate to your App Registration (`Postman`) overview page.
 2. Under *API permissions*, select **Add a permission**
@@ -222,7 +232,7 @@ The following steps configure [delegated permissions](https://learn.microsoft.co
 
 ## Postman Configuration
 
-1. Create a new Postman collection: you will configure authorization for the collection, so it can be used for all requests (REST and GraphQL).
+1. Create a new Postman collection: you'll configure authorization for the collection, so it can be used for all requests (REST and GraphQL).
 2. Select the collection, then navigate to **Authorization**
    1. Type: **OAuth 2.0**
    2. Add auth data to: **Request Headers**
@@ -240,6 +250,6 @@ The following steps configure [delegated permissions](https://learn.microsoft.co
          1. Recommended: store as Postman variable, and use value `{{ClientID_VariableName}}` here.
          2. The client ID value can be found on the client app registration overview page.
       8. Client Secret: `Client_APP_Secret` this was created earlier. (Recommended: store as Postman variable, and use value `{{ClientSecret_VariableName}}` here)
-      9. Scope: `api://<APP_ID>/Endpoint.Access` (Note: don't forget this or authentication will fail.)
+      9. Scope: `api://<APP_ID>/Endpoint.Access` (Note: don't forget this or authentication fails.)
 3. Select Get New Access Token, and sign in with your Azure AD tenant credentials.
-   1. It is expected that you will get a Consent screen. This is normal and you must agree to authenticate successfully.
+   1. It's expected that you get a Consent screen. This is normal and you must agree to authenticate successfully.
