@@ -66,7 +66,7 @@ dab start --LogLevel 0
 
 This logs the information as follows:
 
-- At startup 
+- At startup
   - what configuration file is being used (Level: Information)
 
 - During the (in-memory schema generation)
