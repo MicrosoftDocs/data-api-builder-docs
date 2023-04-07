@@ -55,11 +55,11 @@ Make sure you have an Azure Tenant that you can use. If you want or need to crea
 
 ## Configure Server App Registration
 
-Note: The following steps can also be found in the Microsoft Doc: [QuickStart: Configure an application to expose a web API](https://learn.microsoft.com/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
+Note: The following steps can also be found in the Microsoft Doc: [QuickStart: Configure an application to expose a web API](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
 
 1. Navigate to `Expose an API` from your App Registration (`Data API builder`) overview page.
 2. Create an `Application ID URI`, by clicking on **Set**, just before the section *Scopes defined by this API*,
-3. Under *Scopes defined by this API*, select **Add a scope**. For more information on why scopes are defined, see this [Microsoft Identity Platform doc](https://learn.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#request-the-permissions-from-a-directory-admin).
+3. Under *Scopes defined by this API*, select **Add a scope**. For more information on why scopes are defined, see this [Microsoft Identity Platform doc](/azure/active-directory/develop/v2-permissions-and-consent#request-the-permissions-from-a-directory-admin).
    1. Scope name: `Endpoint.Access`
    2. Who can consent?: `Admins and users`
    3. Admin consent display name: `Execute requests against Data API builder`
@@ -218,9 +218,9 @@ This step creates the app registration for the application that sends requests t
 4. Under *Certificates & secrets* and *Client Secrets*, select **New client secret**
    1. Add a description and expiration setting.
    2. Select **Add**
-   3. Save the **Value** of the created secret somewhere as it's needed later, and it is not be visible anymore once you navigate to another page
+   3. Save the **Value** of the created secret somewhere as it's needed later, and it will not be visible anymore once you navigate to another page
 
-The following steps configure [delegated permissions](https://learn.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#permission-types) for the client app registration. This means that the client app is delegated with the permission to act as a signed-in user when it makes calls to the target resource (Data API builder).
+The following steps configure [delegated permissions](/azure/active-directory/develop/v2-permissions-and-consent#permission-types) for the client app registration. This means that the client app is delegated with the permission to act as a signed-in user when it makes calls to the target resource (Data API builder).
 
 1. Navigate to your App Registration (`Postman`) overview page.
 2. Under *API permissions*, select **Add a permission**
