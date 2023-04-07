@@ -55,7 +55,8 @@ Make sure you have an Azure Tenant that you can use. If you want or need to crea
 
 ## Configure Server App Registration
 
-Note: The following steps can also be found in the Microsoft Doc: [QuickStart: Configure an application to expose a web API](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
+> [!NOTE]
+> The following steps can also be found in the Microsoft Doc: [QuickStart: Configure an application to expose a web API](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
 
 1. Navigate to `Expose an API` from your App Registration (`Data API builder`) overview page.
 2. Create an `Application ID URI`, by clicking on **Set**, just before the section *Scopes defined by this API*,
@@ -72,7 +73,7 @@ Note: The following steps can also be found in the Microsoft Doc: [QuickStart: C
    1. Click on **Create app role**
       1. DisplayName: `SampleRole`
       2. Allowed member types: **Users/Groups**
-      3. Value: `Sample.Role` (Note: this is the value that shows up in role claims in your access token).
+      3. Value: `Sample.Role` (this is the value that shows up in role claims in your access token)
       4. Description: `A Sample Role to be used with Data API builder.`
       5. Do you want to enable this app role?: Ensure checkbox is checked.
       6. Select **Apply**
@@ -86,7 +87,7 @@ Note: The following steps can also be found in the Microsoft Doc: [QuickStart: C
 3. Navigate to **Users and groups**
 4. Select **Add user/group** to add a role assignment
    1. Users: select your user account and select **Select** to save your choice.
-   2. Select a role: choose a role you want to assign to your account. (Note: if you don't see your role, wait a few minutes for Azure AD replication to finish from when you added the role to your App Registration earlier.)
+   2. Select a role: choose a role you want to assign to your account. (if you don't see your role, wait a few minutes for Azure AD replication to finish from when you added the role to your App Registration earlier)
    3. Repeat this step for all the roles you want to add to your account.
 
 Where the`APP_ID` is the "Application (client) ID" and the `TENANT_ID` is the "Directory (tenant) ID". Both values can be found in the App Registration overview page in the Azure Active Directory page.
@@ -250,6 +251,6 @@ The following steps configure [delegated permissions](/azure/active-directory/de
          1. Recommended: store as Postman variable, and use value `{{ClientID_VariableName}}` here.
          2. The client ID value can be found on the client app registration overview page.
       8. Client Secret: `Client_APP_Secret` this was created earlier. (Recommended: store as Postman variable, and use value `{{ClientSecret_VariableName}}` here)
-      9. Scope: `api://<APP_ID>/Endpoint.Access` (Note: don't forget this or authentication fails.)
+      9. Scope: `api://<APP_ID>/Endpoint.Access` (don't forget this or authentication fails)
 3. Select Get New Access Token, and sign in with your Azure AD tenant credentials.
    1. It's expected that you get a Consent screen. This is normal and you must agree to authenticate successfully.
