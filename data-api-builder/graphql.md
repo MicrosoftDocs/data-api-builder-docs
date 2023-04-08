@@ -18,7 +18,7 @@ http://<dab-server>/graphql
 
 Data API builder will automatically generate a GraphQL schema with query and mutation fields for all configured entities. The GraphQL schema can be explored using a modern GraphQL client like [Insomnia](http://insomnia.rest/) or [Postman](https://www.postman.com/), so that you have IntelliSense and autocomplete.
 
-If you followed the [Getting Started](./getting-started/getting-started.md) example, where there are the `books` and the `authors` entity configured for GraphQL access, you can see how easy is to use GraphQL.
+If you followed the [Getting Started](./get-started/get-started-with-data-api-builder.md) example, where there are the `books` and the `authors` entity configured for GraphQL access, you can see how easy is to use GraphQL.
 
 ## Resultset format
 
