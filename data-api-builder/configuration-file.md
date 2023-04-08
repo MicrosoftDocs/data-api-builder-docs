@@ -66,6 +66,7 @@ Data API builder configuration file is able to support multiple environments, fo
 
 The environment variable used to set the chosen environment is `DAB_ENVIRONMENT`
 
+> [!NOTE]
 > Configuration providers that are added later override previous key settings. For example, if `MyKey` is set in both `dab-config.json` and the environment-specific file, the environment value is used.
 
 ## Accessing Environment Variables
@@ -365,10 +366,10 @@ type Category
 
 `source.fields` and `target.fields` are optional and can be used to specify which database columns are used to create the query behind the scenes:
 
-+ `source.fields`: database fields, in the *source* entity (`Category` in the example), that will be used to connect to the related item in the `target` entity
-+ `target.fields`: database fields, in the *target* entity (`Todo` in the example), that will be used to connect to the related item in the `source` entity
++ `source.fields`: database fields in the *source* entity (`Category` in the example) that are used to connect to the related item in the `target` entity
++ `target.fields`: database fields in the *target* entity (`Todo` in the example) that are used to connect to the related item in the `source` entity
 
-These are optional if there's a Foreign Key constraint on the database between the two tables, that can be used to infer that information automatically.
+These are optional if there's a Foreign Key constraint on the database between the two tables that can be used to infer that information automatically.
 
 ##### Many-To-One Relationship
 
@@ -402,14 +403,14 @@ type Todo
 
 `source.fields` and `target.fields` are optional and can be used to specify which database columns are used to create the query behind the scenes:
 
-+ `source.fields`: database fields, in the *source* entity (`Todo` in the example), that are used to connect to the related item in the `target` entity
-+ `target.fields`: database fields, in the *target* entity (`Category` in the example), that are used to connect to the related item in the `source` entity
++ `source.fields`: database fields in the *source* entity (`Todo` in the example) that are used to connect to the related item in the `target` entity
++ `target.fields`: database fields in the *target* entity (`Category` in the example) that are used to connect to the related item in the `source` entity
 
-These are optional if there's a Foreign Key constraint on the database between the two tables, that can be used to infer that information automatically.
+These are optional if there's a Foreign Key constraint on the database between the two tables that can be used to infer that information automatically.
 
 ##### Many-To-Many Relationship
 
-A many to many relationship is configured in the same way the other relationships type are configured, with the additional information about the association table or entity used to create the M:N relationship in the backend database.
+A many-to-many relationship is configured in the same way the other relationships type are configured, with the additional information about the association table or entity used to create the M:N relationship in the backend database.
 
 ```json
 "entities": {

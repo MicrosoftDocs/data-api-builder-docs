@@ -1,6 +1,6 @@
 ---
-title: Authorization
-description: This document defines the role-based authorization workflow used in Data API builder.
+title: Authorization in Data API builder
+description: This document defines the role-based authorization workflow in Data API builder.
 author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
@@ -25,7 +25,7 @@ There are two system roles:
 
 ### User Roles
 
-An authenticated request comes with a set of role claims that describe the requestor's role membership. When using EasyAuth authentication (the default when using `StaticWebApps` as authentication mode), the received token can be something like the following:
+An authenticated request comes with a set of role claims that describe the requestor's role membership. For EasyAuth authentication (the default when using `StaticWebApps` as authentication mode), the received token can be something like the following:
 
 ```json
 {
@@ -90,7 +90,8 @@ A request can only be evaluated in the context of a single role. So, if the acce
 
 the desired role must be specified in the `X-MS-API-ROLE` HTTP Header.
 
-> ATTENTION! If `X-MS-API-ROLE` is not specified for an authenticated request, the request is assumed to be evaluated in the context of the `authenticated` system role.
+> [!IMPORTANT]
+> If `X-MS-API-ROLE` is not specified for an authenticated request, the request is assumed to be evaluated in the context of the `authenticated` system role.
 
 ## Permissions
 
@@ -114,7 +115,7 @@ To allow anonymous access to an entity, for example the `book` entity, the `anon
 }
 ```
 
-To simplify permissions definition on an entity, it's assumed that if there are no specific permissions for the `authenticated` role, then the permission defined for the `anonymous` role are used. The `book` configuration shown before will therefore allow any anonymous or authenticated requests to perform read operations on the `book` entity. If only authenticated requests should be able to perform a read operation on the book entity, then the following configuration must be used:
+To simplify permissions definition on an entity, it's assumed that if there are no specific permissions for the `authenticated` role, then the permissions defined for the `anonymous` role are used. The `book` configuration shown before will therefore allow any anonymous or authenticated requests to perform read operations on the `book` entity. If only authenticated requests should be able to perform a read operation on the book entity, then the following configuration must be used:
 
 ```json
 "book": {

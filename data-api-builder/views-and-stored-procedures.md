@@ -1,6 +1,6 @@
 ---
-title: Views and stored procedures
-description: This document defines views and stored procedures.
+title: Views and stored procedures in Data API builder
+description: This document defines views and stored procedures in Data API builder.
 author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
@@ -25,7 +25,8 @@ If you have a view, for example [`dbo.vw_books_details`](https://github.com/Azur
 dab add BookDetail --source dbo.vw_books_details --source.type View --source.key-fields "id" --permissions "anonymous:read"
 ```
 
-**NOTE: --source.key-fields is mandatory for views when generating config through the CLI.**
+> [!NOTE]
+> --source.key-fields is mandatory for views when generating config through the CLI.
 
 the `dab-config.json` file looks like the following:
 
@@ -109,7 +110,7 @@ The REST endpoint behavior, for stored procedure backed entity, can be configure
 }
 ```
 
-Any REST requests for the entity fails with **HTTP 405 Method Not Allowed** when an HTTP method not listed in the configuration is used. for example, executing a PUT request fails with error code 405.
+Any REST requests for the entity fail with **HTTP 405 Method Not Allowed** when an HTTP method not listed in the configuration is used. for example, executing a PUT request fails with error code 405.
 If the `methods` section is excluded from the entity's REST configuration, the default method **POST** is inferred. To disable the REST endpoint for this entity, configure `"rest": false` and any REST requests on the stored procedure entity will fail with **HTTP 404 Not Found**.
 
 If the stored procedure accepts parameters, the parameters can be passed in the URL query string when calling the REST endpoint with the GET HTTP verb. For example:
@@ -120,7 +121,7 @@ URL
 GET http://<dab-server>/api/GetCowrittenBooksByAuthor?author=isaac%20asimov
 ```
 
-Executing stored procedures using other HTTP verbs such as POST, PUT, PATCH, DELETE requires parameters to be passed as JSON in the request body. For example:
+Stored procedures that are executed using other HTTP verbs such as POST, PUT, PATCH, DELETE require parameters to be passed as JSON in the request body. For example:
 
 URL
 

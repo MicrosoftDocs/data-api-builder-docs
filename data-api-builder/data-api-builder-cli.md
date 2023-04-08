@@ -87,7 +87,7 @@ Add new database entity to the configuration file. Make sure you already have a 
 `--graphql: true` -> Exposes the entity for GraphQL with default names. The singular form of the entity name will be considered for the query and mutation names.
 `--graphql: "customQueryName"` -> Lets the user customize the singular and plural name for queries and mutations. |
 | **--graphql.operation** | false   | mutation   | GraphQL operation to be supported for stored procedure. Valid operations are: [query, mutation]  |
-| **--fields.include** | false   | -   | Fields that are allowed access to permission.  |
+| **--fields.include** | false   | -   | Fields with permission to access.  |
 | **--fields.exclude** | false   | -   | Fields excluded from the action lists.   |
 | **--policy-database** | false   | -   | Specify an OData style filter rule that is injected in the query sent to the database.  |
 | **-c, --config** | false   | dab-config.json   | Path to config file.   |
@@ -100,7 +100,8 @@ Update the properties of any database entity in the configuration file.
 
 **Example:** `dab update Publisher --permissions "authenticated:*"`
 
-**NOTE:** `dab update` supports all the options that are supported by `dab add`. Additionally, it also supports the below listed options.
+> [!NOTE]
+> `dab update` supports all the options that are supported by `dab add`. Additionally, it also supports the below listed options.
 
 | Options | Required    | Default Value    | Description |
 | :---   | :--- | :--- | :--- |

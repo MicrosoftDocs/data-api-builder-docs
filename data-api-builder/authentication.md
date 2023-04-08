@@ -1,6 +1,6 @@
 ---
-title: Authentication
-description: This document assists in defining the authentication mechanism.
+title: Authentication in Data API builder
+description: This document assists in defining the authentication mechanism in Data API builder.
 author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
