@@ -8,7 +8,7 @@ ms.topic: known-issues
 ms.date: 04/06/2023
 ---
 
-# Known Issues and Limitations
+# Known issues and limitations
 
 ## General
 
