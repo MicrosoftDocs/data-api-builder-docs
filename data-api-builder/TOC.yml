@@ -38,3 +38,9 @@
     href: running-from-source-code.md
   - name: Local authentication
     href: local-authentication.md
+- name: Database specific features
+  href: database-specific-features.md  
+- name: Known issues
+  href: known-issues.md  
+- name: Azure SQL Session Context and Row Level Security
+  href: azure-sql-session-context-rls.md
