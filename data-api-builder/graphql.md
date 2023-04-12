@@ -33,7 +33,7 @@ The returned result is a JSON object with this format:
 > [!NOTE]
 > Only the first 100 items are returned by default.
 
-## Supported GraphQL Root Types
+## Supported GraphQL root types
 
 Data API builder supports the following GraphQL root types:
 
@@ -95,7 +95,7 @@ for example:
 }
 ```
 
-### Generic Query
+### Generic query
 
 Every entity also supports a generic query pattern so that you can ask for  only the items you want, in the order you want, using the following parameters:
 
@@ -194,7 +194,7 @@ will return books ordered by `title`.
 
 ### `first` and `after`
 
-The parameter `first` allows to limit the number of items returned. For example:
+The parameter `first` limits the number of items returned. For example:
 
 ```graphql
 query {
