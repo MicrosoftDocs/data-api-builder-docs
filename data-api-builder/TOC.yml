@@ -27,4 +27,14 @@
     href: troubleshoot-installation.md
   - name: Troubleshoot usage
     href: troubleshoot-usage.md
-  
+- name: Local development  
+  href: local-development.md
+  items:
+  - name: Running using DAB CLI
+    href: running-using-dab-cli.md
+  - name: Running using a container
+    href: running-using-a-container.md
+  - name: Running from source code
+    href: running-from-source-code.md
+  - name: Local authentication
+    href: local-authentication.md
