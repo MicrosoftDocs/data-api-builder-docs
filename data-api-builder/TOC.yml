@@ -29,5 +29,7 @@
     href: troubleshoot-usage.md
 - name: GraphQL
   href: graphql.md
+- name: Known issues
+  href: known-issues.md  
 - name: Azure SQL Session Context and Row Level Security
   href: azure-sql-session-context-rls.md
