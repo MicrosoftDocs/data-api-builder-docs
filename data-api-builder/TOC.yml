@@ -29,6 +29,8 @@
     href: troubleshoot-usage.md
 - name: Relationships  
   href: relationships.md
+- name: GraphQL
+  href: graphql.md
 - name: Database specific features
   href: database-specific-features.md  
 - name: Known issues
