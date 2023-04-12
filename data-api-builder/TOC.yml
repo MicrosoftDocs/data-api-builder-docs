@@ -39,5 +39,7 @@
   href: running-using-data-api-builder-cli.md
 - name: Views and stored procedures
   href: views-and-stored-procedures.md
+- name: Known issues
+  href: known-issues.md  
 - name: Azure SQL Session Context and Row Level Security
   href: azure-sql-session-context-rls.md
