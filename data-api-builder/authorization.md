@@ -16,14 +16,14 @@ Data API builder uses a role-based authorization workflow. Any incoming request,
 
 Roles, except for the system roles described next, aren't predefined and are inferred from the claims found in the incoming request.
 
-### System Roles
+### System roles
 
 There are two system roles:
 
 - `anonymous`: all non authenticated requests are assigned to the `anonymous` role
 - `authenticated`: all authenticated requests are assigned to the `authenticated` role
 
-### User Roles
+### User roles
 
 An authenticated request comes with a set of role claims that describe the requestor's role membership. For EasyAuth authentication (the default when using `StaticWebApps` as authentication mode), the received token can be something like the following:
 

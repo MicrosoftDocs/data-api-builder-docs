@@ -74,7 +74,7 @@ Add new database entity to the configuration file. Make sure you already have a 
 | :---   | :--- | :--- | :--- |
 | **-s, --source** | true   | -   | Name of the source table or container.   |
 | **--permissions** | true   | -   | Permissions required to access the source table or container. Format "[role]:[actions]"   |
-| **--source.type** | false   | table   | Type of the database object.Must be one of: [table, view, stored-procedure]   |
+| **--source.type** | false   | table   | Type of the database object. Must be one of: [table, view, stored-procedure]   |
 | **--source.params** | false   | -   | Dictionary of parameters and their values for Source object."param1:val1,param2:value2,.." for Stored-Procedures.   |
 | **--source.key-fields** | true when `--source.type` is view   | -   | The field(s) to be used as primary keys for tables and views only. Comma separated values. Example `--source.key-fields "id,name,type"`  |
 | **--rest** | false   | case sensitive entity name.  | Route for REST API. Example:

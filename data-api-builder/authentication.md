@@ -51,10 +51,10 @@ The supported providers are the following:
 
 - [Azure AD](./authentication-azure-ad.md)
 
-## Roles Selection
+## Roles selection
 
 Once a request has been authenticated via any of the available options, the roles defined in the token are used to help determine how permission rules are evaluated to [authorize](./authorization.md) the request. Any authenticated request is automatically assigned to the `authenticated` system role, unless a user role is requested to be used, as described in the [Authorization](./authorization.md) document.
 
-## Anonymous Requests
+## Anonymous requests
 
 Requests can also be made without being authenticated. In such cases, the request is automatically assigned to the `anonymous` system role so that it can be properly [authorized](./authorization.md).

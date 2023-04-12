@@ -1,6 +1,6 @@
 ---
-title: Configuration file
-description: This document assists in defining the configuration.
+title: Data API builder configuration file
+description: This document assists in defining the configuration file in Data API builder.
 author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
@@ -8,7 +8,7 @@ ms.topic: configuration-file
 ms.date: 04/06/2023
 ---
 
-# Configuration File
+# Configuration file
 
 ## Summary
 
@@ -25,7 +25,7 @@ Data API builder configuration file contains the information to
 
 using the minimum amount of code.
 
-## Environments Support
+## Environments support
 
 Data API builder configuration file is able to support multiple environments, following the same behavior offered by ASP.NET Core for the `appSettings.json` file, as per: [Default Configuration](/aspnet/core/fundamentals/configuration/?view=aspnetcore-6.0#default-configuration&preserve-view=true). For example:
 
@@ -37,7 +37,7 @@ The environment variable used to set the chosen environment is `DAB_ENVIRONMENT`
 > [!NOTE]
 > Configuration providers that are added later override previous key settings. For example, if `MyKey` is set in both `dab-config.json` and the environment-specific file, the environment value is used.
 
-## Accessing Environment Variables
+## Accessing environment variables
 
 To avoid storing sensitive data into the configuration file itself, a developer can use the `@env()` function to access environment data. `env()` can be used anywhere a scalar value is needed. For example:
 
@@ -47,7 +47,7 @@ To avoid storing sensitive data into the configuration file itself, a developer 
 }
 ```
 
-## File Structure
+## File structure
 
 ### Schema
 
@@ -81,7 +81,7 @@ the **latest** version of the schema is always available at
 https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json
 ```
 
-### Data Source
+### Data source
 
 The `data-source` element contains the information needed to connect to the backend database.
 
@@ -179,9 +179,9 @@ instructs Data API builder to expose a GraphQL entity named `User` and a REST en
 
 Within the entity section, there are feature specific sections:
 
-#### GraphQL Settings
- 
-##### GraphQL Type
+#### GraphQL settings
+
+##### GraphQL type
 
 The `graphql` property defines the name with which the entity is exposed as a GraphQL type, if that is different from the entity name:
 
@@ -204,7 +204,7 @@ or, if needed
 
 which instructs Data API builder runtime to expose the GraphQL type for the related entity and to name it using the provided type name. `plural` is optional and can be used to tell Data API builder the correct plural name for that type. If omitted Data API builder tries to pluralize the name automatically, following the English rules for pluralization (for example: https://engdic.org/singular-and-plural-noun-rules-definitions-examples)
 
-##### GraphQL Operation
+##### GraphQL operation
 
 The `graphql` element contains the `operation` property only for stored-procedures. The `operation` property defines the GraphQL operation that is configured for the stored procedure. It can be one of `Query` or `Mutation`.
 
@@ -219,9 +219,10 @@ For example:
 
 instructs the engine that the stored procedure is exposed for graphQL through `Query` operation.
 
-#### REST Settings
+#### REST settings
 
-##### REST Path
+##### REST path
+
 The `path` property defines the endpoint through which the entity is exposed for REST APIs, if that is different from the entity name:
 
 ```json
@@ -230,7 +231,7 @@ The `path` property defines the endpoint through which the entity is exposed for
 }
 ```
 
-##### REST Methods
+##### REST methods
 
 The `methods` property is only valid for stored procedures. This property defines the REST HTTP actions that the stored procedure is configured for.
 
@@ -302,7 +303,7 @@ The `relationships` section defines how an entity is related to other exposed en
 }
 ```
 
-##### One-To-Many Relationship
+##### One-To-Many relationship
 
 Using the following configuration snippet as an example:
 
@@ -339,7 +340,7 @@ type Category
 
 These are optional if there's a Foreign Key constraint on the database between the two tables that can be used to infer that information automatically.
 
-##### Many-To-One Relationship
+##### Many-To-One relationship
 
 Similar to the One-To-Many but cardinality is set to `one`. Using the following configuration snippet as an example:
 
@@ -376,7 +377,7 @@ type Todo
 
 These are optional if there's a Foreign Key constraint on the database between the two tables that can be used to infer that information automatically.
 
-##### Many-To-Many Relationship
+##### Many-To-Many relationship
 
 A many-to-many relationship is configured in the same way the other relationships type are configured, with the additional information about the association table or entity used to create the M:N relationship in the backend database.
 
@@ -573,7 +574,7 @@ For example:
 
 means the `sku_title` field in the related database object is mapped to the exposed name `title` and `sku_status` is mapped to `status`. Both GraphQL and REST require using `title` and `status` instead of `sku_title` and `sku_status` and will additionally use those mapped values in all response payloads.
 
-#### Sample Config
+#### Sample config
 
 This is a sample config file to give an idea of how the json config consumed by Data API builder might look like:
 
