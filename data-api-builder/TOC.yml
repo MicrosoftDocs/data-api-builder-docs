@@ -27,6 +27,18 @@
     href: troubleshoot-installation.md
   - name: Troubleshoot usage
     href: troubleshoot-usage.md
+- name: Authentication
+  href: authentication.md
+- name: Authorization  
+  href: authorization.md
+- name: Configuration file
+  href: configuration-file.md
+- name: Data API builder CLI
+  href: data-api-builder-cli.md
+- name: Running using Data API builder CLI
+  href: running-using-data-api-builder-cli.md
+- name: Views and stored procedures
+  href: views-and-stored-procedures.md
 - name: GraphQL
   href: graphql.md
 - name: Database specific features
