@@ -39,6 +39,8 @@
   href: running-using-data-api-builder-cli.md
 - name: Views and stored procedures
   href: views-and-stored-procedures.md
+- name: GraphQL
+  href: graphql.md
 - name: Database specific features
   href: database-specific-features.md  
 - name: Known issues
