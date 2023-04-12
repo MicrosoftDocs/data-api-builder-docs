@@ -10,38 +10,6 @@ ms.date: 04/06/2023
 
 # Configuration File
 
-- [Configuration File](#configuration-file)
-  - [Summary](#summary)
-  - [Environments Support](#environments-support)
-  - [Accessing Environment Variables](#accessing-environment-variables)
-  - [File Structure](#file-structure)
-    - [Schema](#schema)
-    - [Data Source](#data-source)
-    - [Runtime global settings](#runtime-global-settings)
-      - [REST](#rest)
-      - [GraphQL](#graphql)
-      - [Host](#host)
-    - [Entities](#entities)
-      - [GraphQL Settings](#graphql-settings)
-        - [GraphQL Type](#graphql-type)
-        - [GraphQL Operation](#graphql-operation)
-      - [REST Settings](#rest-settings)
-        - [REST Path](#rest-path)
-        - [REST Methods](#rest-methods)
-      - [Database object source](#database-object-source)
-      - [Relationships](#relationships)
-        - [One-To-Many Relationship](#one-to-many-relationship)
-        - [Many-To-One Relationship](#many-to-one-relationship)
-        - [Many-To-Many Relationship](#many-to-many-relationship)
-      - [Permissions](#permissions)
-        - [Roles](#roles)
-        - [Actions](#actions)
-        - [Fields](#fields)
-        - [Policies](#policies)
-        - [Limitations](#limitations)
-      - [Mappings](#mappings)
-      - [Sample Config](#sample-config)
-
 ## Summary
 
 Data API builder configuration file contains the information to

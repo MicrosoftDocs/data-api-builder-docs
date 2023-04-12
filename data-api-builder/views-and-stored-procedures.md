@@ -10,9 +10,6 @@ ms.date: 04/06/2023
 
 # Views and Stored Procedures
 
-- [Views](#views)
-- [Stored Procedures](#stored-procedures)
-
 ## Views
 
 ### Configuration
