@@ -28,13 +28,13 @@ cd .\data-api-builder\
 git checkout release/Jan2023
 ```
 
-Create a configuration file (`dab-config.json`) manually or using the [DAB CLI](./dab-cli.md) tool. If you want to create the file manually, you can use the [empty template](../samples/basic-empty-dab-config.json) as a starting point.
+Create a configuration file (`dab-config.json`) manually or using the [DAB CLI](./data-api-builder-cli.md) tool. If you want to create the file manually, you can use the [empty template](../samples/basic-empty-dab-config.json) as a starting point.
 
-Make sure to add some entities to the configuration file (you can follow the [Getting Started](./getting-started/getting-started.md) guide if you want) and then start the Data API builder engine.
+Make sure to add some entities to the configuration file (you can follow the [Getting Started](./get-started/get-started-with-data-api-builder.md) guide if you want) and then start the Data API builder engine.
 
 ## Run the Data API builder for Azure Databases engine
 
-Make sure you have [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0.) installed. Clone the repository and then execute, from the root folder of the repository:
+Make sure you have [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0) installed. Clone the repository and then execute, from the root folder of the repository:
 
 ```sh
 dotnet run --project ./src/Service

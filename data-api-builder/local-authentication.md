@@ -21,7 +21,8 @@ To simulate an authenticated request without configuring an authentication provi
 - At a minimum, all requests are evaluated in the context of the system role `Authenticated`.
 - If desired, the request is evaluated in the context of any role denoted in the `X-MS-API-ROLE` Http header.
 
->[!NOTE] While the desired role will be honored, authorization permissions defining database policies will not work because custom claims can't be set for the authenticated user with the `Simulator` provider. Continue to the section [Use the `StaticWebApps` provider](#use-the-staticwebapps-provider) for testing database authorization policies.
+> [!NOTE]
+> While the desired role will be honored, authorization permissions defining database policies will not work because custom claims can't be set for the authenticated user with the `Simulator` provider. Continue to the section [Use the `StaticWebApps` provider](#use-the-staticwebapps-provider) for testing database authorization policies.
 
 ### 1. Update the runtime configuration authentication provider
 
@@ -58,7 +59,7 @@ curl --request GET \
 The `StaticWebApps` authentication provider instructs Data API builder to look for a set of HTTP headers only present when running within a Static Web Apps environment. Such HTTP headers are set by the client when running locally to simulate an authenticated user, including any role membership or custom claims.
 
 > [!NOTE]
-> Client provided instances of the Http header, `X-MS-CLIENT-PRINCIPAL`, will only work when developing locally because production Azure Static Web Apps environments [drop all client provided instances](https://learn.microsoft.com/azure/static-web-apps/user-information?tabs=javascript) of that header.
+> Client provided instances of the Http header, `X-MS-CLIENT-PRINCIPAL`, will only work when developing locally because production Azure Static Web Apps environments [drop all client provided instances](/azure/static-web-apps/user-information?tabs=javascript) of that header.
 
 Make sure that in the configuration file you're using the `StaticWebApps` authentication provider. The `host` configuration section should look like the following:
 
@@ -84,7 +85,7 @@ Once Data API builder is running locally and configured to use the `StaticWebApp
 }
 ```
 
-Static Web App's [authenticated user metadata](https://learn.microsoft.com/azure/static-web-apps/user-information?tabs=javascript#client-principal-data) has the following properties:
+Static Web App's [authenticated user metadata](/azure/static-web-apps/user-information?tabs=javascript#client-principal-data) has the following properties:
 
 |Property|Description|
 |---|---|
@@ -93,7 +94,8 @@ Static Web App's [authenticated user metadata](https://learn.microsoft.com/azure
 |userDetails|Username or email address of the user.|
 |userRoles|An array of the user's assigned roles.|
 
->[!NOTE] As noted in [Static Web Apps documentation](https://learn.microsoft.com/azure/static-web-apps/user-information?tabs=javascript), the `X-MS-CLIENT-PRINCIPAL` header does not contain the `claims` array.
+> [!NOTE]
+> As noted in [Static Web Apps documentation](/azure/static-web-apps/user-information?tabs=javascript), the `X-MS-CLIENT-PRINCIPAL` header does not contain the `claims` array.
 
 In order to be passed with the `X-MS-CLIENT-PRINCIPAL` header, the JSON payload must be Base64-encoded. You can use any online or offline tool to do that. One such tool is [DevToys](https://github.com/veler/DevToys). A sample Base64 encoded payload that represents the JSON previously referenced:
 
@@ -108,3 +110,4 @@ curl --request GET \
   --url http://localhost:5000/api/books \
   --header 'X-MS-API-ROLE: author' \
   --header 'X-MS-CLIENT-PRINCIPAL: eyAgCiAgImlkZW50aXR5UHJvdmlkZXIiOiAidGVzdCIsCiAgInVzZXJJZCI6ICIxMjM0NSIsCiAgInVzZXJEZXRhaWxzIjogImpvaG5AY29udG9zby5jb20iLAogICJ1c2VyUm9sZXMiOiBbImF1dGhvciIsICJlZGl0b3IiXQp9'
+```
