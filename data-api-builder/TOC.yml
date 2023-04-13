@@ -29,6 +29,8 @@
     href: troubleshoot-usage.md
 - name: Best practices
   href: best-practices.md  
+- name: Database connections
+  href: database-connections.md
 - name: Authentication
   href: authentication.md
 - name: Authorization  
