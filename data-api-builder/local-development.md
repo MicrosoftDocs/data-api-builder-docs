@@ -24,4 +24,4 @@ Data API builder works in the same way if run in Azure or if run locally or in a
 
 [Static Web Apps CLI](https://azure.github.io/static-web-apps-cli/) has been integrated to support Data API builder so that you can have a full end-to-end full-stack development experience offline, and then deploy everything in the cloud using a CI/CD pipeline.
 
-To learn more about how to use Data API builder with Static Web Apps CLI, read the following documentation: [Quickstart: Use Data API builder with Azure Databases](/azure/data-api-builder/getting-started/getting-started-with-data-api-builder)
+To learn more about how to use Data API builder with Static Web Apps CLI, read the following documentation: [Quickstart: Use Data API builder with Azure Databases](/azure/data-api-builder/get-started/get-started-with-data-api-builder)
