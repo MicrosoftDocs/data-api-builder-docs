@@ -27,4 +27,5 @@
     href: troubleshoot-installation.md
   - name: Troubleshoot usage
     href: troubleshoot-usage.md
-  
+- name: Database connections
+  href: database-connections.md
