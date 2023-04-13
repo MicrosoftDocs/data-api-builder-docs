@@ -38,6 +38,8 @@
     href: running-from-source-code.md
   - name: Local authentication
     href: local-authentication.md
+- name: Database connections
+  href: database-connections.md
 - name: Authentication
   href: authentication.md
 - name: Authorization  
