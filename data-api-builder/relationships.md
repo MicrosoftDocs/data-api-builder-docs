@@ -174,7 +174,7 @@ Data API builder supports this type of relationship natively:
 - using a pair of One-to-Many/Many-to-One relationships
 - using a *linking object*
 
-#### Using a pair of One-to-Many/Many-to-One relationships
+## Using a pair of One-to-Many/Many-to-One relationships
 
 Continuing using the books and authors sample, one business requirement that is likely to be there is to keep track of how royalties are split between the authors of a book. To implement such requirement a dedicated entity that links together an author, a book and the assigned royalties are needed. Three entities are therefore needed:
 
@@ -235,7 +235,7 @@ to add the relationships from `BookAuthor` to `Book` and `Author` entities. With
 
 where you're asking to return all the authors, the book they have written along with the related royalties.
 
-#### Using a linking object
+## Using a linking object
 
 The process described in the previous section works great if all the entities involved in the Many-to-Many relationships need to be accessed via GraphQL. This isn't always the case. For example, if you don't need to keep track of royalties, the `BookAuthor` entity doesn't really bring any value to the end user, as it's used to associated books to their authors. In relational databases Many-to-Many relationships are created using such third table that *links* the tables participating in the Many-to-Many relationship together:
 
