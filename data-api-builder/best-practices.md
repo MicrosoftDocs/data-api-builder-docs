@@ -10,6 +10,8 @@ ms.date: 04/06/2023
 
 # Data API builder best practices
 
+Here are the recommended best practices for Data API Builder:
+
 ## Name entity using PascalCasing
 
 When adding an entity to the configuration file, use PascalCasing, so that the generated GraphQL types are easier to read. For example, if you have an entity named `CompositeNameEntity` the generated GraphQL schema will have the following queries and mutations:
