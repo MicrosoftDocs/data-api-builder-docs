@@ -27,6 +27,8 @@
     href: troubleshoot-installation.md
   - name: Troubleshoot usage
     href: troubleshoot-usage.md
+- name: Best practices
+  href: best-practices.md  
 - name: Database connections
   href: database-connections.md
 - name: Authentication
