@@ -14,7 +14,7 @@ Data API builder can be used on-premises, if needed. This can be helpful in both
 
 Depending on what you want to do, you have several options to run Data API builder locally:
 
-- [Run Data API builder using the CLI tool](./running-using-dab-cli.md)
+- [Run Data API builder using the CLI tool](./running-using-data-api-builder-cli.md)
 - [Run Data API builder in a container](./running-using-a-container.md)
 - [Run Data API builder from source code](./running-from-source-code.md)
 

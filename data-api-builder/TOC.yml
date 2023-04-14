@@ -30,8 +30,8 @@
 - name: Local development  
   href: local-development.md
   items:
-  - name: Running using DAB CLI
-    href: running-using-dab-cli.md
+  - name: Running using Data API builder CLI
+    href: running-using-data-api-builder-cli.md
   - name: Running using a container
     href: running-using-a-container.md
   - name: Running from source code
@@ -52,8 +52,6 @@
   href: configuration-file.md
 - name: Data API builder CLI
   href: data-api-builder-cli.md
-- name: Running using Data API builder CLI
-  href: running-using-data-api-builder-cli.md
 - name: Views and stored procedures
   href: views-and-stored-procedures.md
 - name: GraphQL

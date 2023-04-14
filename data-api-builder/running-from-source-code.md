@@ -28,7 +28,7 @@ cd .\data-api-builder\
 git checkout release/Jan2023
 ```
 
-Create a configuration file (`dab-config.json`) manually or using the [DAB CLI](./data-api-builder-cli.md) tool. If you want to create the file manually, you can use the [empty template](./samples/basic-empty-dab-config.json) as a starting point.
+Create a configuration file (`dab-config.json`) manually or using the [DAB CLI](./data-api-builder-cli.md) tool. If you want to create the file manually, you can use the [empty template](https://github.com/Azure/data-api-builder/blob/main/samples/basic-empty-dab-config.json) as a starting point.
 
 Make sure to add some entities to the configuration file (you can follow the [Getting Started](./get-started/get-started-with-data-api-builder.md) guide if you want) and then start the Data API builder engine.
 
