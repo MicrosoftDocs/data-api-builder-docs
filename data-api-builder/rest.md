@@ -16,7 +16,7 @@ Entities configured to be available via REST are available at the path
 http://<dab-server>/api/<entity>
 ```
 
-Using the [Getting Started](./getting-started/getting-started-with-data-api-builder.md) example, with `books` and the `authors` entity configured for REST access, the path would be, for example:
+Using the [Getting Started](./get-started/get-started-with-data-api-builder.md) example, with `books` and the `authors` entity configured for REST access, the path would be, for example:
 
 ```bash
 http://localhost:5000/api/book
