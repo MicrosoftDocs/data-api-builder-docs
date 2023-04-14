@@ -10,9 +10,33 @@ ms.date: 02/22/2023
 
 # What's New in Data API builder
 
+- [Version 0.5.34](#version-0534)
+- [Version 0.5.32](#version-0532)
 - [Version 0.5.0](#version-050)
 - [Version 0.4.11](#version-0411)
 - [Version 0.3.7](#version-037)
+
+## Version 0.5.34
+
+A summary of the most relevant changes done in this version is available in the following list:
+
+- [Honor REST and GraphQL enabled flag at runtime level](./whats-new-0-5-34.md#honor-rest-and-graphql-enabled-flag-at-runtime-level)
+- [Add Correlation ID to request logs](./whats-new-0-5-34.md#add-correlation-id-to-request-logs)
+- [Wildcard Operation Support for Stored Procedures in Engine and CLI](./whats-new-0-5-34.md#wildcard-operation-support-for-stored-procedures-in-engine-and-cli)
+
+The full list of release notes for this version is available here: [version 0.5.34 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.5.34)
+
+## Version 0.5.32
+
+A summary of the most relevant changes done in this version is available in the following list:
+
+- [Ability to customize rest path via CLI](./whats-new-0-5-32.md#ability-to-customize-rest-path-via-cli)
+- [Data API builder container image in MAR](./whats-new-0-5-32.md#data-api-builder-container-image-in-mar)
+- [Support for GraphQL fragments](./whats-new-0-5-32.md#support-for-graphql-fragments)
+- Generate NOTICE.txt in the pipeline for distribution and include LICENSE, README, NOTICE in zip, nuget, docker image
+- [Turn on BinSkim and fix Policheck alerts](./whats-new-0-5-32.md#turn-on-binskim-and-fix-policheck-alerts)
+
+The full list of release notes for this version is available here: [version 0.5.32 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.5.32-beta)
 
 ## Version 0.5.0
 
