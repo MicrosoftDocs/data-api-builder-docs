@@ -182,9 +182,9 @@ Continuing using the books and authors sample, one business requirement that is 
 - `books`, to represent book data like title and ISBN
 - `books_authors` to represent data that is related both to a book and to its author, for example, the percentage of royalties an author gets for a specific book
 
-the three entities can be visualized link in the following diagram.
+The three entities can be visualized through the following diagram.
 
-![Many-to-Many Relationship](./media/relationship-many-to-many-01.png)
+![Diagram showing many-to-many relationship between authors, books_authors and books.](./media/relationship-many-to-many-01.png)
 
 As visible, there are two bi-directional relationships:
 
@@ -239,7 +239,7 @@ where you're asking to return all the authors, the book they have written along 
 
 The process described in the previous section works great if all the entities involved in the Many-to-Many relationships need to be accessed via GraphQL. This isn't always the case. For example, if you don't need to keep track of royalties, the `BookAuthor` entity doesn't really bring any value to the end user, as it's used to associated books to their authors. In relational databases Many-to-Many relationships are created using such third table that *links* the tables participating in the Many-to-Many relationship together:
 
-![Many-to-Many Relationship Diagram](./media/relationship-many-to-many-02.png)
+![Diagram showing many-to-many relationship between authors, books_authors and books.](./media/relationship-many-to-many-02.png)
 
 In the diagram above you can see that there's a table named `books_authors` that is linking authors with their books and books with their authors. This linking table doesn't need to be exposed to the end user as it is just an artifact to allow the Many-to-Many relationship to exist, but Data API builder needs to know its existence in order to properly use it.
 
