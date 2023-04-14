@@ -29,3 +29,29 @@
     href: troubleshoot-usage.md
 - name: Running in Azure
   href: running-in-azure.md  
+- name: Relationships  
+  href: relationships.md
+- name: Best practices
+  href: best-practices.md  
+- name: Database connections
+  href: database-connections.md
+- name: Authentication
+  href: authentication.md
+- name: Authorization  
+  href: authorization.md
+- name: Configuration file
+  href: configuration-file.md
+- name: Data API builder CLI
+  href: data-api-builder-cli.md
+- name: Running using Data API builder CLI
+  href: running-using-data-api-builder-cli.md
+- name: Views and stored procedures
+  href: views-and-stored-procedures.md
+- name: GraphQL
+  href: graphql.md
+- name: Database specific features
+  href: database-specific-features.md  
+- name: Known issues
+  href: known-issues.md  
+- name: Azure SQL Session Context and Row Level Security
+  href: azure-sql-session-context-rls.md
