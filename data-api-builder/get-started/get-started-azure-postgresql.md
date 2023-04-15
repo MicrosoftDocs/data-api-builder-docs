@@ -36,6 +36,9 @@ To connect to a local PostgreSQL Server, the connection string looks like:
 `Server={your_server};Database={your_database};Port=5432;User Id={your_username};Password={your_password};Ssl Mode=Require;`
 ```
 
+> [!NOTE]
+> User IDs and passwords specified here are recommended for sample purpose only. For details, refer [Azure Active Directory authentication](/azure/postgresql/single-server/how-to-configure-sign-in-azure-ad-authentication).
+
 ## Create the database objects
 
 Create the database tables needed to represent Authors, Books and the many-to-many relationship between Authors and Books. You can find the `library.azure-postgresql.sql` script in the `azure-postgresql-db` folder in the GitHub repo. You can use it to create three tables, along with sample data:
@@ -131,6 +134,9 @@ within the `entities` object you can create any entity with any name (as long as
 > Entities names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them. Take a look at the [Best Practices](https://github.com/Azure/data-api-builder/blob/main/docs/best-practices.md) document to learn the best practices on entities names.
 
 After that, the permissions for the exposed entity are defined via the `permission` element; it allows you to be sure that only those users making a request with the right claims will be able to access the entity and its data. In this getting started tutorial, we're allowing anyone, without the need to be authenticated, to perform all the CRUD operations to the `Author` entity.
+
+> [!NOTE]
+> The aforementioned permissions settings are only to be used for learning purposes. We do not recommend that unauthenticated entities are allowed to perform CRUD operations on a database in a production environment, as this poses a security risk. To read more on security baselines, go to [Azure security baseline for Azure Database for PostgreSQL](/security/benchmark/azure/baselines/azure-database-for-postgresql-flexible-server-security-baseline)
 
 You can also add the `Book` entity now, applying the same concepts you just learned for the `Author` entity. Once you've added the `Author` entity, the `entities` object of configuration file looks like the following:
 
