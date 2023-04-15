@@ -30,12 +30,12 @@
 - name: Local development  
   href: local-development.md
   items:
-  - name: Running using Data API builder CLI
-    href: running-using-data-api-builder-cli.md
-  - name: Running using a container
-    href: running-using-a-container.md
-  - name: Running from source code
-    href: running-from-source-code.md
+  - name: Run using Data API builder CLI
+    href: run-using-data-api-builder-cli.md
+  - name: Run using container
+    href: run-using-container.md
+  - name: Run from source code
+    href: run-from-source-code.md
   - name: Local authentication
     href: local-authentication.md
 - name: Relationships  
