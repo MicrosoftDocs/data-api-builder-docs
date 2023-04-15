@@ -46,9 +46,9 @@ A summary of the most relevant changes done in this version is available in the 
 
 - [Ability to customize rest path via CLI](./whats-new-0-5-32.md#ability-to-customize-rest-path-via-cli)
 - [Data API builder container image in MAR](./whats-new-0-5-32.md#data-api-builder-container-image-in-mar)
-- [Support for GraphQL fragments](./whats-new-0-5-32.md#support-for-grapql-fragments)
+- [Support for GraphQL fragments](./whats-new-0-5-32.md#support-for-graphql-fragments)
 - [Generate NOTICE.txt in the pipeline for distribution and include LICENSE, README, NOTICE in zip, nuget, docker image]
-- [Turn on BinSkim and fix Policheck alerts](./whats-new-0-5-32.md#turn-on-binskim-fix-policheck)
+- [Turn on BinSkim and fix Policheck alerts](./whats-new-0-5-32.md#turn-on-binskim-and-fix-policheck-alerts)
 
 ## Version 0.5.0
 
