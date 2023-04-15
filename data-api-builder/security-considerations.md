@@ -25,7 +25,7 @@ As detailed in [OWASP's Transport Layer Protection](https://cheatsheetseries.owa
 
 ### Recommendation
 
-One way to help configure TLS securely is **to disable usage of legacy versions of TLS at the server level**. Data API builder is built on Kestrel, a [cross-platform web server for ASP.NET Core](/aspnet/core/fundamentals/servers/kestrel?view=aspnetcore-6.0) and is configured by default to defer to the operating system's TLS version configuration. Microsoft's [TLS best practices for .NET guidance](/dotnet/framework/network-programming/tls) describe the motivation behind such behavior:
+One way to help configure TLS securely is **to disable usage of legacy versions of TLS at the server level**. Data API builder is built on Kestrel, a [cross-platform web server for ASP.NET Core](/aspnet/core/fundamentals/servers/kestrel?view=aspnetcore-6.0&preserve-view=true) and is configured by default to defer to the operating system's TLS version configuration. Microsoft's [TLS best practices for .NET guidance](/dotnet/framework/network-programming/tls) describe the motivation behind such behavior:
 > TLS 1.2 is a standard that provides security improvements over previous versions. TLS 1.2 will eventually be replaced by the newest released standard TLS 1.3 which is faster and has improved security.
 
 > To ensure .NET Framework applications remain secure, the TLS version should not be hardcoded. .NET Framework applications should use the TLS version the operating system (OS) supports.
@@ -40,7 +40,7 @@ TLS 1.2 is enabled by default on the latest versions of .NET and many of the lat
 
 - Install .NET on Windows - [Microsoft Learn](/dotnet/core/install/windows?tabs=net60)
 - Enable support for TLS 1.2 in your environment - [Azure AD Guidance](/troubleshoot/azure/active-directory/enable-support-tls-environment?tabs=azure-monitor#enable-support-for-tls-12-in-your-environment)
-- TLS 1.2 support at Microsoft - [Microsoft Security Blog](/security/blog/2017/06/20/tls-1-2-support-at-microsoft/)
+- TLS 1.2 support at Microsoft - [Microsoft Security Blog](https://www.microsoft.com/security/blog/2017/06/20/tls-1-2-support-at-microsoft/)
 
 #### macOS
 
