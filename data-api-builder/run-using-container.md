@@ -1,10 +1,10 @@
 ---
-title: Running Data API builder using a container
+title: Run Data API builder using a container
 description: This document contains details about running Data API builder using a container.
 author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
-ms.topic: running-dab-using-a-container
+ms.topic: run-dab-using-container
 ms.date: 04/06/2023
 ---
 
