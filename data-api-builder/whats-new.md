@@ -10,9 +10,45 @@ ms.date: 02/22/2023
 
 # What's New in Data API builder
 
+- [Version 0.6.13](#version-0613)
+- [Version 0.5.35](#version-0535)
+- [Version 0.5.34](#version-0534)
+- [Version 0.5.32](#version-0532)
 - [Version 0.5.0](#version-050)
 - [Version 0.4.11](#version-0411)
 - [Version 0.3.7](#version-037)
+
+## Version 0.6.13
+
+A summary of the most relevant changes done in this version is available in the following list:
+
+- [New CLI command to export GraphQL schema](./whats-new-0.6.13.md#new-cli-command-to-export-graphql-schema)
+- [Database policy support for create action for MsSql](./whats-new-0.6.13.md#database-policy-support-for-create-action-for-mssql)
+- [Ability to configure GraphQL path and disable REST and GraphQL endpoints globally via CLI](./whats-new-0.6.13.md#ability-to-configure-graphql-path-and-disable-rest-and-graphql-endpoints-globally-via-cli)
+- [Key fields mandatory for adding/updating views in CLI](./whats-new-0.6.13.md#key-fields-mandatory-for-adding-and-updating-views-in-cli)
+
+## Version 0.5.35
+
+- Force `Allow User Variables=true` for MySql connections fixing PUT/PATCH requests
+- Improve mapped column handling for REST pagination and NextLink creation fixes
+
+## Version 0.5.34
+
+A summary of the most relevant changes done in this version is available in the following list:
+
+- [Honor REST and GraphQL enabled flag at runtime level](./whats-new-0.5.34.md#honor-rest-and-graphql-enabled-flag-at-runtime-level)
+- [Add Correlation ID to request logs](./whats-new-0.5.34.md#add-correlation-id-to-request-logs)
+- [Wildcard Operation Support for Stored Procedures in Engine and CLI](./whats-new-0.5.34.md#wildcard-operation-support-for-stored-procedures-in-engine-and-cli)
+
+## Version 0.5.32
+
+A summary of the most relevant changes done in this version is available in the following list:
+
+- [Ability to customize rest path via CLI](./whats-new-0.5.32.md#customize-rest-path-cli)
+- [Data API builder container image in MAR](./whats-new-0.5.32.md#container-image-in-mar)
+- [Support for GraphQL fragments](./whats-new-0.5.32.md#grapql-fragments-support)
+- [Generate NOTICE.txt in the pipeline for distribution and include LICENSE, README, NOTICE in zip, nuget, docker image](./whats-new-0.5.32.md#notice-license-readme-in-binaries-and-container-image)
+- [Turn on BinSkim and fix Policheck alerts](./whats-new-0.5.32.md#turn-on-binskim-fix-policheck)
 
 ## Version 0.5.0
 
