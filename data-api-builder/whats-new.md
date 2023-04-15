@@ -64,8 +64,6 @@ A summary of the most relevant changes done in this version is available in the 
 - [Enhanced logging support using `LogLevel`](./whats-new-0-5-0.md#enhanced-logging-support-using-loglevel)
 - [Updated DAB CLI to support new features](./whats-new-0-5-0.md#updated-cli)
 
-The full list of release notes for this version is available here: [version 0.5.0 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.5.0-beta)
-
 ## Version 0.4.11
 
 A summary of the most relevant changes done in this version is available in the following list:
@@ -79,8 +77,6 @@ A summary of the most relevant changes done in this version is available in the 
 - [Managed Identity now supported with Postgres](./whats-new-0-4-11.md#managed-identity-now-supported-with-postgres)
 - [Support Azure AD User authentication for Azure MySQL Service](./whats-new-0-4-11.md#support-azure-ad-user-authentication-for-azure-mysql-service)
 
-The full list of release notes for this version is available here: [version 0.4.11 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.4.11-alpha)
-
 ## Version 0.3.7
 
 A summary of the most relevant changes done in this version is available in the following list:
@@ -91,5 +87,3 @@ A summary of the most relevant changes done in this version is available in the 
 - [Azure Active Directory Authentication](./whats-new-0-3-7.md#azure-active-directory-authentication)
 - [New "Simulator" Authentication Provider for local authentication](./whats-new-0-3-7.md#new-simulator-authentication-provider-for-local-authentication)
 - [Support for filter on nested objects within a document in Cosmos DB](./whats-new-0-3-7.md#support-for-filter-on-nested-objects-within-a-document-in-cosmos-db)
-
-The full list of release notes for this version is available here: [version 0.3.7 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.3.7-alpha)
