@@ -1,10 +1,10 @@
 ---
-title: Running Data API builder from source code
+title: Run Data API builder from source code
 description: This document contains details about running Data API builder from source code.
 author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
-ms.topic: running-dab-from-source-code
+ms.topic: run-data-api-builder-from-source-code
 ms.date: 04/06/2023
 ---
 
