@@ -27,6 +27,8 @@
     href: troubleshoot-installation.md
   - name: Troubleshoot usage
     href: troubleshoot-usage.md
+- name: Running in Azure
+  href: running-in-azure.md  
 - name: Relationships  
   href: relationships.md
 - name: Best practices
