@@ -24,7 +24,7 @@ A summary of the most relevant changes done in this version is available in the 
 
 - [New CLI command to export GraphQL schema](./whats-new-0-6-13.md#new-cli-command-to-export-graphql-schema)
 - [Database policy support for create action for MsSql](./whats-new-0-6-13.md#database-policy-support-for-create-action-for-mssql)
-- [Ability to configure GraphQL path and disable REST and GraphQL endpoints globally via CLI](./whats-new-0.6.13.md#ability-to-configure-graphql-path-and-disable-rest-and-graphql-endpoints-globally-via-cli)
+- [Ability to configure GraphQL path and disable REST and GraphQL endpoints globally via CLI](./whats-new-0-6-13.md#ability-to-configure-graphql-path-and-disable-rest-and-graphql-endpoints-globally-via-cli)
 - [Key fields mandatory for adding/updating views in CLI](./whats-new-0-6-13.md#key-fields-mandatory-for-adding-and-updating-views-in-cli)
 
 ## Version 0.5.35
@@ -44,10 +44,10 @@ A summary of the most relevant changes done in this version is available in the 
 
 A summary of the most relevant changes done in this version is available in the following list:
 
-- [Ability to customize rest path via CLI](./whats-new-0-5-32.md#customize-rest-path-cli)
-- [Data API builder container image in MAR](./whats-new-0-5-32.md#container-image-in-mar)
-- [Support for GraphQL fragments](./whats-new-0-5-32.md#grapql-fragments-support)
-- [Generate NOTICE.txt in the pipeline for distribution and include LICENSE, README, NOTICE in zip, nuget, docker image](./whats-new-0-5-32.md#notice-license-readme-in-binaries-and-container-image)
+- [Ability to customize rest path via CLI](./whats-new-0-5-32.md#ability-to-customize-rest-path-via-cli)
+- [Data API builder container image in MAR](./whats-new-0-5-32.md#data-api-builder-container-image-in-mar)
+- [Support for GraphQL fragments](./whats-new-0-5-32.md#support-for-grapql-fragments)
+- [Generate NOTICE.txt in the pipeline for distribution and include LICENSE, README, NOTICE in zip, nuget, docker image]
 - [Turn on BinSkim and fix Policheck alerts](./whats-new-0-5-32.md#turn-on-binskim-fix-policheck)
 
 ## Version 0.5.0
