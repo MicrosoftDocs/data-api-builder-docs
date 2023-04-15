@@ -8,7 +8,7 @@ ms.topic: local-development
 ms.date: 04/06/2023
 ---
 
-# Local development with Data API builder for Azure Databases
+# Local development with Data API builder for Azure databases
 
 Data API builder can be used on-premises, if needed. This can be helpful in both cases. In case you prefer to build cloud-solution offline, and then deploy everything in the cloud using a CI/CD pipeline, or in case you want to use Data API builder to give access to on-premises developers to on-premises databases available in your environment.
 
