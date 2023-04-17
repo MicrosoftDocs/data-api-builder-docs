@@ -30,7 +30,8 @@ Depending on the permission defined on the entity in the configuration file, the
 - [PATCH](#patch): Update an item
 - [DELETE](#delete): Delete an item
 
-> **Attention!**: the URL path (entities and query parameters) is case sensitive
+> [!Note]
+> The URL path (entities and query parameters) is case sensitive.
 
 ## Result set format
 
@@ -131,7 +132,8 @@ not                      | Logical negation      | not (year le 1960)
 **Grouping Operators**   |                       |
 ( )                      | Precedence grouping   | (year ge 1970 or title eq 'Foundation') and pages gt 400
 
-**NOTE: `$filter` is a case sensitive argument.**
+> [!NOTE]
+> `$filter` is a case sensitive argument.
 
 #### `$orderby`
 
@@ -147,7 +149,8 @@ http://localhost:5000/api/author?$orderby=first_name desc, last_name
 
 returns the list of authors sorted by `first_name` descending and then by `last_name` ascending.
 
-**NOTE: `$orderBy` is a case sensitive argument.**
+> [!NOTE]
+> `$orderBy` is a case sensitive argument.
 
 #### `$first` and `$after`
 
