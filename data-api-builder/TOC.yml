@@ -38,6 +38,8 @@
     href: run-from-source-code.md
   - name: Local authentication
     href: local-authentication.md
+- name: REST
+  href: rest.md
 - name: Running in Azure
   href: running-in-azure.md  
 - name: Relationships  

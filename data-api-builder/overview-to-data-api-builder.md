@@ -47,7 +47,7 @@ Data API builder is built using .NET Core and is distributed as a NuGet package.
 dotnet tool install -g Microsoft.DataApiBuilder
 ```
 
-if you've already installed the tool, you can update it to the latest version with the following command:
+if you have already installed the tool, you can update it to the latest version with the following command:
 
 ```shell
 dotnet tool update -g Microsoft.DataApiBuilder
