@@ -1,10 +1,10 @@
 ---
-title: Running using Data API builder CLI
+title: Run using Data API builder CLI
 description: This document assists in running Data API builder CLI.
 author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
-ms.topic: running-using-data-api-builder-cli
+ms.topic: run-using-data-api-builder-cli
 ms.date: 04/06/2023
 ---
 

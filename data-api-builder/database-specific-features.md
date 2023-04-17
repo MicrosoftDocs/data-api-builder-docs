@@ -16,4 +16,4 @@ Data API builder allows each database to have its own specific features. This pa
 
 #### SESSION_CONTEXT and row level security
 
-Azure SQL and SQL Server support the use of the SESSION_CONTEXT function to access the current user's identity. This is useful when you want to leverage the native support for row level security (RLS) available in Azure SQL and SQL Server.
+Azure SQL and SQL Server support the use of the SESSION_CONTEXT function to access the current user's identity. This is useful when you want to leverage the native support for row level security (RLS) available in Azure SQL and SQL Server. For more information, see [Azure SQL session context and RLS](./azure-sql-session-context-rls.md).
