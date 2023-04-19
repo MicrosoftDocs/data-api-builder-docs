@@ -8,7 +8,7 @@ ms.topic: whats-new
 ms.date: 04/06/2023
 ---
 
-# What's New in Data API builder 0.6.13
+# What's new in Data API builder 0.6.13
 
 - [New CLI command to export GraphQL schema](#new-cli-command-to-export-graphql-schema)
 - [Database policy support for create action for MsSql](#database-policy-support-for-create-action-for-mssql)
@@ -93,7 +93,7 @@ would generate a config file where the runtime section looks like this:
 
 It's now mandatory for the user to provide the key-fields (to be used as primary key) via the exposed option `source.key-fields` whenever adding a new database view (via `dab add`) to the config via CLI. Also, whenever updating anything in the view's configuration (via `dab update`) in the config file via CLI, if the update changes anything that relates to the definition of the view in the underlying database (for example, source type, key-fields), it's mandatory to specify the key-fields in the update command as well.
 
-However, we still support views without having explicit primary keys specified in the config, but the configuration for such views have to be written directly in the config file.
+However, we still support views without having explicit primary keys specified in the config, but the configuration for such views has to be written directly in the config file.
 
 For example, a `dab add` command like:
 
