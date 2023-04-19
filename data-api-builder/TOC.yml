@@ -20,15 +20,8 @@
       href: get-started/get-started-azure-cosmos-db.md
     - name: Use Data API builder with MySQL
       href: get-started/get-started-azure-mysql.md
-- name: Troubleshoot
-  href: troubleshoot.md
-  items:
-  - name: Troubleshoot installation
-    href: troubleshoot-installation.md
-  - name: Troubleshoot usage
-    href: troubleshoot-usage.md
-- name: Security considerations
-  href: security-considerations.md  
+- name: Data API builder CLI
+  href: data-api-builder-cli.md
 - name: Local development  
   href: local-development.md
   items:
@@ -40,31 +33,43 @@
     href: run-from-source-code.md
   - name: Local authentication
     href: local-authentication.md
-- name: REST
-  href: rest.md
 - name: Running in Azure
-  href: running-in-azure.md  
-- name: Relationships  
-  href: relationships.md
-- name: Best practices
-  href: best-practices.md  
-- name: Database connections
-  href: database-connections.md
-- name: Authentication
-  href: authentication.md
-- name: Authorization  
-  href: authorization.md
+  href: running-in-azure.md
 - name: Configuration file
   href: configuration-file.md
-- name: Data API builder CLI
-  href: data-api-builder-cli.md
-- name: Views and stored procedures
-  href: views-and-stored-procedures.md
+  items:
+  - name: Database connections
+    href: database-connections.md
+- name: REST
+  href: rest.md
 - name: GraphQL
   href: graphql.md
+- name: Views and stored procedures
+  href: views-and-stored-procedures.md
+- name: Relationships  
+  href: relationships.md
+- name: Authentication
+  href: authentication.md
+  items:
+  - name: Authentication with Azure AD
+    href: authentication-azure-ad.md
+- name: Authorization  
+  href: authorization.md
 - name: Database specific features
   href: database-specific-features.md  
+  items:
+  - name: Azure SQL Session Context and Row Level Security
+    href: azure-sql-session-context-rls.md
+- name: Best practices
+  href: best-practices.md  
 - name: Known issues
   href: known-issues.md  
-- name: Azure SQL Session Context and Row Level Security
-  href: azure-sql-session-context-rls.md
+- name: Troubleshoot
+  href: troubleshoot.md
+  items:
+  - name: Troubleshoot installation
+    href: troubleshoot-installation.md
+  - name: Troubleshoot usage
+    href: troubleshoot-usage.md
+- name: Security considerations
+  href: security-considerations.md  
