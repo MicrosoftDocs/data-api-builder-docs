@@ -12,6 +12,9 @@ ms.date: 02/22/2023
 
 **Data API builder for Azure Databases provides modern REST and GraphQL endpoints to your Azure Databases.**
 
+> [!WARNING]
+> This feature is in public preview. Your use of the feature is governed by the [Supplemental Terms of Use For Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+
 With Data API builder, database objects can be securely exposed via REST or GraphQL endpoints so that your data can be accessed using modern techniques on any platform, any language, and any device. With an integrated and flexible policy engine, granular security is assured; integrated with Azure SQL, SQL Server, PostgreSQL, MySQL and Cosmos DB, gives developers an efficiency boost like never seen before.
 
 Data API builder is Open Source and works on any platform. It can be executed on-premises, in container or as a Managed Service in Azure, via the new *Database Connection* feature available in Azure Static Web Apps.
@@ -44,7 +47,7 @@ Data API builder is built using .NET Core and is distributed as a NuGet package.
 dotnet tool install -g Microsoft.DataApiBuilder
 ```
 
-if you've already installed the tool, you can update it to the latest version with the following command:
+if you have already installed the tool, you can update it to the latest version with the following command:
 
 ```shell
 dotnet tool update -g Microsoft.DataApiBuilder
