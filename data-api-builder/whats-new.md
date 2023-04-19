@@ -10,11 +10,27 @@ ms.date: 02/22/2023
 
 # What's New in Data API builder
 
+- [Version 0.6.13](#version-0613)
+- [Version 0.5.35](#version-0535)
 - [Version 0.5.34](#version-0534)
 - [Version 0.5.32](#version-0532)
 - [Version 0.5.0](#version-050)
 - [Version 0.4.11](#version-0411)
 - [Version 0.3.7](#version-037)
+
+## Version 0.6.13
+
+A summary of the most relevant changes done in this version is available in the following list:
+
+- [New CLI command to export GraphQL schema](./whats-new-0-6-13.md#new-cli-command-to-export-graphql-schema)
+- [Database policy support for create action for MsSql](./whats-new-0-6-13.md#database-policy-support-for-create-action-for-mssql)
+- [Ability to configure GraphQL path and disable REST and GraphQL endpoints globally via CLI](./whats-new-0-6-13.md#ability-to-configure-graphql-path-and-disable-rest-and-graphql-endpoints-globally-via-cli)
+- [Key fields mandatory for adding/updating views in CLI](./whats-new-0-6-13.md#key-fields-mandatory-for-adding-and-updating-views-in-cli)
+
+## Version 0.5.35
+
+- Force `Allow User Variables=true` for MySql connections fixing PUT/PATCH requests
+- Improve mapped column handling for REST pagination and NextLink creation fixes
 
 ## Version 0.5.34
 
@@ -24,8 +40,6 @@ A summary of the most relevant changes done in this version is available in the 
 - [Add Correlation ID to request logs](./whats-new-0-5-34.md#add-correlation-id-to-request-logs)
 - [Wildcard Operation Support for Stored Procedures in Engine and CLI](./whats-new-0-5-34.md#wildcard-operation-support-for-stored-procedures-in-engine-and-cli)
 
-The full list of release notes for this version is available here: [version 0.5.34 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.5.34)
-
 ## Version 0.5.32
 
 A summary of the most relevant changes done in this version is available in the following list:
@@ -33,10 +47,8 @@ A summary of the most relevant changes done in this version is available in the 
 - [Ability to customize rest path via CLI](./whats-new-0-5-32.md#ability-to-customize-rest-path-via-cli)
 - [Data API builder container image in MAR](./whats-new-0-5-32.md#data-api-builder-container-image-in-mar)
 - [Support for GraphQL fragments](./whats-new-0-5-32.md#support-for-graphql-fragments)
-- Generate NOTICE.txt in the pipeline for distribution and include LICENSE, README, NOTICE in zip, nuget, docker image
+- Generate NOTICE.txt in the pipeline for distribution and include LICENSE, README, NOTICE in zip, NuGet, docker image
 - [Turn on BinSkim and fix Policheck alerts](./whats-new-0-5-32.md#turn-on-binskim-and-fix-policheck-alerts)
-
-The full list of release notes for this version is available here: [version 0.5.32 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.5.32-beta)
 
 ## Version 0.5.0
 
@@ -52,8 +64,6 @@ A summary of the most relevant changes done in this version is available in the 
 - [Enhanced logging support using `LogLevel`](./whats-new-0-5-0.md#enhanced-logging-support-using-loglevel)
 - [Updated DAB CLI to support new features](./whats-new-0-5-0.md#updated-cli)
 
-The full list of release notes for this version is available here: [version 0.5.0 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.5.0-beta)
-
 ## Version 0.4.11
 
 A summary of the most relevant changes done in this version is available in the following list:
@@ -67,8 +77,6 @@ A summary of the most relevant changes done in this version is available in the 
 - [Managed Identity now supported with Postgres](./whats-new-0-4-11.md#managed-identity-now-supported-with-postgres)
 - [Support Azure AD User authentication for Azure MySQL Service](./whats-new-0-4-11.md#support-azure-ad-user-authentication-for-azure-mysql-service)
 
-The full list of release notes for this version is available here: [version 0.4.11 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.4.11-alpha)
-
 ## Version 0.3.7
 
 A summary of the most relevant changes done in this version is available in the following list:
@@ -79,5 +87,3 @@ A summary of the most relevant changes done in this version is available in the 
 - [Azure Active Directory Authentication](./whats-new-0-3-7.md#azure-active-directory-authentication)
 - [New "Simulator" Authentication Provider for local authentication](./whats-new-0-3-7.md#new-simulator-authentication-provider-for-local-authentication)
 - [Support for filter on nested objects within a document in Cosmos DB](./whats-new-0-3-7.md#support-for-filter-on-nested-objects-within-a-document-in-cosmos-db)
-
-The full list of release notes for this version is available here: [version 0.3.7 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.3.7-alpha)
