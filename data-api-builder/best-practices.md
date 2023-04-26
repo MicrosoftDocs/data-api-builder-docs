@@ -24,6 +24,9 @@ When adding an entity to the configuration file, use PascalCasing, so that the g
   - `updateCompositeNameEntity`
   - `deleteCompositeNameEntity`
 
+- If the entity is backed by a stored procedure, the generated query or mutation would be named:
+  - `executeCompositeNameEntity`
+
 which are easier and nicer to read.
 
 ## Use singular form when naming entities
