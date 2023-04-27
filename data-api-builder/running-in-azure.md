@@ -46,7 +46,7 @@ After the script has finished running, it will return the public container IP ad
 
 ## Use Azure Container Apps
 
-If you prefer to manage the infrastructure yourself, you can deploy the Data API builder container in Azure. Data API builder image is available on the Microsoft Container Registry: https://mcr.microsoft.com/en-us/product/azure-databases/data-api-builder/about
+If you prefer to manage the infrastructure yourself, you can deploy the Data API builder container in Azure. Data API builder image is available on the [Microsoft Container Registry](https://mcr.microsoft.com/product/azure-databases/data-api-builder/about).
 
 To run Data API builder in Azure Container Apps, you need to
 
@@ -56,7 +56,7 @@ To run Data API builder in Azure Container Apps, you need to
 - Create the Azure Container Apps environment and mount the storage account file share so that it can be accessed by the containers running in the environment.
 - Create the Azure Container Apps application, using the image from the Microsoft Container Registry and mounting the storage account file share so that it can be accessed by Data API builder.
 
-A sample shell script that can be run on Linux (using the [Cloud Shell](https://learn.microsoft.com/en-us/azure/cloud-shell/overview) if you don't have a Linux machine or WSL installed) is available in `/samples/azure` folder.
+A sample shell script that can be run on Linux (using the [Cloud Shell](/azure/cloud-shell/overview) if you don't have a Linux machine or WSL installed) is available in `/samples/azure` folder.
 
 On first run, the script creates an `.env` file that you have to fill out with the correct values for your environment.
 
