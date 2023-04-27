@@ -40,7 +40,7 @@ On first run, the script creates an `.env` file that you have to fill out with t
 - `DAB_CONFIG_FILE`: the configuration file you want to use (for example: `./my-dab-config.json`).
 
 > [!NOTE]
-> Note that the file must be in the same folder where the `./azure-deploy.sh` script is located.
+> Note that the file must be in the same folder where the `./azure-deploy.sh` script is located. You can find `azure-deploy.sh` [here](https://github.com/Azure/data-api-builder/blob/main/samples/azure/azure-deploy.sh).
 
 After the script has finished running, it will return the public container IP address. Use your favorite REST or GraphQL client to access the Data API builder exposed endpoints as configured in the configuration file you provided.
 
@@ -69,6 +69,6 @@ On first run, the script creates an `.env` file that you have to fill out with t
 - `DAB_CONFIG_FILE`: the configuration file you want to use (for example: `./my-dab-config.json`).
 
 > [Note]
-> The file must be in the same folder where the `./azure-container-apps-deploy.sh` script is located.
+> The file must be in the same folder where the `./azure-container-apps-deploy.sh` script is located. You can find `azure-container-app-deploy.sh` [here](https://github.com/Azure/data-api-builder/blob/main/samples/azure/azure-container-apps-deploy.sh).
 
 After the script has finished running, it will return the FQDN of Azure Container Apps. Use your favorite REST or GraphQL client to access the Data API builder exposed endpoints as configured in the configuration file you provided.
