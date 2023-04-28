@@ -68,7 +68,7 @@ On first run, the script creates an `.env` file that you have to fill out with t
 - `CONTAINERAPPS_APP_NAME`: the name of the Container Apps application you want to create (for example: `dm-dab-aca-app`)
 - `DAB_CONFIG_FILE`: the configuration file you want to use (for example: `./my-dab-config.json`).
 
-> [Note]
+> [!NOTE]
 > The file must be in the same folder where the `./azure-container-apps-deploy.sh` script is located. You can find `azure-container-app-deploy.sh` at [`/samples/azure/'](https://github.com/Azure/data-api-builder/blob/main/samples/azure/).
 
 After the script has finished running, it will return the FQDN of Azure Container Apps. Use your favorite REST or GraphQL client to access the Data API builder exposed endpoints as configured in the configuration file you provided.
