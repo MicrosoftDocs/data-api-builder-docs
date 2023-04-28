@@ -46,7 +46,7 @@ After the script has finished running, it will return the public container IP ad
 
 ## Use Azure Container Apps
 
-You can also deploy the Data API builder container in Azure for a more hands-on approach to infrastructure management. Data API builder image is available on the [Microsoft Container Registry](https://mcr.microsoft.com/product/azure-databases/data-api-builder/about).
+Alternatively, can also deploy the Data API builder [container in Azure](https://learn.microsoft.com/azure/container-apps/?ocid=AID3042118). Data API builder image is available on the [Microsoft Container Registry](https://mcr.microsoft.com/product/azure-databases/data-api-builder/about).
 
 To run Data API builder in Azure Container Apps, you need to
 
@@ -69,6 +69,6 @@ On first run, the script creates an `.env` file that you have to fill out with t
 - `DAB_CONFIG_FILE`: the configuration file you want to use (for example: `./my-dab-config.json`).
 
 > [Note]
-> The file must be in the same folder where the `./azure-container-apps-deploy.sh` script is located. You can find `azure-container-app-deploy.sh` [here](https://github.com/Azure/data-api-builder/blob/main/samples/azure/azure-container-apps-deploy.sh).
+> The file must be in the same folder where the `./azure-container-apps-deploy.sh` script is located. You can find `azure-container-app-deploy.sh` at [`/samples/azure/'](https://github.com/Azure/data-api-builder/blob/main/samples/azure/).
 
 After the script has finished running, it will return the FQDN of Azure Container Apps. Use your favorite REST or GraphQL client to access the Data API builder exposed endpoints as configured in the configuration file you provided.
