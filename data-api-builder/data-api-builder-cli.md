@@ -57,7 +57,6 @@ Initializes the runtime configuration for the Data API builder runtime engine. I
 | **--host-mode** | false   | production   | Specify the Host mode - development or production   |
 | **--cors-origin** | false   | ""   | Specify the list of allowed origins.   |
 | **--auth.provider** | false   | StaticWebApps   | Specify the Identity Provider.   |
-| **--rest.path** | false   | /api   | Specify the REST endpoint's default prefix.   |
 | **--rest.path** | false   | /api   | Specify the REST endpoint's prefix.   |
 | **--rest.disabled** | false   | false   | Disables REST endpoint for all entities.   |
 | **--graphql.path** | false   | /graphql   | Specify the GraphQL endpoint's prefix.   |
