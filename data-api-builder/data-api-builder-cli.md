@@ -112,6 +112,21 @@ Update the properties of any database entity in the configuration file.
 | **--relationship.fields** | false   | -   | Specify fields to be used for mapping the entities. Example: `--relationship.fields "id:book_id"`. Here `id` represents column from sourceEntity, while `book_id` from targetEntity. Foreign keys are required between the underlying sources if not specified.  |
 | **-m, --map** | false   | -   | Specify mappings between database fields and GraphQL and REST fields. format: --map "backendName1:exposedName1,backendName2:exposedName2,...".   |
 
+### **`export`**
+
+Export the required schema as a file and save to disk based on the options.
+
+**Syntax**: `dab export [options]`
+
+**Example**: `dab export --graphql -o ./schemas`
+
+| Options | Required    | Default Value    | Description |
+| :---   | :--- | :--- | :--- |
+| **--graphql** | false   | false   | Export GraphQL schema.   |
+| **-o, --output** | true   | -   | Specify the directory to save the schema file.   |
+| **-g, --graphql-schema-file** | false   | schema.graphql   | Specify the name of the Graphql schema file.   |
+| **-c, --config** | false   | dab-config.json   | Path to config file.   |
+
 ### **`start`**
 
 Start the runtime engine with the provided configuration file for serving REST and GraphQL requests.
