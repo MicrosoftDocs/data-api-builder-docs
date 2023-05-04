@@ -10,6 +10,7 @@ ms.date: 02/22/2023
 
 # What's New in Data API builder
 
+- [Version 0.6.14](#version-0614)
 - [Version 0.6.13](#version-0613)
 - [Version 0.5.35](#version-0535)
 - [Version 0.5.34](#version-0534)
@@ -17,6 +18,12 @@ ms.date: 02/22/2023
 - [Version 0.5.0](#version-050)
 - [Version 0.4.11](#version-0411)
 - [Version 0.3.7](#version-037)
+
+## Version 0.6.14
+
+A summary of the most relevant changes done in this version is available in the following list:
+
+- [Bug Fixes](./whats-new-0-6-14.md#bug-fixes)
 
 ## Version 0.6.13
 
