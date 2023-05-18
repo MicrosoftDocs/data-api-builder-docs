@@ -142,4 +142,10 @@ Start the runtime engine with the provided configuration file for serving REST a
 | **-c, --config** | false   | dab-config.json   | Path to config file.   |
 
 > [!NOTE]
+>
 > One cannot have both verbose and LogLevel. Learn more about different logging levels [here](/dotnet/api/microsoft.extensions.logging.loglevel?view=dotnet-plat-ext-6.0&preserve-view=true).
+>
+> To use multiple config file, i.e, it's possible to merge environmentBasedConfigFile(dab-config.{DAB_ENVIRONMENT}.json) with the baseConfigFile(dab-config.json) using the environment variable:
+>> If the DAB_ENVIRONMENT variable is set, and both enviromentBasedConfigFile and baseConfigFile is present.
+>
+>> Then the `dab start` will automatically merge both the config and use the generated mergedConfigFile(dab-config.{DAB_ENVIRONMENT}.merged.json) to start the engine. 
