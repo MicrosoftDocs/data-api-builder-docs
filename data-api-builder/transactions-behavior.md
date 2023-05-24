@@ -1,6 +1,6 @@
 ---
 title: Usage and behavior of transactions created by Data API builder
-description: This document contains details about the transactions created by Data API builder.
+description: This document aims to outline details about the transactions created by Data API builder.
 author: severussundar
 ms.author: shyamsundarj
 ms.service: data-api-builder
@@ -10,7 +10,7 @@ ms.date: 05/18/2023
 
 # Transactions
 
-Data API builder creates database transactions to execute certain types of graphQL and REST requests. This document aims to outline the details on 
+Data API builder creates database transactions to execute certain types of GraphQL and REST requests. This document aims to outline the details on 
  - GraphQL and REST request types for which transactions are created.
  - Isolation levels with which the transactions are created for each database type.
  - Behavior of concurrent long running transactions. 
@@ -42,21 +42,19 @@ Refer to the [REST in Data API builder](.\rest.md) page to read about the REST f
 
 Data API builder executes the database queries associated with `POST,DELETE,PUT and PATCH` requests in a transaction.
 
-
 ## Transaction Isolation level for each database type
 
 The below table lists the isolation levels with which the transactions are created for each database type.
 
 |**Database Type**|**Isolation Level**
 :-----:|:-----:
-MsSQL|Read Committed
+Azure SQL (or) SQL Server|Read Committed
 MySQL|Repeatable Read
-PostgreSql|Read Committed
-
+PostgreSQL|Read Committed
 
 ## Behavior exhibited by concurrent transactions
 
-This section details the behavior expected when there are two concurrent running transactions operating on the same item. The nature of concurrent transactions are as follows.
+This section details the behavior expected when there are two concurrent running transactions operating on the same item. The nature of concurrent transactions is as follows.
 
 a) Long running write transaction and a read transaction
 
@@ -74,7 +72,7 @@ Azure SQL (or) SQL Server| Yes
 MySQL| No
 PostgreSQL| No
 
-For MsSQL database type, the read transaction waits for the write transaction to complete. For MySQL and PostgreSql database types, the read transaction doesn't wait until the completion of the write transaction.
+For Azure SQL or SQL Server, the read transaction waits for the write transaction to complete. For MySQL and PostgreSQL database types, the read transaction doesn't wait until the completion of the write transaction.
 
 ### Long running read transaction and a write transaction
 
