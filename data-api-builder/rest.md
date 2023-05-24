@@ -12,14 +12,14 @@ ms.date: 04/06/2023
 
 Entities configured to be available via REST are available at the path
 
-```bash
-http://<dab-server>/api/<entity>
+```http
+/api/{entity}
 ```
 
 Using the [Getting Started](./get-started/get-started-with-data-api-builder.md) example, with `books` and the `authors` entity configured for REST access, the path would be, for example:
 
-```bash
-http://localhost:5000/api/book
+```http
+GET /api/book
 ```
 
 Depending on the permission defined on the entity in the configuration file, the following HTTP verbs are available:
@@ -30,7 +30,7 @@ Depending on the permission defined on the entity in the configuration file, the
 - [PATCH](#patch): Update an item
 - [DELETE](#delete): Delete an item
 
-> [!Note]
+> [!NOTE]
 > The URL path (entities and query parameters) is case sensitive.
 
 ## Result set format
@@ -71,14 +71,14 @@ Using the GET method you can retrieve one or more items of the desired entity
 
 REST endpoints support the ability to return an item via its primary key, using URL parameter:
 
-```bash
-http://<dab-server>/api/<entity>/<primary-key-column>/<primary-key-value>
+```http
+GET /api/{entity}/{primary-key-column}/{primary-key-value}
 ```
 
 for example:
 
-```bash
-http://localhost:5000/api/book/id/1001
+```http
+GET /api/book/id/1001
 ```
 
 ### Query parameters
@@ -96,8 +96,8 @@ Query parameters can be used together
 
 The query parameter `$select` allow to specify which fields must be returned. For example:
 
-```bash
-http://localhost:5000/api/author?$select=first_name,last_name
+```http
+GET /api/author?$select=first_name,last_name
 ```
 
 returns only `first_name` and `last_name` fields.
@@ -108,8 +108,8 @@ If any of the requested fields don't exist or isn't accessible due to configured
 
 The value of the `$filter` option is predicate expression (an expression that returns a boolean value) using entity's fields. Only items where the expression evaluates to True are included in the response. For example:
 
-```bash
-http://localhost:5000/api/author?$filter=last_name eq 'Asimov'
+```http
+GET /api/author?$filter=last_name eq 'Asimov'
 ```
 
 returns only those authors whose last name is `Asimov`
@@ -143,8 +143,8 @@ Each expression in the `orderby` parameter value may include the suffix `desc` t
 
 For example:
 
-```bash
-http://localhost:5000/api/author?$orderby=first_name desc, last_name
+```http
+GET /api/author?$orderby=first_name desc, last_name
 ```
 
 returns the list of authors sorted by `first_name` descending and then by `last_name` ascending.
@@ -156,8 +156,8 @@ returns the list of authors sorted by `first_name` descending and then by `last_
 
 The query parameter `$first` allows to limit the number of items returned. For example:
 
-```bash
-http://localhost:5000/api/book?$first=5
+```http
+GET /api/book?$first=5
 ```
 
 returns only the first `n` books. In case ordering isn't specified, items are ordered by the underlying primary key. `n` must be a positive integer value.
@@ -173,16 +173,17 @@ If the number of items available to the entity is bigger than the number specifi
 
 `nextLink` can be used to get the next set of items via the `$after` query parameter using the following format:
 
-```bash
-http://<dab-server>/api/book?$first=<n>&$after=<continuation-data>
+```http
+GET /api/book?$first={n}&$after={continuation-data}
 ```
 
 ## POST
 
 Create a new item for the specified entity. For example:
 
-```bash
-POST http://localhost:5000/api/book
+```http
+POST /api/book
+Content-type: application/json
 
 {
   "id": 2000,
@@ -192,7 +193,7 @@ POST http://localhost:5000/api/book
 
 creates a new book. All the fields that can't be nullable must be supplied. If successful the full entity object, including any null fields, is returned:
 
-```JSON
+```json
 {
   "value": [
     {
@@ -209,14 +210,15 @@ creates a new book. All the fields that can't be nullable must be supplied. If s
 
 PUT creates or replaces an item of the specified entity. The query pattern is:
 
-```bash
-http://<dab-server>/api/<entity>/<primary-key-column>/<primary-key-value>
+```http
+PUT /api/{entity}/{primary-key-column}/{primary-key-value}
 ```
 
 for example:
 
-```bash
+```http
 PUT /api/book/id/2001
+Content-type: application/json
 
 {  
   "title": "Stranger in a Strange Land",
@@ -247,14 +249,15 @@ PATCH creates or updates the item of the specified entity. Only the specified fi
 
 The query pattern is:
 
-```bash
-http://<dab-server>/api/<entity>/<primary-key-column>/<primary-key-value>
+```http
+PATCH /api/{entity}/{primary-key-column}/{primary-key-value}
 ```
 
 for example:
 
-```bash
+```http
 PATCH /api/book/id/2001
+Content-type: application/json
 
 {    
   "year": 1991
@@ -281,13 +284,13 @@ The result is something like:
 DELETE deletes the item of the specified entity.
 The query pattern is:
 
-```bash
-http://<dab-server>/api/<entity>/<primary-key-column>/<primary-key-value>
+```http
+DELETE /api/{entity}/{primary-key-column}/{primary-key-value}
 ```
 
 for example:
 
-```bash
+```http
 DELETE /api/book/id/2001
 ```
 
