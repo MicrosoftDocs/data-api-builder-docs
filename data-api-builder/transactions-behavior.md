@@ -1,5 +1,5 @@
 ---
-title: Usage and behavior of transactions created by Data API buidler
+title: Usage and behavior of transactions created by Data API builder
 description: This document contains details about the transactions created by Data API builder.
 author: severussundar
 ms.author: shyamsundarj
@@ -10,16 +10,16 @@ ms.date: 05/18/2023
 
 # Transactions
 
-Data API builder creates database transactions to execute certian types of graphQL and REST requests. This document aims to outline the details on 
+Data API builder creates database transactions to execute certain types of graphQL and REST requests. This document aims to outline the details on 
  - GraphQL and REST request types for which transactions are created.
  - Isolation levels with which the transactions are created for each database type.
  - Behavior of concurrent long running transactions. 
 
 ## GraphQL Mutations in Data API builder
 
-Please refer to [GraphQL Mutations in Data API builder](.\graphql#mutations) to learn about GraphQL mutations supported by Data API builder.
+ Refer to [GraphQL Mutations in Data API builder](.\graphql.md#mutations) to learn about GraphQL mutations supported by Data API builder.
 
-Consider a typical GraphQL mutation as below
+Consider a typical GraphQL mutation
 
 ```graphql
 mutation updateNotebook($id: Int!, $item: UpdateNotebookInput!) {
@@ -31,16 +31,16 @@ mutation updateNotebook($id: Int!, $item: UpdateNotebookInput!) {
 
 ``` 
 
-To process such a graphQL request, Data API builder constructs two database queries. The first database query is for performing the update action that is assosciated with the mutation. 
+To process such a graphQL request, Data API builder constructs two database queries. The first database query is for performing the update action that is associated with the mutation. 
 The second database query is for fetching the data requested in the selection set. 
 
 Data API builder executes both these database queries in a transaction. 
 
 ## REST requests
 
-Please refer to the [REST in Data API builder](.\rest.md) page to read about the REST features supported by Data API builder.
+Refer to the [REST in Data API builder](.\rest.md) page to read about the REST features supported by Data API builder.
 
-Data API builder executes the database queries assosciated with `POST,DELETE,PUT and PATCH` requests in a transaction.
+Data API builder executes the database queries associated with `POST,DELETE,PUT and PATCH` requests in a transaction.
 
 
 ## Transaction Isolation level for each database type
@@ -56,7 +56,7 @@ PostgreSql|Read Committed
 
 ## Behavior exhibited by concurrent transactions
 
-This section details the behavior expected when there are two concurrent running transactions operating on the same item. The nature of the concurrent transactions are as follows.
+This section details the behavior expected when there are two concurrent running transactions operating on the same item. The nature of concurrent transactions are as follows.
 
 a) Long running write transaction and a read transaction
 
@@ -70,11 +70,11 @@ A read transaction arrives when a long running write transaction is in flight.
 
 |**Database Type**|**Does the read transaction block?**
 :-----:|:-----:
-MsSQL| Yes
+Azure SQL (or) SQL Server| Yes
 MySQL| No
-PostgreSql| No
+PostgreSQL| No
 
-For MsSQL database type, the read transaction waits for the write transaction to complete. For MySQL and PostgreSql database types, the read transaction does not wait until the completion of the write transaction.
+For MsSQL database type, the read transaction waits for the write transaction to complete. For MySQL and PostgreSql database types, the read transaction doesn't wait until the completion of the write transaction.
 
 ### Long running read transaction and a write transaction
 
@@ -82,8 +82,8 @@ A write transaction arrives when a long running read transaction is in flight.
 
 |**Database Type**|**Does the write transaction block?**
 :-----:|:-----:
-MsSQL| No
+Azure SQL (or) SQL Server| No
 MySQL| No
-PostgreSql| No
+PostgreSQL| No
 
-For all the SQL database types, the write transaction does not wait for the read transaction to complete.
+For all the SQL database types, the write transaction doesn't wait for the read transaction to complete.
