@@ -80,7 +80,7 @@ Add new database entity to the configuration file. Make sure you already have a 
 | **--source.type** | false   | table   | Type of the database object. Must be one of: [table, view, stored-procedure]   |
 | **--source.params** | false   | -   | Dictionary of parameters and their values for Source object."param1:val1,param2:value2,.." for Stored-Procedures.   |
 | **--source.key-fields** | true when `--source.type` is view   | -   | The field(s) to be used as primary keys for tables and views only. Comma separated values. Example `--source.key-fields "id,name,type"`  |
-| **--rest** | false   | case sensitive entity name.  | Route for REST API. Example: `--rest: false` -> Disables REST API  calls for this entity. <br>`--rest: true` -> Entity name becomes the rest path. <br>`--rest: "customPathName"` -> Provided customPathName becomes the REST path.|
+| **--rest** | false   | case sensitive entity name.  | Route for REST API. Example: <br>`--rest: false` -> Disables REST API  calls for this entity.<br>`--rest: true` -> Entity name becomes the rest path. <br>`--rest: "customPathName"` -> Provided customPathName becomes the REST path.|
 | **--rest.methods** | false   | post   | HTTP actions to be supported for stored procedure. Specify the actions as a comma separated list. Valid HTTP actions are:[get, post, put, patch, delete]   |
 | **--graphql** | false   | case sensitive entity name  | Entity type exposed for GraphQL. Example: <br>`--graphql: false` -> disables graphql calls for this entity. <br>`--graphql: true` -> Exposes the entity for GraphQL with default names. The singular form of the entity name will be considered for the query and mutation names. <br>`--graphql: "customQueryName"` -> Lets the user customize the singular and plural name for queries and mutations. |
 | **--graphql.operation** | false   | mutation   | GraphQL operation to be supported for stored procedure. Valid operations are: [query, mutation]  |
@@ -142,10 +142,21 @@ Start the runtime engine with the provided configuration file for serving REST a
 | **-c, --config** | false   | dab-config.json   | Path to config file.   |
 
 > [!NOTE]
->
 > One cannot have both verbose and LogLevel. Learn more about different logging levels [here](/dotnet/api/microsoft.extensions.logging.loglevel?view=dotnet-plat-ext-6.0&preserve-view=true).
->
-> To use multiple config file, i.e, it's possible to merge environmentBasedConfigFile(dab-config.{DAB_ENVIRONMENT}.json) with the baseConfigFile(dab-config.json) using the environment variable:
->> If the DAB_ENVIRONMENT variable is set, and both enviromentBasedConfigFile and baseConfigFile is present.
->
->> Then the `dab start` will automatically merge both the config and use the generated mergedConfigFile(dab-config.{DAB_ENVIRONMENT}.merged.json) to start the engine. 
+
+### Using multiple config with DAB
+
+There are many scenarios where maintaining multiple config files can be useful. For example, it can allow users to have different configuration settings for different environments (such as development, staging, and production). Having multiple config files can also make it easier to manage and update your configuration settings over time.
+
+1. Using DAB it's super easy. We just need to keep all the configuration settings that remains constant across environment in a base config, i.e. `dab-config.json`.
+
+2. And maintain a environment based config to keep the configuration settings which is specific to an environment. Let's say we have 2 environments `development` and `production`. Then we can have two environment specific config files `dab-config.development.json` and `dab-config.production.json`. They'll only contain configuration settings that's specific to their environment.
+
+3. Now we just have to set the `DAB_ENVIRONMENT` variable based on the environment config we want to consume. For example, if we want to use `development` environment we need to set `DAB_ENVIRONMENT=development`.
+
+4. If we run the command `dab start`, it will check the value of `DAB_ENVIRONMENT` and accordingly it will search for the files `dab-config.json` and `dab-config.{DAB_ENVIRONMENT}.json`. if both files are present, it will merge the files giving precedence to the environment config file to create a merged config file `dab-config.{DAB_ENVIRONMENT}.merged.json` and use this config to start the DAB engine.
+
+<b>NOTE:</b>
+
+1. If DAB_ENVIRONMENT is not set, the default `dab-config.json` would be used to start the engine.
+2. If user provides a config file, i.e `dab start -c my-config.json` it will use the user provided file irrespective of DAB_ENVIRONMENT value.
