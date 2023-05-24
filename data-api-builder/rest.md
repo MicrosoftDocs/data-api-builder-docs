@@ -5,35 +5,52 @@ author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
 ms.topic: rest-in-data-api-builder
-ms.date: 04/06/2023
+ms.date: 06/01/2023
 ---
 
 # REST in Data API builder
 
-Entities configured to be available via REST are available at the path
+Data API builder provides a RESTful web API that enables you to access tables, views, and stored procedures from a connected database. A database object is represented by an entity in Data API builder's runtime config. An entity must be set in the runtime config in order to be available on the REST API endpoint.
+
+## Call a REST API method
+
+To read from or write to a resource (or entity), you construct a request that looks like the following:
 
 ```http
-/api/{entity}
+{HTTP method} https://{base_url}/{rest-path}/{entity}
 ```
-
-Using the [Getting Started](./get-started/get-started-with-data-api-builder.md) example, with `books` and the `authors` entity configured for REST access, the path would be, for example:
-
-```http
-GET /api/book
-```
-
-Depending on the permission defined on the entity in the configuration file, the following HTTP verbs are available:
-
-- [GET](#get): Get zero, one or more items
-- [POST](#post): Create a new item
-- [PUT](#put): Create or replace an item
-- [PATCH](#patch): Update an item
-- [DELETE](#delete): Delete an item
 
 > [!NOTE]
 > The URL path (entities and query parameters) is case sensitive.
 
-## Result set format
+The components of a request include:
+
+- [{HTTP method}](#http-methods) - The HTTP method used on the request to Data API builder.
+- {base_url} - The domain (or localhost server and port) which hosts an instance of Data API builder.
+- [{rest-path}](#rest-path) - The base path of the REST API endpoint set in the runtime config.
+- [{entity}](#entity) - The name of the database object as defined in the runtime config.
+
+### HTTP methods
+
+Data API builder uses the HTTP method on your request to determine what action to take on the request designated entity. The following HTTP verbs are available, dependent upon the permissions set for a particular entity.
+
+|**Method** |**Description**                         |
+| :----- | :---------------------------------------- |
+| [GET](#get)    | Get zero, one or more items.      |
+| [POST](#post)  | Create a new item.                |
+| [PATCH](#patch)  | Update an item with new values. |
+| [PUT](#put)   | Replace an item with a new one.    |
+| [DELETE](#delete) | Delete an item.                |
+
+### Rest Path
+
+The rest path designates the location of Data API builder's REST API. The path is configurable in the runtime config and defaults to */api*. For more details, see the [configuration file article](./configuration-file.md).
+
+### Entity
+
+*Entity* is the terminology used to reference a REST API resource in  Data API builder. By default, the URL route value for an entity is the entity name defined in the runtime config. An entity's REST URL path value is configurable within the entity's REST settings. For more details, see the [configuration file article](./configuration-file.md).
+
+### Result set format
 
 The returned result is a JSON object with this format:
 
@@ -137,7 +154,7 @@ not                      | Logical negation      | not (year le 1960)
 
 #### `$orderby`
 
-The value of the `orderby` parameter is a comma-separated list of expressions used to sort the items. 
+The value of the `orderby` parameter is a comma-separated list of expressions used to sort the items.
 
 Each expression in the `orderby` parameter value may include the suffix `desc` to ask for a descending order, separated from the expression by one or more spaces.
 
