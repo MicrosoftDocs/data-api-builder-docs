@@ -550,12 +550,14 @@ Data API builder compares the value of the `UserId` claim to the value of the da
 
 Database policies are supported for tables and views. Stored procedures can't be configured with policies.
 
-Database policies are only supported for the `actions` **read**, **update**, and **delete**.
+Database policies are only supported for the `actions` **create**, **read**, **update**, and **delete**.
 
-Database policy OData expression syntax supports:
+Database policy OData expression syntax only supports:
 
 - Binary operators [BinaryOperatorKind - Microsoft Learn](/dotnet/api/microsoft.odata.uriparser.binaryoperatorkind?view=odata-core-7.0&preserve-view=true) such as `and`, `or`, `eq`, `gt`, `lt`, and more.
 - Unary operators [UnaryOperatorKind - Microsoft Learn](/dotnet/api/microsoft.odata.uriparser.unaryoperatorkind?view=odata-core-7.0&preserve-view=true) such as the negate (`-`) and `not` operators.
+- Entity field names must "start with a letter or underscore, followed by at most 127 letters, underscores or digits" per [OData Common Schema Definition Language Version 4.01](https://docs.oasis-open.org/odata/odata-csdl-json/v4.01/odata-csdl-json-v4.01.html#sec_SimpleIdentifier)
+    - Fields which do not conform to the mentioned restrictions can't be referenced in database policies. As a workaround, configure the entity with a `mappings` section to assign conforming aliases to the fields.
 
 #### Mappings
 
