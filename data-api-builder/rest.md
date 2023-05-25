@@ -48,7 +48,7 @@ Data API builder uses the HTTP method on your request to determine what action t
 | [PUT](#put)       | Replace an item with a new one if one exists. Otherwise, create a new item. |
 | [DELETE](#delete) | Delete an item.                                                             |
 
-### Rest Path
+### Rest path
 
 The rest path designates the location of Data API builder's REST API. The path is configurable in the runtime config and defaults to */api*. For more details, see the [configuration file article](./configuration-file.md).
 
