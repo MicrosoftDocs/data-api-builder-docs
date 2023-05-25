@@ -1,8 +1,8 @@
 ---
 title: Authorization in Data API builder
 description: This document defines the role-based authorization workflow in Data API builder.
-author: anagha-todalbagi
-ms.author: atodalbagi
+author: seantleonard
+ms.author: seantleonard
 ms.service: data-api-builder
 ms.topic: authentication-azure-ad
 ms.date: 06/01/2023
@@ -22,11 +22,11 @@ Data API builder evaluates requests in the context of a single role. Roles are *
 
 System roles are built-in roles recognized by Data API builder. A system role will be auto-assigned to a requestor regardless of the requestor's role membership denoted in their access tokens. There are two system roles: `anonymous` and `authenticated`.
 
-#### Anonymous System Role
+#### Anonymous system role
 
 The `anonymous` system role is assigned to requests executed by unauthenticated users. Runtime config defined entities must include permissions for the `anonymous` role if unauthenticated access is desired.
 
-#### Authenticated System Role
+#### Authenticated system role
 
 The `authenticated` system role is assigned to requests executed by authenticated users. 
 
@@ -110,7 +110,7 @@ In the following example, the user role `administrator` is the only defined role
 
 For more information, see the [configuration file](./configuration-file.md#actions) documentation.
 
-#### Field Access
+#### Field access
 
 You can configure which fields should be accessible for an action. For example, you can set which fields to **include** and **exclude** from the `read` action.
 
@@ -139,7 +139,7 @@ The following example prevents users in the `free-access` role from performing r
     }
 ```
 
-#### Item Level Security
+#### Item level security
 
 **Database policy** expressions enable results to be restricted even further. Database policies translate expressions to query predicates executed against the database. Database policy expressions are supported for the following actions:
 
@@ -154,7 +154,7 @@ The following example prevents users in the `free-access` role from performing r
 
 See the [configuration file](./configuration-file.md#policies) documentation for more details about database policies.
 
-### Example
+##### Example
 
 A database policy restricting the `read` action on the `consumer` role to only return records where the *title* is "Sample Title."
 
