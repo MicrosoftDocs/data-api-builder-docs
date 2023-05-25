@@ -1,8 +1,8 @@
 ---
 title: REST in Data API builder
 description: This document contains details about REST in Data API builder.
-author: anagha-todalbagi
-ms.author: atodalbagi
+author: seantleonard
+ms.author: seleonar
 ms.service: data-api-builder
 ms.topic: rest-in-data-api-builder
 ms.date: 06/01/2023
@@ -30,17 +30,23 @@ The components of a request include:
 - [{rest-path}](#rest-path) - The base path of the REST API endpoint set in the runtime config.
 - [{entity}](#entity) - The name of the database object as defined in the runtime config.
 
+An example GET request on the `book` entity residing under the REST endpoint base `/api` in a local development environment `localhost`:
+
+```http
+GET https:/localhost:5001/api/Book
+```
+
 ### HTTP methods
 
 Data API builder uses the HTTP method on your request to determine what action to take on the request designated entity. The following HTTP verbs are available, dependent upon the permissions set for a particular entity.
 
-|**Method** |**Description**                         |
-| :----- | :---------------------------------------- |
-| [GET](#get)    | Get zero, one or more items.      |
-| [POST](#post)  | Create a new item.                |
-| [PATCH](#patch)  | Update an item with new values. |
-| [PUT](#put)   | Replace an item with a new one.    |
-| [DELETE](#delete) | Delete an item.                |
+| **Method**        | **Description**                                                             |
+|:------------------|:----------------------------------------------------------------------------|
+| [GET](#get)       | Get zero, one or more items.                                                |
+| [POST](#post)     | Create a new item.                                                          |
+| [PATCH](#patch)   | Update an item with new values if one exists. Otherwise, create a new item. |
+| [PUT](#put)       | Replace an item with a new one if one exists. Otherwise, create a new item. |
+| [DELETE](#delete) | Delete an item.                                                             |
 
 ### Rest Path
 
