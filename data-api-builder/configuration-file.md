@@ -36,7 +36,7 @@ The environment variable used to set the chosen environment is `DAB_ENVIRONMENT`
 
 > [!NOTE]
 > Configuration providers that are added later override previous key settings. For example, if `MyKey` is set in both `dab-config.json` and the environment-specific file, the environment value is used.
-> To use a pair of base and environment config file, refer [here](/data-api-builder-cli.md#using-data-api-builder-with-two-configuration-files)
+> To use a pair of base and environment config file, refer [here](/data-api-builder/data-api-builder-cli.md#using-data-api-builder-with-two-configuration-files)
 
 ## Accessing environment variables
 
