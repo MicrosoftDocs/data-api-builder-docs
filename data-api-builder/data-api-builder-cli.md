@@ -144,19 +144,19 @@ Start the runtime engine with the provided configuration file for serving REST a
 > [!NOTE]
 > One cannot have both verbose and LogLevel. Learn more about different logging levels [here](/dotnet/api/microsoft.extensions.logging.loglevel?view=dotnet-plat-ext-6.0&preserve-view=true).
 
-### Using multiple config with DAB
+### Using Data API builder with two configuration files
 
-There are many scenarios where maintaining multiple config files can be useful. For example, it can allow users to have different configuration settings for different environments (such as development, staging, and production). Having multiple config files can also make it easier to manage and update your configuration settings over time.
+There are many scenarios where maintaining multiple pairs of a baseline configuration file and environment specific configuration file can be useful. For example, it can allow developers to use separate files for each environment such as development, staging, and production. Having such configuration files can also make it easier to manage and update your settings over time.
 
-1. Using DAB it's super easy. We just need to keep all the configuration settings that remains constant across environment in a base config, i.e. `dab-config.json`.
+1. Using DAB it's super easy. We just need to keep all the configuration settings that are common across environments in a base configuration file, i.e. `dab-config.json`.
 
-2. And maintain a environment based config to keep the configuration settings which is specific to an environment. Let's say we have 2 environments `development` and `production`. Then we can have two environment specific config files `dab-config.development.json` and `dab-config.production.json`. They'll only contain configuration settings that's specific to their environment.
+2. And maintain an environment based config to keep the configuration settings which is specific to an environment. Let's say we have 2 environments `development` and `production`. Then we can have two environment specific configuration files `dab-config.development.json` and `dab-config.production.json`. They'll only contain configuration settings that are specific to that environment.
 
-3. Now we just have to set the `DAB_ENVIRONMENT` variable based on the environment config we want to consume. For example, if we want to use `development` environment we need to set `DAB_ENVIRONMENT=development`.
+3. Now we just have to set the `DAB_ENVIRONMENT` variable based on the environment configuration we want to consume. For example, if we want to use `development` environment we need to set `DAB_ENVIRONMENT=development`.
 
-4. If we run the command `dab start`, it will check the value of `DAB_ENVIRONMENT` and accordingly it will search for the files `dab-config.json` and `dab-config.{DAB_ENVIRONMENT}.json`. if both files are present, it will merge the files giving precedence to the environment config file to create a merged config file `dab-config.{DAB_ENVIRONMENT}.merged.json` and use this config to start the DAB engine.
+4. If we run the command `dab start`, it will check the value of `DAB_ENVIRONMENT` and accordingly it will search for the files `dab-config.json` and `dab-config.{DAB_ENVIRONMENT}.json`. if both files are present, it will merge the files giving precedence to the environment configuration file to create a merged file `dab-config.{DAB_ENVIRONMENT}.merged.json` and use this configuration to start DAB.
 
 <b>NOTE:</b>
 
-1. If DAB_ENVIRONMENT is not set, the default `dab-config.json` would be used to start the engine.
-2. If user provides a config file, i.e `dab start -c my-config.json` it will use the user provided file irrespective of DAB_ENVIRONMENT value.
+1. If `DAB_ENVIRONMENT` is not set, the default `dab-config.json` would be used to start the engine.
+2. If user provides a config file, i.e `dab start -c my-config.json` it will use the user provided file irrespective of `DAB_ENVIRONMENT` value.
