@@ -146,7 +146,7 @@ Start the runtime engine with the provided configuration file for serving REST a
 
 ### Using Data API builder with two configuration files
 
-There are many scenarios where maintaining multiple pairs of a baseline configuration file and environment specific configuration file can be useful. For example, it can allow developers to use separate files for each environment such as development, staging, and production. Having such configuration files can also make it easier to manage and update your settings over time.
+There are many scenarios where maintaining multiple pairs of a baseline configuration file and environment specific configuration file can be useful. For example, It can allow developers to use separate files for each environment such as development, staging, and production. Having such configuration files can also make it easier to manage and update your settings over time.
 
 1. Using DAB it's super easy. We just need to keep all the configuration settings that are common across environments in a base configuration file, i.e. `dab-config.json`.
 
@@ -154,7 +154,7 @@ There are many scenarios where maintaining multiple pairs of a baseline configur
 
 3. Now we just have to set the `DAB_ENVIRONMENT` variable based on the environment configuration we want to consume. For example, if we want to use `development` environment we need to set `DAB_ENVIRONMENT=development`.
 
-4. If we run the command `dab start`, it will check the value of `DAB_ENVIRONMENT` and accordingly it will search for the files `dab-config.json` and `dab-config.{DAB_ENVIRONMENT}.json`. if both files are present, it will merge the files giving precedence to the environment configuration file to create a merged file `dab-config.{DAB_ENVIRONMENT}.merged.json` and use this configuration to start DAB.
+4. If we run the command `dab start`, it will check the value of `DAB_ENVIRONMENT` and accordingly it will search for the files `dab-config.json` and `dab-config.{DAB_ENVIRONMENT}.json`. If both files are present, It will merge the files giving precedence to the environment configuration file to create a merged file `dab-config.{DAB_ENVIRONMENT}.merged.json` and use this configuration to start DAB.
 
 <b>NOTE:</b>
 
