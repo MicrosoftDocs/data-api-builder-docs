@@ -5,7 +5,7 @@ author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
 ms.topic: authentication-azure-ad
-ms.date: 04/06/2023
+ms.date: 06/08/2023
 ---
 
 # Authentication with Azure AD
@@ -96,19 +96,19 @@ Where the`APP_ID` is the "Application (client) ID" and the `TENANT_ID` is the "D
 
 Make sure you're logged in to AZ CLI with the account that you want to use to authenticate against Data API builder.
 
-```shell
+```azurecli
 az login
 ```
 
 and select the subscription where you've [configured the Data API builder App Registration](#configure-server-app-registration).
 
-```shell
-az account set --subscription <subscription name or id>
+```azurecli
+az account set --tenant 00000000-0000-0000-0000-000000000000
 ```
 
 then run the following command to try to authenticate against the newly created scope:
 
-```shell
+```azurecli
 az account get-access-token --scope api://<Application ID>/Endpoint.Access
 ```
 
@@ -130,10 +130,10 @@ If you now run the AZ CLI command again, you get an access token:
 
 ```json
 {
-  "accessToken": "***",
+  "accessToken": "ey***",
   "expiresOn": "2022-11-03 14:55:37.000000",
-  "subscription": "***",
-  "tenant": "***",
+  "subscription": "00000000-0000-0000-0000-000000000000",
+  "tenant": "00000000-0000-0000-0000-000000000000",
   "tokenType": "Bearer"
 }
 ```
@@ -185,13 +185,13 @@ To test out that authentication is working fine, you can update your configurati
 
 ## Send authenticated request to Data API builder
 
-You can use any HTTP client now to send an authenticated request. Firstly get the token:
+You can use any HTTP client now to send an authenticated request. First, get a new access token:
 
-```shell
+```azurecli
 az account get-access-token --scope api://<Application ID>/Endpoint.Access --query "accessToken" -o tsv
 ```
 
-then you can use the obtained access token to issue a successful authenticated request to a protected endpoint:
+Then, use the acquired access token to issue an authenticated request to a protected endpoint:
 
 ```shell
 curl -k -r GET -H 'Authorization: Bearer ey...' -H 'X-MS-API-ROLE: Sample.Role' https://localhost:5001/api/Book
@@ -220,6 +220,8 @@ This step creates the app registration for the application that sends requests t
    1. Add a description and expiration setting.
    2. Select **Add**
    3. Save the **Value** of the created secret somewhere as it's needed later, and it will not be visible anymore once you navigate to another page
+5. Navigate to `Manifest` from your App Registration overview page.
+    1. Update the JSON document so that `accessTokenAcceptedVersion` is set to `2`
 
 The following steps configure [delegated permissions](/azure/active-directory/develop/v2-permissions-and-consent#permission-types) for the client app registration. This means that the client app is delegated with the permission to act as a signed-in user when it makes calls to the target resource (Data API builder).
 
