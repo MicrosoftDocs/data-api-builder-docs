@@ -100,7 +100,7 @@ Make sure you're logged in to AZ CLI with the account that you want to use to au
 az login
 ```
 
-and select the subscription where you've [configured the Data API builder App Registration](#configure-server-app-registration).
+and select the Azure AD tenant where you've [configured the Data API builder App Registration](#configure-server-app-registration).
 
 ```azurecli
 az account set --tenant 00000000-0000-0000-0000-000000000000
