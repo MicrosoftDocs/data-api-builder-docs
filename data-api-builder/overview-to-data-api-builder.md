@@ -59,9 +59,7 @@ Data API builder requires .NET Core 6 to run. If you don't have it installed, yo
 
 Data API builder comes with a friendly CLI interface that allows the configuration of everything needed to securely create REST and GraphQL endpoints for your database.
 
-## Section header
-
-### [Tab 1](#tab/azure-sql)
+### [Azure SQL](#tab/azure-sql)
 
 ```shell
 dab init --database-type mssql --connection-string "Server=localhost;Database=Library;"
@@ -71,7 +69,7 @@ dab add Book --source dbo.Books --permissions "anonymous:*"
 dab start
 ```
 
-### [Tab 2](#tab/azure-cosmosdb)
+### [Azure Cosmos DB](#tab/azure-cosmosdb)
 
 ```shell
 dab init --database-type cosmosdb_nosql --graphql-schema schema.gql --cosmosdb_nosql-database PlaygroundDB  --connection-string "AccountEndpoint=https://localhost:8081/;AccountKey=REPLACEME;"
