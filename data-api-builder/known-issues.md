@@ -19,6 +19,10 @@ ms.date: 04/06/2023
 - Table with triggers error out on UPDATE. [Issue #452](https://github.com/Azure/data-api-builder/issues/452)
 - JSON data is escaped in the response. [Issue #444](https://github.com/Azure/data-api-builder/issues/444)
 
+## Azure Cosmos DB
+
+- Authorization policy support. [Issue #597](https://github.com/Azure/data-api-builder/issues/597)
+
 ## MySQL
 
 - Update fails on tables with Computed columns. [Issue #1001](https://github.com/Azure/data-api-builder/issues/1001)
