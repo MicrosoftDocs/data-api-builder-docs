@@ -5,7 +5,7 @@ author: seantleonard
 ms.author: sean.leonard
 ms.service: data-api-builder
 ms.topic: openapi
-ms.date: 06/01/2023
+ms.date: 06/08/2023
 ---
 
 # Data API builder REST API documentation with Swagger / OpenAPI
@@ -23,7 +23,7 @@ The schema file is generated using functionality provided by the [OpenAPI.NET SD
 
 The OpenAPI description document can be fetched from Data API builder from the path:
 
-```http
+```https
 GET /{rest-path}/openapi 
 ```
 
@@ -34,9 +34,9 @@ GET /{rest-path}/openapi
 
 [Swagger UI](https://swagger.io/swagger-ui/) offers a web-based UI that provides information about the service, using the generated OpenAPI specification.
 
-Data API builder enables viewing the generated OpenAPI description document from a dedicated endpoint:
+In `Development` mode, Data API builder enables viewing the generated OpenAPI description document from a dedicated endpoint:
 
-```http
+```https
 GET /swagger
 ```
 
