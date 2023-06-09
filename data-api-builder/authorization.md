@@ -142,7 +142,7 @@ The syntax for defining permissions is described in the [runtime configuration a
 
 ### Secure by default
 
-By default, an entity has no permissions configured, which means no one can access the entity. Additionally, Data API builder will ignore database objects when they are not referenced in the runtime configuration.
+By default, an entity has no permissions configured, which means no one can access the entity. Additionally, Data API builder ignores database objects when they are not referenced in the runtime configuration.
 
 #### Permissions must be explicitly configured
 To allow unauthenticated access to an entity, the `anonymous` role must be explicitly defined in the entity's permissions. For example, the `book` entity's permissions is explicitly set to allow unauthenticated read access:
