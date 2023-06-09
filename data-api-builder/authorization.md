@@ -14,18 +14,18 @@ Data API builder uses a role-based authorization workflow. Any incoming request,
 
 ## Roles
 
-Roles set the permissions context in which a request should be executed. For each entity defined in the runtime config, you can define a set of roles and associated permissions which determine how the entity can be accessed in both the REST and GraphQL endpoints.
+Roles set the permissions context in which a request should be executed. For each entity defined in the runtime config, you can define a set of roles and associated permissions that determine how the entity can be accessed in both the REST and GraphQL endpoints.
 
 Data API builder evaluates requests in the context of a single role: 
 - `anonymous` when no access token is presented.
 - `authenticated` when a valid access token is presented.
 - `<CUSTOM_USER_ROLE>` when a valid access token is presented *and* the `X-MS-API-ROLE` HTTP header is included specifying a user role that is also included in the access token's `roles` claim.
 
-Roles are **not** additive which means that a user who is a member of both `Role1` and `Role2` does not inherit the permissions associated with both roles. 
+Roles are **not** additive, which means that a user who is a member of both `Role1` and `Role2` does not inherit the permissions associated with both roles. 
 
 ### System roles
 
-System roles are built-in roles recognized by Data API builder. A system role will be auto-assigned to a requestor regardless of the requestor's role membership denoted in their access tokens. There are two system roles: `anonymous` and `authenticated`.
+System roles are built-in roles recognized by Data API builder. A system role is auto-assigned to a requestor regardless of the requestor's role membership denoted in their access tokens. There are two system roles: `anonymous` and `authenticated`.
 
 #### Anonymous system role
 
@@ -73,12 +73,12 @@ The following Data API builder runtime configuration demonstrates explicitly con
 
 User roles are non-system roles that are assigned to users within the identity provider you set in the runtime config. For Data API builder to evaluate a request in the context of a user role, two requirements must be met:
 
-1. The client app supplied access token must include role claims which list a user's role membership.
+1. The client app supplied access token must include role claims that list a user's role membership.
 1. The client app must include the HTTP header `X-MS-API-ROLE` with requests and set the header's value as the desired user role.
 
 #### Role evaluation example
 
-The following example demonstrates requests made to the `Book` entity which is configured in the Data API builder runtime configuration as follows:
+The following examples demonstrate requests made to the `Book` entity that is configured in the Data API builder runtime configuration as follows:
 
 ```json
 "Book": {
@@ -102,7 +102,7 @@ The following example demonstrates requests made to the `Book` entity which is c
 
 In Static Web Apps, a user is a member of the anonymous role [by default](/azure/static-web-apps/authentication-custom?tabs=aad%2Cinvitations#manage-roles). If the user is authenticated, the user is a member of both the `anonymous` and `authenticated` roles.
 
-When a client app sends an authenticated request to Data API builder [deployed using Static Web Apps database connections (Preview)](/azure/static-web-apps/database-overview), the client app supplies an access token that is processed by Static Web Apps and [transformed into JSON](/azure/static-web-apps/user-information?tabs=javascript#client-principal-data):
+When a client app sends an authenticated request to Data API builder [deployed using Static Web Apps database connections (Preview)](/azure/static-web-apps/database-overview), the client app supplies an access token that Static Web Apps [transforms into JSON](/azure/static-web-apps/user-information?tabs=javascript#client-principal-data):
 
 ```json
 {
@@ -115,7 +115,7 @@ When a client app sends an authenticated request to Data API builder [deployed u
 
 Because Data API builder evaluates requests in the context of a single role, it evaluates the request in the context of the system role `authenticated` by default.
 
-If the client application's request also includes the HTTP header `X-MS-API-ROLE` with the value `author`, the request will be evaulated in the context of the `author` role. An example request including an access token and `X-MS-API-ROLE` HTTP header:
+If the client application's request also includes the HTTP header `X-MS-API-ROLE` with the value `author`, the request is evaluated in the context of the `author` role. An example request including an access token and `X-MS-API-ROLE` HTTP header:
 
 ```shell
 curl -k -r GET -H 'Authorization: Bearer ey...' -H 'X-MS-API-ROLE: author' https://localhost:5001/api/Book
@@ -127,10 +127,10 @@ curl -k -r GET -H 'Authorization: Bearer ey...' -H 'X-MS-API-ROLE: author' https
 ## Permissions
 
 Permissions describe:
-- Who can make requests on an entity (role membership).
-- What actions (create, read, update, delete, execute) can that user perform.
+- Who can make requests on an entity based on role membership.
+- What actions (create, read, update, delete, execute) a user can perform.
 - Which fields are accessible for a particular action.
-- Additional restrictions on the results returned by a request.
+- Extra restrictions on the results returned by a request.
 
 The syntax for defining permissions is described in the [runtime configuration article](./configuration-file.md#permissions).
 
@@ -142,7 +142,7 @@ The syntax for defining permissions is described in the [runtime configuration a
 
 ### Secure by default
 
-By default, an entity has no permissions configured, which means no one can access the entity. Additionally, database objects will be ignored by Data API builder when they are not referenced in the runtime configuration.
+By default, an entity has no permissions configured, which means no one can access the entity. Additionally, Data API builder will ignore database objects when they are not referenced in the runtime configuration.
 
 #### Permissions must be explicitly configured
 To allow unauthenticated access to an entity, the `anonymous` role must be explicitly defined in the entity's permissions. For example, the `book` entity's permissions is explicitly set to allow unauthenticated read access:
@@ -192,13 +192,13 @@ In the following example, the user role `administrator` is the only defined role
 - Tables and Views: `create`, `read`, `update`, `delete`
 - Stored Procedures: `execute`
 
-For more information, see the [configuration file](./configuration-file.md#actions) documentation.
+For more information about actions, see the [configuration file](./configuration-file.md#actions) documentation.
 
 #### Field access
 
 You can configure which fields should be accessible for an action. For example, you can set which fields to **include** and **exclude** from the `read` action.
 
-The following example prevents users in the `free-access` role from performing read operations on `Column3`. Any reference to `Column3` in GET requests (REST endpoint) or queries (GraphQL endpoint) will result in a rejected request:
+The following example prevents users in the `free-access` role from performing read operations on `Column3`. References to `Column3` in GET requests (REST endpoint) or queries (GraphQL endpoint) result in a rejected request:
 
 ```json
     "book": {
@@ -236,7 +236,7 @@ The following example prevents users in the `free-access` role from performing r
 > [!WARNING]
 > The **execute** action, used with stored procedures, **does not support** database policies.
 
-See the [configuration file](./configuration-file.md#policies) documentation for more details about database policies.
+For more information about database policies, see the [configuration file](./configuration-file.md#policies) documentation.
 
 ##### Example
 
