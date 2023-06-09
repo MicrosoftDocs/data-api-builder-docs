@@ -21,7 +21,7 @@ Data API builder evaluates requests in the context of a single role:
 - `authenticated` when a valid access token is presented.
 - `<CUSTOM_USER_ROLE>` when a valid access token is presented *and* the `X-MS-API-ROLE` HTTP header is included specifying a user role that is also included in the access token's `roles` claim.
 
-Roles are **not** additive, which means that a user who is a member of both `Role1` and `Role2` does not inherit the permissions associated with both roles. 
+Roles are **not** additive, which means that a user who is a member of both `Role1` and `Role2` doesn't inherit the permissions associated with both roles. 
 
 ### System roles
 
@@ -47,7 +47,7 @@ The following Data API builder runtime configuration demonstrates explicitly con
 }
 ```
 
-When a client application sends a request accessing the Book entity on behalf of an unauthenticated user, the app should not include the `Authorization` HTTP header.
+When a client application sends a request accessing the Book entity on behalf of an unauthenticated user, the app shouldn't include the `Authorization` HTTP header.
 
 #### Authenticated system role
 
@@ -122,7 +122,7 @@ curl -k -r GET -H 'Authorization: Bearer ey...' -H 'X-MS-API-ROLE: author' https
 ```
 
 > [!IMPORTANT]
-> A client app's request is rejected when the supplied access token's `roles` claim does not contain the role listed in the `X-MS-API-ROLE` header.
+> A client app's request is rejected when the supplied access token's `roles` claim doesn't contain the role listed in the `X-MS-API-ROLE` header.
 
 ## Permissions
 
@@ -142,7 +142,7 @@ The syntax for defining permissions is described in the [runtime configuration a
 
 ### Secure by default
 
-By default, an entity has no permissions configured, which means no one can access the entity. Additionally, Data API builder ignores database objects when they are not referenced in the runtime configuration.
+By default, an entity has no permissions configured, which means no one can access the entity. Additionally, Data API builder ignores database objects when they aren't referenced in the runtime configuration.
 
 #### Permissions must be explicitly configured
 To allow unauthenticated access to an entity, the `anonymous` role must be explicitly defined in the entity's permissions. For example, the `book` entity's permissions is explicitly set to allow unauthenticated read access:
@@ -171,7 +171,7 @@ When read operations should be restricted to authenticated users only, the follo
 }
 ```
 
-An entity does not require and is not pre-configured with permissions for the `anonymous` and `authenticated` roles. One or more user roles can be defined within an entity's permissions configuration and all other undefined roles, system or user defined, are automatically denied access. 
+An entity doesn't require and isn't pre-configured with permissions for the `anonymous` and `authenticated` roles. One or more user roles can be defined within an entity's permissions configuration and all other undefined roles, system or user defined, are automatically denied access. 
 
 In the following example, the user role `administrator` is the only defined role for the `book` entity. A user must be a member of the `administrator` role and include that role in the `X-MS-API-ROLE` HTTP header to operate on the `book` entity:
 
