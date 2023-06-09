@@ -2,7 +2,7 @@
 title: Authorization in Data API builder
 description: This document defines the role-based authorization workflow in Data API builder.
 author: seantleonard
-ms.author: seantleonard
+ms.author: seleonar
 ms.service: data-api-builder
 ms.topic: authentication-azure-ad
 ms.date: 06/01/2023
