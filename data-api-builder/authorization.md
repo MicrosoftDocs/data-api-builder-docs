@@ -78,7 +78,7 @@ User roles are non-system roles that are assigned to users within the identity p
 
 #### Role evaluation example
 
-The following examples demonstrate requests made to the `Book` entity that is configured in the Data API builder runtime configuration as follows:
+The following example demonstrates requests made to the `Book` entity that is configured in the Data API builder runtime configuration as follows:
 
 ```json
 "Book": {
