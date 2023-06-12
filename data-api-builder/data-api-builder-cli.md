@@ -142,21 +142,18 @@ Start the runtime engine with the provided configuration file for serving REST a
 | **-c,--config** | false   | dab-config.json   | Path to config file.   |
 
 > [!NOTE]
-> One cannot have both verbose and LogLevel. Learn more about different logging levels [here](/dotnet/api/microsoft.extensions.logging.loglevel?view=dotnet-plat-ext-6.0&preserve-view=true).
+> You can't use `--verbose` and `--LogLevel` at the same time. Learn more about different logging levels [here](/dotnet/api/microsoft.extensions.logging.loglevel?view=dotnet-plat-ext-6.0&preserve-view=true).
 
 ### Using Data API builder with two configuration files
 
-There are many scenarios where maintaining multiple pairs of a baseline configuration file and environment specific configuration file can be useful. For example, It can allow developers to use separate files for each environment such as development, staging, and production. Having such configuration files can also make it easier to manage and update your settings over time.
+You can maintain multiple pairs of baseline and environment specific configuration files to simplify management of your environment specific settings. The following steps demonstrate how to set up a base configuration file with two environment specific configuration files (**development** and **production**):
 
-1. Using DAB it's super easy. We just need to keep all the configuration settings that are common across environments in a base configuration file (`dab-config.json`).
+1. Create a base configuration file `dab-config.json` with all of your settings common across each of your environments.
+2. Create two environemnt specific configuration files: `dab-config.development.json` and `dab-config.production.json`. These two configuration files should only include settings which differ from the base configuration file such as connection strings.
+3. Next, set the `DAB_ENVIRONMENT` variable based on the environment configuration you want Data API builder to consume. For this example, set `DAB_ENVIRONMENT=development` so the `development` environment configuration file selected.
+4. Start Data API builder with the command `dab start`. The engine checks the value of `DAB_ENVIRONMENT` and uses the base file `dab-config.json` and the environment specific file `dab-config.development.json`. When the engine detects the presence of both files, it merges the files into a third file: `dab-config.development.merged.json`.
+5. (Optional) Set the `DAB_ENVIRONMENT` environment variable value to `production` when you want the production environment specific settings to be merged with your base configuration file.
 
-2. And maintain an environment based config to keep the configuration settings that are specific to an environment. Let's say we have two environments `development` and `production`. Then we can have two environment specific configuration files `dab-config.development.json` and `dab-config.production.json`. They only contain configuration settings that are specific to that environment.
-
-3. Now we just have to set the `DAB_ENVIRONMENT` variable based on the environment configuration we want to consume. For example, if we want to use `development` environment we need to set `DAB_ENVIRONMENT=development`.
-
-4. When we run the command `dab start`, It checks the value of `DAB_ENVIRONMENT` and accordingly it searches for the files `dab-config.json` and `dab-config.{DAB_ENVIRONMENT}.json`. If both files are present, It merges the files giving precedence to the environment configuration file to create a merged file `dab-config.{DAB_ENVIRONMENT}.merged.json` and use this configuration to start DAB.
-
-<b>NOTE:</b>
-
-1. If `DAB_ENVIRONMENT` isn't set, the default `dab-config.json` would be used to start the engine.
-2. If user provides a config file, i.e `dab start -c my-config.json` it uses the user provided file irrespective of `DAB_ENVIRONMENT` value.
+> [!NOTE]
+> 1. By default, **dab-config.json** is used to start the engine when the `DAB_ENVIRONMENT` environment variable isn't set.
+> 2. A user provided config file is used regardless of the `DAB_ENVIRONMENT` environment variable's value. For example, the file `my-config.json` is used when Data API builder is started using `dab start -c my-config.json`

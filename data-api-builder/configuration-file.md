@@ -27,18 +27,17 @@ using the minimum amount of code.
 
 ## Environments support
 
-Data API builder configuration file is able to support multiple environments, following the same behavior offered by ASP.NET Core for the `appSettings.json` file, as per: [Default Configuration](/aspnet/core/fundamentals/configuration/?view=aspnetcore-6.0#default-configuration&preserve-view=true). For example:
+Data API builder configuration file is able to support multiple environments, following the same behavior offered by ASP.NET Core for the `appSettings.json` file, as per: [Default Configuration](/aspnet/core/fundamentals/configuration/?view=aspnetcore-6.0#default-configuration&preserve-view=true). For example, the following two files represent a "base" and "environment specific" configuration files:
 
-1. dab-config.json
-2. dab-config.Development.json
+1. dab-config.json (base)
+2. dab-config.Development.json (environment specific)
 
-The environment variable used to set the chosen environment is `DAB_ENVIRONMENT`
+You must set the environment variable `DAB_ENVIRONMENT` to designate which environment file should be chosen Data API builder.
 
 > [!NOTE]
-
-> Configuration providers that are added later override previous key settings. For example, if `MyKey` is set in both `dab-config.json` and the environment-specific file, the environment value is used.
+> Environment specific configuration files override property values set in the base configuration file. For example, if the proprety `connection-string` is set in both `dab-config.json` and the environment-specific file, the environment specific configuration value is used.
 >
-> To use a pair of base and environment configuration files, refer [here](../data-api-builder/data-api-builder-cli.md#using-data-api-builder-with-two-configuration-files)
+> To learn more about using multiple configuration files together, see [here](../data-api-builder/data-api-builder-cli#using-data-api-builder-with-two-configuration-files)
 
 ## Accessing environment variables
 
