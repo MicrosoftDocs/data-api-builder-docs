@@ -325,6 +325,6 @@ The following table lists the isolation levels with which the transactions are c
 
 |**Database Type**|**Isolation Level**|**Isolation Level Docs**
 :-----:|:-----:|:-----|
-Azure SQL (or) SQL Server|Read Committed|[Azure SQL docs](https://learn.microsoft.com/en-us/sql/t-sql/language-elements/transaction-isolation-levels?view=sql-server-ver16)
+Azure SQL (or) SQL Server|Read Committed|[Azure SQL docs](https://www.learn.microsoft.com/sql/t-sql/language-elements/transaction-isolation-levels)
 MySQL|Repeatable Read|[MySQL docs](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html#isolevel_repeatable-read)
 PostgreSQL|Read Committed|[PostgreSQL docs](https://www.postgresql.org/docs/current/transaction-iso.html#XACT-READ-COMMITTED)
