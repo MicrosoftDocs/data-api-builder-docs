@@ -5,16 +5,16 @@ author: seantleonard
 ms.author: seleonar
 ms.service: data-api-builder
 ms.topic: rest-in-data-api-builder
-ms.date: 06/01/2023
+ms.date: 06/14/2023
 ---
 
 # REST in Data API builder
 
-Data API builder provides a RESTful web API that enables you to access tables, views, and stored procedures from a connected database. A database object is represented by an entity in Data API builder's runtime config. An entity must be set in the runtime config in order to be available on the REST API endpoint.
+Data API builder provides a RESTful web API that enables you to access tables, views, and stored procedures from a connected database. An entity represents a database object in Data API builder's runtime config. An entity must be set in the runtime config in order to be available on the REST API endpoint.
 
 ## Call a REST API method
 
-To read from or write to a resource (or entity), you construct a request that looks like the following:
+To read from or write to a resource (or entity), you construct a request that looks like the following pattern:
 
 ```http
 {HTTP method} https://{base_url}/{rest-path}/{entity}
@@ -50,11 +50,11 @@ Data API builder uses the HTTP method on your request to determine what action t
 
 ### Rest path
 
-The rest path designates the location of Data API builder's REST API. The path is configurable in the runtime config and defaults to */api*. For more details, see the [configuration file article](./configuration-file.md).
+The rest path designates the location of Data API builder's REST API. The path is configurable in the runtime config and defaults to */api*. For more information, see the [configuration file article](./configuration-file.md).
 
 ### Entity
 
-*Entity* is the terminology used to reference a REST API resource in  Data API builder. By default, the URL route value for an entity is the entity name defined in the runtime config. An entity's REST URL path value is configurable within the entity's REST settings. For more details, see the [configuration file article](./configuration-file.md).
+*Entity* is the terminology used to reference a REST API resource in  Data API builder. By default, the URL route value for an entity is the entity name defined in the runtime config. An entity's REST URL path value is configurable within the entity's REST settings. For more information, see the [configuration file article](./configuration-file.md).
 
 ### Result set format
 
@@ -177,13 +177,13 @@ returns the list of authors sorted by `first_name` descending and then by `last_
 
 #### `$first` and `$after`
 
-The query parameter `$first` allows to limit the number of items returned. For example:
+The query parameter `$first` allows the user to limit the number of items returned. For example:
 
 ```http
 GET /api/book?$first=5
 ```
 
-returns only the first `n` books. In case ordering isn't specified, items are ordered by the underlying primary key. `n` must be a positive integer value.
+returns only the first `n` books. In case ordering isn't specified, items are ordered based on the underlying primary key. `n` must be a positive integer value.
 
 If the number of items available to the entity is bigger than the number specified in the `$first` parameter, the returned result contains a `nextLink` item:
 
@@ -249,7 +249,7 @@ Content-type: application/json
 }
 ```
 
-If there's an item with the specified primary key `2001` that item is *completely replaced* by the provided data. If instead an item with that primary key doesn't exist, a new item is created.
+If there's an item with the specified primary key `2001`, the provided data *completely replaces* that item. If instead an item with that primary key doesn't exist, a new item is created.
 
 In either case, the result is something like:
 
@@ -268,7 +268,7 @@ In either case, the result is something like:
 
 ## PATCH
 
-PATCH creates or updates the item of the specified entity. Only the specified fields are affected. All fields not specified in the request body are not affected. If an item with the specified primary key doesn't exist, a new item is created.
+PATCH creates or updates the item of the specified entity. Only the specified fields are affected. All fields not specified in the request body aren't affected. If an item with the specified primary key doesn't exist, a new item is created.
 
 The query pattern is:
 
@@ -318,3 +318,15 @@ DELETE /api/book/id/2001
 ```
 
 If successful, the result is an empty response with status code 204.
+
+### Database transactions for REST API requests
+
+To process POST, PUT, PATCH and DELETE API requests, Data API builder constructs and executes the database queries in a transaction.
+
+The following table lists the isolation levels with which the transactions are created for each database type.
+
+|**Database Type**|**Isolation Level**|**Isolation Level Docs**
+:-----:|:-----:|:-----|
+Azure SQL (or) SQL Server|Read Committed|[Azure SQL docs](https://www.learn.microsoft.com/sql/t-sql/language-elements/transaction-isolation-levels)
+MySQL|Repeatable Read|[MySQL docs](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html#isolevel_repeatable-read)
+PostgreSQL|Read Committed|[PostgreSQL docs](https://www.postgresql.org/docs/current/transaction-iso.html#XACT-READ-COMMITTED)
