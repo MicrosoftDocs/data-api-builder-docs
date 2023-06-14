@@ -16,7 +16,7 @@ Entities configured to be available via GraphQL will be available at the default
 http://<dab-server>/graphql
 ```
 
-Data API builder will automatically generate a GraphQL schema with query and mutation fields for all configured entities. The GraphQL schema can be explored using a modern GraphQL client like [Insomnia](http://insomnia.rest/) or [Postman](https://www.postman.com/), so that you have IntelliSense and autocomplete.
+Data API builder automatically generates a GraphQL schema with query and mutation fields for all configured entities. The GraphQL schema can be explored using a modern GraphQL client like [Insomnia](http://insomnia.rest/) or [Postman](https://www.postman.com/), so that you have IntelliSense and autocomplete.
 
 If you followed the [Getting Started](./get-started/get-started-with-data-api-builder.md) example, where there are the `books` and the `authors` entity configured for GraphQL access, you can see how easy is to use GraphQL.
 
@@ -151,7 +151,7 @@ The value of the `filter` parameter is predicate expression (an expression that 
 }
 ```
 
-all the books with the word `Foundation` in the title will be returned.
+returns all the books with the word `Foundation` in the title.
 
 The operators supported by the `filter` parameter are:
 
@@ -190,7 +190,7 @@ The value of the `orderby` set the order with which the items in the resultset a
 }
 ```
 
-will return books ordered by `title`.
+returns books ordered by `title`.
 
 ### `first` and `after`
 
@@ -210,9 +210,9 @@ query {
 }
 ```
 
-returns the first five books. When no `orderBy` is not specified items are ordered by the underlying primary key. The value provided to `orderBy` must be a positive integer.
+returns the first five books. When no `orderBy` is specified, items are ordered based on the underlying primary key. The value provided to `orderBy` must be a positive integer.
 
-If there are more items in the `book` entity than those requested via `first`, the `hasNextPage` field will evaluate to `true` and the `endCursor` will return a string that can be used with the `after` parameter to access the next items. For example:
+If there are more items in the `book` entity than those requested via `first`, the `hasNextPage` field will evaluate to `true`, and the `endCursor` will return a string that can be used with the `after` parameter to access the next items. For example:
 
 ```graphql
 query {
@@ -316,10 +316,10 @@ mutation {
 
 ### Database transactions for a mutation
 
-To process a typical GraphQL mutation request, Data API builder constructs two database queries. One of the database queries is for performing the update (or) insert (or) delete action that is associated with the mutation.
-The other database query is for fetching the data requested in the selection set.
+To process a typical GraphQL mutation request, Data API builder constructs two database queries. One of the database queries performs the update (or) insert (or) delete action that is associated with the mutation.
+The other database query fetches the data requested in the selection set.
 
-Data API builder executes both these database queries in a transaction. Transactions are created only for SQL database types.
+Data API builder executes both database queries in a transaction. Transactions are created only for SQL database types.
 
 The following table lists the isolation levels with which the transactions are created for each database type.
 
