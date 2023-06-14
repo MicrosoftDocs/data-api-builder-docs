@@ -127,7 +127,7 @@ This adds a second configuration endpoint at `/configuration/v2`. This endpoint 
 Adds `user agent` to Cosmos client.
 >A string that specifies the client user agent performing the request. The recommended format is {user agent name}/{version}. For example, the official SQL API .NET SDK sets the User-Agent string to Microsoft.Document.Client/1.0.0.0. A custom user-agent could be something like ContosoMarketingApp/1.0.0.
 
-[Read more about Cosmos DB REST request headers here.](https://learn.microsoft.com/en-us/rest/api/cosmos-db/common-cosmosdb-rest-request-headers)
+[Read more about Cosmos DB REST request headers here.](https://learn.microsoft.com/rest/api/cosmos-db/common-cosmosdb-rest-request-headers)
 ## Bug Fixes
 - [Address filter access deny issue for Cosmos](https://github.com/Azure/data-api-builder/pull/1436)
 - [Fix CLI test warnings](https://github.com/Azure/data-api-builder/pull/1450)
