@@ -5,7 +5,7 @@ author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
 ms.topic: graphql
-ms.date: 04/06/2023
+ms.date: 06/14/2023
 ---
 
 # GraphQL in Data API builder
@@ -313,3 +313,18 @@ mutation {
   }  
 }
 ```
+
+### Database transactions for a mutation
+
+To process a typical GraphQL mutation request, Data API builder constructs two database queries. One of the database queries is for performing the update (or) insert (or) delete action that is associated with the mutation.
+The other database query is for fetching the data requested in the selection set.
+
+Data API builder executes both these database queries in a transaction. Transactions are created only for SQL database types.
+
+The following table lists the isolation levels with which the transactions are created for each database type.
+
+|**Database Type**|**Isolation Level**|**Isolation Level Docs**
+:-----:|:-----:|:-----|
+Azure SQL (or) SQL Server|Read Committed|[Azure SQL docs](https://learn.microsoft.com/en-us/sql/t-sql/language-elements/transaction-isolation-levels?view=sql-server-ver16)
+MySQL|Repeatable Read|[MySQL docs](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html#isolevel_repeatable-read)
+PostgreSQL|Read Committed|[PostgreSQL docs](https://www.postgresql.org/docs/current/transaction-iso.html#XACT-READ-COMMITTED)

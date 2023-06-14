@@ -5,7 +5,7 @@ author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
 ms.topic: rest-in-data-api-builder
-ms.date: 04/06/2023
+ms.date: 06/14/2023
 ---
 
 # REST in Data API builder
@@ -292,3 +292,15 @@ DELETE /api/book/id/2001
 ```
 
 If successful, the result is an empty response with status code 204.
+
+### Database transactions for REST API requests
+
+To process POST, PUT, PATCH and DELETE API requests, Data API builder constructs and executes the database queries in a transaction.
+
+The following table lists the isolation levels with which the transactions are created for each database type.
+
+|**Database Type**|**Isolation Level**|**Isolation Level Docs**
+:-----:|:-----:|:-----|
+Azure SQL (or) SQL Server|Read Committed|[Azure SQL docs](https://learn.microsoft.com/en-us/sql/t-sql/language-elements/transaction-isolation-levels?view=sql-server-ver16)
+MySQL|Repeatable Read|[MySQL docs](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html#isolevel_repeatable-read)
+PostgreSQL|Read Committed|[PostgreSQL docs](https://www.postgresql.org/docs/current/transaction-iso.html#XACT-READ-COMMITTED)
