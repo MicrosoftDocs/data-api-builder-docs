@@ -25,7 +25,7 @@ ms.date: 02/22/2023
 A summary of the most relevant changes done in this version is available in the following list:
 
 
-- [Allowing merger of configuration files](./whats-new-0-7-6.md#using-data-api-builder-with-two-configuration-files)
+- [Allowing merger of configuration files](./whats-new-0-7-6.md#allowing-merger-of-configuration-files)
 - [Executing GraphQL and REST Mutations in a transaction](./whats-new-0-7-6.md#executing-graphql-and-rest-mutations-in-a-transaction)
 - [Initial Support for OpenAPI v3.0.1 description document creation](./whats-new-0-7-6.md#initial-support-for-openapi-v3-0-1-description-document-creation)
 - [Bug Fixes](./whats-new-0-7-6.md#bug-fixes)
