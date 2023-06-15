@@ -25,13 +25,10 @@ ms.date: 02/22/2023
 A summary of the most relevant changes done in this version is available in the following list:
 
 
-- [Adding Merge config capabilities](./whats-new-0-7-6.md#adding-merge-config-capabilities)
+- [Allowing merger of configuration files](./whats-new-0-7-6.md#using-data-api-builder-with-two-configuration-files)
 - [Executing GraphQL and REST Mutations in a transaction](./whats-new-0-7-6.md#executing-graphql-and-rest-mutations-in-a-transaction)
 - [Initial Support for OpenAPI v3.0.1 description document creation](./whats-new-0-7-6.md#initial-support-for-openapi-v3-0-1-description-document-creation)
-- [Allow passing a config override file through the configuration endpoint](./whats-new-0-7-6.md#allow-passing-a-config-override-file-through-the-configuration-endpoint)
-- [Adding useragent to cosmos client](./whats-new-0-7-6.md#adding-useragent-to-cosmos)
 - [Bug Fixes](./whats-new-0-7-6.md#bug-fixes)
-- [Doc Updates](./whats-new-0-7-6.md#doc-updates)
 
 The full list of release notes for this version is available here: [version 0.7.6 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.7.6)
 and here: [version 0.7.5 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.7.5)
