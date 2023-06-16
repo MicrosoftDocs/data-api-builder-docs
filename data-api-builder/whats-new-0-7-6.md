@@ -12,7 +12,6 @@ ms.date: 06/12/2023
 - [Initial Support for OpenAPI v3.0.1 description document creation](#initial-support-for-openapi-v3-0-1-description-document-creation)
 - [Adding Merge config capabilities](#allowing-merger-of-configuration-files)
 - [Executing GraphQL and REST Mutations in a transaction](#executing-graphql-and-rest-mutations-in-a-transaction)
-
 - [Bug Fixes](#bug-fixes)
 
 ## Initial Support for OpenAPI v3-0-1 description document creation
