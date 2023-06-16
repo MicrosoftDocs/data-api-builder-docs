@@ -9,9 +9,10 @@ ms.date: 06/12/2023
 ---
 # What's New in Data API builder 0.7.6
 
+- [Initial Support for OpenAPI v3.0.1 description document creation](#initial-support-for-openapi-v3-0-1-description-document-creation)
 - [Adding Merge config capabilities](#allowing-merger-of-configuration-files)
 - [Executing GraphQL and REST Mutations in a transaction](#executing-graphql-and-rest-mutations-in-a-transaction)
-- [Initial Support for OpenAPI v3.0.1 description document creation](#initial-support-for-openapi-v3-0-1-description-document-creation)
+
 - [Bug Fixes](#bug-fixes)
 
 ## Initial Support for OpenAPI v3-0-1 description document creation
