@@ -31,7 +31,6 @@ A summary of the most relevant changes done in this version is available in the 
 - [Bug Fixes](./whats-new-0-7-6.md#bug-fixes)
 
 The full list of release notes for this version is available here: [version 0.7.6 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.7.6)
-and here: [version 0.7.5 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.7.5)
 
 
 ## Version 0.6.14
