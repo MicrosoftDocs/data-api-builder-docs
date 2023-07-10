@@ -100,7 +100,7 @@ The command generates a config file called `dab-config.json` looking like this:
 
 As you can see there the `data-source` property specifies that our chosen `database-type` is `mssql`, with the `connection-string` we passed to DAB CLI.
 
->Take a look at the [DAB Configuration File Guide](https://github.com/Azure/data-api-builder/blob/main/docs/configuration-file.md) document to learn more.
+>Take a look at the [DAB Configuration File Guide](../configuration-file.md) document to learn more.
 
 With the configuration file in place, then it's time to start defining which entities you want to expose via the API.
 
