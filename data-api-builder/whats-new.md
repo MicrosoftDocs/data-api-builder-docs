@@ -10,6 +10,7 @@ ms.date: 02/22/2023
 
 # What's New in Data API builder
 
+- [Version 0.7.6](#version-076)
 - [Version 0.6.14](#version-0614)
 - [Version 0.6.13](#version-0613)
 - [Version 0.5.35](#version-0535)
@@ -18,6 +19,19 @@ ms.date: 02/22/2023
 - [Version 0.5.0](#version-050)
 - [Version 0.4.11](#version-0411)
 - [Version 0.3.7](#version-037)
+
+## Version 0.7.6
+
+A summary of the most relevant changes done in this version is available in the following list:
+
+
+- [Initial Support for OpenAPI v3.0.1 description document creation](./whats-new-0-7-6.md#initial-support-for-openapi-v3-0-1-description-document-creation)
+- [Allowing merger of configuration files](./whats-new-0-7-6.md#allowing-merger-of-configuration-files)
+- [Executing GraphQL and REST Mutations in a transaction](./whats-new-0-7-6.md#executing-graphql-and-rest-mutations-in-a-transaction)
+- [Bug Fixes](./whats-new-0-7-6.md#bug-fixes)
+
+The full list of release notes for this version is available here: [version 0.7.6 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.7.6)
+
 
 ## Version 0.6.14
 

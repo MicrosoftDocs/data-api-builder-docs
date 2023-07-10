@@ -63,7 +63,7 @@ Initializes the runtime configuration for the Data API builder runtime engine. I
 | **--graphql.disabled** | false   | false   | Disables GraphQL endpoint for all entities.   |
 | **--auth.audience** | false   | -   | Identifies the recipients that the JWT is intended for.   |
 | **--auth.issuer** | false   | -   | Specify the party that issued the JWT token.   |
-| **-c, --config** | false   | dab-config.json   | Path to config file.   |
+| **-c,--config** | false   | dab-config.json   | Path to config file.   |
 
 ### **`add`**
 
@@ -75,19 +75,19 @@ Add new database entity to the configuration file. Make sure you already have a 
 
 | Options | Required    | Default Value    | Description |
 | :---   | :--- | :--- | :--- |
-| **-s, --source** | true   | -   | Name of the source table or container.   |
+| **-s,--source** | true   | -   | Name of the source table or container.   |
 | **--permissions** | true   | -   | Permissions required to access the source table or container. Format "[role]:[actions]"   |
 | **--source.type** | false   | table   | Type of the database object. Must be one of: [table, view, stored-procedure]   |
-| **--source.params** | false   | -   | Dictionary of parameters and their values for Source object."param1:val1,param2:value2,.." for Stored-Procedures.   |
+| **--source.params** | false   | -   | Dictionary of parameters and their values for Source object."param1:val1,param2:value2,..." for Stored-Procedures.   |
 | **--source.key-fields** | true when `--source.type` is view   | -   | The field(s) to be used as primary keys for tables and views only. Comma separated values. Example `--source.key-fields "id,name,type"`  |
-| **--rest** | false   | case sensitive entity name.  | Route for REST API. Example: `--rest: false` -> Disables REST API  calls for this entity. <br>`--rest: true` -> Entity name becomes the rest path. <br>`--rest: "customPathName"` -> Provided customPathName becomes the REST path.|
+| **--rest** | false   | case sensitive entity name.  | Route for REST API. Example: <br>`--rest: false` -> Disables REST API  calls for this entity.<br>`--rest: true` -> Entity name becomes the rest path. <br>`--rest: "customPathName"` -> Provided customPathName becomes the REST path.|
 | **--rest.methods** | false   | post   | HTTP actions to be supported for stored procedure. Specify the actions as a comma separated list. Valid HTTP actions are:[get, post, put, patch, delete]   |
-| **--graphql** | false   | case sensitive entity name  | Entity type exposed for GraphQL. Example: <br>`--graphql: false` -> disables graphql calls for this entity. <br>`--graphql: true` -> Exposes the entity for GraphQL with default names. The singular form of the entity name will be considered for the query and mutation names. <br>`--graphql: "customQueryName"` -> Lets the user customize the singular and plural name for queries and mutations. |
+| **--graphql** | false   | case sensitive entity name  | Entity type exposed for GraphQL. Example: <br>`--graphql: false` -> disables graphql calls for this entity. <br>`--graphql: true` -> Exposes the entity for GraphQL with default names. The singular form of the entity name is considered for the query and mutation names. <br>`--graphql: "customQueryName"` -> Lets the user customize the singular and plural name for queries and mutations. |
 | **--graphql.operation** | false   | mutation   | GraphQL operation to be supported for stored procedure. Valid operations are: [query, mutation]  |
 | **--fields.include** | false   | -   | Fields with permission to access.  |
 | **--fields.exclude** | false   | -   | Fields excluded from the action lists.   |
 | **--policy-database** | false   | -   | Specify an OData style filter rule that is injected in the query sent to the database.  |
-| **-c, --config** | false   | dab-config.json   | Path to config file.   |
+| **-c,--config** | false   | dab-config.json   | Path to config file.   |
 
 ### **`update`**
 
@@ -109,7 +109,7 @@ Update the properties of any database entity in the configuration file.
 | **--linking.source.fields** | false   | -   | Database fields in the linking object to connect to the related item in the source entity. Comma separated fields.   |
 | **--linking.target.fields** | false   | -   | Database fields in the linking object to connect to the related item in the target entity. Comma separated fields.  |
 | **--relationship.fields** | false   | -   | Specify fields to be used for mapping the entities. Example: `--relationship.fields "id:book_id"`. Here `id` represents column from sourceEntity, while `book_id` from targetEntity. Foreign keys are required between the underlying sources if not specified.  |
-| **-m, --map** | false   | -   | Specify mappings between database fields and GraphQL and REST fields. format: --map "backendName1:exposedName1,backendName2:exposedName2,...".   |
+| **-m,--map** | false   | -   | Specify mappings between database fields and GraphQL and REST fields. format: --map "backendName1:exposedName1, backendName2:exposedName2,...".   |
 
 ### **`export`**
 
@@ -122,9 +122,9 @@ Export the required schema as a file and save to disk based on the options.
 | Options | Required    | Default Value    | Description |
 | :---   | :--- | :--- | :--- |
 | **--graphql** | false   | false   | Export GraphQL schema.   |
-| **-o, --output** | true   | -   | Specify the directory to save the schema file.   |
-| **-g, --graphql-schema-file** | false   | schema.graphql   | Specify the name of the Graphql schema file.   |
-| **-c, --config** | false   | dab-config.json   | Path to config file.   |
+| **-o,--output** | true   | -   | Specify the directory to save the schema file.   |
+| **-g,--graphql-schema-file** | false   | schema.graphql   | Specify the name of the Graphql schema file.   |
+| **-c,--config** | false   | dab-config.json   | Path to config file.   |
 
 ### **`start`**
 
@@ -139,7 +139,21 @@ Start the runtime engine with the provided configuration file for serving REST a
 | **--verbose** | false   | -   | Specify logging level as informational.   |
 | **--LogLevel** | false   | Debug when hostMode=development, else Error when HostMode=Production   | Specify logging level as provided value. example: debug, error, information, etc.   |
 | **--no-https-redirect** | false   | false   | Disables automatic https redirects.   |
-| **-c, --config** | false   | dab-config.json   | Path to config file.   |
+| **-c,--config** | false   | dab-config.json   | Path to config file.   |
 
 > [!NOTE]
-> One cannot have both verbose and LogLevel. Learn more about different logging levels [here](/dotnet/api/microsoft.extensions.logging.loglevel?view=dotnet-plat-ext-6.0&preserve-view=true).
+> You can't use `--verbose` and `--LogLevel` at the same time. Learn more about different logging levels [here](/dotnet/api/microsoft.extensions.logging.loglevel?view=dotnet-plat-ext-6.0&preserve-view=true).
+
+### Using Data API builder with two configuration files
+
+You can maintain multiple pairs of baseline and environment specific configuration files to simplify management of your environment specific settings. The following steps demonstrate how to set up a base configuration file with two environment specific configuration files (**development** and **production**):
+
+1. Create a base configuration file `dab-config.json` with all of your settings common across each of your environments.
+2. Create two environemnt specific configuration files: `dab-config.development.json` and `dab-config.production.json`. These two configuration files should only include settings which differ from the base configuration file such as connection strings.
+3. Next, set the `DAB_ENVIRONMENT` variable based on the environment configuration you want Data API builder to consume. For this example, set `DAB_ENVIRONMENT=development` so the `development` environment configuration file selected.
+4. Start Data API builder with the command `dab start`. The engine checks the value of `DAB_ENVIRONMENT` and uses the base file `dab-config.json` and the environment specific file `dab-config.development.json`. When the engine detects the presence of both files, it merges the files into a third file: `dab-config.development.merged.json`.
+5. (Optional) Set the `DAB_ENVIRONMENT` environment variable value to `production` when you want the production environment specific settings to be merged with your base configuration file.
+
+> [!NOTE]
+> 1. By default, **dab-config.json** is used to start the engine when the `DAB_ENVIRONMENT` environment variable isn't set.
+> 2. A user provided config file is used regardless of the `DAB_ENVIRONMENT` environment variable's value. For example, the file `my-config.json` is used when Data API builder is started using `dab start -c my-config.json`
