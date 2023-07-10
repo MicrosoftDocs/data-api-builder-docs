@@ -37,7 +37,7 @@ You must set the environment variable `DAB_ENVIRONMENT` to designate which envir
 > [!NOTE]
 > Environment specific configuration files override property values set in the base configuration file. For example, if the proprety `connection-string` is set in both `dab-config.json` and the environment-specific file, the environment specific configuration value is used.
 >
-> To learn more about using multiple configuration files together, see [here](../data-api-builder/data-api-builder-cli#using-data-api-builder-with-two-configuration-files)
+> To learn more about using multiple configuration files together, see [here](../data-api-builder/data-api-builder-cli.md#using-data-api-builder-with-two-configuration-files)
 
 ## Accessing environment variables
 

@@ -2,7 +2,7 @@
 title: Data API builder REST API documentation with Swagger / OpenAPI
 description: This document describes how to access the REST endpoint's OpenAPI description document with Swagger.
 author: seantleonard
-ms.author: sean.leonard
+ms.author: seleonar
 ms.service: data-api-builder
 ms.topic: openapi
 ms.date: 06/08/2023
