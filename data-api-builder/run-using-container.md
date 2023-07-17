@@ -10,21 +10,28 @@ ms.date: 04/06/2023
 
 # Running Data API builder for Azure Databases using a container
 
+## Docker run
+
 With Docker, you can run Data API builder using a container from `mcr.microsoft.com/azure-databases/data-api-builder`:
 
-```sh
-docker run -it -v <configuration-file>:/App/<configuration-file> -p 5000:5000 mcr.microsoft.com/azure-databases/data-api-builder:<tag> --ConfigFileName <configuration-file>
+```shell
+docker run -it -v <configuration-file>:/App/Configs/<configuration-file> -p 5000:5000 mcr.microsoft.com/azure-databases/data-api-builder:latest --ConfigFileName Configs/<configuration-file>
 ```
 
 The proceeding command makes the following assumptions:
 
-- Let's say you are in the directory: `C:\data-api-builder` folder
-- The configuration file you want to use in the `samples` folder and is named `my-sample-dab-config.json`
-- You want to use the latest release, this can be identified from the [Releases](https://github.com/Azure/data-api-builder/releases) page. For Example, If you would like to use the image with the tag `0.5.34`, run the following command:
+- You are running the `docker` command from: `C:\data-api-builder`.
+- Your configuration file `my-sample-dab-config.json` is in a folder named `configs`.
+- You want to use the latest release which can be identified from the [releases page](https://github.com/Azure/data-api-builder/releases).
 
-```bash
-docker run -it -v "c:\data-api-builder\samples:/App/samples" -p 5000:5000 mcr.microsoft.com/azure-databases/data-api-builder:0.5.34 --ConfigFileName ./samples/my-sample-dab-config.json
+```shell
+docker run -it -v "C:\data-api-builder\config:/App/configs" -p 5000:5000 mcr.microsoft.com/azure-databases/data-api-builder:latest --ConfigFileName ./configs/my-sample-dab-config.json
 ```
+
+> [!TIP]
+> When developing locally, your container may fail to connect to a locally deployed database instance. In that case, you may need to update you config file's connection string server reference to `host.docker.internal`. For example: `Server=host.docker.internal\\<instancename>;`
+
+## Docker compose
 
 You may also use one of the provided 'docker-compose.yml' files, available in the `docker` folder:
 
