@@ -48,7 +48,7 @@ type Author {
 ```
 
 > [!TIP]
-> It is recommended to use the _singular_ form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a _list_ of entity items will be returned. More on this behavior in the [GraphQL documentation](https://github.com/Azure/data-api-builder/blob/main/docs/graphql.md).
+> It is recommended to use the _singular_ form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a _list_ of entity items will be returned. More on this behavior in the [GraphQL documentation](./graphql.md).
 
 ## Get the Cosmos DB Account connection string
 
@@ -68,7 +68,7 @@ Now that you have all the required pieces in place, it's time to create the conf
 
 ## Creating a configuration file for DAB
 
-The Data API builder for Azure Databases engine needs a [configuration file](https://github.com/Azure/data-api-builder/blob/main/docs/configuration-file.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
+The Data API builder for Azure Databases engine needs a [configuration file](./configuration-file.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
 
 For this getting started guide, you'll use DAB CLI to initialize your configuration file. Run the following command:
 
@@ -115,7 +115,7 @@ The command generates a config file called `dab-config.json` looking like this:
 As you can see there the `data-source` property specifies that our chosen `database-type` is `cosmosdb_nosql`, with the `connection-string` we passed to DAB CLI.
 
 > [!TIP]
-> Take a look at the [DAB Configuration File Guide](https://github.com/Azure/data-api-builder/blob/main/docs/configuration-file.md) document to learn more about the configuration file.
+> Take a look at the [DAB Configuration File Guide](./configuration-file.md) document to learn more about the configuration file.
 
 With the configuration file in place, then it's time to start defining which entities you want to expose via the API.
 
@@ -179,7 +179,7 @@ Once you've added the `Book` entity, the `entities` object of configuration file
 that's all is needed at the moment. Data API builder is ready to be run.
 
 > [!TIP]
-> It is recommended to use the _singular_ form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a _list_ of entity items will be returned. More on this behavior in the [GraphQL documentation](https://github.com/Azure/data-api-builder/blob/main/docs/graphql.md).
+> It is recommended to use the _singular_ form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a _list_ of entity items will be returned. More on this behavior in the [GraphQL documentation](./graphql.md).
 
 ## Start Data API builder for Azure Cosmos DB
 

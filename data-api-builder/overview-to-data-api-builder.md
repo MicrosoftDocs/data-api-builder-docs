@@ -85,7 +85,7 @@ If you use the third-party software Banana Cake Pop by ChilliCream, Inc., as par
 
 ## Next steps
 
-Once you're familiar with the basic features of Data API builder, you want to dive into the [Authentication](https://github.com/Azure/data-api-builder/blob/main/docs/authentication.md) and [Authorization](https://github.com/Azure/data-api-builder/blob/main/docs/authorization.md) process, the details of the [configuration file](https://github.com/Azure/data-api-builder/blob/main/docs/configuration-file.md) that is at the core of Data API builder engine. You can also check out the [Best Practices](https://github.com/Azure/data-api-builder/blob/main/docs/best-practices.md) also make sure to check out the end-to-end samples available here:
+Once you're familiar with the basic features of Data API builder, you want to dive into the [Authentication](./authentication.md) and [Authorization](./authorization.md) process, the details of the [configuration file](./configuration-file.md) that is at the core of Data API builder engine. You can also check out the [Best Practices](./best-practices.md) also make sure to check out the end-to-end samples available here:
 
 - [Jamstack Todo-List Sample](https://github.com/Azure-Samples/dab-swa-todo).
 - [Jamstack Library Management Sample](https://github.com/Azure-Samples/dab-swa-library-demo)
