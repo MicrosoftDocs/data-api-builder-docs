@@ -16,12 +16,13 @@ Data API builder uses a role-based authorization workflow. Any incoming request,
 
 Roles set the permissions context in which a request should be executed. For each entity defined in the runtime config, you can define a set of roles and associated permissions that determine how the entity can be accessed in both the REST and GraphQL endpoints.
 
-Data API builder evaluates requests in the context of a single role: 
+Data API builder evaluates requests in the context of a single role:
+
 - `anonymous` when no access token is presented.
 - `authenticated` when a valid access token is presented.
-- `<CUSTOM_USER_ROLE>` when a valid access token is presented *and* the `X-MS-API-ROLE` HTTP header is included specifying a user role that is also included in the access token's `roles` claim.
+- `<CUSTOM_USER_ROLE>` when a valid access token is presented _and_ the `X-MS-API-ROLE` HTTP header is included specifying a user role that is also included in the access token's `roles` claim.
 
-Roles are **not** additive, which means that a user who is a member of both `Role1` and `Role2` doesn't inherit the permissions associated with both roles. 
+Roles are **not** additive, which means that a user who is a member of both `Role1` and `Role2` doesn't inherit the permissions associated with both roles.
 
 ### System roles
 
@@ -33,7 +34,7 @@ The `anonymous` system role is assigned to requests executed by unauthenticated 
 
 ##### Example
 
-The following Data API builder runtime configuration demonstrates explicitly configuring the system role `anonymous` to have *read* access to the Book entity:
+The following Data API builder runtime configuration demonstrates explicitly configuring the system role `anonymous` to have _read_ access to the Book entity:
 
 ```json
 "Book": {
@@ -51,11 +52,11 @@ When a client application sends a request accessing the Book entity on behalf of
 
 #### Authenticated system role
 
-The `authenticated` system role is assigned to requests executed by authenticated users. 
+The `authenticated` system role is assigned to requests executed by authenticated users.
 
 ##### Example
 
-The following Data API builder runtime configuration demonstrates explicitly configuring the system role `authenticated` to have *read* access to the Book entity:
+The following Data API builder runtime configuration demonstrates explicitly configuring the system role `authenticated` to have _read_ access to the Book entity:
 
 ```json
 "Book": {
@@ -127,6 +128,7 @@ curl -k -r GET -H 'Authorization: Bearer ey...' -H 'X-MS-API-ROLE: author' https
 ## Permissions
 
 Permissions describe:
+
 - Who can make requests on an entity based on role membership.
 - What actions (create, read, update, delete, execute) a user can perform.
 - Which fields are accessible for a particular action.
@@ -135,7 +137,7 @@ Permissions describe:
 The syntax for defining permissions is described in the [runtime configuration article](./configuration-file.md#permissions).
 
 > [!IMPORTANT]
-> There may be multiple roles defined within a single entity's permissions configuration. However, a request is only evaluated in the context of a single role: 
+> There may be multiple roles defined within a single entity's permissions configuration. However, a request is only evaluated in the context of a single role:
 >
 > - By default, either the system role `anonymous` or `authenticated`
 > - When included, the role set in the `X-MS-API-ROLE` HTTP header.
@@ -145,6 +147,7 @@ The syntax for defining permissions is described in the [runtime configuration a
 By default, an entity has no permissions configured, which means no one can access the entity. Additionally, Data API builder ignores database objects when they aren't referenced in the runtime configuration.
 
 #### Permissions must be explicitly configured
+
 To allow unauthenticated access to an entity, the `anonymous` role must be explicitly defined in the entity's permissions. For example, the `book` entity's permissions is explicitly set to allow unauthenticated read access:
 
 ```json
@@ -157,7 +160,7 @@ To allow unauthenticated access to an entity, the `anonymous` role must be expli
 }
 ```
 
-To simplify permissions definition on an entity, it's assumed that if there are no specific permissions for the `authenticated` role, then the permissions defined for the `anonymous` role are used. The `book` configuration shown previously allows any anonymous or authenticated user's to perform read operations on the `book` entity. 
+To simplify permissions definition on an entity, it's assumed that if there are no specific permissions for the `authenticated` role, then the permissions defined for the `anonymous` role are used. The `book` configuration shown previously allows any anonymous or authenticated user's to perform read operations on the `book` entity.
 
 When read operations should be restricted to authenticated users only, the following permissions configuration should be set, resulting in the rejection of unauthenticated requests:
 
@@ -171,7 +174,7 @@ When read operations should be restricted to authenticated users only, the follo
 }
 ```
 
-An entity doesn't require and isn't pre-configured with permissions for the `anonymous` and `authenticated` roles. One or more user roles can be defined within an entity's permissions configuration and all other undefined roles, system or user defined, are automatically denied access. 
+An entity doesn't require and isn't pre-configured with permissions for the `anonymous` and `authenticated` roles. One or more user roles can be defined within an entity's permissions configuration and all other undefined roles, system or user defined, are automatically denied access.
 
 In the following example, the user role `administrator` is the only defined role for the `book` entity. A user must be a member of the `administrator` role and include that role in the `X-MS-API-ROLE` HTTP header to operate on the `book` entity:
 
@@ -184,6 +187,9 @@ In the following example, the user role `administrator` is the only defined role
   }]
 }
 ```
+
+> [!NOTE]
+> To enhance access control for queries in Azure Cosmos DB with GraphQL, users are required to include the @authorize directive in the [schema.gql](./database-specific-features.md#user-provided-graphql-schema).
 
 #### Actions
 
@@ -228,6 +234,7 @@ The following example prevents users in the `free-access` role from performing r
 **Database policy** expressions enable results to be restricted even further. Database policies translate expressions to query predicates executed against the database. Database policy expressions are supported for the following actions:
 
 > [!div class="checklist"]
+>
 > - create
 > - read
 > - update
@@ -240,18 +247,18 @@ For more information about database policies, see the [configuration file](./con
 
 ##### Example
 
-A database policy restricting the `read` action on the `consumer` role to only return records where the *title* is "Sample Title."
+A database policy restricting the `read` action on the `consumer` role to only return records where the _title_ is "Sample Title."
 
 ```json
 {
-    "role": "consumer",
-    "actions": [
-        {
-            "action": "read",
-            "policy": {
-                "database": "@item.title eq 'Sample Title'"
-            }
-        }
-    ]
+  "role": "consumer",
+  "actions": [
+    {
+      "action": "read",
+      "policy": {
+        "database": "@item.title eq 'Sample Title'"
+      }
+    }
+  ]
 }
 ```
