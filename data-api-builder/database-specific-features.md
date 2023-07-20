@@ -22,26 +22,30 @@ Azure SQL and SQL Server support the use of the SESSION_CONTEXT function to acce
 
 #### User-Provided GraphQL schema
 
-The Data API builder for Azure Cosmos DB engine requires users to provide the schema since the NOSQL API is schema-agnostic. Additionally, the entities utilized in the GraphQL filter query should be included in the schema file.  The engine also expects a GraphQL schema directive @authorize to be used with your object type definitions to enforce "read" permissions, when you want to be more restrictive than "anonymous" read access.
+The Azure Cosmos DB NOSQL API is schema-agnostic.In order to use Data API builder with Azure Cosmos DB, you must create a GraphQL schema file that includes the object type definitions representing your Azure Cosmos DB container's data model.Data API builder also expects your GraphQL object type definitions and fields to include the GraphQL schema directive `authorize` when you want to enforce more restrictive read access than `anonymous`.
 
 Example 1 :
 
+```graphql 
 type Book @model(name:"Book"){
   id: ID
   title: String @authorize(roles:["role1","authenticated"])
   Authors: [Author]
 }
+```
 
 The @authorize directive with roles:["role1","authenticated"] restricts access to the title field to only users with the roles "role1" and "authenticated," adhering to the permissions configuration for "included" and "excluded" fields. For authenticated requestors, the system role 'authenticated' is automatically assigned, eliminating the need for x-ms-api-role. However, if anonymous access is desired, omitting the authorize directive is recommended.
 
-The @model(name:"Book") directive is utilized to establish a correlation between this GraphQL object type and the corresponding entity name in the runtime config.
+The `@model` directive is utilized to establish a correlation between this GraphQL object type and the corresponding entity name in the runtime config.The directive is formatted as: `@model(name:"<Entity_Name>")`
 
 Example 2 :
 
+```graphql 
 type Book @model(name:"Book") @authorize(roles:["role1","authenticated"]) {
   id: ID
   title: String
   Authors: [Author]
 }
+```
 
-By incorporating the @authorize directive in the top-level type definition, access to this type and its fields will be restricted exclusively to the roles specified within the directive.
+By incorporating the @authorize directive in the top-level type definition, you restrict access to the type and its fields will be restricted exclusively to the roles specified within the directive.

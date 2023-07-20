@@ -189,7 +189,7 @@ In the following example, the user role `administrator` is the only defined role
 ```
 
 > [!NOTE]
-> To enhance access control for queries in Azure Cosmos DB with GraphQL, users are required to include the @authorize directive in the [schema.gql](./database-specific-features.md#user-provided-graphql-schema).
+> To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you are required to use the `@authorize` directive in your supplied [GraphQL schema file](./database-specific-features.md#user-provided-graphql-schema).
 
 #### Actions
 
