@@ -33,3 +33,6 @@ docker compose -f "./docker-compose.yml" up
 ```
 
 When using your own Docker compose file, make sure you update your docker-compose file to point to the configuration file you want to use.
+
+**NOTE:**
+If running DAB Application through Docker you only see HTTP endpoints (i.e, HTTPS endpoints are not available). Although the HTTP endpoints can be used to access DAB server, but if you would want to make HTTPS call then you may have to configure your container to use ssl by including the certificate and private key files required for SSL/TLS encryption in your Docker container and expose the HTTPS port. There are several applications and libraries as well that can help redirect HTTPS calls to HTTP within a container such as Nginx, Traefix, etc. 
