@@ -41,7 +41,7 @@ To connect to a local PostgreSQL Server, the connection string looks like:
 
 ## Create the database objects
 
-Create the database tables needed to represent Authors, Books and the many-to-many relationship between Authors and Books. You can find the `library.azure-postgresql.sql` script in the `azure-postgresql-db` folder in the GitHub repo. You can use it to create three tables, along with sample data:
+Create the database tables needed to represent Authors, Books and the many-to-many relationship between Authors and Books. You can find the `library.azure-postgresql.sql` script in the `azure-postgresql-db` folder in the [GitHub repo](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-postgresql/exercise-library.postgresql.sql). You can use it to create three tables, along with sample data:
 
 - `authors`: Table containing authors
 - `books`: Table containing books
@@ -401,3 +401,4 @@ If you want to practice what you have learned, here's a little exercise you can 
 - Update the configuration file with a new entity named `Series`, supported by the `series` source table you just created.
 - Update the `Book` entity by creating a relationship with the `Series` entity. Make sure you select `one` for the `cardinality` property
 - Update the `Series` entity by creating a relationship with the `Book` entity. Make sure you select `many` for the `cardinality` property
+
