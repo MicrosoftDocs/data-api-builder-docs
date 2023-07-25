@@ -33,3 +33,15 @@ docker compose -f "./docker-compose.yml" up
 ```
 
 When using your own Docker compose file, make sure you update your docker-compose file to point to the configuration file you want to use.
+
+**NOTE:**
+
+When running a Data API builder container in Docker, you'll see that only the HTTP endpoint is mapped. If you want your Docker container to support HTTPS for local development, you'll need to provide your own SSL/TLS certificate and private key files required for SSL/TLS encryption and expose the HTTPS port. 
+
+Reverse proxies can also be used to implement HTTPS and proxy requests to your application layer using http protocol within a containerized application.
+Some of useful reverse proxies for https implementation:
+
+* Nginx
+* Envoy
+* Traefix, etc.
+
