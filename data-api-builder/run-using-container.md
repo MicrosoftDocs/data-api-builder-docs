@@ -12,11 +12,13 @@ ms.date: 04/06/2023
 
 ## Docker run
 
-With Docker, you can run Data API builder using a container from `mcr.microsoft.com/azure-databases/data-api-builder`:
+With Docker, you can run Data API builder using a container from the Microsoft Container Registry `mcr.microsoft.com/azure-databases/data-api-builder`:
 
 ```shell
 docker run -it -v <configuration-file>:/App/Configs/<configuration-file> -p 5000:5000 mcr.microsoft.com/azure-databases/data-api-builder:latest --ConfigFileName Configs/<configuration-file>
 ```
+
+### Docker run example
 
 The proceeding command makes the following assumptions:
 
@@ -33,7 +35,7 @@ docker run -it -v "C:\data-api-builder\config:/App/configs" -p 5000:5000 mcr.mic
 
 ## Docker compose
 
-You may also use one of the provided 'docker-compose.yml' files, available in the `docker` folder:
+You may also use one of the provided 'docker-compose.yml' files to build your own container. The sample docker-compose files are available in the `docker` folder:
 
 ```shell
 docker compose -f "./docker-compose.yml" up
