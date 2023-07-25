@@ -42,6 +42,9 @@
     href: database-connections.md
 - name: REST
   href: rest.md
+  items:
+  - name: Swagger / OpenAPI
+    href: openapi.md
 - name: GraphQL
   href: graphql.md
 - name: Views and stored procedures

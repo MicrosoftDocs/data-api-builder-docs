@@ -41,7 +41,7 @@ To connect to a local PostgreSQL Server, the connection string looks like:
 
 ## Create the database objects
 
-Create the database tables needed to represent Authors, Books and the many-to-many relationship between Authors and Books. You can find the `library.azure-postgresql.sql` script in the `azure-postgresql-db` folder in the GitHub repo. You can use it to create three tables, along with sample data:
+Create the database tables needed to represent Authors, Books and the many-to-many relationship between Authors and Books. You can find the `library.azure-postgresql.sql` script in the `azure-postgresql-db` folder in the [GitHub repo](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-postgresql/exercise-library.postgresql.sql). You can use it to create three tables, along with sample data:
 
 - `authors`: Table containing authors
 - `books`: Table containing books
@@ -131,7 +131,7 @@ or by adding the `Author` entity manually to the config file:
 within the `entities` object you can create any entity with any name (as long as it's valid for REST and GraphQL). The name `Author`, in this case, is used to build the REST path and the GraphQL type. Within the entity, you have the `source` element that specifies which table in the database contains the entity data. In our case, it's `authors`.
 
 > [!NOTE]
-> Entities names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them. Take a look at the [Best Practices](../best-practices.md) document to learn the best practices on entities names.
+> Entity names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them. Take a look at the [Best Practices](../best-practices.md) document to learn the best practices on entity names.
 
 After that, the permissions for the exposed entity are defined via the `permission` element; it allows you to be sure that only those users making a request with the right claims will be able to access the entity and its data. In this getting started tutorial, we're allowing anyone, without the need to be authenticated, to perform all the CRUD operations to the `Author` entity.
 
@@ -166,10 +166,10 @@ You can also add the `Book` entity now, applying the same concepts you just lear
 that's all is needed at the moment. Data API builder is ready to be run.
 
 > [!TIP]
-> It is recommended to use the *singular* form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](../graphql.md).
+> We recommend that you use the *singular* form for entity names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](../graphql.md).
 
 > [!TIP]
-> It is recommended to use Pascal Casing for the entity names, so that the generated GraphQL types, queries and mutations will be easier to read.
+> We recommend that you use Pascal Casing for entity names so that the generated GraphQL types, queries, and mutations will be easier to read.
 
 ## Start Data API builder for Azure Database for PostgreSQL Flexible Server
 
@@ -401,3 +401,4 @@ If you want to practice what you have learned, here's a little exercise you can 
 - Update the configuration file with a new entity named `Series`, supported by the `series` source table you just created.
 - Update the `Book` entity by creating a relationship with the `Series` entity. Make sure you select `one` for the `cardinality` property
 - Update the `Series` entity by creating a relationship with the `Book` entity. Make sure you select `many` for the `cardinality` property
+

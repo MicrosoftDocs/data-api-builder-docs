@@ -31,7 +31,7 @@ For Data API Builder, the format used for a MySQL connection is based on SSL con
     ```
 
 > [!NOTE]
-> User IDs and passwords specified here are recommended for sample purpose only. For details, refer [Azure Active Directory authentication](/azure/mysql/single-server/how-to-configure-sign-in-azure-ad-authentication).
+> User IDs and passwords specified here are referenced for sample purposes only. We recommend that you consider [configuring Azure Active Directory access with Azure Database for MySQL](/azure/mysql/single-server/how-to-configure-sign-in-azure-ad-authentication).
 
 ## Create the database objects
 
@@ -125,10 +125,10 @@ This will add the following information to the `entities` section of the configu
 within the `entities` object you can create any entity with any name (as long as it's valid for REST and GraphQL). The name `Book`, in this case, is used to build the REST path and the GraphQL type. Within the entity, you have the `source` element that specifies which table contains the entity data. In our case is `books`. You can add other entities for `authors` table and `books_authors` table using `dab add` CLI command.
 
 > [!NOTE]
-> Entities names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them.
+> Entity names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them.
 
 > [!TIP]
-> It is recommended to use the *singular* form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](../graphql.md).
+> We recommend that you use the *singular* form for entity names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](../graphql.md).
 
 After that, the permissions for the exposed entity are defined via the `permissions` element; it allows you to be sure that only those users making a request with the right claims will be able to access the entity and its data. In this getting started tutorial, we're allowing anyone, without the need to be authenticated, to perform all the CRUD operations on the `Book` entity.
 
