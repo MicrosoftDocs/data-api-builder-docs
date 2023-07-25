@@ -119,16 +119,16 @@ This section contains options that affect the runtime behavior and/or all expose
     "enabled": true
   },
   "host": {
-    "mode": "production" | "development",
+    "mode": "<production> | <development>",
     "cors": {
-      "origins": <array of string>,
-      "credentials": true | false
+      "origins": ["<array-of-strings>"],
+      "credentials": false
     },
     "authentication":{
-      "provider": "StaticWebApps" | "AppService" | "AzureAD" | "Simulator",
+      "provider": "<StaticWebApps> | <AppService> | <AzureAD> | <Simulator>",
       "jwt": {
-        "audience": "",
-        "issuer": ""
+        "audience": "<Client_ID>",
+        "issuer": "<Identity_Provider_Issuer_URL>"
       }
     }
   }
@@ -241,7 +241,7 @@ For example:
 
 ```json
 "rest":{
-  "path": "/entity-path"
+  "path": "/entity-path",
   "methods": [ "GET", "POST" ]
 }
 
