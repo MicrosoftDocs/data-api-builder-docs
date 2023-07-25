@@ -31,7 +31,7 @@ docker run -it -v "C:\data-api-builder\config:/App/configs" -p 5000:5000 mcr.mic
 ```
 
 > [!TIP]
-> When developing locally, your container may fail to connect to a locally deployed database instance. In that case, you may need to update you config file's connection string server reference to `host.docker.internal`. For example: `Server=host.docker.internal\\<instancename>;`
+> When developing locally, your container may fail to connect to a database instance on your host machine. In that case, you may need to update your connection string's server field to `host.docker.internal`. For example: `Server=host.docker.internal\\<instancename>;`
 
 ## Docker compose
 
