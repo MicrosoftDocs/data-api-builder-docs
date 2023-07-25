@@ -59,7 +59,7 @@ The configuration file has a `$schema` property as the first property in the con
 "$schema": "..."
 ```
 
-From version 0.3.7-alpha, schema is available at:
+From versions 0.3.7-alpha and up, the schema file is available at the following location:
 
 ```https
 GET https://github.com/Azure/data-api-builder/releases/download/<VERSION>-<suffix>/dab.draft.schema.json
@@ -74,7 +74,7 @@ GET https://github.com/Azure/data-api-builder/releases/download/v0.3.7-alpha/dab
 If there are no suffix, then ignore it, for example:
 
 ```https
-GET ttps://github.com/Azure/data-api-builder/releases/download/v0.5.35/dab.draft.schema.json
+GET https://github.com/Azure/data-api-builder/releases/download/v0.5.35/dab.draft.schema.json
 ```
 
 the **latest** version of the schema is always available at
@@ -266,13 +266,12 @@ a more complete option is to specify the full description of the database if tha
 ```json
 {
   "source": {
-    "object": "<string>"
+    "object": "<string>",
     "type": "<view> | <stored-procedure> | <table>",
     "key-fields": ["<array-of-strings>"],
     "parameters": {
         "<name>": "<value>",
-        ...
-        "<name>": "<value>"
+        "<...>": "<...>"
     }        
   }
 }
@@ -294,7 +293,7 @@ The `relationships` section defines how an entity is related to other exposed en
 ```json
 "relationships": {
   "<relationship-name>": {
-    "cardinality": "one" | "many",
+    "cardinality": "<one> | <many>",
     "target.entity": "<entity-name>",
     "source.fields": ["<array-of-strings>"],
     "target.fields": ["<array-of-strings>"],
