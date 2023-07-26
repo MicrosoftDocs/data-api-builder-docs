@@ -22,9 +22,9 @@ docker run -it -v <configuration-file>:/App/Configs/<configuration-file> -p 5000
 
 The proceeding command makes the following assumptions:
 
-- You are running the `docker` command from: `C:\data-api-builder`.
+- You're running the `docker` command from: `C:\data-api-builder`.
 - Your configuration file `my-sample-dab-config.json` is in a folder named `configs`.
-- You want to use the latest release which can be identified from the [releases page](https://github.com/Azure/data-api-builder/releases).
+- You want to use the latest release, which can be identified from the [releases page](https://github.com/Azure/data-api-builder/releases).
 
 ```shell
 docker run -it -v "C:\data-api-builder\config:/App/configs" -p 5000:5000 mcr.microsoft.com/azure-databases/data-api-builder:latest --ConfigFileName ./configs/my-sample-dab-config.json
@@ -45,10 +45,10 @@ When using your own Docker compose file, make sure you update your docker-compos
 
 **NOTE:**
 
-When running a Data API builder container in Docker, you'll see that only the HTTP endpoint is mapped. If you want your Docker container to support HTTPS for local development, you'll need to provide your own SSL/TLS certificate and private key files required for SSL/TLS encryption and expose the HTTPS port. 
+When running a Data API builder container in Docker, you'll see that only the HTTP endpoint is mapped. If you want your Docker container to support HTTPS for local development, you need to provide your own SSL/TLS certificate and private key files required for SSL/TLS encryption and expose the HTTPS port. 
 
 A reverse proxy can also be used to enforce that clients connect to your server over HTTPS to ensure that the communication channel is encrypted before forwarding the request to your container.
 Some of useful reverse proxies for https implementation:
 
 * Nginx
-* Envoy,etc
+* Envoy, etc
