@@ -42,5 +42,5 @@ Reverse proxies can also be used to implement HTTPS and proxy requests to your a
 Some of useful reverse proxies for https implementation:
 
 * Nginx
-* Envoy
+* Envoy,etc
 
