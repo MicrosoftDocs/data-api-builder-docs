@@ -38,7 +38,7 @@ When using your own Docker compose file, make sure you update your docker-compos
 
 When running a Data API builder container in Docker, you'll see that only the HTTP endpoint is mapped. If you want your Docker container to support HTTPS for local development, you'll need to provide your own SSL/TLS certificate and private key files required for SSL/TLS encryption and expose the HTTPS port. 
 
-Reverse proxies can also be used to implement HTTPS and proxy requests to your application layer using http protocol within a containerized application.
+A reverse proxy can also be used to enforce that clients connect to your server over HTTPS to ensure that the communication channel is encrypted before forwarding the request to your container.
 Some of useful reverse proxies for https implementation:
 
 * Nginx
