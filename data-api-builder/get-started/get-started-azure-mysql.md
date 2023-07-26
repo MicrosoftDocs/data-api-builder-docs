@@ -31,7 +31,7 @@ For Data API Builder, the format used for a MySQL connection is based on SSL con
     ```
 
 > [!NOTE]
-> User IDs and passwords specified here are recommended for sample purpose only. For details, refer [Azure Active Directory authentication](/azure/mysql/single-server/how-to-configure-sign-in-azure-ad-authentication).
+> User IDs and passwords specified here are referenced for sample purposes only. We recommend that you consider [configuring Azure Active Directory access with Azure Database for MySQL](/azure/mysql/single-server/how-to-configure-sign-in-azure-ad-authentication).
 
 ## Create the database objects
 
@@ -89,7 +89,7 @@ The command generates a config file called dab-config.MySql.json looking like th
 
 As you can see there the `data-source` property specifies that our chosen `database-type` is `mysql`, with the `connection-string` we passed to DAB CLI.
 
-> Take a look at the [DAB Configuration File Guide](https://github.com/Azure/data-api-builder/blob/main/docs/configuration-file.md) document to learn more. With the configuration file in place, then it's time to start defining which entities you want to expose via the API.
+> Take a look at the [DAB Configuration File Guide](../configuration-file.md) document to learn more. With the configuration file in place, then it's time to start defining which entities you want to expose via the API.
 
 ## Add Book entities
 
@@ -125,10 +125,10 @@ This will add the following information to the `entities` section of the configu
 within the `entities` object you can create any entity with any name (as long as it's valid for REST and GraphQL). The name `Book`, in this case, is used to build the REST path and the GraphQL type. Within the entity, you have the `source` element that specifies which table contains the entity data. In our case is `books`. You can add other entities for `authors` table and `books_authors` table using `dab add` CLI command.
 
 > [!NOTE]
-> Entities names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them.
+> Entity names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them.
 
 > [!TIP]
-> It is recommended to use the *singular* form for entities names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](https://github.com/Azure/data-api-builder/blob/main/docs/graphql.md).
+> We recommend that you use the *singular* form for entity names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](../graphql.md).
 
 After that, the permissions for the exposed entity are defined via the `permissions` element; it allows you to be sure that only those users making a request with the right claims will be able to access the entity and its data. In this getting started tutorial, we're allowing anyone, without the need to be authenticated, to perform all the CRUD operations on the `Book` entity.
 
@@ -225,7 +225,7 @@ The GET verb also supports several query parameters that allow you to manipulate
 - `$filter`: expression to filter the returned items
 - `$select`:  list of field names to be returned
 
-For more information on how they can be used, see [REST documentation](https://github.com/Azure/data-api-builder/blob/main/docs/rest.md)
+For more information on how they can be used, see [REST documentation](../rest.md)
 
 ### GraphQL endpoint
 
@@ -278,7 +278,7 @@ The element under `relationship` is used to add a field - `books` in the sample 
 - `target.entity`: Which entity, defined in the same configuration file, will be used in this relationship. For this sample, it's `Book` as we're creating the relationship on the `Author` entity.
 - `linking.object`: the database table used to support the many-to-many relationship. That table is the `books_authors`.
 
-Data API Builder will automatically figure out which columns are used to support the relationship between all the involved parts by analyzing the foreign key constraints that exist between the involved tables. For this reason, the configuration is done! (If you don't have foreign keys, you can always manually specify the columns you want to use to navigate between table relationships. More on this in the [relationships documentation](https://github.com/Azure/data-api-builder/blob/main/docs/relationships.md))
+Data API Builder will automatically figure out which columns are used to support the relationship between all the involved parts by analyzing the foreign key constraints that exist between the involved tables. For this reason, the configuration is done! (If you don't have foreign keys, you can always manually specify the columns you want to use to navigate between table relationships. More on this in the [relationships documentation](../relationships.md))
 
 The `Author` entity should now look like the following:
 
