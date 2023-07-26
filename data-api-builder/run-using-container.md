@@ -43,5 +43,4 @@ Some of useful reverse proxies for https implementation:
 
 * Nginx
 * Envoy
-* Traefix, etc.
 
