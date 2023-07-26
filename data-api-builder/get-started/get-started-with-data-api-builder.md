@@ -68,7 +68,7 @@ Where `x.y.z` is your version of DAB CLI.
 
 ## Next Steps
 
-As the Data API builder for Azure Databases generates REST and GraphQL endpoints for database objects, you need to have a database ready for the tutorial. You can choose either a relational or non-relational database.
+As Data API builder for Azure Databases generates REST and GraphQL endpoints for database objects, you need to have a database ready for the tutorial. You can choose either a relational or non-relational database.
 
 It's time for you to choose which database you want to use, so you can continue the getting started guide from there:
 

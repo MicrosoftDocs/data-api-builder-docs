@@ -43,8 +43,6 @@
 - name: REST
   href: rest.md
   items:
-  - name: REST
-    href: rest.md
   - name: Swagger / OpenAPI
     href: openapi.md
 - name: GraphQL
