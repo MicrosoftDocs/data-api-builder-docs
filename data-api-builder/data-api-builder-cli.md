@@ -46,24 +46,24 @@ Initializes the runtime configuration for the Data API builder runtime engine. I
 
 **Example:** `dab init --config "dab-config.MsSql.json" --database-type mssql --connection-string "Server=tcp:127.0.0.1,1433;User ID=sa;Password=REPLACEME;Connection Timeout=5;"`
 
-| Options | Required    | Default Value    | Description |
-| :---   | :--- | :--- | :--- |
-| **--database-type** | true   | -   | Type of database to connect. Supported values: mssql, cosmosdb_nosql, cosmosdb_postgresql, mysql, postgresql   |
-| **--connection-string** | false   | ""   | Connection details to connect to the database.   |
-| **--cosmosdb_nosql-database** | true when databaseType=cosmosdb_nosql   | -   | Database name for Cosmos DB for NoSql.   |
-| **--cosmosdb_nosql-container** | false   | -   | Container name for Cosmos DB for NoSql.   |
-| **--graphql-schema** | true when databaseType=cosmosdb_nosql   | -   | GraphQL schema Path   |
-| **--set-session-context** | false   | false   | Enable sending data to MsSql using session context.   |
-| **--host-mode** | false   | production   | Specify the Host mode - development or production   |
-| **--cors-origin** | false   | ""   | Specify the list of allowed origins.   |
-| **--auth.provider** | false   | StaticWebApps   | Specify the Identity Provider.   |
-| **--rest.path** | false   | /api   | Specify the REST endpoint's prefix.   |
-| **--rest.disabled** | false   | false   | Disables REST endpoint for all entities.   |
-| **--graphql.path** | false   | /graphql   | Specify the GraphQL endpoint's prefix.   |
-| **--graphql.disabled** | false   | false   | Disables GraphQL endpoint for all entities.   |
-| **--auth.audience** | false   | -   | Identifies the recipients that the JWT is intended for.   |
-| **--auth.issuer** | false   | -   | Specify the party that issued the JWT token.   |
-| **-c,--config** | false   | dab-config.json   | Path to config file.   |
+| Options | Flag Required | Default Value | Value Required | Value Type | Description | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| **--database-type** | true | - | true | String | Type of database to connect. Supported values: mssql, cosmosdb_nosql, cosmosdb_postgresql, mysql, postgresql | 
+| **--connection-string** | false | "" | true | String | Connection details to connect to the database. | 
+| **--cosmosdb_nosql-database** | true when databaseType=cosmosdb_nosql | - | true | String | Database name for Cosmos DB for NoSql. | 
+| **--cosmosdb_nosql-container** | false | - | true | String | Container name for Cosmos DB for NoSql. | 
+| **--graphql-schema** | true when databaseType=cosmosdb_nosql | - | true | String | GraphQL schema Path | 
+| **--set-session-context** | false | false | false | - | Enable sending data to MsSql using session context. | 
+| **--host-mode** | false | production | true | String | Specify the Host mode - development or production | 
+| **--cors-origin** | false | "" | true | String | Specify the list of allowed origins. | 
+| **--auth.provider** | false | StaticWebApps | true | String | Specify the Identity Provider. | 
+| **--rest.path** | false | /api | true | String | Specify the REST endpoint's prefix. | 
+| **--rest.disabled** | false | false | false | - | Disables REST endpoint for all entities. | 
+| **--graphql.path** | false | /graphql | true | String | Specify the GraphQL endpoint's prefix. | 
+| **--graphql.disabled** | false | false | false | - | Disables GraphQL endpoint for all entities. | 
+| **--auth.audience** | false | - | true | String | Identifies the recipients that the JWT is intended for. | 
+| **--auth.issuer** | false | - | true | String | Specify the party that issued the JWT token. | 
+| **-c,--config** | false | dab-config.json | true | String | Path to config file. |
 
 ### **`add`**
 
@@ -73,21 +73,21 @@ Add new database entity to the configuration file. Make sure you already have a 
 
 **Example:**: `dab add Book -c "dab-config.MsSql.json" --source dbo.books --permissions "anonymous:*"`
 
-| Options | Required    | Default Value    | Description |
-| :---   | :--- | :--- | :--- |
-| **-s,--source** | true   | -   | Name of the source table or container.   |
-| **--permissions** | true   | -   | Permissions required to access the source table or container. Format "[role]:[actions]"   |
-| **--source.type** | false   | table   | Type of the database object. Must be one of: [table, view, stored-procedure]   |
-| **--source.params** | false   | -   | Dictionary of parameters and their values for Source object."param1:val1,param2:value2,..." for Stored-Procedures.   |
-| **--source.key-fields** | true when `--source.type` is view   | -   | The field(s) to be used as primary keys for tables and views only. Comma separated values. Example `--source.key-fields "id,name,type"`  |
-| **--rest** | false   | case sensitive entity name.  | Route for REST API. Example: <br>`--rest: false` -> Disables REST API  calls for this entity.<br>`--rest: true` -> Entity name becomes the rest path. <br>`--rest: "customPathName"` -> Provided customPathName becomes the REST path.|
-| **--rest.methods** | false   | post   | HTTP actions to be supported for stored procedure. Specify the actions as a comma separated list. Valid HTTP actions are:[get, post, put, patch, delete]   |
-| **--graphql** | false   | case sensitive entity name  | Entity type exposed for GraphQL. Example: <br>`--graphql: false` -> disables graphql calls for this entity. <br>`--graphql: true` -> Exposes the entity for GraphQL with default names. The singular form of the entity name is considered for the query and mutation names. <br>`--graphql: "customQueryName"` -> Lets the user customize the singular and plural name for queries and mutations. |
-| **--graphql.operation** | false   | mutation   | GraphQL operation to be supported for stored procedure. Valid operations are: [query, mutation]  |
-| **--fields.include** | false   | -   | Fields with permission to access.  |
-| **--fields.exclude** | false   | -   | Fields excluded from the action lists.   |
-| **--policy-database** | false   | -   | Specify an OData style filter rule that is injected in the query sent to the database.  |
-| **-c,--config** | false   | dab-config.json   | Path to config file.   |
+| Options | Flag Required | Default Value | Value Required | Value Type | Description | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| **-s,--source** | true | - | true | String | Name of the source table or container. | 
+| **--permissions** | true | - | true | String | Permissions required to access the source table or container. Format "[role]:[actions]". | 
+| **--source.type** | false | table | true | String | Type of the database object. Must be one of: [table, view, stored-procedure]. | 
+| **--source.params** | false | - | true | String | Dictionary of parameters and their values for Source object."param1:val1,param2:value2,..." for Stored-Procedures. | 
+| **--source.key-fields** | true when  `--source.type`  is view | - | true | String | The field(s) to be used as primary keys for tables and views only. Comma separated values. Example `--source.key-fields "id,name,type"`. | 
+| **--rest** | false | case sensitive entity name. | true | String | Route for REST API. Example: <br>`--rest: false` -> Disables REST API  calls for this entity.<br>`--rest: true` -> Entity name becomes the rest path. <br>`--rest: "customPathName"` -> Provided customPathName becomes the REST path.| 
+| **--rest.methods** | false | post | true | String | HTTP actions to be supported for stored procedure. Specify the actions as a comma separated list. Valid HTTP actions are:[get, post, put, patch, delete]. | 
+| **--graphql** | false | case sensitive entity name | true | Bool/String | Entity type exposed for GraphQL. Example: <br>`--graphql: false` -> disables graphql calls for this entity. <br>`--graphql: true` -> Exposes the entity for GraphQL with default names. The singular form of the entity name is considered for the query and mutation names. <br>`--graphql: "customQueryName"` -> Lets the user customize the singular and plural name for queries and mutations. | 
+| **--graphql.operation** | false | mutation | true | String | GraphQL operation to be supported for stored procedure. Valid operations are: [query, mutation]. | 
+| **--fields.include** | false | - | true | String | Fields with permission to access. | 
+| **--fields.exclude** | false | - | true | String | Fields excluded from the action lists. | 
+| **--policy-database** | false | - | true | String | Specify an OData style filter rule that is injected in the query sent to the database. | 
+| **-c,--config** | false | dab-config.json | true | String | Path to config file. |
 
 ### **`update`**
 
@@ -100,16 +100,16 @@ Update the properties of any database entity in the configuration file.
 > [!NOTE]
 > `dab update` supports all the options that are supported by `dab add`. Additionally, it also supports the below listed options.
 
-| Options | Required    | Default Value    | Description |
-| :---   | :--- | :--- | :--- |
-| **--relationship** | false   | -   | Specify relationship between two entities. Provide the name of the relationship.   |
-| **--cardinality** | true when `--relationship` option is used   | -   | Specify cardinality between two entities. Could be one or many.   |
-| **--target.entity** | true when `--relationship` option is used   | -   | Another exposed entity that the source entity relates to.  |
-| **--linking.object** | false   | -   | Database object that is used to support an M:N relationship.   |
-| **--linking.source.fields** | false   | -   | Database fields in the linking object to connect to the related item in the source entity. Comma separated fields.   |
-| **--linking.target.fields** | false   | -   | Database fields in the linking object to connect to the related item in the target entity. Comma separated fields.  |
-| **--relationship.fields** | false   | -   | Specify fields to be used for mapping the entities. Example: `--relationship.fields "id:book_id"`. Here `id` represents column from sourceEntity, while `book_id` from targetEntity. Foreign keys are required between the underlying sources if not specified.  |
-| **-m,--map** | false   | -   | Specify mappings between database fields and GraphQL and REST fields. format: --map "backendName1:exposedName1, backendName2:exposedName2,...".   |
+| Options | Flag Required | Default Value | Value Required | Value Type | Description |
+| --- | --- | --- | --- | --- | --- |
+| **--relationship** | false | - | true | String | Specify relationship between two entities. Provide the name of the relationship. |
+| **--cardinality** | true when `--relationship` option is used | - | true | String | Specify cardinality between two entities. Could be one or many. |
+| **--target.entity** | true when `--relationship` option is used | - | true | String | Another exposed entity that the source entity relates to. |
+| **--linking.object** | false | - | true | String | Database object that is used to support an M:N relationship. |
+| **--linking.source.fields** | false | - | true | String | Database fields in the linking object to connect to the related item in the source entity. Comma separated fields. |
+| **--linking.target.fields** | false | - | true | String | Database fields in the linking object to connect to the related item in the target entity. Comma separated fields. |
+| **--relationship.fields** | false | - | true | String | Specify fields to be used for mapping the entities. Example: `--relationship.fields "id:book_id"`. Here `id` represents column from sourceEntity, while `book_id` from targetEntity. Foreign keys are required between the underlying sources if not specified. |
+| **-m,--map** | false | - | true | String | Specify mappings between database fields and GraphQL and REST fields. Format: --map "backendName1:exposedName1, backendName2:exposedName2,...". |
 
 ### **`export`**
 
@@ -119,12 +119,12 @@ Export the required schema as a file and save to disk based on the options.
 
 **Example**: `dab export --graphql -o ./schemas`
 
-| Options | Required    | Default Value    | Description |
-| :---   | :--- | :--- | :--- |
-| **--graphql** | false   | false   | Export GraphQL schema.   |
-| **-o,--output** | true   | -   | Specify the directory to save the schema file.   |
-| **-g,--graphql-schema-file** | false   | schema.graphql   | Specify the name of the Graphql schema file.   |
-| **-c,--config** | false   | dab-config.json   | Path to config file.   |
+| Options | Flag Required | Default Value | Value Required | Value Type | Description |
+| --- | --- | --- | --- | --- | --- |
+| **--graphql** | false | false | false | - | Export GraphQL schema. |
+| **-o,--output** | true | - | true | String | Specify the directory to save the schema file. |
+| **-g,--graphql-schema-file** | false | schema.graphql | true | String | Specify the name of the Graphql schema file. |
+| **-c,--config** | false | dab-config.json | true | String | Path to config file. |
 
 ### **`start`**
 
@@ -134,12 +134,12 @@ Start the runtime engine with the provided configuration file for serving REST a
 
 **Example**: `dab start`
 
-| Options | Required    | Default Value    | Description |
-| :---   | :--- | :--- | :--- |
-| **--verbose** | false   | -   | Specify logging level as informational.   |
-| **--LogLevel** | false   | Debug when hostMode=development, else Error when HostMode=Production   | Specify logging level as provided value. example: debug, error, information, etc.   |
-| **--no-https-redirect** | false   | false   | Disables automatic https redirects.   |
-| **-c,--config** | false   | dab-config.json   | Path to config file.   |
+| Options | Required | Default Value | Value Required | Value Type | Description |
+| --- | --- | --- | --- | --- | --- |
+| **--verbose** | false | - | false | - | Specify logging level as informational. |
+| **--LogLevel** | false | Debug when hostMode=development, else Error when HostMode=Production | true | String | Specify logging level as provided value. example: debug, error, information, etc. |
+| **--no-https-redirect** | false | false | true | String | Disables automatic https redirects. |
+| **-c,--config** | false | dab-config.json | true | String | Path to config file. |
 
 > [!NOTE]
 > You can't use `--verbose` and `--LogLevel` at the same time. Learn more about different logging levels [here](/dotnet/api/microsoft.extensions.logging.loglevel?view=dotnet-plat-ext-6.0&preserve-view=true).
