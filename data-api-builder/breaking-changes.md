@@ -20,7 +20,7 @@ This article defines what constitutes a breaking change in new versions of Data 
 
 A *breaking change* is a change that may require you to make changes to your application in order to avoid disruption. 
 
-### Engine
+The follow changes are considered breaking changes to the Data API builder engine:
 
 - REST API contract changes
 - GraphQL schema generation changes
@@ -33,7 +33,7 @@ A *breaking change* is a change that may require you to make changes to your app
 - Changes to the intended functionality of an API endpoint. _For example, if a DELETE request (REST) or delete mutation (GraphQL) previously used to archive the resource but now hard deletes the resource._
 - Introduction of a new validation for request content
 
-### Runtime configuration
+The follow changes are considered breaking changes to Data API builder's runtime configuration file:
 
 - New required fields in the configuration file
 - Introduction of a new validation
@@ -45,7 +45,7 @@ A *non-breaking* change is a change that you can adapt to at your own discretion
 > [!WARNING] 
 > Changes you make to your database may result in a newly generated representation of your database in the REST and GraphQL endpoints. Databases changes are not considered breaking changes in Data API builder.
 
-### Engine
+The follow changes are considered non-breaking changes to the Data API builder engine:
 
 - Addition of new endpoints (e.g. `/graphql`, `/api`, `/swagger`, and `/openapi`)
 - Addition of new methods to existing endpoints
@@ -64,7 +64,7 @@ A *non-breaking* change is a change that you can adapt to at your own discretion
 - Fixes to HTTP response codes and error codes from incorrect code to correct code
 - Additional metadata included in the generated OpenAPI document.
 
-### Runtime configuration
+The follow changes are considered non-breaking changes to Data API builder's runtime configuration file:
  
 - New optional properties in the configuration file
 
