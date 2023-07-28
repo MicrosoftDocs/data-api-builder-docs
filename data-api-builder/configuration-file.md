@@ -39,6 +39,19 @@ You must set the environment variable `DAB_ENVIRONMENT` to designate which envir
 >
 > To learn more about using multiple configuration files together, see [here](../data-api-builder/data-api-builder-cli.md#using-data-api-builder-with-two-configuration-files)
 
+## Setting environment variables
+
+To use the environment variables we need to first set it up. There are two ways to do it:
+1. Set the variables directly in the system.
+2. Use `.env` file
+
+Setting your variables in .env file is a more convinient way to use and maintain environment variables.
+
+```txt
+my-connection-string="Server=tcp:127.0.0.1,1433;Persist Security Info=False;User ID=USER_NAME;Password=PASSWORD;MultipleActiveResultSets=False;Connection Timeout=5;"
+DAB_ENVIRONMENT=Development
+```
+
 ## Accessing environment variables
 
 To avoid storing sensitive data into the configuration file itself, a developer can use the `@env()` function to access environment data. `env()` can be used anywhere a scalar value is needed. For example:
