@@ -46,7 +46,7 @@ Initializes the runtime configuration for the Data API builder runtime engine. I
 
 **Example:** `dab init --config "dab-config.MsSql.json" --database-type mssql --connection-string "Server=tcp:127.0.0.1,1433;User ID=sa;Password=REPLACEME;Connection Timeout=5;"`
 
-| Options | Flag Required | Default Value | Value Required | Value Type | Description | 
+| Options | Option Required | Default Value | Value Required | Value Type | Description | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
 | **--database-type** | true | - | true | String | Type of database to connect. Supported values: mssql, cosmosdb_nosql, cosmosdb_postgresql, mysql, postgresql | 
 | **--connection-string** | false | "" | true | String | Connection details to connect to the database. | 
@@ -73,7 +73,7 @@ Add new database entity to the configuration file. Make sure you already have a 
 
 **Example:**: `dab add Book -c "dab-config.MsSql.json" --source dbo.books --permissions "anonymous:*"`
 
-| Options | Flag Required | Default Value | Value Required | Value Type | Description | 
+| Options | Option Required | Default Value | Value Required | Value Type | Description | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
 | **-s,--source** | true | - | true | String | Name of the source table or container. | 
 | **--permissions** | true | - | true | String | Permissions required to access the source table or container. Format "[role]:[actions]". | 
@@ -100,7 +100,7 @@ Update the properties of any database entity in the configuration file.
 > [!NOTE]
 > `dab update` supports all the options that are supported by `dab add`. Additionally, it also supports the below listed options.
 
-| Options | Flag Required | Default Value | Value Required | Value Type | Description |
+| Options | Option Required | Default Value | Value Required | Value Type | Description |
 | --- | --- | --- | --- | --- | --- |
 | **--relationship** | false | - | true | String | Specify relationship between two entities. Provide the name of the relationship. |
 | **--cardinality** | true when `--relationship` option is used | - | true | String | Specify cardinality between two entities. Could be one or many. |
@@ -119,7 +119,7 @@ Export the required schema as a file and save to disk based on the options.
 
 **Example**: `dab export --graphql -o ./schemas`
 
-| Options | Flag Required | Default Value | Value Required | Value Type | Description |
+| Options | Option Required | Default Value | Value Required | Value Type | Description |
 | --- | --- | --- | --- | --- | --- |
 | **--graphql** | false | false | false | - | Export GraphQL schema. |
 | **-o,--output** | true | - | true | String | Specify the directory to save the schema file. |
@@ -134,7 +134,7 @@ Start the runtime engine with the provided configuration file for serving REST a
 
 **Example**: `dab start`
 
-| Options | Required | Default Value | Value Required | Value Type | Description |
+| Options | Option Required | Default Value | Value Required | Value Type | Description |
 | --- | --- | --- | --- | --- | --- |
 | **--verbose** | false | - | false | - | Specify logging level as informational. |
 | **--LogLevel** | false | Debug when hostMode=development, else Error when HostMode=Production | true | String | Specify logging level as provided value. example: debug, error, information, etc. |
