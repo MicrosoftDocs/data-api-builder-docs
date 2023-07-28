@@ -47,10 +47,12 @@ To use the environment variables we need to first set it up. There are two ways 
 
 Setting your variables in .env file is a more convinient way to use and maintain environment variables.
 
+For Example:
 ```txt
 my-connection-string="Server=tcp:127.0.0.1,1433;Persist Security Info=False;User ID=USER_NAME;Password=PASSWORD;MultipleActiveResultSets=False;Connection Timeout=5;"
 DAB_ENVIRONMENT=Development
 ```
+By using the above  .env  file, you can easily define and access your environment variables.
 
 ## Accessing environment variables
 
