@@ -10,7 +10,7 @@ ms.date: 9/04/2023
 
 # Versioning overview
 
-This article outlines the versioning strategy used for new releases of Data API builder. 
+This article outlines the versioning strategy used for new releases of Data API builder. Data API builder is currently in **Public Preview**.
 
 Each published version of Data API builder is considered a *release* and is defined with the `Major.Minor.Patch` format. Releases are characterized as *stable*, *breaking change*, and *preview*.
 

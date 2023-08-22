@@ -11,7 +11,7 @@ ms.date: 9/04/2023
 
 # Overview
 
-This article defines what constitutes a breaking change in new versions of Data API builder. 
+This article defines what constitutes a breaking change in new versions of Data API builder. Data API builder is currently in **Public Preview**.
 
 > [!IMPORTANT]
 > We may make changes without prior notice if the change is considered non-breaking, or if it is a breaking change being made to address critical product bugs or legal, security, or privacy concerns.
