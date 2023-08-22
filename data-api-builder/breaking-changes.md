@@ -5,7 +5,7 @@ author: seantleonard
 ms.author: seleonar 
 ms.service: data-api-builder 
 ms.topic: versioning-breakingchanges
-ms.date: 8/27/2023 
+ms.date: 9/04/2023 
 ---
 
 
@@ -43,7 +43,7 @@ The follow changes are considered breaking changes to Data API builder's runtime
 A *non-breaking* change is a change that you can adapt to at your own discretion and pace without disruption. In most cases, we will communicate non-breaking changes after they are already made. Ensure that your application is designed to be able to handle the following types of non-breaking changes without prior notice:
 
 > [!WARNING] 
-> Changes you make to your database may result in a newly generated representation of your database in the REST and GraphQL endpoints. Databases changes are not considered breaking changes in Data API builder.
+> Changes you make to your database may result in a newly generated representation of your database in the REST and GraphQL endpoints. Database changes are not considered breaking changes in Data API builder.
 
 The follow changes are considered non-breaking changes to the Data API builder engine:
 

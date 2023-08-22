@@ -5,7 +5,7 @@ author: seantleonard
 ms.author: seleonar 
 ms.service: data-api-builder 
 ms.topic: versioning-breaking-change-notification
-ms.date: 8/27/2023 
+ms.date: 9/04/2023 
 ---
 
 # Breaking change list

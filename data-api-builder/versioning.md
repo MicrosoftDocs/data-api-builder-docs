@@ -5,7 +5,7 @@ author: seantleonard
 ms.author: seleonar 
 ms.service: data-api-builder 
 ms.topic: versioning-general
-ms.date: 8/27/2023 
+ms.date: 9/04/2023 
 ---
 
 # Versioning overview
@@ -17,7 +17,7 @@ Each published version of Data API builder is considered a *release* and is defi
 ## Stable releases
 
 >[!WARNING]
-> While we make every effort to maintain backwards compatibility with stable versions during Public Preview, we may introduce breaking changes as we respond to customer feedback about new features and bugs. 
+> While we make every effort to maintain backwards compatibility with stable versions, we may introduce breaking changes as we respond to customer feedback about new features and bugs. For more information, see the [breaking changes article](./breaking-changes.md).
 
 A *stable version* of Data API builder is backwards compatible, meaning that any code you write that relies on one version of a Data API builder can adopt a newer stable version without requiring any code changes to maintain correctness or existing functionality.
 
@@ -29,13 +29,7 @@ Breaking change versions are announced via the breaking change list article and 
 
 ## Preview releases
 
-Currently, Data API builder is published as a *preview version* to gather feedback about proposed changes and new features. During Public Preview, Data API builder releases are identified with the `0.Y.Z` versioning scheme during Public Preview - for example, `0.7.34`. 
-
-Unless explicitly intended to introduce a breaking change from the previous stable version, new preview versions include all the features of the most recent stable version and add new preview features. However, between preview versions, a service may break any of the newly added preview features.
-
-Previews aren't intended for long-term use. Anytime a new stable or preview version of a service becomes available, existing preview versions may become unavailable as early as 90 days from the availability of the new version. Use preview versions only in situations where you're actively developing against new service features and you're prepared to adopt a new, non-preview version soon after it's released. If some features from a preview version are released in a new stable version, remaining features still in preview will typically be published in a new preview version.
-
-## Previews
+Data API builder preview releases are identified with the `X.Y.Z-rc` versioning scheme. The `-rc` suffix indicates that the build is a "release candidate." Preview releases are used to gather feedback about new features and other changes.
 
 Unless explicitly intended to introduce a breaking change from the previous stable version, new preview versions include all the features of the most recent stable version and add new preview features. However, between preview versions, a new Data API builder release may break any of the newly added preview features.
 
