@@ -18,7 +18,7 @@ This article defines what constitutes a breaking change in new versions of Data 
 
 ## Definition of a breaking change
 
-A *breaking change* is a change that may require you to make changes to your application in order to avoid disruption. 
+A *breaking change* is a change that requires you to make changes to your application in order to avoid disruption. 
 
 The following changes are considered breaking changes to the Data API builder engine:
 
