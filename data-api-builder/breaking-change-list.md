@@ -10,4 +10,4 @@ ms.date: 9/04/2023
 
 # Breaking change list
 
-Breaking changes will be announced and documented in this article.
+Breaking changes and feature retirements will be announced and documented in this article.

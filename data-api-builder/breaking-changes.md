@@ -9,65 +9,49 @@ ms.date: 9/04/2023
 ---
 
 
-# Overview
+# Breaking Changes
 
-This article defines what constitutes a breaking change in new versions of Data API builder. Data API builder is currently in **Public Preview**.
+To prioritize security, enhance features, and maintain code quality, new versions of our software might include breaking changes. While we strive to minimize these changes through careful architectural choices, they can still occur. In such cases, we make it a priority to announce them and provide possible solutions.
 
 > [!IMPORTANT]
 > We may make changes without prior notice if the change is considered non-breaking, or if it is a breaking change being made to address critical product bugs or legal, security, or privacy concerns.
 
-## Definition of a breaking change
+## What is a breaking change?
 
-A *breaking change* is a change that requires you to make changes to your application in order to avoid disruption. 
+A breaking change is a modification that could necessitate adjustments to your application to prevent disruptions. In Data API builder, breaking changes can include alterations to REST API contracts, GraphQL schema generation, and other elements that impact compatibility and functionality.
 
-The following changes are considered breaking changes to the Data API builder engine:
+### Breaking change examples
 
-- REST API contract changes
-- GraphQL schema generation changes
-- Changes that affect backwards compatibility 
-- Removing or renaming APIs or API parameters
-- Changes in Error Codes
-- Changes to the intended functionality of permission definitions
-- Removal of an allowed parameter, request field, or response field
-- Addition of a required parameter or request field without default values
-- Changes to the intended functionality of an API endpoint. _For example, if a DELETE request (REST) or delete mutation (GraphQL) previously used to archive the resource but now hard deletes the resource._
-- Introduction of a new validation for request content
+The following examples are a *non-exhaustive* list of breaking changes to Data API builder:
 
-The following changes are considered breaking changes to Data API builder's runtime configuration file:
-
-- New required fields in the configuration file
-- Introduction of a new validation
+1. REST API contract modifications
+2. Alterations in GraphQL schema generation
+3. Changes affecting backwards compatibility
+4. Removal or renaming of APIs or parameters
+5. Changes in error codes
+6. Adjustments to permission definition functionality
+7. Removal of allowed parameters, request fields, or response fields
+8. Addition of mandatory parameters or request fields without default values
+9. Modifications to intended API endpoint functionality
 
 ## Definition of a non-breaking change
 
-A *non-breaking* change is a change that you can adapt to at your own discretion and pace without disruption. In most cases, we'll' communicate non-breaking changes after they're' already made. Ensure that your application is designed to be able to handle the following types of non-breaking changes without prior notice:
+A **non-breaking change** refers to a change that can be integrated into your application without causing disruption. We typically communicate non-breaking changes after they have already been implemented. Your application should be designed to handle these changes without prior notice.
 
-> [!WARNING] 
-> Changes you make to your database may result in a newly generated representation of your database in the REST and GraphQL endpoints. Database changes are not considered breaking changes in Data API builder.
+### Non-Breaking Change Examples
 
-The following changes are considered non-breaking changes to the Data API builder engine:
+The following examples are a *non-exhaustive* list of non-breaking changes to Data API builder:
 
-- Addition of new endpoints (e.g. `/graphql`, `/api`, `/swagger`, and `/openapi`)
-- Addition of new methods to existing endpoints
-- Addition of new fields in the following scenarios:
-  - New fields in responses
-  - New optional request fields or parameters
-  - New required request fields that have default values
-  - New optional properties in the runtime configuration
-- Addition of a new value returned for an existing text field
-- Changes to the order of fields returned within a response
-- Addition of an optional request header
-- Removal of redundant request header
-- Changes to the length of data returned within a field
-- Changes to the overall response size
-- Changes to error messages. _We don't recommend parsing error messages to perform business logic. Instead, you should only rely on HTTP response codes and error codes._
-- Fixes to HTTP response codes and error codes from incorrect code to correct code
-- Extra metadata included in the generated OpenAPI document.
+1. Introduction of new endpoints
+2. Addition of methods to existing endpoints
+3. Incorporation of new fields in responses and requests
+4. Adjustments to field order within responses
+5. Introduction of optional request headers
+6. Changes to data length and response size
+7. Alterations to error messages and codes
+8. Fixes to HTTP response codes
+9. Additional metadata in generated OpenAPI documents
 
-The following changes are considered non-breaking changes to Data API builder's runtime configuration file:
- 
-- New optional properties in the configuration file
+## How Do We Communicate Breaking Changes?
 
-## Change Notifications
-
-We make every effort to give timely notification of breaking changes. Breaking change notifications can be found in the release notes of Data API builder releases on GitHub and on the breaking changes list article.
+We make it a priority to inform you promptly about breaking changes. You can find breaking change notifications in the release notes of Data API builder releases on GitHub, as well as in the dedicated [breaking changes list article](./breaking-change-list.md).
