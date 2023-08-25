@@ -90,8 +90,6 @@ Make sure you have an Azure Tenant that you can use. If you want or need to crea
    2. Select a role: choose a role you want to assign to your account. (if you don't see your role, wait a few minutes for Azure AD replication to finish from when you added the role to your App Registration earlier)
    3. Repeat this step for all the roles you want to add to your account.
 
-Where the`APP_ID` is the "Application (client) ID" and the `TENANT_ID` is the "Directory (tenant) ID". Both values can be found in the App Registration overview page in the Azure Active Directory page.
-
 ## Configure AZ CLI to get an authentication token
 
 Make sure you're logged in to AZ CLI with the account that you want to use to authenticate against Data API builder.
@@ -167,7 +165,7 @@ Update the `dab-config.json` file so that in the `authentication` section you ha
 }
 ```
 
-To test out that authentication is working fine, you can update your configuration file so that an entity allows access only to authenticated request with the `Sample.Role` assigned. For example:
+Where the`APP_ID` is the "Application (client) ID" and the `TENANT_ID` is the "Directory (tenant) ID". Both values can be found in the App Registration overview page in the Azure Active Directory page you used before to Data API builder with Azure AD. To test out that authentication is working fine, you can update your configuration file so that an entity allows access only to authenticated request with the `Sample.Role` assigned. For example:
 
 ```json
 "entities": {
