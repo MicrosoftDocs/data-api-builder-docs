@@ -54,4 +54,4 @@ The following examples are a *non-exhaustive* list of non-breaking changes to Da
 
 ## How Do We Communicate Breaking Changes?
 
-We make it a priority to inform you promptly about breaking changes. You can find breaking change notifications in the release notes of Data API builder releases on GitHub, as well as in the dedicated [breaking changes list article](./breaking-change-list.md).
+We make it a priority to inform you promptly about breaking changes. You can find breaking change notifications in the release notes of Data API builder releases on GitHub, and in the dedicated [breaking changes list article](./breaking-change-list.md).
