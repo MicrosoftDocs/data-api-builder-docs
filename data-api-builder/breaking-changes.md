@@ -52,6 +52,6 @@ The following examples are a *non-exhaustive* list of non-breaking changes to Da
 8. Fixes to HTTP response codes
 9. Additional metadata in generated OpenAPI documents
 
-## How Do We Communicate Breaking Changes?
+## How do we communicate breaking changes?
 
 We make it a priority to inform you promptly about breaking changes. You can find breaking change notifications in the release notes of Data API builder releases on GitHub, and in the dedicated [breaking changes list article](./breaking-change-list.md).
