@@ -22,7 +22,7 @@ Azure SQL and SQL Server support the use of the SESSION_CONTEXT function to acce
 
 #### User-Provided GraphQL schema
 
-The Azure Cosmos DB NOSQL API is schema-agnostic.In order to use Data API builder with Azure Cosmos DB, you must create a GraphQL schema file that includes the object type definitions representing your Azure Cosmos DB container's data model.Data API builder also expects your GraphQL object type definitions and fields to include the GraphQL schema directive `authorize` when you want to enforce more restrictive read access than `anonymous`.
+The Azure Cosmos DB NOSQL API is schema-agnostic. In order to use Data API builder with Azure Cosmos DB, you must create a GraphQL schema file that includes the object type definitions representing your Azure Cosmos DB container's data model. Data API builder also expects your GraphQL object type definitions and fields to include the GraphQL schema directive `authorize` when you want to enforce more restrictive read access than `anonymous`.
 
 Example 1 :
 
@@ -33,10 +33,28 @@ type Book @model(name:"Book"){
   Authors: [Author]
 }
 ```
+and the corresponding entities section in config.json
 
-The @authorize directive with roles:["role1","authenticated"] restricts access to the title field to only users with the roles "role1" and "authenticated," adhering to the permissions configuration for "included" and "excluded" fields. For authenticated requestors, the system role 'authenticated' is automatically assigned, eliminating the need for x-ms-api-role. However, if anonymous access is desired, omitting the authorize directive is recommended.
+```json
+{
+  "Book": {
+    "source": "Book",
+    "permissions": [
+      {
+        "role": "anonymous",
+        "actions": [
+          "read"
+        ]
+      }
+    ]
+  }
+}
 
-The `@model` directive is utilized to establish a correlation between this GraphQL object type and the corresponding entity name in the runtime config.The directive is formatted as: `@model(name:"<Entity_Name>")`
+```
+
+The @authorize directive with roles:["role1","authenticated"] restricts access to the title field to only users with the roles "role1" and "authenticated". For authenticated requestors, the system role 'authenticated' is automatically assigned, eliminating the need for x-ms-api-role. However, if anonymous access is desired, omitting the authorize directive is recommended.
+
+The `@model` directive is utilized to establish a correlation between this GraphQL object type and the corresponding entity name in the runtime config. The directive is formatted as: `@model(name:"<Entity_Name>")`
 
 Example 2 :
 
@@ -47,5 +65,21 @@ type Book @model(name:"Book") @authorize(roles:["role1","authenticated"]) {
   Authors: [Author]
 }
 ```
+and the corresponding entities section in config.json
+
+```json
+{
+  "Book": {
+    "source": "Book",
+    "permissions": [
+      {
+        "role": "anonymous",
+        "actions": [
+          "read"
+        ]
+      }
+    ]
+  }
+}
 
 By incorporating the @authorize directive in the top-level type definition, you restrict access to the type and its fields will be restricted exclusively to the roles specified within the directive.
