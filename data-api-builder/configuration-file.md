@@ -43,7 +43,7 @@ You must set the environment variable `DAB_ENVIRONMENT` to designate which envir
 
 To use the environment variables we need to first set it up. There are two ways to do it:
 1. Set the variables directly in the system.
-2. Use `.env` file
+2. Create an `.env` file listing the environment variable key-value pairs one line each and place this file in the same directory as the configuration file.
 
 Setting your variables in .env file is a more convinient way to use and maintain environment variables.
 
