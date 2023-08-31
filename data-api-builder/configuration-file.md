@@ -52,7 +52,7 @@ For Example:
 my-connection-string="Server=tcp:127.0.0.1,1433;Persist Security Info=False;User ID=USER_NAME;Password=PASSWORD;MultipleActiveResultSets=False;Connection Timeout=5;"
 DAB_ENVIRONMENT=Development
 ```
-By using the above .env  file, you can easily define and access your environment variables.
+By using the above .env  file, you can easily define and access these environment variables in the configuration file using the `@env()` function as mentioned below.
 
 ## Accessing environment variables
 
