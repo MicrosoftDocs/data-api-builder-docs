@@ -82,6 +82,8 @@ and the corresponding entities section in config.json
   }
 }
 
+```
+
 By incorporating the @authorize directive in the top-level type definition, you restrict access to the type and its fields will be restricted exclusively to the roles specified within the directive.
 
 #### Cross Container Operations
