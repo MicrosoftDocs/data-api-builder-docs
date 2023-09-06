@@ -38,7 +38,7 @@ landingContent:
           - text: Use Data API builder with MySQL 
             url: ./get-started/get-started-azure-mysql.md
 
- - title: Open Source
+  - title: Open Source
     linkLists:
       - linkListType: reference
         links:
