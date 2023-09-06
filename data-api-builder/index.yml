@@ -23,17 +23,6 @@ landingContent:
           - text: What's new in Data API builder
             url: whats-new.md
 
-  - title: Open Source
-    linkLists:
-      - linkListType: overview
-        links:
-          - text: Source Code 
-            url: https://github.com/Azure/data-api-builder
-          - text: Issues
-            url: https://github.com/Azure/data-api-builder/issues
-          - text: Discussions
-            url: https://github.com/Azure/data-api-builder/discussions
-
   - title: Get started
     linkLists:
       - linkListType: quickstart
@@ -48,3 +37,14 @@ landingContent:
             url: ./get-started/get-started-azure-postgresql.md
           - text: Use Data API builder with MySQL 
             url: ./get-started/get-started-azure-mysql.md
+
+  - title: Open Source
+    linkLists:
+      - linkListType: reference
+        links:
+          - text: Source Code 
+            url: https://github.com/Azure/data-api-builder
+          - text: Issues
+            url: https://github.com/Azure/data-api-builder/issues
+          - text: Discussions
+            url: https://github.com/Azure/data-api-builder/discussions
