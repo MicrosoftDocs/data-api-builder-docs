@@ -25,7 +25,7 @@ landingContent:
 
   - title: Open Source
     linkLists:
-      - linkListType: concept
+      - linkListType: reference
         links:
           - text: Source Code 
             url: https://github.com/Azure/data-api-builder
