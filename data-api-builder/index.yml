@@ -48,3 +48,5 @@ landingContent:
             url: https://github.com/Azure/data-api-builder/issues
           - text: Discussions
             url: https://github.com/Azure/data-api-builder/discussions
+          - text: Samples
+            url: https://github.com/Azure-Samples/data-api-builder
