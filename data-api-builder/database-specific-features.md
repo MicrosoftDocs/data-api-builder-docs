@@ -12,6 +12,16 @@ ms.date: 04/06/2023
 
 Data API builder allows each database to have its own specific features. This page lists the features that are supported for each database.
 
+## Database version support
+
+| Database | Minimum Supported Version
+| - | - 
+| Azure SQL	| n/a
+| Cosmos DB	| n/a 
+| SQL Server | v2016
+| MySQL |	v8 
+| PostgreSQL | v11 
+
 ### Azure SQL and SQL Server
 
 #### SESSION_CONTEXT and row level security
