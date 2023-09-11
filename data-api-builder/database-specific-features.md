@@ -24,7 +24,7 @@ Azure SQL and SQL Server support the use of the SESSION_CONTEXT function to acce
 
 The Azure Cosmos DB NOSQL API is schema-agnostic. In order to use Data API builder with Azure Cosmos DB, you must create a GraphQL schema file that includes the object type definitions representing your Azure Cosmos DB container's data model. Data API builder also expects your GraphQL object type definitions and fields to include the GraphQL schema directive `authorize` when you want to enforce more restrictive read access than `anonymous`.
 
-Example 1 :
+Example 1:
 
 ```graphql 
 type Book @model(name:"Book"){
@@ -45,6 +45,12 @@ and the corresponding entities section in config.json
         "actions": [
           "read"
         ]
+      },
+      {
+        "role": "role1",
+        "actions": [
+          "read"
+        ]
       }
     ]
   }
@@ -56,7 +62,7 @@ The @authorize directive with roles:["role1","authenticated"] restricts access t
 
 The `@model` directive is utilized to establish a correlation between this GraphQL object type and the corresponding entity name in the runtime config. The directive is formatted as: `@model(name:"<Entity_Name>")`
 
-Example 2 :
+Example 2:
 
 ```graphql 
 type Book @model(name:"Book") @authorize(roles:["role1","authenticated"]) {
@@ -77,6 +83,12 @@ and the corresponding entities section in config.json
         "actions": [
           "read"
         ]
+      },
+      {
+        "role": "role1",
+        "actions": [
+          "read"
+        ]
       }
     ]
   }
@@ -84,8 +96,8 @@ and the corresponding entities section in config.json
 
 ```
 
-By incorporating the @authorize directive in the top-level type definition, you restrict access to the type and its fields will be restricted exclusively to the roles specified within the directive.
+By incorporating the @authorize directive in the top-level type definition, you restrict access to the type and its fields are restricted exclusively to the roles specified within the directive.
 
 #### Cross Container Operations
 
-Currently, GraphQL operations across containers are unsupported. The engine responds with an error message stating, "Adding/updating Relationships is currently not supported in CosmosDB." You can work around this limitation updating your data model to store entities within the same container in an embedded format. To learn more, reference our CosmosDB NOSQL data modeling [documentation](/azure/cosmos-db/nosql/modeling-data).
+Currently, GraphQL operations across containers are unsupported. The engine responds with an error message stating, "Adding/updating Relationships is currently not supported in Cosmos DB."You can work around this limitation by updating your data model to store entities within the same container in an embedded format. To learn more, reference our Cosmos DB NOSQL data modeling [documentation](/azure/cosmos-db/nosql/modeling-data).
