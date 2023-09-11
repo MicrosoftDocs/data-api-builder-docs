@@ -189,8 +189,8 @@ In the following example, the user role `administrator` is the only defined role
 ```
 
 > [!NOTE]
-> To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you are required to use the `@authorize` directive in your supplied.However, for GraphQL mutations and filters in GraphQL queries, access control still is enforced by the permissions configuration as described here.[GraphQL schema file](./database-specific-features.md#user-provided-graphql-schema)
-
+>  To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you are required to use the `@authorize` directive in your supplied. [GraphQL schema file](./database-specific-features.md#user-provided-graphql-schema).
+However, for GraphQL mutations and filters in GraphQL queries, access control still is enforced by the permissions configuration as described above.
 #### Actions
 
 **Actions** describe the accessibility of an entity within the scope of a role. Actions can be specified individually or with the wildcard shortcut: `*` (asterisk). The wildcard shortcut represents all actions supported for the entity type on which it's defined:
@@ -230,7 +230,7 @@ The following example prevents users in the `free-access` role from performing r
 ```
 
 > [!NOTE]
-> To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you are required to use the `@authorize` directive in your supplied.However, for GraphQL mutations and filters in GraphQL queries, access control still is enforced by the permissions configuration as described here.[GraphQL schema file](./database-specific-features.md#user-provided-graphql-schema)
+> To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you are required to use the `@authorize` directive in your supplied. [GraphQL schema file](./database-specific-features.md#user-provided-graphql-schema). However, for GraphQL mutations and filters in GraphQL queries, access control still is enforced by the permissions configuration as described here.
 
 #### Item level security
 

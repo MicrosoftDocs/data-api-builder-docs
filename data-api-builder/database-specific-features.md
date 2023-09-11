@@ -73,7 +73,7 @@ and the corresponding entities section in config.json
     "source": "Book",
     "permissions": [
       {
-        "role": "anonymous",
+        "role": "authenticated",
         "actions": [
           "read"
         ]
@@ -88,4 +88,4 @@ By incorporating the @authorize directive in the top-level type definition, you 
 
 #### Cross Container Operations
 
-Currently, the limitation lies in performing GraphQL operations across containers. The engine responds with an error message stating, "Adding/updating Relationships is currently not supported in CosmosDB."However, you can follow our data mdoelling [documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/modeling-data) , which outlines how to store entities within the same container in an embedded format. By following this approach, you can attain the desired outcome.
+Currently, the limitation lies in performing GraphQL operations across containers. The engine responds with an error message stating, "Adding/updating Relationships is currently not supported in CosmosDB."However, you can follow our data mdoelling [documentation](/azure/cosmos-db/nosql/modeling-data) , which outlines how to store entities within the same container in an embedded format. By following this approach, you can attain the desired outcome.
