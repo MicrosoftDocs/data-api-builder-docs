@@ -52,7 +52,7 @@ and the corresponding entities section in config.json
 
 ```
 
-The @authorize directive with roles:["role1","authenticated"] restricts access to the title field to only users with the roles "role1" and "authenticated". For authenticated requestors, the system role 'authenticated' is automatically assigned, eliminating the need for x-ms-api-role. However, if anonymous access is desired, omitting the authorize directive is recommended.
+The @authorize directive with roles:["role1","authenticated"] restricts access to the title field to only users with the roles "role1" and "authenticated". For authenticated requestors, the system role 'authenticated' is automatically assigned, eliminating the need for `X-MS-API-ROLE` header. If the authenticated request needs to be executed in context of `role1`, it should be accompanied with the value of request header `X-MS-API-ROLE` set to `role1`. However, if anonymous access is desired, you must omit the authorize directive.
 
 The `@model` directive is utilized to establish a correlation between this GraphQL object type and the corresponding entity name in the runtime config. The directive is formatted as: `@model(name:"<Entity_Name>")`
 
@@ -88,4 +88,4 @@ By incorporating the @authorize directive in the top-level type definition, you 
 
 #### Cross Container Operations
 
-Currently, the limitation lies in performing GraphQL operations across containers. The engine responds with an error message stating, "Adding/updating Relationships is currently not supported in CosmosDB."However, you can follow our data mdoelling [documentation](/azure/cosmos-db/nosql/modeling-data) , which outlines how to store entities within the same container in an embedded format. By following this approach, you can attain the desired outcome.
+Currently, GraphQL operations across containers are unsupported. The engine responds with an error message stating, "Adding/updating Relationships is currently not supported in CosmosDB." You can work around this limitation updating your data model to store entities within the same container in an embedded format. To learn more, reference our CosmosDB NOSQL data modeling [documentation](/azure/cosmos-db/nosql/modeling-data).
