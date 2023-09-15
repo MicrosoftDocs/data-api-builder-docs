@@ -10,6 +10,7 @@ ms.date: 02/22/2023
 
 # What's New in Data API builder
 
+- [Version 0.8.5](#version-085)
 - [Version 0.7.6](#version-076)
 - [Version 0.6.14](#version-0614)
 - [Version 0.6.13](#version-0613)
@@ -19,6 +20,38 @@ ms.date: 02/22/2023
 - [Version 0.5.0](#version-050)
 - [Version 0.4.11](#version-0411)
 - [Version 0.3.7](#version-037)
+
+## Version 0.8.5
+
+Certainly! Here's the revised list with the GitHub URL prefix added to all the issue references:
+
+**What's New**
+ - Added support for .env files ([#1497](https://github.com/Azure/data-api-builder/issues/1497))
+ - Added support for adding base-route for Runtime ([#1506](https://github.com/Azure/data-api-builder/issues/1506))
+
+**What's Changed**
+ - Improved null handling in generated config ([#1529](https://github.com/Azure/data-api-builder/issues/1529))
+ - Improved JSON schema definition ([#1565](https://github.com/Azure/data-api-builder/issues/1565))
+ - Improved resolving JSON data types in OpenAPI ([#1568](https://github.com/Azure/data-api-builder/issues/1568))
+ - Improved config validation for REST entities ([#1496](https://github.com/Azure/data-api-builder/issues/1496))
+ - Improved stored procedure parameter handling ([#1551](https://github.com/Azure/data-api-builder/issues/1551))
+ - Improved order by and filter tests for GQL/SQL Types ([#1557](https://github.com/Azure/data-api-builder/issues/1557))
+
+**Bug Fixes**
+ - Fixed the issue with merge config file not being available ([#1493](https://github.com/Azure/data-api-builder/issues/1493))
+ - Fixed broken links in Markdown Contributing and Readme files ([#1498](https://github.com/Azure/data-api-builder/issues/1498))
+ - Fixed the issue when GraphQL is true and include permission is WILDCARD ([#1501](https://github.com/Azure/data-api-builder/issues/1501))
+ - Fixed linting issues with markdown files ([#1514](https://github.com/Azure/data-api-builder/issues/1514))
+ - Fixed unintended update to GraphQL operation when updating REST methods ([#1555](https://github.com/Azure/data-api-builder/issues/1555))
+ - Fixed a bug with only __typename in the selection set ([#1525](https://github.com/Azure/data-api-builder/issues/1525))
+ - Fixed REST behavior for Stored Procedures when methods property is absent in the config file ([#1548](https://github.com/Azure/data-api-builder/issues/1548))
+ - Fixed init command with environment variable ([#1541](https://github.com/Azure/data-api-builder/issues/1541))
+ - Fixed configs missing options for MsSql ([#1580](https://github.com/Azure/data-api-builder/issues/1580))
+ - Fixed OpenAPI document with custom REST path ([#1658](https://github.com/Azure/data-api-builder/issues/1658))
+ - Fixed the guid filter issue in GraphQL ([#1659](https://github.com/Azure/data-api-builder/issues/1659))
+ - Fixed indentation in the generated configuration ([#1663](https://github.com/Azure/data-api-builder/issues/1663))
+
+**Bug Fixes**
 
 ## Version 0.7.6
 
