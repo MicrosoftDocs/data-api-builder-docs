@@ -46,7 +46,7 @@ After the script has finished running, it will return the public container IP ad
 
 ## Use Azure Container Apps
 
-Alternatively, can also deploy the Data API builder [container in Azure](/azure/container-apps/?ocid=AID3042118). Data API builder image is available on the [Microsoft Container Registry](https://mcr.microsoft.com/product/azure-databases/data-api-builder/about).
+Alternatively, you can also deploy the Data API builder [container in Azure](/azure/container-apps/?ocid=AID3042118). Data API builder image is available on the [Microsoft Container Registry](https://mcr.microsoft.com/product/azure-databases/data-api-builder/about).
 
 To run Data API builder in Azure Container Apps, you need to
 
