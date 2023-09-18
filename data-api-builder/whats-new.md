@@ -10,7 +10,7 @@ ms.date: 02/22/2023
 
 # What's New in Data API builder
 
-- [Version 0.8.51](#version-085)
+- [Version 0.8.51](#version-0851)
 - [Version 0.7.6](#version-076)
 - [Version 0.6.14](#version-0614)
 - [Version 0.6.13](#version-0613)
