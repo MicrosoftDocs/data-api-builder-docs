@@ -1,7 +1,7 @@
 ---
 title: Release notes for Data API builder 0.8.5
 description: Release notes for Data API builder 0.8.5 are available here.
-author: Jerry Nixon
+author: jerrynixon
 ms.author: jnixon
 ms.service: data-api-builder 
 ms.topic: whats-new 
