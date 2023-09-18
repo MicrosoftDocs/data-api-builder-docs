@@ -10,6 +10,7 @@ ms.date: 02/22/2023
 
 # What's New in Data API builder
 
+- [Version 0.8.51](#version-085)
 - [Version 0.7.6](#version-076)
 - [Version 0.6.14](#version-0614)
 - [Version 0.6.13](#version-0613)
@@ -19,6 +20,17 @@ ms.date: 02/22/2023
 - [Version 0.5.0](#version-050)
 - [Version 0.4.11](#version-0411)
 - [Version 0.3.7](#version-037)
+
+## Version 0.8.51
+
+### What's New
+
+A summary of the most relevant changes done in this version is available in the following list:
+
+- Added support for `.env` files 
+- Added support for base-route in Runtime
+
+The full list of release notes for this version is available here: [version 0.8.5 release notes](whats-new-0-8-5.md)
 
 ## Version 0.7.6
 
