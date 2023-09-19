@@ -29,6 +29,7 @@ Add a new property under runtime section in the runtime config file.
       }
     }
     //...
+  }
 }
 ```
 
