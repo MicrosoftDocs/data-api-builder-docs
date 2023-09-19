@@ -79,6 +79,3 @@ traces
 
 ![Checking exceptions occured on Data API builder.](./media/application-insights-app-exceptions.png)
 
-
-
-
