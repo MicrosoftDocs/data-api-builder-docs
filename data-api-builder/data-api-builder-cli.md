@@ -59,8 +59,11 @@ Initializes the runtime configuration for the Data API builder runtime engine. I
 | **--auth.provider** | false | StaticWebApps | true | String | Specify the Identity Provider. | 
 | **--rest.path** | false | /api | true | String | Specify the REST endpoint's prefix. | 
 | **--rest.disabled** | false | false | false | - | Disables REST endpoint for all entities. | 
+| **--rest.enabled** | false | true | true | - | Enables REST endpoint for all entities. |
+| **--rest.request-body-strict** | false | true | true | - | Does not allow extraneous fields in request body. |
 | **--graphql.path** | false | /graphql | true | String | Specify the GraphQL endpoint's prefix. | 
 | **--graphql.disabled** | false | false | false | - | Disables GraphQL endpoint for all entities. | 
+| **--graphql.enabled** | false | true | true | - | Enables GraphQL endpoint for all entities. |
 | **--auth.audience** | false | - | true | String | Identifies the recipients that the JWT is intended for. | 
 | **--auth.issuer** | false | - | true | String | Specify the party that issued the JWT token. | 
 | **-c,--config** | false | dab-config.json | true | String | Path to config file. |
