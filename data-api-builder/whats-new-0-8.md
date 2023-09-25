@@ -17,8 +17,6 @@ ms.date: 09/18/2023
 
 Environment variables shield secrets from plain text exposure and allow for value swapping in different settings. However, these variables must be set either in the user or computer scope, which can lead to cross-project variable "bleeding" if variable names are duplicated. The better alternative? ENV files.[Related Blog](https://devblogs.microsoft.com/azure-sql/dab-envfiles)
 
-- Added support for base-route in Runtime [#1506](https://github.com/Azure/data-api-builder/pull/1506)
-
 ### Source & Refactoring
 - Updated FileSystemRuntimeConfigLoader [#1587](https://github.com/Azure/data-api-builder/pull/1587)
 - Updated config system [#1402](https://github.com/Azure/data-api-builder/pull/1402)
@@ -28,6 +26,7 @@ Environment variables shield secrets from plain text exposure and allow for valu
 - Updated missing properties from the schema [#1565](https://github.com/Azure/data-api-builder/pull/1565)
 - Updated OpenAPI - resolving db types to json data types [#1568](https://github.com/Azure/data-api-builder/pull/1568)
 - Updated OpenAPI - distinguish proc parameters & result set columns [#1551](https://github.com/Azure/data-api-builder/pull/1551)
+- Added base-route support in Runtime for SWA [#1506](https://github.com/Azure/data-api-builder/pull/1506)
 
 ### Bug Fixes
 - Fixed merge config file not available issue [#1493](https://github.com/Azure/data-api-builder/pull/1493)
