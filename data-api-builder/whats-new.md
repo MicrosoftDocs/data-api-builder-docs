@@ -28,7 +28,6 @@ ms.date: 02/22/2023
 A summary of the most relevant changes done in this version is available in the following list:
 
 - Added support for `.env` files 
-- Added support for base-route in Runtime
 
 The full list of release notes for this version is available here: [version 0.8.5 release notes](whats-new-0-8-5.md)
 
