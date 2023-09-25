@@ -1,6 +1,6 @@
 ---
-title: Release notes for Data API builder 0.8.5
-description: Release notes for Data API builder 0.8.5 are available here.
+title: Release notes for Data API builder 0.8
+description: Release notes for Data API builder 0.8 are available here.
 author: jerrynixon
 ms.author: jnixon
 ms.service: data-api-builder 
@@ -10,7 +10,7 @@ ms.date: 09/18/2023
 
 # What's new in Data API builder
 
-## Version 0.8.51
+## Version 0.8
 
 ### What's New
 - Added support for .env file [#1497](https://github.com/Azure/data-api-builder/pull/1497)
