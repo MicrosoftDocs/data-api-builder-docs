@@ -136,11 +136,15 @@ Body
 
 ### GraphQL support for stored procedures
 
-Stored procedure execution in GraphQL can be configured using the `graphql` option of a stored procedure backed entity. Explicitly setting the operation of the entity allows you to represent a stored procedure in the GraphQL schema in a way that aligns with the behavior of the stored procedure.
+Stored procedure execution in GraphQL can be configured using the `graphql` option of a stored procedure backed entity. Explicitly setting the operation of the entity allows you to represent a stored procedure in the GraphQL schema in a way that aligns with the behavior of the stored procedure. 
+
+> [!NOTE]
+> GraphQL *requires* a Query element to be present in the schema. If you are exposing only stored procedures, make sure to have at least one of them supporting the `query` operation, otherwise you'll get a GraphQL error like ```The object type Query has to at least define one field in order to be valid.```
+
 Not setting any value for the operation results in the creation of a `mutation` operation.
 
 For example, using the value `query` for the `operation` option results in the stored procedure resolving as a query field in the GraphQL schema
-
+.
 CLI Usage:
 
 ```sh
