@@ -24,7 +24,7 @@ A *stable version* of Data API builder is backwards compatible, meaning that any
 
 A *breaking change version* of Data API builder isn't backwards compatible. Adopting a breaking change version in existing client code may require code changes to ensure the client behaves exactly as it did when targeting the previous version.
 
-Breaking change versions are announced via the breaking change list article and in a GitHub release's change description. Breaking change versions are typically preceded by publication of a preview/release candidate version. While previous versions of Data API builder may remain available on the GitHub releases page, we recommend that you upgrade to the latest release which may include bug fixes.
+Breaking change versions are announced via the breaking change list article and in a GitHub release's change description. Breaking change versions are preceded by publication of a preview/release candidate version unless the changes fix critical security, privacy, or legal issues. While previous versions of Data API builder may remain available on the GitHub releases page, we recommend that you upgrade to the latest release which may include bug fixes.
 
 ### Preview releases
 
@@ -36,9 +36,12 @@ Preview versions are not meant for long-term or production use. When a new stabl
 
 ## Version change table
 
+> [!IMPORTANT]
+> We may introduce a breaking change to a minor or patch release when the change addresses critical product bugs, legal, security, or privacy concerns.
+
 | Release type | Previous Version | New Version | Notes |
 |---|---|---|---|
 | Breaking Change | `1.Y.Z` | `2.Y.Z` | New features and bug fixes along with any breaking changes.|
-| Stable | `1.1.Z`| `1.2.Z` | New features and bug fixes with no breaking changes.|
-| Stable | `1.1.1` | `1.1.2` | Bug fixes with no new features or breaking changes.|
+| Stable | `1.1.Z`| `1.2.Z` | New features and bug fixes with no breaking changes unless the changes address critical product bugs, legal, security, or privacy concerns.|
+| Stable | `1.1.1` | `1.1.2` | Bug fixes with no new features or breaking changes the unless the changes address critical product bugs, legal, security, or privacy concerns.|
 | Preview | `X.Y.1-rc` | `X.Y.2-rc` | New preview features and bug fixes. (Breaking changes are included if the major version is bumped.) |
