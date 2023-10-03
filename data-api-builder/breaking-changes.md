@@ -18,7 +18,7 @@ To prioritize security, enhance features, and maintain code quality, new version
 
 ## What is a breaking change?
 
-A breaking change is a modification that could necessitate adjustments to your application to prevent disruptions. In Data API builder, breaking changes can include alterations to REST API contracts, GraphQL schema generation, and other elements that impact compatibility and functionality.
+A breaking change is a modification that will require you to update your application to prevent disruptions. In Data API builder, breaking changes can include alterations to REST API contracts, GraphQL schema generation, and other elements that impact compatibility and functionality.
 
 ### Breaking change examples
 
