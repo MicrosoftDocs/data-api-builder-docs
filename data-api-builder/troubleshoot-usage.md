@@ -110,6 +110,10 @@ If the return GraphQL error is *"Either the parameter query or the parameter ID 
 
 Make sure the GraphQL request is sent using the HTTP POST method.
 
+## Error "The object type Query has to at least define one field in order to be valid."
+
+Make sure your GraphQL schema has at least on Query object. If you are only exposing stored procedures it might happen that all are expsoed as Mutations (the default behavior) and thus there is no Query object in the schema, which will lead to the error: `The object type Query has to at least define one field in order to be valid.`
+
 ## General errors
 
 ## Request returns an HTTP 500 error
