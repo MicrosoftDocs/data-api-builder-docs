@@ -6,6 +6,8 @@
     href: overview-to-data-api-builder.md
   - name: What's new in Data API builder
     href: whats-new.md
+  - name: What's new in Data API builder 0.8
+    href: whats-new-0-8.md
 - name: Quickstarts
   items:
   - name: Get started with Data API builder
@@ -41,8 +43,9 @@
   - name: Database connections
     href: database-connections.md
 - name: REST
-  href: rest.md
   items:
+  - name: Overview
+    href: rest.md
   - name: Swagger / OpenAPI
     href: openapi.md
 - name: GraphQL
