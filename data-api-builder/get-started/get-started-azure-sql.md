@@ -41,7 +41,7 @@ More details on Azure SQL and SQL Server connection strings can be found here: [
 
 ## Create the database objects
 
-Create the database tables needed to represent Authors, Books and the many-to-many relationship between Authors and Books. You can find the `library.azure-sql.sql` script in the `azure-sql-db` folder in the source code [GitHub repo](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-sql-db/exercise/exercise-library.azure-sql.sql). You can use it to create three tables, along with sample data:
+Create the database tables needed to represent Authors, Books and the many-to-many relationship between Authors and Books. You can find the `library.azure-sql.sql` script in the `azure-sql-db` folder in the source code [GitHub repo](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-sql-db/library.azure-sql.sql). You can use it to create three tables, along with sample data:
 
 - `dbo.authors`: Table containing authors
 - `dbo.books`: Table containing books
