@@ -43,5 +43,5 @@ Preview versions are not meant for long-term or production use. When a new stabl
 |---|---|---|---|
 | Breaking Change | `1.Y.Z` | `2.Y.Z` | New features and bug fixes along with any breaking changes.|
 | Stable | `1.1.Z`| `1.2.Z` | New features and bug fixes with no breaking changes unless the changes address critical product bugs, legal, security, or privacy concerns.|
-| Stable | `1.1.1` | `1.1.2` | Bug fixes with no new features or breaking changes the unless the changes address critical product bugs, legal, security, or privacy concerns.|
+| Stable | `1.1.1` | `1.1.2` | Bug fixes with no new features or breaking changes unless the changes address critical product bugs, legal, security, or privacy concerns.|
 | Preview | `X.Y.1-rc` | `X.Y.2-rc` | New preview features and bug fixes. (Breaking changes are included if the major version is bumped.) |
