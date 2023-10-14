@@ -61,6 +61,8 @@
     href: authentication-azure-ad.md
 - name: Authorization  
   href: authorization.md
+- name: Use Application Insights
+  href: use-application-insights.md
 - name: Database specific features
   href: database-specific-features.md  
   items:
