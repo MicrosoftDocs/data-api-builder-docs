@@ -229,12 +229,35 @@ For example:
 
 ```json
   {
-    "graphql": "true",
-    "operation": "query"
+    "graphql": {
+      "enabled" : true,
+      "operation": "query"
+    }
   }
 ```
 
 instructs the engine that the stored procedure is exposed for graphQL through `Query` operation.
+
+##### GraphQL enabled
+
+The graphql endpoints can be enabled/disabled for a specific entity by using `enabled` property
+
+```json
+"graphql": {
+  "enabled": false
+}
+```
+
+or, to enable
+
+```json
+"graphql": {
+  "enabled": true
+}
+```
+
+If `type`is not provided, the Entity Name becomes the singular type and pluralise for the plural type.
+If this is a Stored Procedure with no provided GraphQL operation, it is set to Mutation by default.
 
 #### REST settings
 
@@ -262,7 +285,26 @@ For example:
 
 ```
 
-instructs the engine that GET and POST actions are configured for this stored procedure.  
+instructs the engine that GET and POST actions are configured for this stored procedure.
+
+##### REST enabled
+
+The rest endpoints can be enabled/disabled for a specific entity by using `enabled` property
+
+```json
+"rest": {
+  "enabled": false
+}
+```
+
+or, to enable
+
+```json
+"rest": {
+  "enabled": true
+}
+```
+If this is a Stored Procedure with no provided REST method, it is set to POST by default.
 
 #### Database object source
 
