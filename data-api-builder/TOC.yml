@@ -71,8 +71,9 @@
 - name: Known issues
   href: known-issues.md  
 - name: Troubleshoot
-  href: troubleshoot.md
   items:
+  - name: Overview
+    href: troubleshoot.md
   - name: Troubleshoot installation
     href: troubleshoot-installation.md
   - name: Troubleshoot usage
