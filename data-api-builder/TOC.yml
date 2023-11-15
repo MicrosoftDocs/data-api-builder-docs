@@ -61,6 +61,8 @@
     href: authentication-azure-ad.md
 - name: Authorization  
   href: authorization.md
+- name: Use Application Insights
+  href: use-application-insights.md
 - name: Database specific features
   href: database-specific-features.md  
   items:
@@ -78,4 +80,12 @@
   - name: Troubleshoot usage
     href: troubleshoot-usage.md
 - name: Security considerations
-  href: security-considerations.md  
+  href: security-considerations.md
+- name: Change Policy
+  items:
+  - name: Versioning
+    href: versioning.md
+  - name: Breaking change policy
+    href: breaking-changes.md
+  - name: Breaking change list
+    href: breaking-change-list.md
