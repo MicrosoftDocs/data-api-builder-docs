@@ -156,6 +156,8 @@ This section contains options that affect the runtime behavior and/or all expose
 
 `enabled`: Boolean flag that defines whether we want to enable to disable the REST endpoints globally. If disabled globally, no entities would be accessible via REST requests irrespective of the individual entity settings.
 
+`request-body-strict`: Boolean flag that defines whether we can include extraneous fields in the request body for a REST operation. By default, it is true - meaning you cannot include extra fields in request body. Doing so would lead to a `BadRequest` exception. However when this flag is set to false, user is allowed to include extra fields in the request body (and those fields would simply be ignored by DAB).
+
 #### GraphQL
 
 `path`: defines the URL path where the GraphQL endpoint is made available. For example if set to `/graphql`, the GraphQL endpoint is exposed `/graphql`. No sub-paths allowed. Optional. Default is `graphql`. Currently, a customized path value for GraphQL endpoint isn't supported.
