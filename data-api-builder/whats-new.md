@@ -72,7 +72,7 @@ A summary of the most relevant changes done in this version is available in the 
 - [Ability to configure GraphQL path and disable REST and GraphQL endpoints globally via CLI](./whats-new-0-6-13.md#ability-to-configure-graphql-path-and-disable-rest-and-graphql-endpoints-globally-via-cli)
 - [Key fields mandatory for adding/updating views in CLI](./whats-new-0-6-13.md#key-fields-mandatory-for-adding-and-updating-views-in-cli)
 
-The full list of release notes for this version is available here: [version 0.6 release notes](./whats-new-0-6.md)
+The full list of release notes for this version is available here: [version 0.6.13 release notes](./whats-new-0-6-13.md)
 
 ## Version 0.5
 

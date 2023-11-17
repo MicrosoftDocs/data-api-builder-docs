@@ -12,13 +12,26 @@ ms.date: 11/16/2023
 
 Here's the details on the most relevant changes and improvement in Data API builder 0.9
 
+## Enable Application Insights when self-hosting DAB
+
+Logs can now be streamed to Application Insights for a better monitoring and debugging experience, especially when Data API builder is deployed in Azure. A new `telemetry` section can been added to the configuration file to enable and configure integration with Application Insights:
+
+```
+"telemetry": {
+    "application-insights": {
+    "enabled": true,    // To enable/disable application insights telemetry
+    "connection-string": "{APP_INSIGHTS_CONNECTION_STRING}" // Application Insights connection string to send telemetry
+    }
+}
+```
+
+Read all the details in the [Use Application Insights](./use-application-insights.md) documentation page.
+
+
 ## Support for ignoring extraneous fields in rest request body
 
 TBD
 
-## Enable Application Insights when self-hosting DAB
-
-TBD
 
 ## Adding Application Name for `mssql` connections 
 

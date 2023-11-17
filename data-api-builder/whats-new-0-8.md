@@ -12,9 +12,9 @@ ms.date: 11/16/2023
 
 Here's the details on the most relevant changes and improvement in Data API builder 0.8
 
-## Added support for .env file [#1497](https://github.com/Azure/data-api-builder/pull/1497)
+## Added support for .env file 
 
-[Environment variables](/azure/data-api-builder/configuration-file#setting-environment-variables) shield secrets from plain text exposure and allow for value swapping in different settings. However, these variables must be set either in the user or computer scope, which can lead to cross-project variable "bleeding" if variable names are duplicated. The better alternative? ENV files. [Related Blog](https://devblogs.microsoft.com/azure-sql/dab-envfiles)
+[Environment variables](/azure/data-api-builder/configuration-file#setting-environment-variables) shield secrets from plain text exposure and allow for value swapping in different settings. However, these variables must be set either in the user or computer scope, which can lead to cross-project variable "bleeding" if variable names are duplicated. The better alternative? ENV files. [Related Blog](https://devblogs.microsoft.com/azure-sql/dab-envfiles).
 
 ## Complete list of fixes:
 
