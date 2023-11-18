@@ -16,7 +16,7 @@ Here's the details on the most relevant changes and improvement in Data API buil
 
 Logs can now be streamed to Application Insights for a better monitoring and debugging experience, especially when Data API builder is deployed in Azure. A new `telemetry` section can been added to the configuration file to enable and configure integration with Application Insights:
 
-```
+```json
 "telemetry": {
     "application-insights": {
     "enabled": true,    // To enable/disable application insights telemetry
@@ -30,20 +30,32 @@ Read all the details in the [Use Application Insights](./use-application-insight
 
 ## Support for ignoring extraneous fields in rest request body
 
-TBD
+Using the new `request-body-strict` option you can now decide if having additional field in the REST payload will generate an error (default behaviour, backward compatible) or the additional fields will just be silentily ignored. 
 
+```json
+"runtime": {
+    "rest": {
+      "enabled": true,
+      "path": "/api",
+      "request-body-strict": true
+    },
+    ...
+}
+```
+
+By setting the `request-body-strict` option to `false`, fields that does not have a mapping to the related database object will be ignored without generating any error.
 
 ## Adding Application Name for `mssql` connections 
 
-TBD
+Data API builder will now inject in the connection string, for `mssql` database types only, the value `dab-<version>` as the `Application Name` property. This will make it easier to identify the connections in the database server. If `Application Name` is already present in the connection string, Data API builder version will be appended to it.
 
 ## Support `time` data type in `mssql`
 
-TBD
+`time` data type is now supported in `mssql` databases.
 
 ## Mutations on table with triggers for `mssql`
 
-TBD
+Mutations are now fully supported on tables with triggers for `mssql` databases.
 
 ## Adding support for positive boolean options in CLI 
 
