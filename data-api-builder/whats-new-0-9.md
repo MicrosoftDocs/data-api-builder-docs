@@ -57,17 +57,9 @@ Data API builder will now inject in the connection string, for `mssql` database 
 
 Mutations are now fully supported on tables with triggers for `mssql` databases.
 
-## Adding support for positive boolean options in CLI 
-
-TBD
-
 ### Preventing update/insert of read-only fields in a table by user 
 
-TBD
-
-## Structured logging compatibility 
-
-TBD
+Automatically detect read-only fields the database and prevent update/insert of those fields by user.  
 
 ## Complete list of fixes:
 
