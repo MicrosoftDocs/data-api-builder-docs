@@ -30,7 +30,7 @@ Read all the details in the [Use Application Insights](./use-application-insight
 
 ## Support for ignoring extraneous fields in rest request body
 
-Using the new `request-body-strict` option you can now decide if having additional field in the REST payload will generate an error (default behaviour, backward compatible) or the additional fields will just be silentily ignored. 
+With the new `request-body-strict` option, you can now decide if having extra field in the REST payload generates an error (default behavior, backward compatible) or the extra fields is just silently ignored. 
 
 ```json
 "runtime": {
@@ -43,11 +43,11 @@ Using the new `request-body-strict` option you can now decide if having addition
 }
 ```
 
-By setting the `request-body-strict` option to `false`, fields that does not have a mapping to the related database object will be ignored without generating any error.
+By setting the `request-body-strict` option to `false`, fields that don't have a mapping to the related database object are ignored without generating any error.
 
 ## Adding Application Name for `mssql` connections 
 
-Data API builder will now inject in the connection string, for `mssql` database types only, the value `dab-<version>` as the `Application Name` property. This will make it easier to identify the connections in the database server. If `Application Name` is already present in the connection string, Data API builder version will be appended to it.
+Data API builder now injects in the connection string, for `mssql` database types only, the value `dab-<version>` as the `Application Name` property, making easier to identify the connections in the database server. If `Application Name` is already present in the connection string, Data API builder version is appended to it.
 
 ## Support `time` data type in `mssql`
 
@@ -63,5 +63,5 @@ Automatically detect read-only fields the database and prevent update/insert of 
 
 ## Complete list of fixes:
 
-Please take a look at [0.9.7 GitHub release page](https://github.com/Azure/data-api-builder/releases/tag/v0.9.7) for a comprehensive list of all the changes and improvements.
+Take a look at [0.9.7 GitHub release page](https://github.com/Azure/data-api-builder/releases/tag/v0.9.7) for a comprehensive list of all the changes and improvements.
 
