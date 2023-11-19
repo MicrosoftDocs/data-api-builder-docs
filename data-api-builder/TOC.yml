@@ -6,8 +6,13 @@
     href: overview-to-data-api-builder.md
   - name: What's new in Data API builder
     href: whats-new.md
-  - name: What's new in Data API builder 0.8
-    href: whats-new-0-8.md
+    items:
+    - name: Version 0.9
+      href: whats-new-0-9.md
+    - name: Version 0.8
+      href: whats-new-0-8.md
+    - name: Older versions
+      href: whats-new.md#version-07
 - name: Quickstarts
   items:
   - name: Get started with Data API builder
