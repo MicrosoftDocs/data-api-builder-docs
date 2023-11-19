@@ -14,7 +14,7 @@ Here's the details on the most relevant changes and improvement in Data API buil
 
 ## Enable Application Insights when self-hosting DAB
 
-Logs can now be streamed to Application Insights for a better monitoring and debugging experience, especially when Data API builder is deployed in Azure. A new `telemetry` section can been added to the configuration file to enable and configure integration with Application Insights:
+Logs can now be streamed to Application Insights for a better monitoring and debugging experience, especially when Data API builder is deployed in Azure. A new `telemetry` section can be added to the configuration file to enable and configure integration with Application Insights:
 
 ```json
 "telemetry": {
