@@ -5,52 +5,65 @@ author: yorek
 ms.author: damauri
 ms.service: data-api-builder 
 ms.topic: whats-new 
-ms.date: 02/22/2023
+ms.date: 11/16/2023
 ---
 
 # What's New in Data API builder
 
+- [Version 0.9](#version-09)
 - [Version 0.8](#version-08)
-- [Version 0.7.6](#version-076)
-- [Version 0.6.14](#version-0614)
-- [Version 0.6.13](#version-0613)
-- [Version 0.5.35](#version-0535)
-- [Version 0.5.34](#version-0534)
-- [Version 0.5.32](#version-0532)
-- [Version 0.5.0](#version-050)
-- [Version 0.4.11](#version-0411)
-- [Version 0.3.7](#version-037)
+- [Version 0.7](#version-07)
+- [Version 0.6](#version-06)
+- [Version 0.5](#version-05)
+- [Version 0.4](#version-04)
+- [Version 0.3](#version-03)
+
+## Version 0.9
+
+A summary of the most relevant changes done in this version is available in the following list:
+
+- Support for ignoring extraneous fields in rest request body 
+- Mutations on table with triggers (for `mssql` databases)
+- [Enable Application Insights when self-hosting DAB](./use-application-insights.md)
+- Remove duplicate exception logged to console during startup failure
+- Adding support for positive boolean options in CLI
+- Preventing update/insert of read-only fields in a table by user
+- Structured logging compatibility
+- Adding application Name for `mssql` connections
+- Support time data type in `mssql`
+
+The full list of release notes for this version is available here: [version 0.9 release notes](whats-new-0-9.md)
 
 ## Version 0.8
-
-### What's New
 
 A summary of the most relevant changes done in this version is available in the following list:
 
 - Added support for `.env` files 
 
-The full list of release notes for this version is available here: [version 0.8.5 release notes](whats-new-0-8.md)
+The full list of release notes for this version is available here: [version 0.8 release notes](whats-new-0-8.md)
 
-## Version 0.7.6
+## Version 0.7
+
+### Version 0.7.6
 
 A summary of the most relevant changes done in this version is available in the following list:
-
 
 - [Initial Support for OpenAPI v3.0.1 description document creation](./whats-new-0-7-6.md#initial-support-for-openapi-v3-0-1-description-document-creation)
 - [Allowing merger of configuration files](./whats-new-0-7-6.md#allowing-merger-of-configuration-files)
 - [Executing GraphQL and REST Mutations in a transaction](./whats-new-0-7-6.md#executing-graphql-and-rest-mutations-in-a-transaction)
 - [Bug Fixes](./whats-new-0-7-6.md#bug-fixes)
 
-The full list of release notes for this version is available here: [version 0.7.6 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.7.6)
+The full list of release notes for this version is available here: [version 0.7 release notes](./whats-new-0-7-6.md)
 
+## Version 0.6
 
-## Version 0.6.14
+### Version 0.6.14
 
 A summary of the most relevant changes done in this version is available in the following list:
 
 - [Bug Fixes](./whats-new-0-6-14.md#bug-fixes)
 
-## Version 0.6.13
+### Version 0.6.13
 
 A summary of the most relevant changes done in this version is available in the following list:
 
@@ -59,12 +72,16 @@ A summary of the most relevant changes done in this version is available in the 
 - [Ability to configure GraphQL path and disable REST and GraphQL endpoints globally via CLI](./whats-new-0-6-13.md#ability-to-configure-graphql-path-and-disable-rest-and-graphql-endpoints-globally-via-cli)
 - [Key fields mandatory for adding/updating views in CLI](./whats-new-0-6-13.md#key-fields-mandatory-for-adding-and-updating-views-in-cli)
 
-## Version 0.5.35
+The full list of release notes for this version is available here: [version 0.6.13 release notes](./whats-new-0-6-13.md)
+
+## Version 0.5
+
+### Version 0.5.35
 
 - Force `Allow User Variables=true` for MySql connections fixing PUT/PATCH requests
 - Improve mapped column handling for REST pagination and NextLink creation fixes
 
-## Version 0.5.34
+### Version 0.5.34
 
 A summary of the most relevant changes done in this version is available in the following list:
 
@@ -72,7 +89,7 @@ A summary of the most relevant changes done in this version is available in the 
 - [Add Correlation ID to request logs](./whats-new-0-5-34.md#add-correlation-id-to-request-logs)
 - [Wildcard Operation Support for Stored Procedures in Engine and CLI](./whats-new-0-5-34.md#wildcard-operation-support-for-stored-procedures-in-engine-and-cli)
 
-## Version 0.5.32
+### Version 0.5.32
 
 A summary of the most relevant changes done in this version is available in the following list:
 
@@ -82,7 +99,7 @@ A summary of the most relevant changes done in this version is available in the 
 - Generate NOTICE.txt in the pipeline for distribution and include LICENSE, README, NOTICE in zip, NuGet, docker image
 - [Turn on BinSkim and fix Policheck alerts](./whats-new-0-5-32.md#turn-on-binskim-and-fix-policheck-alerts)
 
-## Version 0.5.0
+### Version 0.5.0
 
 A summary of the most relevant changes done in this version is available in the following list:
 
@@ -96,7 +113,9 @@ A summary of the most relevant changes done in this version is available in the 
 - [Enhanced logging support using `LogLevel`](./whats-new-0-5-0.md#enhanced-logging-support-using-loglevel)
 - [Updated DAB CLI to support new features](./whats-new-0-5-0.md#updated-cli)
 
-## Version 0.4.11
+## Version 0.4
+
+### Version 0.4.11
 
 A summary of the most relevant changes done in this version is available in the following list:
 
@@ -109,7 +128,9 @@ A summary of the most relevant changes done in this version is available in the 
 - [Managed Identity now supported with Postgres](./whats-new-0-4-11.md#managed-identity-now-supported-with-postgres)
 - [Support Azure AD User authentication for Azure MySQL Service](./whats-new-0-4-11.md#support-azure-ad-user-authentication-for-azure-mysql-service)
 
-## Version 0.3.7
+## Version 0.3
+
+### Version 0.3.7
 
 A summary of the most relevant changes done in this version is available in the following list:
 
