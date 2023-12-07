@@ -56,6 +56,9 @@ A view, from a GraphQL perspective, behaves like a table. All GraphQL operations
 
 Stored procedures can be used as objects related to entities exposed by Data API builder. Stored Procedure usage must be defined specifying that the source type for the entity is `stored-procedure`.
 
+> [!NOTE]
+> Data API builder supports stored procedures for relational databases (i.e. MSSQL), not for non-relational databases (i.e. NoSQL).
+
 If you have a stored procedure, for example [`dbo.stp_get_all_cowritten_books_by_author`](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-sql-db/library.azure-sql.sql#L138) it can be exposed using the following `dab` command:
 
 ```shell
