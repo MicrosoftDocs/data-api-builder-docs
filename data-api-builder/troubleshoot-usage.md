@@ -114,7 +114,7 @@ Make sure the GraphQL request is sent using the HTTP POST method.
 
 Make sure your GraphQL schema has at least on Query object. If you are only exposing stored procedures it might happen that all are expsoed as Mutations (the default behavior) and thus there is no Query object in the schema, which will lead to the error: `The object type Query has to at least define one field in order to be valid.`
 
-## Error "The mutation operation was successful but the current user is unauthorized to view the response due to lack of read permissions"
+## Error "The mutation operation <operation_name> was successful but the current user is unauthorized to view the response due to lack of read permissions"
 
 For a graphQL mutation operation to receive a valid response, read permission should be configured in addition to the respective mutation operation type -  create/update/delete. As the error suggests, the mutation operation(create/update/delete) was successful at the database layer but the lack of read permission is causing Data API builder to return an error message. So, make sure to configure read permission either in the Anonymous role or the role with which you would like to execute the mutation operation. 
 
