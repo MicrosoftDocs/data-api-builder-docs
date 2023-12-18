@@ -28,7 +28,7 @@ dotnet tool install --global  Microsoft.DataApiBuilder
 If you already have an older version of `dab` CLI installed, update the tool using:
 
 ```bash
-dotnet tool update -g Microsoft.DatApiBuilder --version <version_number>
+dotnet tool update -g Microsoft.DataApiBuilder --version <version_number>
 ```
 
 ### Validate the Install
