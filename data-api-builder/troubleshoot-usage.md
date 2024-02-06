@@ -145,6 +145,10 @@ Make sure you set the runtime configuration property `allow-introspection` to `t
 }
 ```
 
+## Error "The mutation operation <operation_name> was successful but the current user is unauthorized to view the response due to lack of read permissions"
+
+For a graphQL mutation operation to receive a valid response, read permission should be configured in addition to the respective mutation operation type -  create/update/delete. As the error suggests, the mutation operation(create/update/delete) was successful at the database layer but the lack of read permission is causing Data API builder to return an error message. So, make sure to configure read permission either in the Anonymous role or the role with which you would like to execute the mutation operation. 
+
 ## General errors
 
 ## Request returns an HTTP 500 error
