@@ -129,6 +129,21 @@ Export the required schema as a file and save to disk based on the options.
 | **-g,--graphql-schema-file** | false | schema.graphql | true | String | Specify the name of the Graphql schema file. |
 | **-c,--config** | false | dab-config.json | true | String | Path to config file. |
 
+### **`validate`**
+
+Validates the runtime config file used by the Data API builder runtime engine. The validation process ensures that the config file is compliant with the schema and contains all the required information for the runtime engine to function correctly.
+
+**Syntax**: `dab validate [options]`
+
+**Example**: `dab validate`
+
+| Options | Option Required | Default Value | Value Required | Value Type | Description |
+| --- | --- | --- | --- | --- | --- |
+| **-c,--config** | false | dab-config.json | true | String | Path to config file that needs to be validated. |
+
+> [!NOTE]
+> `-c` or `--config` is an optional flag. If not used it will pick the config file based on the environment variable (i.e., the same config that would be picked up by `dab start`).
+
 ### **`start`**
 
 Start the runtime engine with the provided configuration file for serving REST and GraphQL requests.
