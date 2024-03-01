@@ -10,15 +10,6 @@ ms.date: 11/16/2023
 
 # What's New in Data API builder
 
-- [Version 0.10](#version-010)
-- [Version 0.9](#version-09)
-- [Version 0.8](#version-08)
-- [Version 0.7](#version-07)
-- [Version 0.6](#version-06)
-- [Version 0.5](#version-05)
-- [Version 0.4](#version-04)
-- [Version 0.3](#version-03)
-
 ## Version 0.10
 
 A summary of the most relevant changes done in this version is available in the following list:
