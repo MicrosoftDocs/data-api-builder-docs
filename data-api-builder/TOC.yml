@@ -69,31 +69,31 @@
     - name: Overview
       href: configuration-file.md#entities
     - name: Source Settings
-      href: configuration-file.md##database-object-source
+      href: configuration-file.md#database-object-source
     - name: Field Mappings
-      href: configuration-file.md##mappings
+      href: configuration-file.md#mappings
     - name: Relationships
       items:
       - name: Overview
-        href: configuration-file.md##relationships
+        href: configuration-file.md#relationships
       - name: One-to-Many Relationships
-        href: configuration-file.md##one-to-many-relationship
+        href: configuration-file.md#one-to-many-relationship
       - name: Many-to-One Relationships
-        href: configuration-file.md##many-to-one-relationship
+        href: configuration-file.md#many-to-one-relationship
       - name: Many-to-Many Relationships
-        href: configuration-file.md##many-to-many-relationship
+        href: configuration-file.md#many-to-many-relationship
     - name: Permissions
       items:
       - name: Overview
-        href: configuration-file.md##permissions
+        href: configuration-file.md#permissions
       - name: Roles
-        href: configuration-file.md##roles
+        href: configuration-file.md#roles
       - name: Actions
-        href: configuration-file.md##actions
+        href: configuration-file.md#actions
       - name: Fields
-        href: configuration-file.md##fields
+        href: configuration-file.md#fields
     - name: Policies
-      href: configuration-file.md##policies
+      href: configuration-file.md#policies
   - name: Sample File
     href: configuration-file-sample.md
   - name: Database Connections
