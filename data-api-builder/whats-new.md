@@ -28,7 +28,6 @@ A summary of the most relevant changes done in this version is available in the 
 
 Preview features:
 
-- Hot reload configuration
 - Multiple data-sources
 - Data Warehouse support
 

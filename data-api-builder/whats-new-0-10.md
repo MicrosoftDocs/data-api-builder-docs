@@ -82,6 +82,8 @@ TTL stands for time-to-live. It is a caching convention that sets the global def
 
 **Entity settings**
 
+> Caching must be enabled globally (see above) before entity-level settings will be reflected. Enabling it at the entity level does not change the global setting. In this way, developers can disable or enable caching with one setting, then tailor the caching experience for every entity. 
+
 ```json
     "Book": {
       "source": {
@@ -137,9 +139,8 @@ against database. this check won't run if database connection fails.
 
 ## Preview features
 
-Preview features in Data API builder are the initial support of a future enhancement. They can be used today and any additional functionality introduced later will follow DAB's breaking chance policy. 
+Preview features in Data API builder are the initial support of a future enhancement. They can be used today and any additional functionality introduced later will follow DAB's breaking change policy. 
 
-- Initial support for Hot Reload [#1726](https://github.com/Azure/data-api-builder/pull/1726)
 - Initial support for DWSQL. [#1864](https://github.com/Azure/data-api-builder/pull/1864)
 - Initial support for multiple data sources. [#1709](https://github.com/Azure/data-api-builder/pull/1709)
 
