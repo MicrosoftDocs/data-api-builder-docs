@@ -247,6 +247,9 @@ The following example prevents users in the `free-access` role from performing r
 > [!WARNING]
 > The **execute** action, used with stored procedures, **does not support** database policies.
 
+> [!NOTE]
+> Database policies are not currently supported by CosmosDB for NoSQL. 
+
 For more information about database policies, see the [configuration file](./configuration-file.md#policies) documentation.
 
 ##### Example
