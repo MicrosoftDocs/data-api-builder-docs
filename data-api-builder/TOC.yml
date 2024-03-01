@@ -7,13 +7,13 @@
   - name: What's new in Data API builder
     items:
     - name: Version 0.10
-      href: whats-new#version-010
+      href: whats-new.md#version-010
     - name: Version 0.9
-      href: whats-new#version-09
+      href: whats-new.md#version-09
     - name: Version 0.8
-      href: whats-new#version-08
+      href: whats-new.md#version-08
     - name: Older versions
-      href: whats-new#version-07
+      href: whats-new.md#version-07
 - name: Quickstarts
   items:
   - name: Get started with Data API builder
