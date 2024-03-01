@@ -487,12 +487,18 @@ The section `permissions` defines who (in terms of roles) can access the related
 
 ```json
 {
-  "permissions": [
-    {
-      "role": "...",
-      "actions": ["create", "read", "update", "delete"],
-      }
-  ]
+  ...
+  "entities": {
+    "<entity-name>": {
+      ...
+      "permissions": [
+        {
+          "role": "...",
+          "actions": ["create", "read", "update", "delete"],
+        }
+      ]
+    }
+  }
 }
 ```
 
@@ -502,7 +508,18 @@ The `role` string contains the name of the role to which the defined permission 
 
 ```json
 {
-  "role": "reader"
+  ...
+  "entities": {
+    "<entity-name>": {
+      ...
+      "permissions": [
+        {
+          "role": "reader"
+          ...
+        }
+      ]
+    }
+  }
 }
 ```
 
@@ -514,8 +531,18 @@ The following example tells Data API builder that the contributor role permits t
 
 ```json
 {
-  "role": "contributor",
-  "actions": ["read", "create"]
+  ...
+  "entities": {
+    "<entity-name>": {
+      ...
+      "permissions": [
+        {
+          "role": "contributor",
+          "actions": ["read", "create"]
+        }
+      ]
+    }
+  }
 }
 ```
 
@@ -523,8 +550,18 @@ In case all actions are allowed, the wildcard character `*` can be used as a sho
 
 ```json
 {
-  "role": "editor",
-  "actions": ["*"]
+  ...
+  "entities": {
+    "<entity-name>": {
+      ...
+      "permissions": [
+        {
+          "role": "editor",
+          "actions": ["*"]
+        }
+      ]
+    }
+  }
 }
 ```
 
@@ -537,11 +574,23 @@ Role configuration supports granularly defining which database columns (fields) 
 
 ```json
 {
-  "role": "read-only",
-  "action": "read",
-  "fields": {
-    "include": ["*"],
-    "exclude": ["field_xyz"]
+  ...
+  "entities": {
+    "<entity-name>": {
+      ...
+      "permissions": [
+        {
+          {
+            "role": "read-only",
+            "action": "read",
+            "fields": {
+              "include": ["*"],
+              "exclude": ["field_xyz"]
+            }
+          }
+        }
+      ]
+    }
   }
 }
 ```
@@ -552,17 +601,25 @@ Both the simplified and granular `action` definitions can be used at the same ti
 
 ```json
 {
-  "role": "reader",
-  "actions": [
-    {
-      "action": "read",
-      "fields": {
-        "include": ["*"],
-        "exclude": ["last_updated"]
-      }
-    },
-    "create"
-  ]
+  ...
+  "entities": {
+    "<entity-name>": {
+      ...
+      "permissions": [
+        {
+          "role": "reader",
+          "action": "read",
+          "fields": {
+            "include": ["*"],
+            "exclude": ["last_updated"]
+        },
+        {
+          "role": "writer",
+          "actions": ["create", "read", "update", "delete"]
+        }
+      ]
+    }
+  }
 }
 ```
 
@@ -573,9 +630,17 @@ In the `fields` section above, the wildcard `*` in the `include` section indicat
 The `policy` section, defined per `action`, defines item-level security rules (database policies) which limit the results returned from a request. The sub-section `database` denotes the database policy expression that is evaluated during request execution.
 
 ```json
-  "policy": {
-    "database": "<Expression>"
+{
+  ...
+  "entities": {
+    "<entity-name>": {
+      ...
+      "policy": {
+        "database": "<Expression>"
+      }
+    }
   }
+}
 ```
 
 - `database` policy: an OData expression that is translated into a query predicate that will be evaluated by the database.
@@ -597,9 +662,17 @@ Two types of directives can be used when authoring a database policy expression:
 For example, a policy that utilizes both directive types, pulling the UserId from the access token and referencing the entity's OwnerId field would look like:
 
 ```json
-  "policy": {
-    "database": "@claims.UserId eq @item.OwnerId"
+{
+  ...
+  "entities": {
+    "<entity-name>": {
+      ...
+      "policy": {
+        "database": "@claims.UserId eq @item.OwnerId"
+      }
+    }
   }
+}
 ```
 
 Data API builder compares the value of the `UserId` claim to the value of the database field `OwnerId`. The result payload only includes records that fulfill **both** the request metadata and the database policy expression.
@@ -628,72 +701,18 @@ The format is: `<database_field>: <entity_field>`
 For example:
 
 ```json
-  "mappings": {
-    "sku_title": "title",
-    "sku_status": "status"
-  }
-```
-
-means the `sku_title` field in the related database object is mapped to the exposed name `title` and `sku_status` is mapped to `status`. Both GraphQL and REST require using `title` and `status` instead of `sku_title` and `sku_status` and will additionally use those mapped values in all response payloads.
-
-#### Sample config
-
-This is a sample config file to give an idea of how the json config consumed by Data API builder might look like:
-
-```json
 {
-  "$schema": "https://github.com/Azure/data-api-builder/releases/download/v{dab-version}/dab.draft.schema.json",
-  "data-source": {
-    "database-type": "mssql",
-    "connection-string": "Server=localhost;Database=PlaygroundDB;User ID=PlaygroundUser;Password=ReplaceMe;TrustServerCertificate=false;Encrypt=True"
-  },
-  "mssql": {
-    "set-session-context": true
-  },
-  "runtime": {
-    "rest": {
-      "enabled": true,
-      "path": "/api"
-    },
-    "graphql": {
-      "allow-introspection": true,
-      "enabled": true,
-      "path": "/graphql"
-    },
-    "host": {
-      "mode": "development",
-      "cors": {
-        "origins": [],
-        "allow-credentials": false
-      },
-      "authentication": {
-        "provider": "StaticWebApps"
-      }
-    }
-  },
+  ...
   "entities": {
-    "Author": {
-      "source": "authors",
-      "rest": false,
-      "graphql": true,
-      "permissions": [
-        {
-          "role": "anonymous",
-          "actions": [ "*" ]
-        }
-      ]
-    },
-    "Book": {
-      "source": "books",
-      "rest": false,
-      "graphql": true,
-      "permissions": [
-        {
-          "role": "anonymous",
-          "actions": [ "*" ]
-        }
-      ]
+    "<entity-name>": {
+      ...
+      "mappings": {
+        "sku_title": "title",
+        "sku_status": "status"
+      }
     }
   }
 }
 ```
+
+means the `sku_title` field in the related database object is mapped to the exposed name `title` and `sku_status` is mapped to `status`. Both GraphQL and REST require using `title` and `status` instead of `sku_title` and `sku_status` and will additionally use those mapped values in all response payloads.

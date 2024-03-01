@@ -46,6 +46,50 @@
 - name: Configuration file
   href: configuration-file.md
   items:
+  - name: Environments Support
+    href: configuration-file.md#environments-support
+  - name: Environment Variables
+    href: configuration-file.md#setting-environment-variables
+  - name: Runtime Settings
+    href: configuration-file.md#runtime-global-settings
+    items:
+    - name: Data Source Settings
+      href: configuration-file.md#data-source
+    - name: REST Settings
+      href: configuration-file.md#rest
+    - name: GraphQL Settings
+      href: configuration-file.md#graphql
+    - name: HOST Settings
+      href: configuration-file.md#host
+  - name: Entities
+    href: configuration-file.md#entities
+    items:
+    - name: Source Settings
+      href: configuration-file.md##database-object-source
+    - name: Relationships
+      href: configuration-file.md##relationships
+      items:
+      - name: One-to-Many Relationships
+        href: configuration-file.md##one-to-many-relationship
+      - name: Many-to-One Relationships
+        href: configuration-file.md##many-to-one-relationship
+      - name: Many-to-Many Relationships
+        href: configuration-file.md##many-to-many-relationship
+    - name: Permissions
+      href: configuration-file.md##permissions
+      items:
+      - name: Roles
+        href: configuration-file.md##roles
+      - name: Actions
+        href: configuration-file.md##actions
+      - name: Fields
+        href: configuration-file.md##fields
+    - name: Claims Policies
+      href: configuration-file.md##policies
+    - name: Field Name Mappings
+      href: configuration-file.md##mappings
+  - name: Sample Configuration File
+    href: configuration-file-sample.md
   - name: Database connections
     href: database-connections.md
 - name: REST
