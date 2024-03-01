@@ -20,30 +20,28 @@
     href: get-started/get-started-with-data-api-builder.md
   - name: Get started with databases 
     items:
-    - name: Use DAB with Azure SQL
+    - name: Using Azure SQL
       href: get-started/get-started-azure-sql.md
-    - name: Use DAB with PostgreSQL
+    - name: Using PostgreSQL
       href: get-started/get-started-azure-postgresql.md
-    - name: Use DAB with Azure Cosmos DB
+    - name: Using Azure Cosmos DB
       href: get-started/get-started-azure-cosmos-db.md
-    - name: Use DAB with MySQL
+    - name: Using MySQL
       href: get-started/get-started-azure-mysql.md
 - name: Command-line Interface (CLI)
   href: data-api-builder-cli.md
-- name: Local development  
+- name: Running Data API builder
   items:
-  - name: Overview
+  - name: Local Development
     href: local-development.md
-  - name: Run using Data API builder CLI
+  - name: Run using the CLI
     href: run-using-data-api-builder-cli.md
-  - name: Run using container
+  - name: Run in a container
     href: run-using-container.md
   - name: Run from source code
     href: run-from-source-code.md
-  - name: Local authentication
-    href: local-authentication.md
-- name: Running in Azure
-  href: running-in-azure.md
+  - name: Run in Azure
+    href: running-in-azure.md
 - name: Configuration file
   items:
   - name: Overview
@@ -94,11 +92,11 @@
         href: configuration-file.md#fields
     - name: Policies
       href: configuration-file.md#policies
-  - name: Sample File
+  - name: Example Configuration
     href: configuration-file-sample.md
   - name: Database Connections
     href: database-connections.md
-- name: REST
+- name: REST Endpoints
   items:
   - name: Overview
     href: rest.md
@@ -106,14 +104,40 @@
     href: openapi.md
   - name: Swagger
     href: openapi.md#swaggerui
-- name: GraphQL
-  href: graphql.md
-- name: Views#views
-  href: views-and-stored-procedures.md
-- name: Stored Procedures
-  href: views-and-stored-procedures.md#stored-procedures
-- name: Relationships  
-  href: relationships.md
+  - name: GET method
+    href: rest.md#get
+  - name: POST method
+    href: rest.md#post
+  - name: PUT method
+    href: rest.md#put
+  - name: PATCH method
+    href: rest.md#patch
+  - name: DELETE method
+    href: rest.md#delete
+- name: GraphQL Endpoints
+  items:
+  - name: Overview
+    href: graphql.md
+  - name: Pagination
+    href: graphql.md#pagination
+  - name: Filtering
+    href: graphql.md#filter
+  - name: Mutations
+    href: graphql.md#mutations
+  - name: Create
+    href: graphql.md#create
+  - name: Update
+    href: graphql.md#update
+  - name: Delete
+    href: graphql.md#delete
+- name: Database Objects
+- items:
+  - name: Using Views
+    href: views-and-stored-procedures.md#views
+  - name: Using Stored Procedures
+    href: views-and-stored-procedures.md#stored-procedures
+  - name: Defining Relationships  
+    href: relationships.md
 - name: Application Insights
   href: use-application-insights.md
 - name: Security
@@ -122,24 +146,26 @@
     href: authentication.md
   - name: Microsoft Entra ID
     href: authentication-azure-ad.md
+  - name: Local authentication
+    href: local-authentication.md
   - name: Authorization  
     href: authorization.md
   - name: Security considerations
     href: security-considerations.md
 - name: Database-specific features
   items:
-  - name: Overview
+  - name: Azure CosmosDB
     href: database-specific-features.md  
   - name: SQL Session Context 
     href: azure-sql-session-context-rls.md
   - name: Row Level Security
     href: azure-sql-session-context-rls.md#example-how-to-use-session_context-to-leverage-row-level-security-rls
-- name: Best practices
-  href: best-practices.md  
 - name: Troubleshoot
   items:
   - name: Overview
     href: troubleshoot.md
+  - name: Best practices
+    href: best-practices.md  
   - name: Troubleshoot installation
     href: troubleshoot-installation.md
   - name: Troubleshoot usage
