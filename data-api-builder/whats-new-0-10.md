@@ -8,7 +8,7 @@ ms.topic: whats-new
 ms.date: 3/1/2024
 ---
 
-# Data API builder vresion 0.10
+# Data API builder version 0.10
 
 ## How to Upgrade 
 
