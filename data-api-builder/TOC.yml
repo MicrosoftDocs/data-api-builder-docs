@@ -1,7 +1,6 @@
 - name: Data API builder Documentation
   href: index.yml
 - name: What is Data API builder?
-  href: overview-to-data-api-builder.md
   items:
   - name: Overview
     href: overview-to-data-api-builder.md
@@ -17,7 +16,7 @@
   items:
   - name: Getting Started
     href: get-started/get-started-with-data-api-builder.md
-  - name: Different Databases
+  - name: Using Databases
     items:
     - name: Using Azure SQL
       href: get-started/get-started-azure-sql.md
@@ -59,7 +58,7 @@
       href: configuration-file.md#rest
     - name: GraphQL Settings
       href: configuration-file.md#graphql
-    - name: HOST Settings
+    - name: Host Settings
       href: configuration-file.md#host
   - name: Entities
     items:
@@ -101,7 +100,7 @@
     href: rest.md
   - name: OpenAPI
     href: openapi.md
-  - name: Swagger
+  - name: Swagger UI
     href: openapi.md#swaggerui
   - name: GET method
     href: rest.md#get
@@ -122,13 +121,15 @@
   - name: Filtering
     href: graphql.md#filter
   - name: Mutations
-    href: graphql.md#mutations
-  - name: Create
-    href: graphql.md#create
-  - name: Update
-    href: graphql.md#update
-  - name: Delete
-    href: graphql.md#delete
+    items:
+    - name: Overview
+      href: graphql.md#mutations
+    - name: Create
+      href: graphql.md#create
+    - name: Update
+      href: graphql.md#update
+    - name: Delete
+      href: graphql.md#delete
 - name: Database Objects
   items:
   - name: Views
@@ -159,7 +160,7 @@
     href: azure-sql-session-context-rls.md
   - name: Row Level Security
     href: azure-sql-session-context-rls.md#example-how-to-use-session_context-to-leverage-row-level-security-rls
-- name: Troubleshoot
+- name: Troubleshooting
   items:
   - name: Overview
     href: troubleshoot.md
@@ -171,9 +172,9 @@
     href: troubleshoot-usage.md
   - name: Known issues
     href: known-issues.md  
-- name: Change Policy
+- name: Internal Policies
   items:
-  - name: Versioning
+  - name: Version Numbers
     href: versioning.md
   - name: Breaking change policy
     href: breaking-changes.md
