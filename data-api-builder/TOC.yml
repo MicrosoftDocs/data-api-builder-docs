@@ -5,11 +5,11 @@
   items:
   - name: Overview
     href: overview-to-data-api-builder.md
-  - name: What's new in Version 0.10
+  - name: What's new in ver. 0.10
     href: whats-new-0-10.md
-  - name: What's new in Version 0.9
+  - name: What's new in ver. 0.9
     href: whats-new.md#version-09
-  - name: What's new in Version 0.8
+  - name: What's new in ver. 0.8
     href: whats-new.md#version-08
   - name: Older versions
     href: whats-new.md#version-07
