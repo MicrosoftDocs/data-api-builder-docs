@@ -130,7 +130,8 @@ Every entity can participate in caching and, if desired, specify a custom TTL va
 
 ### Configuration [Validation in CLI](https://github.com/Azure/data-api-builder/commit/e26d50717753272ca797c45c19e7aad6b6e52f91)
 
-Today you can start dab using the CLI with `dab start` or create a new configuration file with `dab init`. The CLI is for the developer and makes their workflow easier. With validation, developres can use the CLI to check for logical inconsistencies, sytnax errors, or even schema incompabibilities with `dab validate`.
+Today you can start DAB using the CLI with `dab start` or create a new configuration file with `dab init`. The CLI is for the developer and makes their workflow easier. With validation, developres can use the CLI to check for logical inconsistencies, sytnax errors, or even schema incompabibilities with `dab validate`.
+
 
 #### Order of Validation
 1. **Schema validation:** fetches the schema file from the `$schema`
