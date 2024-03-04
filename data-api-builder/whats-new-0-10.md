@@ -5,7 +5,7 @@ author: jerrynixon
 ms.author: jnixon
 ms.service: data-api-builder
 ms.topic: whats-new
-ms.date: March 1, 2024
+ms.date: 3/1/2024
 ---
 
 # Data API builder version 0.10
