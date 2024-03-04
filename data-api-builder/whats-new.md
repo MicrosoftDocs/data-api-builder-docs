@@ -8,7 +8,7 @@ ms.topic: whats-new
 ms.date: 11/16/2023
 ---
 
-## Version 0.10
+# Version 0.10
 
 A summary of the most relevant changes done in this version is available in the following list:
 
