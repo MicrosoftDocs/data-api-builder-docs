@@ -8,24 +8,13 @@ ms.topic: configuration-file
 ms.date: 03/04/2024
 ---
 
-# Configuration File for Entities
+# Configuration File
 
-```json
-{
-  "entities" {
-    "<entity-name>": { ... }
-  }
-}
-```
+### Entities
 
+The `entities` section is where mapping between database objects to exposed endpoint is done, along with properties mapping and permission definition.
 
-## entities
-
-The `entities` section is where mapping between database objects to exposed endpoint is done, along with properties mapping and permission definition. Each exposed entity is enclosed in a dedicated section. The property name is used as the name of the entity to be exposed. 
-
-**Example**
-
-This example declare the `User` entity. This name `User` is used anywhere in the configuration file where entities are referenced. Otherwise the entity name is not relevant to the endpoints.
+Each exposed entity is enclosed in a dedicated section. The property name is used as the name of the entity to be exposed. For example
 
 ```json
 "entities" {
@@ -35,21 +24,20 @@ This example declare the `User` entity. This name `User` is used anywhere in the
 }
 ```
 
-### entity.graphql
+instructs Data API builder to expose a GraphQL entity named `User` and a REST endpoint reachable via `/User` url path.
 
-The `graphql` property defines the name with which the entity is exposed as a GraphQL type, if that is different from the entity name.
+Within the entity section, there are feature specific sections:
+
+#### GraphQL settings
+
+##### GraphQL type
+
+The `graphql` property defines the name with which the entity is exposed as a GraphQL type, if that is different from the entity name:
 
 ```json
-"entities" {
-  "<entity-name>": {
-    "graphql":{
-      "type": "my-alternative-name"
-    }
-  }
+"graphql":{
+  "type": "my-alternative-name"
 }
-```
-
-```json
 ```
 
 or, if needed
