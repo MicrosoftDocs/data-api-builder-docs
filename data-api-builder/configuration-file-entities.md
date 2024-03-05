@@ -1,6 +1,6 @@
 ---
-title: Entities Configuration
-description: Part of the configuration documentation for Data API builder, focusing on Entities Configuration.
+title: Entities Basic Configuration
+description: Part of the configuration documentation for Data API builder, focusing on Entities Basic Configuration.
 author: jnixon
 ms.author: jnixon
 ms.service: data-api-builder
@@ -8,7 +8,23 @@ ms.topic: configuration-file
 ms.date: 03/04/2024
 ---
 
-# Configuration File for Entities
+## Configuration File
+
+1. [Overview](./configuration-file-overview.md)
+1. [Runtime](./configuration-file-runtime.md)
+1. [Entities.{entity}](./configuration-file-entities.md)
+1. [Entities.{entity}.rest](./configuration-file-entities-graphql.md)
+1. [Entities.{entity}.graphql](./configuration-file-entities-rest.md)
+1. [Entities.{entity}.relationships](./configuration-file-entity-relationships.md)
+1. [Entities.{entity}.permissions](./configuration-file-entity-permissions.md)
+1. [Entities.{entity}.policy](./configuration-file-entity-policy.md)
+1. [Sample](./configuration-file-sample.md)
+
+# Entities
+
+## `entities` property
+
+The `entities` section serves as the core of the configuration file, establishing a bridge between database objects and their corresponding API endpoints. It defines how each entity in the database is represented in the API, including property mappings and permissions. Each entity is encapsulated within its own subsection, with the entity's name acting as a key for reference throughout the configuration.
 
 ```json
 {
@@ -18,545 +34,310 @@ ms.date: 03/04/2024
 }
 ```
 
-
-## entities
-
-The `entities` section is where mapping between database objects to exposed endpoint is done, along with properties mapping and permission definition. Each exposed entity is enclosed in a dedicated section. The property name is used as the name of the entity to be exposed. 
-
 **Example**
 
 This example declare the `User` entity. This name `User` is used anywhere in the configuration file where entities are referenced. Otherwise the entity name is not relevant to the endpoints.
 
 ```json
-"entities" {
-  "User": {
-    ...
-  }
-}
-```
-
-### entity.graphql
-
-The `graphql` property defines the name with which the entity is exposed as a GraphQL type, if that is different from the entity name.
-
-```json
-"entities" {
-  "<entity-name>": {
-    "graphql":{
-      "type": "my-alternative-name"
+{
+  "entities" {
+    "User": {
+      ...
     }
   }
 }
 ```
 
-```json
-```
+## `{entity}.source` property
 
-or, if needed
+The {entity}.source configuration is pivotal in defining the connection between the API-exposed entity and its underlying database object. This property specifies the database table, view, or stored procedure that the entity represents, establishing a direct link for data retrieval and manipulation.
 
-```json
-"graphql":{
-  "type": {
-    "singular": "my-alternative-name",
-    "plural": "my-alternative-name-pluralized"
-  }
-}
-```
+**Simple Source Definition**
 
-which instructs Data API builder runtime to expose the GraphQL type for the related entity and to name it using the provided type name. `plural` is optional and can be used to tell Data API builder the correct plural name for that type. If omitted Data API builder tries to pluralize the name automatically, following the English rules for pluralization (for example: https://engdic.org/singular-and-plural-noun-rules-definitions-examples)
-
-##### GraphQL operation
-
-The `graphql` element contains the `operation` property only for stored-procedures. The `operation` property defines the GraphQL operation that is configured for the stored procedure. It can be one of `Query` or `Mutation`.
-
-For example:
+For straightforward scenarios, where the entity maps directly to a single database table or collection, the source property needs only the name of that database object. This simplicity facilitates quick setup for common use cases.
 
 ```json
-  {
-    "graphql": {
-      "enabled" : true,
-      "operation": "query"
+{
+  "entities" {
+    "<entity-name>": {
+      "source": "<database-object>",
+      ...
     }
   }
-```
-
-instructs the engine that the stored procedure is exposed for graphQL through `Query` operation.
-
-##### GraphQL enabled
-
-The graphql endpoints can be enabled/disabled for a specific entity by using `enabled` property
-
-```json
-"graphql": {
-  "enabled": false
 }
 ```
 
-or, to enable
+When specifying a value for `source`, include the schema, for example "dbo.Users".
 
-```json
-"graphql": {
-  "enabled": true
-}
-```
+## `{entity}.type` property
 
-If `type`is not provided, the Entity Name becomes the singular type and pluralise for the plural type.
-If this is a Stored Procedure with no provided GraphQL operation, it is set to Mutation by default.
+The `type` property identifies the type of database object behind the entity, these include `view`, `table`, and `stored-procedure`. Some types require additional properties. The `type` property is required and there is not default value. 
 
-#### REST settings
+**View**
 
-##### REST path
+Views require the `key-fields` property to be provided, so that Data API builder knows how it can identify and return a single item, if needed. If `type` is set to `view` without `key-fields`, the Data API builder engine will refuse to start.
 
-The `path` property defines the endpoint through which the entity is exposed for REST APIs, if that is different from the entity name:
+## `{entity}.key-fields` property
 
-```json
-"rest":{
-  "path": "/entity-path"
-}
-```
-
-##### REST methods
-
-The `methods` property is only valid for stored procedures. This property defines the REST HTTP actions that the stored procedure is configured for.
-
-For example:
-
-```json
-"rest":{
-  "path": "/entity-path",
-  "methods": [ "GET", "POST" ]
-}
-
-```
-
-instructs the engine that GET and POST actions are configured for this stored procedure.
-
-##### REST enabled
-
-The rest endpoints can be enabled/disabled for a specific entity by using `enabled` property
-
-```json
-"rest": {
-  "enabled": false
-}
-```
-
-or, to enable
-
-```json
-"rest": {
-  "enabled": true
-}
-```
-If this is a Stored Procedure with no provided REST method, it is set to POST by default.
-
-#### Database object source
-
-The `source` property tells Data API builder what is the underlying database object to which the exposed entity is connected to.
-
-The simplest option is to specify just the name of the table or the collection:
+The `{entity}.key-fields` setting is necessary for entities backed by views, so Data API builder knows how it can identify and return a single item, if needed. If `type` is set to `view` without `key-fields`, the Data API builder engine will refuse to start.
 
 ```json
 {
-  "source": "dbo.users"
-}
-```
-
-a more complete option is to specify the full description of the database if that isn't a table or a collection:
-
-```json
-{
-  "source": {
-    "object": "<string>",
-    "type": "<view> | <stored-procedure> | <table>",
-    "key-fields": ["<array-of-strings>"],
-    "parameters": {
-        "<name>": "<value>",
-        "<...>": "<...>"
-    }        
+  "entities" {
+    "<entity-name>": {
+      ...
+      "type": "view",
+      "key-fields": [ "<field-name>" ]
+    }
   }
 }
 ```
 
-where
+## `{entity}.parameters` property
 
-+ `object` is the name of the database object to be used.
-+ `type` describes if the object is a table, a view or a stored procedure.
-+ `key-fields` is a list of columns to be used to uniquely identify an item. Needed if type is `view` or if type is `table` and there's no Primary Key defined on it.
-+ `parameters` is optional and can be used if type is `stored-procedure`. The key-value pairs specified in this object will be used to supply values to stored procedures parameters, in case those aren't specified in the HTTP request.
-
-More details on how to use Views and Stored Procedure in the related documentation [Views and Stored Procedures](./views-and-stored-procedures.md)
-
-#### Relationships
-
-The `relationships` section defines how an entity is related to other exposed entities, and optionally provides details on what underlying database objects can be used to support such relationships. Objects defined in the `relationship` section are exposed as GraphQL field in the related entity. The format is the following:
+The `{entity}.parameters` setting is important for entities backed by stored procedures, enabling developers to specify parameters and their default values. This ensures that if certain parameters are not provided within an HTTP request, the system can fall back to these predefined values.
 
 ```json
-"relationships": {
-  "<relationship-name>": {
-    "cardinality": "<one> | <many>",
-    "target.entity": "<entity-name>",
-    "source.fields": ["<array-of-strings>"],
-    "target.fields": ["<array-of-strings>"],
-    "linking.[object|entity]": "<entity-or-db-object-name",
-    "linking.source.fields": ["<array-of-strings>"],
-    "linking.target.fields": ["<array-of-strings>"]
-  }
-}
-```
-
-##### One-To-Many relationship
-
-Using the following configuration snippet as an example:
-
-```json
-"entities": {
-  "Category": {
-    "relationships": {
-      "todos": {
-        "cardinality": "many",
-        "target.entity": "Todo",
-        "source.fields": ["id"],
-        "target.fields": ["category_id"]
+{
+  "entities" {
+    "<entity-name>": {
+      ...
+      "type": "stored-procedure",
+      "parameters": {
+        "<parameter-name-1>" : "<default-value>",
+        "<parameter-name-2>" : "<default-value>",
+        "<parameter-name-3>" : "<default-value>"
       }
     }
   }
 }
 ```
 
-the configuration is telling Data API builder that the exposed `category` entity has a One-To-Many relationship with the `Todo` entity (defined elsewhere in the configuration file) and so the resulting exposed GraphQL schema (limited to the `Category` entity) should look like the following:
+## `{entity}.mappings` property
+
+The `mappings` section enables configuring aliases, or exposed names, for database object fields. The configured exposed names apply to both the GraphQL and REST endpoints. For entities with GraphQL enabled, the configured exposed name must meet GraphQL naming requirements. [GraphQL - October 2021 - Names](https://spec.graphql.org/October2021/#sec-Names)
+
+```json
+{
+  "entities" {
+    "<entity-name>": {
+      ...
+      "mappings": [
+        "<field-1-alias>" : "<field-1-name>",
+        "<field-2-alias>" : "<field-2-name>",
+        "<field-3-alias>" : "<field-3-name>"
+      ]
+    }
+  }
+}
+```
+
+## `{entity}.graphql` property
+
+This segment provides the necessary customization options for integrating an entity into the GraphQL schema. It allows developers to specify or modify default values for the entity's representation in GraphQL, ensuring that the schema accurately reflects the intended structure and naming conventions.
+
+```json
+{
+  "entities" {
+    "<entity-name>": {
+      ...
+      "graphql": {
+        ...
+      }
+    }
+  }
+}
+```
+
+### `{entity}.graphql.enabled` property
+
+This setting controls whether an entity is available via GraphQL endpoints. By toggling the `enabled` property, developers can selectively expose or hide entities from the GraphQL schema, offering flexibility in API design and access control.
+
+```json
+{
+  "entities" {
+    "<entity-name>": {
+      ...
+      "graphql": {
+        ...
+        "enabled": true | false
+      }
+    }
+  }
+}
+```
+
+### `{entity}.graphql.type` property
+
+This property dictates the naming convention for an entity within the GraphQL schema. It supports both scalar string values for direct scalar naming and object types for specifying singular and plural forms, providing granular control over the schema's readability and user experience.
+
+**Scalar string value**
+
+```json
+{
+  "entities" {
+    "<entity-name>": {
+      ...
+      "graphql": {
+        ...
+        "type": "<custom-type-name>"
+      }
+    }
+  }
+}
+```
+
+**Object type value**
+
+For even greater control over the GraphQL type, you can configure how the singular and plural name is represented independently. This is not required but can deliver a curated user experience. If `plural` is missing or omitted (like in the case of the scalar value) Data API builder tries to pluralize the name automatically, following the English rules for pluralization (for example: https://engdic.org/singular-and-plural-noun-rules-definitions-examples)
+
+```json
+{
+  "entities" {
+    "<entity-name>": {
+      ...
+      "graphql": {
+        ...
+        "type": {
+          "singular": "User",
+          "plural": "Users"
+        }
+      }
+    }
+  }
+}
+```
+
+### `{entity}.graphql.operation` property
+
+For entities mapped to stored procedures, the `operation` property designates the GraphQL operation type (query or mutation) where the stored procedure is accessible. This allows for logical organization of the schema and adherence to GraphQL best practices, without impacting functionality.
+
+> An entity is specified to be a stored procedure by setting the `{entity}.type` property value to `stored-procedure`. In the case of a stored procedure, a new GraphQL type executeXXX is automatically created. However, the `operation` property allows the developer to coerse the location of that type into either the `mutation` or `query` parts of the schema. This property allows for schema hygene and there is no functional impact regardless of `operation` value.  
+
+If ommitted or missing, the `operation` default is `mutation`.
+
+**Mutation example**
+
+```json
+{
+  "entities" {
+    "<entity-name>": {
+      ...
+      "graphql":{
+        ...
+        "operation": "mutation"
+      }
+    }
+  }
+}
+```
+
+The Graph QL schema would resemble:
 
 ```graphql
-type Category
-{
-  id: Int!
-  ...
-  todos: [TodoConnection]!
+type Mutation {
+  executeGetCowrittenBooksByAuthor(
+    searchType: String = "S"
+  ): [GetCowrittenBooksByAuthor!]!
 }
 ```
 
-`source.fields` and `target.fields` are optional and can be used to specify which database columns are used to create the query behind the scenes:
-
-+ `source.fields`: database fields in the *source* entity (`Category` in the example) that are used to connect to the related item in the `target` entity
-+ `target.fields`: database fields in the *target* entity (`Todo` in the example) that are used to connect to the related item in the `source` entity
-
-These are optional if there's a Foreign Key constraint on the database between the two tables that can be used to infer that information automatically.
-
-##### Many-To-One relationship
-
-Similar to the One-To-Many but cardinality is set to `one`. Using the following configuration snippet as an example:
+**Query example**
 
 ```json
-"entities": {
-  "Todo": {
-    "relationships": {
-      "category": {
-        "cardinality": "one",
-        "target.entity": "Category",
-        "source.fields": ["category_id"],
-        "target.fields": ["id"]
+{
+  "entities" {
+    "<entity-name>": {
+      ...
+      "graphql":{
+        ...
+        "operation": "query"
       }
     }
   }
 }
 ```
 
-the configuration is telling Data API builder that the exposed `Todo` entity has a Many-To-One relationship with the `Category` entity (defined elsewhere in the configuration file) and so the resulting exposed GraphQL schema (limited to the `Todo` entity) should look like the following:
+The Graph QL schema would resemble:
 
 ```graphql
-type Todo
-{
-  id: Int!
-  ...
-  category: Category
+type Query {
+  executeGetCowrittenBooksByAuthor(
+    searchType: String = "S"
+  ): [GetCowrittenBooksByAuthor!]!
 }
 ```
 
-`source.fields` and `target.fields` are optional and can be used to specify which database columns are used to create the query behind the scenes:
+## `{entity}.rest` property
 
-+ `source.fields`: database fields in the *source* entity (`Todo` in the example) that are used to connect to the related item in the `target` entity
-+ `target.fields`: database fields in the *target* entity (`Category` in the example) that are used to connect to the related item in the `source` entity
-
-These are optional if there's a Foreign Key constraint on the database between the two tables that can be used to infer that information automatically.
-
-##### Many-To-Many relationship
-
-A many-to-many relationship is configured in the same way the other relationships type are configured, with the additional information about the association table or entity used to create the M:N relationship in the backend database.
+The `rest` section of the configuration file is dedicated to fine-tuning the RESTful endpoints for each database entity. This customization capability ensures that the exposed REST API matches specific requirements, improving both its utility and integration capabilities. It addresses potential mismatches between default inferred settings and desired endpoint behaviors.
 
 ```json
-"entities": {
-  "Todo": {
-    "relationships": {
-      "assignees": {
-        "cardinality": "many",
-        "target.entity": "User",
-        "source.fields": ["id"],
-        "target.fields": ["id"],
-        "linking.object": "s005.users_todos",
-        "linking.source.fields": ["todo_id"],
-        "linking.target.fields": ["user_id"]
+{
+  "entities" {
+    "<entity-name>": {
+      ...
+      "rest": {
+        ...
       }
     }
   }
 }
 ```
 
-the `linking` prefix in elements identifies those elements used to provide association table or entity information:
+### `{entity}.rest.enabled` property
 
-+ `linking.object`: the database object (if not exposed via Hawaii) that is used in the backend database to support the M:N relationship
-+ `linking.source.fields`: database fields, in the *linking* object (`s005.users_todos` in the example), that is used to connect to the related item in the `source` entity (`Todo` in the sample)
-+ `linking.target.fields`: database fields, in the *linking* object (`s005.users_todos` in the example), that is used to connect to the related item in the `target` entity (`User` in the sample)
-
-The expected GraphQL schema generated by the above configuration is something like:
-
-```graphql
-type User
-{
-  id: Int!
-  ...
-  todos: [TodoConnection]!
-}
-
-type Todo
-{
-  id: Int!
-  ...
-  assignees: [UserConnection]!
-}
-```
-
-#### Permissions
-
-The section `permissions` defines who (in terms of roles) can access the related entity and using which actions. Actions are the usual CRUD operations: `create`, `read`, `update`, `delete`.
+This property acts as a toggle for the visibility of entities within the REST API. By setting the `enabled` property to `true` or `false`, developers can control access to specific entities, enabling a tailored API surface that aligns with application security and functionality requirements.
 
 ```json
 {
-  ...
-  "entities": {
+  "entities" {
     "<entity-name>": {
       ...
-      "permissions": [
-        {
-          "role": "...",
-          "actions": ["create", "read", "update", "delete"],
-        }
-      ]
-    }
-  }
-}
-```
-
-##### Roles
-
-The `role` string contains the name of the role to which the defined permission applies.
-
-```json
-{
-  ...
-  "entities": {
-    "<entity-name>": {
-      ...
-      "permissions": [
-        {
-          "role": "reader"
-          ...
-        }
-      ]
-    }
-  }
-}
-```
-
-##### Actions
-
-The `actions` array details what actions are allowed on the associated role. When the entity is either a table or view, roles can be configured with a combination of the actions: `create`, `read`, `update`, `delete`.
-
-The following example tells Data API builder that the contributor role permits the `read` and `create` actions on the entity:
-
-```json
-{
-  ...
-  "entities": {
-    "<entity-name>": {
-      ...
-      "permissions": [
-        {
-          "role": "contributor",
-          "actions": ["read", "create"]
-        }
-      ]
-    }
-  }
-}
-```
-
-In case all actions are allowed, the wildcard character `*` can be used as a shortcut to represent all actions supported for the type of entity:
-
-```json
-{
-  ...
-  "entities": {
-    "<entity-name>": {
-      ...
-      "permissions": [
-        {
-          "role": "editor",
-          "actions": ["*"]
-        }
-      ]
-    }
-  }
-}
-```
-
-For stored procedures, roles can only be configured with the `execute` action or the wildcard `*`. The wildcard `*` expands to the `execute` action for stored procedures.
-For tables and views, the wildcard `*` action expands to the actions `create, read, update, delete`.
-
-##### Fields
-
-Role configuration supports granularly defining which database columns (fields) are permitted access in the section `fields`:
-
-```json
-{
-  ...
-  "entities": {
-    "<entity-name>": {
-      ...
-      "permissions": [
-        {
-          {
-            "role": "read-only",
-            "action": "read",
-            "fields": {
-              "include": ["*"],
-              "exclude": ["field_xyz"]
-            }
-          }
-        }
-      ]
-    }
-  }
-}
-```
-
-That indicates to Data API builder that the role *read-only* can `read` from all fields except from `field_xyz`.
-
-Both the simplified and granular `action` definitions can be used at the same time. For example, the following configuration limits the `read` action to specific fields, while implicitly allowing the `create` action to operate on all fields:
-
-```json
-{
-  ...
-  "entities": {
-    "<entity-name>": {
-      ...
-      "permissions": [
-        {
-          "role": "reader",
-          "action": "read",
-          "fields": {
-            "include": ["*"],
-            "exclude": ["last_updated"]
-        },
-        {
-          "role": "writer",
-          "actions": ["create", "read", "update", "delete"]
-        }
-      ]
-    }
-  }
-}
-```
-
-In the `fields` section above, the wildcard `*` in the `include` section indicates all fields. The fields noted in the `exclude` section have precedence over fields noted in the `include` section. The definition translates to *include all fields except for the field 'last_updated'*.
-
-##### Policies
-
-The `policy` section, defined per `action`, defines item-level security rules (database policies) which limit the results returned from a request. The sub-section `database` denotes the database policy expression that is evaluated during request execution.
-
-```json
-{
-  ...
-  "entities": {
-    "<entity-name>": {
-      ...
-      "policy": {
-        "database": "<Expression>"
+      "rest": {
+        "enabled": true | false
       }
     }
   }
 }
 ```
 
-- `database` policy: an OData expression that is translated into a query predicate that will be evaluated by the database.
-  - for example The policy expression `@item.OwnerId eq 2000` is translated to the query predicate `WHERE Table.OwnerId  = 2000`
+If omitted or missing, the default value of `enabled` is `true`. 
 
-> A *predicate* is an expression that evaluates to TRUE, FALSE, or UNKNOWN. Predicates are used in the search condition of [WHERE](/sql/t-sql/queries/where-transact-sql) clauses and [HAVING](/sql/t-sql/queries/select-having-transact-sql) clauses, the join conditions of [FROM](/sql/t-sql/queries/from-transact-sql) clauses, and other constructs where a Boolean value is required.
-([Microsoft Learn Docs](/sql/t-sql/queries/predicates?view=sql-server-ver16&preserve-view=true))
+### `{entity}.rest.path` property
 
-In order for results to be returned for a request, the request's query predicate resolved from a database policy must evaluate to `true` when executing against the database.
-
-Two types of directives can be used when authoring a database policy expression:
-
-- `@claims`: access a claim within the validated access token provided in the request.
-- `@item`: represents a field of the entity for which the database policy is defined.
-
-> [!NOTE]
-> When Azure Static Web Apps authentication (EasyAuth) is configured, a limited number of claims types are available for use in database policies: `identityProvider`, `userId`, `userDetails`, and `userRoles`. See Azure Static Web App's [Client principal data](/azure/static-web-apps/user-information?tabs=javascript#client-principal-data) documentation for more details.
-
-For example, a policy that utilizes both directive types, pulling the UserId from the access token and referencing the entity's OwnerId field would look like:
+The `path` property specifies the URI segment used to access an entity via the REST API. This customization allows for more descriptive or simplified endpoint paths beyond the default entity name, enhancing API navigability and client-side integration.
 
 ```json
 {
-  ...
-  "entities": {
+  "entities" {
     "<entity-name>": {
       ...
-      "policy": {
-        "database": "@claims.UserId eq @item.OwnerId"
+      "rest": {
+        ...
+        "path": "/entity-path"
       }
     }
   }
 }
 ```
 
-Data API builder compares the value of the `UserId` claim to the value of the database field `OwnerId`. The result payload only includes records that fulfill **both** the request metadata and the database policy expression.
+### `{entity}.rest.methods` property
 
-##### Limitations
+Applicable specifically to stored procedures, the `methods` property defines which HTTP verbs (e.g., GET, POST) the procedure can respond to. This enables precise control over how stored procedures are exposed through the REST API, ensuring compatibility with RESTful standards and client expectations. This section underlines the platform's commitment to flexibility and developer control, allowing for precise and intuitive API design tailored to the specific needs of each application.
 
-Database policies are supported for tables and views. Stored procedures can't be configured with policies.
-
-Database policies can't be used to prevent a request from executing within a database. This is because database policies are resolved as query predicates in the generated database queries and are ultimately evaluated by the database engine.
-
-Database policies are only supported for the `actions` **create**, **read**, **update**, and **delete**.
-
-Database policy OData expression syntax only supports:
-
-- Binary operators [BinaryOperatorKind - Microsoft Learn](/dotnet/api/microsoft.odata.uriparser.binaryoperatorkind?view=odata-core-7.0&preserve-view=true) such as `and`, `or`, `eq`, `gt`, `lt`, and more.
-- Unary operators [UnaryOperatorKind - Microsoft Learn](/dotnet/api/microsoft.odata.uriparser.unaryoperatorkind?view=odata-core-7.0&preserve-view=true) such as the negate (`-`) and `not` operators.
-- Entity field names must "start with a letter or underscore, followed by at most 127 letters, underscores or digits" per [OData Common Schema Definition Language Version 4.01](https://docs.oasis-open.org/odata/odata-csdl-json/v4.01/odata-csdl-json-v4.01.html#sec_SimpleIdentifier)
-    - Fields which do not conform to the mentioned restrictions can't be referenced in database policies. As a workaround, configure the entity with a `mappings` section to assign conforming aliases to the fields.
-
-#### Mappings
-
-The `mappings` section enables configuring aliases, or exposed names, for database object fields. The configured exposed names apply to both the GraphQL and REST endpoints. For entities with GraphQL enabled, the configured exposed name **must** meet GraphQL naming requirements. [GraphQL - October 2021 - Names ](https://spec.graphql.org/October2021/#sec-Names)
-
-The format is: `<database_field>: <entity_field>`
-
-For example:
+If omitted or missing, the `methods` default is `POST`. 
 
 ```json
 {
-  ...
-  "entities": {
+  "entities" {
     "<entity-name>": {
       ...
-      "mappings": {
-        "sku_title": "title",
-        "sku_status": "status"
+      "rest": {
+        ...
+        "methods": [ "GET", "POST" ]
       }
     }
   }
 }
 ```
-
-means the `sku_title` field in the related database object is mapped to the exposed name `title` and `sku_status` is mapped to `status`. Both GraphQL and REST require using `title` and `status` instead of `sku_title` and `sku_status` and will additionally use those mapped values in all response payloads.

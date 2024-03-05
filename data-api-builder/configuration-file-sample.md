@@ -8,7 +8,17 @@ ms.topic: configuration-file-sample
 ms.date: 3/1/2024
 ---
 
-# Sample configuration file
+## Configuration File
+
+1. [Overview](./configuration-file-overview.md)
+1. [Runtime](./configuration-file-runtime.md)
+1. [Entities.{entity}](./configuration-file-entities.md)
+1. [Entities.{entity}.relationships](./configuration-file-entity-relationships.md)
+1. [Entities.{entity}.permissions](./configuration-file-entity-permissions.md)
+1. [Entities.{entity}.policy](./configuration-file-entity-policy.md)
+1. [Sample](./configuration-file-sample.md)
+
+# Sample 
 
 This is an example configuration file based on the database defined in our online sample: [here](https://github.com/Azure/data-api-builder/tree/main/samples/getting-started/azure-sql-db).
 
@@ -22,6 +32,8 @@ This is an example configuration file based on the database defined in our onlin
       "set-session-context": false
     }
   },
+```
+```json
   "runtime": {
     "rest": {
       "enabled": true,
@@ -44,7 +56,11 @@ This is an example configuration file based on the database defined in our onlin
       "mode": "development"
     }
   },
+```
+```json
   "entities": {
+```
+```json
     "authors": {
       "source": {
         "object": "[dbo].[authors]",
@@ -92,6 +108,8 @@ This is an example configuration file based on the database defined in our onlin
         }
       }
     },
+```
+```json
     "series": {
       "source": {
         "object": "[dbo].[series]",
@@ -129,6 +147,8 @@ This is an example configuration file based on the database defined in our onlin
         }
       }
     },
+```
+```json
     "books": {
       "source": {
         "object": "[dbo].[books]",
@@ -175,6 +195,8 @@ This is an example configuration file based on the database defined in our onlin
         }
       }
     },
+```
+```json
     "books_authors": {
       "source": {
         "object": "[dbo].[books_authors]",

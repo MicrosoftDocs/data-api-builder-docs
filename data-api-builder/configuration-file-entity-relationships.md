@@ -8,7 +8,17 @@ ms.topic: configuration-file
 ms.date: 03/04/2024
 ---
 
-# Configuration File Entity Relationships
+## Configuration File
+
+1. [Overview](./configuration-file-overview.md)
+1. [Runtime](./configuration-file-runtime.md)
+1. [Entities.{entity}](./configuration-file-entities.md)
+1. [Entities.{entity}.relationships](./configuration-file-entity-relationships.md)
+1. [Entities.{entity}.permissions](./configuration-file-entity-permissions.md)
+1. [Entities.{entity}.policy](./configuration-file-entity-policy.md)
+1. [Sample](./configuration-file-sample.md)
+
+# Relationships
 
 This section outlines options that define relationships between entities. [more](https://devblogs.microsoft.com/azure-sql/data-api-builder-relationships/)
 
@@ -39,12 +49,15 @@ A one-to-many relationship connects one entity to multiple entities in another t
 ```json
 {
   "entities": {
-    "relationships": {
-      "<relationshipName>": {
-        "cardinality": "many",
-        "target.entity": "<entity-name>",
-        "source.fields": ["<array-of-strings>"],
-        "target.fields": ["<array-of-strings>"],
+    "<entity-name>": {
+      ...
+      "relationships": {
+        "<relationship-name>": {
+          "cardinality": "many",
+          "target.entity": "<entity-name>",
+          "source.fields": ["<array-of-strings>"],
+          "target.fields": ["<array-of-strings>"],
+        }
       }
     }
   }
@@ -78,9 +91,10 @@ Consider a scenario where a `Category` entity is related to multiple `Todo` item
 ```json
 {
   "entities": {
-    "Category": {
+    "<entity-name>": {
+      ...
       "relationships": {
-        "todos": {
+        "<relationship-name>": {
           "cardinality": "many",
           "target.entity": "Todo",
           "source.fields": ["id"],
@@ -99,12 +113,15 @@ A Many-To-One relationship implies that multiple records in one entity are assoc
 ```json
 {
   "entities": {
-    "relationships": {
-      "<relationshipName>": {
-        "cardinality": "one",
-        "target.entity": "<entity-name>",
-        "source.fields": ["<array-of-strings>"],
-        "target.fields": ["<array-of-strings>"],
+    "<entity-name>": {
+      ...
+      "relationships": {
+        "<relationship-name>": {
+          "cardinality": "one",
+          "target.entity": "<entity-name>",
+          "source.fields": ["<array-of-strings>"],
+          "target.fields": ["<array-of-strings>"],
+        }
       }
     }
   }
@@ -135,7 +152,8 @@ This configuration establishes a Many-To-One relationship between `Todo` and `Ca
 ```json
 {
   "entities": {
-    "Todo": {
+    "<entity-name>": {
+      ...
       "relationships": {
         "category": {
           "cardinality": "one",
@@ -156,15 +174,22 @@ In a many-to-many relationship, two entities can have multiple connections betwe
 ### Basic Syntax
 
 ```json
-"relationships": {
-  "<relationship-name>": {
-    "cardinality": "many",
-    "target.entity": "<entity-name>",
-    "source.fields": ["<array-of-strings>"],
-    "target.fields": ["<array-of-strings>"],
-    "linking.object": "<entity-or-db-object-name",
-    "linking.source.fields": ["<array-of-strings>"],
-    "linking.target.fields": ["<array-of-strings>"]
+{
+  "entities": {
+    "<entity-name>": {
+      ...
+      "relationships": {
+        "<relationship-name>": {
+          "cardinality": "many",
+          "target.entity": "<entity-name>",
+          "source.fields": ["<array-of-strings>"],
+          "target.fields": ["<array-of-strings>"],
+          "linking.object": "<entity-or-db-object-name",
+          "linking.source.fields": ["<array-of-strings>"],
+          "linking.target.fields": ["<array-of-strings>"]
+        }
+      }
+    }
   }
 }
 ```
@@ -202,22 +227,26 @@ type Author {
 Consider a scenario where books and authors are related through a many-to-many relationship. Each book can have multiple authors, and each author can write multiple books. The relationship is managed through an intermediary table, `BookAuthors`, which links books and authors based on their IDs.
 
 ```json
-"entities": {
-  "Todo": {
-    "relationships": {
-      "assignees": {
-        "cardinality": "many",
-        "target.entity": "User",
-        "source.fields": ["id"],
-        "target.fields": ["id"],
-        "linking.object": "users_todos",
-        "linking.source.fields": ["todo_id"],
-        "linking.target.fields": ["user_id"]
+{
+  "entities": {
+    "Todo": {
+      "relationships": {
+        "assignees": {
+          "cardinality": "many",
+          "target.entity": "User",
+          "source.fields": ["id"],
+          "target.fields": ["id"],
+          "linking.object": "users_todos",
+          "linking.source.fields": ["todo_id"],
+          "linking.target.fields": ["user_id"]
+        }
       }
     }
   }
 }
 ```
+
+**Walkthrough**
 
 + `linking.object`: the database object (if not exposed via Hawaii) that is used in the backend database to support the M:N relationship
 + `linking.source.fields`: database fields, in the *linking* object (`users_todos` in the example), that is used to connect to the related item in the `source` entity (`Todo` in the sample)

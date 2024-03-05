@@ -8,9 +8,22 @@ ms.topic: configuration-file
 ms.date: 03/04/2024
 ---
 
-# Configuration File Overview
+## Configuration File
 
-The Data API builder configuration file is in JSON format. 
+1. [Overview](./configuration-file-overview.md)
+1. [Environment](./configuration-file-environment.md)
+1. [Runtime](./configuration-file-runtime.md)
+1. [Entities.{entity}](./configuration-file-entities.md)
+1. [Entities.{entity}.relationships](./configuration-file-entity-relationships.md)
+1. [Entities.{entity}.permissions](./configuration-file-entity-permissions.md)
+1. [Entities.{entity}.policy](./configuration-file-entity-policy.md)
+1. [Sample](./configuration-file-sample.md)
+
+# Overview
+
+The Data API Builder configuration file provides a structured and comprehensive approach to setting up your API, detailing everything from environmental variables to entity-specific configurations. This JSON-formatted document begins with a `$schema` property for validation purposes, guiding through various sections including `data-source` which establishes the connection to your backend database. 
+
+By specifying the `database-type` and `connection-string`, it ensures seamless integration with a variety of database systems, from Azure SQL DB to Cosmos DB NoSQL API, making it a cornerstone for developers to customize and leverage the Data API Builder's capabilities efficiently.
 
 ## $schema
 
@@ -34,7 +47,8 @@ Replace `VERSION-suffix` with the version you want.
 https://github.com/Azure/data-api-builder/releases/download/v0.3.7-alpha/dab.draft.schema.json
 ```
 
-#### Latest version
+**Latest version**
+
 The latest version of the schema is always available [here](https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json). 
 
 ```https
@@ -47,22 +61,32 @@ The `data-source` section outlines backend database connectivity, specifying bot
 
 ```json
 {
-  "$schema": "...",
+  ...
   "data-source": {
-    "database-type": "...",
+    "database-type": "..",
     "connection-string": "..."
   }
 }
 ```
 
-### database-type
+### database-source.database-type
 
-+ `mssql`: Azure SQL DB, Azure SQL MI and SQL Server
-+ `postgresql`: PostgreSQL
-+ `mysql`: MySQL
-+ `cosmosdb_nosql`: Cosmos DB NoSQL API
-+ `cosmosdb_postgresql`: Cosmos DB PostgreSQL API
+The `type` property indicates the kind of backend database.
 
-### database-type
+|Type|Description
+|-|-
+|`mssql`| Azure SQL DB, Azure SQL MI and SQL Server
+|`postgresql`| PostgreSQL
+|`mysql`| MySQL
+|`cosmosdb_nosql`| Cosmos DB NoSQL API
+|`cosmosdb_postgresql`| Cosmos DB PostgreSQL API
 
-The ADO.NET connection string that Data API builder uses to connect to the backend database. [Learn more](/dotnet/framework/data/adonet/connection-strings)
+### database-source.database-type
+
+The ADO.NET connection string to connect to the backend database. [Learn more.](/dotnet/framework/data/adonet/connection-strings)
+
+**Example**
+
+```
+Server=tcp:myserver.database.windows.net,1433;Database=myDataBase;User ID=mylogin@myserver;Password=myPassword;Trusted_Connection=False;Encrypt=True;
+```

@@ -8,7 +8,17 @@ ms.topic: configuration-file
 ms.date: 03/04/2024
 ---
 
-# Configuration File Runtime Settings
+## Configuration File
+
+1. [Overview](./configuration-file-overview.md)
+1. [Runtime](./configuration-file-runtime.md)
+1. [Entities.{entity}](./configuration-file-entities.md)
+1. [Entities.{entity}.relationships](./configuration-file-entity-relationships.md)
+1. [Entities.{entity}.permissions](./configuration-file-entity-permissions.md)
+1. [Entities.{entity}.policy](./configuration-file-entity-policy.md)
+1. [Sample](./configuration-file-sample.md)
+
+# Runtime
 
 This section outlines options that influence the runtime behavior and settings for all exposed entities.
 
