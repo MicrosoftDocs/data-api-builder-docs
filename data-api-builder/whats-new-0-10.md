@@ -14,7 +14,7 @@ ms.date: 3/1/2024
 
 ### Update the Developer CLI
 
-The Data API Builder CLI is a tool that helps developers build their configuration files with fewer errors. It also runs the DAB engine in the developer's local environment. With each new release of Data API Builder, including version 0.10, we revise the CLI.
+The Data API builder CLI is a tool that helps developers build their configuration files with fewer errors. It also runs the DAB engine in the developer's local environment. With each new release of Data API builder, including version 0.10, we revise the CLI.
 
 1. **For first-time installation**
 
