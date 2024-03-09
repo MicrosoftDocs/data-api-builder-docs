@@ -52,7 +52,7 @@ The Data API builder container works with desktop Docker or in a container servi
 
 ## What's New in Version 0.10
 
-Our focus shifts to stability as we approach General Availability (projected for early May 2024). While not all efforts in code quality and engine stability are detailed below, this list highlights significant updates.
+Our focus shifts to stability as we approach General Availability. While not all efforts in code quality and engine stability are detailed below, this list highlights significant updates.
 
 ### In-memory Caching
 
