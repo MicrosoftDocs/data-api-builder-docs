@@ -48,7 +48,7 @@ The Data API builder container works with desktop Docker or in a container servi
 
 2. **To pull a specific version**
 
-   `docker pull mcr.microsoft.com/azure-databases/data-api-builder:0.10.*`
+   `docker pull mcr.microsoft.com/azure-databases/data-api-builder:0.10.2`
 
 ## What's New in Version 0.10
 
