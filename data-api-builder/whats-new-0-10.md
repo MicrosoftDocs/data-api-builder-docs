@@ -10,6 +10,8 @@ ms.date: 3/1/2024
 
 # Data API builder version 0.10
 
+Release notes and information about the updates and enhancements in Data API builder version 0.10.
+
 ## How to Upgrade
 
 ### Update the Developer CLI
