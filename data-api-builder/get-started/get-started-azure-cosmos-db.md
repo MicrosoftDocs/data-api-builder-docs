@@ -61,7 +61,7 @@ You can also use Azure Cosmos DB emulator connection string if you're testing lo
 The connection string looks like,
 
 ```shell
-AccountEndpoint=AccountEndpoint=https://localhost:8081/;AccountKey=REPLACEME;
+AccountEndpoint=https://localhost:8081/;AccountKey=REPLACEME;
 ```
 
 Now that you have all the required pieces in place, it's time to create the configuration file for DAB.
