@@ -1,162 +1,200 @@
 ---
-title: Data API builder CLI
-description: This document defines the dab CLI.
-author: anagha-todalbagi
-ms.author: atodalbagi
+title: Command-line interface
+description: Lists all of the commands and subcommands (verbs) for the Data API builder command-line interface (CLI).
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: cab-cli
-ms.date: 04/06/2023
+ms.topic: reference
+ms.date: 03/20/2024
 ---
 
-# About `dab` CLI
+# Data API builder command-line interface reference
 
-The Data API builder CLI (**dab CLI** or `dab`) is a command line tool that streamlines the local development experience for applications using Data API builder.
+The Data API builder command-line interface (CLI) (**dab CLI** or `dab`) is a command line tool that streamlines the local development experience for applications using Data API builder.
 
-## Key Features of `dab` CLI
+> [!TIP]
+> The Data API builder CLI comes with an integrated help system. To get a list of what commands are available, use the `--help` option on the `dab` command.
+>
+> ```dotnetcli
+> dab --help
+> ```
+>
+> To get help on a specific command, use the `--help` option. For example, to learn more about the `init` command:
+>
+> ```dotnetcli
+> dab init --help
+> ```
+>
 
-- Initialize the configuration file for REST and GraphQL endpoints
-- Add new entities
-- Update entity details
-- Add/update entity relationships
-- Configure roles and their permissions
-- Configure cross-origin requests (CORS)
-- Run the Data API builder engine
-
-## CLI command line
-
-DAB CLI comes with an integrated help system. To get a list of what commands are available, use the `--help` option on the `dab` command.
-
-```shell
-dab --help
-```
-
-To get help on a specific command, use the `--help` option. For example, to learn more about the `init` command:
-
-```shell
-dab init --help
-```
-
-## CLI command line verbs and options
+## Command-line verbs and options
 
 ### **`init`**
 
 Initializes the runtime configuration for the Data API builder runtime engine. It creates a new JSON file with the properties provided as options.
 
-**Syntax:** `dab init [options]`
+#### Syntax
 
-**Example:** `dab init --config "dab-config.MsSql.json" --database-type mssql --connection-string "Server=tcp:127.0.0.1,1433;User ID=sa;Password=REPLACEME;Connection Timeout=5;"`
+```dotnetcli
+dab init [options]
+```
 
-| Options | Option Required | Default Value | Value Required | Value Type | Description | 
-| :--- | :--- | :--- | :--- | :--- | :--- | 
-| **--database-type** | true | - | true | String | Type of database to connect. Supported values: mssql, cosmosdb_nosql, cosmosdb_postgresql, mysql, postgresql | 
-| **--connection-string** | false | "" | true | String | Connection details to connect to the database. | 
-| **--cosmosdb_nosql-database** | true when databaseType=cosmosdb_nosql | - | true | String | Database name for Cosmos DB for NoSql. | 
-| **--cosmosdb_nosql-container** | false | - | true | String | Container name for Cosmos DB for NoSql. | 
-| **--graphql-schema** | true when databaseType=cosmosdb_nosql | - | true | String | GraphQL schema Path | 
-| **--set-session-context** | false | false | false | - | Enable sending data to MsSql using session context. | 
-| **--host-mode** | false | production | true | String | Specify the Host mode - development or production | 
-| **--cors-origin** | false | "" | true | String | Specify the list of allowed origins. | 
-| **--auth.provider** | false | StaticWebApps | true | String | Specify the Identity Provider. | 
-| **--rest.path** | false | /api | true | String | Specify the REST endpoint's prefix. | 
-| **--rest.disabled** | false | false | false | - | Disables REST endpoint for all entities. | 
-| **--rest.enabled** | false | true | true | - | Enables REST endpoint for all entities. |
-| **--rest.request-body-strict** | false | true | true | - | Does not allow extraneous fields in request body. |
-| **--graphql.path** | false | /graphql | true | String | Specify the GraphQL endpoint's prefix. | 
-| **--graphql.disabled** | false | false | false | - | Disables GraphQL endpoint for all entities. | 
-| **--graphql.enabled** | false | true | true | - | Enables GraphQL endpoint for all entities. |
-| **--auth.audience** | false | - | true | String | Identifies the recipients that the JWT is intended for. | 
-| **--auth.issuer** | false | - | true | String | Specify the party that issued the JWT token. | 
-| **-c,--config** | false | dab-config.json | true | String | Path to config file. |
+#### Examples
+
+```dotnetcli
+dab init --config "dab-config.MsSql.json" --database-type mssql --connection-string "Server=tcp:127.0.0.1,1433;User ID=sa;Password=REPLACEME;Connection Timeout=5;"
+```
+
+#### Options
+
+| Options | Option Required | Default Value | Value Required | Value Type | Description |
+| --- | --- | --- | --- | --- | --- |
+| **--database-type** | ✔️ Yes | | ✔️ Yes | string | Type of database to connect. Supported values: `mssql`, `cosmosdb_nosql`, `cosmosdb_postgresql`, `mysql`, `postgresql`. |
+| **--connection-string** | ❌ No | `""` | ✔️ Yes | string | Connection details to connect to the database. |
+| **--cosmosdb_nosql-database** | ✔️ Yes ¹ | | ✔️ Yes | string | Database name for Cosmos DB for NoSql. |
+| **--cosmosdb_nosql-container** | ❌ No | | ✔️ Yes | string | Container name for Cosmos DB for NoSql. |
+| **--graphql-schema** | ✔️ Yes ¹ | | ✔️ Yes | string | GraphQL schema Path |
+| **--set-session-context** | ❌ No | `false` | ❌ No | | Enable sending data to MsSql using session context. |
+| **--host-mode** | ❌ No | `production` | ✔️ Yes | string | Specify the Host mode - development or production |
+| **--cors-origin** | ❌ No | `""` | ✔️ Yes | string | Specify the list of allowed origins. |
+| **--auth.provider** | ❌ No | `StaticWebApps` | ✔️ Yes | string | Specify the Identity Provider. |
+| **--rest.path** | ❌ No | `/api` | ✔️ Yes | string | Specify the REST endpoint's prefix. |
+| **--rest.disabled** | ❌ No | `false` | ❌ No | | Disables REST endpoint for all entities. |
+| **--rest.enabled** | ❌ No | `true` | ✔️ Yes | | Enables REST endpoint for all entities. |
+| **--rest.request-body-strict** | ❌ No | `true` | ✔️ Yes | | Doesn't allow extraneous fields in request body. |
+| **--graphql.path** | ❌ No | `/graphql` | ✔️ Yes | string | Specify the GraphQL endpoint's prefix. |
+| **--graphql.disabled** | ❌ No | `false` | ❌ No | | Disables GraphQL endpoint for all entities. |
+| **--graphql.enabled** | ❌ No | `true` | ✔️ Yes | | Enables GraphQL endpoint for all entities. |
+| **--auth.audience** | ❌ No | | ✔️ Yes | string | Identifies the recipients that the Json Web Token (JWT) is intended for. |
+| **--auth.issuer** | ❌ No | | ✔️ Yes | string | Specify the party that issued the JWT token. |
+| **-c,--config** | ❌ No | `dab-config.json` | ✔️ Yes | string | Path to config file. |
+
+¹ This option is only required when `--database-type` is set to `cosmosdb_nosql`.
 
 ### **`add`**
 
 Add new database entity to the configuration file. Make sure you already have a configuration file before executing this command, otherwise it returns an error.
 
-**Syntax**: `dab add [entity-name] [options]`
+#### Syntax
 
-**Example:**: `dab add Book -c "dab-config.MsSql.json" --source dbo.books --permissions "anonymous:*"`
+```dotnetcli
+dab add [entity-name] [options]
+```
 
-| Options | Option Required | Default Value | Value Required | Value Type | Description | 
-| :--- | :--- | :--- | :--- | :--- | :--- | 
-| **-s,--source** | true | - | true | String | Name of the source table or container. | 
-| **--permissions** | true | - | true | String | Permissions required to access the source table or container. Format "[role]:[actions]". | 
-| **--source.type** | false | table | true | String | Type of the database object. Must be one of: [table, view, stored-procedure]. | 
-| **--source.params** | false | - | true | String | Dictionary of parameters and their values for Source object."param1:val1,param2:value2,..." for Stored-Procedures. | 
-| **--source.key-fields** | true when  `--source.type`  is view | - | true | String | The field(s) to be used as primary keys for tables and views only. Comma separated values. Example `--source.key-fields "id,name,type"`. | 
-| **--rest** | false | case sensitive entity name. | true | String | Route for REST API. Example: <br>`--rest: false` -> Disables REST API  calls for this entity.<br>`--rest: true` -> Entity name becomes the rest path. <br>`--rest: "customPathName"` -> Provided customPathName becomes the REST path.| 
-| **--rest.methods** | false | post | true | String | HTTP actions to be supported for stored procedure. Specify the actions as a comma separated list. Valid HTTP actions are:[get, post, put, patch, delete]. | 
-| **--graphql** | false | case sensitive entity name | true | Bool/String | Entity type exposed for GraphQL. Example: <br>`--graphql: false` -> disables graphql calls for this entity. <br>`--graphql: true` -> Exposes the entity for GraphQL with default names. The singular form of the entity name is considered for the query and mutation names. <br>`--graphql: "customQueryName"` -> Lets the user customize the singular and plural name for queries and mutations. | 
-| **--graphql.operation** | false | mutation | true | String | GraphQL operation to be supported for stored procedure. Valid operations are: [query, mutation]. | 
-| **--fields.include** | false | - | true | String | Fields with permission to access. | 
-| **--fields.exclude** | false | - | true | String | Fields excluded from the action lists. | 
-| **--policy-database** | false | - | true | String | Specify an OData style filter rule that is injected in the query sent to the database. | 
-| **-c,--config** | false | dab-config.json | true | String | Path to config file. |
+#### Examples
+
+```dotnetcli
+dab add Book -c "dab-config.MsSql.json" --source dbo.books --permissions "anonymous:*"
+```
+
+#### Options
+
+| Options | Option Required | Default Value | Value Required | Value Type | Description |
+| --- | --- | --- | --- | --- | --- |
+| **-s,--source** | ✔️ Yes | | ✔️ Yes | string | Name of the source table or container. |
+| **--permissions** | ✔️ Yes | | ✔️ Yes | string | Permissions required to access the source table or container. Format: `[role]:[actions]`. |
+| **--source.type** | ❌ No | `table` | ✔️ Yes | string | Type of the database object. Supported values: `table`, `view`, `stored-procedure`. |
+| **--source.params** | ❌ No | | ✔️ Yes | string | Dictionary of parameters and their values for Source object. `param1:val1,param2:value2,...` for Stored-Procedures. |
+| **--source.key-fields** | ✔️ Yes ¹ | | ✔️ Yes | string | One or more fields to be used as primary keys for tables and views only. Comma separated values. Example `--source.key-fields "id,name,type"`. |
+| **--rest** | ❌ No | *case-sensitive entity name* | ✔️ Yes | string | Route for REST API. Examples: `--rest: false` -> Disables REST API  calls for this entity. `--rest: true` -> Entity name becomes the rest path. `--rest: "customPathName"` -> Provided customPathName becomes the REST path.|
+| **--rest.methods** | ❌ No | `post` | ✔️ Yes | string | HTTP actions to be supported for stored procedure. Specify the actions as a comma separated list. Valid HTTP actions are:[get, post, put, patch, delete]. |
+| **--graphql** | ❌ No | *case-sensitive entity name* | ✔️ Yes | Bool/String | Entity type exposed for GraphQL. Examples: `--graphql: false` -> disables graphql calls for this entity. `--graphql: true` -> Exposes the entity for GraphQL with default names. The singular form of the entity name is considered for the query and mutation names. `--graphql: "customQueryName"` -> Lets the user customize the singular and plural name for queries and mutations. |
+| **--graphql.operation** | ❌ No | `mutation` | ✔️ Yes | string | GraphQL operation to be supported for stored procedure. Supported values: `query`, `mutation`. |
+| **--fields.include** | ❌ No | | ✔️ Yes | string | Fields with permission to access. |
+| **--fields.exclude** | ❌ No | | ✔️ Yes | string | Fields excluded from the action lists. |
+| **--policy-database** | ❌ No | | ✔️ Yes | string | Specify an OData style filter rule that is injected in the query sent to the database. |
+| **-c,--config** | ❌ No | `dab-config.json` | ✔️ Yes | string | Path to config file. |
+
+¹ This option is only required when `--source.type` is set to `view`.
 
 ### **`update`**
 
 Update the properties of any database entity in the configuration file.
 
-**Syntax**: `dab update [entity-name] [options]`
-
-**Example:** `dab update Publisher --permissions "authenticated:*"`
-
 > [!NOTE]
 > `dab update` supports all the options that are supported by `dab add`. Additionally, it also supports the below listed options.
 
+#### Syntax
+
+```dotnetcli
+dab update [entity-name] [options]
+```
+
+#### Examples
+
+```dotnetcli
+dab update Publisher --permissions "authenticated:*"
+```
+
+#### Options
+
 | Options | Option Required | Default Value | Value Required | Value Type | Description |
 | --- | --- | --- | --- | --- | --- |
-| **--relationship** | false | - | true | String | Specify relationship between two entities. Provide the name of the relationship. |
-| **--cardinality** | true when `--relationship` option is used | - | true | String | Specify cardinality between two entities. Could be one or many. |
-| **--target.entity** | true when `--relationship` option is used | - | true | String | Another exposed entity that the source entity relates to. |
-| **--linking.object** | false | - | true | String | Database object that is used to support an M:N relationship. |
-| **--linking.source.fields** | false | - | true | String | Database fields in the linking object to connect to the related item in the source entity. Comma separated fields. |
-| **--linking.target.fields** | false | - | true | String | Database fields in the linking object to connect to the related item in the target entity. Comma separated fields. |
-| **--relationship.fields** | false | - | true | String | Specify fields to be used for mapping the entities. Example: `--relationship.fields "id:book_id"`. Here `id` represents column from sourceEntity, while `book_id` from targetEntity. Foreign keys are required between the underlying sources if not specified. |
-| **-m,--map** | false | - | true | String | Specify mappings between database fields and GraphQL and REST fields. Format: --map "backendName1:exposedName1, backendName2:exposedName2,...". |
+| **--relationship** | ❌ No | | ✔️ Yes | string | Specify relationship between two entities. Provide the name of the relationship. |
+| **--cardinality** | ✔️ Yes ¹ | | ✔️ Yes | string | Specify cardinality between two entities. Could be one or many. |
+| **--target.entity** | ✔️ Yes ¹ | | ✔️ Yes | string | Another exposed entity that the source entity relates to. |
+| **--linking.object** | ❌ No | | ✔️ Yes | string | Database object that is used to support an M:N relationship. |
+| **--linking.source.fields** | ❌ No | | ✔️ Yes | string | Database fields in the linking object to connect to the related item in the source entity. Comma separated fields. |
+| **--linking.target.fields** | ❌ No | | ✔️ Yes | string | Database fields in the linking object to connect to the related item in the target entity. Comma separated fields. |
+| **--relationship.fields** | ❌ No | | ✔️ Yes | string | Specify fields to be used for mapping the entities. Example: `--relationship.fields "id:book_id"`. Here, `id` represents column from sourceEntity, while `book_id` from targetEntity. Foreign keys are required between the underlying sources if not specified. |
+| **-m,--map** | ❌ No | | ✔️ Yes | string | Specify mappings between database fields and GraphQL and REST fields. Format: `--map "backendName1:exposedName1, backendName2:exposedName2,..."`. |
+
+¹ This option is only required when the `--relationship` option is used.
 
 ### **`export`**
 
 Export the required schema as a file and save to disk based on the options.
 
-**Syntax**: `dab export [options]`
+#### Syntax
 
-**Example**: `dab export --graphql -o ./schemas`
+```dotnetcli
+dab export [options]
+```
+
+#### Examples
+
+```dotnetcli
+dab export --graphql -o ./schemas
+```
+
+#### Options
 
 | Options | Option Required | Default Value | Value Required | Value Type | Description |
 | --- | --- | --- | --- | --- | --- |
-| **--graphql** | false | false | false | - | Export GraphQL schema. |
-| **-o,--output** | true | - | true | String | Specify the directory to save the schema file. |
-| **-g,--graphql-schema-file** | false | schema.graphql | true | String | Specify the name of the Graphql schema file. |
-| **-c,--config** | false | dab-config.json | true | String | Path to config file. |
+| **--graphql** | ❌ No | `false` | ❌ No | | Export GraphQL schema. |
+| **-o,--output** | ✔️ Yes | | ✔️ Yes | string | Specify the directory to save the schema file. |
+| **-g,--graphql-schema-file** | ❌ No | `schema.graphql` | ✔️ Yes | string | Specify the name of the Graphql schema file. |
+| **-c,--config** | ❌ No | `dab-config.json` | ✔️ Yes | string | Path to config file. |
 
 ### **`start`**
 
 Start the runtime engine with the provided configuration file for serving REST and GraphQL requests.
 
-**Syntax**: `dab start [options]`
+#### Syntax
 
-**Example**: `dab start`
+```dotnetcli
+dab start [options]
+```
+
+#### Examples
+
+```dotnetcli
+dab start
+```
+
+#### Options
 
 | Options | Option Required | Default Value | Value Required | Value Type | Description |
 | --- | --- | --- | --- | --- | --- |
-| **--verbose** | false | - | false | - | Specify logging level as informational. |
-| **--LogLevel** | false | Debug when hostMode=development, else Error when HostMode=Production | true | String | Specify logging level as provided value. example: debug, error, information, etc. |
-| **--no-https-redirect** | false | false | true | String | Disables automatic https redirects. |
-| **-c,--config** | false | dab-config.json | true | String | Path to config file. |
+| **--verbose** | ❌ No | | ❌ No | | Specify logging level as informational. |
+| **--LogLevel** | ❌ No | *`Debug` when `hostMode=development`, else `Error` when `HostMode=Production`* | ✔️ Yes | string | Specify logging level as provided value. example: debug, error, information, etc. |
+| **--no-https-redirect** | ❌ No | `false` | ✔️ Yes | string | Disables automatic https redirects. |
+| **-c,--config** | ❌ No | `dab-config.json` | ✔️ Yes | string | Path to config file. |
 
 > [!NOTE]
-> You can't use `--verbose` and `--LogLevel` at the same time. Learn more about different logging levels [here](/dotnet/api/microsoft.extensions.logging.loglevel?view=dotnet-plat-ext-6.0&preserve-view=true).
+> You can't use `--verbose` and `--LogLevel` at the same time. For more information about different logging levels, see [.NET log levels](/dotnet/api/microsoft.extensions.logging.loglevel).
 
-### Using Data API builder with two configuration files
+## Related content
 
-You can maintain multiple pairs of baseline and environment specific configuration files to simplify management of your environment specific settings. The following steps demonstrate how to set up a base configuration file with two environment specific configuration files (**development** and **production**):
-
-1. Create a base configuration file `dab-config.json` with all of your settings common across each of your environments.
-2. Create two environemnt specific configuration files: `dab-config.development.json` and `dab-config.production.json`. These two configuration files should only include settings which differ from the base configuration file such as connection strings.
-3. Next, set the `DAB_ENVIRONMENT` variable based on the environment configuration you want Data API builder to consume. For this example, set `DAB_ENVIRONMENT=development` so the `development` environment configuration file selected.
-4. Start Data API builder with the command `dab start`. The engine checks the value of `DAB_ENVIRONMENT` and uses the base file `dab-config.json` and the environment specific file `dab-config.development.json`. When the engine detects the presence of both files, it merges the files into a third file: `dab-config.development.merged.json`.
-5. (Optional) Set the `DAB_ENVIRONMENT` environment variable value to `production` when you want the production environment specific settings to be merged with your base configuration file.
-
-> [!NOTE]
-> 1. By default, **dab-config.json** is used to start the engine when the `DAB_ENVIRONMENT` environment variable isn't set.
-> 2. A user provided config file is used regardless of the `DAB_ENVIRONMENT` environment variable's value. For example, the file `my-config.json` is used when Data API builder is started using `dab start -c my-config.json`
+- [Functions reference](reference-functions.md)
+- [Configuration reference](reference-config.md)

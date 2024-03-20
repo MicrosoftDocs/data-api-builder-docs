@@ -1,94 +1,246 @@
 ---
-title: Run using Data API builder CLI
-description: This document assists in running Data API builder CLI.
-author: anagha-todalbagi
-ms.author: atodalbagi
+title: Connect with local data
+description: Use the Data API builder with a local Docker-hosted SQL database as part of your typical development process.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: run-using-data-api-builder-cli
-ms.date: 04/06/2023
+ms.topic: how-to
+ms.date: 03/20/2024
+#Customer Intent: As a developer, I want to use the Data API builder with my local database, so that I can quickly develop my API before deploying it.
 ---
 
-# Running Data API builder for Azure Databases using CLI
+# Connect Data API builder with local data
 
-The easiest option that doesn't require cloning the repo is to use the `dab` [CLI tool](./data-api-builder-cli.md) that you can find in the `Microsoft.DataApiBuilder` NuGet package [here.](https://www.nuget.org/packages/Microsoft.DataApiBuilder)
+This guide walks through the steps to build a set of Data API builder configuration files to target a local database. Targeting a local development database early makes it possible to iterate over your configuration and schema quickly as part of your development workflow. The end result configuration files should be flexible enough that a production database configuration can be added in the future with minimal changes.
 
-## Install `dab` CLI
+## Prerequisites
 
-You can install the latest `dab` CLI using [.NET tools](/dotnet/core/tools/global-tools):
+- Data API builder command-line interface (CLI)
+  - [Install the CLI](how-to-install-cli.md)
+- Database on local development machine
+  - This guide uses Microsoft SQL Server 2022 running in a Docker Linux container image, but any supported database can be used
 
-```bash
-dotnet tool install --global  Microsoft.DataApiBuilder
-```
+## Configure the local database
 
-> [!CAUTION]
-> If you are running on Linux or MacOS, you may need to add .NET global tools to your PATH to call `dab` directly. Once installed run: `export PATH=$PATH:~/.dotnet/tools`
+Start by configuring the local database to set the relevant credentials and create basic tables.
 
-## Update `dab` CLI to latest version
+1. Get the latest copy of the `mcr.microsoft.com/mssql/server:2022-latest` container image from Docker Hub.
 
-If you already have an older version of `dab` CLI installed, update the tool using:
+    ```bash
+    docker pull mcr.microsoft.com/mssql/server:2022-latest
+    ```
 
-```bash
-dotnet tool update -g Microsoft.DatApiBuilder --version <version_number>
-```
+1. Start the docker container by setting the password, accepting the end-user license agreement (EULA), and publishing port **1433**. Replace `<your-password>` with a custom password.
 
-### Validate the Install
+    ```bash
+    docker run \
+        --env "ACCEPT_EULA=Y" \
+        --env "MSSQL_SA_PASSWORD=<your-password>" \
+        --publish 1433:1433 \
+        --detach \
+        mcr.microsoft.com/mssql/server:2022-latest
+    ```
 
-Installing the package makes the `dab` command available on your development machine. To validate your installation, you can check the installed version with:
+1. Connect to your local database using your preferred database development environment. Examples include, but aren't limited to: [SQL Server Management Studio](/sql/ssms), [Azure Data Studio](/azure-data-studio), and the [SQL Server extension for Visual Studio Code](/sql/tools/visual-studio-code/sql-server-develop-use-vscode).
 
-```bash
-dab --version
-```
+    > [!TIP]
+    > If you're using default networking for your Docker Linux container images, the connection string will likely be `Server=localhost,1433;User Id=sa;Password=<your-password>;TrustServerCertificate=True;Encrypt=True;`. Replace `<your-password>` with the password you set earlier.
 
-## Run engine using `dab` CLI
+1. Create a new `bookshelf` database and use the database for your remaining queries.
 
-To start the Data API builder engine, use the `start` action if you have the configuration file `dab-config.json` as described [here](./configuration-file.md) in the current directory:
+    ```sql
+    DROP DATABASE IF EXISTS bookshelf;
+    GO
 
-```bash
-dab start
-```
+    CREATE DATABASE bookshelf;
+    GO
 
-For providing a custom configuration file, you can use the option `-c` or `--config` followed by the config file name.
+    USE bookshelf;
+    GO
+    ```
 
-```bash
-dab start -c my-custom-dab-config.json
-```
+1. Create a new `dbo.authors` table and seed the table with basic data.
 
-You can also start the engine with a custom log level. This alters the amount of logging that is provided during both startup and runtime of the service. When you start the service with a custom log level, use the `start` action with `--verbose` or `--LogLevel <0-6>`. `--verbose` starts the service with a log level of `informational` whereas `--LogLevel <0-6>` represents one of the following log levels.
-![image](https://user-images.githubusercontent.com/93220300/216731511-ea420ee8-3b52-4e1b-a052-87943b135be1.png)
+    ```sql
+    DROP TABLE IF EXISTS dbo.authors;
+    GO
 
-```bash
-dab start --verbose
-```
+    CREATE TABLE dbo.authors
+    (
+        id int not null primary key,
+        first_name nvarchar(100) not null,
+        middle_name  nvarchar(100) null,
+        last_name nvarchar(100) not null
+    )
+    GO
 
-```bash
-dab start --LogLevel 0
-```
+    INSERT INTO dbo.authors VALUES
+        (01, 'Henry', null, 'Ross'),
+        (02, 'Jacob', 'A.', 'Hancock'),
+        (03, 'Sydney', null, 'Mattos'),
+        (04, 'Jordan', null, 'Mitchell'),
+        (05, 'Victoria', null, 'Burke'),
+        (06, 'Vance', null, 'DeLeon'),
+        (07, 'Reed', null, 'Flores'),
+        (08, 'Felix', null, 'Henderson'),
+        (09, 'Avery', null, 'Howard'),
+        (10, 'Violet', null, 'Martinez')
+    GO
+    ```
 
-This logs the information as follows:
+## Create a base configuration file
 
-- At startup
-  - what configuration file is being used (Level: Information)
+Start by creating a baseline configuration file using the DAB CLI.
 
-- During the (in-memory schema generation)
-  - what entities have been loaded (names, paths) (Level: Information)
-  - automatically identified relationships columns (Level: Debug)
-  - automatically identified primary keys, column types etc. (Level: Debug)
+1. Create a typical configuration file using `dab init`.
 
-- Whenever a request is received
-  - if request has been authenticated or not and which role has been assigned (Level: Debug)
-  - the generated queries sent to the database (Level: Debug)
+    ```dotnetcli
+    dab init --database-type "mssql" --host-mode "Development"
+    ```
 
-- Internal behavior
-  - view which queries are generated (any query, not just those necessarily related to a request) and sent to the database (Level: Debug)
+1. Add an Author entity using `dab add`.
 
-## Get started using `dab` CLI
+    ```dotnetcli
+    dab add Author --source "dbo.authors" --permissions "anonymous:*"
+    ```
 
-To quickly get started using the CLI, make sure you have read the [Getting Started](./get-started/get-started-with-data-api-builder.md) guide to become familiar with basic Data API builder concepts, and then use [`dab` CLI](./data-api-builder-cli.md) to learn how to use the CLI tool.
+1. Observe your current *dab-config.json* configuration file. The file should include a baseline implementation of your API with a single entity, a REST API endpoint, and a GraphQL endpoint.
 
-## Uninstall `dab` CLI
+    ```json
+    {
+      "$schema": "<https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json>",
+      "data-source": {
+        "database-type": "mssql",
+        "connection-string": "",
+        "options": {
+          "set-session-context": false
+        }
+      },
+      "runtime": {
+        "rest": {
+          "enabled": true,
+          "path": "/api",
+          "request-body-strict": true
+        },
+        "graphql": {
+          "enabled": true,
+          "path": "/graphql",
+          "allow-introspection": true
+        },
+        "host": {
+          "cors": {
+            "origins": [],
+            "allow-credentials": false
+          },
+          "authentication": {
+            "provider": "StaticWebApps"
+          },
+          "mode": "development"
+        }
+      },
+      "entities": {
+        "Author": {
+          "source": {
+            "object": "dbo.authors",
+            "type": "table"
+          },
+          "graphql": {
+            "enabled": true,
+            "type": {
+              "singular": "Author",
+              "plural": "Authors"
+            }
+          },
+          "rest": {
+            "enabled": true
+          },
+          "permissions": [
+            {
+              "role": "anonymous",
+              "actions": [
+                {
+                  "action": "*"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+    ```
 
-For any reason, if you need to uninstall `dab` CLI, simply do:
+1. Run the tool with `dab start`.
 
-```bash
-dotnet tool uninstall -g Microsoft.DataApiBuilder
-```
+    ```dotnetcli
+    dab start
+    ```
+
+    > [!Note]
+    > By default, the engine uses the `dab-config.json` file is a `DAB_ENVIRONMENT` environment variable is not set. Alternatively, you can use `dab start --config <specific-config-file>` to force the engine to use a specific configuration file regardless of the `DAB_ENVIRONMENT` environment variable's value.
+
+1. Observe that the engine fails to start because the default configuration file doesn't specify a connection string for the SQL Server database connection.
+
+## Create a development configuration file
+
+Now, create the environment variables file and a delta configuration file for development-only configuration settings.
+
+1. Create an `.env` file in the same directory as your DAB CLI configuration files.
+
+1. Add a `DAB_ENVIRONMENT` environment variable with a value of `Development`. Also, add an `SQL_DOCKER_CONNECTION_STRING` environment variable with your database connection string from the first section. Replace `<your-password>` with the password you set earlier in this guide.
+
+    ```env
+    SQL_DOCKER_CONNECTION_STRING=Server=localhost,1433;User Id=sa;Database=bookshelf;Password=<your-password>;TrustServerCertificate=True;Encrypt=True;
+    DAB_ENVIRONMENT=Development
+    ```
+
+1. Create a `dab-config.Development.json` file. Add the following content to use the `@env()` function to set your [`connection-string`](reference-config.md#connection-string) value in the development environment.
+
+    ```json
+    {
+      "$schema": "<https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json>",
+      "data-source": {
+        "database-type": "mssql",
+        "connection-string": "@env('SQL_DOCKER_CONNECTION_STRING')"
+      }
+    }
+    ```
+
+1. **Save** your changes to the `.env` and `dab-config.Development.json` files.
+
+## Test API with the local database
+
+Now, start the Data API builder tool to validate that your configuration files are merged during development.
+
+1. Use `dab start` to run the tool and create API endpoints for your entity.
+
+    ```dotnetcli
+    dab start
+    ```
+
+1. The output of the tool should include the address to use to navigate to the running API.
+
+    ```output
+          Successfully completed runtime initialization.
+    info: Microsoft.Hosting.Lifetime[14]
+          Now listening on: <http://localhost:5000>
+    info: Microsoft.Hosting.Lifetime[0]
+    ```
+
+    > [!TIP]
+    > In this example, the application is running on `localhost` at port **5000**. Your running application may have a different address and port.
+
+1. First, try the API manually by issuing a GET request to `/api/Author`.
+
+    > [!TIP]
+    > In this example, the URL would be `https://localhost:5000/api/Author`. You can navigate to this URL using your web browser.
+
+1. Next, navigate to the Swagger documentation page at `/swagger`.
+
+    > [!TIP]
+    > In this example, the URL would be `<https://localhost:5000/swagger`. Again, you can navigate to this URL using your web browser.
+
+## Related content
+
+- [Command-line interface (CLI) reference](reference-cli.md)
+- [Configuration reference](reference-config.md)
