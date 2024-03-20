@@ -134,4 +134,4 @@ This sample is derived from the tables and data provided in [Library sample SQL 
 ## Next step
 
 > [!div class="nextstepaction"]
-> [Configuration reference](reference-config.md)
+> [Configuration reference](reference-configuration.md)

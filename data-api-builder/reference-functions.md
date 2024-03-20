@@ -1,6 +1,6 @@
 ---
 title: Configuration functions
-description: List of functions that can be used in the Data API builder's configuration file.
+description: List of available functions that can be used to enhance the functionality of Data API builder's configuration file.
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
@@ -47,9 +47,9 @@ Now, use the `@env()` function to reference the `SQL_CONN_STRING` environment va
 }
 ```
 
-For more information, see [`data-source` configuration property](reference-config.md#data-source).
+For more information, see [`data-source` configuration property](reference-configuration.md#data-source).
 
 ## Related content
 
 - [Command-line interface (CLI) reference](reference-cli.md)
-- [Configuration reference](reference-config.md)
+- [Configuration reference](reference-configuration.md)

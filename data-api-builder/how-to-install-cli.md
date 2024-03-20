@@ -1,6 +1,6 @@
 ---
-title: Install the CLI
-description: Get started with the Data API builder (DAB) by installing the command-line interface (CLI).
+title: Install the DAB CLI
+description: Get started using the Data API builder (DAB) to generate APIs by installing the command-line interface (CLI).
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon

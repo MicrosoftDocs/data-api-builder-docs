@@ -197,4 +197,4 @@ dab start
 ## Related content
 
 - [Functions reference](reference-functions.md)
-- [Configuration reference](reference-config.md)
+- [Configuration reference](reference-configuration.md)

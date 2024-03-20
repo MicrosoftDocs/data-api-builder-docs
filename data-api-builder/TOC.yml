@@ -27,7 +27,7 @@
     href: reference-cli.md
   - name: Configuration schema
     displayName: Config, JSON
-    href: reference-config.md
+    href: reference-configuration.md
   - name: Functions
     href: reference-functions.md
 - name: Data API builder Documentation

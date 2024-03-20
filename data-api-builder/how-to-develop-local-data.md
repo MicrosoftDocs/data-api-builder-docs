@@ -194,7 +194,7 @@ Now, create the environment variables file and a delta configuration file for de
     DAB_ENVIRONMENT=Development
     ```
 
-1. Create a `dab-config.Development.json` file. Add the following content to use the `@env()` function to set your [`connection-string`](reference-config.md#connection-string) value in the development environment.
+1. Create a `dab-config.Development.json` file. Add the following content to use the `@env()` function to set your [`connection-string`](reference-configuration.md#connection-string) value in the development environment.
 
     ```json
     {
@@ -243,4 +243,4 @@ Now, start the Data API builder tool to validate that your configuration files a
 ## Related content
 
 - [Command-line interface (CLI) reference](reference-cli.md)
-- [Configuration reference](reference-config.md)
+- [Configuration reference](reference-configuration.md)
