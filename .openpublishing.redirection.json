@@ -1,3 +1,24 @@
 {
-  "redirections": []
+  "redirections": [
+    {
+      "source_path_from_root": "/data-api-builder/data-api-builder-cli.md",
+      "redirect_url": "/azure/data-api-builder/reference-cli",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/run-using-data-api-builder-cli.md",
+      "redirect_url": "/azure/data-api-builder/how-to-develop-local-data",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/overview-to-data-api-builder.md",
+      "redirect_url": "/azure/data-api-builder/overview",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/configuration-file.md",
+      "redirect_url": "/azure/data-api-builder/reference-configuration",
+      "redirect_document_id": true
+    }
+  ]
 }

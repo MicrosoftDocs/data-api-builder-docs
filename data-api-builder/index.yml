@@ -2,27 +2,26 @@
 
 title: Data API builder documentation
 summary: Data API builder for Azure Databases provides modern REST and GraphQL endpoints to your Azure Databases.
-
 metadata:
   title: Data API builder documentation
   description: With Data API builder, database objects can be exposed via REST or GraphQL endpoints so that your data can be accessed using modern techniques on any platform, any language, and any device.
-  ms.topic: landing-page
-  ms.author: damauri
+  author: seesharprun
+  ms.author: sidandrews
+  ms.reviewer: jerrynixon
   ms.service: data-api-builder
-  ms.date: 02/27/2023
-
+  ms.topic: landing-page
+  ms.date: 03/20/2024
 landingContent:
   - title: About Data API builder
     linkLists:
       - linkListType: overview
         links:
-          - text: Data API builder overview
-            url: overview-to-data-api-builder.md
+          - text: What is Data API builder?
+            url: overview.md
       - linkListType: whats-new
         links:
           - text: What's new in Data API builder
             url: whats-new.md
-
   - title: Get started
     linkLists:
       - linkListType: quickstart
@@ -32,17 +31,16 @@ landingContent:
           - text: Use Data API builder with Azure SQL
             url: ./get-started/get-started-azure-sql.md
           - text: Use Data API builder with Cosmos DB
-            url: ./get-started/get-started-azure-cosmos-db.md   
+            url: ./get-started/get-started-azure-cosmos-db.md
           - text: Use Data API builder with PostgreSQL
             url: ./get-started/get-started-azure-postgresql.md
-          - text: Use Data API builder with MySQL 
+          - text: Use Data API builder with MySQL
             url: ./get-started/get-started-azure-mysql.md
-
   - title: Open Source
     linkLists:
       - linkListType: reference
         links:
-          - text: Source Code 
+          - text: Source Code
             url: https://github.com/Azure/data-api-builder
           - text: Issues
             url: https://github.com/Azure/data-api-builder/issues
@@ -50,3 +48,19 @@ landingContent:
             url: https://github.com/Azure/data-api-builder/discussions
           - text: Samples
             url: https://github.com/Azure-Samples/data-api-builder
+  - title: Guides
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Install the CLI
+            url: how-to-install-cli.md
+          - text: Develop using local data
+            url: how-to-develop-local-data.md
+  - title: Reference
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Configuration file
+            url: reference-configuration.md
+          - text: Command-line interface (CLI)
+            url: reference-cli.md

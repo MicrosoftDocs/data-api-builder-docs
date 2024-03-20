@@ -3,7 +3,37 @@
 - name: Overview 
   items:
   - name: What is Data API builder?
-    href: overview-to-data-api-builder.md
+    href: overview.md
+- name: How to
+  items:
+    - name: Install the CLI
+      href: how-to-install-cli.md
+    - name: Develop with local data
+      href: how-to-develop-local-data.md
+- name: Samples
+  items:
+  - name: Example configuration
+    href: sample-configuration.md
+  - name: Applications
+    items:
+    - name: Todo app sample with Data API builder, Azure Static Web Apps, and Azure SQL
+      href: https://github.com/azure-samples/dab-swa-todo
+    - name: Library app sample with Data API builder, Azure Static Web Apps, and Azure SQL
+      href: https://github.com/azure-samples/dab-swa-library-demo
+- name: Reference
+  items:
+  - name: Command-line interface
+    displayName: CLI
+    href: reference-cli.md
+  - name: Configuration schema
+    displayName: Config, JSON
+    href: reference-configuration.md
+  - name: Functions
+    href: reference-functions.md
+- name: Data API builder Documentation
+  href: index.yml
+- name: Overview 
+  items:
   - name: What's new in Data API builder
     href: whats-new.md
     items:
