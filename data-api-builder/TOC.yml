@@ -13,7 +13,7 @@
 - name: Samples
   items:
   - name: Example configuration
-    href: sample-config.md
+    href: sample-configuration.md
   - name: Applications
     items:
     - name: Todo app sample with Data API builder, Azure Static Web Apps, and Azure SQL
