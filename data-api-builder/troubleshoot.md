@@ -8,9 +8,9 @@ ms.topic: troubleshooting-general
 ms.date: 02/27/2023 
 ---
 
-# Troubleshoot Data API builder (preview)
+# Troubleshoot Data API builder
 
-This article provides solutions to common problems that might arise when you're using Data API builder (preview).
+This article provides solutions to common problems that might arise when you're using Data API builder.
 
 ## Troubleshooting topics
 
