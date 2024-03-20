@@ -56,5 +56,8 @@
       "template_folder": "_themes.pdf"
     }
   },
-  "skip_source_output_uploading": false
+  "skip_source_output_uploading": false,
+  "redirection_files": [
+    ".openpublishing.redirection.json"
+  ]
 }
