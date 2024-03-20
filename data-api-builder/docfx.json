@@ -41,7 +41,9 @@
     "globalMetadata": {
       "breadcrumb_path": "/azure/data-api-builder/breadcrumb/toc.json",
       "extendBreadcrumb": true,
-      "feedback_system": "None"
+      "feedback_system": "None",
+      "uhfHeaderId": "Azure",
+      "titleSuffix": "Data API builder"
     },
     "fileMetadata": {},
     "template": [],
