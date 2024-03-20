@@ -37,6 +37,8 @@
   - name: What's new in Data API builder
     href: whats-new.md
     items:
+    - name: Version 0.10
+      href: whats-new-0-10.md
     - name: Version 0.9
       href: whats-new-0-9.md
     - name: Version 0.8
