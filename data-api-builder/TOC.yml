@@ -1,6 +1,7 @@
 - name: Data API builder Documentation
   href: index.yml
-- name: Overview 
+- name: Overview
+  expanded: true
   items:
   - name: What is Data API builder?
     href: overview.md
