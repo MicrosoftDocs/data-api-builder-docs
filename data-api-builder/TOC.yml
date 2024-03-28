@@ -26,14 +26,17 @@
   - name: Command-line interface
     displayName: CLI
     href: reference-cli.md
-  - name: Configuration schema
-    displayName: Config, JSON
-    href: reference-configuration.md
+  - name: Configuration
     items:
-      - name: Schema
-        href: reference-configuration.md#schema
-      - name: Data source
-        href: reference-configuration.md#data-source
+      - name: Full configuration Schema      
+        displayName: Config, JSON
+        href: reference-configuration.md
+      - name: Sections
+        items:
+        - name: Schema
+          href: reference-configuration.md#schema
+        - name: Data source
+          href: reference-configuration.md#data-source
   - name: Functions
     href: reference-functions.md
 - name: Data API builder Documentation
