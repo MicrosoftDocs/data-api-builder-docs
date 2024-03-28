@@ -20,7 +20,7 @@ This sample is derived from the tables and data provided in [Library sample SQL 
   "$schema": "https://github.com/Azure/data-api-builder/releases/download/v0.10.23/dab.draft.schema.json",
   "data-source": {
     "database-type": "mssql",
-    "connection-string": "@env('AZURE_SQL_CONNECTION_STRING')",
+    "connection-string": "@env('my-connection-string')",
     "options": {
       "set-session-context": false
     }
@@ -29,7 +29,7 @@ This sample is derived from the tables and data provided in [Library sample SQL 
     "rest": {
       "enabled": true,
       "path": "/api",
-      "request-body-strict": true
+      "request-body-strict": false
     },
     "graphql": {
       "enabled": true,
@@ -48,16 +48,64 @@ This sample is derived from the tables and data provided in [Library sample SQL 
     }
   },
   "entities": {
-    "Author": {
+    "authors": {
       "source": {
-        "object": "dbo.authors",
-        "type": "table"
+        "object": "[dbo].[authors]",
+        "type": "table",
+        "key-fields": [ "id" ]
       },
       "graphql": {
         "enabled": true,
         "type": {
-          "singular": "Author",
-          "plural": "Authors"
+          "singular": "authors",
+          "plural": "authors"
+        }
+      },
+      "rest": {
+        "enabled": true
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*",
+              "fields": {
+                "exclude": [ "middle_name" ],
+                "include": [
+                  "id",
+                  "first_name",
+                  "last_name"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "mappings": { "id": "key" },
+      "relationships": {
+        "books": {
+          "cardinality": "many",
+          "target.entity": "books",
+          "source.fields": [],
+          "target.fields": [],
+          "linking.object": "dbo.books_authors",
+          "linking.source.fields": [ "author_id" ],
+          "linking.target.fields": [ "book_id" ]
+        }
+      }
+    },
+    "series": {
+      "source": {
+        "object": "[dbo].[series]",
+        "type": "table",
+        "key-fields": [ "id" ]
+      },
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "series",
+          "plural": "series"
         }
       },
       "rest": {
@@ -76,25 +124,25 @@ This sample is derived from the tables and data provided in [Library sample SQL 
       "relationships": {
         "books": {
           "cardinality": "many",
-          "target.entity": "Book",
-          "source.fields": [],
-          "target.fields": [],
-          "linking.object": "dbo.books_authors",
+          "target.entity": "books",
+          "source.fields": [ "id" ],
+          "target.fields": [ "series_id" ],
           "linking.source.fields": [],
           "linking.target.fields": []
         }
       }
     },
-    "Book": {
+    "books": {
       "source": {
-        "object": "dbo.books",
-        "type": "table"
+        "object": "[dbo].[books]",
+        "type": "table",
+        "key-fields": [ "id" ]
       },
       "graphql": {
         "enabled": true,
         "type": {
-          "singular": "Book",
-          "plural": "Books"
+          "singular": "books",
+          "plural": "books"
         }
       },
       "rest": {
@@ -111,16 +159,54 @@ This sample is derived from the tables and data provided in [Library sample SQL 
         }
       ],
       "relationships": {
+        "series": {
+          "cardinality": "one",
+          "target.entity": "series",
+          "source.fields": [ "series_id" ],
+          "target.fields": [ "id" ],
+          "linking.source.fields": [],
+          "linking.target.fields": []
+        },
         "authors": {
           "cardinality": "many",
-          "target.entity": "Author",
+          "target.entity": "authors",
           "source.fields": [],
           "target.fields": [],
           "linking.object": "dbo.books_authors",
-          "linking.source.fields": [],
-          "linking.target.fields": []
+          "linking.source.fields": [ "book_id" ],
+          "linking.target.fields": [ "author_id" ]
         }
       }
+    },
+    "books_authors": {
+      "source": {
+        "object": "[dbo].[books_authors]",
+        "type": "table",
+        "key-fields": [
+          "book_id",
+          "author_id"
+        ]
+      },
+      "graphql": {
+        "enabled": false,
+        "type": {
+          "singular": "books_authors",
+          "plural": "books_authors"
+        }
+      },
+      "rest": {
+        "enabled": true
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*"
+            }
+          ]
+        }
+      ]
     }
   }
 }
