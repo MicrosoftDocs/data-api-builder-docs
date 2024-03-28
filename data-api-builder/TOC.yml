@@ -32,6 +32,8 @@
     items:
       - name: Schema
         href: reference-configuration.md#schema
+      - name: Data source
+        href: reference-configuration.md#data-source
   - name: Functions
     href: reference-functions.md
 - name: Data API builder Documentation
