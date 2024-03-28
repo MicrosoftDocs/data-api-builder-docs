@@ -4,11 +4,11 @@
   items:
   - name: Overview
     href: overview-to-data-api-builder.md
-  - name: What's new in ver. 0.10
+  - name: What's new in v0.10
     href: whats-new-0-10.md
-  - name: What's new in ver. 0.9
+  - name: What's new in v0.9
     href: whats-new.md#version-09
-  - name: What's new in ver. 0.8
+  - name: What's new in v0.8
     href: whats-new.md#version-08
   - name: Older versions
     href: whats-new.md#version-07
@@ -223,7 +223,7 @@
     href: security-considerations.md
 - name: Database-specific features
   items:
-  - name: Azure CosmosDB
+  - name: Azure Cosmos DB
     href: database-specific-features.md  
   - name: SQL Session Context 
     href: azure-sql-session-context-rls.md
