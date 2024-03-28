@@ -87,7 +87,7 @@
           href: reference-configuration.md#cache-runtime
         - name: Enabled (Cache runtime)
           href: reference-configuration.md#enabled-cache-runtime
-        - name: TTL in seconds (Cache runtime)
+        - name: Time-to-live in seconds (Cache runtime)
           href: reference-configuration.md#ttl-in-seconds-cache-runtime
         - name: Entities
           href: reference-configuration.md#entities
@@ -155,7 +155,7 @@
           href: reference-configuration.md#cache-entities
         - name: Enabled (Cache entity)
           href: reference-configuration.md#enabled-cache-entity
-        - name: TTL in seconds (Cache entity)
+        - name: Time-to-live in seconds (Cache entity)
           href: reference-configuration.md#ttl-in-seconds-cache-entity
   - name: Functions
     href: reference-functions.md
