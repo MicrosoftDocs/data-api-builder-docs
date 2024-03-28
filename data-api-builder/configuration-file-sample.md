@@ -1,6 +1,6 @@
 ---
 title: Sample Data API builder configuration file
-description: This is a sample configuration file for Data API builder.
+description: An sample configuration file for Data API builder.
 author: jerrynixon
 ms.author: jnixon
 ms.service: data-api-builder
@@ -10,7 +10,7 @@ ms.date: 3/1/2024
 
 # Sample 
 
-This is an example configuration file based on the database defined in our online sample: [here](https://github.com/Azure/data-api-builder/tree/main/samples/getting-started/azure-sql-db).
+The example configuration file is based on the database defined in our online sample: [here](https://github.com/Azure/data-api-builder/tree/main/samples/getting-started/azure-sql-db).
 
 ```json
 {
