@@ -254,3 +254,6 @@ The following steps configure [delegated permissions](/azure/active-directory/de
       9. Scope: `api://<APP_ID>/Endpoint.Access` (don't forget this or authentication fails)
 3. Select Get New Access Token, and sign in with your Azure AD tenant credentials.
    1. It's expected that you get a Consent screen. This is normal and you must agree to authenticate successfully.
+
+## X-MS-API-ROLE request header
+The API requires two headers for authentication: a bearer token and X-MS-API-ROLE. The value of X-MS-API-ROLE must match the role specified in the token. For example, if the token has the role **Sample.Role**, then X-MS-API-ROLE should also be **Sample.Role**.
