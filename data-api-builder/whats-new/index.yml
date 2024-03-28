@@ -20,9 +20,13 @@ landingContent:
       url: version-0-10.md#in-memory-caching
     - text: Validation in the command-line interface
       url: version-0-10.md#configuration-validation-in-cli
-  - linkListType: whats-new
+  - linkListType: reference
     links:
     - text: Multiple data-sources (preview)
       url: https://github.com/Azure/data-api-builder/pull/1709
     - text: Azure SQL Data Warehouse support (preview)
       url: https://github.com/Azure/data-api-builder/pull/1864
+  - linkListType: whats-new
+    links:
+    - text: Download
+      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.10.23
