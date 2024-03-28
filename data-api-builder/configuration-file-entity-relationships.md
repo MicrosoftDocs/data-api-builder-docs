@@ -33,6 +33,9 @@ This section outlines options that define relationships between entities. [more]
 }
 ```
 
+> [!NOTE]
+> Relationships are only relevant to GraphQL queries. REST endpoints access only one entity at a time and can't return nested types. 
+ 
 The `relationships` section outlines how entities interact within the Data API builder, detailing associations and potential database support for these relationships. The `relationship-name` property for each relationship is both required and must be unique across all relationships for a given entity. Names ensures clear, identifiable connections and maintains the integrity of the GraphQL schema generated from these configurations.
 
 | Relationship | Cardinality | Example
