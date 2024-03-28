@@ -68,7 +68,7 @@ The `path` property specifies the URI segment used to access an entity via the R
 
 ### Methods property
 
-Applicable specifically to stored procedures, the `methods` property defines which HTTP verbs (e.g., GET, POST) the procedure can respond to. This enables precise control over how stored procedures are exposed through the REST API, ensuring compatibility with RESTful standards and client expectations. This section underlines the platform's commitment to flexibility and developer control, allowing for precise and intuitive API design tailored to the specific needs of each application.
+Applicable specifically to stored procedures, the `methods` property defines which HTTP verbs (for example, GET, POST) the procedure can respond to. Methods enable precise control over how stored procedures are exposed through the REST API, ensuring compatibility with RESTful standards and client expectations. This section underlines the platform's commitment to flexibility and developer control, allowing for precise and intuitive API design tailored to the specific needs of each application.
 
 If omitted or missing, the `methods` default is `POST`. 
 
