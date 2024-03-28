@@ -38,7 +38,7 @@ For straightforward scenarios, where the entity maps directly to a single databa
 
 ## Type property
 
-The `type` property identifies the type of database object behind the entity, these include `view`, `table`, and `stored-procedure`. Some types require additional properties. The `type` property is required and there is not default value. 
+The `type` property identifies the type of database object behind the entity, these include `view`, `table`, and `stored-procedure`. The `type` property is required and there isn't default value. 
 
 ```json
 {
@@ -51,13 +51,9 @@ The `type` property identifies the type of database object behind the entity, th
 }
 ```
 
-**View**
-
-Views require the `key-fields` property to be provided, so that Data API builder knows how it can identify and return a single item, if needed. If `type` is set to `view` without `key-fields`, the Data API builder engine will refuse to start.
-
 ## Key-fields property
 
-The `{entity}.key-fields` setting is necessary for entities backed by views, so Data API builder knows how it can identify and return a single item, if needed. If `type` is set to `view` without `key-fields`, the Data API builder engine will refuse to start.
+The `{entity}.key-fields` setting is necessary for entities backed by views, so Data API builder knows how it can identify and return a single item, if needed. If `type` is set to `view` without `key-fields`, the Data API builder engine refuses to start.
 
 ```json
 {
@@ -73,7 +69,7 @@ The `{entity}.key-fields` setting is necessary for entities backed by views, so 
 
 ## Parameters property
 
-The `{entity}.parameters` setting is important for entities backed by stored procedures, enabling developers to specify parameters and their default values. This ensures that if certain parameters are not provided within an HTTP request, the system can fall back to these predefined values.
+The `{entity}.parameters` setting is important for entities backed by stored procedures, enabling developers to specify parameters and their default values. Parameters ensure that if certain parameters aren't provided within an HTTP request, the system can fall back to these predefined values.
 
 ```json
 {
@@ -120,7 +116,7 @@ The `{entity}.parameters` setting is important for entities backed by stored pro
 }
 ```
 
- - The `Todo` entity is configured to be backed by a stored procedure.
+ - The `Todo` entity backed by a stored procedure.
  - The `type` property within source is set to `stored-procedure`, indicating the kind of source object the entity is mapped to.
  - The `object` property within source is the name of the stored procedure in the database.
 
@@ -128,7 +124,7 @@ The `{entity}.parameters` setting is important for entities backed by stored pro
 
 Also in this example, the (optional) `mapping` property is added to the configuration for the "Todo" entity. It specifies how the fields in the entity (`Id`, `Title`, `Description`, and `Completed`) map to the corresponding fields in the underlying data source or stored procedure parameters (`todo_id`, `todo_title`, `todo_description`, and `todo_completed`, respectively). This mapping ensures that the correct data is passed between the entity and the stored procedure during create/update operations.
 
-The above example would leverage the following SQL procedure.
+The above example would use the following SQL procedure.
 
 ```sql
 CREATE PROCEDURE GetUserTodos
@@ -147,7 +143,7 @@ BEGIN
 END
 ```
 
- - `@UserId`: Mandatory parameter without a default value. It's used to fetch todos for a specific user.
+ - `@UserId`: Mandatory parameter without a default value.
  - `@Completed`: Optional parameter. If provided, it filters the todos by their completion status.
  - `@CategoryName`: Optional parameter. If provided, it filters the todos by category name.
 
@@ -173,7 +169,7 @@ END
 }
 ```
 
-This example, explicitly sets the HTTP method for interacting with this entity to `POST` using the method property.
+This example explicitly sets the HTTP method for interacting with this entity to `POST` using the method property.
 
 ```SQL
 CREATE PROCEDURE UpsertTodo
