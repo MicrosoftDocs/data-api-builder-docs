@@ -1,43 +1,29 @@
 ---
-title: Release notes for Data API builder 0.4.11 
-description: Release notes for Data API builder 0.4.11 are available here.
-author: yorek 
-ms.author: damauri
-ms.service: data-api-builder 
+title: What's new for version 0.4.11
+description: Release notes with new features, bug fixes, and updates listed for the Data API builder version 0.4.11.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
+ms.service: data-api-builder
 ms.topic: whats-new 
-ms.date: 02/28/2023
+ms.date: 03/28/2024
 ---
 
-# What's New in Data API builder 0.4.11
+# What's new in Data API builder version 0.4.11
 
-- [Public JSON Schema](#public-json-schema)
-- [Updated JSON schema for `data-source` section](#updated-json-schema-for-data-source-section)
-- [Support for filter on nested objects within a document in Azure SQL and SQL Server](#support-for-filter-on-nested-objects-within-a-document-in-azure-sql-and-sql-server)
-- [Improved Stored Procedure support](#improved-stored-procedure-support)
-- [`database-type` value renamed for Cosmos DB](#database-type-value-renamed-for-cosmos-db)
-- [Renaming CLI properties for `cosmosdb_nosql`](#renaming-cli-properties-for-cosmosdb_nosql)
-- [Managed Identity now supported with Postgres](#managed-identity-now-supported-with-postgres)
-- [Support Azure AD User authentication for Azure MySQL Service](#support-azure-ad-user-authentication-for-azure-mysql-service)
-
-The full list of release notes for this version is available here: [version 0.4.11 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.4.11-alpha)
-
-Details on how to install the latest version are here: [Installing DAB CLI](./get-started/get-started-with-data-api-builder.md#installing-dab-cli)
+The full list of release notes for this version is available on GitHub: <https://github.com/Azure/data-api-builder/releases/tag/v0.4.11-alpha>.
 
 ## Public JSON Schema
 
-JSON Schema has been published here:
+JSON schema is published here: <https://dataapibuilder.azureedge.net/schemas/v0.4.11-alpha/dab.draft.schema.json>.
 
-```text
-https://dataapibuilder.azureedge.net/schemas/v0.4.11-alpha/dab.draft.schema.json
-```
+This schema gives you support for "intellisense," if you're using an IDE like Visual Studio Code that supports JSON Schemas. The `basic-empty-dab-config.json` file in the `samples` folder has an example starting point when manually creating the `dab-config.json` file.
 
-JSON schema provides 'intellisense', if you're using an IDE like VS Code that supports JSON Schemas. Take a look at `basic-empty-dab-config.json` in the `samples` folder, to have a starting point when manually creating the `dab-config.json` file.
-
-If you're using DAB CLI to create and manage the `dab-config.json` file, DAB CLI isn't yet creating the configuration file using the aforementioned reference to the JSON schema file.
+If you're using DAB CLI to create and manage the `dab-config.json` file, DAB CLI isn't yet creating the configuration file using the reference to the JSON schema file.
 
 ## Updated JSON schema for `data-source` section
 
-The `data-source` section in the configuration file has been updated to be consistent across all supported databases but still allow each database to have custom configurations. A new section `options` has been introduced to group all the properties that are specific to a database. For example:
+The `data-source` section in the configuration file is updated to be consistent across all supported databases but still allow each database to have custom configurations. A new section `options` is introduced to group all the properties that are specific to a database. For example:
 
 ```json
 {
@@ -71,13 +57,13 @@ query {
 }
 ```
 
-## Improved Stored Procedure support
+## Improved stored procedure support
 
-Full support for stored procedure in REST and GraphQL. Stored procedure with parameters now 100% supported. Check out the [Stored Procedures](./views-and-stored-procedures.md#stored-procedures) documentation to learn how to use Data API builder with stored procedures.
+Full support for stored procedure in REST and GraphQL. Stored procedure with parameters now 100% supported. Check out the [Stored Procedures](../views-and-stored-procedures.md#stored-procedures) documentation to learn how to use Data API builder with stored procedures.
 
-## `database-type` value renamed for Cosmos DB
+## New `database-type` value renamed for Cosmos DB
 
-We've added support for PostgreSQL API with Cosmos DB. With a consolidated `data-source` section, the attribute `database-type` denotes the type of database. Since Cosmos DB supports multiple APIs, the currently supported database types are 'cosmosdb_nosql' and 'cosmosdb_postgresql'.
+We added support for PostgreSQL API with Cosmos DB. With a consolidated `data-source` section, the attribute `database-type` denotes the type of database. Since Cosmos DB supports multiple APIs, the currently supported database types are `cosmosdb_nosql` and `cosmosdb_postgresql`.
 
 ```json
   "data-source": {
@@ -101,6 +87,6 @@ dab init --database-type "cosmosdb_nosql" --graphql-schema schema.gql --cosmosdb
 
 Now the user can alternatively specify the access token in the config to authenticate with a Managed Identity. Alternatively, now the user  just can't specify the password in the connection string and the runtime attempts to fetch the default managed identity token. If this fails, connection is attempted without a password in the connection string.
 
-## Support Azure AD User authentication for Azure MySQL Service
+## Support Microsoft Entra ID user authentication for Azure MySQL
 
-Added user token as password field to authenticate with MySQL with Azure AD plugin.
+Added user token as password field to authenticate with MySQL with Microsoft Entra ID plugin.

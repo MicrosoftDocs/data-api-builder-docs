@@ -1,34 +1,27 @@
 ---
-title: Release notes for Data API builder 0.6.13 
-description: Release notes for Data API builder 0.6.13 are available here.
-author: anagha-todalbagi 
-ms.author: atodalbagi
-ms.service: data-api-builder 
+title: What's new for version 0.6.13
+description: Release notes with new features, bug fixes, and updates listed for the Data API builder version 0.6.13.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
+ms.service: data-api-builder
 ms.topic: whats-new 
-ms.date: 04/06/2023
+ms.date: 03/28/2024
 ---
 
-# What's new in Data API builder 0.6.13
+# What's new in Data API builder version 0.6.13
 
-- [New CLI command to export GraphQL schema](#new-cli-command-to-export-graphql-schema)
-- [Database policy support for create action for MsSql](#database-policy-support-for-create-action-for-mssql)
-- [Ability to configure GraphQL path and disable REST and GraphQL endpoints globally via CLI](#ability-to-configure-graphql-path-and-disable-rest-and-graphql-endpoints-globally-via-cli)
-- [Key fields mandatory for adding/updating views in CLI](#key-fields-mandatory-for-adding-and-updating-views-in-cli)
-- [Replacing Azure storage link with GitHub links](#replacing-azure-storage-link-with-github-links)
-
-The full list of release notes for this version is available here: [version 0.6.13 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.6.13)
+The full list of release notes for this version is available on GitHub: <https://github.com/Azure/data-api-builder/releases/tag/v0.6.13>.
 
 ## New CLI command to export GraphQL schema
 
-A new option is added to export GraphQL schema. This starts up the DAB server and then query it to get the schema before writing it to the location that has been provided
-
-For example:
+A new option is added to export GraphQL schema. This starts up the DAB server and then query it to get the schema before writing it to the location that is provided.
 
 ```text
 dab export --graphql -c dab-config.development.json -o ./schemas
 ```
 
-generates the GraphQL schema file in the ./schemas directory. The path to configuration file is an optional parameter, which defaults to 'dab-config.json' unless 'dab-config.<DAB_ENVIRONMENT>.json' exists, where DAB_ENVIRONMENT is an environment variable.
+This command generates the GraphQL schema file in the ./schemas directory. The path to configuration file is an optional parameter, which defaults to 'dab-config.json' unless 'dab-config.<DAB_ENVIRONMENT>.json' exists, where DAB_ENVIRONMENT is an environment variable.
 
 ## Database policy support for create action for MsSql
 
@@ -67,13 +60,11 @@ We now support three more options for the `init` command:
 - `rest.disabled`: To disable REST endpoints globally
 - `graphql.disabled`: To disable GraphQL endpoints globally
 
-For example, an `init` command like:
+For example, an `init` command would generate a config file with a runtime section:
 
 ```text
 dab init --database-type mssql --rest.disabled --graphql.disabled --graphql.path /gql
 ```
-
-would generate a config file where the runtime section looks like this:
 
 ```json
 "runtime": {
@@ -95,13 +86,13 @@ It's now mandatory for the user to provide the key-fields (to be used as primary
 
 However, we still support views without having explicit primary keys specified in the config, but the configuration for such views has to be written directly in the config file.
 
-For example, a `dab add` command like:
+For example, a `dab add` command is used to add a view:
 
 ```text
 dab add books_view --source books_view --source.type "view" --source.key-fields "id" --permissions "anonymous:*" --rest true --graphql true
 ```
 
-generates the configuration for `books_view` entity that looks like this:
+This command generates the configuration for `books_view` entity that is like this example:
 
 ```json
 "books_view": {

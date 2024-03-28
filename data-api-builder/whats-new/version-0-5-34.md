@@ -1,20 +1,17 @@
 ---
-title: Release notes for Data API builder 0.5.34
-description: Release notes for Data API builder 0.5.34 are available here.
-author: anagha-todalbagi 
-ms.author: atodalbagi
-ms.service: data-api-builder 
+title: What's new for version 0.5.34
+description: Release notes with new features, bug fixes, and updates listed for the Data API builder version 0.5.34.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
+ms.service: data-api-builder
 ms.topic: whats-new 
-ms.date: 03/13/2023
+ms.date: 03/28/2024
 ---
 
-# What's New in Data API builder 0.5.34
+# What's new in Data API builder version 0.5.34
 
-- [Honor REST and GraphQL enabled flag at runtime level](#honor-rest-and-graphql-enabled-flag-at-runtime-level)
-- [Add Correlation ID to request logs](#add-correlation-id-to-request-logs)
-- [Wildcard Operation Support for Stored Procedures in Engine and CLI](#wildcard-operation-support-for-stored-procedures-in-engine-and-cli)
-
-The full list of release notes for this version is available here: [version 0.5.34 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.5.34)
+The full list of release notes for this version is available on GitHub: <https://github.com/Azure/data-api-builder/releases/tag/v0.5.34>.
 
 ## Honor REST and GraphQL enabled flag at runtime level
 
@@ -34,10 +31,10 @@ A new option is added to allow enabling or disabling REST/GraphQL requests for a
   }
 ```
 
-## Add Correlation ID to request logs
+## Correlation ID in request logs
 
-To help debugging, we attach a correlation ID to any logs that are generated during a request. Since many requests may be made, having a way to identify the logs to a specific request is important to help the debugging process.
+To help debugging, we attach a correlation ID to any logs that are generated during a request. Since many requests might be made, having a way to identify the logs to a specific request is important to help the debugging process.
 
 ## Wildcard Operation Support for Stored Procedures in Engine and CLI
 
-For stored procedures, roles can now be configured with the wildcard `*` action but it will only expand to the `execute` action.
+For stored procedures, roles can now be configured with the wildcard `*` action but it only expands to the `execute` action.

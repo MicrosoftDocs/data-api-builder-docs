@@ -1,14 +1,15 @@
 ---
-title: Release notes for Data API builder 0.10
-description: Release notes for Data API builder version 0.10 are available here.
-author: jerrynixon
-ms.author: jnixon
+title: What's new for version 0.10
+description: Release notes with new features, bug fixes, and updates listed for the Data API builder version 0.10.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: whats-new
-ms.date: 3/1/2024
+ms.topic: whats-new 
+ms.date: 03/28/2024
 ---
 
-# Data API builder version 0.10
+# What's new in Data API builder version 0.10
 
 Release notes and information about the updates and enhancements in Data API builder version 0.10.
 
@@ -20,25 +21,28 @@ The Data API builder CLI is a tool that helps developers build their configurati
 
 1. **For first-time installation**
 
-```
+```dotnetcli
 dotnet tool install microsoft.dataapibuilder --version 0.10.23 -g
 ```
 
-2. **For updating an existing installation**
+1. **For updating an existing installation**
 
-```
+```dotnetcli
 dotnet tool update microsoft.dataapibuilder --version 0.10.23 -g
 ```
 
-You will see a message similar to:
+You see a message similar to:
 
-> Tool 'microsoft.dataapibuilder' was successfully updated from version '0.9.7' to version '0.10.23'.
+```output
+Tool 'microsoft.dataapibuilder' was successfully updated from version '0.9.7' to version '0.10.23'.
+```
 
-Note: To incorporate potential subversions of 0.10 released for addressing bugs, you may update the scripts to include those subversions. Omitting `--version` fetches the latest version available.
+> [!NOTE]
+> To incorporate potential subversions of 0.10 released for addressing bugs, you might update the scripts to include those subversions. Omitting `--version` fetches the latest version available.
 
 #### Understanding the Global Installation
 
-The `-g` switch in the `dotnet tool install` and `dotnet tool update` commands indicates a "global" installation. It makes the .NET Core CLI tool accessible from any directory in your command line or terminal session. 
+The `-g` switch in the `dotnet tool install` and `dotnet tool update` commands indicates a "global" installation. It makes the .NET Core CLI tool accessible from any directory in your command line or terminal session.
 
 ### Update the Container Version
 
@@ -54,7 +58,7 @@ The Data API builder container works with desktop Docker or in a container servi
 
 ## What's New in Version 0.10
 
-Our focus shifts to stability as we approach General Availability. While not all efforts in code quality and engine stability are detailed below, this list highlights significant updates.
+Our focus shifts to stability as we approach General Availability. While not all efforts in code quality and engine stability are detailed in this article, this list highlights significant updates.
 
 ### In-memory Caching
 
@@ -83,7 +87,7 @@ Caching settings are available in the `runtime` section and for each entity, off
 ```
 
 - Caching is disabled by default.
-- The default TTL (time-to-live) is 5 seconds.
+- The default time-to-live (TTL) is 5 seconds.
 
 **Entity settings**:
 
@@ -141,13 +145,11 @@ The CLI now supports `dab validate` for checking configuration files for errors 
 
 ## Recent Releases
 
-### Feb 6. Version 0.10.23
-[0.10.23: Data API builder for Azure Databases](https://github.com/Azure/data-api-builder/releases/tag/v0.10.23)
+Review these release pages for a comprehensive list of all the changes and improvements:
 
-### Jan 31. Version 0.10.21
-
-[0.10.21: Data API builder for Azure Databases](https://github.com/Azure/data-api-builder/releases/tag/v0.10.21)
-
-### Dec 7. Version 0.10.11
-
-[0.10.11-rc: Data API builder for Azure Databases](https://github.com/Azure/data-api-builder/releases/tag/v0.10.11-rc)
+- February 6 - Version 0.10.23
+  - [0.10.23: Data API builder for Azure Databases](https://github.com/Azure/data-api-builder/releases/tag/v0.10.23)
+- January 31 - Version 0.10.21
+  - [0.10.21: Data API builder for Azure Databases](https://github.com/Azure/data-api-builder/releases/tag/v0.10.21)
+- December 7 - Version 0.10.11
+  - [0.10.11-rc: Data API builder for Azure Databases](https://github.com/Azure/data-api-builder/releases/tag/v0.10.11-rc)
