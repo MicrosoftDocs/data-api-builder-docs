@@ -20,8 +20,8 @@ The `rest` section of the configuration file is dedicated to fine-tuning the RES
     "entity-name": {
       "rest": {
         "enabled": true (default) | false,
-        "path": "/entity-path",
-        "methods": ["GET", "POST"]
+        "path": "/entity-path", (default <entity-name>)
+        "methods": ["GET", "POST" (default)]
       },
       ...
     }

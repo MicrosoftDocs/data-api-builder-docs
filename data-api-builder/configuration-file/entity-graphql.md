@@ -25,7 +25,7 @@ This segment provides for integrating an entity into the GraphQL schema. It allo
           "singular": "my-alternative-name",
           "plural": "my-alternative-name-pluralized"
         },
-        "operation": "query" | "mutation"
+        "operation": "query" | "mutation" (default)
       },
     }
   }

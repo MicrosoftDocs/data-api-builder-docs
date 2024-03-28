@@ -20,8 +20,8 @@ The `entities` section serves as the core of the configuration file, establishin
     "<entity-name>": {
       "rest": {
         "enabled": true (default) | false,
-        "path": "/entity-path",
-        "methods": ["GET", "POST"]
+        "path": "/entity-path", (default <entity-name>)
+        "methods": ["GET", "POST" (default)]
       },
       "graphql": {
         "enabled": true (default) | false,
@@ -29,7 +29,7 @@ The `entities` section serves as the core of the configuration file, establishin
           "singular": "myEntity",
           "plural": "myEntities"
         },
-        "operation": "query" | "mutation"
+        "operation": "query" | "mutation" (default)
       },
       "source": {
         "object": "database-object-name",
