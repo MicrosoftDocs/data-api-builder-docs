@@ -29,7 +29,7 @@ dotnet tool install --global Microsoft.DataApiBuilder
 
 ## New `execute` action for stored procedures in Azure SQL
 
-A new `execute` action is introduced as the only allowed action in the `permissions` section of the configuration file only when a source type backs an entity of `stored-procedure`. By default, only `POST` method is allowed for such entities and only the GraphQL `mutation` operation is configured with the prefix `execute` added to their name. Explicitly specifying the allowed `methods` in the `rest` section of the configuration file overrides this behavior. Similarly, for GraphQL, the `operation` in the `graphql` section, can be overridden to be `query` instead. For more information, see [views and stored procedures](views-and-stored-procedures.md).
+A new `execute` action is introduced as the only allowed action in the `permissions` section of the configuration file only when a source type backs an entity of `stored-procedure`. By default, only `POST` method is allowed for such entities and only the GraphQL `mutation` operation is configured with the prefix `execute` added to their name. Explicitly specifying the allowed `methods` in the `rest` section of the configuration file overrides this behavior. Similarly, for GraphQL, the `operation` in the `graphql` section, can be overridden to be `query` instead. For more information, see [views and stored procedures](../views-and-stored-procedures.md).
 
 ## New `mappings` section
 

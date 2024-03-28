@@ -13,14 +13,6 @@ ms.date: 03/28/2024
 
 The full list of release notes for this version is available on GitHub: <https://github.com/Azure/data-api-builder/releases/tag/v0.4.11-alpha>.
 
-## Public JSON Schema
-
-JSON schema is published here: <https://dataapibuilder.azureedge.net/schemas/v0.4.11-alpha/dab.draft.schema.json>.
-
-This schema gives you support for "intellisense," if you're using an IDE like Visual Studio Code that supports JSON Schemas. The `basic-empty-dab-config.json` file in the `samples` folder has an example starting point when manually creating the `dab-config.json` file.
-
-If you're using DAB CLI to create and manage the `dab-config.json` file, DAB CLI isn't yet creating the configuration file using the reference to the JSON schema file.
-
 ## Updated JSON schema for `data-source` section
 
 The `data-source` section in the configuration file is updated to be consistent across all supported databases but still allow each database to have custom configurations. A new section `options` is introduced to group all the properties that are specific to a database. For example:

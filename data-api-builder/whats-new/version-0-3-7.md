@@ -13,14 +13,6 @@ ms.date: 03/28/2024
 
 The full list of release notes for this version is available on GitHub: <https://github.com/Azure/data-api-builder/releases/tag/v0.3.7-alpha>.
 
-## Public JSON schema
-
-JSON schema is published here: <https://dataapibuilder.azureedge.net/schemas/v0.3.7-alpha/dab.draft.schema.json>.
-
-This schema gives you support for "intellisense," if you're using an IDE like Visual Studio Code that supports JSON Schemas. The `basic-empty-dab-config.json` file in the `samples` folder has an example starting point when manually creating the `dab-config.json` file.
-
-If you're using DAB CLI to create and manage the `dab-config.json` file, DAB CLI isn't yet creating the configuration file using the reference to the JSON schema file.
-
 ## View support
 
 Views are now supported both in REST and GraphQL. If you have a view, for example [`dbo.vw_books_details`](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-sql-db/library.azure-sql.sql#L115) it can be exposed using the following `dab` command:
