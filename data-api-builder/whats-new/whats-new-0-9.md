@@ -25,7 +25,7 @@ Logs can now be streamed to Application Insights for a better monitoring and deb
 }
 ```
 
-Read all the details in the [Use Application Insights](./use-application-insights.md) documentation page.
+Read all the details in the [Use Application Insights](../use-application-insights.md) documentation page.
 
 
 ## Support for ignoring extraneous fields in rest request body

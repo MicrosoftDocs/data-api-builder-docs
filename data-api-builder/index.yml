@@ -7,9 +7,9 @@ metadata:
   title: Data API builder documentation
   description: With Data API builder, database objects can be exposed via REST or GraphQL endpoints so that your data can be accessed using modern techniques on any platform, any language, and any device.
   ms.topic: landing-page
-  ms.author: damauri
+  ms.author: jnixon
   ms.service: data-api-builder
-  ms.date: 02/27/2023
+  ms.date: 03/27/2024
 
 landingContent:
   - title: About Data API builder
@@ -21,7 +21,7 @@ landingContent:
       - linkListType: whats-new
         links:
           - text: What's new in Data API builder
-            url: whats-new.md
+            url: ./whats-new/whats-new.md
 
   - title: Get started
     linkLists:
