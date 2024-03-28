@@ -17,7 +17,7 @@ The `entities` section serves as the core of the configuration file, establishin
 ```json
 {
   "entities": {
-    "entity-name": {
+    "<entity-name>": {
       "rest": {
         "enabled": true (default) | false,
         "path": "/entity-path",
