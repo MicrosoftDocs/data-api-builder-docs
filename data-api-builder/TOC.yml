@@ -13,8 +13,6 @@
       href: how-to-develop-local-data.md
 - name: Concepts
   items:
-    - name: Database connections
-      href: database-connections.md
     - name: Local authentication
       href: local-authentication.md
 - name: Samples
