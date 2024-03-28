@@ -13,8 +13,10 @@
       href: how-to-develop-local-data.md
 - name: Concepts
   items:
-    - name:
-      href:
+    - name: Database connections
+      href: database-connections.md
+    - name: Local authentication
+      href: local-authentication.md
 - name: Samples
   items:
   - name: Example configuration
@@ -73,12 +75,8 @@
     href: run-using-container.md
   - name: Run from source code
     href: run-from-source-code.md
-  - name: Local authentication
-    href: local-authentication.md
 - name: Running in Azure
   href: running-in-azure.md
-- name: Database connections
-  href: database-connections.md
 - name: REST
   items:
   - name: Overview

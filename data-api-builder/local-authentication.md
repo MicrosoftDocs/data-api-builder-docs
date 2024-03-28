@@ -1,5 +1,5 @@
 ---
-title: Local authentication in Data API builder
+title: Local authentication
 description: This document contains details about local authentication in Data API builder.
 author: anagha-todalbagi
 ms.author: atodalbagi
