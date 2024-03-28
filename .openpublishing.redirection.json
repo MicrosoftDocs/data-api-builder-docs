@@ -19,6 +19,11 @@
       "source_path_from_root": "/data-api-builder/configuration-file.md",
       "redirect_url": "/azure/data-api-builder/reference-configuration",
       "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/database-connections.md",
+      "redirect_url": "/azure/data-api-builder/reference-configuration#connection-string",
+      "redirect_document_id": false
     }
   ]
 }
