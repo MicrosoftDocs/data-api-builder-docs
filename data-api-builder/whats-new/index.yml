@@ -17,9 +17,9 @@ landingContent:
   - linkListType: whats-new
     links:
     - text: In-memory caching
-      url: whats-new/version-0-10.md#in-memory-caching
+      url: version-0-10.md#in-memory-caching
     - text: Validation in the command-line interface
-      url: whats-new/version-0-10.md#configuration-validation-in-cli
+      url: version-0-10.md#configuration-validation-in-cli
   - linkListType: whats-new
     links:
     - text: Multiple data-sources (preview)
