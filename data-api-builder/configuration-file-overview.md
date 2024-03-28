@@ -10,9 +10,9 @@ ms.date: 03/04/2024
 
 # Configuration file
 
-The Data API Builder configuration file provides a structured and comprehensive approach to setting up your API, detailing everything from environmental variables to entity-specific configurations. This JSON-formatted document begins with a `$schema` property for validation purposes, guiding through various sections including `data-source` which establishes the connection to your backend database. 
+The Data API Builder configuration file provides a structured and comprehensive approach to setting up your API, detailing everything from environmental variables to entity-specific configurations. This JSON-formatted document begins with a `$schema` property. This validates the document. 
 
-By specifying the `database-type` and `connection-string`, it ensures seamless integration with a variety of database systems, from Azure SQL DB to Cosmos DB NoSQL API, making it a cornerstone for developers to customize and leverage the Data API Builder's capabilities efficiently.
+The properties `database-type` and `connection-string` ensure seamless integration with database systems, from Azure SQL Database to Cosmos DB NoSQL API.
 
 ## Syntax overview
 
