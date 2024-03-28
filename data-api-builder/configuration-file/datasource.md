@@ -52,7 +52,7 @@ The `type` property indicates the kind of backend database.
 
 ### Set-session-context property
 
-For Azure SQL and SQL Server, Data API builder can take advantage of `SESSION_CONTEXT` to send user specified metadata to the underlying database. Such metadata is available to Data API builder by virtue of the claims present in the access token. The `SESSION_CONTEXT` data is available to the database during the database connection until that connection is closed. [Learn more about session context](/data-api-builder/azure-sql-session-context-rls.md).
+For Azure SQL and SQL Server, Data API builder can take advantage of `SESSION_CONTEXT` to send user specified metadata to the underlying database. Such metadata is available to Data API builder by virtue of the claims present in the access token. The `SESSION_CONTEXT` data is available to the database during the database connection until that connection is closed. [Learn more about session context](../azure-sql-session-context-rls.md).
 
 ### Connection-string property
 

@@ -128,7 +128,8 @@ type Query {
 }
 ```
 
-> [!Note] The `operation` property is only about the placement of the operation in the GraphQL schema, it does not change the behavior of the operation. 
+> [!NOTE]
+> The `operation` property is only about the placement of the operation in the GraphQL schema, it does not change the behavior of the operation. 
 
 ## Example
 

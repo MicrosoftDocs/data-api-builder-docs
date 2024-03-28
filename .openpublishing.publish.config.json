@@ -1,4 +1,11 @@
 {
+  "redirections": [
+    {
+        "source_path": "/data-api-builder/configuration-file.md",
+        "redirect_url": "/data-api-builder/configuration-file/overview.md",
+        "redirect_document_id": true
+    }
+  ],
   "docsets_to_publish": [
     {
       "docset_name": "data-api-builder-docs",

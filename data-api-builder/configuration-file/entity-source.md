@@ -89,7 +89,7 @@ The `{entity}.parameters` setting is important for entities backed by stored pro
 
 ### Example - Stored Procedure Select
 
-![Many-to-many diagram](media/many-to-many.png)
+![Many-to-many diagram](../media/many-to-many.png)
 
 ```json
 {

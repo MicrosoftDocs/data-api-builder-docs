@@ -237,17 +237,17 @@ The `authentication.provider` setting within the `host` configuration defines th
 
 | Provider | Description |
 | - | - |
-| StaticWebApps (default) | Instructs Data API builder to look for a set of HTTP headers only present when running within a Static Web Apps environment. [more](/local-authentication.md) |
+| StaticWebApps (default) | Instructs Data API builder to look for a set of HTTP headers only present when running within a Static Web Apps environment. [more](../local-authentication.md) |
 | AppService | When the runtime is hosted in Azure AppService with AppService Authentication enabled and configured (EasyAuth). [more](https://github.com/Azure/data-api-builder/pull/97) |
-| AzureAd | Azure AD needs to be configured so that it can authenticate a request sent to Data API builder (the "Server App"). [more](/authentication-azure-ad.md) |
-| Simulator | A configurable authentication provider that instructs the Data API builder engine to treat all requests as authenticated. [more](/local-authentication.md) |
+| AzureAd | Azure AD needs to be configured so that it can authenticate a request sent to Data API builder (the "Server App"). [more](../authentication-azure-ad.md) |
+| Simulator | A configurable authentication provider that instructs the Data API builder engine to treat all requests as authenticated. [more](../local-authentication.md) |
 
 > [!NOTE]
 > Effective July 2023, Azure Active Directory (Azure AD) underwent a name change and is now known as Microsoft Entra ID. This transition occurred as part of Microsoft’s commitment to simplifying secure access experiences for everyone. 
 
 #### Jwt property
  
-Required if the authentication provider is `AzureAD` for Microsoft Entra Identity (previously known as Azure Active Directory). This section must specify the `audience` and `issuer` to validate the received JWT token against the intended `AzureAD` tenant for authentication. [Learn more about Microsoft Entra Identity in DAB.](/authentication-azure-ad.md)
+Required if the authentication provider is `AzureAD` for Microsoft Entra Identity (previously known as Azure Active Directory). This section must specify the `audience` and `issuer` to validate the received JWT token against the intended `AzureAD` tenant for authentication. [Learn more about Microsoft Entra Identity in DAB.](../authentication-azure-ad.md)
 
 | Setting | Description |
 | - | - |
@@ -258,7 +258,7 @@ Required if the authentication provider is `AzureAD` for Microsoft Entra Identit
 
 The Data API builder (DAB) offers flexible authentication support, integrating with Microsoft Entra Identity and custom JSON Web Token (JWT) servers. In this image, the **JWT Server** represents the authentication service that issues JWT tokens to clients upon successful login. The client then passes the token to DAB, which can interrogate its claims and properties.
 
-![alt text](media/jwt-server.png)
+![alt text](../media/jwt-server.png)
 
 ## Examples
 

@@ -90,7 +90,7 @@ type Category
 
 Consider a scenario where a `Category` entity is related to multiple `Todo` items. The configuration indicates that each category can be linked to many todos. The relationship is defined by matching the `Category` entity's ID (`source.fields`) with the `Todo` entity's category ID (`target.fields`).
 
-![One to many diagram](media/one-to-many.png)
+![One to many diagram](../media/one-to-many.png)
 
 ```json
 {
@@ -153,7 +153,7 @@ type Todo {
 
 This configuration establishes a Many-To-One relationship between `Todo` and `Category` entities, allowing each `Todo` to be associated with a single `Category`.
 
-![Many to one diagram](media/one-to-many.png)
+![Many to one diagram](../media/one-to-many.png)
 
 ```json
 {
@@ -232,7 +232,7 @@ type Author {
 
 Consider a scenario where books and authors are related through a many-to-many relationship. Each book can have multiple authors, and each author can write multiple books. The relationship is managed through an intermediary table, `BookAuthors`, which links books and authors based on their IDs.
 
-![Many to many diagram](media/many-to-many.png)
+![Many to many diagram](../media/many-to-many.png)
 
 The example creates two relationships, from `User` to `Todo` and from `Todo` to `User`. In fact, this comprehensive demo shows all of the possible relationships in one complete configuration file, including the CLI walkthrough to create the configuration file from only the command line. At the bottom, the SQL Server database schema is also provided for testing purposes.
 
@@ -415,7 +415,7 @@ The example creates two relationships, from `User` to `Todo` and from `Todo` to 
 
 `linking.target.fields`: database fields, in the *linking* object (`users_todos` in the example), that is used to connect to the related item in the `target` entity (`User` in the sample)
 
-**[Command-line](/data-api-builder/data-api-builder-cli.md) for this example**
+**[Command-line](/data-api-builder/data-api-builder-cli.md) walkthrough for this example**
 
 To create the entities `User` and `Todo` and set up the many-to-many relationship using the `users_todos` linking table through the Data API builder CLI, you must run a series of `dab` commands. 
 
@@ -456,7 +456,7 @@ To create the entities `User` and `Todo` and set up the many-to-many relationshi
    dab update Todo --relationship "users" --cardinality many --target.entity User --linking.object users_todos --linking.source.fields "todo_id" --linking.target.fields "user_id" 
    ```
 
-**Sample data**
+**Database setup for this example**
 
 Want a backing database for testing? These are the DDL (Data Definition Language) and DML (Data Manipulation Language) SQL statements to create the `User`, `Todo`, `Category`, and `users_todos` tables, along with their relationships.
 

@@ -67,7 +67,7 @@ The `role` string contains the name of the role to which the defined permission 
 }
 ```
 
-Roles set the permissions context in which a request should be executed. For each entity defined in the runtime config, you can define a set of roles and associated permissions that determine how the entity can be accessed in both the REST and GraphQL endpoints. Roles aren't additive. [Learn more about roles.](/data-api-builder/authorization.md)
+Roles set the permissions context in which a request should be executed. For each entity defined in the runtime config, you can define a set of roles and associated permissions that determine how the entity can be accessed in both the REST and GraphQL endpoints. Roles aren't additive. [Learn more about roles.](../authorization.md)
 
 Data API builder evaluates requests in the context of a single role:
 

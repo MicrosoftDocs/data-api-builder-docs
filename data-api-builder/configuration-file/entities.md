@@ -134,12 +134,12 @@ The example declares the `User` entity. This name `User` is used anywhere in the
 
 ### Walkthrough
 
-**[REST](/data-api-builder/configuration-file/entity-rest.md) & [GraphQL](/data-api-builder/configuration-file/entity-graphql.md) Configurations**: Define how the `Book` entity is exposed through RESTful endpoints and GraphQL queries, specifying paths, enabled methods, and operations.
+**[REST](../configuration-file/entity-rest.md) & [GraphQL](../configuration-file/entity-graphql.md) Configurations**: Define how the `Book` entity is exposed through RESTful endpoints and GraphQL queries, specifying paths, enabled methods, and operations.
 
-**[Source](/data-api-builder/configuration-file/entity-source.md)**: Identifies the database table (`BooksTable`) associated with the `Book` entity, including the primary key and any parameters for querying the database.
+**[Source](../configuration-file/entity-source.md)**: Identifies the database table (`BooksTable`) associated with the `Book` entity, including the primary key and any parameters for querying the database.
 
-**[Mappings](/data-api-builder/configuration-file/entity-mappings.md)**: Links entity fields (`id`, `title`, `authorId`) to their corresponding database column names, ensuring correct data translation between the API and the database.
+**[Mappings](../configuration-file/entity-mappings.md)**: Links entity fields (`id`, `title`, `authorId`) to their corresponding database column names, ensuring correct data translation between the API and the database.
 
-**[Permissions](/data-api-builder/configuration-file/entity-permissions.md)**: Outlines role-based access control, detailing which roles can perform specified actions (`read`, `create`, `update`, `delete`) on the entity's fields. Includes field-level access control through `include` and `exclude` lists.
+**[Permissions](../configuration-file/entity-permissions.md)**: Outlines role-based access control, detailing which roles can perform specified actions (`read`, `create`, `update`, `delete`) on the entity's fields. Includes field-level access control through `include` and `exclude` lists.
 
-**[Policy](/data-api-builder/configuration-file/entity-policy.md)**: Specifies item-level security rules using database policy expressions. These expressions determine access to entity records based on conditions involving user claims and entity fields, enforcing row-level security.
+**[Policy](../configuration-file/entity-policy.md)**: Specifies item-level security rules using database policy expressions. These expressions determine access to entity records based on conditions involving user claims and entity fields, enforcing row-level security.

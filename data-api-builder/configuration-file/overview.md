@@ -62,14 +62,14 @@ The latest version of the schema is always available [here](https://github.com/A
 https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json
 ```
 
-## [Data-source](/data-api-builder/configuration-file/datasource.md) property
+## [Data-source](datasource.md) property
 
 The `data-source` section defines the database and access to the database through the connection string. It also defines db options.
 
-## [Runtime](/data-api-builder/configuration-file/runtime.md) property
+## [Runtime](runtime.md) property
 
 The `runtime` section outlines options that influence the runtime behavior and settings for all exposed entities.
 
-## [Entities](/data-api-builder/configuration-file/entities.md) property
+## [Entities](entities.md) property
 
 The `entities` section serves as the core of the configuration file, establishing a bridge between database objects and their corresponding API endpoints. 
