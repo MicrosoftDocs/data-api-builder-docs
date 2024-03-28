@@ -1960,9 +1960,9 @@ Data API builder evaluates requests in the context of a single role:
 
 | Role | Description |
 | --- | --- |
-| `anonymous` | When no access token is presented |
-| `authenticated`| When a valid access token is presented |
-| `<custom-role>`| When a valid access token is presented and the `X-MS-API-ROLE` HTTP header is included specifying a user role that is also included in the access token's roles claim |
+| `anonymous` | No access token is presented |
+| `authenticated`| A valid access token is presented |
+| `<custom-role>`| A valid access token is presented and the `X-MS-API-ROLE` HTTP header is included specifying a user role that is also included in the access token's roles claim |
 
 #### Format
 
