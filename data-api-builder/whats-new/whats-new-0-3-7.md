@@ -10,12 +10,13 @@ ms.date: 02/28/2023
 
 # What's New in Data API builder 0.3.7
 
-- [Public JSON Schema](#public-json-schema)
-- [View Support](#view-support)
-- [Stored Procedures Support](#stored-procedures-support)
-- [Azure Active Directory Authentication](#azure-active-directory-authentication)
-- [New "Simulator" Authentication Provider for local authentication](#new-simulator-authentication-provider-for-local-authentication)
-- [Support for filter on nested objects within a document in Cosmos DB](#support-for-filter-on-nested-objects-within-a-document-in-cosmos-db)
+- [What's New in Data API builder 0.3.7](#whats-new-in-data-api-builder-037)
+  - [Public JSON Schema](#public-json-schema)
+  - [View Support](#view-support)
+  - [Stored Procedures Support](#stored-procedures-support)
+  - [Azure Active Directory Authentication](#azure-active-directory-authentication)
+  - [New "Simulator" Authentication Provider for local authentication](#new-simulator-authentication-provider-for-local-authentication)
+  - [Support for filter on nested objects within a document in Cosmos DB](#support-for-filter-on-nested-objects-within-a-document-in-cosmos-db)
 
 The full list of release notes for this version is available here: [version 0.3.7 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.3.7-alpha)
 

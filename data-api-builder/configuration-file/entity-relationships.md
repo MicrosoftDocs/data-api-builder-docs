@@ -415,7 +415,7 @@ The example creates two relationships, from `User` to `Todo` and from `Todo` to 
 
 `linking.target.fields`: database fields, in the *linking* object (`users_todos` in the example), that is used to connect to the related item in the `target` entity (`User` in the sample)
 
-**[Command-line](/data-api-builder/data-api-builder-cli.md) walkthrough for this example**
+**[Command-line](../data-api-builder-cli.md) walkthrough for this example**
 
 To create the entities `User` and `Todo` and set up the many-to-many relationship using the `users_todos` linking table through the Data API builder CLI, you must run a series of `dab` commands. 
 

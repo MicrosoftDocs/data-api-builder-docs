@@ -4,31 +4,28 @@
   items:
   - name: Overview
     href: overview-to-data-api-builder.md
-  - name: What's new in Data API builder
-    href: whats-new.md
+  - name: What's new
     items:
     - name: Version 0.10
-      href: whats-new-0-10.md
+      href: whats-new/whats-new-0-10.md
     - name: Version 0.9
-      href: whats-new-0-9.md
+      href: whats-new/whats-new-0-9.md
     - name: Version 0.8
-      href: whats-new-0-8.md
+      href: whats-new/whats-new-0-8.md
     - name: Older versions
-      href: whats-new.md#version-07
+      href: whats-new/whats-new.md#version-07
 - name: Quickstarts
   items:
   - name: Getting Started
     href: get-started/get-started-with-data-api-builder.md
-  - name: Using Databases
-    items:
-    - name: Using Azure SQL
-      href: get-started/get-started-azure-sql.md
-    - name: Using PostgreSQL
-      href: get-started/get-started-azure-postgresql.md
-    - name: Using Azure Cosmos DB
-      href: get-started/get-started-azure-cosmos-db.md
-    - name: Using MySQL
-      href: get-started/get-started-azure-mysql.md
+  - name: Using Azure SQL
+    href: get-started/get-started-azure-sql.md
+  - name: Using PostgreSQL
+    href: get-started/get-started-azure-postgresql.md
+  - name: Using Azure Cosmos DB
+    href: get-started/get-started-azure-cosmos-db.md
+  - name: Using MySQL
+    href: get-started/get-started-azure-mysql.md
 - name: Command-line Interface (CLI)
   href: data-api-builder-cli.md
 - name: Running Data API builder
