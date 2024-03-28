@@ -85,6 +85,10 @@ Sets the URL path for accessing all exposed REST endpoints. For instance, settin
 
 A Boolean flag that determines the global availability of REST endpoints. If disabled, entities can't be accessed via REST, regardless of individual entity settings.
 
+### Request-body-strict property
+
+This boolean flag determines whether the request body for a REST mutation operation can contain extraneous fields. By default, it is set to true, meaning that additional fields in the request body will result in a `BadRequest` exception. However, setting this flag to false allows users to include extra fields in the request body, which will be ignored by DAB. It's important to note that this flag does not affect REST query (GET) requests, as the request body is always ignored for GET operations.
+
 ## GraphQL property
 
 This section outlines the global settings for the GraphQL endpoint. 

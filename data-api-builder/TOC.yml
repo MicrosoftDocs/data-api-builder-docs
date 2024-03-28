@@ -4,14 +4,17 @@
   items:
   - name: Overview
     href: overview-to-data-api-builder.md
-  - name: What's new in v0.10
-    href: whats-new-0-10.md
-  - name: What's new in v0.9
-    href: whats-new.md#version-09
-  - name: What's new in v0.8
-    href: whats-new.md#version-08
-  - name: Older versions
-    href: whats-new.md#version-07
+  - name: What's new in Data API builder
+    href: whats-new.md
+    items:
+    - name: Version 0.10
+      href: whats-new-0-10.md
+    - name: Version 0.9
+      href: whats-new-0-9.md
+    - name: Version 0.8
+      href: whats-new-0-8.md
+    - name: Older versions
+      href: whats-new.md#version-07
 - name: Quickstarts
   items:
   - name: Getting Started
@@ -40,7 +43,6 @@
     href: run-from-source-code.md
   - name: Run in Azure
     href: running-in-azure.md
-
 - name: Configuration file
   items:
   - name: Overview

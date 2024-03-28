@@ -10,27 +10,31 @@ ms.date: 3/1/2024
 
 # Data API builder version 0.10
 
+Release notes and information about the updates and enhancements in Data API builder version 0.10.
+
 ## How to Upgrade
 
 ### Update the Developer CLI
 
-The Data API Builder CLI is a tool that helps developers build their configuration files with fewer errors. It also runs the DAB engine in the developer's local environment. With each new release of Data API Builder, including version 0.10, we revise the CLI.
+The Data API builder CLI is a tool that helps developers build their configuration files with fewer errors. It also runs the DAB engine in the developer's local environment. With each new release of Data API builder, including version 0.10, we revise the CLI.
 
 1. **For first-time installation**
 
-   `dotnet tool install microsoft.dataapibuilder --version 0.10.23 -g`
+```
+dotnet tool install microsoft.dataapibuilder --version 0.10.23 -g
+```
 
 2. **For updating an existing installation**
 
-   `dotnet tool update microsoft.dataapibuilder --version 0.10.23 -g`
+```
+dotnet tool update microsoft.dataapibuilder --version 0.10.23 -g
+```
 
 You will see a message similar to:
 
-```
-Tool 'microsoft.dataapibuilder' was successfully updated from version '0.9.7' to version '0.10.23'.
-```
+> Tool 'microsoft.dataapibuilder' was successfully updated from version '0.9.7' to version '0.10.23'.
 
-> Note: To incorporate potential subversions of 0.10 released for addressing regressions, you may update the scripts to include those subversions. Omitting `--version` fetches the latest version available.
+Note: To incorporate potential subversions of 0.10 released for addressing bugs, you may update the scripts to include those subversions. Omitting `--version` fetches the latest version available.
 
 #### Understanding the Global Installation
 
@@ -38,7 +42,7 @@ The `-g` switch in the `dotnet tool install` and `dotnet tool update` commands i
 
 ### Update the Container Version
 
-The Data API Builder container works with desktop Docker or in a container service like Kubernetes. Every DAB version is securely hosted in the [Microsoft Container Registry](https://aka.ms/dab/registry).
+The Data API builder container works with desktop Docker or in a container service like Kubernetes. Every DAB version is securely hosted in the [Microsoft Container Registry](https://aka.ms/dab/registry).
 
 1. **To pull the most recent version automatically**
 
@@ -46,11 +50,11 @@ The Data API Builder container works with desktop Docker or in a container servi
 
 2. **To pull a specific version**
 
-   `docker pull mcr.microsoft.com/azure-databases/data-api-builder:0.10.*`
+   `docker pull mcr.microsoft.com/azure-databases/data-api-builder:0.10.2`
 
 ## What's New in Version 0.10
 
-Our focus shifts to stability as we approach General Availability (projected for early May 2024). While not all efforts in code quality and engine stability are detailed below, this list highlights significant updates.
+Our focus shifts to stability as we approach General Availability. While not all efforts in code quality and engine stability are detailed below, this list highlights significant updates.
 
 ### In-memory Caching
 
@@ -117,8 +121,6 @@ Caching settings are available in the `runtime` section and for each entity, off
   }
 }
 ```
-
-- Caching follows global settings by default.
 
 ### Configuration Validation in CLI
 
