@@ -40,11 +40,11 @@ Tool 'microsoft.dataapibuilder' was successfully updated from version '0.9.7' to
 > [!NOTE]
 > To incorporate potential subversions of 0.10 released for addressing bugs, you might update the scripts to include those subversions. Omitting `--version` fetches the latest version available.
 
-#### Understanding the Global Installation
+#### Understanding the global installation
 
 The `-g` switch in the `dotnet tool install` and `dotnet tool update` commands indicates a "global" installation. It makes the .NET Core CLI tool accessible from any directory in your command line or terminal session.
 
-### Update the Container Version
+### Update the container Version
 
 The Data API builder container works with desktop Docker or in a container service like Kubernetes. Every DAB version is securely hosted in the [Microsoft Container Registry](https://aka.ms/dab/registry).
 
@@ -60,7 +60,7 @@ The Data API builder container works with desktop Docker or in a container servi
 
 Our focus shifts to stability as we approach General Availability. While not all efforts in code quality and engine stability are detailed in this article, this list highlights significant updates.
 
-### In-memory Caching
+### In-memory caching
 
 Version 0.10 introduces in-memory caching for REST and GraphQL endpoints. This feature, designed for internal caching, lays the groundwork for future distributed caching. In-memory caching reduces database load from repetitive queries.
 

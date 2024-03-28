@@ -1,0 +1,28 @@
+### YamlMime:Landing
+
+title: What's new in Data API Builder?
+summary: Review release notes and core features for the latest versions of Data API builder.
+metadata:
+  title: What's new?
+  description: Release notes and core features for the latest versions of Data API builder are listed in this landing page.
+  author: seesharprun
+  ms.author: sidandrews
+  ms.reviewer: jerrynixon
+  ms.service: data-api-builder
+  ms.topic: landing-page
+  ms.date: 03/28/2024
+landingContent:
+- title: Version 0.10
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: In-memory caching
+      url: whats-new/version-0-10.md#in-memory-caching
+    - text: Validation in the command-line interface
+      url: whats-new/version-0-10.md#configuration-validation-in-cli
+  - linkListType: whats-new
+    links:
+    - text: Multiple data-sources (preview)
+      url: https://github.com/Azure/data-api-builder/pull/1709
+    - text: Azure SQL Data Warehouse support (preview)
+      url: https://github.com/Azure/data-api-builder/pull/1864
