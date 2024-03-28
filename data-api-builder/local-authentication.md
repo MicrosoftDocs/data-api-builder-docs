@@ -1,18 +1,20 @@
 ---
 title: Local authentication
-description: This document contains details about local authentication in Data API builder.
-author: anagha-todalbagi
-ms.author: atodalbagi
+description: Test authentication and authorization locally for Data API builder using a simulated request with specified roles and/or claims.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: local-authentication
-ms.date: 04/06/2023
+ms.topic: concept-article
+ms.date: 03/28/2024
+# Customer Intent: As a developer, I want to test authentication locally, so that I don't have to rely on authentication "just working" when published.
 ---
 
 # Local Authentication
 
 When developing a solution using Data API builder locally, or when running Data API builder on-premises, you need to test the configured authentication and authorization options by simulating a request with a specific role or claim.
 
-To simulate an authenticated request without configuring an authentication provider (like Azure AD, for example), you can utilize either the `Simulator` or `StaticWebApps` authentication providers:
+To simulate an authenticated request without configuring an authentication provider (like Microsoft Entra ID, for example), you can utilize either the `Simulator` or `StaticWebApps` authentication providers:
 
 ## Use the `Simulator` provider
 
@@ -26,7 +28,7 @@ To simulate an authenticated request without configuring an authentication provi
 
 ### 1. Update the runtime configuration authentication provider
 
-Make sure that in the configuration file you're using the `Simulator` authentication provider and `development` mode is specified. The `host` configuration section should look like the following:
+Make sure that in the configuration file you're using the `Simulator` authentication provider and `development` mode is specified. Refer to this sample `host` configuration section:
 
 ```json
 "host": {
@@ -56,12 +58,12 @@ curl --request GET \
 
 ## Use the `StaticWebApps` provider
 
-The `StaticWebApps` authentication provider instructs Data API builder to look for a set of HTTP headers only present when running within a Static Web Apps environment. Such HTTP headers are set by the client when running locally to simulate an authenticated user, including any role membership or custom claims.
+The `StaticWebApps` authentication provider instructs Data API builder to look for a set of HTTP headers only present when running within a Static Web Apps environment. The client sets these HTTP headers when running locally to simulate an authenticated user, including any role membership or custom claims.
 
 > [!NOTE]
 > Client provided instances of the Http header, `X-MS-CLIENT-PRINCIPAL`, will only work when developing locally because production Azure Static Web Apps environments [drop all client provided instances](/azure/static-web-apps/user-information?tabs=javascript) of that header.
 
-Make sure that in the configuration file you're using the `StaticWebApps` authentication provider. The `host` configuration section should look like the following:
+Make sure that in the configuration file you're using the `StaticWebApps` authentication provider. Refer to this sample `host` configuration section:
 
 ```json
 "host": {
@@ -97,7 +99,7 @@ Static Web App's [authenticated user metadata](/azure/static-web-apps/user-infor
 > [!NOTE]
 > As noted in [Static Web Apps documentation](/azure/static-web-apps/user-information?tabs=javascript), the `X-MS-CLIENT-PRINCIPAL` header does not contain the `claims` array.
 
-In order to be passed with the `X-MS-CLIENT-PRINCIPAL` header, the JSON payload must be Base64-encoded. You can use any online or offline tool to do that. One such tool is [DevToys](https://github.com/veler/DevToys). A sample Base64 encoded payload that represents the JSON previously referenced:
+In order to be passed with the `X-MS-CLIENT-PRINCIPAL` header, the JSON payload must be Base64-encoded. You can use any online or offline tool to do that. One such tool is [DevToys](https://github.com/veler/DevToys). A sample Base64-encoded payload that represents the JSON previously referenced:
 
 ```text
 eyAgCiAgImlkZW50aXR5UHJvdmlkZXIiOiAidGVzdCIsCiAgInVzZXJJZCI6ICIxMjM0NSIsCiAgInVzZXJEZXRhaWxzIjogImpvaG5AY29udG9zby5jb20iLAogICJ1c2VyUm9sZXMiOiBbImF1dGhvciIsICJlZGl0b3IiXQp9
