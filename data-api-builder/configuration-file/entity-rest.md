@@ -1,7 +1,7 @@
 ---
 title: Configuration Entity REST
 description: Details the graphql rest in Entity
-author: jnixon
+author: jerrynixon
 ms.author: jnixon
 ms.service: data-api-builder
 ms.topic: configuration-file

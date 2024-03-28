@@ -26,20 +26,6 @@
     href: get-started/get-started-azure-cosmos-db.md
   - name: Using MySQL
     href: get-started/get-started-azure-mysql.md
-- name: Command-line Interface (CLI)
-  href: data-api-builder-cli.md
-- name: Running Data API builder
-  items:
-  - name: Local Development
-    href: local-development.md
-  - name: Run using the CLI
-    href: run-using-data-api-builder-cli.md
-  - name: Run in a container
-    href: run-using-container.md
-  - name: Run from source code
-    href: run-from-source-code.md
-  - name: Run in Azure
-    href: running-in-azure.md
 - name: Configuration file
   items:
   - name: Overview
@@ -51,21 +37,11 @@
     - name: Overview
       href: configuration-file/datasource.md
     - name: Database-type
-      href: configuration-file/datasource.md
+      href: configuration-file/datasource.md#database-type-property
     - name: Connection-string
-      href: configuration-file/datasource.md
-    - name: Options
-      items:
-      - name: Overview
-        href: configuration-file/datasource.md
-      - name: Set-session-context
-        href: configuration-file/datasource.md
-      - name: Database
-        href: configuration-file/datasource.md
-      - name: Container
-        href: configuration-file/datasource.md
-      - name: Schema
-        href: configuration-file/datasource.md
+      href: configuration-file/datasource.md#connection-string-property
+    - name: Set-session-context
+      href: configuration-file/datasource.md#set-session-context-property
   - name: Runtime
     items:
     - name: Overview
@@ -73,49 +49,45 @@
     - name: REST
       items:
       - name: Overview
-        href: configuration-file/runtime.md
+        href: configuration-file/runtime.md#rest-property
       - name: Enabled
-        href: configuration-file/runtime.md
+        href: configuration-file/runtime.md#enabled-property
       - name: Path
-        href: configuration-file/runtime.md
+        href: configuration-file/runtime.md#path-property
       - name: Request-body-strict
-        href: configuration-file/runtime.md
+        href: configuration-file/runtime.md#request-body-strict-property
     - name: GraphQL
       items:
       - name: Overview
-        href: configuration-file/runtime.md
+        href: configuration-file/runtime.md#graphql-property
       - name: Enabled
-        href: configuration-file/runtime.md
+        href: configuration-file/runtime.md#enabled-property-1
       - name: Path
-        href: configuration-file/runtime.md
+        href: configuration-file/runtime.md#path-property-1
       - name: Allow-introspection
-        href: configuration-file/runtime.md
+        href: configuration-file/runtime.md#allow-introspection-property
     - name: Host
       items:
       - name: Overview
-        href: configuration-file/runtime.md
+        href: configuration-file/runtime.md#host-property
       - name: Mode
-        href: configuration-file/runtime.md
+        href: configuration-file/runtime.md#mode-property
       - name: Cors
         items:
         - name: Overview
-          href: configuration-file/runtime.md
+          href: configuration-file/runtime.md#cors-property
         - name: Origins
-          href: configuration-file/runtime.md
+          href: configuration-file/runtime.md#origins-property
         - name: Credentials
-          href: configuration-file/runtime.md
+          href: configuration-file/runtime.md#credentials-property
       - name: Authentication
         items:
         - name: Overview
-          href: configuration-file/runtime.md
+          href: configuration-file/runtime.md#authentication-property
         - name: Provider
-          href: configuration-file/runtime.md
+          href: configuration-file/runtime.md#provider-property
         - name: Jwt
-          href: configuration-file/runtime.md
-        - name: Jwt-Audience
-          href: configuration-file/runtime.md
-        - name: Jwt-Issuer
-          href: configuration-file/runtime.md
+          href: configuration-file/runtime.md#jwt-property
     - name: Entities
       items:
       - name: Overview
@@ -125,25 +97,21 @@
         - name: Overview
           href: configuration-file/entity-rest.md
         - name: Enabled
-          href: configuration-file/entity-rest.md
+          href: configuration-file/entity-rest.md#enabled-property
         - name: Path
-          href: configuration-file/entity-rest.md
+          href: configuration-file/entity-rest.md#path-property
         - name: Methods
-          href: configuration-file/entity-rest.md
+          href: configuration-file/entity-rest.md#methods-property
       - name: GraphQL
         items:
         - name: Overview
           href: configuration-file/entity-graphql.md
         - name: Enabled
-          href: configuration-file/entity-graphql.md
+          href: configuration-file/entity-graphql.md#enabled-property
         - name: Type
-          href: configuration-file/entity-graphql.md
-        - name: Type-Singular
-          href: configuration-file/entity-graphql.md
-        - name: Type-Plural
-          href: configuration-file/entity-graphql.md
+          href: configuration-file/entity-graphql.md#type-property
         - name: Operation
-          href: configuration-file/entity-graphql.md
+          href: configuration-file/entity-graphql.md#operation-property
       - name: Source
         href: configuration-file/entity-source.md
       - name: Mappings
@@ -158,6 +126,20 @@
     href: configuration-file/sample.md
   - name: Configuration Schema
     href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
+- name: Command-line Interface (CLI)
+  href: data-api-builder-cli.md
+- name: Running Data API builder
+  items:
+  - name: Local Development
+    href: local-development.md
+  - name: Run using the CLI
+    href: run-using-data-api-builder-cli.md
+  - name: Run in a container
+    href: run-using-container.md
+  - name: Run from source code
+    href: run-from-source-code.md
+  - name: Run in Azure
+    href: running-in-azure.md
 - name: REST Endpoints
   items:
   - name: Overview

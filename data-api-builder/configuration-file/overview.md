@@ -1,7 +1,7 @@
 ---
 title: Overview Configuration
 description: Overviews the Configuration file
-author: jnixon
+author: jerrynixon
 ms.author: jnixon
 ms.service: data-api-builder
 ms.topic: configuration-file

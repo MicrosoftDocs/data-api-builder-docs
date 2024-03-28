@@ -1,7 +1,7 @@
 ---
 title: Overview Configuration Runtime
 description: Details the runtime property in Configuration
-author: jnixon
+author: jerrynixon
 ms.author: jnixon
 ms.service: data-api-builder
 ms.topic: configuration-file

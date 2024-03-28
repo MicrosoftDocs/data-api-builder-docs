@@ -1,7 +1,7 @@
 ---
 title: Configuration Entity Mappings
 description: Details the mappings property in Entity
-author: jnixon
+author: jerrynixon
 ms.author: jnixon
 ms.service: data-api-builder
 ms.topic: configuration-file

@@ -1,7 +1,7 @@
 ---
 title: Overview Configuration Environment
 description: Details the environments capability
-author: jnixon
+author: jerrynixon
 ms.author: jnixon
 ms.service: data-api-builder
 ms.topic: configuration-file
