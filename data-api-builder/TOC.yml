@@ -29,6 +29,9 @@
   - name: Configuration schema
     displayName: Config, JSON
     href: reference-configuration.md
+    items:
+      - name: Schema
+        href: reference-configuration.md#schema
   - name: Functions
     href: reference-functions.md
 - name: Data API builder Documentation
