@@ -30,7 +30,7 @@ The `policy` section, defined per `action`, defines item-level security rules (d
 
 **Syntax**
 
-The `database` policy: an OData-like expression that is translated into a query predicate the database evaluates. This includes operators like `eq`, `lt`, and `gt`. In order for results to be returned for a request, the request's query predicate resolved from a database policy must evaluate to `true` when executing against the database.
+The `database` policy: an OData-like expression that is translated into a query predicate the database evaluates, including operators like `eq`, `lt`, and `gt`. In order for results to be returned for a request, the request's query predicate resolved from a database policy must evaluate to `true` when executing against the database.
 
 |Example Item Policy|Predicate
 |-|-
@@ -63,11 +63,11 @@ Data API builder compares the value of the `UserId` claim to the value of the da
 
 ### Limitations
 
-Database policies are supported for tables and views. Stored procedures can't be configured with policies.
+**Database policies are supported for tables and views.** Stored procedures can't be configured with policies.
 
-Database policies can't be used to prevent a request from executing within a database because they are resolved as query predicates in the generated queries passed to the database engine. 
+**Database policies don't prevent requests from executing within the database.** This is because they're resolved as predicates in the generated queries that are passed to the database engine. 
 
-Database policies are only supported for the `actions` **create**, **read**, **update**, and **delete**.
+Database policies are only supported for the `actions` **create**, **read**, **update**, and **delete**. Since there is no predicate in a stored procedure call, they cannot be appended. 
 
 ### Supported OData-like operators
 
@@ -98,7 +98,7 @@ Database policies are only supported for the `actions` **create**, **read**, **u
   
 - **Impact**: Fields not adhering to these rules can't be directly used in database policies.
 
-- **Solution**: Utilize the `mappings` section to create aliases for fields that don't meet these naming conventions; this ensures all fields can be included in policy expressions.
+- **Solution**: Utilize the `mappings` section to create aliases for fields that don't meet these naming conventions; mappings ensure all fields can be included in policy expressions.
 
 ### Utilizing `mappings` for Nonconforming Fields
 
