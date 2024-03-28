@@ -145,13 +145,7 @@
         - name: Operation
           href: configuration-file/entity-graphql.md
       - name: Source
-        items:
-        - name: Overview
-          href: configuration-file/entity-source.md
-        - name: Views
-          href: views-and-stored-procedures.md#views
-        - name: Stored Procedures
-          href: views-and-stored-procedures.md#stored-procedures
+        href: configuration-file/entity-source.md
       - name: Mappings
         href: configuration-file/entity-mappings.md
       - name: Permissions
@@ -160,8 +154,10 @@
         href: configuration-file/entity-relationships.md      
     - name: Telemetry
       href: use-application-insights.md
-  - name: Example Configuration
+  - name: Configuration Sample
     href: configuration-file/sample.md
+  - name: Configuration Schema
+    href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
 - name: REST Endpoints
   items:
   - name: Overview

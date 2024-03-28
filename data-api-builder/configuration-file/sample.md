@@ -22,8 +22,6 @@ The example configuration file is based on the database defined in our online sa
       "set-session-context": false
     }
   },
-```
-```json
   "runtime": {
     "rest": {
       "enabled": true,
@@ -46,11 +44,7 @@ The example configuration file is based on the database defined in our online sa
       "mode": "development"
     }
   },
-```
-```json
   "entities": {
-```
-```json
     "authors": {
       "source": {
         "object": "[dbo].[authors]",
@@ -98,8 +92,6 @@ The example configuration file is based on the database defined in our online sa
         }
       }
     },
-```
-```json
     "series": {
       "source": {
         "object": "[dbo].[series]",
@@ -137,8 +129,6 @@ The example configuration file is based on the database defined in our online sa
         }
       }
     },
-```
-```json
     "books": {
       "source": {
         "object": "[dbo].[books]",
@@ -185,8 +175,6 @@ The example configuration file is based on the database defined in our online sa
         }
       }
     },
-```
-```json
     "books_authors": {
       "source": {
         "object": "[dbo].[books_authors]",

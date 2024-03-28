@@ -1,7 +1,7 @@
 {
   "redirections": [
     {
-        "source_path": "/data-api-builder/configuration-file.md",
+        "source_path": "/azure/data-api-builder/configuration-file",
         "redirect_url": "/data-api-builder/configuration-file/overview.md",
         "redirect_document_id": true
     }
