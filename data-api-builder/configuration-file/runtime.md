@@ -87,7 +87,7 @@ A Boolean flag that determines the global availability of REST endpoints. If dis
 
 ### Request-body-strict property
 
-This boolean flag determines whether the request body for a REST mutation operation can contain extraneous fields. By default, it is set to true, meaning that additional fields in the request body will result in a `BadRequest` exception. However, setting this flag to false allows users to include extra fields in the request body, which will be ignored by DAB. It's important to note that this flag does not affect REST query (GET) requests, as the request body is always ignored for GET operations.
+This boolean flag determines whether the request body for a REST mutation operation can contain extraneous fields. By default, the value is true, meaning that extra fields in the request body results in a `BadRequest` exception. However, setting this flag to false allows users to include extra fields in the request body, which are ignored. It's important to note that this flag doesn't affect REST query (GET) requests, as the request body is always ignored for GET operations.
 
 ## GraphQL property
 
@@ -109,7 +109,7 @@ This section outlines the global settings for the GraphQL endpoint.
 
 ### Path property
 
-Specifies the URL path for the GraphQL endpoint. Setting `path` to `/graphql` exposes the endpoint at `/graphql`. Sub-paths aren't allowed. This field is optional, with `graphql` as the default. Custom paths for the GraphQL endpoint are currently unsupported.
+Specifies the URL path for the GraphQL endpoint. Setting `path` to `/graphql` exposes the endpoint at `/graphql`. Subpaths aren't allowed. This field is optional, with `graphql` as the default. Custom paths for the GraphQL endpoint are currently unsupported.
 
 ### Enabled property
 
@@ -239,7 +239,7 @@ The `authentication.provider` setting within the `host` configuration defines th
 | - | - |
 | StaticWebApps (default) | Instructs Data API builder to look for a set of HTTP headers only present when running within a Static Web Apps environment. [more](../local-authentication.md) |
 | AppService | When the runtime is hosted in Azure AppService with AppService Authentication enabled and configured (EasyAuth). [more](https://github.com/Azure/data-api-builder/pull/97) |
-| AzureAd | Azure AD needs to be configured so that it can authenticate a request sent to Data API builder (the "Server App"). [more](../authentication-azure-ad.md) |
+| AzureAd | Microsoft Entra Identity needs to be configured so that it can authenticate a request sent to Data API builder (the "Server App"). [more](../authentication-azure-ad.md) |
 | Simulator | A configurable authentication provider that instructs the Data API builder engine to treat all requests as authenticated. [more](../local-authentication.md) |
 
 > [!NOTE]
@@ -256,7 +256,7 @@ Required if the authentication provider is `AzureAD` for Microsoft Entra Identit
 
 **Flexible security**
 
-The Data API builder (DAB) offers flexible authentication support, integrating with Microsoft Entra Identity and custom JSON Web Token (JWT) servers. In this image, the **JWT Server** represents the authentication service that issues JWT tokens to clients upon successful login. The client then passes the token to DAB, which can interrogate its claims and properties.
+The Data API builder (DAB) offers flexible authentication support, integrating with Microsoft Entra Identity and custom JSON Web Token (JWT) servers. In this image, the **JWT Server** represents the authentication service that issues JWT tokens to clients upon successful sign-in. The client then passes the token to DAB, which can interrogate its claims and properties.
 
 ![alt text](../media/jwt-server.png)
 
@@ -281,7 +281,7 @@ The following are examples of the `host` property given various architectural ch
 }
 ````
 
-With `StaticWebApps`, Data API builder expects Azure Static Web Apps has authenticated the request and the `X-MS-CLIENT-PRINCIPAL` HTTP header is present. 
+With `StaticWebApps`, Data API builder expects Azure Static Web Apps to authenticate the request and the `X-MS-CLIENT-PRINCIPAL` HTTP header is present. 
 
 **AppService**
 

@@ -1,6 +1,6 @@
 ---
 title: Overview Configuration Entities
-description: Overviews the entites property in Configuration
+description: Overviews the entities property in Configuration
 author: jerrynixon
 ms.author: jnixon
 ms.service: data-api-builder

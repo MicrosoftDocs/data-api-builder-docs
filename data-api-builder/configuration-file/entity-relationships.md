@@ -36,7 +36,7 @@ This section outlines options that define relationships between entities. [more]
 > [!NOTE]
 > Relationships are only relevant to GraphQL queries. REST endpoints access only one entity at a time and can't return nested types. 
  
-The `relationships` section outlines how entities interact within the Data API builder, detailing associations and potential database support for these relationships. The `relationship-name` property for each relationship is both required and must be unique across all relationships for a given entity. Names ensures clear, identifiable connections and maintains the integrity of the GraphQL schema generated from these configurations.
+The `relationships` section outlines how entities interact within the Data API builder, detailing associations and potential database support for these relationships. The `relationship-name` property for each relationship is both required and must be unique across all relationships for a given entity. Custom names ensure clear, identifiable connections and maintain the integrity of the GraphQL schema generated from these configurations.
 
 | Relationship | Cardinality | Example
 |-|-|-
@@ -458,7 +458,7 @@ To create the entities `User` and `Todo` and set up the many-to-many relationshi
 
 **Database setup for this example**
 
-Want a backing database for testing? These are the DDL (Data Definition Language) and DML (Data Manipulation Language) SQL statements to create the `User`, `Todo`, `Category`, and `users_todos` tables, along with their relationships.
+Want a backing database for testing? These scripts are the DDL (Data Definition Language) and DML (Data Manipulation Language) SQL statements to create the `User`, `Todo`, `Category`, and `users_todos` tables, along with their relationships.
 
 ```sql
 CREATE TABLE User (

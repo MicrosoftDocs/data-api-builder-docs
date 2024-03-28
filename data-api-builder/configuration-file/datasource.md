@@ -41,7 +41,7 @@ The `type` property indicates the kind of backend database.
 
 | Type                  | Description              | Min Version |
 | --------------------- | ------------------------ | ----------- |
-| `mssql`               | Azure SQL DB             | n/a         |
+| `mssql`               | Azure SQL Database       | n/a         |
 | `mssql`               | Azure SQL MI             | n/a         |
 | `mssql`               | SQL Server               | SQL 2016    |
 | `sqldw`               | Azure SQL Data Warehouse | n/a         |
@@ -70,7 +70,7 @@ Data API builder can also connect to the target database using Managed Service I
 
 ## Example
 
-These samples just illustrate how each database type might be configured. Your scenario may be unique, but this sample is a good starting place. Replace the placeholders such as `myserver`, `myDataBase`, `mylogin`, and `myPassword` with the actual values specific to your environment.
+These samples just illustrate how each database type might be configured. Your scenario might be unique, but this sample is a good starting place. Replace the placeholders such as `myserver`, `myDataBase`, `mylogin`, and `myPassword` with the actual values specific to your environment.
 
 **Sample - mssql**
 

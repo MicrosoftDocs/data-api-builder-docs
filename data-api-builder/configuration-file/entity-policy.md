@@ -65,9 +65,9 @@ Data API builder compares the value of the `UserId` claim to the value of the da
 
 **Database policies are supported for tables and views.** Stored procedures can't be configured with policies.
 
-**Database policies don't prevent requests from executing within the database.** This is because they're resolved as predicates in the generated queries that are passed to the database engine. 
+**Database policies don't prevent requests from executing within the database.** This behavior is because they're resolved as predicates in the generated queries that are passed to the database engine. 
 
-Database policies are only supported for the `actions` **create**, **read**, **update**, and **delete**. Since there is no predicate in a stored procedure call, they cannot be appended. 
+Database policies are only supported for the `actions` **create**, **read**, **update**, and **delete**. Since there's no predicate in a stored procedure call, they can't be appended. 
 
 ### Supported OData-like operators
 

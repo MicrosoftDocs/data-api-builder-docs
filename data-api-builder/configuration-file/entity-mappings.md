@@ -62,4 +62,4 @@ In this refined example for the `Book` entity, the `mappings` section is utilize
 
   - **Field Name Obfuscation**: Mapping allows for the obfuscation of field names, which can help prevent unauthorized users from inferring sensitive information about the database schema or the nature of the data stored.
 
-  - **Protecting Proprietary Information**: By renaming fields, you can also protect proprietary names or business logic that may be hinted at through the database's original field names.
+  - **Protecting Proprietary Information**: By renaming fields, you can also protect proprietary names or business logic that might be hinted at through the database's original field names.

@@ -10,7 +10,7 @@ ms.date: 03/27/2024
 
 # GraphQL
 
-This segment provides for integrating an entity into the GraphQL schema. It allows developers to specify or modify default values for the entity in GraphQL. This ensures the schema accurately reflects the intended structure and naming conventions.
+This segment provides for integrating an entity into the GraphQL schema. It allows developers to specify or modify default values for the entity in GraphQL. This setup ensures the schema accurately reflects the intended structure and naming conventions.
 
 ## Syntax overview
 
@@ -34,7 +34,7 @@ This segment provides for integrating an entity into the GraphQL schema. It allo
 
 ### Enabled property
 
-This setting controls whether an entity is available via GraphQL endpoints. Toggling the `enabled` property lets developers  selectively expose entities from the GraphQL schema.
+Enabled controls whether an entity is available via GraphQL endpoints. Toggling the `enabled` property lets developers  selectively expose entities from the GraphQL schema.
 
 ```json
 {
@@ -52,7 +52,7 @@ This setting controls whether an entity is available via GraphQL endpoints. Togg
 
 ### Type property
 
-This property dictates the naming convention for an entity within the GraphQL schema. It supports both scalar string values and object types. The object value specifes a singular and plural forms. This provides granular control over the schema's readability and user experience.
+This property dictates the naming convention for an entity within the GraphQL schema. It supports both scalar string values and object types. The object value specifies the singular and plural forms. This property provides granular control over the schema's readability and user experience.
 
 **Scalar string value**
 

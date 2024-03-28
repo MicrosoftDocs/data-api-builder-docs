@@ -1,6 +1,6 @@
 ---
 title: Sample Data API builder configuration file
-description: An sample configuration file for Data API builder.
+description: A sample configuration file for Data API builder.
 author: jerrynixon
 ms.author: jnixon
 ms.service: data-api-builder

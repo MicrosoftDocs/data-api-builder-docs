@@ -33,7 +33,7 @@ This approach enhances flexibility and organization in managing configurations a
 To illustrate the use of environment-specific `connection-string` settings in the Data API builder configuration files, consider the following sample setup:
 
 #### Base Configuration File (`dab-config.json`)
-This file contains all common configuration settings that don't vary between different environments. It might not include the `connection-string` since it will differ between development and production environments.
+This file contains all common configuration settings that don't vary between different environments. It might not include the `connection-string` since it differs between development and production environments.
 
 ```json
 {
@@ -85,7 +85,7 @@ Effectively managing environment variables is crucial for the secure and flexibl
 
 ### Best Practices and Security
 
-- **Process Isolation:** When set through a `.env` file or directly in the system, environment variables are established as process variables, safeguarded from other processes. This isolation may enhance the security of your configuration by limiting exposure to sensitive information.
+- **Process Isolation:** When set through a `.env` file or directly in the system, environment variables are established as process variables, safeguarded from other processes. This isolation can enhance the security of your configuration by limiting exposure to sensitive information.
 
 - **Exclusion from Version Control:** To prevent the accidental leakage of secrets, include your `.env` file in your project's `.gitignore`. This practice ensures that sensitive information, such as connection strings or API keys, isn't inadvertently committed and pushed to version control repositories.
 
