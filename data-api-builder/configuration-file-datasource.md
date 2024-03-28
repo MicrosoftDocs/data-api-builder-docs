@@ -44,15 +44,15 @@ The `type` property indicates the kind of backend database.
 | `mssql`               | Azure SQL DB             | n/a         |
 | `mssql`               | Azure SQL MI             | n/a         |
 | `mssql`               | SQL Server               | SQL 2016    |
-| `sqldw`               | Azure SQL DW             | n/a         |
+| `sqldw`               | Azure SQL Data Warehouse | n/a         |
 | `postgresql`          | PostgreSQL               | v11         |
 | `mysql`               | MySQL                    | v8          |
-| `cosmosdb_nosql`      | Cosmos DB NoSQL API      | n/a         |
-| `cosmosdb_postgresql` | Cosmos DB PostgreSQL API | n/a         |
+| `cosmosdb_nosql`      | Azure Cosmos DB<br/>NoSQL API      | n/a         |
+| `cosmosdb_postgresql` | Azure Cosmos DB<br/>PostgreSQL API | n/a         |
 
 ### Set-session-context property
 
-For Azure SQL and SQL Server, Data API builder can take advantage of `SESSION_CONTEXT` to send user specified metadata to the underlying database. Such metadata is available to Data API builder by virtue of the claims present in the access token. The `SESSION_CONTEXT` data is available to the database for the duration of the database connection until that connection is closed. [Learn more about session context](/data-api-builder/azure-sql-session-context-rls.md).
+For Azure SQL and SQL Server, Data API builder can take advantage of `SESSION_CONTEXT` to send user specified metadata to the underlying database. Such metadata is available to Data API builder by virtue of the claims present in the access token. The `SESSION_CONTEXT` data is available to the database during the database connection until that connection is closed. [Learn more about session context](/data-api-builder/azure-sql-session-context-rls.md).
 
 ### Connection-string property
 
@@ -66,11 +66,11 @@ Data API builder automatically retries database requests after detecting transie
 
 Data API builder uses the SqlClient library to connect to Azure SQL or SQL Server using the connection string you provide in the configuration file. A list of all the supported connection string options is available here: [SqlConnection.ConnectionString Property](/dotnet/api/system.data.sqlclient.sqlconnection.connectionstring).
 
-Data API builder can also connect to the target database using Managed Service Identities (MSI). The DefaultAzureCredential defined in [Azure Identity client library for .NET](/dotnet/api/overview/azure/Identity-readme#defaultazurecredential) will be used when you don't specify a username or password in your connection string.
+Data API builder can also connect to the target database using Managed Service Identities (MSI). It uses DefaultAzureCredential defined in [Azure Identity client library for .NET](/dotnet/api/overview/azure/Identity-readme#defaultazurecredential) when you don't specify a username or password in your connection string.
 
 ## Example
 
-These samples just illustrate how each database type might be configured. Your scenario may be unique, but this is a good starting place. Replace the placeholders such as `myserver`, `myDataBase`, `mylogin`, and `myPassword` with the actual values specific to your environment. These can be used within a larger configuration file.
+These samples just illustrate how each database type might be configured. Your scenario may be unique, but this sample is a good starting place. Replace the placeholders such as `myserver`, `myDataBase`, `mylogin`, and `myPassword` with the actual values specific to your environment.
 
 **Sample - mssql**
 
@@ -135,4 +135,4 @@ Typical connection string format: `"AccountEndpoint=https://mycosmosdb.documents
 
 Typical connection string format: `"Host=mycosmosdb.postgres.database.azure.com;Database=myDataBase;Username=mylogin@mycosmosdb;Password=myPassword;Port=5432;SSL Mode=Require;"`
 
-> The "options" specified such as `database`, `container`, and `schema` are specific to Cosmos DB's NoSQL API rather than the PostgreSQL API. For Cosmos DB using the PostgreSQL API, the "options" would not include `database`, `container`, or `schema` as in the NoSQL setup.
+> The "options" specified such as `database`, `container`, and `schema` are specific to Azure Cosmos DB's NoSQL API rather than the PostgreSQL API. For Azure Cosmos DB using the PostgreSQL API, the "options" would not include `database`, `container`, or `schema` as in the NoSQL setup.
