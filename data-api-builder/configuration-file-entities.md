@@ -73,7 +73,7 @@ The `entities` section serves as the core of the configuration file, establishin
 
 ## Example
 
-This declares the `User` entity. This name `User` is used anywhere in the configuration file where entities are referenced. Otherwise the entity name is not relevant to the endpoints.
+The example declares the `User` entity. This name `User` is used anywhere in the configuration file where entities are referenced. Otherwise the entity name isn't relevant to the endpoints.
 
 ```json
 {
