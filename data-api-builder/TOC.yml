@@ -157,100 +157,235 @@
           href: reference-configuration.md#enabled-cache-entity
         - name: Time-to-live in seconds (Cache entity)
           href: reference-configuration.md#ttl-in-seconds-cache-entity
+      - name: JSON Schema
+        href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
   - name: Functions
     href: reference-functions.md
+
+
 - name: Data API builder Documentation
   href: index.yml
-- name: Overview 
+- name: What is Data API builder?
   items:
-  - name: What's new in Data API builder
-    href: whats-new.md
+  - name: Overview
+    href: overview-to-data-api-builder.md
+  - name: What's new
     items:
     - name: Version 0.10
-      href: whats-new-0-10.md
+      href: whats-new/whats-new-0-10.md
     - name: Version 0.9
-      href: whats-new-0-9.md
+      href: whats-new/whats-new-0-9.md
     - name: Version 0.8
-      href: whats-new-0-8.md
+      href: whats-new/whats-new-0-8.md
     - name: Older versions
-      href: whats-new.md#version-07
+      href: whats-new/whats-new.md#version-07
 - name: Quickstarts
   items:
-  - name: Get started with Data API builder
+  - name: Getting Started
     href: get-started/get-started-with-data-api-builder.md
-  - name: Get started with databases 
-    items:
-    - name: Use Data API builder with Azure SQL
-      href: get-started/get-started-azure-sql.md
-    - name: Use Data API builder with PostgreSQL
-      href: get-started/get-started-azure-postgresql.md
-    - name: Use Data API builder with Azure Cosmos DB
-      href: get-started/get-started-azure-cosmos-db.md
-    - name: Use Data API builder with MySQL
-      href: get-started/get-started-azure-mysql.md
-- name: Data API builder CLI
-  href: data-api-builder-cli.md
-- name: Local development  
-  href: local-development.md
+  - name: Using Azure SQL
+    href: get-started/get-started-azure-sql.md
+  - name: Using PostgreSQL
+    href: get-started/get-started-azure-postgresql.md
+  - name: Using Azure Cosmos DB
+    href: get-started/get-started-azure-cosmos-db.md
+  - name: Using MySQL
+    href: get-started/get-started-azure-mysql.md
+- name: Configuration file
   items:
-  - name: Run using Data API builder CLI
+  - name: Overview
+    href: configuration-file/overview.md
+  - name: Environment
+    href: configuration-file/environment.md
+  - name: Data Source
+    items:
+    - name: Overview
+      href: configuration-file/datasource.md
+    - name: Database-type
+      href: configuration-file/datasource.md#database-type-property
+    - name: Connection-string
+      href: configuration-file/datasource.md#connection-string-property
+    - name: Set-session-context
+      href: configuration-file/datasource.md#set-session-context-property
+  - name: Runtime
+    items:
+    - name: Overview
+      href: configuration-file/runtime.md
+    - name: REST
+      items:
+      - name: Overview
+        href: configuration-file/runtime.md#rest-property
+      - name: Enabled
+        href: configuration-file/runtime.md#enabled-property
+      - name: Path
+        href: configuration-file/runtime.md#path-property
+      - name: Request-body-strict
+        href: configuration-file/runtime.md#request-body-strict-property
+    - name: GraphQL
+      items:
+      - name: Overview
+        href: configuration-file/runtime.md#graphql-property
+      - name: Enabled
+        href: configuration-file/runtime.md#enabled-property-1
+      - name: Path
+        href: configuration-file/runtime.md#path-property-1
+      - name: Allow-introspection
+        href: configuration-file/runtime.md#allow-introspection-property
+    - name: Host
+      items:
+      - name: Overview
+        href: configuration-file/runtime.md#host-property
+      - name: Mode
+        href: configuration-file/runtime.md#mode-property
+      - name: Cors
+        items:
+        - name: Overview
+          href: configuration-file/runtime.md#cors-property
+        - name: Origins
+          href: configuration-file/runtime.md#origins-property
+        - name: Credentials
+          href: configuration-file/runtime.md#credentials-property
+      - name: Authentication
+        items:
+        - name: Overview
+          href: configuration-file/runtime.md#authentication-property
+        - name: Provider
+          href: configuration-file/runtime.md#provider-property
+        - name: Jwt
+          href: configuration-file/runtime.md#jwt-property
+    - name: Entities
+      items:
+      - name: Overview
+        href: configuration-file/entities.md
+      - name: REST
+        items:
+        - name: Overview
+          href: configuration-file/entity-rest.md
+        - name: Enabled
+          href: configuration-file/entity-rest.md#enabled-property
+        - name: Path
+          href: configuration-file/entity-rest.md#path-property
+        - name: Methods
+          href: configuration-file/entity-rest.md#methods-property
+      - name: GraphQL
+        items:
+        - name: Overview
+          href: configuration-file/entity-graphql.md
+        - name: Enabled
+          href: configuration-file/entity-graphql.md#enabled-property
+        - name: Type
+          href: configuration-file/entity-graphql.md#type-property
+        - name: Operation
+          href: configuration-file/entity-graphql.md#operation-property
+      - name: Source
+        href: configuration-file/entity-source.md
+      - name: Mappings
+        href: configuration-file/entity-mappings.md
+      - name: Permissions
+        href: configuration-file/entity-permissions.md
+      - name: Relationships
+        href: configuration-file/entity-relationships.md      
+    - name: Telemetry
+      href: use-application-insights.md
+  - name: Configuration Sample
+    href: configuration-file/sample.md
+  - name: Configuration Schema
+    href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
+- name: Command-line Interface (CLI)
+  href: data-api-builder-cli.md
+- name: Running Data API builder
+  items:
+  - name: Local Development
+    href: local-development.md
+  - name: Run using the CLI
     href: run-using-data-api-builder-cli.md
-  - name: Run using container
+  - name: Run in a container
     href: run-using-container.md
   - name: Run from source code
     href: run-from-source-code.md
-  - name: Local authentication
-    href: local-authentication.md
-- name: Running in Azure
-  href: running-in-azure.md
-- name: Configuration file
-  href: configuration-file.md
-  items:
-  - name: Database connections
-    href: database-connections.md
-- name: REST
+  - name: Run in Azure
+    href: running-in-azure.md
+- name: REST Endpoints
   items:
   - name: Overview
     href: rest.md
-  - name: Swagger / OpenAPI
+  - name: OpenAPI
     href: openapi.md
-- name: GraphQL
-  href: graphql.md
-- name: Views and stored procedures
-  href: views-and-stored-procedures.md
-- name: Relationships  
-  href: relationships.md
-- name: Authentication
-  href: authentication.md
+  - name: Swagger UI
+    href: openapi.md#swaggerui
+  - name: GET method
+    href: rest.md#get
+  - name: POST method
+    href: rest.md#post
+  - name: PUT method
+    href: rest.md#put
+  - name: PATCH method
+    href: rest.md#patch
+  - name: DELETE method
+    href: rest.md#delete
+- name: GraphQL Endpoints
   items:
-  - name: Authentication with Azure AD
-    href: authentication-azure-ad.md
-- name: Authorization  
-  href: authorization.md
-- name: Use Application Insights
+  - name: Overview
+    href: graphql.md
+  - name: Pagination
+    href: graphql.md#pagination
+  - name: Filtering
+    href: graphql.md#filter
+  - name: Mutations
+    items:
+    - name: Overview
+      href: graphql.md#mutations
+    - name: Create
+      href: graphql.md#create
+    - name: Update
+      href: graphql.md#update
+    - name: Delete
+      href: graphql.md#delete
+- name: Database Objects
+  items:
+  - name: Views
+    href: views-and-stored-procedures.md#views
+  - name: Stored Procedures
+    href: views-and-stored-procedures.md#stored-procedures
+  - name: Relationships  
+    href: relationships.md
+- name: Application Insights
   href: use-application-insights.md
-- name: Database specific features
-  href: database-specific-features.md  
+- name: Security
   items:
-  - name: Azure SQL Session Context and Row Level Security
+  - name: Authentication
+    href: authentication.md
+  - name: Microsoft Entra ID
+    href: authentication-azure-ad.md
+  - name: Local authentication
+    href: local-authentication.md
+  - name: Authorization  
+    href: authorization.md
+  - name: Security considerations
+    href: security-considerations.md
+- name: Database-specific features
+  items:
+  - name: Azure Cosmos DB
+    href: database-specific-features.md  
+  - name: SQL Session Context 
     href: azure-sql-session-context-rls.md
-- name: Best practices
-  href: best-practices.md  
-- name: Known issues
-  href: known-issues.md  
-- name: Troubleshoot
+  - name: Row Level Security
+    href: azure-sql-session-context-rls.md#example-how-to-use-session_context-to-leverage-row-level-security-rls
+- name: Troubleshooting
   items:
   - name: Overview
     href: troubleshoot.md
+  - name: Best practices
+    href: best-practices.md  
   - name: Troubleshoot installation
     href: troubleshoot-installation.md
   - name: Troubleshoot usage
     href: troubleshoot-usage.md
-- name: Security considerations
-  href: security-considerations.md
-- name: Change Policy
+  - name: Known issues
+    href: known-issues.md  
+- name: Internal Policies
   items:
-  - name: Versioning
+  - name: Version Numbers
     href: versioning.md
   - name: Breaking change policy
     href: breaking-changes.md

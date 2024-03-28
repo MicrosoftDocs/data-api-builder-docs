@@ -1,5 +1,5 @@
 ---
-title: Quickstart to Data API builder for Azure SQL Database 
+title: Quickstart to Data API builder for Azure SQL Database. 
 description: This quickstart will help you use Data API builder with Azure SQL.
 author: anagha-todalbagi
 ms.author: atodalbagi
@@ -16,13 +16,13 @@ As mentioned before, this tutorial assumes that you already have a SQL Server or
 
 ## Create a sample database
 
-If you don't have a SQL Server or Azure SQL database, you can create one in Azure. You can use the Azure Portal or the Azure CLI. More details here: [Quickstart: Create a single database - Azure SQL Database](/azure/azure-sql/database/single-database-create-quickstart?view=azuresql&tabs=azure-portal&preserve-view=true)
+If you don't have a SQL Server or Azure SQL database, you can create one in Azure. You can use the Azure portal or the Azure CLI. More details here: [Quickstart: Create a single database - Azure SQL Database.](/azure/azure-sql/database/single-database-create-quickstart?view=azuresql&tabs=azure-portal&preserve-view=true)
 
 ## Get the database connection string
 
 There are several ways to get an Azure SQL database connection string. More details here: [Azure SQL Database and Azure SQL Managed Instance connect and query articles](/azure/azure-sql/database/connect-query-content-reference-guide?view=azuresql&preserve-view=true)
 
-If you're connecting to Azure SQL DB, Azure SQL MI, or SQL Server, the connection string looks like:
+If you're connecting to Azure SQL Database, Azure SQL MI, or SQL Server, the connection string looks like:
 
 ```text
 Server=<server-address>;Database=<database-name>;User ID=<user-d>;Password=<password>;
@@ -51,15 +51,15 @@ Execute the script in the SQL Server or Azure SQL database you decided to use, s
 
 ## Creating a configuration file for DAB
 
-The Data API builder for Azure Databases engine needs a [configuration file](../configuration-file.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
+The Data API builder for Azure Databases engine needs a [configuration file](../configuration-file/overview.md). Define which database DAB connects to, and which entities are exposed by the API.
 
-For this getting started guide, you'll use DAB CLI to initialize your configuration file. Run the following command:
+For this getting started guide, use the DAB CLI to initialize your configuration file. Run the following command:
 
 ```bash
 dab init --database-type "mssql" --connection-string "Server=localhost;Database=PlaygroundDB;User ID=PlaygroundUser;Password=<Password>;TrustServerCertificate=true" --host-mode "Development"
 ```
 
-Make sure to replace the placehoders (`<database-name>`, `<user>` and `<password>`) with the correct values for your database.
+Make sure to replace the placehoders (`<database-name>`, `<user>`, and `<password>`) with the correct values for your database.
 
 The command generates a config file called `dab-config.json` looking like this:
 
@@ -100,13 +100,14 @@ The command generates a config file called `dab-config.json` looking like this:
 
 As you can see there the `data-source` property specifies that our chosen `database-type` is `mssql`, with the `connection-string` we passed to DAB CLI.
 
->Take a look at the [DAB Configuration File Guide](../configuration-file.md) document to learn more.
+> [!TIP]
+> Take a look at the [DAB Configuration File Guide](../configuration-file/overview.md) document to learn more.
 
 With the configuration file in place, then it's time to start defining which entities you want to expose via the API.
 
 ## Add Book and Author entities
 
-Now, you'll want to expose the `dbo.books` and the `dbo.authors` table as REST or GraphQL endpoints. To do that, add the following information to the `entities` section of the configuration file.
+Now, expose the `dbo.books` and the `dbo.authors` table as REST or GraphQL endpoints. To do that, add the following information to the `entities` section of the configuration file.
 
 You can do this either using the CLI:
 
@@ -114,7 +115,7 @@ You can do this either using the CLI:
 dab add Author --source dbo.authors --permissions "anonymous:*"
 ```
 
-or by adding the `Author` entity manually to the config file:
+Or by adding the `Author` entity manually to the config file:
 
 ```json
 "entities": {
@@ -130,7 +131,7 @@ or by adding the `Author` entity manually to the config file:
 }
 ```
 
-within the `entities` object you can create any entity with any name (as long as it's valid for REST and GraphQL). The name `Author`, in this case, is used to build the REST path and the GraphQL type. Within the entity, you have the `source` element that specifies which table contains the entity data. In our case is `dbo.authors`.
+Within the `entities` object you can create any entity with any name (as long as it's valid for REST and GraphQL). The name `Author`, in this case, is used to build the REST path and the GraphQL type. Within the entity, you have the `source` element that specifies which table contains the entity data. In our case is `dbo.authors`.
 
 > [!NOTE]
 > Entity names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them. Take a look at the [Best Practices](../best-practices.md) document to learn the best practices on entity names.
@@ -140,7 +141,7 @@ After that, the permissions for the exposed entity are defined via the `permissi
 > [!NOTE]
 > The aforementioned permissions settings are only to be used for learning purposes. We do not recommend that unauthenticated entities are allowed to perform CRUD operations on a database in a production environment, as this poses a security risk. To read more on security baselines, go to [Azure security baseline for Azure SQL](/security/benchmark/azure/baselines/azure-sql-security-baseline)
 
-You can also add the `Book` entity now, applying the same concepts you just learned for the `Author` entity. Once you've added the `Author` entity, the `entities` object of configuration file looks like the following:
+You can also add the `Book` entity now, applying the same concepts you just learned for the `Author` entity. The `entities` object of configuration file looks like the following snippet:
 
 ```json
 "entities": {
@@ -165,7 +166,7 @@ You can also add the `Book` entity now, applying the same concepts you just lear
   }
 ```
 
-that's all is needed at the moment. Data API builder is ready to be run.
+Data API builder is ready to be run.
 
 > [!TIP]
 > We recommend that you use the *singular* form for entity names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](../graphql.md).
@@ -175,13 +176,13 @@ that's all is needed at the moment. Data API builder is ready to be run.
 
 ## Start Data API builder for Azure SQL Database
 
-You're ready to serve your API. Run the below command (this starts the engine with default config `dab-config.json`, use option --config otherwise):
+You're ready to serve your API. Run the below command (the engine starts with default config `dab-config.json`, use option --config otherwise):
 
 ```bash
 dab start
 ```
 
-when you see something like:
+When you see something like:
 
 ```text
 info: Azure.DataApiBuilder.Service.Startup[0]
@@ -194,7 +195,7 @@ info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 ```
 
-you're good to go, Data API Builder is up and running, ready to serve your requests.
+Data API Builder is up and running, ready to serve requests.
 
 ## Query the endpoints
 
@@ -208,7 +209,7 @@ REST endpoint is made available at the path (make sure to keep in mind that the 
 /api/<entity>
 ```
 
-so if you want to get a list of all the available books you can run this GET request:
+So if you want to get a list of all the available books you can run this GET request:
 
 ```text
 /api/Book
@@ -227,7 +228,7 @@ Whenever you need to access a single item, you can get the item you want through
 /api/Book/id/1000
 ```
 
-The ability to filter by primary key is supported by all verbs except for POST as that verb is used to create a new item and therefore searching an item by its primary key isn't applicable.
+All verbs support filtering by primary key except `POST` as that verb is used to create a new item and therefore searching an item by its primary key isn't applicable.
 
 The GET verb also supports several query parameters (also case sensitive) that allow you to manipulate and refine the requested data:
 
@@ -236,7 +237,7 @@ The GET verb also supports several query parameters (also case sensitive) that a
 - `$filter`: expression to filter the returned items
 - `$select`:  list of field names to be returned
 
-For more information on how they can be used, see the [REST documentation](../rest.md)
+For more information on how they can be used, see the [REST documentation.](../rest.md)
 
 ### GraphQL endpoint
 
@@ -259,11 +260,11 @@ Use a GraphQL-capable REST client like Postman or Insomnia to query the database
 }
 ```
 
-returns the first five books ordered by title in descending order.
+Returns the first five books ordered by title in descending order.
 
 ## Adding entities relationships
 
-Everything is now up and working, and now you probably want to take advantage as much as possible of GraphQL capabilities to handle complex queries by sending just one request. For example, you may want to get all the Authors in your library along with the Books they've written. In order to achieve that, you need to let Data API Builder know that you want such relationship to be available to be used in queries.
+Everything is now up and working, and now you probably want to take advantage as much as possible of GraphQL capabilities to handle complex queries by sending just one request. For example, you may want to get all the Authors in your library along with their Books. In order to achieve that, you need to let Data API Builder know that you want such relationship to be available to be used in queries.
 
 Stop the engine (`Ctrl+C`).
 
@@ -273,7 +274,7 @@ Relationships are also defined in the configuration file, via the `relationships
 dab update Author --relationship "books" --cardinality "many" --target.entity "Book" --linking.object "dbo.books_authors"
 ```
 
-which creates the `relationships` section in the `Author` entity:
+Which creates the `relationships` section in the `Author` entity:
 
 ```json
 "relationships": {
@@ -291,7 +292,7 @@ The element under `relationship` is used to add a field - `books` in the sample 
 - `target.entity`: Which entity, defined in the same configuration file, will be used in this relationship. For this sample is `book` as we're creating the relationship on the `Author` entity.
 - `linking.object`: the database table used to support the many-to-many relationship. That table is the `dbo.books_authors`.
 
-Data API Builder will automatically figure out what are the columns that are used to support the relationship between all the involved parts by analyzing the foreign key constraints that exist between the involved tables. For this reason, the configuration is done! (If you don't have foreign keys you can always manually specify the columns you want to use to navigate from one table to another. More on this in the [relationships documentation](../relationships.md))
+Data API Builder will automatically figure out what are the relationship columns used. For this reason, the configuration is done! (If you don't have foreign keys you can always manually specify the columns you want to use to navigate from one table to another. For more information, see the [relationships documentation](../relationships.md))
 
 The `author` entity should now look like the following:
 
@@ -314,13 +315,13 @@ The `author` entity should now look like the following:
 },
 ```
 
-as we also want to enable querying a book and getting its authors, we also need to make a similar change to the book entity:
+As we also want to enable querying a book and getting its authors, we also need to make a similar change to the book entity:
 
 ```bash
 dab update Book --relationship "authors" --cardinality "many" --target.entity "Author" --linking.object "dbo.books_authors"
 ```
 
-that updates the configuration file so that the `book` entity looks like the following code:
+That updates the configuration file so that the `book` entity looks like the following code:
 
 ```json
 "Book": {
@@ -341,7 +342,7 @@ that updates the configuration file so that the `book` entity looks like the fol
 }
 ```
 
-Once this is done, you can now restart the Data API builder engine, and using GraphQL you can now execute queries like:
+Once done, you can now restart the Data API builder engine, and using GraphQL you can now execute queries like:
 
 ```graphql
 {
@@ -361,7 +362,7 @@ Once this is done, you can now restart the Data API builder engine, and using Gr
 }
 ```
 
-that returns all the authors of "Nightfall" book, or like:
+That returns all the authors of "Nightfall" book, or like:
 
 ```graphql
 {
@@ -386,20 +387,18 @@ that returns all the authors of "Nightfall" book, or like:
 }
 ```
 
-that returns all the books written by Isaac Asimov.
+That returns all the books written by Isaac Asimov.
 
-Congratulations, you've now created a fully working backend to support your modern applications!
+Congratulations, you've created a fully working backend to support your modern applications!
 
 ## Next steps
 
-## Exercise
-
-If you want to practice what you have learned, here's a little exercise you can do on your own
+If you want to practice, here's an exercise.
 
 - Using the database setup script available in the source code repo [exercise folder](https://github.com/Azure/data-api-builder/tree/main/samples/getting-started/azure-sql-db/exercise/exercise.library.azure-sql.sql):
-  - add the table `dbo.series`, which stores series names (for example: [Foundation Series](https://en.wikipedia.org/wiki/Foundation_series))
-  - update the `dbo.books` table by adding a column named `series_id`
-  - update the `dbo.books` table by adding a foreign key constraint on the `dbo.series` table
+  - Add the table `dbo.series`, which stores series names (for example: [Foundation Series](https://en.wikipedia.org/wiki/Foundation_series)).
+  - Update the `dbo.books` table by adding a column named `series_id`.
+  - Update the `dbo.books` table by adding a foreign key constraint on the `dbo.series` table.
 - Update the configuration file with a new entity named `Series`, supported by the `dbo.series` source table you just created.
-- Update the `Book` entity by creating a relationship with the `Series` entity. Make sure you select `one` for the `cardinality` property
-- Update the `Series` entity by creating a relationship with the `Book` entity. Make sure you select `many` for the `cardinality` property
+- Update the `Book` entity by creating a relationship with the `Series` entity. Make sure you select `one` for the `cardinality` property.
+- Update the `Series` entity by creating a relationship with the `Book` entity. Make sure you select `many` for the `cardinality` property.

@@ -10,18 +10,17 @@ ms.date: 02/28/2023
 
 # What's New in Data API builder 0.4.11
 
-- [Public JSON Schema](#public-json-schema)
-- [Updated JSON schema for `data-source` section](#updated-json-schema-for-data-source-section)
-- [Support for filter on nested objects within a document in Azure SQL and SQL Server](#support-for-filter-on-nested-objects-within-a-document-in-azure-sql-and-sql-server)
-- [Improved Stored Procedure support](#improved-stored-procedure-support)
-- [`database-type` value renamed for Cosmos DB](#database-type-value-renamed-for-cosmos-db)
-- [Renaming CLI properties for `cosmosdb_nosql`](#renaming-cli-properties-for-cosmosdb_nosql)
-- [Managed Identity now supported with Postgres](#managed-identity-now-supported-with-postgres)
-- [Support Azure AD User authentication for Azure MySQL Service](#support-azure-ad-user-authentication-for-azure-mysql-service)
+- [What's New in Data API builder 0.4.11](#whats-new-in-data-api-builder-0411)
+  - [Public JSON Schema](#public-json-schema)
+  - [Updated JSON schema for `data-source` section](#updated-json-schema-for-data-source-section)
+  - [Support for filter on nested objects within a document in Azure SQL and SQL Server](#support-for-filter-on-nested-objects-within-a-document-in-azure-sql-and-sql-server)
+  - [Improved Stored Procedure support](#improved-stored-procedure-support)
+  - [`database-type` value renamed for Cosmos DB](#database-type-value-renamed-for-cosmos-db)
+  - [Renaming CLI properties for `cosmosdb_nosql`](#renaming-cli-properties-for-cosmosdb_nosql)
+  - [Managed Identity now supported with Postgres](#managed-identity-now-supported-with-postgres)
+  - [Support Azure AD User authentication for Azure MySQL Service](#support-azure-ad-user-authentication-for-azure-mysql-service)
 
 The full list of release notes for this version is available here: [version 0.4.11 release notes](https://github.com/Azure/data-api-builder/releases/tag/v0.4.11-alpha)
-
-Details on how to install the latest version are here: [Installing DAB CLI](./get-started/get-started-with-data-api-builder.md#installing-dab-cli)
 
 ## Public JSON Schema
 
@@ -73,7 +72,7 @@ query {
 
 ## Improved Stored Procedure support
 
-Full support for stored procedure in REST and GraphQL. Stored procedure with parameters now 100% supported. Check out the [Stored Procedures](./views-and-stored-procedures.md#stored-procedures) documentation to learn how to use Data API builder with stored procedures.
+Full support for stored procedure in REST and GraphQL. Stored procedure with parameters now 100% supported. Check out the [Stored Procedures](../views-and-stored-procedures.md#stored-procedures) documentation to learn how to use Data API builder with stored procedures.
 
 ## `database-type` value renamed for Cosmos DB
 
