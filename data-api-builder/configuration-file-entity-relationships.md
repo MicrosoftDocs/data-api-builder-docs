@@ -33,13 +33,13 @@ This section outlines options that define relationships between entities. [more]
 }
 ```
 
-The `relationships` section outlines how entities interact within the Data API builder, detailing associations and potential database support for these relationships. The `relationship-name` property for each relationship is both required and must be unique across all relationships for a given entity. This ensures clear, identifiable connections and maintains the integrity of the GraphQL schema generated from these configurations.
+The `relationships` section outlines how entities interact within the Data API builder, detailing associations and potential database support for these relationships. The `relationship-name` property for each relationship is both required and must be unique across all relationships for a given entity. Names ensures clear, identifiable connections and maintains the integrity of the GraphQL schema generated from these configurations.
 
 | Relationship | Cardinality | Example
 |-|-|-
-| one-to-many | `many` | One category entity can relate to many todo entities
-| many-to-one | `one` | Many todo entities can relate to one category entity
-| many-to-many| `many`  | One todo entity can relate to many user entities, and one user entity can relate to many todo entities
+| one-to-many | `many` | One category entity can relate to many todo entities.
+| many-to-one | `one` | Many todo entities can relate to one category entity.
+| many-to-many| `many`  | One todo entity can relate to many user entities, and one user entity can relate to many todo entities.
 
 ## One-To-Many relationship
 
@@ -109,7 +109,7 @@ Consider a scenario where a `Category` entity is related to multiple `Todo` item
 
 ## Many-To-One Relationship
 
-A Many-To-One relationship implies that multiple records in one entity are associated with a single record in another entity. This is commonly seen in scenarios where each child record (e.g., `Todo`) refers back to a parent record (`Category`).
+A Many-To-One relationship implies that multiple records in one entity are associated with a single record in another entity. They occur where each child record (for example, `Todo`) refers back to a parent record (`Category`).
 
 ```json
 {
@@ -209,7 +209,7 @@ Both `source.fields` and `target.fields` are required in many-to-many relationsh
 
 ### GraphQL Schema
 
-The GraphQL schema generated from the configuration will allow for querying related entities through the intermediary, reflecting the many-to-many relationship.
+The GraphQL schema generated from the configuration allows for querying related entities through the intermediary, reflecting the many-to-many relationship.
 
 ```graphql
 type Book {
@@ -231,7 +231,7 @@ Consider a scenario where books and authors are related through a many-to-many r
 
 ![Many to many diagram](media/many-to-many.png)
 
-This creates two relationships, from `User` to `Todo` and from `Todo` to `User`. In fact, this comprehensive demo shows all of the possible relationships in one complete configuration file, including the CLI walkthrough below for creating it from the command line. At the bottom, the SQL Server database schema is also provided for testing purposes.
+The example creates two relationships, from `User` to `Todo` and from `Todo` to `User`. In fact, this comprehensive demo shows all of the possible relationships in one complete configuration file, including the CLI walkthrough to create the configuration file from only the command line. At the bottom, the SQL Server database schema is also provided for testing purposes.
 
 ```json
 {
@@ -414,7 +414,7 @@ This creates two relationships, from `User` to `Todo` and from `Todo` to `User`.
 
 **[Command-line](/data-api-builder/data-api-builder-cli.md) for this example**
 
-To create the entities `User` and `Todo` and set up the many-to-many relationship using the `users_todos` linking table through the Data API builder CLI, you will need to run a series of `dab` commands. Here is the command-line syntax for setting up the example scenario given the capabilities of the CLI:
+To create the entities `User` and `Todo` and set up the many-to-many relationship using the `users_todos` linking table through the Data API builder CLI, you must run a series of `dab` commands. 
 
 1. Initialize the configuration for a specific database:
    ```shell
@@ -455,7 +455,7 @@ To create the entities `User` and `Todo` and set up the many-to-many relationshi
 
 **Sample data**
 
-Want a backing database for testing? Below are the DDL (Data Definition Language) and DML (Data Manipulation Language) SQL statements to create the `User`, `Todo`, `Category`, and `users_todos` tables, along with their relationships.
+Want a backing database for testing? These are the DDL (Data Definition Language) and DML (Data Manipulation Language) SQL statements to create the `User`, `Todo`, `Category`, and `users_todos` tables, along with their relationships.
 
 ```sql
 CREATE TABLE User (
