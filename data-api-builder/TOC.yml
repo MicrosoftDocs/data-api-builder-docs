@@ -11,6 +11,10 @@
       href: how-to-install-cli.md
     - name: Develop with local data
       href: how-to-develop-local-data.md
+- name: Concepts
+  items:
+    - name:
+      href:
 - name: Samples
   items:
   - name: Example configuration
@@ -60,8 +64,6 @@
       href: get-started/get-started-azure-cosmos-db.md
     - name: Use Data API builder with MySQL
       href: get-started/get-started-azure-mysql.md
-- name: Data API builder CLI
-  href: data-api-builder-cli.md
 - name: Local development  
   href: local-development.md
   items:
@@ -75,11 +77,8 @@
     href: local-authentication.md
 - name: Running in Azure
   href: running-in-azure.md
-- name: Configuration file
-  href: configuration-file.md
-  items:
-  - name: Database connections
-    href: database-connections.md
+- name: Database connections
+  href: database-connections.md
 - name: REST
   items:
   - name: Overview
