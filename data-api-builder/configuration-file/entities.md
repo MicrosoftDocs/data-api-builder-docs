@@ -1,11 +1,11 @@
 ---
-title: Entities Basic Configuration
-description: Part of the configuration documentation for Data API builder, focusing on Entities Basic Configuration.
+title: Overview Configuration Entities
+description: Overviews the entites property in Configuration
 author: jnixon
 ms.author: jnixon
 ms.service: data-api-builder
 ms.topic: configuration-file
-ms.date: 03/04/2024
+ms.date: 03/27/2024
 ---
 
 # Entities
@@ -134,12 +134,12 @@ The example declares the `User` entity. This name `User` is used anywhere in the
 
 ### Walkthrough
 
-**[REST](/data-api-builder/configuration-file-entity-rest.md) & [GraphQL](/data-api-builder/configuration-file-entity-graphql.md) Configurations**: Define how the `Book` entity is exposed through RESTful endpoints and GraphQL queries, specifying paths, enabled methods, and operations.
+**[REST](/data-api-builder/configuration-file/entity-rest.md) & [GraphQL](/data-api-builder/configuration-file/entity-graphql.md) Configurations**: Define how the `Book` entity is exposed through RESTful endpoints and GraphQL queries, specifying paths, enabled methods, and operations.
 
-**[Source](/data-api-builder/configuration-file-entity-source.md)**: Identifies the database table (`BooksTable`) associated with the `Book` entity, including the primary key and any parameters for querying the database.
+**[Source](/data-api-builder/configuration-file/entity-source.md)**: Identifies the database table (`BooksTable`) associated with the `Book` entity, including the primary key and any parameters for querying the database.
 
-**[Mappings](/data-api-builder/configuration-file-entity-mappings.md)**: Links entity fields (`id`, `title`, `authorId`) to their corresponding database column names, ensuring correct data translation between the API and the database.
+**[Mappings](/data-api-builder/configuration-file/entity-mappings.md)**: Links entity fields (`id`, `title`, `authorId`) to their corresponding database column names, ensuring correct data translation between the API and the database.
 
-**[Permissions](/data-api-builder/configuration-file-entity-permissions.md)**: Outlines role-based access control, detailing which roles can perform specified actions (`read`, `create`, `update`, `delete`) on the entity's fields. Includes field-level access control through `include` and `exclude` lists.
+**[Permissions](/data-api-builder/configuration-file/entity-permissions.md)**: Outlines role-based access control, detailing which roles can perform specified actions (`read`, `create`, `update`, `delete`) on the entity's fields. Includes field-level access control through `include` and `exclude` lists.
 
-**[Policy](/data-api-builder/configuration-file-entity-policy.md)**: Specifies item-level security rules using database policy expressions. These expressions determine access to entity records based on conditions involving user claims and entity fields, enforcing row-level security.
+**[Policy](/data-api-builder/configuration-file/entity-policy.md)**: Specifies item-level security rules using database policy expressions. These expressions determine access to entity records based on conditions involving user claims and entity fields, enforcing row-level security.

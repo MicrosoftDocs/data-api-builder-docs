@@ -1,11 +1,11 @@
 ---
-title: Policies Configuration
-description: Part of the configuration documentation for Data API builder, focusing on Policies Configuration.
+title: Configuration Entity Policy
+description: Details the policy property in Entity
 author: jnixon
 ms.author: jnixon
 ms.service: data-api-builder
-ms.topic: configuration-file-policy
-ms.date: 03/04/2024
+ms.topic: configuration-file/policy
+ms.date: 03/27/2024
 ---
 
 # Entity & Database Policies

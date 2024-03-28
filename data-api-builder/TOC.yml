@@ -46,125 +46,125 @@
 - name: Configuration file
   items:
   - name: Overview
-    href: configuration-file-overview.md
+    href: configuration-file/overview.md
   - name: Environment
-    href: configuration-file-environment.md
+    href: configuration-file/environment.md
   - name: Data Source
     items:
     - name: Overview
-      href: configuration-file-datasource.md
+      href: configuration-file/datasource.md
     - name: Database-type
-      href: configuration-file-datasource.md
+      href: configuration-file/datasource.md
     - name: Connection-string
-      href: configuration-file-datasource.md
+      href: configuration-file/datasource.md
     - name: Options
       items:
       - name: Overview
-        href: configuration-file-datasource.md
+        href: configuration-file/datasource.md
       - name: Set-session-context
-        href: configuration-file-datasource.md
+        href: configuration-file/datasource.md
       - name: Database
-        href: configuration-file-datasource.md
+        href: configuration-file/datasource.md
       - name: Container
-        href: configuration-file-datasource.md
+        href: configuration-file/datasource.md
       - name: Schema
-        href: configuration-file-datasource.md
+        href: configuration-file/datasource.md
   - name: Runtime
     items:
     - name: Overview
-      href: configuration-file-runtime.md
+      href: configuration-file/runtime.md
     - name: REST
       items:
       - name: Overview
-        href: configuration-file-runtime.md
+        href: configuration-file/runtime.md
       - name: Enabled
-        href: configuration-file-runtime.md
+        href: configuration-file/runtime.md
       - name: Path
-        href: configuration-file-runtime.md
+        href: configuration-file/runtime.md
       - name: Request-body-strict
-        href: configuration-file-runtime.md
+        href: configuration-file/runtime.md
     - name: GraphQL
       items:
       - name: Overview
-        href: configuration-file-runtime.md
+        href: configuration-file/runtime.md
       - name: Enabled
-        href: configuration-file-runtime.md
+        href: configuration-file/runtime.md
       - name: Path
-        href: configuration-file-runtime.md
+        href: configuration-file/runtime.md
       - name: Allow-introspection
-        href: configuration-file-runtime.md
+        href: configuration-file/runtime.md
     - name: Host
       items:
       - name: Overview
-        href: configuration-file-runtime.md
+        href: configuration-file/runtime.md
       - name: Mode
-        href: configuration-file-runtime.md
+        href: configuration-file/runtime.md
       - name: Cors
         items:
         - name: Overview
-          href: configuration-file-runtime.md
+          href: configuration-file/runtime.md
         - name: Origins
-          href: configuration-file-runtime.md
+          href: configuration-file/runtime.md
         - name: Credentials
-          href: configuration-file-runtime.md
+          href: configuration-file/runtime.md
       - name: Authentication
         items:
         - name: Overview
-          href: configuration-file-runtime.md
+          href: configuration-file/runtime.md
         - name: Provider
-          href: configuration-file-runtime.md
+          href: configuration-file/runtime.md
         - name: Jwt
-          href: configuration-file-runtime.md
+          href: configuration-file/runtime.md
         - name: Jwt-Audience
-          href: configuration-file-runtime.md
+          href: configuration-file/runtime.md
         - name: Jwt-Issuer
-          href: configuration-file-runtime.md
+          href: configuration-file/runtime.md
     - name: Entities
       items:
       - name: Overview
-        href: configuration-file-entities.md
+        href: configuration-file/entities.md
       - name: REST
         items:
         - name: Overview
-          href: configuration-file-entity-rest.md
+          href: configuration-file/entity-rest.md
         - name: Enabled
-          href: configuration-file-entity-rest.md
+          href: configuration-file/entity-rest.md
         - name: Path
-          href: configuration-file-entity-rest.md
+          href: configuration-file/entity-rest.md
         - name: Methods
-          href: configuration-file-entity-rest.md
+          href: configuration-file/entity-rest.md
       - name: GraphQL
         items:
         - name: Overview
-          href: configuration-file-entity-graphql.md
+          href: configuration-file/entity-graphql.md
         - name: Enabled
-          href: configuration-file-entity-graphql.md
+          href: configuration-file/entity-graphql.md
         - name: Type
-          href: configuration-file-entity-graphql.md
+          href: configuration-file/entity-graphql.md
         - name: Type-Singular
-          href: configuration-file-entity-graphql.md
+          href: configuration-file/entity-graphql.md
         - name: Type-Plural
-          href: configuration-file-entity-graphql.md
+          href: configuration-file/entity-graphql.md
         - name: Operation
-          href: configuration-file-entity-graphql.md
+          href: configuration-file/entity-graphql.md
       - name: Source
         items:
         - name: Overview
-          href: configuration-file-entity-source.md
+          href: configuration-file/entity-source.md
         - name: Views
           href: views-and-stored-procedures.md#views
         - name: Stored Procedures
           href: views-and-stored-procedures.md#stored-procedures
       - name: Mappings
-        href: configuration-file-entity-mappings.md
+        href: configuration-file/entity-mappings.md
       - name: Permissions
-        href: configuration-file-entity-permissions.md
+        href: configuration-file/entity-permissions.md
       - name: Relationships
-        href: configuration-file-entity-relationships.md      
+        href: configuration-file/entity-relationships.md      
     - name: Telemetry
       href: use-application-insights.md
   - name: Example Configuration
-    href: configuration-file-sample.md
+    href: configuration-file/sample.md
 - name: REST Endpoints
   items:
   - name: Overview

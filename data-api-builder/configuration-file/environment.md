@@ -1,11 +1,11 @@
 ---
-title: Environment Configuration
-description: Part of the configuration documentation for Data API builder, focusing on Environment Configuration.
+title: Overview Configuration Environment
+description: Details the environments capability
 author: jnixon
 ms.author: jnixon
 ms.service: data-api-builder
 ms.topic: configuration-file
-ms.date: 03/04/2024
+ms.date: 03/27/2024
 ---
 
 # Environment

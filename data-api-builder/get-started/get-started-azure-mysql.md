@@ -89,7 +89,7 @@ The command generates a config file called dab-config.MySql.json looking like th
 
 As you can see there the `data-source` property specifies that our chosen `database-type` is `mysql`, with the `connection-string` we passed to DAB CLI.
 
-> Take a look at the [DAB Configuration File Guide](../configuration-file.md) document to learn more. With the configuration file in place, then it's time to start defining which entities you want to expose via the API.
+> Take a look at the [DAB Configuration File Guide](../configuration-file/overview.md) document to learn more. With the configuration file in place, then it's time to start defining which entities you want to expose via the API.
 
 ## Add Book entities
 

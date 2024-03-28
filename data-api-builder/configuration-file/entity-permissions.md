@@ -1,11 +1,11 @@
 ---
-title: Entities Permissions Configuration
-description: Part of the configuration documentation for Data API builder, focusing on Permissions Configuration.
+title: Configuration Entity Permissions
+description: Details the permissions property in Entity
 author: jnixon
 ms.author: jnixon
 ms.service: data-api-builder
 ms.topic: configuration-file
-ms.date: 03/04/2024
+ms.date: 03/27/2024
 ---
 
 # Permissions

@@ -8,7 +8,7 @@ ms.topic: relationships
 ms.date: 03/01/2024
 ---
 
-# Relationships
+# Entity Relationships
 
 GraphQL queries can traverse related objects and their fields, so that with just one query you can write something like:
 
@@ -38,7 +38,7 @@ To allow this ability to work, Data API builder needs to know how the two object
 
 No matter what database you're using with Data API builder, you have to explicitly tell Data API builder that an object is related to another one. There are three types of relationships that can be established between two entities:
 
-- [Relationships](#relationships)
+- [Entity Relationships](#entity-relationships)
   - [Configuring a Relationship](#configuring-a-relationship)
     - [One-to-Many Relationship](#one-to-many-relationship)
     - [Many-to-One Relationship](#many-to-one-relationship)

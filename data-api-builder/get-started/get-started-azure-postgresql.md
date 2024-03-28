@@ -51,7 +51,7 @@ Execute the script in the PostgreSQL Server or Azure Database for PostgreSQL as 
 
 ## Creating a configuration file for DAB
 
-The Data API builder for Azure Databases engine needs a [configuration file](../configuration-file.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
+The Data API builder for Azure Databases engine needs a [configuration file](../configuration-file/overview.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
 
 For this getting started guide, you'll use DAB CLI to initialize your configuration file. Run the following command:
 
@@ -98,7 +98,8 @@ The command generates a config file called `dab-config.json` and looks like this
 
 As you can see there the `data-source` property specifies that our chosen `database-type` is `postgresql`, with the `connection-string` we passed to DAB CLI.
 
->Take a look at the [DAB Configuration File Guide](../configuration-file.md) document to learn more.
+> [!TIP]
+> Take a look at the [DAB Configuration File Guide](../configuration-file/overview.md) document to learn more.
 
 With the configuration file in place, it's time to start defining which entities you want to expose via the API.
 

@@ -41,7 +41,7 @@ dab --version
 
 ## Run engine using `dab` CLI
 
-To start the Data API builder engine, use the `start` action if you have the configuration file `dab-config.json` as described [here](./configuration-file.md) in the current directory:
+To start the Data API builder engine, use the `start` action if you have the configuration file `dab-config.json` as described [here](./configuration-file/overview.md) in the current directory:
 
 ```bash
 dab start

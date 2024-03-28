@@ -31,4 +31,4 @@ which are easier and nicer to read.
 
 ## Use singular form when naming entities
 
-When adding an entity to the configuration file, make sure to use the singular form for the name. Data API builder will automatically generate the plural form whenever a collection of that entity is returned. You can also manually provide singular and plural forms, by manually adding them to the configuration file: [Configuration file - GraphQL type](./configuration-file.md#graphql-type)
+When adding an entity to the configuration file, make sure to use the singular form for the name. Data API builder will automatically generate the plural form whenever a collection of that entity is returned. You can also manually provide singular and plural forms, by manually adding them to the configuration file: [Configuration file - GraphQL type](./configuration-file/entity-graphql.md)

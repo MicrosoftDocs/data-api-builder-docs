@@ -1,11 +1,11 @@
 ---
-title: Entities REST Configuration
-description: Part of the configuration documentation for Data API builder, focusing on Entities REST Configuration.
+title: Configuration Entity REST
+description: Details the graphql rest in Entity
 author: jnixon
 ms.author: jnixon
 ms.service: data-api-builder
 ms.topic: configuration-file
-ms.date: 03/04/2024
+ms.date: 03/27/2024
 ---
 
 # Rest

@@ -68,7 +68,7 @@ Now that you have all the required pieces in place, it's time to create the conf
 
 ## Creating a configuration file for DAB
 
-The Data API builder for Azure Databases engine needs a [configuration file](../configuration-file.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
+The Data API builder for Azure Databases engine needs a [configuration file](../configuration-file/overview.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
 
 For this getting started guide, you'll use DAB CLI to initialize your configuration file. Run the following command:
 
@@ -115,7 +115,7 @@ The command generates a config file called `dab-config.json` looking like this:
 As you can see there the `data-source` property specifies that our chosen `database-type` is `cosmosdb_nosql`, with the `connection-string` we passed to DAB CLI.
 
 > [!TIP]
-> Take a look at the [DAB Configuration File Guide](../configuration-file.md) document to learn more about the configuration file.
+> Take a look at the [DAB Configuration File Guide](../configuration-file/overview.md) document to learn more about the configuration file.
 
 With the configuration file in place, then it's time to start defining which entities you want to expose via the API.
 

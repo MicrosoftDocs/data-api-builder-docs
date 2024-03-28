@@ -1,14 +1,14 @@
 ---
-title: Entities Graphql Configuration
-description: Part of the configuration documentation for Data API builder, focusing on Entities Graphql Configuration.
+title: Configuration Entity Graphql
+description: Details the graphql property in Entity
 author: jnixon
 ms.author: jnixon
 ms.service: data-api-builder
 ms.topic: configuration-file
-ms.date: 03/04/2024
+ms.date: 03/27/2024
 ---
 
-# `{entity}.graphql` property
+# GraphQL
 
 This segment provides for integrating an entity into the GraphQL schema. It allows developers to specify or modify default values for the entity in GraphQL. This ensures the schema accurately reflects the intended structure and naming conventions.
 
