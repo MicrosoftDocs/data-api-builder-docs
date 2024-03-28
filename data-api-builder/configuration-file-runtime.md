@@ -76,14 +76,14 @@ This section outlines the global settings for the REST endpoints. These settings
 
 ### Path property
 
-Sets the URL path for accessing all exposed REST endpoints. For instance, setting this to `/api` makes the REST endpoint accessible at `/api/<entity>`. Sub-paths are not permitted. This field is optional, with `/api` as the default.
+Sets the URL path for accessing all exposed REST endpoints. For instance, setting `path` to `/api` makes the REST endpoint accessible at `/api/<entity>`. Subpaths aren't permitted. This field is optional, with `/api` as the default.
 
 > [!NOTE]
-> When deploying Data API builder using Static Web Apps (preview), the Azure service automatically injects the additional sub-path `/data-api` to the url. This behavior ensures compatibility with existing Static Web App features. The resulting endpoint would be `/data-api/api/<entity>`. This is only relevant to Static Web Apps.
+> When deploying Data API builder using Static Web Apps (preview), the Azure service automatically injects the additional subpath `/data-api` to the url. This behavior ensures compatibility with existing Static Web App features. The resulting endpoint would be `/data-api/api/<entity>`. This is only relevant to Static Web Apps.
 
 ### Enabled property
 
-A Boolean flag that determines the global availability of REST endpoints. If disabled, entities cannot be accessed via REST, regardless of individual entity settings.
+A Boolean flag that determines the global availability of REST endpoints. If disabled, entities can't be accessed via REST, regardless of individual entity settings.
 
 ## GraphQL property
 
@@ -105,19 +105,21 @@ This section outlines the global settings for the GraphQL endpoint.
 
 ### Path property
 
-Specifies the URL path for the GraphQL endpoint. Setting this to `/graphql` exposes the endpoint at `/graphql`. Sub-paths are not allowed. This field is optional, with `graphql` as the default. Custom paths for the GraphQL endpoint are currently unsupported.
+Specifies the URL path for the GraphQL endpoint. Setting `path` to `/graphql` exposes the endpoint at `/graphql`. Sub-paths aren't allowed. This field is optional, with `graphql` as the default. Custom paths for the GraphQL endpoint are currently unsupported.
 
 ### Enabled property
 
-A Boolean flag that determines the global availability of GraphQL endpoints. If disabled, entities cannot be accessed via GraphQL, regardless of individual entity settings.
+A Boolean flag that determines the global availability of GraphQL endpoints. If disabled, entities can't be accessed via GraphQL, regardless of individual entity settings.
 
 ### Allow-introspection property
 
-This Boolean flag controls the ability to perform schema introspection queries on the GraphQL endpoint. Enabling introspection allows clients to query the schema for information about the types of data available, the kinds of queries they can perform, and the mutations available. This feature is particularly useful during development for understanding the structure of the GraphQL API and for tooling that automatically generates queries. However, for production environments, it might be disabled to obscure the API's schema details and enhance security. By default, introspection is enabled, allowing for immediate and comprehensive exploration of the GraphQL schema.
+This Boolean flag controls the ability to perform schema introspection queries on the GraphQL endpoint. Enabling introspection allows clients to query the schema for information about the types of data available, the kinds of queries they can perform, and the mutations available. 
+
+This feature is useful during development for understanding the structure of the GraphQL API and for tooling that automatically generates queries. However, for production environments, it might be disabled to obscure the API's schema details and enhance security. By default, introspection is enabled, allowing for immediate and comprehensive exploration of the GraphQL schema.
 
 ## Host property
 
-The `host` section within the runtime configuration provides settings crucial for the operational environment of the Data API builder. These settings include operational modes, CORS configuration, and authentication details, offering a comprehensive control over how your API behaves in different environments and how it interacts with clients and security protocols.
+The `host` section within the runtime configuration provides settings crucial for the operational environment of the Data API builder. These settings include operational modes, CORS configuration, and authentication details.
 
 ### Syntax overview
 
@@ -151,12 +153,12 @@ Indicates how the engine should operate.
 
 | Mode | Description |
 | - | - |
-| `production` | In `production` mode, the engine optimizes for security and performance, setting the default `-LogLevel` to `Error`. This mode limits the detail of error messages, particularly those from the underlying database, to prevent sensitive information exposure. |
-| `development` | In `development` mode, the engine increases the verbosity of logging (`Debug` level) and provides detailed error messages, including those from the underlying database. This mode is beneficial for troubleshooting and development. |
+| `production` | In `production` mode, the engine optimizes for security and performance, setting the default `-LogLevel` to `Error`. This mode limits the detail of error messages, particularly from the database, to prevent sensitive information exposure. |
+| `development` | In `development` mode, the engine increases the verbosity of logging (`Debug` level) and provides detailed error messages, including from the database. This mode is beneficial for troubleshooting and development. |
 
 ### Anonymous 
 
-Requests can also be made without being authenticated. In such cases, the request is automatically assigned to the `anonymous` system role so that it can be properly authorized. In this case, the configuration does not require either `cors` or `authentication` properties - since they would be ignored. 
+Requests can also be made without being authenticated. In such cases, the request is automatically assigned to the `anonymous` system role so that it can be properly authorized. In this case, the configuration doesn't require either `cors` or `authentication` properties - since they would be ignored. 
 
 ```json
 {
@@ -170,7 +172,7 @@ Requests can also be made without being authenticated. In such cases, the reques
 
 ### Cors property
 
-The `host.cors` section within the runtime configuration specifies the Cross-Origin Resource Sharing (CORS) policies for the Data API builder. This defines how resources in your API can be requested from a different domain than the one that served the initial request.
+The `host.cors` section within the runtime configuration specifies the Cross-Origin Resource Sharing (CORS) policies for the Data API builder. The `cors` property defines how resources in your API can be requested from a different domain than the one that served the initial request.
 
 ### Syntax overview
 
@@ -195,11 +197,11 @@ This parameter defines the allowed origins that can make requests to your API, e
  
 #### Credentials property
 
-Controls whether browsers should include credentials, like cookies or HTTP authentication, in cross-origin requests. Setting this to `true` allows credentials on cross-origin requests, while `false` prohibits them, aligning with security best practices and specific application needs. 
+Controls whether browsers should include credentials, like cookies or HTTP authentication, in cross-origin requests. Setting `credentials` to `true` allows credentials on cross-origin requests, while `false` prohibits them, aligning with security best practices and specific application needs. 
 
 More about the [`Access-Control-Allow-Credentials`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials) header.
 
-By default, this is `false`.
+By default, `credentials` is `false`.
 
 ### Authentication property
 
@@ -241,16 +243,16 @@ The `authentication.provider` setting within the `host` configuration defines th
 
 #### Jwt property
  
-Required if the authentication provider is `AzureAD` for Microsoft Entra Identity (previously known as Azure Active Directory). This section must specify the `audience` and `issuer` to validate the received JWT token against the intended `AzureAD` tenant for authentication. [Learn more about EntraID auehtntication in DAB](/authentication-azure-ad.md)
+Required if the authentication provider is `AzureAD` for Microsoft Entra Identity (previously known as Azure Active Directory). This section must specify the `audience` and `issuer` to validate the received JWT token against the intended `AzureAD` tenant for authentication. [Learn more about Microsoft Entra Identity in DAB.](/authentication-azure-ad.md)
 
 | Setting | Description |
 | - | - |
-| audience | Identifies the intended recipient of the token. In the context of your API, this is typically the application's identifier registered in Entra Id (or your identity provider), ensuring that the token was indeed issued for your application. |
+| audience | Identifies the intended recipient of the token; typically the application's identifier registered in Microsoft Entra Identity (or your identity provider), ensuring that the token was indeed issued for your application. |
 | issuer | Specifies the issuing authority's URL, which is the token service that issued the JWT. This URL should match the identity provider's issuer URL from which the JWT was obtained, validating the token's origin. |
 
 **Flexible security**
 
-The Data API builder (DAB) offers flexible authentication support, integrating with Microsoft Entra Identity and custom JSON Web Token (JWT) servers. In this image, the **JWT Server** represents the authentication service that issues JWT tokens to clients upon successful login. The client then passes the token to DAB which can interogate its claims and properties.
+The Data API builder (DAB) offers flexible authentication support, integrating with Microsoft Entra Identity and custom JSON Web Token (JWT) servers. In this image, the **JWT Server** represents the authentication service that issues JWT tokens to clients upon successful login. The client then passes the token to DAB, which can interrogate its claims and properties.
 
 ![alt text](media/jwt-server.png)
 
@@ -275,7 +277,7 @@ The following are examples of the `host` property given various architectural ch
 }
 ````
 
-When using the option StaticWebApps, Data API builder expects Azure Static Web Apps authentication (EasyAuth) to have authenticated the request, and to have provided metadata about the authenticated user in the `X-MS-CLIENT-PRINCIPAL` HTTP header. 
+With `StaticWebApps`, Data API builder expects Azure Static Web Apps has authenticated the request and the `X-MS-CLIENT-PRINCIPAL` HTTP header is present. 
 
 **AppService**
 
