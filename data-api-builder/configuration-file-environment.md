@@ -8,17 +8,6 @@ ms.topic: configuration-file
 ms.date: 03/04/2024
 ---
 
-## Configuration File
-
-1. [Overview](./configuration-file-overview.md)
-1. [Environment](./configuration-file-environment.md)
-1. [Runtime](./configuration-file-runtime.md)
-1. [Entities.{entity}](./configuration-file-entities.md)
-1. [Entities.{entity}.relationships](./configuration-file-entity-relationships.md)
-1. [Entities.{entity}.permissions](./configuration-file-entity-permissions.md)
-1. [Entities.{entity}.policy](./configuration-file-entity-policy.md)
-1. [Sample](./configuration-file-sample.md)
-
 # Environment
 
 The Data API builder configuration supports multiple environments, mirroring the functionality of ASP.NET Core's `appSettings.json`. This feature enables the use of a base configuration file along with environment-specific files to tailor settings accordingly:

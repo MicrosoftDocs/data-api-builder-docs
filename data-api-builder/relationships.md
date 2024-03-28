@@ -40,9 +40,13 @@ No matter what database you're using with Data API builder, you have to explicit
 
 There are three types of relationships that can be established between two entities:
 
-- [One-to-Many Relationship](#one-to-many-relationship)
-- [Many-to-One Relationship](#many-to-one-relationship)
-- [Many-to-Many Relationship](#many-to-many-relationship)
+- [Relationships](#relationships)
+  - [Configuring a Relationship](#configuring-a-relationship)
+    - [One-to-Many Relationship](#one-to-many-relationship)
+    - [Many-to-One Relationship](#many-to-one-relationship)
+    - [Many-To-Many Relationship](#many-to-many-relationship)
+  - [Using a pair of One-to-Many/Many-to-One relationships](#using-a-pair-of-one-to-manymany-to-one-relationships)
+  - [Using a linking object](#using-a-linking-object)
 
 ### One-to-Many Relationship
 

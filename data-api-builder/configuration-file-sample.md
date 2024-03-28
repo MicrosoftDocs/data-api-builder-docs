@@ -4,19 +4,9 @@ description: This is a sample configuration file for Data API builder.
 author: jerrynixon
 ms.author: jnixon
 ms.service: data-api-builder
-ms.topic: configuration-file-sample
+ms.topic: configuration-file
 ms.date: 3/1/2024
 ---
-
-## Configuration File
-
-1. [Overview](./configuration-file-overview.md)
-1. [Runtime](./configuration-file-runtime.md)
-1. [Entities.{entity}](./configuration-file-entities.md)
-1. [Entities.{entity}.relationships](./configuration-file-entity-relationships.md)
-1. [Entities.{entity}.permissions](./configuration-file-entity-permissions.md)
-1. [Entities.{entity}.policy](./configuration-file-entity-policy.md)
-1. [Sample](./configuration-file-sample.md)
 
 # Sample 
 

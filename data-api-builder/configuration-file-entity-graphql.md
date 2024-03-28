@@ -8,21 +8,11 @@ ms.topic: configuration-file
 ms.date: 03/04/2024
 ---
 
-## Configuration File
-
-1. [Overview](./configuration-file-overview.md)
-1. [Runtime](./configuration-file-runtime.md)
-1. [Entities.{entity}](./configuration-file-entities.md)
-1. [Entities.{entity}.relationships](./configuration-file-entity-relationships.md)
-1. [Entities.{entity}.permissions](./configuration-file-entity-permissions.md)
-1. [Entities.{entity}.policy](./configuration-file-entity-policy.md)
-1. [Sample](./configuration-file-sample.md)
-
-# Entity GraphQL
-
-## `{entity}.graphql` property
+# `{entity}.graphql` property
 
 This segment provides the necessary customization options for integrating an entity into the GraphQL schema. It allows developers to specify or modify default values for the entity's representation in GraphQL, ensuring that the schema accurately reflects the intended structure and naming conventions.
+
+## Syntax overview
 
 ```json
 {
@@ -30,14 +20,19 @@ This segment provides the necessary customization options for integrating an ent
     "<entity-name>": {
       ...
       "graphql": {
-        ...
-      }
+        "enabled": true (default) | false,
+        "type": {
+          "singular": "my-alternative-name",
+          "plural": "my-alternative-name-pluralized"
+        },
+        "operation": "query" | "mutation"
+      },
     }
   }
 }
 ```
 
-### `{entity}.graphql.enabled` property
+### Enabled property
 
 This setting controls whether an entity is available via GraphQL endpoints. By toggling the `enabled` property, developers can selectively expose or hide entities from the GraphQL schema, offering flexibility in API design and access control.
 
@@ -55,7 +50,7 @@ This setting controls whether an entity is available via GraphQL endpoints. By t
 }
 ```
 
-### `{entity}.graphql.type` property
+### Type property
 
 This property dictates the naming convention for an entity within the GraphQL schema. It supports both scalar string values for direct scalar naming and object types for specifying singular and plural forms, providing granular control over the schema's readability and user experience.
 
@@ -77,7 +72,9 @@ This property dictates the naming convention for an entity within the GraphQL sc
 
 **Object type value**
 
-For even greater control over the GraphQL type, you can configure how the singular and plural name is represented independently. This is not required but can deliver a curated user experience. If `plural` is missing or omitted (like in the case of the scalar value) Data API builder tries to pluralize the name automatically, following the English rules for pluralization (for example: https://engdic.org/singular-and-plural-noun-rules-definitions-examples)
+For even greater control over the GraphQL type, you can configure how the singular and plural name is represented independently. This is not required but can deliver a curated user experience. 
+
+If `plural` is missing or omitted (like in the case of the scalar value) Data API builder tries to pluralize the name automatically, following the English rules for pluralization (for example: https://engdic.org/singular-and-plural-noun-rules-definitions-examples)
 
 ```json
 {
@@ -96,7 +93,7 @@ For even greater control over the GraphQL type, you can configure how the singul
 }
 ```
 
-### `{entity}.graphql.operation` property
+### Operation property
 
 For entities mapped to stored procedures, the `operation` property designates the GraphQL operation type (query or mutation) where the stored procedure is accessible. This allows for logical organization of the schema and adherence to GraphQL best practices, without impacting functionality.
 
@@ -106,21 +103,7 @@ If ommitted or missing, the `operation` default is `mutation`.
 
 **Mutation example**
 
-```json
-{
-  "entities" {
-    "<entity-name>": {
-      ...
-      "graphql":{
-        ...
-        "operation": "mutation"
-      }
-    }
-  }
-}
-```
-
-The Graph QL schema would resemble:
+When `operation` is `mutation`, the GraphQL schema would resemble:
 
 ```graphql
 type Mutation {
@@ -132,19 +115,7 @@ type Mutation {
 
 **Query example**
 
-```json
-{
-  "entities" {
-    "<entity-name>": {
-      ...
-      "graphql":{
-        ...
-        "operation": "query"
-      }
-    }
-  }
-}
-```
+When `operation` is `query`, the GraphQL schema would resemble:
 
 The Graph QL schema would resemble:
 
@@ -155,3 +126,36 @@ type Query {
   ): [GetCowrittenBooksByAuthor!]!
 }
 ```
+
+> [!Note] The `opreation` property is only about the placement of the operation in the GraphQL schema, it does not change the behavior of the operation. 
+
+## Example
+
+```json
+{
+  "entities": {
+    "Book": {
+      ...
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "Book",
+          "plural": "Books"
+        },
+        "operation": "query"
+      },
+      ...
+    }
+  }
+}
+```
+
+### Walkthrough:
+
+In this example, the entity defined is `Book`, indicating we're dealing with a set of data related to books in the database. The configuration for the `Book` entity within the GraphQL segment offers a clear structure on how it should be represented and interacted with in a GraphQL schema.
+
+**Enabled property**: The `Book` entity is made available through GraphQL (`"enabled": true`), meaning developers and users can query or mutate book data via GraphQL operations.
+
+**Type property**: The entity is represented with the singular name `"Book"` and the plural name `"Books"` in the GraphQL schema. This distinction ensures that when querying a single book or multiple books, the schema offers intuitively named types (`Book` for a single entry, `Books` for a list), enhancing the API's usability.
+
+**Operation property**: The operation is set to `"query"`, indicating that the primary interaction with the `Book` entity through GraphQL is intended to be querying (retrieving) data rather than mutating (creating, updating, or deleting) it. This setup aligns with typical usage patterns where book data is more frequently read than modified.
