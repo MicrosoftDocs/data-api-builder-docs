@@ -1,14 +1,16 @@
 ---
-title: Relationships in Data API builder
-description: This document defines the relationships in Data API builder.
-author: anagha-todalbagi
-ms.author: atodalbagi
+title: Entity relationships
+description: Review GraphQL-specific relationships in Data API builder and how you can define, map, or manage them.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: relationships
-ms.date: 04/06/2023
+ms.topic: concept-article
+ms.date: 03/29/2024
+# Customer Intent: As a developer, I want to use relationships, so that I can better "shape" my GraphQL representation of my data.
 ---
 
-# Relationships
+# Entity Relationships
 
 GraphQL queries can traverse related objects and their fields, so that with just one query you can write something like:
 
@@ -30,19 +32,21 @@ GraphQL queries can traverse related objects and their fields, so that with just
 }
 ```
 
-to retrieve books and their authors.
+To retrieve books and their authors.
 
 To allow this ability to work, Data API builder needs to know how the two objects are related to each other. The `relationships` section in the configuration file provides the necessary metadata for making this ability work correctly and efficiently.
 
 ## Configuring a Relationship
 
-No matter what database you're using with Data API builder, you have to explicitly tell Data API builder that an object is related to another one. This has to be done even if using Foreign Key metadata when available, it could infer it automatically. This is done to allow you to have full control on what is exposed via GraphQL and what not.
+No matter what database you're using with Data API builder, you have to explicitly tell Data API builder that an object is related to another one. There are three types of relationships that can be established between two entities:
 
-There are three types of relationships that can be established between two entities:
-
-- [One-to-Many Relationship](#one-to-many-relationship)
-- [Many-to-One Relationship](#many-to-one-relationship)
-- [Many-to-Many Relationship](#many-to-many-relationship)
+- [Entity Relationships](#entity-relationships)
+  - [Configuring a Relationship](#configuring-a-relationship)
+    - [One-to-Many Relationship](#one-to-many-relationship)
+    - [Many-to-One Relationship](#many-to-one-relationship)
+    - [Many-To-Many Relationship](#many-to-many-relationship)
+  - [Using a pair of One-to-Many/Many-to-One relationships](#using-a-pair-of-one-to-manymany-to-one-relationships)
+  - [Using a linking object](#using-a-linking-object)
 
 ### One-to-Many Relationship
 
@@ -65,11 +69,11 @@ A one-to-many relationship allows an object to access a list of related objects.
 
 If there are Foreign Keys supporting the relationship between the two underlying database objects, you only need to tell Data API builder, that you want to expose such relationship. With DAB CLI:
 
-```shell
+```dotnetcli
 dab update Series --relationship books --target.entity Book --cardinality many 
 ```
 
-which updates the `series` entity - used in the example - to look like the following:
+Which updates the `series` entity - used in the example:
 
 ```json
 "Series": {
@@ -85,23 +89,23 @@ which updates the `series` entity - used in the example - to look like the follo
 }
 ```
 
-A new key has been added under the `relationships` element: `books`. The element defines the name that is used for the GraphQL field to navigate from the `series` object to the object defined in the `target.entity`, `Book` in this case. This means that there must be an entity called `Book` in configuration file.
+A new key is added under the `relationships` element: `books`. The element defines the name that is used for the GraphQL field to navigate from the `series` object to the object defined in the `target.entity`, `Book` in this case. This means that there must be an entity called `Book` in configuration file.
 
-`cardinality` property tells Data API builder that there can be many books in each series, so the created GraphQL field returns a list of items.
+The `cardinality` property tells Data API builder that there can be many books in each series, so the created GraphQL field returns a list of items.
 
-That's all you need. At startup, Data API builder will automatically detect the database fields that need to be used to sustain the defined relationship.
+That property is all you need. At startup, Data API builder automatically detects the database fields that need to be used to sustain the defined relationship.
 
-If you don't have a Foreign Key constraint sustaining the database relationship, Data API builder can't figure out automatically what fields will be used to relate the two entities, so you have to provide it manually. You can do it with DAB CLI:
+If you don't have a Foreign Key constraint sustaining the database relationship, Data API builder can't figure out automatically what fields are used. To tell Data API builder what fields relate the two entities, you must specify them manually. You can specify them with the CLI using [`dab update`](reference-cli.md#update):
 
 ```bash
 dab update Series --relationship books --target.entity Book --cardinality many  --relationship.fields "id:series_id"
 ```
 
-The option `relationship.fields` allows you to define which fields will be used from the entity being updated (`Series`), and which fields are used from the target entity (`Book`), to connect the data from one entity to the other.
+The option `relationship.fields` allows you to define which fields are used from the entity being updated (`Series`), and which fields are used from the target entity (`Book`), to connect the data from one entity to the other.
 
-In the above sample, the `id` database field of the `Series` entity will be matched with the database field `series_id` of the `Book` entity.
+In the above sample, the `id` database field of the `Series` entity is matched with the database field `series_id` of the `Book` entity.
 
-The configuration will also contain that information:
+The configuration also contains this information:
 
 ```json
 "Series": {
@@ -132,7 +136,7 @@ Following the Book Series samples used before, a book can be in just one series,
 dab update Book --relationship series --target.entity Series --cardinality one
 ```
 
-which generates the following configuration:
+Which generates this configuration:
 
 ```json
 "Book": {
@@ -147,7 +151,7 @@ which generates the following configuration:
 }
 ```
 
-which, in turn, will allow a GraphQL query like the following:
+Which, in turn, allows a GraphQL query like this example:
 
 ```graphql
 {
@@ -163,7 +167,7 @@ which, in turn, will allow a GraphQL query like the following:
 }
 ```
 
-where each book returns also the series it belongs to.
+Where each book returns also the series it belongs to.
 
 ### Many-To-Many Relationship
 
@@ -171,16 +175,16 @@ Many to many relationships can be seen as a pair of One-to-Many and Many-to-One 
 
 Data API builder supports this type of relationship natively:
 
-- using a pair of One-to-Many/Many-to-One relationships
-- using a *linking object*
+- Using a pair of One-to-Many/Many-to-One relationships.
+- Using a *linking object*.
 
 ## Using a pair of One-to-Many/Many-to-One relationships
 
-Continuing using the books and authors sample, one business requirement that is likely to be there is to keep track of how royalties are split between the authors of a book. To implement such requirement a dedicated entity that links together an author, a book and the assigned royalties are needed. Three entities are therefore needed:
+One business requirement that is likely to be there's to keep track of how royalties are split between the authors of a book. To implement such requirement a dedicated entity that links together an author, a book and the assigned royalties are needed. Three entities are therefore needed:
 
-- `authors`, to represent biographical details of authors
-- `books`, to represent book data like title and ISBN
-- `books_authors` to represent data that is related both to a book and to its author, for example, the percentage of royalties an author gets for a specific book
+- `authors`, to represent biographical details of authors.
+- `books`, to represent book data like title and International Standard Book Number (ISBN).
+- `books_authors` to represent data that is related both to a book and to its author, for example, the percentage of royalties an author gets for a specific book.
 
 The three entities can be visualized through the following diagram.
 
@@ -191,27 +195,27 @@ As visible, there are two bi-directional relationships:
 - One-to-Many/Many-to-One relationship between `authors` and the `books_authors`
 - One-to-Many/Many-to-One relationship between `books` and the `books_authors`
 
-To allow such a scenario to be handled gracefully by DAB, all that is needed is to create the related entities and mappings in the configuration file. Assuming the `Book` and `Author` entity are already in the configuration file (see the Getting Started guide if you need help on that):
+To handle such a scenario gracefully with DAB, all that is needed is to create the related entities and mappings in the configuration file. Assuming the `Book` and `Author` entity are already in the configuration file:
 
-```shell
+```dotnetcli
 dab add BookAuthor --source dbo.books_authors --permissions "anonymous:*"
 ```
 
-to add the new entity and then run
+To add the new entity, run `dab update`:
 
-```shell
+```dotnetcli
 dab update Book --relationship authors --target.entity BookAuthor --cardinality many --relationship.fields "id:book_id"
 dab update Author --relationship books --target.entity BookAuthor --cardinality many --relationship.fields "id:author_id"
 ```
 
-to add the aforementioned relationships to the newly created `BookAuthor` entity, and then
+To add the relationships to the newly created `BookAuthor` entity, run `dab update` again:
 
-```shell
+```dotnetcli
 dab update BookAuthor --relationship book --target.entity Book --cardinality one --relationship.fields "book_id:id"
 dab update BookAuthor --relationship author --target.entity Author --cardinality one --relationship.fields "author_id:id"
 ```
 
-to add the relationships from `BookAuthor` to `Book` and `Author` entities. With the provided configuration DAB will be able to handle nested queries like the following:
+To add the relationships from `BookAuthor` to `Book` and `Author` entities. With the provided configuration DAB is able to handle nested queries like this example:
 
 ```graphql
 {
@@ -233,15 +237,15 @@ to add the relationships from `BookAuthor` to `Book` and `Author` entities. With
 }
 ```
 
-where you're asking to return all the authors, the book they have written along with the related royalties.
+Where you're asking to return all the authors, the book they wrote along with the related royalties.
 
 ## Using a linking object
 
-The process described in the previous section works great if all the entities involved in the Many-to-Many relationships need to be accessed via GraphQL. This isn't always the case. For example, if you don't need to keep track of royalties, the `BookAuthor` entity doesn't really bring any value to the end user, as it's used to associated books to their authors. In relational databases Many-to-Many relationships are created using such third table that *links* the tables participating in the Many-to-Many relationship together:
+The process described in the previous section works great if all the entities involved in the Many-to-Many relationships need to be accessed via GraphQL. This scenario isn't always the case. For example, if you don't need to keep track of royalties, the `BookAuthor` entity doesn't really bring any value to the end user. The entity was only used to associated books to their authors. In relational databases Many-to-Many relationships are created using such third table that *links* the tables participating in the Many-to-Many relationship together:
 
 ![Diagram showing another many-to-many relationship between authors, books_authors and books.](./media/relationship-many-to-many-02.png)
 
-In the diagram above you can see that there's a table named `books_authors` that is linking authors with their books and books with their authors. This linking table doesn't need to be exposed to the end user as it is just an artifact to allow the Many-to-Many relationship to exist, but Data API builder needs to know its existence in order to properly use it.
+In the diagram above you can see that there's a table named `books_authors` that is linking authors with their books and books with their authors. This linking table doesn't need to be exposed to the end user. The linking table is just an artifact to allow the Many-to-Many relationship to exist, but Data API builder needs to know its existence in order to properly use it.
 
 DAB CLI can be used to create the Many-to-Many relationship and also configure the linking object (make sure to remove all the relationships created in the previous section and start only with the `Book` and `Author` entity with no configured relationship between them already):
 
@@ -249,7 +253,7 @@ DAB CLI can be used to create the Many-to-Many relationship and also configure t
 dab update Book --relationship authors --target.entity Author --cardinality many --relationship.fields "id:id" --linking.object "dbo.books_authors" --linking.source.fields "book_id" --linking.target.fields "author_id" 
 ```
 
-which updates the JSON configuration file to be like the following:
+Which updates the JSON configuration file to be like this example:
 
 ```json
 "Book": {
@@ -269,11 +273,11 @@ which updates the JSON configuration file to be like the following:
 }
 ```
 
-the configuration is telling DAB that you want to add a `authors` field in the `Book` entity that allows access to authors of the book. `authors` can be `many`, so a list of authors will be returned when the GraphQL query accesses the `authors` field. This relationship defines how to navigate *from* books *to* authors:  the database fields used to navigate from books to their authors are defined in the `source.fields` for the book, and in the `target.fields` for the authors, similarly to the One-to-Many or Many-to-One relationship described above.
+The configuration is telling DAB that you want to add a `authors` field in the `Book` entity that allows access to authors of the book. `authors` can be `many`, so a list of authors is returned when the GraphQL query accesses the `authors` field. This relationship defines how to navigate *from* books *to* authors:  the database fields used to navigate from books to their authors are defined in the `source.fields` for the book, and in the `target.fields` for the authors, similarly to the One-to-Many or Many-to-One relationship described previously in this article.
 
-This is a Many-to-Many relationship, so there's no direct connection between the two entities and so a `linking.object` needs to be used. In the sample, the database table `dbo.books_authors` is used as the linking object. How the linking object is able to connect books to their authors is defined in the `linking.source.fields` and `linking.target.fields` properties. The first one tells DAB how the source entity - the `Book` - is connected to the liking object, and the second one how the linking object is connected to the target entity, `Author` in the sample.
+This relationship is a Many-to-Many relationship, so there's no direct connection between the two entities and so a `linking.object` needs to be used. In the sample, the database table `dbo.books_authors` is used as the linking object. How the linking object is able to connect books to their authors is defined in the `linking.source.fields` and `linking.target.fields` properties. The first one tells DAB how the source entity - the `Book` - is connected to the liking object, and the second one how the linking object is connected to the target entity, `Author` in the sample.
 
-To understand how the provided information is used, you can visualize the equivalent query that you would have written:
+To understand how the provided information is used, you can use this example equivalent query:
 
 ```sql
 select * 
@@ -282,7 +286,7 @@ inner join dbo.books_authors as ba on b.id = ba.book_id
 inner join dbo.authors a on ba.author_id = a.id 
 ```
 
-with the provided configuration DAB will now be able to understand GraphQL like the following:
+With the provided configuration DAB is able to understand GraphQL like this example:
 
 ```graphql
 {
@@ -301,7 +305,7 @@ with the provided configuration DAB will now be able to understand GraphQL like 
 }
 ```
 
-where you want to get books and their authors.
+Where you want to get books and their authors.
 
 To allow navigation from `Author` to `Book`, the same principles can be applied, updating the configuration using the following command:
 
@@ -309,4 +313,9 @@ To allow navigation from `Author` to `Book`, the same principles can be applied,
 dab update Author --relationship books --target.entity Book --cardinality many --relationship.fields "id:id" --linking.object "dbo.books_authors" --linking.source.fields "author_id" --linking.target.fields "book_id" 
 ```
 
-which will define a Many-to-Many relationship between the `Author` entity and the `Book` entity, using the linking object `dbo.books_authors` behind the scenes.
+Which defines a Many-to-Many relationship between the `Author` entity and the `Book` entity, using the linking object `dbo.books_authors` behind the scenes.
+
+## Related content
+
+- [GraphQL](graphql.md)
+- [GraphQL - configuration schema](reference-configuration.md#graphql-entities)
