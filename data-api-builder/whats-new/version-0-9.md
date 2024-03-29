@@ -1,16 +1,17 @@
 ---
-title: Release notes for Data API builder 0.9
-description: Release notes for Data API builder 0.9 are available here.
-author: yorek
-ms.author: damauri
-ms.service: data-api-builder 
+title: What's new for version 0.9
+description: Release notes with new features, bug fixes, and updates listed for the Data API builder version 0.9.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
+ms.service: data-api-builder
 ms.topic: whats-new 
-ms.date: 11/16/2023
+ms.date: 03/28/2024
 ---
 
-# What's new in Data API builder 0.9
+# What's new in Data API builder version 0.9
 
-Here's the details on the most relevant changes and improvement in Data API builder 0.9
+Here's the details on the most relevant changes and improvement in Data API builder 0.9.
 
 ## Enable Application Insights when self-hosting DAB
 
@@ -25,12 +26,11 @@ Logs can now be streamed to Application Insights for a better monitoring and deb
 }
 ```
 
-Read all the details in the [Use Application Insights](./use-application-insights.md) documentation page.
+Read all the details in the [Use Application Insights](../use-application-insights.md) documentation page.
 
+## Support for ignoring extraneous fields in REST request body
 
-## Support for ignoring extraneous fields in rest request body
-
-With the new `request-body-strict` option, you can now decide if having extra field in the REST payload generates an error (default behavior, backward compatible) or the extra fields is just silently ignored. 
+With the new `request-body-strict` option, you can now decide if having extra field in the REST payload generates an error (default behavior, backward compatible) or the extra fields is silently ignored.
 
 ```json
 "runtime": {
@@ -45,7 +45,7 @@ With the new `request-body-strict` option, you can now decide if having extra fi
 
 By setting the `request-body-strict` option to `false`, fields that don't have a mapping to the related database object are ignored without generating any error.
 
-## Adding Application Name for `mssql` connections 
+## Adding Application Name for `mssql` connections
 
 Data API builder now injects in the connection string, for `mssql` database types only, the value `dab-<version>` as the `Application Name` property, making easier to identify the connections in the database server. If `Application Name` is already present in the connection string, Data API builder version is appended to it.
 
@@ -57,11 +57,12 @@ Data API builder now injects in the connection string, for `mssql` database type
 
 Mutations are now fully supported on tables with triggers for `mssql` databases.
 
-### Preventing update/insert of read-only fields in a table by user 
+### Preventing update/insert of read-only fields in a table by user
 
 Automatically detect read-only fields the database and prevent update/insert of those fields by user.  
 
-## Complete list of fixes:
+## Complete list of fixes
 
-Take a look at [0.9.7 GitHub release page](https://github.com/Azure/data-api-builder/releases/tag/v0.9.7) for a comprehensive list of all the changes and improvements.
+Review these release pages for a comprehensive list of all the changes and improvements:
 
+- [0.9.7 GitHub release page](https://github.com/Azure/data-api-builder/releases/tag/v0.9.7)
