@@ -13,6 +13,8 @@ ms.date: 08/28/2023
 Application Insights is a service provided by Microsoft Azure that enables developers to monitor and gain insights into the performance and usage of their applications. 
 It helps in understanding how the application is performing, identifying and diagnosing issues, and making data-driven decisions to improve application performance and user experience. We can track application availability, response times, performance metrics, and user behavior, among other things. 
 
+> [!NOTE]
+> This feature is not supported when hosting Data API builder in Azure Web Apps.
 
 ## How to configure Application Insights
 
