@@ -21,6 +21,66 @@
       "redirect_document_id": true
     },
     {
+      "source_path_from_root": "/data-api-builder/whats-new.md",
+      "redirect_url": "/azure/data-api-builder/whats-new/",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/whats-new-0-3-7.md",
+      "redirect_url": "/azure/data-api-builder/whats-new/version-0-3-7",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/whats-new-0-4-11.md",
+      "redirect_url": "/azure/data-api-builder/whats-new/version-0-4-11",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/whats-new-0-5-0.md",
+      "redirect_url": "/azure/data-api-builder/whats-new/version-0-5-0",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/whats-new-0-5-32.md",
+      "redirect_url": "/azure/data-api-builder/whats-new/version-0-5-32",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/whats-new-0-5-34.md",
+      "redirect_url": "/azure/data-api-builder/whats-new/version-0-5-34",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/whats-new-0-6-13.md",
+      "redirect_url": "/azure/data-api-builder/whats-new/version-0-6-13",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/whats-new-0-6-14.md",
+      "redirect_url": "/azure/data-api-builder/whats-new/version-0-6-14",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/whats-new-0-7-6.md",
+      "redirect_url": "/azure/data-api-builder/whats-new/version-0-7-6",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/whats-new-0-8.md",
+      "redirect_url": "/azure/data-api-builder/whats-new/version-0-8",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/whats-new-0-9.md",
+      "redirect_url": "/azure/data-api-builder/whats-new/version-0-9",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/whats-new-0-10.md",
+      "redirect_url": "/azure/data-api-builder/whats-new/version-0-10",
+      "redirect_document_id": true
+    },
+    {
       "source_path_from_root": "/data-api-builder/database-connections.md",
       "redirect_url": "/azure/data-api-builder/reference-configuration#connection-string",
       "redirect_document_id": false

@@ -5,6 +5,16 @@
   items:
   - name: What is Data API builder?
     href: overview.md
+  - name: What's new
+    items:
+    - name: Version 0.10
+      href: whats-new/version-0-10.md
+    - name: Version 0.9
+      href: whats-new/version-0-9.md
+    - name: Version 0.8
+      href: whats-new/version-0-8.md
+    - name: All versions
+      href: whats-new/index.yml
 - name: Quickstarts
   items:
   - name: Getting Started

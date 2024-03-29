@@ -7,7 +7,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: overview
-ms.date: 03/20/2024
+ms.date: 03/29/2024
 #Customer Intent: As a developer, I want to learn more about DAB, so that I can determine if it's the right tool for my scenario.
 ---
 
@@ -47,7 +47,7 @@ Here's a list of features that Data API builder supports for your workloads.
   - Filtering, sorting and pagination
   - Relationship navigation
 - Easy development via dedicated CLI
-- Fully integrated with Static Web Apps via Database Connection feature when running in Azure
+- Integration for Static Web Apps via Database Connection feature when running in Azure
 - Open Source
 
 ## Open source
