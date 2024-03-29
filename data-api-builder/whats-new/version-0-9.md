@@ -28,7 +28,7 @@ Logs can now be streamed to Application Insights for a better monitoring and deb
 
 Read all the details in the [Use Application Insights](../use-application-insights.md) documentation page.
 
-## Support for ignoring extraneous fields in rest request body
+## Support for ignoring extraneous fields in REST request body
 
 With the new `request-body-strict` option, you can now decide if having extra field in the REST payload generates an error (default behavior, backward compatible) or the extra fields is silently ignored.
 

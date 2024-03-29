@@ -10,7 +10,7 @@ metadata:
   ms.reviewer: jerrynixon
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 03/28/2024
+  ms.date: 03/29/2024
 landingContent:
 - title: Version 0.10
   linkLists:
@@ -26,7 +26,93 @@ landingContent:
       url: https://github.com/Azure/data-api-builder/pull/1709
     - text: Azure SQL Data Warehouse support (preview)
       url: https://github.com/Azure/data-api-builder/pull/1864
-  - linkListType: whats-new
+  - linkListType: download
     links:
     - text: Download
       url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.10.23
+- title: Version 0.9
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: Support for ignoring extraneous fields in REST request body
+      url: version-0-9.md#support-for-ignoring-extraneous-fields-in-rest-request-body
+    - text: Enable Application Insights when self-hosting DAB
+      url: version-0-9.md#enable-application-insights-when-self-hosting-dab
+    - text: Mutations on table with triggers for `mssql`
+      url: version-0-9.md#mutations-on-table-with-triggers-for-mssql
+  - linkListType: download
+    links:
+    - text: Download
+      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.9.7
+- title: Version 0.8
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: TODO
+      url: about:blank
+    - text: TODO
+      url: about:blank 
+    - text: TODO
+      url: about:blank 
+  - linkListType: download
+    links:
+    - text: Download
+      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.8.52
+- title: Version 0.7
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: TODO
+      url: about:blank
+    - text: TODO
+      url: about:blank 
+    - text: TODO
+      url: about:blank 
+  - linkListType: download
+    links:
+    - text: Download
+      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.7.6
+- title: Version 0.6
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: TODO
+      url: about:blank
+    - text: TODO
+      url: about:blank 
+    - text: TODO
+      url: about:blank 
+  - linkListType: download
+    links:
+    - text: Download
+      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.6.14
+- title: Version 0.5
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: TODO
+      url: about:blank
+    - text: TODO
+      url: about:blank 
+    - text: TODO
+      url: about:blank 
+  - linkListType: download
+    links:
+    - text: Download
+      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.5.35
+- title: Older versions
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: Support for filter on nested objects within a document in Azure SQL and SQL Server (0.4.11)
+      url: version-0-4-11.md#support-for-filter-on-nested-objects-within-a-document-in-azure-sql-and-sql-server
+    - text: TODO
+      url: about:blank 
+    - text: TODO
+      url: about:blank 
+    - text: View support (0.3.7)
+      url: version-0-3-7.md#view-support
+    - text: TODO
+      url: about:blank 
+    - text: TODO
+      url: about:blank 
