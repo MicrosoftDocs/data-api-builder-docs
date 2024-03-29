@@ -20,10 +20,6 @@ landingContent:
       url: version-0-10.md#in-memory-caching
     - text: Validation in the command-line interface
       url: version-0-10.md#configuration-validation-in-cli
-    - text: 
-      url: 
-    - text: 
-      url: 
   - linkListType: reference
     links:
     - text: Multiple data-sources (preview)
