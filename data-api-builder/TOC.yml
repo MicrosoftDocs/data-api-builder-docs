@@ -22,7 +22,9 @@
     - name: Develop with local data
       href: how-to-develop-local-data.md
 - name: Concepts
-  items:
+  items:    
+    - name: Environments
+      href: environments.md
     - name: Local authentication
       href: local-authentication.md
 - name: Samples
