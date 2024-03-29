@@ -15,6 +15,18 @@
       href: whats-new/version-0-8.md
     - name: All versions
       href: whats-new/index.yml
+- name: Quickstarts
+  items:
+  - name: Getting Started
+    href: get-started/get-started-with-data-api-builder.md
+  - name: Using Azure SQL
+    href: get-started/get-started-azure-sql.md
+  - name: Using PostgreSQL
+    href: get-started/get-started-azure-postgresql.md
+  - name: Using Azure Cosmos DB
+    href: get-started/get-started-azure-cosmos-db.md
+  - name: Using MySQL
+    href: get-started/get-started-azure-mysql.md
 - name: How to
   items:
     - name: Install the CLI
@@ -177,78 +189,104 @@
         href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
   - name: Functions
     href: reference-functions.md
-- name: Data API builder Documentation
-  href: index.yml
-- name: Quickstarts
+
+
+
+- name: In progress (rework)
   items:
-  - name: Get started with Data API builder
-    href: get-started/get-started-with-data-api-builder.md
-  - name: Get started with databases 
+  - name: Running Data API builder
     items:
-    - name: Use Data API builder with Azure SQL
-      href: get-started/get-started-azure-sql.md
-    - name: Use Data API builder with PostgreSQL
-      href: get-started/get-started-azure-postgresql.md
-    - name: Use Data API builder with Azure Cosmos DB
-      href: get-started/get-started-azure-cosmos-db.md
-    - name: Use Data API builder with MySQL
-      href: get-started/get-started-azure-mysql.md
-- name: Local development  
-  href: local-development.md
-  items:
-  - name: Run using Data API builder CLI
-    href: run-using-data-api-builder-cli.md
-  - name: Run using container
-    href: run-using-container.md
-  - name: Run from source code
-    href: run-from-source-code.md
-- name: Running in Azure
-  href: running-in-azure.md
-- name: REST
-  items:
-  - name: Overview
-    href: rest.md
-  - name: Swagger / OpenAPI
-    href: openapi.md
-- name: GraphQL
-  href: graphql.md
-- name: Views and stored procedures
-  href: views-and-stored-procedures.md
-- name: Relationships  
-  href: relationships.md
-- name: Authentication
-  href: authentication.md
-  items:
-  - name: Authentication with Azure AD
-    href: authentication-azure-ad.md
-- name: Authorization  
-  href: authorization.md
-- name: Use Application Insights
-  href: use-application-insights.md
-- name: Database specific features
-  href: database-specific-features.md  
-  items:
-  - name: Azure SQL Session Context and Row Level Security
-    href: azure-sql-session-context-rls.md
-- name: Best practices
-  href: best-practices.md  
-- name: Known issues
-  href: known-issues.md  
-- name: Troubleshoot
-  items:
-  - name: Overview
-    href: troubleshoot.md
-  - name: Troubleshoot installation
-    href: troubleshoot-installation.md
-  - name: Troubleshoot usage
-    href: troubleshoot-usage.md
-- name: Security considerations
-  href: security-considerations.md
-- name: Change Policy
-  items:
-  - name: Versioning
-    href: versioning.md
-  - name: Breaking change policy
-    href: breaking-changes.md
-  - name: Breaking change list
-    href: breaking-change-list.md
+    - name: Local Development
+      href: local-development.md
+    - name: Run in a container
+      href: run-using-container.md
+    - name: Run from source code
+      href: run-from-source-code.md
+    - name: Run in Azure
+      href: running-in-azure.md
+  - name: REST Endpoints
+    items:
+    - name: Overview
+      href: rest.md
+    - name: OpenAPI
+      href: openapi.md
+    - name: Swagger UI
+      href: openapi.md#swaggerui
+    - name: GET method
+      href: rest.md#get
+    - name: POST method
+      href: rest.md#post
+    - name: PUT method
+      href: rest.md#put
+    - name: PATCH method
+      href: rest.md#patch
+    - name: DELETE method
+      href: rest.md#delete
+  - name: GraphQL Endpoints
+    items:
+    - name: Overview
+      href: graphql.md
+    - name: Pagination
+      href: graphql.md#pagination
+    - name: Filtering
+      href: graphql.md#filter
+    - name: Mutations
+      items:
+      - name: Overview
+        href: graphql.md#mutations
+      - name: Create
+        href: graphql.md#create
+      - name: Update
+        href: graphql.md#update
+      - name: Delete
+        href: graphql.md#delete
+  - name: Database Objects
+    items:
+    - name: Views
+      href: views-and-stored-procedures.md#views
+    - name: Stored Procedures
+      href: views-and-stored-procedures.md#stored-procedures
+    - name: Relationships  
+      href: relationships.md
+  - name: Application Insights
+    href: use-application-insights.md
+  - name: Security
+    items:
+    - name: Authentication
+      href: authentication.md
+    - name: Microsoft Entra ID
+      href: authentication-azure-ad.md
+    - name: Local authentication
+      href: local-authentication.md
+    - name: Authorization  
+      href: authorization.md
+    - name: Security considerations
+      href: security-considerations.md
+  - name: Database-specific features
+    items:
+    - name: Azure Cosmos DB
+      href: database-specific-features.md  
+    - name: SQL Session Context 
+      href: azure-sql-session-context-rls.md
+    - name: Row Level Security
+      href: azure-sql-session-context-rls.md#example-how-to-use-session_context-to-leverage-row-level-security-rls
+  - name: Troubleshooting
+    items:
+    - name: Overview
+      href: troubleshoot.md
+    - name: Best practices
+      href: best-practices.md  
+    - name: Troubleshoot installation
+      href: troubleshoot-installation.md
+    - name: Troubleshoot usage
+      href: troubleshoot-usage.md
+    - name: Known issues
+      href: known-issues.md  
+  - name: Internal Policies
+    items:
+    - name: Version Numbers
+      href: versioning.md
+    - name: Breaking change policy
+      href: breaking-changes.md
+    - name: Breaking change list
+      href: breaking-change-list.md
