@@ -7,7 +7,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: overview
-ms.date: 03/20/2024
+ms.date: 03/29/2024
 #Customer Intent: As a developer, I want to learn more about DAB, so that I can determine if it's the right tool for my scenario.
 ---
 
@@ -33,20 +33,21 @@ This diagram breaks down the relationship between all of the components of the D
 
 Here's a list of features that Data API builder supports for your workloads.
 
-- Allow collections, tables, views, and stored procedures to be accessed via REST and GraphQL
-- Support authentication via OAuth2/JWT
+- Support for collections, tables, views, and stored procedures to be accessed via REST and GraphQL
+- Support for authentication via OAuth2/JWT
 - Support for EasyAuth when running in Azure
 - Role-based authorization using received claims
 - Item-level security via policy expressions
 - REST
   - CRUD operations via POST, GET, PUT, PATCH, DELETE
-  - filtering, sorting and pagination
+  - Filtering, sorting, and pagination
+  - Support for OpenAPI
 - GraphQL
-  - queries and mutations
-  - filtering, sorting and pagination
-  - relationship navigation
-- Straightforward development using a dedicated command-line interface (CLI)
-- Full integration with Static Web Apps via the **database connection** feature when running in Azure
+  - Queries and mutations
+  - Filtering, sorting and pagination
+  - Relationship navigation
+- Easy development via dedicated CLI
+- Integration for Static Web Apps via Database Connection feature when running in Azure
 - Open Source
 
 ## Open source
