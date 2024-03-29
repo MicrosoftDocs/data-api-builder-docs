@@ -39,6 +39,8 @@
       href: environments.md
     - name: Local authentication
       href: local-authentication.md
+    - name: Relationships
+      href: relationships.md
 - name: Samples
   items:
   - name: Example configuration
