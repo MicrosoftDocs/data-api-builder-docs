@@ -50,11 +50,11 @@ Data API builder uses the HTTP method on your request to determine what action t
 
 ### Rest path
 
-The rest path designates the location of Data API builder's REST API. The path is configurable in the runtime config and defaults to */api*. For more information, see the [configuration file article](./configuration-file/overview.md).
+The rest path designates the location of Data API builder's REST API. The path is configurable in the runtime config and defaults to */api*. For more information, see the [configuration file article](./configuration-file.md).
 
 ### Entity
 
-*Entity* is the terminology used to reference a REST API resource in  Data API builder. By default, the URL route value for an entity is the entity name defined in the runtime config. An entity's REST URL path value is configurable within the entity's REST settings. For more information, see the [configuration file article](./configuration-file/overview.md).
+*Entity* is the terminology used to reference a REST API resource in  Data API builder. By default, the URL route value for an entity is the entity name defined in the runtime config. An entity's REST URL path value is configurable within the entity's REST settings. For more information, see the [configuration file article](./configuration-file.md).
 
 ### Result set format
 

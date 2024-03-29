@@ -1,6 +1,6 @@
 ---
 title: Quickstart to Data API builder for Azure Database PostgreSQL
-description: This quickstart uses Data API builder with Azure Database PostgreSQL.
+description: This quickstart will help you use Data API builder with Azure Database PostgreSQL.
 author: anagha-todalbagi 
 ms.author: atodalbagi 
 ms.service: data-api-builder 
@@ -10,7 +10,7 @@ ms.date: 02/22/2023
 
 # Quickstart: Use Data API builder with Azure Database PostgreSQL
 
-Make sure you read the [Get Started](./get-started-with-data-api-builder.md) document.
+Make sure you have read the [Get Started](./get-started-with-data-api-builder.md) document.
 
 As mentioned before, this tutorial assumes that you already have a PostgreSQL server or an Azure Database for PostgreSQL database that can be used as playground.
 
@@ -41,7 +41,7 @@ To connect to a local PostgreSQL Server, the connection string looks like:
 
 ## Create the database objects
 
-Create the database tables needed to represent Authors, Books, and the many-to-many relationship between Authors and Books. You can find the `library.azure-postgresql.sql` script in the `azure-postgresql-db` folder in the [GitHub repo](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-postgresql/exercise-library.postgresql.sql). You can use it to create three tables, along with sample data:
+Create the database tables needed to represent Authors, Books and the many-to-many relationship between Authors and Books. You can find the `library.azure-postgresql.sql` script in the `azure-postgresql-db` folder in the [GitHub repo](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-postgresql/exercise-library.postgresql.sql). You can use it to create three tables, along with sample data:
 
 - `authors`: Table containing authors
 - `books`: Table containing books
@@ -51,9 +51,9 @@ Execute the script in the PostgreSQL Server or Azure Database for PostgreSQL as 
 
 ## Creating a configuration file for DAB
 
-The Data API builder for Azure Databases engine needs a [configuration file](../configuration-file/overview.md). There you define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
+The Data API builder for Azure Databases engine needs a [configuration file](../configuration-file.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
 
-For this getting started guide, you use DAB CLI to initialize your configuration file. Run the following command:
+For this getting started guide, you'll use DAB CLI to initialize your configuration file. Run the following command:
 
 ```bash
 dab init 
@@ -98,14 +98,13 @@ The command generates a config file called `dab-config.json` and looks like this
 
 As you can see there the `data-source` property specifies that our chosen `database-type` is `postgresql`, with the `connection-string` we passed to DAB CLI.
 
-> [!TIP]
-> Take a look at the [DAB Configuration File Guide](../configuration-file/overview.md) document to learn more.
+>Take a look at the [DAB Configuration File Guide](../configuration-file.md) document to learn more.
 
 With the configuration file in place, it's time to start defining which entities you want to expose via the API.
 
 ## Add Book and Author entities
 
-Now, we have to expose `books` and `authors` as REST or GraphQL endpoints. To do that, add the following information to the `entities` section of the configuration file.
+Now, we have to expose the entities, `books` and `authors` table as REST or GraphQL endpoints. To do that, add the following information to the `entities` section of the configuration file.
 
 You can do this either using the CLI:
 
@@ -113,7 +112,7 @@ You can do this either using the CLI:
 dab add Author --source dbo.authors --permissions "anonymous:*"
 ```
 
-Or by adding the `Author` entity manually to the config file:
+or by adding the `Author` entity manually to the config file:
 
 ```json
 "entities": {
@@ -139,7 +138,7 @@ After that, the permissions for the exposed entity are defined via the `permissi
 > [!NOTE]
 > The aforementioned permissions settings are only to be used for learning purposes. We do not recommend that unauthenticated entities are allowed to perform CRUD operations on a database in a production environment, as this poses a security risk. To read more on security baselines, go to [Azure security baseline for Azure Database for PostgreSQL](/security/benchmark/azure/baselines/azure-database-for-postgresql-flexible-server-security-baseline)
 
-You can also add the `Book` entity now, applying the same concepts you just learned for the `Author` entity. Once you add the `Author` entity, the `entities` object of configuration file looks like the following snippet:
+You can also add the `Book` entity now, applying the same concepts you just learned for the `Author` entity. Once you've added the `Author` entity, the `entities` object of configuration file looks like the following:
 
 ```json
 "entities": {
@@ -164,7 +163,7 @@ You can also add the `Book` entity now, applying the same concepts you just lear
   }
 ```
 
-Data API builder is ready to be run.
+that's all is needed at the moment. Data API builder is ready to be run.
 
 > [!TIP]
 > We recommend that you use the *singular* form for entity names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](../graphql.md).
@@ -174,13 +173,13 @@ Data API builder is ready to be run.
 
 ## Start Data API builder for Azure Database for PostgreSQL Flexible Server
 
-You're ready to serve your API. Run the below command (the engine starts with default config `dab-config.json`, use option --config otherwise):
+You're ready to serve your API. Run the below command (this starts the engine with default config `dab-config.json`, use option --config otherwise):
 
 ```bash
 dab start
 ```
 
-When you see something like:
+when you see something like:
 
 ```text
 info: Azure.DataApiBuilder.Service.Startup[0]
@@ -192,6 +191,8 @@ info: Microsoft.Hosting.Lifetime[14]
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 ```
+
+you are good to go, Data API Builder is up and running, ready to serve your requests.
 
 ## Query the endpoints
 
@@ -205,7 +206,7 @@ REST endpoint is made available at the path (make sure to keep in mind that the 
 /api/<entity>
 ```
 
-So if you want to get a list of all the available books you can run this GET request:
+so if you want to get a list of all the available books you can run this GET request:
 
 ```text
 /api/Book
@@ -224,16 +225,16 @@ Whenever you need to access a single item, you can get the item you want by spec
 GET /api/Book/id/1000
 ```
 
-All verbs support filter by primary key, except for `POST` as that verb is used to create a new item and therefore searching an item by its primary key isn't applicable.
+The ability to filter by primary key is supported by all verbs except for POST as that verb is used to create a new item and therefore searching an item by its primary key isn't applicable.
 
 The GET verb also supports several query parameters that allow you to manipulate and refine the requested data:
 
-- `$orderby`: Return items in the specified order.
-- `$first`: The top `n` items to return.
-- `$filter`: Expression to filter the returned items.
-- `$select`:  List of field names to be returned.
+- `$orderby`: return items in the specified order
+- `$first`: the top `n` items to return
+- `$filter`: expression to filter the returned items
+- `$select`:  list of field names to be returned
 
-For more information on how they can be used, see [REST documentation](../rest.md).
+For more details on how they can be used, see [REST documentation](../rest.md)
 
 ### GraphQL endpoint
 
@@ -256,11 +257,11 @@ Use a GraphQL-capable REST client like Postman or Insomnia to query the database
 }
 ```
 
-This returns the first five books ordered by title in descending order.
+this returns the first five books ordered by title in descending order.
 
 ## Adding entities relationships
 
-Everything is now up and working, and now you probably want to take advantage as much as possible of GraphQL capabilities to handle complex queries by sending just one request. For example, you may want to get all the Authors in your library along with their Books. In order to achieve that, you need to let Data API Builder know that you want such relationship to be available to be used in queries.
+Everything is now up and working, and now you probably want to take advantage as much as possible of GraphQL capabilities to handle complex queries by sending just one request. For example, you may want to get all the Authors in your library along with the Books they've written. In order to achieve that, you need to let Data API Builder know that you want such relationship to be available to be used in queries.
 
 Stop the engine (`Ctrl+C`).
 
@@ -270,7 +271,7 @@ Relationships are also defined in the configuration file, via the `relationships
 dab update Author --relationship "books" --cardinality "many" --target.entity "Book" --linking.object "books_authors"
 ```
 
-Which creates the `relationships` section in the `Author` entity:
+which creates the `relationships` section in the `Author` entity:
 
 ```json
 "relationships": {
@@ -288,9 +289,9 @@ The element under `relationship` is used to add a field - `books` in the sample 
 - `target.entity`: Which entity, defined in the same configuration file, is used in this relationship. For this sample is `book` as we're creating the relationship on the `Author` entity.
 - `linking.object`: the database table used to support the many-to-many relationship. That table is the `books_authors`.
 
-Data API Builder automatically figures out which columns are used to support the relationship between all the involved parts. For this reason, the configuration is done! (If you don't have foreign keys you can always manually specify the columns you want to use to navigate from one table to another. For more information, see [relationships documentation](../relationships.md)).
+Data API Builder automatically figures out which columns are used to support the relationship between all the involved parts. This is done by analyzing the foreign key constraints that exist between the involved tables. For this reason, the configuration is done! (If you don't have foreign keys you can always manually specify the columns you want to use to navigate from one table to another. For more details, see [relationships documentation](../relationships.md)).
 
-The `author` entity should now look like the following snippet:
+The `author` entity should now look like the following:
 
 ```json
 "Author": {
@@ -338,7 +339,7 @@ that updates the configuration file and the `book` entity looks like the followi
 }
 ```
 
-Once done, you can now restart the Data API builder engine, and using GraphQL you can now execute queries like:
+Once this is done, you can now restart the Data API builder engine, and using GraphQL you can now execute queries like:
 
 ```graphql
 {
@@ -385,19 +386,19 @@ that returns all the authors of "Nightfall" book, or like:
 
 that returns all the books written by Isaac Asimov.
 
-Congratulations, you've created a fully working backend to support your modern applications!
+Congratulations, you've now created a fully working backend to support your modern applications!
 
 ## Next steps
 
 ## Exercise
 
-If you want to practice, here's an exercise you can do on your own.
+If you want to practice what you have learned, here's a little exercise you can do on your own
 
 - Using the database setup script available in the source code repo [exercise folder](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-postgresql/exercise-library.postgresql.sql):
-  - Add the table `series`, which stores series names (for example: [Foundation Series](https://en.wikipedia.org/wiki/Foundation_series)).
-  - Update the `books` table by adding a column named `series_id`.
-  - Update the `books` table by adding a foreign key constraint on the `series` table.
+  - add the table `series`, which stores series names (for example: [Foundation Series](https://en.wikipedia.org/wiki/Foundation_series))
+  - update the `books` table by adding a column named `series_id`
+  - update the `books` table by adding a foreign key constraint on the `series` table
 - Update the configuration file with a new entity named `Series`, supported by the `series` source table you just created.
-- Update the `Book` entity by creating a relationship with the `Series` entity. Make sure you select `one` for the `cardinality` property.
-- Update the `Series` entity by creating a relationship with the `Book` entity. Make sure you select `many` for the `cardinality` property.
+- Update the `Book` entity by creating a relationship with the `Series` entity. Make sure you select `one` for the `cardinality` property
+- Update the `Series` entity by creating a relationship with the `Book` entity. Make sure you select `many` for the `cardinality` property
 

@@ -28,7 +28,7 @@ GET /{rest-path}/openapi
 ```
 
 > [!NOTE]
-> By default, the `rest-path` value is `api` and is configurable. For more details, see [Configuration file - REST Settings](./configuration-file/runtime.md)
+> By default, the `rest-path` value is `api` and is configurable. For more details, see [Configuration file - REST Settings](./configuration-file.md#rest)
 
 ## SwaggerUI
 
