@@ -21,6 +21,11 @@
       "redirect_document_id": true
     },
     {
+      "source_path_from_root": "/data-api-builder/whats-new.md",
+      "redirect_url": "/azure/data-api-builder/whats-new",
+      "redirect_document_id": true
+    },
+    {
       "source_path_from_root": "/data-api-builder/whats-new-0-3-7.md",
       "redirect_url": "/azure/data-api-builder/whats-new/version-0-3-7",
       "redirect_document_id": true

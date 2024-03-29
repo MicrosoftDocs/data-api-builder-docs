@@ -21,7 +21,7 @@ landingContent:
       - linkListType: whats-new
         links:
           - text: What's new in Data API builder
-            url: whats-new.md
+            url: whats-new/index.yml
   - title: Get started
     linkLists:
       - linkListType: quickstart
