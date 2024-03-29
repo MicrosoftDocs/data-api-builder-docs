@@ -40,7 +40,7 @@ http://<dab-server>/api/GetCowrittenBooksByAuthor?author=isaac%20asimov
 
 It's the responsibility of the developer configuring DAB to enable or disable actions (for example, the `create` action) to allow or deny specific HTTP verbs to be used when calling the stored procedure. For example, for the stored procedure used in the example, given that its purpose is to return some data, it would make sense to only allow the `read` action.
 
-## Microsoft Entra ID Authentication
+## Microsoft Entra ID authentication
 
 Microsoft Entra ID authentication is now fully working. For more information, see [authentication with Microsoft Entra ID](https://github.com/Azure/data-api-builder/blob/8c44bc882da718f86bbfba48756c0796ef24e058/docs/authentication-azure-ad.md).
 
