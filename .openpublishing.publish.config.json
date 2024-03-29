@@ -19,15 +19,13 @@
     "abhtiwar@microsoft.com",
     "damauri@microsoft.com",
     "sasinnat@microsoft.com",
-    "jnixon@microsoft.com",
-    "sidandrews@microsoft.com"
+    "atodalbagi@microsoft.com"
   ],
   "sync_notification_subscribers": [
     "abhtiwar@microsoft.com",
     "damauri@microsoft.com",
     "sasinnat@microsoft.com",
-    "jnixon@microsoft.com",
-    "sidandrews@microsoft.com"
+    "atodalbagi@microsoft.com"
   ],
   "branches_to_filter": [],
   "git_repository_url_open_to_public_contributors": "https://github.com/MicrosoftDocs/data-api-builder-docs",
