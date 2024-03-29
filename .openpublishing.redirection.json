@@ -22,7 +22,7 @@
     },
     {
       "source_path_from_root": "/data-api-builder/whats-new.md",
-      "redirect_url": "/azure/data-api-builder/whats-new",
+      "redirect_url": "/azure/data-api-builder/whats-new/",
       "redirect_document_id": true
     },
     {
