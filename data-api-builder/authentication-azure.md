@@ -25,7 +25,7 @@ The supported identity provider configuration options are:
 
 Data API builder expects Azure Static Web Apps authentication (EasyAuth) to authenticate the request, and to provide metadata about the authenticated user in the `X-MS-CLIENT-PRINCIPAL` HTTP header when using the option `StaticWebApps`. The authenticated user metadata provided by Static Web Apps can be referenced in the following documentation: [Accessing User Information](/azure/static-web-apps/user-information?tabs=csharp).
 
-, you need to specify the following configuration in the `runtime.host` section of the configuration file:
+To use the `StaticWebApps` provider, you need to specify the following configuration in the `runtime.host` section of the configuration file:
 
 ```json
 "authentication": {
