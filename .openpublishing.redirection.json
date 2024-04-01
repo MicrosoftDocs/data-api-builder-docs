@@ -84,6 +84,26 @@
       "source_path_from_root": "/data-api-builder/database-connections.md",
       "redirect_url": "/azure/data-api-builder/reference-configuration#connection-string",
       "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/troubleshoot.md",
+      "redirect_url": "/troubleshoot/azure/data-api-builder/",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/troubleshoot-installation.md",
+      "redirect_url": "/troubleshoot/azure/data-api-builder/installation",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/troubleshoot-usage.md",
+      "redirect_url": "/troubleshoot/azure/data-api-builder/usage",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/known-issues.md",
+      "redirect_url": "/troubleshoot/azure/data-api-builder/known-issues",
+      "redirect_document_id": false
     }
   ]
 }
