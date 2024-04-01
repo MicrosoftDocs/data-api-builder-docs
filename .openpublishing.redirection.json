@@ -114,6 +114,11 @@
       "source_path_from_root": "/data-api-builder/views-and-stored-procedures.md",
       "redirect_url": "/azure/data-api-builder/database-objects",
       "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/local-development.md",
+      "redirect_url": "/azure/data-api-builder/how-to-develop-local-data",
+      "redirect_document_id": false
     }
   ]
 }
