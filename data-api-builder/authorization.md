@@ -1,14 +1,16 @@
 ---
-title: Authorization in Data API builder
-description: This document defines the role-based authorization workflow in Data API builder.
-author: seantleonard
-ms.author: seleonar
+title: Authorization and roles
+description: Define role-based authorization workflow in Data API builder for custom-defined roles and permissions.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: authentication-azure-ad
-ms.date: 06/01/2023
+ms.topic: concept-article
+ms.date: 04/01/2024
+# Customer Intent: As a developer, I want to configure roles, so that I can use roles to authorize certain endpoints.
 ---
 
-# Authorization
+# Authorization and roles in Data API builder
 
 Data API builder uses a role-based authorization workflow. Any incoming request, authenticated or not, is assigned to a role. [Roles](#roles) can be [System Roles](#system-roles) or [User Roles](#user-roles). The assigned role is then checked against the defined [permissions](#permissions) specified in the [configuration file](./configuration-file.md) to understand what actions, fields, and policies are available for that role on the requested entity.
 
@@ -269,3 +271,8 @@ A database policy restricting the `read` action on the `consumer` role to only r
   ]
 }
 ```
+
+## Related content
+
+- [Azure authentication](authentication-azure.md)
+- [Local authentication](authentication-local.md)

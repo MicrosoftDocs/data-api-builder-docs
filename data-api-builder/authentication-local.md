@@ -6,11 +6,11 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 03/28/2024
+ms.date: 04/01/2024
 # Customer Intent: As a developer, I want to test authentication locally, so that I don't have to rely on authentication "just working" when published.
 ---
 
-# Local Authentication
+# Local Authentication in Data API builder
 
 When developing a solution using Data API builder locally, or when running Data API builder on-premises, you need to test the configured authentication and authorization options by simulating a request with a specific role or claim.
 
@@ -113,3 +113,8 @@ curl --request GET \
   --header 'X-MS-API-ROLE: author' \
   --header 'X-MS-CLIENT-PRINCIPAL: eyAgCiAgImlkZW50aXR5UHJvdmlkZXIiOiAidGVzdCIsCiAgInVzZXJJZCI6ICIxMjM0NSIsCiAgInVzZXJEZXRhaWxzIjogImpvaG5AY29udG9zby5jb20iLAogICJ1c2VyUm9sZXMiOiBbImF1dGhvciIsICJlZGl0b3IiXQp9'
 ```
+
+## Related content
+
+- [Azure authentication](authentication-azure.md)
+- [Authorization](authorization.md)

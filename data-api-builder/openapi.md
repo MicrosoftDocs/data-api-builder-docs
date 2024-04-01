@@ -1,11 +1,13 @@
 ---
-title: Data API builder REST API documentation with Swagger / OpenAPI
-description: This document describes how to access the REST endpoint's OpenAPI description document with Swagger.
-author: seantleonard
-ms.author: seleonar
+title: Swagger and OpenAPI metadata for REST endpoints
+description: Manage OpenAPI description and Swagger UI hosting for Data API builder's REST API endpoints feature.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: openapi
-ms.date: 06/08/2023
+ms.topic: concept-article
+ms.date: 04/01/2024
+# Customer Intent: As a developer, I want to use the Data API Builder, so that I can host OpenAPI/Swagger metadata.
 ---
 
 # Data API builder REST API documentation with Swagger / OpenAPI

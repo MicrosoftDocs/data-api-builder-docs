@@ -96,6 +96,11 @@
       "redirect_document_id": true
     },
     {
+      "source_path_from_root": "/data-api-builder/authentication.md",
+      "redirect_url": "/azure/data-api-builder/authentication-azure",
+      "redirect_document_id": false
+    },
+    {
       "source_path_from_root": "/data-api-builder/security-considerations.md",
       "redirect_url": "/azure/data-api-builder/best-practices-security",
       "redirect_document_id": true

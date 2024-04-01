@@ -1,14 +1,18 @@
 ---
-title: Security considerations in Data API builder
-description: This document contains details about security considerations in Data API builder.
-author: anagha-todalbagi
-ms.author: atodalbagi
+title: Security best practices
+description: Review a list of current best practices and recommendations for security and connectivity in Data API builder.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: security-considerations-in-data-api-builder
-ms.date: 04/06/2023
+ms.topic: concept-article
+ms.date: 04/01/2024
+# Customer Intent: As a developer, I want to review best practices, so that I can configure my API using current best practices.
 ---
 
-# Security Considerations
+# Security best practices in Data API builder
+
+This article includes the current recommended best practices for security in the Data API builder. This is not an exhaustive list of every security consideration for your Data API builder solution.
 
 ## Disable Legacy Versions of TLS at the Server Level
 
@@ -53,3 +57,8 @@ TLS 1.2 is enabled by default on the latest versions of .NET and many of the lat
 - Install .NET on Linux - [Microsoft Learn](/dotnet/core/install/linux)
 - Linux .NET Dependencies - [GitHub](https://github.com/dotnet/core/blob/main/release-notes/6.0/linux-packages.md)
   - Includes [OpenSSL](https://www.openssl.org/) where the latest versions support TLS protocol versions up through TLS 1.3. [OpenSSL Wiki](https://wiki.openssl.org/index.php/TLS1.3)
+
+## Related content
+
+- [Install CLI](how-to-install-cli.md)
+- [Best practices configuration](best-practices-configuration.md)

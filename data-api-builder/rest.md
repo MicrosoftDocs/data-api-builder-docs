@@ -1,14 +1,16 @@
 ---
-title: REST in Data API builder
-description: This document contains details about REST in Data API builder.
-author: seantleonard
-ms.author: seleonar
+title: Host REST endpoints
+description: Review REST endpoint hosting for Data API builder including, how to expose endpoints, endpoint configuration, and invocation.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: rest-in-data-api-builder
-ms.date: 06/14/2023
+ms.topic: concept-article
+ms.date: 04/01/2024
+# Customer Intent: As a developer, I want to use the Data API Builder, so that I can host REST endpoints.
 ---
 
-# REST in Data API builder
+# Host REST endpoints in Data API builder
 
 Data API builder provides a RESTful web API that enables you to access tables, views, and stored procedures from a connected database. An entity represents a database object in Data API builder's runtime config. An entity must be set in the runtime config in order to be available on the REST API endpoint.
 

@@ -1,14 +1,16 @@
 ---
-title: Views and stored procedures in Data API builder
-description: This document defines views and stored procedures in Data API builder.
-author: anagha-todalbagi
-ms.author: atodalbagi
+title: Expanded database objects
+description: Map Data API builder endpoints to data other than traditional database tables by using database objects in the configuration.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: views-and-stored-procedures
-ms.date: 04/06/2023
+ms.topic: concept-article
+ms.date: 04/01/2024
+# Customer Intent: As a developer, I want to configure database objects, so that I can map my endpoints to objects other than tables.
 ---
 
-# Views and Stored Procedures
+# Expanded database objects in Data API builder
 
 ## Views
 

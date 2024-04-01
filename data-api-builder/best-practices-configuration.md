@@ -1,16 +1,18 @@
 ---
-title: Data API builder best practices
-description: This doc lists the Data API builder best practices.
-author: anagha-todalbagi
-ms.author: atodalbagi
+title: Configuration best practices
+description: Review a list of current best practices and recommendations for the configuration metadata in Data API builder.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: best-practices
-ms.date: 04/06/2023
+ms.topic: concept-article
+ms.date: 04/01/2024
+# Customer Intent: As a developer, I want to review best practices, so that I can configure my API using current best practices.
 ---
 
-# Data API builder best practices
+# Configuration best practices in Data API builder
 
-Here are the recommended best practices for Data API Builder:
+This article includes the current recommended best practices for configuration in the Data API builder. This is not an exhaustive list of everything you must configure for your Data API builder solution.
 
 ## Name entity using PascalCasing
 
@@ -32,3 +34,8 @@ which are easier and nicer to read.
 ## Use singular form when naming entities
 
 When adding an entity to the configuration file, make sure to use the singular form for the name. Data API builder will automatically generate the plural form whenever a collection of that entity is returned. You can also manually provide singular and plural forms, by manually adding them to the configuration file: [Configuration file - GraphQL type](./configuration-file.md#graphql-type)
+
+## Related content
+
+- [Configuration reference](reference-configuration.md)
+- [Best practices security](best-practices-security.md)

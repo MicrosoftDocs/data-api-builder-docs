@@ -1,14 +1,16 @@
 ---
-title: GraphQL in Data API builder
-description: This document contains details about GraphQL in Data API builder.
-author: anagha-todalbagi
-ms.author: atodalbagi
+title: Host GraphQL endpoints
+description: Review GraphQL endpoint hosting for Data API builder including, how to expose endpoints, schema definition, endpoint configuration, and invocation.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: graphql
-ms.date: 06/14/2023
+ms.topic: concept-article
+ms.date: 04/01/2024
+# Customer Intent: As a developer, I want to use the Data API Builder, so that I can host GraphQL endpoints.
 ---
 
-# GraphQL in Data API builder
+# Host GraphQL endpoints in Data API builder
 
 Entities configured to be available via GraphQL will be available at the default path
 
