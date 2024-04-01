@@ -12,9 +12,11 @@ ms.date: 04/01/2024
 
 # Expanded database objects in Data API builder
 
-## Views
+Data API builder includes support for views and stored procedures as alternatives to mapping to database tables or containers. These distinct database objects require custom configuration to map seamlessly to REST or GraphQL endpoints. Some custom configuration is required to use Data API builder with views and stored procedures.
 
-### Configuration
+This article includes a breakdown of how to use both views and stored procedures with Data API builder.
+
+## Views
 
 Views can be used similar to how a table can be used in Data API builder. View usage must be defined by specifying the source type for the entity as `view`. Along with that the `key-fields` property must be provided, so that Data API builder knows how it can identify and return a single item, if needed.
 
@@ -25,7 +27,7 @@ dab add BookDetail --source dbo.vw_books_details --source.type View --source.key
 ```
 
 > [!NOTE]
-> --source.key-fields is mandatory for views when generating config through the CLI.
+> `--source.key-fields` is mandatory for views when generating config through the CLI.
 
 The `dab-config.json` file would be like the following example:
 
@@ -88,16 +90,16 @@ The `dab-config.json` file would be like the following example:
 }
 ```
 
-The `parameters` defines which parameters should be exposed and also provides default values to be passed to the stored procedure parameters, if those aren't provided in the HTTP request.
+The `parameters` defines which parameters should be exposed and also provides default values to be passed to the stored procedure parameters, if those parameters aren't provided in the HTTP request.
 
-**Limitations**:
+### Limitations
 
-1. Only the first result set returned by the stored procedure will be used by Data API builder.
-2. Only those stored procedures whose metadata for the first result set can be described by [`sys.dm_exec_describe_first_result_set`](/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-describe-first-result-set-transact-sql) are supported.
-3. For both REST and GraphQL endpoints: when a stored procedure parameter is specified both in the configuration file and in the URL query string, the parameter in the URL query string will take precedence.
-4. Entities backed by a stored procedure don't have all the capabilities automatically provided for entities backed by tables, collections or views.
-    1. Stored procedure backed entities don't support pagination, ordering, or filtering. Nor do such entities support returning items specified by primary key values.
-    2. Field/parameter level authorization rules aren't supported.
+- Only the first result set returned by the stored procedure is used by Data API builder.
+- Only those stored procedures whose metadata for the first result set described by [`sys.dm_exec_describe_first_result_set`](/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-describe-first-result-set-transact-sql) are supported.
+- For both REST and GraphQL endpoints: when a stored procedure parameter is specified both in the configuration file and in the URL query string, the parameter in the URL query string takes precedence.
+- Entities backed by a stored procedure don't have all the capabilities automatically provided for entities backed by tables, collections, or views.
+  - Stored procedure backed entities don't support pagination, ordering, or filtering. Nor do such entities support returning items specified by primary key values.
+  - Field/parameter level authorization rules aren't supported.
 
 ### REST support for stored procedures
 
@@ -109,26 +111,20 @@ The REST endpoint behavior, for stored procedure backed entity, can be configure
 }
 ```
 
-Any REST requests for the entity fail with **HTTP 405 Method Not Allowed** when an HTTP method not listed in the configuration is used. for example, executing a PUT request fails with error code 405.
-If the `methods` section is excluded from the entity's REST configuration, the default method **POST** is inferred. To disable the REST endpoint for this entity, configure `"rest": false` and any REST requests on the stored procedure entity will fail with **HTTP 404 Not Found**.
+Any REST requests for the entity fail with **HTTP 405 Method Not Allowed** when an HTTP method not listed in the configuration is used. For example, executing a PUT request fails with error code 405.
+If the `methods` section is excluded from the entity's REST configuration, the default method **POST** is inferred. To disable the REST endpoint for this entity, configure `"rest": false` and any REST requests on the stored procedure entity fails with **HTTP 404 Not Found**.
 
-If the stored procedure accepts parameters, the parameters can be passed in the URL query string when calling the REST endpoint with the GET HTTP verb. For example:
+If the stored procedure accepts parameters, the parameters can be passed in the URL query string when calling the REST endpoint with the `GET` HTTP verb. For example:
 
-URL
-
-```text
+```http
 GET http://<dab-server>/api/GetCowrittenBooksByAuthor?author=isaac%20asimov
 ```
 
 Stored procedures that are executed using other HTTP verbs such as POST, PUT, PATCH, DELETE require parameters to be passed as JSON in the request body. For example:
 
-URL
-
-```text
+```http
 POST http://<dab-server>/api/GetCowrittenBooksByAuthor
 ```
-
-Body
 
 ```json
 {
@@ -138,15 +134,15 @@ Body
 
 ### GraphQL support for stored procedures
 
-Stored procedure execution in GraphQL can be configured using the `graphql` option of a stored procedure backed entity. Explicitly setting the operation of the entity allows you to represent a stored procedure in the GraphQL schema in a way that aligns with the behavior of the stored procedure. 
+Stored procedure execution in GraphQL can be configured using the `graphql` option of a stored procedure backed entity. Explicitly setting the operation of the entity allows you to represent a stored procedure in the GraphQL schema in a way that aligns with the behavior of the stored procedure.
 
 > [!NOTE]
 > GraphQL *requires* a Query element to be present in the schema. If you are exposing only stored procedures, make sure to have at least one of them supporting the `query` operation, otherwise you'll get a GraphQL error like ```The object type Query has to at least define one field in order to be valid.```
 
 Not setting any value for the operation results in the creation of a `mutation` operation.
 
-For example, using the value `query` for the `operation` option results in the stored procedure resolving as a query field in the GraphQL schema
-.
+For example, using the value `query` for the `operation` option results in the stored procedure resolving as a query field in the GraphQL schema.
+
 CLI Usage:
 
 ```sh
@@ -170,7 +166,7 @@ type GetCowrittenBooksByAuthor {
 }
 ```
 
-In the schema, both query and mutation operations for stored procedures will have `execute` as a prefix. For the previous stored procedure, the exact query name field generated would be `executeGetCowrittenBooksByAuthor`. The GraphQL type that is generated is:
+In the schema, both query and mutation operations for stored procedures have `execute` as a prefix. For the previous stored procedure, the exact query name field generated would be `executeGetCowrittenBooksByAuthor`. The GraphQL type that is generated is:
 
 ```graphql
 type Query {
@@ -204,7 +200,7 @@ type Mutation {
 }
 ```
 
-If the stored procedure accepts parameters, those can be passed as parameter of the query or mutation. For example:
+If the stored procedure accepts parameters, those parameters can be passed as parameter of the query or mutation. For example:
 
 ```graphql
 query {
@@ -217,3 +213,8 @@ query {
   }
 }
 ```
+
+## Related content
+
+- [Configuration reference](reference-configuration.md)
+- [Install the CLI](how-to-install-cli.md)

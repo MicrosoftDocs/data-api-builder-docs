@@ -324,13 +324,7 @@ If successful, the result is an empty response with status code 204.
 
 To process POST, PUT, PATCH, and DELETE API requests; Data API builder constructs and executes the database queries in a transaction.
 
-The following table lists the isolation levels with which the transactions are created for each database type.
-
-| Database Type | Isolation Level | More information |
-| --- | --- | --- |
-| Azure SQL (or) SQL Server | Read Committed | [Azure SQL](/sql/t-sql/language-elements/transaction-isolation-levels) |
-| MySQL | Repeatable Read | [MySQL](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html#isolevel_repeatable-read) |
-| PostgreSQL | Read Committed | [PostgreSQL](https://www.postgresql.org/docs/current/transaction-iso.html#XACT-READ-COMMITTED) |
+[!INCLUDE[Database isolation levels](includes/database-isolation-levels.md)]
 
 ## Related content
 

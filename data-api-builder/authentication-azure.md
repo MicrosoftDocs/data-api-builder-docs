@@ -19,13 +19,13 @@ Authentication is delegated to a supported identity provider where access token 
 The supported identity provider configuration options are:
 
 - StaticWebApps
-- JWT
+- JSON Web Tokens (JWT)
 
 ## Azure Static Web Apps authentication (EasyAuth)
 
-When using the option `StaticWebApps`, Data API builder expects Azure Static Web Apps authentication (EasyAuth) to have authenticated the request, and to have provided metadata about the authenticated user in the `X-MS-CLIENT-PRINCIPAL` HTTP header. The authenticated user metadata provided by Static Web Apps can be referenced in the following documentation: [Accessing User Information](/azure/static-web-apps/user-information?tabs=csharp).
+Data API builder expects Azure Static Web Apps authentication (EasyAuth) to authenticate the request, and to provide metadata about the authenticated user in the `X-MS-CLIENT-PRINCIPAL` HTTP header when using the option `StaticWebApps`. The authenticated user metadata provided by Static Web Apps can be referenced in the following documentation: [Accessing User Information](/azure/static-web-apps/user-information?tabs=csharp).
 
-To use the `StaticWebApps` provider you need to specify the following configuration in the `runtime.host` section of the configuration file:
+, you need to specify the following configuration in the `runtime.host` section of the configuration file:
 
 ```json
 "authentication": {
@@ -51,11 +51,11 @@ To use the JWT provider, you need to configure the `runtime.host.authentication`
 
 ## Roles selection
 
-Once a request has been authenticated via any of the available options, the roles defined in the token are used to help determine how permission rules are evaluated to [authorize](./authorization.md) the request. Any authenticated request is automatically assigned to the `authenticated` system role, unless a user role is requested to be used, as described in the [Authorization](./authorization.md) document.
+Once a request is authenticated via any of the available options, the roles defined in the token are used to help determine how permission rules are evaluated to [authorize](authorization.md) the request. Any authenticated request is automatically assigned to the `authenticated` system role, unless a user role is requested for use. For more information, see [authorization](authorization.md).
 
 ## Anonymous requests
 
-Requests can also be made without being authenticated. In such cases, the request is automatically assigned to the `anonymous` system role so that it can be properly [authorized](./authorization.md).
+Requests can also be made without being authenticated. In such cases, the request is automatically assigned to the `anonymous` system role so that it can be properly [authorized](authorization.md).
 
 ## Related content
 

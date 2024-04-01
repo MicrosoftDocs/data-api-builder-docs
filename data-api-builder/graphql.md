@@ -14,7 +14,7 @@ ms.date: 04/01/2024
 
 Entities configured to be available via GraphQL are available at the default path: `https://{base_url}//graphql`. Data API builder automatically generates a GraphQL schema with query and mutation fields for all configured entities. The GraphQL schema can be explored using a modern GraphQL client that includes features like autocomplete.
 
-If you followed the [Getting Started](./get-started/get-started-with-data-api-builder.md) example, where there are the `books` and the `authors` entity configured for GraphQL access, you can see how easy is to use GraphQL.
+If you followed the [Getting Started](get-started/get-started-with-data-api-builder.md) example, where there are the `books` and the `authors` entity configured for GraphQL access, you can see how easy is to use GraphQL.
 
 ## Result set format
 
