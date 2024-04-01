@@ -18,11 +18,11 @@ Data API builder requires .NET 6 to be installed on your machine. If you don't h
 
 ### Installing .NET 6 on Ubuntu 22
 
-Installing .NET 6 on Ubuntu 22 can be tricky as the .NET package are available both in the Ubuntu repo and also in the Microsoft repo, which can lead to conflicts. If you're having issues, and when executing `dotnet` on Linux if you have error like `A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist`  make sure to take a look at this post on StackOverflow: [How to install .NET 6 on Ubuntu 22](https://stackoverflow.com/questions/73753672/a-fatal-error-occurred-the-folder-usr-share-dotnet-host-fxr-does-not-exist?answertab=scoredesc#tab-top).
+Installing .NET 6 on Ubuntu 22 can be tricky as the .NET package are available both in the Ubuntu repo and also in the Microsoft repo, which can lead to conflicts. If you're having issues, and when executing `dotnet` on Linux if you have error like `A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist`  make sure to review this post on StackOverflow: [How to install .NET 6 on Ubuntu 22](https://stackoverflow.com/questions/73753672/a-fatal-error-occurred-the-folder-usr-share-dotnet-host-fxr-does-not-exist?answertab=scoredesc#tab-top).
 
 ## Using .NET tool
 
-Data API builder is distributed as a NuGet package and can be installed using the `dotnet tool` command. If you're having issues using `dotnet tool`, take a look at [Troubleshoot .NET tool usage issues](/dotnet/core/tools/troubleshoot-usage-issues)
+Data API builder is distributed as a NuGet package and can be installed using the `dotnet tool` command. If you're having issues using `dotnet tool`, review [Troubleshoot .NET tool usage issues](/dotnet/core/tools/troubleshoot-usage-issues)
 
 ## Data API Builder CLI
 

@@ -36,7 +36,7 @@ You configure the root path of the GraphQL and REST endpoints in the `runtime` s
 }
 ```
 
-In other words, the above runtime configuration defines what value you must use at the beginning of your path for the REST and GraphQL endpoints, respectively:
+In other words, the previous runtime configuration defines what value you must use at the beginning of your path for the REST and GraphQL endpoints, respectively:
 
 ```https
 /api/<entity>
@@ -129,7 +129,7 @@ The error message `The object type Query has to at least define one field in ord
 
 ## Introspection doesn't work with my GraphQL endpoint
 
-GraphQL schema introspection is utilized by tooling that supports GraphQL. Some examples of GraphQL capable tooling are Insomnia and Postman.
+GraphQL schema introspection is utilized by tooling that supports GraphQL.
 
 Make sure you set the runtime configuration property `allow-introspection` to `true` in the `runtime.graphql` configuration section. For example:
 
