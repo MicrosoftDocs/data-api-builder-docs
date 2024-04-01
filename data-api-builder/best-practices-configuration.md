@@ -12,11 +12,11 @@ ms.date: 04/01/2024
 
 # Configuration best practices in Data API builder
 
-This article includes the current recommended best practices for configuration in the Data API builder. This is not an exhaustive list of everything you must configure for your Data API builder solution.
+This article includes the current recommended best practices for configuration in the Data API builder. This article doesn't include an exhaustive list of everything you must configure for your Data API builder solution.
 
-## Name entity using PascalCasing
+## Name entities using Pascal casing
 
-When adding an entity to the configuration file, use PascalCasing, so that the generated GraphQL types are easier to read. For example, if you have an entity named `CompositeNameEntity` the generated GraphQL schema will have the following queries and mutations:
+When adding an entity to the configuration file, use PascalCasing, so that the generated GraphQL types are easier to read. For example, if you have an entity named `CompositeNameEntity` the generated GraphQL schema has the following queries and mutations:
 
 - Queries
   - `compositeNameEntities`
@@ -26,14 +26,11 @@ When adding an entity to the configuration file, use PascalCasing, so that the g
   - `updateCompositeNameEntity`
   - `deleteCompositeNameEntity`
 
-- If the entity is backed by a stored procedure, the generated query or mutation would be named:
-  - `executeCompositeNameEntity`
-
-which are easier and nicer to read.
+- If the entity maps to a stored procedure, the generated query or mutation would be named `executeCompositeNameEntity`, which is easier and nicer to read.
 
 ## Use singular form when naming entities
 
-When adding an entity to the configuration file, make sure to use the singular form for the name. Data API builder will automatically generate the plural form whenever a collection of that entity is returned. You can also manually provide singular and plural forms, by manually adding them to the configuration file: [Configuration file - GraphQL type](./configuration-file.md#graphql-type)
+When adding an entity to the configuration file, make sure to use the singular form for the name. Data API builder automatically generates the plural form whenever a collection of that entity is returned. You can also manually provide singular and plural forms, by manually adding them to the configuration file: [Configuration file - GraphQL type](./configuration-file.md#graphql-type)
 
 ## Related content
 

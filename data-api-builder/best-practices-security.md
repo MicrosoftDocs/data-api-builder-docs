@@ -12,11 +12,9 @@ ms.date: 04/01/2024
 
 # Security best practices in Data API builder
 
-This article includes the current recommended best practices for security in the Data API builder. This is not an exhaustive list of every security consideration for your Data API builder solution.
+This article includes the current recommended best practices for security in the Data API builder. This article doesn't include an exhaustive list of every security consideration for your Data API builder solution.
 
 ## Disable Legacy Versions of TLS at the Server Level
-
-### Background
 
 Data sent between a client and Data API builder should occur over a secure connection to protect sensitive or valuable information. A secure connection is typically established using Transport Layer Security (TLS) protocols.
 
@@ -34,7 +32,7 @@ One way to help configure TLS securely is **to disable usage of legacy versions 
 
 > To ensure .NET Framework applications remain secure, the TLS version should not be hardcoded. .NET Framework applications should use the TLS version the operating system (OS) supports.
 
-While explicitly defining supported TLS protocol versions for Kestrel is supported, doing so isn't recommended because such definitions translate to an allowlist, which prevents support for future TLS versions as they become available. More information about Kestrel's default TLS protocol version behavior can be found [here](/dotnet/core/compatibility/aspnet-core/5.0/kestrel-default-supported-tls-protocol-versions-changed).
+While explicitly defining supported TLS protocol versions for Kestrel is supported, doing so isn't recommended. These definitions translate to an allowlist, which prevents support for future TLS versions as they become available. More information about Kestrel's default TLS protocol version behavior can be found [here](/dotnet/core/compatibility/aspnet-core/5.0/kestrel-default-supported-tls-protocol-versions-changed).
 
 ### Platform Resources
 
@@ -43,7 +41,7 @@ TLS 1.2 is enabled by default on the latest versions of .NET and many of the lat
 #### Windows
 
 - Install .NET on Windows - [Microsoft Learn](/dotnet/core/install/windows?tabs=net60)
-- Enable support for TLS 1.2 in your environment - [Azure AD Guidance](/troubleshoot/azure/active-directory/enable-support-tls-environment?tabs=azure-monitor#enable-support-for-tls-12-in-your-environment)
+- Enable support for TLS 1.2 in your environment - [Microsoft Entra ID Guidance](/troubleshoot/azure/active-directory/enable-support-tls-environment?tabs=azure-monitor#enable-support-for-tls-12-in-your-environment)
 - TLS 1.2 support at Microsoft - [Microsoft Security Blog](https://www.microsoft.com/security/blog/2017/06/20/tls-1-2-support-at-microsoft/)
 
 #### macOS
