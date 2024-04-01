@@ -27,7 +27,7 @@ Use Data API builder with:
 
 This diagram breaks down the relationship between all of the components of the Data API builder.
 
-![Diagram that shows an overview of the Data API Builder architecture. The diagram includes schema files, abstractions, configuration files, and resulting GraphQL+REST endpoints.](./media/overview/architecture.png)
+![Diagram that shows an overview of the Data API Builder architecture. The diagram includes schema files, abstractions, configuration files, and resulting GraphQL+REST endpoints.](media/overview/architecture.png)
 
 ## Features
 

@@ -112,7 +112,7 @@ dab add Book -c "dab-config.MsSql.json" --source dbo.books --permissions "anonym
 Update the properties of any database entity in the configuration file.
 
 > [!NOTE]
-> `dab update` supports all the options that are supported by `dab add`. Additionally, it also supports the below listed options.
+> `dab update` supports all the options that are supported by `dab add`. Additionally, it also supports the listed options.
 
 #### Syntax
 

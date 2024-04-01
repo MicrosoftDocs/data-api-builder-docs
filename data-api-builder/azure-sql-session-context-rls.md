@@ -126,7 +126,7 @@ At the end of the demonstration, we see that only those rows are returned to the
 
 ### Laying down the ground work for `SESSION_CONTEXT` - SQL Queries
 
-We can execute the below SQL queries in the same order via SSMS or any other SQL client to lay the groundwork for SESSION_CONTEXT.
+We can execute the next SQL queries in the same order via SSMS or any other SQL client to lay the groundwork for SESSION_CONTEXT.
 
 #### Creating revenues table
 
