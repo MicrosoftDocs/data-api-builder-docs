@@ -74,7 +74,7 @@ query {
 
 The ability to query `List` of Scalars is now added for Cosmos DB.
 
-Consider the below type definition.
+Consider this type definition.
 
 ```graphql
 type Planet @model(name:"Planet") {

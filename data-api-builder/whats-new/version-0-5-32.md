@@ -17,7 +17,7 @@ The full list of release notes for this version is available on GitHub: <https:/
 
 A new option `--rest.path` is introduced in the `init` command to customize the path for REST APIs.
 
-```text
+```http
 dab init --database-type mssql --connection-string "Connection-String" --rest.path "rest-api" 
 ```
 
@@ -62,7 +62,7 @@ A GraphQL query that makes use of the defined fragment can be constructed as ill
 }
 ```
 
-For the above query, the result contains the following fields:
+For the previous query, the result contains the following fields:
 
 ```graphql
 {

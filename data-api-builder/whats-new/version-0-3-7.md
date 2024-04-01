@@ -28,13 +28,12 @@ The `source.key-fields` option is used to specify which fields from the view are
 Stored procedures are now supported for REST requests. If you have a stored procedure, for example [`dbo.stp_get_all_cowritten_books_by_author`](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-sql-db/library.azure-sql.sql#L141) it can be exposed using the following `dab` command:
 
 ```sh
-
 dab add GetCowrittenBooksByAuthor --source dbo.stp_get_all_cowritten_books_by_author --source.type "stored-procedure" --permissions "anonymous:read" --rest true
 ```
 
 The parameter can be passed in the URL query string when calling the REST endpoint:
 
-```text
+```http
 http://<dab-server>/api/GetCowrittenBooksByAuthor?author=isaac%20asimov
 ```
 
