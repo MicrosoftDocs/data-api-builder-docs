@@ -17,7 +17,7 @@ The full list of release notes for this version is available on GitHub: <https:/
 
 A new option is added to export GraphQL schema. This starts up the DAB server and then query it to get the schema before writing it to the location that is provided.
 
-```text
+```http
 dab export --graphql -c dab-config.development.json -o ./schemas
 ```
 
@@ -50,7 +50,7 @@ For example:
 }
 ```
 
-The above configuration for `Revenue` entity indicates that the user who is performing an insert operation with role `Authenticated` isn't allowed to create a record with revenue less than or equal to zero.
+The previous configuration for `Revenue` entity indicates that the user who is performing an insert operation with role `Authenticated` isn't allowed to create a record with revenue less than or equal to zero.
 
 ## Ability to configure GraphQL path and disable REST and GraphQL endpoints globally via CLI
 
@@ -62,7 +62,7 @@ We now support three more options for the `init` command:
 
 For example, an `init` command would generate a config file with a runtime section:
 
-```text
+```http
 dab init --database-type mssql --rest.disabled --graphql.disabled --graphql.path /gql
 ```
 
@@ -88,7 +88,7 @@ However, we still support views without having explicit primary keys specified i
 
 For example, a `dab add` command is used to add a view:
 
-```text
+```http
 dab add books_view --source books_view --source.type "view" --source.key-fields "id" --permissions "anonymous:*" --rest true --graphql true
 ```
 
