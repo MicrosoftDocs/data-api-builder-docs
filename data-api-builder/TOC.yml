@@ -37,10 +37,22 @@
   items:    
     - name: Environments
       href: environments.md
-    - name: Local authentication
-      href: local-authentication.md
     - name: Relationships
       href: relationships.md
+    - name: Authentication and authorization
+      items:
+      - name: Azure authentication
+        href: authentication-azure.md
+      - name: Local authentication
+        href: authentication-local.md
+      - name: Authorization
+        href: authorization.md
+    - name: Best practices
+      items:
+        - name: Security
+          href: best-practices-security.md
+        - name: Configuration
+          href: best-practices-configuration.md
 - name: Samples
   items:
   - name: Example configuration
@@ -250,16 +262,6 @@
       href: views-and-stored-procedures.md#stored-procedures
   - name: Application Insights
     href: use-application-insights.md
-  - name: Security
-    items:
-    - name: Authentication
-      href: authentication.md
-    - name: Microsoft Entra ID
-      href: authentication-azure-ad.md
-    - name: Authorization  
-      href: authorization.md
-    - name: Security considerations
-      href: security-considerations.md
   - name: Database-specific features
     items:
     - name: Azure Cosmos DB
@@ -272,8 +274,6 @@
     items:
     - name: Overview
       href: troubleshoot.md
-    - name: Best practices
-      href: best-practices.md  
     - name: Troubleshoot installation
       href: troubleshoot-installation.md
     - name: Troubleshoot usage

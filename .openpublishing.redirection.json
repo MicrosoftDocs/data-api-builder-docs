@@ -84,6 +84,26 @@
       "source_path_from_root": "/data-api-builder/database-connections.md",
       "redirect_url": "/azure/data-api-builder/reference-configuration#connection-string",
       "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/local-authentication.md",
+      "redirect_url": "/azure/data-api-builder/authentication-local",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/authentication-azure-ad.md",
+      "redirect_url": "/azure/data-api-builder/authentication-azure",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/security-considerations.md",
+      "redirect_url": "/azure/data-api-builder/best-practices-security",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/best-practices.md",
+      "redirect_url": "/azure/data-api-builder/best-practices-configuration",
+      "redirect_document_id": true
     }
   ]
 }
