@@ -248,8 +248,6 @@
       href: views-and-stored-procedures.md#views
     - name: Stored Procedures
       href: views-and-stored-procedures.md#stored-procedures
-    - name: Relationships  
-      href: relationships.md
   - name: Application Insights
     href: use-application-insights.md
   - name: Security
@@ -258,8 +256,6 @@
       href: authentication.md
     - name: Microsoft Entra ID
       href: authentication-azure-ad.md
-    - name: Local authentication
-      href: local-authentication.md
     - name: Authorization  
       href: authorization.md
     - name: Security considerations
