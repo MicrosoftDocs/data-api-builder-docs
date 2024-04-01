@@ -27,7 +27,7 @@ dab add BookDetail --source dbo.vw_books_details --source.type View --source.key
 > [!NOTE]
 > --source.key-fields is mandatory for views when generating config through the CLI.
 
-the `dab-config.json` file looks like the following:
+The `dab-config.json` file would be like the following example:
 
 ```json
 "BookDetail": {
@@ -64,7 +64,7 @@ If you have a stored procedure, for example [`dbo.stp_get_all_cowritten_books_by
 dab add GetCowrittenBooksByAuthor --source dbo.stp_get_all_cowritten_books_by_author --source.type "stored-procedure" source.params "searchType:s" --permissions "anonymous:execute" --rest.methods "get" --graphql.operation "query"
 ```
 
-the `dab-config.json` file looks like the following:
+The `dab-config.json` file would be like the following example:
 
 ```json
 "GetCowrittenBooksByAuthor": {
@@ -101,7 +101,7 @@ The `parameters` defines which parameters should be exposed and also provides de
 
 ### REST support for stored procedures
 
-The REST endpoint behavior, for stored procedure backed entity, can be configured to support one or multiple HTTP verbs (GET, POST, PUT, PATCH, DELETE). The REST section of the entity would look like the following:
+The REST endpoint behavior, for stored procedure backed entity, can be configured to support one or multiple HTTP verbs (GET, POST, PUT, PATCH, DELETE). The REST section of the entity would be like the following example:
 
 ```json
 "rest": {
@@ -170,7 +170,7 @@ type GetCowrittenBooksByAuthor {
 }
 ```
 
-In the schema, both query and mutation operations for stored procedures will have `execute` as a prefix. For the above stored procedure, the exact query name field generated would be `executeGetCowrittenBooksByAuthor`. The GraphQL type that is generated is:
+In the schema, both query and mutation operations for stored procedures will have `execute` as a prefix. For the previous stored procedure, the exact query name field generated would be `executeGetCowrittenBooksByAuthor`. The GraphQL type that is generated is:
 
 ```graphql
 type Query {
@@ -180,7 +180,7 @@ type Query {
 }
 ```
 
-Alternatively, `operation` can be set to `mutation` so that a mutation field represents the stored procedure in the GraphQL schema. The below `dab update` command can be used to change the `operation`:
+Alternatively, `operation` can be set to `mutation` so that a mutation field represents the stored procedure in the GraphQL schema. The `dab update` command can be used to change the `operation`:
 
 ```sh
 dab update GetCowrittenBooksByAuthor --graphql.operation "mutation"
