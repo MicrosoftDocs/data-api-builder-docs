@@ -104,6 +104,11 @@
       "source_path_from_root": "/data-api-builder/best-practices.md",
       "redirect_url": "/azure/data-api-builder/best-practices-configuration",
       "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/views-and-stored-procedures.md",
+      "redirect_url": "/azure/data-api-builder/database-objects",
+      "redirect_document_id": true
     }
   ]
 }
