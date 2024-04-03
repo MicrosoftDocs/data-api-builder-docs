@@ -6,11 +6,11 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 03/28/2024
+ms.date: 04/01/2024
 # Customer Intent: As a developer, I want to test authentication locally, so that I don't have to rely on authentication "just working" when published.
 ---
 
-# Local Authentication
+# Local Authentication in Data API builder
 
 When developing a solution using Data API builder locally, or when running Data API builder on-premises, you need to test the configured authentication and authorization options by simulating a request with a specific role or claim.
 
@@ -101,7 +101,7 @@ Static Web App's [authenticated user metadata](/azure/static-web-apps/user-infor
 
 In order to be passed with the `X-MS-CLIENT-PRINCIPAL` header, the JSON payload must be Base64-encoded. You can use any online or offline tool to do that. One such tool is [DevToys](https://github.com/veler/DevToys). A sample Base64-encoded payload that represents the JSON previously referenced:
 
-```text
+```http
 eyAgCiAgImlkZW50aXR5UHJvdmlkZXIiOiAidGVzdCIsCiAgInVzZXJJZCI6ICIxMjM0NSIsCiAgInVzZXJEZXRhaWxzIjogImpvaG5AY29udG9zby5jb20iLAogICJ1c2VyUm9sZXMiOiBbImF1dGhvciIsICJlZGl0b3IiXQp9
 ```
 
@@ -113,3 +113,8 @@ curl --request GET \
   --header 'X-MS-API-ROLE: author' \
   --header 'X-MS-CLIENT-PRINCIPAL: eyAgCiAgImlkZW50aXR5UHJvdmlkZXIiOiAidGVzdCIsCiAgInVzZXJJZCI6ICIxMjM0NSIsCiAgInVzZXJEZXRhaWxzIjogImpvaG5AY29udG9zby5jb20iLAogICJ1c2VyUm9sZXMiOiBbImF1dGhvciIsICJlZGl0b3IiXQp9'
 ```
+
+## Related content
+
+- [Azure authentication](authentication-azure.md)
+- [Authorization](authorization.md)

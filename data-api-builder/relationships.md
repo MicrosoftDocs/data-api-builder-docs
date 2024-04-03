@@ -103,7 +103,7 @@ dab update Series --relationship books --target.entity Book --cardinality many  
 
 The option `relationship.fields` allows you to define which fields are used from the entity being updated (`Series`), and which fields are used from the target entity (`Book`), to connect the data from one entity to the other.
 
-In the above sample, the `id` database field of the `Series` entity is matched with the database field `series_id` of the `Book` entity.
+In the previous sample, the `id` database field of the `Series` entity is matched with the database field `series_id` of the `Book` entity.
 
 The configuration also contains this information:
 
@@ -188,7 +188,7 @@ One business requirement that is likely to be there's to keep track of how royal
 
 The three entities can be visualized through the following diagram.
 
-![Diagram showing many-to-many relationship between authors, books_authors and books.](./media/relationship-many-to-many-01.png)
+![Diagram showing many-to-many relationship between authors, books_authors and books.](media/relationship-many-to-many-01.png)
 
 As visible, there are two bi-directional relationships:
 
@@ -243,9 +243,9 @@ Where you're asking to return all the authors, the book they wrote along with th
 
 The process described in the previous section works great if all the entities involved in the Many-to-Many relationships need to be accessed via GraphQL. This scenario isn't always the case. For example, if you don't need to keep track of royalties, the `BookAuthor` entity doesn't really bring any value to the end user. The entity was only used to associated books to their authors. In relational databases Many-to-Many relationships are created using such third table that *links* the tables participating in the Many-to-Many relationship together:
 
-![Diagram showing another many-to-many relationship between authors, books_authors and books.](./media/relationship-many-to-many-02.png)
+![Diagram showing another many-to-many relationship between authors, books_authors and books.](media/relationship-many-to-many-02.png)
 
-In the diagram above you can see that there's a table named `books_authors` that is linking authors with their books and books with their authors. This linking table doesn't need to be exposed to the end user. The linking table is just an artifact to allow the Many-to-Many relationship to exist, but Data API builder needs to know its existence in order to properly use it.
+In the diagram, you can see that there's a table named `books_authors` that is linking authors with their books and books with their authors. This linking table doesn't need to be exposed to the end user. The linking table is just an artifact to allow the Many-to-Many relationship to exist, but Data API builder needs to know its existence in order to properly use it.
 
 DAB CLI can be used to create the Many-to-Many relationship and also configure the linking object (make sure to remove all the relationships created in the previous section and start only with the `Book` and `Author` entity with no configured relationship between them already):
 
