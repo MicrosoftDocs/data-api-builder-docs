@@ -102,7 +102,7 @@
     },
     {
       "source_path_from_root": "/data-api-builder/known-issues.md",
-      "redirect_url": "/troubleshoot/azure/data-api-builder/known-issues",
+      "redirect_url": "https://github.com/azure/data-api-builder/labels/known-issue",
       "redirect_document_id": false
     }
   ]
