@@ -211,8 +211,15 @@
           href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
     - name: Functions
       href: reference-functions.md
-
-
+    - name: Trouble
+    - name: Troubleshooting
+      items:
+        - name: Installation
+          href: /troubleshoot/azure/data-api-builder/installation
+        - name: Usage
+          href: /troubleshoot/azure/data-api-builder/usage
+        - name: Known issues
+          href: https://github.com/azure/data-api-builder/labels/known-issue
 
 - name: In progress (rework)
   items:
@@ -236,16 +243,7 @@
           href: azure-sql-session-context-rls.md
         - name: Row Level Security
           href: azure-sql-session-context-rls.md#example-how-to-use-session_context-to-leverage-row-level-security-rls
-    - name: Troubleshooting
-      items:
-        - name: Overview
-          href: troubleshoot.md
-        - name: Troubleshoot installation
-          href: troubleshoot-installation.md
-        - name: Troubleshoot usage
-          href: troubleshoot-usage.md
-        - name: Known issues
-          href: known-issues.md
+
     - name: Internal Policies
       items:
         - name: Version Numbers
