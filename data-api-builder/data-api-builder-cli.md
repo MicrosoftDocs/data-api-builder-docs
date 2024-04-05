@@ -5,7 +5,7 @@ author: anagha-todalbagi
 ms.author: atodalbagi
 ms.service: data-api-builder
 ms.topic: cab-cli
-ms.date: 04/06/2023
+ms.date: 03/15/2024
 ---
 
 # About `dab` CLI
@@ -85,7 +85,7 @@ Add new database entity to the configuration file. Make sure you already have a 
 | **--source.key-fields** | true when  `--source.type`  is view | - | true | String | The field(s) to be used as primary keys for tables and views only. Comma separated values. Example `--source.key-fields "id,name,type"`. | 
 | **--rest** | false | case sensitive entity name. | true | String | Route for REST API. Example: <br>`--rest: false` -> Disables REST API  calls for this entity.<br>`--rest: true` -> Entity name becomes the rest path. <br>`--rest: "customPathName"` -> Provided customPathName becomes the REST path.| 
 | **--rest.methods** | false | post | true | String | HTTP actions to be supported for stored procedure. Specify the actions as a comma separated list. Valid HTTP actions are:[get, post, put, patch, delete]. | 
-| **--graphql** | false | case sensitive entity name | true | Bool/String | Entity type exposed for GraphQL. Example: <br>`--graphql: false` -> disables graphql calls for this entity. <br>`--graphql: true` -> Exposes the entity for GraphQL with default names. The singular form of the entity name is considered for the query and mutation names. <br>`--graphql: "customQueryName"` -> Lets the user customize the singular and plural name for queries and mutations. | 
+| **--graphql** | false | case sensitive entity name | true | Bool/String | Entity type exposed for GraphQL. Example: <br>`--graphql: false` -> disables graphql calls for this entity. <br>`--graphql: true` -> Exposes the entity for GraphQL with default names. The singular form of the entity name is considered for the query and mutation names. <br>`--graphql: "customQueryName"` -> Explicitly sets the singular value while DAB pluralizes the provided value for queries and mutations. <br>`--graphql: "singularName:pluralName"` -> Sets both the singular and plural values (delimited by a colon `:`) used for queries and mutations. | 
 | **--graphql.operation** | false | mutation | true | String | GraphQL operation to be supported for stored procedure. Valid operations are: [query, mutation]. | 
 | **--fields.include** | false | - | true | String | Fields with permission to access. | 
 | **--fields.exclude** | false | - | true | String | Fields excluded from the action lists. | 
