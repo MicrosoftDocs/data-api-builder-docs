@@ -215,9 +215,9 @@
     - name: Troubleshooting
       items:
         - name: Installation
-          href: /troubleshoot/azure/data-api-builder/installation
+          href: /troubleshoot/azure/data-api-builder/installation?context=/azure/data-api-builder/context/context
         - name: Usage
-          href: /troubleshoot/azure/data-api-builder/usage
+          href: /troubleshoot/azure/data-api-builder/usage?context=/azure/data-api-builder/context/context
         - name: Known issues
           href: https://github.com/azure/data-api-builder/labels/known-issue
 
