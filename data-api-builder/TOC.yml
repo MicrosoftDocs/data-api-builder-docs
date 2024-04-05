@@ -87,12 +87,13 @@
               href: reference-configuration.md#schema
             - name: Data source
               href: reference-configuration.md#data-source
-            - name: Database type
-              href: reference-configuration.md#database-type
-            - name: Connection string
-              href: reference-configuration.md#connection-string
-            - name: Options
-              href: reference-configuration.md#options
+              items:
+                - name: Database type
+                  href: reference-configuration.md#database-type
+                - name: Connection string
+                  href: reference-configuration.md#connection-string
+                - name: Options
+                  href: reference-configuration.md#options
             - name: Data source files
               href: reference-configuration.md#data-source-files
             - name: Runtime
@@ -199,12 +200,12 @@
                       href: reference-configuration.md#linking-source-fields
                     - name: Linking target fields
                       href: reference-configuration.md#linking-target-fields
-                - name: Cache (entities)
+                - name: Cache
                   href: reference-configuration.md#cache-entities
                   items:
-                    - name: Enabled (Cache entity)
+                    - name: Enabled
                       href: reference-configuration.md#enabled-cache-entity
-                    - name: Time-to-live in seconds (Cache entity)
+                    - name: Time-to-live in seconds
                       displayName: TTL
                       href: reference-configuration.md#ttl-in-seconds-cache-entity
                 - name: Permissions
