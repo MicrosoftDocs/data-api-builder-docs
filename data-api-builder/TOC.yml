@@ -231,7 +231,6 @@
           href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
     - name: Functions
       href: reference-functions.md
-    - name: Trouble
     - name: Troubleshooting
       items:
         - name: Installation
