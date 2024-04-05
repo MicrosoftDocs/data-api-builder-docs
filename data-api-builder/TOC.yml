@@ -87,126 +87,146 @@
               href: reference-configuration.md#schema
             - name: Data source
               href: reference-configuration.md#data-source
-            - name: Database type
-              href: reference-configuration.md#database-type
-            - name: Connection string
-              href: reference-configuration.md#connection-string
-            - name: Options
-              href: reference-configuration.md#options
+              items:
+                - name: Database type
+                  href: reference-configuration.md#database-type
+                - name: Connection string
+                  href: reference-configuration.md#connection-string
+                - name: Options
+                  href: reference-configuration.md#options
             - name: Data source files
               href: reference-configuration.md#data-source-files
             - name: Runtime
               href: reference-configuration.md#runtime
-            - name: GraphQL (runtime)
-              href: reference-configuration.md#graphql-runtime
-            - name: Enabled (GraphQL runtime)
-              href: reference-configuration.md#enabled-graphql-runtime
-            - name: Path (GraphQL runtime)
-              href: reference-configuration.md#path-graphql-runtime
-            - name: Allow introspection (GraphQL runtime)
-              href: reference-configuration.md#allow-introspection-graphql-runtime
-            - name: REST (runtime)
-              href: reference-configuration.md#rest-runtime
-            - name: Enabled (REST runtime)
-              href: reference-configuration.md#enabled-rest-runtime
-            - name: Path (REST runtime)
-              href: reference-configuration.md#path-rest-runtime
-            - name: Request body strict (REST runtime)
-              href: reference-configuration.md#request-body-strict-rest-runtime
-            - name: Host (runtime)
-              href: reference-configuration.md#host-runtime
-            - name: Mode (Host runtime)
-              href: reference-configuration.md#mode-host-runtime
-            - name: CORS (Host runtime)
-              href: reference-configuration.md#cors-host-runtime
-            - name: Allow credentials (Host runtime)
-              href: reference-configuration.md#allow-credentials-host-runtime
-            - name: Origins (Host runtime)
-              href: reference-configuration.md#origins-host-runtime
-            - name: Authentication (Host runtime)
-              href: reference-configuration.md#authentication-host-runtime
-            - name: Provider (Host runtime)
-              href: reference-configuration.md#provider-host-runtime
-            - name: JSON Web Tokens (Host runtime)
-              href: reference-configuration.md#json-web-tokens-host-runtime
-            - name: Audience (Host runtime)
-              href: reference-configuration.md#audience-host-runtime
-            - name: Issuer (Host runtime)
-              href: reference-configuration.md#issuer-host-runtime
-            - name: Cache (runtime)
-              href: reference-configuration.md#cache-runtime
-            - name: Enabled (Cache runtime)
-              href: reference-configuration.md#enabled-cache-runtime
-            - name: Time-to-live in seconds (Cache runtime)
-              href: reference-configuration.md#ttl-in-seconds-cache-runtime
+              items:
+                - name: GraphQL
+                  displayName: API
+                  href: reference-configuration.md#graphql-runtime
+                  items:
+                    - name: Enabled
+                      href: reference-configuration.md#enabled-graphql-runtime
+                    - name: Path
+                      href: reference-configuration.md#path-graphql-runtime
+                    - name: Allow introspection
+                      href: reference-configuration.md#allow-introspection-graphql-runtime
+                - name: REST
+                  displayName: API
+                  href: reference-configuration.md#rest-runtime
+                  items:
+                    - name: Enabled
+                      href: reference-configuration.md#enabled-rest-runtime
+                    - name: Path
+                      href: reference-configuration.md#path-rest-runtime
+                    - name: Request body strict
+                      href: reference-configuration.md#request-body-strict-rest-runtime
+                - name: Host
+                  href: reference-configuration.md#host-runtime
+                  items:
+                    - name: Mode
+                      href: reference-configuration.md#mode-host-runtime
+                    - name: CORS
+                      href: reference-configuration.md#cors-host-runtime
+                    - name: Allow credentials
+                      href: reference-configuration.md#allow-credentials-host-runtime
+                    - name: Origins
+                      href: reference-configuration.md#origins-host-runtime
+                    - name: Authentication
+                      href: reference-configuration.md#authentication-host-runtime
+                    - name: Provider
+                      href: reference-configuration.md#provider-host-runtime
+                    - name: JSON Web Tokens
+                      displayName: JWT
+                      href: reference-configuration.md#json-web-tokens-host-runtime
+                    - name: Audience
+                      href: reference-configuration.md#audience-host-runtime
+                    - name: Issuer
+                      href: reference-configuration.md#issuer-host-runtime
+                - name: Cache
+                  href: reference-configuration.md#cache-runtime
+                  items:
+                    - name: Enabled
+                      href: reference-configuration.md#enabled-cache-runtime
+                    - name: Time-to-live in seconds
+                      displayName: TTL
+                      href: reference-configuration.md#ttl-in-seconds-cache-runtime
             - name: Entities
               href: reference-configuration.md#entities
-            - name: Source
-              href: reference-configuration.md#source
-            - name: Object
-              href: reference-configuration.md#object
-            - name: Type (entities)
-              href: reference-configuration.md#type-entities
-            - name: Key fields
-              href: reference-configuration.md#key-fields
-            - name: Parameters
-              href: reference-configuration.md#parameters
-            - name: Permissions
-              href: reference-configuration.md#permissions
-            - name: Role
-              href: reference-configuration.md#role
-            - name: Actions (string-array)
-              href: reference-configuration.md#actions-string-array
-            - name: Actions (object-array)
-              href: reference-configuration.md#actions-object-array
-            - name: Action
-              href: reference-configuration.md#action
-            - name: Fields
-              href: reference-configuration.md#fields
-            - name: Policy
-              href: reference-configuration.md#policy
-            - name: Database
-              href: reference-configuration.md#database
-            - name: GraphQL (entities)
-              href: reference-configuration.md#graphql-entities
-            - name: Type (GraphQL entity)
-              href: reference-configuration.md#type-graphql-entity
-            - name: Operation (GraphQL entity)
-              href: reference-configuration.md#operation-graphql-entity
-            - name: Enabled (GraphQL entity)
-              href: reference-configuration.md#enabled-graphql-entity
-            - name: REST (entities)
-              href: reference-configuration.md#rest-entities
-            - name: Enabled (REST entity)
-              href: reference-configuration.md#enabled-rest-entity
-            - name: Path (REST entity)
-              href: reference-configuration.md#path-rest-entity
-            - name: Methods (REST entity)
-              href: reference-configuration.md#methods-rest-entity
-            - name: Mappings (entities)
-              href: reference-configuration.md#mappings-entities
-            - name: Relationships (entities)
-              href: reference-configuration.md#relationships-entities
-            - name: Cardinality
-              href: reference-configuration.md#cardinality
-            - name: Target entity
-              href: reference-configuration.md#target-entity
-            - name: Source fields
-              href: reference-configuration.md#source-fields
-            - name: Target fields
-              href: reference-configuration.md#target-fields
-            - name: Linking object or entity
-              href: reference-configuration.md#linking-object-or-entity
-            - name: Linking source fields
-              href: reference-configuration.md#linking-source-fields
-            - name: Linking target fields
-              href: reference-configuration.md#linking-target-fields
-            - name: Cache (entities)
-              href: reference-configuration.md#cache-entities
-            - name: Enabled (Cache entity)
-              href: reference-configuration.md#enabled-cache-entity
-            - name: Time-to-live in seconds (Cache entity)
-              href: reference-configuration.md#ttl-in-seconds-cache-entity
+              items:
+                - name: REST
+                  href: reference-configuration.md#rest-entities
+                  items:
+                    - name: Enabled
+                      href: reference-configuration.md#enabled-rest-entity
+                    - name: Path
+                      href: reference-configuration.md#path-rest-entity
+                    - name: Methods
+                      href: reference-configuration.md#methods-rest-entity
+                - name: GraphQL
+                  href: reference-configuration.md#graphql-entities
+                  items:
+                    - name: Enabled
+                      href: reference-configuration.md#enabled-graphql-entity
+                    - name: Type
+                      href: reference-configuration.md#type-graphql-entity
+                    - name: Operation
+                      href: reference-configuration.md#operation-graphql-entity
+                - name: Source
+                  href: reference-configuration.md#source
+                  items:
+                    - name: Object
+                      href: reference-configuration.md#object
+                    - name: Type
+                      href: reference-configuration.md#type-entities
+                    - name: Key fields
+                      href: reference-configuration.md#key-fields
+                    - name: Parameters
+                      href: reference-configuration.md#parameters
+                - name: Mappings
+                  href: reference-configuration.md#mappings-entities
+                - name: Relationships
+                  href: reference-configuration.md#relationships-entities
+                  items:
+                    - name: Cardinality
+                      href: reference-configuration.md#cardinality
+                    - name: Target entity
+                      href: reference-configuration.md#target-entity
+                    - name: Source fields
+                      href: reference-configuration.md#source-fields
+                    - name: Target fields
+                      href: reference-configuration.md#target-fields
+                    - name: Linking object or entity
+                      href: reference-configuration.md#linking-object-or-entity
+                    - name: Linking source fields
+                      href: reference-configuration.md#linking-source-fields
+                    - name: Linking target fields
+                      href: reference-configuration.md#linking-target-fields
+                - name: Cache
+                  href: reference-configuration.md#cache-entities
+                  items:
+                    - name: Enabled
+                      href: reference-configuration.md#enabled-cache-entity
+                    - name: Time-to-live in seconds
+                      displayName: TTL
+                      href: reference-configuration.md#ttl-in-seconds-cache-entity
+                - name: Permissions
+                  href: reference-configuration.md#permissions
+                  items:
+                    - name: Role
+                      href: reference-configuration.md#role
+                    - name: Actions (string-array)
+                      href: reference-configuration.md#actions-string-array
+                    - name: Actions (object-array)
+                      href: reference-configuration.md#actions-object-array
+                      items:
+                        - name: Action
+                          href: reference-configuration.md#action
+                    - name: Fields
+                      href: reference-configuration.md#fields
+                    - name: Policy
+                      href: reference-configuration.md#policy
+                      items:
+                        - name: Database
+                          href: reference-configuration.md#database
         - name: JSON Schema
           href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
     - name: Functions
@@ -218,8 +238,6 @@
   items:
     - name: Running Data API builder
       items:
-        - name: Local Development
-          href: local-development.md
         - name: Run in a container
           href: run-using-container.md
         - name: Run from source code
@@ -232,10 +250,8 @@
       items:
         - name: Azure Cosmos DB
           href: database-specific-features.md
-        - name: SQL Session Context
+        - name: SQL Session Context and Row Level Security
           href: azure-sql-session-context-rls.md
-        - name: Row Level Security
-          href: azure-sql-session-context-rls.md#example-how-to-use-session_context-to-leverage-row-level-security-rls
     - name: Troubleshooting
       items:
         - name: Overview
