@@ -138,6 +138,7 @@
             - name: Enabled (Cache runtime)
               href: reference-configuration.md#enabled-cache-runtime
             - name: Time-to-live in seconds (Cache runtime)
+              displayName: TTL
               href: reference-configuration.md#ttl-in-seconds-cache-runtime
             - name: Entities
               href: reference-configuration.md#entities
@@ -206,6 +207,7 @@
             - name: Enabled (Cache entity)
               href: reference-configuration.md#enabled-cache-entity
             - name: Time-to-live in seconds (Cache entity)
+              displayName: TTL
               href: reference-configuration.md#ttl-in-seconds-cache-entity
         - name: JSON Schema
           href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
