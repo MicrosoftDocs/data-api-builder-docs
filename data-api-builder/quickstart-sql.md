@@ -1,405 +1,108 @@
 ---
-title: Quickstart to Data API builder for Azure SQL Database 
-description: This quickstart will help you use Data API builder with Azure SQL.
-author: anagha-todalbagi
-ms.author: atodalbagi
+title: |
+  Quickstart: Use with Azure SQL
+description: Deploy an Azure Developer CLI template that uses Data API builder with Azure Static Web apps and Azure SQL.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: quickstart
-ms.date: 02/22/2023
+ms.date: 04/08/2024
+# Customer Intent: As a developer, I want to get started using Data API builder quickly, so that I can evaluate the tool.
 ---
 
-# Quickstart: Use Data API builder with Azure SQL
+# Quickstart: Use Data API builder with Azure SQL and Azure Static Web Apps
 
-Make sure you have read the [Get Started](./get-started-with-data-api-builder.md) document.
+In this Quickstart, you deploy an Azure Developer CLI (AZD) template. The template deploys an Azure Static Web App that hosts the Data API builder using it's **database connections** feature. The template also includes a sample application that you can use as a starting point for your solutions.
 
-As mentioned before, this tutorial assumes that you already have a SQL Server or an Azure SQL database that can be used as playground.
+## Prerequisites
 
-## Create a sample database
-
-If you don't have a SQL Server or Azure SQL database, you can create one in Azure. You can use the Azure Portal or the Azure CLI. More details here: [Quickstart: Create a single database - Azure SQL Database](/azure/azure-sql/database/single-database-create-quickstart?view=azuresql&tabs=azure-portal&preserve-view=true)
-
-## Get the database connection string
-
-There are several ways to get an Azure SQL database connection string. More details here: [Azure SQL Database and Azure SQL Managed Instance connect and query articles](/azure/azure-sql/database/connect-query-content-reference-guide?view=azuresql&preserve-view=true)
-
-If you're connecting to Azure SQL DB, Azure SQL MI, or SQL Server, the connection string looks like:
-
-```text
-Server=<server-address>;Database=<database-name>;User ID=<user-d>;Password=<password>;
-```
-
-To connect to a local SQL Server, for example:
-
-```text
-Server=localhost;Database=Library;User ID=dab_user;Password=<password>;TrustServerCertificate=true
-```
-
-> [!NOTE]
-> User IDs and passwords specified here are recommended for sample purpose only. For details, refer [Azure Active Directory authentication](/azure/azure-sql/database/authentication-aad-overview?view=azuresql&preserve-view=true).
-
-More details on Azure SQL and SQL Server connection strings can be found here: [/sql/connect/ado-net/connection-string-syntax]
-
-## Create the database objects
-
-Create the database tables needed to represent Authors, Books and the many-to-many relationship between Authors and Books. You can find the `library.azure-sql.sql` script in the `azure-sql-db` folder in the source code [GitHub repo](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-sql-db/exercise/exercise-library.azure-sql.sql). You can use it to create three tables, along with sample data:
-
-- `dbo.authors`: Table containing authors
-- `dbo.books`: Table containing books
-- `dbo.books_authors`: Table associating books with respective authors
-
-Execute the script in the SQL Server or Azure SQL database you decided to use, so that the tables with sample data are created and populated.
-
-## Creating a configuration file for DAB
-
-The Data API builder for Azure Databases engine needs a [configuration file](../configuration-file.md). There you'll define which database DAB connects to, and which entities are to be exposed by the API, together with their properties.
-
-For this getting started guide, you'll use DAB CLI to initialize your configuration file. Run the following command:
-
-```bash
-dab init --database-type "mssql" --connection-string "Server=localhost;Database=PlaygroundDB;User ID=PlaygroundUser;Password=<Password>;TrustServerCertificate=true" --host-mode "Development"
-```
-
-Make sure to replace the placehoders (`<database-name>`, `<user>` and `<password>`) with the correct values for your database.
-
-The command generates a config file called `dab-config.json` looking like this:
-
-```json
-{
-  "$schema": "dab.draft-01.schema.json",
-  "data-source": {
-    "database-type": "mssql",
-    "connection-string": "Server=localhost;Database=PlaygroundDB;User ID=PlaygroundUser;Password=ReplaceMe;TrustServerCertificate=true"
-  },
-  "mssql": {
-    "set-session-context": true
-  },
-  "runtime": {
-    "rest": {
-      "enabled": true,
-      "path": "/api"
-    },
-    "graphql": {
-      "allow-introspection": true,
-      "enabled": true,
-      "path": "/graphql"
-    },
-    "host": {
-      "mode": "development",
-      "cors": {
-        "origins": [],
-        "allow-credentials": false
-      },
-      "authentication": {
-        "provider": "StaticWebApps"
-      }
-    }
-  },
-  "entities": {}
-}
-```
-
-As you can see there the `data-source` property specifies that our chosen `database-type` is `mssql`, with the `connection-string` we passed to DAB CLI.
-
->Take a look at the [DAB Configuration File Guide](../configuration-file.md) document to learn more.
-
-With the configuration file in place, then it's time to start defining which entities you want to expose via the API.
-
-## Add Book and Author entities
-
-Now, you'll want to expose the `dbo.books` and the `dbo.authors` table as REST or GraphQL endpoints. To do that, add the following information to the `entities` section of the configuration file.
-
-You can do this either using the CLI:
-
-```bash
-dab add Author --source dbo.authors --permissions "anonymous:*"
-```
-
-or by adding the `Author` entity manually to the config file:
-
-```json
-"entities": {
-  "Author": {
-    "source": "dbo.authors",
-    "permissions": [
-      {
-        "actions": ["*"],
-        "role": "anonymous"
-      }
-    ]
-  }
-}
-```
-
-within the `entities` object you can create any entity with any name (as long as it's valid for REST and GraphQL). The name `Author`, in this case, is used to build the REST path and the GraphQL type. Within the entity, you have the `source` element that specifies which table contains the entity data. In our case is `dbo.authors`.
-
-> [!NOTE]
-> Entity names are case sensitive, and they will be exposed via REST and GraphQL as you have typed them. Take a look at the [Best Practices](../best-practices.md) document to learn the best practices on entity names.
-
-After that, the permissions for the exposed entity are defined via the `permission` element; it allows you to be sure that only those users making a request with the right claims will be able to access the entity and its data. In this getting started tutorial, we're allowing anyone, without the need to be authenticated, to perform all the CRUD operations to the `Author` entity.
-
-> [!NOTE]
-> The aforementioned permissions settings are only to be used for learning purposes. We do not recommend that unauthenticated entities are allowed to perform CRUD operations on a database in a production environment, as this poses a security risk. To read more on security baselines, go to [Azure security baseline for Azure SQL](/security/benchmark/azure/baselines/azure-sql-security-baseline)
-
-You can also add the `Book` entity now, applying the same concepts you just learned for the `Author` entity. Once you've added the `Author` entity, the `entities` object of configuration file looks like the following:
-
-```json
-"entities": {
-    "Author": {
-      "source": "dbo.authors",
-      "permissions": [
-        {
-          "actions": ["*"],
-          "role": "anonymous"
-        }
-      ]
-    },
-    "Book": {
-      "source": "dbo.books",
-      "permissions": [
-        {
-          "actions": ["*"],
-          "role": "anonymous"
-        }
-      ]
-    }
-  }
-```
-
-that's all is needed at the moment. Data API builder is ready to be run.
+- Azure subscription. If you don't have an Azure subscription, create a free [trial account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)
+- [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [Azure Developer CLI](https://github.com/MicrosoftDocs/azure-docs-pr/blob/main/azure/developer/azure-developer-cli/install-azd)
 
 > [!TIP]
-> We recommend that you use the *singular* form for entity names. For GraphQL, the Data API builder engine will automatically use the correct plural form to generate the final GraphQL schema whenever a *list* of entity items will be returned. More on this behavior in the [GraphQL documentation](../graphql.md).
+> Alternatively, open this Quickstart in GitHub Codespaces with all developer prerequisites already installed. Simply bring your own Azure subscription. GitHub accounts include an entitlement of storage and core hours at no cost. For more information, see [included storage and core hours for GitHub accounts](https://docs.github.com/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts).
+>
+> [![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=brightgreen&logo=github)](https://codespaces.new/Azure-Samples/dab-azure-sql-quickstart?template=true&quickstart=1)
 
-> [!TIP]
-> We recommend that you use Pascal Casing for entity names so that the generated GraphQL types, queries, and mutations will be easier to read.
+## Deploy the template
 
-## Start Data API builder for Azure SQL Database
+First, deploy all of the required services using the AZD template.
 
-You're ready to serve your API. Run the below command (this starts the engine with default config `dab-config.json`, use option --config otherwise):
+1. Open a terminal in the root directory of the project.
 
-```bash
-dab start
-```
+1. Authenticate to the Azure Developer CLI using `azd auth login`. Follow the steps specified by the tool to authenticate to the CLI using your preferred Azure credentials.
 
-when you see something like:
+    ```azurecli
+    azd auth login
+    ```
 
-```text
-info: Azure.DataApiBuilder.Service.Startup[0]
-      Successfully completed runtime initialization.
-info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://localhost:5000
-info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: https://localhost:5001
-info: Microsoft.Hosting.Lifetime[0]
-      Application started. Press Ctrl+C to shut down.
-```
+1. Use `azd init` to initialize the project.
 
-you're good to go, Data API Builder is up and running, ready to serve your requests.
+    ```azurecli
+    azd init --template dab-azure-sql-quickstart
+    ```
 
-## Query the endpoints
+    > [!IMPORTANT]
+    > If you are running in GitHub Codespaces, you can safely omit the `--template` argument since the code has already been cloned to your environment.
 
-Now that Data API builder engine is running, you can use your favorite REST client (Postman or Insomnia, for example) to query the REST or the GraphQL endpoints.
+1. During initialization, configure a unique environment name.
 
-### REST Endpoint
+    > [!TIP]
+    > The environment name will also be used as the target resource group name. For this quickstart, consider using `msdocs-dab-*`.
 
-REST endpoint is made available at the path (make sure to keep in mind that the url path is treated as case sensitive and must match the entity and path names defined in the configuration file):
+1. Deploy the Azure Static Web Apps solution using `azd up`. The Bicep templates deploy an **Azure SQL database** along with the supporting database, storage, identity, and host services. A sample web application is deployed to the web host.
 
-```text
-/api/<entity>
-```
+    ```azurecli
+    azd up
+    ```
 
-so if you want to get a list of all the available books you can run this GET request:
+1. During the provisioning process, select your subscription and desired location. Wait for the provisioning process to complete. The process can take **approximately five minutes**.
 
-```text
-/api/Book
-```
+1. Once the provisioning of your Azure resources is done, the template outputs a **SUCCESS** message along with the duration of the run.
 
-The following HTTP verbs are supported:
+    ```output
+    SUCCESS: Your application was provisioned and deployed to Azure in 5 minutes 0 seconds.
+    ```
 
-- `GET`: return one or more items
-- `POST`: create a new item
-- `PUT` & `PATCH`: update or create an item
-- `DELETE`: delete an item
+## Configure the database connection
 
-Whenever you need to access a single item, you can get the item you want through a `GET` request by specifying its primary key:
+Now, use the **database connections** feature of Azure Static Web Apps to create a connection between the deployed static web app and the deployed database. This feature uses Data API builder seamlessly to create a connection to a running Azure SQL database using the credentials you specify.
 
-```text
-/api/Book/id/1000
-```
+1. Navigate to the **Azure Static Web App** resource in the Azure portal.
 
-The ability to filter by primary key is supported by all verbs except for POST as that verb is used to create a new item and therefore searching an item by its primary key isn't applicable.
+1. Configure the static web app to add a **Database Connection** to the Azure SQL database using these settings. Then, select **Link**.
 
-The GET verb also supports several query parameters (also case sensitive) that allow you to manipulate and refine the requested data:
+    | | Value |
+    | --- | --- |
+    | **Database type** | `Azure SQL Database` |
+    | **Subscription** | *Select the subscription you used for the AZD deployment* |
+    | **Resource group** | *Select the resource group (environment) you used for the AZD deployment* |
+    | **Resource name** | *Select the only SQL server resource with a prefix of `srvr-*`* |
+    | **Database name** | `adventureworkslt` |
+    | **Authentication type** | `User-assigned managed identity` |
+    | **User-assigned managed identity** | *Select the only managed identity resource with a prefix of `ua-id-*` |
 
-- `$orderby`: return items in the specified order
-- `$first`: the top `n` items to return
-- `$filter`: expression to filter the returned items
-- `$select`:  list of field names to be returned
+    :::image type="content" source="media/quickstart/database-connection-config.png" alt-text="Screenshot of the running web application on Azure Static Web Apps.":::
 
-For more information on how they can be used, see the [REST documentation](../rest.md)
+1. Now, select the **Browse** option on the resource page to observe running web application.
 
-### GraphQL endpoint
+    :::image type="content" source="media/quickstart/running-application.png" alt-text="Screenshot of the running web application on Azure Static Web Apps.":::
 
-GraphQL endpoint is available at
+## Clean up
 
-```text
-/graphql
-```
+When you no longer need the sample application or resources, remove the corresponding deployment and all resources.
 
-Use a GraphQL-capable REST client like Postman or Insomnia to query the database using full GraphQL introspection capabilities, to get intellisense and validation. For example:
+1. Remove the deployment from your Azure subscription.
 
-```graphql
-{
-  books(first: 5, orderBy: { title: DESC }) {
-    items {
-      id
-      title
-    }
-  }
-}
-```
+    ```azurecli
+    azd down
+    ```
 
-returns the first five books ordered by title in descending order.
+1. Delete the running codespace to maximize your storage and core entitlements if you're using GitHub Codespaces.
 
-## Adding entities relationships
+## Next step
 
-Everything is now up and working, and now you probably want to take advantage as much as possible of GraphQL capabilities to handle complex queries by sending just one request. For example, you may want to get all the Authors in your library along with the Books they've written. In order to achieve that, you need to let Data API Builder know that you want such relationship to be available to be used in queries.
-
-Stop the engine (`Ctrl+C`).
-
-Relationships are also defined in the configuration file, via the `relationships` section. Relationships must be defined on each entity where you want to have them. For example to create a relationship between a Book and its Authors, you can use the following DAB CLI command:
-
-```bash
-dab update Author --relationship "books" --cardinality "many" --target.entity "Book" --linking.object "dbo.books_authors"
-```
-
-which creates the `relationships` section in the `Author` entity:
-
-```json
-"relationships": {
-  "books": {
-    "cardinality": "many",
-    "target.entity": "Book",
-    "linking.object": "dbo.books_authors"
-  }
-}
-```
-
-The element under `relationship` is used to add a field - `books` in the sample - to the generated GraphQL object, so that one can navigate the relationship between an Author and their Books. Within the `books` element there are three fields:
-
-- `cardinality`: set to `many` as an author can be associated with more than one book
-- `target.entity`: Which entity, defined in the same configuration file, will be used in this relationship. For this sample is `book` as we're creating the relationship on the `Author` entity.
-- `linking.object`: the database table used to support the many-to-many relationship. That table is the `dbo.books_authors`.
-
-Data API Builder will automatically figure out what are the columns that are used to support the relationship between all the involved parts by analyzing the foreign key constraints that exist between the involved tables. For this reason, the configuration is done! (If you don't have foreign keys you can always manually specify the columns you want to use to navigate from one table to another. More on this in the [relationships documentation](../relationships.md))
-
-The `author` entity should now look like the following:
-
-```json
-"Author": {
-  "source": "dbo.authors",
-  "permissions": [
-    {
-      "actions": [ "*" ],
-      "role": "anonymous"
-    }
-  ],
-  "relationships": {
-    "books": {
-      "cardinality": "many",
-      "target.entity": "Book",
-      "linking.object": "dbo.books_authors"
-    }
-  }
-},
-```
-
-as we also want to enable querying a book and getting its authors, we also need to make a similar change to the book entity:
-
-```bash
-dab update Book --relationship "authors" --cardinality "many" --target.entity "Author" --linking.object "dbo.books_authors"
-```
-
-that updates the configuration file so that the `book` entity looks like the following code:
-
-```json
-"Book": {
-  "source": "dbo.books",
-  "permissions": [
-    {
-      "actions": [ "*" ],
-      "role": "anonymous"
-    }
-  ],
-  "relationships": {
-    "authors": {
-      "cardinality": "many",
-      "target.entity": "Author",
-      "linking.object": "dbo.books_authors"
-    }
-  }
-}
-```
-
-Once this is done, you can now restart the Data API builder engine, and using GraphQL you can now execute queries like:
-
-```graphql
-{
-  books(filter: { title: { eq: "Nightfall" } })
-  {
-    items {
-      id
-      title
-      authors {
-        items {
-          first_name
-          last_name
-        }
-      }
-    }
-  }
-}
-```
-
-that returns all the authors of "Nightfall" book, or like:
-
-```graphql
-{
-  authors(
-    filter: {
-        and: [
-          { first_name: { eq: "Isaac" } }
-          { last_name: { eq: "Asimov" } }
-        ]
-    }
-  ) {
-    items {
-      first_name
-      last_name
-      books {
-        items {
-          title
-        }
-      }
-    }
-  }
-}
-```
-
-that returns all the books written by Isaac Asimov.
-
-Congratulations, you've now created a fully working backend to support your modern applications!
-
-## Next steps
-
-## Exercise
-
-If you want to practice what you have learned, here's a little exercise you can do on your own
-
-- Using the database setup script available in the source code repo [exercise folder](https://github.com/Azure/data-api-builder/tree/main/samples/getting-started/azure-sql-db/exercise/exercise.library.azure-sql.sql):
-  - add the table `dbo.series`, which stores series names (for example: [Foundation Series](https://en.wikipedia.org/wiki/Foundation_series))
-  - update the `dbo.books` table by adding a column named `series_id`
-  - update the `dbo.books` table by adding a foreign key constraint on the `dbo.series` table
-- Update the configuration file with a new entity named `Series`, supported by the `dbo.series` source table you just created.
-- Update the `Book` entity by creating a relationship with the `Series` entity. Make sure you select `one` for the `cardinality` property
-- Update the `Series` entity by creating a relationship with the `Book` entity. Make sure you select `many` for the `cardinality` property
+> [!div class="nextstepaction"]
+> [Install the DAB CLI on your local machine](how-to-install-cli.md)
