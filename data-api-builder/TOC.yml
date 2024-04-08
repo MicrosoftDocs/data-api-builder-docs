@@ -18,9 +18,9 @@
 - name: Quickstarts
   items:
     - name: Azure SQL
-      href: quickstart-sql.md
+      href: quickstart-azure-sql.md
     - name: Azure Cosmos DB for NoSQL
-      href: quickstart-cosmos-db-nosql.md
+      href: quickstart-azure-cosmos-db-nosql.md
 - name: How to
   items:
     - name: Install the CLI
