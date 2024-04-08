@@ -139,6 +139,31 @@
       "source_path_from_root": "/data-api-builder/known-issues.md",
       "redirect_url": "https://github.com/azure/data-api-builder/labels/known-issue",
       "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/get-started/get-started-with-data-api-builder.md",
+      "redirect_url": "/azure/data-api-builder/quickstart-azure-sql",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/get-started/get-started-azure-sql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart-azure-sql",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/get-started/get-started-azure-cosmos-db.md",
+      "redirect_url": "/azure/data-api-builder/quickstart-azure-cosmos-db-nosql",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/get-started/get-started-azure-postgresql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart-azure-sql",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/get-started/get-started-azure-mysql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart-azure-sql",
+      "redirect_document_id": false
     }
   ]
 }
