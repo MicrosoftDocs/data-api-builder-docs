@@ -24,7 +24,7 @@ In this Quickstart, you deploy an Azure Developer CLI (AZD) template. The templa
 > [!TIP]
 > Alternatively, open this Quickstart in GitHub Codespaces with all developer prerequisites already installed. Simply bring your own Azure subscription. GitHub accounts include an entitlement of storage and core hours at no cost. For more information, see [included storage and core hours for GitHub accounts](https://docs.github.com/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts).
 >
-> [![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=002050&logo=github&logoColor=0078D7&labelColor=303030)](https://codespaces.new/Azure-Samples/dab-azure-sql-quickstart?template=true&quickstart=1)
+> [![Open in GitHub Codespaces](https://img.shields.io/badge/Open-Open?style=for-the-badge&label=GitHub+Codespaces&logo=github&labelColor=0078D7&color=303030)](https://codespaces.new/azure-samples/dab-azure-sql-quickstart?template=true&quickstart=1)
 
 ## Deploy the template
 
@@ -52,7 +52,7 @@ First, deploy all of the required services using the AZD template.
     > [!TIP]
     > The environment name will also be used as the target resource group name. For this quickstart, consider using `msdocs-dab-*`.
 
-1. Deploy the Azure Static Web Apps solution using `azd up`. The Bicep templates deploy an **Azure SQL database** along with the supporting database, storage, identity, and host services. A sample web application is deployed to the web host.
+1. Deploy the Azure Static Web Apps solution using `azd up`. The Bicep templates deploy an **Azure SQL database** along with the supporting storage, identity, and host services. A sample web application is deployed to the web host.
 
     ```azurecli
     azd up
@@ -84,11 +84,11 @@ Now, use the **database connections** feature of Azure Static Web Apps to create
     | **Authentication type** | `User-assigned managed identity` |
     | **User-assigned managed identity** | *Select the only managed identity resource with a prefix of `ua-id-*` |
 
-    :::image type="content" source="media/quickstart-sql/database-connection-config.png" alt-text="Screenshot of the database connection page for a static web app in the Azure portal.":::
+    :::image type="content" source="media/quickstart-azure-sql/database-connection-config.png" alt-text="Screenshot of the database connection page for a static web app in the Azure portal.":::
 
 1. Now, select the **Browse** option on the resource page to observe running web application.
 
-    :::image type="content" source="media/quickstart-sql/running-application.png" alt-text="Screenshot of the running web application on Azure Static Web Apps.":::
+    :::image type="content" source="media/quickstart-azure-sql/running-application.png" alt-text="Screenshot of the running web application on Azure Static Web Apps.":::
 
 ## Clean up
 
