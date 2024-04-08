@@ -84,11 +84,11 @@ Now, use the **database connections** feature of Azure Static Web Apps to create
     | **Authentication type** | `User-assigned managed identity` |
     | **User-assigned managed identity** | *Select the only managed identity resource with a prefix of `ua-id-*` |
 
-    :::image type="content" source="media/quickstart/database-connection-config.png" alt-text="Screenshot of the running web application on Azure Static Web Apps.":::
+    :::image type="content" source="media/quickstart-sql/database-connection-config.png" alt-text="Screenshot of the running web application on Azure Static Web Apps.":::
 
 1. Now, select the **Browse** option on the resource page to observe running web application.
 
-    :::image type="content" source="media/quickstart/running-application.png" alt-text="Screenshot of the running web application on Azure Static Web Apps.":::
+    :::image type="content" source="media/quickstart-sql/running-application.png" alt-text="Screenshot of the running web application on Azure Static Web Apps.":::
 
 ## Clean up
 
