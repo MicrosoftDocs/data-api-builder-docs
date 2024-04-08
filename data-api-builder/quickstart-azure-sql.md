@@ -24,7 +24,7 @@ In this Quickstart, you deploy an Azure Developer CLI (AZD) template. The templa
 > [!TIP]
 > Alternatively, open this Quickstart in GitHub Codespaces with all developer prerequisites already installed. Simply bring your own Azure subscription. GitHub accounts include an entitlement of storage and core hours at no cost. For more information, see [included storage and core hours for GitHub accounts](https://docs.github.com/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts).
 >
-> [![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=brightgreen&logo=github)](https://codespaces.new/Azure-Samples/dab-azure-sql-quickstart?template=true&quickstart=1)
+> [![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=002050&logo=github&logoColor=0078D7&labelColor=303030)](https://codespaces.new/Azure-Samples/dab-azure-sql-quickstart?template=true&quickstart=1)
 
 ## Deploy the template
 
