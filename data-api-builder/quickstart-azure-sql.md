@@ -50,7 +50,7 @@ First, deploy all of the required services using the AZD template.
 1. During initialization, configure a unique environment name.
 
     > [!TIP]
-    > The environment name will also be used as the target resource group name. For this quickstart, consider using `msdocs-dab-*`.
+    > The environment name will also be used as the target resource group name. For this quickstart, consider using `msdocs-swa-dab`.
 
 1. Deploy the Azure Static Web Apps solution using `azd up`. The Bicep templates deploy an **Azure SQL database** along with the supporting storage, identity, and host services. A sample web application is deployed to the web host.
 
