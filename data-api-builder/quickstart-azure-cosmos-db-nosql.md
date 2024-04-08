@@ -19,7 +19,7 @@ In this Quickstart, you deploy an Azure Developer CLI (AZD) template. The templa
 
 - Azure subscription. If you don't have an Azure subscription, create a free [trial account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)
 - [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [Azure Developer CLI](https://github.com/MicrosoftDocs/azure-docs-pr/blob/main/azure/developer/azure-developer-cli/install-azd)
+- [Azure Developer CLI](/azure/developer/azure-developer-cli/install-azd)
 
 > [!TIP]
 > Alternatively, open this Quickstart in GitHub Codespaces with all developer prerequisites already installed. Simply bring your own Azure subscription. GitHub accounts include an entitlement of storage and core hours at no cost. For more information, see [included storage and core hours for GitHub accounts](https://docs.github.com/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts).
