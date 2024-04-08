@@ -17,16 +17,10 @@
           href: whats-new/index.yml
 - name: Quickstarts
   items:
-    - name: Getting Started
-      href: get-started/get-started-with-data-api-builder.md
-    - name: Using Azure SQL
-      href: get-started/get-started-azure-sql.md
-    - name: Using PostgreSQL
-      href: get-started/get-started-azure-postgresql.md
-    - name: Using Azure Cosmos DB
-      href: get-started/get-started-azure-cosmos-db.md
-    - name: Using MySQL
-      href: get-started/get-started-azure-mysql.md
+    - name: Azure SQL
+      href: quickstart-sql.md
+    - name: Azure Cosmos DB for NoSQL
+      href: quickstart-cosmos-db-nosql.md
 - name: How to
   items:
     - name: Install the CLI
