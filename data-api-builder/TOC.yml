@@ -27,6 +27,10 @@
       href: how-to-install-cli.md
     - name: Develop with local data
       href: how-to-develop-local-data.md
+- name: Tutorials
+  items:
+    - name: Deploy to Azure Container Apps
+      href: tutorial-deploy-container-app.md
 - name: Concepts
   items:
     - name: REST
@@ -242,8 +246,6 @@
           href: run-using-container.md
         - name: Run from source code
           href: run-from-source-code.md
-        - name: Run in Azure
-          href: running-in-azure.md
     - name: Application Insights
       href: use-application-insights.md
     - name: Database-specific features

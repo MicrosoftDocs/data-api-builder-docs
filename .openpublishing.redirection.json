@@ -164,6 +164,11 @@
       "source_path_from_root": "/data-api-builder/get-started/get-started-azure-mysql.md",
       "redirect_url": "/azure/data-api-builder/quickstart-azure-sql",
       "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/get-started/running-in-azure.md",
+      "redirect_url": "/azure/data-api-builder/tutorial-deploy-container-app",
+      "redirect_document_id": true
     }
   ]
 }
