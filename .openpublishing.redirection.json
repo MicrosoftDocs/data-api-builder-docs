@@ -166,17 +166,17 @@
       "redirect_document_id": false
     },
     {
-      "source_path_from_root": "/data-api-builder/get-started/run-using-container.md",
+      "source_path_from_root": "/data-api-builder/run-using-container.md",
       "redirect_url": "/azure/data-api-builder/how-to-run-container",
       "redirect_document_id": true
     },
     {
-      "source_path_from_root": "/data-api-builder/get-started/run-from-source-code.md",
+      "source_path_from_root": "/data-api-builder/run-from-source-code.md",
       "redirect_url": "/azure/data-api-builder/how-to-run-from-source",
       "redirect_document_id": true
     },
     {
-      "source_path_from_root": "/data-api-builder/get-started/use-application-insights.md",
+      "source_path_from_root": "/data-api-builder/use-application-insights.md",
       "redirect_url": "/azure/data-api-builder/how-to-use-application-insights",
       "redirect_document_id": true
     }
