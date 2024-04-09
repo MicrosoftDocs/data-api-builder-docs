@@ -1,51 +1,98 @@
 ---
-title: Run Data API builder from source code
-description: This document contains details about running Data API builder from source code.
-author: anagha-todalbagi
-ms.author: atodalbagi
+title: Build and run source code
+description: Use advanced Git commands and the source code from GitHub to manually build and run Data API builder.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: run-data-api-builder-from-source-code
-ms.date: 04/06/2023
+ms.topic: how-to
+ms.date: 04/09/2024
+# Customer Intent: As a developer, I want to build Data API builder from source code, so that I can make changes and contribute back to the project.
 ---
 
-# Running Data API builder for Azure Databases from source code
+# Build and run Data API builder from source code
 
-> [!NOTE]
-> Familiarity with Git commands and tooling is assumed throughout the tutorial. Make sure `git` is installed in your machine.
+Data API builder (DAB) is an open-source project hosted on GitHub. At any time, you can download the source code, modify the code, and run the project directly from source. This guide includes all the steps necessary to build the project directly from its source code.
 
-## Clone the Data API builder for Azure Databases engine
+## Prerequisites
 
-Clone the repository locally:
+- [GitHub account](https://docs.github.com/get-started/start-your-journey/creating-an-account-on-github)
+- [Git](https://git-scm.com/downloads)
+  - This tutorial assumes a basic familiarity with Git commands and tooling.
+- [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0)
 
-```shell
-git clone https://github.com/Azure/data-api-builder.git
-```
+## Fork and clone the repository
 
-Check out the branch associated with the latest [release](https://github.com/Azure/data-api-builder/releases). For example:
+Get started by creating your own fork of the `azure/data-api-builder` GitHub repository. This fork allows you to persist your own changes. If you so choose, you can always open a pull request and suggest the changes to the upstream repository.
 
-```shell
-cd .\data-api-builder\
-git checkout release/Jan2023
-```
+1. Navigate to <https://github.com/azure/data-api-builder/fork>.
 
-Create a configuration file (`dab-config.json`) manually or using the [DAB CLI](./data-api-builder-cli.md) tool. If you want to create the file manually, you can use the [empty template](https://github.com/Azure/data-api-builder/blob/main/samples/basic-empty-dab-config.json) as a starting point.
+1. Create a fork of the repository in your own account or organization. Wait for the forking operation to complete before continuing.
 
-Make sure to add some entities to the configuration file (you can follow the [Getting Started](./get-started/get-started-with-data-api-builder.md) guide if you want) and then start the Data API builder engine.
+1. Open a new terminal.
 
-## Run the Data API builder for Azure Databases engine
+1. Clone the fork.
 
-Make sure you have [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0) installed. Clone the repository and then execute, from the root folder of the repository:
+    ```bash
+    git clone https://github.com/<your-username>/data-api-builder.git
+    ```
 
-```sh
-dotnet run --project ./src/Service
-```
+    > [!TIP]
+    > Alternatively, you can open the fork or the original repository as a GitHub Codespace.
 
-The Data API builder engine will try to load the configuration from the `dab-config.json` file in the same folder, if present.
+1. Build the `src/Azure.DataApiBuilder.sln` solution.
 
-If there is no `dab-config.json` the engine will start anyway but it will not be able to serve anything.
+    ```bash
+    dotnet build src/Azure.DataApiBuilder.sln
+    ```
 
-You may use the optional `--ConfigFileName` option to specify which configuration file will be used:
+## Run the engine
 
-```sh
-dotnet run --project ./src/Service  --ConfigFileName ../../samples/my-sample-dab-config.json
-```
+The `Azure.DataApiBuilder` solution includes multiple projects. To run the tool from source, run the `Azure.DataApiBuilder.Service` project passing in a configuration file.
+
+1. In the root directory, create a new file named `dab-config.json`.
+
+    > [!TIP]
+    > The *.gitignore* file automatically ignores any DAB configuration files.
+
+1. Add the following content to the configuration file.
+
+    ```json
+    {
+      "$schema": "https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json",
+      "data-source": {
+        "database-type": "mssql",
+        "connection-string": "Server=localhost,1433;Initial Catalog=Library;User Id=sa;Password=P@ssw.rd;TrustServerCertificate=true;"
+      },
+      "entities": {
+        "book": {
+          "source": "dbo.Books",
+          "permissions": [
+            {
+              "actions": [
+                "read"
+              ],
+              "role": "anonymous"
+            }
+          ]
+        }
+      }
+    }
+    ```
+
+    > [!IMPORTANT]
+    > This is a sample configuration that assumes you have a SQL Server available on your local machine. If you do not, you can run a Docker container for SQL Server with your sample data. For more information, see [creating sample data](how-to-run-container.md#create-sample-data).
+
+1. Run the `src/Service/Azure.DataApiBuilder.Service.csproj` project. Use the `--ConfigFileName` argument to specify the configuration file created in the previous step.
+
+    ```bash
+    dotnet run --project src/Service/Azure.DataApiBuilder.Service.csproj --ConfigFileName ../../dab-config.json 
+    ```
+
+    > [!TIP]
+    > The Data API builder engine will try to load the configuration from the `dab-config.json` file in the same folder, if present. If there is no `dab-config.json` file, the engine will start anyway but it will not be able to serve anything.
+
+## Related content
+
+- [`azure/data-api-builder` on GitHub](https://github.com/azure/data-api-builder)
+- [Run in a Docker container](how-to-run-container.md)
