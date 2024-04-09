@@ -27,6 +27,12 @@
       href: how-to-install-cli.md
     - name: Develop with local data
       href: how-to-develop-local-data.md
+    - name: Run in a container
+      href: how-to-run-container.md
+    - name: Run from source code
+      href: how-to-run-from-source.md
+    - name: Use Application Insights
+      href: how-to-use-application-insights.md
 - name: Concepts
   items:
     - name: REST
@@ -242,11 +248,5 @@
   items:
     - name: Running Data API builder
       items:
-        - name: Run in a container
-          href: run-using-container.md
-        - name: Run from source code
-          href: run-from-source-code.md
         - name: Run in Azure
           href: running-in-azure.md
-    - name: Application Insights
-      href: use-application-insights.md
