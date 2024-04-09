@@ -31,8 +31,14 @@
       href: how-to-run-container.md
     - name: Run from source code
       href: how-to-run-from-source.md
+    - name: Implement row-level security in SQL
+      href: how-to-row-level-security.md
     - name: Use Application Insights
       href: how-to-use-application-insights.md
+- name: Tutorials
+  items:
+    - name: Deploy to Azure Container Apps
+      href: running-in-azure.md
 - name: Concepts
   items:
     - name: REST
@@ -243,10 +249,3 @@
       href: reference-database-specific-features.md
     - name: Policies
       href: reference-policies.md
-
-- name: In progress (rework)
-  items:
-    - name: Running Data API builder
-      items:
-        - name: Run in Azure
-          href: running-in-azure.md

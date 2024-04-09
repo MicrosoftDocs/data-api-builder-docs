@@ -12,7 +12,7 @@ ms.date: 04/09/2024
 
 # Implement row-level security with session context in Data API builder
 
-TODO
+Use the **session context** feature of SQL to implement row-level security in Data API builder.
 
 ## Prerequisites
 
@@ -21,7 +21,9 @@ TODO
 
 ## Create SQL table and data
 
-TODO
+Create a table with fictitious data to use in this example scenario.
+
+1. Connect to the SQL server using your preferred client or tool.
 
 1. Create a table named `Revenues` with `id`, `category`, `revenue`, and `username` columns.
 
@@ -41,10 +43,10 @@ TODO
 
     ```sql
     INSERT INTO dbo.Revenues VALUES
-        (1, 'Book', 5000, 'Sean'),  
-        (2, 'Comics', 10000, 'Sean'),  
-        (3, 'Journals', 20000, 'Davide'),  
-        (4, 'Series', 40000, 'Davide')
+        (1, 'Book', 5000, 'Oscar'),  
+        (2, 'Comics', 10000, 'Oscar'),  
+        (3, 'Journals', 20000, 'Hannah'),  
+        (4, 'Series', 40000, 'Hannah')
     GO
     ```
 
@@ -54,7 +56,7 @@ TODO
     SELECT * FROM dbo.Revenues
     ```
 
-1. Create a function named `RevenuesPredicate`. This will filter results based on the current session context.
+1. Create a function named `RevenuesPredicate`. This function will filter results based on the current session context.
 
     ```sql
     CREATE FUNCTION dbo.RevenuesPredicate(@username varchar(max))
@@ -72,9 +74,9 @@ TODO
     ON dbo.Revenues;
     ```
 
-## Create base configuration
+## Run tool
 
-TODO
+Run the Data API builder (DAB) tool to generate a configuration file and a single entity.
 
 1. Create a new configuration while setting `--set-session-context` to true.
 
@@ -99,23 +101,25 @@ TODO
     dab start
     ```
 
-## Test session context
+1. Navigate to the `http://localhost:5000/api/revenue` endpoint. Observe that no data is returned. This behavior occurs because the session context isn't set and no records match the filter predicate.
 
-TODO
+## Test in SQL
 
-1. TODO
+Test the filter and predicate in SQL directly to ensure it's working.
+
+1. Connect to the SQL server again using your preferred client or tool.
+
+1. Run the `sp_set_session_context` to manually set your session context's `name` claim to the static value `Oscar`.
 
     ```sql
-    EXEC sp_set_session_context 'name', 'Sean';
+    EXEC sp_set_session_context 'name', 'Oscar';
     ```
 
-1. TODO
+1. Run a typical `SELECT *` query. Observe that the results are automatically filtered using the predicate.
 
     ```sql
     SELECT * FROM dbo.Revenues;  
     ```
-
-1. Navigate to the `http://localhost:5000/api/revenue` endpoint. Observe that TODO
 
 ## Related content
 
