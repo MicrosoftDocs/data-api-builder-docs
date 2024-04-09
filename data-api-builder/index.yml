@@ -59,7 +59,7 @@ landingContent:
           - text: Run in container
             url: how-to-run-container.md
           - text: Run from source code
-            text: how-to-run-from-source.md
+            url: how-to-run-from-source.md
           - text: Implement row-level security in SQL
             url: how-to-row-level-security.md
   - title: Reference
