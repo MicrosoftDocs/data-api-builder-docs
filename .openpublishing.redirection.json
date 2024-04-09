@@ -172,8 +172,8 @@
     },
     {
       "source_path_from_root": "/data-api-builder/azure-sql-session-context-rls.md",
-      "redirect_url": "/azure/data-api-builder/reference-database-specific-features",
-      "redirect_document_id": false
+      "redirect_url": "/azure/data-api-builder/how-to-row-level-security.md",
+      "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/versioning.md",

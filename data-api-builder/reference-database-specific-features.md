@@ -1,36 +1,106 @@
 ---
-title: Database-specific features for Data API builder
-description: This document lists the database specific features.
-author: anagha-todalbagi
-ms.author: atodalbagi
+title: Database-specific features
+description: Various databases have specific features that requires unique configuration properties in Data API builder.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: database-specific-features
-ms.date: 04/06/2023
+ms.topic: reference
+ms.date: 04/09/2024
 ---
 
-# Database-specific features
+# Database-specific features for Data API builder
 
-Data API builder allows each database to have its own specific features. This page lists the features that are supported for each database.
+Data API builder allows each database to have its own specific features. This article details the features that are supported for each database.
 
 ## Database version support
 
-| Database | Minimum Supported Version
-| - | - 
-| Azure SQL	| n/a
-| Cosmos DB	| n/a 
-| SQL Server | v2016
-| MySQL |	v8 
-| PostgreSQL | v11 
+Many traditional databases require a minimum version to be compatible with Data API builder (DAB).
 
-### Azure SQL and SQL Server
+| | Minimum Supported Version |
+| --- | --- |
+| **SQL Server** | 2016 |
+| **MySQL** | 8 |
+| **PostgreSQL** | 11 |
 
-#### SESSION_CONTEXT and row level security
+Conversely, Azure cloud database services work with DAB out of the box withour requiring a specific version.
 
-Azure SQL and SQL Server support the use of the SESSION_CONTEXT function to access the current user's identity. This is useful when you want to leverage the native support for row level security (RLS) available in Azure SQL and SQL Server. For more information, see [Azure SQL session context and RLS](./azure-sql-session-context-rls.md).
+| | Minimum Supported Version |
+| --- | --- |
+| **Azure SQL** | n/a |
+| **Azure Cosmos DB for NoSQL** | n/a |
+| **Azure Cosmos DB for PostgreSQL** | n/a |
+
+## Azure SQL and SQL Server
+
+There are a few specific properties that are unique to SQL including both Azure SQL and SQL Server.
+
+### SESSION_CONTEXT
+
+Azure SQL and SQL Server support the use of the `SESSION_CONTEXT` function to access the current user's identity. This is useful when you want to leverage the native support for row level security (RLS) available in Azure SQL and SQL Server.
+
+For Azure SQL and SQL Server, Data API builder can take advantage of `SESSION_CONTEXT` to send user specified metadata to the underlying database. Such metadata is available to Data API builder by virtue of the claims present in the access token. The data sent to the database can then be used to configure an additional level of security (for example, by configuring Security policies) to further prevent access to data in operations like SELECT, UPDATE, DELETE. The `SESSION_CONTEXT` data is available to the database for the duration of the database connection until that connection is closed. The same data can be used inside a stored procedure as well.  
+
+For more information about setting `SESSION_CONTEXT` data, see [`sp_set_session_context` (Transact-SQL)](/sql/relational-databases/system-stored-procedures/sp-set-session-context-transact-sql).
+
+Configure `SESSION_CONTEXT` using the `options` property of the `data-source` section in the configuration file. For more information, see [`data-source` configuraton reference](reference-configuration.md#data-source).
+
+```json
+{
+  ...
+  "data-source": {
+    "database-type": "mssql",
+    "options": {
+      "set-session-context": true
+    },
+    "connection-string": "<connection-string>"
+  },
+  ...
+}
+```
+
+Alternatively, use the `--set-session-context` argument with the `dab init` command.
+
+```console
+dab init --database-type mssql --set-session-context true
+```
+
+All of the claims present in the EasyAuth/JWT token are sent via the `SESSION_CONTEXT` to the underlying database. All the claims present in the token are translated into key-value pairs passed via `SESSION_CONTEXT` query. These claims include, but are not limited to:
+
+| | Description |
+| --- | --- |
+| **`aud`** | Audience |
+| **`iss`** | Issuer |
+| **`iat`** | Issued at |
+| **`exp`** | Expiration time |
+| **`azp`** | Application identifier |
+| **`azpacr`** | Authentication method of the client |
+| **`name`** | Subject |
+| **`uti`** | Unique token identifier |
+
+For more information on claims, see [Microsoft Entra ID access token claims reference](/entra/identity-platform/access-token-claims-reference).
+
+These claims are translated into a SQL query. This truncated example illustrates how `sp_set_session_context` is used in this context:
+
+```sql
+EXEC sp_set_session_context 'aud', '<AudienceID>', @read_only = 1;
+EXEC sp_set_session_context 'iss', 'https://login.microsoftonline.com/<TenantID>/v2.0', @read_only = 1;
+EXEC sp_set_session_context 'iat', '1637043209', @read_only = 1;
+...
+EXEC sp_set_session_context 'azp', 'a903e2e6-fd13-4502-8cae-9e09f86b7a6c', @read_only = 1;
+EXEC sp_set_session_context 'azpacr', 1, @read_only = 1;
+..
+EXEC sp_set_session_context 'uti', '_sSP3AwBY0SucuqqJyjEAA', @read_only = 1;
+EXEC sp_set_session_context 'ver', '2.0', @read_only = 1;
+```
+
+You can then iplement row-level security (RLS) using the session data. For more information, see [implement row-level security with session context](how-to-row-level-security.md)
 
 ### Azure Cosmos DB
 
-#### User-Provided GraphQL schema
+There are a few specific properties that are unique to various APIs in Azure Cosmos DB.
+
+#### User-Provided GraphQL schema in API for NoSQL
 
 The Azure Cosmos DB NOSQL API is schema-agnostic. In order to use Data API builder with Azure Cosmos DB, you must create a GraphQL schema file that includes the object type definitions representing your Azure Cosmos DB container's data model. Data API builder also expects your GraphQL object type definitions and fields to include the GraphQL schema directive `authorize` when you want to enforce more restrictive read access than `anonymous`.
 
@@ -108,183 +178,6 @@ and the corresponding entities section in config.json
 
 By incorporating the @authorize directive in the top-level type definition, you restrict access to the type and its fields are restricted exclusively to the roles specified within the directive.
 
-#### Cross Container Operations
+#### Cross Container Operations in API for NoSQL
 
 Currently, GraphQL operations across containers are unsupported. The engine responds with an error message stating, "Adding/updating Relationships is currently not supported in Cosmos DB."You can work around this limitation by updating your data model to store entities within the same container in an embedded format. To learn more, reference our Cosmos DB NOSQL data modeling [documentation](/azure/cosmos-db/nosql/modeling-data).
-
-# SESSION_CONTEXT and Row Level Security
-
-## SESSION_CONTEXT
-
-For Azure SQL and SQL Server, Data API builder can take advantage of `SESSION_CONTEXT` to send user specified metadata to the underlying database. Such metadata is available to Data API builder by virtue of the claims present in the access token. The data sent to the database can then be used to configure an additional level of security (for example, by configuring Security policies) to further prevent access to data in operations like SELECT, UPDATE, DELETE. The `SESSION_CONTEXT` data is available to the database for the duration of the database connection until that connection is closed. The same data can be used inside a stored procedure as well.  
-
-## How to read and write to `SESSION_CONTEXT`
-
-Learn more about setting `SESSION_CONTEXT` data from the `sp_set_session_context` [Microsoft Learn article](/sql/relational-databases/system-stored-procedures/sp-set-session-context-transact-sql).
-
-## How to enable `SESSION_CONTEXT` in Data API builder
-
-In the config file, the `data-source` section sub-key `options` holds database specific configuration properties. To enable `SESSION_CONTEXT`, the user needs to set the property `set-session-context` to `true`. This can be done while generating the config file via CLI the first time or later by setting the property manually in the config file.
-
-## CLI command to set the `SESSION_CONTEXT`
-
-Use the command `dab init` to generate the config file. The `--set-session-context` flag can be used to set the `SESSION_CONTEXT` property to `true`. The command looks like:
-
-```shell
-dab init -c config.json --database-type mssql --connection-string some-connection-string --set-session-context true
-```
-
-This generates the data-source section in config file as follows:
-
-```json
-"data-source": {
-    "database-type": "mssql",
-    "options": {
-      "set-session-context": true
-    },
-    "connection-string": "some-connection-string"
-  }
- ```
-
-## How and what data is sent via SESSION_CONTEXT
-
-All the claims present in the EasyAuth/JWT token are sent via the `SESSION_CONTEXT` to the underlying database. A sample decoded EasyAuth token looks like:
-
-```json
-{
-  "auth_typ": "aad",
-  "claims": [
-    {
-      "typ": "aud",
-      "val": "<AudienceID>"
-    },
-    {
-      "typ": "iss",
-      "val": "https://login.microsoftonline.com/<TenantID>/v2.0"
-    },
-    {
-      "typ": "iat",
-      "val": "1637043209"
-    },
-    {
-      "typ": "nbf",
-      "val": "1637043209"
-    },
-    {
-      "typ": "exp",
-      "val": "1637048193"
-    },
-    {
-      "typ": "aio",
-      "val": "ATQAy/8TAAAAGf/W0I7stMr3YH5iHFvESie38+INPT+Zf/p+ByYjTE5TsfeZud/5gqrpBpC1qUsD"
-    },
-    {
-      "typ": "azp",
-      "val": "a903e2e6-fd13-4502-8cae-9e09f86b7a6c"
-    },
-    {
-      "typ": "azpacr",
-      "val": "1"
-    },
-    {
-      "typ": "name",
-      "val": "Sean"
-    },
-    {
-      "typ": "uti",
-      "val": "_sSP3AwBY0SucuqqJyjEAA"
-    },
-    {
-      "typ": "ver",
-      "val": "2.0"
-    }
-  ],
-  "name_typ": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
-  "role_typ": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-}
-```
-
-All the claims present in the token are translated into key-value pairs passed via `SESSION_CONTEXT` query formulated next:
-
-```sql
-EXEC sp_set_session_context 'aud', '<AudienceID>', @read_only = 1;
-EXEC sp_set_session_context 'iss', 'https://login.microsoftonline.com/<TenantID>/v2.0', @read_only = 1;
-EXEC sp_set_session_context 'iat', '1637043209', @read_only = 1;
-EXEC sp_set_session_context 'nbf', '1637043209', @read_only = 1;
-EXEC sp_set_session_context 'exp', '1637048193', @read_only = 1;
-EXEC sp_set_session_context 'aio', 'ATQAy/8TAAAAGf/W0I7stMr3YH5iHFvESie38+INPT+Zf/p+ByYjTE5TsfeZud/5gqrpBpC1qUsD', @read_only = 1;
-EXEC sp_set_session_context 'azp', 'a903e2e6-fd13-4502-8cae-9e09f86b7a6c', @read_only = 1;
-EXEC sp_set_session_context 'azpacr', 1, @read_only = 1;
-EXEC sp_set_session_context 'name', 'Sean', @read_only = 1;
-EXEC sp_set_session_context 'uti', '_sSP3AwBY0SucuqqJyjEAA', @read_only = 1;
-EXEC sp_set_session_context 'ver', '2.0', @read_only = 1;
-```
-
-## Example: How to use `SESSION_CONTEXT` to leverage Row Level Security (RLS)
-
-For more details about Row Level Security (RLS), refer this [Microsoft Learn article](/sql/relational-databases/security/row-level-security).
-
-In this demonstration, we start by creating a database table `revenues`. Next, we configure a [Security Policy](/sql/t-sql/statements/create-security-policy-transact-sql) that would add a FILTER PREDICATE
-to this `revenues` table. The [FILTER PREDICATE](/sql/relational-databases/security/row-level-security#Description) is nothing but a table-valued function that filters the rows accessible to operations SELECT, UPDATE, DELETE based on the criteria that is configured for the function.  
-At the end of the demonstration, we see that only those rows are returned to the user that match the criteria of the filter predicate imposed by the security policy.  
-
-### Laying down the ground work for `SESSION_CONTEXT` - SQL Queries
-
-We can execute the next SQL queries in the same order via SSMS or any other SQL client to lay the groundwork for SESSION_CONTEXT.
-
-#### Creating revenues table
-
-```sql
-CREATE TABLE revenues(
-    id int PRIMARY KEY,  
-    category varchar(max) NOT NULL,  
-    revenue int,  
-    username varchar(max) NOT NULL  
-);  
-```
-
-```sql
-INSERT INTO revenues(id, category, revenue, username) VALUES  
-(1, 'Book', 5000, 'Sean'),  
-(2, 'Comics', 10000, 'Sean'),  
-(3, 'Journals', 20000, 'Davide'),  
-(4, 'Series', 40000, 'Davide');  
-```
-
-#### Creating function to be used as FILTER PREDICATE
-
-Create a function to be used as a filter predicate by the security policy to restrict access to rows in the table for SELECT, UPDATE, DELETE operations. We use the variable @username to store the value of the column revenues.username and then filter the rows accessible to the user using the filter predicate with condition:`@username = SESSION_CONTEXT(N'name')`.
-  
-```sql
-CREATE FUNCTION dbo.revenuesPredicate(@username varchar(max))  
-RETURNS TABLE  
-WITH SCHEMABINDING  
-AS RETURN SELECT 1 AS fn_securitypredicate_result  
-WHERE @username = CAST(SESSION_CONTEXT(N'name') AS varchar(max));  
-```
-
-#### Creating SECURITY POLICY to add to the revenues table
-
-Adding a security policy that would restrict access to the rows in revenues table for SELECT, UPDATE, DELETE operations using the filter predicate dbo.revenuesPredicate.
-
-```sql
-CREATE SECURITY POLICY dbo.revenuesSecPolicy 
-ADD FILTER PREDICATE dbo.revenuesPredicate(username)  
-ON dbo.revenues;  
-```
-
-#### SESSION_CONTEXT in action
-
-Now that we've laid the groundwork for SESSION_CONTEXT, it's time to see it in action.  
-
-```sql
-EXEC sp_set_session_context 'name', 'Sean'; -- setting the value of 'name' key in SESSION_CONTEXT;  
-SELECT * FROM dbo.revenues;  
-```
-
-#### Result
-
-Rows corresponding to `username` = 'Sean' are returned as only these rows match the criteria of the filter predicate imposed by the security policy.
-
-> [!NOTE]
-> If `SESSION_CONTEXT` is not set, any key referenced in `SESSION_CONTEXT` is assigned a null value, and no errors are raised. In this example, no rows would have been returned by the query as the filter predicate would have returned 0 (false) for each of the row, i.e. none of the row is accessible to the user.
