@@ -86,7 +86,7 @@ TODO
 
 ## Deploy an Azure SQL database with sample data
 
-First, deploy a new server and database in the Azure SQL service. The database will use the **AdventureWorksLT** sample dataset.
+First, deploy a new server and database in the Azure SQL service. The database uses the **AdventureWorksLT** sample dataset.
 
 1. Create a new Azure SQL **server** resource using `az sql server create`.
 
