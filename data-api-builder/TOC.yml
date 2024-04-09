@@ -31,8 +31,14 @@
       href: how-to-run-container.md
     - name: Run from source code
       href: how-to-run-from-source.md
+    - name: Implement row-level security in SQL
+      href: how-to-row-level-security.md
     - name: Use Application Insights
       href: how-to-use-application-insights.md
+- name: Tutorials
+  items:
+    - name: Deploy to Azure Container Apps
+      href: running-in-azure.md
 - name: Concepts
   items:
     - name: REST
@@ -239,24 +245,7 @@
           href: /troubleshoot/azure/data-api-builder/usage?context=/azure/data-api-builder/context/context
         - name: Known issues
           href: https://github.com/azure/data-api-builder/labels/known-issue
-
-- name: In progress (rework)
-  items:
-    - name: Running Data API builder
-      items:
-        - name: Run in Azure
-          href: running-in-azure.md
     - name: Database-specific features
-      items:
-        - name: Azure Cosmos DB
-          href: database-specific-features.md
-        - name: SQL Session Context and Row Level Security
-          href: azure-sql-session-context-rls.md
-    - name: Internal Policies
-      items:
-        - name: Version Numbers
-          href: versioning.md
-        - name: Breaking change policy
-          href: breaking-changes.md
-        - name: Breaking change list
-          href: breaking-change-list.md
+      href: reference-database-specific-features.md
+    - name: Policies
+      href: reference-policies.md
