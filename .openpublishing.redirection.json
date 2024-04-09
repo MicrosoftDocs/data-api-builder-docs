@@ -166,27 +166,27 @@
       "redirect_document_id": false
     },
     {
-      "source_path_from_root": "/data-api-builder/get-started/database-specific-features.md",
+      "source_path_from_root": "/data-api-builder/database-specific-features.md",
       "redirect_url": "/azure/data-api-builder/reference-database-specific-features",
       "redirect_document_id": true
     },
     {
-      "source_path_from_root": "/data-api-builder/get-started/azure-sql-session-context-rls.md",
+      "source_path_from_root": "/data-api-builder/azure-sql-session-context-rls.md",
       "redirect_url": "/azure/data-api-builder/reference-database-specific-features",
       "redirect_document_id": false
     },
     {
-      "source_path_from_root": "/data-api-builder/get-started/versioning.md",
+      "source_path_from_root": "/data-api-builder/versioning.md",
       "redirect_url": "/azure/data-api-builder/reference-policies",
       "redirect_document_id": true
     },
     {
-      "source_path_from_root": "/data-api-builder/get-started/breaking-changes.md",
+      "source_path_from_root": "/data-api-builder/breaking-changes.md",
       "redirect_url": "/azure/data-api-builder/reference-policies",
       "redirect_document_id": false
     },
     {
-      "source_path_from_root": "/data-api-builder/get-started/breaking-change-list.md",
+      "source_path_from_root": "/data-api-builder/breaking-change-list.md",
       "redirect_url": "/azure/data-api-builder/reference-policies",
       "redirect_document_id": false
     }
