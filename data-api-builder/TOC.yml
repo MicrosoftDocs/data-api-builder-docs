@@ -31,6 +31,8 @@
       href: how-to-run-container.md
     - name: Run from source code
       href: how-to-run-from-source.md
+    - name: Implement row-level security in SQL
+      href: how-to-row-level-security.md
     - name: Use Application Insights
       href: how-to-use-application-insights.md
 - name: Tutorials
@@ -243,3 +245,7 @@
           href: /troubleshoot/azure/data-api-builder/usage?context=/azure/data-api-builder/context/context
         - name: Known issues
           href: https://github.com/azure/data-api-builder/labels/known-issue
+    - name: Database-specific features
+      href: reference-database-specific-features.md
+    - name: Policies
+      href: reference-policies.md
