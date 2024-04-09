@@ -58,9 +58,19 @@ landingContent:
             url: how-to-develop-local-data.md
   - title: Reference
     linkLists:
-      - linkListType: how-to-guide
+      - linkListType: reference
         links:
           - text: Configuration file
             url: reference-configuration.md
           - text: Command-line interface (CLI)
             url: reference-cli.md
+          - text: Database-specific features
+            url: reference-database-specific-features.md
+          - text: Policies
+            url: reference-policies.md
+      - linkListType: sample
+        links:
+          - text: Todo app sample with Data API builder, Azure Static Web Apps, and Azure SQL
+            url: https://github.com/azure-samples/dab-swa-todo
+          - text: Library app sample with Data API builder, Azure Static Web Apps, and Azure SQL
+            url: https://github.com/azure-samples/dab-swa-library-demo

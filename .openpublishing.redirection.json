@@ -164,6 +164,31 @@
       "source_path_from_root": "/data-api-builder/get-started/get-started-azure-mysql.md",
       "redirect_url": "/azure/data-api-builder/quickstart-azure-sql",
       "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/get-started/database-specific-features.md",
+      "redirect_url": "/azure/data-api-builder/reference-database-specific-features",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/get-started/azure-sql-session-context-rls.md",
+      "redirect_url": "/azure/data-api-builder/reference-database-specific-features",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/get-started/versioning.md",
+      "redirect_url": "/azure/data-api-builder/reference-policies",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/get-started/breaking-changes.md",
+      "redirect_url": "/azure/data-api-builder/reference-policies",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/get-started/breaking-change-list.md",
+      "redirect_url": "/azure/data-api-builder/reference-policies",
+      "redirect_document_id": false
     }
   ]
 }

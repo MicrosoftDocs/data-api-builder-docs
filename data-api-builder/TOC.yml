@@ -233,6 +233,10 @@
           href: /troubleshoot/azure/data-api-builder/usage?context=/azure/data-api-builder/context/context
         - name: Known issues
           href: https://github.com/azure/data-api-builder/labels/known-issue
+    - name: Database-specific features
+      href: reference-database-specific-features.md
+    - name: Policies
+      href: reference-policies.md
 
 - name: In progress (rework)
   items:
@@ -246,17 +250,3 @@
           href: running-in-azure.md
     - name: Application Insights
       href: use-application-insights.md
-    - name: Database-specific features
-      items:
-        - name: Azure Cosmos DB
-          href: database-specific-features.md
-        - name: SQL Session Context and Row Level Security
-          href: azure-sql-session-context-rls.md
-    - name: Internal Policies
-      items:
-        - name: Version Numbers
-          href: versioning.md
-        - name: Breaking change policy
-          href: breaking-changes.md
-        - name: Breaking change list
-          href: breaking-change-list.md
