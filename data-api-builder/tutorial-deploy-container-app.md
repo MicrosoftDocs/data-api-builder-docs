@@ -1,74 +1,170 @@
 ---
-title: Running Data API builder in Azure
-description: This document contains details about running Data API builder in Azure.
-author: anagha-todalbagi
-ms.author: atodalbagi
+title: |
+  Tutorial: Deploy to Azure Container Apps
+description: This tutorial walks through the steps necessary to deploy an API solution to Azure Container Apps using Azure SQL.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: running-data-api-builder-in-azure
-ms.date: 04/06/2023
+ms.topic: tutorial
+ms.date: 04/09/2024
+#Customer Intent: As a developer, I want to deploy to Azure, so that I can integrate Data API builder with my other cloud services.
 ---
 
-# Running Data API builder in Azure
+# Tutorial: Deploy Data API builder to Azure Container Apps
 
-Data API builder can be run in Azure in two different ways: using Azure Static Web Apps or using any container service like Azure Container Instances, Azure App Service, Azure Container Apps, etc.
+Data API builder can be quickly deployed to Azure services like Azure Container Apps as part of your application stack.
 
-## Use Azure Static Web Apps
+In this tutorial, you:
 
-When running Data API builder in Azure Static Web Apps, you don't have to worry about the infrastructure since it's managed by Azure. When running Data API builder in Azure Container Instances or Azure App Service, you have to manage the infrastructure yourself.
+> [!div class="checklist"]
+>
+> - Create a managed identity with role-based access control permissions
+> - Deploy Azure SQL with the sample AdventureWorksLT dataset
+> - Stage an Azure Storage account with the configuration file
+> - Deploy Azure Container Apps with the Data API builder container image
+>
 
-To learn how to use Data API builder with Azure Static Web Apps, refer to the Azure Static Web Apps documentation: [Connecting to a database with Azure Static Web Apps](/azure/static-web-apps/database-overview).
+[!INCLUDE[Azure Subscription Trial](includes/azure-subscription-trial.md)]
 
-## Use Azure Container Instance
+## Prerequisites
 
-If you prefer to manage the infrastructure yourself, you can deploy the Data API builder container in Azure. Data API builder image is available on the [Microsoft Container Registry](https://mcr.microsoft.com/product/azure-databases/data-api-builder/about)
+- Azure subscription
+- Azure Cloud Shell
 
-To run Data API builder in Azure Container Instances, you need to
+[!INCLUDE[Azure Cloud Shell](includes/azure-cloud-shell.md)]
 
-- Create a resource group
-- Create a storage account, with File Share enabled
-- Upload the `dab-config.json` file to the storage account
-- Create the Azure Container Instance using the image from the Microsoft Container Registry, and mount the storage account file share, so that it can be accessed by Data API builder
+## Create a managed identity
 
-A sample shell script that can be run on Linux (using the [Cloud Shell](/azure/cloud-shell/overview) if you don't have a Linux machine or WSL installed) is available in [`/samples/azure`](https://github.com/Azure/data-api-builder/tree/main/samples/azure) folder.
+TODO
 
-On first run, the script creates an `.env` file that you have to fill out with the correct values for your environment.
+1. TODO
 
-- `RESOURCE_GROUP`: name of the resource group you're using (for example: `my-dab-rg`)
-- `STORAGE_ACCOUNT`: the name for the Storage Account you want to create (for example: `dabstorage`)
-- `LOCATION`: the region where you want to create the resources (for example: `westus2`)
-- `CONTAINER_INSTANCE_NAME`: the name of the Container Instance you want to create (for example: `dab-backend`)
-- `DAB_CONFIG_FILE`: the configuration file you want to use (for example: `./my-dab-config.json`).
+    ```azurecli-interactive
+    az group create --name "<resource-group>" --location "<location>"
+    ```
 
-> [!NOTE]
-> Note that the file must be in the same folder where the `./azure-deploy.sh` script is located. You can find `azure-deploy.sh` [here](https://github.com/Azure/data-api-builder/blob/main/samples/azure/azure-deploy.sh).
+1. TODO
 
-After the script has finished running, it will return the public container IP address. Use your favorite REST or GraphQL client to access the Data API builder exposed endpoints as configured in the configuration file you provided.
+    ```azurecli-interactive
+    RESOURCE_GROUP_ID=$(az group show --name "<resource-group>" --query "id" --output tsv)
+    ```
 
-## Use Azure Container Apps
+1. TODO
 
-Alternatively, can also deploy the Data API builder [container in Azure](/azure/container-apps/?ocid=AID3042118). Data API builder image is available on the [Microsoft Container Registry](https://mcr.microsoft.com/product/azure-databases/data-api-builder/about).
+    ```azurecli-interactive
+    az identity create --name "<resource-group>" -identity --resource-group "<resource-group>"
+    ```
 
-To run Data API builder in Azure Container Apps, you need to
+1. TODO
 
-- Create a resource group
-- Create a storage account, with File Share enabled
-- Upload the `dab-config.json` file to the storage account
-- Create the Azure Container Apps environment and mount the storage account file share so that it can be accessed by the containers running in the environment.
-- Create the Azure Container Apps application, using the image from the Microsoft Container Registry and mounting the storage account file share so that it can be accessed by Data API builder.
+    ```azurecli-interactive
+    UA_PRINCIPAL_ID=$(az identity show --name "<resource-group>" -identity --resource-group "<resource-group>" --query "principalId" --output tsv)
+    ```
 
-A sample shell script that can be run on Linux (using the [Cloud Shell](/azure/cloud-shell/overview) if you don't have a Linux machine or WSL installed) is available in [`/samples/azure`](https://github.com/Azure/data-api-builder/tree/main/samples/azure) folder.
+1. TODO
 
-On first run, the script creates an `.env` file that you have to fill out with the correct values for your environment.
+    ```azurecli-interactive
+    UA_NAME=$(az identity show --name "<resource-group>" -identity --resource-group "<resource-group>" --query "name" --output tsv)
+    ```
 
-- `RESOURCE_GROUP`: name of the resource group you're using (for example: `my-dab-rg`)
-- `STORAGE_ACCOUNT`: the name for the Storage Account you want to create (for example: `dabstorage`)
-- `LOCATION`: the region where you want to create the resources (for example: `westus2`)
-- `LOG_ANALYTICS_WORKSPACE`: the name of the Log Analytics Workspace you want to create (for example: `dablogging`)
-- `CONTAINERAPPS_ENVIRONMENT`: the name of the Container Apps environment you want to create (for example: `dm-dab-aca-env`)
-- `CONTAINERAPPS_APP_NAME`: the name of the Container Apps application you want to create (for example: `dm-dab-aca-app`)
-- `DAB_CONFIG_FILE`: the configuration file you want to use (for example: `./my-dab-config.json`).
+1. TODO
 
-> [!NOTE]
-> The file must be in the same folder where the `./azure-container-apps-deploy.sh` script is located. You can find `azure-container-app-deploy.sh` at [`/samples/azure/'](https://github.com/Azure/data-api-builder/blob/main/samples/azure/).
+    ```azurecli-interactive
+    # Storage Blob Data Owner
+    
+    az role assignment create --assignee-object-id $UA_PRINCIPAL_ID --assignee-principal-type "ServicePrincipal" --role "b7e6dc6d-f1e8-4753-8033-0f276bb0955b" --scope
+    ```
 
-After the script has finished running, it will return the FQDN of Azure Container Apps. Use your favorite REST or GraphQL client to access the Data API builder exposed endpoints as configured in the configuration file you provided.
+1. TODO
+
+    ```azurecli-interactive
+    # Storage File Data SMB Share Reader
+
+    az role assignment create --assignee-object-id $UA_PRINCIPAL_ID --assignee-principal-type "ServicePrincipal" --role "aba4ae5f-2193-4029-9191-0cb91df5e314" --scope $STORAGE_RESOURCE_ID
+    ```
+
+## Deploy an Azure SQL database with sample data
+
+First, deploy a new server and database in the Azure SQL service. The database will use the **AdventureWorksLT** sample dataset.
+
+1. Create a new Azure SQL **server** resource using `az sql server create`.
+
+    ```azurecli-interactive
+    az sql server create --resource-group "<resource-group>" --name "<resource-group>" -srvr --enable-ad-only-auth --external-admin-principal-type "User" --external-admin-name $UA_NAME --external-admin-sid $UA_PRINCIPAL_ID
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    az sql db create --resource-group "<resource-group>" --server "<resource-group>" -srvr --name adventureworks --sample-name "AdventureWorksLT"
+    ```
+
+## Create a file share using Azure Storage
+
+TODO
+
+1. TODO
+
+    ```azurecli-interactive
+    az storage account create --resource-group "<resource-group>" --name "<unique-storage-account-name>"
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    az storage share create --account-name "<unique-storage-account-name>" --name dab-config
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    dotnet tool install --global TODO
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    dab init TODO
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    dab add TODO
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    az storage file upload --account-name "<unique-storage-account-name>" --share-name dab-config --source dab-config.json --path dab-config.json
+    ```
+
+## Deploy Azure Container Apps with a DAB container
+
+TODO
+
+1. TODO
+
+    ```azurecli-interactive
+    az container create
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    TODO
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    TODO
+    ```
+
+1. Navigate to `TODO` and test the API.
+
+## Next step
+
+> [!div class="nextstepaction"]
+> [Use Application Insights with Data API builder](how-to-use-application-insights.md)
