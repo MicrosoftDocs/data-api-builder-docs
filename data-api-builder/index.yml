@@ -55,7 +55,9 @@ landingContent:
           - text: Install the CLI
             url: how-to-install-cli.md
           - text: Develop using local data
-            url: how-to-develop-local-data.md
+            url: how-to-develop-local-data.md            
+          - text: Run in container
+            url: how-to-run-container.md
       - linkListType: tutorial
         links:
           - text: Deploy to Azure Container Apps
