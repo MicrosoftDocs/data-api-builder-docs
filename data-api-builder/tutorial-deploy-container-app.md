@@ -30,7 +30,7 @@ In this tutorial, you:
 ## Prerequisites
 
 - Azure subscription
-- Azure Cloud Shell
+
 [!INCLUDE[Azure Cloud Shell](includes/azure-cloud-shell.md)]
 
 ## Create a managed identity
