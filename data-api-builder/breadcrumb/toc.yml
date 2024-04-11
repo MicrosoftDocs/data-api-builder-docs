@@ -1,7 +1,7 @@
-- name: Data API builder documentation
-  tocHref: /azure/data-api-builder/
-  topicHref: /azure/data-api-builder/index
+- name: Azure
+  tocHref: /azure/
+  topicHref: /azure/index
   items:
-  - name: Get started with Data API builder
-    tocHref: /azure/data-api-builder/get-started
-    topicHref: /azure/data-api-builder/get-started/get-started-with-data-api-builder
+    - name: Data API builder
+      tocHref: /azure/data-api-builder/
+      topicHref: /azure/data-api-builder/index
