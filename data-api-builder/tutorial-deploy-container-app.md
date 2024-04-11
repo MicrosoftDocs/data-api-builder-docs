@@ -1,17 +1,17 @@
 ---
 title: |
-  Tutorial: Deploy to Azure Container Apps
+  Tutorial: Azure Container Apps and Azure SQL
 description: This tutorial walks through the steps necessary to deploy an API solution to Azure Container Apps using Azure SQL.
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: tutorial
-ms.date: 04/09/2024
+ms.date: 04/11/2024
 #Customer Intent: As a developer, I want to deploy to Azure, so that I can integrate Data API builder with my other cloud services.
 ---
 
-# Tutorial: Deploy Data API builder to Azure Container Apps
+# Tutorial: Deploy Data API builder for Azure SQL to Azure Container Apps with Azure CLI
 
 Data API builder can be quickly deployed to Azure services like Azure Container Apps as part of your application stack.
 
@@ -22,7 +22,8 @@ In this tutorial, you:
 > - Create a managed identity with role-based access control permissions
 > - Deploy Azure SQL with the sample AdventureWorksLT dataset
 > - Stage an Azure Storage account with the configuration file
-> - Deploy Azure Container Apps with the Data API builder container image
+> - Deploy Azure Container App with the Data API builder container image
+> - Deploy Azure Container App with a sample application
 >
 
 [!INCLUDE[Azure Subscription Trial](includes/azure-subscription-trial.md)]
@@ -83,7 +84,7 @@ TODO
     az role assignment create --assignee-object-id $UA_PRINCIPAL_ID --assignee-principal-type "ServicePrincipal" --role "aba4ae5f-2193-4029-9191-0cb91df5e314" --scope $STORAGE_RESOURCE_ID
     ```
 
-## Deploy an Azure SQL database with sample data
+## Deploy an Azure SQL database
 
 First, deploy a new server and database in the Azure SQL service. The database   the **AdventureWorksLT** sample dataset.
 
@@ -99,7 +100,7 @@ First, deploy a new server and database in the Azure SQL service. The database  
     az sql db create --resource-group "<resource-group>" --server "<resource-group>" -srvr --name adventureworks --sample-name "AdventureWorksLT"
     ```
 
-## Create a file share using Azure Storage
+## Create an Azure Storage file share
 
 TODO
 
@@ -139,7 +140,7 @@ TODO
     az storage file upload --account-name "<unique-storage-account-name>" --share-name dab-config --source dab-config.json --path dab-config.json
     ```
 
-## Deploy Azure Container Apps with a DAB container
+## Deploy Azure Container App DAB container
 
 TODO
 
@@ -162,6 +163,28 @@ TODO
     ```
 
 1. Navigate to `TODO` and test the API.
+
+## Deploy Azure Container App web application
+
+TODO
+
+1. TODO
+
+    ```azurecli-interactive
+    TODO
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    TODO
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    TODO
+    ```
 
 ## Next step
 

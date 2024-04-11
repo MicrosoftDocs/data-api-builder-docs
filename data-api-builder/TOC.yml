@@ -37,7 +37,9 @@
       href: how-to-use-application-insights.md
 - name: Tutorials
   items:
-    - name: Deploy to Azure Container Apps
+    - name: Deploy to Azure Static Web Apps with Azure Cosmos DB for NoSQL
+      href: tutorial-deploy-static-web-app.md
+    - name: Deploy to Azure Container Apps with Azure SQL
       href: tutorial-deploy-container-app.md
 - name: Concepts
   items:
