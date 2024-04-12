@@ -592,7 +592,7 @@ In this example, the GraphQL endpoint is disabled for all entities.
 Defines the URL path where the GraphQL endpoint is made available. For example, if this parameter is set to `/graphql`, the GraphQL endpoint is exposed as `/graphql`. By default, the path is `/graphql`.
 
 > [!IMPORTANT]
-> Sub-paths are not allowed for this property. A customized path value for the GraphQL endpoint is not currently available.
+> Sub-paths are not allowed for this property. A customized path value for the GraphQL endpoint isn't currently available.
 
 #### Format
 
@@ -1240,7 +1240,7 @@ Configures result limits.
 
 **REST pagination example**
 
-In the case of the example above, if we issued the REST GET `https://localhost:5001/api/books`, the resulting JSON would include one record in the `value` array because the page size was defaulted to 1. The example results below show how Data API builder appends `nextLink` to results when a subsequent page exists.
+In the example, if we issued the REST GET `https://localhost:5001/api/books`, the resulting JSON would include one record in the `value` array because the page size was defaulted to 1. The example results show how Data API builder appends `nextLink` to results when a subsequent page exists.
 
 ```JSON
 {
@@ -1257,14 +1257,14 @@ In the case of the example above, if we issued the REST GET `https://localhost:5
 }
 ```
 
-Notice the `$after` option is appended to the same URL used to query the endpoint. This special value internally indicates the last record on the current page. Using this as the value of `$after` will automatically return the next page of data.
+Notice the `$after` option is appended to the same URL used to query the endpoint. This special value internally indicates the last record on the current page. Using the supplied string as the value of `$after` will automatically return the next page of data.
 
 > [!NOTE]
 > It is possible that the underlying table data has changed between queries. This will not result in an error; however, it illustrates why Data API builder does not have the concept of a page number. Subsequent calls return the correct next page, but the page number could have changed due to data changes. In this way, the `nextLink` is literally the next page of _data_, not the next page _number_.
 
 **GraphQL pagination example**
 
-In the case of the above example, if we issue a GraphQL query, we must include `hasNextPage` and `endCursor` to use pagination. The reason for this requirement is that while REST payloads are determined by the endpoint, GraphQL payloads are determined by the query the consumer submitted. Note that with or without these values, the results are still limited to the default page size. A query would look like this:
+In the example, if we issue a GraphQL query, we must include `hasNextPage` and `endCursor` to use pagination. The reason for this requirement is that REST endpoints determine the structure of their payloads, but the consumer's query determines the structure of GraphQL payloads. With or without these values, the results are still limited to the default page size. A query would look like this:
 
 ```GraphQL
 query {
@@ -1282,7 +1282,7 @@ query {
 }
 ```
 
-Our GraphQL results would include `hasNextPage` and `endCursor` which are used to fetch further pages.
+Our GraphQL results would include `hasNextPage` and `endCursor`, which are used to fetch further pages.
 
 ```JSON
 {
@@ -1328,24 +1328,24 @@ Both REST and GraphQL can include a `$limit` or `first` variable, respectively. 
 
 | First value | Result |
 |-------------|--------|
-| `-1`        | The current value of the `max-page-size` setting. This is handy when the `max-page-size` setting value is unknown to the consumer. Data API builder will replace `-1` with the current value of `max-page-size`. |
-| `< max-page-size` | The results will be limited to the value supplied. |
-| `0`, `< -1`, `> max-page-size`</nobr> | This is invalid and an exception is returned.
+| `-1`        | The current value of the `max-page-size` setting. Using `-1` is handy when the `max-page-size` setting value is unknown to the consumer. Data API builder replaces `-1` with the current value of `max-page-size`. |
+| `< max-page-size` | The results are limited to the value supplied. |
+| `0`, `< -1`, `> max-page-size`</nobr> | Invalid. An exception is returned.
 
 ### Maximum page size (Pagination runtime)
 
 **REQUIRED**: ❌ No
 
-Sets the maximum number of top-level records returned by a REST or Graph QL query. 
+Sets the maximum number of top-level records returned by a REST or GraphQL query. 
 
 #### Allowed values
 
 | Value | Result
 |-|-
 |`-1` | This value defaults to maximum supported value.
-|`integer` | Any positive 32 bit integer is supported.
-|`< -1` | This is not supported.
-|`= 0` | This is not supported.
+|`integer` | Any positive 32-bit integer is supported.
+|`< -1` | This isn't supported.
+|`= 0` | This isn't supported.
 
 > [!NOTE]
 > The maximum value of a 32-bit integer is 2,147,483,647. This is big. In practice, there isn't a strict universal limit to the size of an outbound endpoint payload, but several factors can effectively limit the size, including server configuration, bandwidth, and timeout. Data API builder doesn't know your scenario, so this setting is open to configuration by each developer. The default maximum of 100,000 is already quite aggressive.
@@ -1354,7 +1354,7 @@ Sets the maximum number of top-level records returned by a REST or Graph QL quer
 
 **REQUIRED**: ❌ No
 
-Sets the page size when pagination is  number of top-level records returned by a REST or Graph QL query. 
+Sets the page size when pagination is  number of top-level records returned by a REST or GraphQL query. 
 
 #### Allowed values
 
@@ -1362,8 +1362,8 @@ Sets the page size when pagination is  number of top-level records returned by a
 |-|-
 |`-1` | This value defaults to the current `max-page-size` setting.
 |`integer` | Any positive integer less than the current `max-page-size` setting.
-|`< -1` | This is not supported.
-|`= 0` | This is not supported.
+|`< -1` | This isn't supported.
+|`= 0` | This isn't supported.
 
 ### Cache (runtime)
 
@@ -3587,7 +3587,7 @@ The name of the entity defined elsewhere in the configuration that is the target
 An optional parameter to define the field used for mapping in the *source* entity used to connect to the related item in the target entity.
 
 > [!TIP]
-> This field is not required if there's a **foreign key** restraint on the database between the two database objects that can be used to infer the relationship automatically.
+> This field isn't required if there's a **foreign key** restraint on the database between the two database objects that can be used to infer the relationship automatically.
 
 ### Target fields
 
@@ -3596,7 +3596,7 @@ An optional parameter to define the field used for mapping in the *source* entit
 An optional parameter to define the field used for mapping in the *target* entity used to connect to the related item in the source entity.
 
 > [!TIP]
-> This field is not required if there's a **foreign key** restraint on the database between the two database objects that can be used to infer the relationship automatically.
+> This field isn't required if there's a **foreign key** restraint on the database between the two database objects that can be used to infer the relationship automatically.
 
 ### Linking object or entity
 
