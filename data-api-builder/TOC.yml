@@ -155,6 +155,15 @@
                     - name: Time-to-live in seconds
                       displayName: TTL
                       href: reference-configuration.md#ttl-in-seconds-cache-runtime
+                - name: Pagination
+                  href: reference-configuration.md#pagination
+                  items:
+                    - name: Default page size
+                      displayName: default-page-size
+                      href: reference-configuration.md#default-page-size
+                    - name: Maximum page size
+                      displayName: max-page-size
+                      href: reference-configuration.md#max-page-size
             - name: Entities
               href: reference-configuration.md#entities
               items:
