@@ -1322,9 +1322,9 @@ query {
 }
 ```
 
-**Using `$first` or `first` to change the page size.**
+**Using `$limit` or `first` to change the page size.**
 
-Both REST and GraphQL can include a `$first` or `first` variable, respectively. The purpose of `first` is to limit the results for a specific query. However, consider `https://{server}/api/books?$first=10`. If `first` is, for example, 10 when the default page size is 100, the results are limited to 10. However, if `first` is 200 when the default page size is 100, the results are limited to 200—a value greater than the default page size.
+Both REST and GraphQL can include a `$limit` or `first` variable, respectively. The purpose of `limit` is to limit the results for a specific query. However, consider `https://{server}/api/books?$limit=10`. If `limit` is, for example, 10 when the default page size is 100, the results are limited to 10. However, if `limit` is 200 when the default page size is 100, the results are limited to 200—a value greater than the default page size.
 
 | First value | Result |
 |-------------|--------|
