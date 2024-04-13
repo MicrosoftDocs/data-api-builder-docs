@@ -156,7 +156,7 @@
                       displayName: TTL
                       href: reference-configuration.md#ttl-in-seconds-cache-runtime
                 - name: Pagination
-                  href: reference-configuration.md#pagination
+                  href: reference-configuration.md#pagination-runtime
                   items:
                     - name: Default page size
                       displayName: default-page-size
