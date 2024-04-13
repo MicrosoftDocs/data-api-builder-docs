@@ -163,7 +163,7 @@
                       href: reference-configuration.md#default-page-size-pagination-runtime
                     - name: Maximum page size
                       displayName: max-page-size
-                      href: reference-configuration.md#max-page-size
+                      href: reference-configuration.md#max-page-size-pagination-runtime
             - name: Entities
               href: reference-configuration.md#entities
               items:
