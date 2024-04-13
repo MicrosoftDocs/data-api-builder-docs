@@ -1238,7 +1238,7 @@ Configures result limits.
 }
 ```
 
-**REST pagination example**
+##### REST pagination example
 
 In the example, if we issued the REST GET `https://localhost:5001/api/books`, the resulting JSON would include one record in the `value` array because the page size was defaulted to 1. The example results show how Data API builder appends `nextLink` to results when a subsequent page exists.
 
