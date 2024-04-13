@@ -1330,7 +1330,9 @@ Both REST and GraphQL can include a `$limit` or `first` variable, respectively. 
 |-------------|--------|
 | `-1`        | The current value of the `max-page-size` setting. Using `-1` is handy when the `max-page-size` setting value is unknown to the consumer. Data API builder replaces `-1` with the current value of `max-page-size`. |
 | `< max-page-size` | The results are limited to the value supplied. |
-| `0`, `< -1`, `> max-page-size`</nobr> | Invalid. An exception is returned.
+| `0` | Invalid. An exception is returned.
+| `< -1` | Invalid. An exception is returned.
+| `> max-page-size` | Invalid. An exception is returned.
 
 ### Maximum page size (Pagination runtime)
 
