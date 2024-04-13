@@ -1262,7 +1262,7 @@ Notice the `$after` option is appended to the same URL used to query the endpoin
 > [!NOTE]
 > It is possible that the underlying table data has changed between queries. This will not result in an error; however, it illustrates why Data API builder does not have the concept of a page number. Subsequent calls return the correct next page, but the page number could have changed due to data changes. In this way, the `nextLink` is literally the next page of _data_, not the next page _number_.
 
-**GraphQL pagination example**
+##### GraphQL pagination example
 
 In the example, if we issue a GraphQL query, we must include `hasNextPage` and `endCursor` to use pagination. The reason for this requirement is that REST endpoints determine the structure of their payloads, but the consumer's query determines the structure of GraphQL payloads. With or without these values, the results are still limited to the default page size. A query would look like this:
 
