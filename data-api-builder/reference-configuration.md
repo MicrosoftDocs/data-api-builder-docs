@@ -171,28 +171,7 @@ The `data-source` section defines the database and access to the database throug
     
     // mssql-only
     "options": {
-      "set-session-context": true (default) | false
-    },
-    
-    // cosmosdb_nosql-only
-    "options": {
-      "database": "your-cosmosdb-database-name", 
-      "container": "your-cosmosdb-container-name",
-      "schema": "path-to-your-graphql-schema-file"
-    }
-  }
-}
-```
-
-```json
-{
-  "data-source": {
-    "database-type": "...",
-    "connection-string": "your-connection-string",
-    
-    // mssql-only
-    "options": {
-      "set-session-context": true (default) | false
+      "set-session-context": <true> (default) | <false>
     },
     
     // cosmosdb_nosql-only
@@ -424,19 +403,19 @@ The `runtime` section outlines options that influence the runtime behavior and s
   "runtime": {
     "rest": {
       "path": "/api" (default),
-      "enabled": true (default) | false,
-      "request-body-strict": true (default) | false
+      "enabled": <true> (default) | <false>,
+      "request-body-strict": <true> (default) | <false>
     },
     "graphql": {
       "path": "/graphql" (default),
-      "enabled": true (default) | false,
-      "allow-introspection": true (default) | false
+      "enabled": <true> (default) | <false>,
+      "allow-introspection": <true> (default) | <false>
     },
     "host": {
       "mode": "production" (default) | "development",
       "cors": {
         "origins": ["<array-of-strings>"],
-        "credentials": true | false (default)
+        "credentials": <true> | <false> (default)
       },
       "authentication": {
         "provider": "StaticWebApps" (default) | ...,
@@ -523,8 +502,8 @@ This object defines whether GraphQL is enabled and the name\[s\] used to expose 
   "runtime": {
     "graphql": {
       "path": "/graphql" (default),
-      "enabled": true (default) | false,
-      "allow-introspection": true (default) | false
+      "enabled": <true> (default) | <false>,
+      "allow-introspection": <true> (default) | <false>
     }
   }
 }
@@ -652,8 +631,8 @@ This section outlines the global settings for the REST endpoints. These settings
   "runtime": {
     "rest": {
       "path": "/api" (default),
-      "enabled": true (default) | false,
-      "request-body-strict": true (default) | false
+      "enabled": <true> (default) | <false>,
+      "request-body-strict": <true> (default) | <false>
     },
     ...
   }
@@ -792,7 +771,7 @@ The `host` section within the runtime configuration provides settings crucial fo
       "mode": "production" (default) | "development",
       "cors": {
         "origins": ["<array-of-strings>"],
-        "credentials": true | false (default)
+        "credentials": <true> | <false> (default)
       },
       "authentication": {
         "provider": "StaticWebApps" (default) | ...,
@@ -1302,12 +1281,12 @@ This section defines how each entity in the database is represented in the API, 
   "entities": {
     "<entity-name>": {
       "rest": {
-        "enabled": true (default) | false,
+        "enabled": <true> (default) | <false>,
         "path": "/entity-path", (default <entity-name>)
         "methods": ["GET", "POST" (default)]
       },
       "graphql": {
-        "enabled": true (default) | false,
+        "enabled": <true> (default) | <false>,
         "type": {
           "singular": "myEntity",
           "plural": "myEntities"
@@ -2582,7 +2561,7 @@ This segment provides for integrating an entity into the GraphQL schema. It allo
     "<entity-name>": {
       ...
       "graphql": {
-        "enabled": true (default) | false,
+        "enabled": <true> (default) | <false>,
         "type": {
           "singular": "my-alternative-name",
           "plural": "my-alternative-name-pluralized"
@@ -2902,27 +2881,13 @@ The `rest` section of the configuration file is dedicated to fine-tuning the RES
 ```json
 {
   "entities": {
-    "entity-name": {
+    "<entity-name>": {
       "rest": {
-        "enabled": true (default) | false,
+        "enabled": <true> (default) | <false>,
         "path": "/entity-path", (default <entity-name>)
         "methods": ["GET", "POST" (default)]
       },
       ...
-    }
-  }
-}
-```
-
-```json
-{
-  "entities": {
-    "<string>": {
-      "rest": {
-        "enabled": "<boolean>",
-        "path": "<string>",
-        "methods": ["<string-array>"]
-      }
     }
   }
 }
@@ -2964,16 +2929,7 @@ These two examples are functionally equivalent.
 {
   "entities": {
     "Author": {
-      "source": {
-        "object": "dbo.authors",
-        "type": "table"
-      },
-      "permissions": [
-        {
-          "role": "anonymous",
-          "actions": ["*"]
-        }
-      ],
+      ...
       "rest": {
         "enabled": true
       }
@@ -3014,7 +2970,7 @@ If omitted or missing, the default value of `enabled` is `true`.
     "<entity-name>": {
       ...
       "rest": {
-        "enabled": true | false
+        "enabled": <true> (default) | <false>
       }
     }
   }
@@ -3076,7 +3032,7 @@ If omitted or missing, the `methods` default is `POST`.
       ...
       "rest": {
         ...
-        "methods": [ "GET", "POST" ]
+        "methods": [ "GET" (default), "POST" ]
       }
     }
   }
@@ -3447,7 +3403,10 @@ Enables and configures caching for the entity.
 {
   "entities": {
     "<string>": {
-      "cache": "<object>"
+      "cache": {
+        "enabled": <true> | <false> (default),
+        "ttl-seconds": (integer, default: 5)
+      }
     }
   }
 }
@@ -3455,10 +3414,10 @@ Enables and configures caching for the entity.
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`enabled`](#enabled-cache-entity)** | ❌ No | boolean |
-| **[`ttl-seconds`](#ttl-in-seconds-cache-entity)** | ❌ No | integer |
+| | Required | Type | Default
+| --- | --- | --- | ---
+| **[`enabled`](#enabled-cache-entity)** | ❌ No | boolean | false
+| **[`ttl-seconds`](#ttl-in-seconds-cache-entity)** | ❌ No | integer | 5
 
 #### Examples
 
