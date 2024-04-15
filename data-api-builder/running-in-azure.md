@@ -1,14 +1,16 @@
 ---
-title: Running Data API builder in Azure
-description: This document contains details about running Data API builder in Azure.
-author: anagha-todalbagi
-ms.author: atodalbagi
+title: Host in Azure services
+description: Walk through the prerequisites and steps to run Data API builder in various Azure hosting services as either an embedded service or container.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: running-data-api-builder-in-azure
-ms.date: 04/06/2023
+ms.topic: tutorial
+ms.date: 04/15/2023
+# Customer Intent: As a developer, I want to deploy Data API builder to Azure, so that I can use it as part of my cloud application stack.
 ---
 
-# Running Data API builder in Azure
+# Host Data API builder in Azure services
 
 Data API builder can be run in Azure in two different ways: using Azure Static Web Apps or using any container service like Azure Container Instances, Azure App Service, Azure Container Apps, etc.
 
