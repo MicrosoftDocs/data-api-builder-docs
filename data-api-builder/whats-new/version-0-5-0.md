@@ -15,9 +15,7 @@ The full list of release notes for this version is available on GitHub: <https:/
 
 ## Public JSON Schema
 
-JSON schema is published here: <https://dataapibuilder.azureedge.net/schemas/v0.5.0-beta/dab.draft.schema.json>.
-
-This schema gives you support for "intellisense," if you're using an IDE like Visual Studio Code that supports JSON Schemas. The `basic-empty-dab-config.json` file in the `samples` folder has an example starting point when manually creating the `dab-config.json` file.
+The public JSON schema gives you support for "intellisense," if you're using an IDE like Visual Studio Code that supports JSON Schemas. The `basic-empty-dab-config.json` file in the `samples` folder has an example starting point when manually creating the `dab-config.json` file.
 
 ## Public `Microsoft.DataApiBuilder` NuGet
 
