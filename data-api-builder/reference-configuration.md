@@ -1302,7 +1302,7 @@ This section defines how each entity in the database is represented in the API, 
         }
       },
       "mappings": {
-        "field-alias": "database-field-name"
+        "database-field-name": "field-alias"
       },
       "relationships": {
         "relationship-name": {
@@ -2297,7 +2297,7 @@ The `policy` section, defined per `action`, defines item-level security rules (d
 ```json
 {
   "entities": {
-    "<string>": {
+    "<entity-name>": {
       "permissions": [
         {
           "role": "<string>",
@@ -2389,20 +2389,26 @@ For more information, see [unary operators](/dotnet/api/microsoft.odata.uriparse
 - **Impact**: Fields not adhering to these rules can't be directly used in database policies.
 - **Solution**: Utilize the `mappings` section to create aliases for fields that don't meet these naming conventions; mappings ensure all fields can be included in policy expressions.
 
-###### Utilizing `mappings` for nonconforming fields
+###### Utilizing `mappings`
 
-If your entity field names don't meet the OData syntax rules, you can define conforming aliases in the `mappings` section of your configuration. Here’s an example approach to work around field naming restrictions:
+If your entity field names don't meet the OData syntax rules or you simply want to alias them for other reasons, you can define aliases in the `mappings` section of your configuration. 
 
 ```json
-"mappings": {
-  "validFieldName": "NonConforming-Field_Name1",
-  "anotherValidField": "Invalid Field Name 2"
+{
+  "entities": {
+    "<entity-name>": {
+      ...
+      "mappings": {
+        "<field-1-name>" : "<field-1-alias>",
+        "<field-2-name>" : "<field-2-alias>",
+        "<field-3-name>" : "<field-3-alias>"
+      }
+    }
+  }
 }
 ```
 
-In this example, `NonConforming-Field_Name1` and `Invalid Field Name 2` are original database field names that don't meet the OData naming conventions. By mapping to `validFieldName` and `anotherValidField`, respectively, you ensure these fields can be referenced in database policy expressions without issue.
-
-This approach not only helps in adhering to the OData naming conventions but also enhances the clarity and accessibility of your data model within both GraphQL and RESTful endpoints.
+In this example, `field-1-name` is the original database field name that doesn't meet the OData naming conventions. By mapping to `field-1-name` and `field-1-alias`, this field may be referenced in database policy expressions without issue. This approach not only helps in adhering to the OData naming conventions but also enhances the clarity and accessibility of your data model within both GraphQL and RESTful endpoints.
 
 #### Examples
 
@@ -2412,29 +2418,16 @@ Consider an entity named `Employee` within a Data API configuration that utilize
 {
   "entities": {
     "Employee": {
-      "rest": {
-        "enabled": true,
-        "path": "/employees",
-        "methods": ["GET", "POST", "PUT"]
-      },
-      "graphql": {
-        "enabled": true,
-        "type": {
-          "singular": "Employee",
-          "plural": "Employees"
-        },
-        "operation": "query"
-      },
       "source": {
-        "object": "EmployeesTable",
+        "object": "HRUNITS",
         "type": "table",
-        "key-fields": ["EmployeeId"],
+        "key-fields": ["employee NUM"],
         "parameters": {}
       },
       "mappings": {
-        "employeeId": "EmployeeId",
-        "employeeName": "Name",
-        "department": "DepartmentId"
+        "employee NUM": "EmployeeId",
+        "employee Name": "EmployeeName",
+        "department COID": "DepartmentId"
       },
       "policy": {
         "database": "@claims.role eq 'HR' or @claims.UserId eq @item.EmployeeId"
@@ -2446,11 +2439,11 @@ Consider an entity named `Employee` within a Data API configuration that utilize
 
 **Entity Definition**: The `Employee` entity is configured for REST and GraphQL interfaces, indicating its data can be queried or manipulated through these endpoints.
 
-**Source Configuration**: Identifies the `EmployeesTable` in the database, with `EmployeeId` as the key field.
+**Source Configuration**: Identifies the `HRUNITS` in the database, with `employee NUM` as the key field.
 
-**Mappings**: Aliases are used to map `EmployeeId`, `Name`, and `DepartmentId` from the database to `employeeId`, `employeeName`, and `department` in the API, simplifying the field names and potentially obfuscating sensitive database schema details.
+**Mappings**: Aliases are used to map `employee NUM`, `employee Name`, and `department COID` to `EmployeeId`, `EmployeeName`, and `DepartmentId`, respectively, simplifying field names and potentially obfuscating sensitive database schema details.
 
-**Policy Application**: The `policy` section applies a database policy using an OData-like expression. This policy restricts data access to users with the HR role (`@claims.role eq 'HR'`) or to users whose `UserId` claim matches the `EmployeeId` field in the database (`@claims.UserId eq @item.EmployeeId`). It ensures that employees can only access their own records unless they belong to the HR department. Policies can enforce row-level security based on dynamic conditions.
+**Policy Application**: The `policy` section applies a database policy using an OData-like expression. This policy restricts data access to users with the HR role (`@claims.role eq 'HR'`) or to users whose `UserId` claim matches `EmployeeId` - the field alias - in the database (`@claims.UserId eq @item.EmployeeId`). It ensures that employees can only access their own records unless they belong to the HR department. Policies can enforce row-level security based on dynamic conditions.
 
 ### Database
 
@@ -3095,9 +3088,9 @@ The `mappings` section enables configuring aliases, or exposed names, for databa
       "graphql": { ... },
       "source": { ... },
       "mappings": {
-        "<field-1-alias>" : "<field-1-name>",
-        "<field-2-alias>" : "<field-2-name>",
-        "<field-3-alias>" : "<field-3-name>"
+        "<field-1-name>" : "<field-1-alias>",
+        "<field-2-name>" : "<field-2-alias>",
+        "<field-3-name>" : "<field-3-alias>"
       }
     }
   }
@@ -3112,10 +3105,7 @@ In this example, the `sku_title` field from the database object `dbo.magazines` 
 {
   "entities": {
     "Magazine": {
-      "source": {
-        "object": "dbo.magazines",
-        "type": "table"
-      },
+      ...
       "mappings": {
         "sku_title": "title",
         "sku_status": "status"
@@ -3125,12 +3115,13 @@ In this example, the `sku_title` field from the database object `dbo.magazines` 
 }
 ```
 
-Here's another example of mappings.
+Here's another example of mappings. 
 
 ```json
 {
   "entities": {
     "Book": {
+      ...
       "mappings": {
         "id": "BookID",
         "title": "BookTitle",
@@ -3140,8 +3131,6 @@ Here's another example of mappings.
   }
 }
 ```
-
-In this refined example for the `Book` entity, the `mappings` section is utilized to define how fields in the database map to names exposed through the API, applicable for both GraphQL and REST interfaces.
 
 **Mappings**: The `mappings` object links the database fields (`BookID`, `BookTitle`, `AuthorName`) to more intuitive or standardized names (`id`, `title`, `author`) that is used externally. This aliasing serves several purposes:
 
