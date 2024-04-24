@@ -2408,7 +2408,7 @@ If your entity field names don't meet the OData syntax rules or you simply want 
 }
 ```
 
-In this example, `field-1-name` is the original database field name that doesn't meet the OData naming conventions. By mapping to `field-1-name` and `field-1-alias`, this field may be referenced in database policy expressions without issue. This approach not only helps in adhering to the OData naming conventions but also enhances the clarity and accessibility of your data model within both GraphQL and RESTful endpoints.
+In this example, `field-1-name` is the original database field name that doesn't meet the OData naming conventions. By creating a map to `field-1-name` and `field-1-alias`, this field may be referenced in database policy expressions without issue. This approach not only helps in adhering to the OData naming conventions but also enhances the clarity and accessibility of your data model within both GraphQL and RESTful endpoints.
 
 #### Examples
 
