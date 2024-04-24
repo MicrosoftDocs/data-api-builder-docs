@@ -2389,7 +2389,7 @@ For more information, see [unary operators](/dotnet/api/microsoft.odata.uriparse
 - **Impact**: Fields not adhering to these rules can't be directly used in database policies.
 - **Solution**: Utilize the `mappings` section to create aliases for fields that don't meet these naming conventions; mappings ensure all fields can be included in policy expressions.
 
-###### Utilizing `mappings`
+###### Utilizing `mappings` for nonconforming fields
 
 If your entity field names don't meet the OData syntax rules or you simply want to alias them for other reasons, you can define aliases in the `mappings` section of your configuration. 
 
