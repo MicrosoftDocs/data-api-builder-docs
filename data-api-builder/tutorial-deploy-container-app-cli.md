@@ -287,7 +287,7 @@ Finally, TODO
       --ingress "external" \
       --target-port "5000" \
       --user-assigned $MANAGED_IDENTITY_RESOURCE_ID \
-      --command "curl $CONFIG_BLOB_URL > dab-config.json"
+      --command "curl $CONFIG_BLOB_URL > /App/dab-config.json"
     ```
 
 1. TODO
