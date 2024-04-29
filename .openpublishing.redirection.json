@@ -179,7 +179,7 @@
       "source_path_from_root": "/data-api-builder/use-application-insights.md",
       "redirect_url": "/azure/data-api-builder/how-to-use-application-insights",
       "redirect_document_id": true
-    },    
+    },
     {
       "source_path_from_root": "/data-api-builder/database-specific-features.md",
       "redirect_url": "/azure/data-api-builder/reference-database-specific-features",
@@ -204,6 +204,11 @@
       "source_path_from_root": "/data-api-builder/breaking-change-list.md",
       "redirect_url": "/azure/data-api-builder/reference-policies",
       "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to-develop-local-data.md",
+      "redirect_url": "/azure/data-api-builder/quickstart-sql",
+      "redirect_document_id": true
     }
   ]
 }
