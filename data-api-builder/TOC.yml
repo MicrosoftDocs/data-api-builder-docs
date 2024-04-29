@@ -21,6 +21,12 @@
       items:
       - name: SQL
         href: quickstart-sql.md
+      - name: NoSQL
+        href: quickstart-nosql.md
+      - name: PostgreSQL
+        href: quickstart-postgresql.md
+      - name: MySQL
+        href: quickstart-mysql.md
     - name: Azure
       items:
       - name: Azure SQL

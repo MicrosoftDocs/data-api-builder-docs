@@ -105,4 +105,4 @@ When you no longer need the sample application or resources, remove the correspo
 ## Next step
 
 > [!div class="nextstepaction"]
-> [REST endpoints](rest.md)
+> [GraphQL endpoints](graphql.md)
