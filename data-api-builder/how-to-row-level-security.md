@@ -124,4 +124,4 @@ Test the filter and predicate in SQL directly to ensure it's working.
 ## Related content
 
 - [Database-specific features](reference-database-specific-features.md)
-- [Use local data](how-to-develop-local-data.md)
+- [How-to: Use environments](how-to-use-environments.md)
