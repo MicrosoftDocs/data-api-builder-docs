@@ -171,28 +171,7 @@ The `data-source` section defines the database and access to the database throug
     
     // mssql-only
     "options": {
-      "set-session-context": true (default) | false
-    },
-    
-    // cosmosdb_nosql-only
-    "options": {
-      "database": "your-cosmosdb-database-name", 
-      "container": "your-cosmosdb-container-name",
-      "schema": "path-to-your-graphql-schema-file"
-    }
-  }
-}
-```
-
-```json
-{
-  "data-source": {
-    "database-type": "...",
-    "connection-string": "your-connection-string",
-    
-    // mssql-only
-    "options": {
-      "set-session-context": true (default) | false
+      "set-session-context": <true> (default) | <false>
     },
     
     // cosmosdb_nosql-only
@@ -424,19 +403,19 @@ The `runtime` section outlines options that influence the runtime behavior and s
   "runtime": {
     "rest": {
       "path": "/api" (default),
-      "enabled": true (default) | false,
-      "request-body-strict": true (default) | false
+      "enabled": <true> (default) | <false>,
+      "request-body-strict": <true> (default) | <false>
     },
     "graphql": {
       "path": "/graphql" (default),
-      "enabled": true (default) | false,
-      "allow-introspection": true (default) | false
+      "enabled": <true> (default) | <false>,
+      "allow-introspection": <true> (default) | <false>
     },
     "host": {
       "mode": "production" (default) | "development",
       "cors": {
         "origins": ["<array-of-strings>"],
-        "credentials": true | false (default)
+        "credentials": <true> | <false> (default)
       },
       "authentication": {
         "provider": "StaticWebApps" (default) | ...,
@@ -523,8 +502,8 @@ This object defines whether GraphQL is enabled and the name\[s\] used to expose 
   "runtime": {
     "graphql": {
       "path": "/graphql" (default),
-      "enabled": true (default) | false,
-      "allow-introspection": true (default) | false
+      "enabled": <true> (default) | <false>,
+      "allow-introspection": <true> (default) | <false>
     }
   }
 }
@@ -652,8 +631,8 @@ This section outlines the global settings for the REST endpoints. These settings
   "runtime": {
     "rest": {
       "path": "/api" (default),
-      "enabled": true (default) | false,
-      "request-body-strict": true (default) | false
+      "enabled": <true> (default) | <false>,
+      "request-body-strict": <true> (default) | <false>
     },
     ...
   }
@@ -792,7 +771,7 @@ The `host` section within the runtime configuration provides settings crucial fo
       "mode": "production" (default) | "development",
       "cors": {
         "origins": ["<array-of-strings>"],
-        "credentials": true | false (default)
+        "credentials": <true> | <false> (default)
       },
       "authentication": {
         "provider": "StaticWebApps" (default) | ...,
@@ -1302,12 +1281,12 @@ This section defines how each entity in the database is represented in the API, 
   "entities": {
     "<entity-name>": {
       "rest": {
-        "enabled": true (default) | false,
+        "enabled": <true> (default) | <false>,
         "path": "/entity-path", (default <entity-name>)
         "methods": ["GET", "POST" (default)]
       },
       "graphql": {
-        "enabled": true (default) | false,
+        "enabled": <true> (default) | <false>,
         "type": {
           "singular": "myEntity",
           "plural": "myEntities"
@@ -1323,7 +1302,7 @@ This section defines how each entity in the database is represented in the API, 
         }
       },
       "mappings": {
-        "field-alias": "database-field-name"
+        "database-field-name": "field-alias"
       },
       "relationships": {
         "relationship-name": {
@@ -2318,7 +2297,7 @@ The `policy` section, defined per `action`, defines item-level security rules (d
 ```json
 {
   "entities": {
-    "<string>": {
+    "<entity-name>": {
       "permissions": [
         {
           "role": "<string>",
@@ -2412,18 +2391,24 @@ For more information, see [unary operators](/dotnet/api/microsoft.odata.uriparse
 
 ###### Utilizing `mappings` for nonconforming fields
 
-If your entity field names don't meet the OData syntax rules, you can define conforming aliases in the `mappings` section of your configuration. Here’s an example approach to work around field naming restrictions:
+If your entity field names don't meet the OData syntax rules or you simply want to alias them for other reasons, you can define aliases in the `mappings` section of your configuration. 
 
 ```json
-"mappings": {
-  "validFieldName": "NonConforming-Field_Name1",
-  "anotherValidField": "Invalid Field Name 2"
+{
+  "entities": {
+    "<entity-name>": {
+      ...
+      "mappings": {
+        "<field-1-name>" : "<field-1-alias>",
+        "<field-2-name>" : "<field-2-alias>",
+        "<field-3-name>" : "<field-3-alias>"
+      }
+    }
+  }
 }
 ```
 
-In this example, `NonConforming-Field_Name1` and `Invalid Field Name 2` are original database field names that don't meet the OData naming conventions. By mapping to `validFieldName` and `anotherValidField`, respectively, you ensure these fields can be referenced in database policy expressions without issue.
-
-This approach not only helps in adhering to the OData naming conventions but also enhances the clarity and accessibility of your data model within both GraphQL and RESTful endpoints.
+In this example, `field-1-name` is the original database field name that doesn't meet the OData naming conventions. By creating a map to `field-1-name` and `field-1-alias`, this field may be referenced in database policy expressions without issue. This approach not only helps in adhering to the OData naming conventions but also enhances the clarity and accessibility of your data model within both GraphQL and RESTful endpoints.
 
 #### Examples
 
@@ -2433,29 +2418,16 @@ Consider an entity named `Employee` within a Data API configuration that utilize
 {
   "entities": {
     "Employee": {
-      "rest": {
-        "enabled": true,
-        "path": "/employees",
-        "methods": ["GET", "POST", "PUT"]
-      },
-      "graphql": {
-        "enabled": true,
-        "type": {
-          "singular": "Employee",
-          "plural": "Employees"
-        },
-        "operation": "query"
-      },
       "source": {
-        "object": "EmployeesTable",
+        "object": "HRUNITS",
         "type": "table",
-        "key-fields": ["EmployeeId"],
+        "key-fields": ["employee NUM"],
         "parameters": {}
       },
       "mappings": {
-        "employeeId": "EmployeeId",
-        "employeeName": "Name",
-        "department": "DepartmentId"
+        "employee NUM": "EmployeeId",
+        "employee Name": "EmployeeName",
+        "department COID": "DepartmentId"
       },
       "policy": {
         "database": "@claims.role eq 'HR' or @claims.UserId eq @item.EmployeeId"
@@ -2467,11 +2439,11 @@ Consider an entity named `Employee` within a Data API configuration that utilize
 
 **Entity Definition**: The `Employee` entity is configured for REST and GraphQL interfaces, indicating its data can be queried or manipulated through these endpoints.
 
-**Source Configuration**: Identifies the `EmployeesTable` in the database, with `EmployeeId` as the key field.
+**Source Configuration**: Identifies the `HRUNITS` in the database, with `employee NUM` as the key field.
 
-**Mappings**: Aliases are used to map `EmployeeId`, `Name`, and `DepartmentId` from the database to `employeeId`, `employeeName`, and `department` in the API, simplifying the field names and potentially obfuscating sensitive database schema details.
+**Mappings**: Aliases are used to map `employee NUM`, `employee Name`, and `department COID` to `EmployeeId`, `EmployeeName`, and `DepartmentId`, respectively, simplifying field names and potentially obfuscating sensitive database schema details.
 
-**Policy Application**: The `policy` section applies a database policy using an OData-like expression. This policy restricts data access to users with the HR role (`@claims.role eq 'HR'`) or to users whose `UserId` claim matches the `EmployeeId` field in the database (`@claims.UserId eq @item.EmployeeId`). It ensures that employees can only access their own records unless they belong to the HR department. Policies can enforce row-level security based on dynamic conditions.
+**Policy Application**: The `policy` section applies a database policy using an OData-like expression. This policy restricts data access to users with the HR role (`@claims.role eq 'HR'`) or to users whose `UserId` claim matches `EmployeeId` - the field alias - in the database (`@claims.UserId eq @item.EmployeeId`). It ensures that employees can only access their own records unless they belong to the HR department. Policies can enforce row-level security based on dynamic conditions.
 
 ### Database
 
@@ -2582,7 +2554,7 @@ This segment provides for integrating an entity into the GraphQL schema. It allo
     "<entity-name>": {
       ...
       "graphql": {
-        "enabled": true (default) | false,
+        "enabled": <true> (default) | <false>,
         "type": {
           "singular": "my-alternative-name",
           "plural": "my-alternative-name-pluralized"
@@ -2902,27 +2874,13 @@ The `rest` section of the configuration file is dedicated to fine-tuning the RES
 ```json
 {
   "entities": {
-    "entity-name": {
+    "<entity-name>": {
       "rest": {
-        "enabled": true (default) | false,
+        "enabled": <true> (default) | <false>,
         "path": "/entity-path", (default <entity-name>)
         "methods": ["GET", "POST" (default)]
       },
       ...
-    }
-  }
-}
-```
-
-```json
-{
-  "entities": {
-    "<string>": {
-      "rest": {
-        "enabled": "<boolean>",
-        "path": "<string>",
-        "methods": ["<string-array>"]
-      }
     }
   }
 }
@@ -2964,16 +2922,7 @@ These two examples are functionally equivalent.
 {
   "entities": {
     "Author": {
-      "source": {
-        "object": "dbo.authors",
-        "type": "table"
-      },
-      "permissions": [
-        {
-          "role": "anonymous",
-          "actions": ["*"]
-        }
-      ],
+      ...
       "rest": {
         "enabled": true
       }
@@ -3014,7 +2963,7 @@ If omitted or missing, the default value of `enabled` is `true`.
     "<entity-name>": {
       ...
       "rest": {
-        "enabled": true | false
+        "enabled": <true> (default) | <false>
       }
     }
   }
@@ -3076,7 +3025,7 @@ If omitted or missing, the `methods` default is `POST`.
       ...
       "rest": {
         ...
-        "methods": [ "GET", "POST" ]
+        "methods": [ "GET" (default), "POST" ]
       }
     }
   }
@@ -3123,7 +3072,7 @@ This example instructs the engine that the `stp_get_bestselling_authors` stored 
 
 **REQUIRED**: ❌ No
 
-The `mappings` section enables configuring aliases, or exposed names, for database object fields. The configured exposed names apply to both the GraphQL and REST endpoints.
+[The `mappings` section](https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json#L471-L479) enables configuring aliases, or exposed names, for database object fields. The configured exposed names apply to both the GraphQL and REST endpoints.
 
 > [!IMPORTANT]
 > For entities with GraphQL enabled, the configured exposed name must meet GraphQL naming requirements. For more information, see [GraphQL names specification](https://spec.graphql.org/October2021/#sec-Names).
@@ -3139,9 +3088,9 @@ The `mappings` section enables configuring aliases, or exposed names, for databa
       "graphql": { ... },
       "source": { ... },
       "mappings": {
-        "<field-1-alias>" : "<field-1-name>",
-        "<field-2-alias>" : "<field-2-name>",
-        "<field-3-alias>" : "<field-3-name>"
+        "<field-1-name>" : "<field-1-alias>",
+        "<field-2-name>" : "<field-2-alias>",
+        "<field-3-name>" : "<field-3-alias>"
       }
     }
   }
@@ -3156,10 +3105,7 @@ In this example, the `sku_title` field from the database object `dbo.magazines` 
 {
   "entities": {
     "Magazine": {
-      "source": {
-        "object": "dbo.magazines",
-        "type": "table"
-      },
+      ...
       "mappings": {
         "sku_title": "title",
         "sku_status": "status"
@@ -3169,12 +3115,13 @@ In this example, the `sku_title` field from the database object `dbo.magazines` 
 }
 ```
 
-Here's another example of mappings.
+Here's another example of mappings. 
 
 ```json
 {
   "entities": {
     "Book": {
+      ...
       "mappings": {
         "id": "BookID",
         "title": "BookTitle",
@@ -3184,8 +3131,6 @@ Here's another example of mappings.
   }
 }
 ```
-
-In this refined example for the `Book` entity, the `mappings` section is utilized to define how fields in the database map to names exposed through the API, applicable for both GraphQL and REST interfaces.
 
 **Mappings**: The `mappings` object links the database fields (`BookID`, `BookTitle`, `AuthorName`) to more intuitive or standardized names (`id`, `title`, `author`) that is used externally. This aliasing serves several purposes:
 
@@ -3447,7 +3392,10 @@ Enables and configures caching for the entity.
 {
   "entities": {
     "<string>": {
-      "cache": "<object>"
+      "cache": {
+        "enabled": <true> | <false> (default),
+        "ttl-seconds": (integer, default: 5)
+      }
     }
   }
 }
@@ -3455,10 +3403,10 @@ Enables and configures caching for the entity.
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`enabled`](#enabled-cache-entity)** | ❌ No | boolean |
-| **[`ttl-seconds`](#ttl-in-seconds-cache-entity)** | ❌ No | integer |
+| | Required | Type | Default
+| --- | --- | --- | ---
+| **[`enabled`](#enabled-cache-entity)** | ❌ No | boolean | false
+| **[`ttl-seconds`](#ttl-in-seconds-cache-entity)** | ❌ No | integer | 5
 
 #### Examples
 
