@@ -13,7 +13,7 @@ ms.date: 04/29/2024
 
 # Tutorial: Deploy Data API builder to Azure Container Apps with Azure CLI
 
-Data API builder can be quickly deployed to Azure services like Azure Container Apps as part of your application stack.
+Data API builder can be quickly deployed to Azure services like Azure Container Apps as part of your application stack. In this tutorial, you deploy Data API builder to Azure Container Apps with a backing Azure SQL database and authentication using managed identities.
 
 In this tutorial, you:
 
@@ -34,54 +34,107 @@ In this tutorial, you:
 
 [!INCLUDE[Azure Cloud Shell](includes/azure-cloud-shell.md)]
 
-## Create a managed identity
+## Assign managed identity permissions
 
-TODO
+First, create a managed identity and assign it permissions to read data from Azure Storage.
 
-1. TODO
+1. Create a new resource group using [`az group create`](/cli/azure/group#az-group-create).
 
     ```azurecli-interactive
-    az group create --name "<resource-group>" --location "<location>"
+    az group create \
+      --name "msdocs-dab-aca"
     ```
 
-1. TODO
+1. Get the identifier of the resource group by using [`az group show`](/cli/azure/group#az-group-show).
 
     ```azurecli-interactive
-    RESOURCE_GROUP_ID=$(az group show --name "<resource-group>" --query "id" --output tsv)
+    RESOURCE_GROUP_ID=$( \
+      az group show \
+        --name "msdocs-dab-aca" \
+        --query "id" \
+        --output tsv \
+    )
     ```
 
-1. TODO
+    > [!TIP]
+    > You can always check the output of this command using `echo`.
+    >
+    > ```azurecli-interactive
+    > echo $RESOURCE_GROUP_ID
+    > ```
+    >
+
+1. Use [`az identity create`](/cli/azure/identity#az-identity-create) to create a new user-assigned managed identity.
 
     ```azurecli-interactive
-    az identity create --name "<resource-group>" -identity --resource-group "<resource-group>"
-    ```
-
-1. TODO
-
-    ```azurecli-interactive
-    UA_PRINCIPAL_ID=$(az identity show --name "<resource-group>" -identity --resource-group "<resource-group>" --query "principalId" --output tsv)
-    ```
-
-1. TODO
-
-    ```azurecli-interactive
-    UA_NAME=$(az identity show --name "<resource-group>" -identity --resource-group "<resource-group>" --query "name" --output tsv)
-    ```
-
-1. TODO
-
-    ```azurecli-interactive
-    # Storage Blob Data Owner
+    let suffix=$RANDOM*$RANDOM
     
-    az role assignment create --assignee-object-id $UA_PRINCIPAL_ID --assignee-principal-type "ServicePrincipal" --role "b7e6dc6d-f1e8-4753-8033-0f276bb0955b" --scope
+    az identity create \
+      --name "ua-id-$suffix" \
+      --identity \
+      --resource-group "msdocs-dab-aca"
     ```
 
-1. TODO
+1. Get the **principal identifier** of the managed identity using [`az identity show`](/cli/azure/identity#az-identity-show).
 
     ```azurecli-interactive
-    # Storage File Data SMB Share Reader
+    UA_PRINCIPAL_ID=$( \
+      az identity show \
+        --name "<unique-identity-name>" \
+        --identity \
+        --resource-group "msdocs-dab-aca" \
+        --query "principalId" \
+        --output tsv \
+    )
+    ```
 
-    az role assignment create --assignee-object-id $UA_PRINCIPAL_ID --assignee-principal-type "ServicePrincipal" --role "aba4ae5f-2193-4029-9191-0cb91df5e314" --scope $STORAGE_RESOURCE_ID
+    > [!TIP]
+    > Check the output of this command using `echo`.
+    >
+    > ```azurecli-interactive
+    > echo $UA_PRINCIPAL_ID
+    > ```
+    >
+
+1. Use [`az identity show`](/cli/azure/identity#az-identity-show) to get the **name** of the managed identity.
+
+    ```azurecli-interactive
+    UA_NAME=$( \
+      az identity show \
+        --name "<unique-identity-name>" \
+        --identity \
+        --resource-group "msdocs-dab-aca" \
+        --query "name" \
+        --output tsv \
+    )
+    ```
+
+    > [!TIP]
+    > Check the output of this command using `echo`.
+    >
+    > ```azurecli-interactive
+    > echo $UA_NAME
+    > ```
+    >
+
+1. Use [`az role assignment create`](/cli/azure/role/assignment#az-role-assignment-create) to assign the **Storage Blob Data Owner** role to the managed identity scoped to the current resource group.
+
+    ```azurecli-interactive
+    az role assignment create \
+      --assignee-object-id $UA_PRINCIPAL_ID \
+      --assignee-principal-type "ServicePrincipal" \
+      --role "b7e6dc6d-f1e8-4753-8033-0f276bb0955b" # Storage Blob Data Owner \
+      --scope $RESOURCE_GROUP_ID
+    ```
+
+1. Use [`az role assignment create`](/cli/azure/role/assignment#az-role-assignment-create) to assign the **Storage File Data SMB Share Reader** role to the managed identity scoped to the current resource group.
+
+    ```azurecli-interactive
+    az role assignment create \
+      --assignee-object-id $UA_PRINCIPAL_ID \
+      --assignee-principal-type "ServicePrincipal" \
+      --role "aba4ae5f-2193-4029-9191-0cb91df5e314" # Storage File Data SMB Share Reader \
+      --scope $RESOURCE_GROUP_ID
     ```
 
 ## Deploy an Azure SQL database
@@ -91,13 +144,13 @@ First, deploy a new server and database in the Azure SQL service. The database  
 1. Create a new Azure SQL **server** resource using `az sql server create`.
 
     ```azurecli-interactive
-    az sql server create --resource-group "<resource-group>" --name "<resource-group>" -srvr --enable-ad-only-auth --external-admin-principal-type "User" --external-admin-name $UA_NAME --external-admin-sid $UA_PRINCIPAL_ID
+    az sql server create --resource-group "msdocs-dab-aca" --name "msdocs-dab-aca" -srvr --enable-ad-only-auth --external-admin-principal-type "User" --external-admin-name $UA_NAME --external-admin-sid $UA_PRINCIPAL_ID
     ```
 
 1. TODO
 
     ```azurecli-interactive
-    az sql db create --resource-group "<resource-group>" --server "<resource-group>" -srvr --name adventureworks --sample-name "AdventureWorksLT"
+    az sql db create --resource-group "msdocs-dab-aca" --server "msdocs-dab-aca" -srvr --name adventureworks --sample-name "AdventureWorksLT"
     ```
 
 ## Create an Azure Storage file share
@@ -107,7 +160,7 @@ TODO
 1. TODO
 
     ```azurecli-interactive
-    az storage account create --resource-group "<resource-group>" --name "<unique-storage-account-name>"
+    az storage account create --resource-group "msdocs-dab-aca" --name "<unique-storage-account-name>"
     ```
 
 1. TODO
