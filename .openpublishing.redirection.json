@@ -207,7 +207,7 @@
     },
     {
       "source_path_from_root": "/data-api-builder/running-in-azure.md",
-      "redirect_url": "/azure/data-api-builder/tutorial-deploy-container-app",
+      "redirect_url": "/azure/data-api-builder/tutorial-deploy-container-app-cli",
       "redirect_document_id": true
     }
   ]
