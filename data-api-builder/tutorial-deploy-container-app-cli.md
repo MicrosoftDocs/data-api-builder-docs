@@ -281,11 +281,13 @@ Finally, TODO
     ```azurecli-interactive
     az containerapp create \ 
       --resource-group $RESOURCE_GROUP_NAME \
+      --environment $CONTAINER_ENV_NAME \
       --name $API_CONTAINER_NAME \
       --image "mcr.microsoft.com/azure-databases/data-api-builder:latest" \
       --ingress "external" \
       --target-port "5000" \
-      --user-assigned $MANAGED_IDENTITY_RESOURCE_ID
+      --user-assigned $MANAGED_IDENTITY_RESOURCE_ID \
+      --command "curl $CONFIG_BLOB_URL > dab-config.json"
     ```
 
 1. TODO
