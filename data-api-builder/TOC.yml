@@ -31,7 +31,7 @@
       href: how-to-run-from-source.md
     - name: Implement row-level security in SQL
       href: how-to-row-level-security.md
-    - name: Use enviornments
+    - name: Use environments
       href: how-to-use-environments.md
     - name: Use Application Insights
       href: how-to-use-application-insights.md
