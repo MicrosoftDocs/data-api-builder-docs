@@ -48,7 +48,9 @@ First, create a managed identity and assign it permissions to read data from Azu
 
     ```azurecli-interactive
     az group create \
-      --name $RESOURCE_GROUP_NAME
+      --name $RESOURCE_GROUP_NAME \
+      --location "westus" \
+      --tag "msdocs-dab-tutorial"
     ```
 
 1. Create a variable named `RESOURCE_GROUP_ID` to store the identifier of the resource group. Get the identifier using [`az group show`](/cli/azure/group#az-group-show). You will use this variable multiple times in this tutorial.
@@ -63,12 +65,7 @@ First, create a managed identity and assign it permissions to read data from Azu
     ```
 
     > [!TIP]
-    > You can always check the output of this command using `echo`.
-    >
-    > ```azurecli-interactive
-    > echo $RESOURCE_GROUP_ID
-    > ```
-    >
+    > You can always check the output of this command using `echo $RESOURCE_GROUP_ID`.
 
 1. Create a variable named `MANAGED_IDENTITY_NAME` with a uniquely generated name for your user-assigned manager identity. You will also use this variable multiple times in this tutorial.
 
@@ -84,10 +81,10 @@ First, create a managed identity and assign it permissions to read data from Azu
       --resource-group $RESOURCE_GROUP_NAME
     ```
 
-1. Get the **principal identifier** of the managed identity using [`az identity show`](/cli/azure/identity#az-identity-show).
+1. Get the **principal identifier** of the managed identity using [`az identity show`](/cli/azure/identity#az-identity-show) and store the value in a variable named `MANAGED_IDENTITY_PRINCIPAL_ID`.
 
     ```azurecli-interactive
-    UA_PRINCIPAL_ID=$( \
+    MANAGED_IDENTITY_PRINCIPAL_ID=$( \
       az identity show \
         --name $MANAGED_IDENTITY_NAME \
         --resource-group $RESOURCE_GROUP_NAME \
@@ -97,12 +94,7 @@ First, create a managed identity and assign it permissions to read data from Azu
     ```
 
     > [!TIP]
-    > Check the output of this command using `echo`.
-    >
-    > ```azurecli-interactive
-    > echo $UA_PRINCIPAL_ID
-    > ```
-    >
+    > You can always check the output of this command using `echo $MANAGED_IDENTITY_PRINCIPAL_ID`.
 
 1. Use [`az role assignment create`](/cli/azure/role/assignment#az-role-assignment-create) to assign the **Storage Blob Data Owner** role to the managed identity scoped to the current resource group.
 
