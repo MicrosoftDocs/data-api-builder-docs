@@ -108,7 +108,7 @@ Refer to this matrix to better understand which value is used depending on where
 | **Specified in current environment configuration** | Current environment | Current environment |
 | **Not specified in current environment configuration** | Base | None |
 
-For an example of using multiple configuration files, see [use Data API builder with environments](how-to-use-environments.md).
+For an example of using multiple configuration files, see [use Data API builder with environments](how-to-develop-local-data.md).
 
 ## Configuration properties
 
