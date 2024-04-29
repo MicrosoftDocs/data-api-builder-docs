@@ -213,21 +213,25 @@ Next, TODO
 1. TODO
 
     ```azurecli-interactive
-    dotnet tool install --global Microsoft.DataApiBuilder
+    dotnet tool install \
+      --global \
+      Microsoft.DataApiBuilder
     ```
 
 1. TODO
 
     ```azurecli-interactive
     dab init \
-      --type "mssql" \
+      --database-type "mssql" \
       --connection-string "@env('DATABASE_CONNECTION_STRING')"
     ```
 
 1. TODO
 
     ```azurecli-interactive
-    dab add Product --source "SalesLT.Product" --permissions "anonymous:read"
+    dab add Product \
+      --source "SalesLT.Product" \
+      --permissions "anonymous:read"
     ```
 
 1. TODO
