@@ -60,7 +60,7 @@ First, create a managed identity and assign it permissions to read data from Azu
       az group show \
         --name $RESOURCE_GROUP_NAME \
         --query "id" \
-        --output tsv \
+        --output "tsv" \
     )
     ```
 
@@ -89,107 +89,203 @@ First, create a managed identity and assign it permissions to read data from Azu
         --name $MANAGED_IDENTITY_NAME \
         --resource-group $RESOURCE_GROUP_NAME \
         --query "principalId" \
-        --output tsv \
+        --output "tsv" \
     )
     ```
 
     > [!TIP]
     > You can always check the output of this command using `echo $MANAGED_IDENTITY_PRINCIPAL_ID`.
 
-1. Use [`az role assignment create`](/cli/azure/role/assignment#az-role-assignment-create) to assign the **Storage Blob Data Owner** role to the managed identity scoped to the current resource group.
+1. Get the **resource identifier** of the managed identity using [`az identity show`](/cli/azure/identity#az-identity-show) and store the value in a variable named `MANAGED_IDENTITY_RESOURCE_ID`.
+
+    ```azurecli-interactive
+    MANAGED_IDENTITY_RESOURCE_ID=$( \
+      az identity show \
+        --name $MANAGED_IDENTITY_NAME \
+        --resource-group $RESOURCE_GROUP_NAME \
+        --query "id" \
+        --output "tsv" \
+    )
+    ```
+
+    > [!TIP]
+    > You can always check the output of this command using `echo $MANAGED_IDENTITY_RESOURCE_ID`.
+
+1. Use [`az role assignment create`](/cli/azure/role/assignment#az-role-assignment-create) to assign the **Storage Blob Data Owner** role to your account so you can upload blobs to Azure Storage.
 
     ```azurecli-interactive
     # Storage Blob Data Owner
     
     az role assignment create \
-      --assignee-object-id $UA_PRINCIPAL_ID \
-      --assignee-principal-type "ServicePrincipal" \
+      --assignee $( \
+        az ad signed-in-user show \
+          --query "id" \
+          --output "tsv" \
+      ) \
       --role "b7e6dc6d-f1e8-4753-8033-0f276bb0955b" \
-      --scope $RESOURCE_GROUP_ID
-    ```
-
-1. Use [`az role assignment create`](/cli/azure/role/assignment#az-role-assignment-create) to assign the **Storage File Data SMB Share Reader** role to the managed identity scoped to the current resource group.
-
-    ```azurecli-interactive
-    # Storage File Data SMB Share Reader
-    
-    az role assignment create \
-      --assignee-object-id $UA_PRINCIPAL_ID \
-      --assignee-principal-type "ServicePrincipal" \
-      --role "aba4ae5f-2193-4029-9191-0cb91df5e314" \
       --scope $RESOURCE_GROUP_ID
     ```
 
 ## Deploy an Azure SQL database
 
-First, deploy a new server and database in the Azure SQL service. The database   the **AdventureWorksLT** sample dataset.
+Now, deploy a new server and database in the Azure SQL service. The database will use the **AdventureWorksLT** sample dataset.
 
-1. Create a new Azure SQL **server** resource using `az sql server create`.
+1. Create a variable named `SQL_SERVER_NAME` with a uniquely generated name for your Azure SQL server instance. You will use this variable later in this section.
 
     ```azurecli-interactive
-    az sql server create --resource-group "msdocs-dab-aca" --name "msdocs-dab-aca" -srvr --enable-ad-only-auth --external-admin-principal-type "User" --external-admin-name $UA_NAME --external-admin-sid $UA_PRINCIPAL_ID
+    SQL_SERVER_NAME="srvr-$RANDOM"
     ```
 
-1. TODO
+1. Create a new Azure SQL **server** resource using [`az sql server create`](/cli/azure/sql/server#az-sql-server-create). Configure the managed identity as the admin of this server.
 
     ```azurecli-interactive
-    az sql db create --resource-group "msdocs-dab-aca" --server "msdocs-dab-aca" -srvr --name adventureworks --sample-name "AdventureWorksLT"
+    az sql server create \
+      --resource-group $RESOURCE_GROUP_NAME \
+      --name $SQL_SERVER_NAME \
+      --enable-ad-only-auth \
+      --external-admin-principal-type "User" \
+      --external-admin-name $MANAGED_IDENTITY_NAME \
+      --external-admin-sid $MANAGED_IDENTITY_PRINCIPAL_ID
+    ```
+
+1. Use [`az sql db create`](/cli/azure/sql/db#az-sql-db-create) to create a **database** within the Azure SQL server named `adventureworks`. Configure the database to use the `AdventureWorksLT` sample data.
+
+    ```azurecli-interactive
+    az sql db create \
+      --resource-group $RESOURCE_GROUP_NAME \
+      --server $SQL_SERVER_NAME \
+      --name "adventureworks" \
+      --sample-name "AdventureWorksLT"
+    ```
+
+1. Get the **fully-qualified domain name** of the Azure SQL server using [`az sql server show`](/cli/azure/sql/server#az-sql-server-show) and store the value in a variable named `SQL_SERVER_ENDPOINT`.
+
+    ```azurecli-interactive
+    SQL_SERVER_ENDPOINT=$( \
+      az sql server show \
+        --resource-group $RESOURCE_GROUP_NAME \
+        --name $SQL_SERVER_NAME \
+        --query "fullyQualifiedDomainName" \
+        --output "tsv" \
+    )
+    ```
+
+    > [!TIP]
+    > You can always check the output of this command using `echo $SQL_SERVER_ENDPOINT`.
+
+1. Create a variable named `SQL_CONNECTION_STRING` with the connection string for the `adventureworks` database in your Azure SQL server instance. You will use this variable later in this tutorial.
+
+    ```azurecli-interactive
+    SQL_CONNECTION_STRING="Server=$SQL_SERVER_ENDPOINT;Database=adventureworks;Encrypt=true;Authentication=Active Directory Default;"
     ```
 
 ## Create an Azure Storage file share
 
-TODO
+Next, TODO
 
-1. TODO
+1. Create a variable named `STORAGE_NAME` with a uniquely generated name for your Azure Storage instance. You will use this variable later in this section.
 
     ```azurecli-interactive
-    az storage account create --resource-group "msdocs-dab-aca" --name "<unique-storage-account-name>"
+    STORAGE_NAME="stor$RANDOM"
     ```
 
 1. TODO
 
     ```azurecli-interactive
-    az storage share create --account-name "<unique-storage-account-name>" --name dab-config
+    az storage account create \
+      --resource-group $RESOURCE_GROUP_NAME \
+      --name $STORAGE_NAME \
+      --location "westus" \
+      --allow-shared-key-access false \
+      --allow-blob-public-access true
     ```
 
 1. TODO
 
     ```azurecli-interactive
-    dotnet tool install --global TODO
+    az storage container create \
+      --account-name $STORAGE_NAME \
+      --name "dab-config" \
+      --public-access "blob" \
+      --auth-mode "login"
     ```
 
 1. TODO
 
     ```azurecli-interactive
-    dab init TODO
+    dotnet tool install --global Microsoft.DataApiBuilder
     ```
 
 1. TODO
 
     ```azurecli-interactive
-    dab add TODO
+    dab init \
+      --type "mssql"
+      --connection-string $SQL_CONNECTION_STRING
     ```
 
 1. TODO
 
     ```azurecli-interactive
-    az storage file upload --account-name "<unique-storage-account-name>" --share-name dab-config --source dab-config.json --path dab-config.json
+    dab add Product --source "SalesLT.Product" --permissions "anonymous:read"
     ```
+
+1. TODO
+
+    ```azurecli-interactive
+    az storage blob upload \
+      --account-name $STORAGE_NAME \
+      --container-name "dab-config" \
+      --file "dab-config.json" \
+      --auth-mode "login"
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    CONFIG_BLOB_URL=$( \
+      az storage blob url \
+        --account-name $STORAGE_NAME \
+        --container-name "dab-config" \
+        --name "dab-config.json" \
+        --auth-mode "login" \
+        --output "tsv" \
+    )
+    ```
+
+    > [!TIP]
+    > You can always check the output of this command using `echo $CONFIG_BLOB_URL`.
 
 ## Deploy Azure Container App DAB container
 
-TODO
+Finally, TODO
 
-1. TODO
+1. Create variables named `API_CONTAINER_NAME` and `CONTAINER_ENV_NAME` with uniquely generated names for your Azure Container Apps instance. You will use these variables later in this section.
 
     ```azurecli-interactive
-    az container create
+    API_CONTAINER_NAME="api-$RANDOM"
+    CONTAINER_ENV_NAME="env-$RANDOM"
     ```
 
 1. TODO
 
     ```azurecli-interactive
-    TODO
+    az containerapp env create \ 
+      --resource-group $RESOURCE_GROUP_NAME \
+      --name $CONTAINER_ENV_NAME \
+      --location "westus"
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    az containerapp create \ 
+      --resource-group $RESOURCE_GROUP_NAME \
+      --name $API_CONTAINER_NAME \
+      --image "mcr.microsoft.com/azure-databases/data-api-builder:latest" \
+      --ingress "external" \
+      --target-port "5000" \
+      --user-assigned $MANAGED_IDENTITY_RESOURCE_ID
     ```
 
 1. TODO
@@ -200,35 +296,13 @@ TODO
 
 1. Navigate to `TODO` and test the API.
 
-## Deploy Azure Container App web application
-
-TODO
-
-1. TODO
-
-    ```azurecli-interactive
-    TODO
-    ```
-
-1. TODO
-
-    ```azurecli-interactive
-    TODO
-    ```
-
-1. TODO
-
-    ```azurecli-interactive
-    TODO
-    ```
-
 ## Clean up resources
 
 When you no longer need the sample application or resources, remove the corresponding deployment and all resources.
 
 ```azurecli-interactive
 az group delete \
-  --name "msdocs-dab-aca"
+  --name $RESOURCE_GROUP_NAME
 ```
 
 ## Next step
