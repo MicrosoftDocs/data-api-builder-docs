@@ -53,7 +53,7 @@ First, create a managed identity and assign it permissions to read data from Azu
       --tag "msdocs-dab-tutorial"
     ```
 
-1. Create a variable named `RESOURCE_GROUP_ID` to store the identifier of the resource group. Get the identifier using [`az group show`](/cli/azure/group#az-group-show). You will use this variable multiple times in this tutorial.
+1. Create a variable named `RESOURCE_GROUP_ID` to store the identifier of the resource group. Get the identifier using [`az group show`](/cli/azure/group#az-group-show). You use this variable multiple times in this tutorial.
 
     ```azurecli-interactive
     RESOURCE_GROUP_ID=$( \
@@ -67,7 +67,7 @@ First, create a managed identity and assign it permissions to read data from Azu
     > [!TIP]
     > You can always check the output of this command using `echo $RESOURCE_GROUP_ID`.
 
-1. Create a variable named `MANAGED_IDENTITY_NAME` with a uniquely generated name for your user-assigned manager identity. You will also use this variable multiple times in this tutorial.
+1. Create a variable named `MANAGED_IDENTITY_NAME` with a uniquely generated name for your user-assigned manager identity. You also use this variable multiple times in this tutorial.
 
     ```azurecli-interactive
     MANAGED_IDENTITY_NAME="ua-$RANDOM"
@@ -128,9 +128,9 @@ First, create a managed identity and assign it permissions to read data from Azu
 
 ## Deploy an Azure SQL database
 
-Now, deploy a new server and database in the Azure SQL service. The database will use the **AdventureWorksLT** sample dataset.
+Now, deploy a new server and database in the Azure SQL service. The database uses the **AdventureWorksLT** sample dataset.
 
-1. Create a variable named `SQL_SERVER_NAME` with a uniquely generated name for your Azure SQL server instance. You will use this variable later in this section.
+1. Create a variable named `SQL_SERVER_NAME` with a uniquely generated name for your Azure SQL server instance. You use this variable later in this section.
 
     ```azurecli-interactive
     SQL_SERVER_NAME="srvr-$RANDOM"
@@ -173,7 +173,7 @@ Now, deploy a new server and database in the Azure SQL service. The database wil
     > [!TIP]
     > You can always check the output of this command using `echo $SQL_SERVER_ENDPOINT`.
 
-1. Create a variable named `SQL_CONNECTION_STRING` with the connection string for the `adventureworks` database in your Azure SQL server instance. You will use this variable later in this tutorial.
+1. Create a variable named `SQL_CONNECTION_STRING` with the connection string for the `adventureworks` database in your Azure SQL server instance. You use this variable later in this tutorial.
 
     ```azurecli-interactive
     SQL_CONNECTION_STRING="Server=$SQL_SERVER_ENDPOINT;Database=adventureworks;Encrypt=true;Authentication=Active Directory Default;"
@@ -183,7 +183,7 @@ Now, deploy a new server and database in the Azure SQL service. The database wil
 
 Next, TODO
 
-1. Create a variable named `STORAGE_NAME` with a uniquely generated name for your Azure Storage instance. You will use this variable later in this section.
+1. Create a variable named `STORAGE_NAME` with a uniquely generated name for your Azure Storage instance. You use this variable later in this section.
 
     ```azurecli-interactive
     STORAGE_NAME="stor$RANDOM"
@@ -264,7 +264,7 @@ Next, TODO
 
 Finally, TODO
 
-1. Create variables named `API_CONTAINER_NAME` and `CONTAINER_ENV_NAME` with uniquely generated names for your Azure Container Apps instance. You will use these variables later in this section.
+1. Create variables named `API_CONTAINER_NAME` and `CONTAINER_ENV_NAME` with uniquely generated names for your Azure Container Apps instance. You use these variables later in this section.
 
     ```azurecli-interactive
     API_CONTAINER_NAME="api-$RANDOM"
