@@ -64,10 +64,8 @@ landingContent:
             url: how-to-row-level-security.md
       - linkListType: tutorial
         links:
-          - text: Deploy to Azure Static Web Apps with Azure Cosmos DB for NoSQL
-            url: tutorial-deploy-static-web-app.md
           - text: Deploy to Azure Container Apps with Azure SQL
-            url: tutorial-deploy-container-app.md
+            url: tutorial-container-app-cli.md
   - title: Reference
     linkLists:
       - linkListType: reference

@@ -1,17 +1,17 @@
 ---
 title: |
-  Tutorial: Azure Container Apps and Azure SQL
-description: This tutorial walks through the steps necessary to deploy an API solution to Azure Container Apps using Azure SQL.
+  Tutorial: Deploy to Azure Container Apps with Azure CLI
+description: This tutorial walks through the steps necessary to deploy an API solution for Azure SQL to Azure Container Apps using the Azure CLI.
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: tutorial
-ms.date: 04/11/2024
+ms.date: 04/29/2024
 #Customer Intent: As a developer, I want to deploy to Azure, so that I can integrate Data API builder with my other cloud services.
 ---
 
-# Tutorial: Deploy Data API builder for Azure SQL to Azure Container Apps with Azure CLI
+# Tutorial: Deploy Data API builder to Azure Container Apps with Azure CLI
 
 Data API builder can be quickly deployed to Azure services like Azure Container Apps as part of your application stack.
 
