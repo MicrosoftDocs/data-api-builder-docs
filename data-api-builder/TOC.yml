@@ -25,14 +25,14 @@
   items:
     - name: Install the CLI
       href: how-to-install-cli.md
-    - name: Develop with local data
-      href: how-to-develop-local-data.md
     - name: Run in a container
       href: how-to-run-container.md
     - name: Run from source code
       href: how-to-run-from-source.md
     - name: Implement row-level security in SQL
       href: how-to-row-level-security.md
+    - name: Use environments
+      href: how-to-use-environments.md
     - name: Use Application Insights
       href: how-to-use-application-insights.md
 - name: Tutorials

@@ -54,8 +54,6 @@ landingContent:
         links:
           - text: Install the CLI
             url: how-to-install-cli.md
-          - text: Develop using local data
-            url: how-to-develop-local-data.md
           - text: Run in container
             url: how-to-run-container.md
           - text: Run from source code
