@@ -7,13 +7,13 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: tutorial
-ms.date: 04/29/2024
+ms.date: 04/30/2024
 #Customer Intent: As a developer, I want to deploy to Azure, so that I can integrate Data API builder with my other cloud services.
 ---
 
 # Tutorial: Deploy Data API builder to Azure Container Apps with Azure CLI
 
-Data API builder can be quickly deployed to Azure services like Azure Container Apps as part of your application stack. In this tutorial, you build a container image with Data API builder and store it in Azure Container Registry. You then deploy the container image to Azure Container Apps with a backing Azure SQL database. The entire tutorial authenticates to each component using managed identities.
+Data API builder can be quickly deployed to Azure services like Azure Container Apps as part of your application stack. In this tutorial, you use the Azure CLI to automate common tasks when deploying Data API builder to Azure. First, you build a container image with Data API builder and store it in Azure Container Registry. You then deploy the container image to Azure Container Apps with a backing Azure SQL database. The entire tutorial authenticates to each component using managed identities.
 
 In this tutorial, you:
 
@@ -37,7 +37,7 @@ In this tutorial, you:
 
 First, create a managed identity and assign it permissions to read data from Azure Storage.
 
-1. Create a variable named `UA_NAME` with the resource group name. For this tutorial, we recommend `msdocs-dab-aca`.
+1. Create a variable named `RESOURCE_GROUP_NAME` with the resource group name. For this tutorial, we recommend `msdocs-dab-aca`.
 
     ```azurecli-interactive
     RESOURCE_GROUP_NAME="msdocs-dab-aca"
