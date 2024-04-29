@@ -17,10 +17,16 @@
           href: whats-new/index.yml
 - name: Quickstarts
   items:
-    - name: Azure SQL
-      href: quickstart-azure-sql.md
-    - name: Azure Cosmos DB for NoSQL
-      href: quickstart-azure-cosmos-db-nosql.md
+    - name: Local
+      items:
+      - name: SQL
+        href: quickstart-sql.md
+    - name: Azure
+      items:
+      - name: Azure SQL
+        href: quickstart-azure-sql.md
+      - name: Azure Cosmos DB for NoSQL
+        href: quickstart-azure-cosmos-db-nosql.md
 - name: How to
   items:
     - name: Install the CLI

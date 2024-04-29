@@ -7,7 +7,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: quickstart
-ms.date: 04/08/2024
+ms.date: 04/29/2024
 # Customer Intent: As a developer, I want to get started using Data API builder quickly, so that I can evaluate the tool.
 ---
 
@@ -105,4 +105,4 @@ When you no longer need the sample application or resources, remove the correspo
 ## Next step
 
 > [!div class="nextstepaction"]
-> [Install the DAB CLI on your local machine](how-to-install-cli.md)
+> [REST endpoints](rest.md)

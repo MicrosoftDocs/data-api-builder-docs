@@ -1,29 +1,33 @@
 ---
-title: Connect with local data
-description: Use the Data API builder with a local Docker-hosted SQL database as part of your typical development process.
+title: |
+  Quickstart: Use with SQL
+description: Get started quickly using the Data API builder with a local Docker-hosted SQL database.
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: how-to
-ms.date: 03/20/2024
-#Customer Intent: As a developer, I want to use the Data API builder with my local database, so that I can quickly develop my API before deploying it.
+ms.topic: quickstart
+ms.date: 04/29/2024
+#Customer Intent: As a developer, I want to use the Data API builder with my local SQL database, so that I can quickly develop my API before deploying it.
 ---
 
-# Connect Data API builder with local data
+# Quickstart: Use Data API builder with SQL
 
-This guide walks through the steps to build a set of Data API builder configuration files to target a local database. Targeting a local development database early makes it possible to iterate over your configuration and schema quickly as part of your development workflow. The end result configuration files should be flexible enough that a production database configuration can be added in the future with minimal changes.
+In this Quickstart, you build a set of Data API builder configuration files to target a local SQL database.
+
+[!INCLUDE[Quickstart overview](includes/quickstart-overview.md)]
 
 ## Prerequisites
 
-- Data API builder command-line interface (CLI)
-  - [Install the CLI](how-to-install-cli.md)
-- Database on local development machine
-  - This guide uses Microsoft SQL Server 2022 running in a Docker Linux container image, but any supported database can be used
+[!INCLUDE[Quickstart prerequisites](includes/quickstart-prerequisites.md)]
+
+## Install the Data API builder CLI
+
+[!INCLUDE[Install CLI](includes/install-cli.md)]
 
 ## Configure the local database
 
-Start by configuring the local database to set the relevant credentials and create basic tables.
+Start by configuring the local database to set the relevant credentials. Then, you can see the database with sample data.
 
 1. Get the latest copy of the `mcr.microsoft.com/mssql/server:2022-latest` container image from Docker Hub.
 
@@ -89,9 +93,9 @@ Start by configuring the local database to set the relevant credentials and crea
     GO
     ```
 
-## Create a base configuration file
+## Create configuration files
 
-Start by creating a baseline configuration file using the DAB CLI.
+Create a baseline configuration file using the DAB CLI. Then, add a development configuration file with your current credentials.
 
 1. Create a typical configuration file using `dab init`.
 
@@ -170,21 +174,6 @@ Start by creating a baseline configuration file using the DAB CLI.
     }
     ```
 
-1. Run the tool with `dab start`.
-
-    ```dotnetcli
-    dab start
-    ```
-
-    > [!Note]
-    > By default, the engine uses the `dab-config.json` file is a `DAB_ENVIRONMENT` environment variable is not set. Alternatively, you can use `dab start --config <specific-config-file>` to force the engine to use a specific configuration file regardless of the `DAB_ENVIRONMENT` environment variable's value.
-
-1. Observe that the engine fails to start because the default configuration file doesn't specify a connection string for the SQL Server database connection.
-
-## Create a development configuration file
-
-Now, create the environment variables file and a delta configuration file for development-only configuration settings.
-
 1. Create an `.env` file in the same directory as your DAB CLI configuration files.
 
 1. Add a `DAB_ENVIRONMENT` environment variable with a value of `Development`. Also, add an `SQL_DOCKER_CONNECTION_STRING` environment variable with your database connection string from the first section. Replace `<your-password>` with the password you set earlier in this guide.
@@ -206,7 +195,7 @@ Now, create the environment variables file and a delta configuration file for de
     }
     ```
 
-1. **Save** your changes to the `.env` and `dab-config.Development.json` files.
+1. **Save** your changes to the *.env*, *dab-config.json*, and *dab-config.Development.json* files.
 
 ## Test API with the local database
 
@@ -240,7 +229,7 @@ Now, start the Data API builder tool to validate that your configuration files a
     > [!TIP]
     > In this example, the URL would be `<https://localhost:5000/swagger`. Again, you can navigate to this URL using your web browser.
 
-## Related content
+## Next step
 
-- [Command-line interface (CLI) reference](reference-cli.md)
-- [Configuration reference](reference-configuration.md)
+> [!div class="nextstepaction"]
+> [Quickstart: Deploy Data API builder to Azure](quickstart-azure-sql.md)
