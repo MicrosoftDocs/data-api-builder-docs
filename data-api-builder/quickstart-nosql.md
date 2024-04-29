@@ -135,6 +135,17 @@ Start by running the local emulator. Then, you can seed a new container with sam
 
 Create a baseline configuration file using the DAB CLI. Then, add a development configuration file with your current credentials.
 
+1. Create a new file named *schema.graphql* with this schema content.
+
+    ```graphql
+    type Author @model {
+      id: ID!
+      firstName: String!
+      middleName: String
+      lastName: String!
+    }
+    ```
+
 1. Create a typical configuration file using `dab init`. Add the `--connection-string` argument with the emulator's default connection string.
 
     ```dotnetcli
@@ -169,7 +180,7 @@ Now, start the Data API builder tool to validate that your configuration files a
     > [!TIP]
     > In this example, the application is running on `localhost` at port **5000**. Your running application may have a different address and port.
 
-1. Try the API manually by issuing the following GraphQL operation.
+1. Go to the GraphQL endpoint by navigating to `/graphql` and running this operation.
 
     ```graphql
     query {
@@ -182,6 +193,9 @@ Now, start the Data API builder tool to validate that your configuration files a
       }
     }
     ```
+
+    > [!TIP]
+    > In this example, the URL would be `https://localhost:5000/graphql`. You can navigate to this URL using your web browser.
 
 ## Next step
 

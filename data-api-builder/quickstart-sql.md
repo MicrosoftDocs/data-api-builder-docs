@@ -140,7 +140,7 @@ Now, start the Data API builder tool to validate that your configuration files a
 1. Next, navigate to the Swagger documentation page at `/swagger`.
 
     > [!TIP]
-    > In this example, the URL would be `<https://localhost:5000/swagger`. Again, you can navigate to this URL using your web browser.
+    > In this example, the URL would be `https://localhost:5000/swagger`. Again, you can navigate to this URL using your web browser.
 
 ## Next step
 
