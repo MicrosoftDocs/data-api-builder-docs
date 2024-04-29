@@ -50,7 +50,7 @@ Start by configuring and running the local database to set the relevant credenti
 1. Connect to your local database using your preferred data management environment. Examples include, but aren't limited to: [SQL Server Management Studio](/sql/ssms), [Azure Data Studio](/azure-data-studio), and the [SQL Server extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql).
 
     > [!TIP]
-    > If you're using default networking for your Docker Linux container images, the connection string will likely be `Server=localhost,1433;User Id=sa;Password=<your-password>;`. Replace `<your-password>` with the password you set earlier.
+    > If you're using default networking for your Docker Linux container images, the connection string will likely be `Server=localhost,1433;User Id=sa;Password=<your-password>;TrustServerCertificate=True;Encrypt=True;`. Replace `<your-password>` with the password you set earlier.
 
 1. Create a new `bookshelf` database and use the database for your remaining queries.
 
@@ -101,7 +101,7 @@ Create a baseline configuration file using the DAB CLI. Then, add a development 
 1. Create a typical configuration file using `dab init`. Add the `--connection-string` argument with your database connection string from the first section. Replace `<your-password>` with the password you set earlier in this guide. Also, add the `Database=bookshelf` value to the connection string.
 
     ```dotnetcli
-    dab init --database-type "mssql" --host-mode "Development" --connection-string "Server=localhost,1433;User Id=sa;Database=bookshelf;Password=<your-password>;"
+    dab init --database-type "mssql" --host-mode "Development" --connection-string "Server=localhost,1433;User Id=sa;Database=bookshelf;Password=<your-password>;TrustServerCertificate=True;Encrypt=True;"
     ```
 
 1. Add an **Author** entity using `dab add`.
