@@ -220,8 +220,8 @@ Next, TODO
 
     ```azurecli-interactive
     dab init \
-      --type "mssql"
-      --connection-string $SQL_CONNECTION_STRING
+      --type "mssql" \
+      --connection-string "@env('DATABASE_CONNECTION_STRING')"
     ```
 
 1. TODO
@@ -287,6 +287,7 @@ Finally, TODO
       --ingress "external" \
       --target-port "5000" \
       --user-assigned $MANAGED_IDENTITY_RESOURCE_ID \
+      --env-vars "DATABASE_CONNECTION_STRING=$SQL_CONNECTION_STRING" \
       --command "curl $CONFIG_BLOB_URL > /App/dab-config.json"
     ```
 
