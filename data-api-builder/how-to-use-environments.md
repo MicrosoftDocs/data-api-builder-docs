@@ -221,7 +221,7 @@ Finally, add a development configuration file with the delta between your curren
     ```
 
     > [!TIP]
-    > In this example, the URL would be `<https://localhost:5000/graphql`. Again, you can navigate to this URL using your web browser.
+    > In this example, the URL would be `https://localhost:5000/graphql`. Again, you can navigate to this URL using your web browser.
 
 ## Related content
 
