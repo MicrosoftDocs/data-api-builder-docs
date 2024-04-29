@@ -15,11 +15,12 @@ ms.date: 04/29/2024
 
 In this Quickstart, you build a set of Data API builder configuration files to target a local PostgreSQL database.
 
-[!INCLUDE[Quickstart overview](includes/quickstart-overview.md)]
-
 ## Prerequisites
 
-[!INCLUDE[Quickstart prerequisites](includes/quickstart-prerequisites.md)]
+- [Docker](https://www.docker.com/products/docker-desktop/)
+- [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0)
+- A data management client
+  - If you don't have a client installed, [install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
 
 ## Install the Data API builder CLI
 
@@ -86,103 +87,17 @@ Start by configuring and running the local database. Then, you can seed a new co
 
 Create a baseline configuration file using the DAB CLI. Then, add a development configuration file with your current credentials.
 
-1. Create a typical configuration file using `dab init`.
+1. Create a typical configuration file using `dab init`. Add the `--connection-string` argument with your database connection string from the first section. Replace `<your-password>` with the password you set earlier in this guide. Also, add the `Database=bookshelf` value to the connection string.
 
     ```dotnetcli
-    dab init --database-type "postgresql" --host-mode "Development"
+    dab init --database-type "postgresql" --host-mode "Development" --connection-string "Host=localhost;Port=5432;Database=bookshelf;User ID=postgres;Password=<your-password>;"
     ```
 
-1. Add an Author entity using `dab add`.
+1. Add an **Author** entity using `dab add`.
 
     ```dotnetcli
     dab add Author --source "public.authors" --permissions "anonymous:*"
     ```
-
-1. Observe your current *dab-config.json* configuration file. The file should include a baseline implementation of your API with a single entity, a REST API endpoint, and a GraphQL endpoint.
-
-    ```json
-    {
-      "$schema": "https://github.com/Azure/data-api-builder/releases/download/v0.10.23/dab.draft.schema.json",
-      "data-source": {
-        "database-type": "postgresql",
-        "connection-string": "",
-        "options": {}
-      },
-      "runtime": {
-        "rest": {
-          "enabled": true,
-          "path": "/api",
-          "request-body-strict": true
-        },
-        "graphql": {
-          "enabled": true,
-          "path": "/graphql",
-          "allow-introspection": true
-        },
-        "host": {
-          "cors": {
-            "origins": [],
-            "allow-credentials": false
-          },
-          "authentication": {
-            "provider": "StaticWebApps"
-          },
-          "mode": "development"
-        }
-      },
-      "entities": {
-        "Author": {
-          "source": {
-            "object": "public.authors",
-            "type": "table"
-          },
-          "graphql": {
-            "enabled": true,
-            "type": {
-              "singular": "Author",
-              "plural": "Authors"
-            }
-          },
-          "rest": {
-            "enabled": true
-          },
-          "permissions": [
-            {
-              "role": "anonymous",
-              "actions": [
-                {
-                  "action": "*"
-                }
-              ]
-            }
-          ]
-        }
-      }
-    }
-    ```
-
-1. Create an *.env* file in the same directory as your DAB CLI configuration files.
-
-1. Add a `DAB_ENVIRONMENT` environment variable with a value of `Development`. Also, add an `POSTGRESQL_DOCKER_CONNECTION_STRING` environment variable with your database connection string from the first section. Replace `<your-password>` with the password you set earlier in this guide.
-
-    ```env
-    POSTGRESQL_DOCKER_CONNECTION_STRING=Host=localhost;Port=5432;Database=bookshelf;User ID=postgres;Password=<your-password>;
-    DAB_ENVIRONMENT=Development
-    ```
-
-1. Create a `dab-config.Development.json` file. Add the following content to use the `@env()` function to set your [`connection-string`](reference-configuration.md#connection-string) value in the development environment.
-
-    ```json
-    {
-      "$schema": "<https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json>",
-      "data-source": {
-        "database-type": "postgresql",
-        "connection-string": "@env('POSTGRESQL_DOCKER_CONNECTION_STRING')"
-      }
-    }
-    ```
-
-1. **Save** your changes to the *.env*, *dab-config.json*, and *dab-config.Development.json* files.
 
 ## Test API with the local database
 

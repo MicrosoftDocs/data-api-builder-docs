@@ -15,11 +15,12 @@ ms.date: 04/29/2024
 
 In this Quickstart, you build a set of Data API builder configuration files to target a local SQL database.
 
-[!INCLUDE[Quickstart overview](includes/quickstart-overview.md)]
-
 ## Prerequisites
 
-[!INCLUDE[Quickstart prerequisites](includes/quickstart-prerequisites.md)]
+- [Docker](https://www.docker.com/products/docker-desktop/)
+- [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0)
+- A data management client
+  - If you don't have a client installed, [install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
 
 ## Install the Data API builder CLI
 
@@ -49,7 +50,7 @@ Start by configuring and running the local database to set the relevant credenti
 1. Connect to your local database using your preferred data management environment. Examples include, but aren't limited to: [SQL Server Management Studio](/sql/ssms), [Azure Data Studio](/azure-data-studio), and the [SQL Server extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql).
 
     > [!TIP]
-    > If you're using default networking for your Docker Linux container images, the connection string will likely be `Server=localhost,1433;User Id=sa;Password=<your-password>;TrustServerCertificate=True;Encrypt=True;`. Replace `<your-password>` with the password you set earlier.
+    > If you're using default networking for your Docker Linux container images, the connection string will likely be `Server=localhost,1433;User Id=sa;Password=<your-password>;`. Replace `<your-password>` with the password you set earlier.
 
 1. Create a new `bookshelf` database and use the database for your remaining queries.
 
@@ -97,105 +98,17 @@ Start by configuring and running the local database to set the relevant credenti
 
 Create a baseline configuration file using the DAB CLI. Then, add a development configuration file with your current credentials.
 
-1. Create a typical configuration file using `dab init`.
+1. Create a typical configuration file using `dab init`. Add the `--connection-string` argument with your database connection string from the first section. Replace `<your-password>` with the password you set earlier in this guide. Also, add the `Database=bookshelf` value to the connection string.
 
     ```dotnetcli
-    dab init --database-type "mssql" --host-mode "Development"
+    dab init --database-type "mssql" --host-mode "Development" --connection-string "Server=localhost,1433;User Id=sa;Database=bookshelf;Password=<your-password>;"
     ```
 
-1. Add an Author entity using `dab add`.
+1. Add an **Author** entity using `dab add`.
 
     ```dotnetcli
     dab add Author --source "dbo.authors" --permissions "anonymous:*"
     ```
-
-1. Observe your current *dab-config.json* configuration file. The file should include a baseline implementation of your API with a single entity, a REST API endpoint, and a GraphQL endpoint.
-
-    ```json
-    {
-      "$schema": "<https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json>",
-      "data-source": {
-        "database-type": "mssql",
-        "connection-string": "",
-        "options": {
-          "set-session-context": false
-        }
-      },
-      "runtime": {
-        "rest": {
-          "enabled": true,
-          "path": "/api",
-          "request-body-strict": true
-        },
-        "graphql": {
-          "enabled": true,
-          "path": "/graphql",
-          "allow-introspection": true
-        },
-        "host": {
-          "cors": {
-            "origins": [],
-            "allow-credentials": false
-          },
-          "authentication": {
-            "provider": "StaticWebApps"
-          },
-          "mode": "development"
-        }
-      },
-      "entities": {
-        "Author": {
-          "source": {
-            "object": "dbo.authors",
-            "type": "table"
-          },
-          "graphql": {
-            "enabled": true,
-            "type": {
-              "singular": "Author",
-              "plural": "Authors"
-            }
-          },
-          "rest": {
-            "enabled": true
-          },
-          "permissions": [
-            {
-              "role": "anonymous",
-              "actions": [
-                {
-                  "action": "*"
-                }
-              ]
-            }
-          ]
-        }
-      }
-    }
-    ```
-
-1. Create an *.env* file in the same directory as your DAB CLI configuration files.
-
-1. Add a `DAB_ENVIRONMENT` environment variable with a value of `Development`. Also, add an `SQL_DOCKER_CONNECTION_STRING` environment variable with your database connection string from the first section. Replace `<your-password>` with the password you set earlier in this guide.
-
-    ```env
-    SQL_DOCKER_CONNECTION_STRING=Server=localhost,1433;User Id=sa;Database=bookshelf;Password=<your-password>;TrustServerCertificate=True;Encrypt=True;
-    DAB_ENVIRONMENT=Development
-    ```
-
-1. Create a `dab-config.Development.json` file. Add the following content to use the `@env()` function to set your [`connection-string`](reference-configuration.md#connection-string) value in the development environment.
-
-    ```json
-    {
-      "$schema": "<https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json>",
-      "data-source": {
-        "database-type": "mssql",
-        "connection-string": "@env('SQL_DOCKER_CONNECTION_STRING')"
-      }
-    }
-    ```
-
-1. **Save** your changes to the *.env*, *dab-config.json*, and *dab-config.Development.json* files.
 
 ## Test API with the local database
 
