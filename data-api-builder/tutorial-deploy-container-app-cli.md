@@ -13,7 +13,7 @@ ms.date: 04/29/2024
 
 # Tutorial: Deploy Data API builder to Azure Container Apps with Azure CLI
 
-Data API builder can be quickly deployed to Azure services like Azure Container Apps as part of your application stack. In this tutorial, you deploy Data API builder to Azure Container Apps with a backing Azure SQL database and authentication using managed identities.
+Data API builder can be quickly deployed to Azure services like Azure Container Apps as part of your application stack. In this tutorial, you build a container image with Data API builder and store it in Azure Container Registry. You then deploy the container image to Azure Container Apps with a backing Azure SQL database. The entire tutorial authenticates to each component using managed identities.
 
 In this tutorial, you:
 
@@ -21,9 +21,8 @@ In this tutorial, you:
 >
 > - Create a managed identity with role-based access control permissions
 > - Deploy Azure SQL with the sample AdventureWorksLT dataset
-> - Stage an Azure Storage account with the configuration file
+> - Stage the container image in Azure Container Registry
 > - Deploy Azure Container App with the Data API builder container image
-> - Deploy Azure Container App with a sample application
 >
 
 [!INCLUDE[Azure Subscription Trial](includes/azure-subscription-trial.md)]
@@ -179,35 +178,26 @@ Now, deploy a new server and database in the Azure SQL service. The database use
     SQL_CONNECTION_STRING="Server=$SQL_SERVER_ENDPOINT;Database=adventureworks;Encrypt=true;Authentication=Active Directory Default;"
     ```
 
-## Create an Azure Storage file share
+## Build image in Azure Container Registry
 
 Next, TODO
 
-1. Create a variable named `STORAGE_NAME` with a uniquely generated name for your Azure Storage instance. You use this variable later in this section.
+1. TODO
 
     ```azurecli-interactive
-    STORAGE_NAME="stor$RANDOM"
+    
     ```
 
 1. TODO
 
     ```azurecli-interactive
-    az storage account create \
-      --resource-group $RESOURCE_GROUP_NAME \
-      --name $STORAGE_NAME \
-      --location "westus" \
-      --allow-shared-key-access false \
-      --allow-blob-public-access true
+    
     ```
 
 1. TODO
 
     ```azurecli-interactive
-    az storage container create \
-      --account-name $STORAGE_NAME \
-      --name "dab-config" \
-      --public-access "blob" \
-      --auth-mode "login"
+    
     ```
 
 1. TODO
@@ -237,28 +227,14 @@ Next, TODO
 1. TODO
 
     ```azurecli-interactive
-    az storage blob upload \
-      --account-name $STORAGE_NAME \
-      --container-name "dab-config" \
-      --file "dab-config.json" \
-      --auth-mode "login"
+    
     ```
 
 1. TODO
 
     ```azurecli-interactive
-    CONFIG_BLOB_URL=$( \
-      az storage blob url \
-        --account-name $STORAGE_NAME \
-        --container-name "dab-config" \
-        --name "dab-config.json" \
-        --auth-mode "login" \
-        --output "tsv" \
-    )
+    
     ```
-
-    > [!TIP]
-    > You can always check the output of this command using `echo $CONFIG_BLOB_URL`.
 
 ## Deploy Azure Container App DAB container
 
@@ -282,6 +258,12 @@ Finally, TODO
 
 1. TODO
 
+    ```yaml
+
+    ```
+
+1. TODO
+
     ```azurecli-interactive
     az containerapp create \ 
       --resource-group $RESOURCE_GROUP_NAME \
@@ -292,7 +274,6 @@ Finally, TODO
       --target-port "5000" \
       --user-assigned $MANAGED_IDENTITY_RESOURCE_ID \
       --env-vars "DATABASE_CONNECTION_STRING=$SQL_CONNECTION_STRING" \
-      --command "curl $CONFIG_BLOB_URL > /App/dab-config.json"
     ```
 
 1. TODO
