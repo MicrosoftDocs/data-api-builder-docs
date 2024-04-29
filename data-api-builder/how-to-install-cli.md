@@ -44,4 +44,4 @@ Installing the .NET tool makes the `dab` command available on your local machine
 ## Related content
 
 - [.NET tools](/dotnet/core/tools/global-tools)
-- [How-to: Develop with local data](how-to-develop-local-data.md)
+- [How-to: Use environments](how-to-use-environments.md)
