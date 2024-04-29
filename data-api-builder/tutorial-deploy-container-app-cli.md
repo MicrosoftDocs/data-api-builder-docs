@@ -99,20 +99,24 @@ First, create a managed identity and assign it permissions to read data from Azu
 1. Use [`az role assignment create`](/cli/azure/role/assignment#az-role-assignment-create) to assign the **Storage Blob Data Owner** role to the managed identity scoped to the current resource group.
 
     ```azurecli-interactive
+    # Storage Blob Data Owner
+    
     az role assignment create \
       --assignee-object-id $UA_PRINCIPAL_ID \
       --assignee-principal-type "ServicePrincipal" \
-      --role "b7e6dc6d-f1e8-4753-8033-0f276bb0955b" # Storage Blob Data Owner \
+      --role "b7e6dc6d-f1e8-4753-8033-0f276bb0955b" \
       --scope $RESOURCE_GROUP_ID
     ```
 
 1. Use [`az role assignment create`](/cli/azure/role/assignment#az-role-assignment-create) to assign the **Storage File Data SMB Share Reader** role to the managed identity scoped to the current resource group.
 
     ```azurecli-interactive
+    # Storage File Data SMB Share Reader
+    
     az role assignment create \
       --assignee-object-id $UA_PRINCIPAL_ID \
       --assignee-principal-type "ServicePrincipal" \
-      --role "aba4ae5f-2193-4029-9191-0cb91df5e314" # Storage File Data SMB Share Reader \
+      --role "aba4ae5f-2193-4029-9191-0cb91df5e314" \
       --scope $RESOURCE_GROUP_ID
     ```
 
