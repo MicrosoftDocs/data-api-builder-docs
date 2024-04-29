@@ -38,7 +38,7 @@
 - name: Tutorials
   items:
     - name: Deploy to Azure Container Apps using Azure CLI
-      href: tutorial-container-app-cli.md
+      href: tutorial-deploy-container-app-cli.md
 - name: Concepts
   items:
     - name: REST

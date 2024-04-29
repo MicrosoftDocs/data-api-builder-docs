@@ -65,7 +65,7 @@ landingContent:
       - linkListType: tutorial
         links:
           - text: Deploy to Azure Container Apps with Azure SQL
-            url: tutorial-container-app-cli.md
+            url: tutorial-deploy-container-app-cli.md
   - title: Reference
     linkLists:
       - linkListType: reference
