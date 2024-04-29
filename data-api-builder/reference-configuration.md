@@ -2391,7 +2391,7 @@ For more information, see [unary operators](/dotnet/api/microsoft.odata.uriparse
 
 ###### Utilizing `mappings` for nonconforming fields
 
-If your entity field names don't meet the OData syntax rules or you simply want to alias them for other reasons, you can define aliases in the `mappings` section of your configuration. 
+If your entity field names don't meet the OData syntax rules or you simply want to alias them for other reasons, you can define aliases in the `mappings` section of your configuration.
 
 ```json
 {
@@ -2408,7 +2408,7 @@ If your entity field names don't meet the OData syntax rules or you simply want 
 }
 ```
 
-In this example, `field-1-name` is the original database field name that doesn't meet the OData naming conventions. By creating a map to `field-1-name` and `field-1-alias`, this field may be referenced in database policy expressions without issue. This approach not only helps in adhering to the OData naming conventions but also enhances the clarity and accessibility of your data model within both GraphQL and RESTful endpoints.
+In this example, `field-1-name` is the original database field name that doesn't meet the OData naming conventions. Creating a map to `field-1-name` and `field-1-alias` allows this field to be referenced in database policy expressions without issue. This approach not only helps in adhering to the OData naming conventions but also enhances the clarity and accessibility of your data model within both GraphQL and RESTful endpoints.
 
 #### Examples
 
@@ -3115,7 +3115,7 @@ In this example, the `sku_title` field from the database object `dbo.magazines` 
 }
 ```
 
-Here's another example of mappings. 
+Here's another example of mappings.
 
 ```json
 {
@@ -3403,10 +3403,10 @@ Enables and configures caching for the entity.
 
 #### Properties
 
-| | Required | Type | Default
-| --- | --- | --- | ---
-| **[`enabled`](#enabled-cache-entity)** | ❌ No | boolean | false
-| **[`ttl-seconds`](#ttl-in-seconds-cache-entity)** | ❌ No | integer | 5
+| | Required | Type | Default |
+| --- | --- | --- | --- |
+| **[`enabled`](#enabled-cache-entity)** | ❌ No | boolean | `false` |
+| **[`ttl-seconds`](#ttl-in-seconds-cache-entity)** | ❌ No | integer | `5` |
 
 #### Examples
 
