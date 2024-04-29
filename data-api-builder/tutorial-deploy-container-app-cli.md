@@ -38,19 +38,25 @@ In this tutorial, you:
 
 First, create a managed identity and assign it permissions to read data from Azure Storage.
 
+1. Create a variable named `UA_NAME` with the resource group name. For this tutorial, we recommend `msdocs-dab-aca`.
+
+    ```azurecli-interactive
+    RESOURCE_GROUP_NAME="msdocs-dab-aca"
+    ```
+
 1. Create a new resource group using [`az group create`](/cli/azure/group#az-group-create).
 
     ```azurecli-interactive
     az group create \
-      --name "msdocs-dab-aca"
+      --name $RESOURCE_GROUP_NAME
     ```
 
-1. Get the identifier of the resource group by using [`az group show`](/cli/azure/group#az-group-show).
+1. Create a variable named `RESOURCE_GROUP_ID` to store the identifier of the resource group. Get the identifier using [`az group show`](/cli/azure/group#az-group-show). You will use this variable multiple times in this tutorial.
 
     ```azurecli-interactive
     RESOURCE_GROUP_ID=$( \
       az group show \
-        --name "msdocs-dab-aca" \
+        --name $RESOURCE_GROUP_NAME \
         --query "id" \
         --output tsv \
     )
@@ -64,15 +70,18 @@ First, create a managed identity and assign it permissions to read data from Azu
     > ```
     >
 
-1. Use [`az identity create`](/cli/azure/identity#az-identity-create) to create a new user-assigned managed identity.
+1. Create a variable named `MANAGED_IDENTITY_NAME` with a uniquely generated name for your user-assigned manager identity. You will also use this variable multiple times in this tutorial.
 
     ```azurecli-interactive
-    let suffix=$RANDOM*$RANDOM
-    
+    MANAGED_IDENTITY_NAME="ua-$RANDOM"
+    ```
+
+1. Use [`az identity create`](/cli/azure/identity#az-identity-create) to create a new managed identity.
+
+    ```azurecli-interactive
     az identity create \
-      --name "ua-id-$suffix" \
-      --identity \
-      --resource-group "msdocs-dab-aca"
+      --name $MANAGED_IDENTITY_NAME \
+      --resource-group $RESOURCE_GROUP_NAME
     ```
 
 1. Get the **principal identifier** of the managed identity using [`az identity show`](/cli/azure/identity#az-identity-show).
@@ -80,9 +89,8 @@ First, create a managed identity and assign it permissions to read data from Azu
     ```azurecli-interactive
     UA_PRINCIPAL_ID=$( \
       az identity show \
-        --name "<unique-identity-name>" \
-        --identity \
-        --resource-group "msdocs-dab-aca" \
+        --name $MANAGED_IDENTITY_NAME \
+        --resource-group $RESOURCE_GROUP_NAME \
         --query "principalId" \
         --output tsv \
     )
@@ -93,27 +101,6 @@ First, create a managed identity and assign it permissions to read data from Azu
     >
     > ```azurecli-interactive
     > echo $UA_PRINCIPAL_ID
-    > ```
-    >
-
-1. Use [`az identity show`](/cli/azure/identity#az-identity-show) to get the **name** of the managed identity.
-
-    ```azurecli-interactive
-    UA_NAME=$( \
-      az identity show \
-        --name "<unique-identity-name>" \
-        --identity \
-        --resource-group "msdocs-dab-aca" \
-        --query "name" \
-        --output tsv \
-    )
-    ```
-
-    > [!TIP]
-    > Check the output of this command using `echo`.
-    >
-    > ```azurecli-interactive
-    > echo $UA_NAME
     > ```
     >
 
@@ -238,6 +225,15 @@ TODO
     ```azurecli-interactive
     TODO
     ```
+
+## Clean up resources
+
+When you no longer need the sample application or resources, remove the corresponding deployment and all resources.
+
+```azurecli-interactive
+az group delete \
+  --name "msdocs-dab-aca"
+```
 
 ## Next step
 
