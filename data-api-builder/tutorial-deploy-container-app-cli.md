@@ -234,6 +234,7 @@ Next, TODO
       --registry $CONTAINER_REGISTRY_NAME \
       --image adventureworkslt-dab:latest \
       --image adventureworkslt-dab:{{.Run.ID}} \
+      --file Dockerfile \
       .
     ```
 
