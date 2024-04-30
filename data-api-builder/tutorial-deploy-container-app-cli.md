@@ -80,7 +80,7 @@ First, create a managed identity and assign it permissions to read data from Azu
       --resource-group $RESOURCE_GROUP_NAME
     ```
 
-1. Get the **principal identifier** of the managed identity using [`az identity show`](/cli/azure/identity#az-identity-show) and store the value in a variable named `MANAGED_IDENTITY_PRINCIPAL_ID`.
+1. Get the **principal**, **resource**, and **client** identifiers of the managed identity using [`az identity show`](/cli/azure/identity#az-identity-show) and store the values in variables named `MANAGED_IDENTITY_PRINCIPAL_ID`, `MANAGED_IDENTITY_RESOURCE_ID`, and `MANAGED_IDENTITY_RESOURCE_ID`.
 
     ```azurecli-interactive
     MANAGED_IDENTITY_PRINCIPAL_ID=$( \
@@ -90,14 +90,7 @@ First, create a managed identity and assign it permissions to read data from Azu
         --query "principalId" \
         --output "tsv" \
     )
-    ```
 
-    > [!TIP]
-    > You can always check the output of this command using `echo $MANAGED_IDENTITY_PRINCIPAL_ID`.
-
-1. Get the **resource identifier** of the managed identity using [`az identity show`](/cli/azure/identity#az-identity-show) and store the value in a variable named `MANAGED_IDENTITY_RESOURCE_ID`.
-
-    ```azurecli-interactive
     MANAGED_IDENTITY_RESOURCE_ID=$( \
       az identity show \
         --name $MANAGED_IDENTITY_NAME \
@@ -105,10 +98,18 @@ First, create a managed identity and assign it permissions to read data from Azu
         --query "id" \
         --output "tsv" \
     )
+
+    MANAGED_IDENTITY_CLIENT_ID=$( \
+      az identity show \
+        --name $MANAGED_IDENTITY_NAME \
+        --resource-group $RESOURCE_GROUP_NAME \
+        --query "clientId" \
+        --output "tsv" \
+    )
     ```
 
     > [!TIP]
-    > You can always check the output of this command using `echo $MANAGED_IDENTITY_RESOURCE_ID`.
+    > You can always check the output of this command using `echo $MANAGED_IDENTITY_PRINCIPAL_ID`, `echo $MANAGED_IDENTITY_RESOURCE_ID`, or `echo $MANAGED_IDENTITY_CLIENT_ID`.
 
 1. Use [`az role assignment create`](/cli/azure/role/assignment#az-role-assignment-create) to assign the [**AcrPush**](/azure/role-based-access-control/built-in-roles/containers#acrpush) role to your account so you can push containers to Azure Container Registry.
 
