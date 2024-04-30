@@ -250,6 +250,9 @@ Next, TODO
     )
     ```
 
+    > [!TIP]
+    > You can always check the output of this command using `echo $CONTAINER_REGISTRY_LOGIN_SERVER`.
+
 ## Deploy Azure Container App DAB container
 
 Finally, TODO
