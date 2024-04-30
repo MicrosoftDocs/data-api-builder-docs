@@ -49,7 +49,7 @@ First, create a managed identity and assign it permissions to read data from Azu
     az group create \
       --name $RESOURCE_GROUP_NAME \
       --location "westus" \
-      --tag "msdocs-dab-tutorial"
+      --tag "source=msdocs-dab-tutorial"
     ```
 
 1. Create a variable named `RESOURCE_GROUP_ID` to store the identifier of the resource group. Get the identifier using [`az group show`](/cli/azure/group#az-group-show). You use this variable multiple times in this tutorial.
