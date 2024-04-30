@@ -29,7 +29,7 @@ The Data API builder command-line interface (CLI) (**dab CLI** or `dab`) is a co
 
 ## Command-line verbs and options
 
-### **`init`**
+### `init`
 
 Initializes the runtime configuration for the Data API builder runtime engine. It creates a new JSON file with the properties provided as options.
 
@@ -71,7 +71,7 @@ dab init --config "dab-config.MsSql.json" --database-type mssql --connection-str
 
 ¹ This option is only required when `--database-type` is set to `cosmosdb_nosql`.
 
-### **`add`**
+### `add`
 
 Add new database entity to the configuration file. Make sure you already have a configuration file before executing this command, otherwise it returns an error.
 
@@ -107,7 +107,7 @@ dab add Book -c "dab-config.MsSql.json" --source dbo.books --permissions "anonym
 
 ¹ This option is only required when `--source.type` is set to `view`.
 
-### **`update`**
+### `update`
 
 Update the properties of any database entity in the configuration file.
 
@@ -141,7 +141,7 @@ dab update Publisher --permissions "authenticated:*"
 
 ¹ This option is only required when the `--relationship` option is used.
 
-### **`export`**
+### `export`
 
 Export the required schema as a file and save to disk based on the options.
 
@@ -166,7 +166,7 @@ dab export --graphql -o ./schemas
 | **-g,--graphql-schema-file** | ❌ No | `schema.graphql` | ✔️ Yes | string | Specify the name of the Graphql schema file. |
 | **-c,--config** | ❌ No | `dab-config.json` | ✔️ Yes | string | Path to config file. |
 
-### **`start`**
+### `start`
 
 Start the runtime engine with the provided configuration file for serving REST and GraphQL requests.
 
