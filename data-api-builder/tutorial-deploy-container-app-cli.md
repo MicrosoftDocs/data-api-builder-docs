@@ -37,10 +37,22 @@ In this tutorial, you:
 
 TODO
 
-1. Create a variable named `RESOURCE_GROUP_NAME` with the resource group name. For this tutorial, we recommend `msdocs-dab-aca`.
+1. TODO
 
     ```azurecli-interactive
-    RESOURCE_GROUP_NAME="msdocs-dab-aca"
+    let SUFFIX=$RANDOM*$RANDOM
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    LOCATION="<azure-region>"
+    ```
+
+1. Create a variable named `RESOURCE_GROUP_NAME` with the resource group name. For this tutorial, we recommend `msdocs-dab-*`.
+
+    ```azurecli-interactive
+    RESOURCE_GROUP_NAME="msdocs-dab-$SUFFIX"    
     ```
 
 1. Create a new resource group using [`az group create`](/cli/azure/group#az-group-create).
@@ -48,15 +60,15 @@ TODO
     ```azurecli-interactive
     az group create \
       --name $RESOURCE_GROUP_NAME \
-      --location "<azure-region>" \
+      --location $LOCATION \
       --tag "source=msdocs-dab-tutorial"
     ```
 
 1. Create variables named `API_CONTAINER_NAME` and `CONTAINER_ENV_NAME` with uniquely generated names for your Azure Container Apps instance. You use these variables later in this section.
 
     ```azurecli-interactive
-    API_CONTAINER_NAME="api-$RANDOM"
-    CONTAINER_ENV_NAME="env-$RANDOM"
+    API_CONTAINER_NAME="api-$SUFFIX"
+    CONTAINER_ENV_NAME="env-$SUFFIX"
     ```
 
 1. TODO
@@ -66,7 +78,7 @@ TODO
       --resource-group $RESOURCE_GROUP_NAME \
       --name $CONTAINER_ENV_NAME \
       --logs-destination none \
-      --location "<azure-region>"
+      --location $LOCATION
     ```
 
 1. TODO
@@ -148,7 +160,7 @@ Now, deploy a new server and database in the Azure SQL service. The database use
 1. Create a variable named `SQL_SERVER_NAME` with a uniquely generated name for your Azure SQL server instance. You use this variable later in this section.
 
     ```azurecli-interactive
-    SQL_SERVER_NAME="srvr-$RANDOM"
+    SQL_SERVER_NAME="srvr-$SUFFIX"
     ```
 
 1. Create a new Azure SQL **server** resource using [`az sql server create`](/cli/azure/sql/server#az-sql-server-create). Configure the managed identity as the admin of this server.
@@ -157,7 +169,7 @@ Now, deploy a new server and database in the Azure SQL service. The database use
     az sql server create \
       --resource-group $RESOURCE_GROUP_NAME \
       --name $SQL_SERVER_NAME \
-      --location "<azure-region>" \
+      --location $LOCATION \
       --enable-ad-only-auth \
       --external-admin-principal-type "User" \
       --external-admin-name $API_CONTAINER_NAME \
@@ -198,7 +210,7 @@ Next, TODO
 1. Create a variable named `CONTAINER_REGISTRY_NAME` with a uniquely generated name for your Azure Container Registry instance. You use this variable later in this section.
 
     ```azurecli-interactive
-    CONTAINER_REGISTRY_NAME="reg$RANDOM"
+    CONTAINER_REGISTRY_NAME="reg$SUFFIX"
     ```
 
 1. TODO
@@ -208,7 +220,7 @@ Next, TODO
       --resource-group $RESOURCE_GROUP_NAME \
       --name $CONTAINER_REGISTRY_NAME \
       --sku "Standard" \
-      --location "<azure-region>" \
+      --location $LOCATION \
       --admin-enabled false
     ```
 
@@ -265,21 +277,27 @@ Finally, TODO
 1. TODO
 
     ```azurecli-interactive
-      --registry-server $CONTAINER_REGISTRY_LOGIN_SERVER
+    az containerapp registry set \
+      --resource-group $RESOURCE_GROUP_NAME \
+      --name $API_CONTAINER_NAME \
+      --server $CONTAINER_REGISTRY_LOGIN_SERVER
     ```
 
 1. TODO
 
     ```azurecli-interactive
-      --secrets conn-string="$SQL_CONNECTION_STRING" \
-
+    az containerapp secret set \
+      --resource-group $RESOURCE_GROUP_NAME \
+      --name $API_CONTAINER_NAME \
+      --secrets conn-string="$SQL_CONNECTION_STRING"
     ```
 
 1. TODO
 
     ```azurecli-interactive
-
-    
+    az containerapp update \
+      --resource-group $RESOURCE_GROUP_NAME \
+      --name $API_CONTAINER_NAME \
       --image "$CONTAINER_REGISTRY_LOGIN_SERVER/adventureworkslt-dab:latest" \
       --set-env-vars DATABASE_CONNECTION_STRING=secretref:conn-string
     ```
