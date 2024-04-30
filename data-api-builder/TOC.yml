@@ -37,6 +37,17 @@
   items:
     - name: Install the CLI
       href: how-to-install-cli.md
+    - name: Deploy
+      items:
+      - name: Azure Container Instances
+        displayName: ACI
+        href: how-to-deploy-container-instance.md
+      - name: Azure Container Apps
+        displayName: ACA
+        href: how-to-deploy-container-app.md
+      - name: Azure Static Web Apps
+        displayName: SWA
+        href: how-to-deploy-static-web-app.md
     - name: Run in a container
       href: how-to-run-container.md
     - name: Run from source code
