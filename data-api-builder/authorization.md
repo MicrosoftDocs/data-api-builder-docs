@@ -120,7 +120,7 @@ Because Data API builder evaluates requests in the context of a single role, it 
 
 If the client application's request also includes the HTTP header `X-MS-API-ROLE` with the value `author`, the request is evaluated in the context of the `author` role. An example request including an access token and `X-MS-API-ROLE` HTTP header:
 
-```shell
+```bash
 curl -k -r GET -H 'Authorization: Bearer ey...' -H 'X-MS-API-ROLE: author' https://localhost:5001/api/Book
 ```
 
