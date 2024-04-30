@@ -70,14 +70,6 @@ landingContent:
             url: how-to-run-from-source.md
           - text: Implement row-level security in SQL
             url: how-to-row-level-security.md
-      - linkListType: how-to-guide
-        links:
-          - text: Deploy to Azure Container Instances
-            url: how-to-deploy-container-instance.md
-          - text: Deploy to Azure Container Apps
-            url: how-to-deploy-container-app.md
-          - text: Deploy to Azure Static Web Apps
-            url: how-to-deploy-static-web-app.md
   - title: Reference
     linkLists:
       - linkListType: reference
