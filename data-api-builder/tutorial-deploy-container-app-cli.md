@@ -49,6 +49,21 @@ First, create an Azure Container Apps instance with a system-assigned managed id
     LOCATION="<azure-region>"
     ```
 
+    > [!NOTE]
+    > For example, if you want to deploy to the **West US** region, you would use this script.
+    >
+    > ```azurecli
+    > LOCATION="westus"
+    > ```
+    >
+    > For a list of supported regions for the current subscription, use [`az account list-locations`](/cli/azure/account#az-account-list-locations)
+    >
+    > ```azurecli
+    > az account list-locations --query "[].{Name:displayName,Slug:name}" --output table
+    > ```
+    >
+    > For more information, see [Azure regions](/azure/reliability/).
+
 1. Create a variable named `RESOURCE_GROUP_NAME` with the resource group name. For this tutorial, we recommend `msdocs-dab-*`. You use this value multiple times in this tutorial.
 
     ```azurecli-interactive
@@ -250,7 +265,17 @@ Next, build a container image using a Dockerfile. Then deploy that container ima
       --admin-enabled false
     ```
 
-1. Create a multi-stage Dockerfile that uses the `mcr.microsoft.com/dotnet/sdk` container image and the [DAB CLI](how-to-install-cli.md) to create a configuration file. The configuration file should specify the `DATABASE_CONNECTION_STRING` environment variable as the connection string for an SQL database connection (`mssql`). The configuration file should also create an entity named `Product` mapped to the `SalesLT.Product` table. Finally, the Dockerfile should copy the configuration file to the `mcr.microsoft.com/azure-databases/data-api-builder` container image.
+1. Create a multi-stage Dockerfile named `Dockerfile`. In the file, implement these steps.
+
+    - Use the `mcr.microsoft.com/dotnet/sdk` container image as the base of the build stage
+
+    - Install the [DAB CLI](how-to-install-cli.md).
+
+    - Create a configuration file for an SQL database connection (`mssql`) using the `DATABASE_CONNECTION_STRING` environment variable as the connection string. 
+
+    - Create an entity named `Product` mapped to the `SalesLT.Product` table.
+
+    - Copy the configuration file to the final `mcr.microsoft.com/azure-databases/data-api-builder` container image.
 
     ```Dockerfile
     FROM mcr.microsoft.com/dotnet/sdk:6.0-cbl-mariner2.0 AS build
@@ -362,6 +387,9 @@ Finally, update the Azure Container App with the new custom container image and 
     ```azurecli-interactive
     echo "https://$APPLICATION_URL/api/Product"
     ```
+
+    > [!WARNING]
+    > Deployment can take up to a minute. If you are not seeing a successful response, wait and refresh your browser.
 
 ## Clean up resources
 
