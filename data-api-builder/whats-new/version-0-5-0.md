@@ -109,13 +109,13 @@ query ($id: ID, $partitionKeyValue: String) {
 
 - In MsSql, session context can be enabled using `--set-session-context true` in the `init` command. A sample command is shown in this example:
 
-  ```shell
+  ```bash
   dab init --database-type mssql --connection-string "Connection String" --set-session-context true
   ```
   
 - Authentication details such as the provider, audience, and issuer can be configured using the options `--auth.provider`, `--auth.audience`, and `--auth.issuer.` in the `init` command. A sample command is shown in this sample:
 
-  ```shell
+  ```bash
   dab init --database-type mssql --auth.provider AzureAD --auth.audience "audience" --auth.issuer "issuer"
   ```
   
