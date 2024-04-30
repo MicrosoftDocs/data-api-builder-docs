@@ -35,21 +35,21 @@ In this tutorial, you:
 
 ## Create container app
 
-TODO
+First, create an Azure Container Apps instance with a system-assigned managed identity. This identity is eventually granted role-based access control permissions to access Azure SQL and Azure Container Registry.
 
-1. TODO
+1. Create a universal `SUFFIX` variable to use for multiple resource names later in this tutorial.
 
     ```azurecli-interactive
     let SUFFIX=$RANDOM*$RANDOM
     ```
 
-1. TODO
+1. Create a `LOCATION` variable with an Azure region you selected to use in this tutorial.
 
     ```azurecli-interactive
     LOCATION="<azure-region>"
     ```
 
-1. Create a variable named `RESOURCE_GROUP_NAME` with the resource group name. For this tutorial, we recommend `msdocs-dab-*`.
+1. Create a variable named `RESOURCE_GROUP_NAME` with the resource group name. For this tutorial, we recommend `msdocs-dab-*`. You use this value multiple times in this tutorial.
 
     ```azurecli-interactive
     RESOURCE_GROUP_NAME="msdocs-dab$SUFFIX"    
@@ -64,14 +64,14 @@ TODO
       --tag "source=msdocs-dab-tutorial"
     ```
 
-1. Create variables named `API_CONTAINER_NAME` and `CONTAINER_ENV_NAME` with uniquely generated names for your Azure Container Apps instance. You use these variables later in this section.
+1. Create variables named `API_CONTAINER_NAME` and `CONTAINER_ENV_NAME` with uniquely generated names for your Azure Container Apps instance. You use these variables throughout the tutorial.
 
     ```azurecli-interactive
     API_CONTAINER_NAME="api$SUFFIX"
     CONTAINER_ENV_NAME="env$SUFFIX"
     ```
 
-1. TODO
+1. Use [`az containerapp env create`](/cli/azure/containerapp/env#az-containerapp-env-create) to create a new Azure Container Apps environment.
 
     ```azurecli-interactive
     az containerapp env create \ 
@@ -81,7 +81,7 @@ TODO
       --location $LOCATION
     ```
 
-1. TODO
+1. Create a new container app using the `mcr.microsoft.com/azure-databases/data-api-builder` DAB container image and the [`az containerapp create`](/cli/azure/containerapp#az-containerapp-create) command. This container app runs successfully, but isn't connected to any database.
 
     ```azurecli-interactive
     az containerapp create \ 
@@ -116,7 +116,7 @@ TODO
 
 ## Assign permissions
 
-First, create a managed identity and assign it permissions to read data from Azure Storage.
+Now, assign the system-assigned managed identity permissions to read data from Azure SQL and Azure Container Registry. Additionally, assign your identity permissions to write to Azure Container Registry.
 
 1. Create a variable named `RESOURCE_GROUP_ID` to store the identifier of the resource group. Get the identifier using [`az group show`](/cli/azure/group#az-group-show). You use this variable multiple times in this tutorial.
 
@@ -165,7 +165,7 @@ First, create a managed identity and assign it permissions to read data from Azu
 
 ## Deploy database
 
-Now, deploy a new server and database in the Azure SQL service. The database uses the **AdventureWorksLT** sample dataset.
+Next, deploy a new server and database in the Azure SQL service. The database uses the **AdventureWorksLT** sample dataset.
 
 1. Create a variable named `SQL_SERVER_NAME` with a uniquely generated name for your Azure SQL server instance. You use this variable later in this section.
 
@@ -186,7 +186,7 @@ Now, deploy a new server and database in the Azure SQL service. The database use
       --external-admin-sid $MANAGED_IDENTITY_PRINCIPAL_ID
     ```
 
-1. TODO
+1. Use [`az sql server firewall-rule create`](/cli/azure/sql/server/firewall-rule#az-sql-server-firewall-rule-create) to create a firewall rule to allow access from Azure services.
 
     ```azurecli-interactive
     az sql server firewall-rule create \
@@ -231,7 +231,7 @@ Now, deploy a new server and database in the Azure SQL service. The database use
 
 ## Build container image
 
-Next, TODO
+Next, build a container image using a Dockerfile. Then deploy that container image to a newly created Azure Container Registry instance.
 
 1. Create a variable named `CONTAINER_REGISTRY_NAME` with a uniquely generated name for your Azure Container Registry instance. You use this variable later in this section.
 
@@ -239,7 +239,7 @@ Next, TODO
     CONTAINER_REGISTRY_NAME="reg$SUFFIX"
     ```
 
-1. TODO
+1. Create a new Azure Container Registry instance using [`az acr create`](/cli/azure/acr#az-acr-create).
 
     ```azurecli-interactive
     az acr create \
@@ -250,7 +250,7 @@ Next, TODO
       --admin-enabled false
     ```
 
-1. TODO
+1. Create a multi-stage Dockerfile that uses the `mcr.microsoft.com/dotnet/sdk` container image and the [DAB CLI](how-to-install-cli.md) to create a configuration file. The configuration file should specify the `DATABASE_CONNECTION_STRING` environment variable as the connection string for an SQL database connection (`mssql`). The configuration file should also create an entity named `Product` mapped to the `SalesLT.Product` table. Finally, the Dockerfile should copy the configuration file to the `mcr.microsoft.com/azure-databases/data-api-builder` container image.
 
     ```Dockerfile
     FROM mcr.microsoft.com/dotnet/sdk:6.0-cbl-mariner2.0 AS build
@@ -270,7 +270,7 @@ Next, TODO
     COPY --from=build /config /App
     ```
 
-1. TODO
+1. Build the Dockerfile as an Azure Container Registry task using [`az acr build`](/cli/azure/acr#az-acr-build).
 
     ```azurecli-interactive
     az acr build \
@@ -281,7 +281,7 @@ Next, TODO
       .
     ```
 
-1. TODO
+1. Use [`az acr show`](/cli/azure/acr#az-acr-show) to get the endpoint for the container registry and store it in a variable named `CONTAINER_REGISTRY_LOGIN_SERVER`.
 
     ```azurecli-interactive
     CONTAINER_REGISTRY_LOGIN_SERVER=$( \
@@ -303,9 +303,9 @@ Next, TODO
 
 ## Deploy container image
 
-Finally, TODO
+Finally, update the Azure Container App with the new custom container image and credentials. Test the running application to validate its connectivity to the database.
 
-1. TODO
+1. Configure the container app to use the container registry using [`az containerapp registry set`](/cli/azure/containerapp/registry#az-containerapp-registry-set).
 
     ```azurecli-interactive
     az containerapp registry set \
@@ -315,7 +315,7 @@ Finally, TODO
       --identity "system"
     ```
 
-1. TODO
+1. Use [`az containerapp secret set`](/cli/azure/containerapp/secret#az-containerapp-secret-set) to create a secret named `conn-string` with the Azure SQL connection string.
 
     ```azurecli-interactive
     az containerapp secret set \
@@ -324,7 +324,10 @@ Finally, TODO
       --secrets conn-string="$SQL_CONNECTION_STRING"
     ```
 
-1. TODO
+    > [!IMPORTANT]
+    > This connection string doesn't include any username or passwords. The connection string uses the managed identity to access the Azure SQL database. This makes it safe to use the connection string as a secret in the host.
+
+1. Update the container app with your new custom container image using [`az containerapp update`](/cli/azure/containerapp#az-containerapp-update). Set the `DATABASE_CONNECTION_STRING` environment variable to read from the previously created `conn-string` secret.
 
     ```azurecli-interactive
     az containerapp update \
@@ -334,7 +337,31 @@ Finally, TODO
       --set-env-vars DATABASE_CONNECTION_STRING=secretref:conn-string
     ```
 
-1. Navigate to `TODO` and test the API.
+1. Retrieve the fully qualified domain name of the latest revision in the running container app using [`az containerapp show`](/cli/azure/containerapp#az-containerapp-show). Store that value in a variable named `APPLICATION_URL`.
+
+    ```azurecli-interactive
+    APPLICATION_URL=$( \
+      az containerapp show \
+        --resource-group $RESOURCE_GROUP_NAME \
+        --name $API_CONTAINER_NAME \
+        --query "properties.latestRevisionFqdn" \
+        --output "tsv" \
+    )
+    ```
+
+    > [!TIP]
+    > You can always check the output of this command.
+    >
+    > ```azurecli
+    > echo $APPLICATION_URL
+    > ```
+    >
+
+1. Navigate to the URL and test the `Product` REST API.
+
+    ```azurecli-interactive
+    echo "https://$APPLICATION_URL/api/Product"
+    ```
 
 ## Clean up resources
 
