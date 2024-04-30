@@ -52,7 +52,7 @@ TODO
 1. Create a variable named `RESOURCE_GROUP_NAME` with the resource group name. For this tutorial, we recommend `msdocs-dab-*`.
 
     ```azurecli-interactive
-    RESOURCE_GROUP_NAME="msdocs-dab-$SUFFIX"    
+    RESOURCE_GROUP_NAME="msdocs-dab$SUFFIX"    
     ```
 
 1. Create a new resource group using [`az group create`](/cli/azure/group#az-group-create).
@@ -67,8 +67,8 @@ TODO
 1. Create variables named `API_CONTAINER_NAME` and `CONTAINER_ENV_NAME` with uniquely generated names for your Azure Container Apps instance. You use these variables later in this section.
 
     ```azurecli-interactive
-    API_CONTAINER_NAME="api-$SUFFIX"
-    CONTAINER_ENV_NAME="env-$SUFFIX"
+    API_CONTAINER_NAME="api$SUFFIX"
+    CONTAINER_ENV_NAME="env$SUFFIX"
     ```
 
 1. TODO
@@ -114,7 +114,7 @@ TODO
     > ```
     >
 
-## Assign managed identity permissions
+## Assign permissions
 
 First, create a managed identity and assign it permissions to read data from Azure Storage.
 
@@ -163,14 +163,14 @@ First, create a managed identity and assign it permissions to read data from Azu
       --scope $RESOURCE_GROUP_ID
     ```
 
-## Deploy an Azure SQL database
+## Deploy database
 
 Now, deploy a new server and database in the Azure SQL service. The database uses the **AdventureWorksLT** sample dataset.
 
 1. Create a variable named `SQL_SERVER_NAME` with a uniquely generated name for your Azure SQL server instance. You use this variable later in this section.
 
     ```azurecli-interactive
-    SQL_SERVER_NAME="srvr-$SUFFIX"
+    SQL_SERVER_NAME="srvr$SUFFIX"
     ```
 
 1. Create a new Azure SQL **server** resource using [`az sql server create`](/cli/azure/sql/server#az-sql-server-create). Configure the managed identity as the admin of this server.
@@ -184,6 +184,17 @@ Now, deploy a new server and database in the Azure SQL service. The database use
       --external-admin-principal-type "User" \
       --external-admin-name $API_CONTAINER_NAME \
       --external-admin-sid $MANAGED_IDENTITY_PRINCIPAL_ID
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    az sql server firewall-rule create \
+      --resource-group $RESOURCE_GROUP_NAME \
+      --server $SQL_SERVER_NAME \
+      --name "AllowAzure" \
+      --start-ip-address "0.0.0.0" \
+      --end-ip-address "0.0.0.0"
     ```
 
 1. Use [`az sql db create`](/cli/azure/sql/db#az-sql-db-create) to create a **database** within the Azure SQL server named `adventureworks`. Configure the database to use the `AdventureWorksLT` sample data.
@@ -218,7 +229,7 @@ Now, deploy a new server and database in the Azure SQL service. The database use
     > ```
     >
 
-## Build image in Azure Container Registry
+## Build container image
 
 Next, TODO
 
@@ -290,7 +301,7 @@ Next, TODO
     > ```
     >
 
-## Deploy Azure Container App DAB container
+## Deploy container image
 
 Finally, TODO
 
@@ -300,7 +311,8 @@ Finally, TODO
     az containerapp registry set \
       --resource-group $RESOURCE_GROUP_NAME \
       --name $API_CONTAINER_NAME \
-      --server $CONTAINER_REGISTRY_LOGIN_SERVER
+      --server $CONTAINER_REGISTRY_LOGIN_SERVER \
+      --identity "system"
     ```
 
 1. TODO
