@@ -287,12 +287,11 @@ Finally, TODO
       --resource-group $RESOURCE_GROUP_NAME \
       --environment $CONTAINER_ENV_NAME \
       --name $API_CONTAINER_NAME \
-      --image "adventureworkslt-dab:latest" \
+      --image "$CONTAINER_REGISTRY_LOGIN_SERVER/adventureworkslt-dab:latest" \
       --ingress "external" \
       --target-port "5000" \
       --user-assigned $MANAGED_IDENTITY_RESOURCE_ID \
       --registry-server $CONTAINER_REGISTRY_LOGIN_SERVER \
-      --registry-identity $MANAGED_IDENTITY_RESOURCE_ID \
       --env-vars "DATABASE_CONNECTION_STRING=$SQL_CONNECTION_STRING" \
     ```
 
