@@ -29,7 +29,7 @@ procedureSection:
       To start, build a Data API builder (DAB) configuration file to connect to your existing database. This file is used later with the final container.
     steps:
       - |
-        Initialize a new base configuration file using [`dab init`](reference-cli.md#dab-init). Use the following settings on initialization.
+        Initialize a new base configuration file using [`dab init`](reference-cli.md#init). Use the following settings on initialization.
 
         | | Value |
         | --- | --- |
@@ -40,7 +40,7 @@ procedureSection:
         dab init --database-type <database-type> --connection-string <connection-string>
         ```
       - |
-        Add at least one database entity to the configuration. Use the [`dab add`](reference-cli.md#dab-add) command to configure an entity. Configure the entity to allow all permissions for anonymous users.
+        Add at least one database entity to the configuration. Use the [`dab add`](reference-cli.md#add) command to configure an entity. Configure the entity to allow all permissions for anonymous users.
 
         ```dotnetcli
         dab add <entity-name> --source <schema>.<table> --permissions "anonymous:*"
