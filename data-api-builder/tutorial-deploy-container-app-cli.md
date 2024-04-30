@@ -169,7 +169,7 @@ Now, deploy a new server and database in the Azure SQL service. The database use
       --sample-name "AdventureWorksLT"
     ```
 
-1. Get the **fully-qualified domain name** of the Azure SQL server using [`az sql server show`](/cli/azure/sql/server#az-sql-server-show) and store the value in a variable named `SQL_SERVER_ENDPOINT`.
+1. Create a variable named `SQL_CONNECTION_STRING` with the connection string for the `adventureworks` database in your Azure SQL server instance. Construct the connection string with the **fully-qualified domain name** of the server using [`az sql server show`](/cli/azure/sql/server#az-sql-server-show). You use this variable later in this tutorial.
 
     ```azurecli-interactive
     SQL_SERVER_ENDPOINT=$( \
@@ -179,16 +179,12 @@ Now, deploy a new server and database in the Azure SQL service. The database use
         --query "fullyQualifiedDomainName" \
         --output "tsv" \
     )
+    
+    SQL_CONNECTION_STRING="Server=$SQL_SERVER_ENDPOINT;Database=adventureworks;Encrypt=true;Authentication=Active Directory Default;"
     ```
 
     > [!TIP]
-    > You can always check the output of this command using `echo $SQL_SERVER_ENDPOINT`.
-
-1. Create a variable named `SQL_CONNECTION_STRING` with the connection string for the `adventureworks` database in your Azure SQL server instance. You use this variable later in this tutorial.
-
-    ```azurecli-interactive
-    SQL_CONNECTION_STRING="Server=$SQL_SERVER_ENDPOINT;Database=adventureworks;Encrypt=true;Authentication=Active Directory Default;"
-    ```
+    > You can always check the output of this command using `echo $SQL_CONNECTION_STRING`.
 
 ## Build image in Azure Container Registry
 
