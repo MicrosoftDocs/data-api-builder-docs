@@ -21,22 +21,22 @@
   items:
     - name: Local
       items:
-      - name: SQL
-        href: quickstart-sql.md
-      - name: NoSQL
-        displayName: Cosmos
-        href: quickstart-nosql.md
-      - name: PostgreSQL
-        href: quickstart-postgresql.md
-      - name: MySQL
-        href: quickstart-mysql.md
+        - name: SQL
+          href: quickstart-sql.md
+        - name: NoSQL
+          displayName: Cosmos
+          href: quickstart-nosql.md
+        - name: PostgreSQL
+          href: quickstart-postgresql.md
+        - name: MySQL
+          href: quickstart-mysql.md
     - name: Azure
       items:
-      - name: Azure SQL
-        displayName: database, server
-        href: quickstart-azure-sql.md
-      - name: Azure Cosmos DB for NoSQL
-        href: quickstart-azure-cosmos-db-nosql.md
+        - name: Azure SQL
+          displayName: database, server
+          href: quickstart-azure-sql.md
+        - name: Azure Cosmos DB for NoSQL
+          href: quickstart-azure-cosmos-db-nosql.md
 - name: How to
   items:
     - name: Install the CLI
