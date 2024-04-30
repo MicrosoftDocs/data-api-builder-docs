@@ -43,14 +43,14 @@ Make sure that in the configuration file you're using the `Simulator` authentica
 
 With `Simulator` as Data API builder's authentication provider, no custom header is necessary to set the role context to the system role `Authenticated`:
 
-```shell
+```bash
 curl --request GET \
   --url http://localhost:5000/api/books \
 ```
 
 To set the role context to any other role, including the system role `Anonymous`, the `X-MS-API-ROLE` header must be included with the desired role:
 
-```shell
+```bash
 curl --request GET \
   --url http://localhost:5000/api/books \
   --header 'X-MS-API-ROLE: author' \
