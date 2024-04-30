@@ -206,7 +206,8 @@ Next, TODO
       --resource-group $RESOURCE_GROUP_NAME \
       --name $CONTAINER_REGISTRY_NAME \
       --sku "Standard" \
-      --location "westus"
+      --location "westus" \
+      --admin-enabled false
     ```
 
 1. TODO
@@ -261,6 +262,7 @@ Finally, TODO
     az containerapp env create \ 
       --resource-group $RESOURCE_GROUP_NAME \
       --name $CONTAINER_ENV_NAME \
+      --logs-destination none \
       --location "westus"
     ```
 
