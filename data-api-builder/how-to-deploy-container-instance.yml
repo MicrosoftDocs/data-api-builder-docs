@@ -2,7 +2,7 @@
 
 metadata:
   title: Deploy to Azure Container Instances
-  description: Use the Azure portal to deploy an Azure Container Instance with the Data API builder image.
+  description: Use the Azure portal to deploy an Azure Container Instances resource with the Data API builder image.
   author: seesharprun
   ms.author: sidandrews
   ms.reviewer: jerrynixon
@@ -14,10 +14,55 @@ title: |
   Deploy Data API builder to Azure Container Instances
 introduction: |
   Deploy the Data API builder quickly to Azure using just a configuration file and no custom code. This guide includes steps to host the Data API builder container image from Docker as a container in Azure Container Instances. 
-  
+
   In this guide, walk through the steps to build a Data API builder configuration file, host the file in Azure Files, and then mount the file to a container in Azure Container Instances.
 prerequisites:
   dependencies:
-    - Azure subscription
-    - Data API builder CLI. [Install the CLI](how-to-install-cli.md)
-    
+    - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+    - Data API builder CLI. [Install the CLI](how-to-install-cli.md).
+    - Azure CLI. [Install the Azure CLI](/cli/azure/install-azure-cli).
+    - Existing supported database addressable from Azure.
+procedureSection:
+  - title: |
+      Build the configuration file
+    summary: |
+      To start, build a Data API builder (DAB) configuration file to connect to your existing database. This file is used later with the final container.
+    steps:
+      - |
+        Initialize a new base configuration file using [`dab init`](reference-cli.md#dab-init). Use the following settings on initialization.
+
+        | | Value |
+        | --- | --- |
+        | **Database type** | Select a supported database type. |
+        | **Connection string** | Provide a connection string to your database. |
+
+        ```dotnetcli
+        dab init --database-type <database-type> --connection-string <connection-string>
+        ```
+      - |
+        Add at least one database entity to the configuration. Use the [`dab add`](reference-cli.md#dab-add) command to configure an entity. Configure the entity to allow all permissions for anonymous users.
+
+        ```dotnetcli
+        dab add <entity-name> --source <schema>.<table> --permissions "anonymous:*"
+        ```
+  - title: |
+      Host configuration in Azure Files
+    summary: |
+      Next, upload the configuration file to a file share created within Azure Files. This file share is eventually mounted to the final container as a volume.
+    steps:
+      - |
+      - |
+  - title: |
+      Create the container instance
+    summary: |
+      Finally, create the container in Azure using Azure Container Instances. This container hosts the Data API builder image and use the configuration file from the Azure Files mount to connect to your database.
+    steps:
+      - |
+      - |
+relatedContent:
+  - text: Deploy Data API builder to Azure Container Apps.
+    url: how-to-deploy-container-app.yml
+  - text: Deploy Data API builder to Azure Static Web Apps.
+    url: how-to-deploy-static-web-app.yml
+  - text: Automate deployment of Data API builder to Azure Container Apps using Azure CLI.
+    url: tutorial-deploy-container-app-cli.md
