@@ -33,9 +33,9 @@ In this tutorial, you:
 
 [!INCLUDE[Azure Cloud Shell](includes/azure-cloud-shell.md)]
 
-## Assign managed identity permissions
+## Create container app
 
-First, create a managed identity and assign it permissions to read data from Azure Storage.
+TODO
 
 1. Create a variable named `RESOURCE_GROUP_NAME` with the resource group name. For this tutorial, we recommend `msdocs-dab-aca`.
 
@@ -52,6 +52,55 @@ First, create a managed identity and assign it permissions to read data from Azu
       --tag "source=msdocs-dab-tutorial"
     ```
 
+1. Create variables named `API_CONTAINER_NAME` and `CONTAINER_ENV_NAME` with uniquely generated names for your Azure Container Apps instance. You use these variables later in this section.
+
+    ```azurecli-interactive
+    API_CONTAINER_NAME="api-$RANDOM"
+    CONTAINER_ENV_NAME="env-$RANDOM"
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    az containerapp env create \ 
+      --resource-group $RESOURCE_GROUP_NAME \
+      --name $CONTAINER_ENV_NAME \
+      --logs-destination none \
+      --location "<azure-region>"
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    az containerapp create \ 
+      --resource-group $RESOURCE_GROUP_NAME \
+      --environment $CONTAINER_ENV_NAME \
+      --name $API_CONTAINER_NAME \
+      --image "mcr.microsoft.com/azure-databases/data-api-builder" \
+      --ingress "external" \
+      --target-port "5000" \
+      --system-assigned
+    ```
+
+1. Get the **principal** identifier of the managed identity using [`az identity show`](/cli/azure/identity#az-identity-show) and store the value in a variable named `MANAGED_IDENTITY_PRINCIPAL_ID`.
+
+    ```azurecli-interactive
+    MANAGED_IDENTITY_PRINCIPAL_ID=$( \
+      az containerapp show \ 
+        --resource-group $RESOURCE_GROUP_NAME \
+        --name $API_CONTAINER_NAME \
+        --query "identity.principalId" \
+        --output "tsv" \
+    )
+    ```
+
+    > [!TIP]
+    > You can always check the output of this command using `echo $MANAGED_IDENTITY_PRINCIPAL_ID`.
+
+## Assign managed identity permissions
+
+First, create a managed identity and assign it permissions to read data from Azure Storage.
+
 1. Create a variable named `RESOURCE_GROUP_ID` to store the identifier of the resource group. Get the identifier using [`az group show`](/cli/azure/group#az-group-show). You use this variable multiple times in this tutorial.
 
     ```azurecli-interactive
@@ -65,51 +114,6 @@ First, create a managed identity and assign it permissions to read data from Azu
 
     > [!TIP]
     > You can always check the output of this command using `echo $RESOURCE_GROUP_ID`.
-
-1. Create a variable named `MANAGED_IDENTITY_NAME` with a uniquely generated name for your user-assigned manager identity. You also use this variable multiple times in this tutorial.
-
-    ```azurecli-interactive
-    MANAGED_IDENTITY_NAME="ua-$RANDOM"
-    ```
-
-1. Use [`az identity create`](/cli/azure/identity#az-identity-create) to create a new managed identity.
-
-    ```azurecli-interactive
-    az identity create \
-      --name $MANAGED_IDENTITY_NAME \
-      --resource-group $RESOURCE_GROUP_NAME
-    ```
-
-1. Get the **principal**, **resource**, and **client** identifiers of the managed identity using [`az identity show`](/cli/azure/identity#az-identity-show) and store the values in variables named `MANAGED_IDENTITY_PRINCIPAL_ID`, `MANAGED_IDENTITY_RESOURCE_ID`, and `MANAGED_IDENTITY_RESOURCE_ID`.
-
-    ```azurecli-interactive
-    MANAGED_IDENTITY_PRINCIPAL_ID=$( \
-      az identity show \
-        --name $MANAGED_IDENTITY_NAME \
-        --resource-group $RESOURCE_GROUP_NAME \
-        --query "principalId" \
-        --output "tsv" \
-    )
-
-    MANAGED_IDENTITY_RESOURCE_ID=$( \
-      az identity show \
-        --name $MANAGED_IDENTITY_NAME \
-        --resource-group $RESOURCE_GROUP_NAME \
-        --query "id" \
-        --output "tsv" \
-    )
-
-    MANAGED_IDENTITY_CLIENT_ID=$( \
-      az identity show \
-        --name $MANAGED_IDENTITY_NAME \
-        --resource-group $RESOURCE_GROUP_NAME \
-        --query "clientId" \
-        --output "tsv" \
-    )
-    ```
-
-    > [!TIP]
-    > You can always check the output of this command using `echo $MANAGED_IDENTITY_PRINCIPAL_ID`, `echo $MANAGED_IDENTITY_RESOURCE_ID`, or `echo $MANAGED_IDENTITY_CLIENT_ID`.
 
 1. Use [`az role assignment create`](/cli/azure/role/assignment#az-role-assignment-create) to assign the [**AcrPush**](/azure/role-based-access-control/built-in-roles/containers#acrpush) role to your account so you can push containers to Azure Container Registry.
 
@@ -156,7 +160,7 @@ Now, deploy a new server and database in the Azure SQL service. The database use
       --location "<azure-region>" \
       --enable-ad-only-auth \
       --external-admin-principal-type "User" \
-      --external-admin-name $MANAGED_IDENTITY_NAME \
+      --external-admin-name $API_CONTAINER_NAME \
       --external-admin-sid $MANAGED_IDENTITY_PRINCIPAL_ID
     ```
 
@@ -258,38 +262,26 @@ Next, TODO
 
 Finally, TODO
 
-1. Create variables named `API_CONTAINER_NAME` and `CONTAINER_ENV_NAME` with uniquely generated names for your Azure Container Apps instance. You use these variables later in this section.
+1. TODO
 
     ```azurecli-interactive
-    API_CONTAINER_NAME="api-$RANDOM"
-    CONTAINER_ENV_NAME="env-$RANDOM"
+      --registry-server $CONTAINER_REGISTRY_LOGIN_SERVER
     ```
 
 1. TODO
 
     ```azurecli-interactive
-    az containerapp env create \ 
-      --resource-group $RESOURCE_GROUP_NAME \
-      --name $CONTAINER_ENV_NAME \
-      --logs-destination none \
-      --location "<azure-region>"
+      --secrets conn-string="$SQL_CONNECTION_STRING" \
+
     ```
 
 1. TODO
 
     ```azurecli-interactive
-    az containerapp create \ 
-      --resource-group $RESOURCE_GROUP_NAME \
-      --environment $CONTAINER_ENV_NAME \
-      --name $API_CONTAINER_NAME \
+
+    
       --image "$CONTAINER_REGISTRY_LOGIN_SERVER/adventureworkslt-dab:latest" \
-      --ingress "external" \
-      --target-port "5000" \
-      --user-assigned $MANAGED_IDENTITY_RESOURCE_ID \
-      --registry-server $CONTAINER_REGISTRY_LOGIN_SERVER \
-      --registry-identity $MANAGED_IDENTITY_RESOURCE_ID \
-      --secrets conn-string="$SQL_CONNECTION_STRING" identity-client-id="$MANAGED_IDENTITY_CLIENT_ID" \
-      --env-vars DATABASE_CONNECTION_STRING=secretref:conn-string AZURE_MANAGED_IDENTITY_CLIENT_ID=secretref:identity-client-id
+      --set-env-vars DATABASE_CONNECTION_STRING=secretref:conn-string
     ```
 
 1. Navigate to `TODO` and test the API.
