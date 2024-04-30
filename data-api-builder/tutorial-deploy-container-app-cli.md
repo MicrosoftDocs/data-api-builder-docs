@@ -276,12 +276,6 @@ Finally, TODO
 
 1. TODO
 
-    ```yaml
-
-    ```
-
-1. TODO
-
     ```azurecli-interactive
     az containerapp create \ 
       --resource-group $RESOURCE_GROUP_NAME \
@@ -293,12 +287,6 @@ Finally, TODO
       --user-assigned $MANAGED_IDENTITY_RESOURCE_ID \
       --registry-server $CONTAINER_REGISTRY_LOGIN_SERVER \
       --env-vars "DATABASE_CONNECTION_STRING=$SQL_CONNECTION_STRING" \
-    ```
-
-1. TODO
-
-    ```azurecli-interactive
-    TODO
     ```
 
 1. Navigate to `TODO` and test the API.
