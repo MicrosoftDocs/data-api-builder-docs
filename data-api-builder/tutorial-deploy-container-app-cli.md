@@ -121,7 +121,7 @@ First, create a managed identity and assign it permissions to read data from Azu
 
     # AcrPush
     az role assignment create \
-      --assignee $CURRENT_USER_PRINCIPAL_ID
+      --assignee $CURRENT_USER_PRINCIPAL_ID \
       --role "8311e382-0749-4cb8-b61a-304f252e45ec" \
       --scope $RESOURCE_GROUP_ID
     ```
@@ -131,7 +131,7 @@ First, create a managed identity and assign it permissions to read data from Azu
     ```azurecli-interactive
     # AcrPull    
     az role assignment create \
-      --assignee $MANAGED_IDENTITY_PRINCIPAL_ID
+      --assignee $MANAGED_IDENTITY_PRINCIPAL_ID \
       --role "7f951dda-4ed3-4680-a7ca-43fe172d538d" \
       --scope $RESOURCE_GROUP_ID
     ```
