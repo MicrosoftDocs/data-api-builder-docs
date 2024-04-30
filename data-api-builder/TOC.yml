@@ -41,7 +41,7 @@
       items:
       - name: Azure Container Instances
         displayName: ACI
-        href: how-to-deploy-container-instance.md
+        href: how-to-deploy-container-instance.yml
       - name: Azure Container Apps
         displayName: ACA
         href: how-to-deploy-container-app.md
