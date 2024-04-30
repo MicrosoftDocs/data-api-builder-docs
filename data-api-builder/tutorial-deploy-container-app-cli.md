@@ -288,10 +288,8 @@ Finally, TODO
       --user-assigned $MANAGED_IDENTITY_RESOURCE_ID \
       --registry-server $CONTAINER_REGISTRY_LOGIN_SERVER \
       --registry-identity $MANAGED_IDENTITY_RESOURCE_ID \
-      --secrets "conn-string=$SQL_CONNECTION_STRING" \
-      --secrets "identity-client-id=$MANAGED_IDENTITY_CLIENT_ID" \
-      --env-vars "DATABASE_CONNECTION_STRING=secretref:conn-string" \
-      --env-vars "AZURE_MANAGED_IDENTITY_CLIENT_ID=secretref:identity-client-id"
+      --secrets conn-string="$SQL_CONNECTION_STRING" identity-client-id="$MANAGED_IDENTITY_CLIENT_ID" \
+      --env-vars DATABASE_CONNECTION_STRING=secretref:conn-string AZURE_MANAGED_IDENTITY_CLIENT_ID=secretref:identity-client-id
     ```
 
 1. Navigate to `TODO` and test the API.
