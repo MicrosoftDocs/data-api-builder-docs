@@ -107,7 +107,12 @@ TODO
     ```
 
     > [!TIP]
-    > You can always check the output of this command using `echo $MANAGED_IDENTITY_PRINCIPAL_ID`.
+    > You can always check the output of this command.
+    >
+    > ```azurecli
+    > echo $MANAGED_IDENTITY_PRINCIPAL_ID
+    > ```
+    >
 
 ## Assign managed identity permissions
 
@@ -125,7 +130,12 @@ First, create a managed identity and assign it permissions to read data from Azu
     ```
 
     > [!TIP]
-    > You can always check the output of this command using `echo $RESOURCE_GROUP_ID`.
+    > You can always check the output of this command.
+    >
+    > ```azurecli
+    > echo $RESOURCE_GROUP_ID
+    > ```
+    >
 
 1. Use [`az role assignment create`](/cli/azure/role/assignment#az-role-assignment-create) to assign the [**AcrPush**](/azure/role-based-access-control/built-in-roles/containers#acrpush) role to your account so you can push containers to Azure Container Registry.
 
@@ -201,7 +211,12 @@ Now, deploy a new server and database in the Azure SQL service. The database use
     ```
 
     > [!TIP]
-    > You can always check the output of this command using `echo $SQL_CONNECTION_STRING`.
+    > You can always check the output of this command.
+    >
+    > ```azurecli
+    > echo $SQL_CONNECTION_STRING
+    > ```
+    >
 
 ## Build image in Azure Container Registry
 
@@ -268,7 +283,12 @@ Next, TODO
     ```
 
     > [!TIP]
-    > You can always check the output of this command using `echo $CONTAINER_REGISTRY_LOGIN_SERVER`.
+    > You can always check the output of this command.
+    >
+    > ```azurecli
+    > echo $CONTAINER_REGISTRY_LOGIN_SERVER
+    > ```
+    >
 
 ## Deploy Azure Container App DAB container
 
