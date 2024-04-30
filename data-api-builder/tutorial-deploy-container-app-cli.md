@@ -286,6 +286,7 @@ Finally, TODO
       --target-port "5000" \
       --user-assigned $MANAGED_IDENTITY_RESOURCE_ID \
       --registry-server $CONTAINER_REGISTRY_LOGIN_SERVER \
+      --registry-identity $MANAGED_IDENTITY_RESOURCE_ID \
       --env-vars "DATABASE_CONNECTION_STRING=$SQL_CONNECTION_STRING" \
     ```
 
