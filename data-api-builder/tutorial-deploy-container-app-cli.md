@@ -193,7 +193,7 @@ Next, TODO
 1. Create a variable named `CONTAINER_REGISTRY_NAME` with a uniquely generated name for your Azure Container Registry instance. You use this variable later in this section.
 
     ```azurecli-interactive
-    CONTAINER_REGISTRY_NAME="reg-$RANDOM"
+    CONTAINER_REGISTRY_NAME="reg$RANDOM"
     ```
 
 1. TODO
@@ -233,7 +233,8 @@ Next, TODO
     az acr build \
       --registry $CONTAINER_REGISTRY_NAME \
       --image adventureworkslt-dab:latest \
-      --image adventureworkslt-dab:{{.Run.ID}}
+      --image adventureworkslt-dab:{{.Run.ID}} \
+      .
     ```
 
 1. TODO
