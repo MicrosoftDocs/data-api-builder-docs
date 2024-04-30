@@ -95,7 +95,7 @@ The `cardinality` property tells Data API builder that there can be many books i
 
 That property is all you need. At startup, Data API builder automatically detects the database fields that need to be used to sustain the defined relationship.
 
-If you don't have a Foreign Key constraint sustaining the database relationship, Data API builder can't figure out automatically what fields are used. To tell Data API builder what fields relate the two entities, you must specify them manually. You can specify them with the CLI using [`dab update`](reference-cli.md#update):
+If you don't have a Foreign Key constraint sustaining the database relationship, Data API builder can't figure out automatically what fields are used. To tell Data API builder what fields relate the two entities, you must specify them manually. You can specify them with the CLI using [`dab update`](reference-command-line-interface.md#update):
 
 ```bash
 dab update Series --relationship books --target.entity Book --cardinality many  --relationship.fields "id:series_id"
