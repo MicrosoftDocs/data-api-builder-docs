@@ -51,5 +51,5 @@ For more information, see [`data-source` configuration property](reference-confi
 
 ## Related content
 
-- [Command-line interface (CLI) reference](reference-cli.md)
+- [Command-line interface (CLI) reference](reference-command-line-interface.md)
 - [Configuration reference](reference-configuration.md)

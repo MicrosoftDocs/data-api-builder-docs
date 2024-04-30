@@ -70,6 +70,10 @@ landingContent:
             url: how-to-run-from-source.md
           - text: Implement row-level security in SQL
             url: how-to-row-level-security.md
+      - linkListType: tutorial
+        links:
+          - text: Deploy to Azure Container Apps with Azure SQL
+            url: tutorial-deploy-container-app-cli.md
   - title: Reference
     linkLists:
       - linkListType: reference
@@ -77,7 +81,7 @@ landingContent:
           - text: Configuration file
             url: reference-configuration.md
           - text: Command-line interface (CLI)
-            url: reference-cli.md
+            url: reference-command-line-interface.md
           - text: Database-specific features
             url: reference-database-specific-features.md
           - text: Policies

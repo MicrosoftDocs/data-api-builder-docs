@@ -824,7 +824,7 @@ Defines if the Data API builder engine should run in `development` or `productio
 Typically, the underlying database errors are exposed in detail by setting the default level of detail for logs to `Debug` when running in development. In production, the level of detail for logs is set to `Error`.
 
 > [!TIP]
-> The default log level can be further overriden using `dab start --LogLevel <level-of-detail>`. For more information, see [command-line interface (CLI) reference](reference-cli.md#start).
+> The default log level can be further overriden using `dab start --LogLevel <level-of-detail>`. For more information, see [command-line interface (CLI) reference](reference-command-line-interface.md#start).
 
 #### Format
 
@@ -3501,4 +3501,4 @@ In this example, cache is enabled and the items expire after 15 seconds.
 ## Related content
 
 - [Functions reference](reference-functions.md)
-- [Command-line interface (CLI) reference](reference-cli.md)
+- [Command-line interface (CLI) reference](reference-command-line-interface.md)
