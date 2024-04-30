@@ -241,7 +241,13 @@ Next, TODO
 1. TODO
 
     ```azurecli-interactive
-    
+    CONTAINER_REGISTRY_LOGIN_SERVER=$( \
+      az acr show \
+        --resource-group $RESOURCE_GROUP_NAME \
+        --name $CONTAINER_REGISTRY_NAME \
+        --query "loginServer" \
+        --output "tsv" \
+    )
     ```
 
 ## Deploy Azure Container App DAB container
@@ -278,10 +284,12 @@ Finally, TODO
       --resource-group $RESOURCE_GROUP_NAME \
       --environment $CONTAINER_ENV_NAME \
       --name $API_CONTAINER_NAME \
-      --image "mcr.microsoft.com/azure-databases/data-api-builder:latest" \
+      --image "adventureworkslt-dab:latest" \
       --ingress "external" \
       --target-port "5000" \
       --user-assigned $MANAGED_IDENTITY_RESOURCE_ID \
+      --registry-server $CONTAINER_REGISTRY_LOGIN_SERVER \
+      --registry-identity $MANAGED_IDENTITY_RESOURCE_ID \
       --env-vars "DATABASE_CONNECTION_STRING=$SQL_CONNECTION_STRING" \
     ```
 
