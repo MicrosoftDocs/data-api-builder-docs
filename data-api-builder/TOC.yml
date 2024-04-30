@@ -50,6 +50,7 @@
 - name: Tutorials
   items:
     - name: Deploy to Azure Container Apps using Azure CLI
+      displayName: ACA, automate, automation
       href: tutorial-deploy-container-app-cli.md
 - name: Concepts
   items:
