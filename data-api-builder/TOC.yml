@@ -4,8 +4,10 @@
   expanded: true
   items:
     - name: What is Data API builder?
+      displayName: overview
       href: overview.md
     - name: What's new
+      displayName: changelog
       items:
         - name: Version 0.10
           href: whats-new/version-0-10.md
@@ -22,6 +24,7 @@
       - name: SQL
         href: quickstart-sql.md
       - name: NoSQL
+        displayName: Cosmos
         href: quickstart-nosql.md
       - name: PostgreSQL
         href: quickstart-postgresql.md
@@ -30,12 +33,14 @@
     - name: Azure
       items:
       - name: Azure SQL
+        displayName: database, server
         href: quickstart-azure-sql.md
       - name: Azure Cosmos DB for NoSQL
         href: quickstart-azure-cosmos-db-nosql.md
 - name: How to
   items:
     - name: Install the CLI
+      displayName: DAB, command-line, interface
       href: how-to-install-cli.md
     - name: Deploy
       items:
@@ -51,20 +56,26 @@
     - name: Run in a container
       href: how-to-run-container.md
     - name: Run from source code
+      displayName: Git, GitHub
       href: how-to-run-from-source.md
     - name: Implement row-level security in SQL
+      displayName: RLS
       href: how-to-row-level-security.md
     - name: Use environments
+      displayName: development
       href: how-to-use-environments.md
     - name: Use Application Insights
+      displayName: app
       href: how-to-use-application-insights.md
 - name: Tutorials
   items:
-    - name: Deploy to Azure Container Apps
-      href: running-in-azure.md
+    - name: Deploy to Azure Container Apps using Azure CLI
+      displayName: ACA, automate, automation
+      href: tutorial-deploy-container-app-cli.md
 - name: Concepts
   items:
     - name: REST
+      displayName: HTTP
       href: rest.md
     - name: OpenAPI
       href: openapi.md
@@ -93,12 +104,15 @@
 - name: Samples
   items:
     - name: Example configuration
+      displayName: Sample
       href: sample-configuration.md
     - name: Applications
       items:
         - name: Todo app sample with Data API builder, Azure Static Web Apps, and Azure SQL
+          displayName: To-do
           href: https://github.com/azure-samples/dab-swa-todo
         - name: Library app sample with Data API builder, Azure Static Web Apps, and Azure SQL
+          displayName: Bookstore
           href: https://github.com/azure-samples/dab-swa-library-demo
 - name: Reference
   items:
