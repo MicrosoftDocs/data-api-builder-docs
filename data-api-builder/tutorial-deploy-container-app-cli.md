@@ -48,7 +48,7 @@ First, create a managed identity and assign it permissions to read data from Azu
     ```azurecli-interactive
     az group create \
       --name $RESOURCE_GROUP_NAME \
-      --location "westus" \
+      --location "<azure-region>" \
       --tag "source=msdocs-dab-tutorial"
     ```
 
@@ -152,6 +152,7 @@ Now, deploy a new server and database in the Azure SQL service. The database use
     az sql server create \
       --resource-group $RESOURCE_GROUP_NAME \
       --name $SQL_SERVER_NAME \
+      --location "<azure-region>" \
       --enable-ad-only-auth \
       --external-admin-principal-type "User" \
       --external-admin-name $MANAGED_IDENTITY_NAME \
@@ -206,7 +207,7 @@ Next, TODO
       --resource-group $RESOURCE_GROUP_NAME \
       --name $CONTAINER_REGISTRY_NAME \
       --sku "Standard" \
-      --location "westus" \
+      --location "<azure-region>" \
       --admin-enabled false
     ```
 
@@ -263,7 +264,7 @@ Finally, TODO
       --resource-group $RESOURCE_GROUP_NAME \
       --name $CONTAINER_ENV_NAME \
       --logs-destination none \
-      --location "westus"
+      --location "<azure-region>"
     ```
 
 1. TODO
