@@ -81,7 +81,7 @@ landingContent:
           - text: Configuration file
             url: reference-configuration.md
           - text: Command-line interface (CLI)
-            url: reference-cli.md
+            url: reference-command-line-interface.md
           - text: Database-specific features
             url: reference-database-specific-features.md
           - text: Policies

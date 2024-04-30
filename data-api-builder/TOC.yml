@@ -107,7 +107,7 @@
   items:
     - name: Command-line interface
       displayName: CLI
-      href: reference-cli.md
+      href: reference-command-line-interface.md
     - name: Configuration
       items:
         - name: Full configuration Schema
