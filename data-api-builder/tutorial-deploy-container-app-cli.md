@@ -110,18 +110,29 @@ First, create a managed identity and assign it permissions to read data from Azu
     > [!TIP]
     > You can always check the output of this command using `echo $MANAGED_IDENTITY_RESOURCE_ID`.
 
-1. Use [`az role assignment create`](/cli/azure/role/assignment#az-role-assignment-create) to assign the **Storage Blob Data Owner** role to your account so you can upload blobs to Azure Storage.
+1. Use [`az role assignment create`](/cli/azure/role/assignment#az-role-assignment-create) to assign the [**AcrPush**](/azure/role-based-access-control/built-in-roles/containers#acrpush) role to your account so you can push containers to Azure Container Registry.
 
     ```azurecli-interactive
-    # Storage Blob Data Owner
-    
+    CURRENT_USER_PRINCIPAL_ID=$( \
+      az ad signed-in-user show \
+        --query "id" \
+        --output "tsv" \
+    )
+
+    # AcrPush
     az role assignment create \
-      --assignee $( \
-        az ad signed-in-user show \
-          --query "id" \
-          --output "tsv" \
-      ) \
-      --role "b7e6dc6d-f1e8-4753-8033-0f276bb0955b" \
+      --assignee $CURRENT_USER_PRINCIPAL_ID
+      --role "8311e382-0749-4cb8-b61a-304f252e45ec" \
+      --scope $RESOURCE_GROUP_ID
+    ```
+
+1. Assign the [**AcrPull**](/azure/role-based-access-control/built-in-roles/containers#acrpull) role to your managed identity using [`az role assignment create`](/cli/azure/role/assignment#az-role-assignment-create) again. This assignment allows the managed identity to pull container images from Azure Container Registry. The managed identity is eventually assigned to an Azure Container Apps instance.
+
+    ```azurecli-interactive
+    # AcrPull    
+    az role assignment create \
+      --assignee $MANAGED_IDENTITY_PRINCIPAL_ID
+      --role "7f951dda-4ed3-4680-a7ca-43fe172d538d" \
       --scope $RESOURCE_GROUP_ID
     ```
 
@@ -182,52 +193,49 @@ Now, deploy a new server and database in the Azure SQL service. The database use
 
 Next, TODO
 
+1. Create a variable named `CONTAINER_REGISTRY_NAME` with a uniquely generated name for your Azure Container Registry instance. You use this variable later in this section.
+
+    ```azurecli-interactive
+    CONTAINER_REGISTRY_NAME="reg-$RANDOM"
+    ```
+
 1. TODO
 
     ```azurecli-interactive
+    az acr create \
+      --resource-group $RESOURCE_GROUP_NAME \
+      --name $CONTAINER_REGISTRY_NAME \
+      --sku "Standard" \
+      --location "westus"
+    ```
+
+1. TODO
+
+    ```Dockerfile
+    FROM mcr.microsoft.com/dotnet/sdk:6.0-cbl-mariner2.0 AS build
     
-    ```
-
-1. TODO
-
-    ```azurecli-interactive
+    WORKDIR /config
     
-    ```
-
-1. TODO
-
-    ```azurecli-interactive
+    RUN dotnet new tool-manifest
     
-    ```
-
-1. TODO
-
-    ```azurecli-interactive
-    dotnet tool install \
-      --global \
-      Microsoft.DataApiBuilder
-    ```
-
-1. TODO
-
-    ```azurecli-interactive
-    dab init \
-      --database-type "mssql" \
-      --connection-string "@env('DATABASE_CONNECTION_STRING')"
-    ```
-
-1. TODO
-
-    ```azurecli-interactive
-    dab add Product \
-      --source "SalesLT.Product" \
-      --permissions "anonymous:read"
-    ```
-
-1. TODO
-
-    ```azurecli-interactive
+    RUN dotnet tool install Microsoft.DataApiBuilder
     
+    RUN dotnet tool run dab -- init --database-type "mssql" --connection-string "@env('DATABASE_CONNECTION_STRING')"
+    
+    RUN dotnet tool run dab -- add Product --source "SalesLT.Product" --permissions "anonymous:read"
+    
+    FROM mcr.microsoft.com/azure-databases/data-api-builder
+    
+    COPY --from=build /config /App
+    ```
+
+1. TODO
+
+    ```azurecli-interactive
+    az acr build \
+      --registry $CONTAINER_REGISTRY_NAME \
+      --image adventureworkslt-dab:latest \
+      --image adventureworkslt-dab:{{.Run.ID}}
     ```
 
 1. TODO
