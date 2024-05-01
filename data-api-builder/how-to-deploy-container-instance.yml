@@ -72,7 +72,7 @@ procedureSection:
       - |
         Create a new resource group. You will use this resource group to for all new resources in this guide. 
 
-        :::image type="content" source="media/how-to-deploy-container-instance/create-resource-group.png" lightbox="media/how-to-deploy-container-instance/create-resource-group.png" alt-text="Screenshot of the "Create a resource group" page's "Basics" tab in the Azure portal.":::
+        :::image type="content" source="media/how-to-deploy-container-instance/create-resource-group.png" lightbox="media/how-to-deploy-container-instance/create-resource-group.png" alt-text="Screenshot of the 'Create a resource group' page's "Basics" tab in the Azure portal.":::
 
         > [!TIP]
         > We recommend naming the resource group **msdocs-dab-aci**. All screenshots in this guide use this name.
@@ -88,7 +88,7 @@ procedureSection:
         | **Redundancy** | Select **Locally-redundant storage (LRS)** |
         | **Enable storage account key access** | Select **Enabled** |
 
-        :::image type="content" source="media/how-to-deploy-container-instance/create-storage-account.png" alt-text="Screenshot of the "Create a storage account" page's "Advanced" tab in the Azure portal.":::
+        :::image type="content" source="media/how-to-deploy-container-instance/create-storage-account.png" alt-text="Screenshot of the 'Create a storage account' page's "Advanced" tab in the Azure portal.":::
       - |
         Navigate to the new storage account in the Azure portal.
       - |
