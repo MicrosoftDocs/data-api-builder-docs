@@ -8,7 +8,7 @@ metadata:
   ms.reviewer: jerrynixon
   ms.service: data-api-builder
   ms.topic: quickstart
-  ms.date: 04/30/2024
+  ms.date: 05/01/2024
   #Customer Intent: As a developer, I want to deploy Data API builder to Azure Container Instances so that I can quickly create a REST API for my database.
 title: |
   Deploy Data API builder to Azure Container Instances
@@ -29,6 +29,8 @@ procedureSection:
       To start, build a Data API builder (DAB) configuration file to connect to your existing database. This file is used later with the final container.
     steps:
       - |
+        Create an empty directory on your local machine to store the configuration file.
+      - |
         Initialize a new base configuration file using [`dab init`](reference-cli.md#init). Use the following settings on initialization.
 
         | | Value |
@@ -40,7 +42,7 @@ procedureSection:
         dab init --database-type <database-type> --connection-string <connection-string>
         ```
       - |
-        Add at least one database entity to the configuration. Use the [`dab add`](reference-cli.md#add) command to configure an entity. Configure the entity to allow all permissions for anonymous users.
+        Add at least one database entity to the configuration. Use the [`dab add`](reference-cli.md#add) command to configure an entity. Configure each entity to allow all permissions for anonymous users. Repeat `dab add` as many times as you like for your entities.
 
         ```dotnetcli
         dab add <entity-name> --source <schema>.<table> --permissions "anonymous:*"
@@ -51,7 +53,16 @@ procedureSection:
       Next, upload the configuration file to a file share created within Azure Files. This file share is eventually mounted to the final container as a volume.
     steps:
       - |
+        Sign into the Azure portal (<https://portal.azure.com>).
       - |
+        Create a new resource group. You will use this resource group to for all new resources in this guide. 
+
+        [![Screenshot of the "Create a resource group" page in the Azure portal](media/how-to-deploy-container-instance/create-resource-group.png)](media/how-to-deploy-container-instance/create-resource-group.png#lightbox)
+
+        > [!TIP]
+        > We recommend naming the resource group **msdocs-dab-aci**. All screenshots in this guide use this name.
+      - |
+
   - title: |
       Create the container instance
     summary: |
@@ -59,6 +70,17 @@ procedureSection:
     steps:
       - |
       - |
+  - title: |
+      Clean up resources
+    summary: |
+      When you no longer need the sample application or resources, remove the corresponding deployment and all resources.
+    steps:
+      - |
+        Navigate to the **resource group** using the Azure portal.
+      - |
+        In the **command bar**, select **Delete**.
+      - |
+
 relatedContent:
   - text: Deploy Data API builder to Azure Container Apps.
     url: how-to-deploy-container-app.yml
