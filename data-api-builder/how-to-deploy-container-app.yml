@@ -24,19 +24,152 @@ prerequisites:
     - Existing supported database addressable from Azure.
 procedureSection:
   - title: |
-      TODO
+      Build the configuration file
     summary: |
-      TODO
-    code: |
-      ```output
-      TODO
-      ```
-  - title: |
-      TODO
-    summary: |
-      TODO
+      To start, build a Data API builder (DAB) configuration file to connect to your existing database. This file is used later with the final container.
     steps:
       - |
-        TODO
+        Create an empty directory on your local machine to store the configuration file.
       - |
-        TODO
+        Initialize a new base configuration file using [`dab init`](reference-cli.md#init). Use the following settings at a minimum on initialization.
+
+        | Setting | Value |
+        | --- | --- |
+        | **Database type** | Select a supported database type. |
+        | **Connection string** | Use the [`@env()`](reference-functions.md#env) function to reference the `DATABASE_CONNECTION_STRING` environment variable. |
+
+        ```dotnetcli
+        dab init --database-type "<database-type>" --connection-string "@env('DATABASE_CONNECTION_STRING')"
+        ```
+
+        > [!IMPORTANT]
+        > Some database types will require additional configuration settings on initialization.
+      - |
+        Add at least one database entity to the configuration. Use the [`dab add`](reference-cli.md#add) command to configure an entity. Configure each entity to allow all permissions for anonymous users. Repeat `dab add` as many times as you like for your entities.
+
+        ```dotnetcli
+        dab add "<entity-name>" --source "<schema>.<table>" --permissions "anonymous:*"
+        ```
+      - |
+        Open and review the contents of the *dab-config.json* file. You use this file later in this guide.
+      - |
+        Create a new file in the same directory named *schema.graphql*. Insert the following content into the file and **save** the file. You also use this file later in this guide.
+
+        ```graphql
+        type Author @model {
+          id: ID
+          firstName: String
+          lastName: String
+        }
+        ```
+  - title: |
+      Host configuration in Azure Files
+    summary: |
+      Next, upload the configuration file to a file share created within Azure Files. This file share is eventually mounted to the final container as a volume.
+    steps:
+      - |
+        Sign into the Azure portal (<https://portal.azure.com>).
+      - |
+        Create a new resource group. You will use this resource group to for all new resources in this guide. 
+
+        [![Screenshot of the "Create a resource group" page's "Basics" tab in the Azure portal.](media/how-to-deploy-container-instance/create-resource-group.png)](media/how-to-deploy-container-instance/create-resource-group.png#lightbox)
+
+        > [!TIP]
+        > We recommend naming the resource group **msdocs-dab-aci**. All screenshots in this guide use this name.
+      - |
+        Create an Azure Storage account. Use these settings to configure the account.
+
+        | Setting | Value |
+        | --- | --- |
+        | **Resource group** | Select the resource group you created earlier |
+        | **Storage account name** | Enter a globally unique name |
+        | **Region** | Select an Azure region |
+        | **Performance** | Select **Standard** |
+        | **Redundancy** | Select **Locally-redundant storage (LRS)** |
+        | **Enable storage account key access** | Select **Enabled** |
+
+        ![Screenshot of the "Create a storage account" page's "Advanced" tab in the Azure portal.](media/how-to-deploy-container-instance/create-storage-account.png)
+      - |
+        Navigate to the new storage account in the Azure portal.
+      - |
+        Select **File shares** in the **Data storage** section of the resource menu. Then, select **File share** from the command bar to create a new share in the storage account. Use the following settings to configure the new file share.
+
+        | Setting | Value |
+        | --- | --- |
+        | **Name** | Enter `config` |
+        | **Access tier** | Select **Hot** |
+        | **Enable backup** | Do not select |
+
+        ![Screenshot of the **File share** resource menu and command bar options in the Azure portal.](media/how-to-deploy-container-instance/storage-file-share-option.png)
+      - |
+        Upload the *dab-config.json* and *schema.graphql* files to the share. Use the **Upload** option in the command bar to open the **Upload files** dialog. Select both files and then select **Upload**.
+
+        ![Screenshot of the **Upload files** dialog in the Azure portal.](media/how-to-deploy-container-instance/upload-files.png)
+  - title: |
+      Create the base container app
+    summary: |
+      Now, create the container in Azure using Azure Container Apps. This container hosts the Data API builder image without a configuration.
+    steps:
+      - |
+        Create an Azure Container Apps resource. As part of the process of creating the app resource, you will be required to create an environment. Use these settings to configure both resources.
+
+        | Resource | Setting | Value |
+        | --- | --- | --- |
+        | **Environment** | **Environment name** | Enter a globally unique name |
+        | **Environment** | **Environment type** | Select **** |
+        | **Environment** | **Logs destination** | Select **Don't save logs** |
+        | **App** | **Resource group** | Select the resource group you created earlier |
+        | **App** | **Storage account name** | Enter a globally unique name |
+        | **App** | **Region** | Select an Azure region |
+        | **App** | **Use quickstart image** | Do not select |
+        | **App** | **Image source** | Select **Docker Hub or other registries** |
+        | **App** | **Image type** | Select **Public** |
+        | **App** | **Registry login server** | Enter `mcr.microsoft.com` |
+        | **App** | **Image and tag** | Enter `azure-databases/data-api-builder:latest` |
+        | **App** | **Environment variables - Name** | Enter `DATABASE_CONNECTION_STRING` |
+        | **App** | **Environment variables - Value** | Enter the connection string for your database. |
+        | **App** | **Ingress** | Ensure **Enabled** is selected |
+        | **App** | **Ingress traffic** | Select **Accepting traffic from anywhere** |
+        | **App** | **** | Select **** |
+        | **App** | **Ingress type** | Select **HTTP** |
+        | **App** | **Target port** | Enter `5000` |
+
+        ![Screenshot of the "Create Container App" page's "Container" tab in the Azure portal.](media/how-to-deploy-container-instance/create-container-app.png)
+
+        ![Screenshot of the "Create Container Apps Environment" page's "Basics" tab in the Azure portal.](media/how-to-deploy-container-instance/create-container-app-environment.png)
+
+        > [!TIP]
+        > We recommend using a connection string that does not include authorization keys. Instead, use managed identities and role-based access control to manage access between your database and host. For more information, see [Azure services that use managed identities](/entra/identity/managed-identities-azure-resources/managed-identities-status).
+      - |
+        Navigate to the new container app in the Azure portal.
+      - |
+        Use the **Application URL** field in the **Essentials** section to browse to the container app's website. Observe that the DAB container is running and the status is **healthy**. 
+        
+        ![Screenshot of the running DAB container](media/how-to-deploy-container-instance/running-app-healthy.png)
+
+        > [!NOTE]
+        > At this point, you cannot navigate to any API endpoints. These endpoints will be available once you mount a DAB configuration file.
+  - title: |
+      Mount the configuration files
+    summary: |
+      Finally, mount the configuration files from the Azure Files share to the container instance. This step allows the Data API builder to use the configuration file to connect to your database.
+    steps:
+      - |
+      - |
+  - title: |
+      Clean up resources
+    summary: |
+      When you no longer need the sample application or resources, remove the corresponding deployment and all resources.
+    steps:
+      - |
+        Navigate to the **resource group** using the Azure portal.
+      - |
+        In the **command bar**, select **Delete**.
+      - |
+relatedContent:
+  - text: Deploy Data API builder to Azure Container Instances.
+    url: how-to-deploy-container-instance.yml
+  - text: Deploy Data API builder to Azure Static Web Apps.
+    url: how-to-deploy-static-web-app.yml
+  - text: Automate deployment of Data API builder to Azure Container Apps using Azure CLI.
+    url: tutorial-deploy-container-app-cli.md

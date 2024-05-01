@@ -33,7 +33,7 @@ procedureSection:
       - |
         Initialize a new base configuration file using [`dab init`](reference-cli.md#init). Use the following settings at a minimum on initialization.
 
-        | | Value |
+        | Setting | Value |
         | --- | --- |
         | **Database type** | Select a supported database type. |
         | **Connection string** | Use the [`@env()`](reference-functions.md#env) function to reference the `DATABASE_CONNECTION_STRING` environment variable. |
@@ -50,6 +50,18 @@ procedureSection:
         ```dotnetcli
         dab add "<entity-name>" --source "<schema>.<table>" --permissions "anonymous:*"
         ```
+      - |
+        Open and review the contents of the *dab-config.json* file. You use this file later in this guide.
+      - |
+        Create a new file in the same directory named *schema.graphql*. Insert the following content into the file and **save** the file. You also use this file later in this guide.
+
+        ```graphql
+        type Author @model {
+          id: ID
+          firstName: String
+          lastName: String
+        }
+        ```
   - title: |
       Host configuration in Azure Files
     summary: |
@@ -60,12 +72,39 @@ procedureSection:
       - |
         Create a new resource group. You will use this resource group to for all new resources in this guide. 
 
-        [![Screenshot of the "Create a resource group" page in the Azure portal](media/how-to-deploy-container-instance/create-resource-group.png)](media/how-to-deploy-container-instance/create-resource-group.png#lightbox)
+        [![Screenshot of the "Create a resource group" page's "Basics" tab in the Azure portal.](media/how-to-deploy-container-instance/create-resource-group.png)](media/how-to-deploy-container-instance/create-resource-group.png#lightbox)
 
         > [!TIP]
         > We recommend naming the resource group **msdocs-dab-aci**. All screenshots in this guide use this name.
       - |
+        Create an Azure Storage account. Use these settings to configure the account.
 
+        | Setting | Value |
+        | --- | --- |
+        | **Resource group** | Select the resource group you created earlier |
+        | **Storage account name** | Enter a globally unique name |
+        | **Region** | Select an Azure region |
+        | **Performance** | Select **Standard** |
+        | **Redundancy** | Select **Locally-redundant storage (LRS)** |
+        | **Enable storage account key access** | Select **Enabled** |
+
+        ![Screenshot of the "Create a storage account" page's "Advanced" tab in the Azure portal.](media/how-to-deploy-container-instance/create-storage-account.png)
+      - |
+        Navigate to the new storage account in the Azure portal.
+      - |
+        Select **File shares** in the **Data storage** section of the resource menu. Then, select **File share** to create a new share in the storage account. Use the following settings to configure the new file share.
+
+        | Setting | Value |
+        | --- | --- |
+        | **Name** | Enter `config` |
+        | **Access tier** | Select **Hot** |
+        | **Enable backup** | Select **Disabled** |
+
+        ![Screenshot of the **File share** resource menu and command bar options in the Azure portal.](media/how-to-deploy-container-instance/storage-file-share-option.png)
+      - |
+        Upload the *dab-config.json* and *schema.graphql* files to the share. Use the **Upload** option in the command bar to open the **Upload files** dialog. Select both files and then select **Upload**.
+
+        ![Screenshot of the **Upload files** dialog in the Azure portal.](media/how-to-deploy-container-instance/upload-files.png)
   - title: |
       Create the container instance
     summary: |
@@ -83,7 +122,6 @@ procedureSection:
       - |
         In the **command bar**, select **Delete**.
       - |
-
 relatedContent:
   - text: Deploy Data API builder to Azure Container Apps.
     url: how-to-deploy-container-app.yml
