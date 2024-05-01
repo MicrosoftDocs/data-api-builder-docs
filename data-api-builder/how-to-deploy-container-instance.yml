@@ -72,7 +72,7 @@ procedureSection:
       - |
         Create a new resource group. You will use this resource group to for all new resources in this guide. 
 
-        [![Screenshot of the "Create a resource group" page's "Basics" tab in the Azure portal.](media/how-to-deploy-container-instance/create-resource-group.png)](media/how-to-deploy-container-instance/create-resource-group.png#lightbox)
+        :::image type="content" source="media/how-to-deploy-container-instance/create-resource-group.png" lightbox="media/how-to-deploy-container-instance/create-resource-group.png" alt-text="Screenshot of the "Create a resource group" page's "Basics" tab in the Azure portal.":::
 
         > [!TIP]
         > We recommend naming the resource group **msdocs-dab-aci**. All screenshots in this guide use this name.
@@ -88,7 +88,7 @@ procedureSection:
         | **Redundancy** | Select **Locally-redundant storage (LRS)** |
         | **Enable storage account key access** | Select **Enabled** |
 
-        ![Screenshot of the "Create a storage account" page's "Advanced" tab in the Azure portal.](media/how-to-deploy-container-instance/create-storage-account.png)
+        :::image type="content" source="media/how-to-deploy-container-instance/create-storage-account.png" alt-text="Screenshot of the "Create a storage account" page's "Advanced" tab in the Azure portal.":::
       - |
         Navigate to the new storage account in the Azure portal.
       - |
@@ -100,11 +100,11 @@ procedureSection:
         | **Access tier** | Select **Hot** |
         | **Enable backup** | Select **Disabled** |
 
-        ![Screenshot of the **File share** resource menu and command bar options in the Azure portal.](media/how-to-deploy-container-instance/storage-file-share-option.png)
+        :::image type="content" source="media/how-to-deploy-container-instance/storage-file-share-option.png" alt-text="Screenshot of the **File share** resource menu and command bar options in the Azure portal.":::
       - |
         Upload the *dab-config.json* and *schema.graphql* files to the share. Use the **Upload** option in the command bar to open the **Upload files** dialog. Select both files and then select **Upload**.
 
-        ![Screenshot of the **Upload files** dialog in the Azure portal.](media/how-to-deploy-container-instance/upload-files.png)
+        :::image type="content" source="media/how-to-deploy-container-instance/upload-files.png" alt-text="Screenshot of the **Upload files** dialog in the Azure portal.":::
   - title: |
       Create the container instance
     summary: |
