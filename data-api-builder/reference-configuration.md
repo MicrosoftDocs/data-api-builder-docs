@@ -55,8 +55,8 @@ Here's the description of the top-level properties in a table format:
 |-----------------------|-------------|
 | **[$schema](#schema)**           | Specifies the JSON schema for validation, ensuring the configuration adheres to the required format. |
 | **[data-source](#data-source)**       | Contains the details about the [database type](#database-type) and the [connection string](#connection-string), necessary for establishing the database connection. |
-| **[data-source-files](#data-source-files)** | An optional array specifying additional configuration files that might define other data sources. |
-| **[runtime](#runtime)**           | Configures runtime behaviors and settings, including sub-properties for  [REST](#rest-runtime), [GraphQL](#graphql-runtime), [host](#host-runtime), [cache](#cache-runtime), and [telemetry](#telemetry-runtime). |
+| **[data-source-files](#data-source-files)** | An optional array specifying other configuration files that might define other data sources. |
+| **[runtime](#runtime)**           | Configures runtime behaviors and settings, including subproperties for  [REST](#rest-runtime), [GraphQL](#graphql-runtime), [host](#host-runtime), [cache](#cache-runtime), and [telemetry](#telemetry-runtime). |
 | **[entities](#entities)**          | Defines the set of entities ([database tables](#type-entities), views, etc.) that are exposed through the API, including their [mappings](#mappings-entities), [permissions](#permissions), and [relationships](#relationships-entities). |
 
 ## Sample configuration
@@ -410,12 +410,12 @@ This property includes names of runtime configuration files referencing extra da
 * Child-level configuration files can also identify child files.  
 * Configuration files can be placed in subfolders as desired.  
 * Entity names must be unique across all configuration files. 
-* Relationships across configuration files is not supported.  
+* Relationships across configuration files aren't supported.  
 
 **Known issues**
 
 * Currently, child configuration files are only supported in GraphQL.  
-* Currently, child configuration files do not support environment variables. 
+* Currently, child configuration files don't support environment variables. 
 
 #### Examples
 
