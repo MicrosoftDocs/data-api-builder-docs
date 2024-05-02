@@ -116,7 +116,7 @@ procedureSection:
         | Resource | Setting | Value |
         | --- | --- | --- |
         | **Environment** | **Environment name** | Enter a globally unique name |
-        | **Environment** | **Environment type** | Select **** |
+        | **Environment** | **Environment type** | Select **Consumption only** |
         | **Environment** | **Logs destination** | Select **Don't save logs** |
         | **App** | **Resource group** | Select the resource group you created earlier |
         | **App** | **Storage account name** | Enter a globally unique name |
@@ -130,7 +130,7 @@ procedureSection:
         | **App** | **Environment variables - Value** | Enter the connection string for your database. |
         | **App** | **Ingress** | Ensure **Enabled** is selected |
         | **App** | **Ingress traffic** | Select **Accepting traffic from anywhere** |
-        | **App** | **** | Select **** |
+        | **App** | **Client certificate mode** | Select **Ignore** |
         | **App** | **Ingress type** | Select **HTTP** |
         | **App** | **Target port** | Enter `5000` |
 
