@@ -414,7 +414,7 @@ This property includes names of runtime configuration files referencing extra da
 
 **Known issues**
 
-* Currently, multiple data sources is only supported in GraphQL.  
+* Currently, child configuration files are only supported in GraphQL.  
 * Currently, child configuration files do not support environment variables. 
 
 #### Examples
