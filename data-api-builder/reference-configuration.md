@@ -54,8 +54,8 @@ Here's the description of the top-level properties in a table format:
 | Property              | Description |
 |-----------------------|-------------|
 | **[$schema](#schema)**           | Specifies the JSON schema for validation, ensuring the configuration adheres to the required format. |
-| **[data-source](#data-source)**       | Contains the details about the database type and the connection string, necessary for establishing the database connection. |
-| **[data-source-files](#data-source-files)** | An optional array specifying additional configuration files that might define other data sources or override settings. |
+| **[data-source](#data-source)**       | Contains the details about the [database type](#database-type) and the [connection string](#connection-string), necessary for establishing the database connection. |
+| **[data-source-files](#data-source-files)** | An optional array specifying additional configuration files that might define other data sources. |
 | **[runtime](#runtime)**           | Configures runtime behaviors and settings, including sub-properties for  [REST](#rest-runtime), [GraphQL](#graphql-runtime), [host](#host-runtime), [cache](#cache-runtime), and [telemetry](#telemetry-runtime). |
 | **[entities](#entities)**          | Defines the set of entities ([database tables](#type-entities), views, etc.) that are exposed through the API, including their [mappings](#mappings-entities), [permissions](#permissions), and [relationships](#relationships-entities). |
 
@@ -401,6 +401,16 @@ This property includes names of runtime configuration files referencing extra da
   "data-source-files": ["<string-array>"]
 }
 ```
+
+**Configuration file considerations**
+
+* The `data-source` property in every configuration file is required. 
+* The `entities` property in every configuration file is required. 
+* Only the top-level configuration file `runtime` setting is used. 
+* Child-level configuration files can also identify child files.  
+* Configuration file can be placed in subfolders as desired.  
+* Entities names across configuration files must be unique. 
+* Relationships across configuration files is not supported.  
 
 #### Examples
 
