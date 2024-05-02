@@ -1314,7 +1314,7 @@ In this example, cache is enabled globally and all items expire after 15 seconds
 
 **REQUIRED**: ❌ No
 
-This property configures Application Insights to centralize API logs. Learn [more](/data-api-builder/how-to-use-application-insights.md). 
+This property configures Application Insights to centralize API logs. Learn [more](how-to-use-application-insights.md). 
 
 ### Entities
 
