@@ -35,6 +35,7 @@ Here's a quick breakdown of the primary "sections" in a configuration file.
 {
   "$schema": "...",
   "data-source": { ... },
+  "data-source-files": [ ... ],
   "runtime": {
     "rest": { ... },
     "graphql": { .. },
@@ -43,7 +44,7 @@ Here's a quick breakdown of the primary "sections" in a configuration file.
     "cache": { ... },
     "telemetry": { ... }
   }
-  "entities": { ... }
+  "entities": [ ... ]
 }
 ```
 
@@ -389,6 +390,23 @@ This property includes names of runtime configuration files referencing extra da
   "data-source-files": ["<string-array>"]
 }
 ```
+
+#### Examples
+
+```json
+{
+  "data-source-files": ["dab-config-two.json", "dab-config-three.json"]
+}
+```
+
+Reference subfolders if in use:
+
+```json
+{
+  "data-source-files": ["myfolder/dab-config-two.json"]
+}
+```
+
 
 ### Runtime
 
