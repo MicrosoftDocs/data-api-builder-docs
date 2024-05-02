@@ -459,7 +459,7 @@ The `runtime` section outlines options that influence the runtime behavior and s
       "mode": "production" (default) | "development",
       "cors": {
         "origins": ["<array-of-strings>"],
-        "credentials": <true> | <false> (default)
+        "allow-credentials": <true> | <false> (default)
       },
       "authentication": {
         "provider": "StaticWebApps" (default) | ...,
@@ -815,7 +815,7 @@ The `host` section within the runtime configuration provides settings crucial fo
       "mode": "production" (default) | "development",
       "cors": {
         "origins": ["<array-of-strings>"],
-        "credentials": <true> | <false> (default)
+        "allow-credentials": <true> | <false> (default)
       },
       "authentication": {
         "provider": "StaticWebApps" (default) | ...,
