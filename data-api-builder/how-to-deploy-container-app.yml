@@ -105,6 +105,10 @@ procedureSection:
         Upload the *dab-config.json* and *schema.graphql* files to the share. Use the **Upload** option in the command bar to open the **Upload files** dialog. Select both files and then select **Upload**.
 
         :::image type="content" source="media/how-to-deploy-container-instance/upload-files.png" alt-text="Screenshot of the **Upload files** dialog in the Azure portal.":::
+      - |
+        Select **Access keys** in the **Security + networking** section of the resource menu. Then, record the **Storage account name** and **Key** values from this page. You will use these values later in this guide.
+
+        :::image type="content" source="media/how-to-deploy-container-instance/storage-credentials.png" alt-text="Screenshot of the 'Access Keys' page within a storage account in the Azure portal."::: 
   - title: |
       Create the base container app
     summary: |
@@ -155,7 +159,37 @@ procedureSection:
       Finally, mount the configuration files from the Azure Files share to the container instance. This step allows the Data API builder to use the configuration file to connect to your database.
     steps:
       - |
+        Navigate to the container environment created previously in this guide using the Azure portal.
       - |
+        Select **Azure files** in the **Settings** section of the resource menu. Then, select **Add** from the command bar to add an existing file share to the container environment. Use the following settings to configure the new file share. Then **save** the new file share configuration.
+
+        | Setting | Value |
+        | --- | --- |
+        | **Name** | Enter `config-share` |
+        | **Storage account name** | Name of the storage account recorded earlier in this guide. |
+        | **Storage account key** | Key of the storage account recorded earlier in this guide. |
+        | **File share** | Enter `config` |
+        | **Access mode** | Select **Read only** |
+
+        :::image type="content" source="media/how-to-deploy-container-instance/azure-files-option.png" alt-text="Screenshot of the 'Azure Files' option in the resource menu within the Azure portal.":::
+      - |
+        Navigate to the container app again in the Azure portal.
+      - |
+        Select **Revisions and replicas** in the **Application** section of the resource menu. Then, select **Create new revision** from the command bar to start the process of configuring a new revision for your container app.
+
+        :::image type="content" source="media/how-to-deploy-container-instance/create-new-revision-option.png" alt-text="":::
+      - |
+        Use the following settings to configure the new revision.
+
+        | Setting | Value |
+        | --- | --- |
+        | TODO | TODO |        
+
+        :::image type="content" source="media/how-to-deploy-container-instance/add-volume.png" alt-text="":::
+      - |
+        TODO
+
+        :::image type="content" source="media/how-to-deploy-container-instance/edit-container.png" alt-text="":::
   - title: |
       Clean up resources
     summary: |
