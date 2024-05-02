@@ -3039,10 +3039,7 @@ Here's a list of allowed values for this property:
 | | Description |
 | --- | --- |
 | **`get`** | Exposes HTTP GET requests |
-| **`put`** | Exposes HTTP PUT requests |
 | **`post`** | Exposes HTTP POST requests |
-| **`delete`** | Exposes HTTP DELETE requests |
-| **`patch`** | Exposes HTTP PATCH requests |
 
 #### Examples
 
