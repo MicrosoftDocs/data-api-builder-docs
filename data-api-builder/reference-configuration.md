@@ -40,13 +40,24 @@ Here's a quick breakdown of the primary "sections" in a configuration file.
     "rest": { ... },
     "graphql": { .. },
     "host": { ... },
-    "authentication":{ ... },
     "cache": { ... },
     "telemetry": { ... }
   }
   "entities": [ ... ]
 }
 ```
+
+**Top-level properties**
+
+Here's the description of the top-level properties in a table format:
+
+| Property              | Description |
+|-----------------------|-------------|
+| **[$schema](#schema)**           | Specifies the JSON schema for validation, ensuring the configuration adheres to the required format. |
+| **[data-source](#data-source)**       | Contains the details about the database type and the connection string, necessary for establishing the database connection. |
+| **[data-source-files](#data-source-files)** | An optional array specifying additional configuration files that might define other data sources or override settings. |
+| **[runtime](#runtime)**           | Configures runtime behaviors and settings, including sub-properties for  [REST](#rest-runtime), [GraphQL](#graphql-runtime), [host](#host-runtime), [cache](#cache-runtime), and [telemetry](#telemetry-runtime). |
+| **[entities](#entities)**          | Defines the set of entities ([database tables](#type-entities), views, etc.) that are exposed through the API, including their [mappings](#mappings-entities), [permissions](#permissions), and [relationships](#relationships-entities). |
 
 ## Sample configuration
 
@@ -451,7 +462,7 @@ The `runtime` section outlines options that influence the runtime behavior and s
   "telemetry": {
     "application-insights": {
       "connection-string": "<connection-string>",
-      "enabled": <true> (default) | <false>
+      "enabled": <true> | <false> (default)
     }
   }
 }
@@ -1283,6 +1294,12 @@ In this example, cache is enabled globally and all items expire after 15 seconds
   }
 }
 ```
+
+### Telemetry (runtime)
+
+**REQUIRED**: ❌ No
+
+This configures Application Insights to centralize API logs. Learn [more](/data-api-builder/how-to-use-application-insights.md). 
 
 ### Entities
 
