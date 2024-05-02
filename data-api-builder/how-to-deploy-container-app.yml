@@ -177,7 +177,7 @@ procedureSection:
       - |
         Select **Revisions and replicas** in the **Application** section of the resource menu. Then, select **Create new revision** from the command bar to start the process of configuring a new revision for your container app.
 
-        :::image type="content" source="media/how-to-deploy-container-instance/create-new-revision-option.png" alt-text="":::
+        :::image type="content" source="media/how-to-deploy-container-instance/create-new-revision-option.png" alt-text="TODO":::
       - |
         Use the following settings to configure the new revision.
 
@@ -185,11 +185,11 @@ procedureSection:
         | --- | --- |
         | TODO | TODO |        
 
-        :::image type="content" source="media/how-to-deploy-container-instance/add-volume.png" alt-text="":::
+        :::image type="content" source="media/how-to-deploy-container-instance/add-volume.png" alt-text="TODO":::
       - |
         TODO
 
-        :::image type="content" source="media/how-to-deploy-container-instance/edit-container.png" alt-text="":::
+        :::image type="content" source="media/how-to-deploy-container-instance/edit-container.png" alt-text="TODO":::
   - title: |
       Clean up resources
     summary: |
