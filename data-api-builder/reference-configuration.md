@@ -408,9 +408,14 @@ This property includes names of runtime configuration files referencing extra da
 * The `entities` property in every configuration file is required. 
 * Only the top-level configuration file `runtime` setting is used. 
 * Child-level configuration files can also identify child files.  
-* Configuration file can be placed in subfolders as desired.  
-* Entities names across configuration files must be unique. 
+* Configuration files can be placed in subfolders as desired.  
+* Entity names must be unique across all configuration files. 
 * Relationships across configuration files is not supported.  
+
+**Known issues**
+
+* Currently, multiple data sources is only supported in GraphQL.  
+* Currently, child configuration files do not support environment variables. 
 
 #### Examples
 
