@@ -84,20 +84,6 @@ Here's a sample configuration file that only includes required properties for a 
 
 For an example of a more complex scenario, see the [end-to-end sample configuration](sample-configuration.md).
 
-## Configuration format
-
-As a reference, here's the full JSON format for valid configuration files.
-
-```json
-{
-  "$schema": "<string>",
-  "data-source": {
-    "database-type": "<enum-string>",
-    "connection-string": "<string>"
-  }
-}
-```
-
 ## Environments
 
 Data API builder's configuration file can support scenarios where you need to support multiple environments, similar to the `appSettings.json` file in ASP.NET Core. The framework provides three [common environment values](/dotnet/api/microsoft.extensions.hosting.environments#fields); `Development`, `Staging`, and `Production`; but you can elect to use any environment value you choose. The environment that Data API builder uses must be configured using the `DAB_ENVIRONMENT` environment variable.
