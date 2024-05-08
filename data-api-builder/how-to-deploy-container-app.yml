@@ -147,7 +147,7 @@ procedureSection:
       - |
         Navigate to the new container app in the Azure portal.
       - |
-        Use the **Application URL** field in the **Essentials** section to browse to the container app's website. Observe the response indcating that the DAB container is running and the status is **healthy**.
+        Use the **Application URL** field in the **Essentials** section to browse to the container app's website. Observe the response indicating that the DAB container is running and the status is **healthy**.
         
         ```json
         {
@@ -183,27 +183,40 @@ procedureSection:
       - |
         Select **Revisions and replicas** in the **Application** section of the resource menu. Then, select **Create new revision** from the command bar to start the process of configuring a new revision for your container app.
 
-        :::image type="content" source="media/how-to-deploy-container-instance/create-new-revision-option.png" alt-text="TODO":::
+        :::image type="content" source="media/how-to-deploy-container-instance/create-new-revision-option.png" alt-text="Screenshot of the 'Create new revision' option in the command bar of the Azure portal.":::
       - |
-        Use the following settings to configure the new revision.
+        Navigate to the **Volumes** section and select the **Add** option. Use the following settings to configure the new volume. After configuring the volume, **Add** the volume to the container revision.
 
         | Setting | Value |
         | --- | --- |
-        | TODO | TODO |        
+        | **Volume type** | Select **Azure file volume** |
+        | **Name** | Enter `config-volume` |
+        | **File share** | Enter `config` |
 
-        :::image type="content" source="media/how-to-deploy-container-instance/add-volume.png" alt-text="TODO":::
-      - |
-        TODO
 
-        :::image type="content" source="media/how-to-deploy-container-instance/edit-container.png" alt-text="TODO":::
+        :::image type="content" source="media/how-to-deploy-container-instance/add-volume.png" alt-text="Screenshot of the `Create new volume` section in the Azure portal.":::
       - |
-        TODO
+        Navigatte to the **Container** section, select the single current container, and then select the **Edit** option. Use the following settings to configure two mounts for the container. **Save** your changes.
+
+        | Setting | Value |
+        | --- | --- |
+        | **Volume name** | Enter `config-volume` |
+        | **Mount path** | Enter `/App/dab-config.json` |
+        | **Sub path** | Enter `dab-config.json` |
+
+        | Setting | Value |
+        | --- | --- |
+        | **Volume name** | Enter `config-volume` |
+        | **Mount path** | Enter `/App/schema.graphql` |
+        | **Sub path** | Enter `schema.graphql` |
+
+        :::image type="content" source="media/how-to-deploy-container-instance/edit-container.png" alt-text="Screenshot of the `Add volume mount` section in the Azure portal.":::
       - |
-        TODO
+        Select **Create** to create a new revision with the volume mounts you specified. With for the revision to finish deploying.
       - |
-        TODO (Browse to the running app)
+        Use the **Application URL** field in the **Essentials** section to browse to the container app's website again. Observe that the response still indicates that the DAB container is **healthy**.
       - |
-        TODO
+        Navigate to the `/api/swagger` path for the current running application. Use the Swagger UI to issue a **HTTP GET** request for one of your entities.
   - title: |
       Clean up resources
     summary: |
