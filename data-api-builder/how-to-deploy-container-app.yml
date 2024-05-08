@@ -8,7 +8,7 @@ metadata:
   ms.reviewer: jerrynixon
   ms.service: data-api-builder
   ms.topic: quickstart
-  ms.date: 05/01/2024
+  ms.date: 05/08/2024
   #Customer Intent: As a developer, I want to deploy Data API builder to Azure Container Apps so that I can quickly create a REST API for my database.
 title: |
   Deploy Data API builder to Azure Container Apps
@@ -147,12 +147,18 @@ procedureSection:
       - |
         Navigate to the new container app in the Azure portal.
       - |
-        Use the **Application URL** field in the **Essentials** section to browse to the container app's website. Observe that the DAB container is running and the status is **healthy**. 
+        Use the **Application URL** field in the **Essentials** section to browse to the container app's website. Observe the response indcating that the DAB container is running and the status is **healthy**.
         
-        :::image type="content" source="media/how-to-deploy-container-instance/running-app-healthy.png" alt-text="Screenshot of the running DAB container.":::
+        ```json
+        {
+          "status": "healthy",
+          "version": "0.12.0",
+          "app-name": "dab_oss_0.12.0"
+        }
+        ```
 
         > [!NOTE]
-        > At this point, you cannot navigate to any API endpoints. These endpoints will be available once you mount a DAB configuration file.
+        > The version number and name will vary based on your current version of Data API builder. At this point, you cannot navigate to any API endpoints. These endpoints will be available once you mount a DAB configuration file.
   - title: |
       Mount the configuration files
     summary: |
