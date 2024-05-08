@@ -25,7 +25,7 @@ Adds the ability to automatically merge two configuration files.
 
 It's possible to maintain multiple pairs of baseline and environment specific configuration files to simplify management of the environment specific settings. For example, it's possible to maintain separate configurations for **Development** and **Production**. This step involves having a base configuration file that has all of the common settings between the different environments. Then by setting the `DAB_ENVIRONMENT` variable it's possible to control which configuration files to merge for consumption by Data API builder.
 
-For more information, see [CLI reference](../reference-cli.md).
+For more information, see [CLI reference](../reference-command-line-interface.md).
 
 ## Executing GraphQL and REST Mutations in a transaction
 

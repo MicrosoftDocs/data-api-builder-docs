@@ -215,5 +215,5 @@ This sample is derived from the tables and data provided in [Library sample SQL 
 ## Related content
 
 - [Functions reference](reference-functions.md)
-- [Command-line interface (CLI) reference](reference-cli.md)
+- [Command-line interface (CLI) reference](reference-command-line-interface.md)
 - [Configuration reference](reference-configuration.md)
