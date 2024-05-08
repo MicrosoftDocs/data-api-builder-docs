@@ -256,7 +256,7 @@ mutation {
 
 ### Update
 
-To create a new element of the desired entity, the `update<entity>` mutation is provided. The update mutation requires two parameters:
+To update an element of the desired entity, the `update<entity>` mutation is provided. The update mutation requires two parameters:
 
 - `<primary_key>`, the key-value list of primary key columns and related values to identify the element to be updated
 - `item`: parameter, with entity's mandatory fields values, to be used when updating the specified item
@@ -286,7 +286,7 @@ mutation {
 
 ### Delete
 
-To delete a new element of the desired entity, the `delete<entity>` mutation is provided. The primary key of the element to be deleted is the required parameter.
+To delete an element of the desired entity, the `delete<entity>` mutation is provided. The primary key of the element to be deleted is the required parameter.
 
 ```graphql
 delete<entity>(<pk_colum>:<pk_value>, [<pk_colum>:<pk_value> ... <pk_colum>:<pk_value>,])
