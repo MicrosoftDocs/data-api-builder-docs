@@ -18,7 +18,7 @@ In this Quickstart, you build a set of Data API builder configuration files to t
 ## Prerequisites
 
 - [Docker](https://www.docker.com/products/docker-desktop/)
-- [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0)
+- [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0)
 - A data management client
   - If you don't have a client installed, [install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
 
