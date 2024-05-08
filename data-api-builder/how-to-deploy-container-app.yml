@@ -226,7 +226,6 @@ procedureSection:
         Navigate to the **resource group** using the Azure portal.
       - |
         In the **command bar**, select **Delete**.
-      - |
 relatedContent:
   - text: Deploy Data API builder to Azure Container Instances.
     url: how-to-deploy-container-instance.yml
