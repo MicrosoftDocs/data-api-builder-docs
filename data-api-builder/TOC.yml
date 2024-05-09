@@ -71,14 +71,28 @@
     - name: GraphQL
       href: graphql.md
     - name: Environments
-      href: environments.md
+      items:
+        - name: Configuring
+          href: environments.md
+        - name: Setting variables
+          displayName: $env, @env, vars, .env
+          href: environments#setting-environment-variables
+        - name: Accessing variables
+          displayName: Environment variables, $env, @env, vars
+          href: environments#accessing-environment-variables
     - name: Database objects
-      href: database-objects.md
+      items:
+        - name: Views
+          href: database-objects#views
+        - name: Stored Procedures
+          displayName: procs
+          href: database-objects#stored-procedures
     - name: Relationships
       href: relationships.md
     - name: Authentication and authorization
       items:
         - name: Azure authentication
+          displayName: AAD, AD, Azure Active Directory, Microsoft Entra Identity, Entra ID
           href: authentication-azure.md
         - name: Local authentication
           href: authentication-local.md
