@@ -72,14 +72,14 @@
       href: graphql.md
     - name: Environments
       items:
-        - name: Configuring
+        - name: Configuring environments
           href: environments.md
-        - name: Setting variables
-          displayName: $env, @env, vars, .env
-          href: environments#setting-environment-variables
-        - name: Accessing variables
-          displayName: Environment variables, $env, @env, vars
-          href: environments#accessing-environment-variables
+        - name: Setting environment variables
+          displayName: $env, @env, vars, .env, env
+          href: environments.md#setting-environment-variables
+        - name: Accessing environment variables
+          displayName: Environment variables, $env, @env, vars, env
+          href: environments.md#accessing-environment-variables
     - name: Database objects
       items:
         - name: Views
