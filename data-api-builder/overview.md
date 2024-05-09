@@ -7,21 +7,17 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: overview
-ms.date: 03/29/2024
+ms.date: 05/08/2024
 #Customer Intent: As a developer, I want to learn more about DAB, so that I can determine if it's the right tool for my scenario.
 ---
 
 # What is Data API builder for Azure Databases?
 
-Data API builder generates modern REST and GraphQL endpoints for your Azure Databases. Use Data API builder to securely expose API endpoints so that your data can be accessed using modern techniques from any platform, developer language, or device. Data API builder includes a flexible deeply integrated policy engine, granular security controls, and integration with popular Azure databases. Data API builder is open-source and it can be ran both for development workloads on your machines or production workloads in any cloud.
+<img align=right src=media/dab-logo.png width=150 alt="DAB logo" title="DAB logo" />
 
-Use Data API builder with:
+Data API builder is designed for developers, featuring a cross-platform CLI, native OpenAPI and Swagger for REST endpoints, and Banana Cake Pop for GraphQL endpoints. Its stateless, Docker-friendly container can be secured with EasyAuth, Microsoft Entra Identity, or any JWT server an enterprise chooses. It has a flexible policy engine, granular security controls, and automatically passes claims data to the SQL session context. DAB supports multiple backend data sources simultaneously, including relational and NoSQL sources, and integrates seamlessly with Application Insights. It requires zero code and a single configuration file, which can reflect relationships in the database or define new ones. GraphQL endpoints allow multiple nested Create statements within a single transaction, while REST endpoints feature in-memory caching and support OData-like query string keywords.
 
-- Azure SQL
-- SQL Server
-- Azure Database for PostgreSQL
-- Azure Database for MySQL
-- Azure Cosmos DB for NoSQL
+DAB is cross-platform, open-source, and completely independent of language, technology, and frameworks. It is free, without any premium tier, and can run in any cloud. DAB natively integrates with Azure Static Web Apps, works great with Azure Container Apps, Azure Container Instances, Azure Kubernetes Services, and Azure Web Apps for Containers, while fully supporting custom, on-premises deployments. It supports SQL Server & Azure SQL, Azure Cosmos DB, PostgreSQL & Azure Database for PostgreSQL, MySQL & Azure Database for MySQL, and Azure SQL Data Warehouse. DAB can reduce a typical codebase by a third, eliminate suites of unit tests, shorten CI/CD pipelines, and introduce standards and advanced capabilities typically reserved for the largest development teams. It’s secure and feature-rich while remaining incredibly simple, scalable, and observable.
 
 ## Architecture
 
@@ -29,26 +25,28 @@ This diagram breaks down the relationship between all of the components of the D
 
 ![Diagram that shows an overview of the Data API Builder architecture. The diagram includes schema files, abstractions, configuration files, and resulting GraphQL+REST endpoints.](media/overview/architecture.png)
 
-## Features
+## Key Features
 
-Here's a list of features that Data API builder supports for your workloads.
-
-- Support for collections, tables, views, and stored procedures to be accessed via REST and GraphQL
+- Support for NoSQL collections
+- Support for relational tables, views, and stored procedures
+- Support multiple, simultaneous data sources
 - Support for authentication via OAuth2/JWT
-- Support for EasyAuth when running in Azure
+- Support for EasyAuth and Microsoft Entra Identity
 - Role-based authorization using received claims
 - Item-level security via policy expressions
-- REST
-  - CRUD operations via POST, GET, PUT, PATCH, DELETE
+- REST endpoints
+  - POST, GET, PUT, PATCH, DELETE
   - Filtering, sorting, and pagination
+  - In-memory cache
   - Support for OpenAPI
-- GraphQL
+- GraphQL endpoints
   - Queries and mutations
   - Filtering, sorting and pagination
   - Relationship navigation
+  - Dynamic schemas
 - Easy development via dedicated CLI
-- Integration for Static Web Apps via Database Connection feature when running in Azure
-- Open Source
+- Integration for Static Web Apps via Database Connection
+- Open Source & free
 
 ## Open source
 
