@@ -83,10 +83,10 @@
     - name: Database objects
       items:
         - name: Views
-          href: database-objects#views
+          href: database-objects.md#views
         - name: Stored Procedures
           displayName: procs
-          href: database-objects#stored-procedures
+          href: database-objects.md#stored-procedures
     - name: Relationships
       href: relationships.md
     - name: Authentication and authorization
