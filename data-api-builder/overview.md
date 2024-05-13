@@ -13,9 +13,16 @@ ms.date: 05/08/2024
 
 # What is Data API builder for Azure Databases?
 
-<img align=right src=media/dab-logo.png width=150 alt="DAB logo" title="DAB logo" />
+:::row:::
+  :::column span="3":::
+    Data API builder is designed for developers, featuring a cross-platform CLI, native OpenAPI and Swagger for REST endpoints, and Banana Cake Pop for GraphQL endpoints. Its stateless, Docker-friendly container can be secured with EasyAuth, Microsoft Entra Identity, or any JWT server an enterprise chooses. It has a flexible policy engine, granular security controls, and automatically passes claims data to the SQL session context.
+  :::column-end:::
+  :::column span="1":::
+    :::image type="content" source="media/dab-mascot.png" alt-text="Illustration of the Data API builder mascot which is a database with a construction hat featuring a cloud logo." border="false":::
+  :::column-end:::
+:::row-end:::
 
-Data API builder is designed for developers, featuring a cross-platform CLI, native OpenAPI and Swagger for REST endpoints, and Banana Cake Pop for GraphQL endpoints. Its stateless, Docker-friendly container can be secured with EasyAuth, Microsoft Entra Identity, or any JWT server an enterprise chooses. It has a flexible policy engine, granular security controls, and automatically passes claims data to the SQL session context. DAB supports multiple backend data sources simultaneously, including relational and NoSQL sources, and integrates seamlessly with Application Insights. It requires zero code and a single configuration file, which can reflect relationships in the database or define new ones. GraphQL endpoints allow multiple nested Create statements within a single transaction, while REST endpoints feature in-memory caching and support OData-like query string keywords.
+DAB supports multiple backend data sources simultaneously, including relational and NoSQL sources, and integrates seamlessly with Application Insights. It requires zero code and a single configuration file, which can reflect relationships in the database or define new ones. GraphQL endpoints allow multiple nested Create statements within a single transaction, while REST endpoints feature in-memory caching and support OData-like query string keywords.
 
 DAB is cross-platform, open-source, and independent of language, technology, and frameworks. It's free, without any premium tier, and can run in any cloud. DAB natively integrates with Azure Static Web Apps, works great with Azure Container Apps, Azure Container Instances, Azure Kubernetes Services, and Azure Web Apps for Containers, while fully supporting custom, on-premises deployments. It supports SQL Server & Azure SQL, Azure Cosmos DB, PostgreSQL & Azure Database for PostgreSQL, MySQL & Azure Database for MySQL, and Azure SQL Data Warehouse. DAB can reduce a typical codebase by a third, eliminate suites of unit tests, shorten CI/CD pipelines, and introduce standards and advanced capabilities typically reserved for the largest development teams. It’s secure and feature-rich while remaining incredibly simple, scalable, and observable.
 
