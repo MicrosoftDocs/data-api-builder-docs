@@ -7,7 +7,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: overview
-ms.date: 05/08/2024
+ms.date: 05/13/2024
 #Customer Intent: As a developer, I want to learn more about DAB, so that I can determine if it's the right tool for my scenario.
 ---
 
@@ -18,7 +18,7 @@ ms.date: 05/08/2024
     Data API builder is designed for developers, featuring a cross-platform CLI, native OpenAPI and Swagger for REST endpoints, and Banana Cake Pop for GraphQL endpoints. Its stateless, Docker-friendly container can be secured with EasyAuth, Microsoft Entra Identity, or any JWT server an enterprise chooses. It has a flexible policy engine, granular security controls, and automatically passes claims data to the SQL session context.
   :::column-end:::
   :::column span="1":::
-    :::image type="content" source="media/dab-mascot.png" alt-text="Illustration of the Data API builder mascot which is a database with a construction hat featuring a cloud logo." border="false":::
+    :::image type="content" source="media/overview/mascot.png" alt-text="Illustration of the Data API builder mascot which is a database with a construction hat featuring a cloud logo." border="false":::
   :::column-end:::
 :::row-end:::
 
