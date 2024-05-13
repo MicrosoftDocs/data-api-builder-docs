@@ -42,7 +42,9 @@ dab init [options]
 #### Examples
 
 ```dotnetcli
-dab init --config "dab-config.MsSql.json" --database-type mssql --connection-string "Server=tcp:127.0.0.1,1433;User ID=sa;Password=REPLACEME;Connection Timeout=5;"
+dab init --config "dab-config.mssql.json" --database-type mssql --connection-string "@env('SQL_CONNECTION_STRING')"
+
+dab init --database-type mysql --connection-string "@env('MYSQL_CONNECTION_STRING') --graphql.multiple-create.enabled true
 ```
 
 #### Options
@@ -65,6 +67,7 @@ dab init --config "dab-config.MsSql.json" --database-type mssql --connection-str
 | **--graphql.path** | ❌ No | `/graphql` | ✔️ Yes | string | Specify the GraphQL endpoint's prefix. |
 | **--graphql.disabled** | ❌ No | `false` | ❌ No | | Disables GraphQL endpoint for all entities. |
 | **--graphql.enabled** | ❌ No | `true` | ✔️ Yes | | Enables GraphQL endpoint for all entities. |
+| **--graphql.multiple-create.enabled** | ❌ No | `false` | ✔️ Yes | | Enables multiple create functionality in GraphQL. |
 | **--auth.audience** | ❌ No | | ✔️ Yes | string | Identifies the recipients that the Json Web Token (JWT) is intended for. |
 | **--auth.issuer** | ❌ No | | ✔️ Yes | string | Specify the party that issued the JWT token. |
 | **-c,--config** | ❌ No | `dab-config.json` | ✔️ Yes | string | Path to config file. |

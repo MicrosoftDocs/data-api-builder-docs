@@ -534,6 +534,7 @@ This object defines whether GraphQL is enabled and the name\[s\] used to expose 
       "path": "/graphql" (default),
       "enabled": <true> (default) | <false>,
       "allow-introspection": <true> (default) | <false>
+      "multiple-mutations": <object>
     }
   }
 }
@@ -546,6 +547,7 @@ This object defines whether GraphQL is enabled and the name\[s\] used to expose 
 | **[`enabled`](#enabled-graphql-runtime)** | ❌ No | boolean |
 | **[`path`](#path-graphql-runtime)** | ❌ No | string |
 | **[`allow-introspection`](#allow-introspection-graphql-runtime)** | ❌ No | boolean |
+| **[`multiple-mutations`](#multiple-mutations-graphql-runtime)** | ❌ No | object |
 
 ### Enabled (GraphQL runtime)
 
@@ -643,6 +645,78 @@ In this example, the introspection is disabled.
   "runtime": {
     "graphql": {
       "allow-introspection": false
+    }
+  }
+}
+```
+
+### Multiple mutations (GraphQL runtime)
+
+**REQUIRED**: ❌ No
+
+TODO
+
+#### Format
+
+```json
+{
+  "runtime": {
+    "graphql": {
+      "multiple-mutations": {
+        "create": <object>
+      }
+    }
+  }
+}
+```
+
+#### Properties
+
+| | Required | Type |
+| --- | --- | --- |
+| **[`create`](#multiple-mutations---create-graphql-runtime)** | ❌ No | object |
+
+### Multiple mutations - create (GraphQL runtime)
+
+**REQUIRED**: ❌ No
+
+TODO
+
+#### Format
+
+```json
+{
+  "runtime": {
+    "graphql": {
+      "multiple-mutations": {
+        "create": {
+          "enabled": <false> (default) | <true>
+        }
+      }
+    }
+  }
+}
+```
+
+#### Properties
+
+| | Required | Type |
+| --- | --- | --- |
+| **`enabled`** | ✔️ Yes | boolean |
+
+#### Examples
+
+TODO
+
+```json
+{
+  "runtime": {
+    "graphql": {
+      "multiple-mutations": {
+        "create": {
+          "enabled": true
+        }
+      }
     }
   }
 }

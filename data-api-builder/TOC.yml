@@ -56,6 +56,9 @@
     - name: Use Application Insights
       displayName: app
       href: how-to-use-application-insights.md
+    - name: Batch multiple mutations
+      displayName: multiple create
+      href: how-to-multiple-mutations.md
 - name: Tutorials
   items:
     - name: Deploy to Azure Container Apps using Azure CLI
