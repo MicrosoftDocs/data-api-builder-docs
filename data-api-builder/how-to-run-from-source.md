@@ -19,7 +19,7 @@ Data API builder (DAB) is an open-source project hosted on GitHub. At any time, 
 - [GitHub account](https://docs.github.com/get-started/start-your-journey/creating-an-account-on-github)
 - [Git](https://git-scm.com/downloads)
   - This tutorial assumes a basic familiarity with Git commands and tooling.
-- [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0)
+- [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0)
 
 ## Fork and clone the repository
 

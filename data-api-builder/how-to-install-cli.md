@@ -16,7 +16,7 @@ In this guide, you go through the steps to install the Data API builder (DAB) co
 
 ## Prerequisites
 
-- .NET 6
+- [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0)
 
 ## Install the CLI
 
