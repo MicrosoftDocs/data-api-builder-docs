@@ -57,7 +57,7 @@
       displayName: app
       href: how-to-use-application-insights.md
     - name: Batch multiple mutations
-      displayName: multiple create
+      displayName: multiple create, transaction
       href: how-to-multiple-mutations.md
 - name: Tutorials
   items:
@@ -144,6 +144,9 @@
                       href: reference-configuration.md#path-graphql-runtime
                     - name: Allow introspection
                       href: reference-configuration.md#allow-introspection-graphql-runtime
+                    - name: Multiple mutations, transaction
+                      displayName: multiple create
+                      href: reference-configuration.md#multiple-mutations-graphql-runtime
                 - name: REST
                   displayName: API
                   href: reference-configuration.md#rest-runtime
