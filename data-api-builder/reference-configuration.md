@@ -47,7 +47,7 @@ Here's a quick breakdown of the primary "sections" in a configuration file.
 }
 ```
 
-**Top-level properties**
+### Top-level properties
 
 Here's the description of the top-level properties in a table format:
 
@@ -388,20 +388,20 @@ This property includes names of runtime configuration files referencing extra da
 }
 ```
 
-**Configuration file considerations**
+#### Configuration file considerations
 
-* The `data-source` property in every configuration file is required. 
-* The `entities` property in every configuration file is required. 
-* Only the top-level configuration file `runtime` setting is used. 
-* Child-level configuration files can also identify child files.  
-* Configuration files can be placed in subfolders as desired.  
-* Entity names must be unique across all configuration files. 
-* Relationships across configuration files aren't supported.  
+- The `data-source` property in every configuration file is required.
+- The `entities` property in every configuration file is required.
+- Only the top-level configuration file `runtime` setting is used.
+- Child-level configuration files can also identify child files.  
+- Configuration files can be placed in subfolders as desired.  
+- Entity names must be unique across all configuration files.
+- Relationships across configuration files aren't supported.  
 
-**Known issues**
+#### Known issues
 
-* Currently, child configuration files are only supported in GraphQL.  
-* Currently, child configuration files don't support environment variables. 
+- Currently, child configuration files are only supported in GraphQL.  
+- Currently, child configuration files don't support environment variables.
 
 #### Examples
 
@@ -418,7 +418,6 @@ Reference subfolders if in use:
   "data-source-files": ["myfolder/dab-config-two.json"]
 }
 ```
-
 
 ### Runtime
 
@@ -1374,7 +1373,7 @@ In this example, cache is enabled globally and all items expire after 15 seconds
 
 **REQUIRED**: ❌ No
 
-This property configures Application Insights to centralize API logs. Learn [more](how-to-use-application-insights.md). 
+This property configures Application Insights to centralize API logs. Learn [more](how-to-use-application-insights.md).
 
 ### Entities
 
