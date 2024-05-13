@@ -18,9 +18,14 @@ In this Quickstart, you build a set of Data API builder configuration files to t
 ## Prerequisites
 
 - [Docker](https://www.docker.com/products/docker-desktop/)
-- [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0)
+- [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0)
 - A data management client
   - If you don't have a client installed, [install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
+
+> [!TIP]
+> Alternatively, open this Quickstart in GitHub Codespaces with all developer prerequisites already installed. Simply bring your own Azure subscription. GitHub accounts include an entitlement of storage and core hours at no cost. For more information, see [included storage and core hours for GitHub accounts](https://docs.github.com/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts).
+>
+> [![Open in GitHub Codespaces](https://img.shields.io/badge/Open-Open?style=for-the-badge&label=GitHub+Codespaces&logo=github&labelColor=0078D7&color=303030)](https://codespaces.new/azure-samples/dab-quickstart?template=true&quickstart=1)
 
 ## Install the Data API builder CLI
 
