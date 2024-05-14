@@ -285,18 +285,19 @@
           href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
     - name: Functions
       href: reference-functions.md
-    - name: Troubleshooting
-      items:
-        - name: Installation
-          href: /troubleshoot/azure/data-api-builder/installation?context=/azure/data-api-builder/context/context
-        - name: Runtime
-          href: /troubleshoot/azure/data-api-builder/usage?context=/azure/data-api-builder/context/context
-        - name: Known issues
-          href: https://github.com/azure/data-api-builder/labels/known-issue
-        - name: Support
-          displayName: ticket, css, feedback, help, assistance
-          href: https://github.com/Azure/data-api-builder/blob/main/SUPPORT.md
     - name: Database-specific features
       href: reference-database-specific-features.md
     - name: Policies
       href: reference-policies.md
+- name: Troubleshooting
+  items:
+    - name: Installation
+      href: /troubleshoot/azure/data-api-builder/installation?context=/azure/data-api-builder/context/context
+    - name: Runtime
+      href: /troubleshoot/azure/data-api-builder/usage?context=/azure/data-api-builder/context/context
+    - name: Known issues
+      displayName: bugs
+      href: https://github.com/azure/data-api-builder/labels/known-issue
+    - name: Support
+      displayName: ticket, css, feedback, help, assistance
+      href: https://github.com/Azure/data-api-builder/blob/main/SUPPORT.md
