@@ -71,14 +71,28 @@
     - name: GraphQL
       href: graphql.md
     - name: Environments
-      href: environments.md
+      items:
+        - name: Configuring environments
+          href: environments.md
+        - name: Setting environment variables
+          displayName: $env, @env, vars, .env, env
+          href: environments.md#setting-environment-variables
+        - name: Accessing environment variables
+          displayName: Environment variables, $env, @env, vars, env
+          href: environments.md#accessing-environment-variables
     - name: Database objects
-      href: database-objects.md
+      items:
+        - name: Views
+          href: database-objects.md#views
+        - name: Stored Procedures
+          displayName: procs
+          href: database-objects.md#stored-procedures
     - name: Relationships
       href: relationships.md
     - name: Authentication and authorization
       items:
         - name: Azure authentication
+          displayName: AAD, AD, Azure Active Directory, Microsoft Entra Identity, Entra ID
           href: authentication-azure.md
         - name: Local authentication
           href: authentication-local.md
@@ -271,7 +285,11 @@
   items:
     - name: Installation
       href: /troubleshoot/azure/data-api-builder/installation?context=/azure/data-api-builder/context/context
-    - name: Usage
+    - name: Runtime
       href: /troubleshoot/azure/data-api-builder/usage?context=/azure/data-api-builder/context/context
     - name: Known issues
+      displayName: bugs
       href: https://github.com/azure/data-api-builder/labels/known-issue
+    - name: Support
+      displayName: ticket, css, feedback, help, assistance
+      href: https://github.com/Azure/data-api-builder/blob/main/SUPPORT.md
