@@ -157,7 +157,7 @@ To wrap up things, use the DAB CLI to run the API and test the GraphQL endpoint 
 1. Navigate to the `/graphql` relative endpoint for your running application. This endpoint opens the Banana Cake Pop interface.
 
     > [!NOTE]
-    > By default, this would be `https://localhost:5000/graphql`.
+    > By default, this would be `https://localhost:5001/graphql`.
 
 1. Author a GraphQL mutation to create three distinct rows across two tables in your database. This mutation uses both the `Book` and `Chapter` entities in a single "multiple create" operation. Use the following properties for the mutation.
 
