@@ -653,7 +653,10 @@ In this example, the introspection is disabled.
 
 **REQUIRED**: ❌ No
 
-TODO
+Configures all multiple mutation operations for the GraphQL runtime. 
+
+> [!NOTE]
+> By default, multiple mutations is not enabled and must explicitly be configured to be enabled.
 
 #### Format
 
@@ -679,7 +682,7 @@ TODO
 
 **REQUIRED**: ❌ No
 
-TODO
+Configures multiple create operations for the GraphQL runtime.
 
 #### Format
 
@@ -705,7 +708,7 @@ TODO
 
 #### Examples
 
-TODO
+In this example, multiple mutations are enabled for the GraphQL runtime. Specifically, the multiple create operation is enabled by specifying a value of `true` for the `runtime.graphql.multiple-mutations.create.enabled` property.
 
 ```json
 {
