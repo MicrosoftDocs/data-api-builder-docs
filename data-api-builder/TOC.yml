@@ -144,8 +144,8 @@
                       href: reference-configuration.md#path-graphql-runtime
                     - name: Allow introspection
                       href: reference-configuration.md#allow-introspection-graphql-runtime
-                    - name: Multiple mutations, transaction
-                      displayName: multiple create
+                    - name: Multiple mutations
+                      displayName: multiple create, transaction
                       href: reference-configuration.md#multiple-mutations-graphql-runtime
                 - name: REST
                   displayName: API
