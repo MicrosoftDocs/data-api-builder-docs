@@ -44,7 +44,7 @@ dab init [options]
 ```dotnetcli
 dab init --config "dab-config.mssql.json" --database-type mssql --connection-string "@env('SQL_CONNECTION_STRING')"
 
-dab init --database-type mysql --connection-string "@env('MYSQL_CONNECTION_STRING') --graphql.multiple-create.enabled true
+dab init --database-type mysql --connection-string "@env('MYSQL_CONNECTION_STRING')" --graphql.multiple-create.enabled true
 ```
 
 #### Options
