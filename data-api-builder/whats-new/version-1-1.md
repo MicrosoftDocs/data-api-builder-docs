@@ -13,6 +13,9 @@ ms.date: 05/15/2024
 
 Release notes and information about the updates and enhancements in Data API builder version 1.1.
 
+> [!IMPORTANT]
+> This is the first generally availability (GA) release on Data API builder (DAB).
+
 ## TODO
 
 TODO
