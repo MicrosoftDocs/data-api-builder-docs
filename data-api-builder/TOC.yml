@@ -42,6 +42,11 @@
     - name: Install the CLI
       displayName: DAB, command-line, interface
       href: how-to-install-cli.md
+    - name: Deploy
+      items:
+      - name: Azure Static Web Apps
+        displayName: SWA
+        href: how-to-deploy-static-web-app.yml
     - name: Run in a container
       href: how-to-run-container.md
     - name: Run from source code
@@ -56,11 +61,6 @@
     - name: Use Application Insights
       displayName: app
       href: how-to-use-application-insights.md
-    - name: Deploy
-      items:
-      - name: Azure Static Web Apps
-        displayName: SWA
-        href: how-to-deploy-static-web-app.yml
 - name: Tutorials
   items:
     - name: Deploy to Azure Container Apps using Azure CLI
