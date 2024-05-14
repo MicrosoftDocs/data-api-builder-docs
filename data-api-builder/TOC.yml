@@ -17,6 +17,9 @@
           href: whats-new/version-0-8.md
         - name: All versions
           href: whats-new/index.yml
+    - name: FAQ
+      displayName: frequently asked questions, Q&A
+      href: faq.yml
 - name: Quickstarts
   items:
     - name: Local

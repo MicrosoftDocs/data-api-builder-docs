@@ -50,7 +50,7 @@ sections:
       - question: |
           How do I use multiple mutations in GraphQL?
         answer: |
-          To use multiple mutations in GraphQL, review the [use multiple mutations in GraphQL guide](how-to-use-multiple-mutations.md).
+          To use multiple mutations in GraphQL, review the [use multiple mutations in GraphQL guide](how-to-multiple-mutations.md).
       - question: |
           How does row-level security work with multiple mutations in GraphQL?
         answer: |
