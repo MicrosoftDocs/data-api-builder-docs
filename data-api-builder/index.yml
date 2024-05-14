@@ -76,8 +76,6 @@ landingContent:
             url: how-to-deploy-container-instance.yml
           - text: Deploy to Azure Container Apps
             url: how-to-deploy-container-app.yml
-          - text: Deploy to Azure Static Web Apps
-            url: how-to-deploy-static-web-app.yml
       - linkListType: tutorial
         links:
           - text: Deploy to Azure Container Apps with Azure SQL

@@ -50,9 +50,6 @@
       - name: Azure Container Apps
         displayName: ACA
         href: how-to-deploy-container-app.yml
-      - name: Azure Static Web Apps
-        displayName: SWA
-        href: how-to-deploy-static-web-app.yml
     - name: Run in a container
       href: how-to-run-container.md
     - name: Run from source code
