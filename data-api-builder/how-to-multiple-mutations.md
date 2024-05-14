@@ -12,7 +12,7 @@ ms.date: 05/14/2024
 
 # Multiple mutations in GraphQL for Data API builder
 
-Data API builder (DAB) supports combining multiple mutation operations together into a single transition. Multiple mutations support scenarios where you need to create multiple items belonging to the same entity or create multiple items belonging to a related entity. This guide walks through a sample scenario using a multiple mutation operation.
+Data API builder (DAB) supports combining multiple mutation operations together into a single transaction. Multiple mutations support scenarios where you need to create multiple items belonging to the same entity or create multiple items belonging to a related entity. This guide walks through a sample scenario using a multiple mutation operation.
 
 ## Prerequisites
 
