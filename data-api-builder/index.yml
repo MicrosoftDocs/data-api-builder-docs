@@ -18,6 +18,8 @@ landingContent:
         links:
           - text: What is Data API builder?
             url: overview.md
+          - text: Frequently asked questions
+            url: faq.yml
       - linkListType: whats-new
         links:
           - text: Version 0.10
