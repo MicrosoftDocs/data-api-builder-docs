@@ -56,6 +56,11 @@
     - name: Use Application Insights
       displayName: app
       href: how-to-use-application-insights.md
+    - name: Deploy
+      items:
+      - name: Azure Static Web Apps
+        displayName: SWA
+        href: how-to-deploy-static-web-app.yml
 - name: Tutorials
   items:
     - name: Deploy to Azure Container Apps using Azure CLI

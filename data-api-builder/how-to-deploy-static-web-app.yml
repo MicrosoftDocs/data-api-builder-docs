@@ -1,0 +1,42 @@
+### YamlMime:HowTo
+
+metadata:
+  title: Deploy to Azure Static Web Apps
+  description: Use the Azure portal to deploy an Azure Static Web Apps resource with the Data API builder image.
+  author: seesharprun
+  ms.author: sidandrews
+  ms.reviewer: jerrynixon
+  ms.service: data-api-builder
+  ms.topic: quickstart
+  ms.date: 05/08/2024
+  #Customer Intent: As a developer, I want to deploy Data API builder to Azure Static Web Apps so that I can quickly create a REST API for my database.
+title: |
+  Deploy Data API builder to Azure Static Web Apps
+introduction: |
+  Deploy the Data API builder quickly to Azure using just a configuration file and no custom code. This guide includes steps to host the Data API builder container image from Docker as a database connection in Azure Static Web Apps. 
+
+  In this guide, walk through the steps to build a Data API builder configuration file, host the file as part of your application payload, and then use the configuration file with a web application deployed to Azure Static Web Apps.
+prerequisites:
+  dependencies:
+    - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+    - Data API builder CLI. [Install the CLI](how-to-install-cli.md).
+    - Azure CLI. [Install the Azure CLI](/cli/azure/install-azure-cli).
+    - Existing supported database addressable from Azure.
+procedureSection:
+  - title: |
+      TODO
+    summary: |
+      TODO
+    code: |
+      ```output
+      TODO
+      ```
+  - title: |
+      TODO
+    summary: |
+      TODO
+    steps:
+      - |
+        TODO
+      - |
+        TODO
