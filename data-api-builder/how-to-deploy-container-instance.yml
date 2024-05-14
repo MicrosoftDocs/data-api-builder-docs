@@ -92,26 +92,41 @@ procedureSection:
       - |
         Navigate to the new storage account in the Azure portal.
       - |
-        Select **File shares** in the **Data storage** section of the resource menu. Then, select **File share** to create a new share in the storage account. Use the following settings to configure the new file share.
+        Select **File shares** in the **Data storage** section of the resource menu. Then, select **File share** from the command bar to create a new share in the storage account. Use the following settings to configure the new file share.
 
         | Setting | Value |
         | --- | --- |
         | **Name** | Enter `config` |
         | **Access tier** | Select **Hot** |
-        | **Enable backup** | Select **Disabled** |
+        | **Enable backup** | Do not select |
 
         :::image type="content" source="media/how-to-deploy-container-instance/storage-file-share-option.png" alt-text="Screenshot of the **File share** resource menu and command bar options in the Azure portal.":::
       - |
         Upload the *dab-config.json* and *schema.graphql* files to the share. Use the **Upload** option in the command bar to open the **Upload files** dialog. Select both files and then select **Upload**.
 
         :::image type="content" source="media/how-to-deploy-container-instance/upload-files.png" alt-text="Screenshot of the **Upload files** dialog in the Azure portal.":::
+      - |
+        Select **Access keys** in the **Security + networking** section of the resource menu. Then, record the **Storage account name** and **Key** values from this page. You will use these values later in this guide.
+
+        :::image type="content" source="media/how-to-deploy-container-instance/storage-credentials.png" alt-text="Screenshot of the 'Access Keys' page within a storage account in the Azure portal.":::
   - title: |
-      Create the container instance
+      Create the base container instance
     summary: |
-      Finally, create the container in Azure using Azure Container Instances. This container hosts the Data API builder image and use the configuration file from the Azure Files mount to connect to your database.
+      Now, create the container in Azure using Azure Container Instances. This container hosts the Data API builder image without a configuration.
     steps:
       - |
+        TODO
       - |
+        TODO
+  - title: |
+      Mount the configuration files
+    summary: |
+      Finally, mount the configuration files from the Azure Files share to the container instance. This step allows the Data API builder to use the configuration file to connect to your database.
+    steps:
+      - |
+        TODO
+      - |
+        TODO
   - title: |
       Clean up resources
     summary: |

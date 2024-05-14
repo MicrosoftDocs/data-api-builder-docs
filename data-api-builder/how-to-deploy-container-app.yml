@@ -162,7 +162,7 @@ procedureSection:
   - title: |
       Mount the configuration files
     summary: |
-      Finally, mount the configuration files from the Azure Files share to the container instance. This step allows the Data API builder to use the configuration file to connect to your database.
+      Finally, mount the configuration files from the Azure Files share to the container app. This step allows the Data API builder to use the configuration file to connect to your database.
     steps:
       - |
         Navigate to the container environment created previously in this guide using the Azure portal.
