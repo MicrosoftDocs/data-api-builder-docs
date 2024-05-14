@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 04/09/2024
+ms.date: 05/14/2024
 # Customer Intent: As a developer, I want to implement row-level secuirty, so that I can ensure that users only see records intended for them.
 ---
 
@@ -18,12 +18,14 @@ Use the **session context** feature of SQL to implement row-level security in Da
 
 - Existing SQL server and database.
 - Data API builder CLI. [Install the CLI](how-to-install-cli.md)
+- A database client (SQL Server Management Studio, Azure Data Studio, etc.)
+  - If you don't have a client installed, [install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
 
 ## Create SQL table and data
 
 Create a table with fictitious data to use in this example scenario.
 
-1. Connect to the SQL server using your preferred client or tool.
+1. Connect to the SQL database using your preferred client or tool.
 
 1. Create a table named `Revenues` with `id`, `category`, `revenue`, and `username` columns.
 
