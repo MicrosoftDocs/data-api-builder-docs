@@ -16,8 +16,10 @@ landingContent:
   linkLists:
   - linkListType: whats-new
     links:
-    - text: TODO
-      url: version-1-1.md#todo
+    - text: Multiple mutations (create) support
+      url: version-1-1.md#announcement-1-multiple-mutations
+    - text: SQL Data Warehouse support
+      url: version-1-1.md#announcement-2-sql-data-warehouse-support
     - text: NuGet (1.1)
       url: https://www.nuget.org/packages/Microsoft.DataApiBuilder
 - title: Previous versions (0.x)
