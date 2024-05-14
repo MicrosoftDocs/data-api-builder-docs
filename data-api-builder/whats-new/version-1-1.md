@@ -16,14 +16,14 @@ Release notes and information about the updates and enhancements in Data API bui
 > [!IMPORTANT]
 > This is the first generally availability (GA) release on Data API builder (DAB).
 
-## TODO
+## Announcement 1 (multiple mutations?)
 
 TODO
 
-## TODO
+## Announcement 2 (SQL Data Warehouse support?)
 
 TODO
 
-## TODO
+## Announcement 3 (???)
 
 TODO
