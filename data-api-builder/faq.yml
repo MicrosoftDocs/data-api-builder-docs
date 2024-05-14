@@ -1,0 +1,60 @@
+### YamlMime:FAQ
+metadata:
+  title: Frequently asked questions
+  description: Get answers to frequently asked questions about Data API builder for Azure databases.
+  author: seesharprun
+  ms.author: sidandrews
+  ms.reviewer: jerrynixon
+  ms.service: data-api-builder
+  ms.topic: faq
+  ms.date: 05/14/2024
+  ai-usage: ai-assisted
+title: Frequently asked questions about Data API builder
+summary: |
+  Get answers to frequently asked questions about Data API builder for Azure databases.
+sections:
+  - name: General
+    questions:
+      - question: |
+          What is Data API builder?
+        answer: |
+          Data API builder for Azure Databases provides modern REST and GraphQL endpoints to your Azure Databases.
+      - question: |
+          How do I install the Data API builder CLI?
+        answer: |
+          You can install the Data API builder CLI using the .NET CLI. For more information, see the [installation guide](how-to-install-cli.md).
+  - name: Multiple mutations
+    questions:
+      - question: |
+          What is multiple mutation support in GraphQL?
+        answer: |
+          Multiple mutations support for GraphQL allows you to execute multiple mutations in a single request. Today, support is limited to create operations.
+      - question: |
+          What are the current limitations on using multiple mutations with GraphQL?
+        answer: |
+          The current limitations on using multiple mutations with GraphQL are:
+          - Only create operations are supported.
+          - Multiple create mutations are only supported for entities backed by a database table.
+          - Multiple create mutation operations must include a valid order of insertion between the related entities. For example, if foreign key constraints in the backing table define your entity relationships, DAB is able to determine the order of insertion. Relationships build without a backing foreign key constraint might not have a valid order of insertion that DAB can infer.
+          - Multiple create mutation operations aren't supported for self-referencing relationships.
+      - question: |
+          How does authorization work with GraphQL multiple mutations?
+        answer: |
+          Authorization for multiple mutations in GraphQL is handled similarly to single mutations. All entities involved in the multiple mutation operation must be configured to support the same role from the request. For example, if a multiple mutation operation creates both a **Book** and **Publisher** entity, then both entities should have the same authenticated role defined. 
+          
+          For more information on authorization, see [authorization guide](authorization.md).
+      - question: |
+          Do GraphQL multiple mutations support atomic behaviors?
+        answer: |
+          Yes, GraphQL multiple mutations support atomic behaviors. If any of the mutations in the multiple mutation operation fail, the entire operation is rolled back. If all mutations succeed, the entire transaction is committed.
+      - question: |
+          How do I use multiple mutations in GraphQL?
+        answer: |
+          To use multiple mutations in GraphQL, review the [use multiple mutations in GraphQL guide](how-to-use-multiple-mutations.md).
+      - question: |
+          How does row-level security work with multiple mutations in GraphQL?
+        answer: |
+          Row-level security functions similarly to single operations in GraphQL. For multiple create mutation requests, the "create" policy for every entity is considered when creating the item in the backing database table. Similarly, every read policy is considered for the selection set of a multiple mutation operation.
+
+          For more information on row-level security, see [implement row-level security in SQL](how-to-row-level-security.md).
+
