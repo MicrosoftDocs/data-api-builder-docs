@@ -71,7 +71,7 @@ TODO
 | Not/Strict Payload | Yes | Yes | - | Yes | Yes | - |
 | OpenAPIReference | - | - | - | - | - | - |
 
-> * Data API builder does not generate a REST API for Azure Cosmos DB for NoSQL as Azure Cosmos DB for NoSQL provides a native REST API. More information can be found here: [Azure Cosmos DB: REST API Reference](https://learn.microsoft.com/rest/api/cosmos-db/).
+> * Data API builder does not generate a REST API for Azure Cosmos DB for NoSQL as the API for NoSQL provides a native REST API. More information can be found here: [Azure Cosmos DB: REST API Reference](/rest/api/cosmos-db/).
 
 ## Supported Database Objects
 
