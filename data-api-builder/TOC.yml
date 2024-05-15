@@ -16,7 +16,7 @@
         - name: All versions
           href: whats-new/index.yml
     - name: Feature availability
-      href: feature-availability.md      
+      href: feature-availability.md
     - name: FAQ
       displayName: frequently asked questions, Q&A
       href: faq.yml
