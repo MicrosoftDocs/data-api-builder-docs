@@ -75,7 +75,7 @@ procedureSection:
         :::image type="content" source="media/how-to-deploy-container-app/create-resource-group.png" lightbox="media/how-to-deploy-container-app/create-resource-group.png" alt-text="Screenshot of the 'Create a resource group' page's 'Basics' tab in the Azure portal.":::
 
         > [!TIP]
-        > We recommend naming the resource group **msdocs-dab-aci**. All screenshots in this guide use this name.
+        > We recommend naming the resource group **msdocs-dab-aca**. All screenshots in this guide use this name.
       - |
         Create an Azure Storage account. Use these settings to configure the account.
 
@@ -102,7 +102,7 @@ procedureSection:
 
         :::image type="content" source="media/how-to-deploy-container-app/storage-file-share-option.png" alt-text="Screenshot of the **File share** resource menu and command bar options in the Azure portal.":::
       - |
-        Upload the *dab-config.json* and *schema.graphql* files to the share. Use the **Upload** option in the command bar to open the **Upload files** dialog. Select both files and then select **Upload**.
+        Upload the *dab-config.json* and any other required files to the share. Use the **Upload** option in the command bar to open the **Upload files** dialog. Select both files and then select **Upload**.
 
         :::image type="content" source="media/how-to-deploy-container-app/upload-files.png" alt-text="Screenshot of the **Upload files** dialog in the Azure portal.":::
       - |
@@ -124,7 +124,7 @@ procedureSection:
         | **Environment** | **Logs destination** | Select **Don't save logs** |
         | **App** | **Resource group** | Select the resource group you created earlier |
         | **App** | **Storage account name** | Enter a globally unique name |
-        | **App** | **Region** | Select an Azure region |
+        | **App** | **Region** | Select the same region as the storage account |
         | **App** | **Use quickstart image** | Do not select |
         | **App** | **Image source** | Select **Docker Hub or other registries** |
         | **App** | **Image type** | Select **Public** |

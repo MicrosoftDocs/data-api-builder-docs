@@ -102,7 +102,7 @@ procedureSection:
 
         :::image type="content" source="media/how-to-deploy-container-instance/storage-file-share-option.png" alt-text="Screenshot of the **File share** resource menu and command bar options in the Azure portal.":::
       - |
-        Upload the *dab-config.json* and *schema.graphql* files to the share. Use the **Upload** option in the command bar to open the **Upload files** dialog. Select both files and then select **Upload**.
+        Upload the *dab-config.json* and any other required files to the share. Use the **Upload** option in the command bar to open the **Upload files** dialog. Select both files and then select **Upload**.
 
         :::image type="content" source="media/how-to-deploy-container-instance/upload-files.png" alt-text="Screenshot of the **Upload files** dialog in the Azure portal.":::
       - |
@@ -112,21 +112,75 @@ procedureSection:
   - title: |
       Create the base container instance
     summary: |
-      Now, create the container in Azure using Azure Container Instances. This container hosts the Data API builder image without a configuration.
+      Finally, create the container in Azure using Azure Container Instances. This container hosts the Data API builder image with a configuration file to connect to your database.
+
+      > [!IMPORTANT]
+      > Today, the only way to create a container instance with a mounted volume is with the Azure CLI.
     steps:
       - |
-        TODO
+        Create an Azure Container Instances resource using [`az container create`](/cli/azure/container#az-container-create). Use these settings to configure the resource.
+
+        | Setting | Value |
+        | --- | --- |
+        | **Resource group** | Use the resource group you created earlier |
+        | **Container name** | Enter a globally unique name |
+        | **Region** | Use the same region as the storage account |
+        | **SKU** | Use **Standard** |
+        | **Image type** | Use **Public** |
+        | **Image** | Enter `mcr.microsoft.com/azure-databases/data-api-builder:latest` |
+        | **OS Type** | Use **Linux** |
+        | **Networking type** | Use **Public** |
+        | **Networking ports** | Enter `5000` |
+        | **DNS name label** | Enter a globally unique label |
+        | **Environment variables** | Enter `DATABASE_CONNECTION_STRING` and the connection string for your database. |
+
+        ```azurecli
+        az container create \
+          --resource-group "<resource-group-name>" \
+          --name "<unique-container-instance-name>" \
+          --image "mcr.microsoft.com/azure-databases/data-api-builder:latest" \
+          --location "<region>" \
+          --sku "Standard" \
+          --os-type "Linux" \
+          --ip-address "public" \
+          --ports "5000" \
+          --dns-name-label "<unique-dns-label>" \
+          --environment-variables "DATABASE_CONNECTION_STRING=<database-connection-string>" \
+          --azure-file-volume-mount-path "/cfg" \
+          --azure-file-volume-account-name "<storage-account-name>" \
+          --azure-file-volume-account-key "<storage-account-key>" \
+          --azure-file-volume-share-name "config" \
+          --command-line "dotnet Azure.DataApiBuilder.Service.dll --ConfigFileName /cfg/dab-config.json"
+          --
+        ```
+
+        > [!TIP]
+        > We recommend using a connection string that does not include authorization keys. Instead, use managed identities and role-based access control to manage access between your database and host. For more information, see [Azure services that use managed identities](/entra/identity/managed-identities-azure-resources/managed-identities-status).
       - |
-        TODO
-  - title: |
-      Mount the configuration files
-    summary: |
-      Finally, mount the configuration files from the Azure Files share to the container instance. This step allows the Data API builder to use the configuration file to connect to your database.
-    steps:
+        Use [`az container show`](/cli/azure/container#az-container-show) to query the fully-qualified domain name (FQDN) for your new container instance. Then, browse to the container instance's website.
+
+        ```azurecli
+        az container show \
+          --resource-group "<resource-group-name>" \
+          --name "<unique-container-instance-name>" \
+          --query "join('://', ['https', ipAddress.fqdn])" \
+          --output "tsv"
+        ```
       - |
-        TODO
+        Observe the response indicating that the DAB container is running and the status is **healthy**.
+        
+        ```json
+        {
+          "status": "healthy",
+          "version": "0.12.0",
+          "app-name": "dab_oss_0.12.0"
+        }
+        ```
+
+        > [!NOTE]
+        > The version number and name will vary based on your current version of Data API builder. At this point, you cannot navigate to any API endpoints. These endpoints will be available once you mount a DAB configuration file.
       - |
-        TODO
+        Navigate to the `/api/swagger` path for the current running application. Use the Swagger UI to issue a **HTTP GET** request for one of your entities.
   - title: |
       Clean up resources
     summary: |
