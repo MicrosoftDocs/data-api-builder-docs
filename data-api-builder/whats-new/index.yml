@@ -10,99 +10,49 @@ metadata:
   ms.reviewer: jerrynixon
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 03/29/2024
+  ms.date: 05/15/2024
 landingContent:
-- title: Version 0.10
+- title: Version 1.1
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: .NET 8 and .NET 6 multi-targeting
+      url: version-1-1.md#net-8-support
+    - text: Multiple mutations in GraphQL
+      url: version-1-1.md#graphql-multiple-mutations-support
+    - text: Pagination enhancements
+      url: version-1-1.md#pagination-enhancements
+    - text: Health status JSON
+      url: version-1-1.md#health-status
+    - text: Azure Cosmos DB for NoSQL patch
+      url: version-1-1.md#patch-operation-support
+  - linkListType: download
+    links:
+    - text: NuGet package (1.1.7)
+      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/1.1.7
+- title: Previous versions (0.x)
   linkLists:
   - linkListType: whats-new
     links:
     - text: In-memory caching
-      url: version-0-10.md#in-memory-caching
+      url: version-0.md#in-memory-caching
     - text: Validation in the command-line interface
-      url: version-0-10.md#configuration-validation-in-cli
-  - linkListType: reference
-    links:
-    - text: Multiple data-sources (preview)
-      url: https://github.com/Azure/data-api-builder/pull/1709
-    - text: Azure SQL Data Warehouse support (preview)
-      url: https://github.com/Azure/data-api-builder/pull/1864
-  - linkListType: download
-    links:
-    - text: NuGet (0.10.23)
-      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.10.23
-- title: Version 0.9
-  linkLists:
-  - linkListType: whats-new
-    links:
-    - text: Support for ignoring extraneous fields in REST request body
-      url: version-0-9.md#support-for-ignoring-extraneous-fields-in-rest-request-body
+      url: version-0.md#configuration-validation-in-cli
     - text: Enable Application Insights when self-hosting DAB
-      url: version-0-9.md#enable-application-insights-when-self-hosting-dab
-    - text: Mutations on table with triggers for mssql
-      url: version-0-9.md#mutations-on-table-with-triggers-for-mssql
-  - linkListType: download
-    links:
-    - text: NuGet (0.9.7)
-      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.9.7
-- title: Version 0.8
-  linkLists:
-  - linkListType: whats-new
-    links:
+      url: version-0.md#enable-application-insights-when-self-hosting-dab
     - text: Added support for .env file
-      url: version-0-8.md#added-support-for-env-file
-  - linkListType: download
-    links:
-    - text: NuGet (0.8.52)
-      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.8.52
-- title: Version 0.7
-  linkLists:
-  - linkListType: whats-new
-    links:
-    - text: Allowing merger of configuration files
-      url: version-0-7-6.md#allowing-merger-of-configuration-files
-    - text: Executing GraphQL and REST Mutations in a transaction
-      url: version-0-7-6.md#executing-graphql-and-rest-mutations-in-a-transaction
-  - linkListType: download
-    links:
-    - text: NuGet (0.7.6)
-      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.7.6
-- title: Version 0.6
-  linkLists:
-  - linkListType: whats-new
-    links:
+      url: version-0.md#added-support-for-env-file
+    - text: Allow merger of configuration files
+      url: version-0.md#allowing-merger-of-configuration-files
     - text: New CLI command to export GraphQL schema
-      url: version-0-6-13.md#new-cli-command-to-export-graphql-schema
-    - text: Ability to configure GraphQL path and disable REST and GraphQL endpoints globally via CLI
-      url: version-0-6-13.md#ability-to-configure-graphql-path-and-disable-rest-and-graphql-endpoints-globally-via-cli
+      url: version-0.md#new-cli-command-to-export-graphql-schema
+    - text: View support
+      url: version-0.md#view-support
+    - text: Stored procedures support
+      url: version-0.md#stored-procedures-support
+    - text: Microsoft Entra ID authentication
+      url: version-0.md#microsoft-entra-id-authentication
   - linkListType: download
     links:
-    - text: NuGet (0.6.14)
-      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.6.14
-- title: Version 0.5
-  linkLists:
-  - linkListType: whats-new
-    links:
-    - text: Correlation ID in request logs
-      url: version-0-5-34.md#correlation-id-in-request-logs
-    - text: Support for GraphQL fragments
-      url: version-0-5-32.md#support-for-graphql-fragments
-  - linkListType: download
-    links:
-    - text: NuGet (0.5.35)
-      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.5.35
-- title: Older versions
-  linkLists:
-  - linkListType: whats-new
-    links:
-    - text: Support for filter on nested objects within a document in Azure SQL and SQL Server (0.4.11)
-      url: version-0-4-11.md#support-for-filter-on-nested-objects-within-a-document-in-azure-sql-and-sql-server
-    - text: Managed Identity now supported with PostgreSQL (0.4.11)
-      url: version-0-4-11.md#managed-identity-now-supported-with-postgres
-    - text: Support Microsoft Entra ID User authentication for Azure MySQL (0.4.11)
-      url: version-0-4-11.md#support-microsoft-entra-id-user-authentication-for-azure-mysql
-    - text: View support (0.3.7)
-      url: version-0-3-7.md#view-support
-    - text: Stored procedures support (0.3.7)
-      url: version-0-3-7.md#stored-procedures-support
-    - text: Microsoft Entra ID authentication (0.3.7)
-      url: version-0-3-7.md#microsoft-entra-id-authentication
+    - text: NuGet package (0.10.23)
+      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.10.23
