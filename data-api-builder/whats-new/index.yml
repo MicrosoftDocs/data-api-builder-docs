@@ -38,39 +38,19 @@ landingContent:
       url: version-0.md#in-memory-caching
     - text: Validation in the command-line interface
       url: version-0.md#configuration-validation-in-cli
-    - text: Support for ignoring extraneous fields in REST request body
-      url: version-0.md#support-for-ignoring-extraneous-fields-in-rest-request-body
     - text: Enable Application Insights when self-hosting DAB
       url: version-0.md#enable-application-insights-when-self-hosting-dab
-    - text: Mutations on table with triggers for mssql
-      url: version-0.md#mutations-on-table-with-triggers-for-mssql
     - text: Added support for .env file
       url: version-0.md#added-support-for-env-file
-    - text: Allowing merger of configuration files
+    - text: Allow merger of configuration files
       url: version-0.md#allowing-merger-of-configuration-files
-    - text: Executing GraphQL and REST Mutations in a transaction
-      url: version-0.md#executing-graphql-and-rest-mutations-in-a-transaction
     - text: New CLI command to export GraphQL schema
       url: version-0.md#new-cli-command-to-export-graphql-schema
-    - text: Ability to configure GraphQL path and disable REST and GraphQL endpoints globally via CLI
-      url: version-0.md#ability-to-configure-graphql-path-and-disable-rest-and-graphql-endpoints-globally-via-cli
-  - linkListType: whats-new
-    links:
-    - text: Correlation ID in request logs
-      url: version-0.md#correlation-id-in-request-logs
-    - text: Support for GraphQL fragments
-      url: version-0.md#support-for-graphql-fragments
-    - text: Support for filter on nested objects within a document in Azure SQL and SQL Server (0.4.11)
-      url: version-0.md#support-for-filter-on-nested-objects-within-a-document-in-azure-sql-and-sql-server
-    - text: Managed Identity now supported with PostgreSQL (0.4.11)
-      url: version-0.md#managed-identity-now-supported-with-postgres
-    - text: Support Microsoft Entra ID User authentication for Azure MySQL (0.4.11)
-      url: version-0.md#support-microsoft-entra-id-user-authentication-for-azure-mysql
-    - text: View support (0.3.7)
+    - text: View support
       url: version-0.md#view-support
-    - text: Stored procedures support (0.3.7)
+    - text: Stored procedures support
       url: version-0.md#stored-procedures-support
-    - text: Microsoft Entra ID authentication (0.3.7)
+    - text: Microsoft Entra ID authentication
       url: version-0.md#microsoft-entra-id-authentication
   - linkListType: download
     links:
