@@ -25,7 +25,7 @@ TODO
 
 ## GraphQL
 
-| Feature | SQL Server | Azure SQL | CosmosDB for NoSQL | PostgreSQL | MySQL | DWSQL |
+| Feature | SQL Server | Azure SQL | Azure Cosmos DB for NoSQL | PostgreSQL | MySQL | DWSQL |
 | --- | --- | --- | --- | --- | --- | --- |
 | Pagination | Yes | Yes | Yes | Yes | Yes | - |
 | Filtering | Yes | Yes | Yes | Yes | Yes | - |
@@ -40,7 +40,7 @@ TODO
 
 ## GraphQL Relationship Navigation
 
-| Feature | SQL Server | Azure SQL | CosmosDB for NoSQL | PostgreSQL | MySQL | DWSQL |
+| Feature | SQL Server | Azure SQL | Azure Cosmos DB for NoSQL | PostgreSQL | MySQL | DWSQL |
 | --- | --- | --- | --- | --- | --- | --- |
 | One-To-Many / Query | Yes | Yes | - | Yes | Yes | - |
 | One-To-Many / Mutation | `v0.11` | `v0.11` | - | - | - | - |
@@ -51,7 +51,7 @@ TODO
 
 ## REST
 
-| Feature | SQL Server | Azure SQL | CosmosDB for NoSQL* | PostgreSQL | MySQL | DWSQL |
+| Feature | SQL Server | Azure SQL | Azure Cosmos DB for NoSQL* | PostgreSQL | MySQL | DWSQL |
 | --- | --- | --- | --- | --- | --- | --- |
 | PUT | Yes | Yes | - | Yes | Yes | - |
 | POST | Yes | Yes | - | Yes | Yes | - |
@@ -71,11 +71,11 @@ TODO
 | Not/Strict Payload | Yes | Yes | - | Yes | Yes | - |
 | OpenAPIReference | - | - | - | - | - | - |
 
-> * Data API builder does not generate a REST API for CosmosDB for NoSQL as CosmosDB for NoSQL provides a native REST API. More information can be found here: [Azure Cosmos DB: REST API Reference](https://learn.microsoft.com/rest/api/cosmos-db/).
+> * Data API builder does not generate a REST API for Azure Cosmos DB for NoSQL as Azure Cosmos DB for NoSQL provides a native REST API. More information can be found here: [Azure Cosmos DB: REST API Reference](https://learn.microsoft.com/rest/api/cosmos-db/).
 
 ## Supported Database Objects
 
-| Feature | SQL Server | Azure SQL | CosmosDB for NoSQL | PostgreSQL | MySQL | DWSQL |
+| Feature | SQL Server | Azure SQL | Azure Cosmos DB for NoSQL | PostgreSQL | MySQL | DWSQL |
 | --- | --- | --- | --- | --- | --- | --- |
 | Stored Procedures | Yes | Yes | - | - | - | - |
 | Tables | Yes | Yes | - | Yes | Yes | Yes |
@@ -85,16 +85,16 @@ TODO
 
 ## Entity Security
 
-| Feature | SQL Server | Azure SQL | CosmosDB for NoSQL | PostgreSQL | MySQL | DWSQL |
+| Feature | SQL Server | Azure SQL | Azure Cosmos DB for NoSQL | PostgreSQL | MySQL | DWSQL |
 | --- | --- | --- | --- | --- | --- | --- |
-| \[C\]reate | Yes | Yes | Yes | Yes | Yes | - |
-| \[R\]ead | Yes | Yes | Yes | Yes | Yes | - |
-| \[U\]pdate | Yes | Yes | Yes | Yes | Yes | - |
-| \[D\]elete | Yes | Yes | Yes | Yes | Yes | - |
+| **C**reate | Yes | Yes | Yes | Yes | Yes | - |
+| **R**ead | Yes | Yes | Yes | Yes | Yes | - |
+| **U**pdate | Yes | Yes | Yes | Yes | Yes | - |
+| **D**elete | Yes | Yes | Yes | Yes | Yes | - |
 
 ## Database Policy
 
-| Feature | SQL Server | Azure SQL | CosmosDB for NoSQL | PostgreSQL | MySQL | DWSQL |
+| Feature | SQL Server | Azure SQL | Azure Cosmos DB for NoSQL | PostgreSQL | MySQL | DWSQL |
 | --- | --- | --- | --- | --- | --- | --- |
 | Create | Yes | Yes | - | - | - | - |
 | Read | Yes | Yes | - | Yes | Yes | - |
@@ -110,7 +110,7 @@ TODO
 
 ## Other Features
 
-| Feature | SQL Server | Azure SQL | CosmosDB for NoSQL | PostgreSQL | MySQL | DWSQL |
+| Feature | SQL Server | Azure SQL | Azure Cosmos DB for NoSQL | PostgreSQL | MySQL | DWSQL |
 | --- | --- | --- | --- | --- | --- | --- |
 | User-assigned managed identity (Microsoft Entra ID) | - | - | - | - | - | - |
 | System-assigned managed identity (Microsoft Entra ID) | Yes | Yes | Yes | Yes | Yes | - |
@@ -126,7 +126,7 @@ TODO
 
 ## Static Web Apps
 
-* `*` Not supported in SWA
+* `*` Not supported in Azure Static Web Apps (SWA)
 * `**` Not supported in SWA yet
 * User-assigned managed identity is supported in SWA only when configured from the Azure portal.
-* When using SWA authentication (EasyAuth) `StaticWebApps` is required.
+* `StaticWebApps` is required when using SWA authentication (EasyAuth).
