@@ -1,6 +1,6 @@
 ---
-title: What's new for version 0.10 and earlier
-description: Release notes with new features, bug fixes, and updates listed for the Data API builder version 0.10 and earlier.
+title: What's new for version 0.11 and earlier
+description: Release notes with new features, bug fixes, and updates listed for the Data API builder version 0.11 and earlier.
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
@@ -9,9 +9,9 @@ ms.topic: whats-new
 ms.date: 05/15/2024
 ---
 
-# What's new in version 0.10 and earlier
+# What's new in version 0.11 and earlier
 
-Release notes and information about all updates and enhancements in Data API builder version 0.10 and earlier.
+Release notes and information about all updates and enhancements in Data API builder version 0.11 and earlier.
 
 ## What's new in version 0.10
 
