@@ -15,6 +15,8 @@
           href: whats-new/version-0.md
         - name: All versions
           href: whats-new/index.yml
+    - name: Feature availability
+      href: feature-availability.md
     - name: FAQ
       displayName: frequently asked questions, Q&A
       href: faq.yml
@@ -45,6 +47,12 @@
       href: how-to-install-cli.md
     - name: Deploy
       items:
+      - name: Azure Container Instances
+        displayName: ACI
+        href: how-to-deploy-container-instance.yml
+      - name: Azure Container Apps
+        displayName: ACA
+        href: how-to-deploy-container-app.yml
       - name: Azure Static Web Apps
         displayName: SWA
         href: how-to-deploy-static-web-app.yml
