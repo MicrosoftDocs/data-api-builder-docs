@@ -15,6 +15,9 @@
           href: whats-new/version-0.md
         - name: All versions
           href: whats-new/index.yml
+    - name: FAQ
+      displayName: frequently asked questions, Q&A
+      href: faq.yml
 - name: Quickstarts
   items:
     - name: Local
@@ -54,6 +57,9 @@
     - name: Use Application Insights
       displayName: app
       href: how-to-use-application-insights.md
+    - name: Batch multiple mutations
+      displayName: multiple create, transaction
+      href: how-to-multiple-mutations.md
 - name: Tutorials
   items:
     - name: Deploy to Azure Container Apps using Azure CLI
@@ -153,6 +159,9 @@
                       href: reference-configuration.md#path-graphql-runtime
                     - name: Allow introspection
                       href: reference-configuration.md#allow-introspection-graphql-runtime
+                    - name: Multiple mutations
+                      displayName: multiple create, transaction
+                      href: reference-configuration.md#multiple-mutations-graphql-runtime
                 - name: REST
                   displayName: API
                   href: reference-configuration.md#rest-runtime
