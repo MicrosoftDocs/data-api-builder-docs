@@ -7,7 +7,7 @@ ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: reference
 ms.date: 05/14/2024
-show-latex: true
+show_latex: true
 ---
 
 # Data API builder configuration schema reference
@@ -239,7 +239,11 @@ A **string** value containing a valid connection string to connect to the target
 
 #### Connection resiliency
 
-Data API builder automatically retries database requests after detecting transient errors. The retry logic follows an **Exponential Backoff** strategy where the maximum number of retries is **five**. The retry backoff duration after subsequent requests is calculated using this formula (assuming the current retry attempt is `r`): $2^r$. Using this formula, you can calculate the time for each retry attempt in seconds.
+Data API builder automatically retries database requests after detecting transient errors. The retry logic follows an **Exponential Backoff** strategy where the maximum number of retries is **five**. The retry backoff duration after subsequent requests is calculated using this formula (assuming the current retry attempt is `r`):
+
+$r^2$
+
+Using this formula, you can calculate the time for each retry attempt in seconds.
 
 | | Seconds |
 | :-- | :-- |
