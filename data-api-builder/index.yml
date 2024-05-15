@@ -10,7 +10,7 @@ metadata:
   ms.reviewer: jerrynixon
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 03/29/2024
+  ms.date: 05/15/2024
 landingContent:
   - title: About Data API builder
     linkLists:
@@ -50,7 +50,11 @@ landingContent:
             url: quickstart-azure-cosmos-db-nosql.md
   - title: Open Source
     linkLists:
-      - linkListType: reference
+      - linkListType: download
+        links:
+          - text: NuGet
+            url: https://www.nuget.org/packages/Microsoft.DataApiBuilder
+      - linkListType: sample
         links:
           - text: Source Code
             url: https://github.com/Azure/data-api-builder
