@@ -112,19 +112,21 @@ MySQL | v8
 
 | Feature                                          | SQL Server | Azure SQL | CosmosDB for NoSQL | PostgreSQL | MySQL | DWSQL |
 |--------------------------------------------------|------------|-----------|--------------------|------------|-------|-------|
-| User Assigned Managed Identity (Entra ID/ Azure AD) | -    | -       | -                | -        | -   | -     |
-| System Assigned Managed Identity (Entra ID/ Azure AD) | Yes    | Yes       | Yes                | Yes        | Yes   | -     |
+| User-assigned managed identity (Microsoft Entra ID) | -    | -       | -                | -        | -   | -     |
+| System-assigned managed identity (Microsoft Entra ID) | Yes    | Yes       | Yes                | Yes        | Yes   | -     |
 | Column/Property Mapping/Rename                   | Yes        | Yes       | -                  | Yes        | Yes   | -     |
 | Native JSON Support                              | Yes        | Yes       | Yes                | -          | -     | -     |
 | Native XML Support                               | -          | -         | -                  | -          | -     | -     |
+| Native Vector Support                               | -          | -         | -                  | -          | -     | -     |
 | application_name                                 | Yes        | Yes       | Yes                | -          | -     | -     |
 | Application Insights `*`                            | Yes        | Yes       | Yes                | Yes        | Yes   | Yes     |
 | Session Context                                  | Yes        | Yes       | -                  | -          | -     | -     |
 | Multiple Data Sources `*`                            | Yes        | Yes       | Yes                | Yes        | Yes   | -     |
+| Cross-data source join | - | - | - | - | - | - |
 
 ## Static Web Apps
 
 * `*` Not supported in SWA
 * `**` Not supported in SWA yet
-* UAMI is supported in SWA only when configured from the Azure portal.
-* When using SWA authentication `StaticWebApps` is required.
+* User-assigned managed identity is supported in SWA only when configured from the Azure portal.
+* When using SWA authentication (EasyAuth) `StaticWebApps` is required.
