@@ -16,12 +16,20 @@ landingContent:
   linkLists:
   - linkListType: whats-new
     links:
-    - text: Multiple mutations (create) support
-      url: version-1-1.md#announcement-1-multiple-mutations
-    - text: SQL Data Warehouse support
-      url: version-1-1.md#announcement-2-sql-data-warehouse-support
-    - text: NuGet (1.1)
-      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder
+    - text: .NET 8 and .NET 6 multi-targeting
+      url: version-1-1.md#net-8-support
+    - text: Multiple mutations in GraphQL
+      url: version-1-1.md#graphql-multiple-mutations-support
+    - text: Pagination enhancements
+      url: version-1-1.md#pagination-enhancements
+    - text: Health status JSON
+      url: version-1-1.md#health-status
+    - text: Azure Cosmos DB for NoSQL patch
+      url: version-1-1.md#patch-operation-support
+  - linkListType: download
+    links:
+    - text: NuGet package (1.1.7)
+      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/1.1.7
 - title: Previous versions (0.x)
   linkLists:
   - linkListType: whats-new
@@ -66,5 +74,5 @@ landingContent:
       url: version-0.md#microsoft-entra-id-authentication
   - linkListType: download
     links:
-    - text: NuGet (0.10)
+    - text: NuGet package (0.10.23)
       url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.10.23

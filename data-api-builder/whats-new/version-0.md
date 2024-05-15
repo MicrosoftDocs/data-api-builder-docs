@@ -23,11 +23,11 @@ Our focus shifts to stability as we approach General Availability. While not all
 
 Review these release pages for a comprehensive list of all the changes and improvements:
 
-- February 6 - Version 0.10.23
+- 2024-02-06 - Version 0.10.23
   - [0.10.23: Data API builder for Azure Databases](https://github.com/Azure/data-api-builder/releases/tag/v0.10.23)
-- January 31 - Version 0.10.21
+- 2024-01-31 - Version 0.10.21
   - [0.10.21: Data API builder for Azure Databases](https://github.com/Azure/data-api-builder/releases/tag/v0.10.21)
-- December 7 - Version 0.10.11
+- 2023-12-07 - Version 0.10.11
   - [0.10.11-rc: Data API builder for Azure Databases](https://github.com/Azure/data-api-builder/releases/tag/v0.10.11-rc)
 
 ### In-memory caching
