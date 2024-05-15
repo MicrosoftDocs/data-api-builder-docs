@@ -88,6 +88,12 @@ For example, version `0.12.0` of the OSS container image would return this statu
 
 For more information, see [azure/data-api-builder - Improved health endpoint metadata](https://github.com/azure/data-api-builder/pull/2086).
 
+## REST Multiple database support
+
+In the REST API, multiple databases (or data sources) are now supported. The database name is determined based on each entity.
+
+For more information, see [azure/data-api-builder - Multiple database support in REST](https://github.com/azure/data-api-builder/pull/2169).
+
 ## Azure Cosmos DB for NoSQL enhancements
 
 There were a few enhancements to the existing Azure Cosmos DB for NoSQL support in DAB.
