@@ -197,6 +197,28 @@ dab start
 > [!NOTE]
 > You can't use `--verbose` and `--LogLevel` at the same time. For more information about different logging levels, see [.NET log levels](/dotnet/api/microsoft.extensions.logging.loglevel).
 
+### `validate`
+
+Validates the runtime config file used by the Data API builder runtime engine. The validation process ensures that the config file is compliant with the schema and contains all the required information for the runtime engine to function correctly.
+
+#### Syntax
+
+```dotnetcli
+dab validate [options]
+```
+
+#### Examples
+
+```dotnetcli
+dab validate
+```
+
+#### Options
+
+| Options | Option Required | Default Value | Value Required | Value Type | Description |
+| --- | --- | --- | --- | --- | --- |
+| **-c,--config** | ❌ No | `dab-config.json` | ✔️ Yes | string | Path to the config file that is the target of validation. |
+
 ## Related content
 
 - [Functions reference](reference-functions.md)
