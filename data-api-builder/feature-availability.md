@@ -1,6 +1,6 @@
 ---
 title: Feature availability
-description: Review available features in Data API builder for Azure Databases. This matrix includes features across multiple databases and API platforms.
+description: Review available features in Data API builder for Azure Databases. This article includes features across multiple databases and API platforms.
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
@@ -11,7 +11,7 @@ ms.date: 05/15/2024
 
 # Feature availability for Data API builder
 
-TODO
+These tables list the features available in Data API builder (DAB) for Azure databases. These tables include features across multiple databases and API platforms.
 
 ## Database version
 
