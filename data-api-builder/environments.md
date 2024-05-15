@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 03/29/2024
+ms.date: 05/15/2024
 # Customer Intent: As a developer, I want to use the environments feature, so that I can change which connection strings or other settings I use in development or production.
 ---
 
@@ -42,11 +42,8 @@ The `dab-config.json` file contains all common configuration settings that don't
 
 ```json
 {
-  "applicationSettings": {
-    "logLevel": "info",
-    "featureToggle": {
-      "enableFeatureX": true
-    }
+  "<all-environments-feature>": {
+    "<property>": <value>
   }
   // Note: "connection-string" isn't included here as it varies by environment
 }
@@ -58,8 +55,8 @@ The `dab-config.Development.json` file overrides or adds to the base configurati
 
 ```json
 {
-  "applicationSettings": {
-    "logLevel": "debug"
+  "<development-specific-feature>": {
+    "<property>": <value>
   },
   "connection-string": "<development-connection-string>"
 }
@@ -73,9 +70,6 @@ For the `dab-config.Production.json` file, the connection string is securely ref
 
 ```json
 {
-  "applicationSettings": {
-    "logLevel": "error"
-  },
   "connection-string": "@env('my-connection-string')"
 }
 ```

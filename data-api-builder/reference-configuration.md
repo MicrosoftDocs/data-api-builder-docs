@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 03/29/2024
+ms.date: 05/14/2024
 show-latex: true
 ---
 
@@ -533,6 +533,7 @@ This object defines whether GraphQL is enabled and the name\[s\] used to expose 
       "path": "/graphql" (default),
       "enabled": <true> (default) | <false>,
       "allow-introspection": <true> (default) | <false>
+      "multiple-mutations": <object>
     }
   }
 }
@@ -545,6 +546,7 @@ This object defines whether GraphQL is enabled and the name\[s\] used to expose 
 | **[`enabled`](#enabled-graphql-runtime)** | ❌ No | boolean |
 | **[`path`](#path-graphql-runtime)** | ❌ No | string |
 | **[`allow-introspection`](#allow-introspection-graphql-runtime)** | ❌ No | boolean |
+| **[`multiple-mutations`](#multiple-mutations-graphql-runtime)** | ❌ No | object |
 
 ### Enabled (GraphQL runtime)
 
@@ -642,6 +644,81 @@ In this example, the introspection is disabled.
   "runtime": {
     "graphql": {
       "allow-introspection": false
+    }
+  }
+}
+```
+
+### Multiple mutations (GraphQL runtime)
+
+**REQUIRED**: ❌ No
+
+Configures all multiple mutation operations for the GraphQL runtime. 
+
+> [!NOTE]
+> By default, multiple mutations is not enabled and must explicitly be configured to be enabled.
+
+#### Format
+
+```json
+{
+  "runtime": {
+    "graphql": {
+      "multiple-mutations": {
+        "create": <object>
+      }
+    }
+  }
+}
+```
+
+#### Properties
+
+| | Required | Type |
+| --- | --- | --- |
+| **[`create`](#multiple-mutations---create-graphql-runtime)** | ❌ No | object |
+
+### Multiple mutations - create (GraphQL runtime)
+
+**REQUIRED**: ❌ No
+
+Configures multiple create operations for the GraphQL runtime.
+
+#### Format
+
+```json
+{
+  "runtime": {
+    "graphql": {
+      "multiple-mutations": {
+        "create": {
+          "enabled": <false> (default) | <true>
+        }
+      }
+    }
+  }
+}
+```
+
+#### Properties
+
+| | Required | Type |
+| --- | --- | --- |
+| **`enabled`** | ✔️ Yes | boolean |
+
+#### Examples
+
+In this example, multiple mutations are enabled for the GraphQL runtime. Specifically, the multiple create operation is enabled by specifying a value of `true` for the `runtime.graphql.multiple-mutations.create.enabled` property.
+
+```json
+{
+  "runtime": {
+    "graphql": {
+      "multiple-mutations": {
+        "create": {
+          "enabled": true
+        }
+      }
     }
   }
 }
