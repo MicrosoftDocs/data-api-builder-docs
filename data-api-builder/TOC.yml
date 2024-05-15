@@ -45,6 +45,14 @@
     - name: Install the CLI
       displayName: DAB, command-line, interface
       href: how-to-install-cli.md
+    - name: Deploy
+      items:
+      - name: Azure Container Instances
+        displayName: ACI
+        href: how-to-deploy-container-instance.yml
+      - name: Azure Container Apps
+        displayName: ACA
+        href: how-to-deploy-container-app.yml
     - name: Run in a container
       href: how-to-run-container.md
     - name: Run from source code
