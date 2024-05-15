@@ -10,7 +10,7 @@ metadata:
   ms.reviewer: jerrynixon
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 03/29/2024
+  ms.date: 05/15/2024
 landingContent:
   - title: About Data API builder
     linkLists:
@@ -18,6 +18,8 @@ landingContent:
         links:
           - text: What is Data API builder?
             url: overview.md
+          - text: Feature availability
+            url: feature-availability.md
           - text: Frequently asked questions
             url: faq.yml
       - linkListType: whats-new
@@ -50,7 +52,11 @@ landingContent:
             url: quickstart-azure-cosmos-db-nosql.md
   - title: Open Source
     linkLists:
-      - linkListType: reference
+      - linkListType: download
+        links:
+          - text: NuGet
+            url: https://www.nuget.org/packages/Microsoft.DataApiBuilder
+      - linkListType: sample
         links:
           - text: Source Code
             url: https://github.com/Azure/data-api-builder
@@ -72,6 +78,12 @@ landingContent:
             url: how-to-run-from-source.md
           - text: Implement row-level security in SQL
             url: how-to-row-level-security.md
+      - linkListType: how-to-guide
+        links:
+          - text: Deploy to Azure Container Instances
+            url: how-to-deploy-container-instance.yml
+          - text: Deploy to Azure Container Apps
+            url: how-to-deploy-container-app.yml
       - linkListType: tutorial
         links:
           - text: Deploy to Azure Container Apps with Azure SQL
