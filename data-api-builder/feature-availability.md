@@ -35,8 +35,8 @@ TODO
 | Schema Attribute Placement (`@model`, `@authorize`) | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
 | User Provided Schema | ✖️ No | ✖️ No | ✅ Yes | ✖️ No | ✖️ No | ✖️ No |
 | Subscription | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| Banana Cake Pop UI `*` | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
-| In-Memory Cache  `**` | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
+| Banana Cake Pop UI ¹ | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
+| In-Memory Cache  ² | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
 
 ## GraphQL Relationship Navigation
 
@@ -66,8 +66,8 @@ TODO
 | $After | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✖️ No | ✖️ No |
 | $Select | ✅ Yes | ✖️ No | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
 | OpenAPI Document | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
-| Swagger UI  `*` | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
-| In-Memory Cache  `**` | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
+| Swagger UI  ¹ | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
+| In-Memory Cache  ² | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
 | Not/Strict Payload | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
 | OpenAPIReference | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 
@@ -119,14 +119,15 @@ TODO
 | Native XML Support | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Native Vector Support | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | application_name | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No |
-| Application Insights `*` | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| Application Insights ¹ | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | Session Context | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| Multiple Data Sources `*` | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
+| Multiple Data Sources ¹ | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
 | Cross-data source join | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 
 ## Static Web Apps
 
-* `*` Not supported in Azure Static Web Apps (SWA)
-* `**` Not supported in SWA yet
+* ¹ Not supported in Azure Static Web Apps (SWA)
+* ² Not supported in Azure Static Web Apps (SWA) yet
+
 * User-assigned managed identity is supported in SWA only when configured from the Azure portal.
 * `StaticWebApps` is required when using SWA authentication (EasyAuth).
