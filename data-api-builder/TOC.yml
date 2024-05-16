@@ -215,6 +215,15 @@
                     - name: Time-to-live in seconds
                       displayName: TTL
                       href: reference-configuration.md#ttl-in-seconds-cache-runtime
+                - name: Pagination
+                  href: reference-configuration.md#pagination-runtime
+                  items:
+                    - name: Default page size
+                      displayName: default-page-size
+                      href: reference-configuration.md#default-page-size-pagination-runtime
+                    - name: Maximum page size
+                      displayName: max-page-size
+                      href: reference-configuration.md#maximum-page-size-pagination-runtime
             - name: Entities
               href: reference-configuration.md#entities
               items:
@@ -297,6 +306,8 @@
           href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
     - name: Functions
       href: reference-functions.md
+    - name: Supported data types
+      href: reference-data-types.md
     - name: Database-specific features
       href: reference-database-specific-features.md
     - name: Policies
