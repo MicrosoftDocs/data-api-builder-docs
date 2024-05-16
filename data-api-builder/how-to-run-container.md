@@ -30,7 +30,7 @@ For this short guide, a simple table with a few rows of data is sufficient to de
     docker pull mcr.microsoft.com/mssql/server:2022-latest
     ```
 
-1. Run the container image publishing the `1433` port and setting the `sa` account password to `P@ssw.rd`.
+1. Run the container image publishing the `1433` port and setting the `sa` account password to a unique password that you use throughout this guide.
 
     ```bash
     docker run \
@@ -38,14 +38,14 @@ For this short guide, a simple table with a few rows of data is sufficient to de
         --publish 1433:1433 \
         --detach \
         --env "ACCEPT_EULA=Y" \
-        --env "MSSQL_SA_PASSWORD=P@ssw.rd" \
+        --env "MSSQL_SA_PASSWORD=<your-password>" \
         mcr.microsoft.com/mssql/server:2022-latest
     ```
 
     > [!IMPORTANT]
     > This is a simple fictiuous password for this guide. In the real world, you would use a different authentication mechanism and ideally a different account.
 
-1. Connect to the SQL server using your preferred client or tool. The connection string is `Server=localhost,1433;User Id=sa;Password=P@ssw.rd;TrustServerCertificate=true;`.
+1. Connect to the SQL server using your preferred client or tool. The connection string is `Server=localhost,1433;User Id=sa;Password=<your-password>;TrustServerCertificate=true;`.
 
 1. Create a new database named `Library` if it doesn't already exist.
 
@@ -107,7 +107,7 @@ Create a configuration file that maps to the table created in the previous steps
       "$schema": "https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json",
       "data-source": {
         "database-type": "mssql",
-        "connection-string": "Server=host.docker.internal\\mssql,1433;Initial Catalog=Library;User Id=sa;Password=P@ssw.rd;TrustServerCertificate=true;"
+        "connection-string": "Server=host.docker.internal\\mssql,1433;Initial Catalog=Library;User Id=sa;Password=<your-password>;TrustServerCertificate=true;"
       },
       "entities": {
         "book": {
