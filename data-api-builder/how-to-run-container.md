@@ -30,7 +30,7 @@ For this short guide, a simple table with a few rows of data is sufficient to de
     docker pull mcr.microsoft.com/mssql/server:2022-latest
     ```
 
-1. Run the container image publishing the `1433` port and setting the `sa` account password to a unique password that you will use throughout this guide.
+1. Run the container image publishing the `1433` port and setting the `sa` account password to a unique password that you use throughout this guide.
 
     ```bash
     docker run \
