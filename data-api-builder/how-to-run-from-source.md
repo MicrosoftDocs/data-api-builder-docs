@@ -62,7 +62,7 @@ The `Azure.DataApiBuilder` solution includes multiple projects. To run the tool 
       "$schema": "https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json",
       "data-source": {
         "database-type": "mssql",
-        "connection-string": "Server=localhost,1433;Initial Catalog=Library;User Id=sa;Password=P@ssw.rd;TrustServerCertificate=true;"
+        "connection-string": "Server=localhost,1433;Initial Catalog=Library;User Id=sa;Password=<your-password>;TrustServerCertificate=true;"
       },
       "entities": {
         "book": {
