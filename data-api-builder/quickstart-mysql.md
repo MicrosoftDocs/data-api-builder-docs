@@ -54,7 +54,7 @@ Start by configuring and running the local database. Then, you can seed a new co
 1. Connect to your local database using your preferred data management environment. Examples include, but aren't limited to: [MySQL Workbench](https://www.mysql.com/products/workbench/), [Azure Data Studio](/azure-data-studio), and the [MySQL shell for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=Oracle.mysql-shell-for-vs-code).
 
     > [!TIP]
-    > If you're using default networking for your Docker Linux container images, the connection string will likely be `Server=localhost;Port=3306;Uid=root;Pwd=P@ssw.rd;`. Replace `<your-password>` with the password you set earlier.
+    > If you're using default networking for your Docker Linux container images, the connection string will likely be `Server=localhost;Port=3306;Uid=root;Pwd=<your-password>;`. Replace `<your-password>` with the password you set earlier.
 
 1. Create a new `bookshelf` database and use the database for your remaining queries.
 
