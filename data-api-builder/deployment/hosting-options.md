@@ -37,8 +37,13 @@ TODO
 
 TODO
 
-## Related content
+## Next step
 
-- [Deploy to Azure Container Apps](how-to-publish-container-apps.yml)
-- [Deploy to Azure Container Instances](how-to-publish-container-instances.yml)
-- [Deploy to Azure Static Web Apps](how-to-publish-static-web-apps.yml)
+> [!div class="nextstepaction"]
+> [Deploy to Azure Container Apps](how-to-publish-container-apps.yml)
+
+> [!div class="nextstepaction"]
+> [Deploy to Azure Container Instances](how-to-publish-container-instances.yml)
+
+> [!div class="nextstepaction"]
+> [Deploy to Azure Static Web Apps](how-to-publish-static-web-apps.yml)
