@@ -12,6 +12,10 @@ ms.date: 05/23/2024
 
 # Deployment guide for Data API builder
 
+:::image type="complex" source="media/overview/map.svg" alt-text="Diagram of the current location ('Overview') in the sequence of the deployment guide.":::
+Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Overview' location is currently highlighted.
+:::image-end:::
+
 TODO
 
 ## Concept A
