@@ -8,35 +8,147 @@ metadata:
   ms.reviewer: jerrynixon
   ms.service: data-api-builder
   ms.topic: quickstart
-  ms.date: 05/16/2024
+  ms.date: 05/23/2024
+  ai-usage: ai-assisted
   #Customer Intent: As a developer, I want to deploy Data API builder to Azure Static Web Apps so that I can quickly create a REST API for my database.
 title: |
   Deploy Data API builder to Azure Static Web Apps
 introduction: |
-  Deploy the Data API builder quickly to Azure using just a configuration file and no custom code. This guide includes steps to host the Data API builder container image from Docker as a database connection in Azure Static Web Apps. 
+  Deploy Data API builder quickly to Azure Static Web Apps using just a configuration file. This guide includes steps to integratee Data API builder with a static web app.
 
-  In this guide, walk through the steps to build a Data API builder configuration file, host the file as part of your application payload, and then use the configuration file with a web application deployed to Azure Static Web Apps.
+  In this guide, walk through the steps to build a DAB configuration file, host the file as part of your application, and then use a database connection in Azure Static Web Apps.
 prerequisites:
   dependencies:
     - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
-    - Data API builder CLI. [Install the CLI](how-to-install-cli.md).
-    - Azure CLI. [Install the Azure CLI](/cli/azure/install-azure-cli).
+    - Azure Static Web Apps CLI. [Install the Static Web Apps (SWA) CLI](/azure/static-web-apps/static-web-apps-cli-install).
+    - Data API builder CLI. [Install the Data API builder (DAB) CLI](how-to-install-cli.md).
     - Existing supported database addressable from Azure.
+    - Existing web application in a GitHub repository that can be deployed to Azure Static Web Apps.
+      - If you don't have a web application, [generate a repository with a basic web application](https://github.com/staticwebdev/vanilla-basic/generate).
 procedureSection:
   - title: |
-      TODO
+      Create a static web app 
     summary: |
-      TODO
-    code: |
-      ```output
-      TODO
-      ```
-  - title: |
-      TODO
-    summary: |
-      TODO
+      To start, use the Azure portal to create a new Azure Static Web App using the web application in GitHub.
     steps:
       - |
-        TODO
+        Sign into the Azure portal (<https://portal.azure.com>).
       - |
-        TODO
+        Create a new resource group. You will use this resource group to for all new resources in this guide. 
+
+        :::image type="content" source="media/how-to-deploy-static-web-app/create-resource-group.png" lightbox="media/how-to-deploy-static-web-app/create-resource-group.png" alt-text="Screenshot of the 'Create a resource group' page's 'Basics' tab in the Azure portal.":::
+
+        > [!TIP]
+        > We recommend naming the resource group **msdocs-dab-swa**. All screenshots in this guide use this name.
+      - |
+        Create an Azure Static Web App. Use these settings to configure the static web app.
+
+        | Setting | Value |
+        | --- | --- |
+        | **Resource group** | Select the resource group you created earlier |
+        | **Name** | Enter a globally unique name |
+        | **Plan type** | Select the best option for your workload |
+        | **Source** | Select **GitHub** |
+        | **GitHub account** | Configure a GitHub account that has access to the web application repository |
+        | **Organization** | Select the parent organization or user for the repository |
+        | **Repository** | Select the repository name |
+        | **Branch** | Select the primary branch |
+                
+        :::image type="content" source="media/how-to-deploy-static-web-app/create-static-web-app.png" alt-text="Screenshot of the 'Create Static Web App' page's 'Basics' tab in the Azure portal.":::
+      - |
+        Wait for the static web application deployment to complete. A GitHub Actions workflow is automatically added to your repository that will deploy the application to Azure Static Web Apps every time you push to the primary branch.
+
+        > [!NOTE]
+        > This initial deployment can take a few minutes. You can always check the status of the deployment in either the Azure portal or the GitHub Actions tab in your repository.
+      - |
+        Navigate to the new static web app in the Azure portal.
+      - |
+        In the **Essentials** section, use the **URL** hyperlink to navigate to the running web application. Verify that the application is running as expected.
+  - title: |
+      Add the DAB configuration file
+    summary: |
+      Now, use the DAB and SWA command-line interfaces to create a new DAB configuration file and add it to the web application repository.
+    steps:
+      - |
+        Open the GitHub repository for your web application in the integrated developer environment (IDE) of your choice.
+
+        > [!TIP]
+        > You can use any IDE you'd like. If you want to work on the application locally, you can clone the repository to your local machine. If you prefer to work in the browser, you can use [GitHub Codespaces](https://github.com/codespaces). Ensure that the SWA and DAB CLIs is installed in your development environment.
+      - |
+        Open a terminal in the root of the repository.
+      - |
+        Use the [`swa db`](/azure/static-web-apps/static-web-apps-cli#swa-db) command from the SWA CLI to initialize a new DAB configuration file using the specified database type. The command will create a new file named *staticwebapp.database.config.json* in the *swa-db-connections* folder.
+
+        ```dotnetcli
+        swa db init --database-type "<database-type>"
+        ```
+
+        > [!IMPORTANT]
+        > Some database types will require additional configuration settings on initialization.
+      - |
+        Use the [`dab add`](reference-cli.md#add) command to add at least one database entity to the configuration. Configure each entity to allow all permissions for anonymous users. Repeat `dab add` as many times as you like for your entities.
+
+        ```dotnetcli
+        dab add "<entity-name>" --source "<schema>.<table>" --permissions "anonymous:*" --config "swa-db-connections/staticwebapp.database.config.json"
+        ```
+      - |
+        Open and review the contents of the *swa-db-connections/staticwebapp.database.config.json* file.
+      - |
+        Commit your changes to the repository and push them to the primary branch. This will automatically trigger a new deployment of the web application. Wait for this latest deployment to finish before continuing with this guide.
+  - title: |
+      Configure the database connection
+    summary: |
+      Next, configure the database connection in the Azure portal to allow the static web app to access the database.
+    steps:
+      - |
+        Navigate to the static web app again in the Azure portal.
+      - |
+        Select the **Database connection** option in the **Settings** section of the resource menu. Then, select **Link existing database** for the **production** environment.
+
+        :::image type="content" source="media/how-to-deploy-static-web-app/database-connection-option.png" alt-text="Screenshot of the `Database connection` option in the Azure Static Web Apps page of the Azure portal.":::
+      - |
+        In the **Link database** dialog, use these settings to configure the database connection.
+
+        | Setting | Value |
+        | --- | --- |
+        | **Database type** | Select the same database type you used when creating the DAB configuration file |
+        | **Resource group** | Select the resource group you created earlier in this guide |
+        | **Resource name** | Select the database resource you want to link to the static web app |
+        | **Database name** | Enter the name of the database |
+        | **Authentication type** | Select the type of authentication you intend to use |
+
+        :::image type="content" source="media/how-to-deploy-static-web-app/link-database-options.png" alt-text="Screenshot of the `Link database` dialog for database connections in the Azure Static Web Apps page of the Azure portal.":::
+        
+        > [!TIP]
+        > We recommend using a connection string that does not include authorization keys. Instead, use managed identities and role-based access control to manage access between your database and host. For more information, see [Azure services that use managed identities](/entra/identity/managed-identities-azure-resources/managed-identities-status).
+  - title: |
+      Test the data API endpoint
+    summary: |
+      Finally, validate that the data API endpoint is available on the static web app.
+    steps:
+      - |
+        Navigate to the static web app again in the Azure portal.
+      - |
+        Use the **URL** field in the **Essentials** section to browse to the static web app's website again.
+      - |
+        Navigate to the `/data-api` path for the current running application. Observe that the response still indicates that the DAB container is **healthy**.
+
+        ```output
+        Healthy
+        ```
+      - |
+        Navigate to the `/data-api/rest/<entity-name>` path for the current running application. This issues a **HTTP GET** request for that set of entities. Observe the JSON response.
+  - title: |
+      Clean up resources
+    summary: |
+      When you no longer need the sample application or resources, remove the corresponding deployment and all resources.
+    steps:
+      - |
+        Navigate to the **resource group** using the Azure portal.
+      - |
+        In the **command bar**, select **Delete**.
+relatedContent:
+  - text: Deploy Data API builder to Azure Container Instances.
+    url: how-to-deploy-container-instance.yml
+  - text: Deploy Data API builder to Azure Container Apps.
+    url: how-to-deploy-container-app.yml
