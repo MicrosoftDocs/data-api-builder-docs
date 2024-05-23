@@ -39,6 +39,6 @@ TODO
 
 ## Related content
 
-- [Deploy to Azure Container Apps](container-app.yml)
-- [Deploy to Azure Container Instances](container-instance.yml)
-- [Deploy to Azure Static Web Apps](static-web-app.yml)
+- [Deploy to Azure Container Apps](how-to-publish-container-apps.yml)
+- [Deploy to Azure Container Instances](how-to-publish-container-instances.yml)
+- [Deploy to Azure Static Web Apps](how-to-publish-static-web-apps.yml)

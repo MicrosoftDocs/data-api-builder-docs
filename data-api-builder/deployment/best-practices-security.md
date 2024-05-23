@@ -58,5 +58,5 @@ TLS 1.2 is enabled by default on the latest versions of .NET and many of the lat
 
 ## Related content
 
-- [Install CLI](how-to-install-cli.md)
-- [Best practices configuration](deployment/best-practices-configuration.md)
+- [Install CLI](../how-to-install-cli.md)
+- [Best practices configuration](best-practices-configuration.md)
