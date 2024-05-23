@@ -144,7 +144,7 @@ Create a baseline configuration file using the DAB CLI.
 
 Now, add an environment file to store environment variables for DAB.
 
-1. Create a file name `.env` in the same directory as your DAB CLI configuration files.
+1. Create a file named `.env` in the same directory as your DAB CLI configuration files.
 
 > [!NOTE]
 > The `.env` filename, like `.gitignore` and `.editorconfig` files has no filename, only a file extension. The name is case insensitive but the convention is lower-case.
