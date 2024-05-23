@@ -5,12 +5,16 @@ author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: concept-article
-ms.date: 04/01/2024
+ms.topic: best-practice
+ms.date: 05/23/2024
 # Customer Intent: As a developer, I want to review best practices, so that I can configure my API using current best practices.
 ---
 
 # Configuration best practices in Data API builder
+
+:::image type="complex" source="media/best-practices-configuration/map.svg" border="false" alt-text="Diagram of the current location ('Optimize') in the sequence of the deployment guide.":::
+Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Optimize' location is currently highlighted.
+:::image-end:::
 
 This article includes the current recommended best practices for configuration in the Data API builder. This article doesn't include an exhaustive list of everything you must configure for your Data API builder solution.
 

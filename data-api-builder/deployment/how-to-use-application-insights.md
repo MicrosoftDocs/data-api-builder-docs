@@ -6,11 +6,15 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 04/09/2024
+ms.date: 05/23/2024
 # Customer Intent: As a developer, I want to integrate Application Insights with Data API builder, so that I can capture performance metrics.
 ---
 
 # Use Azure Application Insights in Data API builder
+
+:::image type="complex" source="media/how-to-use-application-insights/map.svg" border="false" alt-text="Diagram of the current location ('Monitor') in the sequence of the deployment guide.":::
+Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Monitor' location is currently highlighted.
+:::image-end:::
 
 Azure Application Insights is a service provided by Microsoft Azure that enables developers to monitor and gain insights into the performance and usage of their applications. The guide illustrates how to enable Application Insights for Data API builder (DAB). With Application Insights, you can track application availability, response times, performance metrics, user behavior, and other useful metrics.
 
