@@ -13,6 +13,22 @@ ms.date: 05/15/2024
 
 Release notes and information about all updates and enhancements in Data API builder version 0.11 and earlier.
 
+## What's new in version 0.11
+
+Release notes and information about the updates and enhancements in Data API builder version 0.10.
+
+### GraphQL support for SQL Data Warehouse
+
+SQL Data Warehouse now supports GraphQL endpoints.
+
+### Enhanced Azure Cosmos DB for NoSQL filtering
+
+Azure Cosmos DB for NoSQL now has support for nested filters, ID variables, and string array searches with the `contains` operator.
+
+### Enable application data collection with command-line interface
+
+You can now use the DAB command-line interface (CLI) to enable data collection with Application Insights.
+
 ## What's new in version 0.10
 
 Release notes and information about the updates and enhancements in Data API builder version 0.10.

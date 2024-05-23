@@ -88,7 +88,7 @@ These tables list the features available in Data API builder (DAB) for Azure dat
 | Feature | SQL Server | Azure SQL | Azure Cosmos DB for NoSQL | PostgreSQL | MySQL | DWSQL |
 | --- | --- | --- | --- | --- | --- | --- |
 | **C**reate | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
-| **R**ead | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
+| **R**ead | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | **U**pdate | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
 | **D**elete | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
 
