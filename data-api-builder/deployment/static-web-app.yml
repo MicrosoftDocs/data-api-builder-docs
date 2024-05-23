@@ -14,6 +14,10 @@ metadata:
 title: |
   Deploy Data API builder to Azure Static Web Apps
 introduction: |
+  :::image type="complex" source="media/static-web-app/map.svg" border="false" alt-text="Diagram of the current location ('Publish') in the sequence of the deployment guide.":::
+  Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Publish' location is currently highlighted.
+  :::image-end:::
+
   Deploy Data API builder quickly to Azure Static Web Apps using just a configuration file. This guide includes steps to integratee Data API builder with a static web app.
 
   In this guide, walk through the steps to build a DAB configuration file, host the file as part of your application, and then use a database connection in Azure Static Web Apps.

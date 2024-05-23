@@ -11,6 +11,10 @@ ms.date: 05/23/2024
 
 # Hosting options for Data API builder
 
+:::image type="complex" source="media/hosting-options/map.svg" border="false" alt-text="Diagram of the current location ('Prepare') in the sequence of the deployment guide.":::
+Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Prepare' location is currently highlighted.
+:::image-end:::
+
 TODO
 
 ## Azure Container Apps
