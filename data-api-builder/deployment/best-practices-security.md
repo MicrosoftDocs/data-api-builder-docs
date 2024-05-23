@@ -24,10 +24,10 @@ Data sent between a client and Data API builder should occur over a secure conne
 
 As detailed in [OWASP's Transport Layer Protection](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html) guidance, TLS provides numerous security benefits when implemented correctly:
 
->- **Confidentiality** - protection against an attacker from reading the contents of traffic.
->- **Integrity** - protection against an attacker modifying traffic.
->- **Replay prevention** - protection against an attacker replaying requests against the server.
->- **Authentication** - allowing the client to verify that they are connected to the real server (note that the identity of the client is not verified unless client certificates are used).
+- **Confidentiality** - protection against an attacker from reading the contents of traffic.
+- **Integrity** - protection against an attacker modifying traffic.
+- **Replay prevention** - protection against an attacker replaying requests against the server.
+- **Authentication** - allowing the client to verify that they are connected to the real server (note that the identity of the client is not verified unless client certificates are used).
 
 ### Recommendation
 
