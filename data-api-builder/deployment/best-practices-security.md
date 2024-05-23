@@ -38,29 +38,25 @@ One way to help configure TLS securely is **to disable usage of legacy versions 
 
 While explicitly defining supported TLS protocol versions for Kestrel is supported, doing so isn't recommended. These definitions translate to an allowlist, which prevents support for future TLS versions as they become available. More information about Kestrel's default TLS protocol version behavior can be found [here](/dotnet/core/compatibility/aspnet-core/5.0/kestrel-default-supported-tls-protocol-versions-changed).
 
-### Platform Resources
+> [!NOTE]
+> TLS 1.2 is enabled by default on the latest versions of .NET and many of the latest operating system versions.
 
-TLS 1.2 is enabled by default on the latest versions of .NET and many of the latest operating system versions.
-
-#### Windows
+#### [Windows](#tab/windows)
 
 - Install .NET on Windows - [Microsoft Learn](/dotnet/core/install/windows?tabs=net60)
 - Enable support for TLS 1.2 in your environment - [Microsoft Entra ID Guidance](/troubleshoot/azure/active-directory/enable-support-tls-environment?tabs=azure-monitor#enable-support-for-tls-12-in-your-environment)
 - TLS 1.2 support at Microsoft - [Microsoft Security Blog](https://www.microsoft.com/security/blog/2017/06/20/tls-1-2-support-at-microsoft/)
 
-#### macOS
+#### [macOS](#tab/macos)
 
 - Install .NET on macOS - [Microsoft Learn](/dotnet/core/install/macos)
 - TLS Security - [Apple Platform Security](https://support.apple.com/guide/security/tls-security-sec100a75d12/web)
 - TLS 1.2 is enabled starting with OS X Mavericks(10.9) - [About the security content of OS X Mavericks v10.9](https://support.apple.com/HT202854)
 
-#### Linux
+#### [Linux](#tab/linux)
 
 - Install .NET on Linux - [Microsoft Learn](/dotnet/core/install/linux)
 - Linux .NET Dependencies - [GitHub](https://github.com/dotnet/core/blob/main/release-notes/6.0/linux-packages.md)
   - Includes [OpenSSL](https://www.openssl.org/) where the latest versions support TLS protocol versions up through TLS 1.3. [OpenSSL Wiki](https://wiki.openssl.org/index.php/TLS1.3)
 
-## Related content
-
-- [Install CLI](../how-to-install-cli.md)
-- [Best practices configuration](best-practices-configuration.md)
+---

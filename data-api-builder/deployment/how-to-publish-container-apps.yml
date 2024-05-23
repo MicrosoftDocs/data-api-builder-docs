@@ -112,7 +112,7 @@ procedureSection:
       - |
         Select **Access keys** in the **Security + networking** section of the resource menu. Then, record the **Storage account name** and **Key** values from this page. You will use these values later in this guide.
 
-        :::image type="content" source="media/how-to-publish-container-apps/storage-credentials.png" alt-text="Screenshot of the 'Access Keys' page within a storage account in the Azure portal."::: 
+        :::image type="content" source="media/how-to-publish-container-apps/storage-credentials.png" alt-text="Screenshot of the 'Access Keys' page within a storage account in the Azure portal.":::
   - title: |
       Create the base container app
     summary: |
@@ -152,7 +152,7 @@ procedureSection:
         Navigate to the new container app in the Azure portal.
       - |
         Use the **Application URL** field in the **Essentials** section to browse to the container app's website. Observe the response indicating that the DAB container is running and the status is **healthy**.
-        
+
         ```json
         {
           "status": "healthy",
@@ -230,10 +230,6 @@ procedureSection:
         Navigate to the **resource group** using the Azure portal.
       - |
         In the **command bar**, select **Delete**.
-relatedContent:
-  - text: Deploy Data API builder to Azure Container Instances.
-    url: how-to-publish-container-instances.yml
-  - text: Deploy Data API builder to Azure Static Web Apps.
-    url: how-to-publish-static-web-apps.yml
-  - text: Automate deployment of Data API builder to Azure Container Apps using Azure CLI.
-    url: ../tutorial-deploy-container-app-cli.md
+nextStep:
+  text: Integrate with Application Insights
+  url: how-to-use-applicaton-insights.yml

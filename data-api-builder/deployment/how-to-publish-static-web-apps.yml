@@ -31,7 +31,7 @@ prerequisites:
       - If you don't have a web application, [generate a repository with a basic web application](https://github.com/staticwebdev/vanilla-basic/generate).
 procedureSection:
   - title: |
-      Create a static web app 
+      Create a static web app
     summary: |
       To start, use the Azure portal to create a new Azure Static Web App using the web application in GitHub.
     steps:
@@ -122,7 +122,7 @@ procedureSection:
         | **Authentication type** | Select the type of authentication you intend to use |
 
         :::image type="content" source="media/how-to-publish-static-web-apps/link-database-options.png" alt-text="Screenshot of the `Link database` dialog for database connections in the Azure Static Web Apps page of the Azure portal.":::
-        
+
         > [!TIP]
         > We recommend using a connection string that does not include authorization keys. Instead, use managed identities and role-based access control to manage access between your database and host. For more information, see [Azure services that use managed identities](/entra/identity/managed-identities-azure-resources/managed-identities-status).
   - title: |
@@ -151,8 +151,6 @@ procedureSection:
         Navigate to the **resource group** using the Azure portal.
       - |
         In the **command bar**, select **Delete**.
-relatedContent:
-  - text: Deploy Data API builder to Azure Container Instances.
-    url: how-to-publish-container-instances.yml
-  - text: Deploy Data API builder to Azure Container Apps.
-    url: how-to-publish-container-apps.yml
+nextStep:
+  text: Integrate with Application Insights
+  url: how-to-use-applicaton-insights.yml
