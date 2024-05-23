@@ -17,11 +17,11 @@
   expanded: true
   items:
   - name: Integrate with Application Insights
-    href: ../how-to-use-application-insights.md
+    href: ../how-to-use-application-insights.md?context=/azure/data-api-builder/deployment/context/context
 - name: Optimize
   expanded: true
   items:
   - name: Configuration best practices
-    href: ../best-practices-configuration.md
+    href: ../best-practices-configuration.md?context=/azure/data-api-builder/deployment/context/context
   - name: Security best practices
-    href: ../best-practices-security.md
+    href: ../best-practices-security.md?context=/azure/data-api-builder/deployment/context/context
