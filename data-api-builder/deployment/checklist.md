@@ -1,6 +1,6 @@
 ---
 title: Deployment checklist
-description: TODO.
+description: TODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODO.
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
@@ -13,15 +13,15 @@ ms.date: 05/23/2024
 
 TODO
 
-## Checklist
+## Checklist A
 
 TODO
 
-## Checklist
+## Checklist B
 
 TODO
 
 ## Next step
 
 > [!div class="nextstepaction"]
-> [GraphQL endpoints](graphql.md)
+> [Hosting options](hosting-options.md)

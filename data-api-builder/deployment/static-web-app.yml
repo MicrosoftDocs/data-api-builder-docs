@@ -21,7 +21,7 @@ prerequisites:
   dependencies:
     - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
     - Azure Static Web Apps CLI. [Install the Static Web Apps (SWA) CLI](/azure/static-web-apps/static-web-apps-cli-install).
-    - Data API builder CLI. [Install the Data API builder (DAB) CLI](how-to-install-cli.md).
+    - Data API builder CLI. [Install the Data API builder (DAB) CLI](../how-to-install-cli.md).
     - Existing supported database addressable from Azure.
     - Existing web application in a GitHub repository that can be deployed to Azure Static Web Apps.
       - If you don't have a web application, [generate a repository with a basic web application](https://github.com/staticwebdev/vanilla-basic/generate).
@@ -86,7 +86,7 @@ procedureSection:
         > [!IMPORTANT]
         > Some database types will require additional configuration settings on initialization.
       - |
-        Use the [`dab add`](reference-cli.md#add) command to add at least one database entity to the configuration. Configure each entity to allow all permissions for anonymous users. Repeat `dab add` as many times as you like for your entities.
+        Use the [`dab add`](../reference-cli.md#add) command to add at least one database entity to the configuration. Configure each entity to allow all permissions for anonymous users. Repeat `dab add` as many times as you like for your entities.
 
         ```dotnetcli
         dab add "<entity-name>" --source "<schema>.<table>" --permissions "anonymous:*" --config "swa-db-connections/staticwebapp.database.config.json"

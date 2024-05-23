@@ -1,6 +1,6 @@
 ---
-title: Hosting options
-description: TODO.
+title: API hosting options
+description: TODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODO.
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
@@ -13,19 +13,23 @@ ms.date: 05/23/2024
 
 TODO
 
-## Option
+## Azure Container Apps
 
 TODO
 
-## Option
+## Azure Container Instances
 
 TODO
 
-## Option
+## Azure Static Web Apps
 
 TODO
 
-## Option
+## Azure App Service
+
+TODO
+
+## Self-hosted
 
 TODO
 

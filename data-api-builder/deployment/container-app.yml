@@ -19,7 +19,7 @@ introduction: |
 prerequisites:
   dependencies:
     - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
-    - Data API builder CLI. [Install the CLI](how-to-install-cli.md).
+    - Data API builder CLI. [Install the CLI](../how-to-install-cli.md).
     - Azure CLI. [Install the Azure CLI](/cli/azure/install-azure-cli).
     - Existing supported database addressable from Azure.
 procedureSection:
@@ -31,12 +31,12 @@ procedureSection:
       - |
         Create an empty directory on your local machine to store the configuration file.
       - |
-        Initialize a new base configuration file using [`dab init`](reference-cli.md#init). Use the following settings at a minimum on initialization.
+        Initialize a new base configuration file using [`dab init`](../reference-cli.md#init). Use the following settings at a minimum on initialization.
 
         | Setting | Value |
         | --- | --- |
         | **Database type** | Select a supported database type. |
-        | **Connection string** | Use the [`@env()`](reference-functions.md#env) function to reference the `DATABASE_CONNECTION_STRING` environment variable. |
+        | **Connection string** | Use the [`@env()`](../reference-functions.md#env) function to reference the `DATABASE_CONNECTION_STRING` environment variable. |
 
         ```dotnetcli
         dab init --database-type "<database-type>" --connection-string "@env('DATABASE_CONNECTION_STRING')"
@@ -45,7 +45,7 @@ procedureSection:
         > [!IMPORTANT]
         > Some database types will require additional configuration settings on initialization.
       - |
-        Add at least one database entity to the configuration. Use the [`dab add`](reference-cli.md#add) command to configure an entity. Configure each entity to allow all permissions for anonymous users. Repeat `dab add` as many times as you like for your entities.
+        Add at least one database entity to the configuration. Use the [`dab add`](../reference-cli.md#add) command to configure an entity. Configure each entity to allow all permissions for anonymous users. Repeat `dab add` as many times as you like for your entities.
 
         ```dotnetcli
         dab add "<entity-name>" --source "<schema>.<table>" --permissions "anonymous:*"
@@ -232,4 +232,4 @@ relatedContent:
   - text: Deploy Data API builder to Azure Static Web Apps.
     url: static-web-app.yml
   - text: Automate deployment of Data API builder to Azure Container Apps using Azure CLI.
-    url: tutorial-deploy-container-app-cli.md
+    url: ../tutorial-deploy-container-app-cli.md
