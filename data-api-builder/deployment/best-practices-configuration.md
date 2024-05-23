@@ -35,4 +35,4 @@ When adding an entity to the configuration file, make sure to use the singular f
 ## Related content
 
 - [Configuration reference](reference-configuration.md)
-- [Best practices security](best-practices-security.md)
+- [Best practices security](deployment/best-practices-security.md)

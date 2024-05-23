@@ -52,13 +52,13 @@
         href: deployment/index.md?context=/azure/data-api-builder/context/context
       - name: Azure Container Instances
         displayName: ACI
-        href: deployment/container-instance.yml?context=/azure/data-api-builder/context/context
+        href: deployment/how-to-publish-container-instances.yml?context=/azure/data-api-builder/context/context
       - name: Azure Container Apps
         displayName: ACA
-        href: deployment/container-app.yml?context=/azure/data-api-builder/context/context
+        href: deployment/how-to-publish-container-apps.yml?context=/azure/data-api-builder/context/context
       - name: Azure Static Web Apps
         displayName: SWA
-        href: deployment/static-web-app.yml?context=/azure/data-api-builder/context/context
+        href: deployment/how-to-publish-static-web-apps.yml?context=/azure/data-api-builder/context/context
     - name: Run in a container
       href: how-to-run-container.md
     - name: Run from source code
@@ -72,7 +72,7 @@
       href: how-to-use-environments.md
     - name: Use Application Insights
       displayName: app
-      href: how-to-use-application-insights.md
+      href: deployment/how-to-use-application-insights.md
     - name: Batch multiple mutations
       displayName: multiple create, transaction
       href: how-to-multiple-mutations.md
@@ -121,9 +121,9 @@
     - name: Best practices
       items:
         - name: Security
-          href: best-practices-security.md
+          href: deployment/best-practices-security.md
         - name: Configuration
-          href: best-practices-configuration.md
+          href: deployment/best-practices-configuration.md
 - name: Samples
   items:
     - name: Example configuration

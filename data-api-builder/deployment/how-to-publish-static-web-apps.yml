@@ -153,6 +153,6 @@ procedureSection:
         In the **command bar**, select **Delete**.
 relatedContent:
   - text: Deploy Data API builder to Azure Container Instances.
-    url: container-instance.yml
+    url: how-to-publish-container-instances.yml
   - text: Deploy Data API builder to Azure Container Apps.
-    url: container-app.yml
+    url: how-to-publish-container-apps.yml

@@ -8,20 +8,20 @@
   expanded: true
   items:
   - name: Azure Container Apps
-    href: container-app.yml
+    href: how-to-publish-container-apps.yml
   - name: Azure Container Instances
-    href: container-instance.yml
+    href: how-to-publish-container-instances.yml
   - name: Azure Static Web Apps
-    href: static-web-app.yml
+    href: how-to-publish-static-web-apps.yml
 - name: Monitor
   expanded: true
   items:
   - name: Integrate with Application Insights
-    href: ../how-to-use-application-insights.md
+    href: how-to-use-application-insights.md
 - name: Optimize
   expanded: true
   items:
   - name: Configuration best practices
-    href: ../best-practices-configuration.md
+    href: best-practices-configuration.md
   - name: Security best practices
-    href: ../best-practices-security.md
+    href: best-practices-security.md

@@ -277,17 +277,32 @@
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-deploy-container-app.md",
-      "redirect_url": "/azure/data-api-builder/deployment/container-app",
+      "redirect_url": "/azure/data-api-builder/deployment/how-to-publish-container-apps",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-deploy-container-instance.md",
-      "redirect_url": "/azure/data-api-builder/deployment/container-instance",
+      "redirect_url": "/azure/data-api-builder/deployment/how-to-publish-container-instances",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-deploy-static-web-app.md",
-      "redirect_url": "/azure/data-api-builder/deployment/static-web-app",
+      "redirect_url": "/azure/data-api-builder/deployment/how-to-publish-static-web-apps",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/best-practices-security.md",
+      "redirect_url": "/azure/data-api-builder/deployment/best-practices-security",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/best-practices-configuration.md",
+      "redirect_url": "/azure/data-api-builder/deployment/best-practices-configuration",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to-use-application-insights.md",
+      "redirect_url": "/azure/data-api-builder/deployment/how-to-use-application-insights",
       "redirect_document_id": true
     }
   ]
