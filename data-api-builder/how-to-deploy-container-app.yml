@@ -229,5 +229,7 @@ procedureSection:
 relatedContent:
   - text: Deploy Data API builder to Azure Container Instances.
     url: how-to-deploy-container-instance.yml
+  - text: Deploy Data API builder to Azure Static Web Apps.
+    url: how-to-deploy-static-web-app.yml
   - text: Automate deployment of Data API builder to Azure Container Apps using Azure CLI.
     url: tutorial-deploy-container-app-cli.md
