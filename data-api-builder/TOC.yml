@@ -49,7 +49,7 @@
       items:
       - name: Deployment guide
         displayName: hosting
-        href: deployment/index.md?context=/azure/data-api-builder/context/context
+        href: deployment/overview.md?context=/azure/data-api-builder/context/context
       - name: Azure Container Instances
         displayName: ACI
         href: deployment/container-instance.yml?context=/azure/data-api-builder/context/context
