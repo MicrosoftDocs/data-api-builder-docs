@@ -71,8 +71,8 @@
       displayName: development
       href: how-to-use-environments.md
     - name: Use Application Insights
-      displayName: app
-      href: deployment/how-to-use-application-insights.md
+      displayName: app, monitor
+      href: deployment/how-to-use-application-insights.md?context=/azure/data-api-builder/context/context
     - name: Batch multiple mutations
       displayName: multiple create, transaction
       href: how-to-multiple-mutations.md
@@ -121,9 +121,9 @@
     - name: Best practices
       items:
         - name: Security
-          href: deployment/best-practices-security.md
+          href: deployment/best-practices-security.md?context=/azure/data-api-builder/context/context
         - name: Configuration
-          href: deployment/best-practices-configuration.md
+          href: deployment/best-practices-configuration.md?context=/azure/data-api-builder/context/context
 - name: Samples
   items:
     - name: Example configuration
