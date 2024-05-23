@@ -8,7 +8,7 @@ metadata:
   ms.reviewer: jerrynixon
   ms.service: data-api-builder
   ms.topic: quickstart
-  ms.date: 05/15/2024
+  ms.date: 05/23/2024
   #Customer Intent: As a developer, I want to deploy Data API builder to Azure Container Apps so that I can quickly create a REST API for my database.
 title: |
   Deploy Data API builder to Azure Container Apps

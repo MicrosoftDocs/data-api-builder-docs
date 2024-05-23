@@ -2,13 +2,13 @@
 
 metadata:
   title: Deploy to Azure Container Instances
-  description: Use the Azure portal to deploy an Azure Container Instances resource with the Data API builder image.
+  description: Use the Azure portal and Azure CLI to deploy an Azure Container Instances resource with the Data API builder image.
   author: seesharprun
   ms.author: sidandrews
   ms.reviewer: jerrynixon
   ms.service: data-api-builder
   ms.topic: quickstart
-  ms.date: 05/15/2024
+  ms.date: 05/23/2024
   #Customer Intent: As a developer, I want to deploy Data API builder to Azure Container Instances so that I can quickly create a REST API for my database.
 title: |
   Deploy Data API builder to Azure Container Instances
