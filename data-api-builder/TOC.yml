@@ -68,7 +68,7 @@
       displayName: development
       href: how-to-use-environments.md
     - name: Use Application Insights
-      displayName: app
+      displayName: app insights, ai, telemetry
       href: how-to-use-application-insights.md
     - name: Batch multiple mutations
       displayName: multiple create, transaction
