@@ -115,5 +115,5 @@ When you enable Application Insights in your application, it starts sending data
 ## Related content
 
 - [Azure Application Insights](/azure/azure-monitor/app/app-insights-overview)
-- [Configuration file reference](reference-configuration.md)
-- [Tutorial: Run Data API builder in Azure Container Apps](running-in-azure.md)
+- [Configuration file reference](../reference-configuration.md)
+- [Tutorial: Run Data API builder in Azure Container Apps](../running-in-azure.md)
