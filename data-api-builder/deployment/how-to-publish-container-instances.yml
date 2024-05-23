@@ -13,7 +13,7 @@ metadata:
 title: |
   Deploy Data API builder to Azure Container Instances
 introduction: |
-  :::image type="complex" source="media/container-instance/map.svg" border="false" alt-text="Diagram of the current location ('Publish') in the sequence of the deployment guide.":::
+  :::image type="complex" source="media/how-to-publish-container-instances/map.svg" border="false" alt-text="Diagram of the current location ('Publish') in the sequence of the deployment guide.":::
   Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Publish' location is currently highlighted.
   :::image-end:::
 
@@ -76,7 +76,7 @@ procedureSection:
       - |
         Create a new resource group. You will use this resource group to for all new resources in this guide. 
 
-        :::image type="content" source="media/container-instance/create-resource-group.png" lightbox="media/container-instance/create-resource-group.png" alt-text="Screenshot of the 'Create a resource group' page's 'Basics' tab in the Azure portal.":::
+        :::image type="content" source="media/how-to-publish-container-instances/create-resource-group.png" lightbox="media/how-to-publish-container-instances/create-resource-group.png" alt-text="Screenshot of the 'Create a resource group' page's 'Basics' tab in the Azure portal.":::
 
         > [!TIP]
         > We recommend naming the resource group **msdocs-dab-aci**. All screenshots in this guide use this name.
@@ -92,7 +92,7 @@ procedureSection:
         | **Redundancy** | Select **Locally-redundant storage (LRS)** |
         | **Enable storage account key access** | Select **Enabled** |
 
-        :::image type="content" source="media/container-instance/create-storage-account.png" alt-text="Screenshot of the 'Create a storage account' page's 'Advanced' tab in the Azure portal.":::
+        :::image type="content" source="media/how-to-publish-container-instances/create-storage-account.png" alt-text="Screenshot of the 'Create a storage account' page's 'Advanced' tab in the Azure portal.":::
       - |
         Navigate to the new storage account in the Azure portal.
       - |
@@ -104,15 +104,15 @@ procedureSection:
         | **Access tier** | Select **Hot** |
         | **Enable backup** | Do not select |
 
-        :::image type="content" source="media/container-instance/storage-file-share-option.png" alt-text="Screenshot of the **File share** resource menu and command bar options in the Azure portal.":::
+        :::image type="content" source="media/how-to-publish-container-instances/storage-file-share-option.png" alt-text="Screenshot of the **File share** resource menu and command bar options in the Azure portal.":::
       - |
         Upload the *dab-config.json* and any other required files to the share. Use the **Upload** option in the command bar to open the **Upload files** dialog. Select both files and then select **Upload**.
 
-        :::image type="content" source="media/container-instance/upload-files.png" alt-text="Screenshot of the **Upload files** dialog in the Azure portal.":::
+        :::image type="content" source="media/how-to-publish-container-instances/upload-files.png" alt-text="Screenshot of the **Upload files** dialog in the Azure portal.":::
       - |
         Select **Access keys** in the **Security + networking** section of the resource menu. Then, record the **Storage account name** and **Key** values from this page. You will use these values later in this guide.
 
-        :::image type="content" source="media/container-instance/storage-credentials.png" alt-text="Screenshot of the 'Access Keys' page within a storage account in the Azure portal.":::
+        :::image type="content" source="media/how-to-publish-container-instances/storage-credentials.png" alt-text="Screenshot of the 'Access Keys' page within a storage account in the Azure portal.":::
   - title: |
       Create the base container instance
     summary: |
