@@ -144,7 +144,10 @@ Create a baseline configuration file using the DAB CLI.
 
 Now, add an environment file to store environment variables for DAB.
 
-1. Create an *.env* file in the same directory as your DAB CLI configuration files.
+1. Create a file name `.env` in the same directory as your DAB CLI configuration files.
+
+> [!NOTE]
+> The `.env` filename, like `.gitignore` and `.editorconfig` files has no filename, only a file extension. The name is case insensitive but the convention is lower-case.
 
 1. Add a `DAB_ENVIRONMENT` environment variable with a value of `Development`. Also, add an `SQL_DOCKER_CONNECTION_STRING` environment variable with your database connection string.
 

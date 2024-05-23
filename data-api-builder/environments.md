@@ -84,6 +84,9 @@ Effectively managing environment variables is crucial for the secure and flexibl
 
 - **Using a `.env` File:** For a more localized and development-friendly approach, create a `.env` file containing key-value pairs of your environment variables. Place this file in the same directory as your Data API builder configuration file. This method enhances the ease of use and maintenance of environment variables during development.
 
+  > [!NOTE]
+  > The `.env` filename, like `.gitignore` and `.editorconfig` files has no filename, only a file extension. The name is case insensitive but the convention is lower-case.
+
 ### Best practices and security
 
 - **Process Isolation:** When set through a `.env` file or directly in the system, environment variables are established as process variables, safeguarded from other processes. This isolation can enhance the security of your configuration by limiting exposure to sensitive information.
@@ -96,6 +99,7 @@ An `.env` file not only simplifies the management of environment variables but a
 
 ```plaintext
 my-connection-string="Server=tcp:127.0.0.1,1433;User ID=<username>;Password=<password>;"
+ASPNETCORE_URLS="http://localhost:5000;https://localhost:5001"
 DAB_ENVIRONMENT=Development
 ```
 
