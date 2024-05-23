@@ -34,6 +34,20 @@ First, you should add an `application-insights` section to your existing configu
     | **`enabled`** | Enables or disables application insights |
     | **`connection-string`** | Connection string for Application Insights instance |
 
+    **Use the Data API builder CLI**
+
+    You can directly edit the configuration JSON or use the command line interface to do it. 
+
+    ```bash
+    dab add-telemetry
+      --app-insights-enabled true
+      --app-insights-conn-string "@env('app-insights-connection-string')"
+    ```
+
+    **Update the dab-config.json file**
+
+    The `telemetry` property in the configuration JSON is a child of the `runtime` property. 
+
     ```json
     {
       "runtime": {
@@ -41,15 +55,17 @@ First, you should add an `application-insights` section to your existing configu
         "telemetry": {
           "application-insights": {
             "enabled": true,
-            "connection-string": "<app-insights-connection-string>"
+            "connection-string": "@env('app-insights-connection-string')"
           }
-        },
-        ...
+        }
       }
     }
     ```
 
-1. Save the configuration file and redeploy your solution.
+    > [!NOTE]
+    > This sample assumes the environment variable named 'app-insights-connection-string' holds your Application Insights connection string. To get your connection string, open the Azure portal and navigate to the Application Insights blade after you have added the service.
+
+1. Save the configuration file (if you edited the JSON) and restart your solution.
 
 ## Review metrics
 
