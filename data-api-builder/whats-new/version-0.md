@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: whats-new 
-ms.date: 05/15/2024
+ms.date: 05/30/2024
 ---
 
 # What's new in version 0.11 and earlier
@@ -671,7 +671,8 @@ The parameter can be passed in the URL query string when calling the REST endpoi
 http://<dab-server>/api/GetCowrittenBooksByAuthor?author=isaac%20asimov
 ```
 
-It's the responsibility of the developer configuring DAB to enable or disable actions (for example, the `create` action) to allow or deny specific HTTP verbs to be used when calling the stored procedure. For example, for the stored procedure used in the example, given that its purpose is to return some data, it would make sense to only allow the `read` action.
+> [!NOTE]
+> It's the responsibility of the developer configuring DAB to enable or disable actions (for example, the `create` action) to allow or deny specific HTTP verbs when calling the stored procedure. For example, for the stored procedure used in the example, given that its purpose is to return some data, it would make sense to only allow the `read` action.
 
 ### Microsoft Entra ID authentication
 
