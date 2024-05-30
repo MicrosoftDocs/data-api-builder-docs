@@ -56,7 +56,7 @@
       - name: Azure Container Apps
         displayName: ACA
         href: deployment/how-to-publish-container-apps.yml?context=/azure/data-api-builder/context/context
-      - name: Azure Static Web Apps
+      - name: Azure Static Web Apps (preview)
         displayName: SWA
         href: deployment/how-to-host-static-web-apps.yml?context=/azure/data-api-builder/context/context
     - name: Run in a container

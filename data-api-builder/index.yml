@@ -84,7 +84,7 @@ landingContent:
             url: deployment/how-to-publish-container-instances.yml
           - text: Deploy to Azure Container Apps
             url: deployment/how-to-publish-container-apps.yml
-          - text: Host in Azure Static Web Apps
+          - text: Host in Azure Static Web Apps (preview)
             url: deployment/how-to-host-static-web-apps.yml
       - linkListType: tutorial
         links:
