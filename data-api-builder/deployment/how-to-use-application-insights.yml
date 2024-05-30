@@ -47,13 +47,23 @@ procedureSection:
             "telemetry": {
               "application-insights": {
                 "enabled": true,
-                "connection-string": "<app-insights-connection-string>"
+                "connection-string": "@env('app-insights-connection-string')"
               }
             },
             ...
           }
         }
         ```
+
+        > [!TIP]
+        > Alternatively, you can use the DAB CLI to add telemetry:
+        >
+        > ```dotnetcli
+        > dab add-telemetry --app-insights-enabled true --app-insights-conn-string "@env('app-insights-connection-string')"
+        > ```
+
+        > [!NOTE]
+        > This sample assumes that your host has an environment variable named `app-insights-connection-string` with the connection string. For more information on retrieving the connection string, see [Azure Monitor connection strings](/azure/azure-monitor/app/sdk-connection-string).
       - |
         Save the configuration file and redeploy your solution.
   - title: |
