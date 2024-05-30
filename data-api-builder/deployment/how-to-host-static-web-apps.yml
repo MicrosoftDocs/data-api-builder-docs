@@ -1,8 +1,8 @@
 ### YamlMime:HowTo
 
 metadata:
-  title: Deploy to Azure Static Web Apps
-  description: Use the Azure portal to deploy an Azure Static Web Apps resource with the Data API builder image.
+  title: Host in Azure Static Web Apps
+  description: Use the Azure portal to deploy an Azure Static Web Apps resource with Data API builder using the database connections feature.
   author: seesharprun
   ms.author: sidandrews
   ms.reviewer: jerrynixon
@@ -10,15 +10,15 @@ metadata:
   ms.topic: quickstart
   ms.date: 05/30/2024
   ai-usage: ai-assisted
-  #Customer Intent: As a developer, I want to deploy Data API builder to Azure Static Web Apps so that I can quickly create a REST API for my database.
+  #Customer Intent: As a developer, I want to host Data API builder in Azure Static Web Apps so that I can quickly create a REST API for my database.
 title: |
-  Deploy Data API builder to Azure Static Web Apps
+  Host Data API builder in Azure Static Web Apps
 introduction: |
-  :::image type="complex" source="media/how-to-publish-static-web-apps/map.svg" border="false" alt-text="Diagram of the current location ('Publish') in the sequence of the deployment guide.":::
+  :::image type="complex" source="media/how-to-host-static-web-apps/map.svg" border="false" alt-text="Diagram of the current location ('Publish') in the sequence of the deployment guide.":::
   Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Publish' location is currently highlighted.
   :::image-end:::
 
-  Deploy Data API builder quickly to Azure Static Web Apps using just a configuration file. This guide includes steps to integratee Data API builder with a static web app.
+  Host Data API builder quickly in Azure Static Web Apps using just a configuration file. This guide includes steps to integratee Data API builder with a static web app.
 
   In this guide, walk through the steps to build a DAB configuration file, host the file as part of your application, and then use a database connection in Azure Static Web Apps.
 prerequisites:

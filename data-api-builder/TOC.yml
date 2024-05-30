@@ -58,7 +58,7 @@
         href: deployment/how-to-publish-container-apps.yml?context=/azure/data-api-builder/context/context
       - name: Azure Static Web Apps
         displayName: SWA
-        href: deployment/how-to-publish-static-web-apps.yml?context=/azure/data-api-builder/context/context
+        href: deployment/how-to-host-static-web-apps.yml?context=/azure/data-api-builder/context/context
     - name: Run in a container
       href: how-to-run-container.md
     - name: Run from source code
