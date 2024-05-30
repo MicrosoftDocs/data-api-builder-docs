@@ -1,7 +1,7 @@
 ### YamlMime:HowTo
 
 metadata:
-  title: Host in Azure Static Web Apps
+  title: Host in Azure Static Web Apps (preview)
   description: Use the Azure portal to deploy an Azure Static Web Apps resource with Data API builder using the database connections feature.
   author: seesharprun
   ms.author: sidandrews
@@ -12,7 +12,7 @@ metadata:
   ai-usage: ai-assisted
   #Customer Intent: As a developer, I want to host Data API builder in Azure Static Web Apps so that I can quickly create a REST API for my database.
 title: |
-  Host Data API builder in Azure Static Web Apps
+  Host Data API builder in Azure Static Web Apps (preview)
 introduction: |
   :::image type="complex" source="media/how-to-host-static-web-apps/map.svg" border="false" alt-text="Diagram of the current location ('Publish') in the sequence of the deployment guide.":::
   Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Publish' location is currently highlighted.
