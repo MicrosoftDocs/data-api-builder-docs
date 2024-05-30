@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: whats-new 
-ms.date: 05/15/2024
+ms.date: 05/30/2024
 ---
 
 # What's new in version 0.11 and earlier
