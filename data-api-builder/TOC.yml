@@ -45,11 +45,11 @@
     - name: Install the CLI
       displayName: DAB, command-line, interface
       href: how-to-install-cli.md
+    - name: Deployment guide
+      displayName: hosting, host, publish, services, cloud, Azure
+      href: deployment/index.md
     - name: Host
       items:
-      - name: Deployment guide
-        displayName: hosting
-        href: deployment/index.md?context=/azure/data-api-builder/context/context
       - name: Azure Container Instances
         displayName: ACI
         href: deployment/how-to-publish-container-instances.yml?context=/azure/data-api-builder/context/context
