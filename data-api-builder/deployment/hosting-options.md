@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: product-comparison
-ms.date: 05/23/2024
+ms.date: 05/30/2024
 ---
 
 # Hosting options for Data API builder
