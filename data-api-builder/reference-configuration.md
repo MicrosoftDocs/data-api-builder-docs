@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 05/14/2024
+ms.date: 05/30/2024
 show_latex: true
 ---
 
@@ -258,7 +258,7 @@ Using this formula, you can calculate the time for each retry attempt in seconds
 
 Data API builder uses the [`SqlClient`](https://www.nuget.org/packages/Microsoft.Data.SqlClient) library to connect to Azure SQL or SQL Server using the connection string you provide in the configuration file. A list of all the supported connection string options is available here: [SqlConnection.ConnectionString Property](/dotnet/api/system.data.sqlclient.sqlconnection.connectionstring).
 
-Data API builder can also connect to the target database using Managed Service Identities (MSI). The `DefaultAzureCredential` defined in [`Azure.Identity`](https://www.nuget.org/packages/Azure.Identity) library is used when you don't specify a username or password in your connection string. For more information, see [`DefaultAzureCredential` examples](/dotnet/api/azure.identity.defaultazurecredential#examples).
+Data API builder can also connect to the target database using Managed Service Identities (MSI). The `DefaultAzureCredential` defined in [`Azure.Identity`](https://www.nuget.org/packages/Azure.Identity) library is used to connect using known identities when you don't specify a username or password in your connection string. For more information, see [`DefaultAzureCredential` examples](/dotnet/api/azure.identity.defaultazurecredential#examples).
 
 #### Examples
 
@@ -2637,7 +2637,7 @@ The `database` policy: an OData-like expression that is translated into a query 
 
 ##### Database policy
 
-Two types of directives can be used when authoring a database policy expression:
+Two types of directives can be used to manage database policy when authoring a database policy expression:
 
 | Directive | Description |
 | --- | --- |
@@ -2762,7 +2762,7 @@ This property denotes the database policy expression that is evaluated during re
 
 In order for results to be returned for a request, the request's query predicate resolved from a database policy must evaluate to `true` when executing against the database.
 
-Two types of directives can be used when authoring a database policy expression:
+Two types of directives can be used to manage the database policy when authoring a database policy expression:
 
 | | Description |
 | --- | --- |
