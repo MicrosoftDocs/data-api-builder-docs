@@ -8,7 +8,4 @@ ms.date: 05/30/2024
 ---
 
 > [!IMPORTANT]
-> Azure Static Web Apps uses a fixed version of the Data API builder (DAB) engine. At any point in time, this version of the engine can lag behind the latest stable version by a couple of releases. Additionally, you cannot manually update or specify the version of the DAB engine used by Azure Static Web Apps.
->
-> If you require the latest features in Data API builder or require manual control over DAB versions, consider an alternative host for the engine.
->
+> Support for Data API builder (DAB) in Azure Static Web Apps using database connections is in public preview. Azure Static Web Apps uses a fixed version of the DAB engine that can vary from the latest stable version of DAB. To access the latest DAB features, consider an alternative host for DAB using the latest version of the engine from GitHub, Microsoft Container Registry (Docker Hub), or NuGet.

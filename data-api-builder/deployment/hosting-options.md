@@ -25,12 +25,6 @@ TODO
 
 TODO
 
-## Azure Static Web Apps
-
-[!INCLUDE[SWA versioning](includes/static-web-apps-versioning.md)]
-
-TODO
-
 ## Azure App Service
 
 TODO
@@ -46,6 +40,3 @@ TODO
 
 > [!div class="nextstepaction"]
 > [Deploy to Azure Container Instances](how-to-publish-container-instances.yml)
-
-> [!div class="nextstepaction"]
-> [Deploy to Azure Static Web Apps](how-to-publish-static-web-apps.yml)
