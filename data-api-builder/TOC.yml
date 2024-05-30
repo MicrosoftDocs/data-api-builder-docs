@@ -45,7 +45,7 @@
     - name: Install the CLI
       displayName: DAB, command-line, interface
       href: how-to-install-cli.md
-    - name: Deploy
+    - name: Host
       items:
       - name: Deployment guide
         displayName: hosting
