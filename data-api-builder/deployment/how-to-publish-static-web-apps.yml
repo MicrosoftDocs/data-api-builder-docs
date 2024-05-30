@@ -22,6 +22,8 @@ introduction: |
 
   In this guide, walk through the steps to build a DAB configuration file, host the file as part of your application, and then use a database connection in Azure Static Web Apps.
 prerequisites:
+  summary: |
+    [!INCLUDE[SWA versioning](includes/static-web-apps-versioning.md)]
   dependencies:
     - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
     - Azure Static Web Apps CLI. [Install the Static Web Apps (SWA) CLI](/azure/static-web-apps/static-web-apps-cli-install).

@@ -27,6 +27,8 @@ TODO
 
 ## Azure Static Web Apps
 
+[!INCLUDE[SWA versioning](includes/static-web-apps-versioning.md)]
+
 TODO
 
 ## Azure App Service
