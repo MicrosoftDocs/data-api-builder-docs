@@ -287,7 +287,7 @@
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-deploy-static-web-app.md",
-      "redirect_url": "/azure/data-api-builder/deployment/how-to-publish-static-web-apps",
+      "redirect_url": "/azure/data-api-builder/deployment/how-to-host-static-web-apps",
       "redirect_document_id": true
     },
     {

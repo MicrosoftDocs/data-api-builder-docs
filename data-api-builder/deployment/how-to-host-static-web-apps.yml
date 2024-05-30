@@ -42,7 +42,7 @@ procedureSection:
       - |
         Create a new resource group. You will use this resource group to for all new resources in this guide. 
 
-        :::image type="content" source="media/how-to-publish-static-web-apps/create-resource-group.png" lightbox="media/how-to-publish-static-web-apps/create-resource-group.png" alt-text="Screenshot of the 'Create a resource group' page's 'Basics' tab in the Azure portal.":::
+        :::image type="content" source="media/how-to-host-static-web-apps/create-resource-group.png" lightbox="media/how-to-host-static-web-apps/create-resource-group.png" alt-text="Screenshot of the 'Create a resource group' page's 'Basics' tab in the Azure portal.":::
 
         > [!TIP]
         > We recommend naming the resource group **msdocs-dab-swa**. All screenshots in this guide use this name.
@@ -60,7 +60,7 @@ procedureSection:
         | **Repository** | Select the repository name |
         | **Branch** | Select the primary branch |
                 
-        :::image type="content" source="media/how-to-publish-static-web-apps/create-static-web-app.png" alt-text="Screenshot of the 'Create Static Web App' page's 'Basics' tab in the Azure portal.":::
+        :::image type="content" source="media/how-to-host-static-web-apps/create-static-web-app.png" alt-text="Screenshot of the 'Create Static Web App' page's 'Basics' tab in the Azure portal.":::
       - |
         Wait for the static web application deployment to complete. A GitHub Actions workflow is automatically added to your repository that will deploy the application to Azure Static Web Apps every time you push to the primary branch.
 
@@ -111,7 +111,7 @@ procedureSection:
       - |
         Select the **Database connection** option in the **Settings** section of the resource menu. Then, select **Link existing database** for the **production** environment.
 
-        :::image type="content" source="media/how-to-publish-static-web-apps/database-connection-option.png" alt-text="Screenshot of the `Database connection` option in the Azure Static Web Apps page of the Azure portal.":::
+        :::image type="content" source="media/how-to-host-static-web-apps/database-connection-option.png" alt-text="Screenshot of the `Database connection` option in the Azure Static Web Apps page of the Azure portal.":::
       - |
         In the **Link database** dialog, use these settings to configure the database connection.
 
@@ -123,7 +123,7 @@ procedureSection:
         | **Database name** | Enter the name of the database |
         | **Authentication type** | Select the type of authentication you intend to use |
 
-        :::image type="content" source="media/how-to-publish-static-web-apps/link-database-options.png" alt-text="Screenshot of the `Link database` dialog for database connections in the Azure Static Web Apps page of the Azure portal.":::
+        :::image type="content" source="media/how-to-host-static-web-apps/link-database-options.png" alt-text="Screenshot of the `Link database` dialog for database connections in the Azure Static Web Apps page of the Azure portal.":::
 
         > [!TIP]
         > We recommend using a connection string that does not include authorization keys. Instead, use managed identities and role-based access control to manage access between your database and host. For more information, see [Azure services that use managed identities](/entra/identity/managed-identities-azure-resources/managed-identities-status).
