@@ -1,6 +1,6 @@
 ---
 title: Deployment checklist
-description: TODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODO.
+description: TODO
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon

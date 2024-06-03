@@ -1,6 +1,6 @@
 ---
 title: API hosting options
-description: TODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODO.
+description: TODO
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
