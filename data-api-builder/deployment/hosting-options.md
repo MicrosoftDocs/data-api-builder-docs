@@ -46,3 +46,6 @@ TODO
 
 > [!div class="nextstepaction"]
 > [Deploy to Azure Container Instances](how-to-publish-container-instances.yml)
+
+> [!div class="nextstepaction"]
+> [Host in Azure Static Web Apps (preview)](how-to-host-static-web-apps.yml)
