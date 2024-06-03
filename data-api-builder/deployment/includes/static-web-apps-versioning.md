@@ -4,7 +4,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: include
-ms.date: 05/30/2024
+ms.date: 06/03/2024
 ---
 
 > [!IMPORTANT]
