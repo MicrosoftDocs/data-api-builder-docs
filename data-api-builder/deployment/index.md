@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: overview
-ms.date: 05/30/2024
+ms.date: 06/03/2024
 #Customer Intent: As a developer, I want to learn more about deploying DAB, so that I can determine the best option for my workload.
 ---
 

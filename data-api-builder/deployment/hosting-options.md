@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: product-comparison
-ms.date: 05/30/2024
+ms.date: 06/03/2024
 ---
 
 # Hosting options for Data API builder
@@ -26,6 +26,12 @@ TODO
 TODO
 
 ## Azure App Service
+
+TODO
+
+## Azure Static Web Apps (preview)
+
+[!INCLUDE[SWA versioning](includes/static-web-apps-versioning.md)]
 
 TODO
 
