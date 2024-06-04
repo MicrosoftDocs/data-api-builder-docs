@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: checklist
-ms.date: 06/03/2024
+ms.date: 06/05/2024
 ---
 
 # Deployment checklist for Data API builder

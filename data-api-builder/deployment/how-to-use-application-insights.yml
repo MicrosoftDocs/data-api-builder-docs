@@ -8,7 +8,7 @@ metadata:
   ms.reviewer: jerrynixon
   ms.service: data-api-builder
   ms.topic: how-to
-  ms.date: 06/03/2024
+  ms.date: 06/05/2024
   # Customer Intent: As a developer, I want to integrate Application Insights with Data API builder, so that I can capture performance metrics.
 title: |
   Use Azure Application Insights in Data API builder
