@@ -104,7 +104,11 @@ landingContent:
             url: reference-policies.md
       - linkListType: sample
         links:
+          - text: Library app sample with Data API builder, SQL server, and Blazor
+            url: /samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
           - text: Todo app sample with Data API builder, Azure Static Web Apps, and Azure SQL
-            url: https://github.com/azure-samples/dab-swa-todo
+            url: /samples/azure-samples/dab-swa-todo/sample
           - text: Library app sample with Data API builder, Azure Static Web Apps, and Azure SQL
-            url: https://github.com/azure-samples/dab-swa-library-demo
+            url: /samples/azure-samples/dab-swa-library-demo/sample
+          - text: Sample devcontainer for Data API builder and Azure SQL Database
+            url: /samples/microsoft/vscode-remote-try-dab/devcontainer
