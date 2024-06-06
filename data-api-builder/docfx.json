@@ -42,7 +42,10 @@
     "globalMetadata": {
       "breadcrumb_path": "/azure/data-api-builder/breadcrumb/toc.json",
       "extendBreadcrumb": true,
-      "feedback_system": "None",
+      "feedback_system": "Standard",
+      "feedback_product_url": "https://github.com/azure/data-api-builder/issues/new/choose",
+      "feedback_help_link_url": "https://github.com/azure/data-api-builder/discussions",
+      "feedback_help_link_type": "ask-the-community",
       "uhfHeaderId": "Azure",
       "titleSuffix": "Data API builder"
     },
