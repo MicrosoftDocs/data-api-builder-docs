@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 04/01/2024
+ms.date: 06/06/2024
 # Customer Intent: As a developer, I want to configure database objects, so that I can map my endpoints to objects other than tables.
 ---
 
@@ -60,10 +60,13 @@ A view, from a GraphQL perspective, behaves like a table. All GraphQL operations
 
 Stored procedures can be used as objects related to entities exposed by Data API builder. Stored Procedure usage must be defined specifying that the source type for the entity is `stored-procedure`.
 
+> [!NOTE]
+> Data API builder supports stored procedures for relational databases (i.e. MSSQL), but not for non-relational databases (i.e. NoSQL).
+
 If you have a stored procedure, for example [`dbo.stp_get_all_cowritten_books_by_author`](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-sql-db/library.azure-sql.sql#L138) it can be exposed using the following `dab` command:
 
 ```bash
-dab add GetCowrittenBooksByAuthor --source dbo.stp_get_all_cowritten_books_by_author --source.type "stored-procedure" source.params "searchType:s" --permissions "anonymous:execute" --rest.methods "get" --graphql.operation "query"
+dab add GetCowrittenBooksByAuthor --source dbo.stp_get_all_cowritten_books_by_author --source.type "stored-procedure" --source.params "searchType:s" --permissions "anonymous:execute" --rest.methods "get" --graphql.operation "query"
 ```
 
 The `dab-config.json` file would be like the following example:

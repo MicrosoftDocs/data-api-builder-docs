@@ -4,7 +4,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: include
-ms.date: 03/20/2024
+ms.date: 06/06/2024
 ---
 
 Install the `Microsoft.DataApiBuilder` package from NuGet as a .NET tool.

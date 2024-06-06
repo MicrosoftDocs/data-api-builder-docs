@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 03/20/2024
+ms.date: 06/06/2024
 # Customer Intent: As a developer, I want to install the Data API builder, so that I can use it to create APIs for my databases.
 ---
 
