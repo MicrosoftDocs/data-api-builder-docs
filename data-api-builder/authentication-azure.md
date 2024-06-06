@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 04/01/2024
+ms.date: 06/06/2024
 # Customer Intent: As a developer, I want to configure Azure authentication, so that I can authenticate in the Azure environment.
 ---
 
@@ -56,6 +56,10 @@ Once a request is authenticated via any of the available options, the roles defi
 ## Anonymous requests
 
 Requests can also be made without being authenticated. In such cases, the request is automatically assigned to the `anonymous` system role so that it can be properly [authorized](authorization.md).
+
+## X-MS-API-ROLE request header
+
+Data API builder requires the header `X-MS-API-ROLE` to authorize requests using custom roles. The value of `X-MS-API-ROLE` must match a role specified in the token. For example, if the token has the role **Sample.Role**, then X-MS-API-ROLE should also be **Sample.Role**. For more information, see [authorization user roles](./authorization.md#user-roles).
 
 ## Related content
 
