@@ -403,4 +403,4 @@ az group delete \
 ## Next step
 
 > [!div class="nextstepaction"]
-> [Use Application Insights with Data API builder](how-to-use-application-insights.md)
+> [Use Application Insights with Data API builder](deployment/how-to-use-application-insights.yml)

@@ -1,4 +1,4 @@
-- name: Data API builder Documentation
+- name: Data API builder documentation
   href: index.yml
 - name: Overview
   expanded: true
@@ -45,17 +45,20 @@
     - name: Install the CLI
       displayName: DAB, command-line, interface
       href: how-to-install-cli.md
-    - name: Deploy
+    - name: Deployment guide
+      displayName: hosting, host, publish, services, cloud, Azure
+      href: deployment/index.md
+    - name: Host
       items:
-      - name: Azure Container Instances
-        displayName: ACI
-        href: how-to-deploy-container-instance.yml
-      - name: Azure Container Apps
-        displayName: ACA
-        href: how-to-deploy-container-app.yml
-      - name: Azure Static Web Apps
-        displayName: SWA
-        href: how-to-deploy-static-web-app.yml
+        - name: Azure Container Instances
+          displayName: ACI
+          href: deployment/how-to-publish-container-instances.yml?context=/azure/data-api-builder/context/context
+        - name: Azure Container Apps
+          displayName: ACA
+          href: deployment/how-to-publish-container-apps.yml?context=/azure/data-api-builder/context/context
+        - name: Azure Static Web Apps (preview)
+          displayName: SWA
+          href: deployment/how-to-host-static-web-apps.yml?context=/azure/data-api-builder/context/context
     - name: Run in a container
       href: how-to-run-container.md
     - name: Run from source code
@@ -68,8 +71,8 @@
       displayName: development
       href: how-to-use-environments.md
     - name: Use Application Insights
-      displayName: app insights, ai, telemetry
-      href: how-to-use-application-insights.md
+      displayName: app, monitor, insights, ai, telemetry
+      href: deployment/how-to-use-application-insights.yml?context=/azure/data-api-builder/context/context
     - name: Batch multiple mutations
       displayName: multiple create, transaction
       href: how-to-multiple-mutations.md
@@ -118,9 +121,9 @@
     - name: Best practices
       items:
         - name: Security
-          href: best-practices-security.md
+          href: deployment/best-practices-security.md?context=/azure/data-api-builder/context/context
         - name: Configuration
-          href: best-practices-configuration.md
+          href: deployment/best-practices-configuration.md?context=/azure/data-api-builder/context/context
 - name: Samples
   items:
     - name: Example configuration
