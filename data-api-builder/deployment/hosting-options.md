@@ -59,10 +59,6 @@ Data API builder runs as a sidecar service to a static web app. The [database co
 
 For more information, see [Azure Static Web Apps](/azure/static-web-apps).
 
-## Self-hosted
-
-TODO
-
 ## Next step
 
 > [!div class="nextstepaction"]
