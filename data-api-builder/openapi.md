@@ -34,7 +34,7 @@ GET /{rest-path}/openapi
 
 ## SwaggerUI
 
-[Swagger UI](https://swagger.io/swagger-ui/) offers a web-based UI that provides information about the service, using the generated OpenAPI specification.
+[Swagger UI](https://swagger.io/swagger-ui) offers a web-based UI that provides information about the service, using the generated OpenAPI specification.
 
 In `Development` mode, Data API builder enables viewing the generated OpenAPI description document from a dedicated endpoint:
 
