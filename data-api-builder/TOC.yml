@@ -40,103 +40,6 @@
           href: quickstart-azure-sql.md
         - name: Azure Cosmos DB for NoSQL
           href: quickstart-azure-cosmos-db-nosql.md
-- name: How to
-  items:
-    - name: Install the CLI
-      displayName: DAB, command-line, interface
-      href: how-to-install-cli.md
-    - name: Deployment guide
-      displayName: hosting, host, publish, services, cloud, Azure
-      href: deployment/index.md
-    - name: Host
-      items:
-        - name: Azure Container Instances
-          displayName: ACI
-          href: deployment/how-to-publish-container-instances.yml?context=/azure/data-api-builder/context/context
-        - name: Azure Container Apps
-          displayName: ACA
-          href: deployment/how-to-publish-container-apps.yml?context=/azure/data-api-builder/context/context
-        - name: Azure Static Web Apps (preview)
-          displayName: SWA
-          href: deployment/how-to-host-static-web-apps.yml?context=/azure/data-api-builder/context/context
-    - name: Run in a container
-      href: how-to-run-container.md
-    - name: Run from source code
-      displayName: Git, GitHub
-      href: how-to-run-from-source.md
-    - name: Implement row-level security in SQL
-      displayName: RLS
-      href: how-to-row-level-security.md
-    - name: Use environments
-      displayName: development
-      href: how-to-use-environments.md
-    - name: Use Application Insights
-      displayName: app, monitor, insights, ai, telemetry
-      href: deployment/how-to-use-application-insights.yml?context=/azure/data-api-builder/context/context
-    - name: Batch multiple mutations
-      displayName: multiple create, transaction
-      href: how-to-multiple-mutations.md
-- name: Tutorials
-  items:
-    - name: Deploy to Azure Container Apps using Azure CLI
-      displayName: ACA, automate, automation
-      href: tutorial-deploy-container-app-cli.md
-- name: Concepts
-  items:
-    - name: REST
-      displayName: HTTP
-      href: rest.md
-    - name: OpenAPI
-      href: openapi.md
-    - name: GraphQL
-      href: graphql.md
-    - name: Environments
-      items:
-        - name: Configuring environments
-          href: environments.md
-        - name: Setting environment variables
-          displayName: $env, @env, vars, .env, env
-          href: environments.md#setting-environment-variables
-        - name: Accessing environment variables
-          displayName: Environment variables, $env, @env, vars, env
-          href: environments.md#accessing-environment-variables
-    - name: Database objects
-      items:
-        - name: Views
-          href: database-objects.md#views
-        - name: Stored Procedures
-          displayName: procs
-          href: database-objects.md#stored-procedures
-    - name: Relationships
-      href: relationships.md
-    - name: Authentication and authorization
-      items:
-        - name: Azure authentication
-          displayName: AAD, AD, Azure Active Directory, Microsoft Entra Identity, Entra ID
-          href: authentication-azure.md
-        - name: Local authentication
-          href: authentication-local.md
-        - name: Authorization
-          href: authorization.md
-    - name: Best practices
-      items:
-        - name: Security
-          href: deployment/best-practices-security.md?context=/azure/data-api-builder/context/context
-        - name: Configuration
-          href: deployment/best-practices-configuration.md?context=/azure/data-api-builder/context/context
-- name: Samples
-  items:
-    - name: Example configuration
-      displayName: Sample
-      href: sample-configuration.md
-    - name: Applications
-      items:
-        - name: Todo app sample with Data API builder, Azure Static Web Apps, and Azure SQL
-          displayName: To-do
-          href: https://github.com/azure-samples/dab-swa-todo
-        - name: Library app sample with Data API builder, Azure Static Web Apps, and Azure SQL
-          displayName: Bookstore
-          href: https://github.com/azure-samples/dab-swa-library-demo
 - name: Reference
   items:
     - name: Command-line interface
@@ -315,6 +218,103 @@
       href: reference-database-specific-features.md
     - name: Policies
       href: reference-policies.md
+- name: Deploy
+  items:
+    - name: Deployment guide
+      displayName: hosting, host, publish, services, cloud, Azure
+      href: deployment/index.md
+    - name: Deploy to Azure Container Instances
+      displayName: ACI
+      href: deployment/how-to-publish-container-instances.yml?context=/azure/data-api-builder/context/context
+    - name: Deploy to Azure Container Apps
+      displayName: ACA
+      href: deployment/how-to-publish-container-apps.yml?context=/azure/data-api-builder/context/context
+    - name: Deploy to Azure Static Web Apps (preview)
+      displayName: SWA
+      href: deployment/how-to-host-static-web-apps.yml?context=/azure/data-api-builder/context/context
+- name: How to
+  items:
+    - name: Install the CLI
+      displayName: DAB, command-line, interface
+      href: how-to-install-cli.md
+    - name: Run in a container
+      href: how-to-run-container.md
+    - name: Run from source code
+      displayName: Git, GitHub
+      href: how-to-run-from-source.md
+    - name: Implement row-level security in SQL
+      displayName: RLS
+      href: how-to-row-level-security.md
+    - name: Use environments
+      displayName: development
+      href: how-to-use-environments.md
+    - name: Use Application Insights
+      displayName: app, monitor, insights, ai, telemetry
+      href: deployment/how-to-use-application-insights.yml?context=/azure/data-api-builder/context/context
+    - name: Batch multiple mutations
+      displayName: multiple create, transaction
+      href: how-to-multiple-mutations.md
+- name: Tutorials
+  items:
+    - name: Deploy to Azure Container Apps using Azure CLI
+      displayName: ACA, automate, automation
+      href: tutorial-deploy-container-app-cli.md
+- name: Concepts
+  items:
+    - name: REST
+      displayName: HTTP
+      href: rest.md
+    - name: OpenAPI
+      href: openapi.md
+    - name: GraphQL
+      href: graphql.md
+    - name: Environments
+      items:
+        - name: Configuring environments
+          href: environments.md
+        - name: Setting environment variables
+          displayName: $env, @env, vars, .env, env
+          href: environments.md#setting-environment-variables
+        - name: Accessing environment variables
+          displayName: Environment variables, $env, @env, vars, env
+          href: environments.md#accessing-environment-variables
+    - name: Database objects
+      items:
+        - name: Views
+          href: database-objects.md#views
+        - name: Stored Procedures
+          displayName: procs
+          href: database-objects.md#stored-procedures
+    - name: Relationships
+      href: relationships.md
+    - name: Authentication and authorization
+      items:
+        - name: Azure authentication
+          displayName: AAD, AD, Azure Active Directory, Microsoft Entra Identity, Entra ID
+          href: authentication-azure.md
+        - name: Local authentication
+          href: authentication-local.md
+        - name: Authorization
+          href: authorization.md
+    - name: Best practices
+      items:
+        - name: Security
+          href: deployment/best-practices-security.md?context=/azure/data-api-builder/context/context
+        - name: Configuration
+          href: deployment/best-practices-configuration.md?context=/azure/data-api-builder/context/context
+- name: Samples
+  items:
+    - name: Example configuration
+      displayName: Sample
+      href: sample-configuration.md
+    - name: Applications
+      items:
+        - name: Todo app sample with Data API builder, Azure Static Web Apps, and Azure SQL
+          displayName: To-do
+          href: https://github.com/azure-samples/dab-swa-todo
+        - name: Library app sample with Data API builder, Azure Static Web Apps, and Azure SQL
+          displayName: Bookstore
+          href: https://github.com/azure-samples/dab-swa-library-demo
 - name: Troubleshooting
   items:
     - name: Installation
