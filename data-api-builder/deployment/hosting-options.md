@@ -1,6 +1,6 @@
 ---
 title: API hosting options
-description: TODO
+description: Select the most appropriate hosting options for your Data API builder solution by comparing various Azure services.
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
