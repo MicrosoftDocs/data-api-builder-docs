@@ -112,8 +112,8 @@ These tables list the features available in Data API builder (DAB) for Azure dat
 
 | Feature | SQL Server | Azure SQL | Azure Cosmos DB<br/>for NoSQL | PostgreSQL | MySQL | DWSQL |
 | --- | --- | --- | --- | --- | --- | --- |
-| [User-assigned managed identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview#managed-identity-types)<br/>(Microsoft Entra ID) | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| [System-assigned managed identity]((https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview#managed-identity-types))<br/>(Microsoft Entra ID) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
+| User-assigned managed identity<br/>(Microsoft Entra ID) | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
+| System-assigned managed identity<br/>(Microsoft Entra ID) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
 | Static Web App EasyAuth | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | Pass-through security | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | API-key security | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
