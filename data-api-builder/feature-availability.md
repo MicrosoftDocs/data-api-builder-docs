@@ -108,13 +108,22 @@ These tables list the features available in Data API builder (DAB) for Azure dat
 | Update via PUT | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Update via PATCH | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 
+## Authentication Features
+
+| Feature | SQL Server | Azure SQL | Azure Cosmos DB for NoSQL | PostgreSQL | MySQL | DWSQL |
+| --- | --- | --- | --- | --- | --- | --- |
+| User-assigned managed identity (Entra ID) | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
+| System-assigned managed identity (Entra ID) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
+| Pass-through security | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
+| API-key security | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
+| Static Web App EasyAuth | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| Custom JWT tokens | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+
 ## Other Features
 
 | Feature | SQL Server | Azure SQL | Azure Cosmos DB for NoSQL | PostgreSQL | MySQL | DWSQL |
 | --- | --- | --- | --- | --- | --- | --- |
-| User-assigned managed identity (Microsoft Entra ID) | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| System-assigned managed identity (Microsoft Entra ID) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
-| Column/Property Mapping/Rename | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
+| Column/Field Mapping | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
 | Native JSON Support | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No |
 | Native XML Support | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Native Vector Support | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
