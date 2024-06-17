@@ -114,10 +114,9 @@ These tables list the features available in Data API builder (DAB) for Azure dat
 | --- | --- | --- | --- | --- | --- | --- |
 | User-assigned managed identity (Entra ID) | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | System-assigned managed identity (Entra ID) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
+| Static Web App EasyAuth | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | Pass-through security | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | API-key security | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| Static Web App EasyAuth | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
-| Custom JWT tokens | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 
 ## Other Features
 
@@ -130,7 +129,7 @@ These tables list the features available in Data API builder (DAB) for Azure dat
 | application_name | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No |
 | Application Insights ¹ | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | Session Context | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| Multiple Data Sources ¹ | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
+| Multiple Data Sources ¹ | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | Cross-data source join | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 
 ## Static Web Apps
