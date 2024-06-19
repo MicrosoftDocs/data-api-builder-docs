@@ -3725,7 +3725,27 @@ In this example, cache is enabled and the items expire after 30 seconds.
 
 **REQUIRED**: ❌ No
 
-Enables caching for the entity. Defaults to `false`.
+Enables caching for the entity. Defaults to `false` - even if the global setting is `true`.
+
+#### Database Object Support
+
+| Object type | Cache support
+| - | - 
+| Table | ✅ Yes 
+| View | ✅ Yes 
+| Stored Procedure | ✖️ No
+| Container | ✖️ No
+
+#### HTTP Header Support
+
+| Request Header | Cache support
+| - | - 
+| `no-cache` | ✖️ No
+| `no-store` | ✖️ No
+| `max-age` | ✖️ No
+| `public` | ✖️ No
+| `private` | ✖️ No
+| `etag` | ✖️ No
 
 #### Format
 
@@ -3770,7 +3790,7 @@ Configures the time-to-live (TTL) value in seconds for cached items. After this 
   "entities": {
     "<string>": {
       "cache": {
-        "ttl-seconds": "<integer>"
+        "ttl-seconds": <integer (inherited)>
       }
     }
   }
@@ -3779,7 +3799,7 @@ Configures the time-to-live (TTL) value in seconds for cached items. After this 
 
 #### Examples
 
-In this example, cache is enabled and the items expire after 15 seconds.
+In this example, cache is enabled and the items expire after 15 seconds. When omitted, this setting inherits the global setting or default.
 
 ```json
 {
