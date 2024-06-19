@@ -1,0 +1,9 @@
+{
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "docsmsft.learnlinter"
+            ]
+        }
+    }
+}
