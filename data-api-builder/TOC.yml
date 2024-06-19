@@ -20,40 +20,20 @@
     - name: FAQ
       displayName: frequently asked questions, Q&A
       href: faq.yml
-- name: Quickstarts
-  items:
-    - name: Local
-      items:
-        - name: SQL
-          href: quickstart-sql.md
-        - name: NoSQL
-          displayName: Cosmos
-          href: quickstart-nosql.md
-        - name: PostgreSQL
-          href: quickstart-postgresql.md
-        - name: MySQL
-          href: quickstart-mysql.md
-    - name: Azure
-      items:
-        - name: Azure SQL
-          displayName: database, server
-          href: quickstart-azure-sql.md
-        - name: Azure Cosmos DB for NoSQL
-          href: quickstart-azure-cosmos-db-nosql.md
 - name: Reference
   items:
     - name: Command-line interface
       displayName: CLI
       href: reference-command-line-interface.md
-    - name: Configuration
+    - name: Configuration file
       items:
-        - name: Full configuration Schema
+        - name: Configuration schema
+          href: reference-configuration.md#schema
+        - name: Complete configuration 
           displayName: Config, JSON
           href: reference-configuration.md
         - name: Sections
           items:
-            - name: Schema
-              href: reference-configuration.md#schema
             - name: Data source
               href: reference-configuration.md#data-source
               items:
@@ -90,6 +70,7 @@
                     - name: Path
                       href: reference-configuration.md#path-rest-runtime
                     - name: Request body strict
+                      displayName: dotnet, poco, dto
                       href: reference-configuration.md#request-body-strict-rest-runtime
                 - name: Host
                   href: reference-configuration.md#host-runtime
@@ -113,7 +94,7 @@
                       href: reference-configuration.md#audience-host-runtime
                     - name: Issuer
                       href: reference-configuration.md#issuer-host-runtime
-                - name: Cache
+                - name: Global Cache
                   href: reference-configuration.md#cache-runtime
                   items:
                     - name: Enabled
@@ -163,8 +144,9 @@
                     - name: Parameters
                       href: reference-configuration.md#parameters
                 - name: Mappings
+                  displayName: field, column, property
                   href: reference-configuration.md#mappings-entities
-                - name: Relationships
+                - name: Entity Relationships
                   href: reference-configuration.md#relationships-entities
                   items:
                     - name: Cardinality
@@ -190,6 +172,7 @@
                       displayName: TTL
                       href: reference-configuration.md#ttl-in-seconds-cache-entity
                 - name: Permissions
+                  displayName: Security, Policy
                   href: reference-configuration.md#permissions
                   items:
                     - name: Role
@@ -210,14 +193,34 @@
                           href: reference-configuration.md#database
         - name: JSON Schema
           href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
-    - name: Functions
+    - name: The @env() Function
+      displayName: env, environment, macro
       href: reference-functions.md
     - name: Supported data types
       href: reference-data-types.md
     - name: Database-specific features
+      displayName: sql, cosmos, pg, postgres, mysql, dw
       href: reference-database-specific-features.md
-    - name: Policies
-      href: reference-policies.md
+- name: Quickstarts
+  items:
+    - name: Local
+      items:
+        - name: SQL
+          href: quickstart-sql.md
+        - name: NoSQL
+          displayName: Cosmos
+          href: quickstart-nosql.md
+        - name: PostgreSQL
+          href: quickstart-postgresql.md
+        - name: MySQL
+          href: quickstart-mysql.md
+    - name: Azure
+      items:
+        - name: Azure SQL
+          displayName: database, server
+          href: quickstart-azure-sql.md
+        - name: Azure Cosmos DB for NoSQL
+          href: quickstart-azure-cosmos-db-nosql.md
 - name: Deploy
   items:
     - name: Deployment guide
@@ -302,6 +305,9 @@
           href: deployment/best-practices-security.md?context=/azure/data-api-builder/context/context
         - name: Configuration
           href: deployment/best-practices-configuration.md?context=/azure/data-api-builder/context/context
+    - name: Code policies
+      displayName: Versioning, Change, Breaking
+      href: reference-policies.md
 - name: Samples
   items:
     - name: Example configuration
