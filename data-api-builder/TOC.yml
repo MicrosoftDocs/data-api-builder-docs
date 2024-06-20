@@ -323,7 +323,10 @@
           href: /samples/azure-samples/dab-swa-todo/sample
         - name: Library app sample with Data API builder, Azure Static Web Apps, and Azure SQL
           displayName: Bookstore
-          href: https://github.com/azure-samples/dab-swa-library-demo
+          href: /samples/azure-samples/dab-swa-library-demo/sample
+        - name: Sample devcontainer for Data API builder and Azure SQL Database
+          displayName: Codespaces
+          href: /samples/microsoft/vscode-remote-try-dab/devcontainer
 - name: Troubleshooting
   items:
     - name: Installation
