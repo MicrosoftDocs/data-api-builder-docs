@@ -10,7 +10,7 @@ ms.date: 06/06/2024
 # Customer Intent: As a developer, I want to configure database objects, so that I can map my endpoints to objects other than tables.
 ---
 
-# Expanded database objects in Data API builder
+# Database objects in Data API builder
 
 Data API builder includes support for views and stored procedures as alternatives to mapping to database tables or containers. These distinct database objects require custom configuration to map seamlessly to REST or GraphQL endpoints. Some custom configuration is required to use Data API builder with views and stored procedures.
 
@@ -19,6 +19,9 @@ This article includes a breakdown of how to use both views and stored procedures
 ## Views
 
 Views can be used similar to how a table can be used in Data API builder. View usage must be defined by specifying the source type for the entity as `view`. Along with that the `key-fields` property must be provided, so that Data API builder knows how it can identify and return a single item, if needed.
+
+> [!NOTE]
+> Views do not support relationships. 
 
 If you have a view, for example [`dbo.vw_books_details`](https://github.com/Azure/data-api-builder/blob/main/samples/getting-started/azure-sql-db/library.azure-sql.sql#L112) it can be exposed using the following `dab` command:
 

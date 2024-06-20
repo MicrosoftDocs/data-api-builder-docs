@@ -37,6 +37,7 @@ These tables list the features available in Data API builder (DAB) for Azure dat
 | Subscription | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Banana Cake Pop UI ¹ | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
 | In-Memory Cache  ² | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
+| Level 2 Cache | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 
 ## GraphQL Relationship Navigation
 
