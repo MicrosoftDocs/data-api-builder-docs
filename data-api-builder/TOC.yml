@@ -319,7 +319,7 @@
           displayName: ASP.NET, WebAssembly
           href: /samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
         - name: Todo app sample with Data API builder, Azure Static Web Apps, and Azure SQL
-          displayName: To-do, to do
+          displayName: To-do, to, do, to do
           href: /samples/azure-samples/dab-swa-todo/sample
         - name: Library app sample with Data API builder, Azure Static Web Apps, and Azure SQL
           displayName: Bookstore
