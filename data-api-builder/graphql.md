@@ -223,7 +223,7 @@ query {
 
 ## Mutations
 
-For each entity, mutations to support create, update, and delete operations are automatically created. The mutation operation is created using the following name pattern: `entity<operation>`. For example, for the `book` entity, the mutations would be:
+For each entity, mutations to support create, update, and delete operations are automatically created. The mutation operation is created using the following name pattern: `<operation><entity>`. For example, for the `book` entity, the mutations would be:
 
 - `createbook`: create a new book
 - `updatebook`: update an existing book
