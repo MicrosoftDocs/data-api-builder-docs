@@ -243,7 +243,7 @@
     - name: Run in a container
       href: how-to-run-container.md
     - name: Run from source code
-      displayName: Git, GitHub
+      displayName: Git, GitHub, oss, repository, contribute
       href: how-to-run-from-source.md
     - name: Implement row-level security in SQL
       displayName: RLS
