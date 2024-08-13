@@ -277,7 +277,8 @@ GET /api/book?$first=5
 
 This request returns the first 5 books. The `$first` query parameter in Azure Data API Builder is similar to the `TOP` clause in SQL. Both are used to limit the number of records returned from a query. Just as `TOP` in SQL allows you to specify a certain number of rows to retrieve, `$first` lets you control the number of items returned by the API. This feature is particularly useful when you want to fetch a small subset of data, such as the first 10 results, without retrieving the entire dataset. The main advantage is efficiency, as it reduces the amount of data transmitted and processed.
 
-In Azure Data API builder, the number of rows returned by default is limited by a setting in the configuration file. Users can override this limit using the `$first` parameter to request more rows, but there's still a configured maximum number of rows that can be returned overall. Additionally, there's a limit on the total megabytes that can be returned in a single response, which is also configurable. 
+> [!NOTE]
+> In Azure Data API builder, the number of rows returned by default is limited by a setting in the configuration file. Users can override this limit using the `$first` parameter to request more rows, but there's still a configured maximum number of rows that can be returned overall. Additionally, there's a limit on the total megabytes that can be returned in a single response, which is also configurable. 
 
 If more items are available beyond the specified limit, the response includes a `nextLink` property:
 
