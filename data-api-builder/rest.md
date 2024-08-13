@@ -94,18 +94,54 @@ The items related to the requested entity are available in the `value` array. Fo
 
 Using the GET method you can retrieve one or more items of the desired entity.
 
-### URL parameters
+### URL Parameters
 
-REST endpoints support the ability to return an item via its primary key, using the URL parameter:
+REST endpoints allow you to retrieve an item by its primary key using URL parameters. For entities with a single primary key, the format is straightforward:
 
 ```http
 GET /api/{entity}/{primary-key-column}/{primary-key-value}
 ```
 
-For example:
+To retrieve a book with an ID of `1001`, you would use:
 
 ```http
 GET /api/book/id/1001
+```
+
+For entities with compound primary keys, where more than one column is used to uniquely identify a record, the URL format includes all key columns in sequence:
+
+```http
+GET /api/{entity}/{primary-key-column1}/{primary-key-value1}/{primary-key-column2}/{primary-key-value2}
+```
+
+If a `books` entity has a compound key consisting of `id1` and `id2`, you would retrieve a specific book like this:
+
+```http
+GET /api/books/id1/123/id2/abc
+```
+
+### For example:
+
+Here’s how a call would look:
+
+```http
+### Retrieve a book by a single primary key
+GET /api/book/id/1001
+
+### Retrieve an author by a single primary key
+GET /api/author/id/501
+
+### Retrieve a book by compound primary keys (id1 and id2)
+GET /api/books/id1/123/id2/abc
+
+### Retrieve an order by compound primary keys (orderId and customerId)
+GET /api/orders/orderId/789/customerId/456
+
+### Retrieve a product by compound primary keys (categoryId and productId)
+GET /api/products/categoryId/electronics/productId/987
+
+### Retrieve a course by compound primary keys (departmentCode and courseNumber)
+GET /api/courses/departmentCode/CS/courseNumber/101
 ```
 
 ### Query parameters
@@ -124,22 +160,56 @@ Query parameters can be used together.
 The query parameter `$select` allow to specify which fields must be returned. For example:
 
 ```http
+### Get all fields
+GET /api/author
+
+### Get only first_name field
+GET /api/author?$select=first_name
+
+### Get only first_name and last_name fields
 GET /api/author?$select=first_name,last_name
 ```
 
-This request returns only `first_name` and `last_name` fields.
+> [!NOTE]
+> If any of the requested fields don't exist or isn't accessible due to configured permissions, a `400 - Bad Request` is returned.
 
-If any of the requested fields don't exist or isn't accessible due to configured permissions, a `400 - Bad Request` is returned.
+The `$select` query parameter, also known as "projection," is used to control the size of the data returned in an API response. With only needed columns, `$select` reduces the payload size, which can improve performance by minimizing parsing time, reducing bandwidth usage, and speeding up data processing. This optimization extends to the database. There, only the requested columns are retrieved.  
 
 #### `$filter`
 
-The value of the `$filter` option is predicate expression (an expression that returns a boolean value) using entity's fields. Only items where the expression evaluates to True are included in the response. For example:
+The value of the `$filter` option is a predicate expression (an expression that returns a boolean result) using entity's fields. Only items where the expression evaluates to True are included in the response. For example:
 
 ```http
-GET /api/author?$filter=last_name eq 'Asimov'
-```
+### Get books titled "Hyperion" (Equal to)
+GET /api/book?$filter=title eq 'Hyperion'
 
-This request returns only those authors whose family name is `Asimov`
+### Get books not titled "Hyperion" (Not equal to)
+GET /api/book?$filter=title ne 'Hyperion'
+
+### Get books published after 1990 (Greater than)
+GET /api/book?$filter=year gt 1990
+
+### Get books published in or after 1990 (Greater than or equal to)
+GET /api/book?$filter=year ge 1990
+
+### Get books published before 1991 (Less than)
+GET /api/book?$filter=year lt 1991
+
+### Get books published in or before 1990 (Less than or equal to)
+GET /api/book?$filter=year le 1990
+
+### Get books published between 1980 and 1990 (Logical and)
+GET /api/book?$filter=year ge 1980 and year le 1990
+
+### Get books published before 1960 or titled "Hyperion" (Logical or)
+GET /api/book?$filter=year le 1960 or title eq 'Hyperion'
+
+### Get books not published before 1960 (Logical negation)
+GET /api/book?$filter=not (year le 1960)
+
+### Get books published in 1970 or later, and either titled "Foundation" or with more than 400 pages (Grouping)
+GET /api/book?$filter=(year ge 1970 or title eq 'Foundation') and pages gt 400
+```
 
 The operators supported by the `$filter` option are:
 
@@ -157,7 +227,9 @@ The operators supported by the `$filter` option are:
 | `( )` | Grouping | Precedence grouping | `(year ge 1970 or title eq 'Foundation') and pages gt 400` |
 
 > [!NOTE]
-> `$filter` is a case sensitive argument.
+> `$filter` is a case-sensitive argument.
+
+The `$filter` query parameter in Azure Data API Builder might remind some users of OData, and that’s because it was directly inspired by OData’s filtering capabilities. The syntax is nearly identical, making it easy for developers who are already familiar with OData to pick up and use. This similarity was intentional, aimed at providing a familiar and powerful way to filter data across different APIs. 
 
 #### `$orderby`
 
@@ -168,37 +240,83 @@ Each expression in the `orderby` parameter value might include the suffix `desc`
 For example:
 
 ```http
-GET /api/author?$orderby=first_name desc, last_name
+### Order books by title in ascending order
+GET /api/book?$orderby=title
+
+### Order books by title in ascending order
+GET /api/book?$orderby=title asc
+
+### Order books by title in descending order
+GET /api/book?$orderby=title desc
+
+### Order books by year of publication in ascending order, then by title in ascending order
+GET /api/book?$orderby=year asc, title asc
+
+### Order books by year of publication in descending order, then by title in ascending order
+GET /api/book?$orderby=year desc, title asc
+
+### Order books by number of pages in ascending order, then by title in descending order
+GET /api/book?$orderby=pages asc, title desc
+
+### Order books by title in ascending order, then by year of publication in descending order
+GET /api/book?$orderby=title asc, year desc
 ```
 
-This request returns the list of authors sorted by `first_name` descending and then by `last_name` ascending.
-
 > [!NOTE]
-> `$orderBy` is a case sensitive argument.
+> `$orderBy` is a case-sensitive argument.
+
+The `$orderby` query parameter is valuable for sorting data directly on the server, easily handled on the client-side as well. However, it becomes useful when combined with other query parameters, such as `$filter` and `$first`. The parameter lets pagination maintain a stable and predictable dataset as you paginate through large collections.
 
 #### `$first` and `$after`
 
-The query parameter `$first` allows the user to limit the number of items returned. For example:
+The `$first` query parameter limits the number of items returned in a single request. For example:
 
 ```http
 GET /api/book?$first=5
 ```
 
-This request returns only the first `n` books. In case ordering isn't specified, items are ordered based on the underlying primary key. `n` must be a positive integer value.
+This request returns the first five books. The `$first` query parameter in Azure Data API Builder is similar to the `TOP` clause in SQL. Both are used to limit the number of records returned from a query. Just as `TOP` in SQL allows you to specify the quantity of rows to retrieve, `$first` lets you control the number of items returned by the API. `$first` is useful when you want to fetch a small subset of data, such as the first 10 results, without retrieving the entire dataset. The main advantage is efficiency, as it reduces the amount of data transmitted and processed.
 
-If the number of items available to the entity is bigger than the number specified in the `$first` parameter, the returned result contains a `nextLink` item:
+> [!NOTE]
+> In Azure Data API builder, the number of rows returned by default is limited by a setting in the configuration file. Users can override this limit using the `$first` parameter to request more rows, but there's still a configured maximum number of rows that can be returned overall. Additionally, there's a limit on the total megabytes that can be returned in a single response, which is also configurable. 
+
+If more items are available beyond the specified limit, the response includes a `nextLink` property:
 
 ```json
 {
     "value": [],
-    "nextLink": ""
+    "nextLink": "dab-will-generate-this-continuation-url"
 }
 ```
 
-The `nextLink` property can be used to get the next set of items via the `$after` query parameter using the following format:
+The `nextLink` can be used with the `$after` query parameter to retrieve the next set of items:
 
 ```http
 GET /api/book?$first={n}&$after={continuation-data}
+```
+
+This continuation approach uses cursor-based pagination. A unique cursor is a reference to a specific item in the dataset, determining where to continue retrieving data in the next set. Unlike index pagination that use offsets or indexes, cursor-based pagination doesn't rely on skipping records. Cursor continuation makes it more reliable with large datasets or frequently changing data. Instead, it ensures a smooth and consistent flow of data retrieval by starting exactly where the last query left off, based on the cursor provided.
+
+For example:
+
+```http
+### Get the first 5 books explicitly
+GET /api/book?$first=5
+
+### Get the next set of 5 books using the continuation token
+GET /api/book?$first=5&$after={continuation-token}
+
+### Get the first 10 books, ordered by title
+GET /api/book?$first=10&$orderby=title asc
+
+### Get the next set of 10 books after the first set, ordered by title
+GET /api/book?$first=10&$after={continuation-token}&$orderby=title asc
+
+### Get books without specifying $first (automatic pagination limit)
+GET /api/book
+
+### Get the next set of books using the continuation token without specifying $first
+GET /api/book?$after={continuation-token}
 ```
 
 ## POST
