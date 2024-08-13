@@ -122,7 +122,7 @@ GET /api/books/id1/123/id2/abc
 
 ### For example:
 
-Here’s how this could look in an HTTP file with various approaches:
+Here’s how a call would look:
 
 ```http
 ### Retrieve a book by a single primary key
@@ -173,7 +173,7 @@ GET /api/author?$select=first_name,last_name
 > [!NOTE]
 > If any of the requested fields don't exist or isn't accessible due to configured permissions, a `400 - Bad Request` is returned.
 
-The `$select` query parameter, also known as "projection," is used to control the size of the data returned in an API response. By specifying only the needed columns, `$select` reduces the payload size, which can improve performance by minimizing parsing time, reducing bandwidth usage, and speeding up data processing. This optimization extends to the database, where only the requested columns are retrieved, resulting in less data being read, processed, and streamed through Data API builder. This helps ensure better overall performance.
+The `$select` query parameter, also known as "projection," is used to control the size of the data returned in an API response. With only needed columns, `$select` reduces the payload size, which can improve performance by minimizing parsing time, reducing bandwidth usage, and speeding up data processing. This optimization extends to the database. There, only the requested columns are retrieved. This results in less reading and streaming through Data API builder. 
 
 #### `$filter`
 
@@ -229,7 +229,7 @@ The operators supported by the `$filter` option are:
 > [!NOTE]
 > `$filter` is a case-sensitive argument.
 
-The `$filter` query parameter in Azure Data API Builder might remind some users of OData, and that’s because it was directly inspired by OData’s filtering capabilities. The syntax is nearly identical, making it easy for developers who are already familiar with OData to pick up and use. This similarity was intentional, aimed at providing a familiar and powerful way to filter data across different APIs. So, if you’ve used OData before, you’ll find the `$filter` functionality in Azure Data API Builder to be consistent with what you already know.
+The `$filter` query parameter in Azure Data API Builder might remind some users of OData, and that’s because it was directly inspired by OData’s filtering capabilities. The syntax is nearly identical, making it easy for developers who are already familiar with OData to pick up and use. This similarity was intentional, aimed at providing a familiar and powerful way to filter data across different APIs. 
 
 #### `$orderby`
 
@@ -265,7 +265,7 @@ GET /api/book?$orderby=title asc, year desc
 > [!NOTE]
 > `$orderBy` is a case-sensitive argument.
 
-The `$orderby` query parameter is valuable for sorting data directly on the server, but this could be done on the client side as well. However, it becomes particularly useful when combined with other query parameters, such as `$filter` and `$first`, especially in pagination, maintaining a stable and predictable dataset as you paginate through large collections.
+The `$orderby` query parameter is valuable for sorting data directly on the server, easily acomplished on the client-side as well. However, it becomes useful when combined with other query parameters, such as `$filter` and `$first`. This is most important in pagination to maintain a stable and predictable dataset as you paginate through large collections.
 
 #### `$first` and `$after`
 
@@ -275,7 +275,7 @@ The `$first` query parameter limits the number of items returned in a single req
 GET /api/book?$first=5
 ```
 
-This request returns the first 5 books. The `$first` query parameter in Azure Data API Builder is similar to the `TOP` clause in SQL. Both are used to limit the number of records returned from a query. Just as `TOP` in SQL allows you to specify a certain number of rows to retrieve, `$first` lets you control the number of items returned by the API. This feature is particularly useful when you want to fetch a small subset of data, such as the first 10 results, without retrieving the entire dataset. The main advantage is efficiency, as it reduces the amount of data transmitted and processed.
+This request returns the first five books. The `$first` query parameter in Azure Data API Builder is similar to the `TOP` clause in SQL. Both are used to limit the number of records returned from a query. Just as `TOP` in SQL allows you to specify the quantity of rows to retrieve, `$first` lets you control the number of items returned by the API. This feature is particularly useful when you want to fetch a small subset of data, such as the first 10 results, without retrieving the entire dataset. The main advantage is efficiency, as it reduces the amount of data transmitted and processed.
 
 > [!NOTE]
 > In Azure Data API builder, the number of rows returned by default is limited by a setting in the configuration file. Users can override this limit using the `$first` parameter to request more rows, but there's still a configured maximum number of rows that can be returned overall. Additionally, there's a limit on the total megabytes that can be returned in a single response, which is also configurable. 
@@ -295,7 +295,7 @@ The `nextLink` can be used with the `$after` query parameter to retrieve the nex
 GET /api/book?$first={n}&$after={continuation-data}
 ```
 
-This continuation approach uses cursor-based pagination, which leverages a unique cursor (a reference to a specific item in the dataset) to determine where to continue retrieving data in the next set. Unlike traditional pagination methods that use offsets or indexes, cursor-based pagination doesn't rely on skipping a specific number of records. This makes it more reliable in environments with large datasets or frequently changing data, as it avoids potential issues like missing or duplicated records that can occur with offset-based pagination. Instead, it ensures a smooth and consistent flow of data retrieval by starting exactly where the last query left off, based on the cursor provided.
+This continuation approach uses cursor-based pagination. A unique cursor is a reference to a specific item in the dataset. This determines where to continue retrieving data in the next set. Unlike index pagination that use offsets or indexes, cursor-based pagination doesn't rely on skipping records. This makes it more reliable with large datasets or frequently changing data. Instead, it ensures a smooth and consistent flow of data retrieval by starting exactly where the last query left off, based on the cursor provided.
 
 For example:
 
@@ -438,7 +438,7 @@ DELETE /api/book/id/2001
 
 If successful, the result is an empty response with status code 204.
 
-### Database transactions for REST API requests
+### Database transactions for REST API request
 
 To process POST, PUT, PATCH, and DELETE API requests; Data API builder constructs and executes the database queries in a transaction.
 
