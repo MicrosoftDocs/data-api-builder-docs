@@ -295,7 +295,7 @@ The `nextLink` can be used with the `$after` query parameter to retrieve the nex
 GET /api/book?$first={n}&$after={continuation-data}
 ```
 
-This continuation approach uses cursor-based pagination, which leverages a unique cursor (often a reference to a specific item in the dataset) to determine where to continue retrieving data in the next set. Unlike traditional pagination methods that use offsets or indexes, cursor-based pagination doesn't rely on skipping a specific number of records. This makes it more reliable in environments with large datasets or frequently changing data, as it avoids potential issues like missing or duplicated records that can occur with offset-based pagination. Instead, it ensures a smooth and consistent flow of data retrieval by starting exactly where the last query left off, based on the cursor provided.
+This continuation approach uses cursor-based pagination, which leverages a unique cursor (a reference to a specific item in the dataset) to determine where to continue retrieving data in the next set. Unlike traditional pagination methods that use offsets or indexes, cursor-based pagination doesn't rely on skipping a specific number of records. This makes it more reliable in environments with large datasets or frequently changing data, as it avoids potential issues like missing or duplicated records that can occur with offset-based pagination. Instead, it ensures a smooth and consistent flow of data retrieval by starting exactly where the last query left off, based on the cursor provided.
 
 For example:
 
