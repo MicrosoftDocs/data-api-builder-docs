@@ -151,7 +151,7 @@ REST endpoints support the following query parameters (case sensitive) to contro
 - [`$select`](#select): returns only the selected columns
 - [`$filter`](#filter): filters the returned items
 - [`$orderby`](#orderby): defines how the returned data is sorted
-- [`$first` and `$after`](#-first-and-after): returns only the top `n` items
+- [`$first` and `$after`](#first-and-after): returns only the top `n` items
 
 Query parameters can be used together.
 
