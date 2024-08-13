@@ -173,7 +173,7 @@ GET /api/author?$select=first_name,last_name
 > [!NOTE]
 > If any of the requested fields don't exist or isn't accessible due to configured permissions, a `400 - Bad Request` is returned.
 
-The `$select` query parameter, also known as "projection," is used to control the size of the data returned in an API response. With only needed columns, `$select` reduces the payload size, which can improve performance by minimizing parsing time, reducing bandwidth usage, and speeding up data processing. This optimization extends to the database. There, only the requested columns are retrieved. This results in less reading and streaming through Data API builder. 
+The `$select` query parameter, also known as "projection," is used to control the size of the data returned in an API response. With only needed columns, `$select` reduces the payload size, which can improve performance by minimizing parsing time, reducing bandwidth usage, and speeding up data processing. This optimization extends to the database. There, only the requested columns are retrieved.  
 
 #### `$filter`
 
@@ -265,7 +265,7 @@ GET /api/book?$orderby=title asc, year desc
 > [!NOTE]
 > `$orderBy` is a case-sensitive argument.
 
-The `$orderby` query parameter is valuable for sorting data directly on the server, easily acomplished on the client-side as well. However, it becomes useful when combined with other query parameters, such as `$filter` and `$first`. This is most important in pagination to maintain a stable and predictable dataset as you paginate through large collections.
+The `$orderby` query parameter is valuable for sorting data directly on the server, easily handled on the client-side as well. However, it becomes useful when combined with other query parameters, such as `$filter` and `$first`. The parameter lets pagination maintain a stable and predictable dataset as you paginate through large collections.
 
 #### `$first` and `$after`
 
