@@ -177,7 +177,7 @@ The `$select` query parameter, also known as "projection," is used to control th
 
 #### `$filter`
 
-The value of the `$filter` option is predicate expression (an expression that returns a boolean result) using entity's fields. Only items where the expression evaluates to True are included in the response. For example:
+The value of the `$filter` option is a predicate expression (an expression that returns a boolean result) using entity's fields. Only items where the expression evaluates to True are included in the response. For example:
 
 ```http
 ### Get books titled "Hyperion" (Equal to)
