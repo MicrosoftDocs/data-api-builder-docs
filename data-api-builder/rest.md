@@ -151,7 +151,7 @@ REST endpoints support the following query parameters (case sensitive) to contro
 - [`$select`](#select): returns only the selected columns
 - [`$filter`](#filter): filters the returned items
 - [`$orderby`](#orderby): defines how the returned data is sorted
-- [`$first` and `$after`](#first-and-after): returns only the top `n` items
+- [`$first` and `$after`](#-first-and-after): returns only the top `n` items
 
 Query parameters can be used together.
 
@@ -267,7 +267,7 @@ GET /api/book?$orderby=title asc, year desc
 
 The `$orderby` query parameter is valuable for sorting data directly on the server, but this could be done on the client side as well. However, it becomes particularly useful when combined with other query parameters, such as `$filter` and `$first`, especially in pagination, maintaining a stable and predictable dataset as you paginate through large collections.
 
-#### #### `$first` and `$after`
+#### `$first` and `$after`
 
 The `$first` query parameter limits the number of items returned in a single request. For example:
 
