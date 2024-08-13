@@ -438,7 +438,7 @@ DELETE /api/book/id/2001
 
 If successful, the result is an empty response with status code 204.
 
-### Database transactions for REST API request
+### Database transactions for REST API requests
 
 To process POST, PUT, PATCH, and DELETE API requests; Data API builder constructs and executes the database queries in a transaction.
 
