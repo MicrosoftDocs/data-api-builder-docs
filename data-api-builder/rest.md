@@ -275,7 +275,7 @@ The `$first` query parameter limits the number of items returned in a single req
 GET /api/book?$first=5
 ```
 
-This request returns the first five books. The `$first` query parameter in Azure Data API Builder is similar to the `TOP` clause in SQL. Both are used to limit the number of records returned from a query. Just as `TOP` in SQL allows you to specify the quantity of rows to retrieve, `$first` lets you control the number of items returned by the API. This feature is particularly useful when you want to fetch a small subset of data, such as the first 10 results, without retrieving the entire dataset. The main advantage is efficiency, as it reduces the amount of data transmitted and processed.
+This request returns the first five books. The `$first` query parameter in Azure Data API Builder is similar to the `TOP` clause in SQL. Both are used to limit the number of records returned from a query. Just as `TOP` in SQL allows you to specify the quantity of rows to retrieve, `$first` lets you control the number of items returned by the API. `$first` is useful when you want to fetch a small subset of data, such as the first 10 results, without retrieving the entire dataset. The main advantage is efficiency, as it reduces the amount of data transmitted and processed.
 
 > [!NOTE]
 > In Azure Data API builder, the number of rows returned by default is limited by a setting in the configuration file. Users can override this limit using the `$first` parameter to request more rows, but there's still a configured maximum number of rows that can be returned overall. Additionally, there's a limit on the total megabytes that can be returned in a single response, which is also configurable. 
@@ -295,7 +295,7 @@ The `nextLink` can be used with the `$after` query parameter to retrieve the nex
 GET /api/book?$first={n}&$after={continuation-data}
 ```
 
-This continuation approach uses cursor-based pagination. A unique cursor is a reference to a specific item in the dataset. This determines where to continue retrieving data in the next set. Unlike index pagination that use offsets or indexes, cursor-based pagination doesn't rely on skipping records. This makes it more reliable with large datasets or frequently changing data. Instead, it ensures a smooth and consistent flow of data retrieval by starting exactly where the last query left off, based on the cursor provided.
+This continuation approach uses cursor-based pagination. A unique cursor is a reference to a specific item in the dataset, determining where to continue retrieving data in the next set. Unlike index pagination that use offsets or indexes, cursor-based pagination doesn't rely on skipping records. Cursor continuation makes it more reliable with large datasets or frequently changing data. Instead, it ensures a smooth and consistent flow of data retrieval by starting exactly where the last query left off, based on the cursor provided.
 
 For example:
 
