@@ -9,61 +9,45 @@ ms.topic: reference
 ms.date: 05/15/2024
 ---
 
-# Data API builder supported data types
+# Data API builder not supported data types
 
-These tables list database data types and indicates whether they're supported or not in Data API builder (DAB) for Azure databases.
+### SQL Server database
 
-## Data types support by database
+| **Not Supported**       | **Description**                                                |
+|---------------------|----------------------------------------------------------------|
+| `geography`         | Geospatial data representing Earth's surface.                  |
+| `geometry`          | Planar spatial data using Cartesian coordinates.               |
+| `hierarchyid`       | Hierarchical data management.                                  |
+| `json`              | JSON formatted data (currently in preview).                                           |
+| `rowversion`        | Row versioning for concurrency control.                        |
+| `sql_variant`       | Values of various SQL Server-supported data types.             |
+| `vector`               | Vector data (currently in preview).                                            |
+| `xml`               | XML formatted data.                                            |
 
-| | MSSQL | MySQL | PostgreSQL |
-| --- | --- | --- | --- |
-| **`boolean`** | ✅ Yes | Yes | ✅ Yes |
-| **`byte`** | ✅ Yes | Yes | ✖️ No |
-| **`bytearray`** | ✅ Yes | Yes | ✅ Yes |
-| **`date`** | ✅ Yes | ✖️ No | ✖️ No |
-| **`datetime`** | ✅ Yes | Yes | ✅ Yes |
-| **`datetime2`** | ✅ Yes | ✖️ No | ✖️ No |
-| **`datetimeoffset`** | ✅ Yes | ✖️ No | ✖️ No |
-| **`decimal`** | ✅ Yes | Yes | ✅ Yes |
-| **`float`** | ✅ Yes | Yes | ✅ Yes |
-| **`guid`** | ✅ Yes | ✖️ No | ✅ Yes |
-| **`int`** | ✅ Yes | Yes | ✅ Yes |
-| **`long`** | ✅ Yes | Yes | ✅ Yes |
-| **`short`** | ✅ Yes | Yes | ✅ Yes |
-| **`single`** | ✅ Yes | Yes | ✅ Yes |
-| **`smalldatetime`** | ✅ Yes | ✖️ No | ✖️ No |
-| **`string`** | ✅ Yes | Yes | ✅ Yes |
-| **`time`** | ✅ Yes | ✖️ No | ✖️ No |
+### PostgreSQL database
 
-> [!NOTE]
-> Data type support for Azure Cosmos DB for NoSQL is not yet listed.
+| **Not Supported**       | **Description**                                                |
+|---------------------|----------------------------------------------------------------|
+| `bytea`             | Binary string storage.                                         |
+| `date`              | Calendar dates (year, month, day).                             |
+| `smalldatetime`     | Less precise date and time storage.                            |
+| `datetime2`         | Not native; typically handled by `timestamp`.                  |
+| `timestamptz`       | Dates and times with time zone.                                |
+| `time`              | Time of day without date.                                      |
+| `localtime`         | Current time based on system clock.                            |
 
-## Data types reference
+### MySQL database
 
-| | Description |
-| --- | --- |
-| **`boolean`** | Represents true or false values |
-| **`byte`** | A tiny integer, usually ranging from 0 to 255 |
-| **`bytearray`** | Holds variable-length binary data |
-| **`date`** | Stores date values without the time component |
-| **`datetime`** | Stores date & time down to milliseconds |
-| **`datetime2`** | Extended form of `datetime` that supports more extensive date ranges |
-| **`datetimeoffset`** | Similar to `datetime` but includes timezone offset |
-| **`decimal`** | Fixed-point number with a specific number of digits to the right of the decimal point |
-| **`float`** | Floating-point number that can hold large or small numbers with decimal points |
-| **`guid`** | A 128-bit unique identifier |
-| **`int`** | Integer data type that typically ranges from `-2,147,483,648` to `2,147,483,647` |
-| **`long`** | A 64-bit integer |
-| **`short`** | A 16-bit integer |
-| **`single`** | Similar to `float`, but less precise |
-| **`smalldatetime`** | Date & time data type with smaller range & precision |
-| **`string`** | Variable-length character string |
-| **`time`** | Stores time values down to nanoseconds |
+| **Not Supported**       | **Description**                                                |
+|---------------------|----------------------------------------------------------------|
+| `UUID`              | Universally Unique Identifiers.                                |
+| `DATE`              | Calendar dates.                                                |
+| `SMALLDATETIME`     | Less precise date and time storage.                            |
+| `DATETIME2`         | Not native; typically handled by `datetime`.                   |
+| `DATETIMEOFFSET`    | Dates and times with time zone.                                |
+| `TIME`              | Time of day without date.                                      |
+| `LOCALTIME`         | Current time based on system clock.                            |
 
-## Related content
+### Azure Cosmos DB for NoSQL
 
-- [Command-line interface (CLI) reference](reference-command-line-interface.md)
-- [Configuration reference](reference-configuration.md)
-- [Database-specific features reference](reference-database-specific-features.md)
-- [Functions reference](reference-functions.md)
-- [Policies reference](reference-policies.md)
+_Data type support is not yet listed._
