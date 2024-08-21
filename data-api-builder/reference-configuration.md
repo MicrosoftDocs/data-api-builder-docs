@@ -1020,7 +1020,7 @@ Sets the maximum size (in megabytes) for any given result. This setting allows u
 
 Default value: 158 megabytes.
 
-When users request large result sets, it can strain the database and Data API builder. To address this, max-response-size-mb allows developers to set a limit on the maximum response size, measured in megabytes, as the data streams from the data source. This limit is based on the overall data size, not the number of rows, which is crucial since columns can vary significantly in size. For instance, a few columns with data types like text, binary, XML, or JSON can hold up to 2 GB each, making each row potentially large. This setting helps developers protect their endpoints by capping response sizes, preventing system overloads while maintaining flexibility in handling different types of data.
+When users request large result sets, it can strain the database and Data API builder. To address this potential problem, max-response-size-mb allows developers to set a limit on the maximum response size, measured in megabytes, as the data streams from the data source. This limit is based on the overall data size, not the number of rows, which is crucial since columns can vary significantly in size. For instance, a few columns with data types like text, binary, XML, or JSON can hold up to 2 GB each, making each row potentially large. This setting helps developers protect their endpoints by capping response sizes, preventing system overloads while maintaining flexibility in handling different types of data.
 
 #### Allowed values
 
