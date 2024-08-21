@@ -385,11 +385,11 @@ Whether the `options` section is required or not is largely dependent on the dat
 
 Data API builder allows you to work with multiple data sources, each with its own configuration file. Every configuration file follows the same schema. Choose one configuration to be the top-level configuration file, which acts as the parent to the other configuration files. This file also manages the `runtime` settings for the engine while listing the other configurations in its `data-source-files` property.
 
-While only the `runtime` settings in the top-level file are obeyed, you can include `runtime` settings in any configuration file without causing any errors—this can be handy if you want to switch which file is the top-level configuration during development to test different scenarios. When you include `data-source-files` in other configuration files, the system will automatically include child and grandchild configuration files, which is helpful in complex setups. However, be cautious of circular references.
+While only the `runtime` settings in the top-level file are obeyed, you can include `runtime` settings in any configuration file without causing any errors—this approach can be handy if you want to switch which file is the top-level configuration during development to test different scenarios. When you include `data-source-files` in other configuration files, the system automatically merges child and grandchild configuration files, which is helpful in complex setups. However, be cautious of circular references.
 
 ![Illustrating data-source-files setup](media/data-source-files.png)
 
-Remember, separating entities into different configuration files is not just about different data sources. If you have a lot of entities in a single data source, you can break them up into multiple configuration files for easier management. Just keep in mind that entities in separate files can't have relationships, as relationships can't cross file boundaries. This caveat is only relevant in GraphQL scenarios.
+Remember, separating entities into different configuration files isn't just about different data sources. If you have numerous entities in a single data source, you can break them up into multiple configuration files for easier management. Just keep in mind that entities in separate files can't have relationships, as relationships can't cross file boundaries. This caveat is only relevant in GraphQL scenarios.
 
 #### Format
 
@@ -407,7 +407,7 @@ Remember, separating entities into different configuration files is not just abo
 - Child configuration files can also include their own child files.
 - Configuration files can be organized into subfolders as desired.
 - Entity names must be unique across all configuration files.
-- Relationships between entities in different configuration files are not supported.
+- Relationships between entities in different configuration files aren't supported.
 
 #### Examples
 
@@ -624,7 +624,7 @@ The maximum allowed query depth of a query.
 
 Default: None.
 
-GraphQL’s ability to handle nested queries based on relationship definitions is an incredible feature, enabling users to fetch complex, related data in a single query. However, as users continue to add nested queries, the complexity of the query increases, which can eventually compromise the performance and reliability of both the database and the API endpoint. To manage this, the `runtime/graphql/depth-limit` property sets the maximum allowed depth of a GraphQL query (and mutation). This property allows developers to strike a balance, enabling users to enjoy the benefits of nested queries while placing limits to prevent scenarios that could jeopardize the performance and quality of the system.
+GraphQL’s ability to handle nested queries based on relationship definitions is an incredible feature, enabling users to fetch complex, related data in a single query. However, as users continue to add nested queries, the complexity of the query increases, which can eventually compromise the performance and reliability of both the database and the API endpoint. To manage this situation, the `runtime/graphql/depth-limit` property sets the maximum allowed depth of a GraphQL query (and mutation). This property allows developers to strike a balance, enabling users to enjoy the benefits of nested queries while placing limits to prevent scenarios that could jeopardize the performance and quality of the system.
 
 #### Examples
 
@@ -1016,11 +1016,11 @@ Here's a list of allowed values for this property:
 
 **REQUIRED**: ❌ No
 
-Sets the maximum size (in megabytes) for any given result. This allows users to configure the amount of data that their host platform's memory can handle when streaming data from the underlying data sources.
+Sets the maximum size (in megabytes) for any given result. This setting allows users to configure the amount of data that their host platform's memory can handle when streaming data from the underlying data sources.
 
 Default value: 158 megabytes.
 
-When users request large result sets, it can strain the database and Data API builder, potentially impacting performance and reliability. To address this, version 1.1.2 introduces the max-response-size-mb property, which allows developers to set a limit on the maximum response size, measured in megabytes, as the data streams from the data source. This limit is based on the overall data size, not the number of rows, which is crucial since columns can vary significantly in size. For instance, a few columns with data types like text, binary, XML, or JSON can hold up to 2 GB each, making each row potentially very large. This setting helps developers protect their endpoints by capping response sizes, preventing system overloads while maintaining flexibility in handling different types of data.
+When users request large result sets, it can strain the database and Data API builde, ability. To address this, max-response-size-mb allows developers to set a limit on the maximum response size, measured in megabytes, as the data streams from the data source. This limit is based on the overall data size, not the number of rows, which is crucial since columns can vary significantly in size. For instance, a few columns with data types like text, binary, XML, or JSON can hold up to 2 GB each, making each row potentially large. This setting helps developers protect their endpoints by capping response sizes, preventing system overloads while maintaining flexibility in handling different types of data.
 
 #### Allowed values
 
@@ -1489,15 +1489,15 @@ Both REST and GraphQL can include a `$limit` or `first` variable, respectively. 
 |-------------|--------|
 | `-1`        | The current value of the `max-page-size` setting. Using `-1` is handy when the `max-page-size` setting value is unknown to the consumer. Data API builder replaces `-1` with the current value of `max-page-size`. |
 | `< max-page-size` | The results are limited to the value supplied. |
-| `0` | Invalid. An exception is returned.
-| `< -1` | Invalid. An exception is returned.
-| `> max-page-size` | Invalid. An exception is returned.
+| `0` | Not supported. An exception is returned.
+| `< -1` | Not supported. An exception is returned.
+| `> max-page-size` | Not supported. An exception is returned.
 
 ### Maximum page size (Pagination runtime)
 
 **REQUIRED**: ❌ No
 
-Sets the maximum number of top-level records returned by a REST or GraphQL query. If the user provides a value in `$first` that exceeds this limit, then `$first` will be limited to the value of `max-page-size`. The intent of this setting is to give the developer control to ensure the endpoint does not overwhelm either the database or Data API builder. Since every dataset is unique, this value is configurable.
+Sets the maximum number of top-level records returned by a REST or GraphQL query. If the user provides a value in `$first` that exceeds this limit, then `$first` is limited to the value of `max-page-size`. The intent of this setting is to give the developer control to ensure the endpoint doesn't overwhelm either the database or Data API builder. Since every dataset is unique, this value is configurable.
 
 #### Allowed values
 
