@@ -910,6 +910,7 @@ The `host` section within the runtime configuration provides settings crucial fo
     ...
     "host": {
       "mode": "production" (default) | "development",
+      "max-response-size-mb": integer (default: 158),
       "cors": {
         "origins": ["<array-of-strings>"],
         "allow-credentials": <true> | <false> (default)
@@ -987,6 +988,34 @@ Here's a list of allowed values for this property:
 | --- | --- |
 | **`production`** | Use when hosting in production on Azure |
 | **`development`** | Use in development on local machine |
+
+### Maximum response size (Runtime)
+
+**REQUIRED**: ❌ No
+
+Sets the maximum size (in megabytes) for any given result. This allows users to configure the amount of data that their host platform's memory can handle when streaming data from the underlying data sources.
+
+Default value: 158 megabytes.
+
+#### Allowed values
+
+| Value | Result
+|-|-
+|`null` | This value defaults to 158 megabytes. 
+|`integer` | Any positive 32-bit integer is supported.
+|`< 0` | This isn't supported.
+
+#### Format
+
+```json
+{
+  "runtime": {
+    "host": {
+      "max-response-size-mb": 123 
+    }
+  }
+}
+```
 
 ### CORS (Host runtime)
 
@@ -1443,7 +1472,7 @@ Both REST and GraphQL can include a `$limit` or `first` variable, respectively. 
 
 **REQUIRED**: ❌ No
 
-Sets the maximum number of top-level records returned by a REST or GraphQL query. 
+Sets the maximum number of top-level records returned by a REST or GraphQL query. If the user provides a value in `$first` that exceeds this limit, then `$first` will be limited to the value of `max-page-size`. The intent of this setting is to give the developer control to ensure the endpoint does not overwhelm either the database or Data API builder. Since every dataset is unique, this value is configurable.
 
 #### Allowed values
 
@@ -1456,6 +1485,18 @@ Sets the maximum number of top-level records returned by a REST or GraphQL query
 
 > [!NOTE]
 > The maximum value of a 32-bit integer is 2,147,483,647. This is big. In practice, there isn't a strict universal limit to the size of an outbound endpoint payload, but several factors can effectively limit the size, including server configuration, bandwidth, and timeout. Data API builder doesn't know your scenario, so this setting is open to configuration by each developer. The default maximum of 100,000 is already quite aggressive.
+
+#### Format
+
+```json
+{
+  "runtime": {
+    "pagination": {
+      "max-page-size": 123
+    }
+  }
+}
+```
 
 ### Default page size (Pagination runtime)
 
