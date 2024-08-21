@@ -567,6 +567,7 @@ This object defines whether GraphQL is enabled and the name\[s\] used to expose 
     "graphql": {
       "path": "/graphql" (default),
       "enabled": <true> (default) | <false>,
+      "depth-limit": integer (default: none),
       "allow-introspection": <true> (default) | <false>
       "multiple-mutations": <object>
     }
@@ -610,6 +611,28 @@ In this example, the GraphQL endpoint is disabled for all entities.
   "runtime": {
     "graphql": {
       "enabled": false
+    }
+  }
+}
+```
+
+### Depth limit (GraphQL runtime)
+
+**REQUIRED**: ❌ No
+
+The maximum allowed query depth of a query.
+
+Default: None.
+
+GraphQL’s ability to handle nested queries based on relationship definitions is an incredible feature, enabling users to fetch complex, related data in a single query. However, as users continue to add nested queries, the complexity of the query increases, which can eventually compromise the performance and reliability of both the database and the API endpoint. To manage this, the `runtime/graphql/depth-limit` property sets the maximum allowed depth of a GraphQL query (and mutation). This property allows developers to strike a balance, enabling users to enjoy the benefits of nested queries while placing limits to prevent scenarios that could jeopardize the performance and quality of the system.
+
+#### Examples
+
+```json
+{
+  "runtime": {
+    "graphql": {
+      "depth-limit": 2
     }
   }
 }
@@ -910,7 +933,7 @@ The `host` section within the runtime configuration provides settings crucial fo
     ...
     "host": {
       "mode": "production" (default) | "development",
-      "max-response-size-mb": integer (default: 158),
+      "max-response-size-mb": <integer; default: 158>,
       "cors": {
         "origins": ["<array-of-strings>"],
         "allow-credentials": <true> | <false> (default)
@@ -996,6 +1019,8 @@ Here's a list of allowed values for this property:
 Sets the maximum size (in megabytes) for any given result. This allows users to configure the amount of data that their host platform's memory can handle when streaming data from the underlying data sources.
 
 Default value: 158 megabytes.
+
+When users request large result sets, it can strain the database and Data API builder, potentially impacting performance and reliability. To address this, version 1.1.2 introduces the max-response-size-mb property, which allows developers to set a limit on the maximum response size, measured in megabytes, as the data streams from the data source. This limit is based on the overall data size, not the number of rows, which is crucial since columns can vary significantly in size. For instance, a few columns with data types like text, binary, XML, or JSON can hold up to 2 GB each, making each row potentially very large. This setting helps developers protect their endpoints by capping response sizes, preventing system overloads while maintaining flexibility in handling different types of data.
 
 #### Allowed values
 
@@ -3747,7 +3772,7 @@ Enables and configures caching for the entity.
     "<string>": {
       "cache": {
         "enabled": <true> | <false> (default),
-        "ttl-seconds": (integer, default: 5)
+        "ttl-seconds": <integer; default: 5>
       }
     }
   }

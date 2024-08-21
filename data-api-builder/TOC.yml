@@ -56,6 +56,8 @@
                       href: reference-configuration.md#enabled-graphql-runtime
                     - name: Path
                       href: reference-configuration.md#path-graphql-runtime
+                    - name: Depth limit
+                      href: reference-configuration.md#graphql-runtime
                     - name: Allow introspection
                       href: reference-configuration.md#allow-introspection-graphql-runtime
                     - name: Multiple mutations
@@ -76,7 +78,10 @@
                   href: reference-configuration.md#host-runtime
                   items:
                     - name: Mode
+                      href: reference-configuration.md#host-runtime
+                    - name: Maximum response size
                       href: reference-configuration.md#mode-host-runtime
+                      displayName: mb, megabyte
                     - name: CORS
                       href: reference-configuration.md#cors-host-runtime
                     - name: Allow credentials
