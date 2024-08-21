@@ -383,7 +383,13 @@ Whether the `options` section is required or not is largely dependent on the dat
 
 **REQUIRED**: ❌ No
 
-This property includes names of runtime configuration files referencing extra databases.
+Data API builder allows you to work with multiple data sources, each with its own configuration file. Every configuration file follows the same schema. Choose one configuration to be the top-level configuration file, which acts as the parent to the other configuration files. This file also manages the `runtime` settings for the engine while listing the other configurations in its `data-source-files` property.
+
+While only the `runtime` settings in the top-level file are obeyed, you can include `runtime` settings in any configuration file without causing any errors—this can be handy if you want to switch which file is the top-level configuration during development to test different scenarios. When you include `data-source-files` in other configuration files, the system will automatically include child and grandchild configuration files, which is helpful in complex setups. However, be cautious of circular references.
+
+![Illustrating data-source-files setup](media/data-source-files.png)
+
+Remember, separating entities into different configuration files is not just about different data sources. If you have a lot of entities in a single data source, you can break them up into multiple configuration files for easier management. Just keep in mind that entities in separate files can't have relationships, as relationships can't cross file boundaries. This caveat is only relevant in GraphQL scenarios.
 
 #### Format
 
@@ -395,32 +401,42 @@ This property includes names of runtime configuration files referencing extra da
 
 #### Configuration file considerations
 
-- The `data-source` property in every configuration file is required.
-- The `entities` property in every configuration file is required.
-- Only the top-level configuration file `runtime` setting is used.
-- Child-level configuration files can also identify child files.  
-- Configuration files can be placed in subfolders as desired.  
+- Every configuration file must include the `data-source` property.
+- Every configuration file must include the `entities` property.
+- The `runtime` setting is only used from the top-level configuration file, even if included in other files.
+- Child configuration files can also include their own child files.
+- Configuration files can be organized into subfolders as desired.
 - Entity names must be unique across all configuration files.
-- Relationships across configuration files aren't supported.  
-
-#### Known issues
-
-- Currently, child configuration files are only supported in GraphQL.  
-- Currently, child configuration files don't support environment variables.
+- Relationships between entities in different configuration files are not supported.
 
 #### Examples
 
 ```json
 {
-  "data-source-files": ["dab-config-two.json", "dab-config-three.json"]
+  "data-source-files": [
+    "dab-config-2.json"
+  ]
 }
 ```
 
-Reference subfolders if in use:
+```json
+{
+  "data-source-files": [
+    "dab-config-2.json", 
+    "dab-config-3.json"
+  ]
+}
+```
+
+Subfolder syntax is also supported:
 
 ```json
 {
-  "data-source-files": ["myfolder/dab-config-two.json"]
+  "data-source-files": [
+    "dab-config-2.json",
+    "my-folder/dab-config-3.json",
+    "my-folder/my-other-folder/dab-config-4.json"
+  ]
 }
 ```
 
