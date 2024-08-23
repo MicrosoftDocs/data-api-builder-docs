@@ -403,7 +403,7 @@ Data API builder allows you to work with multiple data sources, each with its ow
 
 While only the `runtime` settings in the top-level file are obeyed, you can include `runtime` settings in any configuration file without causing any errors—this approach can be handy if you want to switch which file is the top-level configuration during development to test different scenarios. When you include `data-source-files` in other configuration files, the system automatically merges child and grandchild configuration files, which is helpful in complex setups. However, be cautious of circular references.
 
-![Illustrating data-source-files setup](media/data-source-files.png)
+:::image type="content" source="media/reference-configuration/data-source-files.png" alt-text="Diagram of multiple configuration files referenced as an array within a single configuration file.":::
 
 Remember, separating entities into different configuration files isn't just about different data sources. If you have numerous entities in a single data source, you can break them up into multiple configuration files for easier management. Just keep in mind that entities in separate files can't have relationships, as relationships can't cross file boundaries. This caveat is only relevant in GraphQL scenarios.
 

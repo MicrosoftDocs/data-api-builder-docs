@@ -9,6 +9,8 @@
     - name: What's new
       displayName: changelog
       items:
+        - name: Version 1.2
+          href: whats-new/version-1-2.md
         - name: Version 1.1 (GA)
           href: whats-new/version-1-1.md
         - name: Version 0.11 and earlier
