@@ -92,6 +92,7 @@
                       href: reference-configuration.md#origins-host-runtime
                     - name: Authentication
                       href: reference-configuration.md#authentication-host-runtime
+                      displayName: claims, predicate, item
                     - name: Provider
                       href: reference-configuration.md#provider-host-runtime
                     - name: JSON Web Tokens
@@ -179,7 +180,7 @@
                       displayName: TTL
                       href: reference-configuration.md#ttl-in-seconds-cache-entity
                 - name: Permissions
-                  displayName: Security, Policy
+                  displayName: Security, Policy, claims, predicate, item
                   href: reference-configuration.md#permissions
                   items:
                     - name: Role
@@ -195,6 +196,7 @@
                       href: reference-configuration.md#fields
                     - name: Policy
                       href: reference-configuration.md#policy
+                      displayName: claims, predicate, item
                       items:
                         - name: Database
                           href: reference-configuration.md#database
@@ -253,7 +255,7 @@
       displayName: Git, GitHub, oss, repository, contribute
       href: how-to-run-from-source.md
     - name: Implement row-level security in SQL
-      displayName: RLS
+      displayName: RLS, claims, predicate, item
       href: how-to-row-level-security.md
     - name: Use environments
       displayName: development
