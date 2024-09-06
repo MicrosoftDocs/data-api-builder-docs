@@ -10,8 +10,32 @@ metadata:
   ms.reviewer: jerrynixon
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 05/15/2024
+  ms.date: 09/06/2024
 landingContent:
+- title: Version 1.2
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: Maximum Page Size
+      url: version-1-2.md#introducing-maximum-page-size
+    - text: Maximum Response Size
+      url: version-1-2.md#introducing-maximum-response-size
+    - text: GraphQL Query Depth Limit
+      url: version-1-2.md#introducing-graphql-query-depth-limit
+    - text: OpenAPI Compatibility
+      url: version-1-2.md#miscellaneous-improvements
+    - text: Postgres Telemetry
+      url: version-1-2.md#miscellaneous-improvements
+    - text: Updated Retry Policy
+      url: version-1-2.md#miscellaneous-improvements
+    - text: Cultural Invariant Conversion
+      url: version-1-2.md#miscellaneous-improvements
+    - text: Environment Variable Resolution
+      url: version-1-2.md#miscellaneous-improvements
+  - linkListType: download
+    links:
+    - text: NuGet package (1.2)
+      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/1.2.10
 - title: Version 1.1
   linkLists:
   - linkListType: whats-new
