@@ -140,10 +140,10 @@ procedureSection:
         Navigate to the `/data-api` path for the current running application. Observe that the response still indicates that the DAB container is **healthy**.
 
         ```output
-        Healthy
+        { Healthy }
         ```
       - |
-        Navigate to the `/data-api/rest/<entity-name>` path for the current running application. This issues a **HTTP GET** request for that set of entities. Observe the JSON response.
+        Navigate to the `https://<your-static-web-app-url>/data-api/<your-rest-path>/<your-entity-name>` path for the current running application. This issues a **HTTP GET** request for that set of entities. Observe the JSON response.
   - title: |
       Clean up resources
     summary: |
@@ -153,6 +153,3 @@ procedureSection:
         Navigate to the **resource group** using the Azure portal.
       - |
         In the **command bar**, select **Delete**.
-nextStep:
-  text: Integrate with Application Insights.
-  url: how-to-use-application-insights.yml
