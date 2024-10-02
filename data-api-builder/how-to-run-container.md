@@ -109,6 +109,14 @@ Create a configuration file that maps to the table created in the previous steps
         "database-type": "mssql",
         "connection-string": "Server=host.docker.internal\\mssql,1433;Initial Catalog=Library;User Id=sa;Password=<your-password>;TrustServerCertificate=true;"
       },
+      "runtime": {
+        "rest": {
+          "enabled": true
+        },
+        "graphql": {
+          "enabled": true
+        }
+      },
       "entities": {
         "book": {
           "source": "dbo.Books",
