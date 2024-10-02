@@ -500,8 +500,9 @@ The `runtime` section outlines options that influence the runtime behavior and s
     "ttl-seconds": <integer; default: 5>
   },
   "pagination": {
-    "max-page-size": -1, <integer; default: 100000>,
-    "default-page-size": -1 | <integer; default: 100>
+    "max-page-size": -1 | <integer; default: 100000>,
+    "default-page-size": -1 | <integer; default: 100>,
+    "max-response-size-mb": <integer; default: 158>
   },
   "telemetry": {
     "application-insights": {
@@ -559,8 +560,9 @@ Here's an example of a runtime section with multiple common default parameters s
       "ttl-seconds": 5
     },
     "pagination": {
-      "max-page-size": 100000,
-      "default-page-size": 100
+      "max-page-size": -1 | <integer; default: 100000>,
+      "default-page-size": -1 | <integer; default: 100>,
+      "max-response-size-mb": <integer; default: 158>
     },
     "telemetry": {
       "application-insights": {
@@ -590,7 +592,7 @@ This object defines whether GraphQL is enabled and the name\[s\] used to expose 
       "path": "/graphql" (default),
       "enabled": <true> (default) | <false>,
       "depth-limit": integer (default: none),
-      "allow-introspection": <true> (default) | <false>
+      "allow-introspection": <true> (default) | <false>,
       "multiple-mutations": <object>
     }
   }
@@ -1090,15 +1092,15 @@ Here's a list of allowed values for this property:
 
 Sets the maximum size (in megabytes) for any given result. This setting allows users to configure the amount of data that their host platform's memory can handle when streaming data from the underlying data sources.
 
-When users request large result sets, it can strain the database and Data API builder. To address this potential problem, max-response-size-mb allows developers to set a limit on the maximum response size, measured in megabytes, as the data streams from the data source. This limit is based on the overall data size, not the number of rows, which is crucial since columns can vary significantly in size. For instance, a few columns with data types like text, binary, XML, or JSON can hold up to 2 GB each, making each row potentially large. This setting helps developers protect their endpoints by capping response sizes, preventing system overloads while maintaining flexibility in handling different types of data.
+When users request large result sets, it can strain the database and Data API builder. To address this, `max-response-size-mb` allows developers to limit the maximum response size, measured in megabytes, as the data streams from the data source. This limit is based on the overall data size, not the number of rows. Since columns can vary in size, some columns (like text, binary, XML, or JSON) can hold up to 2 GB each, making individual rows potentially very large. This setting helps developers protect their endpoints by capping response sizes and preventing system overloads while maintaining flexibility for different data types.
 
 #### Allowed values
 
-| Value | Result
-|-|-
-|`null` | This value defaults to 158 megabytes. 
-|`integer` | Any positive 32-bit integer is supported.
-|`< 0` | This isn't supported.
+| Value    | Result |
+|----------|--------|
+| `null`   | Defaults to 158 megabytes if unset or explicitly set to `null`. |
+| `integer` | Any positive 32-bit integer is supported. |
+| `< 0`    | Not supported. Validation errors occur if set to less than 1 MB. |
 
 #### Format
 
@@ -1106,7 +1108,7 @@ When users request large result sets, it can strain the database and Data API bu
 {
   "runtime": {
     "host": {
-      "max-response-size-mb": 123 
+      "max-response-size-mb": 123
     }
   }
 }
