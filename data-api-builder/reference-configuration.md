@@ -2947,9 +2947,9 @@ Two types of directives can be used to manage database policy when authoring a d
 
 Here are a few example database policies:
 
-- `@claims.UserId eq @item.OwnerId`
-- `@claims.UserId gt @item.OwnerId`
-- `@claims.UserId lt @item.OwnerId`
+- `@claims.userId eq @item.OwnerId`
+- `@claims.userId gt @item.OwnerId`
+- `@claims.userId lt @item.OwnerId`
 
 Data API builder compares the value of the `UserId` claim to the value of the database field `OwnerId`. The result payload only includes records that fulfill **both** the request metadata and the database policy expression.
 
@@ -3026,7 +3026,7 @@ Consider an entity named `Employee` within a Data API configuration that utilize
         "department COID": "DepartmentId"
       },
       "policy": {
-        "database": "@claims.role eq 'HR' or @claims.UserId eq @item.EmployeeId"
+        "database": "@claims.role eq 'HR' or @claims.userId eq @item.EmployeeId"
       }
     }
   }
@@ -3039,7 +3039,7 @@ Consider an entity named `Employee` within a Data API configuration that utilize
 
 **Mappings**: Aliases are used to map `employee NUM`, `employee Name`, and `department COID` to `EmployeeId`, `EmployeeName`, and `DepartmentId`, respectively, simplifying field names and potentially obfuscating sensitive database schema details.
 
-**Policy Application**: The `policy` section applies a database policy using an OData-like expression. This policy restricts data access to users with the HR role (`@claims.role eq 'HR'`) or to users whose `UserId` claim matches `EmployeeId` - the field alias - in the database (`@claims.UserId eq @item.EmployeeId`). It ensures that employees can only access their own records unless they belong to the HR department. Policies can enforce row-level security based on dynamic conditions.
+**Policy Application**: The `policy` section applies a database policy using an OData-like expression. This policy restricts data access to users with the HR role (`@claims.role eq 'HR'`) or to users whose `UserId` claim matches `EmployeeId` - the field alias - in the database (`@claims.userId eq @item.EmployeeId`). It ensures that employees can only access their own records unless they belong to the HR department. Policies can enforce row-level security based on dynamic conditions.
 
 ### Database
 
@@ -3142,7 +3142,7 @@ Predicates can also evaluate both `claims` and `item` directive types. This exam
             {
               "action": "read",
               "policy": {
-                "database": "@claims.UserId eq @item.owner_id"
+                "database": "@claims.userId eq @item.owner_id"
               }
             }
           ]
