@@ -399,13 +399,9 @@ Whether the `options` section is required or not is largely dependent on the dat
 |-|-|-|-|-|
 | `$root` | `data-source-files` | string array | ❌ No | None |
 
-Data API builder allows you to work with multiple data sources, each with its own configuration file. Every configuration file follows the same schema. Choose one configuration to be the top-level configuration file, which acts as the parent to the other configuration files. This file also manages the `runtime` settings for the engine while listing the other configurations in its `data-source-files` property.
-
-While only the `runtime` settings in the top-level file are obeyed, you can include `runtime` settings in any configuration file without causing any errors—this approach can be handy if you want to switch which file is the top-level configuration during development to test different scenarios. When you include `data-source-files` in other configuration files, the system automatically merges child and grandchild configuration files, which is helpful in complex setups. However, be cautious of circular references.
+Data API builder supports multiple configuration files for different data sources, with one designated as the top-level file managing `runtime` settings. All configurations share the same schema, allowing `runtime` settings in any file without errors. Child configurations merge automatically, but circular references should be avoided. Entities can be split into separate files for better management, but relationships between entities must be in the same file.
 
 :::image type="content" source="media/reference-configuration/data-source-files.png" alt-text="Diagram of multiple configuration files referenced as an array within a single configuration file.":::
-
-Remember, separating entities into different configuration files isn't just about different data sources. If you have numerous entities in a single data source, you can break them up into multiple configuration files for easier management. Just keep in mind that entities in separate files can't have relationships, as relationships can't cross file boundaries. This caveat is only relevant in GraphQL scenarios.
 
 #### Format
 
@@ -601,12 +597,12 @@ This object defines whether GraphQL is enabled and the name\[s\] used to expose 
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`enabled`](#enabled-graphql-runtime)** | ❌ No | boolean |
-| **[`path`](#path-graphql-runtime)** | ❌ No | string |
-| **[`allow-introspection`](#allow-introspection-graphql-runtime)** | ❌ No | boolean |
-| **[`multiple-mutations`](#multiple-mutations-graphql-runtime)** | ❌ No | object |
+| Property                                | Required | Type    | Default                  |
+|-----------------------------------------|----------|---------|--------------------------|
+| **[`enabled`](#enabled-graphql-runtime)**          | ❌ No    | boolean | true                     |
+| **[`path`](#path-graphql-runtime)**               | ❌ No    | string  | /graphql (default)      |
+| **[`allow-introspection`](#allow-introspection-graphql-runtime)** | ❌ No    | boolean | true                     |
+| **[`multiple-mutations`](#multiple-mutations-graphql-runtime)**   | ❌ No    | object  | { create: { enabled: false } } |
 
 ### Enabled (GraphQL runtime)
 
@@ -808,9 +804,9 @@ Configures multiple create operations for the GraphQL runtime.
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **`enabled`** | ✔️ Yes | boolean |
+| Property    | Required | Type    | Default                 |
+|-------------|----------|---------|-------------------------|
+| **`enabled`** | ✔️ Yes    | boolean | true                    | 
 
 #### Examples
 
@@ -856,11 +852,11 @@ This section outlines the global settings for the REST endpoints. These settings
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`enabled`](#enabled-rest-runtime)** | ❌ No | boolean |
-| **[`path`](#path-rest-runtime)** | ❌ No | string |
-| **[`request-body-strict`](#request-body-strict-rest-runtime)** | ❌ No | boolean |
+| Property                                   | Required | Type    | Default                  |
+|--------------------------------------------|----------|---------|--------------------------|
+| **[`enabled`](#enabled-rest-runtime)**     | ❌ No    | boolean | true                     |
+| **[`path`](#path-rest-runtime)**           | ❌ No    | string  | /api           |
+| **[`request-body-strict`](#request-body-strict-rest-runtime)** | ❌ No    | boolean | true                     | 
 
 ### Enabled (REST runtime)
 
@@ -1018,11 +1014,11 @@ The `host` section within the runtime configuration provides settings crucial fo
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`mode`](#mode-host-runtime)** | ❌ No | enum string |
-| **[`cors`](#cors-host-runtime)** | ❌ No | object |
-| **[`authentication`](#authentication-host-runtime)** | ❌ No | object |
+| Property                                     | Required | Type    | Default                  |
+|----------------------------------------------|----------|---------|--------------------------|
+| **[`mode`](#mode-host-runtime)**             | ❌ No    | enum string | production | 
+| **[`cors`](#cors-host-runtime)**             | ❌ No    | object  | N/A                      | 
+| **[`authentication`](#authentication-host-runtime)** | ❌ No    | object  | N/A                      | 
 
 #### Examples
 
@@ -1243,10 +1239,10 @@ Configures authentication for the Data API builder host.
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`provider`](#provider-host-runtime)** | ❌ No | enum string |
-| **[`jwt`](#json-web-tokens-host-runtime)** | ❌ No | object |
+| Property                                     | Required | Type    | Default                  |
+|----------------------------------------------|----------|---------|--------------------------|
+| **[`provider`](#provider-host-runtime)**     | ❌ No    | enum string | StaticWebApps            | 
+| **[`jwt`](#json-web-tokens-host-runtime)**   | ❌ No    | object  | N/A                      | 
 
 ### Provider (Host runtime)
 
@@ -1327,10 +1323,10 @@ Required if the authentication provider is `AzureAD` for Microsoft Entra ID. Thi
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`audience`](#audience-host-runtime)** | ❌ No | string |
-| **[`issuer`](#issuer-host-runtime)** | ❌ No | string |
+| Property                                     | Required | Type    | Default                  |
+|----------------------------------------------|----------|---------|--------------------------|
+| **[`audience`](#audience-host-runtime)**     | ❌ No    | string  | N/A                      | 
+| **[`issuer`](#issuer-host-runtime)**         | ❌ No    | string  | N/A                      | 
 
 #### Examples
 
@@ -1493,10 +1489,10 @@ Configures pagination limits.
 
 #### Properties
 
-|              | Required | Type    | Default  |
-|--------------|----------|---------|----------|
-| **`max-page-size`**        | ❌ No    | integer | 100,000  |
-| **`default-page-size`**    | ❌ No    | integer | 100      |
+| Property               | Required | Type    | Default   |
+|-----------------------|----------|---------|-----------|
+| **[`max-page-size`](#max-page-size-runtime)**   | ❌ No    | integer | 100,000   |
+| **[`default-page-size`](#default-page-size-runtime)**| ❌ No    | integer | 100       | 
 
 #### Example
 
@@ -1676,10 +1672,10 @@ Enables and configures caching for the entire runtime.
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`enabled`](#enabled-cache-runtime)** | ❌ No | boolean |
-| **[`ttl-seconds`](#ttl-in-seconds-cache-runtime)** | ❌ No | integer |
+| Property                                     | Required | Type    | Default   |
+|----------------------------------------------|----------|---------|-----------|
+| **[`enabled`](#enabled-cache-runtime)**      | ❌ No    | boolean | N/A       |
+| **[`ttl-seconds`](#ttl-in-seconds-cache-runtime)** | ❌ No    | integer | 5         |
 
 #### Examples
 
@@ -2654,11 +2650,11 @@ An array of string values detailing what operations are allowed for the associat
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`action`](#action)** | ✔️ Yes | string |
-| **[`fields`](#fields)** | ❌ No | string array |
-| **[`policy`](#policy)** | ❌ No | object |
+| Property                                     | Required | Type         | Default   |
+|----------------------------------------------|----------|--------------|-----------|
+| **[`action`](#action)**                      | ✔️ Yes   | string       | N/A       |
+| **[`fields`](#fields)**                      | ❌ No    | string array  | N/A       |
+| **[`policy`](#policy)**                      | ❌ No    | object       | N/A       |
 
 #### Examples
 
@@ -2920,9 +2916,9 @@ The `policy` section, defined per `action`, defines item-level security rules (d
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`database`](#database)** | ✔️ Yes | string |
+| Property                                     | Required | Type    | Default   |
+|----------------------------------------------|----------|---------|-----------|
+| **[`database`](#database)**                  | ✔️ Yes   | string  | N/A       |
 
 #### Description
 
@@ -3219,11 +3215,11 @@ This segment provides for integrating an entity into the GraphQL schema. It allo
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`enabled`](#enabled-graphql-entity)** | ❌ No | boolean |
-| **[`type`](#type-graphql-entity)** | ❌ No | string or object |
-| **[`operation`](#operation-graphql-entity)** | ❌ No | enum string |
+| Property                                     | Required | Type          | Default   |
+|----------------------------------------------|----------|---------------|-----------|
+| **[`enabled`](#enabled-graphql-entity)**    | ❌ No    | boolean       | N/A       |
+| **[`type`](#type-graphql-entity)**          | ❌ No    | string or object | N/A    |
+| **[`operation`](#operation-graphql-entity)**| ❌ No    | enum string   | N/A       |
 
 #### Examples
 
@@ -3319,10 +3315,10 @@ This property dictates the naming convention for an entity within the GraphQL sc
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **`singular`** | ❌ No | string |
-| **`plural`** | ❌ No | string |
+| Property     | Required | Type    | Default             |
+|--------------|----------|---------|---------------------|
+| **`singular`** | ❌ No    | string  | N/A                 |
+| **`plural`**  | ❌ No    | string  | N/A (default: singular) |
 
 #### Examples
 
@@ -3529,11 +3525,11 @@ The `rest` section of the configuration file is dedicated to fine-tuning the RES
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`enabled`](#enabled-rest-entity)** | ✔️ Yes | boolean |
-| **[`path`](#path-rest-entity)** | ❌ No | string |
-| **[`methods`](#methods-rest-entity)** | ❌ No | string array |
+| Property                                     | Required | Type          | Default                  |
+|----------------------------------------------|----------|---------------|--------------------------|
+| **[`enabled`](#enabled-rest-entity)**       | ✔️ Yes   | boolean       | true                     |
+| **[`path`](#path-rest-entity)**             | ❌ No    | string        | /<entity-name>           |
+| **[`methods`](#methods-rest-entity)**       | ❌ No    | string array   | GET |
 
 #### Examples
 
@@ -3833,15 +3829,15 @@ The `relationships` section outlines how entities interact within the Data API b
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`cardinality`](#cardinality)** | ✔️ Yes | enum string |
-| **[`target.entity`](#target-entity)** | ✔️ Yes | string |
-| **[`source.fields`](#source-fields)** | ❌ No | string array |
-| **[`target.fields`](#target-fields)** | ❌ No | string array |
-| **[`linking.<object-or-entity>`](#linking-object-or-entity)** | ❌ No | string |
-| **[`linking.source.fields`](#linking-source-fields)** | ❌ No | string array |
-| **[`linking.target.fields`](#linking-target-fields)** | ❌ No | string array |
+| Property                                      | Required | Type          | Default   |
+|-----------------------------------------------|----------|---------------|-----------|
+| **[`cardinality`](#cardinality)**            | ✔️ Yes   | enum string   | N/A       |
+| **[`target.entity`](#target-entity)**        | ✔️ Yes   | string        | N/A       |
+| **[`source.fields`](#source-fields)**        | ❌ No    | string array   | N/A       |
+| **[`target.fields`](#target-fields)**        | ❌ No    | string array   | N/A       |
+| **[`linking.<object-or-entity>`](#linking-object-or-entity)** | ❌ No    | string        | N/A       |
+| **[`linking.source.fields`](#linking-source-fields)** | ❌ No    | string array   | N/A       |
+| **[`linking.target.fields`](#linking-target-fields)** | ❌ No    | string array   | N/A       |
 
 #### Examples
 
@@ -4085,10 +4081,10 @@ You're right; the formatting doesn't match your style. Here’s the corrected ve
 
 #### Properties
 
-| | Required | Type | Default |
-| --- | --- | --- | --- |
-| **[`enabled`](#enabled-cache-entity)** | ❌ No | boolean | `false` |
-| **[`ttl-seconds`](#ttl-in-seconds-cache-entity)** | ❌ No | integer | `5` |
+| Property                                     | Required | Type    | Default   |
+|----------------------------------------------|----------|---------|-----------|
+| **[`enabled`](#enabled-cache-entity)**      | ❌ No    | boolean | false     |
+| **[`ttl-seconds`](#ttl-in-seconds-cache-entity)** | ❌ No    | integer | 5         |
 
 #### Examples
 
