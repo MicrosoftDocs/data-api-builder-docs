@@ -1491,8 +1491,8 @@ Configures pagination limits.
 
 | Property | Required | Type | Default |
 |-|-|-|-|
-| **[`max-page-size`](#max-page-size-runtime)** | ❌ No | integer | 100,000 |
-| **[`default-page-size`](#default-page-size-runtime)**| ❌ No | integer | 100 | 
+| `max-page-size` | ❌ No | integer | 100,000 |
+| `default-page-size` | ❌ No | integer | 100 | 
 
 #### Example
 
@@ -3528,7 +3528,7 @@ The `rest` section of the configuration file is dedicated to fine-tuning the RES
 | Property | Required | Type | Default |
 |-|-|-|-|
 | **[`enabled`](#enabled-rest-entity)** | ✔️ Yes | boolean | True |
-| **[`path`](#path-rest-entity)** | ❌ No | string | /<entity-name> |
+| **[`path`](#path-rest-entity)** | ❌ No | string | `/<entity-name>` |
 | **[`methods`](#methods-rest-entity)** | ❌ No | string array | GET |
 
 #### Examples
