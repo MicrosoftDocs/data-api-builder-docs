@@ -52,13 +52,13 @@ Here's a quick breakdown of the primary "sections" in a configuration file.
 
 Here's the description of the top-level properties in a table format:
 
-| Property              | Description |
-|-----------------------|-------------|
-| **[$schema](#schema)**           | Specifies the JSON schema for validation, ensuring the configuration adheres to the required format. |
-| **[data-source](#data-source)**       | Contains the details about the [database type](#database-type) and the [connection string](#connection-string), necessary for establishing the database connection. |
+| Property | Description |
+|-|-|
+| **[$schema](#schema)** | Specifies the JSON schema for validation, ensuring the configuration adheres to the required format. |
+| **[data-source](#data-source)** | Contains the details about the [database type](#database-type) and the [connection string](#connection-string), necessary for establishing the database connection. |
 | **[data-source-files](#data-source-files)** | An optional array specifying other configuration files that might define other data sources. |
-| **[runtime](#runtime)**           | Configures runtime behaviors and settings, including subproperties for  [REST](#rest-runtime), [GraphQL](#graphql-runtime), [host](#host-runtime), [cache](#cache-runtime), and [telemetry](#telemetry-runtime). |
-| **[entities](#entities)**          | Defines the set of entities ([database tables](#type-entities), views, etc.) that are exposed through the API, including their [mappings](#mappings-entities), [permissions](#permissions), and [relationships](#relationships-entities). |
+| **[runtime](#runtime)** | Configures runtime behaviors and settings, including subproperties for  [REST](#rest-runtime), [GraphQL](#graphql-runtime), [host](#host-runtime), [cache](#cache-runtime), and [telemetry](#telemetry-runtime). |
+| **[entities](#entities)** | Defines the set of entities ([database tables](#type-entities), views, etc.) that are exposed through the API, including their [mappings](#mappings-entities), [permissions](#permissions), and [relationships](#relationships-entities). |
 
 ## Sample configurations
 
@@ -92,7 +92,7 @@ Data API builder's configuration file can support scenarios where you need to su
 Consider an example where you want a baseline configuration and a development-specific configuration. This example requires two configuration files:
 
 | | Environment |
-| --- | --- |
+|-|-|
 | **dab-config.json** | Base |
 | **dab-config.Development.json** | Development |
 
@@ -103,7 +103,7 @@ Environment-specific configuration files override property values in the base co
 Refer to this matrix to better understand which value is used depending on where that value is specified (or not specified) in either file.
 
 | | **Specified in base configuration** | **Not specified in base configuration** |
-| --- | --- | --- |
+|-|-|-|
 | **Specified in current environment configuration** | Current environment | Current environment |
 | **Not specified in current environment configuration** | Base | None |
 
@@ -126,7 +126,7 @@ Each configuration file begins with a `$schema` property, specifying the [JSON s
 
 ```json
 {
-  "$schema": "<string>"
+  "$schema": <string>
 }
 ```
 
@@ -149,7 +149,7 @@ The latest version of the schema is always available at <https://github.com/Azur
 Here are a few examples of valid schema values.
 
 | Version | URI | Description |
-| --- | --- | --- |
+|-|-|-|
 | 0.3.7-alpha | `https://github.com/Azure/data-api-builder/releases/download/v0.3.7-alpha/dab.draft.schema.json` | Uses the configuration schema from an alpha version of the tool. |
 | 0.10.23 | `https://github.com/Azure/data-api-builder/releases/download/v0.10.23/dab.draft.schema.json` | Uses the configuration schema for a stable release of the tool. |
 | Latest | `https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json` | Uses the latest version of the configuration schema. |
@@ -171,8 +171,8 @@ The `data-source` section defines the database and access to the database throug
 ```json
 {
   "data-source": {
-    "database-type": "...",
-    "connection-string": "your-connection-string",
+    "database-type": <string>,
+    "connection-string": <string>,
     
     // mssql-only
     "options": {
@@ -181,9 +181,9 @@ The `data-source` section defines the database and access to the database throug
     
     // cosmosdb_nosql-only
     "options": {
-      "database": "your-cosmosdb-database-name", 
-      "container": "your-cosmosdb-container-name",
-      "schema": "path-to-your-graphql-schema-file"
+      "database": <string>,
+      "container": <string>,
+      "schema": <string>
     }
   }
 }
@@ -192,7 +192,7 @@ The `data-source` section defines the database and access to the database throug
 #### Properties
 
 | | Required | Type |
-| --- | --- | --- |
+|-|-|-|
 | **[`database-type`](#database-type)** | ✔️ Yes | enum string |
 | **[`connection-string`](#connection-string)** | ✔️ Yes | string |
 | **[`options`](#options)** | ❌ No | object |
@@ -210,26 +210,26 @@ An enum string used to specify the type of database to use as the data source.
 
 ```json
 {
-  "data-source"{
-    "database-type": "<enum-string>"
+  "data-source": {
+    "database-type": <string>
   }
 }
 ```
 
-#### Values
+#### Type values
 
 The `type` property indicates the kind of backend database.
 
-| Type                  | Description              | Min Version |
-| --------------------- | ------------------------ | ----------- |
-| `mssql`               | Azure SQL Database       | n/a         |
-| `mssql`               | Azure SQL MI             | n/a         |
-| `mssql`               | SQL Server               | SQL 2016    |
-| `sqldw`               | Azure SQL Data Warehouse | n/a         |
-| `postgresql`          | PostgreSQL               | v11         |
-| `mysql`               | MySQL                    | v8          |
-| `cosmosdb_nosql`      | Azure Cosmos DB for NoSQL      | n/a         |
-| `cosmosdb_postgresql` | Azure Cosmos DB for PostgreSQL | n/a         |
+| Type | Description | Min Version |
+|-|-|-|
+| `mssql` | Azure SQL Database | None |
+| `mssql` | Azure SQL MI | None |
+| `mssql` | SQL Server | SQL 2016 |
+| `sqldw` | Azure SQL Data Warehouse | None |
+| `postgresql` | PostgreSQL | v11 |
+| `mysql` | MySQL | v8 |
+| `cosmosdb_nosql` | Azure Cosmos DB for NoSQL | None |
+| `cosmosdb_postgresql` | Azure Cosmos DB for PostgreSQL | None | 
 
 ### Connection string
 
@@ -244,8 +244,8 @@ A **string** value containing a valid connection string to connect to the target
 
 ```json
 {
-  "data-source"{
-    "connection-string": "<string>"
+  "data-source": {
+    "connection-string": <string>
   }
 }
 ```
@@ -275,7 +275,7 @@ Data API builder can also connect to the target database using Managed Service I
 The value used for the connection string largely depends on the database service used in your scenario. You can always elect to store the connection string in an environment variable and access it using the `@env()` function.
 
 | | Value | Description |
-| --- | --- | --- |
+|-|-|-|
 | **Use Azure SQL Database string value** | `Server=<server-address>;Database=<name-of-database>;User ID=<username>;Password=<password>;` | Connection string to an Azure SQL Database account. For more information, see [Azure SQL Database connection strings](/azure/azure-sql/database/connect-query-content-reference-guide?#get-adonet-connection-information-optional---sql-database-only). |
 | **Use Azure Database for PostgreSQL string value** | `Server=<server-address>;Database=<name-of-database>;Port=5432;User Id=<username>;Password=<password>;Ssl Mode=Require;` | Connection string to an Azure Database for PostgreSQL account. For more information, see [Azure Database for PostgreSQL connection strings](/azure/postgresql/single-server/how-to-connection-string-powershell). |
 | **Use Azure Cosmos DB for NoSQL string value** | `AccountEndpoint=<endpoint>;AccountKey=<key>;` | Connection string to an Azure Cosmos DB for NoSQL account. For more information, see [Azure Cosmos DB for NoSQL connection strings](/azure/cosmos-db/nosql/how-to-dotnet-get-started#retrieve-your-account-connection-string). |
@@ -366,9 +366,9 @@ An optional section of extra key-value parameters for specific database connecti
 
 ```json
 {
-  "data-source"{
+  "data-source": {
     "options": {
-        "<key>": "<value>"
+      "<key-name>": <string>
     }
   }
 }
@@ -379,7 +379,7 @@ An optional section of extra key-value parameters for specific database connecti
 Whether the `options` section is required or not is largely dependent on the database service being used.
 
 | | Value | Description |
-| --- | --- | --- |
+|-|-|-|
 | **Enable `SESSION_CONTEXT` in Azure SQL or SQL Server** | `"set-session-context": false` | For Azure SQL and SQL Server, Data API builder can take advantage of `SESSION_CONTEXT` to send user specified metadata to the underlying database. Such metadata is available to Data API builder by virtue of the claims present in the access token. The `SESSION_CONTEXT` data is available to the database during the database connection until that connection is closed. For more information, see [session context](azure-sql-session-context-rls.md). |
 
 ```json
@@ -399,19 +399,15 @@ Whether the `options` section is required or not is largely dependent on the dat
 |-|-|-|-|-|
 | `$root` | `data-source-files` | string array | ❌ No | None |
 
-Data API builder allows you to work with multiple data sources, each with its own configuration file. Every configuration file follows the same schema. Choose one configuration to be the top-level configuration file, which acts as the parent to the other configuration files. This file also manages the `runtime` settings for the engine while listing the other configurations in its `data-source-files` property.
-
-While only the `runtime` settings in the top-level file are obeyed, you can include `runtime` settings in any configuration file without causing any errors—this approach can be handy if you want to switch which file is the top-level configuration during development to test different scenarios. When you include `data-source-files` in other configuration files, the system automatically merges child and grandchild configuration files, which is helpful in complex setups. However, be cautious of circular references.
+Data API builder supports multiple configuration files for different data sources, with one designated as the top-level file managing `runtime` settings. All configurations share the same schema, allowing `runtime` settings in any file without errors. Child configurations merge automatically, but circular references should be avoided. Entities can be split into separate files for better management, but relationships between entities must be in the same file.
 
 :::image type="content" source="media/reference-configuration/data-source-files.png" alt-text="Diagram of multiple configuration files referenced as an array within a single configuration file.":::
-
-Remember, separating entities into different configuration files isn't just about different data sources. If you have numerous entities in a single data source, you can break them up into multiple configuration files for easier management. Just keep in mind that entities in separate files can't have relationships, as relationships can't cross file boundaries. This caveat is only relevant in GraphQL scenarios.
 
 #### Format
 
 ```json
 {
-  "data-source-files": ["<string-array>"]
+  "data-source-files": [ <string> ]
 }
 ```
 
@@ -471,12 +467,12 @@ The `runtime` section outlines options that influence the runtime behavior and s
 {
   "runtime": {
     "rest": {
-      "path": "/api" (default),
+      "path": <string> (default: /api),
       "enabled": <true> (default) | <false>,
       "request-body-strict": <true> (default) | <false>
     },
     "graphql": {
-      "path": "/graphql" (default),
+      "path": <string> (default: /graphql),
       "enabled": <true> (default) | <false>,
       "allow-introspection": <true> (default) | <false>
     },
@@ -500,12 +496,13 @@ The `runtime` section outlines options that influence the runtime behavior and s
     "ttl-seconds": <integer; default: 5>
   },
   "pagination": {
-    "max-page-size": -1, <integer; default: 100000>,
-    "default-page-size": -1 | <integer; default: 100>
+    "max-page-size": <integer; default: 100000>,
+    "default-page-size": <integer; default: 100>,
+    "max-response-size-mb": <integer; default: 158>
   },
   "telemetry": {
     "application-insights": {
-      "connection-string": "<connection-string>",
+      "connection-string": <string>,
       "enabled": <true> | <false> (default)
     }
   }
@@ -515,7 +512,7 @@ The `runtime` section outlines options that influence the runtime behavior and s
 #### Properties
 
 | | Required | Type |
-| --- | --- | --- |
+|-|-|-|
 | **[`rest`](#rest-runtime)** | ❌ No | object |
 | **[`graphql`](#graphql-runtime)** | ❌ No | object |
 | **[`host`](#host-runtime)** | ❌ No | object |
@@ -559,8 +556,9 @@ Here's an example of a runtime section with multiple common default parameters s
       "ttl-seconds": 5
     },
     "pagination": {
-      "max-page-size": 100000,
-      "default-page-size": 100
+      "max-page-size": -1 | <integer; default: 100000>,
+      "default-page-size": -1 | <integer; default: 100>,
+      "max-response-size-mb": <integer; default: 158>
     },
     "telemetry": {
       "application-insights": {
@@ -577,7 +575,7 @@ Here's an example of a runtime section with multiple common default parameters s
 ---
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime` | `graphql` | object | ❌ No | - |
+| `runtime` | `graphql` | object | ❌ No | None |
 
 This object defines whether GraphQL is enabled and the name\[s\] used to expose the entity as a GraphQL type. This object is optional and only used if the default name or settings aren't sufficient. This section outlines the global settings for the GraphQL endpoint.
 
@@ -587,10 +585,10 @@ This object defines whether GraphQL is enabled and the name\[s\] used to expose 
 {
   "runtime": {
     "graphql": {
-      "path": "/graphql" (default),
+      "path": <string> (default: /graphql),
       "enabled": <true> (default) | <false>,
-      "depth-limit": integer (default: none),
-      "allow-introspection": <true> (default) | <false>
+      "depth-limit": <integer; default: none>,
+      "allow-introspection": <true> (default) | <false>,
       "multiple-mutations": <object>
     }
   }
@@ -599,12 +597,12 @@ This object defines whether GraphQL is enabled and the name\[s\] used to expose 
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`enabled`](#enabled-graphql-runtime)** | ❌ No | boolean |
-| **[`path`](#path-graphql-runtime)** | ❌ No | string |
-| **[`allow-introspection`](#allow-introspection-graphql-runtime)** | ❌ No | boolean |
-| **[`multiple-mutations`](#multiple-mutations-graphql-runtime)** | ❌ No | object |
+| Property | Required | Type | Default |
+|-|-|-|-|
+| **[`enabled`](#enabled-graphql-runtime)** | ❌ No | boolean | True |
+| **[`path`](#path-graphql-runtime)** | ❌ No | string | /graphql (default) |
+| **[`allow-introspection`](#allow-introspection-graphql-runtime)** | ❌ No | boolean | True |
+| **[`multiple-mutations`](#multiple-mutations-graphql-runtime)** | ❌ No | object | { create: { enabled: false } } |
 
 ### Enabled (GraphQL runtime)
 
@@ -622,7 +620,7 @@ Defines whether to enable or disable the GraphQL endpoints globally. If disabled
 {
   "runtime": {
     "graphql": {
-      "enabled": "<boolean>"
+      "enabled": <true> (default) | <false>
     }
   }
 }
@@ -685,7 +683,7 @@ Defines the URL path where the GraphQL endpoint is made available. For example, 
 {
   "runtime": {
     "graphql": {
-      "path": "<string>"
+      "path": <string> (default: /graphql)
     }
   }
 }
@@ -711,7 +709,7 @@ In this example, the root GraphQL URI is `/query`.
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime.graphql` | `allow-introspection` | boolean | ❌ No | None |
+| `runtime.graphql` | `allow-introspection` | boolean | ❌ No | True |
 
 This Boolean flag controls the ability to perform schema introspection queries on the GraphQL endpoint. Enabling introspection allows clients to query the schema for information about the types of data available, the kinds of queries they can perform, and the mutations available.
 
@@ -723,7 +721,7 @@ This feature is useful during development for understanding the structure of the
 {
   "runtime": {
     "graphql": {
-      "allow-introspection": "<boolean>"
+      "allow-introspection": <true> (default) | <false>
     }
   }
 }
@@ -763,7 +761,9 @@ Configures all multiple mutation operations for the GraphQL runtime.
   "runtime": {
     "graphql": {
       "multiple-mutations": {
-        "create": <object>
+        "create": {
+          "enabled": <true> (default) | <false>
+        }
       }
     }
   }
@@ -773,7 +773,7 @@ Configures all multiple mutation operations for the GraphQL runtime.
 #### Properties
 
 | | Required | Type |
-| --- | --- | --- |
+|-|-|-|
 | **[`create`](#multiple-mutations---create-graphql-runtime)** | ❌ No | object |
 
 ### Multiple mutations - create (GraphQL runtime)
@@ -794,7 +794,7 @@ Configures multiple create operations for the GraphQL runtime.
     "graphql": {
       "multiple-mutations": {
         "create": {
-          "enabled": <false> (default) | <true>
+          "enabled": <true> (default) | <false>
         }
       }
     }
@@ -804,9 +804,9 @@ Configures multiple create operations for the GraphQL runtime.
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **`enabled`** | ✔️ Yes | boolean |
+| Property | Required | Type | Default |
+|-|-|-|-|
+| **`enabled`** | ✔️ Yes | boolean | True | 
 
 #### Examples
 
@@ -832,7 +832,7 @@ In this example, multiple mutations are enabled for the GraphQL runtime. Specifi
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime` | `rest` | object | ❌ No | - |
+| `runtime` | `rest` | object | ❌ No | None |
 
 This section outlines the global settings for the REST endpoints. These settings serve as defaults for all entities but can be overridden on a per-entity basis in their respective configurations.
 
@@ -842,22 +842,21 @@ This section outlines the global settings for the REST endpoints. These settings
 {
   "runtime": {
     "rest": {
-      "path": "/api" (default),
+      "path": <string> (default: /api),
       "enabled": <true> (default) | <false>,
       "request-body-strict": <true> (default) | <false>
-    },
-    ...
+    }
   }
 }
 ```
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`enabled`](#enabled-rest-runtime)** | ❌ No | boolean |
-| **[`path`](#path-rest-runtime)** | ❌ No | string |
-| **[`request-body-strict`](#request-body-strict-rest-runtime)** | ❌ No | boolean |
+| Property | Required | Type | Default |
+|-|-|-|-|
+| **[`enabled`](#enabled-rest-runtime)** | ❌ No | boolean | True |
+| **[`path`](#path-rest-runtime)** | ❌ No | string | /api |
+| **[`request-body-strict`](#request-body-strict-rest-runtime)** | ❌ No | boolean | True | 
 
 ### Enabled (REST runtime)
 
@@ -875,7 +874,7 @@ A Boolean flag that determines the global availability of REST endpoints. If dis
 {
   "runtime": {
     "rest": {
-      "enabled": "<boolean>"
+      "enabled": <true> (default) | <false>,
     }
   }
 }
@@ -908,20 +907,20 @@ Sets the URL path for accessing all exposed REST endpoints. For instance, settin
 > [!NOTE]
 > When deploying Data API builder using Static Web Apps (preview), the Azure service automatically injects the additional subpath `/data-api` to the url. This behavior ensures compatibility with existing Static Web App features. The resulting endpoint would be `/data-api/api/<entity>`. This is only relevant to Static Web Apps.
 
-> [!IMPORTANT]
-> Sub-paths are not allowed for this property.
-
 #### Format
 
 ```json
 {
   "runtime": {
     "rest": {
-      "path": "<string>"
+      "path": <string> (default: /api)
     }
   }
 }
 ```
+
+> [!IMPORTANT]
+> User supplied sub-paths are not allowed for this property.
 
 #### Examples
 
@@ -959,7 +958,7 @@ This boolean flag determines whether the request body for a REST mutation operat
 {
   "runtime": {
     "rest": {
-      "request-body-strict": "<boolean>"
+      "request-body-strict": <true> (default) | <false>
     }
   }
 }
@@ -985,7 +984,7 @@ In this example, strict request body validation is disabled.
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime` | `host` | object | ❌ No | - |
+| `runtime` | `host` | object | ❌ No | None |
 
 The `host` section within the runtime configuration provides settings crucial for the operational environment of the Data API builder. These settings include operational modes, CORS configuration, and authentication details.
 
@@ -994,7 +993,6 @@ The `host` section within the runtime configuration provides settings crucial fo
 ```json
 {
   "runtime": {
-    ...
     "host": {
       "mode": "production" (default) | "development",
       "max-response-size-mb": <integer; default: 158>,
@@ -1011,17 +1009,16 @@ The `host` section within the runtime configuration provides settings crucial fo
       }
     }
   }
-  ...
 }
 ```
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`mode`](#mode-host-runtime)** | ❌ No | enum string |
-| **[`cors`](#cors-host-runtime)** | ❌ No | object |
-| **[`authentication`](#authentication-host-runtime)** | ❌ No | object |
+| Property | Required | Type | Default |
+|-|-|-|-|
+| **[`mode`](#mode-host-runtime)** | ❌ No | enum string | production | 
+| **[`cors`](#cors-host-runtime)** | ❌ No | object | None | 
+| **[`authentication`](#authentication-host-runtime)** | ❌ No | object | None | 
 
 #### Examples
 
@@ -1065,7 +1062,7 @@ Typically, the underlying database errors are exposed in detail by setting the d
 {
   "runtime": {
     "host": {
-      "mode": "<enum-string>"
+      "mode": "production" (default) | "development"
     }
   }
 }
@@ -1076,7 +1073,7 @@ Typically, the underlying database errors are exposed in detail by setting the d
 Here's a list of allowed values for this property:
 
 | | Description |
-| --- | --- |
+|-|-|
 | **`production`** | Use when hosting in production on Azure |
 | **`development`** | Use in development on local machine |
 
@@ -1090,15 +1087,15 @@ Here's a list of allowed values for this property:
 
 Sets the maximum size (in megabytes) for any given result. This setting allows users to configure the amount of data that their host platform's memory can handle when streaming data from the underlying data sources.
 
-When users request large result sets, it can strain the database and Data API builder. To address this potential problem, max-response-size-mb allows developers to set a limit on the maximum response size, measured in megabytes, as the data streams from the data source. This limit is based on the overall data size, not the number of rows, which is crucial since columns can vary significantly in size. For instance, a few columns with data types like text, binary, XML, or JSON can hold up to 2 GB each, making each row potentially large. This setting helps developers protect their endpoints by capping response sizes, preventing system overloads while maintaining flexibility in handling different types of data.
+When users request large result sets, it can strain the database and Data API builder. To address this, `max-response-size-mb` allows developers to limit the maximum response size, measured in megabytes, as the data streams from the data source. This limit is based on the overall data size, not the number of rows. Since columns can vary in size, some columns (like text, binary, XML, or JSON) can hold up to 2 GB each, making individual rows potentially very large. This setting helps developers protect their endpoints by capping response sizes and preventing system overloads while maintaining flexibility for different data types.
 
 #### Allowed values
 
-| Value | Result
-|-|-
-|`null` | This value defaults to 158 megabytes. 
-|`integer` | Any positive 32-bit integer is supported.
-|`< 0` | This isn't supported.
+| Value | Result |
+|-|-|
+| `null` | Defaults to 158 megabytes if unset or explicitly set to `null`. |
+| `integer` | Any positive 32-bit integer is supported. |
+| `< 0` | Not supported. Validation errors occur if set to less than 1 MB. |
 
 #### Format
 
@@ -1106,7 +1103,7 @@ When users request large result sets, it can strain the database and Data API bu
 {
   "runtime": {
     "host": {
-      "max-response-size-mb": 123 
+      "max-response-size-mb": <integer; default: 158>
     }
   }
 }
@@ -1118,7 +1115,7 @@ When users request large result sets, it can strain the database and Data API bu
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime.host` | `cors` | object | ❌ No | - |
+| `runtime.host` | `cors` | object | ❌ No | None |
 
 Cross-origin resource sharing (CORS) settings for the Data API builder engine host.
 
@@ -1128,7 +1125,10 @@ Cross-origin resource sharing (CORS) settings for the Data API builder engine ho
 {
   "runtime": {
     "host": {
-      "cors": "<object>"
+      "cors": {
+        "origins": ["<array-of-strings>"],
+        "allow-credentials": <true> | <false> (default)
+      }
     }
   }
 }
@@ -1137,7 +1137,7 @@ Cross-origin resource sharing (CORS) settings for the Data API builder engine ho
 #### Properties
 
 | | Required | Type |
-| --- | --- | --- |
+|-|-|-|
 | **[`allow-credentials`](#allow-credentials-host-runtime)** | ❌ No | boolean |
 | **[`origins`](#origins-host-runtime)** | ❌ No | string array |
 
@@ -1161,7 +1161,7 @@ If true, sets the `Access-Control-Allow-Credentials` CORS header.
   "runtime": {
     "host": {
       "cors": {
-        "allow-credentials": "<boolean>",
+        "allow-credentials": <true> (default) | <false>
       }
     }
   }
@@ -1174,7 +1174,7 @@ If true, sets the `Access-Control-Allow-Credentials` CORS header.
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime.host.cors` | `origins` | string array | ❌ No | - |
+| `runtime.host.cors` | `origins` | string array | ❌ No | None |
 
 Sets an array with a list of allowed origins for CORS. This setting allows the `*` wildcard for all origins.
 
@@ -1185,7 +1185,7 @@ Sets an array with a list of allowed origins for CORS. This setting allows the `
   "runtime": {
     "host": {
       "cors": {
-        "origins": ["<string-array>"]
+        "origins": ["<array-of-strings>"]
       }
     }
   }
@@ -1215,7 +1215,7 @@ Here's an example of a host that allows CORS without credentials from all origin
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime.host` | `authentication` | object | ❌ No | - |
+| `runtime.host` | `authentication` | object | ❌ No | None |
 
 Configures authentication for the Data API builder host.
 
@@ -1226,8 +1226,11 @@ Configures authentication for the Data API builder host.
   "runtime": {
     "host": {
       "authentication": {
-        "provider": "<enum-string>",
-        "jwt": "<object>"
+        "provider": "StaticWebApps" (default) | ...,
+        "jwt": {
+          "audience": "<string>",
+          "issuer": "<string>"
+        }
       }
     }
   }
@@ -1236,10 +1239,10 @@ Configures authentication for the Data API builder host.
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`provider`](#provider-host-runtime)** | ❌ No | enum string |
-| **[`jwt`](#json-web-tokens-host-runtime)** | ❌ No | object |
+| Property | Required | Type | Default |
+|-|-|-|-|
+| **[`provider`](#provider-host-runtime)** | ❌ No | enum string | StaticWebApps | 
+| **[`jwt`](#json-web-tokens-host-runtime)** | ❌ No | object | None | 
 
 ### Provider (Host runtime)
 
@@ -1252,7 +1255,7 @@ Configures authentication for the Data API builder host.
 The `authentication.provider` setting within the `host` configuration defines the method of authentication used by the Data API builder. It determines how the API validates the identity of users or services attempting to access its resources. This setting allows for flexibility in deployment and integration by supporting various authentication mechanisms tailored to different environments and security requirements.
 
 | Provider | Description |
-| - | - |
+|-|-|
 | `StaticWebApps` | Instructs Data API builder to look for a set of HTTP headers only present when running within a Static Web Apps environment. |
 | `AppService` | When the runtime is hosted in Azure AppService with AppService Authentication enabled and configured (EasyAuth). |
 | `AzureAd` | Microsoft Entra Identity needs to be configured so that it can authenticate a request sent to Data API builder (the "Server App"). For more information, see [Microsoft Entra ID authentication](authentication-azure-ad.md). |
@@ -1265,7 +1268,7 @@ The `authentication.provider` setting within the `host` configuration defines th
   "runtime": {
     "host": {
       "authentication": {
-        "provider": "<enum-string>",
+        "provider": "StaticWebApps" (default) | ...
       }
     }
   }
@@ -1277,7 +1280,7 @@ The `authentication.provider` setting within the `host` configuration defines th
 Here's a list of allowed values for this property:
 
 | | Description |
-| --- | --- |
+|-|-|
 | **`StaticWebApps`** | Azure Static Web Apps |
 | **`AppService`** | Azure App Service |
 | **`AzureAD`** | Microsoft Entra ID |
@@ -1296,7 +1299,7 @@ If the authentication provider is set to `AzureAD` (Microsoft Entra ID), then th
 Required if the authentication provider is `AzureAD` for Microsoft Entra ID. This section must specify the `audience` and `issuer` to validate the received JWT token against the intended `AzureAD` tenant for authentication.
 
 | Setting | Description |
-| - | - |
+|-|-|
 | audience | Identifies the intended recipient of the token; typically the application's identifier registered in Microsoft Entra Identity (or your identity provider), ensuring that the token was indeed issued for your application. |
 | issuer | Specifies the issuing authority's URL, which is the token service that issued the JWT. This URL should match the identity provider's issuer URL from which the JWT was obtained, validating the token's origin. |
 
@@ -1307,9 +1310,10 @@ Required if the authentication provider is `AzureAD` for Microsoft Entra ID. Thi
   "runtime": {
     "host": {
       "authentication": {
+        "provider": "StaticWebApps" (default) | ...,
         "jwt": {
-          "audience": "<string>",
-          "issuer": "<string>"
+          "audience": "<client-id>",
+          "issuer": "<issuer-url>"
         }
       }
     }
@@ -1319,10 +1323,10 @@ Required if the authentication provider is `AzureAD` for Microsoft Entra ID. Thi
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`audience`](#audience-host-runtime)** | ❌ No | string |
-| **[`issuer`](#issuer-host-runtime)** | ❌ No | string |
+| Property | Required | Type | Default |
+|-|-|-|-|
+| **[`audience`](#audience-host-runtime)** | ❌ No | string | None | 
+| **[`issuer`](#issuer-host-runtime)** | ❌ No | string | None | 
 
 #### Examples
 
@@ -1414,7 +1418,7 @@ Authentication is delegated to a supported identity provider where access token 
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime.host.authentication.jwt` | `audience` | string | ❌ No | - |
+| `runtime.host.authentication.jwt` | `audience` | string | ❌ No | None |
 
 Audience for the JWT token.
 
@@ -1426,7 +1430,7 @@ Audience for the JWT token.
     "host": {
       "authentication": {
         "jwt": {
-          "audience": "<string>",
+          "audience": "<client-id>"
         }
       }
     }
@@ -1440,7 +1444,7 @@ Audience for the JWT token.
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime.host.authentication.jwt` | `issuer` | string | ❌ No | - |
+| `runtime.host.authentication.jwt` | `issuer` | string | ❌ No | None |
 
 Issuer for the JWT token.
 
@@ -1452,7 +1456,7 @@ Issuer for the JWT token.
     "host": {
       "authentication": {
         "jwt": {
-          "issuer": "<string>"
+          "issuer": "<issuer-url>"
         }
       }
     }
@@ -1460,15 +1464,15 @@ Issuer for the JWT token.
 }
 ```
 
-### Pagination (runtime)
+### Pagination (Runtime)
 
 ---
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime` | `pagination` | object | ❌ No | - |
+| `runtime` | `pagination` | object | ❌ No | None |
 
-Configures result limits.
+Configures pagination limits.
 
 #### Format
 
@@ -1476,8 +1480,8 @@ Configures result limits.
 {
   "runtime": {
     "pagination": {
-      "max-page-size": -1, 
-      "default-page-size": -1 
+      "max-page-size": <integer; default: 100000>,
+      "default-page-size": <integer; default: 100>
     }
   }
 }
@@ -1485,10 +1489,10 @@ Configures result limits.
 
 #### Properties
 
-|              | Required | Type    | Default  |
-|--------------|----------|---------|----------|
-| **`max-page-size`**        | ❌ No    | integer | 100,000  |
-| **`default-page-size`**    | ❌ No    | integer | 100      |
+| Property | Required | Type | Default |
+|-|-|-|-|
+| `max-page-size` | ❌ No | integer | 100,000 |
+| `default-page-size` | ❌ No | integer | 100 | 
 
 #### Example
 
@@ -1505,7 +1509,7 @@ Configures result limits.
 
 ##### REST pagination example
 
-In the example, if we issued the REST GET `https://localhost:5001/api/books`, the resulting JSON would include one record in the `value` array because the page size was defaulted to 1. The example results show how Data API builder appends `nextLink` to results when a subsequent page exists.
+In this example, issuing the REST GET `https://localhost:5001/api/books` would return one record in the `value` array because the `default-page-size` was set to 1. If more results exist, Data API builder appends a `nextLink` in the response. The `nextLink` contains a `$after` parameter for retrieving the next page of data.
 
 ```JSON
 {
@@ -1522,14 +1526,11 @@ In the example, if we issued the REST GET `https://localhost:5001/api/books`, th
 }
 ```
 
-Notice the `$after` option is appended to the same URL used to query the endpoint. This special value internally indicates the last record on the current page. Using the supplied string as the value of `$after` will automatically return the next page of data.
-
-> [!NOTE]
-> It is possible that the underlying table data has changed between queries. This will not result in an error; however, it illustrates why Data API builder does not have the concept of a page number. Subsequent calls return the correct next page, but the page number could have changed due to data changes. In this way, the `nextLink` is literally the next page of _data_, not the next page _number_.
+Using the `nextLink` ensures the next set of results is returned, even if the data has changed between queries.
 
 ##### GraphQL pagination example
 
-In the example, if we issue a GraphQL query, we must include `hasNextPage` and `endCursor` to use pagination. The reason for this requirement is that REST endpoints determine the structure of their payloads, but the consumer's query determines the structure of GraphQL payloads. With or without these values, the results are still limited to the default page size. A query would look like this:
+For GraphQL, use the `hasNextPage` and `endCursor` fields for pagination. These are required to fetch the next set of results. Without them, the query is still limited to the default page size.
 
 ```GraphQL
 query {
@@ -1547,7 +1548,7 @@ query {
 }
 ```
 
-Our GraphQL results would include `hasNextPage` and `endCursor`, which are used to fetch further pages.
+The response includes the `hasNextPage` and `endCursor` fields:
 
 ```JSON
 {
@@ -1569,7 +1570,7 @@ Our GraphQL results would include `hasNextPage` and `endCursor`, which are used 
 }
 ```
 
-The subsequent GraphQL query would include the cursor as the value of the `after` variable in the following way:
+To fetch the next page, include the cursor value in the next query:
 
 ```GraphQL
 query {
@@ -1587,39 +1588,36 @@ query {
 }
 ```
 
-**Using `$limit` or `first` to change the page size.**
+**Using `$limit` or `first` to change the page size**:
 
-Both REST and GraphQL can include a `$limit` or `first` variable, respectively. The purpose of `limit` is to limit the results for a specific query. However, consider `https://{server}/api/books?$limit=10`. If `limit` is, for example, 10 when the default page size is 100, the results are limited to 10. However, if `limit` is 200 when the default page size is 100, the results are limited to 200—a value greater than the default page size.
+REST and GraphQL both support a `$limit` or `first` parameter to adjust the number of results per query. For instance, `https://{server}/api/books?$limit=10` limits the result to 10 records, overriding the `default-page-size`. If `$limit` exceeds `max-page-size`, the result is capped at `max-page-size`.
 
 | First value | Result |
-|-------------|--------|
-| `-1`        | The current value of the `max-page-size` setting. Using `-1` is handy when the `max-page-size` setting value is unknown to the consumer. Data API builder replaces `-1` with the current value of `max-page-size`. |
-| `< max-page-size` | The results are limited to the value supplied. |
-| `0` | Not supported. An exception is returned.
-| `< -1` | Not supported. An exception is returned.
-| `> max-page-size` | Not supported. An exception is returned.
-
-### Maximum page size (Pagination runtime)
+|-|-|
+| `-1` | Defaults to the current `max-page-size` setting. |
+| `< max-page-size` | Limits the result to the provided value. |
+| `0` | Not supported. |
+| `< -1` | Not supported. |
+| `> max-page-size` | Not supported. |
 
 ---
 
+### Maximum page size (Pagination runtime)
+
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime.pagination` | `max-page-size` | int | ❌ No | 100,000|
+| `runtime.pagination` | `max-page-size` | int | ❌ No | 100,000 |
 
-Sets the maximum number of top-level records returned by a REST or GraphQL query. If the user provides a value in `$first` that exceeds this limit, then `$first` is limited to the value of `max-page-size`. The intent of this setting is to give the developer control to ensure the endpoint doesn't overwhelm either the database or Data API builder. Since every dataset is unique, this value is configurable.
+Sets the maximum number of top-level records returned by REST or GraphQL. If a user requests more than `max-page-size`, the results are capped at `max-page-size`.
 
 #### Allowed values
 
-| Value | Result
-|-|-
-|`-1` | This value defaults to maximum supported value.
-|`integer` | Any positive 32-bit integer is supported.
-|`< -1` | This isn't supported.
-|`= 0` | This isn't supported.
-
-> [!NOTE]
-> The maximum value of a 32-bit integer is 2,147,483,647. This is big. In practice, there isn't a strict universal limit to the size of an outbound endpoint payload, but several factors can effectively limit the size, including server configuration, bandwidth, and timeout. Data API builder doesn't know your scenario, so this setting is open to configuration by each developer. The default maximum of 100,000 is already quite aggressive.
+| Value | Result |
+|-|-|
+| `-1` | Defaults to the maximum supported value. |
+| `integer` | Any positive 32-bit integer is supported. |
+| `< -1` | Not supported. |
+| `0` | Not supported. |
 
 #### Format
 
@@ -1627,30 +1625,30 @@ Sets the maximum number of top-level records returned by a REST or GraphQL query
 {
   "runtime": {
     "pagination": {
-      "max-page-size": 123
+      "max-page-size": <integer; default: 100000>
     }
   }
 }
 ```
 
-### Default page size (Pagination runtime)
-
 ---
+
+### Default page size (Pagination runtime)
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
 | `runtime.pagination` | `default-page-size` | int | ❌ No | 100 |
 
-Sets the page size when pagination is  number of top-level records returned by a REST or GraphQL query. 
+Sets the default number of top-level records returned when pagination is enabled but no explicit page size is provided.
 
 #### Allowed values
 
-| Value | Result
-|-|-
-|`-1` | This value defaults to the current `max-page-size` setting.
-|`integer` | Any positive integer less than the current `max-page-size` setting.
-|`< -1` | This isn't supported.
-|`= 0` | This isn't supported.
+| Value | Result |
+|-|-|
+| `-1` | Defaults to the current `max-page-size` setting. |
+| `integer` | Any positive integer less than the current `max-page-size`. |
+| `< -1` | Not supported. |
+| `0` | Not supported. |
 
 ### Cache (runtime)
 
@@ -1658,7 +1656,7 @@ Sets the page size when pagination is  number of top-level records returned by a
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime` | `cache` | object | ❌ No | - |
+| `runtime` | `cache` | object | ❌ No | None |
 
 Enables and configures caching for the entire runtime.
 
@@ -1667,17 +1665,17 @@ Enables and configures caching for the entire runtime.
 ```json
 {
   "runtime": {
-    "cache": "<object>"
+    "cache": <object>
   }
 }
 ```
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`enabled`](#enabled-cache-runtime)** | ❌ No | boolean |
-| **[`ttl-seconds`](#ttl-in-seconds-cache-runtime)** | ❌ No | integer |
+| Property | Required | Type | Default |
+|-|-|-|-|
+| **[`enabled`](#enabled-cache-runtime)** | ❌ No | boolean | None |
+| **[`ttl-seconds`](#ttl-in-seconds-cache-runtime)** | ❌ No | integer | 5 |
 
 #### Examples
 
@@ -1710,7 +1708,7 @@ Enables caching globally for all entities. Defaults to `false`.
 {
   "runtime": {
     "cache":  {
-      "enabled": "<boolean>"
+      "enabled": <boolean>
     }
   }
 }
@@ -1746,7 +1744,7 @@ Configures the time-to-live (TTL) value in seconds for cached items. After this 
 {
   "runtime": {
     "cache":  {
-        "ttl-seconds": "<integer>"
+        "ttl-seconds": <integer>
     }
   }
 }
@@ -1773,7 +1771,7 @@ In this example, cache is enabled globally and all items expire after 15 seconds
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime` | `telemetry` | object | ❌ No | - |
+| `runtime` | `telemetry` | object | ❌ No | None |
 
 This property configures Application Insights to centralize API logs. Learn [more](deployment/how-to-use-application-insights.yml).
 
@@ -1784,8 +1782,9 @@ This property configures Application Insights to centralize API logs. Learn [mor
   "runtime": {
     "telemetry": {
       "application-insights": {
-        "enabled": True (default) | False,
-        "connection-string": string
+        "enabled": <true; default: true> | <false>,
+        "connection-string": <string>
+      }
     }
   }
 }
@@ -1821,7 +1820,7 @@ This property configures Application Insights to centralize API logs. Learn [mor
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `$root` | `entities` | object | ✔️ Yes | - |
+| `$root` | `entities` | object | ✔️ Yes | None |
 
 The `entities` section serves as the core of the configuration file, establishing a bridge between database objects and their corresponding API endpoints. This section maps database objects to exposed endpoints. This section also includes properties mapping and permission definition. Each exposed entity is defined in a dedicated object. The property name of the object is used as the name of the entity to expose.
 
@@ -1834,50 +1833,50 @@ This section defines how each entity in the database is represented in the API, 
   "entities": {
     "<entity-name>": {
       "rest": {
-        "enabled": <true> (default) | <false>,
-        "path": "/entity-path", (default <entity-name>)
-        "methods": ["GET", "POST" (default)]
+        "enabled": <true; default: true> | <false>,
+        "path": <string; default: "<entity-name>">,
+        "methods": <array of strings; default: ["GET", "POST"]>
       },
       "graphql": {
-        "enabled": <true> (default) | <false>,
+        "enabled": <true; default: true> | <false>,
         "type": {
-          "singular": "myEntity",
-          "plural": "myEntities"
+          "singular": <string>,
+          "plural": <string>
         },
-        "operation": "query" | "mutation" (default)
+        "operation": <"query" | "mutation"; default: "query">
       },
       "source": {
-        "object": "database-object-name",
-        "type": "view" | "stored-procedure" | "table",
-        "key-fields": ["field-name"],
+        "object": <string>,
+        "type": <"view" | "stored-procedure" | "table">,
+        "key-fields": <array of strings>,
         "parameters": {
-          "parameter-name": "parameter-value"
+          "<parameter-name>": <string | number | boolean>
         }
       },
       "mappings": {
-        "database-field-name": "field-alias"
+        "<database-field-name>": <string>
       },
       "relationships": {
-        "relationship-name": {
-          "cardinality": "one" | "many",
-          "target.entity": "target-entity-name",
-          "source.fields": ["source-field-name"],
-          "target.fields": ["target-field-name"],
-          "linking.object": "linking-object-name",
-          "linking.source.fields": ["linking-source-field-name"],
-          "linking.target.fields": ["linking-target-field-name"]
+        "<relationship-name>": {
+          "cardinality": <"one" | "many">,
+          "target.entity": <string>,
+          "source.fields": <array of strings>,
+          "target.fields": <array of strings>,
+          "linking.object": <string>,
+          "linking.source.fields": <array of strings>,
+          "linking.target.fields": <array of strings>
         }
       },
       "permissions": [
         {
-          "role": "anonymous | authenticated | custom-role-name",
-          "actions": ["create" | "read" | "update" | "delete" | "*"],
+          "role": <"anonymous" | "authenticated" | "custom-role-name">,
+          "actions": <array of strings>,
           "fields": {
-            "include": ["field-name"],
-            "exclude": ["field-name"]
+            "include": <array of strings>,
+            "exclude": <array of strings>
           },
           "policy": {
-            "database": "<Expression>"
+            "database": <string>
           }
         }
       ]
@@ -1889,7 +1888,7 @@ This section defines how each entity in the database is represented in the API, 
 #### Properties
 
 | | Required | Type |
-| --- | --- | --- |
+|-|-|-|
 | **[`source`](#source)** | ✔️ Yes | object |
 | **[`permissions`](#permissions)** | ✔️ Yes | array |
 | **[`rest`](#rest-entities)** | ❌ No | object |
@@ -2000,18 +1999,15 @@ For straightforward scenarios, where the entity maps directly to a single databa
 
 ```json
 {
-  ...
-  "entities" {
+  "entities": {
     "<entity-name>": {
-      ...
       "source": {
-        "object": "<string>",
-        "type": "<view> | <stored-procedure> | <table>",
-        "key-fields": [ "<array-of-strings>" ],
+        "object": <string>,
+        "type": <"view" | "stored-procedure" | "table">, 
+        "key-fields": <array of strings>,
         "parameters": {
-            "<name>": "<value>",
-            "<name>": "<value>"
-        }        
+          "<name>": <string | number | boolean>
+        }
       }
     }
   }
@@ -2021,7 +2017,7 @@ For straightforward scenarios, where the entity maps directly to a single databa
 #### Properties
 
 | | Required | Type |
-| --- | --- | --- |
+|-|-|-|
 | **[`object`](#object)** | ✔️ Yes | string |
 | **[`type`](#type-entities)** | ✔️ Yes | enum string |
 | **[`parameters`](#parameters)** | ❌ No | object |
@@ -2191,10 +2187,9 @@ The `type` property identifies the type of database object behind the entity, th
 
 ```json
 {
-  "entities" {
+  "entities": {
     "<entity-name>": {
-      "type": "<view> | <stored-procedure> | <table>",
-      ...
+      "type": <"view" | "stored-procedure" | "table">
     }
   }
 }
@@ -2205,7 +2200,7 @@ The `type` property identifies the type of database object behind the entity, th
 Here's a list of allowed values for this property:
 
 | | Description |
-| --- | --- |
+|-|-|
 | **`table`** | Represents a table. |
 | **`stored-procedure`** | Represents a stored procedure. |
 | **`view`** | Represents a view. |
@@ -2247,11 +2242,11 @@ The `{entity}.key-fields` setting is necessary for entities backed by views, so 
 
 ```json
 {
-  "entities" {
+  "entities": {
     "<entity-name>": {
       "source": {
-        "type": "view",
-        "key-fields": [ "<field-name>" ]
+        "type": <"view" | "stored-procedure" | "table">,
+        "key-fields": <array of strings>
       }
     }
   }
@@ -2295,14 +2290,14 @@ The `{entity}.source.parameters` setting is important for entities backed by sto
 
 ```json
 {
-  "entities" {
+  "entities": {
     "<entity-name>": {
       "source": {
         "type": "stored-procedure",
         "parameters": {
-          "<parameter-name-1>" : "<default-value>",
-          "<parameter-name-2>" : "<default-value>",
-          "<parameter-name-3>" : "<default-value>"
+          "<parameter-name-1>": <string | number | boolean>,
+          "<parameter-name-2>": <string | number | boolean>,
+          "<parameter-name-3>": <string | number | boolean>
         }
       }
     }
@@ -2315,7 +2310,7 @@ The `{entity}.source.parameters` setting is important for entities backed by sto
 This example invokes the `dbo.stp_get_bestselling_books` stored procedure passing in these two parameters:
 
 | | Value |
-| --- | --- |
+|-|-|
 | **`depth`** | 25 |
 | **`list`** | contoso-best-sellers |
 
@@ -2350,26 +2345,26 @@ This section defines who can access the related entity and what actions are allo
 
 ```json
 {
-  ...
   "entities": {
     "<entity-name>": {
-      ...
       "permissions": [
         {
-          ...
-          "actions": [
-            "create", 
-            "read", 
-            "update", 
-            "delete", 
-            "execute"
-          ],
+          "actions": <["create", "read", "update", "delete", "execute", "*"]>
         }
       ]
     }
   }
 }
 ```
+
+| Action | Description 
+|-|-
+| `create` | Allows creating a new record in the entity.
+| `read` | Allows reading or retrieving records from the entity.
+| `update` | Allows updating existing records in the entity.
+| `delete` | Allows deleting records from the entity.
+| `execute`| Allows executing a stored procedure or operation related to the entity.
+| `*` | Grants all applicable CRUD operations
 
 #### Examples
 
@@ -2383,27 +2378,6 @@ In this example, an anonymous role is defined with access to all possible action
         {
           "role": "anonymous",
           "actions": ["*"]
-        }
-      ]
-    }
-  }
-}
-```
-
-Alternatively, an object can be used to define the wildcard action.
-
-```json
-{
-  "entities": {
-    "Editor": {
-      "permissions": [
-        {
-          "role": "anonymous",
-          "actions": [
-            {
-              "action": "*"
-            }
-          ]        
         }
       ]
     }
@@ -2502,7 +2476,7 @@ Given the general rule that the `exclude` list takes precedence over the `includ
 #### Properties
 
 | | Required | Type |
-| --- | --- | --- |
+|-|-|-|
 | **[`role`](#role)** | ✔️ Yes | string |
 | **[`actions` (string-array)](#actions-string-array) or [`actions` (object-array)](#actions-object-array)** | ✔️ Yes | object or string array |
 
@@ -2521,7 +2495,7 @@ Roles set the permissions context in which a request should be executed. For eac
 Data API builder evaluates requests in the context of a single role:
 
 | Role | Description |
-| --- | --- |
+|-|-|
 | `anonymous` | No access token is presented |
 | `authenticated`| A valid access token is presented |
 | `<custom-role>`| A valid access token is presented and the `X-MS-API-ROLE` HTTP header is included specifying a user role that is also included in the access token's roles claim |
@@ -2531,27 +2505,21 @@ Data API builder evaluates requests in the context of a single role:
 ```json
 {
   "entities": {
-    "entity-name": {
+    "<entity-name>": {
       "permissions": [
         {
-          "role": "anonymous" | "authenticated" | "custom-role",
-          "actions": [
-            "create",
-            "read",
-            "update",
-            "delete",
-            "execute", // only when stored-procedure
-            "*"
-          ],
+          "role": <"anonymous" | "authenticated" | "custom-role">,
+          "actions": <["create", "read", "update", "delete", "execute", "*"]>,
           "fields": {
-            "include": ["field-name", "field-name"],
-            "exclude": ["field-name", "field-name"]
+            "include": <array of strings>,
+            "exclude": <array of strings>
           }
         }
       ]
     }
   }
 }
+
 ```
 
 #### Examples
@@ -2586,7 +2554,7 @@ This example defines a role named `reader` with only `read` permissions on the e
 An array of string values detailing what operations are allowed for the associated role. For `table` and `view` database objects, roles can be configured to use any combination of `create`, `read`, `update`, or `delete` actions. For stored procedures, roles can only have the `execute` action. The `actions` array details what actions are allowed on the associated role. When the entity is either a table or view, roles can be configured with a combination of the actions: `create`, `read`, `update`, `delete`.
 
 | Action | SQL Operation |
-| --- | --- |
+|-|-|
 | `*` | Wildcard, including execute |
 | `create` | Insert one or more rows |
 | `read` | Select one or more rows |
@@ -2662,15 +2630,15 @@ An array of string values detailing what operations are allowed for the associat
 ```json
 {
   "entities": {
-    "<string>": {
+    <string>: {
       "permissions": [
         {
-          "role": "<string>",
+          "role": <string>,
           "actions": [
             {
-              "action": "<string>",
-              "fields": ["<string-array>"],
-              "policy": "object"
+              "action": <string>,
+              "fields": <array of strings>,
+              "policy": <object>
             }
           ]
         }
@@ -2682,11 +2650,11 @@ An array of string values detailing what operations are allowed for the associat
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`action`](#action)** | ✔️ Yes | string |
-| **[`fields`](#fields)** | ❌ No | string array |
-| **[`policy`](#policy)** | ❌ No | object |
+| Property | Required | Type | Default |
+|-|-|-|-|
+| **[`action`](#action)** | ✔️ Yes | string | None |
+| **[`fields`](#fields)** | ❌ No | string array | None |
+| **[`policy`](#policy)** | ❌ No | object | None |
 
 #### Examples
 
@@ -2733,7 +2701,7 @@ Specifies the specific operation allowed on the database object.
 Here's a list of allowed values for this property:
 
 | | Tables | Views | Stored Procedures | Description |
-| --- | --- | --- | --- | --- |
+|-|-|-|-|-|
 | **`create`** | ✔️ Yes | ✔️ Yes | ❌ No | Create new items |
 | **`read`** | ✔️ Yes | ✔️ Yes | ❌ No | Point read existing items |
 | **`update`** | ✔️ Yes | ✔️ Yes | ❌ No | Update or replace existing items |
@@ -2745,7 +2713,7 @@ Here's a list of allowed values for this property:
 ```json
 {
   "entities": {
-    "<string>": {
+    <string>: {
       "permissions": [
         {
           "role": <string>,
@@ -2825,7 +2793,7 @@ Granular specifications on which specific fields are permitted access for the da
 ```json
 {
   "entities": {
-    "<string>": {
+    <string>: {
       "permissions": [
         {
           "role": <string>,
@@ -2833,8 +2801,8 @@ Granular specifications on which specific fields are permitted access for the da
             {
               "action": <string>,
               "fields": {
-                "include": [<string-array>],
-                "exclude": [<string-array>]
+                "include": <array of strings>,
+                "exclude": <array of strings>
               },
               "policy": <object>
             }
@@ -2861,8 +2829,8 @@ In this example, the `anonymous` role is allowed to read from all fields except 
             {
               "action": "read",
               "fields": {
-                "include": ["*"],
-                "exclude": ["id"]
+                "include": [ "*" ],
+                "exclude": [ "id" ]
               }
             },
             { "action": "create" }
@@ -2924,40 +2892,40 @@ The `policy` section, defined per `action`, defines item-level security rules (d
 #### Format
 
 ```json
-  {
-    "entities": {
-      "<entity-name>": {
-        "permissions": [
-          {
-            "role": <string>,
-            "actions": [
-              {
-                "action": <string>,
-                "fields": [ <string-array> ],
-                "policy": {
-                  "database": <string>
-                }
+{
+  "entities": {
+    "<entity-name>": {
+      "permissions": [
+        {
+          "role": <string>,
+          "actions": [
+            {
+              "action": <string>,
+              "fields": <object>,
+              "policy": {
+                "database": <string>
               }
-            ]
-          }
-        ]
-      }
+            }
+          ]
+        }
+      ]
     }
   }
+}
 ```
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`database`](#database)** | ✔️ Yes | string |
+| Property | Required | Type | Default |
+|-|-|-|-|
+| **[`database`](#database)** | ✔️ Yes | string | None |
 
 #### Description
 
 The `database` policy: an OData-like expression that is translated into a query predicate the database evaluates, including operators like `eq`, `lt`, and `gt`. In order for results to be returned for a request, the request's query predicate resolved from a database policy must evaluate to `true` when executing against the database.
 
 | Example Item Policy | Predicate |
-| --- | --- |
+|-|-|
 | `@item.OwnerId eq 2000` | `WHERE Table.OwnerId = 2000` |
 | `@item.OwnerId gt 2000` | `WHERE Table.OwnerId > 2000` |
 | `@item.OwnerId lt 2000` | `WHERE Table.OwnerId < 2000` |
@@ -2970,7 +2938,7 @@ The `database` policy: an OData-like expression that is translated into a query 
 Two types of directives can be used to manage database policy when authoring a database policy expression:
 
 | Directive | Description |
-| --- | --- |
+|-|-|
 | `@claims` | Access a claim within the validated access token provided in the request |
 | `@item` | Represents a field of the entity for which the database policy is defined |
 
@@ -2979,9 +2947,9 @@ Two types of directives can be used to manage database policy when authoring a d
 
 Here are a few example database policies:
 
-- `@claims.UserId eq @item.OwnerId`
-- `@claims.UserId gt @item.OwnerId`
-- `@claims.UserId lt @item.OwnerId`
+- `@claims.userId eq @item.OwnerId`
+- `@claims.userId gt @item.OwnerId`
+- `@claims.userId lt @item.OwnerId`
 
 Data API builder compares the value of the `UserId` claim to the value of the database field `OwnerId`. The result payload only includes records that fulfill **both** the request metadata and the database policy expression.
 
@@ -2996,19 +2964,19 @@ Database policies are only supported for the `actions` **create**, **read**, **u
 ##### Supported OData-like operators
 
 | Operator | Description | Sample Syntax |
-|----------|-------------|---------------|
-| `and`    | Logical AND | `"@item.status eq 'active' and @item.age gt 18"` |
-| `or`     | Logical OR  | `"@item.region eq 'US' or @item.region eq 'EU'"` |
-| `eq`     | Equals      | `"@item.type eq 'employee'"` |
-| `gt`     | Greater than| `"@item.salary gt 50000"` |
-| `lt`     | Less than   | `"@item.experience lt 5"` |
+|-|-|-|
+| `and` | Logical AND | `"@item.status eq 'active' and @item.age gt 18"` |
+| `or` | Logical OR | `"@item.region eq 'US' or @item.region eq 'EU'"` |
+| `eq` | Equals | `"@item.type eq 'employee'"` |
+| `gt` | Greater than| `"@item.salary gt 50000"` |
+| `lt` | Less than | `"@item.experience lt 5"` |
 
 For more information, see [binary operators](/dotnet/api/microsoft.odata.uriparser.binaryoperatorkind).
 
-| Operator | Description         | Sample Syntax |
-|----------|---------------------|---------------|
-| `-`      | Negate (numeric)    | `"@item.balance lt -100"` |
-| `not`    | Logical negate (NOT) | `"not @item.status eq 'inactive'"` |
+| Operator | Description | Sample Syntax |
+|-|-|-|
+| `-` | Negate (numeric) | `"@item.balance lt -100"` |
+| `not` | Logical negate (NOT) | `"not @item.status eq 'inactive'"` |
 
 For more information, see [unary operators](/dotnet/api/microsoft.odata.uriparser.unaryoperatorkind).
 
@@ -3026,11 +2994,10 @@ If your entity field names don't meet the OData syntax rules or you simply want 
 {
   "entities": {
     "<entity-name>": {
-      ...
       "mappings": {
-        "<field-1-name>" : "<field-1-alias>",
-        "<field-2-name>" : "<field-2-alias>",
-        "<field-3-name>" : "<field-3-alias>"
+        "<field-1-name>": <string>,
+        "<field-2-name>": <string>,
+        "<field-3-name>": <string>
       }
     }
   }
@@ -3059,7 +3026,7 @@ Consider an entity named `Employee` within a Data API configuration that utilize
         "department COID": "DepartmentId"
       },
       "policy": {
-        "database": "@claims.role eq 'HR' or @claims.UserId eq @item.EmployeeId"
+        "database": "@claims.role eq 'HR' or @claims.userId eq @item.EmployeeId"
       }
     }
   }
@@ -3072,7 +3039,7 @@ Consider an entity named `Employee` within a Data API configuration that utilize
 
 **Mappings**: Aliases are used to map `employee NUM`, `employee Name`, and `department COID` to `EmployeeId`, `EmployeeName`, and `DepartmentId`, respectively, simplifying field names and potentially obfuscating sensitive database schema details.
 
-**Policy Application**: The `policy` section applies a database policy using an OData-like expression. This policy restricts data access to users with the HR role (`@claims.role eq 'HR'`) or to users whose `UserId` claim matches `EmployeeId` - the field alias - in the database (`@claims.UserId eq @item.EmployeeId`). It ensures that employees can only access their own records unless they belong to the HR department. Policies can enforce row-level security based on dynamic conditions.
+**Policy Application**: The `policy` section applies a database policy using an OData-like expression. This policy restricts data access to users with the HR role (`@claims.role eq 'HR'`) or to users whose `UserId` claim matches `EmployeeId` - the field alias - in the database (`@claims.userId eq @item.EmployeeId`). It ensures that employees can only access their own records unless they belong to the HR department. Policies can enforce row-level security based on dynamic conditions.
 
 ### Database
 
@@ -3087,26 +3054,29 @@ The `policy` section, defined per `action`, defines item-level security rules (d
 #### Format
 
 ```json
-  {
-    "entities": {
-      "<entity-name>": {
-        "permissions": [
-          {
-            "role": <string>,
-            "actions": [
-              {
-                "action": <string>,
-                "fields": [ <string-array> ],
-                "policy": {
-                  "database": <string>
-                }
+{
+  "entities": {
+    "<entity-name>": {
+      "permissions": [
+        {
+          "role": <string>,
+          "actions": [
+            {
+              "action": <string>,
+              "fields": {
+                "include": <array of strings>,
+                "exclude": <array of strings>
+              },
+              "policy": {
+                "database": <string>
               }
-            ]
-          }
-        ]
-      }
+            }
+          ]
+        }
+      ]
     }
   }
+}
 ```
 
 This property denotes the database policy expression that is evaluated during request execution. The policy string is an OData expression that is translated into a query predicated evaluated by the database. For example, the policy expression `@item.OwnerId eq 2000` is translated to the query predicate `WHERE <schema>.<object-name>.OwnerId = 2000`.
@@ -3126,7 +3096,7 @@ In order for results to be returned for a request, the request's query predicate
 Two types of directives can be used to manage the database policy when authoring a database policy expression:
 
 | | Description |
-| --- | --- |
+|-|-|
 | **`@claims`** | Accesses a claim within the validated access token provided in the request |
 | **`@item`** | Represents a field of the entity for which the database policy is defined |
 
@@ -3172,7 +3142,7 @@ Predicates can also evaluate both `claims` and `item` directive types. This exam
             {
               "action": "read",
               "policy": {
-                "database": "@claims.UserId eq @item.owner_id"
+                "database": "@claims.userId eq @item.owner_id"
               }
             }
           ]
@@ -3214,17 +3184,16 @@ This segment provides for integrating an entity into the GraphQL schema. It allo
 
 ```json
 {
-  "entities" {
+  "entities": {
     "<entity-name>": {
-      ...
       "graphql": {
         "enabled": <true> (default) | <false>,
         "type": {
-          "singular": "my-alternative-name",
-          "plural": "my-alternative-name-pluralized"
+          "singular": <string>,
+          "plural": <string>
         },
-        "operation": "query" | "mutation" (default)
-      },
+        "operation": "query" (default) | "mutation"
+      }
     }
   }
 }
@@ -3233,21 +3202,11 @@ This segment provides for integrating an entity into the GraphQL schema. It allo
 ```json
 {
   "entities": {
-    "<string>": {
-      "graphql": "<boolean>"
-    }
-  }
-}
-```
-
-```json
-{
-  "entities": {
-    "<string>": {
+    "<entity-name>": {
       "graphql": {
-        "enabled": "<boolean>",
-        "type": "<string-or-object>",
-        "operation": "<enum-string>"
+        "enabled": <boolean>,
+        "type": <string-or-object>,
+        "operation": "query" (default) | "mutation"
       }
     }
   }
@@ -3256,11 +3215,11 @@ This segment provides for integrating an entity into the GraphQL schema. It allo
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`enabled`](#enabled-graphql-entity)** | ❌ No | boolean |
-| **[`type`](#type-graphql-entity)** | ❌ No | string or object |
-| **[`operation`](#operation-graphql-entity)** | ❌ No | enum string |
+| Property | Required | Type | Default |
+|-|-|-|-|
+| **[`enabled`](#enabled-graphql-entity)** | ❌ No | boolean | None |
+| **[`type`](#type-graphql-entity)** | ❌ No | string or object | None |
+| **[`operation`](#operation-graphql-entity)**| ❌ No | enum string | None |
 
 #### Examples
 
@@ -3330,9 +3289,9 @@ This property dictates the naming convention for an entity within the GraphQL sc
 ```json
 {
   "entities": {
-    "<string>": {
+    <entity-name>: {
       "graphql": {
-        "type": "<string>"
+        "type": <string>
       }
     }
   }
@@ -3342,11 +3301,11 @@ This property dictates the naming convention for an entity within the GraphQL sc
 ```json
 {
   "entities": {
-    "<string>": {
+    <entity-name>: {
       "graphql": {
         "type": {
-          "singular": "<string>",
-          "plural": "<string>"
+          "singular": <string>,
+          "plural": <string>
         }
       }
     }
@@ -3356,10 +3315,10 @@ This property dictates the naming convention for an entity within the GraphQL sc
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **`singular`** | ❌ No | string |
-| **`plural`** | ❌ No | string |
+| Property | Required | Type | Default |
+|-|-|-|-|
+| **`singular`** | ❌ No | string | None |
+| **`plural`** | ❌ No | string | N/A (default: singular) |
 
 #### Examples
 
@@ -3468,9 +3427,9 @@ If missing, the `operation` default is `mutation`.
 ```json
 {
   "entities": {
-    "<string>": {
+    "<entity-name>": {
       "graphql": {
-        "operation": "<string-enum>"
+        "operation": "query" (default) | "mutation"
       }
     }
   }
@@ -3482,7 +3441,7 @@ If missing, the `operation` default is `mutation`.
 Here's a list of allowed values for this property:
 
 | | Description |
-| --- | --- |
+|-|-|
 | **`query`** | The underlying stored procedure is exposed as a query |
 | **`mutation`** | The underlying stored procedure is exposed as a mutation |
 
@@ -3527,12 +3486,10 @@ Enables or disables the GraphQL endpoint. Controls whether an entity is availabl
 
 ```json
 {
-  "entities" {
+  "entities": {
     "<entity-name>": {
-      ...
       "graphql": {
-        ...
-        "enabled": true | false
+        "enabled": <true> (default) | <false>
       }
     }
   }
@@ -3545,7 +3502,7 @@ Enables or disables the GraphQL endpoint. Controls whether an entity is availabl
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `entities.{entity}` | `rest` | object | ❌ No | - |
+| `entities.{entity}` | `rest` | object | ❌ No | None |
 
 
 The `rest` section of the configuration file is dedicated to fine-tuning the RESTful endpoints for each database entity. This customization capability ensures that the exposed REST API matches specific requirements, improving both its utility and integration capabilities. It addresses potential mismatches between default inferred settings and desired endpoint behaviors.
@@ -3558,10 +3515,9 @@ The `rest` section of the configuration file is dedicated to fine-tuning the RES
     "<entity-name>": {
       "rest": {
         "enabled": <true> (default) | <false>,
-        "path": "/entity-path", (default <entity-name>)
-        "methods": ["GET", "POST" (default)]
-      },
-      ...
+        "path": <string; default: "<entity-name>">,
+        "methods": <array of strings; default: ["GET", "POST"]>
+      }
     }
   }
 }
@@ -3569,11 +3525,11 @@ The `rest` section of the configuration file is dedicated to fine-tuning the RES
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`enabled`](#enabled-rest-entity)** | ✔️ Yes | boolean |
-| **[`path`](#path-rest-entity)** | ❌ No | string |
-| **[`methods`](#methods-rest-entity)** | ❌ No | string array |
+| Property | Required | Type | Default |
+|-|-|-|-|
+| **[`enabled`](#enabled-rest-entity)** | ✔️ Yes | boolean | True |
+| **[`path`](#path-rest-entity)** | ❌ No | string | `/<entity-name>` |
+| **[`methods`](#methods-rest-entity)** | ❌ No | string array | GET |
 
 #### Examples
 
@@ -3642,9 +3598,8 @@ This property acts as a toggle for the visibility of entities within the REST AP
 
 ```json
 {
-  "entities" {
+  "entities": {
     "<entity-name>": {
-      ...
       "rest": {
         "enabled": <true> (default) | <false>
       }
@@ -3667,12 +3622,10 @@ The `path` property specifies the URI segment used to access an entity via the R
 
 ```json
 {
-  "entities" {
+  "entities": {
     "<entity-name>": {
-      ...
       "rest": {
-        ...
-        "path": "/entity-path"
+        "path": <string; default: "<entity-name>">
       }
     }
   }
@@ -3711,12 +3664,10 @@ If omitted or missing, the `methods` default is `POST`.
 
 ```json
 {
-  "entities" {
+  "entities": {
     "<entity-name>": {
-      ...
       "rest": {
-        ...
-        "methods": [ "GET" (default), "POST" ]
+        "methods": ["GET" (default), "POST"]
       }
     }
   }
@@ -3728,7 +3679,7 @@ If omitted or missing, the `methods` default is `POST`.
 Here's a list of allowed values for this property:
 
 | | Description |
-| --- | --- |
+|-|-|
 | **`get`** | Exposes HTTP GET requests |
 | **`post`** | Exposes HTTP POST requests |
 
@@ -3773,20 +3724,17 @@ This example instructs the engine that the `stp_get_bestselling_authors` stored 
 
 ```json
 {
-  ...
-  "entities" {
+  "entities": {
     "<entity-name>": {
-      "rest":{ ... },
-      "graphql": { ... },
-      "source": { ... },
       "mappings": {
-        "<field-1-name>" : "<field-1-alias>",
-        "<field-2-name>" : "<field-2-alias>",
-        "<field-3-name>" : "<field-3-alias>"
+        "<field-1-name>": "<field-1-alias>",
+        "<field-2-name>": "<field-2-alias>",
+        "<field-3-name>": "<field-3-alias>"
       }
     }
   }
 }
+
 ```
 
 #### Examples
@@ -3852,27 +3800,26 @@ This section maps includes a set of relationship definitions that map how entiti
 The `relationships` section outlines how entities interact within the Data API builder, detailing associations and potential database support for these relationships. The `relationship-name` property for each relationship is both required and must be unique across all relationships for a given entity. Custom names ensure clear, identifiable connections and maintain the integrity of the GraphQL schema generated from these configurations.
 
 | Relationship | Cardinality | Example |
-| --- | --- | --- |
+|-|-|-|
 | one-to-many | `many` | One category entity can relate to many todo entities |
 | many-to-one | `one` | Many todo entities can relate to one category entity |
-| many-to-many| `many`  | One todo entity can relate to many user entities, and one user entity can relate to many todo entities |
+| many-to-many| `many` | One todo entity can relate to many user entities, and one user entity can relate to many todo entities |
 
 #### Format
 
 ```json
-{{
+{
   "entities": {
-    "entity-name": {
-      ...
+    "<entity-name>": {
       "relationships": {
-        "relationship-name": {
+        "<relationship-name>": {
           "cardinality": "one" | "many",
-          "target.entity": "target-entity-name",
-          "source.fields": ["source-field-name"],
-          "target.fields": ["target-field-name"],
-          "linking.object": "linking-object-name",
-          "linking.source.fields": ["linking-source-field-name"],
-          "linking.target.fields": ["linking-target-field-name"]
+          "target.entity": "<string>",
+          "source.fields": ["<string>"],
+          "target.fields": ["<string>"],
+          "linking.object": "<string>",
+          "linking.source.fields": ["<string>"],
+          "linking.target.fields": ["<string>"]
         }
       }
     }
@@ -3882,15 +3829,15 @@ The `relationships` section outlines how entities interact within the Data API b
 
 #### Properties
 
-| | Required | Type |
-| --- | --- | --- |
-| **[`cardinality`](#cardinality)** | ✔️ Yes | enum string |
-| **[`target.entity`](#target-entity)** | ✔️ Yes | string |
-| **[`source.fields`](#source-fields)** | ❌ No | string array |
-| **[`target.fields`](#target-fields)** | ❌ No | string array |
-| **[`linking.<object-or-entity>`](#linking-object-or-entity)** | ❌ No | string |
-| **[`linking.source.fields`](#linking-source-fields)** | ❌ No | string array |
-| **[`linking.target.fields`](#linking-target-fields)** | ❌ No | string array |
+| Property | Required | Type | Default |
+|-|-|-|-|
+| **[`cardinality`](#cardinality)** | ✔️ Yes | enum string | None |
+| **[`target.entity`](#target-entity)** | ✔️ Yes | string | None |
+| **[`source.fields`](#source-fields)** | ❌ No | string array | None |
+| **[`target.fields`](#target-fields)** | ❌ No | string array | None |
+| **[`linking.<object-or-entity>`](#linking-object-or-entity)** | ❌ No | string | None |
+| **[`linking.source.fields`](#linking-source-fields)** | ❌ No | string array | None |
+| **[`linking.target.fields`](#linking-target-fields)** | ❌ No | string array | None |
 
 #### Examples
 
@@ -4034,7 +3981,7 @@ Specifies if the current source entity is related to only a single instance of t
 Here's a list of allowed values for this property:
 
 | | Description |
-| --- | --- |
+|-|-|
 | **`one`** | The source only relates to one record from the target |
 | **`many`** | The source can relate to zero-to-many records from the target |
 
@@ -4117,11 +4064,14 @@ Enables and configures caching for the entity.
 #### Format
 
 ```json
+You're right; the formatting doesn't match your style. Here’s the corrected version following your preferred documentation format:
+
+```json
 {
   "entities": {
-    "<string>": {
+    "<entity-name>": {
       "cache": {
-        "enabled": <true> | <false> (default),
+        "enabled": <true> (default) | <false>,
         "ttl-seconds": <integer; default: 5>
       }
     }
@@ -4131,10 +4081,10 @@ Enables and configures caching for the entity.
 
 #### Properties
 
-| | Required | Type | Default |
-| --- | --- | --- | --- |
-| **[`enabled`](#enabled-cache-entity)** | ❌ No | boolean | `false` |
-| **[`ttl-seconds`](#ttl-in-seconds-cache-entity)** | ❌ No | integer | `5` |
+| Property | Required | Type | Default |
+|-|-|-|-|
+| **[`enabled`](#enabled-cache-entity)** | ❌ No | boolean | False |
+| **[`ttl-seconds`](#ttl-in-seconds-cache-entity)** | ❌ No | integer | 5 |
 
 #### Examples
 
@@ -4166,7 +4116,7 @@ Enables caching for the entity.
 #### Database Object Support
 
 | Object type | Cache support
-| - | - 
+|-| - 
 | Table | ✅ Yes 
 | View | ✅ Yes 
 | Stored Procedure | ✖️ No
@@ -4175,7 +4125,7 @@ Enables caching for the entity.
 #### HTTP Header Support
 
 | Request Header | Cache support
-| - | - 
+|-| - 
 | `no-cache` | ✖️ No
 | `no-store` | ✖️ No
 | `max-age` | ✖️ No
@@ -4188,9 +4138,9 @@ Enables caching for the entity.
 ```json
 {
   "entities": {
-    "<string>": {
+    "<entity-name>": {
       "cache": {
-        "enabled": "<boolean>"
+        "enabled": <boolean> (default: false)
       }
     }
   }
@@ -4228,9 +4178,9 @@ Configures the time-to-live (TTL) value in seconds for cached items. After this 
 ```json
 {
   "entities": {
-    "<string>": {
+    "<entity-name>": {
       "cache": {
-        "ttl-seconds": <integer (inherited)>
+        "ttl-seconds": <integer; inherited>
       }
     }
   }
