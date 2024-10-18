@@ -268,7 +268,12 @@ Using this formula, you can calculate the time for each retry attempt in seconds
 
 Data API builder uses the [`SqlClient`](https://www.nuget.org/packages/Microsoft.Data.SqlClient) library to connect to Azure SQL or SQL Server using the connection string you provide in the configuration file. A list of all the supported connection string options is available here: [SqlConnection.ConnectionString Property](/dotnet/api/system.data.sqlclient.sqlconnection.connectionstring).
 
-Data API builder can also connect to the target database using Managed Service Identities (MSI). The `DefaultAzureCredential` defined in [`Azure.Identity`](https://www.nuget.org/packages/Azure.Identity) library is used to connect using known identities when you don't specify a username or password in your connection string. For more information, see [`DefaultAzureCredential` examples](/dotnet/api/azure.identity.defaultazurecredential#examples).
+Data API builder can also connect to the target database using Managed Service Identities (MSI) when Data API builder is hosted in Azure. The `DefaultAzureCredential` defined in [`Azure.Identity`](https://www.nuget.org/packages/Azure.Identity) library is used to connect using known identities when you don't specify a username or password in your connection string. For more information, see [`DefaultAzureCredential` examples](/dotnet/api/azure.identity.defaultazurecredential#examples).
+
+- **User Assigned Managed Identity** (UMI): Append the *Authentication* and *User Id* properties to your connection string while substituting in your User Assigned Managed Identity's client id: `Authentication=Active Directory Managed Identity; User Id=<UMI_CLIENT_ID>;`.
+- **System Assigned Managed Identity** (SMI): Append the *Authentication* property and exclude the *UserId* and *Password* arguments from your connection string: `Authentication=Active Directory Managed Identity;`. The absence of the *UserId* and *Password* connection string properties will signal DAB to authenticate using a system assigned managed identity.
+
+For more information about configuring a Managed Service Identity with Azure SQL or SQL Server, see [Managed identities in Microsoft Entra for Azure SQL](/azure/azure-sql/database/authentication-azure-ad-user-assigned-managed-identity?view=azuresql).
 
 #### Examples
 
