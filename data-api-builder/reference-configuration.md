@@ -273,7 +273,7 @@ Data API builder can also connect to the target database using Managed Service I
 - **User Assigned Managed Identity** (UMI): Append the *Authentication* and *User Id* properties to your connection string while substituting in your User Assigned Managed Identity's client id: `Authentication=Active Directory Managed Identity; User Id=<UMI_CLIENT_ID>;`.
 - **System Assigned Managed Identity** (SMI): Append the *Authentication* property and exclude the *UserId* and *Password* arguments from your connection string: `Authentication=Active Directory Managed Identity;`. The absence of the *UserId* and *Password* connection string properties will signal DAB to authenticate using a system assigned managed identity.
 
-For more information about configuring a Managed Service Identity with Azure SQL or SQL Server, see [Managed identities in Microsoft Entra for Azure SQL](/azure/azure-sql/database/authentication-azure-ad-user-assigned-managed-identity?view=azuresql).
+For more information about configuring a Managed Service Identity with Azure SQL or SQL Server, see [Managed identities in Microsoft Entra for Azure SQL](/azure/azure-sql/database/authentication-azure-ad-user-assigned-managed-identity?view=azuresql&preserve-view=true).
 
 #### Examples
 
