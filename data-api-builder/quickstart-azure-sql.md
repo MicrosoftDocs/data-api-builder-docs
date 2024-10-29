@@ -58,7 +58,7 @@ First, deploy all of the required services using the AZD template.
     azd up
     ```
 
-1. During the provisioning process, select your subscription and desired location. Wait for the provisioning process to complete. The process can take **approximately five minutes**.
+1. During the provisioning process, select your subscription and desired location (not any desired location). Select the default location selected by the bicep as some of the services are not available in all regions. Wait for the provisioning process to complete. The process can take **approximately five minutes**.
 
 1. Once the provisioning of your Azure resources is done, the template outputs a **SUCCESS** message along with the duration of the run.
 
