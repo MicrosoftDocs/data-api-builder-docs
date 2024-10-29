@@ -61,7 +61,7 @@ First, deploy all of the required services using the AZD template.
 1. During the provisioning process, select your subscription and desired location. Wait for the provisioning process to complete. The process can take **approximately five minutes**.
 
     > [!NOTE]
-    > Not all Azure services are avaialble in every Azure region. For more information, see [Azure products by region](https://azure.microsoft.com/explore/global-infrastructure/products-by-region).
+    > Not all Azure services are available in every Azure region. For more information, see [Azure products by region](https://azure.microsoft.com/explore/global-infrastructure/products-by-region).
 
 1. Once the provisioning of your Azure resources is done, the template outputs a **SUCCESS** message along with the duration of the run.
 
