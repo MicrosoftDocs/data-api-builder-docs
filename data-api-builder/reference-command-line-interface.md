@@ -221,6 +221,52 @@ dab validate
 | --- | --- | --- | --- | --- | --- |
 | **-c,--config** | ❌ No | `dab-config.json` | ✔️ Yes | string | Path to the config file that is the target of validation. |
 
+### `configure`
+
+The `dab configure` command is designed to simplify updating config properties outside of the entities section. This document outlines the design, functionality, and implementation details of the dab configure command. It supports to edit the CLI for configuration properties in data-source and runtime sections of the runtime config.
+
+> [!NOTE]
+> `dab configure` is only for updating the data-source and runtime sections of the config. For the entities section, we already have the dab update command.
+
+#### Syntax
+
+```dotnetcli
+dab configure [options] [value]
+```
+
+#### Examples
+
+```dotnetcli
+dab configure --runtime.rest.enabled true
+```
+
+#### Options
+
+| Configuration File Property Path                                        | CLI Flag                                                           | Data Type | Nullable |
+|-------------------------------------------------------------------------|--------------------------------------------------------------------|-----------|----------|
+| data-source.<br/>database-type                                          | <nobr>--data-source.database-type</nobr>                           | String: `MSSQL`, `PostgreSQL`, `CosmosDB`, `MySQL` | ❌ |
+| data-source.<br/>connection-string                                      | <nobr>--data-source.connection-string</nobr>                       | String    | ❌       |
+| data-source.<br/>options.database                                       | <nobr>--data-source.options.database</nobr>                        | String    | ✅       |
+| data-source.<br/>options.container                                      | <nobr>--data-source.options.container</nobr>                       | String    | ✅       |
+| data-source.<br/>options.schema                                         | <nobr>--data-source.options.schema</nobr>                          | String    | ✅       |
+| data-source.<br/>options.set-session-context                            | <nobr>--data-source.options.set-session-context</nobr>             | Boolean: `true`, `false` (default: `false`) | ✅ |
+| data-source-files                                                       | <nobr>--data-source-files</nobr>                                   | Array of strings | ✅ |
+| runtime.<br/>rest.path                                                  | <nobr>--runtime.rest.path</nobr>                                   | String (default: `/api`) | ❌       |
+| runtime.<br/>rest.enabled                                               | <nobr>--runtime.rest.enabled</nobr>                                | Boolean: `true`, `false` (default: `true`) | ❌ |
+| runtime.<br/>rest.request-body-strict                                   | <nobr>--runtime.rest.request-body-strict</nobr>                    | Boolean: `true`, `false` (default: `true`) | ✅ |
+| runtime.<br/>graphql.allow-introspection                                | <nobr>--runtime.graphql.allow-introspection</nobr>                 | Boolean: `true`, `false` (default: `true`) | ✅ |
+| runtime.<br/>graphql.path                                               | <nobr>--runtime.graphql.path</nobr>                                | String (default: `/graphql`) | ❌       |
+| runtime.<br/>graphql.enabled                                            | <nobr>--runtime.graphql.enabled</nobr>                             | Boolean: `true`, `false` (default: `true`) | ❌ |
+| runtime.<br/>graphql.multiple-mutations.create.enabled                  | <nobr>--runtime.graphql.multiple-mutations.create.enabled</nobr>   | Boolean: `true`, `false` (default: `true`) | ✅ |
+| runtime.<br/>host.mode                                                  | <nobr>--runtime.host.mode</nobr>                                   | String: `Development`, `Production` | ❌ |
+| runtime.<br/>host.cors.origins                                          | <nobr>--runtime.host.cors.origins</nobr>                           | Array of strings | ✅ |
+| runtime.<br/>host.cors.allow-credentials                                | <nobr>--runtime.host.cors.allow-credentials</nobr>                 | Boolean: `true`, `false` (default: `false`) | ✅ |
+| runtime.<br/>host.authentication.provider                               | <nobr>--runtime.host.authentication.provider</nobr>                | String: `StaticWebApps`, `AppService`, `AzureAD`, `Jwt` | ✅ |
+| runtime.<br/>host.authentication.jwt.audience                           | <nobr>--runtime.host.authentication.jwt.audience</nobr>            | Array of strings | ✅ |
+| runtime.<br/>host.authentication.jwt.issuer                             | <nobr>--runtime.host.authentication.jwt.issuer</nobr>              | String    | ✅       |
+| runtime.<br/>cache.enabled                                              | <nobr>--runtime.cache.enabled</nobr>                               | Boolean: `true`, `false` (default: `false`) | ✅ |
+| runtime.<br/>cache.ttl-seconds                                          | <nobr>--runtime.cache.ttl-seconds</nobr>                           | Integer (default: `3600`) | ✅       |
+
 ## Related content
 
 - [Functions reference](reference-functions.md)
