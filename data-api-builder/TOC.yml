@@ -274,7 +274,7 @@
 - name: Concepts
   items:
     - name: REST
-      displayName: HTTP
+      displayName: HTTP, etag, header, put, patch, get, post, delete
       href: rest.md
     - name: OpenAPI
       href: openapi.md

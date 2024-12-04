@@ -385,6 +385,25 @@ In either case, the result is something like:
 }
 ```
 
+### The `If-Match: *` HTTP Request Header
+
+The HTTP header `If-Match: *` ensures an **update operation** is performed **only if the resource exists**. If the resource does not exist, the operation will fail with HTTP Status Code: `404 Not Found`. If the `If-Match` header is **omitted**, the default behavior is to perform an **upsert**, which creates the resource if it does not already exist.
+
+**Example:**
+```http
+PUT /api/Books/2001 HTTP/1.1
+If-Match: *
+Content-Type: application/json
+
+{
+  "title": "Stranger in a Strange Land",
+  "pages": 525
+}
+```
+
+> [!NOTE]
+> If you specify a value other than `*` in the `If-Match` header, Data API builder will return a `400 Bad Request` error, as ETag-based matching is not supported.
+
 ## PATCH
 
 PATCH creates or updates the item of the specified entity. Only the specified fields are affected. All fields not specified in the request body aren't affected. If an item with the specified primary key doesn't exist, a new item is created.
@@ -420,6 +439,24 @@ The result is something like:
   ]
 }
 ```
+
+### The `If-Match: *` HTTP Request Header
+
+The HTTP header `If-Match: *` ensures an **update operation** is performed **only if the resource exists**. If the resource does not exist, the operation will fail with HTTP Status Code: `404 Not Found`. If the `If-Match` header is **omitted**, the default behavior is to perform an **upsert**, which creates the resource if it does not already exist.
+
+**Example:**
+```http
+PATCH /api/Books/2001 HTTP/1.1
+If-Match: *
+Content-Type: application/json
+
+{
+    "year": 1991
+}
+```
+
+> [!NOTE]
+> If you specify a value other than `*` in the `If-Match` header, Data API builder will return a `400 Bad Request` error, as ETag-based matching is not supported.
 
 ## DELETE
 
