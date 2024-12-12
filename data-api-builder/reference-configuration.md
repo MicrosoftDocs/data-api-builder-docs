@@ -1249,6 +1249,12 @@ Configures authentication for the Data API builder host.
 | **[`provider`](#provider-host-runtime)** | ❌ No | enum string | StaticWebApps | 
 | **[`jwt`](#json-web-tokens-host-runtime)** | ❌ No | object | None | 
 
+**Authentication and customer responsibilities**
+
+Data API builder is designed to operate within a broader security pipeline, and there are important steps to configure before it processes requests. It’s important to understand that Data API builder does not authenticate the direct caller (such as your web application) but rather the end-user, based on a valid JWT token provided by a trusted identity provider (for example, Entra ID). When a request reaches Data API builder, it assumes the JWT token is valid and checks it against any prerequisites you have configured, such as specific claims. Authorization rules are then applied to determine what the user can access or modify.
+
+Once authorization passes, Data API builder executes the request using the account specified in the connection string. Because this account often requires elevated permissions to handle various user requests, it is essential to minimize its access rights to reduce risk. We recommend securing your architecture by configuring a Private Link between your front-end web application and the API endpoint, and by hardening the machine hosting Data API builder. These measures help ensure your environment remains secure, protecting your data and minimizing vulnerabilities that could be exploited to access, modify, or exfiltrate sensitive information.
+
 ### Provider (Host runtime)
 
 ---
