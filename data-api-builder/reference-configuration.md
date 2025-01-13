@@ -2833,46 +2833,51 @@ This example defines a role named `reader` with only `read` permissions on the `
 }
 ```
 
-Here's an example GET request to the `User` entity including the `X-MS-API-ROLE` header on the REST endpoint base `/api` at `localhost`, using different languages:
+You can use `<custom-role>` when a valid access token is presented *and* the `X-MS-API-ROLE` HTTP header is included, specifying a user role that is also contained in the access token's roles claim. Below are examples of GET requests to the `User` entity, including both the authorization bearer token and the `X-MS-API-ROLE` header, on the REST endpoint base `/api` at `localhost` using different languages.
 
 ### [HTTP](#tab/http)
 
 ```http
 GET https://localhost:5001/api/User
+Authorization: Bearer <your_access_token>
 X-MS-API-ROLE: custom-role
 ```
 
 ### [C#](#tab/csharp)
 
 ```csharp
-var client = new HttpClient();
-client.DefaultRequestHeaders.Add("X-MS-API-ROLE", "custom-role");
-HttpResponseMessage response = await client.GetAsync("https://localhost:5001/api/User");
-```
+using System.Net.Http;
+using System.Net.Http.Headers;
 
-> [!NOTE]
-> This example uses the `HttpClient` class from the `System.Net.Http` library.
+var client = new HttpClient();
+client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "<your_access_token>");
+client.DefaultRequestHeaders.Add("X-MS-API-ROLE", "custom-role");
+var response = await client.GetAsync("https://localhost:5001/api/User");
+```
 
 ### [JavaScript/TypeScript](#tab/javascript-typescript)
 
 ```typescript
 const response = await fetch('https://localhost:5001/api/User', {
-  headers: { "X-MS-API-ROLE": "custom-role" }
+  headers: { 
+    "Authorization": "Bearer <your_access_token>",
+    "X-MS-API-ROLE": "custom-role"
+  }
 });
 ```
-
-> [!NOTE]
-> This example uses the `fetch` function available in modern JavaScript environments.
 
 ### [Python](#tab/python)
 
 ```python
 import requests
-response = requests.get('https://localhost:5001/api/User', headers={"X-MS-API-ROLE": "custom-role"})
-```
 
-> [!NOTE]
-> This example uses the `requests` library in Python.
+headers = {
+  "Authorization": "Bearer <your_access_token>",
+  "X-MS-API-ROLE": "custom-role"
+}
+response = requests.get('https://localhost:5001/api/User', headers=headers)
+print(response.json())
+```
 
 ---
 
