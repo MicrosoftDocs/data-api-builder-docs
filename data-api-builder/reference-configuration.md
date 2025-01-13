@@ -2136,24 +2136,20 @@ This section defines how each entity in the database is represented in the API, 
 
 #### Examples
 
-For example, this JSON object instructs Data API builder to expose a GraphQL entity named `Author` and a REST endpoint reachable via the `/Author` path. The `dbo.authors` database table backs the entity and the configuration allows anyone to access the endpoint anonymously.
+For example, this JSON object instructs Data API builder to expose a GraphQL entity named `User` and a REST endpoint reachable via the `/User` path. The `dbo.User` database table backs the entity and the configuration allows anyone to access the endpoint anonymously.
 
 ```json
 {
   "entities": {
-    "Author": {
+    "User": {
       "source": {
-        "object": "dbo.authors",
+        "object": "dbo.Users",
         "type": "table"
       },
       "permissions": [
         {
           "role": "anonymous",
-          "actions": [
-            {
-              "action": "*"
-            }
-          ]
+          "actions": ["*"]
         }
       ]
     }
@@ -2166,41 +2162,42 @@ This example declares the `User` entity. This name `User` is used anywhere in th
 ```json
 {
   "entities": {
-    "Book": {
+    "User": {
+      "source": {
+        "object": "dbo.Users",
+        "type": "table",
+        "key-fields": ["Id"],
+        "parameters": {} // only when source.type = stored-procedure
+      },
       "rest": {
         "enabled": true,
-        "path": "/books",
-        "methods": ["GET", "POST", "PUT"]
+        "path": "/users",
+        "methods": [] // only when source.type = stored-procedure
       },
       "graphql": {
         "enabled": true,
         "type": {
-          "singular": "Book",
-          "plural": "Books"
+          "singular": "User",
+          "plural": "Users"
         },
         "operation": "query"
       },
-      "source": {
-        "object": "BooksTable",
-        "type": "table",
-        "key-fields": ["Id"],
-        "parameters": {}
-      },
       "mappings": {
         "id": "Id",
-        "title": "Title",
-        "authorId": "AuthorId"
+        "name": "Name",
+        "age": "Age",
+        "isAdmin": "IsAdmin"
       },
       "permissions": [
         {
           "role": "authenticated",
-          "actions": ["read"],
+          "actions": ["read"],  // "execute" only when source.type = stored-procedure
           "fields": {
-            "include": ["id", "title"],
+            "include": ["id", "name", "age", "isAdmin"],
             "exclude": []
           },
           "policy": {
-            "database": "@claims.userId eq @item.authorId"
+            "database": "@claims.userId eq @item.id"
           }
         },
         {
@@ -2211,7 +2208,7 @@ This example declares the `User` entity. This name `User` is used anywhere in th
             "exclude": []
           },
           "policy": {
-            "database": "@claims.userRoles has 'BookAdmin'"
+            "database": "@claims.userRole eq 'UserAdmin'"
           }
         }
       ]
@@ -2222,15 +2219,15 @@ This example declares the `User` entity. This name `User` is used anywhere in th
 
 ### Source
 
----
+--- 
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.{entity}` | `source` | object | ✔️ Yes | None |
+| Parent              | Property    | Type  | Required | Default |
+|---------------------|-------------|-------|----------|---------|
+| `entities.{entity}` | `source`    | object| ✔️ Yes   | None    |
 
 The `{entity}.source` configuration connects the API-exposed entity and its underlying database object. This property specifies the database table, view, or stored procedure that the entity represents, establishing a direct link for data retrieval and manipulation.
 
-For straightforward scenarios, where the entity maps directly to a single database table or collection, the source property needs only the name of that database object. This simplicity facilitates quick setup for common use cases.
+For straightforward scenarios where the entity maps directly to a single database table, the source property needs only the name of that database object. This simplicity facilitates quick setup for common use cases: `"source": "dbo.User"`.
 
 #### Format
 
@@ -2242,7 +2239,7 @@ For straightforward scenarios, where the entity maps directly to a single databa
         "object": <string>,
         "type": <"view" | "stored-procedure" | "table">, 
         "key-fields": <array of strings>,
-        "parameters": {
+        "parameters": {  // only when source.type = stored-procedure
           "<name>": <string | number | boolean>
         }
       }
@@ -2253,23 +2250,36 @@ For straightforward scenarios, where the entity maps directly to a single databa
 
 #### Properties
 
-| | Required | Type |
-|-|-|-|
-| **[`object`](#object)** | ✔️ Yes | string |
-| **[`type`](#type-entities)** | ✔️ Yes | enum string |
-| **[`parameters`](#parameters)** | ❌ No | object |
-| **[`key-fields`](#key-fields)** | ❌ No | string array |
+|                 | Required | Type         |
+|-----------------|----------|--------------|
+| **[`object`](#object)**       | ✔️ Yes   | string        |
+| **[`type`](#type-entities)**  | ✔️ Yes   | enum string   |
+| **[`parameters`](#parameters)** | ❌ No    | object        |
+| **[`key-fields`](#key-fields)** | ❌ No    | string array  |
 
 #### Examples
 
-This example shows the most straightforward structure to associate an entity with a source table.
+**1. Simple Table Mapping:**
 
+This example shows how to associate a `User` entity with a source table `dbo.Users`.
+
+**SQL**
+```sql
+CREATE TABLE dbo.Users (
+  Id INT PRIMARY KEY,
+  Name NVARCHAR(100),
+  Age INT,
+  IsAdmin BIT
+);
+```
+
+**Configuration**
 ```json
 {
   "entities": {
-    "Author": {
+    "User": {
       "source": {
-        "object": "dbo.authors",
+        "object": "dbo.Users",
         "type": "table"
       }
     }
@@ -2277,131 +2287,74 @@ This example shows the most straightforward structure to associate an entity wit
 }
 ```
 
-Here's an exmaple of a many-to-many relationship.
+**2. Stored Procedure Example:**
 
-![Diagram of a many-to-many relationship between multiple database tables](media/many-to-many.png)
+This example shows how to associate a `User` entity with a source proc `dbo.GetUsers`.
 
+**SQL**
+```sql
+CREATE PROCEDURE GetUsers 
+     @IsAdmin BIT 
+AS
+SELECT Id, Name, Age, IsAdmin
+FROM dbo.Users
+WHERE IsAdmin = @IsAdmin;
+```
+
+**Configuration**
 ```json
 {
   "entities": {
-    "Todo": {
+    "User": {
       "source": {
         "type": "stored-procedure",
-        "object": "GetUserTodos",
+        "object": "GetUsers",
         "parameters": {
-          "UserId": "number",
-          "Completed": "boolean",
-          "CategoryName": "string"
+          "IsAdmin": "boolean"
         }
       },
-      "mapping": {
-        "Id": "todo_id",
-        "Title": "todo_title",
-        "Description": "todo_description",
-        "Completed": "todo_completed"
+      "mappings": {
+        "Id": "id",
+        "Name": "name",
+        "Age": "age",
+        "IsAdmin": "isAdmin"
       }
     }
   }
 }
 ```
 
-- The `Todo` entity backed by a stored procedure.
-- The `type` property within source is set to `stored-procedure`, indicating the kind of source object the entity is mapped to.
-- The `object` property within source is the name of the stored procedure in the database.
-
-Also in this example, the (optional) `mapping` property is added to the configuration for the "Todo" entity. It specifies how the fields in the entity (`Id`, `Title`, `Description`, and `Completed`) map to the corresponding fields in the underlying data source or stored procedure parameters (`todo_id`, `todo_title`, `todo_description`, and `todo_completed`, respectively). This mapping ensures that the correct data is passed between the entity and the stored procedure during create/update operations.
-
-The previous example would use the following SQL procedure.
-
-```sql
-CREATE PROCEDURE GetUserTodos
-    @UserId INT,
-    @Completed BIT = NULL,
-    @CategoryName NVARCHAR(100) = NULL
-AS
-BEGIN
-    SELECT t.*
-    FROM Todo t
-    INNER JOIN users_todos ut ON t.id = ut.todo_id
-    INNER JOIN Category c ON t.category_id = c.id
-    WHERE ut.user_id = @UserId
-    AND ISNULL(@Completed, t.completed)
-    AND ISNULL(@CategoryName, c.name)
-END
-```
-
-- `@UserId`: Mandatory parameter without a default value.
-- `@Completed`: Optional parameter. If provided, it filters the todos by their completion status.
-- `@CategoryName`: Optional parameter. If provided, it filters the todos by category name.
-
-Here's an example for updates using a stored procedure.
-
-```json
-{
-  "entities": {
-    "Todo": {
-      "source": {
-        "type": "stored-procedure",
-        "object": "UpsertTodo",
-        "parameters": {
-          "Id": "number",
-          "Title": "string",
-          "Description": "string",
-          "Completed": "boolean"
-        }
-      },
-      "method": "POST" // Specify the HTTP method as POST
-    }
-  }
-}
-```
-
-This example explicitly sets the HTTP method for interacting with this entity to `POST` using the method property.
-
-```SQL
-CREATE PROCEDURE UpsertTodo
-    @Id INT,
-    @Title NVARCHAR(100),
-    @Description NVARCHAR(255),
-    @Completed BIT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    MERGE INTO Todo AS target
-    USING (VALUES (@Id, @Title, @Description, @Completed)) AS source (Id, Title, Description, Completed)
-    ON target.Id = source.Id
-    WHEN MATCHED THEN
-        UPDATE SET
-            Title = source.Title,
-            Description = source.Description,
-            Completed = source.Completed
-    WHEN NOT MATCHED THEN
-        INSERT (Id, Title, Description, Completed)
-        VALUES (source.Id, source.Title, source.Description, source.Completed);
-END;
-```
+The `mappings` property is optional for stored procedures. 
 
 ### Object
 
----
+--- 
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.{entity}.source` | `object` | string | ✔️ Yes | None |
+| Parent                     | Property | Type   | Required | Default |
+|----------------------------|----------|--------|----------|---------|
+| `entities.{entity}.source` | `object` | string | ✔️ Yes   | None    |
 
-Name of the database object to be used.
+Name of the database object to be used. If the object belongs to the `dbo` schema, specifying the schema is optional. Additionally, square brackets around object names (e.g., `[dbo].[Users]` vs. `dbo.Users`) can be used or omitted.
 
 #### Examples
 
-In this example, `object` refers to the `dbo.books` object in the database.
+**SQL**
+```sql
+CREATE TABLE dbo.Users (
+  Id INT PRIMARY KEY,
+  Name NVARCHAR(100),
+  Age INT,
+  IsAdmin BIT
+);
+```
 
+**Configuration**
 ```json
 {
   "entities": {
-    "Book": {
+    "User": {
       "source": {
-        "object": "dbo.books",
+        "object": "dbo.Users",
         "type": "table"
       }
     }
@@ -2409,15 +2362,33 @@ In this example, `object` refers to the `dbo.books` object in the database.
 }
 ```
 
+**Alternative Notation Without Schema and Brackets:**
+
+If the table is in the `dbo` schema, you may omit the schema or brackets:
+
+```json
+{
+  "entities": {
+    "User": {
+      "source": {
+        "object": "Users",
+        "type": "table"
+      }
+    }
+  }
+}
+```
+
+
 ### Type (entities)
 
----
+--- 
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.{entity}.source` | `type` | string | ✔️ Yes | None |
+| Parent                           | Property | Type   | Required | Default |
+|----------------------------------|----------|--------|----------|---------|
+| `entities.{entity}.source`       | `type`   | string | ✔️ Yes   | None    |
 
-The `type` property identifies the type of database object behind the entity, these include `view`, `table`, and `stored-procedure`. The `type` property is required and there isn't default value.
+The `type` property identifies the type of database object behind the entity, including `view`, `table`, and `stored-procedure`. This property is required and has no default value.
 
 #### Format
 
@@ -2433,28 +2404,94 @@ The `type` property identifies the type of database object behind the entity, th
 
 #### Values
 
-Here's a list of allowed values for this property:
-
-| | Description |
-|-|-|
-| **`table`** | Represents a table. |
-| **`stored-procedure`** | Represents a stored procedure. |
-| **`view`** | Represents a view. |
+| Value             | Description                           |
+|-------------------|---------------------------------------|
+| **`table`**       | Represents a table.                   |
+| **`stored-procedure`** | Represents a stored procedure.    |
+| **`view`**        | Represents a view.                    |
 
 #### Examples
 
-In this example, `type` indicates that this source is a view in the database. This value influences whether other values (ex: `key-fields`) are required.
+**1. Table Example:**
 
+**SQL**
+```sql
+CREATE TABLE dbo.Users (
+  Id INT PRIMARY KEY,
+  Name NVARCHAR(100),
+  Age INT,
+  IsAdmin BIT
+);
+```
+
+**Configuration**
 ```json
 {
   "entities": {
-    "Category": {
+    "User": {
       "source": {
-        "object": "dbo.vw_category_details",
+        "object": "dbo.Users",
+        "type": "table"
+      }
+    }
+  }
+}
+```
+
+**2. View Example:**
+
+**SQL**
+```sql
+CREATE VIEW dbo.AdminUsers AS
+SELECT Id, Name, Age
+FROM dbo.Users
+WHERE IsAdmin = 1;
+```
+
+**Configuration**
+```json
+{
+  "entities": {
+    "AdminUsers": {
+      "source": {
+        "object": "dbo.AdminUsers",
         "type": "view",
-        "key-fields": [
-          "category_id"
-        ]
+        "key-fields": ["Id"]
+      },
+      "mappings": {
+        "Id": "id",
+        "Name": "name",
+        "Age": "age"
+      }
+    }
+  }
+}
+```
+
+*Note:* Specifying `key-fields` is important for views because they lack inherent primary keys.
+
+**3. Stored Procedure Example:**
+
+**SQL**
+```sql
+CREATE PROCEDURE dbo.GetUsers (@IsAdmin BIT)
+AS
+SELECT Id, Name, Age, IsAdmin
+FROM dbo.Users
+WHERE IsAdmin = @IsAdmin;
+```
+
+**Configuration**
+```json
+{
+  "entities": {
+    "User": {
+      "source": {
+        "type": "stored-procedure",
+        "object": "GetUsers",
+        "parameters": {
+          "IsAdmin": "boolean"
+        }
       }
     }
   }
@@ -2463,16 +2500,16 @@ In this example, `type` indicates that this source is a view in the database. Th
 
 ### Key fields
 
----
+--- 
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.{entity}.source` | `key-fields` | string array | ❌ No | None |
+| Parent                          | Property    | Type         | Required | Default |
+|---------------------------------|-------------|--------------|----------|---------|
+| `entities.{entity}.source`      | `key-fields`| string array | ❌ No    | None    |
 
-The `{entity}.key-fields` setting is necessary for entities backed by views, so Data API builder knows how it can identify and return a single item, if needed. If `type` is set to `view` without `key-fields`, the Data API builder engine refuses to start.
+The `{entity}.key-fields` property is particularly necessary for entities backed by views, so Data API Builder knows how to identify and return a single item. If `type` is set to `view` without specifying `key-fields`, the engine refuses to start. This property is allowed with tables and stored procedures, but it is not used in those cases. 
 
-> [!IMPORTANT]
-> This property is required if the type of object is a `view`. Also, this property is required is the type of object is a `table` with no primary key defined.
+> [!IMPORTANT]  
+> This property is required if the type of object is a `view`. 
 
 #### Format
 
@@ -2489,20 +2526,27 @@ The `{entity}.key-fields` setting is necessary for entities backed by views, so 
 }
 ```
 
-#### Examples
+#### Example: View with Key Fields
 
-This example uses the `dbo.vw_category_details` view with `category_id` indicated as the key field.
+This example uses the `dbo.AdminUsers` view with `Id` indicated as the key field.
 
+**SQL**
+```sql
+CREATE VIEW dbo.AdminUsers AS
+SELECT Id, Name, Age
+FROM dbo.Users
+WHERE IsAdmin = 1;
+```
+
+**Configuration**
 ```json
 {
   "entities": {
-    "Category": {
+    "AdminUsers": {
       "source": {
-        "object": "dbo.vw_category_details",
+        "object": "dbo.AdminUsers",
         "type": "view",
-        "key-fields": [
-          "category_id"
-        ]
+        "key-fields": ["Id"]
       }
     }
   }
@@ -2511,18 +2555,16 @@ This example uses the `dbo.vw_category_details` view with `category_id` indicate
 
 ### Parameters
 
----
+--- 
 
-| Parent                    | Property       | Type   | Required | Default |
-|---------------------------|----------------|--------|----------|---------|
-| `entities.{entity}.source` | `parameters`   | object | ❌ No     | None    |
+| Parent                     | Property     | Type   | Required | Default |
+|----------------------------|--------------|--------|----------|---------|
+| `entities.{entity}.source` | `parameters` | object | ❌ No    | None    |
 
-The `parameters` property within `entities.{entity}.source` is used for entities backed by stored procedures. While it does not allow specifying default values for parameters, it ensures proper mapping of parameter names and data types required by the stored procedure.
+The `parameters` property within `entities.{entity}.source` is used for entities backed by stored procedures. It ensures proper mapping of parameter names and data types required by the stored procedure.
 
 > [!IMPORTANT]  
-> The `parameters` property is **required** if the `type` of the object is `stored-procedure` and the procedure expects parameters.
-
----
+> The `parameters` property is **required** if the `type` of the object is `stored-procedure` and the parameter is required.
 
 #### Format
 
@@ -2544,15 +2586,13 @@ The `parameters` property within `entities.{entity}.source` is used for entities
 
 ##### Example 1: Stored Procedure Without Parameters
 
-**SQL Stored Procedure:**
-
+**SQL**
 ```sql
-CREATE PROC GetUsers AS
-SELECT Id, Name, Age, IsAdmin FROM USERS
+CREATE PROCEDURE dbo.GetUsers AS
+SELECT Id, Name, Age, IsAdmin FROM dbo.Users;
 ```
 
-**JSON Configuration:**
-
+**Configuration**
 ```json
 {
   "entities": {
@@ -2566,20 +2606,16 @@ SELECT Id, Name, Age, IsAdmin FROM USERS
 }
 ```
 
----
-
 ##### Example 2: Stored Procedure With Parameters
 
-**SQL Stored Procedure:**
-
+**SQL**
 ```sql
-CREATE PROC GetUser @userId INT AS
-SELECT Id, Name, Age, IsAdmin FROM USERS
-WHERE Id = @userId
+CREATE PROCEDURE dbo.GetUser (@userId INT) AS
+SELECT Id, Name, Age, IsAdmin FROM dbo.Users
+WHERE Id = @userId;
 ```
 
-**JSON Configuration:**
-
+**Configuration**
 ```json
 {
   "entities": {
@@ -2598,13 +2634,13 @@ WHERE Id = @userId
 
 ### Permissions
 
----
+--- 
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.{entity}` | `permissions` | object | ✔️ Yes | None |
+| Parent                 | Property     | Type   | Required | Default |
+|------------------------|--------------|--------|----------|---------|
+| `entities.{entity}`  | `permissions` | object | ✔️ Yes   | None    |
 
-This section defines who can access the related entity and what actions are allowed. Permissions are defined in this section in the terms of roles. Actions are defined as typical CRUD operations including: `create`, `read`, `update`, and `delete`. The section `permissions` defines who (in terms of roles) can access the related entity and using which actions. Actions are the usual CRUD operations: `create`, `read`, `update`, `delete`.
+This section defines who can access the related entity and what actions are allowed. Permissions are defined in terms of roles and CRUD operations: `create`, `read`, `update`, and `delete`. The `permissions` section specifies which roles can access the related entity and using which actions.
 
 #### Format
 
@@ -2614,7 +2650,7 @@ This section defines who can access the related entity and what actions are allo
     "<entity-name>": {
       "permissions": [
         {
-          "actions": <["create", "read", "update", "delete", "execute", "*"]>
+          "actions": ["create", "read", "update", "delete", "execute", "*"]
         }
       ]
     }
@@ -2622,23 +2658,25 @@ This section defines who can access the related entity and what actions are allo
 }
 ```
 
-| Action | Description 
-|-|-
-| `create` | Allows creating a new record in the entity.
-| `read` | Allows reading or retrieving records from the entity.
-| `update` | Allows updating existing records in the entity.
-| `delete` | Allows deleting records from the entity.
-| `execute`| Allows executing a stored procedure or operation related to the entity.
-| `*` | Grants all applicable CRUD operations
+| Action           | Description                                                    |
+|------------------|----------------------------------------------------------------|
+| `create`         | Allows creating a new record in the entity.                    |
+| `read`           | Allows reading or retrieving records from the entity.          |
+| `update`         | Allows updating existing records in the entity.                |
+| `delete`         | Allows deleting records from the entity.                       |
+| `execute`        | Allows executing a stored procedure or operation.              |
+| `*`              | Grants all applicable CRUD operations.                         |
 
 #### Examples
 
-In this example, an anonymous role is defined with access to all possible actions.
+**Example 1: Anonymous Role on User Entity**
+
+In this example, the `anonymous` role is defined with access to all possible actions on the `User` entity.
 
 ```json
 {
   "entities": {
-    "Writer": {
+    "User": {
       "permissions": [
         {
           "role": "anonymous",
@@ -2650,19 +2688,19 @@ In this example, an anonymous role is defined with access to all possible action
 }
 ```
 
-You can also mix and match string and object array actions.
+**Example 2: Mixed Actions for Anonymous Role**
+
+This example shows how to mix string and object array actions for the `User` entity.
 
 ```json
 {
   "entities": {
-    "Reviewer": {
+    "User": {
       "permissions": [
         {
           "role": "anonymous",
           "actions": [
-            {
-              "action": "read"
-            },
+            { "action": "read" },
             "create"
           ]        
         }
@@ -2672,98 +2710,88 @@ You can also mix and match string and object array actions.
 }
 ```
 
-**Anonymous Role** Allow anonymous users to read all fields except the `secret-field`. The use of `"include": ["*"]` with `"exclude": ["secret-field"]` effectively hides `secret-field` from anonymous users while allowing access to all other fields.
+**Anonymous Role**: Allows anonymous users to read all fields except a hypothetical sensitive field (e.g., `secret-field`). Using `"include": ["*"]` with `"exclude": ["secret-field"]` hides `secret-field` while permitting access to all other fields.
 
-**Authenticated Role** Allow authenticated users to read and update specific fields, explicitly including `id`, `title`, and `secret-field`, but then excluding `secret-field`. Demonstrates the explicit inclusion and subsequent exclusion of `secret-field`, showcasing the precedence of `exclude`. Since `secret-field` is both included and excluded, it ends up being inaccessible, which matches the intended rule of `exclude` taking precedence.
+**Authenticated Role**: Allows authenticated users to read and update specific fields. For instance, explicitly including `id`, `name`, and `age` but excluding `isAdmin` can demonstrate how exclusions override inclusions.
 
-**Author Role** Authors can do all operations `*` on all fields without exclusions. The file indicates `"include": ["*"]` with an empty `"exclude": []` array grants access to all fields, as no fields are explicitly excluded.
+**Admin Role**: Admins can perform all operations (`*`) on all fields without exclusions. Specifying `"include": ["*"]` with an empty `"exclude": []` array grants access to all fields.
 
-This configuration represents the default if nothing is specified.
-
+This configuration:
 ```json
 "fields": {
   "include": [],
   "exclude": []
 }
 ```
-
-It's effectively identical to:
-
+is effectively identical to:
 ```json
 "fields": {
-  "include": [ "*" ],
+  "include": ["*"],
   "exclude": []
 }
 ```
 
-Also consider the following setup:
-
+Also consider this setup:
 ```json
 "fields": {
   "include": [],
   "exclude": ["*"]
 }
 ```
+This specifies no fields are explicitly included and all fields are excluded, which typically restricts access entirely.
 
-The previous configuration effectively specifies that no fields are explicitly included (`"include": []` is empty, indicating no fields are allowed) and that all fields are excluded (`"exclude": ["*"]` uses the wildcard `*` to indicate all fields).
-
-**Practical Use**: Such a configuration might seem counterintuitive since it restricts access to all fields. However, it could be utilized in scenarios where a role might perform certain actions - like creating an entity - without accessing any of its data.
+**Practical Use**: Such a configuration might seem counterintuitive since it restricts access to all fields. However, it could be used in scenarios where a role performs certain actions (like creating an entity) without accessing any of its data.
 
 The same behavior, but with different syntax, would be:
-
 ```json
 "fields": {
-  "include": ["Id", "Title"],
+  "include": ["Id", "Name"],
   "exclude": ["*"]
 }
 ```
+This setup attempts to include only `Id` and `Name` fields, but excludes all fields due to the wildcard in `exclude`.
 
-The previous setup attempts to specify that only the `Id` and `Title` fields should be included, while also indicating that all fields should be excluded with the wildcard `*` in the `exclude` section. Another way to express the same logic would be:
-
+Another way to express the same logic would be:
 ```json
 "fields": {
-  "include": ["Id", "Title"],
-  "exclude": ["Id", "Title"]
+  "include": ["Id", "Name"],
+  "exclude": ["Id", "Name"]
 }
 ```
+Given that `exclude` takes precedence over `include`, specifying `exclude: ["*"]` means all fields are excluded, even those in `include`. Thus, at first glance, this configuration might seem to prevent any fields from being accessible.
 
-Given the general rule that the `exclude` list takes precedence over the `include` list, specifying `exclude: ["*"]` would typically mean that all fields are excluded, even the fields listed in the `include` section. Thus, at first glance, this configuration might seem to prevent any fields from being accessible, as the exclusion rule is dominant.
-
-**The Reverse**: If the intent is to grant, access only to the `Id` and `Title` fields, it's clearer and more reliable to specify only those fields in the `include` section and not use `exclude` with a wildcard. Alternatively, you could adjust the system's permissions logic to explicitly accommodate such cases, assuming you're in control of its design. For example:
-
+**The Reverse**: If the intent is to grant access only to `Id` and `Name` fields, it's clearer and more reliable to specify only those fields in the `include` section without using an exclusion wildcard:
 ```json
 "fields": {
-  "include": ["Id", "Title"],
+  "include": ["Id", "Name"],
   "exclude": []
 }
 ```
 
 #### Properties
 
-| | Required | Type |
-|-|-|-|
-| **[`role`](#role)** | ✔️ Yes | string |
-| **[`actions` (string-array)](#actions-string-array) or [`actions` (object-array)](#actions-object-array)** | ✔️ Yes | object or string array |
+|                      | Required | Type               |
+|----------------------|----------|--------------------|
+| **[`role`](#role)**  | ✔️ Yes   | string             |
+| **[`actions` (string-array)](#actions-string-array)<br/>or [`actions` (object-array)](#actions-object-array)** | ✔️ Yes   | object or string array |
 
 ### Role
 
----
+--- 
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.permissions` | `role` | string | ✔️ Yes | None |
+| Parent                   | Property | Type   | Required | Default |
+|--------------------------|----------|--------|----------|---------|
+| `entities.permissions`   | `role`   | string | ✔️ Yes   | None    |
 
-String containing the name of the role to which the defined permission applies. The `role` string contains the name of the role to which the defined permission applies.
+String containing the name of the role to which the defined permission applies. Roles set the permissions context in which a request should be executed. For each entity defined in the runtime config, you can define a set of roles and associated permissions that determine how the entity can be accessed via REST and GraphQL endpoints. Roles aren't additive. 
 
-Roles set the permissions context in which a request should be executed. For each entity defined in the runtime config, you can define a set of roles and associated permissions that determine how the entity can be accessed in both the REST and GraphQL endpoints. Roles aren't additive. For more information about roles, see [authorization](authorization.md).
+Data API Builder evaluates requests in the context of a single role:
 
-Data API builder evaluates requests in the context of a single role:
-
-| Role | Description |
-|-|-|
-| `anonymous` | No access token is presented |
-| `authenticated`| A valid access token is presented |
-| `<custom-role>`| A valid access token is presented and the `X-MS-API-ROLE` HTTP header is included specifying a user role that is also included in the access token's roles claim |
+| Role            | Description                                                                                                     |
+|-----------------|-----------------------------------------------------------------------------------------------------------------|
+| `anonymous`     | No access token is presented                                                                                    |
+| `authenticated` | A valid access token is presented                                                                               |
+| `<custom-role>` | A valid access token is presented and the `X-MS-API-ROLE` HTTP header specifies a role present in the token    |
 
 #### Format
 
@@ -2774,7 +2802,7 @@ Data API builder evaluates requests in the context of a single role:
       "permissions": [
         {
           "role": <"anonymous" | "authenticated" | "custom-role">,
-          "actions": <["create", "read", "update", "delete", "execute", "*"]>,
+          "actions": ["create", "read", "update", "delete", "execute", "*"],
           "fields": {
             "include": <array of strings>,
             "exclude": <array of strings>
@@ -2784,73 +2812,106 @@ Data API builder evaluates requests in the context of a single role:
     }
   }
 }
-
 ```
 
 #### Examples
 
-This example defines a role named `reader` with only `read` permissions on the endpoint.
+This example defines a role named `reader` with only `read` permissions on the `User` entity.
 
 ```json
 {
   "entities": {
-    "Book": {
+    "User": {
       "permissions": [
         {
           "role": "reader",
-          "actions": [
-            "read"
-          ]        
+          "actions": ["read"]
         }
       ]
     }
   }
 }
 ```
+
+Here's an example GET request to the `User` entity including the `X-MS-API-ROLE` header on the REST endpoint base `/api` at `localhost`, using different languages:
+
+### [HTTP](#tab/http)
+
+```http
+GET https://localhost:5001/api/User
+X-MS-API-ROLE: custom-role
+```
+
+### [C#](#tab/csharp)
+
+```csharp
+var client = new HttpClient();
+client.DefaultRequestHeaders.Add("X-MS-API-ROLE", "custom-role");
+HttpResponseMessage response = await client.GetAsync("https://localhost:5001/api/User");
+```
+
+> [!NOTE]
+> This example uses the `HttpClient` class from the `System.Net.Http` library.
+
+### [JavaScript/TypeScript](#tab/javascript-typescript)
+
+```typescript
+const response = await fetch('https://localhost:5001/api/User', {
+  headers: { "X-MS-API-ROLE": "custom-role" }
+});
+```
+
+> [!NOTE]
+> This example uses the `fetch` function available in modern JavaScript environments.
+
+### [Python](#tab/python)
+
+```python
+import requests
+response = requests.get('https://localhost:5001/api/User', headers={"X-MS-API-ROLE": "custom-role"})
+```
+
+> [!NOTE]
+> This example uses the `requests` library in Python.
 
 ### Actions (string-array)
 
----
+--- 
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.permissions` | `actions` | oneOf [string, array] | ✔️ Yes | None |
+| Parent                 | Property  | Type               | Required | Default |
+|------------------------|-----------|--------------------|----------|---------|
+| `entities.permissions` | `actions` | oneOf [string, array] | ✔️ Yes   | None    |
 
-An array of string values detailing what operations are allowed for the associated role. For `table` and `view` database objects, roles can be configured to use any combination of `create`, `read`, `update`, or `delete` actions. For stored procedures, roles can only have the `execute` action. The `actions` array details what actions are allowed on the associated role. When the entity is either a table or view, roles can be configured with a combination of the actions: `create`, `read`, `update`, `delete`.
+An array of string values detailing what operations are allowed for the associated role. For `table` and `view` database objects, roles can use any combination of `create`, `read`, `update`, or `delete` actions. For stored procedures, roles can only have the `execute` action.
 
-| Action | SQL Operation |
-|-|-|
-| `*` | Wildcard, including execute |
-| `create` | Insert one or more rows |
-| `read` | Select one or more rows |
-| `update` | Modify one or more rows |
-| `delete` | Delete one or more rows |
-| `execute` | Runs a stored procedure |
+| Action     | SQL Operation                           |
+|------------|-----------------------------------------|
+| `*`        | Wildcard, including execute             |
+| `create`   | Insert one or more rows                 |
+| `read`     | Select one or more rows                 |
+| `update`   | Modify one or more rows                 |
+| `delete`   | Delete one or more rows                 |
+| `execute`  | Runs a stored procedure                 |
 
 > [!NOTE]
-> For stored procedures, the wildcard (`*`) action expands to a list that only includes the `execute` action. For tables and views, the wildcard action expands to a list that includes `create`, `read`, `update`, and `delete` actions.
+> For stored procedures, the wildcard (`*`) action expands to only the `execute` action. For tables and views, it expands to `create`, `read`, `update`, and `delete`.
 
 #### Examples
 
-This example gives `create` and `read` permissions to the first role named `contributor`. The second role named `auditor` only has `delete` permissions.
+This example gives `create` and `read` permissions to a role named `contributor` and `delete` permissions to a role named `auditor` on the `User` entity.
 
 ```json
 {
   "entities": {
-    "CheckoutLogs": {
+    "User": {
       "permissions": [
         {
           "role": "auditor",
-          "actions": [
-            "delete"
-          ]        
+          "actions": ["delete"]
         },
         {
           "role": "contributor",
-          "actions": [
-            "read",
-            "create"
-          ]
+          "actions": ["read", "create"]
         }
       ]
     }
@@ -2858,14 +2919,12 @@ This example gives `create` and `read` permissions to the first role named `cont
 }
 ```
 
-Here's another example.
+Another example:
 
 ```json
 {
-  ...
   "entities": {
-    "<entity-name>": {
-      ...
+    "User": {
       "permissions": [
         {
           "role": "contributor",
@@ -2879,23 +2938,23 @@ Here's another example.
 
 ### Actions (object-array)
 
----
+--- 
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.permissions` | `actions` | string array | ✔️ Yes | None |
+| Parent                 | Property  | Type        | Required | Default |
+|------------------------|-----------|-------------|----------|---------|
+| `entities.permissions` | `actions` | string array | ✔️ Yes  | None    |
 
-An array of string values detailing what operations are allowed for the associated role. For `table` and `view` database objects, roles can be configured to use any combination of `create`, `read`, `update`, or `delete` actions. For stored procedures, roles can only have the `execute` action.
+An array of action objects detailing allowed operations for the associated role. For `table` and `view` objects, roles can use any combination of `create`, `read`, `update`, or `delete`. For stored procedures, only `execute` is allowed.
 
 > [!NOTE]
-> For stored procedures, the wildcard (`*`) action expands to a list that only includes the `execute` action. For tables and views, the wildcard action expands to a list that includes `create`, `read`, `update`, and `delete` actions.
+> For stored procedures, the wildcard (`*`) action expands to only `execute`. For tables/views, it expands to `create`, `read`, `update`, and `delete`.
 
 #### Format
 
 ```json
 {
   "entities": {
-    <string>: {
+    "<entity-name>": {
       "permissions": [
         {
           "role": <string>,
@@ -2915,20 +2974,20 @@ An array of string values detailing what operations are allowed for the associat
 
 #### Properties
 
-| Property | Required | Type | Default |
-|-|-|-|-|
-| **[`action`](#action)** | ✔️ Yes | string | None |
-| **[`fields`](#fields)** | ❌ No | string array | None |
-| **[`policy`](#policy)** | ❌ No | object | None |
+| Property        | Required | Type         | Default |
+|-----------------|----------|--------------|---------|
+| **`action`**    | ✔️ Yes   | string       | None    |
+| **`fields`**    | ❌ No    | string array | None    |
+| **`policy`**    | ❌ No    | object       | None    |
 
-#### Examples
+#### Example
 
-This example grants only `read` permission to the `auditor` role. The `auditor` role can only read specific data using the predicate defined in `policy.database`. The `auditor` role is also limited in what fields it can, or can't read using the `fields` property.
+This example grants only `read` permission to the `auditor` role on the `User` entity, with field and policy restrictions.
 
 ```json
 {
   "entities": {
-    "CheckoutLogs": {
+    "User": {
       "permissions": [
         {
           "role": "auditor",
@@ -2937,10 +2996,10 @@ This example grants only `read` permission to the `auditor` role. The `auditor` 
               "action": "read",
               "fields": {
                 "include": ["*"],
-                "exclude": ["last_updated"]
+                "exclude": ["last_login"]
               },
               "policy": {
-                "database": "@item.LogDepth lt 3"
+                "database": "@item.IsAdmin eq false"
               }
             }
           ]
@@ -2953,40 +3012,43 @@ This example grants only `read` permission to the `auditor` role. The `auditor` 
 
 ### Action
 
----
+--- 
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.permissions.actions[]` | `action` | string | ✔️ Yes | None |
+| Parent                              | Property | Type   | Required | Default |
+|-------------------------------------|----------|--------|----------|---------|
+| `entities.permissions.actions[]`    | `action` | string | ✔️ Yes   | None    |
 
 Specifies the specific operation allowed on the database object.
 
 #### Values
 
-Here's a list of allowed values for this property:
-
-| | Tables | Views | Stored Procedures | Description |
-|-|-|-|-|-|
-| **`create`** | ✔️ Yes | ✔️ Yes | ❌ No | Create new items |
-| **`read`** | ✔️ Yes | ✔️ Yes | ❌ No | Point read existing items |
-| **`update`** | ✔️ Yes | ✔️ Yes | ❌ No | Update or replace existing items |
-| **`delete`** | ✔️ Yes | ✔️ Yes | ❌ No | Remove existing items |
-| **`execute`** | ❌ No | ❌ No | ✔️ Yes | Execute programmatic operations |
+|               | Tables | Views | Stored Procedures | Description                       |
+|---------------|--------|-------|-------------------|-----------------------------------|
+| **`create`**  | ✔️ Yes | ✔️ Yes| ❌ No             | Create new items                  |
+| **`read`**    | ✔️ Yes | ✔️ Yes| ❌ No             | Read existing items               |
+| **`update`**  | ✔️ Yes | ✔️ Yes| ❌ No             | Update or replace items           |
+| **`delete`**  | ✔️ Yes | ✔️ Yes| ❌ No             | Delete items                      |
+| **`execute`** | ❌ No  | ❌ No | ✔️ Yes            | Execute programmatic operations   |
 
 #### Format
 
 ```json
 {
   "entities": {
-    <string>: {
+    "<entity-name>": {
       "permissions": [
         {
-          "role": <string>,
+          "role": "<role>",
           "actions": [
             {
-              "action": <string>,
-              "fields": <object>,
-              "policy": <object>
+              "action": "<string>",
+              "fields": {
+                "include": [/* fields */],
+                "exclude": [/* fields */]
+              },
+              "policy": {
+                "database": "<predicate>"
+              }
             }
           ]
         }
@@ -2996,16 +3058,16 @@ Here's a list of allowed values for this property:
 }
 ```
 
-#### Examples
+#### Example
 
-Here's an example where `anonymous` users are allowed to `execute` a specific stored procedure and `read` a specific table.
+Here's an example where `anonymous` users are allowed to `execute` a stored procedure and `read` from the `User` table.
 
 ```json
 {
   "entities": {
-    "Author": {
+    "User": {
       "source": {
-        "object": "dbo.authors",
+        "object": "dbo.Users",
         "type": "table"
       },
       "permissions": [
@@ -3019,12 +3081,12 @@ Here's an example where `anonymous` users are allowed to `execute` a specific st
         }
       ]
     },
-    "BestSellingAuthor": {
+    "GetUser": {
       "source": {
-        "object": "dbo.stp_get_bestselling_authors",
+        "object": "dbo.GetUser",
         "type": "stored-procedure",
         "parameters": {
-          "depth": 10
+          "userId": "number"
         }
       },
       "permissions": [
@@ -3960,7 +4022,7 @@ This example instructs the engine that the `stp_get_bestselling_authors` stored 
         "object": "dbo.stp_get_bestselling_authors",
         "type": "stored-procedure",
         "parameters": {
-          "depth": 10
+          "depth": "number"
         }
       },
       "rest": {
