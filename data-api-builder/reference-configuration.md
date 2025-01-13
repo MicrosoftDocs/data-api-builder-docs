@@ -69,15 +69,17 @@ Here's a sample configuration file that only includes required properties for a 
   "$schema": "https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json",
   "data-source": {
     "database-type": "mssql",
-    "connection-string": "@env('sql-connection-string')"
+    "connection-string": "@env('SQL_CONNECTION_STRING')"
   },
   "entities": {
-    "Book": {
-      "source": "dbo.books",
-      "permissions": [{
-          "actions": ["*"],
-          "role": "anonymous"
-      }]
+    "User": {
+      "source": "dbo.Users",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": ["*"]
+        }
+      ]
     }
   }
 }
@@ -285,7 +287,7 @@ The value used for the connection string largely depends on the database service
 | **Use Azure Database for PostgreSQL string value** | `Server=<server-address>;Database=<name-of-database>;Port=5432;User Id=<username>;Password=<password>;Ssl Mode=Require;` | Connection string to an Azure Database for PostgreSQL account. For more information, see [Azure Database for PostgreSQL connection strings](/azure/postgresql/single-server/how-to-connection-string-powershell). |
 | **Use Azure Cosmos DB for NoSQL string value** | `AccountEndpoint=<endpoint>;AccountKey=<key>;` | Connection string to an Azure Cosmos DB for NoSQL account. For more information, see [Azure Cosmos DB for NoSQL connection strings](/azure/cosmos-db/nosql/how-to-dotnet-get-started#retrieve-your-account-connection-string). |
 | **Use Azure Database for MySQL string value** | `Server=<server-address>;Database=<name-of-database>;User ID=<username>;Password=<password>;Sslmode=Required;SslCa=<path-to-certificate>;` | Connection string to an Azure Database for MySQL account. For more information, see [Azure Database for MySQL connection strings](/azure/mysql/single-server/how-to-connection-string). |
-| **Access environment variable** | `@env('database-connection-string')` | Access an environment variable from the local machine. In this example, the `database-connection-string` environment variable is referenced. |
+| **Access environment variable** | `@env('SQL_CONNECTION_STRING')` | Access an environment variable from the local machine. In this example, the `SQL_CONNECTION_STRING` environment variable is referenced. |
 
 > [!TIP]
 > As a best practice, avoid storing sensitive information in your configuration file. When possible, use `@env()` to reference environment variables. For more information, see [`@env()` function](reference-functions.md#env).
@@ -367,6 +369,8 @@ These samples just illustrate how each database type might be configured. Your s
 
 An optional section of extra key-value parameters for specific database connections.
 
+Whether the `options` section is required or not is largely dependent on the database service being used.
+
 #### Format
 
 ```json
@@ -379,24 +383,73 @@ An optional section of extra key-value parameters for specific database connecti
 }
 ```
 
-#### Examples
+#### options: { set-session-context: boolean }
 
-Whether the `options` section is required or not is largely dependent on the database service being used.
+For Azure SQL and SQL Server, Data API builder can take advantage of `SESSION_CONTEXT` to send user-specified metadata to the underlying database. Such metadata is available to Data API builder by virtue of the claims present in the access token. The `SESSION_CONTEXT` data is available to the database during the database connection until that connection is closed. For more information, see [session context](azure-sql-session-context-rls.md).
 
-| | Value | Description |
-|-|-|-|
-| **Enable `SESSION_CONTEXT` in Azure SQL or SQL Server** | `"set-session-context": false` | For Azure SQL and SQL Server, Data API builder can take advantage of `SESSION_CONTEXT` to send user specified metadata to the underlying database. Such metadata is available to Data API builder by virtue of the claims present in the access token. The `SESSION_CONTEXT` data is available to the database during the database connection until that connection is closed. For more information, see [session context](azure-sql-session-context-rls.md). |
+##### SQL Stored Procedure Example:
+
+```sql
+CREATE PROC GetUser @userId INT AS
+BEGIN
+    -- Check if the current user has access to the requested userId
+    IF SESSION_CONTEXT(N'user_role') = 'admin' 
+        OR SESSION_CONTEXT(N'user_id') = @userId
+    BEGIN
+        SELECT Id, Name, Age, IsAdmin
+        FROM Users
+        WHERE Id = @userId;
+    END
+    ELSE
+    BEGIN
+        RAISERROR('Unauthorized access', 16, 1);
+    END
+END;
+```
+
+##### JSON Configuration Example:
 
 ```json
 {
-  "data-source"{
+  "$schema": "https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json",
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string": "@env('SQL_CONNECTION_STRING')",
     "options": {
-        "set-session-context": false
+      "set-session-context": true
+    }
+  },
+  "entities": {
+    "User": {
+      "source": {
+        "object": "dbo.GetUser",
+        "type": "stored-procedure",
+        "parameters": {
+          "userId": "number"
+        }
+      },
+      "permissions": [
+        {
+          "role": "authenticated",
+          "actions": ["execute"]
+        }
+      ]
     }
   }
 }
 ```
 
+---
+
+### Explanation:
+1. **Stored Procedure (`GetUser`)**:
+   - The procedure checks the `SESSION_CONTEXT` to validate if the caller has the role `admin` or matches the `userId` provided.
+   - Unauthorized access results in an error.
+
+2. **JSON Configuration**:
+   - `set-session-context` is enabled to pass user metadata from the access token to the database.
+   - The `parameters` property maps the `userId` parameter required by the stored procedure.
+   - The `permissions` block ensures only authenticated users can execute the stored procedure.
 ### Data source files
 
 ---
@@ -2059,15 +2112,14 @@ Here's an exmaple of a many-to-many relationship.
 {
   "entities": {
     "Todo": {
-      "type": "stored-procedure",
       "source": {
         "type": "stored-procedure",
-        "object": "GetUserTodos"
-      },
-      "parameters": {
-        "UserId": 0, 
-        "Completed": null,
-        "CategoryName": null
+        "object": "GetUserTodos",
+        "parameters": {
+          "UserId": "number",
+          "Completed": "boolean",
+          "CategoryName": "string"
+        }
       },
       "mapping": {
         "Id": "todo_id",
@@ -2115,17 +2167,17 @@ Here's an example for updates using a stored procedure.
 {
   "entities": {
     "Todo": {
-      "type": "stored-procedure",
       "source": {
-        "object": "UpsertTodo"
+        "type": "stored-procedure",
+        "object": "UpsertTodo",
+        "parameters": {
+          "Id": "number",
+          "Title": "string",
+          "Description": "string",
+          "Completed": "boolean"
+        }
       },
-      "method": "POST", // Specify the HTTP method as POST
-      "parameters": {
-        "Id": 0,
-        "Title": null,
-        "Description": null,
-        "Completed": null
-      }
+      "method": "POST" // Specify the HTTP method as POST
     }
   }
 }
@@ -2288,14 +2340,16 @@ This example uses the `dbo.vw_category_details` view with `category_id` indicate
 
 ---
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.{entity}.source` | `parameters` | object | ❌ No | None |
+| Parent                    | Property       | Type   | Required | Default |
+|---------------------------|----------------|--------|----------|---------|
+| `entities.{entity}.source` | `parameters`   | object | ❌ No     | None    |
 
-The `{entity}.source.parameters` setting is important for entities backed by stored procedures, enabling developers to specify parameters and their default values. Parameters ensure that if certain parameters aren't provided within an HTTP request, the system can fall back to these predefined values.
+The `parameters` property within `entities.{entity}.source` is used for entities backed by stored procedures. While it does not allow specifying default values for parameters, it ensures proper mapping of parameter names and data types required by the stored procedure.
 
-> [!IMPORTANT]
-> This property is required if the type of object is a `stored-procedure`.
+> [!IMPORTANT]  
+> The `parameters` property is **required** if the `type` of the object is `stored-procedure` and the procedure expects parameters.
+
+---
 
 #### Format
 
@@ -2307,8 +2361,7 @@ The `{entity}.source.parameters` setting is important for entities backed by sto
         "type": "stored-procedure",
         "parameters": {
           "<parameter-name-1>": <string | number | boolean>,
-          "<parameter-name-2>": <string | number | boolean>,
-          "<parameter-name-3>": <string | number | boolean>
+          "<parameter-name-2>": <string | number | boolean>
         }
       }
     }
@@ -2316,25 +2369,53 @@ The `{entity}.source.parameters` setting is important for entities backed by sto
 }
 ```
 
-#### Examples
+##### Example 1: Stored Procedure Without Parameters
 
-This example invokes the `dbo.stp_get_bestselling_books` stored procedure passing in these two parameters:
+**SQL Stored Procedure:**
 
-| | Value |
-|-|-|
-| **`depth`** | 25 |
-| **`list`** | contoso-best-sellers |
+```sql
+CREATE PROC GetUsers AS
+SELECT Id, Name, Age, IsAdmin FROM USERS
+```
+
+**JSON Configuration:**
 
 ```json
 {
   "entities": {
-    "BestsellingBooks": {
+    "Users": {
       "source": {
-        "object": "dbo.stp_get_bestselling_books",
+        "object": "dbo.GetUsers",
+        "type": "stored-procedure"
+      }
+    }
+  }
+}
+```
+
+---
+
+##### Example 2: Stored Procedure With Parameters
+
+**SQL Stored Procedure:**
+
+```sql
+CREATE PROC GetUser @userId INT AS
+SELECT Id, Name, Age, IsAdmin FROM USERS
+WHERE Id = @userId
+```
+
+**JSON Configuration:**
+
+```json
+{
+  "entities": {
+    "User": {
+      "source": {
+        "object": "dbo.GetUser",
         "type": "stored-procedure",
         "parameters": {
-          "depth": 25,
-          "list": "contoso-best-sellers"
+          "userId": "number"
         }
       }
     }
