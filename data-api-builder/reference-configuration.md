@@ -2874,6 +2874,8 @@ response = requests.get('https://localhost:5001/api/User', headers={"X-MS-API-RO
 > [!NOTE]
 > This example uses the `requests` library in Python.
 
+---
+
 ### Actions (string-array)
 
 --- 
