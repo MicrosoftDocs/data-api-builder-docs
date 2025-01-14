@@ -258,13 +258,9 @@ Data API builder automatically retries database requests after detecting transie
 
 Using this formula, you can calculate the time for each retry attempt in seconds.
 
-| | Seconds |
-| :-- | :-- |
-| **First** | `2` |
-| **Second** | `4` |
-| **Third** | `8` |
-| **Fourth** | `16` |
-| **Fifth** | `32` |
+| Attempts | First | Second | Third | Fourth | Fifth |
+|:--------:|:-----:|:------:|:-----:|:------:|:-----:|
+| Seconds  |  2s   |   4s   |  8s   |  16s   |  32s  |
 
 #### Azure SQL and SQL Server
 
