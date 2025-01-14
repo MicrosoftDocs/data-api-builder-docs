@@ -224,14 +224,14 @@ The `type` property indicates the kind of backend database.
 
 | Type | Description | Min Version |
 |-|-|-|
-| `mssql` | Azure SQL Database | None |
-| `mssql` | Azure SQL MI | None |
-| `mssql` | SQL Server | SQL 2016 |
-| `sqldw` | Azure SQL Data Warehouse | None |
-| `postgresql` | PostgreSQL | v11 |
-| `mysql` | MySQL | v8 |
-| `cosmosdb_nosql` | Azure Cosmos DB for NoSQL | None |
-| `cosmosdb_postgresql` | Azure Cosmos DB for PostgreSQL | None | 
+| `mssql` | Azure SQL Database | - 
+| `mssql` | Azure SQL MI | - 
+| `mssql` | SQL Server | 2016 
+| `sqldw` | Azure SQL Data Warehouse | - 
+| `postgresql` | PostgreSQL | ver. 11 
+| `mysql` | MySQL | ver. 8 
+| `cosmosdb_nosql` | Azure Cosmos DB for NoSQL | - 
+| `cosmosdb_postgresql` | Azure Cosmos DB for PostgreSQL | - 
 
 ### Connection string
 
