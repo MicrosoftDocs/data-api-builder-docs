@@ -99,7 +99,7 @@ dab add Book -c "dab-config.MsSql.json" --source dbo.books --permissions "anonym
 | **-s,--source** | ✔️ Yes | | ✔️ Yes | string | Name of the source table or container. |
 | **--permissions** | ✔️ Yes | | ✔️ Yes | string | Permissions required to access the source table or container. Format: `[role]:[actions]`. |
 | **--source.type** | ❌ No | `table` | ✔️ Yes | string | Type of the database object. Supported values: `table`, `view`, `stored-procedure`. |
-| **--source.params** | ❌ No | | ✔️ Yes | string | Dictionary of parameters and their values for Source object. `param1:val1,param2:value2,...` for Stored-Procedures. |
+| **--source.params** | ❌ No | | ✔️ Yes | string | A dictionary of stored procedure parameters and their data types. Supported data types are `string`, `number`, and `boolean`. Parameters are specified in the format: `paramName:type`. For example: `--source.params "id:number,isActive:boolean,name:string"`. |
 | **--source.key-fields** | ✔️ Yes ¹ | | ✔️ Yes | string | One or more fields to be used as primary keys for tables and views only. Comma separated values. Example `--source.key-fields "id,name,type"`. |
 | **--rest** | ❌ No | *case-sensitive entity name* | ✔️ Yes | string | Route for REST API. Examples: `--rest: false` -> Disables REST API  calls for this entity. `--rest: true` -> Entity name becomes the rest path. `--rest: "customPathName"` -> Provided customPathName becomes the REST path.|
 | **--rest.methods** | ❌ No | `post` | ✔️ Yes | string | HTTP actions to be supported for stored procedure. Specify the actions as a comma separated list. Valid HTTP actions are:[get, post, put, patch, delete]. |
