@@ -290,69 +290,59 @@ The value used for the connection string largely depends on the database service
 
 These samples just illustrate how each database type might be configured. Your scenario might be unique, but this sample is a good starting place. Replace the placeholders such as `myserver`, `myDataBase`, `mylogin`, and `myPassword` with the actual values specific to your environment.
 
-- `mssql`
+##### `mssql`
 
-  ```json
-  "data-source": {
-    "database-type": "mssql",
-    "connection-string": "$env('my-connection-string')",
-    "options": {
-      "set-session-context": true
-    }
+```json
+"data-source": {
+  "database-type": "mssql",
+  "connection-string": "$env('my-connection-string')",
+  "options": {
+    "set-session-context": true
   }
-  ```
-
-  - **Typical connection string format**: `"Server=tcp:myserver.database.windows.net,1433;Initial Catalog=myDataBase;Persist Security Info=False;User ID=mylogin;Password=myPassword;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"`
-
-- `postgresql`
-
-  ```json
-  "data-source": {
-    "database-type": "postgresql",
-    "connection-string": "$env('my-connection-string')"
-  }
-  ```
-
-  - **Typical connection string format**: `"Host=myserver.postgres.database.azure.com;Database=myDataBase;Username=mylogin@myserver;Password=myPassword;"`
-
-- `mysql`
-
-  ```json
-  "data-source": {
-    "database-type": "mysql",
-    "connection-string": "$env('my-connection-string')"
-  }
-  ```
+}
+```
   
-  - **Typical connection string format**: `"Server=myserver.mysql.database.azure.com;Database=myDataBase;Uid=mylogin@myserver;Pwd=myPassword;"`
+##### `postgresql`
 
-- `cosmosdb_nosql`
+```json
+"data-source": {
+  "database-type": "postgresql",
+  "connection-string": "$env('my-connection-string')"
+}
+```
 
-  ```json
-  "data-source": {
-    "database-type": "cosmosdb_nosql",
-    "connection-string": "$env('my-connection-string')",
-    "options": {
-      "database": "Your_CosmosDB_Database_Name",
-      "container": "Your_CosmosDB_Container_Name",
-      "schema": "Path_to_Your_GraphQL_Schema_File"
-    }
-  }
-  ```
+##### `mysql`
+
+```json
+"data-source": {
+  "database-type": "mysql",
+  "connection-string": "$env('my-connection-string')"
+}
+```
   
-  - **Typical connection string format**: `"AccountEndpoint=https://mycosmosdb.documents.azure.com:443/;AccountKey=myAccountKey;"`
+##### `cosmosdb_nosql`
 
-- `cosmosdb_postgresql`
-
-  ```json
-  "data-source": {
-    "database-type": "cosmosdb_postgresql",
-    "connection-string": "$env('my-connection-string')"
+```json
+"data-source": {
+  "database-type": "cosmosdb_nosql",
+  "connection-string": "$env('my-connection-string')",
+  "options": {
+    "database": "Your_CosmosDB_Database_Name",
+    "container": "Your_CosmosDB_Container_Name",
+    "schema": "Path_to_Your_GraphQL_Schema_File"
   }
-  ```
+}
+```
   
-  - **Typical connection string format**: `"Host=mycosmosdb.postgres.database.azure.com;Database=myDataBase;Username=mylogin@mycosmosdb;Password=myPassword;Port=5432;SSL Mode=Require;"`
+##### `cosmosdb_postgresql`
 
+```json
+"data-source": {
+  "database-type": "cosmosdb_postgresql",
+  "connection-string": "$env('my-connection-string')"
+}
+```
+  
 > [!NOTE]
 > The "options" specified such as `database`, `container`, and `schema` are specific to Azure Cosmos DB's NoSQL API rather than the PostgreSQL API. For Azure Cosmos DB using the PostgreSQL API, the "options" would not include `database`, `container`, or `schema` as in the NoSQL setup.
 
