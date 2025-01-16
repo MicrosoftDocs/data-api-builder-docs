@@ -63,12 +63,10 @@ dab init --database-type mysql --connection-string "@env('MYSQL_CONNECTION_STRIN
 | **--cors-origin** | ❌ No | `""` | ✔️ Yes | string | Specify the list of allowed origins. |
 | **--auth.provider** | ❌ No | `StaticWebApps` | ✔️ Yes | string | Specify the Identity Provider. |
 | **--rest.path** | ❌ No | `/api` | ✔️ Yes | string | Specify the REST endpoint's prefix. |
-| **--rest.disabled** | ❌ No | `false` | ❌ No | | Disables REST endpoint for all entities. |
-| **--rest.enabled** | ❌ No | `true` | ✔️ Yes | | Enables REST endpoint for all entities. |
+| **--rest.enabled** | ❌ No | `true` | ✔️ Yes | boolean | Enables REST endpoint for all entities. |
 | **--rest.request-body-strict** | ❌ No | `true` | ✔️ Yes | | Doesn't allow extraneous fields in request body. |
 | **--graphql.path** | ❌ No | `/graphql` | ✔️ Yes | string | Specify the GraphQL endpoint's prefix. |
-| **--graphql.disabled** | ❌ No | `false` | ❌ No | | Disables GraphQL endpoint for all entities. |
-| **--graphql.enabled** | ❌ No | `true` | ✔️ Yes | | Enables GraphQL endpoint for all entities. |
+| **--graphql.enabled** | ❌ No | `true` | ✔️ Yes | boolean | Enables GraphQL endpoint for all entities. |
 | **--graphql.multiple-create.enabled** | ❌ No | `false` | ✔️ Yes | | Enables multiple create functionality in GraphQL. |
 | **--auth.audience** | ❌ No | | ✔️ Yes | string | Identifies the recipients that the Json Web Token (JWT) is intended for. |
 | **--auth.issuer** | ❌ No | | ✔️ Yes | string | Specify the party that issued the JWT token. |
@@ -193,7 +191,7 @@ dab start
 | --- | --- | --- | --- | --- | --- |
 | **--verbose** | ❌ No | | ❌ No | | Specify logging level as informational. |
 | **--LogLevel** | ❌ No | *`Debug` when `hostMode=development`, else `Error` when `HostMode=Production`* | ✔️ Yes | string | Specify logging level as provided value. example: debug, error, information, etc. |
-| **--no-https-redirect** | ❌ No | `false` | ✔️ Yes | string | Disables automatic https redirects. |
+| **--no-https-redirect** | ❌ No |  | ✔️ Yes | - | Disables automatic https redirects. |
 | **-c,--config** | ❌ No | `dab-config.json` | ✔️ Yes | string | Path to config file. |
 
 > [!NOTE]
