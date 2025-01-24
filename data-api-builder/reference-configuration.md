@@ -4220,9 +4220,6 @@ Enables and configures caching for the entity.
 #### Format
 
 ```json
-You're right; the formatting doesn't match your style. Here’s the corrected version following your preferred documentation format:
-
-```json
 {
   "entities": {
     "<entity-name>": {
