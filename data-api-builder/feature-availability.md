@@ -44,9 +44,9 @@ These tables list the features available in Data API builder (DAB) for Azure dat
 | Feature | SQL Server | Azure SQL | Azure Cosmos DB<br/>for NoSQL | PostgreSQL | MySQL | DWSQL |
 | --- | --- | --- | --- | --- | --- | --- |
 | One-To-Many / Query | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
-| One-To-Many / Mutation | ✅ Yes (as of version `0.11`) | ✅ Yes (as of version `0.11`) | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
+| One-To-Many / Mutation | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Many-To-Many / Query | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
-| Many-To-Many / Mutation | ✅ Yes (as of version `0.11`) | ✅ Yes (as of version `0.11`) | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
+| Many-To-Many / Mutation | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Cross-Source Relationships | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Cross-Source Joins | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 
@@ -113,11 +113,26 @@ These tables list the features available in Data API builder (DAB) for Azure dat
 
 | Feature | SQL Server | Azure SQL | Azure Cosmos DB<br/>for NoSQL | PostgreSQL | MySQL | DWSQL |
 | --- | --- | --- | --- | --- | --- | --- |
-| User-assigned managed identity<br/>(Microsoft Entra ID) | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| System-assigned managed identity<br/>(Microsoft Entra ID) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
+| UAMI<br/>(Entra ID) | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
+| SAMI<br/>(Entra ID) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
 | Static Web App EasyAuth | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | Pass-through security | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | API-key security | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
+
+**User Assigned Managed Identity (UAMI)**  
+A UAMI is a standalone Azure identity you explicitly create and assign to resources, which can be shared across multiple services.
+
+**System Assigned Managed Identity (SAMI)**  
+A SAMI is an Azure-managed identity tied to a specific resource's lifecycle, enabling secure access to other services without storing credentials.
+
+**Static Web Apps EasyAuth**  
+EasyAuth automates user sign-in, token validation, and role assignment for Azure Static Web Apps, integrating with popular identity providers without custom code.
+
+**Pass-through Security**  
+Pass-through security forwards the authentication context (credentials or claims) from the application directly to the backend, letting the data source enforce its own security policies.
+
+**API-Key Security**  
+API-key security requires each API request to include a unique key, acting as a shared secret to ensure that only authorized clients can access the endpoints.
 
 ## Other Features
 

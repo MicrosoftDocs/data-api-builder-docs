@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 05/30/2024
+ms.date: 01/13/2025
 show_latex: true
 ---
 
@@ -224,14 +224,14 @@ The `type` property indicates the kind of backend database.
 
 | Type | Description | Min Version |
 |-|-|-|
-| `mssql` | Azure SQL Database | None |
-| `mssql` | Azure SQL MI | None |
-| `mssql` | SQL Server | SQL 2016 |
-| `sqldw` | Azure SQL Data Warehouse | None |
-| `postgresql` | PostgreSQL | v11 |
-| `mysql` | MySQL | v8 |
-| `cosmosdb_nosql` | Azure Cosmos DB for NoSQL | None |
-| `cosmosdb_postgresql` | Azure Cosmos DB for PostgreSQL | None | 
+| `mssql` | Azure SQL Database | - 
+| `mssql` | Azure SQL MI | - 
+| `mssql` | SQL Server | 2016 
+| `sqldw` | Azure SQL Data Warehouse | - 
+| `postgresql` | PostgreSQL | ver. 11 
+| `mysql` | MySQL | ver. 8 
+| `cosmosdb_nosql` | Azure Cosmos DB for NoSQL | - 
+| `cosmosdb_postgresql` | Azure Cosmos DB for PostgreSQL | - 
 
 ### Connection string
 
@@ -258,13 +258,9 @@ Data API builder automatically retries database requests after detecting transie
 
 Using this formula, you can calculate the time for each retry attempt in seconds.
 
-| | Seconds |
-| :-- | :-- |
-| **First** | `2` |
-| **Second** | `4` |
-| **Third** | `8` |
-| **Fourth** | `16` |
-| **Fifth** | `32` |
+| Attempts | First | Second | Third | Fourth | Fifth |
+|:--------:|:-----:|:------:|:-----:|:------:|:-----:|
+| Seconds  |  2s   |   4s   |  8s   |  16s   |  32s  |
 
 #### Azure SQL and SQL Server
 
@@ -294,69 +290,59 @@ The value used for the connection string largely depends on the database service
 
 These samples just illustrate how each database type might be configured. Your scenario might be unique, but this sample is a good starting place. Replace the placeholders such as `myserver`, `myDataBase`, `mylogin`, and `myPassword` with the actual values specific to your environment.
 
-- `mssql`
+##### `mssql`
 
-  ```json
-  "data-source": {
-    "database-type": "mssql",
-    "connection-string": "$env('my-connection-string')",
-    "options": {
-      "set-session-context": true
-    }
+```json
+"data-source": {
+  "database-type": "mssql",
+  "connection-string": "$env('my-connection-string')",
+  "options": {
+    "set-session-context": true
   }
-  ```
-
-  - **Typical connection string format**: `"Server=tcp:myserver.database.windows.net,1433;Initial Catalog=myDataBase;Persist Security Info=False;User ID=mylogin;Password=myPassword;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"`
-
-- `postgresql`
-
-  ```json
-  "data-source": {
-    "database-type": "postgresql",
-    "connection-string": "$env('my-connection-string')"
-  }
-  ```
-
-  - **Typical connection string format**: `"Host=myserver.postgres.database.azure.com;Database=myDataBase;Username=mylogin@myserver;Password=myPassword;"`
-
-- `mysql`
-
-  ```json
-  "data-source": {
-    "database-type": "mysql",
-    "connection-string": "$env('my-connection-string')"
-  }
-  ```
+}
+```
   
-  - **Typical connection string format**: `"Server=myserver.mysql.database.azure.com;Database=myDataBase;Uid=mylogin@myserver;Pwd=myPassword;"`
+##### `postgresql`
 
-- `cosmosdb_nosql`
+```json
+"data-source": {
+  "database-type": "postgresql",
+  "connection-string": "$env('my-connection-string')"
+}
+```
 
-  ```json
-  "data-source": {
-    "database-type": "cosmosdb_nosql",
-    "connection-string": "$env('my-connection-string')",
-    "options": {
-      "database": "Your_CosmosDB_Database_Name",
-      "container": "Your_CosmosDB_Container_Name",
-      "schema": "Path_to_Your_GraphQL_Schema_File"
-    }
-  }
-  ```
+##### `mysql`
+
+```json
+"data-source": {
+  "database-type": "mysql",
+  "connection-string": "$env('my-connection-string')"
+}
+```
   
-  - **Typical connection string format**: `"AccountEndpoint=https://mycosmosdb.documents.azure.com:443/;AccountKey=myAccountKey;"`
+##### `cosmosdb_nosql`
 
-- `cosmosdb_postgresql`
-
-  ```json
-  "data-source": {
-    "database-type": "cosmosdb_postgresql",
-    "connection-string": "$env('my-connection-string')"
+```json
+"data-source": {
+  "database-type": "cosmosdb_nosql",
+  "connection-string": "$env('my-connection-string')",
+  "options": {
+    "database": "Your_CosmosDB_Database_Name",
+    "container": "Your_CosmosDB_Container_Name",
+    "schema": "Path_to_Your_GraphQL_Schema_File"
   }
-  ```
+}
+```
   
-  - **Typical connection string format**: `"Host=mycosmosdb.postgres.database.azure.com;Database=myDataBase;Username=mylogin@mycosmosdb;Password=myPassword;Port=5432;SSL Mode=Require;"`
+##### `cosmosdb_postgresql`
 
+```json
+"data-source": {
+  "database-type": "cosmosdb_postgresql",
+  "connection-string": "$env('my-connection-string')"
+}
+```
+  
 > [!NOTE]
 > The "options" specified such as `database`, `container`, and `schema` are specific to Azure Cosmos DB's NoSQL API rather than the PostgreSQL API. For Azure Cosmos DB using the PostgreSQL API, the "options" would not include `database`, `container`, or `schema` as in the NoSQL setup.
 
@@ -3113,32 +3099,31 @@ Here's an example where `anonymous` users are allowed to `execute` a stored proc
 
 ### Fields
 
----
+--- 
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.permissions.actions[]` | `fields` | object | ❌ No | None |
+| Parent                                  | Property | Type   | Required | Default |
+|-----------------------------------------|----------|--------|----------|---------|
+| `entities.permissions.actions[]`        | `fields` | object | ❌ No    | None    |
 
-
-Granular specifications on which specific fields are permitted access for the database object. Role configuration is an object type with two internal properties, `include` and `exclude`. These values support granularly defining which database columns (fields) are permitted access in the section `fields`.
+Granular specifications on which specific fields are permitted access for the database object. The `fields` object contains two properties, `include` and `exclude`, to define which database columns are permitted or restricted for a given action.
 
 #### Format
 
 ```json
 {
   "entities": {
-    <string>: {
+    "<entity-name>": {
       "permissions": [
         {
-          "role": <string>,
+          "role": "<role>",
           "actions": [
             {
-              "action": <string>,
+              "action": "<string>",
               "fields": {
-                "include": <array of strings>,
-                "exclude": <array of strings>
+                "include": [/* array of strings */],
+                "exclude": [/* array of strings */]
               },
-              "policy": <object>
+              "policy": { /* object */ }
             }
           ]
         }
@@ -3150,12 +3135,29 @@ Granular specifications on which specific fields are permitted access for the da
 
 #### Examples
 
-In this example, the `anonymous` role is allowed to read from all fields except `id`, but can use all fields when creating an item.
+**SQL**
+
+```sql
+CREATE TABLE dbo.Users (
+  Id INT PRIMARY KEY,
+  Name NVARCHAR(100),
+  Age INT,
+  IsAdmin BIT
+);
+```
+
+**Configuration**
+
+This configuration allows the `anonymous` role to read all fields from the `User` entity except `IsAdmin`, while still allowing creation of new `User` records.
 
 ```json
 {
   "entities": {
-    "Author": {
+    "User": {
+      "source": {
+        "object": "dbo.Users",
+        "type": "table"
+      },
       "permissions": [
         {
           "role": "anonymous",
@@ -3163,65 +3165,30 @@ In this example, the `anonymous` role is allowed to read from all fields except 
             {
               "action": "read",
               "fields": {
-                "include": [ "*" ],
-                "exclude": [ "id" ]
+                "include": ["*"],
+                "exclude": ["IsAdmin"]
               }
             },
-            { "action": "create" }
+            {
+              "action": "create"
+            }
           ]
         }
       ]
     }
   }
-}
-```
-
-Include and exclude work together. The wildcard `*` in the `include` section indicates all fields. The fields noted in the `exclude` section has precedence over fields noted in the `include` section. The definition translates to *include all fields except for the field 'last_updated.'*
-
-```json
-"Book": {
-    "source": "books",
-    "permissions": [
-        {
-            "role": "anonymous",
-            "actions": [ "read" ],
-            // Include All Except Specific Fields
-            "fields": {
-              "include": [ "*" ],
-              "exclude": [ "secret-field" ]
-            }
-        },
-        {
-            "role": "authenticated",
-            "actions": [ "read", "update" ],
-            // Explicit Include and Exclude
-            "fields": {
-              "include": [ "id", "title", "secret-field" ],
-              "exclude": [ "secret-field" ]
-            }
-        },
-        {
-            "role": "author",
-            "actions": [ "*" ],
-            // Include All With No Exclusions (default)
-            "fields": {
-              "include": ["*"],
-              "exclude": []
-            }
-        }
-    ]
 }
 ```
 
 ### Policy
 
----
+--- 
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.{entity}.permissions.actions[]` | `policy` | object | ❌ No | None |
+| Parent                                     | Property | Type   | Required | Default |
+|--------------------------------------------|----------|--------|----------|---------|
+| `entities.{entity}.permissions.actions[]`  | `policy` | object | ❌ No    | None    |
 
-The `policy` section, defined per `action`, defines item-level security rules (database policies) which limit the results returned from a request. The subsection `database` denotes the database policy expression that is evaluated during request execution.
+The `policy` section, defined per action, sets item-level security rules that limit the results returned from a request. The `database` subsection denotes an OData-like expression evaluated during query execution, which Data API Builder translates into a query predicate.
 
 #### Format
 
@@ -3231,13 +3198,12 @@ The `policy` section, defined per `action`, defines item-level security rules (d
     "<entity-name>": {
       "permissions": [
         {
-          "role": <string>,
+          "role": "<role>",
           "actions": [
             {
-              "action": <string>,
-              "fields": <object>,
+              "action": "<string>",
               "policy": {
-                "database": <string>
+                "database": "<predicate>"
               }
             }
           ]
@@ -3248,211 +3214,131 @@ The `policy` section, defined per `action`, defines item-level security rules (d
 }
 ```
 
-#### Properties
+#### Basic Example
 
-| Property | Required | Type | Default |
-|-|-|-|-|
-| **[`database`](#database)** | ✔️ Yes | string | None |
-
-#### Description
-
-The `database` policy: an OData-like expression that is translated into a query predicate the database evaluates, including operators like `eq`, `lt`, and `gt`. In order for results to be returned for a request, the request's query predicate resolved from a database policy must evaluate to `true` when executing against the database.
-
-| Example Item Policy | Predicate |
-|-|-|
-| `@item.OwnerId eq 2000` | `WHERE Table.OwnerId = 2000` |
-| `@item.OwnerId gt 2000` | `WHERE Table.OwnerId > 2000` |
-| `@item.OwnerId lt 2000` | `WHERE Table.OwnerId < 2000` |
-
-> A `predicate` is an expression that evaluates to TRUE or FALSE. Predicates are used in the search condition of [WHERE](/sql/t-sql/queries/where-transact-sql) clauses and [HAVING](/sql/t-sql/queries/select-having-transact-sql) clauses, the join conditions of [FROM](/sql/t-sql/queries/from-transact-sql) clauses, and other constructs where a Boolean value is required.
-([Microsoft Learn Docs](/sql/t-sql/queries/predicates?view=sql-server-ver16&preserve-view=true))
-
-##### Database policy
-
-Two types of directives can be used to manage database policy when authoring a database policy expression:
-
-| Directive | Description |
-|-|-|
-| `@claims` | Access a claim within the validated access token provided in the request |
-| `@item` | Represents a field of the entity for which the database policy is defined |
-
-> [!NOTE]
-> When **Azure Static Web Apps** authentication (EasyAuth) is configured, a limited number of claims types are available for use in database policies: `identityProvider`, `userId`, `userDetails`, and `userRoles`. For more information, see Azure Static Web App's [Client principal data](/azure/static-web-apps/user-information?tabs=javascript#client-principal-data) documentation.
-
-Here are a few example database policies:
-
-- `@claims.userId eq @item.OwnerId`
-- `@claims.userId gt @item.OwnerId`
-- `@claims.userId lt @item.OwnerId`
-
-Data API builder compares the value of the `UserId` claim to the value of the database field `OwnerId`. The result payload only includes records that fulfill **both** the request metadata and the database policy expression.
-
-##### Limitations
-
-**Database policies are supported for tables and views.** Stored procedures can't be configured with policies.
-
-**Database policies don't prevent requests from executing within the database.** This behavior is because they're resolved as predicates in the generated queries that are passed to the database engine.
-
-Database policies are only supported for the `actions` **create**, **read**, **update**, and **delete**. Since there's no predicate in a stored procedure call, they can't be appended.
-
-##### Supported OData-like operators
-
-| Operator | Description | Sample Syntax |
-|-|-|-|
-| `and` | Logical AND | `"@item.status eq 'active' and @item.age gt 18"` |
-| `or` | Logical OR | `"@item.region eq 'US' or @item.region eq 'EU'"` |
-| `eq` | Equals | `"@item.type eq 'employee'"` |
-| `gt` | Greater than| `"@item.salary gt 50000"` |
-| `lt` | Less than | `"@item.experience lt 5"` |
-
-For more information, see [binary operators](/dotnet/api/microsoft.odata.uriparser.binaryoperatorkind).
-
-| Operator | Description | Sample Syntax |
-|-|-|-|
-| `-` | Negate (numeric) | `"@item.balance lt -100"` |
-| `not` | Logical negate (NOT) | `"not @item.status eq 'inactive'"` |
-
-For more information, see [unary operators](/dotnet/api/microsoft.odata.uriparser.unaryoperatorkind).
-
-###### Entity field name restrictions
-
-- **Rules**: Must start with a letter or underscore (`_`), followed by up to 127 letters, underscores (`_`), or digits (`0-9`).
-- **Impact**: Fields not adhering to these rules can't be directly used in database policies.
-- **Solution**: Utilize the `mappings` section to create aliases for fields that don't meet these naming conventions; mappings ensure all fields can be included in policy expressions.
-
-###### Utilizing `mappings` for nonconforming fields
-
-If your entity field names don't meet the OData syntax rules or you simply want to alias them for other reasons, you can define aliases in the `mappings` section of your configuration.
+This example restricts the `read` action for the `adultReader` role so that only users older than 18 are returned:
 
 ```json
 {
   "entities": {
-    "<entity-name>": {
-      "mappings": {
-        "<field-1-name>": <string>,
-        "<field-2-name>": <string>,
-        "<field-3-name>": <string>
-      }
-    }
-  }
-}
-```
-
-In this example, `field-1-name` is the original database field name that doesn't meet the OData naming conventions. Creating a map to `field-1-name` and `field-1-alias` allows this field to be referenced in database policy expressions without issue. This approach not only helps in adhering to the OData naming conventions but also enhances the clarity and accessibility of your data model within both GraphQL and RESTful endpoints.
-
-#### Examples
-
-Consider an entity named `Employee` within a Data API configuration that utilizes both claims and item directives. It ensures data access is securely managed based on user roles and entity ownership:
-
-```json
-{
-  "entities": {
-    "Employee": {
+    "User": {
       "source": {
-        "object": "HRUNITS",
-        "type": "table",
-        "key-fields": ["employee NUM"],
-        "parameters": {}
+        "object": "dbo.Users",
+        "type": "table"
       },
-      "mappings": {
-        "employee NUM": "EmployeeId",
-        "employee Name": "EmployeeName",
-        "department COID": "DepartmentId"
-      },
-      "policy": {
-        "database": "@claims.role eq 'HR' or @claims.userId eq @item.EmployeeId"
-      }
+      "permissions": [
+        {
+          "role": "adultReader",
+          "actions": [
+            {
+              "action": "read",
+              "policy": {
+                "database": "@item.Age gt 18"
+              }
+            }
+          ]
+        }
+      ]
     }
   }
 }
 ```
-
-**Entity Definition**: The `Employee` entity is configured for REST and GraphQL interfaces, indicating its data can be queried or manipulated through these endpoints.
-
-**Source Configuration**: Identifies the `HRUNITS` in the database, with `employee NUM` as the key field.
-
-**Mappings**: Aliases are used to map `employee NUM`, `employee Name`, and `department COID` to `EmployeeId`, `EmployeeName`, and `DepartmentId`, respectively, simplifying field names and potentially obfuscating sensitive database schema details.
-
-**Policy Application**: The `policy` section applies a database policy using an OData-like expression. This policy restricts data access to users with the HR role (`@claims.role eq 'HR'`) or to users whose `UserId` claim matches `EmployeeId` - the field alias - in the database (`@claims.userId eq @item.EmployeeId`). It ensures that employees can only access their own records unless they belong to the HR department. Policies can enforce row-level security based on dynamic conditions.
 
 ### Database
 
----
+--- 
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.{entity}.permissions.actions.policy` | `database` | object | ✔️ Yes | None |
+| Parent                                               | Property   | Type   | Required | Default |
+|------------------------------------------------------|------------|--------|----------|---------|
+| `entities.{entity}.permissions[].actions[].policy`   | `database` | string | ✔️ Yes   | None    |
 
-The `policy` section, defined per `action`, defines item-level security rules (database policies) which limit the results returned from a request. The subsection `database` denotes the database policy expression that is evaluated during request execution.
+#### Description
 
-#### Format
+The `database` property within a policy defines an OData-like expression that Data API Builder translates into a SQL predicate to filter results during query execution. This expression must evaluate to `true` for rows to be returned. For example:
+- `@item.Age gt 18` might translate to `WHERE Users.Age > 18`.
+- `@claims.userId eq @item.Id` restricts results to rows where the user's ID from the claims matches the `Id` field.
+
+##### Directives
+
+- **`@claims`**: Access a claim from the validated access token.
+- **`@item`**: Represents a field of the entity for which the policy is defined.
+
+> [!NOTE]
+> When using Azure Static Web Apps authentication (EasyAuth), only certain claim types (`identityProvider`, `userId`, `userDetails`, `userRoles`) are available.
+
+##### Supported OData-like Operators
+
+The expression supports operators such as:
+- **Logical**: `and`, `or`, `not`
+- **Comparison**: `eq`, `gt`, `lt`
+- **Unary numeric negation**: `-`
+
+For example, `"@item.Age gt 18 and @item.Age lt 65"` restricts results to users aged between 19 and 64.
+
+###### Entity Field Name Restrictions
+
+Fields must start with a letter or underscore (`_`), followed by up to 127 letters, underscores, or digits. Fields not following these rules cannot be used directly in policies. Use the `mappings` section to alias nonconforming field names for policy references.
+
+###### Utilizing `mappings` for Nonconforming Fields
+
+If entity field names don't meet OData naming conventions, define aliases in the `mappings` section:
 
 ```json
 {
   "entities": {
     "<entity-name>": {
-      "permissions": [
-        {
-          "role": <string>,
-          "actions": [
-            {
-              "action": <string>,
-              "fields": {
-                "include": <array of strings>,
-                "exclude": <array of strings>
-              },
-              "policy": {
-                "database": <string>
-              }
-            }
-          ]
-        }
-      ]
+      "mappings": {
+        "<original-field-name>": "<alias>",
+        "...": "..."
+      }
     }
   }
 }
 ```
 
-This property denotes the database policy expression that is evaluated during request execution. The policy string is an OData expression that is translated into a query predicated evaluated by the database. For example, the policy expression `@item.OwnerId eq 2000` is translated to the query predicate `WHERE <schema>.<object-name>.OwnerId = 2000`.
+This creates compliant aliases for use in policies and improves clarity across endpoints.
 
-> [!NOTE]
-> A *predicate* is an expression that evalutes to `TRUE`, `FALSE`, or `UNKNOWN`. Predicates are used in:
->
-> - The search condition of `WHERE` clauses
-> - The search condition of `FROM` clauses
-> - The join conditions of `FROM` clauses
-> - Other constructs where a boolean value is required.
->
-> For more information, see [predicates](/sql/t-sql/queries/predicates).
+##### Limitations
 
-In order for results to be returned for a request, the request's query predicate resolved from a database policy must evaluate to `true` when executing against the database.
-
-Two types of directives can be used to manage the database policy when authoring a database policy expression:
-
-| | Description |
-|-|-|
-| **`@claims`** | Accesses a claim within the validated access token provided in the request |
-| **`@item`** | Represents a field of the entity for which the database policy is defined |
-
-> [!NOTE]
-> A limited number of claim types are available for use in database policies when Azure Static Web Apps authentication (EasyAuth) is configured. These claim types include: `identityProvider`, `userId`, `userDetails`, and `userRoles`. For more information, see [Azure Static Web Apps client principal data](/azure/static-web-apps/user-information#client-principal-data).
+- Policies apply only to tables and views; stored procedures cannot use them.
+- Policies filter results but don't prevent query execution in the database.
+- Only supported for actions: `create`, `read`, `update`, and `delete`.
+- Field names must adhere to OData naming conventions. Use mappings to alias fields if necessary.
 
 #### Examples
 
-For example, a basic policy expression can evaluate whether a specific field is true within the table. This example evaluates if the `soft_delete` field is `false`.
+Consider an entity named `User` within a Data API configuration that uses policies to restrict access based on age and user identity.
+
+**SQL**
+```sql
+CREATE TABLE dbo.Users (
+  Id INT PRIMARY KEY,
+  Name NVARCHAR(100),
+  Age INT,
+  IsAdmin BIT
+);
+```
+
+**Example 1: Age-Based Access**
+
+This configuration restricts the `adultReader` role so that the `read` action only returns users where `Age > 18`.
 
 ```json
 {
   "entities": {
-    "Manuscripts": {
+    "User": {
+      "source": {
+        "object": "dbo.Users",
+        "type": "table"
+      },
       "permissions": [
         {
-          "role": "anonymous",
+          "role": "adultReader",
           "actions": [
             {
               "action": "read",
               "policy": {
-                "database": "@item.soft_delete eq false"
+                "database": "@item.Age gt 18"
               }
             }
           ]
@@ -3463,20 +3349,26 @@ For example, a basic policy expression can evaluate whether a specific field is 
 }
 ```
 
-Predicates can also evaluate both `claims` and `item` directive types. This example pulls the `UserId` field from the access token and compares it to the `owner_id` field in the target database table.
+**Example 2: Claims-Based Access**
+
+This configuration uses a claim to restrict the `selfReader` role so that users can only read their own records if their `userId` claim matches the `Id` field.
 
 ```json
 {
   "entities": {
-    "Manuscript": {
+    "User": {
+      "source": {
+        "object": "dbo.Users",
+        "type": "table"
+      },
       "permissions": [
         {
-          "role": "anonymous",
+          "role": "selfReader",
           "actions": [
             {
               "action": "read",
               "policy": {
-                "database": "@claims.userId eq @item.owner_id"
+                "database": "@claims.userId eq @item.Id"
               }
             }
           ]
@@ -3486,33 +3378,16 @@ Predicates can also evaluate both `claims` and `item` directive types. This exam
   }
 }
 ```
-
-#### Limitations
-
-- Database policies are supported for tables and views. Stored procedures can't be configured with policies.
-- Database policies can't be used to prevent a request from executing within a database. This limitation is because database policies are resolved as query predicates in the generated database queries. The database engine ultimately evaluates these queries.
-- Database policies are only supported for the [`actions`](#action) `create`, `read`, `update`, and `delete`.
-- Database policy OData expression syntax only supports these scenarios.
-  - Binary operators including, but not limited to; `and`, `or`, `eq`, `gt`, and `lt`. For more information, see [`BinaryOperatorKind`](/dotnet/api/microsoft.odata.uriparser.binaryoperatorkind).
-  - Unary operators such as the `-` (negate) and `not` operators. For more information, see [`UnaryOperatorKind`](/dotnet/api/microsoft.odata.uriparser.unaryoperatorkind).
-- Database policies also have restrictions related to field names.
-  - Entity field names that start with a letter or underscore, followed by at most 127 letters, underscores, or digits.
-  - This requirement is per OData specification. For more information, see [OData Common Schema Definition Language](https://docs.oasis-open.org/odata/odata-csdl-json/v4.01/odata-csdl-json-v4.01.html#sec_SimpleIdentifier).
-
-> [!TIP]
-> Fields which do not conform to the mentioned restrictions can't be referenced in database policies. As a workaround, configure the entity with a mappings section to assign conforming aliases to the fields.
 
 ### GraphQL (entities)
 
----
+--- 
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.{entity}` | `graphql` | object | ❌ No | None |
+| Parent                  | Property | Type                   | Required | Default |
+|-------------------------|----------|------------------------|----------|---------|
+| `entities.{entity}`     | `graphql`| object                 | ❌ No    | None    |
 
-This object defines whether GraphQL is enabled and the name\[s\] used to expose the entity as a GraphQL type. This object is optional and only used if the default name or settings aren't sufficient.
-
-This segment provides for integrating an entity into the GraphQL schema. It allows developers to specify or modify default values for the entity in GraphQL. This setup ensures the schema accurately reflects the intended structure and naming conventions.
+This object defines the entity's GraphQL behavior.
 
 #### Format
 
@@ -3533,46 +3408,22 @@ This segment provides for integrating an entity into the GraphQL schema. It allo
 }
 ```
 
-```json
-{
-  "entities": {
-    "<entity-name>": {
-      "graphql": {
-        "enabled": <boolean>,
-        "type": <string-or-object>,
-        "operation": "query" (default) | "mutation"
-      }
-    }
-  }
-}
-```
-
 #### Properties
 
-| Property | Required | Type | Default |
-|-|-|-|-|
-| **[`enabled`](#enabled-graphql-entity)** | ❌ No | boolean | None |
-| **[`type`](#type-graphql-entity)** | ❌ No | string or object | None |
-| **[`operation`](#operation-graphql-entity)**| ❌ No | enum string | None |
+| Property                        | Required | Type                | Default |
+|---------------------------------|----------|---------------------|---------|
+| **[`enabled`](#enabled-graphql-entity)**    | ❌ No    | boolean             | None    |
+| **[`type`](#type-graphql-entity)**          | ❌ No    | string or object    | None    |
+| **[`operation`](#operation-graphql-entity)**| ❌ No    | enum string         | None    |
 
 #### Examples
 
-These two examples are functionally equivalent.
+These two examples are functionally equivalent, enabling GraphQL for the `User` entity with default settings:
 
 ```json
 {
   "entities": {
-    "Author": {
-      "graphql": true
-    }
-  }
-}
-```
-
-```json
-{
-  "entities": {
-    "Author": {
+    "User": {
       "graphql": {
         "enabled": true
       }
@@ -3581,65 +3432,49 @@ These two examples are functionally equivalent.
 }
 ```
 
-In this example, the entity defined is `Book`, indicating we're dealing with a set of data related to books in the database. The configuration for the `Book` entity within the GraphQL segment offers a clear structure on how it should be represented and interacted with in a GraphQL schema.
-
-**Enabled property**: The `Book` entity is made available through GraphQL (`"enabled": true`), meaning developers and users can query or mutate book data via GraphQL operations.
-
-**Type property**: The entity is represented with the singular name `"Book"` and the plural name `"Books"` in the GraphQL schema. This distinction ensures that when querying a single book or multiple books, the schema offers intuitively named types (`Book` for a single entry, `Books` for a list), enhancing the API's usability.
-
-**Operation property**: The operation is set to `"query"`, indicating that the primary interaction with the `Book` entity through GraphQL is intended to be querying (retrieving) data rather than mutating (creating, updating, or deleting) it. This setup aligns with typical usage patterns where book data is more frequently read than modified.
+In this example, the entity defined is `User`, indicating we're dealing with user data. The configuration for the `User` entity within the GraphQL segment specifies how it should be represented and interacted with in a GraphQL schema.
 
 ```json
 {
   "entities": {
-    "Book": {
-      ...
+    "User": {
+      "source": {
+        "object": "dbo.Users",
+        "type": "table"
+      },
       "graphql": {
         "enabled": true,
         "type": {
-          "singular": "Book",
-          "plural": "Books"
+          "singular": "User",
+          "plural": "Users"
         },
         "operation": "query"
-      },
-      ...
+      }
     }
   }
 }
-```
+``` 
 
 ### Type (GraphQL entity)
 
----
+--- 
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.{entity}.graphql` | `type` | oneOf [string, object] | ❌ No | {entity-name} |
+| Parent                          | Property | Type                     | Required | Default        |
+|---------------------------------|----------|--------------------------|----------|----------------|
+| `entities.{entity}.graphql`     | `type`   | object   | ❌ No    | {entity-name}  |
 
-This property dictates the naming convention for an entity within the GraphQL schema. It supports both scalar string values and object types. The object value specifies the singular and plural forms. This property provides granular control over the schema's readability and user experience.
+This property dictates the naming convention for an entity within the GraphQL schema. It specifies the singular and plural forms, providing granular control over the schema's readability and user experience.
 
 #### Format
 
 ```json
 {
   "entities": {
-    <entity-name>: {
-      "graphql": {
-        "type": <string>
-      }
-    }
-  }
-}
-```
-
-```json
-{
-  "entities": {
-    <entity-name>: {
+    "<entity-name>": {
       "graphql": {
         "type": {
-          "singular": <string>,
-          "plural": <string>
+          "singular": "<string>",
+          "plural": "<string>"
         }
       }
     }
@@ -3649,24 +3484,22 @@ This property dictates the naming convention for an entity within the GraphQL sc
 
 #### Properties
 
-| Property | Required | Type | Default |
-|-|-|-|-|
-| **`singular`** | ❌ No | string | None |
-| **`plural`** | ❌ No | string | N/A (default: singular) |
+| Property   | Required | Type   | Default                              |
+|------------|----------|--------|--------------------------------------|
+| `singular` | ❌ No    | string | None                                 |
+| `plural`   | ❌ No    | string | N/A (defaults to singular value)     |
 
 #### Examples
 
-For even greater control over the GraphQL type, you can configure how the singular and plural name is represented independently.
+If `plural` is missing or omitted (like a scalar value), Data API Builder will attempt to pluralize the name automatically using English rules for pluralization.
 
-If `plural` is missing or omitted (like scalar value) Data API builder tries to pluralize the name automatically, following the English rules for pluralization (for example: <https://engdic.org/singular-and-plural-noun-rules-definitions-examples>)
+**Explicit Singular and Plural Names:**
 
 ```json
 {
-  "entities" {
-    "<entity-name>": {
-      ...
+  "entities": {
+    "User": {
       "graphql": {
-        ...
         "type": {
           "singular": "User",
           "plural": "Users"
@@ -3677,64 +3510,41 @@ If `plural` is missing or omitted (like scalar value) Data API builder tries to 
 }
 ```
 
-A custom entity name can be specified using the `type` parameter with a string value. In this example, the engine differentiates automatically between the singular and plural variants of this name using common English rules for pluralization.
-
-```json
-{
-  "entities": {
-    "Author": {
-      "graphql": {
-        "type": "bookauthor"
-      }
-    }
-  }
-}
-```
-
-If you elect to specify the names explicitly, use the `type.singular` and `type.plural` properties. This example explicitly sets both names.
-
-```json
-{
-  "entities": {
-    "Author": {
-      "graphql": {
-        "type": {
-          "singular": "bookauthor",
-          "plural": "bookauthors"
-        }
-      }
-    }
-  }
-}
-```
-
-Both examples are functionally equivalent. They both return the same JSON output for a GraphQL query that uses the `bookauthors` entity name.
+**GraphQL Query Example:**
 
 ```graphql
 {
-  bookauthors {
+  Users {
     items {
-      first_name
-      last_name
+      id
+      name
+      age
+      isAdmin
     }
   }
 }
 ```
+
+**Sample JSON Response:**
 
 ```json
 {
   "data": {
-    "bookauthors": {
+    "Users": {
       "items": [
         {
-          "first_name": "Henry",
-          "last_name": "Ross"
+          "id": 1,
+          "name": "Alice",
+          "age": 30,
+          "isAdmin": true
         },
         {
-          "first_name": "Jacob",
-          "last_name": "Hancock"
-        },
-        ...
+          "id": 2,
+          "name": "Bob",
+          "age": 25,
+          "isAdmin": false
+        }
+        // ...
       ]
     }
   }
@@ -3743,18 +3553,16 @@ Both examples are functionally equivalent. They both return the same JSON output
 
 ### Operation (GraphQL entity)
 
----
+--- 
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `entities.{entity}.graphql` | `operation` | enum string | ❌ No | None |
+| Parent                               | Property    | Type        | Required | Default |
+|--------------------------------------|-------------|-------------|----------|---------|
+| `entities.{entity}.graphql`          | `operation` | enum string | ❌ No    | mutation |
 
-For entities mapped to stored procedures, the `operation` property designates the GraphQL operation type (query or mutation) where the stored procedure is accessible. This setting allows for logical organization of the schema and adherence to GraphQL best practices, without impacting functionality.
+For entities mapped to stored procedures, the `operation` property designates whether the GraphQL operation appears under the `Query` or `Mutation` type. This setting organizes the schema logically *without impacting functionality*.
 
 > [!NOTE]
-> An entity is specified to be a stored procedure by setting the `{entity}.type` property value to `stored-procedure`. In the case of a stored procedure, a new GraphQL type executeXXX is automatically created. However, the `operation` property allows the developer to coerse the location of that type into either the `mutation` or `query` parts of the schema. This property allows for schema hygene and there is no functional impact regardless of `operation` value.  
-
-If missing, the `operation` default is `mutation`.
+> When `{entity}.type` is set to `stored-procedure`, a new GraphQL type `executeXXX` is automatically created. The `operation` property controls whether this type is placed under `Query` or `Mutation`. There is no functional impact based on the chosen value.
 
 #### Format
 
@@ -3763,7 +3571,7 @@ If missing, the `operation` default is `mutation`.
   "entities": {
     "<entity-name>": {
       "graphql": {
-        "operation": "query" (default) | "mutation"
+        "operation": "query" | "mutation"
       }
     }
   }
@@ -3772,39 +3580,53 @@ If missing, the `operation` default is `mutation`.
 
 #### Values
 
-Here's a list of allowed values for this property:
-
-| | Description |
-|-|-|
-| **`query`** | The underlying stored procedure is exposed as a query |
-| **`mutation`** | The underlying stored procedure is exposed as a mutation |
+| Value      | Description                                       |
+|------------|---------------------------------------------------|
+| `query`    | The stored procedure is exposed as a query        |
+| `mutation` | The stored procedure is exposed as a mutation     |
 
 #### Examples
 
-When `operation` is `mutation`, the GraphQL schema would resemble:
-
-```graphql
-type Mutation {
-  executeGetCowrittenBooksByAuthor(
-    searchType: String = "S"
-  ): [GetCowrittenBooksByAuthor!]!
+**Configuration**
+```json
+{
+  "entities": {
+    "UserProcedure": {
+      "graphql": {
+        "operation": "query" // schema location
+      },
+      "source": {
+        "object": "dbo.GetUser",
+        "type": "stored-procedure",
+        "parameters": {
+          "userId": "number"
+        }
+      }
+    }
+  }
 }
 ```
 
-When `operation` is `query`, the GraphQL schema would resemble:
+**GraphQL Schema Outcome**
 
-The GraphQL schema would resemble:
+If `operation` is set to `query`, the GraphQL schema places the procedure under the `Query` type:
 
 ```graphql
 type Query {
-  executeGetCowrittenBooksByAuthor(
-    searchType: String = "S"
-  ): [GetCowrittenBooksByAuthor!]!
+  executeGetUserDetails(userId: Int!): GetUserDetailsResponse
+}
+```
+
+If it were set to `mutation`, it would appear under the `Mutation` type:
+
+```graphql
+type Mutation {
+  executeGetUserDetails(userId: Int!): GetUserDetailsResponse
 }
 ```
 
 > [!NOTE]
-> The `operation` property is only about the placement of the operation in the GraphQL schema, it does not change the behavior of the operation.
+> The `operation` property affects only the placement of the GraphQL operation in the schema; it does not change the operation's behavior.
 
 ### Enabled (GraphQL entity)
 
@@ -4396,9 +4218,6 @@ The name of the database object or entity field that is related to the target en
 Enables and configures caching for the entity.
 
 #### Format
-
-```json
-You're right; the formatting doesn't match your style. Here’s the corrected version following your preferred documentation format:
 
 ```json
 {
