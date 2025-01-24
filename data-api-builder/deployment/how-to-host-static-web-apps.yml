@@ -142,6 +142,8 @@ procedureSection:
         ```output
         { Healthy }
         ```
+        > [!NOTE]
+        > Static Web Apps automatically set the runtime host mode to `Production`, overwriting any value in the configuration file. As a result, developer features like Swagger and Banana Cake Pop are unavailable in Static Web Apps.
       - |
         Navigate to the `https://<your-static-web-app-url>/data-api/<your-rest-path>/<your-entity-name>` path for the current running application. This issues a **HTTP GET** request for that set of entities. Observe the JSON response.
   - title: |
