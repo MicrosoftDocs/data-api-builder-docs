@@ -1,7 +1,7 @@
 ---
 title: |
   Quickstart: Use with Azure Cosmos DB for NoSQL
-description: Deploy an Azure Developer CLI template that uses Data API builder with Azure Static Web apps and Azure Cosmos DB for NoSQL.
+description: Deploy an Azure Developer CLI template that uses Data API builder with Azure Container Apps and Azure Cosmos DB for NoSQL.
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
