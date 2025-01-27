@@ -7,7 +7,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: quickstart
-ms.date: 01/22/2025
+ms.date: 01/27/2025
 # Customer Intent: As a developer, I want to get started using Data API builder quickly, so that I can evaluate the tool.
 ---
 
