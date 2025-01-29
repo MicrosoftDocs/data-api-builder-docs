@@ -31,13 +31,11 @@ Using `Authentication='Active Directory Default'` in Azure SQL Database connecti
 }
 ```
 
-To setup local credentials, simply use `az login` after you install the [Azure CLI](/cli/azure/authenticate-azure-cli). 
+To set up local credentials, simply use `az login` after you install the [Azure CLI](/cli/azure/authenticate-azure-cli). 
 
 ```bash
 az login
 ```
-
-Azure SQL databases connection strings can include `Authentication="Active Directory Default"` to indicate 
 
 ## Azure Static Web Apps authentication (EasyAuth)
 
