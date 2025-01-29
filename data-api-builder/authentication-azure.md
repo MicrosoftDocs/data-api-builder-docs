@@ -37,8 +37,6 @@ To setup local credentials, simply use `az login` after you install the [Azure C
 az login
 ```
 
-Azure SQL databases connection strings can include `Authentication="Active Directory Default"` to indicate 
-
 ## Azure Static Web Apps authentication (EasyAuth)
 
 Data API builder expects Azure Static Web Apps authentication (EasyAuth) to authenticate the request, and to provide metadata about the authenticated user in the `X-MS-CLIENT-PRINCIPAL` HTTP header when using the option `StaticWebApps`. The authenticated user metadata provided by Static Web Apps can be referenced in the following documentation: [Accessing User Information](/azure/static-web-apps/user-information?tabs=csharp).
