@@ -21,6 +21,22 @@ The supported identity provider configuration options are:
 - StaticWebApps
 - JSON Web Tokens (JWT)
 
+## In Development (AZ Login)
+
+Using `Authentication='Active Directory Default'` in Azure SQL Database connection strings means the client will authenticate using Azure Active Directory (AAD) credentials. The exact authentication method is determined by the environment. When a developer runs `az login`, the Azure CLI opens a browser window prompting the user to sign in with a Microsoft account or corporate credentials. Once authenticated, Azure CLI retrieves and caches the token linked to the Azure Active Directory identity. This token is then used to authenticate requests to Azure services without requiring credentials in the connection string.
+
+```json
+"data-source": {
+    "connection-string": "...;Authentication='Active Directory Default';"
+}
+```
+
+To set up local credentials, simply use `az login` after you install the [Azure CLI](/cli/azure/authenticate-azure-cli). 
+
+```bash
+az login
+```
+
 ## Azure Static Web Apps authentication (EasyAuth)
 
 Data API builder expects Azure Static Web Apps authentication (EasyAuth) to authenticate the request, and to provide metadata about the authenticated user in the `X-MS-CLIENT-PRINCIPAL` HTTP header when using the option `StaticWebApps`. The authenticated user metadata provided by Static Web Apps can be referenced in the following documentation: [Accessing User Information](/azure/static-web-apps/user-information?tabs=csharp).
