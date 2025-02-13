@@ -18,7 +18,7 @@ Diagram of the sequence of the deployment guide including these locations, in or
 
 Azure Application Insights is a service provided by Microsoft Azure that enables developers to monitor and gain insights into the performance and usage of their applications. The guide illustrates how to enable Application Insights for Data API builder (DAB). With Application Insights, you can track application availability, response times, performance metrics, user behavior, and other useful metrics.
 
-# Prerequisites
+## Prerequisites
 
 > [!WARNING]
 > Application Insights for Data API builder isn't supported when hosting Data API builder in Azure App Service web apps.
