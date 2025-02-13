@@ -23,7 +23,7 @@
   expanded: true
   items:
     - name: Integrate with Application Insights
-      href: how-to-use-application-insights.yml
+      href: how-to-use-application-insights.md
 - name: Optimize
   expanded: true
   items:

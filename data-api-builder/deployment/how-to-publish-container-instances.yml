@@ -186,4 +186,4 @@ procedureSection:
         In the **command bar**, select **Delete**.
 nextStep:
   text: Integrate with Application Insights.
-  url: how-to-use-application-insights.yml
+  url: how-to-use-application-insights.md
