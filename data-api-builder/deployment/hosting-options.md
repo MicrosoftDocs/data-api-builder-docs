@@ -68,4 +68,4 @@ For more information, see [Azure Static Web Apps](/azure/static-web-apps).
 > [Deploy to Azure Container Instances](how-to-publish-container-instances.yml)
 
 > [!div class="nextstepaction"]
-> [Host in Azure Static Web Apps (preview)](how-to-host-static-web-apps.yml)
+> [Host in Azure Static Web Apps (preview)](how-to-host-static-web-apps.md)
