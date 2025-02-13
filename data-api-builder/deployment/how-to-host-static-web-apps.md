@@ -21,7 +21,7 @@ Host Data API builder quickly in Azure Static Web Apps using just a configuratio
 
 In this guide, walk through the steps to build a DAB configuration file, host the file as part of your application, and then use a database connection in Azure Static Web Apps.
 
-## prerequisites:
+## Prerequisites
 
 > [!IMPORTANT]
 > Support for Data API builder (DAB) in Azure Static Web Apps using database connections is in preview. Azure Static Web Apps uses a fixed version of the DAB engine that can vary from the latest stable version of DAB. To access the latest DAB features, consider an alternative host for DAB using the latest version of the engine from GitHub, Microsoft Container Registry (Docker Hub), or NuGet.
@@ -140,7 +140,7 @@ Finally, validate that the data API endpoint is available on the static web app.
 
 1. Navigate to the `https://<your-static-web-app-url>/data-api/<your-rest-path>/<your-entity-name>` path for the current running application. This issues a **HTTP GET** request for that set of entities. Observe the JSON response.
 
-##  Clean up resources
+## Clean up resources
 
 When you no longer need the sample application or resources, remove the corresponding deployment and all resources.
 
