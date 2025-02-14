@@ -243,7 +243,7 @@
       href: deployment/how-to-publish-container-apps.yml?context=/azure/data-api-builder/context/context
     - name: Deploy to Azure Static Web Apps (preview)
       displayName: SWA
-      href: deployment/how-to-host-static-web-apps.yml?context=/azure/data-api-builder/context/context
+      href: deployment/how-to-host-static-web-apps.md
 - name: How to
   items:
     - name: Install the CLI
