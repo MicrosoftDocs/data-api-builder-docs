@@ -1320,7 +1320,7 @@ Cross-origin resource sharing (CORS) settings for the Data API builder engine ho
 If true, sets the `Access-Control-Allow-Credentials` CORS header. 
 
 > [!NOTE]
-> For more infromation on the `Access-Control-Allow-Credentials` CORS header, see [MDN Web Docs CORS reference](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials).
+> For more information on the `Access-Control-Allow-Credentials` CORS header, see [MDN Web Docs CORS reference](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials).
 
 #### Format
 
