@@ -262,7 +262,7 @@
       href: how-to-use-environments.md
     - name: Use Application Insights
       displayName: app, monitor, insights, ai, telemetry
-      href: deployment/how-to-use-application-insights.yml?context=/azure/data-api-builder/context/context
+      href: deployment/how-to-use-application-insights.md
     - name: Batch multiple mutations
       displayName: multiple create, transaction
       href: how-to-multiple-mutations.md
