@@ -14,7 +14,7 @@
   expanded: true
   items:
     - name: Azure Container Apps
-      href: how-to-publish-container-apps.yml
+      href: how-to-publish-container-apps.md
     - name: Azure Container Instances
       href: how-to-publish-container-instances.yml
     - name: Azure Static Web Apps (preview)
