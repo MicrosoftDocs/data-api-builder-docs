@@ -182,7 +182,7 @@ Finally, mount the configuration files from the Azure Files share to the contain
 
     :::image type="content" source="media/how-to-publish-container-apps/add-volume.png" alt-text="Screenshot of the `Create new volume` section in the Azure portal.":::
 
-1. Navigatte to the **Container** section, select the single current container, and then select the **Edit** option. Use the following settings to configure two mounts for the container. **Save** your changes.
+1. Navigate to the **Container** section, select the single current container, and then select the **Edit** option. Use the following settings to configure two mounts for the container. **Save** your changes.
 
     | Setting         | Value                        |
     | --------------- | ---------------------------- |
@@ -202,7 +202,7 @@ Finally, mount the configuration files from the Azure Files share to the contain
 
 1. Use the **Application URL** field in the **Essentials** section to browse to the container app's website again. Observe that the response still indicates that the DAB container is **healthy**.
 
-1. Navigate to the `/api/swagger` path for the current running application. Use the Swagger UI to issue a **HTTP GET** request for one of your entities.
+1. Navigate to the `/api/swagger` path for the current running application. Use the Swagger UI to issue an **HTTP GET** request for one of your entities.
 
 ## Clean up resources
 
