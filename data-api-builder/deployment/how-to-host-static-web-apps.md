@@ -17,7 +17,7 @@ ai-usage: ai-assisted
 Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Publish' location is currently highlighted.
 :::image-end:::
 
-Host Data API builder quickly in Azure Static Web Apps using just a configuration file. This guide includes steps to integratee Data API builder with a static web app.
+Host Data API builder quickly in Azure Static Web Apps using just a configuration file. This guide includes steps to integrate Data API builder with a static web app.
 
 In this guide, walk through the steps to build a DAB configuration file, host the file as part of your application, and then use a database connection in Azure Static Web Apps.
 
@@ -138,7 +138,7 @@ Finally, validate that the data API endpoint is available on the static web app.
     > [!NOTE]
     > Static Web Apps automatically set the runtime host mode to `Production`, overwriting any value in the configuration file. As a result, developer features like Swagger and Banana Cake Pop are unavailable in Static Web Apps.
 
-1. Navigate to the `https://<your-static-web-app-url>/data-api/<your-rest-path>/<your-entity-name>` path for the current running application. This issues a **HTTP GET** request for that set of entities. Observe the JSON response.
+1. Navigate to the `https://<your-static-web-app-url>/data-api/<your-rest-path>/<your-entity-name>` path for the current running application. This issues an **HTTP GET** request for that set of entities. Observe the JSON response.
 
 ## Clean up resources
 
