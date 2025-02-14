@@ -243,7 +243,7 @@
       href: deployment/how-to-publish-container-apps.yml?context=/azure/data-api-builder/context/context
     - name: Deploy to Azure Static Web Apps (preview)
       displayName: SWA
-      href: deployment/how-to-host-static-web-apps.yml?context=/azure/data-api-builder/context/context
+      href: deployment/how-to-host-static-web-apps.md
 - name: How to
   items:
     - name: Install the CLI
@@ -262,7 +262,7 @@
       href: how-to-use-environments.md
     - name: Use Application Insights
       displayName: app, monitor, insights, ai, telemetry
-      href: deployment/how-to-use-application-insights.yml?context=/azure/data-api-builder/context/context
+      href: deployment/how-to-use-application-insights.md
     - name: Batch multiple mutations
       displayName: multiple create, transaction
       href: how-to-multiple-mutations.md

@@ -1320,7 +1320,7 @@ Cross-origin resource sharing (CORS) settings for the Data API builder engine ho
 If true, sets the `Access-Control-Allow-Credentials` CORS header. 
 
 > [!NOTE]
-> For more infromation on the `Access-Control-Allow-Credentials` CORS header, see [MDN Web Docs CORS reference](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials).
+> For more information on the `Access-Control-Allow-Credentials` CORS header, see [MDN Web Docs CORS reference](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials).
 
 #### Format
 
@@ -1996,7 +1996,7 @@ In this example, cache is enabled globally and all items expire after 15 seconds
 |-|-|-|-|-|
 | `runtime` | `telemetry` | object | ❌ No | None |
 
-This property configures Application Insights to centralize API logs. Learn [more](deployment/how-to-use-application-insights.yml).
+This property configures Application Insights to centralize API logs. Learn [more](deployment/how-to-use-application-insights.md).
 
 #### Format
 
