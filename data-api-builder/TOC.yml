@@ -237,10 +237,10 @@
       href: deployment/index.md
     - name: Deploy to Azure Container Instances
       displayName: ACI
-      href: deployment/how-to-publish-container-instances.yml?context=/azure/data-api-builder/context/context
+      href: deployment/how-to-publish-container-instances.md
     - name: Deploy to Azure Container Apps
       displayName: ACA
-      href: deployment/how-to-publish-container-apps.yml?context=/azure/data-api-builder/context/context
+      href: deployment/how-to-publish-container-apps.md
     - name: Deploy to Azure Static Web Apps (preview)
       displayName: SWA
       href: deployment/how-to-host-static-web-apps.md

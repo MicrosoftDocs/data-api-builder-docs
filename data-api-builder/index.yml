@@ -81,9 +81,9 @@ landingContent:
       - linkListType: how-to-guide
         links:
           - text: Deploy to Azure Container Instances
-            url: deployment/how-to-publish-container-instances.yml
+            url: deployment/how-to-publish-container-instances.md
           - text: Deploy to Azure Container Apps
-            url: deployment/how-to-publish-container-apps.yml
+            url: deployment/how-to-publish-container-apps.md
           - text: Host in Azure Static Web Apps (preview)
             url: deployment/how-to-host-static-web-apps.md
       - linkListType: tutorial

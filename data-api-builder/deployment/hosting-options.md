@@ -62,10 +62,10 @@ For more information, see [Azure Static Web Apps](/azure/static-web-apps).
 ## Next step
 
 > [!div class="nextstepaction"]
-> [Deploy to Azure Container Apps](how-to-publish-container-apps.yml)
+> [Deploy to Azure Container Apps](how-to-publish-container-apps.md)
 
 > [!div class="nextstepaction"]
-> [Deploy to Azure Container Instances](how-to-publish-container-instances.yml)
+> [Deploy to Azure Container Instances](how-to-publish-container-instances.md)
 
 > [!div class="nextstepaction"]
 > [Host in Azure Static Web Apps (preview)](how-to-host-static-web-apps.md)
