@@ -1,33 +1,18 @@
-- name: Data API builder deployment guide
+- name: Deployment overview
   href: index.md
-- name: Plan
-  expanded: true
-  items:
-    - name: Checklist
-      href: checklist.md
-- name: Prepare
-  expanded: true
-  items:
-    - name: Hosting options
-      href: hosting-options.md
-- name: Publish
-  expanded: true
-  items:
-    - name: Azure Container Apps
-      href: how-to-publish-container-apps.md
-    - name: Azure Container Instances
-      href: how-to-publish-container-instances.md
-    - name: Azure Static Web Apps (preview)
-      href: how-to-host-static-web-apps.md
-- name: Monitor
-  expanded: true
-  items:
-    - name: Integrate with Application Insights
-      href: how-to-use-application-insights.md
-- name: Optimize
-  expanded: true
-  items:
-    - name: Configuration best practices
-      href: best-practices-configuration.md
-    - name: Security best practices
-      href: best-practices-security.md
+- name: Deployment checklist
+  href: checklist.md
+- name: Hosting options
+  href: hosting-options.md
+- name: Publish to Azure Container Apps
+  href: how-to-publish-container-apps.md
+- name: Publish to Azure Container Instances
+  href: how-to-publish-container-instances.md
+- name: Publish to Azure Static Web Apps (preview)
+  href: how-to-host-static-web-apps.md
+- name: Monitor with Application Insights
+  href: how-to-use-application-insights.md
+- name: Configuration best practices
+  href: best-practices-configuration.md
+- name: Security best practices
+  href: best-practices-security.md

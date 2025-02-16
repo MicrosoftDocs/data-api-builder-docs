@@ -231,19 +231,7 @@
         - name: Azure Cosmos DB for NoSQL
           href: quickstart-azure-cosmos-db-nosql.md
 - name: Deploy
-  items:
-    - name: Deployment guide
-      displayName: hosting, host, publish, services, cloud, Azure
-      href: deployment/index.md
-    - name: Deploy to Azure Container Instances
-      displayName: ACI
-      href: deployment/how-to-publish-container-instances.md
-    - name: Deploy to Azure Container Apps
-      displayName: ACA
-      href: deployment/how-to-publish-container-apps.md
-    - name: Deploy to Azure Static Web Apps (preview)
-      displayName: SWA
-      href: deployment/how-to-host-static-web-apps.md
+  href: deployment/toc.yml
 - name: How to
   items:
     - name: Install the CLI
@@ -260,9 +248,6 @@
     - name: Use environments
       displayName: development
       href: how-to-use-environments.md
-    - name: Use Application Insights
-      displayName: app, monitor, insights, ai, telemetry
-      href: deployment/how-to-use-application-insights.md
     - name: Batch multiple mutations
       displayName: multiple create, transaction
       href: how-to-multiple-mutations.md
@@ -308,12 +293,6 @@
           href: authentication-local.md
         - name: Authorization
           href: authorization.md
-    - name: Best practices
-      items:
-        - name: Security
-          href: deployment/best-practices-security.md?context=/azure/data-api-builder/context/context
-        - name: Configuration
-          href: deployment/best-practices-configuration.md?context=/azure/data-api-builder/context/context
     - name: Code policies
       displayName: Versioning, Change, Breaking
       href: reference-policies.md
