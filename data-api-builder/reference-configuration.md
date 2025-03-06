@@ -2610,7 +2610,7 @@ WHERE Id = @userId;
         "object": "dbo.GetUser",
         "type": "stored-procedure",
         "parameters": {
-          "userId": "number"
+          "userId": 1234
         }
       }
     }
