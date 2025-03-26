@@ -227,7 +227,9 @@ The `type` property indicates the kind of backend database.
 | `mssql` | Azure SQL Database | - 
 | `mssql` | Azure SQL MI | - 
 | `mssql` | SQL Server | 2016 
-| `sqldw` | Azure SQL Data Warehouse | - 
+| `dwsql` | Azure Synapse Analytics | - 
+| `dwsql` | Fabric Warehouse | - 
+| `dwsql` | Fabric SQL Analytics endpoint | - 
 | `postgresql` | PostgreSQL | ver. 11 
 | `mysql` | MySQL | ver. 8 
 | `cosmosdb_nosql` | Azure Cosmos DB for NoSQL | - 
