@@ -39,7 +39,7 @@ az login
 
 ## Azure Static Web Apps authentication (EasyAuth)
 
-Data API builder expects Azure Static Web Apps authentication (EasyAuth) to authenticate the request, and to provide metadata about the authenticated user in the `X-MS-CLIENT-PRINCIPAL` HTTP header when using the option `StaticWebApps`. The authenticated user metadata provided by Static Web Apps can be referenced in the following documentation: [Accessing User Information](/azure/static-web-apps/user-information?tabs=csharp).
+Data API builder expects [Azure Static Web Apps authentication](https://review.learn.microsoft.com/en-us/azure/static-web-apps/authentication-authorization?branch=main) (EasyAuth) to authenticate the request, and to provide metadata about the authenticated user in the `X-MS-CLIENT-PRINCIPAL` HTTP header when using the option `StaticWebApps`. The authenticated user metadata provided by Static Web Apps can be referenced in the following documentation: [Accessing User Information](/azure/static-web-apps/user-information?tabs=csharp).
 
 To use the `StaticWebApps` provider, you need to specify the following configuration in the `runtime.host` section of the configuration file:
 
