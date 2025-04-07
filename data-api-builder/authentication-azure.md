@@ -23,7 +23,7 @@ The supported identity provider configuration options are:
 
 ## In Development (AZ Login)
 
-Using `Authentication='Active Directory Default'` in Azure SQL Database connection strings means the client will authenticate using Azure Active Directory (AAD) credentials. The exact authentication method is determined by the environment. When a developer runs `az login`, the Azure CLI opens a browser window prompting the user to sign in with a Microsoft account or corporate credentials. Once authenticated, Azure CLI retrieves and caches the token linked to the Azure Active Directory identity. This token is then used to authenticate requests to Azure services without requiring credentials in the connection string.
+Using `Authentication='Active Directory Default'` in Azure SQL Database connection strings means the client will authenticate using Microsoft Entra credentials. The exact authentication method is determined by the environment. When a developer runs `az login`, the Azure CLI opens a browser window prompting the user to sign in with a Microsoft account or corporate credentials. Once authenticated, Azure CLI retrieves and caches the token linked to the Microsoft Entra identity. This token is then used to authenticate requests to Azure services without requiring credentials in the connection string.
 
 ```json
 "data-source": {
