@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 04/09/2024
+ms.date: 04/08/2025
 # Customer Intent: As a developer, I want to use the Docker container image, so that I can run Data API builder anywhere in a portable fashion.
 ---
 
@@ -195,4 +195,4 @@ Run DAB using the Docker container image hosted on Microsoft Container Registry.
 
 - [Run from source](how-to-run-from-source.md)
 - [Install the CLI](how-to-install-cli.md)
-- [`mcr.microsoft.com/azure-databases/data-api-builder` on Docker Hub](https://hub.docker.com/_/microsoft-azure-databases-data-api-builder)
+- [`mcr.microsoft.com/azure-databases/data-api-builder` on Microsoft Artifact Registry](https://mcr.microsoft.com/artifact/mar/azure-databases/data-api-builder)
