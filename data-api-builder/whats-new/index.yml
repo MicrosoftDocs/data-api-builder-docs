@@ -5,13 +5,51 @@ summary: Review release notes and core features for the latest versions of Data 
 metadata:
   title: What's new?
   description: Release notes and core features for the latest versions of Data API builder are listed in this landing page.
-  author: seesharprun
-  ms.author: sidandrews
-  ms.reviewer: jerrynixon
+  author: jerrynixon
+  ms.author: jnixon
+  ms.reviewer: sidandrews
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 09/06/2024
+  ms.date: 05/16/2025
 landingContent:
+- title: Version 1.5
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: Introducing - Health Endpoint
+      url: version-1-5.md
+    - text: Introducing - Custom Log-Level
+      url: version-1-5.md
+    - text: Introducing - Aggregation in GraphQL 
+      url: version-1-5.md
+    - text: Introducing - Cache Level 2 - Redis Support
+      url: version-1-5.md
+    - text: Enhancement - Cache HTTP Header support
+      url: version-1-5.md
+    - text: Enhanced - Custom OpenTelemetry Metrics
+      url: version-1-5.md
+    - text: Enhanced - EntraId Auth Provider
+      url: version-1-5.md
+- title: Version 1.4
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: Introducing - Open Telemetry
+      url: version-1-4.md
+    - text: Enhancement - Cosmos Schema Generation now with Multi-Container Support
+      url: version-1-4.md
+    - text: Command Line Everything
+      url: version-1-4.md
+- title: Version 1.3
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: Introducing - Hot Reload
+      url: version-1-3.md
+    - text: Introducing - Cosmos Schema Generation
+      url: version-1-3.md
+    - text: Command Line Everything
+      url: version-1-3.md
 - title: Version 1.2
   linkLists:
   - linkListType: whats-new
@@ -32,10 +70,6 @@ landingContent:
       url: version-1-2.md#miscellaneous-improvements
     - text: Environment Variable Resolution
       url: version-1-2.md#miscellaneous-improvements
-  - linkListType: download
-    links:
-    - text: NuGet package (1.2)
-      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/1.2.10
 - title: Version 1.1
   linkLists:
   - linkListType: whats-new
@@ -50,33 +84,3 @@ landingContent:
       url: version-1-1.md#health-status
     - text: Azure Cosmos DB for NoSQL patch
       url: version-1-1.md#patch-operation-support
-  - linkListType: download
-    links:
-    - text: NuGet package (1.1.7)
-      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/1.1.7
-- title: Previous versions (0.x)
-  linkLists:
-  - linkListType: whats-new
-    links:
-    - text: In-memory caching
-      url: version-0.md#in-memory-caching
-    - text: Validation in the command-line interface
-      url: version-0.md#configuration-validation-in-cli
-    - text: Enable Application Insights when self-hosting DAB
-      url: version-0.md#enable-application-insights-when-self-hosting-dab
-    - text: Added support for .env file
-      url: version-0.md#added-support-for-env-file
-    - text: Allow merger of configuration files
-      url: version-0.md#allowing-merger-of-configuration-files
-    - text: New CLI command to export GraphQL schema
-      url: version-0.md#new-cli-command-to-export-graphql-schema
-    - text: View support
-      url: version-0.md#view-support
-    - text: Stored procedures support
-      url: version-0.md#stored-procedures-support
-    - text: Microsoft Entra ID authentication
-      url: version-0.md#microsoft-entra-id-authentication
-  - linkListType: download
-    links:
-    - text: NuGet package (0.10.23)
-      url: https://www.nuget.org/packages/Microsoft.DataApiBuilder/0.10.23
