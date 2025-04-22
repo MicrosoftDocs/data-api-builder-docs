@@ -272,20 +272,25 @@ GET https://localhost:5001/api/Entity?$filter=Date ge 2025-01-01T00:00:00Z and D
 ### [C#](#tab/csharp)
 
 ```csharp
+using System;
 using System.Net.Http;
 
 var client = new HttpClient();
 var baseUrl = "https://localhost:5001/api/Entity";
 
-var startDate = "2025-01-01T00:00:00Z";
-var endDate = "2025-01-05T00:00:00Z";
+// Use DateTime objects
+var start = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+var end = new DateTime(2025, 1, 5, 0, 0, 0, DateTimeKind.Utc);
+
+// Format to ISO 8601 with UTC indicator
+var startDate = start.ToString("yyyy-MM-ddTHH:mm:ssZ");
+var endDate = end.ToString("yyyy-MM-ddTHH:mm:ssZ");
 
 var filterExpression = $"Date ge {startDate} and Date le {endDate}";
 var encodedFilter = Uri.EscapeDataString(filterExpression);
 var url = $"{baseUrl}?$filter={encodedFilter}";
 
 var response = await client.GetAsync(url);
-
 ```
 
 ### [JavaScript/TypeScript](#tab/javascript-typescript)
@@ -293,8 +298,13 @@ var response = await client.GetAsync(url);
 ```typescript
 const baseUrl = "https://localhost:5001/api/Entity";
 
-const startDate = "2025-01-01T00:00:00Z";
-const endDate = "2025-01-05T00:00:00Z";
+// Use real Date objects
+const start = new Date(Date.UTC(2025, 0, 1)); // months are 0-based
+const end = new Date(Date.UTC(2025, 0, 5));
+
+// Format to ISO 8601 with 'Z' for UTC
+const startDate = start.toISOString(); // "2025-01-01T00:00:00.000Z"
+const endDate = end.toISOString();     // "2025-01-05T00:00:00.000Z"
 
 const filterExpression = `Date ge ${startDate} and Date le ${endDate}`;
 const encodedFilter = encodeURIComponent(filterExpression);
@@ -309,11 +319,17 @@ const data = await response.json();
 ```python
 import requests
 from urllib.parse import quote
+from datetime import datetime, timezone
 
 base_url = "https://localhost:5001/api/Entity"
 
-start_date = "2025-01-01T00:00:00Z"
-end_date = "2025-01-05T00:00:00Z"
+# Use datetime objects with UTC timezone
+start = datetime(2025, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
+end = datetime(2025, 1, 5, 0, 0, 0, tzinfo=timezone.utc)
+
+# Format to ISO 8601 with 'Z'
+start_date = start.isoformat().replace("+00:00", "Z")
+end_date = end.isoformat().replace("+00:00", "Z")
 
 filter_expression = f"Date ge {start_date} and Date le {end_date}"
 encoded_filter = quote(filter_expression)
