@@ -282,9 +282,9 @@ var baseUrl = "https://localhost:5001/api/Entity";
 var start = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 var end = new DateTime(2025, 1, 5, 0, 0, 0, DateTimeKind.Utc);
 
-// Format to ISO 8601 with UTC indicator
-var startDate = start.ToString("yyyy-MM-ddTHH:mm:ssZ");
-var endDate = end.ToString("yyyy-MM-ddTHH:mm:ssZ");
+// Format to ISO 8601 with UTC indicator and full precision
+var startDate = start.ToString("o"); // "2025-01-01T00:00:00.0000000Z"
+var endDate = end.ToString("o");     // "2025-01-05T00:00:00.0000000Z"
 
 var filterExpression = $"Date ge {startDate} and Date le {endDate}";
 var encodedFilter = Uri.EscapeDataString(filterExpression);
