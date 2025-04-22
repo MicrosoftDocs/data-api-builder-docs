@@ -37,7 +37,7 @@ The components of a request include:
 Here's an example GET request on the `book` entity residing under the REST endpoint base `/api` in a local development environment `localhost`:
 
 ```http
-GET https:/localhost:5001/api/Book
+GET https://localhost:5001/api/Book
 ```
 
 ### HTTP methods
@@ -230,6 +230,116 @@ The operators supported by the `$filter` option are:
 > `$filter` is a case-sensitive argument.
 
 The `$filter` query parameter in Azure Data API Builder might remind some users of OData, and that’s because it was directly inspired by OData’s filtering capabilities. The syntax is nearly identical, making it easy for developers who are already familiar with OData to pick up and use. This similarity was intentional, aimed at providing a familiar and powerful way to filter data across different APIs. 
+
+### Filtering on Dates 
+
+When filtering on `date` or `datetime` fields in Data API builder, use **unquoted ISO 8601 format** (`yyyy-MM-ddTHH:mm:ssZ`). This approach is required for operators like `ge`, `le`, `gt`, and `lt`.
+
+#### Wrong format
+
+```
+$filter=Date ge '2025-01-01'         // quotes not allowed  
+$filter=Date ge datetime'2025-01-01' // OData-style not supported  
+```
+
+#### Correct format
+
+```
+$filter=Date ge 2025-01-01T00:00:00Z and Date le 2025-01-05T00:00:00Z
+```
+#### Exact dates with `or`
+
+If range filters cause issues, you can match exact dates:
+
+```
+$filter=ClassId eq 2 and (
+  Date eq 2025-01-01T00:00:00Z or
+  Date eq 2025-01-02T00:00:00Z or
+  Date eq 2025-01-03T00:00:00Z
+)
+```
+
+**Code Example**
+
+Tip: Always `UrlEncode` the full `$filter` query before sending it.
+
+### [HTTP](#tab/http)
+
+```http
+GET https://localhost:5001/api/Entity?$filter=Date ge 2025-01-01T00:00:00Z and Date le 2025-01-05T00:00:00Z
+```
+
+### [C#](#tab/csharp)
+
+```csharp
+using System;
+using System.Net.Http;
+
+var client = new HttpClient();
+var baseUrl = "https://localhost:5001/api/Entity";
+
+// Use DateTime objects
+var start = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+var end = new DateTime(2025, 1, 5, 0, 0, 0, DateTimeKind.Utc);
+
+// Format to ISO 8601 with UTC indicator and full precision
+var startDate = start.ToString("o"); // "2025-01-01T00:00:00.0000000Z"
+var endDate = end.ToString("o");     // "2025-01-05T00:00:00.0000000Z"
+
+var filterExpression = $"Date ge {startDate} and Date le {endDate}";
+var encodedFilter = Uri.EscapeDataString(filterExpression);
+var url = $"{baseUrl}?$filter={encodedFilter}";
+
+var response = await client.GetAsync(url);
+```
+
+### [JavaScript/TypeScript](#tab/javascript-typescript)
+
+```typescript
+const baseUrl = "https://localhost:5001/api/Entity";
+
+// Use real Date objects
+const start = new Date(Date.UTC(2025, 0, 1)); // months are 0-based
+const end = new Date(Date.UTC(2025, 0, 5));
+
+// Format to ISO 8601 with 'Z' for UTC
+const startDate = start.toISOString(); // "2025-01-01T00:00:00.000Z"
+const endDate = end.toISOString();     // "2025-01-05T00:00:00.000Z"
+
+const filterExpression = `Date ge ${startDate} and Date le ${endDate}`;
+const encodedFilter = encodeURIComponent(filterExpression);
+const url = `${baseUrl}?$filter=${encodedFilter}`;
+
+const response = await fetch(url);
+const data = await response.json();
+```
+
+### [Python](#tab/python)
+
+```python
+import requests
+from urllib.parse import quote
+from datetime import datetime, timezone
+
+base_url = "https://localhost:5001/api/Entity"
+
+# Use datetime objects with UTC timezone
+start = datetime(2025, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
+end = datetime(2025, 1, 5, 0, 0, 0, tzinfo=timezone.utc)
+
+# Format to ISO 8601 with 'Z'
+start_date = start.isoformat().replace("+00:00", "Z")
+end_date = end.isoformat().replace("+00:00", "Z")
+
+filter_expression = f"Date ge {start_date} and Date le {end_date}"
+encoded_filter = quote(filter_expression)
+
+url = f"{base_url}?$filter={encoded_filter}"
+response = requests.get(url)
+print(response.json())
+```
+
+---
 
 #### `$orderby`
 
