@@ -1459,7 +1459,7 @@ Here's a list of allowed values for this property:
 |-|-|
 | **`StaticWebApps`** | Azure Static Web Apps |
 | **`AppService`** | Azure App Service |
-| **`EntraId`** (formerly **`AzureAd`**)| Microsoft Entra ID |
+| **`EntraId`** (formerly **`AzureAd`**) | Microsoft Entra ID |
 | **`Simulator`** | Simulator |
 
 ### JSON Web Tokens (Host runtime)
