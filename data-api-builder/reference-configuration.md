@@ -3921,9 +3921,9 @@ Here's another example of mappings.
     "Book": {
       ...
       "mappings": {
-        "id": "BookID",
-        "title": "BookTitle",
-        "author": "AuthorName"
+        "BookID": "id",
+        "BookTitle": "title",
+        "AuthorName": "author"
       }
     }
   }
