@@ -290,7 +290,7 @@
     - name: Authentication and authorization
       items:
         - name: Azure authentication
-          displayName: AAD, AD, Azure Active Directory, Microsoft Entra Identity, Entra ID
+          displayName: EntraId, AAD, AD, Azure Active Directory, Microsoft Entra ID
           href: authentication-azure.md
         - name: Local authentication
           href: authentication-local.md

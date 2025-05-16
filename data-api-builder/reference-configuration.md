@@ -1434,7 +1434,7 @@ The `authentication.provider` setting within the `host` configuration defines th
 |-|-|
 | `StaticWebApps` | Instructs Data API builder to look for a set of HTTP headers only present when running within a Static Web Apps environment. |
 | `AppService` | When the runtime is hosted in Azure AppService with AppService Authentication enabled and configured (EasyAuth). |
-| `EntraId` | Microsoft Entra Identity needs to be configured so that it can authenticate a request sent to Data API builder (the "Server App"). For more information, see [Microsoft Entra ID authentication](authentication-azure-ad.md). |
+| `EntraId` | Microsoft Entra ID needs to be configured so that it can authenticate a request sent to Data API builder (the "Server App"). For more information, see [Microsoft Entra ID authentication](authentication-azure-ad.md). |
 | `Simulator` | A configurable authentication provider that instructs the Data API builder engine to treat all requests as authenticated. For more information, see [local authentication](local-authentication.md). |
 
 #### Format
@@ -1476,7 +1476,7 @@ Required if the authentication provider is `EntraId` for Microsoft Entra ID. Thi
 
 | Setting | Description |
 |-|-|
-| audience | Identifies the intended recipient of the token; typically the application's identifier registered in Microsoft Entra Identity (or your identity provider), ensuring that the token was indeed issued for your application. |
+| audience | Identifies the intended recipient of the token; typically the application's identifier registered in Microsoft Entra ID (or your identity provider), ensuring that the token was indeed issued for your application. |
 | issuer | Specifies the issuing authority's URL, which is the token service that issued the JWT. This URL should match the identity provider's issuer URL from which the JWT was obtained, validating the token's origin. |
 
 #### Format
@@ -1506,7 +1506,7 @@ Required if the authentication provider is `EntraId` for Microsoft Entra ID. Thi
 
 #### Examples
 
-The Data API builder (DAB) offers flexible authentication support, integrating with Microsoft Entra Identity and custom JSON Web Token (JWT) servers. In this image, the **JWT Server** represents the authentication service that issues JWT tokens to clients upon successful sign-in. The client then passes the token to DAB, which can interrogate its claims and properties.
+The Data API builder (DAB) offers flexible authentication support, integrating with Microsoft Entra ID and custom JSON Web Token (JWT) servers. In this image, the **JWT Server** represents the authentication service that issues JWT tokens to clients upon successful sign-in. The client then passes the token to DAB, which can interrogate its claims and properties.
 
 ![Diagram of JSON web tokens support in Data API builder.](media/jwt-server.png)
 
