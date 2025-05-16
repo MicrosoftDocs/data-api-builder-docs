@@ -75,7 +75,7 @@ Requests can also be made without being authenticated. In such cases, the reques
 
 ## X-MS-API-ROLE request header
 
-Data API builder requires the header `X-MS-API-ROLE` to authorize requests using custom roles. The value of `X-MS-API-ROLE` must match a role specified in the token. For example, if the token has the role **Sample.Role**, then X-MS-API-ROLE should also be **Sample.Role**. For more information, see [authorization user roles](./authorization.md#user-roles).
+Data API builder requires the header `X-MS-API-ROLE` to authorize requests using custom roles. The value of `X-MS-API-ROLE` must match a role specified in the access token's `roles` claim. For example, if the access token has the role **Sample.Role**, then `X-MS-API-ROLE` should also be **Sample.Role**. For more information, see [authorization user roles](./authorization.md#user-roles).
 
 ## Related content
 
