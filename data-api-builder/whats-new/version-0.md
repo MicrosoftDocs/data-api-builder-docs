@@ -564,7 +564,7 @@ query ($id: ID, $partitionKeyValue: String) {
 - Authentication details such as the provider, audience, and issuer can be configured using the options `--auth.provider`, `--auth.audience`, and `--auth.issuer.` in the `init` command. A sample command is shown in this sample:
 
   ```bash
-  dab init --database-type mssql --auth.provider AzureAD --auth.audience "audience" --auth.issuer "issuer"
+  dab init --database-type mssql --auth.provider AzureAd --auth.audience "audience" --auth.issuer "issuer"
   ```
   
 - User friendly error messaging when the entity name isn't specified.

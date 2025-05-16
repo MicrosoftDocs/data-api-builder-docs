@@ -57,7 +57,7 @@ To use the JWT provider, you need to configure the `runtime.host.authentication`
 
 ```json
 "authentication": {
-    "provider": "AzureAD",
+    "provider": "AzureAd",
     "jwt": {
         "audience": "<APP_ID>",
         "issuer": "https://login.microsoftonline.com/<AZURE_AD_TENANT_ID>/v2.0"
