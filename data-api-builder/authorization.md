@@ -109,7 +109,7 @@ When a client app sends an authenticated request to Data API builder [deployed u
 
 ```json
 {
-  "identityProvider": "AzureAd",
+  "identityProvider": "EntraId",
   "userId": "d75b260a64504067bfc5b2905e3b8182",
   "userDetails": "username",
   "userRoles": ["anonymous", "authenticated", "author"]
