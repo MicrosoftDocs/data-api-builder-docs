@@ -1,5 +1,5 @@
 ---
-title: Schema Generation for Azure CosmosDB for NOSQL
+title: Schema Generation for Azure Cosmos DB for NOSQL
 description: Feature that allows for automatic schema generation from Azure Cosmos DB collections
 author: sajeetharan
 ms.author: sasinnat
@@ -10,7 +10,7 @@ ms.date: 05/13/2025
 show_latex: true
 ---
 
-# Azure CosmosDB for NOSQL Schema Generation in Azure Data API Builder
+# Azure Cosmos DB for NOSQL Schema Generation in Azure Data API Builder
 
 This feature introduces an enhancement to the Azure Data API Builder (DAB) that allows for automatic schema generation from Azure Cosmos DB collections. Previously, users were required to manually provide schema information via a `schema.gql` file. With this update, users have the option to generate the schema automatically, simplifying the setup process.
 
@@ -19,11 +19,11 @@ The manual provision of schema information can be time-consuming and error-prone
 
 - Reduce the setup complexity for users.
 - Minimize potential errors from manual schema definitions.
-- Streamline the integration process with Azure CosmosDB for NOSQL.
+- Streamline the integration process with Azure Cosmos DB for NOSQL.
 
 ## Feature Details
 
-- Automatic Schema Generation: DAB can now infer the schema directly from the existing Azure CosmosDB NOSQL API collections.
+- Automatic Schema Generation: DAB can now infer the schema directly from the existing Azure Cosmos DB NOSQL API collections.
 
 - Optional Usage: Users can choose between providing a schema.gql file or using the automatic schema generation feature.
 
@@ -32,9 +32,9 @@ The manual provision of schema information can be time-consuming and error-prone
 ## Usage
 To utilize the automatic schema generation:
 
- - Ensure your Azure CosmosDB NOSQL collections are populated with representative data.
+ - Ensure your Azure Cosmos DB NOSQL collections are populated with representative data.
 
- - Configure DAB to connect to your Azure CosmosDB NOSQL instance.
+ - Configure DAB to connect to your Azure Cosmos DB NOSQL instance.
 
  - Omit the schema.gql file from your setup.
 
