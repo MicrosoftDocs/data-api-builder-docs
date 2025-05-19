@@ -40,7 +40,7 @@ To utilize the automatic schema generation:
 
  - Upon initialization, DAB will analyze the collections and generate the corresponding GraphQL schema.
 
- # New Capability: Schema Generation via CLI
+ ### New Capability: Schema Generation via CLI
 
 This update introduces a **schema generation utility** that automates schema creation using existing data in CosmosDB. The feature is available via the DAB CLI and will eventually be exposed via a REST API.
 
