@@ -1,6 +1,6 @@
 ---
 title: Schema Generation for Azure CosmosDB for NOSQL
-description: Feature that allows for automatic schema generation from CosmosDB collections
+description: Feature that allows for automatic schema generation from Azure Cosmos DB collections
 author: sajeetharan
 ms.author: sasinnat
 ms.reviewer: jerrynixon
@@ -12,7 +12,7 @@ show_latex: true
 
 # Azure CosmosDB for NOSQL Schema Generation in Azure Data API Builder
 
-This feature introduces an enhancement to the Azure Data API Builder (DAB) that allows for automatic schema generation from CosmosDB collections. Previously, users were required to manually provide schema information via a `schema.gql` file. With this update, users have the option to generate the schema automatically, simplifying the setup process.
+This feature introduces an enhancement to the Azure Data API Builder (DAB) that allows for automatic schema generation from Azure Cosmos DB collections. Previously, users were required to manually provide schema information via a `schema.gql` file. With this update, users have the option to generate the schema automatically, simplifying the setup process.
 
 ## Motivation
 The manual provision of schema information can be time-consuming and error-prone. By enabling automatic schema generation, DAB aims to:
@@ -25,7 +25,7 @@ The manual provision of schema information can be time-consuming and error-prone
 
 - Automatic Schema Generation: DAB can now infer the schema directly from the existing Azure CosmosDB NOSQL API collections.
 
-- Optional Usage: Users can choose between providing a schema.gql file or leveraging the automatic schema generation feature.
+- Optional Usage: Users can choose between providing a schema.gql file or using the automatic schema generation feature.
 
 - Enhanced User Experience: This feature simplifies the initial configuration, especially beneficial for rapid prototyping and development scenarios.
 
@@ -38,11 +38,11 @@ To utilize the automatic schema generation:
 
  - Omit the schema.gql file from your setup.
 
- - Upon initialization, DAB will analyze the collections and generate the corresponding GraphQL schema.
+ - Upon initialization, DAB analyzes the collections and generate the corresponding GraphQL schema.
 
  ### New Capability: Schema Generation via CLI
 
-This update introduces a **schema generation utility** that automates schema creation using existing data in CosmosDB. The feature is available via the DAB CLI and will eventually be exposed via a REST API.
+This update introduces a **schema generation utility** that automates schema creation using existing data in Azure Cosmos DB.
 
 ### CLI Usage
 
