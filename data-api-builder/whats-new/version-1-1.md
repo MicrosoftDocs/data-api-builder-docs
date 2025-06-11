@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: whats-new 
-ms.date: 05/15/2024
+ms.date: 06/11/2025
 ---
 
 # What's new in Data API builder version 1.1 (May 2024)

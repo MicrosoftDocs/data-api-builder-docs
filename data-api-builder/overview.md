@@ -7,7 +7,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: overview
-ms.date: 05/13/2024
+ms.date: 06/11/2025
 #Customer Intent: As a developer, I want to learn more about DAB, so that I can determine if it's the right tool for my scenario.
 ---
 

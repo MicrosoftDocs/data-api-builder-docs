@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 03/29/2024
+ms.date: 06/11/2025
 ---
 
 # Sample Data API builder configuration
