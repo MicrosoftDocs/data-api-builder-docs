@@ -16,7 +16,7 @@ Install the `Microsoft.DataApiBuilder` package from NuGet as a .NET tool.
     ```
 
     > [!NOTE]
-    > If the package is already installed, you will update the package instead using `dotnet tool update`.
+    > If the package is already installed, update the package instead using `dotnet tool update`.
     >
     > ```dotnetcli
     > dotnet tool update --global Microsoft.DataApiBuilder
