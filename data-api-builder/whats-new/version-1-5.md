@@ -106,6 +106,8 @@ Implemented across:
 - [Enable groupBy and aggregation in MSSQL](https://github.com/Azure/data-api-builder/pull/2550)
 - [More improvements and fixes](https://github.com/Azure/data-api-builder/pull/2562)
 
+<!--
+
 ## Introducing: Cache Level 2—Redis Support
 
 Before this release, DAB supported only Level 1 in-memory caching—scoped to a single instance. Now, with Level 2 Redis caching, you get shared caching across all instances.
@@ -113,6 +115,8 @@ Before this release, DAB supported only Level 1 in-memory caching—scoped to a 
 - **Scalable**: Shared by all containers
 - **Fast**: Reduces database round-trips
 - **Reliable**: Persists through restarts and deployments
+
+-->
 
 ### HTTP Cache Headers
 
