@@ -15,7 +15,12 @@ A set of policies governs Data API builder related to breaking changes, notifica
 
 ## Versioning and releases
 
-A **release** in the context of Data API builder refers to every published version of the software, identified by the `Major.Minor.Patch` format. These releases fall into three categories: *stable*, *breaking change*, and *preview*.
+A **release** in the context of Data API builder refers to every published version of the software, identified by the `Major.Minor.Patch` format. These releases fall into three categories: *stable*, *breaking change*, and *preview*. 
+
+### Container Update Responsibility
+The Data API builder container does not update automatically. Customers are responsible for monitoring new releases, evaluating their importance (including security updates), and updating deployed containers accordingly.
+
+Keeping the container up to date is the **customer’s responsibility**.
 
 ### Stable releases
 
