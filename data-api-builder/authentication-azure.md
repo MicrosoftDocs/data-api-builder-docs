@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 04/08/2025
+ms.date: 06/11/2025
 # Customer Intent: As a developer, I want to configure Azure authentication, so that I can authenticate in the Azure environment.
 ---
 

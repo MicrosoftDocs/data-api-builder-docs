@@ -7,7 +7,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: tutorial
-ms.date: 04/30/2024
+ms.date: 06/11/2025
 #Customer Intent: As a developer, I want to deploy to Azure, so that I can integrate Data API builder with my other cloud services.
 ---
 

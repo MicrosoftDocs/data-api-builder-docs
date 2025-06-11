@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 06/06/2024
+ms.date: 06/11/2025
 # Customer Intent: As a developer, I want to configure database objects, so that I can map my endpoints to objects other than tables.
 ---
 
