@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 04/01/2024
+ms.date: 06/11/2025
 # Customer Intent: As a developer, I want to use the Data API Builder, so that I can host REST endpoints.
 ---
 

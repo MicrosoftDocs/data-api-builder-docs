@@ -4,7 +4,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: include
-ms.date: 04/01/2024
+ms.date: 06/11/2025
 ---
 
 The following table lists the isolation levels with which the transactions are created for each database type.

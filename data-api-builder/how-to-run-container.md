@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 04/08/2025
+ms.date: 06/11/2025
 # Customer Intent: As a developer, I want to use the Docker container image, so that I can run Data API builder anywhere in a portable fashion.
 ---
 

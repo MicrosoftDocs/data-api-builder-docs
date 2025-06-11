@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 05/15/2024
+ms.date: 06/11/2025
 # Customer Intent: As a developer, I want to use the environments feature, so that I can change which connection strings or other settings I use in development or production.
 ---
 
