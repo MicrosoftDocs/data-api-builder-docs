@@ -7,7 +7,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: quickstart
-ms.date: 04/29/2024
+ms.date: 06/11/2025
 #Customer Intent: As a developer, I want to use the Data API builder with my local MySQL database, so that I can quickly develop my API before deploying it.
 ---
 
