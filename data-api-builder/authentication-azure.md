@@ -23,7 +23,7 @@ The supported identity provider configuration options are:
 
 ## In Development (AZ Login)
 
-Using `Authentication='Active Directory Default'` in Azure SQL Database connection strings means the client will authenticate using Microsoft Entra credentials. The exact authentication method is determined by the environment. When a developer runs `az login`, the Azure CLI opens a browser window prompting the user to sign in with a Microsoft account or corporate credentials. Once authenticated, Azure CLI retrieves and caches the token linked to the Microsoft Entra identity. This token is then used to authenticate requests to Azure services without requiring credentials in the connection string.
+Using `Authentication='Active Directory Default'` in Azure SQL Database connection strings means the client will authenticate using Microsoft Entra credentials. The exact authentication method is determined by the environment. When a developer runs `az login`, the Azure CLI opens a browser window prompting the user to sign in with a Microsoft account or corporate credentials. Once authenticated, Azure CLI retrieves and caches the token linked to the identity in Microsoft Entra ID. This token is then used to authenticate requests to Azure services without requiring credentials in the connection string.
 
 ```json
 "data-source": {
@@ -57,7 +57,7 @@ To use the JWT provider, you need to configure the `runtime.host.authentication`
 
 ```json
 "authentication": {
-    "provider": "AzureAD",
+    "provider": "EntraId",
     "jwt": {
         "audience": "<APP_ID>",
         "issuer": "https://login.microsoftonline.com/<AZURE_AD_TENANT_ID>/v2.0"
@@ -75,7 +75,7 @@ Requests can also be made without being authenticated. In such cases, the reques
 
 ## X-MS-API-ROLE request header
 
-Data API builder requires the header `X-MS-API-ROLE` to authorize requests using custom roles. The value of `X-MS-API-ROLE` must match a role specified in the token. For example, if the token has the role **Sample.Role**, then X-MS-API-ROLE should also be **Sample.Role**. For more information, see [authorization user roles](./authorization.md#user-roles).
+Data API builder requires the header `X-MS-API-ROLE` to authorize requests using custom roles. The value of `X-MS-API-ROLE` must match a role specified in the access token's `roles` claim. For example, if the access token has the role **Sample.Role**, then `X-MS-API-ROLE` should also be **Sample.Role**. For more information, see [authorization user roles](./authorization.md#user-roles).
 
 ## Related content
 
