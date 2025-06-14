@@ -12,7 +12,7 @@ ms.date: 05/16/2025
 # What's new in Data API builder version 1.5 (April 2025)
 
 Release notes and updates for Data API builder (DAB) version 1.5  
-[Release 1.5: Data API builder for Azure Databases](https://github.com/Azure/data-api-builder/releases/tag/v1.5.29-rc)
+[Release 1.5: Data API builder for Azure Databases](https://github.com/Azure/data-api-builder/releases/tag/v1.5.50)
 
 ## Introducing: Health Endpoint
 
@@ -21,8 +21,8 @@ This release improves how DAB communicates its runtime state. Previously, the ro
 ```json
 {
   "status": "Healthy",
-  "version": "1.5.29",
-  "app-name": "dab_oss_1.5.29"
+  "version": "1.5.50",
+  "app-name": "dab_oss_1.5.50"
 }
 ```
 
@@ -33,8 +33,8 @@ Now, the `/health` endpoint includes basic config details and health checks:
 ```json
 {
   "status": "Unhealthy",
-  "version": "1.5.29",
-  "app-name": "dab_oss_1.5.29",
+  "version": "1.5.50",
+  "app-name": "dab_oss_1.5.50",
   "configuration": {
     "rest": true,
     "graphql": true,
