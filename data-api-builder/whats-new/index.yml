@@ -17,19 +17,17 @@ landingContent:
   - linkListType: whats-new
     links:
     - text: Introducing - Health Endpoint
-      url: version-1-5.md
+      url: version-1-5.md#introducing-health-endpoint
     - text: Introducing - Custom Log-Level
-      url: version-1-5.md
+      url: version-1-5.md#introducing-custom-log-level
     - text: Introducing - Aggregation in GraphQL 
-      url: version-1-5.md
-    - text: Introducing - Cache Level 2 - Redis Support
-      url: version-1-5.md
+      url: version-1-5.md#introducing-aggregation-in-graphql
     - text: Enhancement - Cache HTTP Header support
-      url: version-1-5.md
+      url: version-1-5.md#http-cache-headers
     - text: Enhanced - Custom OpenTelemetry Metrics
-      url: version-1-5.md
+      url: version-1-5.md#enhanced-opentelemetry
     - text: Enhanced - EntraId Auth Provider
-      url: version-1-5.md
+      url: version-1-5.md#enhanced-entra-id-auth-provider
 - title: Version 1.4
   linkLists:
   - linkListType: whats-new
