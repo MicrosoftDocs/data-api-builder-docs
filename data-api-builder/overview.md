@@ -24,7 +24,8 @@ ms.date: 06/11/2025
   :::column-end:::
 :::row-end:::
 
-Data API builder is designed for developers. DAB features a cross-platform CLI, Open Telemetry, and Health Checks with native OpenAPI, Swagger for REST endpoints, and Nitro (previously called Banana Cake Pop) for GraphQL endpoints. Its stateless, Docker-friendly container can be secured with EasyAuth, Microsoft Entra Identity, or any JSON Web Token (JWT) server an enterprise chooses. It has a flexible policy engine, granular security controls, and automatically passes claims data to the SQL session context.
+Data API builder is designed for developers. Data API builder features a cross-platform CLI, native OpenAPI, Swagger for REST endpoints, and Banana Cake Pop for GraphQL endpoints. Its stateless, Docker-friendly container can be secured with EasyAuth, Microsoft Entra ID, or any JSON Web Token (JWT) server an enterprise chooses. It has a flexible policy engine, granular security controls, and automatically passes claims data to the SQL session context.
+
 
 Data API builder (DAB) supports multiple backend data sources simultaneously, including relational and NoSQL sources. DAB also integrates seamlessly with Application Insights. The configuration file can reflect relationships in the database or define new, virtual ones with support for hot reloading. GraphQL endpoints allow multiple nested Create statements within a single transaction, while REST endpoints feature in-memory caching and rich support for OData-like query string keywords.
 
@@ -56,7 +57,7 @@ This diagram breaks down the relationship between all of the components of the D
 - Support for relational tables, views, and stored procedures
 - Support multiple, simultaneous data sources
 - Support for authentication via OAuth2/JWT
-- Support for EasyAuth and Microsoft Entra Identity
+- Support for EasyAuth and Microsoft Entra ID
 - Role-based authorization using received claims
 - Item-level security via policy expressions
 - REST endpoints
