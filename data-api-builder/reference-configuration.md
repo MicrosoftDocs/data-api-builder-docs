@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 01/13/2025
+ms.date: 06/11/2025
 show_latex: true
 ---
 

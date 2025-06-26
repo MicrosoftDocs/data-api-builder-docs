@@ -7,11 +7,11 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: quickstart
-ms.date: 01/27/2025
+ms.date: 06/11/2025
 # Customer Intent: As a developer, I want to get started using Data API builder quickly, so that I can evaluate the tool.
 ---
 
-# Quickstart: Use Data API builder with Azure SQL and Azure Static Web Apps
+# Quickstart: Use Data API builder with Azure SQL and Azure Container Apps
 
 In this quickstart, you deploy Data API builder (DAB) as a Docker container to Azure Container Apps. You use an Azure Developer CLI (AZD) template to deploy DAB along with an Azure SQL database using the latest best practices. The template also deploys a sample web application that connects to the DAB endpoint using GraphQL.
 
@@ -41,6 +41,8 @@ Use the Azure Developer CLI (`azd`) to create an Azure SQL account, deploy DAB a
     ```
 
 1. During initialization, configure a unique environment name.
+
+2. Ensure that Docker is running on your machine before continuing to the next step.
 
 1. Deploy the full solution to Azure using `azd up`. The Bicep templates deploy an **Azure SQL account** DAB to Azure Container Apps, and a sample web application.
 
@@ -77,8 +79,8 @@ Now, browse to each containerized application in Azure Container Apps to validat
     ```json
     {
       "status": "healthy",
-      "version": "1.1.7",
-      "app-name": "dab_oss_1.1.7"
+      "version": "1.4.35",
+      "app-name": "dab_oss_1.4.35"
     }
     ```
 

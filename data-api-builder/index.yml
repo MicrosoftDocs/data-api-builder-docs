@@ -10,7 +10,7 @@ metadata:
   ms.reviewer: jerrynixon
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 05/15/2024
+  ms.date: 06/11/2025
 landingContent:
   - title: About Data API builder
     linkLists:
@@ -24,12 +24,12 @@ landingContent:
             url: faq.yml
       - linkListType: whats-new
         links:
-          - text: Version 0.10
-            url: whats-new/version-0-10.md
-          - text: Version 0.9
-            url: whats-new/version-0-9.md
-          - text: Version 0.8
-            url: whats-new/version-0-8.md
+          - text: Version 1.5
+            url: whats-new/version-1-5.md
+          - text: Version 1.4
+            url: whats-new/version-1-4.md
+          - text: Version 1.3
+            url: whats-new/version-1-3.md
           - text: All versions
             url: whats-new/index.yml
   - title: Get started

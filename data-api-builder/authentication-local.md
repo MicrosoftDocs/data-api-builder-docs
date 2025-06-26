@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 04/01/2024
+ms.date: 06/11/2025
 # Customer Intent: As a developer, I want to test authentication locally, so that I don't have to rely on authentication "just working" when published.
 ---
 

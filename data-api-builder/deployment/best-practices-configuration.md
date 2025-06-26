@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: best-practice
-ms.date: 06/10/2024
+ms.date: 06/11/2025
 # Customer Intent: As a developer, I want to review best practices, so that I can configure my API using current best practices.
 ---
 

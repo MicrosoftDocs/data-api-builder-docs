@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 05/14/2024
+ms.date: 06/11/2025
 # Customer Intent: As a developer, I want to implement row-level secuirty, so that I can ensure that users only see records intended for them.
 ---
 
