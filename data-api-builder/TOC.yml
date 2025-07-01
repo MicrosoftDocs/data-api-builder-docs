@@ -287,8 +287,10 @@
           href: database-objects.md#stored-procedures
     - name: Relationships
       href: relationships.md
-    - name: Authentication and authorization
+    - name: Security
       items:
+        - name: Security overview
+          href: security.md
         - name: Azure authentication
           displayName: AAD, AD, Azure Active Directory, Microsoft Entra Identity, Entra ID
           href: authentication-azure.md
