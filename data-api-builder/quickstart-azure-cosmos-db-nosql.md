@@ -42,7 +42,7 @@ Use the Azure Developer CLI (`azd`) to create an Azure Cosmos DB for NoSQL accou
 
 1. During initialization, configure a unique environment name.
 
-1.  Ensure that Docker is running on your machine before continuing to the next step
+1.  Ensure that Docker is running on your machine before continuing to the next step.
 
 1. Deploy the full solution to Azure using `azd up`. The Bicep templates deploy an **Azure Cosmos DB for NoSQL account** DAB to Azure Container Apps, and a sample web application.
 
