@@ -1544,7 +1544,7 @@ With `StaticWebApps`, Data API builder expects Azure Static Web Apps to authenti
   "authentication": {
    "provider": "AppService",
    "jwt": {
-    "audience": "9e7d452b-7e23-4300-8053-55fbf243b673",
+    "audience": "00001111-aaaa-2222-bbbb-3333cccc4444",
     "issuer": "https://example-appservice-auth.com"
    }
   }
@@ -1567,7 +1567,7 @@ Authentication is delegated to a supported identity provider where access token 
   "authentication": {
    "provider": "AzureAD",
    "jwt": {
-    "audience": "c123d456-a789-0abc-a12b-3c4d56e78f90",
+    "audience": "11112222-bbbb-3333-cccc-4444dddd5555",
     "issuer": "https://login.microsoftonline.com/98765f43-21ba-400c-a5de-1f2a3d4e5f6a/v2.0"
    }
   }
