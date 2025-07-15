@@ -1434,7 +1434,7 @@ The `authentication.provider` setting within the `host` configuration defines th
 |-|-|
 | `StaticWebApps` | Instructs Data API builder to look for a set of HTTP headers only present when running within a Static Web Apps environment. |
 | `AppService` | When the runtime is hosted in Azure AppService with AppService Authentication enabled and configured (EasyAuth). |
-| `AzureAd` | Microsoft Entra Identity needs to be configured so that it can authenticate a request sent to Data API builder (the "Server App"). For more information, see [Microsoft Entra ID authentication](authentication-azure-ad.md). |
+| `EntraId` | Microsoft Entra ID needs to be configured so that it can authenticate a request sent to Data API builder (the "Server App"). For more information, see [Microsoft Entra ID authentication](authentication-azure-ad.md). |
 | `Simulator` | A configurable authentication provider that instructs the Data API builder engine to treat all requests as authenticated. For more information, see [local authentication](local-authentication.md). |
 
 #### Format
@@ -1459,7 +1459,7 @@ Here's a list of allowed values for this property:
 |-|-|
 | **`StaticWebApps`** | Azure Static Web Apps |
 | **`AppService`** | Azure App Service |
-| **`AzureAD`** | Microsoft Entra ID |
+| **`EntraId`** (formerly **`AzureAd`**) | Microsoft Entra ID |
 | **`Simulator`** | Simulator |
 
 ### JSON Web Tokens (Host runtime)
@@ -1470,13 +1470,13 @@ Here's a list of allowed values for this property:
 |-|-|-|-|-|
 | `runtime.host.authentication` | `jwt` | object | ❌ No | None |
 
-If the authentication provider is set to `AzureAD` (Microsoft Entra ID), then this section is required to specify the audience and issuers for the JSOn Web Tokens (JWT) token. This data is used to validate the tokens against your Microsoft Entra tenant.
+If the authentication provider is set to `EntraId` (Microsoft Entra ID), then this section is required to specify the audience and issuers for the JSOn Web Tokens (JWT) token. This data is used to validate the tokens against your Microsoft Entra tenant.
 
-Required if the authentication provider is `AzureAD` for Microsoft Entra ID. This section must specify the `audience` and `issuer` to validate the received JWT token against the intended `AzureAD` tenant for authentication.
+Required if the authentication provider is `EntraId` for Microsoft Entra ID. This section must specify the `audience` and `issuer` to validate the received JWT token against the intended `EntraId` tenant for authentication.
 
 | Setting | Description |
 |-|-|
-| audience | Identifies the intended recipient of the token; typically the application's identifier registered in Microsoft Entra Identity (or your identity provider), ensuring that the token was indeed issued for your application. |
+| audience | Identifies the intended recipient of the token; typically the application's identifier registered in Microsoft Entra ID (or your identity provider), ensuring that the token was indeed issued for your application. |
 | issuer | Specifies the issuing authority's URL, which is the token service that issued the JWT. This URL should match the identity provider's issuer URL from which the JWT was obtained, validating the token's origin. |
 
 #### Format
@@ -1506,7 +1506,7 @@ Required if the authentication provider is `AzureAD` for Microsoft Entra ID. Thi
 
 #### Examples
 
-The Data API builder (DAB) offers flexible authentication support, integrating with Microsoft Entra Identity and custom JSON Web Token (JWT) servers. In this image, the **JWT Server** represents the authentication service that issues JWT tokens to clients upon successful sign-in. The client then passes the token to DAB, which can interrogate its claims and properties.
+The Data API builder (DAB) offers flexible authentication support, integrating with Microsoft Entra ID and custom JSON Web Token (JWT) servers. In this image, the **JWT Server** represents the authentication service that issues JWT tokens to clients upon successful sign-in. The client then passes the token to DAB, which can interrogate its claims and properties.
 
 ![Diagram of JSON web tokens support in Data API builder.](media/jwt-server.png)
 
@@ -1565,7 +1565,7 @@ Authentication is delegated to a supported identity provider where access token 
    "credentials": true
   },
   "authentication": {
-   "provider": "AzureAD",
+   "provider": "EntraId",
    "jwt": {
     "audience": "11112222-bbbb-3333-cccc-4444dddd5555",
     "issuer": "https://login.microsoftonline.com/98765f43-21ba-400c-a5de-1f2a3d4e5f6a/v2.0"
