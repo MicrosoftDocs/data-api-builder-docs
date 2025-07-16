@@ -1,6 +1,41 @@
 {
   "redirections": [
     {
+      "source_path_from_root": "/data-api-builder/database-objects.md",
+      "redirect_url": "/data-api-builder/concepts/database-objects.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/environments.md",
+      "redirect_url": "/data-api-builder/concepts/environments.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/graphql.md",
+      "redirect_url": "/data-api-builder/concepts/graphql.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/openapi.md",
+      "redirect_url": "/data-api-builder/concepts/openapi.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/relationships.md",
+      "redirect_url": "/data-api-builder/concepts/relationships.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/rest.md",
+      "redirect_url": "/data-api-builder/concepts/rest.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/security.md",
+      "redirect_url": "/data-api-builder/concepts/security.md",
+      "redirect_document_id": true
+    },
+    {
       "source_path_from_root": "/data-api-builder/data-api-builder-cli.md",
       "redirect_url": "/azure/data-api-builder/reference-cli",
       "redirect_document_id": true
