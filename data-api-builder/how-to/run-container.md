@@ -193,6 +193,6 @@ Run DAB using the Docker container image hosted on Microsoft Container Registry.
 
 ## Related content
 
-- [Run from source](how-to-run-from-source.md)
-- [Install the CLI](how-to-install-cli.md)
+- [Run from source](how-to/run-from-source.md)
+- [Install the CLI](how-to/install-cli.md)
 - [`mcr.microsoft.com/azure-databases/data-api-builder` on Microsoft Artifact Registry](https://mcr.microsoft.com/artifact/mar/azure-databases/data-api-builder)

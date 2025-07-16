@@ -22,7 +22,7 @@ sections:
       - question: |
           How do I install the Data API builder CLI?
         answer: |
-          You can install the Data API builder CLI using the .NET CLI. For more information, see the [installation guide](how-to-install-cli.md).
+          You can install the Data API builder CLI using the .NET CLI. For more information, see the [installation guide](how-to/install-cli.md).
   - name: Multiple mutations
     questions:
       - question: |
@@ -50,11 +50,11 @@ sections:
       - question: |
           How do I use multiple mutations in GraphQL?
         answer: |
-          To use multiple mutations in GraphQL, review the [use multiple mutations in GraphQL guide](how-to-multiple-mutations.md).
+          To use multiple mutations in GraphQL, review the [use multiple mutations in GraphQL guide](how-to/multiple-mutations.md).
       - question: |
           How does row-level security work with multiple mutations in GraphQL?
         answer: |
           Row-level security functions similarly to single operations in GraphQL. For multiple create mutation requests, the "create" policy for every entity is considered when creating the item in the backing database table. Similarly, every read policy is considered for the selection set of a multiple mutation operation.
 
-          For more information on row-level security, see [implement row-level security in SQL](how-to-row-level-security.md).
+          For more information on row-level security, see [implement row-level security in SQL](how-to/row-level-security.md).
 

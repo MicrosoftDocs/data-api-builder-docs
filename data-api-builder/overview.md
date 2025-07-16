@@ -79,6 +79,6 @@ Data API builder is open source and released under the MIT license. The reposito
 
 ## Related content
 
-- [Install the Data API builder CLI](how-to-install-cli.md)
+- [Install the Data API builder CLI](how-to/install-cli.md)
 - [Todo app sample with Data API builder, Azure Static Web Apps, and Azure SQL](https://github.com/azure-samples/dab-swa-todo)
 - [Library app sample with Data API builder, Azure Static Web Apps, and Azure SQL](https://github.com/azure-samples/dab-swa-library-demo)

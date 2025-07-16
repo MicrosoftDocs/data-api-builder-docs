@@ -269,7 +269,7 @@ Next, build a container image using a Dockerfile. Then deploy that container ima
 
     - Use the `mcr.microsoft.com/dotnet/sdk` container image as the base of the build stage
 
-    - Install the [DAB CLI](how-to-install-cli.md).
+    - Install the [DAB CLI](how-to/install-cli.md).
 
     - Create a configuration file for an SQL database connection (`mssql`) using the `DATABASE_CONNECTION_STRING` environment variable as the connection string. 
 

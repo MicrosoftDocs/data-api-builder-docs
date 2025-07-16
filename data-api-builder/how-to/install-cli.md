@@ -20,7 +20,7 @@ In this guide, you go through the steps to install the Data API builder (DAB) co
 
 ## Install the CLI
 
-[!INCLUDE[Install CLI](includes/install-cli.md)]
+[!INCLUDE[Install CLI](../includes/install-cli.md)]
 
 ## Verify that the CLI is installed
 
@@ -33,7 +33,7 @@ Installing the .NET tool makes the `dab` command available on your local machine
     ```
 
     > [!IMPORTANT]
-    > If you are running on Linux or macOS, you could see an error when invoking `dab` directly. To resolve this error, add the .NET global tools to your `PATH`. For more information, see [troubleshooting Data API builder installation](troubleshoot-installation.md).
+    > If you are running on Linux or macOS, you could see an error when invoking `dab` directly. To resolve this error, add the .NET global tools to your `PATH`. For more information, see [troubleshooting Data API builder installation](../troubleshoot-installation.md).
 
 1. Observe the output of the previous command. Assuming the current version of the DAB CLI is `1.0.0`, the command would output would include the following content.
 
@@ -44,4 +44,4 @@ Installing the .NET tool makes the `dab` command available on your local machine
 ## Related content
 
 - [.NET tools](/dotnet/core/tools/global-tools)
-- [How-to: Use environments](how-to-use-environments.md)
+- [How-to: Use environments](how-to/use-environments.md)

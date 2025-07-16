@@ -239,21 +239,21 @@
   items:
     - name: Install the CLI
       displayName: DAB, command-line, interface
-      href: how-to-install-cli.md
+      href: how-to/install-cli.md
     - name: Run in a container
-      href: how-to-run-container.md
+      href: how-to/run-container.md
     - name: Run from source code
       displayName: Git, GitHub, oss, repository, contribute
-      href: how-to-run-from-source.md
+      href: how-to/run-from-source.md
     - name: Implement row-level security in SQL
       displayName: RLS, claims, predicate, item
-      href: how-to-row-level-security.md
+      href: how-to/row-level-security.md
     - name: Use environments
       displayName: development
-      href: how-to-use-environments.md
+      href: how-to/use-environments.md
     - name: Batch multiple mutations
       displayName: multiple create, transaction
-      href: how-to-multiple-mutations.md
+      href: how-to/multiple-mutations.md
 - name: Tutorials
   items:
     - name: Deploy to Azure Container Apps using Azure CLI

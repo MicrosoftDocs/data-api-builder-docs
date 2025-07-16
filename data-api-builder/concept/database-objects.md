@@ -223,4 +223,4 @@ query {
 ## Related content
 
 - [Configuration reference](../reference-configuration.md)
-- [Install the CLI](../how-to-install-cli.md)
+- [Install the CLI](../how-to/install-cli.md)

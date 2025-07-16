@@ -1,6 +1,36 @@
 {
   "redirections": [
     {
+      "source_path_from_root": "/data-api-builder/how-to-install-cli.md",
+      "redirect_url": "/azure/data-api-builder/how-to/install-cli.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to-multiple-mutations.md",
+      "redirect_url": "/azure/data-api-builder/how-to/multiple-mutations.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to-row-level-security.md",
+      "redirect_url": "/azure/data-api-builder/how-to/row-level-security.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to-run-container.md",
+      "redirect_url": "/azure/data-api-builder/how-to/run-container.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to-run-from-source.md",
+      "redirect_url": "/azure/data-api-builder/how-to/run-from-source.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to-use-environments.md",
+      "redirect_url": "/azure/data-api-builder/how-to/use-environments.md",
+      "redirect_document_id": true
+    },
+    {
       "source_path_from_root": "/data-api-builder/azure-cosmos-db-nosql.md",
       "redirect_url": "/azure/data-api-builder/quickstart/azure-cosmos-db-nosql.md",
       "redirect_document_id": true

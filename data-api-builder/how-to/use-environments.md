@@ -19,7 +19,7 @@ This guide walks through the steps to target a development environment using a c
 - Existing SQL database.
 - A data management client
   - If you don't have a client installed, [install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
-- Data API builder CLI. [Install the CLI](how-to-install-cli.md)
+- Data API builder CLI. [Install the CLI](how-to/install-cli.md)
 
 ## Create SQL table and data
 
@@ -228,5 +228,5 @@ Finally, add a development configuration file with the delta between your curren
 
 ## Related content
 
-- [How-to: Add application insights](deployment/how-to-use-application-insights.md)
-- [How-to: Run from a container](how-to-run-container.md)
+- [How-to: Add application insights](deployment/how-to/use-application-insights.md)
+- [How-to: Run from a container](how-to/run-container.md)
