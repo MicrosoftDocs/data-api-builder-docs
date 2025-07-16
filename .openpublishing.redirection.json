@@ -1,6 +1,36 @@
 {
   "redirections": [
     {
+      "source_path_from_root": "/data-api-builder/azure-cosmos-db-nosql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/azure-cosmos-db-nosql.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/azure-sql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/mssql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/mssql.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/mysql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/mysql.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/nosql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/nosql.md",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/postgresql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/postgresql.md",
+      "redirect_document_id": true
+    },
+    {
       "source_path_from_root": "/data-api-builder/database-objects.md",
       "redirect_url": "/azure/data-api-builder/concepts/database-objects.md",
       "redirect_document_id": true

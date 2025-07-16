@@ -1,7 +1,7 @@
 ---
 title: |
-  Quickstart: Use with Azure SQL
-description: Deploy an Azure Developer CLI template that uses Data API builder with Azure Container Apps and Azure SQL.
+  Quickstart: Use with Azure Cosmos DB for NoSQL
+description: Deploy an Azure Developer CLI template that uses Data API builder with Azure Container Apps and Azure Cosmos DB for NoSQL.
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
@@ -11,9 +11,9 @@ ms.date: 06/11/2025
 # Customer Intent: As a developer, I want to get started using Data API builder quickly, so that I can evaluate the tool.
 ---
 
-# Quickstart: Use Data API builder with Azure SQL and Azure Static Web Apps
+# Quickstart: Use Data API builder with Azure Cosmos DB for NoSQL and Azure Static Web Apps
 
-In this quickstart, you deploy Data API builder (DAB) as a Docker container to Azure Container Apps. You use an Azure Developer CLI (AZD) template to deploy DAB along with an Azure SQL database using the latest best practices. The template also deploys a sample web application that connects to the DAB endpoint using GraphQL.
+In this quickstart, you deploy Data API builder (DAB) as a Docker container to Azure Container Apps. You use an Azure Developer CLI (AZD) template to deploy DAB along with an Azure Cosmos DB for NoSQL database using the latest best practices. The template also deploys a sample web application that connects to the DAB endpoint using GraphQL.
 
 ## Prerequisites
 
@@ -24,7 +24,7 @@ If you don't have an Azure account, create a [free account](https://azure.micros
 
 ## Initialize the project
 
-Use the Azure Developer CLI (`azd`) to create an Azure SQL account, deploy DAB as a containerized solution, and deploy a containerized sample application. The sample application uses DAB to query sample data.
+Use the Azure Developer CLI (`azd`) to create an Azure Cosmos DB for NoSQL account, deploy DAB as a containerized solution, and deploy a containerized sample application. The sample application uses DAB to query sample data.
 
 1. Open a terminal in an empty directory.
 
@@ -37,12 +37,12 @@ Use the Azure Developer CLI (`azd`) to create an Azure SQL account, deploy DAB a
 1. Use `azd init` to initialize the project.
 
     ```azurecli
-    azd init --template dab-azure-sql-quickstart
+    azd init --template dab-azure-cosmos-db-nosql-quickstart
     ```
 
 1. During initialization, configure a unique environment name.
 
-1. Deploy the full solution to Azure using `azd up`. The Bicep templates deploy an **Azure SQL account** DAB to Azure Container Apps, and a sample web application.
+1. Deploy the full solution to Azure using `azd up`. The Bicep templates deploy an **Azure Cosmos DB for NoSQL account** DAB to Azure Container Apps, and a sample web application.
 
     ```azurecli
     azd up
@@ -82,15 +82,30 @@ Now, browse to each containerized application in Azure Container Apps to validat
     }
     ```
 
-1. Navigate to the relative `/swagger` path for the DAB instance. This URL should open the **Swagger UI** REST integrated development environment (IDE).
+1. Navigate to the relative `/graphql` path for the DAB instance. This URL should open the **Nitro** GraphQL integrated development environment (IDE).
 
-1. In the Swagger IDE, run a `GET` request for all rows in the Azure SQL `products` table.
+1. In the Nitro IDE, create a new document and run this query to get all 100 items in the Azure Cosmos DB for NoSQL `products` container.
+
+    ```graphql
+    query {
+      products {
+        items {
+        id
+        name
+        description
+        sku
+        price
+        cost
+        }
+      }
+    }
+    ```
 
 1. Finally, navigate to the URL for the **web** service. This URL links to the running sample web application that connects to the GraphQL endpoint you accessed in the previous step.
 
 1. Observe the running web application and review the output data.
 
-    :::image type="content" source="media/quickstart-azure-sql/running-application.png" alt-text="Screenshot of the running web application on Azure Container Apps.":::
+    :::image type="content" source="media/quickstart-azure-cosmos-db-nosql/running-application.png" alt-text="Screenshot of the running web application on Azure Container Apps.":::
 
 ## Clean up
 
@@ -107,4 +122,4 @@ When you no longer need the sample application or resources, remove the correspo
 ## Next step
 
 > [!div class="nextstepaction"]
-> [REST endpoints](rest.md)
+> [GraphQL endpoints](../concepts/graphql.md)

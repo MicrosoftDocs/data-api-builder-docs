@@ -19,8 +19,6 @@ In this Quickstart, you build a set of Data API builder configuration files to t
 
 - [Docker](https://www.docker.com/products/docker-desktop/)
 - [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0)
-- A data management client
-  - If you don't have a client installed, [install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
 
 > [!TIP]
 > Alternatively, open this Quickstart in GitHub Codespaces with all developer prerequisites already installed. Simply bring your own Azure subscription. GitHub accounts include an entitlement of storage and core hours at no cost. For more information, see [included storage and core hours for GitHub accounts](https://docs.github.com/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts).
@@ -29,7 +27,7 @@ In this Quickstart, you build a set of Data API builder configuration files to t
 
 ## Install the Data API builder CLI
 
-[!INCLUDE[Install CLI](includes/install-cli.md)]
+[!INCLUDE[Install CLI](../includes/install-cli.md)]
 
 ## Configure the local database
 
@@ -51,7 +49,7 @@ Start by configuring and running the local database. Then, you can seed a new co
         mysql:8
     ```
 
-1. Connect to your local database using your preferred data management environment. Examples include, but aren't limited to: [MySQL Workbench](https://www.mysql.com/products/workbench/), [Azure Data Studio](/azure-data-studio), and the [MySQL shell for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=Oracle.mysql-shell-for-vs-code).
+1. Connect to your local database using your preferred data management environment. Examples include, but aren't limited to: [MySQL Workbench](https://www.mysql.com/products/workbench/) and the [MySQL shell for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=Oracle.mysql-shell-for-vs-code).
 
     > [!TIP]
     > If you're using default networking for your Docker Linux container images, the connection string will likely be `Server=localhost;Port=3306;Uid=root;Pwd=<your-password>;`. Replace `<your-password>` with the password you set earlier.
@@ -144,4 +142,4 @@ Now, start the Data API builder tool to validate that your configuration files a
 ## Next step
 
 > [!div class="nextstepaction"]
-> [REST endpoints](rest.md)
+> [REST endpoints](../concepts/rest.md)
