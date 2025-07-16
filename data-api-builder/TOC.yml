@@ -263,34 +263,34 @@
   items:
     - name: REST
       displayName: HTTP, etag, header, put, patch, get, post, delete, select, filter, orderby, first, after
-      href: concepts/rest.md
+      href: concept/rest.md
     - name: OpenAPI
-      href: concepts/openapi.md
+      href: concept/openapi.md
     - name: GraphQL
-      href: concepts/graphql.md
+      href: concept/graphql.md
     - name: Environments
       items:
         - name: Configuring environments
-          href: concepts/environments.md
+          href: concept/environments.md
         - name: Setting environment variables
           displayName: $env, @env, vars, .env, env
-          href: concepts/environments.md#setting-environment-variables
+          href: concept/environments.md#setting-environment-variables
         - name: Accessing environment variables
           displayName: Environment variables, $env, @env, vars, env
-          href: concepts/environments.md#accessing-environment-variables
+          href: concept/environments.md#accessing-environment-variables
     - name: Database objects
       items:
         - name: Views
-          href: concepts/database-objects.md#views
+          href: concept/database-objects.md#views
         - name: Stored Procedures
           displayName: procs
-          href: concepts/database-objects.md#stored-procedures
+          href: concept/database-objects.md#stored-procedures
     - name: Relationships
-      href: concepts/relationships.md
+      href: concept/relationships.md
     - name: Security
       items:
         - name: Security overview
-          href: concepts/security.md
+          href: concept/security.md
         - name: Azure authentication
           displayName: AAD, AD, Azure Active Directory, Microsoft Entra Identity, Entra ID
           href: authentication-azure.md
