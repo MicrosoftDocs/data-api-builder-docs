@@ -128,4 +128,4 @@ When you enable Application Insights in your application, it starts sending data
 ## Next step
 
 > [!div class="nextstepaction"]
-> [Configuration best practices](best-practices-configuration.md)
+> [Configuration best practices](../deployment/best-practices-configuration.md)

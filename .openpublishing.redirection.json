@@ -396,7 +396,7 @@
       "redirect_document_id": true
     },
     {
-      "source_path_from_root": "/data-api-builder/how-to-use-application-insights.md",
+      "source_path_from_root": "/data-api-builder/how-to/use-application-insights.md",
       "redirect_url": "/azure/data-api-builder/deployment/how-to-use-application-insights",
       "redirect_document_id": true
     }
