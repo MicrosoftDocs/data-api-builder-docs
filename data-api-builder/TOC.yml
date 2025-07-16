@@ -293,11 +293,11 @@
           href: concepts/security.md
         - name: Azure authentication
           displayName: AAD, AD, Azure Active Directory, Microsoft Entra Identity, Entra ID
-          href: concepts/authentication-azure.md
+          href: authentication-azure.md
         - name: Local authentication
-          href: concepts/authentication-local.md
+          href: authentication-local.md
         - name: Authorization
-          href: concepts/authorization.md
+          href: authorization.md
     - name: Code policies
       displayName: Versioning, Change, Breaking
       href: reference-policies.md
