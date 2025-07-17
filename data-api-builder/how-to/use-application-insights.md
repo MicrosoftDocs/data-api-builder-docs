@@ -12,7 +12,7 @@ ms.date: 06/11/2025
 
 # Use Azure Application Insights in Data API builder
 
-:::image type="complex" source="media/how-to-use-application-insights/map.svg" border="false" alt-text="Diagram of the current location ('Monitor') in the sequence of the deployment guide.":::
+:::image type="complex" source="media/use-application-insights/map.svg" border="false" alt-text="Diagram of the current location ('Monitor') in the sequence of the deployment guide.":::
 Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Monitor' location is currently highlighted.
 :::image-end:::
 
@@ -105,7 +105,7 @@ When you enable Application Insights in your application, it starts sending data
 
 1. Navigate to the **Live Metrics** page.
 
-    :::image type="content" source="media/how-to-use-application-insights/live-metrics.png" lightbox="media/how-to-use-application-insights/live-metrics.png" alt-text="Screenshot of the live metrics page for Data API builder data in Application Insights.":::
+    :::image type="content" source="media/use-application-insights/live-metrics.png" lightbox="media/use-application-insights/live-metrics.png" alt-text="Screenshot of the live metrics page for Data API builder data in Application Insights.":::
 
 1. Check the **Application Requests** using this query.
 
@@ -114,7 +114,7 @@ When you enable Application Insights in your application, it starts sending data
     | order by timestamp
     ```
     
-    :::image type="content" source="media/how-to-use-application-insights/requests-results.png" lightbox="media/how-to-use-application-insights/requests-results.png"  alt-text="Screenshot of the results of a query for Data API builder application requests in Application Insights.":::
+    :::image type="content" source="media/use-application-insights/requests-results.png" lightbox="media/use-application-insights/requests-results.png"  alt-text="Screenshot of the results of a query for Data API builder application requests in Application Insights.":::
 
 1. Enumerate exceptions using the **Application Exceptions** page.
 
@@ -123,7 +123,7 @@ When you enable Application Insights in your application, it starts sending data
     | order by timestamp
     ```
     
-    :::image type="content" source="media/how-to-use-application-insights/exceptions-results.png" lightbox="media/how-to-use-application-insights/exceptions-results.png" alt-text="Screenshot of the results of a query for Data API builder exceptions in Application Insights.":::
+    :::image type="content" source="media/use-application-insights/exceptions-results.png" lightbox="media/use-application-insights/exceptions-results.png" alt-text="Screenshot of the results of a query for Data API builder exceptions in Application Insights.":::
 
 ## Next step
 

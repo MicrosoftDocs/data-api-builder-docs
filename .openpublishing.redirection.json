@@ -7,7 +7,7 @@
     },
     {
       "source_path_from_root": "/data-api-builder/run-using-data-api-builder-cli.md",
-      "redirect_url": "/azure/data-api-builder/how-to-develop-local-data",
+      "redirect_url": "/azure/data-api-builder/how-to/develop-local-data",
       "redirect_document_id": true
     },
     {
@@ -117,7 +117,7 @@
     },
     {
       "source_path_from_root": "/data-api-builder/local-development.md",
-      "redirect_url": "/azure/data-api-builder/how-to-develop-local-data",
+      "redirect_url": "/azure/data-api-builder/how-to/develop-local-data",
       "redirect_document_id": false
     },
     {
@@ -142,37 +142,37 @@
     },
     {
       "source_path_from_root": "/data-api-builder/get-started/get-started-with-data-api-builder.md",
-      "redirect_url": "/azure/data-api-builder/quickstart-azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/get-started/get-started-azure-sql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart-azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/get-started/get-started-azure-cosmos-db.md",
-      "redirect_url": "/azure/data-api-builder/quickstart-azure-cosmos-db-nosql",
+      "redirect_url": "/azure/data-api-builder/quickstart/azure-cosmos-db-nosql",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/get-started/get-started-azure-postgresql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart-azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/get-started/get-started-azure-mysql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart-azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/run-using-container.md",
-      "redirect_url": "/azure/data-api-builder/how-to-run-container",
+      "redirect_url": "/azure/data-api-builder/how-to/run-container",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/run-from-source-code.md",
-      "redirect_url": "/azure/data-api-builder/how-to-run-from-source",
+      "redirect_url": "/azure/data-api-builder/how-to/run-from-source",
       "redirect_document_id": true
     },
     {
@@ -182,7 +182,7 @@
     },
     {
       "source_path_from_root": "/data-api-builder/azure-sql-session-context-rls.md",
-      "redirect_url": "/azure/data-api-builder/how-to-row-level-security",
+      "redirect_url": "/azure/data-api-builder/how-to/row-level-security",
       "redirect_document_id": true
     },
     {
@@ -202,7 +202,7 @@
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-develop-local-data.md",
-      "redirect_url": "/azure/data-api-builder/how-to-use-environments",
+      "redirect_url": "/azure/data-api-builder/how-to/use-environments",
       "redirect_document_id": true
     },
     {
@@ -293,6 +293,16 @@
     {
       "source_path_from_root": "/data-api-builder/best-practices-configuration.md",
       "redirect_url": "/azure/data-api-builder/deployment/best-practices-configuration",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/use-application-insights.md",
+      "redirect_url": "/azure/data-api-builder/how-to/use-application-insights",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to-use-application-insights.md",
+      "redirect_url": "/azure/data-api-builder/how-to/use-application-insights",
       "redirect_document_id": true
     },
     {
