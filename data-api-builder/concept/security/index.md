@@ -19,12 +19,12 @@ This article provides guidance on how to best secure your Data API builder solut
 
 ## Authentication
 
-- **Use strong authentication providers**: Always configure Data API builder to use a secure authentication provider such as Microsoft Entra ID or Azure Static Web Apps authentication. This configuration ensures only authorized users can access your APIs. For more information, see [authentication configuration](../authentication-local.md).
-- **Avoid hardcoding secrets**: Never store authentication secrets or credentials directly in your configuration files or source code. Use secure methods such as environment variables or Azure Key Vault. For more information, see [Azure authentication](../authentication-azure.md).
+- **Use strong authentication providers**: Always configure Data API builder to use a secure authentication provider such as Microsoft Entra ID or Azure Static Web Apps authentication. This configuration ensures only authorized users can access your APIs. For more information, see [authentication configuration](./authentication-local.md).
+- **Avoid hardcoding secrets**: Never store authentication secrets or credentials directly in your configuration files or source code. Use secure methods such as environment variables or Azure Key Vault. For more information, see [Azure authentication](./authentication-azure.md).
 
 ## Authorization
 
-- **Implement role-based access control (RBAC)**: Restrict access to entities and actions based on user roles by defining roles and permissions in your configuration. This limits exposure of sensitive data and operations. For more information, see [roles](../authorization.md#roles).
+- **Implement role-based access control (RBAC)**: Restrict access to entities and actions based on user roles by defining roles and permissions in your configuration. This limits exposure of sensitive data and operations. For more information, see [roles](./authorization.md#roles).
 - **Deny by default**: By default, entities have no permissions configured, so no one can access them. Explicitly define permissions for each role to ensure only intended users have access. For more information, see [authorization](./authorization.md).
 - **Use the X-MS-API-ROLE header for custom roles**: Require clients to specify the `X-MS-API-ROLE` header to access resources with custom roles, ensuring requests are evaluated in the correct security context. For more information, see [custom role header](./authentication-azure.md#x-ms-api-role-request-header).
 

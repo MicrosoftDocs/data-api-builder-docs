@@ -122,4 +122,4 @@ When you no longer need the sample application or resources, remove the correspo
 ## Next step
 
 > [!div class="nextstepaction"]
-> [GraphQL endpoints](../concept/graphql.md)
+> [GraphQL endpoints](../concept/api/graphql.md)

@@ -317,5 +317,5 @@ Which defines a Many-to-Many relationship between the `Author` entity and the `B
 
 ## Related content
 
-- [GraphQL](../graphql.md)
+- [GraphQL](../api/graphql.md)
 - [GraphQL - configuration schema](../../reference-configuration.md#graphql-entities)

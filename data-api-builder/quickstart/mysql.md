@@ -142,4 +142,4 @@ Now, start the Data API builder tool to validate that your configuration files a
 ## Next step
 
 > [!div class="nextstepaction"]
-> [REST endpoints](../concept/rest.md)
+> [REST endpoints](../concept/api/rest.md)
