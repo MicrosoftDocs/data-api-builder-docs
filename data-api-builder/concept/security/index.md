@@ -40,7 +40,7 @@ This article provides guidance on how to best secure your Data API builder solut
 
 ## Monitoring and updates
 
-- **Monitor and audit access**: Detect suspicious activity or unauthorized access attempts by regularly reviewing logs and monitoring access to your Data API builder endpoints. For more information, see [Monitor using application insights](../../how-to/use-application-insights.md).
+- **Monitor and audit access**: Detect suspicious activity or unauthorized access attempts by regularly reviewing logs and monitoring access to your Data API builder endpoints. For more information, see [Monitor using application insights](../../concept/monitor/use-application-insights.md).
 - **Keep dependencies up to date**: Ensure you have the latest security patches and improvements by regularly updating Data API builder, its dependencies, and your underlying platform. For more information, see [DAB versions](../../whats-new/index.yml).
 
 ## Related

@@ -215,4 +215,4 @@ When you no longer need the sample application or resources, remove the correspo
 ## Next step
 
 > [!div class="nextstepaction"]
-> [Integrate with Application Insights](../how-to/use-application-insights.md)
+> [Integrate with Application Insights](../concept/monitor/use-application-insights.md)

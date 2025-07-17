@@ -1998,7 +1998,7 @@ In this example, cache is enabled globally and all items expire after 15 seconds
 |-|-|-|-|-|
 | `runtime` | `telemetry` | object | ❌ No | None |
 
-This property configures Application Insights to centralize API logs. Learn [more](how-to/use-application-insights.md).
+This property configures Application Insights to centralize API logs. Learn [more](concept/monitor/use-application-insights.md).
 
 #### Format
 

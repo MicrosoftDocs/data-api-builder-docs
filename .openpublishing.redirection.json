@@ -295,20 +295,20 @@
       "redirect_url": "/azure/data-api-builder/deployment/best-practices-configuration",
       "redirect_document_id": true
     },
-    
+
     {
       "source_path_from_root": "/data-api-builder/use-application-insights.md",
-      "redirect_url": "/azure/data-api-builder/how-to/use-application-insights",
+      "redirect_url": "/azure/data-api-builder/concept/monitor/application-insights",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-use-application-insights.md",
-      "redirect_url": "/azure/data-api-builder/how-to/use-application-insights",
+      "redirect_url": "/azure/data-api-builder/concept/monitor/application-insights",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/deployment/how-to-use-application-insights.md",
-      "redirect_url": "/azure/data-api-builder/how-to/use-application-insights",
+      "redirect_url": "/azure/data-api-builder/concept/monitor/application-insights",
       "redirect_document_id": true
     },
     {
