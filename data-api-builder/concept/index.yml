@@ -27,7 +27,7 @@ landingContent:
       url: api/openapi.md
 - title: Configuration
   linkLists:
-  - linkListType: architecture
+  - linkListType: concept
     links:
     - text: File Environments
       url: environments.md
@@ -35,7 +35,7 @@ landingContent:
       url: multi-data-source.md
 - title: Database
   linkLists:
-  - linkListType: get-started 
+  - linkListType: concept
     links:
     - text: Tables
       url: database/index.md
@@ -45,7 +45,7 @@ landingContent:
       url: database/index.md#stored-procedures
 - title: Monitor
   linkLists:
-  - linkListType: learn
+  - linkListType: concept
     links:
     - text: Application Insights
       url: application-insights.md
@@ -57,7 +57,7 @@ landingContent:
       url: open-telemetry.md
 - title: Security
   linkLists:
-  - linkListType: overview 
+  - linkListType: concept 
     links:
     - text: Overview
       url: index.md
