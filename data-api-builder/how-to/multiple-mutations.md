@@ -17,7 +17,7 @@ Data API builder (DAB) supports combining multiple mutation operations together 
 ## Prerequisites
 
 - Existing SQL server and database.
-- Data API builder CLI. [Install the CLI](how-to-install-cli.md)
+- Data API builder CLI. [Install the CLI](install-cli.md)
 - A database client (SQL Server Management Studio, Azure Data Studio, etc.)
   - If you don't have a client installed, [install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
 
@@ -87,7 +87,7 @@ Now, use the DAB CLI to create a configuration file, entities, and entity relati
     $SQL_CONNECTION_STRING="<your-sql-connection-string>"
     ```
   
-1. Run [`dab init`](reference-command-line-interface.md#init) specifying the following properties.
+1. Run [`dab init`](../reference-command-line-interface.md#init) specifying the following properties.
 
     | | Value |
     | --- | --- |
@@ -100,7 +100,7 @@ Now, use the DAB CLI to create a configuration file, entities, and entity relati
     dab init --database-type "mssql" --graphql.multiple-create.enabled true --host-mode "development" --connection-string $SQL_CONNECTION_STRING
     ```
   
-1. Run [`dab add`](reference-command-line-interface.md#add) to add a **Book** entity specifying the following properties.
+1. Run [`dab add`](../reference-command-line-interface.md#add) to add a **Book** entity specifying the following properties.
 
     | | Value |
     | --- | --- |
@@ -122,7 +122,7 @@ Now, use the DAB CLI to create a configuration file, entities, and entity relati
     dab add Chapter --source "dbo.Chapters" --permissions "anonymous:*"  
     ```
   
-1. Run [`dab update`](reference-command-line-interface.md#update) to create the **Book to Chapter** relationship specifying the following properties.
+1. Run [`dab update`](../reference-command-line-interface.md#update) to create the **Book to Chapter** relationship specifying the following properties.
 
     | | Value |
     | --- | --- |
@@ -300,5 +300,5 @@ To wrap up things, use the DAB CLI to run the API and test the GraphQL endpoint 
 
 ## Related content
 
-- [Relationships](relationships.md)
-- [GraphQL](graphql.md)
+- [Relationships](../concept/database/relationships.md)
+- [GraphQL](../concept/api/graphql.md)

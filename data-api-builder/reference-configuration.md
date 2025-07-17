@@ -109,7 +109,7 @@ Refer to this matrix to better understand which value is used depending on where
 | **Specified in current environment configuration** | Current environment | Current environment |
 | **Not specified in current environment configuration** | Base | None |
 
-For an example of using multiple configuration files, see [use Data API builder with environments](how-to-use-environments.md).
+For an example of using multiple configuration files, see [use Data API builder with environments](how-to/use-environments.md).
 
 ## Configuration properties
 
@@ -1998,7 +1998,7 @@ In this example, cache is enabled globally and all items expire after 15 seconds
 |-|-|-|-|-|
 | `runtime` | `telemetry` | object | ❌ No | None |
 
-This property configures Application Insights to centralize API logs. Learn [more](deployment/how-to-use-application-insights.md).
+This property configures Application Insights to centralize API logs. Learn [more](concept/monitor/application-insights.md).
 
 #### Format
 

@@ -1,26 +1,24 @@
 ---
 title: |
-  Quickstart: Use with MySQL
-description: Get started quickly using the Data API builder with a local Docker-hosted MySQL database.
+  Quickstart: Use with PostgreSQL
+description: Get started quickly using the Data API builder with a local Docker-hosted PostgreSQL database.
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: quickstart
 ms.date: 06/11/2025
-#Customer Intent: As a developer, I want to use the Data API builder with my local MySQL database, so that I can quickly develop my API before deploying it.
+#Customer Intent: As a developer, I want to use the Data API builder with my local PostgreSQL database, so that I can quickly develop my API before deploying it.
 ---
 
-# Quickstart: Use Data API builder with MySQL
+# Quickstart: Use Data API builder with PostgreSQL
 
-In this Quickstart, you build a set of Data API builder configuration files to target a local MySQL database.
+In this Quickstart, you build a set of Data API builder configuration files to target a local PostgreSQL database.
 
 ## Prerequisites
 
 - [Docker](https://www.docker.com/products/docker-desktop/)
 - [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0)
-- A data management client
-  - If you don't have a client installed, [install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
 
 > [!TIP]
 > Alternatively, open this Quickstart in GitHub Codespaces with all developer prerequisites already installed. Simply bring your own Azure subscription. GitHub accounts include an entitlement of storage and core hours at no cost. For more information, see [included storage and core hours for GitHub accounts](https://docs.github.com/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts).
@@ -29,39 +27,39 @@ In this Quickstart, you build a set of Data API builder configuration files to t
 
 ## Install the Data API builder CLI
 
-[!INCLUDE[Install CLI](includes/install-cli.md)]
+[!INCLUDE[Install CLI](../includes/install-cli.md)]
 
 ## Configure the local database
 
 Start by configuring and running the local database. Then, you can seed a new container with sample data.
 
-1. Get the latest copy of the `mysql:8` container image from Docker Hub.
+1. Get the latest copy of the `postgres:16` container image from Docker Hub.
 
     ```shell
-    docker pull mysql:8
+    docker pull postgres:16
     ```
 
-1. Start the docker container by setting the password and publishing port **3306**. Replace `<your-password>` with a custom password.
+1. Start the docker container by setting the password and publishing port **5432**. Replace `<your-password>` with a custom password.
 
     ```shell
     docker run \
-        --publish 3306:3306 \
-        --env "MYSQL_ROOT_PASSWORD=<your-password>" \
+        --publish 5432:5432 \
+        --env "POSTGRES_PASSWORD=<your-password>" \
         --detach \
-        mysql:8
+        postgres:16
     ```
 
-1. Connect to your local database using your preferred data management environment. Examples include, but aren't limited to: [MySQL Workbench](https://www.mysql.com/products/workbench/), [Azure Data Studio](/azure-data-studio), and the [MySQL shell for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=Oracle.mysql-shell-for-vs-code).
+1. Connect to your local database using your preferred data management environment. Examples include, but aren't limited to: [pgAdmin](https://www.pgadmin.org/) and the [PostgreSQL extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-ossdata.vscode-postgresql).
 
     > [!TIP]
-    > If you're using default networking for your Docker Linux container images, the connection string will likely be `Server=localhost;Port=3306;Uid=root;Pwd=<your-password>;`. Replace `<your-password>` with the password you set earlier.
+    > If you're using default networking for your Docker Linux container images, the connection string will likely be `Host=localhost;Port=5432;User ID=postgres;Password=<your-password>;`. Replace `<your-password>` with the password you set earlier.
 
-1. Create a new `bookshelf` database and use the database for your remaining queries.
+1. Create a new `bookshelf` database.
 
     ```sql
-    CREATE DATABASE IF NOT EXISTS bookshelf;
-
-    USE bookshelf;
+    DROP DATABASE IF EXISTS bookshelf;
+    
+    CREATE DATABASE bookshelf;
     ```
 
 1. Create a new `dbo.authors` table and seed the table with basic data.
@@ -95,18 +93,13 @@ Create a baseline configuration file using the DAB CLI. Then, add a development 
 1. Create a typical configuration file using `dab init`. Add the `--connection-string` argument with your database connection string from the first section. Replace `<your-password>` with the password you set earlier in this guide. Also, add the `Database=bookshelf` value to the connection string.
 
     ```dotnetcli
-    dab init --database-type "mysql" --host-mode "Development" --connection-string "Server=localhost;Port=3306;Database=bookshelf;Uid=root;Pwd=<your-password>;"
+    dab init --database-type "postgresql" --host-mode "Development" --connection-string "Host=localhost;Port=5432;Database=bookshelf;User ID=postgres;Password=<your-password>;"
     ```
 
 1. Add an **Author** entity using `dab add`.
 
     ```dotnetcli
-    dab add Author --source "authors" --permissions "anonymous:*"
-    ```
-
-1. Observe your current *dab-config.json* configuration file. The file should include a baseline implementation of your API with a single entity, a REST API endpoint, and a GraphQL endpoint.
-
-    ```json
+    dab add Author --source "public.authors" --permissions "anonymous:*"
     ```
 
 ## Test API with the local database
@@ -144,4 +137,4 @@ Now, start the Data API builder tool to validate that your configuration files a
 ## Next step
 
 > [!div class="nextstepaction"]
-> [REST endpoints](rest.md)
+> [REST endpoints](../concept/api/rest.md)
