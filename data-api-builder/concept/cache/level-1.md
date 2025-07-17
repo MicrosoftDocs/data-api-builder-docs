@@ -1,13 +1,13 @@
 ---
-title: Add more than one data source to enable hybrid endpoints
-description: Add more than one data source to enable hybrid endpoints
+title: Implement internal, level 1 cache
+description: Implement internal, level 1 cache
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: reference
 ms.date: 07/16/2025
-# Customer Intent: As a developer, I want to add multiple data sources, so I can query more than one backend database
+# Customer Intent: As a developer, I want to use level 1 cache to ease queries against my database
 ---
 
-# Add more than one data source
+# Implement level 1 cache
