@@ -33,6 +33,8 @@ landingContent:
       url: config/environments.md
     - text: Multiple Data Sources
       url: config/multi-data-source.md
+    - text: Best Practices
+      url: ../deployment/best-practices-configuration.md
 - title: Database
   linkLists:
   - linkListType: concept
@@ -69,3 +71,17 @@ landingContent:
       url: security/authorization.md
     - text: Authorization
       url: security/row-level-security.md
+    - text: Best Practices
+      url: ../deployment/best-practices-security.md
+- title: Cache
+  linkLists:
+  - linkListType: concept 
+    links:
+    - text: Data API Caching
+      url: cache/index.md
+    - text: Level 1 Cache
+      url: cache/level-1.md
+    - text: Level 2 Cache
+      url: cache/level-2.md
+    - text: Cache HTTP headers
+      url: cache/http-headers.md
