@@ -94,7 +94,7 @@ EXEC sp_set_session_context 'uti', '_sSP3AwBY0SucuqqJyjEAA', @read_only = 1;
 EXEC sp_set_session_context 'ver', '2.0', @read_only = 1;
 ```
 
-You can then implement row-level security (RLS) using the session data. For more information, see [implement row-level security with session context.](how-to-row-level-security.md)
+You can then implement row-level security (RLS) using the session data. For more information, see [implement row-level security with session context.](concept/security/row-level-security.md)
 
 ### Azure Cosmos DB
 

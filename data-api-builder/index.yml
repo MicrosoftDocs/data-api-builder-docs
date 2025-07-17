@@ -36,20 +36,18 @@ landingContent:
     linkLists:
       - linkListType: quickstart
         links:
-          - text: Use Data API builder with SQL
-            url: quickstart-sql.md
-          - text: Use Data API builder with NoSQL
-            url: quickstart-nosql.md
-          - text: Use Data API builder with PostgreSQL
-            url: quickstart-postgresql.md
-          - text: Use Data API builder with MySQL
-            url: quickstart-mysql.md
+          - text: Use DAB with MS SQL
+            url: quickstart/mssql.md
+          - text: Use DAB with Azure SQL
+            url: quickstart/azure-sql.md
+          - text: Use DAB with Cosmos DB
+            url: quickstart/azure-cosmos-db-nosql.md
       - linkListType: quickstart
         links:
-          - text: Use Data API builder with Azure SQL
-            url: quickstart-azure-sql.md
-          - text: Use Data API builder with Azure Cosmos DB for NoSQL
-            url: quickstart-azure-cosmos-db-nosql.md
+          - text: Use DAB with PostgreSQL
+            url: quickstart/postgresql.md
+          - text: Use DAB with MySQL
+            url: quickstart/mysql.md
   - title: Open Source
     linkLists:
       - linkListType: download
@@ -71,13 +69,13 @@ landingContent:
       - linkListType: how-to-guide
         links:
           - text: Install the CLI
-            url: how-to-install-cli.md
-          - text: Run in container
-            url: how-to-run-container.md
+            url: how-to/install-cli.md
+          - text: Run in a container
+            url: how-to/run-container.md
           - text: Run from source code
-            url: how-to-run-from-source.md
+            url: how-to/run-from-source.md
           - text: Implement row-level security in SQL
-            url: how-to-row-level-security.md
+            url: how-to/row-level-security.md
       - linkListType: how-to-guide
         links:
           - text: Deploy to Azure Container Instances

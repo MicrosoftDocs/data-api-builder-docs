@@ -90,7 +90,7 @@ Now, browse to each containerized application in Azure Container Apps to validat
 
 1. Observe the running web application and review the output data.
 
-    :::image type="content" source="media/quickstart-azure-sql/running-application.png" alt-text="Screenshot of the running web application on Azure Container Apps.":::
+    :::image type="content" source="media/azure-sql/running-application.png" alt-text="Screenshot of the running web application on Azure Container Apps.":::
 
 ## Clean up
 
@@ -107,4 +107,4 @@ When you no longer need the sample application or resources, remove the correspo
 ## Next step
 
 > [!div class="nextstepaction"]
-> [REST endpoints](rest.md)
+> [REST endpoints](../concept/api/rest.md)
