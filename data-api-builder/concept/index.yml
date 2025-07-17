@@ -1,0 +1,69 @@
+### YamlMime:Landing
+
+title: Data API Concepts
+summary: Data API concepts important to Data API builder (DAB)
+metadata:
+  title: Data API Concepts
+  description: Data API concepts important to Data API builder (DAB)
+  author: jerrynixon
+  ms.author: jnixon
+  ms.reviewer: sidandrews
+  ms.service: data-api-builder
+  ms.topic: landing-page
+  ms.date: 07/16/2025
+
+# linkListType: architecture | concept | deploy | download | get-started | how-to-guide | learn | overview | quickstart | reference | sample | tutorial | video | whats-new
+
+landingContent:
+- title: API
+  linkLists:
+  - linkListType: architecture 
+    links:
+    - text: GraphQL
+      url: api/graphql.md
+    - text: REST
+      url: api/rest.md
+    - text: OpenAPI
+      url: api/openapi.md
+- title: Configuration
+  linkLists:
+  - linkListType: architecture
+    links:
+    - text: File Environments
+      url: environments.md
+    - text: Multiple Data Sources
+      url: multi-data-source.md
+- title: Database
+  linkLists:
+  - linkListType: architecture
+    links:
+    - text: Tables
+      url: database/index.md
+    - text: Views
+      url: database/index.md#views
+    - text: Stored Procedures
+      url: database/index.md#stored-procedures
+- title: Monitor
+  linkLists:
+  - linkListType: architecture
+    links:
+    - text: Application Insights
+      url: application-insights.md
+    - text: Health Checks
+      url: health-checks.md
+    - text: Log Levels
+      url: log-levels.md
+    - text: Open Telemetry
+      url: open-telemetry.md
+- title: Security
+  linkLists:
+  - linkListType: architecture
+    links:
+    - text: Overview
+      url: index.md
+    - text: Azure Authentication
+      url: authentication-azure.md
+    - text: Local Authentication
+      url: authentication-local.md
+    - text: Authorization
+      url: authorization.md

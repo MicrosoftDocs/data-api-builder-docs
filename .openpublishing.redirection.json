@@ -297,7 +297,7 @@
     },
 
     {
-      "source_path_from_root": "/data-api-builder/application-insights.md",
+      "source_path_from_root": "/data-api-builder/use-application-insights.md",
       "redirect_url": "/azure/data-api-builder/concept/monitor/application-insights",
       "redirect_document_id": false
     },
