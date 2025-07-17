@@ -416,7 +416,7 @@
       "redirect_document_id": false
     },
     {
-      "source_path_from_root": "/data-api-builder/quickstart-mssql.md",
+      "source_path_from_root": "/data-api-builder/quickstart-sql.md",
       "redirect_url": "/azure/data-api-builder/quickstart/mssql",
       "redirect_document_id": false
     },
