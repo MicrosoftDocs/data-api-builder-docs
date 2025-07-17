@@ -302,12 +302,12 @@
       "redirect_document_id": false
     },
     {
-      "source_path_from_root": "/data-api-builder/how-to-application-insights.md",
+      "source_path_from_root": "/data-api-builder/how-to-use-application-insights.md",
       "redirect_url": "/azure/data-api-builder/concept/monitor/application-insights",
       "redirect_document_id": false
     },
     {
-      "source_path_from_root": "/data-api-builder/deployment/how-to-application-insights.md",
+      "source_path_from_root": "/data-api-builder/deployment/how-to-use-application-insights.md",
       "redirect_url": "/azure/data-api-builder/concept/monitor/application-insights",
       "redirect_document_id": true
     },
@@ -458,5 +458,5 @@
       "redirect_url": "/azure/data-api-builder/quickstart/postgresql",
       "redirect_document_id": false
     }
-  ]
+ ]
 }
