@@ -263,11 +263,11 @@
   items:
     - name: REST
       displayName: HTTP, etag, header, put, patch, get, post, delete, select, filter, orderby, first, after
-      href: concept/rest.md
+      href: concept/api/rest.md
     - name: OpenAPI
-      href: concept/openapi.md
+      href: concept/api/openapi.md
     - name: GraphQL
-      href: concept/graphql.md
+      href: concept/api/graphql.md
     - name: Environments
       items:
         - name: Configuring environments
@@ -281,23 +281,23 @@
     - name: Database objects
       items:
         - name: Views
-          href: concept/database-objects.md#views
+          href: concept/database/index.md#views
         - name: Stored Procedures
           displayName: procs
-          href: concept/database-objects.md#stored-procedures
+          href: concept/database/index.md#stored-procedures
     - name: Relationships
-      href: concept/relationships.md
+      href: concept/database/relationships.md
     - name: Security
       items:
         - name: Security overview
-          href: concept/security.md
+          href: concept/security/index.md
         - name: Azure authentication
           displayName: AAD, AD, Azure Active Directory, Microsoft Entra Identity, Entra ID
-          href: authentication-azure.md
+          href: concept/security/authentication-azure.md
         - name: Local authentication
-          href: authentication-local.md
+          href: concept/security/authentication-local.md
         - name: Authorization
-          href: authorization.md
+          href: concept/security/authorization.md
     - name: Code policies
       displayName: Versioning, Change, Breaking
       href: reference-policies.md

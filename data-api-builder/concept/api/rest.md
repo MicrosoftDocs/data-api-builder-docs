@@ -54,11 +54,11 @@ Data API builder uses the HTTP method on your request to determine what action t
 
 ### Rest path
 
-The rest path designates the location of Data API builder's REST API. The path is configurable in the runtime configuration and defaults to */api*. For more information, see [REST path configuration](../reference-configuration.md#path-rest-entity).
+The rest path designates the location of Data API builder's REST API. The path is configurable in the runtime configuration and defaults to */api*. For more information, see [REST path configuration](../../reference-configuration.md#path-rest-entity).
 
 ### Entity
 
-*Entity* is the terminology used to reference a REST API resource in  Data API builder. By default, the URL route value for an entity is the entity name defined in the runtime configuration. An entity's REST URL path value is configurable within the entity's REST settings. For more information, see [entity configuration](../reference-configuration.md#rest-entities).
+*Entity* is the terminology used to reference a REST API resource in  Data API builder. By default, the URL route value for an entity is the entity name defined in the runtime configuration. An entity's REST URL path value is configurable within the entity's REST settings. For more information, see [entity configuration](../../reference-configuration.md#rest-entities).
 
 ### Result set format
 
@@ -589,9 +589,9 @@ If successful, the result is an empty response with status code 204.
 
 To process POST, PUT, PATCH, and DELETE API requests; Data API builder constructs and executes the database queries in a transaction.
 
-[!INCLUDE[Database isolation levels](../includes/database-isolation-levels.md)]
+[!INCLUDE[Database isolation levels](../../includes/database-isolation-levels.md)]
 
 ## Related content
 
 - [OpenAPI](openapi.md)
-- [REST configuration reference](../reference-configuration.md#rest-entities)
+- [REST configuration reference](../../reference-configuration.md#rest-entities)
