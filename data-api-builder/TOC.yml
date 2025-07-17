@@ -271,13 +271,13 @@
     - name: Environments
       items:
         - name: Configuring environments
-          href: concept/environments.md
+          href: concept/config/environments.md
         - name: Setting environment variables
           displayName: $env, @env, vars, .env, env
-          href: concept/environments.md#setting-environment-variables
+          href: concept/config/environments.md#setting-environment-variables
         - name: Accessing environment variables
           displayName: Environment variables, $env, @env, vars, env
-          href: concept/environments.md#accessing-environment-variables
+          href: concept/config/environments.md#accessing-environment-variables
     - name: Database objects
       items:
         - name: Views

@@ -30,9 +30,9 @@ landingContent:
   - linkListType: concept
     links:
     - text: File Environments
-      url: environments.md
+      url: config/environments.md
     - text: Multiple Data Sources
-      url: multi-data-source.md
+      url: config/multi-data-source.md
 - title: Database
   linkLists:
   - linkListType: concept

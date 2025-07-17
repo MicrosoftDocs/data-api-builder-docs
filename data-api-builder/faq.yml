@@ -56,5 +56,5 @@ sections:
         answer: |
           Row-level security functions similarly to single operations in GraphQL. For multiple create mutation requests, the "create" policy for every entity is considered when creating the item in the backing database table. Similarly, every read policy is considered for the selection set of a multiple mutation operation.
 
-          For more information on row-level security, see [implement row-level security in SQL](how-to/row-level-security.md).
+          For more information on row-level security, see [implement row-level security in SQL](concept/security/row-level-security.md).
 

@@ -182,7 +182,12 @@
     },
     {
       "source_path_from_root": "/data-api-builder/azure-sql-session-context-rls.md",
-      "redirect_url": "/azure/data-api-builder/how-to/row-level-security",
+      "redirect_url": "/azure/data-api-builder/concept/security/row-level-security",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to/row-level-security.md",
+      "redirect_url": "/azure/data-api-builder/concept/security/row-level-security",
       "redirect_document_id": false
     },
     {
@@ -386,7 +391,7 @@
 
     {
       "source_path_from_root": "/data-api-builder/environments.md",
-      "redirect_url": "/azure/data-api-builder/concept/environments",
+      "redirect_url": "/azure/data-api-builder/concept/config/environments",
       "redirect_document_id": true
     },
 
