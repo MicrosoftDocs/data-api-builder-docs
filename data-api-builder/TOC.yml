@@ -247,7 +247,7 @@
       href: how-to/run-from-source.md
     - name: Implement row-level security in SQL
       displayName: RLS, claims, predicate, item
-      href: how-to/row-level-security.md
+      href: concept/security/row-level-security.md
     - name: Use environments
       displayName: development
       href: how-to/use-environments.md

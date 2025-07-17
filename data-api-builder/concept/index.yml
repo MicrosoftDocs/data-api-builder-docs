@@ -48,22 +48,24 @@ landingContent:
   - linkListType: concept
     links:
     - text: Application Insights
-      url: application-insights.md
+      url: monitor/application-insights.md
     - text: Health Checks
-      url: health-checks.md
+      url: monitor/health-checks.md
     - text: Log Levels
-      url: log-levels.md
+      url: monitor/log-levels.md
     - text: Open Telemetry
-      url: open-telemetry.md
+      url: monitor/open-telemetry.md
 - title: Security
   linkLists:
   - linkListType: concept 
     links:
     - text: Overview
-      url: index.md
+      url: security/index.md
     - text: Azure Authentication
-      url: authentication-azure.md
+      url: security/authentication-azure.md
     - text: Local Authentication
-      url: authentication-local.md
+      url: security/authentication-local.md
     - text: Authorization
-      url: authorization.md
+      url: security/authorization.md
+    - text: Authorization
+      url: security/row-level-security.md
