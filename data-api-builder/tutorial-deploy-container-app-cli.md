@@ -403,4 +403,4 @@ az group delete \
 ## Next step
 
 > [!div class="nextstepaction"]
-> [Use Application Insights with Data API builder](concept/monitor/use-application-insights.md)
+> [Use Application Insights with Data API builder](concept/monitor/application-insights.md)

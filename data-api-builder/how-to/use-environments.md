@@ -226,5 +226,5 @@ Finally, add a development configuration file with the delta between your curren
 
 ## Related content
 
-- [How-to: Add application insights](use-application-insights.md)
+- [How-to: Add application insights](application-insights.md)
 - [How-to: Run from a container](run-container.md)
