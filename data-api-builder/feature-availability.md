@@ -11,7 +11,7 @@ ms.date: 06/11/2025
 
 # Feature availability for Data API builder
 
-These tables list the features available in Data API builder (DAB) for Azure databases. These tables include features across multiple databases and API platforms.
+These tables list the features available in Data API builder (DAB). 
 
 ## Database version
 
@@ -40,13 +40,13 @@ These tables list the features available in Data API builder (DAB) for Azure dat
 | Advanced Having | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Aggregations | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Schema Generation | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
-| Schema Attribute Placement (`@model`, `@authorize`) | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
+| Schema Attribute Placement (`@model`, `@authorize`) | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | User Provided Schema | ✖️ No | ✖️ No | ✅ Yes | ✖️ No | ✖️ No | ✖️ No |
 | Subscription | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Nitro/Banana Cake Pop UI | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No |
-| In-Memory Cache | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
 | Cache Headers | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
-| Level 2 Cache: Redis | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
+| Level 1 Cache: Memory | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
+| Level 2 Cache: Redis | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 
 ## GraphQL Relationship Navigation
 
@@ -77,10 +77,10 @@ These tables list the features available in Data API builder (DAB) for Azure dat
 | $After (Cursor paging) | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✖️ No | ✖️ No |
 | OpenAPI Document | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
 | Swagger UI | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
-| In-Memory Cache | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
 | Cache Headers | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
-| Level 2 Cache: Redis | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
-| Not/Strict POCO Payload | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
+| Level 1 Cache: Memory | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
+| Level 2 Cache: Redis | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
+| POCO-ready Payload | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✖️ No |
 | OpenAPIReference | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 
 > `*` Data API builder does not generate a REST API for Azure Cosmos DB for NoSQL as the API for NoSQL provides a native REST API. More information can be found here: [Azure Cosmos DB: REST API Reference](/rest/api/cosmos-db/).
@@ -92,7 +92,7 @@ These tables list the features available in Data API builder (DAB) for Azure dat
 | Tables | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✅ Yes |
 | Views | ✅ Yes | ✅ Yes | ✖️ No | ✅ Yes | ✖️ No | ✖️ No |
 | Stored Procedures | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| SP Parameters | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
+| Proc Parameters | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Functions | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Collections | ✖️ No | ✖️ No | ✅ Yes | ✖️ No | ✖️ No | ✖️ No |
 | Field Mapping | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
@@ -120,10 +120,6 @@ These tables list the features available in Data API builder (DAB) for Azure dat
 | Single-Table Policies | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Multi-Table Policies | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Request Policy | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| Create via PUT | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| Create via PATCH | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| Update via PUT | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| Update via PATCH | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 
 ## Authentication Features
 
@@ -139,14 +135,14 @@ These tables list the features available in Data API builder (DAB) for Azure dat
 
 | Feature | SQL Server | Azure SQL | Azure Cosmos DB<br/>for NoSQL | PostgreSQL | MySQL | SQLDW |
 | --- | --- | --- | --- | --- | --- | --- |
-| Native JSON Support | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No |
+| Native JSON Support | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Native XML Support | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Native Vector Support | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| application_name | ✅ Yes | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No |
 | Application Insights | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| Log Analytics | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Session Context | ✅ Yes | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Multiple Data Sources | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
-| Cross-data source join | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
+| Cross-source join | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Open Telemetry | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | Health Endpoints | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | Custom Log Levels | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |

@@ -218,42 +218,42 @@
     - name: Local
       items:
         - name: SQL
-          href: quickstart-sql.md
+          href: quickstart/mssql.md
         - name: NoSQL
           displayName: Cosmos
-          href: quickstart-nosql.md
+          href: quickstart/nosql.md
         - name: PostgreSQL
-          href: quickstart-postgresql.md
+          href: quickstart/postgresql.md
         - name: MySQL
-          href: quickstart-mysql.md
+          href: quickstart/mysql.md
     - name: Azure
       items:
         - name: Azure SQL
           displayName: database, server
-          href: quickstart-azure-sql.md
+          href: quickstart/azure-sql.md
         - name: Azure Cosmos DB for NoSQL
-          href: quickstart-azure-cosmos-db-nosql.md
+          href: quickstart/azure-cosmos-db-nosql.md
 - name: Deploy
   href: deployment/toc.yml
 - name: How to
   items:
     - name: Install the CLI
       displayName: DAB, command-line, interface
-      href: how-to-install-cli.md
+      href: how-to/install-cli.md
     - name: Run in a container
-      href: how-to-run-container.md
+      href: how-to/run-container.md
     - name: Run from source code
       displayName: Git, GitHub, oss, repository, contribute
-      href: how-to-run-from-source.md
+      href: how-to/run-from-source.md
     - name: Implement row-level security in SQL
       displayName: RLS, claims, predicate, item
-      href: how-to-row-level-security.md
+      href: concept/security/row-level-security.md
     - name: Use environments
       displayName: development
-      href: how-to-use-environments.md
+      href: how-to/use-environments.md
     - name: Batch multiple mutations
       displayName: multiple create, transaction
-      href: how-to-multiple-mutations.md
+      href: how-to/multiple-mutations.md
 - name: Tutorials
   items:
     - name: Deploy to Azure Container Apps using Azure CLI
@@ -263,41 +263,41 @@
   items:
     - name: REST
       displayName: HTTP, etag, header, put, patch, get, post, delete, select, filter, orderby, first, after
-      href: rest.md
+      href: concept/api/rest.md
     - name: OpenAPI
-      href: openapi.md
+      href: concept/api/openapi.md
     - name: GraphQL
-      href: graphql.md
+      href: concept/api/graphql.md
     - name: Environments
       items:
         - name: Configuring environments
-          href: environments.md
+          href: concept/config/environments.md
         - name: Setting environment variables
           displayName: $env, @env, vars, .env, env
-          href: environments.md#setting-environment-variables
+          href: concept/config/environments.md#setting-environment-variables
         - name: Accessing environment variables
           displayName: Environment variables, $env, @env, vars, env
-          href: environments.md#accessing-environment-variables
+          href: concept/config/environments.md#accessing-environment-variables
     - name: Database objects
       items:
         - name: Views
-          href: database-objects.md#views
+          href: concept/database/index.md#views
         - name: Stored Procedures
           displayName: procs
-          href: database-objects.md#stored-procedures
+          href: concept/database/index.md#stored-procedures
     - name: Relationships
-      href: relationships.md
+      href: concept/database/relationships.md
     - name: Security
       items:
         - name: Security overview
-          href: security.md
+          href: concept/security/index.md
         - name: Azure authentication
           displayName: AAD, AD, Azure Active Directory, Microsoft Entra Identity, Entra ID
-          href: authentication-azure.md
+          href: concept/security/authentication-azure.md
         - name: Local authentication
-          href: authentication-local.md
+          href: concept/security/authentication-local.md
         - name: Authorization
-          href: authorization.md
+          href: concept/security/authorization.md
     - name: Code policies
       displayName: Versioning, Change, Breaking
       href: reference-policies.md

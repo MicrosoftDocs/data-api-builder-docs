@@ -10,8 +10,6 @@
   href: how-to-publish-container-instances.md
 - name: Publish to Azure Static Web Apps (preview)
   href: how-to-host-static-web-apps.md
-- name: Monitor with Application Insights
-  href: how-to-use-application-insights.md
 - name: Configuration best practices
   href: best-practices-configuration.md
 - name: Security best practices

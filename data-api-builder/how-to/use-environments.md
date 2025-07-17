@@ -17,15 +17,13 @@ This guide walks through the steps to target a development environment using a c
 ## Prerequisites
 
 - Existing SQL database.
-- A data management client
-  - If you don't have a client installed, [install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
-- Data API builder CLI. [Install the CLI](how-to-install-cli.md)
+- Data API builder CLI. [Install the CLI](install-cli.md)
 
 ## Create SQL table and data
 
 Create a table with fictitious data to use in this example scenario.
 
-1. Connect to the SQL server and database using your preferred client or tool. Examples include, but aren't limited to: [SQL Server Management Studio](/sql/ssms), [Azure Data Studio](/azure-data-studio), and the [SQL Server extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql).
+1. Connect to the SQL server and database using your preferred client or tool. Examples include, but aren't limited to: [SQL Server Management Studio](/sql/ssms) and the [SQL Server extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql).
 
 1. Create a table named `Books` with `id` and `name` columns.
 
@@ -160,7 +158,7 @@ Now, add an environment file to store environment variables for DAB.
 
 Finally, add a development configuration file with the delta between your current configuration and desired environment configuration.
 
-1. Create a `dab-config.Development.json` file. Add the following content to use the `@env()` function to set your [`connection-string`](reference-configuration.md#connection-string) value in the development environment.
+1. Create a `dab-config.Development.json` file. Add the following content to use the `@env()` function to set your [`connection-string`](../reference-configuration.md#connection-string) value in the development environment.
 
     ```json
     {
@@ -228,5 +226,5 @@ Finally, add a development configuration file with the delta between your curren
 
 ## Related content
 
-- [How-to: Add application insights](deployment/how-to-use-application-insights.md)
-- [How-to: Run from a container](how-to-run-container.md)
+- [How-to: Add application insights](../concept/monitor/application-insights.md)
+- [How-to: Run from a container](run-container.md)

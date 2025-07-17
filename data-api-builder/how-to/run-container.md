@@ -17,8 +17,6 @@ Data API builder (DAB) is published as a container image to the Microsoft Contai
 ## Prerequisites
 
 - [Docker](https://www.docker.com/products/docker-desktop/)
-- A database client (SQL Server Management Studio, Azure Data Studio, etc.)
-  - If you don't have a client installed, [install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
 
 ## Create sample data
 
@@ -193,6 +191,6 @@ Run DAB using the Docker container image hosted on Microsoft Container Registry.
 
 ## Related content
 
-- [Run from source](how-to-run-from-source.md)
-- [Install the CLI](how-to-install-cli.md)
+- [Run from source](run-from-source.md)
+- [Install the CLI](install-cli.md)
 - [`mcr.microsoft.com/azure-databases/data-api-builder` on Microsoft Artifact Registry](https://mcr.microsoft.com/artifact/mar/azure-databases/data-api-builder)

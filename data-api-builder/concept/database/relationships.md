@@ -95,7 +95,7 @@ The `cardinality` property tells Data API builder that there can be many books i
 
 That property is all you need. At startup, Data API builder automatically detects the database fields that need to be used to sustain the defined relationship.
 
-If you don't have a Foreign Key constraint sustaining the database relationship, Data API builder can't figure out automatically what fields are used. To tell Data API builder what fields relate the two entities, you must specify them manually. You can specify them with the CLI using [`dab update`](reference-command-line-interface.md#update):
+If you don't have a Foreign Key constraint sustaining the database relationship, Data API builder can't figure out automatically what fields are used. To tell Data API builder what fields relate the two entities, you must specify them manually. You can specify them with the CLI using [`dab update`](../../reference-command-line-interface.md#update):
 
 ```bash
 dab update Series --relationship books --target.entity Book --cardinality many  --relationship.fields "id:series_id"
@@ -188,7 +188,7 @@ One business requirement that is likely to be there's to keep track of how royal
 
 The three entities can be visualized through the following diagram.
 
-![Diagram showing many-to-many relationship between authors, books_authors and books.](media/relationship-many-to-many-01.png)
+![Diagram showing many-to-many relationship between authors, books_authors and books.](../../media/relationship-many-to-many-01.png)
 
 As visible, there are two bi-directional relationships:
 
@@ -243,7 +243,7 @@ Where you're asking to return all the authors, the book they wrote along with th
 
 The process described in the previous section works great if all the entities involved in the Many-to-Many relationships need to be accessed via GraphQL. This scenario isn't always the case. For example, if you don't need to keep track of royalties, the `BookAuthor` entity doesn't really bring any value to the end user. The entity was only used to associated books to their authors. In relational databases Many-to-Many relationships are created using such third table that *links* the tables participating in the Many-to-Many relationship together:
 
-![Diagram showing another many-to-many relationship between authors, books_authors and books.](media/relationship-many-to-many-02.png)
+![Diagram showing another many-to-many relationship between authors, books_authors and books.](../../media/relationship-many-to-many-02.png)
 
 In the diagram, you can see that there's a table named `books_authors` that is linking authors with their books and books with their authors. This linking table doesn't need to be exposed to the end user. The linking table is just an artifact to allow the Many-to-Many relationship to exist, but Data API builder needs to know its existence in order to properly use it.
 
@@ -317,5 +317,5 @@ Which defines a Many-to-Many relationship between the `Author` entity and the `B
 
 ## Related content
 
-- [GraphQL](graphql.md)
-- [GraphQL - configuration schema](reference-configuration.md#graphql-entities)
+- [GraphQL](../api/graphql.md)
+- [GraphQL - configuration schema](../../reference-configuration.md#graphql-entities)

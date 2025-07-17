@@ -17,9 +17,7 @@ Use the **session context** feature of SQL to implement row-level security in Da
 ## Prerequisites
 
 - Existing SQL server and database.
-- Data API builder CLI. [Install the CLI](how-to-install-cli.md)
-- A database client (SQL Server Management Studio, Azure Data Studio, etc.)
-  - If you don't have a client installed, [install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
+- Data API builder CLI. [Install the CLI](../../how-to/install-cli.md)
 
 ## Create SQL table and data
 
@@ -125,5 +123,5 @@ Test the filter and predicate in SQL directly to ensure it's working.
 
 ## Related content
 
-- [Database-specific features](reference-database-specific-features.md)
-- [How-to: Use environments](how-to-use-environments.md)
+- [Database-specific features](../../reference-database-specific-features.md)
+- [How-to: Use environments](../../how-to/use-environments.md)

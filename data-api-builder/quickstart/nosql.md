@@ -19,8 +19,6 @@ In this Quickstart, you build a set of Data API builder configuration files to t
 
 - [Docker](https://www.docker.com/products/docker-desktop/)
 - [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0)
-- A data management client
-  - If you don't have a client installed, [install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
 
 > [!TIP]
 > Alternatively, open this Quickstart in GitHub Codespaces with all developer prerequisites already installed. Simply bring your own Azure subscription. GitHub accounts include an entitlement of storage and core hours at no cost. For more information, see [included storage and core hours for GitHub accounts](https://docs.github.com/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts).
@@ -29,7 +27,7 @@ In this Quickstart, you build a set of Data API builder configuration files to t
 
 ## Install the Data API builder CLI
 
-[!INCLUDE[Install CLI](includes/install-cli.md)]
+[!INCLUDE[Install CLI](../includes/install-cli.md)]
 
 ## Configure the local database
 
@@ -68,7 +66,7 @@ Start by running the local emulator. Then, you can seed a new container with sam
     certutil -f -addstore "Root" emulatorcert.crt
     ```
 
-1. Connect to your local database using your preferred data management environment. Examples include, but aren't limited to: [Azure Data Studio](/azure-data-studio), and the [Azure Databases extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-cosmosdb).
+1. Connect to your local database using your preferred data management environment. Examples include, but aren't limited to: the [Azure Databases extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-cosmosdb).
 
     > [!TIP]
     > The default connection string for the emulator is `AccountEndpoint=https://localhost:8081;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==;`.
@@ -205,4 +203,4 @@ Now, start the Data API builder tool to validate that your configuration files a
 ## Next step
 
 > [!div class="nextstepaction"]
-> [Quickstart: Deploy Data API builder to Azure](quickstart-azure-cosmos-db-nosql.md)
+> [Quickstart: Deploy Data API builder to Azure](azure-cosmos-db-nosql.md)
