@@ -450,8 +450,9 @@ Global CORS configuration.
   }
 }
 ```
-> [!IMPORTANT]
-> The `origins` property doesn't support the wildcard `*`.
+
+> [!NOTE]
+> The wildcard `*` is valid as a value for `origins`.
 
 ## Provider (Authentication host runtime)
 

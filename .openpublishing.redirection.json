@@ -467,6 +467,11 @@
       "source_path_from_root": "/data-api-builder/quickstart-postgresql.md",
       "redirect_url": "/azure/data-api-builder/quickstart/postgresql",
       "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/sample-configuration.md",
+      "redirect_url": "/azure/data-api-builder/configuration/index.md",
+      "redirect_document_id": true
     }
  ]
 }
