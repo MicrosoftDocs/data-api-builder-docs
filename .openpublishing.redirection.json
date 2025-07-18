@@ -23,7 +23,7 @@
     {
       "source_path_from_root": "/data-api-builder/reference-configuration.md",
       "redirect_url": "/azure/data-api-builder/configuration/index.md",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/whats-new.md",
