@@ -227,46 +227,48 @@ The `dab configure` command is designed to simplify updating `data-source` and `
 dab configure [options] [value]
 ```
 
-### Data source options
+### Data Source options
 
 | Section | Data Source Configuration  | Type  |
 | - | - | - |
-| Core  | [--data-source.database-type](./configuration/data-source.md#data-source-1)  | enumeration  |
-| Core  | [--data-source.connection-string](./configuration/data-source.md#data-source-1)  | string  |
-| Options | [--data-source.options.database](./configuration/data-source.md#data-source-1)  | string  |
-| Options | [--data-source.options.container](./configuration/data-source.md#data-source-1)  | string  |
-| Options | [--data-source.options.schema](./configuration/data-source.md#data-source-1)  | string  |
-| Options | [--data-source.options.set-session-context](./configuration/data-source.md#data-source-1) | boolean (`true`, `false`) |
+| Core  | [`--data-source.database-type`](./configuration/data-source.md#data-source-1)  | enumeration  |
+| Core  | [`--data-source.connection-string`](./configuration/data-source.md#data-source-1)  | string  |
+| Options | [`--data-source.options.database`](./configuration/data-source.md#data-source-1)  | string  |
+| Options | [`--data-source.options.container`](./configuration/data-source.md#data-source-1)  | string  |
+| Options | [`--data-source.options.schema`](./configuration/data-source.md#data-source-1)  | string  |
+| Options | [`--data-source.options.set-session-context`](./configuration/data-source.md#data-source-1) | boolean (`true`, `false`) |
 
 #### Example
 ```sh
 dab configure --data-source.database-type mssql
+dab configure --data-source.database-type "mssql"
 ```
 
 ### Runtime options
 
 | Section | Runtime Configuration  | Type  |
 | - | - | - |
-| REST  | [--runtime.rest.enabled](./configuration/runtime.md#restenabled)  | boolean (`true`, `false`) |
-| REST  | [--runtime.rest.path](./configuration/runtime.md#restpath)  | string  |
-| REST  | [--runtime.rest.request-body-strict](./configuration/runtime.md#restrequest-body-strict)  | boolean (`true`, `false`) |
-| GraphQL | [--runtime.graphql.enabled](./configuration/runtime.md#graphqlenabled)  | boolean (`true`, `false`) |
-| GraphQL | [--runtime.graphql.path](./configuration/runtime.md#graphqlpath)  | string  |
-| GraphQL | [--runtime.graphql.depth-limit](./configuration/runtime.md#graphqldepth-limit)  | integer  |
-| GraphQL | [--runtime.graphql.allow-introspection](./configuration/runtime.md#graphqlallow-introspection)  | boolean (`true`, `false`) |
-| GraphQL | [--runtime.graphql.multiple-mutations.create.enabled](./configuration/runtime.md#graphqlmultiple-mutationscreateenabled) | boolean (`true`, `false`) |
-| Host  | [--runtime.host.mode](./configuration/runtime.md#hostmode)  | enumeration  |
-| Host  | [--runtime.host.cors.origins](./configuration/runtime.md#hostcorsorigins)  | array of strings  |
-| Host  | [--runtime.host.cors.allow-credentials](./configuration/runtime.md#hostcorsallow-credentials)  | boolean (`true`, `false`) |
-| Host  | [--runtime.host.authentication.provider](./configuration/runtime.md#hostauthenticationprovider)  | enumeration  |
-| Host  | [--runtime.host.authentication.jwt.audience](./configuration/runtime.md#hostauthenticationjwtaudience)  | array of strings  |
-| Host  | [--runtime.host.authentication.jwt.issuer](./configuration/runtime.md#hostauthenticationjwtissuer)  | string  |
-| Cache  | [--runtime.cache.enabled](./configuration/runtime.md#cacheenabled)  | boolean (`true`, `false`) |
-| Cache  | [--runtime.cache.ttl-seconds](./configuration/runtime.md#cachettl-seconds)  | integer  |
+| REST  | [`--runtime.rest.enabled`](./configuration/runtime.md#restenabled)  | boolean (`true`, `false`) |
+| REST  | [`--runtime.rest.path`](./configuration/runtime.md#restpath)  | string  |
+| REST  | [`--runtime.rest.request-body-strict`](./configuration/runtime.md#restrequest-body-strict)  | boolean (`true`, `false`) |
+| GraphQL | [`--runtime.graphql.enabled`](./configuration/runtime.md#graphqlenabled)  | boolean (`true`, `false`) |
+| GraphQL | [`--runtime.graphql.path`](./configuration/runtime.md#graphqlpath)  | string  |
+| GraphQL | [`--runtime.graphql.depth-limit`](./configuration/runtime.md#graphqldepth-limit)  | integer  |
+| GraphQL | [`--runtime.graphql.allow-introspection`](./configuration/runtime.md#graphqlallow-introspection)  | boolean (`true`, `false`) |
+| GraphQL | [`--runtime.graphql.multiple-mutations.create.enabled`](./configuration/runtime.md#graphqlmultiple-mutationscreateenabled) | boolean (`true`, `false`) |
+| Host  | [`--runtime.host.mode`](./configuration/runtime.md#hostmode)  | enumeration  |
+| Host  | [`--runtime.host.cors.origins`](./configuration/runtime.md#hostcorsorigins)  | array of strings  |
+| Host  | [`--runtime.host.cors.allow-credentials`](./configuration/runtime.md#hostcorsallow-credentials)  | boolean (`true`, `false`) |
+| Host  | [`--runtime.host.authentication.provider`](./configuration/runtime.md#hostauthenticationprovider)  | enumeration  |
+| Host  | [`--runtime.host.authentication.jwt.audience`](./configuration/runtime.md#hostauthenticationjwtaudience)  | array of strings  |
+| Host  | [`--runtime.host.authentication.jwt.issuer`](./configuration/runtime.md#hostauthenticationjwtissuer)  | string  |
+| Cache  | [`--runtime.cache.enabled`](./configuration/runtime.md#cacheenabled)  | boolean (`true`, `false`) |
+| Cache  | [`--runtime.cache.ttl-seconds`](./configuration/runtime.md#cachettl-seconds)  | integer  |
 
 #### Example 
 ```sh
 dab configure --runtime.rest.enabled true
+dab configure --runtime.rest.enabled "true"
 ```
 
 
