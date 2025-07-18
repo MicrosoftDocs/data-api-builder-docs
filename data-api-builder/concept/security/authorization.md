@@ -12,7 +12,7 @@ ms.date: 06/11/2025
 
 # Authorization and roles in Data API builder
 
-Data API builder uses a role-based authorization workflow. Any incoming request, authenticated or not, is assigned to a role. [Roles](#roles) can be [System Roles](#system-roles) or [User Roles](#user-roles). The assigned role is then checked against the defined [permissions](#permissions) specified in the [configuration file](../../reference-configuration.md) to understand what actions, fields, and policies are available for that role on the requested entity.
+Data API builder uses a role-based authorization workflow. Any incoming request, authenticated or not, is assigned to a role. [Roles](#roles) can be [System Roles](#system-roles) or [User Roles](#user-roles). The assigned role is then checked against the defined [permissions](#permissions) specified in the [configuration file](../../configuration/index.md) to understand what actions, fields, and policies are available for that role on the requested entity.
 
 ## Roles
 
@@ -136,7 +136,7 @@ Permissions describe:
 - Which fields are accessible for a particular action?
 - Which extra restrictions exist on the results returned by a request?
 
-The syntax for defining permissions is described in the [runtime configuration article](../../reference-configuration.md#permissions).
+The syntax for defining permissions is described in the [configuration article](../../configuration/entities.md#permissions).
 
 > [!IMPORTANT]
 > There may be multiple roles defined within a single entity's permissions configuration. However, a request is only evaluated in the context of a single role:
@@ -201,7 +201,7 @@ However, for GraphQL mutations and filters in GraphQL queries, access control st
 - Tables and Views: `create`, `read`, `update`, `delete`
 - Stored Procedures: `execute`
 
-For more information about actions, see the [configuration file](../../reference-configuration.md#action) documentation.
+For more information about actions, see the [configuration file](../../configuration/entities.md#actions-string-array-permissions-entity-name-entities) documentation.
 
 #### Field access
 
@@ -252,7 +252,7 @@ The following example prevents users in the `free-access` role from performing r
 > [!NOTE]
 > Database policies are not currently supported by CosmosDB for NoSQL.
 
-For more information about database policies, see the [configuration file](../../reference-configuration.md#policy) documentation.
+For more information about database policies, see the [configuration file](../../configuration/entities.md#policy-notes) documentation.
 
 ##### Example
 

@@ -36,7 +36,7 @@ This article provides guidance on how to best secure your Data API builder solut
 ## Configuration security
 
 - **Restrict anonymous access**: Only allow anonymous access to entities when necessary. Otherwise, require authentication for all endpoints to reduce the risk of unauthorized data exposure. For more information, see [anonymous system role](./authorization.md#anonymous-system-role).
-- **Limit permissions to the minimum required**: Grant users and roles only the permissions they need to perform their tasks. Avoid using wildcard permissions unless necessary. For more information, see [permissions](../../reference-configuration.md#permissions).
+- **Limit permissions to the minimum required**: Grant users and roles only the permissions they need to perform their tasks. Avoid using wildcard permissions unless necessary. For more information, see [permissions](../../configuration/entities.md#permissions).
 
 ## Monitoring and updates
 

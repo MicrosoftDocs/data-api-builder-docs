@@ -30,7 +30,7 @@ GET /{rest-path}/openapi
 ```
 
 > [!NOTE]
-> By default, the `rest-path` value is `api` and is configurable. For more information, see [REST configuration](../../reference-configuration.md#rest-runtime)
+> By default, the `rest-path` value is `api` and is configurable. For more information, see [REST configuration](../../configuration/runtime.md#rest-runtime)
 
 ## SwaggerUI
 
@@ -46,5 +46,5 @@ The "Swagger" endpoint isn't nested under the `rest-path` in order to avoid nami
 
 ## Related content
 
-- [REST configuration reference](../../reference-configuration.md#rest-runtime)
+- [REST configuration reference](../../configuration/runtime.md#rest-runtime)
 - [REST endpoints](rest.md)

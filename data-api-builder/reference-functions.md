@@ -47,9 +47,9 @@ Now, use the `@env()` function to reference the `SQL_CONN_STRING` environment va
 }
 ```
 
-For more information, see [`data-source` configuration property](reference-configuration.md#data-source).
+For more information, see [`data-source` configuration property](./configuration/data-source.md).
 
 ## Related content
 
 - [Command-line interface (CLI) reference](reference-command-line-interface.md)
-- [Configuration reference](reference-configuration.md)
+- [Configuration reference](./configuration/index.md)

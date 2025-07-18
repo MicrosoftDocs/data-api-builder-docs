@@ -222,5 +222,5 @@ query {
 
 ## Related content
 
-- [Configuration reference](../../reference-configuration.md)
+- [Configuration reference](../../configuration/index.md)
 - [Install the CLI](../../how-to/install-cli.md)

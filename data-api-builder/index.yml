@@ -93,7 +93,7 @@ landingContent:
       - linkListType: reference
         links:
           - text: Configuration file
-            url: reference-configuration.md
+            url: configuration/index.md
           - text: Command-line interface (CLI)
             url: reference-command-line-interface.md
           - text: Database-specific features

@@ -268,4 +268,4 @@ dab configure --runtime.rest.enabled true
 ## Related content
 
 - [Functions reference](reference-functions.md)
-- [Configuration reference](reference-configuration.md)
+- [Configuration reference](./configuration/index.md)

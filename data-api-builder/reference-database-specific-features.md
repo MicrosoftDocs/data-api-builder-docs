@@ -43,7 +43,7 @@ For Azure SQL and SQL Server, Data API builder can take advantage of `SESSION_CO
 
 For more information about setting `SESSION_CONTEXT` data, see [`sp_set_session_context` (Transact-SQL)](/sql/relational-databases/system-stored-procedures/sp-set-session-context-transact-sql).
 
-Configure `SESSION_CONTEXT` using the `options` property of the `data-source` section in the configuration file. For more information, see [`data-source` configuration reference](reference-configuration.md#data-source).
+Configure `SESSION_CONTEXT` using the `options` property of the `data-source` section in the configuration file. For more information, see [`data-source` configuration reference](./configuration/data-source.md).
 
 ```json
 {
@@ -114,7 +114,7 @@ type Book @model(name:"Book"){
 }
 ```
 
-This example schema corresponds to the following entity configuration in the DAB configuration file. For more information, see [`entities` configuration reference](reference-configuration.md#entities).
+This example schema corresponds to the following entity configuration in the DAB configuration file. For more information, see [`entities` configuration reference](./configuration/entities.md).
 
 ```json
 {

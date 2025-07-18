@@ -318,5 +318,5 @@ Data API builder executes both database queries in a transaction. Transactions a
 
 ## Related content
 
-- [GraphQL configuration reference](../../reference-configuration.md#graphql-runtime)
+- [GraphQL configuration reference](../../configuration/runtime.md#graphql-runtime)
 - [OpenAPI](openapi.md)
