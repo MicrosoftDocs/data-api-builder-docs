@@ -248,22 +248,22 @@ dab configure --data-source.database-type "mssql"
 
 | Section | Runtime Configuration  | Type  |
 | - | - | - |
-| REST  | [`--runtime.rest.enabled`](./configuration/runtime.md#restenabled)  | boolean (`true`, `false`) |
-| REST  | [`--runtime.rest.path`](./configuration/runtime.md#restpath)  | string  |
-| REST  | [`--runtime.rest.request-body-strict`](./configuration/runtime.md#restrequest-body-strict)  | boolean (`true`, `false`) |
-| GraphQL | [`--runtime.graphql.enabled`](./configuration/runtime.md#graphqlenabled)  | boolean (`true`, `false`) |
-| GraphQL | [`--runtime.graphql.path`](./configuration/runtime.md#graphqlpath)  | string  |
-| GraphQL | [`--runtime.graphql.depth-limit`](./configuration/runtime.md#graphqldepth-limit)  | integer  |
-| GraphQL | [`--runtime.graphql.allow-introspection`](./configuration/runtime.md#graphqlallow-introspection)  | boolean (`true`, `false`) |
-| GraphQL | [`--runtime.graphql.multiple-mutations.create.enabled`](./configuration/runtime.md#graphqlmultiple-mutationscreateenabled) | boolean (`true`, `false`) |
-| Host  | [`--runtime.host.mode`](./configuration/runtime.md#hostmode)  | enumeration  |
-| Host  | [`--runtime.host.cors.origins`](./configuration/runtime.md#hostcorsorigins)  | array of strings  |
-| Host  | [`--runtime.host.cors.allow-credentials`](./configuration/runtime.md#hostcorsallow-credentials)  | boolean (`true`, `false`) |
-| Host  | [`--runtime.host.authentication.provider`](./configuration/runtime.md#hostauthenticationprovider)  | enumeration  |
-| Host  | [`--runtime.host.authentication.jwt.audience`](./configuration/runtime.md#hostauthenticationjwtaudience)  | array of strings  |
-| Host  | [`--runtime.host.authentication.jwt.issuer`](./configuration/runtime.md#hostauthenticationjwtissuer)  | string  |
-| Cache  | [`--runtime.cache.enabled`](./configuration/runtime.md#cacheenabled)  | boolean (`true`, `false`) |
-| Cache  | [`--runtime.cache.ttl-seconds`](./configuration/runtime.md#cachettl-seconds)  | integer  |
+| REST  | [`--runtime.rest.enabled`](./configuration/runtime.md#rest-runtime)  | boolean (`true`, `false`) |
+| REST  | [`--runtime.rest.path`](./configuration/runtime.md#rest-runtime)  | string  |
+| REST  | [`--runtime.rest.request-body-strict`](./configuration/runtime.md#rest-runtime)  | boolean (`true`, `false`) |
+| GraphQL | [`--runtime.graphql.enabled`](./configuration/runtime.md#graphql-runtime)  | boolean (`true`, `false`) |
+| GraphQL | [`--runtime.graphql.path`](./configuration/runtime.md#graphql-runtime)  | string  |
+| GraphQL | [`--runtime.graphql.depth-limit`](./configuration/runtime.md#graphql-runtime)  | integer  |
+| GraphQL | [`--runtime.graphql.allow-introspection`](./configuration/runtime.md#graphql-runtime)  | boolean (`true`, `false`) |
+| GraphQL | [`--runtime.graphql.multiple-mutations.create.enabled`](./configuration/runtime.md#example-multiple-mutations) | boolean (`true`, `false`) |
+| Host  | [`--runtime.host.mode`](./configuration/runtime.md#mode-host-runtime)  | enumeration  |
+| Host  | [`--runtime.host.cors.origins`](./configuration/runtime.md#cors-host-runtime)  | array of strings  |
+| Host  | [`--runtime.host.cors.allow-credentials`](./configuration/runtime.md#cors-host-runtime)  | boolean (`true`, `false`) |
+| Host  | [`--runtime.host.authentication.provider`](./configuration/runtime.md#provider-authentication-host-runtime)  | enumeration  |
+| Host  | [`--runtime.host.authentication.jwt.audience`](./configuration/runtime.md#jwt-authentication-host-runtime)  | array of strings  |
+| Host  | [`--runtime.host.authentication.jwt.issuer`](./configuration/runtime.md#jwt-authentication-host-runtime)  | string  |
+| Cache  | [`--runtime.cache.enabled`](./configuration/runtime.md#cache-runtime)  | boolean (`true`, `false`) |
+| Cache  | [`--runtime.cache.ttl-seconds`](./configuration/runtime.md#cache-runtime)  | integer  |
 
 #### Example 
 ```sh
