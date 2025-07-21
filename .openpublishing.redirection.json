@@ -382,7 +382,6 @@
       "redirect_url": "/azure/data-api-builder/quickstart/postgresql",
       "redirect_document_id": true
     },
-
     {
       "source_path_from_root": "/data-api-builder/database-objects.md",
       "redirect_url": "/azure/data-api-builder/concept/database/views",
@@ -475,7 +474,7 @@
     },
     {
       "source_path_from_root": "/data-api-builder/reference-functions.md",
-      "redirect_url": "/azure/data-api-builder/concept/config/functions.md",
+      "redirect_url": "/azure/data-api-builder/concept/config/env-function.md",
       "redirect_document_id": false
     },
     {

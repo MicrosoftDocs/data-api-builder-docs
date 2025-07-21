@@ -25,12 +25,16 @@ landingContent:
       url: api/rest.md
     - text: OpenAPI
       url: api/openapi.md
+    - text: Pagination
+      url: api/pagination.md
 - title: Configuration
   linkLists:
   - linkListType: concept
     links:
     - text: File Environments
       url: config/environments.md
+    - text: Env() Function
+      url: config/env-function.md
     - text: Multiple Data Sources
       url: config/multi-data-source.md
     - text: Best Practices
@@ -39,12 +43,12 @@ landingContent:
   linkLists:
   - linkListType: concept
     links:
-    - text: Tables
-      url: database/index.md
     - text: Views
-      url: database/index.md#views
+      url: database/views.md
     - text: Stored Procedures
-      url: database/index.md#stored-procedures
+      url: database/stored-procedures.md
+    - text: Relationships
+      url: database/relationships.md
 - title: Monitor
   linkLists:
   - linkListType: concept
@@ -69,7 +73,7 @@ landingContent:
       url: security/authentication-local.md
     - text: Authorization
       url: security/authorization.md
-    - text: Authorization
+    - text: Row-Level Security
       url: security/row-level-security.md
     - text: Best Practices
       url: ../deployment/best-practices-security.md
@@ -77,8 +81,6 @@ landingContent:
   linkLists:
   - linkListType: concept 
     links:
-    - text: Data API Caching
-      url: cache/index.md
     - text: Level 1 Cache
       url: cache/level-1.md
     - text: Level 2 Cache

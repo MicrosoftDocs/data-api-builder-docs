@@ -936,7 +936,7 @@ Learn more about [OTEL_EXPORTER_OTLP_HEADERS](https://opentelemetry.io/docs/lang
 | - | - | - | - | - |
 | `runtime` | `health` | object | ❌ No | - |
 
-Global health check endpoint (`/health`) configuration.
+Global [health check endpoint](../concept/monitor/health-checks.md) (`/health`) configuration.
 
 ### Nested properties
 
