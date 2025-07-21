@@ -10,41 +10,42 @@ ms.date: 06/11/2025
 # Customer Intent: As a developer, I want to use the Data API Builder, so that I can host OpenAPI/Swagger metadata.
 ---
 
-# Data API builder REST API documentation with Swagger / OpenAPI
+# OpenAPI in Data API builder
 
-The OpenAPI specification is a programming language-agnostic standard for documenting HTTP APIs. Data API builder supports the OpenAPI standard with its ability to:
+The OpenAPI specification is a language-agnostic standard for documenting HTTP APIs. Data API builder supports OpenAPI by:
 
-- Generate information about all runtime configuration defined entities that are REST enabled.
-- Compile the information into a format that matches the OpenAPI schema.
-- Exposes the generated OpenAPI schema via a visual UI (Swagger) or a serialized file.
+* Generating metadata for all REST-enabled entities defined in the runtime configuration
+* Compiling that metadata into a valid OpenAPI schema
+* Exposing the schema through a visual UI (Swagger) or as a serialized JSON file
 
 ## OpenAPI description document
 
-Data API builder generates an OpenAPI description document using the provided runtime configuration and the database object metadata for each REST enabled entity defined.
-The schema file is generated using functionality provided by the [OpenAPI.NET SDK](https://github.com/microsoft/OpenAPI.NET). Currently, the schema file is generated in adherence to [OpenAPI Specification v3.0.1](https://spec.openapis.org/oas/v3.0.1.html) formatted as JSON.
+Data API builder generates an OpenAPI description document using the runtime configuration and the database metadata for each REST-enabled entity.
 
-The OpenAPI description document can be fetched from Data API builder from the path:
+The schema is built using the [OpenAPI.NET SDK](https://github.com/microsoft/OpenAPI.NET) and conforms to the [OpenAPI Specification v3.0.1](https://spec.openapis.org/oas/v3.0.1.html). It is output as a JSON document.
 
-```https
-GET /{rest-path}/openapi 
+You can access the OpenAPI document at:
+
+```http
+GET /{rest-path}/openapi
 ```
 
-> [!NOTE]
-> By default, the `rest-path` value is `api` and is configurable. For more information, see [REST configuration](../../configuration/runtime.md#rest-runtime)
+> \[!NOTE]
+> By default, the `rest-path` is `api`. This value is configurable. See [REST configuration](../../configuration/runtime.md#rest-runtime) for details.
 
-## SwaggerUI
+## Swagger UI
 
-[Swagger UI](https://swagger.io/swagger-ui) offers a web-based UI that provides information about the service, using the generated OpenAPI specification.
+[Swagger UI](https://swagger.io/swagger-ui) provides an interactive, web-based view of the API based on the OpenAPI schema.
 
-In `Development` mode, Data API builder enables viewing the generated OpenAPI description document from a dedicated endpoint:
+In `Development` mode, Data API builder exposes Swagger UI at:
 
-```https
+```http
 GET /swagger
 ```
 
-The "Swagger" endpoint isn't nested under the `rest-path` in order to avoid naming conflicts with runtime configured entities.
+This endpoint is not nested under the `rest-path` to avoid conflicts with user-defined entities.
 
 ## Related content
 
-- [REST configuration reference](../../configuration/runtime.md#rest-runtime)
-- [REST endpoints](rest.md)
+* [REST configuration reference](../../configuration/runtime.md#rest-runtime)
+* [REST endpoints](rest.md)

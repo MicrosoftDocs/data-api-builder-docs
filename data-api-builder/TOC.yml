@@ -18,13 +18,149 @@
           href: whats-new/version-1-3.md
         - name: DAB 1.2 (Stability release)
           href: whats-new/version-1-2.md
-        - name: DAB  1.1 (GA)
+        - name: DAB 1.1 (GA)
           href: whats-new/version-1-1.md
     - name: Feature availability
       href: feature-availability.md
     - name: FAQ
       displayName: frequently asked questions, Q&A
       href: faq.yml
+- name: Concepts
+  items:
+    - name: API access
+      items:
+        - name: REST endpoints
+          href: concept/api/rest.md
+          displayName: HTTP, GET, POST, PATCH, DELETE, verbs, REST API
+        - name: OpenAPI
+          href: concept/api/openapi.md
+          displayName: OpenAPI, Swagger, API docs, schema definition, HTTP interface
+        - name: GraphQL endpoints
+          href: concept/api/graphql.md
+          displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
+        - name: Implement multiple mutations
+          href: how-to/multiple-mutations.md
+          displayName: batch, transaction, graphql, createMany, mutation
+        - name: Pagination
+          href: concept/api/pagination.md
+          displayName: pagination, limit, offset, top, skip, page size, results
+    - name: Caching
+      items:
+        - name: Overview
+          href: concept/cache/index.md
+          displayName: cache, caching, memory, performance, config
+        - name: Cache level 1 (internal)
+          href: concept/cache/level-1.md
+          displayName: level 1 cache, L1, entity cache, query result, fusioncache, memory
+        - name: Cache level 2 (external)
+          href: concept/cache/level-2.md
+          displayName: level 2 cache, L2, global cache, prefetch, fusioncache, redis
+        - name: Cache HTTP headers
+          href: concept/cache/http-headers.md
+          displayName: cache headers, HTTP, control, TTL, freshness
+    - name: Configuration
+      items:
+        - name: Environments
+          href: concept/config/environments.md
+          displayName: environment, config, dev, prod, @env, variables
+        - name: Functions
+          href: concept/config/functions.md
+          displayName: functions, helpers, filters, expressions, macros
+        - name: Multi-data source
+          href: concept/config/multi-data-source.md
+          displayName: multiple databases, cross-DB, data source, federation
+    - name: Database structure
+      items:
+        - name: Views
+          href: concept/database/views.md
+          displayName: views, stored procedures, procs, SQL, read-only
+        - name: Stored procedures
+          href: concept/database/stored-procedures.md
+          displayName: views, stored procedures, procs, SQL, read-only
+        - name: Table relationships
+          href: concept/database/relationships.md
+          displayName: relationships, foreign key, navigation, linking, cardinality
+    - name: Monitoring and telemetry
+      items:
+        - name: Application Insights
+          href: concept/monitor/application-insights.md
+          displayName: app insights, telemetry, metrics, diagnostics, Azure Monitor
+        - name: Health checks
+          href: concept/monitor/health-checks.md
+          displayName: health, ping, liveness, readiness, monitor, probe
+        - name: Log levels
+          href: concept/monitor/log-levels.md
+          displayName: logging, trace, info, debug, warn, error
+        - name: OpenTelemetry
+          href: concept/monitor/open-telemetry.md
+          displayName: OTEL, tracing, distributed trace, metrics
+    - name: Security
+      items:
+        - name: Overview
+          href: concept/security/index.md
+          displayName: security, auth, identity, roles, protection, access
+        - name: Authorization
+          href: concept/security/authorization.md
+          displayName: roles, claims, policies, access control, permissions
+        - name: Azure authentication
+          href: concept/security/authentication-azure.md
+          displayName: AAD, Microsoft Entra ID, Azure AD, SSO, OAuth
+        - name: Local authentication
+          href: concept/security/authentication-local.md
+          displayName: local auth, simulated auth, development, static users
+        - name: Row-level security
+          href: concept/security/row-level-security.md
+          displayName: RLS, predicates, SQL security, claim-based access
+- name: Quickstarts
+  items:
+    - name: Local
+      items:
+        - name: SQL
+          href: quickstart/mssql.md
+          displayName: mssql, local, sql server, database
+        - name: NoSQL
+          href: quickstart/nosql.md
+          displayName: cosmos, nosql, local, database
+        - name: PostgreSQL
+          href: quickstart/postgresql.md
+          displayName: postgres, pg, local, database
+        - name: MySQL
+          href: quickstart/mysql.md
+          displayName: mysql, local, database
+    - name: Azure
+      items:
+        - name: Azure SQL
+          href: quickstart/azure-sql.md
+          displayName: azure, sql server, database, cloud
+        - name: Azure Cosmos DB for NoSQL
+          href: quickstart/azure-cosmos-db-nosql.md
+          displayName: azure, cosmos, nosql, cloud, database
+- name: Deployment
+  items:
+    - name: Overview
+      href: deployment/index.md
+      displayName: deployment, hosting, summary, intro
+    - name: Checklist
+      href: deployment/checklist.md
+      displayName: deployment, validation, steps, readiness
+    - name: Hosting options
+      href: deployment/hosting-options.md
+      displayName: hosting, container, azure, options
+    - name: Publish to Azure Container Apps
+      href: deployment/how-to-publish-container-apps.md
+      displayName: azure, container apps, publish, deploy
+    - name: Publish to Azure Container Instances
+      href: deployment/how-to-publish-container-instances.md
+      displayName: azure, container instances, publish, deploy
+    - name: Publish to Azure Static Web Apps (preview)
+      href: deployment/how-to-host-static-web-apps.md
+      displayName: swa, static web apps, azure, preview
+    - name: Configuration best practices
+      href: deployment/best-practices-configuration.md
+      displayName: configuration, deployment, settings, optimize
+    - name: Security best practices
+      href: deployment/best-practices-security.md
+      displayName: security, deployment, hardening, guidance
 - name: Reference
   items:
     - name: Command-line interface
@@ -32,7 +168,7 @@
       href: reference-command-line-interface.md
     - name: Configuration file
       items:
-        - name: Configuration schema
+        - name: Overview
           href: configuration/index.md#schema
         - name: Complete configuration 
           displayName: Config, JSON
@@ -213,3 +349,46 @@
     - name: Database-specific features
       displayName: sql, cosmos, pg, postgres, mysql, dw
       href: reference-database-specific-features.md
+- name: How-to
+  items:
+    - name: Configure environment settings
+      href: how-to/use-environments.md
+      displayName: environment, config, dev, prod, variables, @env
+    - name: Deploy to Azure Container Apps using Azure CLI
+      href: tutorial-deploy-container-app-cli.md
+      displayName: azure, deploy, ACA, container, cli
+    - name: Install the DAB CLI
+      href: how-to/install-cli.md
+      displayName: CLI, command-line, install, dab
+    - name: Run DAB in a container
+      href: how-to/run-container.md
+      displayName: docker, container, dab, run
+    - name: Run DAB from source
+      href: how-to/run-from-source.md
+      displayName: source, github, OSS, build, run
+- name: Samples
+  items:
+    - name: Devcontainer with Azure SQL
+      href: /samples/microsoft/vscode-remote-try-dab/devcontainer
+      displayName: devcontainer, codespaces, azure sql, docker
+    - name: Library app with Blazor and Azure SQL
+      href: /samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
+      displayName: blazor, aspnet, webassembly, azure sql, sample
+    - name: Library app with SWA and Azure SQL
+      href: /samples/azure-samples/dab-swa-library-demo/sample
+      displayName: static web apps, azure sql, sample, dab
+    - name: Todo app with SWA and Azure SQL
+      href: /samples/azure-samples/dab-swa-todo/sample
+      displayName: todo, dab, static web apps, sample, azure sql
+- name: Troubleshooting
+  items:
+    - name: Installation
+      href: /troubleshoot/azure/data-api-builder/installation?context=/azure/data-api-builder/context/context
+    - name: Runtime
+      href: /troubleshoot/azure/data-api-builder/usage?context=/azure/data-api-builder/context/context
+    - name: Known issues
+      displayName: bugs
+      href: https://github.com/azure/data-api-builder/labels/known-issue
+    - name: Support
+      displayName: ticket, css, feedback, help, assistance
+      href: https://github.com/Azure/data-api-builder/blob/main/SUPPORT.md
