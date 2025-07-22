@@ -12,19 +12,23 @@ ms.date: 06/11/2025
 
 # Authorization and roles in Data API builder
 
-Data API builder uses a role-based authorization workflow. Any incoming request, authenticated or not, is assigned to a role. [Roles](#roles) can be [System Roles](#system-roles) or [User Roles](#user-roles). The assigned role is then checked against the defined [permissions](#permissions) specified in the [configuration file](../../reference-configuration.md) to understand what actions, fields, and policies are available for that role on the requested entity.
+Data API builder uses a role-based authorization workflow. Any incoming request, authenticated or not, is assigned to a role. Roles can be [System Roles](#system-roles) or [User Roles](#user-roles). The assigned role is then checked against the defined [permissions](#permissions) specified in the configuration to understand what actions, fields, and policies are available for that role on the requested entity.
 
-## Roles
+### Determining the user's role
 
-Roles set the permissions context in which a request should be executed. For each entity defined in the runtime config, you can define a set of roles and associated permissions that determine how the entity can be accessed in both the REST and GraphQL endpoints.
+No `role` has default permissions. Once a rule is determined by Data API builder, the entity's `permissions` must define `actions` for that role for the request to be successful.
 
-Data API builder evaluates requests in the context of a single role:
+| Token Provided | `x-ms-api-role` Provided | `x-ms-api-role` in Token | Resulting Role        |
+| -------------- | ------------------------ | ------------------------ | --------------------- |
+| No             | No                       | No                       | `anonymous`           |
+| Yes            | No                       | No                       | `authenticated`       |
+| Yes            | Yes                      | No                       | Exception             |
+| Yes            | Yes                      | Yes                      | `x-ms-api-role` value |
 
-- `anonymous` when no access token is presented.
-- `authenticated` when a valid access token is presented.
-- `<CUSTOM_USER_ROLE>` when a valid access token is presented *and* the `X-MS-API-ROLE` HTTP header is included specifying a user role that is also included in the access token's `roles` claim.
+To have a role other than `anonymous` or `authenticated`, the `x-ms-api-role` header is required.
 
-Roles are **not** additive, which means that a user who is a member of both `Role1` and `Role2` doesn't inherit the permissions associated with both roles.
+> [!NOTE]
+> A request can have only one role. Even if the token indicates multiple roles, the `x-ms-api-role` value selects which role is assigned to the request. 
 
 ### System roles
 
@@ -136,7 +140,7 @@ Permissions describe:
 - Which fields are accessible for a particular action?
 - Which extra restrictions exist on the results returned by a request?
 
-The syntax for defining permissions is described in the [runtime configuration article](../../reference-configuration.md#permissions).
+The syntax for defining permissions is described in the [runtime configuration article](../../configuration/entities.md#permissions).
 
 > [!IMPORTANT]
 > There may be multiple roles defined within a single entity's permissions configuration. However, a request is only evaluated in the context of a single role:
@@ -191,8 +195,7 @@ In the following example, the user role `administrator` is the only defined role
 ```
 
 > [!NOTE]
-> To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you are required to use the `@authorize` directive in your supplied [GraphQL schema file](../api/graphql.md).
-However, for GraphQL mutations and filters in GraphQL queries, access control still is enforced by the permissions configuration as described previously.
+> To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you are required to use the `@authorize` directive in your supplied [GraphQL schema file](../../reference-database-specific-features.md). However, for GraphQL mutations and filters in GraphQL queries, access control still is enforced by the permissions configuration as described previously.
 
 #### Actions
 
@@ -201,7 +204,7 @@ However, for GraphQL mutations and filters in GraphQL queries, access control st
 - Tables and Views: `create`, `read`, `update`, `delete`
 - Stored Procedures: `execute`
 
-For more information about actions, see the [configuration file](../../reference-configuration.md#action) documentation.
+For more information about actions, see the [configuration file](../../configuration/entities.md#actions-string-array-permissions-entity-name-entities) documentation.
 
 #### Field access
 
@@ -233,7 +236,7 @@ The following example prevents users in the `free-access` role from performing r
 ```
 
 > [!NOTE]
-> To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you are required to use the `@authorize` directive in your supplied [GraphQL schema file](../api/graphql.md). However, for GraphQL mutations and filters in GraphQL queries, access control still is enforced by the permissions configuration as described here.
+> To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you are required to use the `@authorize` directive in your supplied [GraphQL schema file](../../reference-database-specific-features.md). However, for GraphQL mutations and filters in GraphQL queries, access control still is enforced by the permissions configuration as described here.
 
 #### Item level security
 
@@ -252,7 +255,7 @@ The following example prevents users in the `free-access` role from performing r
 > [!NOTE]
 > Database policies are not currently supported by CosmosDB for NoSQL.
 
-For more information about database policies, see the [configuration file](../../reference-configuration.md#policy) documentation.
+For more information about database policies, see the [configuration file](../../configuration/entities.md#policy-notes) documentation.
 
 ##### Example
 
@@ -274,5 +277,5 @@ A database policy restricting the `read` action on the `consumer` role to only r
 
 ## Related content
 
-- [Azure authentication](./authentication-azure.md)
-- [Local authentication](./authentication-local.md)
+- [Azure authentication](authentication-azure.md)
+- [Local authentication](authentication-local.md)

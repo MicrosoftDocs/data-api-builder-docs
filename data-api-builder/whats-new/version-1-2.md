@@ -19,9 +19,9 @@ Release notes and information about the updates and enhancements in Data API bui
 
 ## Introducing: Maximum Page Size
 
-Data API builder [automatically paginates](/azure/data-api-builder/reference-configuration#pagination-runtime) query results in REST and GraphQL endpoints. Pagination ensures queries against large tables return manageable results and protects both the database and DAB from overly large responses. 
+Data API builder [automatically paginates](../configuration/runtime.md#pagination-settings) query results in REST and GraphQL endpoints. Pagination ensures queries against large tables return manageable results and protects both the database and DAB from overly large responses. 
 
-By default, DAB uses a page size of `100` records, configurable through the [`default-page-size`](/azure/data-api-builder/reference-configuration#default-page-size-pagination-runtime) setting. Users can request more records using the [`$first` keyword](/azure/data-api-builder/rest#first-and-after), bypassing the default.
+By default, DAB uses a page size of `100` records, configurable through the [`default-page-size`](../configuration/runtime.md#max-page-size-supported-values) setting. Users can request more records using the [`$first` keyword](../concept/api/rest.md#first-and-after), bypassing the default.
 
 To prevent abuse and help maintain endpoint performance, DAB now supports the `max-page-size` setting, which caps the maximum number of records a user can request. This option gives developers control and flexibility while adding important safeguards.
 

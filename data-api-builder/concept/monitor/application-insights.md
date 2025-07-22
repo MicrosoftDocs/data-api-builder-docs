@@ -1,131 +1,102 @@
 ---
-title: Use Azure Application Insights
-description: Configure Application Insights to capture custom logs, performance data, and availability metrics about Data API builder for analysis and troubleshooting.
+title: Use Azure Application Insights in Data API builder
+description: Enable and configure Azure Application Insights for monitoring Data API builder applications.
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: how-to
-ms.date: 06/11/2025
-# Customer Intent: As a developer, I want to integrate Application Insights with Data API builder, so that I can capture performance metrics.
+ms.topic: concept-article
+ms.date: 07/21/2025
+# Customer Intent: As a developer, I want to enable telemetry using Application Insights so I can monitor and troubleshoot my Data API builder apps.
 ---
 
 # Use Azure Application Insights in Data API builder
 
-:::image type="complex" source="media/application-insights/map.svg" border="false" alt-text="Diagram of the current location ('Monitor') in the sequence of the deployment guide.":::
-Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Monitor' location is currently highlighted.
-:::image-end:::
+![Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Monitor' location is currently highlighted.](media/application-insights/map.svg)
 
-Azure Application Insights is a service provided by Microsoft Azure that enables developers to monitor and gain insights into the performance and usage of their applications. The guide illustrates how to enable Application Insights for Data API builder (DAB). With Application Insights, you can track application availability, response times, performance metrics, user behavior, and other useful metrics.
+Azure Application Insights is a monitoring service that captures telemetry such as request details, performance counters, logs, and exceptions. Integrating it with Data API builder (DAB) helps you diagnose issues and monitor runtime behavior in production.
 
-## Prerequisites
+> **Warning**
+> Application Insights isn't supported when DAB is hosted using Azure App Service web apps.
 
-> [!WARNING]
-> Application Insights for Data API builder isn't supported when hosting Data API builder in Azure App Service web apps.
+## Configuration
 
-- A running solution using Data API builder
+To configure Application Insights in your DAB config:
 
-## Update configuration file
+### CLI example
 
-First, you should add an `application-insights` section to your existing configuration file. This section includes the credentials necessary to connect DAB to Application Insights.
+```sh
+dab add-telemetry \
+  --app-insights-enabled true \
+  --app-insights-conn-string "@env('app-insights-connection-string')"
+```
 
-1. Locate and open the existing configuration file for your DAB solution.
+### JSON example
 
-1. In the `runtime` section, of the configuration file, add a `telemetry` section with the following properties.
-
-    |                         | Description                                         |
-    | ----------------------- | --------------------------------------------------- |
-    | **`enabled`**           | Enables or disables application insights            |
-    | **`connection-string`** | Connection string for Application Insights instance |
-
-    ```json
-    {
-        "runtime": {
-        ...
-        "telemetry": {
-            "application-insights": {
-            "enabled": true,
-            "connection-string": "@env('app-insights-connection-string')"
-            }
-        },
-        ...
-        }
+```json
+"runtime": {
+  ...
+  "telemetry": {
+    "application-insights": {
+      "enabled": true,
+      "connection-string": "@env('app-insights-connection-string')"
     }
-    ```
+  }
+  ...
+}
+```
 
-    > [!TIP]
-    > Alternatively, you can use the DAB CLI to add telemetry:
-    >
-    > ```dotnetcli
-    > dab add-telemetry --app-insights-enabled true --app-insights-conn-string "@env('app-insights-connection-string')"
-    > ```
+This assumes `app-insights-connection-string` is set as an environment variable. You can use an `.env` file to define it.
 
-    > [!NOTE]
-    > This sample assumes that your host has an environment variable named `app-insights-connection-string` with the connection string. For more information on retrieving the connection string, see [Azure Monitor connection strings](/azure/azure-monitor/app/sdk-connection-string).
+## What gets captured
 
-1. Save the configuration file and redeploy your solution.
+| Type                 | Description                     |
+| -------------------- | ------------------------------- |
+| Request telemetry    | URL, status code, response time |
+| Trace telemetry      | Console logs from DAB           |
+| Exception telemetry  | Errors and stack traces         |
+| Performance counters | CPU, memory, network metrics    |
 
-## Review metrics
+## View in Azure
 
-When you enable Application Insights in your application, it starts sending data to the Application Insights service immediately.
+1. Go to your Application Insights resource in the Azure portal: [https://portal.azure.com](https://portal.azure.com)
+2. Review logs using this query:
 
-1. Navigate to the Application Insights resource in the Azure portal ([https://portal.azure.com](https://portal.azure.com/)).
+```kusto
+traces
+| order by timestamp
+```
 
-1. Review the following types of data captured by Application Insights about your DAB solution.
+LogLevel mapping:
 
-    |                          | Description                                                                                     |
-    | ------------------------ | ----------------------------------------------------------------------------------------------- |
-    | **Request telemetry**    | Information about each incoming request to DAB, such as the URL, response time, and status code |
-    | **Trace telemetry**      | Logs generated by DAB                                                                           |
-    | **Exception telemetry**  | Information about any exceptions or errors that occur in DAB                                    |
-    | **Performance counters** | Metrics related to the performance of DAB, such as CPU usage, memory usage, and network traffic |
+| LogLevel    | Severity    | Value |
+| ----------- | ----------- | ----- |
+| Trace       | Verbose     | 0     |
+| Debug       | Verbose     | 0     |
+| Information | Information | 1     |
+| Warning     | Warning     | 2     |
+| Error       | Error       | 3     |
+| Critical    | Critical    | 4     |
 
-    > [!NOTE]
-    > The logs that are sent to Application Insights are same as the logs printed by Data API builder in the console.
+3. Check **Live Metrics**
 
-1. Navigate to the **Logs** section of the Application Insights page. Review the logs using this query.
+![Screenshot of the live metrics page for Data API builder data in Application Insights.](media/application-insights/live-metrics.png)
 
-    ```kusto
-    traces
-    | order by timestamp
-    ```
-1. Review the results of the query. The `LogLevel` is mapped to severity levels using this table.
+4. Run this query for requests:
 
-    | LogLevel    | Severity Level | Severity Level Value |
-    | ----------- | -------------- | -------------------- |
-    | Trace       | Verbose        | 0                    |
-    | Debug       | Verbose        | 0                    |
-    | Information | Information    | 1                    |
-    | Warning     | Warning        | 2                    |
-    | Error       | Error          | 3                    |
-    | Critical    | Critical       | 4                    |
-    
-    > [!TIP]
-    > Set the current log level using the `--LogLevel` option for the DAB command-line interface (CLI). Otherwise, the host mode in the config file determines the minimum loglevel. If the host mode is set to `Production`, the minimum log level is `Error`. For the `Development` host mode, the minimum log level is `Debug`.
+```kusto
+requests
+| order by timestamp
+```
 
-1. Navigate to the **Live Metrics** page.
+![Screenshot of the results of a query for Data API builder application requests in Application Insights.](media/application-insights/requests-results.png)
 
-    :::image type="content" source="media/application-insights/live-metrics.png" lightbox="media/application-insights/live-metrics.png" alt-text="Screenshot of the live metrics page for Data API builder data in Application Insights.":::
+5. Run this query for exceptions:
 
-1. Check the **Application Requests** using this query.
+```kusto
+exceptions
+| order by timestamp
+```
 
-    ```kusto
-    requests
-    | order by timestamp
-    ```
-    
-    :::image type="content" source="media/application-insights/requests-results.png" lightbox="media/application-insights/requests-results.png"  alt-text="Screenshot of the results of a query for Data API builder application requests in Application Insights.":::
+![Screenshot of the results of a query for Data API builder exceptions in Application Insights.](media/application-insights/exceptions-results.png)
 
-1. Enumerate exceptions using the **Application Exceptions** page.
-
-    ```kusto
-    exceptions
-    | order by timestamp
-    ```
-    
-    :::image type="content" source="media/application-insights/exceptions-results.png" lightbox="media/application-insights/exceptions-results.png" alt-text="Screenshot of the results of a query for Data API builder exceptions in Application Insights.":::
-
-## Next step
-
-> [!div class="nextstepaction"]
-> [Configuration best practices](../../deployment/best-practices-configuration.md)
