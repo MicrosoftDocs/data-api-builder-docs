@@ -34,7 +34,7 @@ When adding an entity to the configuration file, use PascalCasing, so that the g
 
 ## Use singular form when naming entities
 
-When adding an entity to the configuration file, make sure to use the singular form for the name. Data API builder automatically generates the plural form whenever a collection of that entity is returned. You can also manually provide singular and plural forms, by manually adding them to the configuration file. For more information, see [GraphQL configuration reference](../reference-configuration.md#graphql-entities).
+When adding an entity to the configuration file, make sure to use the singular form for the name. Data API builder automatically generates the plural form whenever a collection of that entity is returned. You can also manually provide singular and plural forms, by manually adding them to the configuration file. For more information, see [GraphQL configuration reference](../configuration/runtime.md#graphql-runtime).
 
 ## Next step
 

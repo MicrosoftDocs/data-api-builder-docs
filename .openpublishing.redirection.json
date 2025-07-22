@@ -17,8 +17,13 @@
     },
     {
       "source_path_from_root": "/data-api-builder/configuration-file.md",
-      "redirect_url": "/azure/data-api-builder/reference-configuration",
-      "redirect_document_id": true
+      "redirect_url": "/azure/data-api-builder/configuration/index",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/reference-configuration.md",
+      "redirect_url": "/azure/data-api-builder/configuration/index",
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/whats-new.md",
@@ -377,10 +382,9 @@
       "redirect_url": "/azure/data-api-builder/quickstart/postgresql",
       "redirect_document_id": true
     },
-
     {
       "source_path_from_root": "/data-api-builder/database-objects.md",
-      "redirect_url": "/azure/data-api-builder/concept/database/index",
+      "redirect_url": "/azure/data-api-builder/concept/database/views",
       "redirect_document_id": true
     },
     {
@@ -461,6 +465,21 @@
     {
       "source_path_from_root": "/data-api-builder/quickstart-postgresql.md",
       "redirect_url": "/azure/data-api-builder/quickstart/postgresql",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/sample-configuration.md",
+      "redirect_url": "/azure/data-api-builder/configuration/index",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/reference-functions.md",
+      "redirect_url": "/azure/data-api-builder/concept/config/env-function",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/reference-policies.md",
+      "redirect_url": "/azure/data-api-builder/reference-code-policies",
       "redirect_document_id": false
     }
  ]

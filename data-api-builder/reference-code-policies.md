@@ -97,7 +97,7 @@ The following examples are a *nonexhaustive* list of nonbreaking changes to Data
 
 ### How do we communicate breaking changes?
 
-We make it a priority to inform you promptly about breaking changes. You can find breaking change notifications in the release notes of Data API builder releases on GitHub, and in the dedicated [breaking changes list article](./breaking-change-list.md).
+We make it a priority to inform you promptly about breaking changes. You can find breaking change notifications in the release notes of Data API builder releases on GitHub.
 
 ## Current breaking change list
 
@@ -107,5 +107,5 @@ Breaking changes and feature retirements are announced in this article.
 
 ## Related content
 
-- [What's new](whats-new/index.yml)
-- [Database-specific-features](reference-database-specific-features.md)
+- [What's new](./whats-new/index.yml)
+- [Database-specific-features](./reference-database-specific-features.md)
