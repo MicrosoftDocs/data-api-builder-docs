@@ -24,7 +24,7 @@ Use `@env()` to reference environment variables at runtime. This function resolv
 "connection-string": "@env('SQL_CONN_STRING')"
 ```
 
-This is commonly used for secrets or values that differ between environments (e.g., dev, test, prod).
+This function is commonly used for secrets or values that differ between environments (for example, dev, test, prod).
 
 ## Setting environment variables
 
@@ -32,7 +32,7 @@ There are two supported approaches:
 
 ### 1. System environment variables
 
-Set environment variables in your operating system's environment. These are resolved at runtime by DAB.
+Set environment variables in your operating system environment. DAB resolves these at runtime.
 
 ### 2. `.env` file (recommended)
 
@@ -45,7 +45,7 @@ SQL_CONN_STRING=Server=localhost;User ID=user;Password=pass;
 DAB_ENVIRONMENT=Development
 ```
 
-DAB automatically loads this file when starting up, and variables defined here become available for use with `@env()`.
+DAB loads this file when starting up, making the variables available for use with `@env()`.
 
 ## Example usage
 
@@ -60,7 +60,7 @@ In `dab-config.json`:
 }
 ```
 
-This enables you to keep secrets out of source control and switch environments by simply changing your `.env` file or system variables.
+This setup keeps secrets out of source control and allows you to switch environments by changing your `.env` file or system variables.
 
 ## Benefits
 
@@ -71,12 +71,5 @@ This enables you to keep secrets out of source control and switch environments b
 ## Limitations
 
 * Only supports string values
-* Environment variable must exist at runtime or DAB will fail to start
-* Does not support computed values or fallback/defaults
-
-## Related content
-
-* [Multiple data sources](../../concepts/add-multiple-data-sources.md)
-* [Data source configuration](../../configuration/data-source.md)
-* [Configuration reference](../../configuration/index.md)
-* [Install the CLI](../../how-to/install-cli.md)
+* Environment variables must exist at runtime or DAB won't start
+* Doesn't support computed values or fallback/defaults

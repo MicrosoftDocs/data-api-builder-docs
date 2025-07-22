@@ -79,8 +79,3 @@ Some common namespaces/classes you may want to filter:
 * `Azure.DataApiBuilder.Auth.IAuthorizationResolver`
 * `Microsoft.AspNetCore.Authorization.IAuthorizationHandler`
 * `default`
-
-## Related content
-
-* [Telemetry configuration](../../configuration/runtime.md#telemetry-runtime)
-* [Application Insights integration](../monitor/application-insights.md)

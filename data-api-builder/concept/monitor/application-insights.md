@@ -100,6 +100,3 @@ exceptions
 
 ![Screenshot of the results of a query for Data API builder exceptions in Application Insights.](media/application-insights/exceptions-results.png)
 
-## Next step
-
-[Configuration best practices](../../deployment/best-practices-configuration.md)

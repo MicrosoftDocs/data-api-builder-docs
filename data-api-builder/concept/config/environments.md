@@ -125,7 +125,3 @@ The `@env` function can be used to access environment variables throughout the c
 }
 ```
 
-## Related content
-
-- [Configuration schema](../../configuration/index.md)
-- [Best practices](../../deployment/best-practices-configuration.md)

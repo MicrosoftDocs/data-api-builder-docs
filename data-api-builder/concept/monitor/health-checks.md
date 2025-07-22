@@ -104,8 +104,3 @@ Example:
 * The **root `/` health endpoint** provides minimal info with no checks and is always publicly accessible.
 * Health check failures respect entity and endpoint authorization — lack of permission results in failure reports, consistent with DAB’s security model.
 
-## Related content
-
-* [Data source configuration](../../configuration/data-source.md)
-* [Entity configuration](../../configuration/entities.md)
-* [Runtime health configuration](../../configuration/runtime.md#health)

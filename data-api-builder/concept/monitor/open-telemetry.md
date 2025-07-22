@@ -81,10 +81,3 @@ Telemetry is exported via .NET OpenTelemetry SDK to your configured backend such
 * Traces and metrics cover all REST, GraphQL, and DB operations
 * Middleware and error handlers also emit telemetry
 * Context is propagated through requests
-
-## References
-
-* [OpenTelemetry Spec](https://opentelemetry.io/docs/specs/)
-* [DAB Feature Request: OpenTelemetry](https://github.com/Azure/data-api-builder/issues/2554)
-* [Implementation PR](https://github.com/Azure/data-api-builder/pull/2617)
-* [Telemetry source code](https://github.com/Azure/data-api-builder/search?q=telemetry)

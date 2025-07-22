@@ -315,8 +315,3 @@ The other database query fetches the data requested in the selection set.
 Data API builder executes both database queries in a transaction. Transactions are created only for SQL database types.
 
 [!INCLUDE[Database isolation levels../includes/database-isolation-levels.md)]
-
-## Related content
-
-- [GraphQL configuration reference](../../configuration/runtime.md#graphql-runtime)
-- [OpenAPI](openapi.md)

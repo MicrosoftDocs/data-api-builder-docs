@@ -103,9 +103,3 @@ To define multiple data sources, create multiple configuration files and referen
 * Circular file references are not allowed
 * Only the top-level file controls runtime behavior
 
-## Related content
-
-* [Entities configuration](../../configuration/entities.md)
-* [Runtime settings](../../configuration/runtime.md)
-* [How to connect to Cosmos DB](../../how-to/configure-cosmos-db.md)
-* [How to connect to SQL Server](../../how-to/configure-sql-server.md)

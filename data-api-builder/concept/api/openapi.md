@@ -44,8 +44,3 @@ GET /swagger
 ```
 
 This endpoint is not nested under the `rest-path` to avoid conflicts with user-defined entities.
-
-## Related content
-
-* [REST configuration reference](../../configuration/runtime.md#rest-runtime)
-* [REST endpoints](rest.md)

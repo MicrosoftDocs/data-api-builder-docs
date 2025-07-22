@@ -83,8 +83,3 @@ Returns the row from `vw_books_details` with `id = 42`.
 * Views do not support relationships
 * Pagination, filtering, and sorting are supported if the view behaves like a table
 
-## Related content
-
-* [Using stored procedures](stored-procedures.md)
-* [Configuration reference](../../configuration/index.md)
-* [Install the CLI](../../how-to/install-cli.md)

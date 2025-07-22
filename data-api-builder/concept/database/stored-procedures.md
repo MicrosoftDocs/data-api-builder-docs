@@ -12,7 +12,7 @@ ms.date: 07/21/2025
 
 # Using stored procedures in Data API builder
 
-Stored procedures can be exposed as REST or GraphQL endpoints in DAB. This is useful for scenarios involving custom logic, filtering, validation, or computed results not handled by simple tables or views.
+Stored procedures can be exposed as REST or GraphQL endpoints in DAB. This is useful for scenarios that involve custom logic, filtering, validation, or computed results not handled by simple tables or views.
 
 ## Configuration
 
@@ -20,8 +20,8 @@ To expose a stored procedure:
 
 * Set `source.type` to `"stored-procedure"`
 * Set `source.object` to the fully qualified procedure name
-* Define the `parameters` (with types) if required
-* Set `rest.methods` (e.g., `"GET"`, `"POST"`) or `rest: false`
+* Define the `parameters` (with types) if necessary
+* Set `rest.methods` (for example, `"GET"`, `"POST"`) or `rest: false`
 * Set `graphql.operation` to `"query"` or `"mutation"`, or omit to default to `"mutation"`
 * Grant permission using the `"execute"` action
 
@@ -78,10 +78,10 @@ These codes define the type only, not default values.
 ## REST support
 
 * Supports only `GET` and `POST`
-* If `methods` is omitted, defaults to `POST`
-* `GET` sends parameters via query string
-* `POST` sends parameters via JSON body
-* To disable REST for a stored procedure, use `"rest": false`
+* Defaults to `POST` if `methods` is omitted
+* Sends parameters via query string with `GET`
+* Sends parameters via JSON body with `POST`
+* Disables REST for a stored procedure if `"rest": false` is set
 
 ### Example requests
 
@@ -97,9 +97,9 @@ These codes define the type only, not default values.
 
 ## GraphQL support
 
-* `graphql.operation` must be `"query"` or `"mutation"`
-* Field is auto-prefixed with `execute`, e.g., `executeGetCowrittenBooksByAuthor`
-* Parameters are GraphQL arguments
+* Requires `graphql.operation` to be `"query"` or `"mutation"`
+* Fields are autoprefixed with `execute`, for example, `executeGetCowrittenBooksByAuthor`
+* Parameters are passed as GraphQL arguments
 
 ### Example GraphQL
 
@@ -115,14 +115,9 @@ query {
 ## Limitations
 
 * Only the **first result set** is returned
-* **Pagination**, **filtering**, and **ordering** are not supported
-* **Relationships** are not supported
-* Requires metadata from [`sys.dm_exec_describe_first_result_set`](https://learn.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-describe-first-result-set-transact-sql)
-* Cannot return a single item by key
+* Pagination, filtering, and ordering aren't supported
+* Relationships aren't supported
+* Requires metadata from `sys.dm_exec_describe_first_result_set`
+* Can't return a single item by key
 * No parameter-level authorization
 
-## Related content
-
-* [Using views](views.md)
-* [Configuration reference](../../configuration/index.md)
-* [Install the CLI](../../how-to/install-cli.md)

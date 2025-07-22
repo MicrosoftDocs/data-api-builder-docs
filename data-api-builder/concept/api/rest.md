@@ -590,8 +590,3 @@ If successful, the result is an empty response with status code 204.
 To process POST, PUT, PATCH, and DELETE API requests; Data API builder constructs and executes the database queries in a transaction.
 
 [!INCLUDE[Database isolation levels](../../includes/database-isolation-levels.md)]
-
-## Related content
-
-- [OpenAPI](openapi.md)
-- [REST configuration reference](../../configuration/entities.md#rest)
