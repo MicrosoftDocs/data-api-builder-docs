@@ -16,7 +16,7 @@ Payload pagination lets a Data API point to extremely large datasets without ove
 
 This paging system works with both REST and GraphQL endpoints, and it includes built-in support for cursor-based navigation. Even when querying busy or fast-changing tables, cursor-based pagination helps deliver stable, consistent results across page loads.
 
-## What is Cursor Navigation
+## What is Cursor Navigation?
 
 Index navigation returns rows by position, like "rows 51 to 100." This works fine for static data but breaks if rows are added or removed between requests. The result is often skipped or duplicated rows.
 
