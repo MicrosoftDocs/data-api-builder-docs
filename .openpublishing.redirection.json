@@ -476,17 +476,17 @@
       "redirect_document_id": false
     },
     {
-      "source_path_from_root": "data-api-builder/concept/cache/index.md",
+      "source_path_from_root": "/data-api-builder/concept/cache/index.md",
       "redirect_url": "/azure/data-api-builder/",
       "redirect_document_id": false
     },
     {
-      "source_path_from_root": "data-api-builder/concept/database/index.md",
+      "source_path_from_root": "/data-api-builder/concept/database/index.md",
       "redirect_url": "/azure/data-api-builder/",
       "redirect_document_id": false
     },
     {
-      "source_path_from_root": "data-api-builder/concept/index.yml",
+      "source_path_from_root": "/data-api-builder/concept/index.yml",
       "redirect_url": "/azure/data-api-builder/",
       "redirect_document_id": false
     }
