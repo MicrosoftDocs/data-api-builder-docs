@@ -305,7 +305,6 @@
       "redirect_url": "/azure/data-api-builder/deployment/best-practices-configuration",
       "redirect_document_id": true
     },
-
     {
       "source_path_from_root": "/data-api-builder/use-application-insights.md",
       "redirect_url": "/azure/data-api-builder/concept/monitor/application-insights",
@@ -351,7 +350,6 @@
       "redirect_url": "/azure/data-api-builder/how-to/use-environments",
       "redirect_document_id": true
     },
-
     {
       "source_path_from_root": "/data-api-builder/azure-cosmos-db-nosql.md",
       "redirect_url": "/azure/data-api-builder/quickstart/azure-cosmos-db-nosql",
@@ -392,13 +390,11 @@
       "redirect_url": "/azure/data-api-builder/concept/database/relationships",
       "redirect_document_id": true
     },
-
     {
       "source_path_from_root": "/data-api-builder/environments.md",
       "redirect_url": "/azure/data-api-builder/concept/config/environments",
       "redirect_document_id": true
     },
-
     {
       "source_path_from_root": "/data-api-builder/graphql.md",
       "redirect_url": "/azure/data-api-builder/concept/api/graphql",
@@ -414,7 +410,6 @@
       "redirect_url": "/azure/data-api-builder/concept/api/rest",
       "redirect_document_id": true
     },
-
     {
       "source_path_from_root": "/data-api-builder/authentication-azure.md",
       "redirect_url": "/azure/data-api-builder/concept/security/authentication-azure",
@@ -435,8 +430,6 @@
       "redirect_url": "/azure/data-api-builder/concept/security/index",
       "redirect_document_id": true
     },
-
-
     {
       "source_path_from_root": "/data-api-builder/quickstart-azure-cosmos-db-nosql.md",
       "redirect_url": "/azure/data-api-builder/quickstart/azure-cosmos-db-nosql",
@@ -481,6 +474,21 @@
       "source_path_from_root": "/data-api-builder/reference-policies.md",
       "redirect_url": "/azure/data-api-builder/reference-code-policies",
       "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/cache/index.md",
+      "redirect_url": "/azure/data-api-builder/",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/database/index.md",
+      "redirect_url": "/azure/data-api-builder/",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/index.yml",
+      "redirect_url": "/azure/data-api-builder/",
+      "redirect_document_id": false
     }
- ]
+  ]
 }
