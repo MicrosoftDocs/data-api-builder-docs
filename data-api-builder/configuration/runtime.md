@@ -117,7 +117,7 @@ Configuration settings that determine runtime behavior.
         "allow-credentials": <true>|<false> (default: `false`)
       },
       "authentication": {
-        "provider": <string> (default: "StaticWebApps"),
+        "provider": <string> (default: "AppService"),
         "jwt": {
           "audience": "<string>",
           "issuer": "<string>"
@@ -458,7 +458,7 @@ Global CORS configuration.
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime.host.authentication` | `provider` | enum (`StaticWebApps` \| `AppService` \| `EntraId` \| `Simulator`) | ❌ No | `StaticWebApps` |
+| `runtime.host.authentication` | `provider` | enum (`AppService` \| `EntraId` \| `Simulator`) | ❌ No | `AppService` |
 
 Defines the method of authentication used by the Data API builder.
 
@@ -471,9 +471,9 @@ Defines the method of authentication used by the Data API builder.
 | `Simulator` | Development/testing only. No auth headers required; DAB fabricates an authenticated context. Optional `X-MS-API-ROLE` may still be sent to simulate a role. Not for production use. See [local authentication](../local-authentication.md). |
 
 > [!TIP]
-> Data API builder authentication providers `StaticWebApps` and `AppService` both support EasyAuth. EasyAuth is not a formal standard; it's the nickname for Azure App Service Authentication/Authorization, a built-in feature of Azure App Service, Azure Functions, and Azure Static Web Apps. It isn't part of OAuth, OIDC, SAML, or any other open standard, though it uses those protocols under the hood. EasyAuth handles sign-in flows with identity providers such as Microsoft Entra ID, Google, and GitHub. It also injects authenticated user claims into HTTP headers for your app and can enforce access control without modifying your code. 
+> Data API builder authentication providers `StaticWebApps` (Deprecated) and `AppService` both support EasyAuth. EasyAuth is not a formal standard; it's the nickname for Azure App Service Authentication/Authorization, a built-in feature of Azure App Service, Azure Functions, and Azure Static Web Apps. It isn't part of OAuth, OIDC, SAML, or any other open standard, though it uses those protocols under the hood. EasyAuth handles sign-in flows with identity providers such as Microsoft Entra ID, Google, and GitHub. 
 > 
-> The "easy" part is that you enable it in the Azure portal or through ARM templates without writing custom authentication middleware. A common misunderstanding is to treat EasyAuth as a cross-platform standard when, in fact, it's a Microsoft PaaS feature built on top of existing identity standards. In DAB, both `StaticWebApps` and `AppService` providers read the same EasyAuth headers. They behave the same way in DAB but are named separately to allow for differences in Azure hosting environments.
+> The "easy" part is that you enable it in the Azure portal or through ARM templates without writing custom authentication middleware. A common misunderstanding is to treat EasyAuth as a cross-platform standard when, in fact, it's a Microsoft PaaS feature built on top of existing identity standards. In DAB, both `StaticWebApps` (Deprecated) and `AppService` providers read the same EasyAuth headers. They behave the same way in DAB but are named separately to allow for differences in Azure hosting environments.
 
 ### Format
 
