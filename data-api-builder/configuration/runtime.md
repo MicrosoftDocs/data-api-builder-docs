@@ -470,7 +470,7 @@ Defines the method of authentication used by the Data API builder.
 | `AzureAd` | [ *Deprecated* ] Functionally identical to `EntraId`. Future versions of DAB maybe remove this value. |
 | `Simulator` | Development/testing only. No auth headers required; DAB fabricates an authenticated context. Optional `X-MS-API-ROLE` may still be sent to simulate a role. Not for production use. See [local authentication](../local-authentication.md). |
 
-> [!INFORMATION]
+> [!TIP]
 > Data API builder authentication providers `StaticWebApps` and `AppService` both support EasyAuth. EasyAuth is not a formal standard; it's the nickname for Azure App Service Authentication/Authorization, a built-in feature of Azure App Service, Azure Functions, and Azure Static Web Apps. It isn't part of OAuth, OIDC, SAML, or any other open standard, though it uses those protocols under the hood. EasyAuth handles sign-in flows with identity providers such as Microsoft Entra ID, Google, and GitHub. It also injects authenticated user claims into HTTP headers for your app and can enforce access control without modifying your code. 
 > 
 > The "easy" part is that you enable it in the Azure portal or through ARM templates without writing custom authentication middleware. A common misunderstanding is to treat EasyAuth as a cross-platform standard when, in fact, it's a Microsoft PaaS feature built on top of existing identity standards. In DAB, both `StaticWebApps` and `AppService` providers read the same EasyAuth headers. They behave the same way in DAB but are named separately to allow for differences in Azure hosting environments.
