@@ -512,7 +512,7 @@ Defines the method of authentication used by the Data API builder.
   "authentication": {
    "provider": "AzureAD",
    "jwt": {
-    "audience": "c123d456-a789-0abc-a12b-3c4d56e78f90",
+    "audience": "00001111-aaaa-2222-bbbb-3333cccc4444",
     "issuer": "https://login.microsoftonline.com/98765f43-21ba-400c-a5de-1f2a3d4e5f6a/v2.0"
    }
   }
