@@ -323,7 +323,8 @@
           displayName: local auth, simulated auth, development, static users
         - name: How to use Row-level security
           href: concept/security/row-level-security.md
-          displayName: RLS, predicates, SQL security, claim-based access- name: Samples
+          displayName: RLS, predicates, SQL security, claim-based access
+- name: Security
   items:
     - name: Devcontainer with Azure SQL
       href: /samples/microsoft/vscode-remote-try-dab/devcontainer
