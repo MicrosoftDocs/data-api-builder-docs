@@ -58,178 +58,178 @@
           href: quickstart/azure-cosmos-db-nosql.md
           displayName: azure, cosmos, nosql, cloud, database
 - name: Configuration file
-    items:
-      - name: Overview
-        href: configuration/index.md
-        displayName: Config, JSON
-      - name: Sections
-        items:
-          - name: Data source
-            href: configuration/data-source.md#data-source
-            items:
-              - name: Database type
-                href: configuration/data-source.md#data-source
-              - name: Connection string
-                href: configuration/data-source.md#data-source
-              - name: Options
-                href: configuration/data-source.md#data-source
-          - name: Data source files
-            href: configuration/index.md#data-source-files
-          - name: Runtime
-            href: configuration/runtime.md#runtime
-            items:
-              - name: GraphQL
-                displayName: API
-                href: configuration/runtime.md#graphql-runtime
-                items:
-                  - name: Enabled
-                    href: configuration/runtime.md#graphql-runtime
-                  - name: Path
-                    href: configuration/runtime.md#graphql-runtime
-                  - name: Depth limit
-                    href: configuration/runtime.md#graphql-runtime
-                  - name: Allow introspection
-                    href: configuration/runtime.md#graphql-runtime
-                  - name: Multiple mutations
-                    displayName: multiple create, transaction
-                    href: configuration/runtime.md#graphql-runtime
-              - name: REST
-                displayName: API
-                href: configuration/runtime.md#rest-runtime
-                items:
-                  - name: Enabled
-                    href: configuration/runtime.md#rest-runtime
-                  - name: Path
-                    href: configuration/runtime.md#rest-runtime
-                  - name: Request body strict
-                    displayName: dotnet, poco, dto
-                    href: configuration/runtime.md#rest-runtime
-              - name: Host
-                href: configuration/runtime.md#mode-host-runtime
-                items:
-                  - name: Mode
-                    href: configuration/runtime.md#mode-host-runtime
-                  - name: Maximum response size
-                    href: configuration/runtime.md#maximum-response-size-host-runtime
-                    displayName: mb, megabyte
-                  - name: CORS
-                    href: configuration/runtime.md#cors-host-runtime
-                  - name: Allow credentials
-                    href: configuration/runtime.md#cors-host-runtime
-                  - name: Origins
-                    href: configuration/runtime.md#cors-host-runtime
-                  - name: Authentication
-                    href: configuration/runtime.md#provider-authentication-host-runtime
-                    displayName: claims, predicate, item
-                  - name: Provider
-                    href: configuration/runtime.md#provider-authentication-host-runtime
-                  - name: JSON Web Tokens
-                    displayName: JWT
-                    href: configuration/runtime.md#jwt-authentication-host-runtime
-                  - name: Audience
-                    href: configuration/runtime.md#jwt-authentication-host-runtime
-                  - name: Issuer
-                    href: configuration/runtime.md#jwt-authentication-host-runtime
-              - name: Global Cache
-                href: configuration/runtime.md#cache-runtime
-                items:
-                  - name: Enabled
-                    href: configuration/runtime.md#cache-runtime
-                  - name: Time-to-live in seconds
-                    displayName: TTL
-                    href: configuration/runtime.md#cache-runtime
-              - name: Pagination
-                href: configuration/runtime.md#pagination-runtime
-                items:
-                  - name: Default page size
-                    displayName: default-page-size
-                    href: configuration/runtime.md#pagination-runtime
-                  - name: Maximum page size
-                    displayName: max-page-size
-                    href: configuration/runtime.md#pagination-runtime
-          - name: Entities
-            href: configuration/entities.md#entities
-            items:
-              - name: REST
-                href: configuration/entities.md#rest-entity-name-entities
-                items:
-                  - name: Enabled
-                    href: configuration/entities.md#rest-entity-name-entities
-                  - name: Path
-                    href: configuration/entities.md#rest-entity-name-entities
-                  - name: Methods
-                    href: configuration/entities.md#rest-entity-name-entities
-              - name: GraphQL
-                href: configuration/entities.md#graphql
-                items:
-                  - name: Enabled
-                    href: configuration/entities.md#enabled-graphql-entity-name-entities
-                  - name: Type
-                    href: configuration/entities.md#type-graphql-entity-name-entities
-                  - name: Operation
-                    href: configuration/entities.md#operation-graphql-entity-name-entities
-              - name: Source
-                href: configuration/entities.md#source-entity-name-entities
-                items:
-                  - name: Object
-                    href: configuration/entities.md#source-entity-name-entities
-                  - name: Type
-                    href: configuration/entities.md#source-entity-name-entities
-                  - name: Key fields
-                    href: configuration/entities.md#source-entity-name-entities
-                  - name: Parameters
-                    href: configuration/entities.md#source-entity-name-entities
-              - name: Mappings
-                displayName: field, column, property
-                href: configuration/entities.md#mappings-entity-name-entities
-              - name: Entity Relationships
-                href: configuration/entities.md#relationships-entity-name-entities
-                items:
-                  - name: Cardinality
-                    href: configuration/entities.md#relationships-entity-name-entities
-                  - name: Target entity
-                    href: configuration/entities.md#relationships-entity-name-entities
-                  - name: Source fields
-                    href: configuration/entities.md#relationships-entity-name-entities
-                  - name: Target fields
-                    href: configuration/entities.md#relationships-entity-name-entities
-                  - name: Linking object or entity
-                    href: configuration/entities.md#relationships-entity-name-entities
-                  - name: Linking source fields
-                    href: configuration/entities.md#relationships-entity-name-entities
-                  - name: Linking target fields
-                    href: configuration/entities.md#relationships-entity-name-entities
-              - name: Cache
-                href: configuration/entities.md#cache-entity-name-entities
-                items:
-                  - name: Enabled
-                    href: configuration/entities.md#cache-entity-name-entities
-                  - name: Time-to-live in seconds
-                    displayName: TTL
-                    href: configuration/entities.md#cache-entity-name-entities
-              - name: Permissions
-                displayName: Security, Policy, claims, predicate, item
-                href: configuration/entities.md#permissions-entity-name-entities
-                items:
-                  - name: Role
-                    href: configuration/entities.md#permissions-entity-name-entities
-                  - name: Actions (string-array)
-                    href: configuration/entities.md#actions-string-array-permissions-entity-name-entities
-                  - name: Actions (object-array)
-                    href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
-                    items:
-                      - name: Action
-                        href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
-                  - name: Fields
-                    href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
-                  - name: Policy
-                    href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
-                    displayName: claims, predicate, item
-                    items:
-                      - name: Database
-                        href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
-      - name: JSON Schema
-        href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
+  items:
+    - name: Overview
+      href: configuration/index.md
+      displayName: Config, JSON
+    - name: Sections
+      items:
+        - name: Data source
+          href: configuration/data-source.md#data-source
+          items:
+            - name: Database type
+              href: configuration/data-source.md#data-source
+            - name: Connection string
+              href: configuration/data-source.md#data-source
+            - name: Options
+              href: configuration/data-source.md#data-source
+        - name: Data source files
+          href: configuration/index.md#data-source-files
+        - name: Runtime
+          href: configuration/runtime.md#runtime
+          items:
+            - name: GraphQL
+              displayName: API
+              href: configuration/runtime.md#graphql-runtime
+              items:
+                - name: Enabled
+                  href: configuration/runtime.md#graphql-runtime
+                - name: Path
+                  href: configuration/runtime.md#graphql-runtime
+                - name: Depth limit
+                  href: configuration/runtime.md#graphql-runtime
+                - name: Allow introspection
+                  href: configuration/runtime.md#graphql-runtime
+                - name: Multiple mutations
+                  displayName: multiple create, transaction
+                  href: configuration/runtime.md#graphql-runtime
+            - name: REST
+              displayName: API
+              href: configuration/runtime.md#rest-runtime
+              items:
+                - name: Enabled
+                  href: configuration/runtime.md#rest-runtime
+                - name: Path
+                  href: configuration/runtime.md#rest-runtime
+                - name: Request body strict
+                  displayName: dotnet, poco, dto
+                  href: configuration/runtime.md#rest-runtime
+            - name: Host
+              href: configuration/runtime.md#mode-host-runtime
+              items:
+                - name: Mode
+                  href: configuration/runtime.md#mode-host-runtime
+                - name: Maximum response size
+                  href: configuration/runtime.md#maximum-response-size-host-runtime
+                  displayName: mb, megabyte
+                - name: CORS
+                  href: configuration/runtime.md#cors-host-runtime
+                - name: Allow credentials
+                  href: configuration/runtime.md#cors-host-runtime
+                - name: Origins
+                  href: configuration/runtime.md#cors-host-runtime
+                - name: Authentication
+                  href: configuration/runtime.md#provider-authentication-host-runtime
+                  displayName: claims, predicate, item
+                - name: Provider
+                  href: configuration/runtime.md#provider-authentication-host-runtime
+                - name: JSON Web Tokens
+                  displayName: JWT
+                  href: configuration/runtime.md#jwt-authentication-host-runtime
+                - name: Audience
+                  href: configuration/runtime.md#jwt-authentication-host-runtime
+                - name: Issuer
+                  href: configuration/runtime.md#jwt-authentication-host-runtime
+            - name: Global Cache
+              href: configuration/runtime.md#cache-runtime
+              items:
+                - name: Enabled
+                  href: configuration/runtime.md#cache-runtime
+                - name: Time-to-live in seconds
+                  displayName: TTL
+                  href: configuration/runtime.md#cache-runtime
+            - name: Pagination
+              href: configuration/runtime.md#pagination-runtime
+              items:
+                - name: Default page size
+                  displayName: default-page-size
+                  href: configuration/runtime.md#pagination-runtime
+                - name: Maximum page size
+                  displayName: max-page-size
+                  href: configuration/runtime.md#pagination-runtime
+        - name: Entities
+          href: configuration/entities.md#entities
+          items:
+            - name: REST
+              href: configuration/entities.md#rest-entity-name-entities
+              items:
+                - name: Enabled
+                  href: configuration/entities.md#rest-entity-name-entities
+                - name: Path
+                  href: configuration/entities.md#rest-entity-name-entities
+                - name: Methods
+                  href: configuration/entities.md#rest-entity-name-entities
+            - name: GraphQL
+              href: configuration/entities.md#graphql
+              items:
+                - name: Enabled
+                  href: configuration/entities.md#enabled-graphql-entity-name-entities
+                - name: Type
+                  href: configuration/entities.md#type-graphql-entity-name-entities
+                - name: Operation
+                  href: configuration/entities.md#operation-graphql-entity-name-entities
+            - name: Source
+              href: configuration/entities.md#source-entity-name-entities
+              items:
+                - name: Object
+                  href: configuration/entities.md#source-entity-name-entities
+                - name: Type
+                  href: configuration/entities.md#source-entity-name-entities
+                - name: Key fields
+                  href: configuration/entities.md#source-entity-name-entities
+                - name: Parameters
+                  href: configuration/entities.md#source-entity-name-entities
+            - name: Mappings
+              displayName: field, column, property
+              href: configuration/entities.md#mappings-entity-name-entities
+            - name: Entity Relationships
+              href: configuration/entities.md#relationships-entity-name-entities
+              items:
+                - name: Cardinality
+                  href: configuration/entities.md#relationships-entity-name-entities
+                - name: Target entity
+                  href: configuration/entities.md#relationships-entity-name-entities
+                - name: Source fields
+                  href: configuration/entities.md#relationships-entity-name-entities
+                - name: Target fields
+                  href: configuration/entities.md#relationships-entity-name-entities
+                - name: Linking object or entity
+                  href: configuration/entities.md#relationships-entity-name-entities
+                - name: Linking source fields
+                  href: configuration/entities.md#relationships-entity-name-entities
+                - name: Linking target fields
+                  href: configuration/entities.md#relationships-entity-name-entities
+            - name: Cache
+              href: configuration/entities.md#cache-entity-name-entities
+              items:
+                - name: Enabled
+                  href: configuration/entities.md#cache-entity-name-entities
+                - name: Time-to-live in seconds
+                  displayName: TTL
+                  href: configuration/entities.md#cache-entity-name-entities
+            - name: Permissions
+              displayName: Security, Policy, claims, predicate, item
+              href: configuration/entities.md#permissions-entity-name-entities
+              items:
+                - name: Role
+                  href: configuration/entities.md#permissions-entity-name-entities
+                - name: Actions (string-array)
+                  href: configuration/entities.md#actions-string-array-permissions-entity-name-entities
+                - name: Actions (object-array)
+                  href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
+                  items:
+                    - name: Action
+                      href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
+                - name: Fields
+                  href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
+                - name: Policy
+                  href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
+                  displayName: claims, predicate, item
+                  items:
+                    - name: Database
+                      href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
+    - name: JSON Schema
+      href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
 - name: How-to
   items:
     - name: How to install the DAB CLI
