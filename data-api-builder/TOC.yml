@@ -324,7 +324,36 @@
         - name: How to use Row-level security
           href: concept/security/row-level-security.md
           displayName: RLS, predicates, SQL security, claim-based access
-- name: Security
+    - name: Deploy and Host
+      items:
+        - name: Deployment Overview
+          href: deployment/index.md
+          displayName: deployment, hosting, summary, intro
+        - name: Deployment Checklist
+          href: deployment/checklist.md
+          displayName: deployment, validation, steps, readiness
+        - name: Deployment Hosting Options
+          href: deployment/hosting-options.md
+          displayName: hosting, container, azure, options
+        - name: How to deploy to Azure Container Apps using Azure Portal
+          href: deployment/how-to-publish-container-apps.md
+          displayName: azure, container apps, publish, deploy
+        - name: How to deployto Azure Container Apps using Azure CLI
+          href: tutorial-deploy-container-app-cli.md
+          displayName: azure, deploy, ACA, container, cli
+        - name: How to deployto Azure Container Instances
+          href: deployment/how-to-publish-container-instances.md
+          displayName: azure, container instances, publish, deploy
+        - name: How to deployto Azure Static Web Apps (preview)
+          href: deployment/how-to-host-static-web-apps.md
+          displayName: swa, static web apps, azure, preview
+        - name: Configuration best practices
+          href: deployment/best-practices-configuration.md
+          displayName: configuration, deployment, settings, optimize
+        - name: Security best practices
+          href: deployment/best-practices-security.md
+          displayName: security, deployment, hardening, guidance
+- name: Samples
   items:
     - name: Devcontainer with Azure SQL
       href: /samples/microsoft/vscode-remote-try-dab/devcontainer
@@ -338,35 +367,6 @@
     - name: Todo app with SWA and Azure SQL
       href: /samples/azure-samples/dab-swa-todo/sample
       displayName: todo, dab, static web apps, sample, azure sql
-- name: Deployment
-  items:
-    - name: Overview
-      href: deployment/index.md
-      displayName: deployment, hosting, summary, intro
-    - name: Checklist
-      href: deployment/checklist.md
-      displayName: deployment, validation, steps, readiness
-    - name: Options
-      href: deployment/hosting-options.md
-      displayName: hosting, container, azure, options
-    - name: Deploy to Azure Container Apps using Azure Portal
-      href: deployment/how-to-publish-container-apps.md
-      displayName: azure, container apps, publish, deploy
-    - name: Deploy to Azure Container Apps using Azure CLI
-      href: tutorial-deploy-container-app-cli.md
-      displayName: azure, deploy, ACA, container, cli
-    - name: Deploy to Azure Container Instances
-      href: deployment/how-to-publish-container-instances.md
-      displayName: azure, container instances, publish, deploy
-    - name: Deploy to Azure Static Web Apps (preview)
-      href: deployment/how-to-host-static-web-apps.md
-      displayName: swa, static web apps, azure, preview
-    - name: Configuration best practices
-      href: deployment/best-practices-configuration.md
-      displayName: configuration, deployment, settings, optimize
-    - name: Security best practices
-      href: deployment/best-practices-security.md
-      displayName: security, deployment, hardening, guidance
 - name: Troubleshooting
   items:
     - name: FAQ
