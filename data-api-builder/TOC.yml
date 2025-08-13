@@ -6,7 +6,7 @@
     - name: What is Data API builder?
       displayName: overview
       href: overview.md
-    - name: What's new
+    - name: Overview
       displayName: changelog, diff, release
       href: whats-new/index.yml
       items:
@@ -221,13 +221,13 @@
                     - name: Action
                       href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
                 - name: Fields
-                  href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
+                  href: configuration/entities.md#nested-properties-1
                 - name: Policy
-                  href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
+                  href: configuration/entities.md#nested-properties-1
                   displayName: claims, predicate, item
                   items:
                     - name: Database
-                      href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
+                      href: configuration/entities.md#nested-properties-1
     - name: JSON Schema
       href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
 - name: How-to
@@ -254,10 +254,10 @@
         - name: How to call GraphQL endpoints
           href: concept/api/graphql.md
           displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
-        - name: How to use GraphQL multiple mutations
+        - name: How to insert multiple records with GraphQL 
           href: how-to/multiple-mutations.md
           displayName: batch, transaction, graphql, createMany, mutation
-        - name: How to use built-in response pagination
+        - name: How to use built-in pagination
           href: concept/api/pagination.md
           displayName: pagination, limit, offset, top, skip, page size, results
     - name: Data caching
