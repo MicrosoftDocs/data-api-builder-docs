@@ -221,13 +221,13 @@
                     - name: Action
                       href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
                 - name: Fields
-                  href: configuration/entities.md#nested-properties-1#a
+                  href: configuration/entities.md#nested-properties-1
                 - name: Policy
-                  href: configuration/entities.md#nested-properties-1#b
+                  href: configuration/entities.md#nested-properties-1
                   displayName: claims, predicate, item
                   items:
                     - name: Database
-                      href: configuration/entities.md#nested-properties-1#c
+                      href: configuration/entities.md#nested-properties-1
     - name: JSON Schema
       href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
 - name: How-to
