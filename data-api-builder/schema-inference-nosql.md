@@ -46,7 +46,7 @@ Schema generation allows for automatic schema generation from Azure Cosmos DB co
 | `--sampling-mode`         | string    | `TopNSampling`, `PartitionBasedSampling`, `TimeBasedSampling` | Chooses sampling strategy. |
 | `--sampling-count` / `-n` | int       | Default: `10`                           | Number of records to sample. |
 | `--sampling-partitionKeyPath` | string | Optional                                | Partition key path (for PartitionBasedSampling). |
-| `--sampling-days`         | int       | Default: `0` (ignore filter)            | Filters records newer than N days. |
+| `--sampling-days`         | int       | Default: `0` (ignore filter)            | Filter records newer than N days. |
 | `--sampling-group-count`  | int       | Default: `10`                           | Used in TimeBasedSampling to split time ranges. |
 | `--config`                | string    | Path to DAB config file                 | Provides connection and entity info. |
 
@@ -90,7 +90,7 @@ SELECT TOP N * FROM c ORDER BY _ts DESC
 
 **Options**
 
-- `sampling-partitionKeyPath`: Optional; auto-discovered if not provided
+- `sampling-partitionKeyPath`: Optional; autodiscovered if not provided
 - `sampling-count` (N): Records per partition (default: 10)
 - `sampling-days`: Filter records by recency (default: 0)
 
