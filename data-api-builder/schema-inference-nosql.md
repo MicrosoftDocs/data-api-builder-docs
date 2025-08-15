@@ -63,10 +63,22 @@ SELECT TOP N * FROM c ORDER BY _ts DESC
 - Selects top N records from the dataset ordered by timestamp.
 - **Ideal For**: Small datasets with uniform data structure.
 
-**Options:**
+**Options**
 
 - `sampling-count` (N): Number of records to retrieve (default: 10)
 - `sampling-days`: Filter for records newer than N days (optional)
+
+**Example**
+
+```sh
+./dab export --graphql -o ./schema.gql \
+  --generate true \
+  --database-type cosmosdb \
+  --sampling-mode TopNSampling \
+  --sampling-count 20 \
+  --sampling-days 30 \
+  --config ./dab-config.json
+```
 
 ### `PartitionBasedSampling` (Partition-aware)
 
@@ -76,11 +88,24 @@ SELECT TOP N * FROM c ORDER BY _ts DESC
 
 - **Ideal For**: Scenarios with diverse data across partitions.
 
-**Options:**
+**Options**
 
 - `sampling-partitionKeyPath`: Optional; auto-discovered if not provided
 - `sampling-count` (N): Records per partition (default: 10)
 - `sampling-days`: Filter records by recency (default: 0)
+
+**Example**
+
+```sh
+./dab export --graphql -o ./schema.gql \
+  --generate true \
+  --database-type cosmosdb \
+  --sampling-mode PartitionBasedSampling \
+  --sampling-partitionKeyPath /customerId \
+  --sampling-count 10 \
+  --sampling-days 0 \
+  --config ./dab-config.json
+```
 
 ### `TimeBasedSampling` (Time-range aware)
 
@@ -90,7 +115,7 @@ SELECT TOP N * FROM c ORDER BY _ts DESC
 
 - **Ideal For**: Unknown or evolving schemas, highest diversity
 
-**Options:**
+**Options**
 
 - `sampling-group-count`: Number of time groups (default: 10)
 - `sampling-count` (N): Records per group
@@ -98,6 +123,19 @@ SELECT TOP N * FROM c ORDER BY _ts DESC
 
 > [!NOTE]
 > This mode is the most resource-intensive due to cross-partition queries.
+
+**Example**
+
+```sh
+./dab export --graphql -o ./schema.gql \
+  --generate true \
+  --database-type cosmosdb \
+  --sampling-mode TimeBasedSampling \
+  --sampling-group-count 8 \
+  --sampling-count 5 \
+  --sampling-days 90 \
+  --config ./dab-config.json
+```
 
 ## How to use the generated schema
 
