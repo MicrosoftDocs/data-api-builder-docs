@@ -48,9 +48,14 @@ Now, the `/health` endpoint includes basic config details and health checks:
 
 Checks validate the availability and responsiveness of each data source and endpoint—REST and GraphQL—using thresholds you define.
 
+
 ### Endpoint Safety
 
 Health endpoints follow DAB’s role-based access model. Checks run in parallel or sequentially depending on settings, and responses are cached to reduce load from polling.
+
+## Introducing: Schema Inference for Azure Cosmos DB for NOSQL
+
+This enhancement to Azure Data API Builder (DAB) enables automated schema creation directly from Azure CosmosDB NOSQL API collections. earlier, users had to manually define the schema using a schema.gql file. With the new capability, schema generation can be handled through cli, streamlining configuration and reducing the need for upfront knowledge of the database structure.[Read more](../schema-inference-nosql.md)
 
 ## Introducing: Custom Log-Level
 
