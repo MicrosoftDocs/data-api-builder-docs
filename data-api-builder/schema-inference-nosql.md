@@ -10,45 +10,20 @@ ms.date: 05/13/2025
 show_latex: true
 ---
 
-# Azure Cosmos DB for NOSQL Schema Generation in Azure Data API Builder
+# Azure Cosmos DB for NoSQL schema generation
 
-This feature introduces an enhancement to the Azure Data API Builder (DAB) that allows for automatic schema generation from Azure Cosmos DB collections. Previously, users were required to manually provide schema information via a `schema.gql` file. With this update, users have the option to generate the schema automatically, simplifying the setup process.
-
-## Motivation
-The manual provision of schema information can be time-consuming and error-prone. By enabling automatic schema generation, DAB aims to:
-
-- Reduce the setup complexity for users.
-- Minimize potential errors from manual schema definitions.
-- Streamline the integration process with Azure Cosmos DB for NOSQL.
-
-## Feature Details
-
-- Automatic Schema Generation: DAB can now infer the schema directly from the existing Azure Cosmos DB NOSQL API collections.
-
-- Optional Usage: Users can choose between providing a schema.gql file or using the automatic schema generation feature.
-
-- Enhanced User Experience: This feature simplifies the initial configuration, especially beneficial for rapid prototyping and development scenarios.
+Schema generation allows for automatic schema generation from Azure Cosmos DB collections. Previously, users manually generated the required `schema.gql` schema file. With schema generation, users can generate this schema automatically by sampling their existing data.
 
 ## Usage
-To utilize the automatic schema generation:
 
  - Ensure your Azure Cosmos DB NOSQL collections are populated with representative data.
-
  - Configure DAB to connect to your Azure Cosmos DB NOSQL instance.
-
  - Omit the schema.gql file from your setup.
+ - After initialization, use the `export` CLI command. 
+ 
+## CLI Syntax
 
- - Upon initialization, DAB analyzes the collections and generate the corresponding GraphQL schema.
-
- ### New Capability: Schema Generation via CLI
-
-This update introduces a **schema generation utility** that automates schema creation using existing data in Azure Cosmos DB.
-
-### CLI Usage
-
-The CLI command to generate schema looks like this:
-
-```bash
+```sh
 ./Microsoft.DataApiBuilder export --graphql -o <output-path> --generate true \
   --database-type cosmosdb \
   --sampling-mode <sampling-mode> \
@@ -59,9 +34,10 @@ The CLI command to generate schema looks like this:
   --config <dab-config-file>
 ```
 
-This command uses the provided DAB runtime config to connect to the database and export the schema to the specified output path.
+> [!NOTE]
+> This command connects to Cosmos DB using the information in config file.
 
-### CLI Options
+### CLI options
 
 | Option                    | Data Type | Values / Default                        | Description |
 |---------------------------|-----------|-----------------------------------------|-------------|
@@ -74,11 +50,11 @@ This command uses the provided DAB runtime config to connect to the database and
 | `--sampling-group-count`  | int       | Default: `10`                           | Used in TimeBasedSampling to split time ranges. |
 | `--config`                | string    | Path to DAB config file                 | Provides connection and entity info. |
 
-## Sampling Modes
+## Sampling modes
 
 The schema generator supports three sampling strategies based on different use cases:
 
-### 1. TopNSampling (Simple)
+### `TopNSampling` (Simple)
 
 ```sql
 SELECT TOP N * FROM c ORDER BY _ts DESC
@@ -92,9 +68,7 @@ SELECT TOP N * FROM c ORDER BY _ts DESC
 - `sampling-count` (N): Number of records to retrieve (default: 10)
 - `sampling-days`: Filter for records newer than N days (optional)
 
----
-
-### 2. PartitionBasedSampling (Partition-aware)
+### `PartitionBasedSampling` (Partition-aware)
 
 - Determines partition key path (from config or calculated)
 - Fetches distinct partition key values
@@ -108,9 +82,7 @@ SELECT TOP N * FROM c ORDER BY _ts DESC
 - `sampling-count` (N): Records per partition (default: 10)
 - `sampling-days`: Filter records by recency (default: 0)
 
----
-
-### 3. TimeBasedSampling (Time-range aware)
+### `TimeBasedSampling` (Time-range aware)
 
 - Calculates min and max `_ts` (timestamps)
 - Splits into N time-based groups
@@ -127,9 +99,7 @@ SELECT TOP N * FROM c ORDER BY _ts DESC
 > [!NOTE]
 > This mode is the most resource-intensive due to cross-partition queries.
 
----
-
-## How to Use the Generated Schema
+## How to use the generated schema
 
 Once generated, the resulting `schema.gql` file can be used with DAB exactly like a manually written one:
 
