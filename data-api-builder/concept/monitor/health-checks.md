@@ -81,6 +81,9 @@ Health checks can also be enabled per entity in `entities.{entity-name}.health`:
 | `first`        | Number of rows returned by the health query        | 100     |
 | `threshold-ms` | Maximum allowed time in milliseconds for the query | 1000    |
 
+> [!NOTE]
+> The value of `first` must be less than or equal to the runtime configuration for `max-page-size`. Having said that, remember that a smaller `first` value helps health checks complete faster. When there are many entities, higher `first` values can negatively delay health reports. 
+
 Example:
 
 ```json
