@@ -324,13 +324,13 @@
         - name: How to deploy to Azure Container Apps using Azure Portal
           href: deployment/how-to-publish-container-apps.md
           displayName: azure, container apps, publish, deploy
-        - name: How to deployto Azure Container Apps using Azure CLI
+        - name: How to deploy to Azure Container Apps using Azure CLI
           href: tutorial-deploy-container-app-cli.md
           displayName: azure, deploy, ACA, container, cli
-        - name: How to deployto Azure Container Instances
+        - name: How to deploy to Azure Container Instances
           href: deployment/how-to-publish-container-instances.md
           displayName: azure, container instances, publish, deploy
-        - name: How to deployto Azure Static Web Apps (preview)
+        - name: How to deploy to Azure Static Web Apps (preview)
           href: deployment/how-to-host-static-web-apps.md
           displayName: swa, static web apps, azure, preview
         - name: Configuration best practices
