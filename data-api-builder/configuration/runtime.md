@@ -474,6 +474,8 @@ Defines the method of authentication used by the Data API builder.
 > [!NOTE]
 > The `X-MS-API-ROLE` header is optional but can be used to select a role context for the request. If not provided, DAB selects a default role (usually the first in the array).
 
+### EasyAuth
+
 Data API builder authentication providers `StaticWebApps` (Deprecated) and `AppService` both support EasyAuth. EasyAuth is not a formal standard; it's the nickname for Azure App Service Authentication/Authorization, a built-in feature of Azure App Service, Azure Functions, and Azure Static Web Apps. It isn't part of OAuth, OIDC, SAML, or any other open standard, though it uses those protocols under the hood. EasyAuth handles sign-in flows with identity providers such as Microsoft Entra ID, Google, and GitHub. 
 
 The "easy" part is that you enable it in the Azure portal or through ARM templates without writing custom authentication middleware. A common misunderstanding is to treat EasyAuth as a cross-platform standard when, in fact, it's a Microsoft PaaS feature built on top of existing identity standards. In DAB, both `StaticWebApps` (Deprecated) and `AppService` providers read the same EasyAuth headers. They behave the same way in DAB but are named separately to allow for differences in Azure hosting environments.
@@ -492,7 +494,7 @@ The "easy" part is that you enable it in the Azure portal or through ARM templat
 }
 ```
 > [!NOTE]
-> If the provider is `EntraId`, the `JWT` section is required.
+> If you use EntraId as the provider, the `jwt` section (`audience`, `issuer`) is required to validate incoming JWTs. For `AppService`, EasyAuth handles authentication and injects the headers DAB uses.
 
 ### Example: App Service
 
@@ -523,21 +525,51 @@ The "easy" part is that you enable it in the Azure portal or through ARM templat
 }
 ````
 
-> [!NOTE]
-> If you use EntraId as the provider, the `jwt` section (`audience`, `issuer`) is required to validate incoming JWTs. For `AppService`, EasyAuth handles authentication and injects the headers DAB uses.
+### Example: Custom
+
+````json
+{
+ "host": {
+  "authentication": {
+   "provider": "Custom",
+   "jwt": {
+    "audience": "<client-id-or-api-audience>",
+    "issuer": "https://<your-domain>/oauth2/default"
+   }
+  }
+ }
+}
+````
+#### Sample bare-bones, workable JWT 
+
+```json
+{
+  "iss": "https://your-domain/oauth2/default",
+  "aud": "api://default",
+  "exp": 1750975200,
+  "sub": "00u1abcd2EFGH3ijk4l5",
+  "roles": ["admin", "user"] // optional. 
+}
+```
+
+> [!IMPORTANT]
+> `roles` is only required if you want DAB’s role-based authorization to do more than treat the user as `anonymous` or `authenticated`. You can also override a role per request with `X-MS-API-ROLE` (note: if you supply `X-MS-API-ROLE`, its value must correspond to a configured `role`; it doesn’t “invent” a role).
 
 ### Example: Simulator (Development-only)
 
 ````json
 {
  "host": {
-  "mode": "development", // Simulator is not intended for production
-  "authentication": {
+   "mode": "development", 
+   "authentication": {
    "provider": "Simulator"
   }
  }
 }
 ````
+
+> [!TIP]
+> Use `X-MS-API-ROLE` while provider is `Simulator` to set any arbitrary role for testing in Data API builder.
 
 ## JWT (Authentication host runtime)
 
