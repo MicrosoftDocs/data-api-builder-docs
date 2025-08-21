@@ -466,14 +466,17 @@ Defines the method of authentication used by the Data API builder.
 |-|-|
 | `AppService` | EasyAuth via Azure Static Web Apps. `X-MS-CLIENT-PRINCIPAL` is injected only on authenticated requests; if it is absent, DAB treats the request as anonymous. No token validation is performed by DAB in this mode. Optional `X-MS-API-ROLE` header can select a specific role. |
 | `StaticWebApps` | [ *Deprecated* ] Functionally identical to `AppService`. Please use `AppService`. |
-| `EntraId` | Direct JWT validation by DAB (no EasyAuth front end). Requires `Authorization: Bearer <JWT>` for authenticated access. If the header is missing or invalid, the user is treated as anonymous. Optional `X-MS-API-ROLE` header can select a specific role. |
+| `EntraId` | Direct JWT validation by DAB (no EasyAuth). Requires an `Authorization: Bearer <JWT>` header for authenticated access. If the header is missing or invalid, the user is treated as anonymous. Optional `X-MS-API-ROLE` header can select a specific role for the request context. |
 | `AzureAd` | [ *Deprecated* ] Functionally identical to `EntraId`. Future versions of DAB maybe remove this value. |
-| `Simulator` | Development/testing only. No auth headers required; DAB fabricates an authenticated context. Optional `X-MS-API-ROLE` may still be sent to simulate a role. Not for production use. See [local authentication](../local-authentication.md). |
+| `Custom` | Generic OAuth provider. DAB performs direct JWT validation using the settings in the `jwt` section (`issuer`, `audience`, etc.). Compatible with identity providers such as Okta, Auth0, and others that issue JWT access tokens. Requires `Authorization: Bearer <JWT>` header for authenticated access. Optional `X-MS-API-ROLE` header can select a specific role. |
+| `Simulator` | For development and testing only. No authentication headers required; DAB fabricates an authenticated context. Optional `X-MS-API-ROLE` may be sent to simulate a role. Not for production use. See [local authentication](../local-authentication.md). `Simulator` is suitable for automated tests or local development where authentication is not a concern.  |
 
-> [!TIP]
-> Data API builder authentication providers `StaticWebApps` (Deprecated) and `AppService` both support EasyAuth. EasyAuth is not a formal standard; it's the nickname for Azure App Service Authentication/Authorization, a built-in feature of Azure App Service, Azure Functions, and Azure Static Web Apps. It isn't part of OAuth, OIDC, SAML, or any other open standard, though it uses those protocols under the hood. EasyAuth handles sign-in flows with identity providers such as Microsoft Entra ID, Google, and GitHub. 
-> 
-> The "easy" part is that you enable it in the Azure portal or through ARM templates without writing custom authentication middleware. A common misunderstanding is to treat EasyAuth as a cross-platform standard when, in fact, it's a Microsoft PaaS feature built on top of existing identity standards. In DAB, both `StaticWebApps` (Deprecated) and `AppService` providers read the same EasyAuth headers. They behave the same way in DAB but are named separately to allow for differences in Azure hosting environments.
+> [!NOTE]
+> The `X-MS-API-ROLE` header is optional but can be used to select a role context for the request. If not provided, DAB selects a default role (usually the first in the array).
+
+Data API builder authentication providers `StaticWebApps` (Deprecated) and `AppService` both support EasyAuth. EasyAuth is not a formal standard; it's the nickname for Azure App Service Authentication/Authorization, a built-in feature of Azure App Service, Azure Functions, and Azure Static Web Apps. It isn't part of OAuth, OIDC, SAML, or any other open standard, though it uses those protocols under the hood. EasyAuth handles sign-in flows with identity providers such as Microsoft Entra ID, Google, and GitHub. 
+
+The "easy" part is that you enable it in the Azure portal or through ARM templates without writing custom authentication middleware. A common misunderstanding is to treat EasyAuth as a cross-platform standard when, in fact, it's a Microsoft PaaS feature built on top of existing identity standards. In DAB, both `StaticWebApps` (Deprecated) and `AppService` providers read the same EasyAuth headers. They behave the same way in DAB but are named separately to allow for differences in Azure hosting environments.
 
 ### Format
 
@@ -510,7 +513,7 @@ Defines the method of authentication used by the Data API builder.
 {
  "host": {
   "authentication": {
-   "provider": "AzureAD",
+   "provider": "EntraId",
    "jwt": {
     "audience": "00001111-aaaa-2222-bbbb-3333cccc4444",
     "issuer": "https://login.microsoftonline.com/98765f43-21ba-400c-a5de-1f2a3d4e5f6a/v2.0"
@@ -519,6 +522,9 @@ Defines the method of authentication used by the Data API builder.
  }
 }
 ````
+
+> [!NOTE]
+> If you use EntraId as the provider, the `jwt` section (`audience`, `issuer`) is required to validate incoming JWTs. For `AppService`, EasyAuth handles authentication and injects the headers DAB uses.
 
 ### Example: Simulator (Development-only)
 
