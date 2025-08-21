@@ -525,13 +525,54 @@ The "easy" part is that you enable it in the Azure portal or through ARM templat
 }
 ````
 
+### Example: Custom
+
+````json
+{
+ "host": {
+  "authentication": {
+   "provider": "Custom",
+   "jwt": {
+    "audience": "<client-id-or-api-audience>",
+    "issuer": "https://<your-domain>/oauth2/default"
+   }
+  }
+ }
+}
+````
+#### Minimum practical claims your identity provider should emit:
+
+- `iss` (string) EXACTLY the same as jwt.issuer
+- `aud` (string) EXACTLY the same as jwt.audience
+- `exp` (numeric, seconds since epoch, future)
+- `iat` (issued-at, optional but recommended)
+- `nbf` (not-before, optional)
+- `sub` (subject identifier)
+- `jti` (unique token id, recommended)
+- `roles` (array OR repeated claim entries; DAB sets RoleClaimType="roles")
+
+#### Sample bare-bones, workable JWT 
+
+```json
+{
+  "iss": "https://your-domain/oauth2/default",
+  "aud": "api://default",
+  "exp": 1750975200,
+  "sub": "00u1abcd2EFGH3ijk4l5",
+  "roles": ["admin", "user"] // optional. 
+}
+```
+
+> [!NOTE]
+> `roles` is only required if you want DAB’s role-based authorization to do more than treat the user as `anonymous` or `authenticated`. You can also override a role per request with `X-MS-API-ROLE` (note: if you supply `X-MS-API-ROLE`, its value must correspond to a configured `role`; it doesn’t “invent” a role).
+
 ### Example: Simulator (Development-only)
 
 ````json
 {
  "host": {
-  "mode": "development", // Simulator is not intended for production
-  "authentication": {
+   "mode": "development", 
+   "authentication": {
    "provider": "Simulator"
   }
  }
