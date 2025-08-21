@@ -540,17 +540,6 @@ The "easy" part is that you enable it in the Azure portal or through ARM templat
  }
 }
 ````
-#### Minimum practical claims your identity provider should emit:
-
-- `iss` (string) EXACTLY the same as jwt.issuer
-- `aud` (string) EXACTLY the same as jwt.audience
-- `exp` (numeric, seconds since epoch, future)
-- `iat` (issued-at, optional but recommended)
-- `nbf` (not-before, optional)
-- `sub` (subject identifier)
-- `jti` (unique token id, recommended)
-- `roles` (array OR repeated claim entries; DAB sets RoleClaimType="roles")
-
 #### Sample bare-bones, workable JWT 
 
 ```json
@@ -563,7 +552,7 @@ The "easy" part is that you enable it in the Azure portal or through ARM templat
 }
 ```
 
-> [!NOTE]
+> [!IMPORTANT]
 > `roles` is only required if you want DAB’s role-based authorization to do more than treat the user as `anonymous` or `authenticated`. You can also override a role per request with `X-MS-API-ROLE` (note: if you supply `X-MS-API-ROLE`, its value must correspond to a configured `role`; it doesn’t “invent” a role).
 
 ### Example: Simulator (Development-only)
@@ -578,6 +567,9 @@ The "easy" part is that you enable it in the Azure portal or through ARM templat
  }
 }
 ````
+
+> [!TIP]
+> Use `X-MS-API-ROLE` while provider is `Simulator` to set any arbitrary role for testing in Data API builder.
 
 ## JWT (Authentication host runtime)
 
