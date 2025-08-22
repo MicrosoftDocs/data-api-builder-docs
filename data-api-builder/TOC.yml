@@ -275,10 +275,10 @@
       items:
         - name: How to use database views 
           href: concept/database/views.md
-          displayName: views, stored procedures, procs, SQL, read-only
+          displayName: views, SQL, read-only
         - name: How to use database stored procedures
           href: concept/database/stored-procedures.md
-          displayName: views, stored procedures, procs, SQL, read-only
+          displayName: stored procedures, procs, SQL, read-only
         - name: How to use table relationships in GraphQL
           href: concept/database/relationships.md
           displayName: relationships, foreign key, navigation, linking, cardinality
