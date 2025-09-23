@@ -472,9 +472,9 @@ Defines the method of authentication used by the Data API builder.
 }
 ```
 
-When the entire `authentication` section is omitted from the dab-config.json file, no authentication provider is used. In this case, Data API builder operates in a "no-auth" mode. In this mode, DAB does not look for any tokens or `Authorization` headers. The `X-MS-API-ROLE` header is also ignored in this configuration.
+When the entire `authentication` section is omitted from the dab-config.json file, no authentication provider is used. In this case, Data API builder operates in a "no-auth" mode. In this mode, DAB doesn't look for any tokens or `Authorization` headers. The `X-MS-API-ROLE` header is also ignored in this configuration.
 
-> [!Note]
+> \[!Note]
 > Every request that comes into the engine is automatically and immediately assigned the system role of `anonymous`. Access control is then exclusively handled by the permissions you define on each entity.
 
 An example of entity permissions.
@@ -495,7 +495,7 @@ An example of entity permissions.
 }
 ```
 
-In this example, since no `authentication` provider is configured, all incoming requests are automatically considered to be from an `anonymous` user. The `permissions` array for the `Book` entity explicitly grants the `anonymous` role the ability to perform `read` operations. Any attempt to perform other actions (like `create`, `update`, `delete`) or access other entities not configured for `anonymous` access will be denied.
+In this example, since no `authentication` provider is configured, all incoming requests are automatically considered to be from an `anonymous` user. The `permissions` array for the `Book` entity explicitly grants the `anonymous` role the ability to perform `read` operations. Any attempt to perform other actions (like `create`, `update`, `delete`) or access other entities not configured for `anonymous` access is denied.
 
 ### StaticWebApps (auth provider) \[deprecated]
 
@@ -511,8 +511,8 @@ In this example, since no `authentication` provider is configured, all incoming 
 
 This provider is deprecated because the Static Web Apps preview feature `Data Connections` was retired in November 2025. While it remains functional, it was designed for a legacy implementation of authentication in Azure Static Web Apps. Developers should migrate to the `AppService` provider for better long-term support and consistency with Azure's broader "Easy Auth" platform.
 
-> [!Note]
-> Migrating is not as simple as changing the provider name in the configuration file. The `StaticWebApps` and `AppService` providers expect different JSON structures within the `x-ms-client-principal` header for processing roles. 
+> \[!Note]
+> Migrating isn't as simple as changing the provider name in the configuration file. The `StaticWebApps` and `AppService` providers expect different JSON structures within the `x-ms-client-principal` header for processing roles.
 
 ### AppService (auth provider)
 
@@ -526,11 +526,11 @@ This provider is deprecated because the Static Web Apps preview feature `Data Co
 }
 ```
 
-This provider is for applications hosted on Azure App Service, such as Azure Container Apps. Authentication is handled by the Azure hosting environment, which then passes the user's identity information to the application via request headers. It is intended for developers who want a simple, out-of-the-box authentication solution managed by the Azure platform.
+This provider is for applications hosted on Azure App Service, such as Azure Container Apps. The Azure hosting environment handles authentication and then passes the user's identity information to the application via request headers. It's intended for developers who want a simple, out-of-the-box authentication solution managed by the Azure platform.
 
-This provider does not use a JWT token from the `Authorization` header. It relies on a special header, `X-MS-CLIENT-PRINCIPAL`, injected by the App Service platform. This header contains a base64-encoded JSON object with the user's identity details. 
+This provider doesn't use a JWT token from the `Authorization` header. It relies on a special header, `X-MS-CLIENT-PRINCIPAL`, injected by the App Service platform. This header contains a base64-encoded JSON object with the user's identity details.
 
-**Anonymous**: If the `AppService` provider is configured but a request arrives without the `X-MS-CLIENT-PRINCIPAL` header, the request is assigned the system role of `anonymous`.
+**Anonymous**: If the `AppService` provider is configured but a request arrives without the `X-MS-CLIENT-PRINCIPAL` header, the request is assigned to the system role of `anonymous`.
 
 The decoded JSON from the `X-MS-CLIENT-PRINCIPAL` header typically looks like this:
 
@@ -553,7 +553,7 @@ The roles are contained within the `claims` array.
 * **Role and Behavior**: The `X-MS-API-ROLE` header is used to specify which role the user wants to assume for the current request. The value of this header must match one of the role values found in the `claims` array of the `X-MS-CLIENT-PRINCIPAL` object.
 * **Is it required?**: No. If the `X-MS-API-ROLE` header is absent, the request is processed in the context of the `authenticated` system role. This means the user is recognized as logged in, but not as any specific application-defined role from the token.
 * **Behavior on Match**: If the `X-MS-API-ROLE` header is provided and its value matches a role in the client principal's `claims`, the user assumes that role for the request.
-* **Behavior on Mismatch**: If the `X-MS-API-ROLE` header is provided but the value does not match any role in the client principal, the request is rejected with a `403 Forbidden` status code. This ensures a user cannot claim a role they haven't been assigned.
+* **Behavior on Mismatch**: If the `X-MS-API-ROLE` header is provided but the value doesn't match any role in the client principal, the request is rejected with a `403 Forbidden` status code. This ensures a user can't claim a role they haven't been assigned.
 
 ### EntraId (auth provider)
 
@@ -571,14 +571,14 @@ The roles are contained within the `claims` array.
 }
 ```
 
-This is the standard provider for securing endpoints with user and application identities in Microsoft Entra. It's ideal for any service that needs to be accessed securely by users or other services within the Entra tenant.
+This provider secures endpoints with user and application identities in Microsoft Entra. It's ideal for any service where users or other services need secure access within the Entra tenant.
 
 > \[!NOTE]
 > The `EntraId` provider was previously named `AzureAd`. The old name still works, but developers are encouraged to migrate their configurations from `AzureAd` to `EntraId`.
 
 This provider expects a standard JWT Bearer token in the `Authorization` header, issued by Microsoft Entra. The token must be configured for the specific application (using the `audience` claim). The roles for the user or service principal are expected to be in a claim within the token. The code looks for a `roles` claim by default.
 
-**Anonymous**: If the `EntraId` provider is configured but a request arrives without the `Authorization` header, the request is assigned the system role of `anonymous`.
+**Anonymous**: If the `EntraId` provider is configured but a request arrives without the `Authorization` header, the request is assigned to the system role of `anonymous`.
 
 A decoded JWT payload might look like this:
 
@@ -600,7 +600,7 @@ A decoded JWT payload might look like this:
 * **Role and Behavior**: The `X-MS-API-ROLE` header is used to specify a role the user wishes to assume for the request. The value of this header must match one of the role values found in the `roles` claim of the JWT token.
 * **Is it required?**: No. If the `X-MS-API-ROLE` header is absent, the request is processed in the context of the `authenticated` system role. This means the user is recognized as logged in, but not as any specific application-defined role from the token.
 * **Behavior on Match**: If the `X-MS-API-ROLE` header is provided and it matches a role in the `roles` claim, the user's context is set to that role.
-* **Behavior on Mismatch**: If the `X-MS-API-ROLE` header is provided but its value does not match any role in the `roles` claim, the request is rejected with a `403 Forbidden` status code. This ensures a user cannot claim a role they haven't been assigned.
+* **Behavior on Mismatch**: If the `X-MS-API-ROLE` header is provided but its value doesn't match any role in the `roles` claim, the request is rejected with a `403 Forbidden` status code. This ensures a user can't claim a role they haven't been assigned.
 
 ### Custom (auth provider)
 
@@ -620,12 +620,12 @@ A decoded JWT payload might look like this:
 
 This provider is for developers who want to integrate Data API builder with a third-party identity provider (like Auth0, Okta, or a custom identity server) that issues JWTs. It provides the flexibility to configure the expected `audience` and `issuer` of the tokens.
 
-The `Custom` provider expects a standard JWT Bearer token in the `Authorization` header. The key difference from the `EntraId` provider is that you configure the valid `issuer` and `audience` in the Data API builder's configuration file. The provider validates that the token was issued by the trusted authority for your application. The user's roles are expected to be in a `roles` claim within the JWT payload.
+The `Custom` provider expects a standard JWT Bearer token in the `Authorization` header. The key difference from the `EntraId` provider is that you configure the valid `issuer` and `audience` in the Data API builder's configuration file. The provider validates the token by checking that the trusted authority issued it. The user's roles are expected to be in a `roles` claim within the JWT payload.
 
 > \[!NOTE]
-> In some cases, depending on the third-party identity provider, developers will need to coerce the structure of their JWT to accommodate the structure expected by Data API builder (illustrated below).
+> In some cases, depending on the third-party identity provider, developers need to coerce the structure of their JWT to match the structure expected by Data API builder (shown below).
 
-**Anonymous**: If the `Custom` provider is configured but a request arrives without the `Authorization` header, the request is assigned the system role of `anonymous`.
+**Anonymous**: If the `Custom` provider is configured but a request arrives without the `Authorization` header, the request is assigned to the system role of `anonymous`.
 
 A decoded JWT payload for a `custom` provider might look like this:
 
@@ -647,20 +647,20 @@ A decoded JWT payload for a `custom` provider might look like this:
 * **Role and Behavior**: The `X-MS-API-ROLE` header functions exactly like it does with the `EntraId` provider. It allows the user to select one of their assigned roles. The value of this header must match one of the roles from the `roles` claim in the custom JWT token.
 * **Is it required?**: No. If the `X-MS-API-ROLE` header is absent, the user is treated as being in the `authenticated` system role.
 * **Behavior on Match**: If the `X-MS-API-ROLE` header's value matches a role in the JWT's `roles` claim, the user's context is set to that role for authorization purposes.
-* **Behavior on Mismatch**: If the `X-MS-API-ROLE` header's value does not match any role in the `roles` claim, the request is rejected with a `403 Forbidden` status code. This ensures a user cannot claim a role they haven't been assigned.
+* **Behavior on Mismatch**: If the `X-MS-API-ROLE` header's value doesn't match any role in the `roles` claim, the request is rejected with a `403 Forbidden` status code. This ensures a user can't claim a role they haven't been assigned.
 
 ### Simulator (auth provider)
 
 This provider is designed to make it easy for developers to test their configuration, especially `authorization` policies, without needing to set up a full authentication provider like Entra Identity or EasyAuth. It simulates an `authenticated` user.
 
-The `Simulator` provider does not use JWT tokens. Authentication is simulated. When using this provider, all requests are treated as if they are coming from an authenticated user.
+The `Simulator` provider doesn't use JWT tokens. Authentication is simulated. When using this provider, all requests are treated as if they're coming from an authenticated user.
 
 #### About the X-MS-API-ROLE header
 
-* **Role and Behavior**: The `X-MS-API-ROLE` header is the only way to specify a role when using the `Simulator`. Since there is no token with a list of roles, the system implicitly trusts the role sent in this header.
+* **Role and Behavior**: The `X-MS-API-ROLE` header is the only way to specify a role when using the `Simulator`. Since there's no token with a list of roles, the system implicitly trusts the role sent in this header.
 * **Is it required?**: No.
 * **Behavior on Absence**: If the `X-MS-API-ROLE` header is absent, the request is processed in the context of the `authenticated` system role.
-* **Behavior on Presence**: If the `X-MS-API-ROLE` header is present, the request is processed in the context of the role specified in the header's value. There is no validation against a claims list, so the developer can simulate any role they need to test their policies.
+* **Behavior on Presence**: If the `X-MS-API-ROLE` header is present, the request is processed in the context of the role specified in the header's value. There's no validation against a claims list, so the developer can simulate any role they need to test their policies.
 
 #### Simulator in Production
 
@@ -674,6 +674,7 @@ When `runtime.host.mode` is set to production, the `Simulator` provider is disab
   }
 }
 ```
+
 
 ## JWT (Authentication host runtime)
 
