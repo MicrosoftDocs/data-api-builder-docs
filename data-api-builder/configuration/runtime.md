@@ -456,66 +456,109 @@ Global CORS configuration.
 
 ## Provider (Authentication host runtime)
 
-| Parent | Property | Type | Required | Default |
-|-|-|-|-|-|
-| `runtime.host.authentication` | `provider` | enum (`AppService` \| `EntraId` \| `Simulator`) | ❌ No | `AppService` |
+| Parent                        | Property   | Type                                                         | Required | Default      |
+| ----------------------------- | ---------- | ------------------------------------------------------------ | -------- | ------------ |
+| `runtime.host.authentication` | `provider` | enum (`AppService` \| `EntraId` \|  `Custom` \| `Simulator`) | ❌ No     | `AppService` |
 
 Defines the method of authentication used by the Data API builder.
 
-| Provider | Description |
-|-|-|
-| `AppService` | EasyAuth via Azure Static Web Apps. `X-MS-CLIENT-PRINCIPAL` is injected only on authenticated requests; if it is absent, DAB treats the request as anonymous. No token validation is performed by DAB in this mode. Optional `X-MS-API-ROLE` header can select a specific role. |
-| `StaticWebApps` | [ *Deprecated* ] Functionally identical to `AppService`. Please use `AppService`. |
-| `EntraId` | Direct JWT validation by DAB (no EasyAuth). Requires an `Authorization: Bearer <JWT>` header for authenticated access. If the header is missing or invalid, the user is treated as anonymous. Optional `X-MS-API-ROLE` header can select a specific role for the request context. |
-| `AzureAd` | [ *Deprecated* ] Functionally identical to `EntraId`. Future versions of DAB maybe remove this value. |
-| `Custom` | Generic OAuth provider. DAB performs direct JWT validation using the settings in the `jwt` section (`issuer`, `audience`, etc.). Compatible with identity providers such as Okta, Auth0, and others that issue JWT access tokens. Requires `Authorization: Bearer <JWT>` header for authenticated access. Optional `X-MS-API-ROLE` header can select a specific role. |
-| `Simulator` | For development and testing only. No authentication headers required; DAB fabricates an authenticated context. Optional `X-MS-API-ROLE` may be sent to simulate a role. Not for production use. See [local authentication](../local-authentication.md). `Simulator` is suitable for automated tests or local development where authentication is not a concern.  |
-
-> [!NOTE]
-> The `X-MS-API-ROLE` header is optional but can be used to select a role context for the request. If not provided, DAB selects a default role (usually the first in the array).
-
-### EasyAuth
-
-Data API builder authentication providers `StaticWebApps` (Deprecated) and `AppService` both support EasyAuth. EasyAuth is not a formal standard; it's the nickname for Azure App Service Authentication/Authorization, a built-in feature of Azure App Service, Azure Functions, and Azure Static Web Apps. It isn't part of OAuth, OIDC, SAML, or any other open standard, though it uses those protocols under the hood. EasyAuth handles sign-in flows with identity providers such as Microsoft Entra ID, Google, and GitHub. 
-
-The "easy" part is that you enable it in the Azure portal or through ARM templates without writing custom authentication middleware. A common misunderstanding is to treat EasyAuth as a cross-platform standard when, in fact, it's a Microsoft PaaS feature built on top of existing identity standards. In DAB, both `StaticWebApps` (Deprecated) and `AppService` providers read the same EasyAuth headers. They behave the same way in DAB but are named separately to allow for differences in Azure hosting environments.
-
-### Format
+### Anonymous-only (auth provider)
 
 ```json
 {
-  "runtime": {
-    "host": {
-      "authentication": {
-        "provider": "AppService" | ...
-      }
+ "host": {
+    // omit the authentication section
+ }
+}
+```
+
+When the entire `authentication` section is omitted from the dab-config.json file, no authentication provider is used. In this case, Data API builder operates in a "no-auth" mode. In this mode, DAB does not look for any tokens or `Authorization` headers. The `X-MS-API-ROLE` header is also ignored in this configuration.
+
+* Role and Behavior: Every request that comes into the engine is automatically and immediately assigned the system role of `anonymous`. Access control is then exclusively handled by the permissions you define on each entity.
+
+An example of entity permissions.
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": "dbo.books",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [ "read" ]
+        }
+      ]
     }
   }
 }
 ```
-> [!NOTE]
-> If you use EntraId as the provider, the `jwt` section (`audience`, `issuer`) is required to validate incoming JWTs. For `AppService`, EasyAuth handles authentication and injects the headers DAB uses.
 
-### Example: App Service
+In this example, since no `authentication` provider is configured, all incoming requests are automatically considered to be from an `anonymous` user. The `permissions` array for the `Book` entity explicitly grants the `anonymous` role the ability to perform `read` operations. Any attempt to perform other actions (like `create`, `update`, `delete`) or access other entities not configured for `anonymous` access will be denied.
 
-````json
+### StaticWebApps (auth provider) \[deprecated]
+
+```json
+{
+ "host": {
+  "authentication": {
+   "provider": "StaticWebApps"
+  }
+ }
+}
+```
+
+This provider is deprecated because the Static Web Apps preview feature `Data Connections` was retired in November 2025. While it remains functional, it was designed for a legacy implementation of authentication in Azure Static Web Apps. Developers should migrate to the `AppService` provider for better long-term support and consistency with Azure's broader "Easy Auth" platform.
+
+> [!Note]
+> Migrating is not as simple as changing the provider name in the configuration file. The `StaticWebApps` and `AppService` providers expect different JSON structures within the `x-ms-client-principal` header for processing roles. 
+
+### AppService (auth provider)
+
+```json
 {
  "host": {
   "authentication": {
    "provider": "AppService"
-   }
   }
  }
 }
-````
+```
 
-### Example: Microsoft Entra ID
+This provider is for applications hosted on Azure App Service, such as Azure Container Apps. Authentication is handled by the Azure hosting environment, which then passes the user's identity information to the application via request headers. It is intended for developers who want a simple, out-of-the-box authentication solution managed by the Azure platform.
 
-````json
+This provider does not use a JWT token from the `Authorization` header. It relies on a special header, `X-MS-CLIENT-PRINCIPAL`, injected by the App Service platform. This header contains a base64-encoded JSON object with the user's identity details. 
+
+**Anonymous**: If the `AppService` provider is configured but a request arrives without the `X-MS-CLIENT-PRINCIPAL` header, the request is assigned the system role of `anonymous`.
+
+The decoded JSON from the `X-MS-CLIENT-PRINCIPAL` header typically looks like this:
+
+```json
+{
+  "auth_typ": "aad",
+  "claims": [
+    {"typ": "roles", "val": "admin"},
+    {"typ": "roles", "val": "contributor"}
+  ],
+  "name_typ": "...",
+  "role_typ": "..."
+}
+```
+
+The roles are contained within the `claims` array.
+
+* Role and Behavior: The `X-MS-API-ROLE` header is used to specify which role the user wants to assume for the current request. The value of this header must match one of the role values found in the `claims` array of the `X-MS-CLIENT-PRINCIPAL` object.
+* Is it required?: No. If the `X-MS-API-ROLE` header is absent, the request is processed in the context of the `authenticated` system role. This means the user is recognized as logged in, but not as any specific application-defined role from the token.
+* Behavior on Match: If the `X-MS-API-ROLE` header is provided and its value matches a role in the client principal's `claims`, the user assumes that role for the request.
+* Behavior on Mismatch: If the `X-MS-API-ROLE` header is provided but the value does not match any role in the client principal, the request is rejected with a `403 Forbidden` status code. This ensures a user cannot claim a role they haven't been assigned.
+
+### EntraId (auth provider)
+
+```json
 {
  "host": {
   "authentication": {
-   "provider": "EntraId",
+   "provider": "EntraId", // previously AzureAd
    "jwt": {
     "audience": "00001111-aaaa-2222-bbbb-3333cccc4444",
     "issuer": "https://login.microsoftonline.com/98765f43-21ba-400c-a5de-1f2a3d4e5f6a/v2.0"
@@ -523,11 +566,40 @@ The "easy" part is that you enable it in the Azure portal or through ARM templat
   }
  }
 }
-````
+```
 
-### Example: Custom
+This is the standard provider for securing endpoints with user and application identities in Microsoft Entra. It's ideal for any service that needs to be accessed securely by users or other services within the Entra tenant.
 
-````json
+> \[!NOTE]
+> The `EntraId` provider was previously named `AzureAd`. The old name still works, but developers are encouraged to migrate their configurations from `AzureAd` to `EntraId`.
+
+This provider expects a standard JWT Bearer token in the `Authorization` header, issued by Microsoft Entra. The token must be configured for the specific application (using the `audience` claim). The roles for the user or service principal are expected to be in a claim within the token. The code looks for a `roles` claim by default.
+
+**Anonymous**: If the `EntraId` provider is configured but a request arrives without the `Authorization` header, the request is assigned the system role of `anonymous`.
+
+A decoded JWT payload might look like this:
+
+```json
+{
+  "aud": "...", // Audience - your API
+  "iss": "https://login.microsoftonline.com/{tenant-id}/v2.0", // Issuer
+  "oid": "...", // User or principal object ID
+  "roles": [
+    "reader",
+    "writer"
+  ],
+  // ... other claims
+}
+```
+
+* Role and Behavior: The `X-MS-API-ROLE` header is used to specify a role the user wishes to assume for the request. The value of this header must match one of the role values found in the `roles` claim of the JWT token.
+* Is it required?: No. If the `X-MS-API-ROLE` header is absent, the request is processed in the context of the `authenticated` system role. This means the user is recognized as logged in, but not as any specific application-defined role from the token.
+* Behavior on Match: If the `X-MS-API-ROLE` header is provided and it matches a role in the `roles` claim, the user's context is set to that role.
+* Behavior on Mismatch: If the `X-MS-API-ROLE` header is provided but its value does not match any role in the `roles` claim, the request is rejected with a `403 Forbidden` status code. This ensures a user cannot claim a role they haven't been assigned.
+
+### Custom (auth provider)
+
+```json
 {
  "host": {
   "authentication": {
@@ -539,37 +611,60 @@ The "easy" part is that you enable it in the Azure portal or through ARM templat
   }
  }
 }
-````
-#### Sample bare-bones, workable JWT 
+```
+
+This provider is for developers who want to integrate Data API builder with a third-party identity provider (like Auth0, Okta, or a custom identity server) that issues JWTs. It provides the flexibility to configure the expected `audience` and `issuer` of the tokens.
+
+The `Custom` provider expects a standard JWT Bearer token in the `Authorization` header. The key difference from the `EntraId` provider is that you configure the valid `issuer` and `audience` in the Data API builder's configuration file. The provider validates that the token was issued by the trusted authority for your application. The user's roles are expected to be in a `roles` claim within the JWT payload.
+
+> \[!NOTE]
+> In some cases, depending on the third-party identity provider, developers will need to coerce the structure of their JWT to accommodate the structure expected by Data API builder (illustrated below).
+
+**Anonymous**: If the `Custom` provider is configured but a request arrives without the `Authorization` header, the request is assigned the system role of `anonymous`.
+
+A decoded JWT payload for a custom provider might look like this:
 
 ```json
 {
-  "iss": "https://your-domain/oauth2/default",
-  "aud": "api://default",
-  "exp": 1750975200,
-  "sub": "00u1abcd2EFGH3ijk4l5",
-  "roles": ["admin", "user"] // optional. 
+  "aud": "my-api-audience", // Must match configuration
+  "iss": "https://my-custom-issuer.com/", // Must match configuration
+  "sub": "user-id",
+  "roles": [
+    "editor",
+    "viewer"
+  ],
+  // ... other claims
 }
 ```
 
-> [!IMPORTANT]
-> `roles` is only required if you want DAB’s role-based authorization to do more than treat the user as `anonymous` or `authenticated`. You can also override a role per request with `X-MS-API-ROLE` (note: if you supply `X-MS-API-ROLE`, its value must correspond to a configured `role`; it doesn’t “invent” a role).
+* Role and Behavior: The `X-MS-API-ROLE` header functions exactly like it does with the `EntraId` provider. It allows the user to select one of their assigned roles. The value of this header must match one of the roles from the `roles` claim in the custom JWT token.
+* Is it required?: No. If the `X-MS-API-ROLE` header is absent, the user is treated as being in the `authenticated` system role.
+* Behavior on Match: If the `X-MS-API-ROLE` header's value matches a role in the JWT's `roles` claim, the user's context is set to that role for authorization purposes.
+* Behavior on Mismatch: If the `X-MS-API-ROLE` header's value does not match any role in the `roles` claim, the request is rejected with a `403 Forbidden` status code. This ensures a user cannot claim a role they haven't been assigned.
 
-### Example: Simulator (Development-only)
+### Simulator (auth provider)
 
-````json
-{
- "host": {
-   "mode": "development", 
-   "authentication": {
-   "provider": "Simulator"
+This provider is designed to make it easy for developers to test their configuration, especially `authorization` policies, without needing to set up a full authentication provider like Entra Identity or EasyAuth. It simulates an `authenticated` user.
+
+The `Simulator` provider does not use JWT tokens. Authentication is simulated. When using this provider, all requests are treated as if they are coming from an authenticated user.
+
+* Role and Behavior: The `X-MS-API-ROLE` header is the only way to specify a role when using the `Simulator`. Since there is no token with a list of roles, the system implicitly trusts the role sent in this header.
+* Is it required?: No.
+* Behavior on Absence: If the `X-MS-API-ROLE` header is absent, the request is processed in the context of the `authenticated` system role.
+* Behavior on Presence: If the `X-MS-API-ROLE` header is present, the request is processed in the context of the role specified in the header's value. There is no validation against a claims list, so the developer can simulate any role they need to test their policies.
+
+#### Simulator in Production
+
+When `runtime.host.mode` is set to production, the `Simulator` provider is disabled.
+
+```json
+"host": {
+  "mode": "production", // or "development"
+  "authentication": {
+    "provider": "Simulator" 
   }
- }
 }
-````
-
-> [!TIP]
-> Use `X-MS-API-ROLE` while provider is `Simulator` to set any arbitrary role for testing in Data API builder.
+```
 
 ## JWT (Authentication host runtime)
 
