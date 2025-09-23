@@ -664,7 +664,7 @@ The `Simulator` provider doesn't use JWT tokens. Authentication is simulated. Wh
 
 #### Simulator in Production
 
-When `runtime.host.mode` is set to production, the `Simulator` provider is disabled.
+If the `authentication.provider` is set to `Simulator` while the `runtime.host.mode` is `production`, Data API builder will fail to start. 
 
 ```json
 "host": {
@@ -674,7 +674,6 @@ When `runtime.host.mode` is set to production, the `Simulator` provider is disab
   }
 }
 ```
-
 
 ## JWT (Authentication host runtime)
 
