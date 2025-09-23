@@ -20,7 +20,7 @@ To expose a stored procedure:
 
 * Set `source.type` to `"stored-procedure"`
 * Set `source.object` to the fully qualified procedure name
-* Define the `parameters` (with types) if necessary
+* Define optional `parameters` with their defaults, if necessary
 * Set `rest.methods` (for example, `"GET"`, `"POST"`) or `rest: false`
 * Set `graphql.operation` to `"query"` or `"mutation"`, or omit to default to `"mutation"`
 * Grant permission using the `"execute"` action
@@ -31,7 +31,7 @@ To expose a stored procedure:
 dab add GetCowrittenBooksByAuthor \
   --source dbo.stp_get_all_cowritten_books_by_author \
   --source.type "stored-procedure" \
-  --source.params "searchType:s" \
+  --source.params "searchType:default-value" \
   --permissions "anonymous:execute" \
   --rest.methods "get" \
   --graphql.operation "query"
@@ -45,7 +45,7 @@ dab add GetCowrittenBooksByAuthor \
     "type": "stored-procedure",
     "object": "dbo.stp_get_all_cowritten_books_by_author",
     "parameters": {
-      "searchType": "s"
+      "searchType": "default-value"
     }
   },
   "rest": {
@@ -62,18 +62,6 @@ dab add GetCowrittenBooksByAuthor \
   ]
 }
 ```
-
-### Parameter types (used in CLI and config)
-
-| Code | Type              |
-| ---- | ----------------- |
-| s    | string            |
-| i    | integer           |
-| n    | numeric (decimal) |
-| b    | boolean           |
-| d    | datetime          |
-
-These codes define the type only, not default values.
 
 ## REST support
 
