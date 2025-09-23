@@ -98,8 +98,8 @@ Configuration settings for database entities.
         "type": "view" | "stored-procedure" | "table",
         "key-fields": [<string>], // primary keys for the view
         "parameters": { // only for stored-procedure
-          "<parameter-name>": <string | number | boolean>,
-          "<parameter-name>": <string | number | boolean>
+          "<parameter-name>": <default-value>,
+          "<parameter-name>": <default-value>
         }
       },
       "mappings": {
@@ -153,16 +153,10 @@ The database source details of the entity.
 
 * `key-fields` is only required when `type` is `view`. The value represents the primary keys.
 
-** `parameters` is only required when `type` is `stored-procedure`. Optional parameters may be omitted.
+** `parameters` is only required when `type` is `stored-procedure` and only for parameters with default values. The data type of the paramter is inferred. Parameters without a default can be omited.
 
 > [!TIP]
 > If the object belongs to the `dbo` schema, specifying the schema is optional. Additionally, square brackets around object names (for example, `dbo.Users` vs. `[dbo].[Users]`) can be used when required.
-
-Supported parameter data types:
-
-1. `string`—includes ANSI and Unicode; also used for JSON/Date/DateTime types
-2. `number`—includes integral and decimal
-3. `boolean`—`true` or `false`
 
 ### Format
 ```json
@@ -173,9 +167,9 @@ Supported parameter data types:
         "object": <string>,
         "type": <"view" | "stored-procedure" | "table">,
         "key-fields": [ <string> ], // primary keys of the view
-        "parameters": { // only for stored-procedure
-          "<parameter-name-1>": <string | number | boolean>,
-          "<parameter-name-2>": <string | number | boolean>
+        "parameters": { // only for option stored-procedure parameters
+          "<parameter-name-1>": <default-value>
+          "<parameter-name-2>": <default-value>
         }
       }
     }
