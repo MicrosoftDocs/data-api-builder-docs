@@ -474,7 +474,8 @@ Defines the method of authentication used by the Data API builder.
 
 When the entire `authentication` section is omitted from the dab-config.json file, no authentication provider is used. In this case, Data API builder operates in a "no-auth" mode. In this mode, DAB does not look for any tokens or `Authorization` headers. The `X-MS-API-ROLE` header is also ignored in this configuration.
 
-* Role and Behavior: Every request that comes into the engine is automatically and immediately assigned the system role of `anonymous`. Access control is then exclusively handled by the permissions you define on each entity.
+> [!Note]
+> Every request that comes into the engine is automatically and immediately assigned the system role of `anonymous`. Access control is then exclusively handled by the permissions you define on each entity.
 
 An example of entity permissions.
 
@@ -547,10 +548,12 @@ The decoded JSON from the `X-MS-CLIENT-PRINCIPAL` header typically looks like th
 
 The roles are contained within the `claims` array.
 
-* Role and Behavior: The `X-MS-API-ROLE` header is used to specify which role the user wants to assume for the current request. The value of this header must match one of the role values found in the `claims` array of the `X-MS-CLIENT-PRINCIPAL` object.
-* Is it required?: No. If the `X-MS-API-ROLE` header is absent, the request is processed in the context of the `authenticated` system role. This means the user is recognized as logged in, but not as any specific application-defined role from the token.
-* Behavior on Match: If the `X-MS-API-ROLE` header is provided and its value matches a role in the client principal's `claims`, the user assumes that role for the request.
-* Behavior on Mismatch: If the `X-MS-API-ROLE` header is provided but the value does not match any role in the client principal, the request is rejected with a `403 Forbidden` status code. This ensures a user cannot claim a role they haven't been assigned.
+#### About the X-MS-API-ROLE header
+
+* **Role and Behavior**: The `X-MS-API-ROLE` header is used to specify which role the user wants to assume for the current request. The value of this header must match one of the role values found in the `claims` array of the `X-MS-CLIENT-PRINCIPAL` object.
+* **Is it required?**: No. If the `X-MS-API-ROLE` header is absent, the request is processed in the context of the `authenticated` system role. This means the user is recognized as logged in, but not as any specific application-defined role from the token.
+* **Behavior on Match**: If the `X-MS-API-ROLE` header is provided and its value matches a role in the client principal's `claims`, the user assumes that role for the request.
+* **Behavior on Mismatch**: If the `X-MS-API-ROLE` header is provided but the value does not match any role in the client principal, the request is rejected with a `403 Forbidden` status code. This ensures a user cannot claim a role they haven't been assigned.
 
 ### EntraId (auth provider)
 
@@ -592,10 +595,12 @@ A decoded JWT payload might look like this:
 }
 ```
 
-* Role and Behavior: The `X-MS-API-ROLE` header is used to specify a role the user wishes to assume for the request. The value of this header must match one of the role values found in the `roles` claim of the JWT token.
-* Is it required?: No. If the `X-MS-API-ROLE` header is absent, the request is processed in the context of the `authenticated` system role. This means the user is recognized as logged in, but not as any specific application-defined role from the token.
-* Behavior on Match: If the `X-MS-API-ROLE` header is provided and it matches a role in the `roles` claim, the user's context is set to that role.
-* Behavior on Mismatch: If the `X-MS-API-ROLE` header is provided but its value does not match any role in the `roles` claim, the request is rejected with a `403 Forbidden` status code. This ensures a user cannot claim a role they haven't been assigned.
+#### About the X-MS-API-ROLE header
+
+* **Role and Behavior**: The `X-MS-API-ROLE` header is used to specify a role the user wishes to assume for the request. The value of this header must match one of the role values found in the `roles` claim of the JWT token.
+* **Is it required?**: No. If the `X-MS-API-ROLE` header is absent, the request is processed in the context of the `authenticated` system role. This means the user is recognized as logged in, but not as any specific application-defined role from the token.
+* **Behavior on Match**: If the `X-MS-API-ROLE` header is provided and it matches a role in the `roles` claim, the user's context is set to that role.
+* **Behavior on Mismatch**: If the `X-MS-API-ROLE` header is provided but its value does not match any role in the `roles` claim, the request is rejected with a `403 Forbidden` status code. This ensures a user cannot claim a role they haven't been assigned.
 
 ### Custom (auth provider)
 
@@ -622,7 +627,7 @@ The `Custom` provider expects a standard JWT Bearer token in the `Authorization`
 
 **Anonymous**: If the `Custom` provider is configured but a request arrives without the `Authorization` header, the request is assigned the system role of `anonymous`.
 
-A decoded JWT payload for a custom provider might look like this:
+A decoded JWT payload for a `custom` provider might look like this:
 
 ```json
 {
@@ -637,10 +642,12 @@ A decoded JWT payload for a custom provider might look like this:
 }
 ```
 
-* Role and Behavior: The `X-MS-API-ROLE` header functions exactly like it does with the `EntraId` provider. It allows the user to select one of their assigned roles. The value of this header must match one of the roles from the `roles` claim in the custom JWT token.
-* Is it required?: No. If the `X-MS-API-ROLE` header is absent, the user is treated as being in the `authenticated` system role.
-* Behavior on Match: If the `X-MS-API-ROLE` header's value matches a role in the JWT's `roles` claim, the user's context is set to that role for authorization purposes.
-* Behavior on Mismatch: If the `X-MS-API-ROLE` header's value does not match any role in the `roles` claim, the request is rejected with a `403 Forbidden` status code. This ensures a user cannot claim a role they haven't been assigned.
+#### About the X-MS-API-ROLE header
+
+* **Role and Behavior**: The `X-MS-API-ROLE` header functions exactly like it does with the `EntraId` provider. It allows the user to select one of their assigned roles. The value of this header must match one of the roles from the `roles` claim in the custom JWT token.
+* **Is it required?**: No. If the `X-MS-API-ROLE` header is absent, the user is treated as being in the `authenticated` system role.
+* **Behavior on Match**: If the `X-MS-API-ROLE` header's value matches a role in the JWT's `roles` claim, the user's context is set to that role for authorization purposes.
+* **Behavior on Mismatch**: If the `X-MS-API-ROLE` header's value does not match any role in the `roles` claim, the request is rejected with a `403 Forbidden` status code. This ensures a user cannot claim a role they haven't been assigned.
 
 ### Simulator (auth provider)
 
@@ -648,10 +655,12 @@ This provider is designed to make it easy for developers to test their configura
 
 The `Simulator` provider does not use JWT tokens. Authentication is simulated. When using this provider, all requests are treated as if they are coming from an authenticated user.
 
-* Role and Behavior: The `X-MS-API-ROLE` header is the only way to specify a role when using the `Simulator`. Since there is no token with a list of roles, the system implicitly trusts the role sent in this header.
-* Is it required?: No.
-* Behavior on Absence: If the `X-MS-API-ROLE` header is absent, the request is processed in the context of the `authenticated` system role.
-* Behavior on Presence: If the `X-MS-API-ROLE` header is present, the request is processed in the context of the role specified in the header's value. There is no validation against a claims list, so the developer can simulate any role they need to test their policies.
+#### About the X-MS-API-ROLE header
+
+* **Role and Behavior**: The `X-MS-API-ROLE` header is the only way to specify a role when using the `Simulator`. Since there is no token with a list of roles, the system implicitly trusts the role sent in this header.
+* **Is it required?**: No.
+* **Behavior on Absence**: If the `X-MS-API-ROLE` header is absent, the request is processed in the context of the `authenticated` system role.
+* **Behavior on Presence**: If the `X-MS-API-ROLE` header is present, the request is processed in the context of the role specified in the header's value. There is no validation against a claims list, so the developer can simulate any role they need to test their policies.
 
 #### Simulator in Production
 
