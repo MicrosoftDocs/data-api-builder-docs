@@ -135,7 +135,7 @@ Since the beginning, Data API builder configuration files supported the `@env()`
 
 With release 1.6, we now support Azure Key Vault the same way. The new `@akv()` function replaces values in the configuration file with values from Azure Key Vault. This option lets developers who rely on centralized secret storage use Data API builder in lockstep with enterprise standards.
 
-> \[!Note]
+> [!!Note]
 > Just as Data API builder supports `.env` files for local developers simulating environment variables, DAB now supports `.akv` files. These files let developers without an Azure Key Vault simulate the service locally. They use the same simple `name=value` format and should always be added to your `.gitignore`.
 
 **Example (function syntax):**
