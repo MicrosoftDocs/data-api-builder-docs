@@ -1,6 +1,6 @@
 ---
 title: What's new for version 1.6
-description: Release notes with new features, bug fixes, and updates listed for the Data API builder version 1.5.
+description: Release notes with new features, bug fixes, and updates listed for the Data API builder version 1.6.
 author: jerrynixon
 ms.author: jnixon
 ms.reviewer: sidandrews
