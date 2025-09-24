@@ -219,7 +219,7 @@ To deliver a faster composite status, Data API builder health checks now run in 
 }
 ```
 
-|  | Minimum | Default | Maximum
+| Configuration | Minimum | Default | Maximum
 | ----------------------- | :-: | :-: | :-: |
 | `max-query-parallelism` |  1  |  4  |  8  |
 
