@@ -15,7 +15,7 @@ This incremental release focuses on multi-tier caching, expanded logging and obs
 
 ## Introducing: Level 2 (Distributed) Caching
 
-Data API builder has long supported Level 1 (L1) in-memory cache and cache-related HTTP request headers like `no-store`, `no-cache`, and `only-if-cached` to influence cache behavior.
+Data API builder long supported Level 1 (L1) in-memory cache and cache-related HTTP request headers like `no-store`, `no-cache`, and `only-if-cached` to influence cache behavior.
 
 In this release, we added Level 2 (L2) distributed cache.
 
@@ -105,7 +105,7 @@ Previously, DAB developers were mostly limited to console logs in the container.
 
 ### Azure Log Analytics Sink
 
-Enterprise developers often face stricter requirements than local debugging can meet. Many organizations mandate centralized logging, compliance auditing, and integration with corporate monitoring solutions. To support these scenarios, Data API builder integrates with Azure Log Analytics, allowing logs to flow into a secure, centralized platform that aligns with enterprise policies for retention, governance, and observability.
+Enterprise developers often face stricter requirements than local debugging can meet. Many organizations mandate centralized logging, compliance auditing, and integration with corporate monitoring solutions. To support these scenarios, Data API builder integrates with Azure Log Analytics. Logs flow into a secure, centralized platform that aligns with enterprise policies for retention, governance, and observability.
 
 **Example Azure Log Analytics sink configuration:**
 
@@ -127,15 +127,15 @@ Enterprise developers often face stricter requirements than local debugging can 
 
 **Versus Application Insights**
 
-Where Application Insights focuses on app performance monitoring (APM), Azure Log Analytics provides broader coverage, aggregating logs from apps, Azure resources, VMs, containers, networks, and security tools into a centralized workspace for Kusto (KQL) queries, correlation, and compliance.
+Where Application Insights focuses on app performance monitoring (APM), Azure Log Analytics provides broader coverage. It aggregates logs from apps, Azure resources, VMs, containers, networks, and security tools. These logs are centralized in a workspace for Kusto Query Language (KQL) queries, correlation, and compliance.
 
 ## Introducing: Azure Key Vault support
 
-Since the beginning, Data API builder configuration files have supported the `@env()` function to replace values in the configuration file with environment variables. This ensures secrets are never checked in with the configuration file. DAB also supports `.env` files in local development so developers can simulate and test configurations.
+Since the beginning, Data API builder configuration files supported the `@env()` function to replace values in the configuration file with environment variables. This ensures secrets are never checked in with the configuration file. DAB also supports `.env` files in local development so developers can simulate and test configurations.
 
-With release 1.6, we now support Azure Key Vault the same way. The new `@akv()` function replaces values in the configuration file with values from Azure Key Vault. This lets developers who rely on centralized secret storage use Data API builder in lockstep with enterprise standards.
+With release 1.6, we now support Azure Key Vault the same way. The new `@akv()` function replaces values in the configuration file with values from Azure Key Vault. This option lets developers who rely on centralized secret storage use Data API builder in lockstep with enterprise standards.
 
-> [!Note]
+> \[!Note]
 > Just as Data API builder supports `.env` files for local developers simulating environment variables, DAB now supports `.akv` files. These files let developers without an Azure Key Vault simulate the service locally. They use the same simple `name=value` format and should always be added to your `.gitignore`.
 
 **Example (function syntax):**
@@ -179,7 +179,7 @@ Using the `@akv()` function:
 
 ### Introducing: IN Operator (SQL backends, GraphQL)
 
-DAB's new `IN` operator helps simplify multi-value filtering in GraphQL queries. It reduces chained `OR` filters, generating cleaner SQL. Note that this feature is part of DAB's GraphQL syntax and is not yet in DAB's REST `$filter` syntax.
+DAB's new `IN` operator helps simplify multi-value filtering in GraphQL queries. It reduces chained `OR` filters, generating cleaner SQL. This feature is part of DAB's GraphQL syntax and isn't yet in DAB's REST `$filter` syntax.
 
 ```graphql
 query {
@@ -205,7 +205,7 @@ DAB's new relative `nextLink` option lets developers configure the engine to emi
 
 ## Health checks
 
-To deliver a faster composite status, Data API builder health checks can now run in parallel. This reduces latency in multi-source deployments, especially when several endpoints are involved and health checks are used to determine the deployment status of the DAB container, such as in the .NET Aspire application host.
+To deliver a faster composite status, Data API builder health checks now run in parallel. This reduces latency in multi-source deployments, especially when several endpoints are involved and health checks are used to determine the deployment status of the DAB container, such as in the .NET Aspire application host.
 
 **Example Health DOP configuration:**
 
@@ -219,15 +219,13 @@ To deliver a faster composite status, Data API builder health checks can now run
 }
 ```
 
-| `max-query-parallelism` | DOP |
-| ----------------------- | :-: |
-| Minimum                 |  1  |
-| Default                 |  4  |
-| Maximum                 |  8  |
+|  | Minimum | Default | Maximum
+| ----------------------- | :-: | :-: | :-: |
+| `max-query-parallelism` |  1  |  4  |  8  |
 
 ## DWSQL policies
 
-Data API builder has always allowed developers to configure API-level policies. These policies append as additional predicates to the query’s WHERE clause and support `@item` and `@claim` interrogation, providing advanced row-level security without requiring database changes.
+Data API builder always allowed developers to configure API-level policies. These policies append as extra predicates to the query’s WHERE clause and support `@item` and `@claim` interrogation, providing advanced row-level security without requiring database changes.
 
 With release 1.6, Data API builder extends this capability to Azure SQL Data Warehouse (`dwsql`), a data source already supported but without policy integration until now. Developers can now define policies that bring DWSQL in line with other SQL database types.
 
@@ -251,4 +249,3 @@ With release 1.6, Data API builder extends this capability to Azure SQL Data War
 ```
 
 In this example, when an `authenticated` user queries `Orders`, the engine appends `WHERE Region = <user's claim:region>` automatically.
-
