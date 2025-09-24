@@ -10,6 +10,8 @@
       displayName: changelog, diff, release
       href: whats-new/index.yml
       items:
+        - name: DAB 1.6 (Stability release)
+          href: whats-new/version-1-6.md
         - name: DAB 1.5 (Feature release)
           href: whats-new/version-1-5.md
         - name: DAB 1.4 (Stability release)
