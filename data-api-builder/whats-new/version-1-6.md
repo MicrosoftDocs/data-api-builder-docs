@@ -112,14 +112,15 @@ Enterprise developers often face stricter requirements than local debugging can 
 ```json
 {
   "telemetry": {
-      "azure-log-analytics": {
-        "enabled": ...,                 // Turn logging on or off
-        "auth.workspace-id": ...,       // Workspace ID 
-        "auth.dcr-immutable-id": ...,   // Data Collection Rule
-        "auth.dce-endpoint": ...,       // Data Collection Endpoint
-        "dab-identifier": ...,          // Unique string to identify log source
-        "flush-interval-seconds": ...,  // How often logs are flushed
-       }
+    "azure-log-analytics": {
+      "enabled": ...,                 // Turn logging on or off
+      "auth": {
+        "workspace-id": ...,          // Workspace ID
+        "dcr-immutable-id": ...,      // Data Collection Rule
+        "dce-endpoint": ...           // Data Collection Endpoint
+      },
+      "dab-identifier": ...,          // Unique string to identify log source
+      "flush-interval-seconds": ...   // How often logs are flushed
     }
   }
 }
@@ -165,12 +166,14 @@ Using the `@akv()` function:
 ```json
 {
   "azure-key-vault": {
-    "endpoint": "...",                          // Key Vault endpoint URL
-    "retry-policy.mode": "...",                 // Retry mode (fixed or exponential)
-    "retry-policy.max-count": ...,              // Maximum retry attempts
-    "retry-policy.delay-seconds": ...,          // Initial delay between retries
-    "retry-policy.max-delay-seconds": ...,      // Maximum delay for exponential backoff
-    "retry-policy.network-timeout-seconds": ... // Network timeout duration
+    "endpoint": "...",                 // Key Vault endpoint URL
+    "retry-policy": {
+      "mode": "...",                   // Retry mode (fixed or exponential)
+      "max-count": ...,                // Maximum retry attempts
+      "delay-seconds": ...,            // Initial delay between retries
+      "max-delay-seconds": ...,        // Maximum delay for exponential backoff
+      "network-timeout-seconds": ...   // Network timeout duration
+    }
   }
 }
 ```

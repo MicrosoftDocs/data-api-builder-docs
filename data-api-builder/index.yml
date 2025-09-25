@@ -27,6 +27,8 @@ landingContent:
             url: faq.yml
       - linkListType: whats-new
         links:
+          - text: Version 1.6
+            url: whats-new/version-1-6.md
           - text: Version 1.5
             url: whats-new/version-1-5.md
           - text: Version 1.4
