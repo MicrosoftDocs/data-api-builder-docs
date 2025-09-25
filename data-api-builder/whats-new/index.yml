@@ -10,8 +10,26 @@ metadata:
   ms.reviewer: sidandrews
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 06/11/2025
+  ms.date: 09/24/2025
 landingContent:
+- title: Version 1.6
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: Introducing - Level 2 Caching
+      url: version-1-6.md
+    - text: Introducing - File Sink
+      url: version-1-6.md
+    - text: Introducing - Azure Log Analytics Sink
+      url: version-1-6.md
+    - text: Introducing - Azure Key Vault
+      url: version-1-6.md
+    - text: GraphQL IN operator
+      url: version-1-6.md
+    - text: Parallel Health Checks
+      url: version-1-6.md
+    - text: DWSQL policies
+      url: version-1-6.md
 - title: Version 1.5
   linkLists:
   - linkListType: whats-new
