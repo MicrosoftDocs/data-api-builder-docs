@@ -1,6 +1,18 @@
+---
+title: Use @akv function in configuration
+description: Use key vault function in the configuration file to reference environment data dynamically
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
+ms.service: data-api-builder
+ms.topic: concept-article
+ms.date: 09/26/2025
+# Customer Intent: As a developer, I want to use configuration functions like @akv() to make my DAB config portable and secure
+---
+
 # Using @akv() for Azure Key Vault secret substitution in Data API builder
 
-Data API builder (DAB) lets you keep secrets, like database connection strings, out of the runtime configuration file by substituting them at load time. Originally this was done with the `@env()` function for environment variables. Beginning with version 1.6, DAB adds support for Azure Key Vault through the `@akv()` function.
+Data API builder (DAB) lets you keep secrets, like database connection strings, out of the runtime configuration file by substituting them at load time. Originally this was done with [the `@env()` function](./env-function.md) for environment variables. Beginning with version 1.6, DAB adds support for Azure Key Vault through the `@akv()` function.
 
 ## What @akv() does
 
@@ -52,6 +64,13 @@ Add the `azure-key-vault` section at the root level of your configuration:
 | `max-delay-seconds`       | 60            | Must be greater than 0, ceiling for exponential backoff |
 | `network-timeout-seconds` | 60            | Must be greater than 0                                  |
 
+### Retry policy modes
+
+| Mode          | Behavior                                                            |
+| ------------- | ------------------------------------------------------------------- |
+| `fixed`       | Waits a constant `delay-seconds` between attempts until `max-count` |
+| `exponential` | Doubles the delay until reaching `max-delay-seconds` or `max-count` |
+
 ## Local development: .akv files
 
 For development without an Azure Key Vault, use a `.akv` file to simulate secrets. Format is `name=value` per line:
@@ -61,7 +80,10 @@ my-connection-secret=Server=.;Database=AppDb;User Id=app;Password=local-dev;
 api-key=dev-api-key-123
 ```
 
-Guidelines:
+> [!Note]
+> If you provide a local `.akv` file for development, its entries are used to satisfy @akv('secret-name') lookups without making a network call to Azure Key Vault. 
+
+### Guidelines:
 
 * Keep `.akv` out of source control
 * Secret names must match the names used in `@akv('name')`
@@ -81,11 +103,10 @@ dab configure \
   --config dab-config.json
 ```
 
-Validation:
+### Validation:
 
 * Retry-policy fields without an endpoint cause validation failure
-* Retry parameters must be positive integers
-* On success, the configuration file is updated
+* Optional retry parameters must be positive integers
 
 ## Using @akv() in configuration
 
@@ -114,6 +135,9 @@ Validation:
 }
 ```
 
+> [!Note]
+> At startup, `@env()` substitutions occur before `@akv()` substitutions.
+
 ### Stored procedure parameters
 
 ```json
@@ -134,36 +158,6 @@ Validation:
   }
 }
 ```
-
-## Retry policy modes
-
-| Mode          | Behavior                                                            |
-| ------------- | ------------------------------------------------------------------- |
-| `fixed`       | Waits a constant `delay-seconds` between attempts until `max-count` |
-| `exponential` | Doubles the delay until reaching `max-delay-seconds` or `max-count` |
-
-`network-timeout-seconds` controls how long each request to Key Vault can run.
-
-## Validation and error cases
-
-| Scenario                             | Outcome                  |
-| ------------------------------------ | ------------------------ |
-| Negative retry field in JSON         | Deserialization error    |
-| Zero retry field in CLI              | Validation error         |
-| Retry options without endpoint       | Validation error         |
-| Nonexistent secret                   | Configuration load fails |
-| Missing entry in `.akv` file         | Placeholder not resolved |
-| Invalid mode value                   | Config load fails        |
-| Using @akv() without Key Vault block | Resolution fails         |
-
-## Security considerations
-
-| Topic            | Guidance                                                                           |
-| ---------------- | ---------------------------------------------------------------------------------- |
-| Source control   | Never commit secrets or `.akv` files                                               |
-| Least privilege  | Assign managed identity or service principal with only `get` or `list` permissions |
-| Rotation         | Rotate secrets; restart DAB to reload                                              |
-| Local simulation | Use `.akv` files only for development                                              |
 
 ## Troubleshooting
 
@@ -207,11 +201,14 @@ Validation:
 }
 ```
 
-Example `.akv` file:
+### Example `.akv` file:
 
 ```
 primary-sql-connection=Server=localhost;Database=BooksDb;User Id=app;Password=password;
 ```
+
+> [!Important]
+> Do not commit `.akv` files containing secrets.                                                |
 
 ## Quick reference
 
@@ -219,10 +216,8 @@ primary-sql-connection=Server=localhost;Database=BooksDb;User Id=app;Password=pa
 | ------------------------ | ------------------------------------------------------------------------ |
 | Syntax                   | `@akv('secret-name')`                                                    |
 | Endpoint required        | Yes                                                                      |
-| Retry defaults           | mode=exponential, max-count=3, delay=1, max-delay=60, network-timeout=60 |
-| CLI zero/negative values | Invalid                                                                  |
-| JSON negative values     | Invalid                                                                  |
 | Simulation file          | `.akv` with `name=value` lines                                           |
+| Mixing with `@env()` | Supported.                                                                  |
 
 ## Review
 
