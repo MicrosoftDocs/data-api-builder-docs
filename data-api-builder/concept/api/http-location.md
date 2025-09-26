@@ -16,20 +16,20 @@ For REST endpoints, the `Location` response header tells clients where to retrie
 
 ## When DAB sets the Location header
 
-| Scenario                                            | Status Code   | Location Header (current behavior)                                               |
-| --------------------------------------------------- | ------------- | -------------------------------------------------------------------------------- |
-| `POST` creates a new row (table)                      | 201 Created   | Present: primary key path segment(s), e.g. `id/123` or `categoryid/3/pieceid/1`. |
-| `POST` executes stored procedure returning new row(s) | 201 Created   | Present if PK can be derived; may be empty when it cannot.                       |
-| `PUT` upsert updates existing row                     | 200 OK        | Not present                                                                      |
-| `PUT` upsert inserts new row (no If-Match)            | 201 Created   | May be omitted; do not rely on `Location`                                          |
-| `PATCH` upsert updates existing row                   | 200 OK        | Not present                                                                      |
-| `PATCH` upsert inserts new row (no If-Match)          | 201 Created   | May be omitted; do not rely on `Location`                                          |
-| `PUT`/`PATCH` with `If-Match: *` and row missing        | 404 Not Found | Not present                                                                      |
-| Any update (row existed)                            | 200 OK        | Not present                                                                      |
+| Scenario                                            | Status Code   | Location Header (current behavior)                                                    |
+| --------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------- |
+| `POST` creates a new row (table)                    | 201 Created   | Present: primary key path segments, for example `id/123` or `categoryid/3/pieceid/1`. |
+| `POST` executes stored procedure returning new rows | 201 Created   | Present if PK can be derived; may be empty when it can't.                             |
+| `PUT` upsert updates existing row                   | 200 OK        | Not present                                                                           |
+| `PUT` upsert inserts new row (no If-Match)          | 201 Created   | May be omitted; don't rely on `Location`                                              |
+| `PATCH` upsert updates existing row                 | 200 OK        | Not present                                                                           |
+| `PATCH` upsert inserts new row (no If-Match)        | 201 Created   | May be omitted; don't rely on `Location`                                              |
+| `PUT`/`PATCH` with `If-Match: *` and row missing    | 404 Not Found | Not present                                                                           |
+| Any update (row existed)                            | 200 OK        | Not present                                                                           |
 
-### Notes:
+### Notes
 
-* Composite primary keys appear as ordered segments, e.g. `book_id/1/id/5001` or `categoryid/3/pieceid/1`.
+* Composite primary keys appear as ordered segments, for example `book_id/1/id/5001` or `categoryid/3/pieceid/1`.
 * Column name mappings (aliases) use the REST-exposed field names in the path.
 
 ## Example: POST creating a new item
@@ -172,17 +172,17 @@ Content-Type: application/json
 }
 ```
 
-(No Location header.)
+(No `Location` header.)
 
 ## Guidance
 
 * Rely on `Location` only for `POST`-based creation flows.
-* For `PUT` or `PATCH` inserts, read the response body to obtain identifiers; do not assume `Location` is provided.
+* For `PUT` or `PATCH` inserts, read the response body to get identifiers; don't assume `Location` is provided.
 * When present, `Location` encodes primary key structure using REST-exposed field names and ordering.
 
-## Summary
+## Review
 
-* **POST + creation**: `Location` present with PK path.
-* **PUT/PATCH + update**: No `Location`.
-* **PUT/PATCH + insert**: 201 Created; `Location` may be omitted (do not depend on it).
-* When you include [`If-Match: *`](http-location), DAB will only perform an update if the row already exists. If the row is missing, the request fails with `404 Not Found` and no insert is performed, so no `Location` header is returned.
+* **POST with creation**: `Location` is present with the primary key path.
+* **PUT or PATCH with update**: No `Location`.
+* **PUT or PATCH with insert**: Returns `201 Created`; `Location` may be omitted (don't depend on it).
+* When you include [`If-Match: *`](./http-if-match.md), DAB only performs an update if the row already exists. If the row is missing, the request fails with `404 Not Found` and no insert is performed, so no `Location` header is returned.

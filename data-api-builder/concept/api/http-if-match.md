@@ -16,13 +16,13 @@ For REST endpoints, developers often want control over whether updates create ne
 
 By default, DAB treats `PUT` and `PATCH` as *upsert* operations:
 
-* If the resource exists: it is updated.
-* If it does not exist: it is inserted.
+* If the resource exists: it's updated.
+* If it doesn't exist: it's inserted.
 
   * `PUT` → full upsert (replaces resource).
   * `PATCH` → incremental upsert (applies partial update).
 
-Adding `If-Match: *` changes this to “update-only” semantics.
+Adding `If-Match: *` changes this behavior to update-only semantics.
 
 ## What If-Match does in DAB
 
@@ -36,16 +36,16 @@ Adding `If-Match: *` changes this to “update-only” semantics.
 
 Notes:
 
-* DAB does not implement per-record ETag or version matching.
-* No concurrency token is evaluated. `*` only asserts “must exist.”
+* DAB doesn't implement per-record ETag or version matching.
+* No concurrency token is evaluated. `*` only asserts "must exist."
 * Applies only to REST, not GraphQL.
 * Not currently meaningful for DELETE operations.
 
 ## Using If-Match with PUT
 
-Without `If-Match`, PUT will insert when the resource does not exist (returns `201 Created`).
+Without `If-Match`, PUT inserts when the resource doesn't exist (returns `201 Created`).
 
-### Update-only example:
+### Update-only example
 
 Request:
 
@@ -82,7 +82,7 @@ Content-Type: application/json
 }
 ```
 
-### Upsert insert example (no If-Match and record did not exist):
+### Upsert insert example (no If-Match and record didn't exist)
 
 ```
 PUT /api/Books/id/500
@@ -110,7 +110,7 @@ Content-Type: application/json
 
 ## Using If-Match with PATCH
 
-`PATCH` behaves similarly. Without `If-Match` it performs an incremental upsert. With `If-Match: *` it only updates existing rows.
+`PATCH` behaves similarly. Without `If-Match`, it performs an incremental upsert. With `If-Match: *`, it only updates existing rows.
 
 Request:
 
@@ -178,4 +178,4 @@ Content-Type: application/json
 
 * Omit `If-Match` for upsert (insert-or-update) semantics.
 * Use `If-Match: *` for strict update-only semantics (404 if the item is missing).
-* Do not use any other value. Real ETag matching is not implemented.
+* Don't use any other value. Real ETag matching isn't implemented.
