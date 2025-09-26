@@ -248,6 +248,10 @@
         - name: How to use built-in pagination
           href: concept/api/pagination.md
           displayName: pagination, limit, offset, top, skip, page size, results
+        - name: How to use the If-Match HTTP Header
+          href: concept/api/http-if-match.md
+        - name: How to use the Location HTTP Header
+          href: concept/api/http-location.md
     - name: Data caching
       items:
         - name: How to use built-in level 1 Cache
@@ -256,7 +260,7 @@
         - name: How to use built-in level 2 Cache
           href: concept/cache/level-2.md
           displayName: level 2 cache, L2, global cache, prefetch, fusioncache, redis
-        - name: How to control Cache with HTTP headers
+        - name: How to use the Cache-Control HTTP header
           href: concept/cache/http-headers.md
           displayName: cache headers, HTTP, control, TTL, freshness
     - name: Configuration file
