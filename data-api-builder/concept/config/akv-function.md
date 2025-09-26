@@ -10,7 +10,8 @@ ms.date: 09/26/2025
 # Customer Intent: As a developer, I want to use configuration functions like @akv() to make my DAB config portable and secure
 ---
 
-# Using @akv() for Azure Key Vault secret substitution in Data API builder
+# Use @akv() for Azure Key Vault secret substitution in Data API builder
+
 
 Data API builder (DAB) lets you keep secrets, like database connection strings, out of the runtime configuration file by substituting them at load time. Originally this was done with [the `@env()` function](./env-function.md) for environment variables. Beginning with version 1.6, DAB adds support for Azure Key Vault through the `@akv()` function.
 

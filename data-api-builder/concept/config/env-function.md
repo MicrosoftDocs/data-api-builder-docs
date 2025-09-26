@@ -10,7 +10,7 @@ ms.date: 09/26/2025
 # Customer Intent: As a developer, I want to use configuration functions like @env() to make my DAB config portable and secure
 ---
 
-# Using @env() for environment variable substitution in Data API builder
+# Use @env() for environment variable substitution in Data API builder
 
 Data API builder (DAB) lets you keep secrets (for example, database connection strings) out of `dab-config.json` by substituting values at load time. The first supported mechanism is the `@env()` function, which resolves environment variables from the host process environment or a local `.env` file.
 
