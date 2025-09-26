@@ -1,5 +1,5 @@
 ---
-title: The Location Response Header in REST create operations
+title: The Location Response Header in REST Create Operation
 description: Learn how Data API builder (DAB) uses the Location header to indicate where newly created resources can be retrieved after POST or PUT inserts.
 author: seesharprun
 ms.author: sidandrews
@@ -10,7 +10,7 @@ ms.date: 09/26/2025
 # Customer Intent: As a developer, I want to understand how the Location header works in DAB REST endpoints so I can reliably find the path of newly created resources.
 ---
 
-# The Location Response Header in REST create operations
+# The Location Response Header in REST Create Operation
 
 For REST endpoints, the `Location` response header tells clients where to retrieve a newly created resource. Data API builder (DAB) returns `Location` for `POST` inserts. For `PUT` or `PATCH` upserts that create new rows, the header may be omitted.
 
@@ -27,14 +27,14 @@ For REST endpoints, the `Location` response header tells clients where to retrie
 | `PUT`/`PATCH` with `If-Match: *` and row missing    | 404 Not Found | Not present                                                                           |
 | Any update (row existed)                            | 200 OK        | Not present                                                                           |
 
-### Notes
+### Behavior
 
 * Composite primary keys appear as ordered segments, for example `book_id/1/id/5001` or `categoryid/3/pieceid/1`.
 * Column name mappings (aliases) use the REST-exposed field names in the path.
 
 ## Example: POST creating a new item
 
-Request:
+Request
 
 ```http
 POST /api/Books
@@ -46,7 +46,7 @@ Content-Type: application/json
 }
 ```
 
-Response:
+Response
 
 ```http
 HTTP/1.1 201 Created
@@ -64,7 +64,7 @@ Client can now `GET /api/Books/id/123`.
 
 ## Example: POST inserting into composite key table
 
-Request:
+Request
 
 ```http
 POST /api/Inventory
@@ -77,7 +77,7 @@ Content-Type: application/json
 }
 ```
 
-Response:
+Response
 
 ```http
 HTTP/1.1 201 Created
@@ -93,7 +93,7 @@ Content-Type: application/json
 
 ## Example: PUT updating existing row (no Location)
 
-Request:
+Request
 
 ```http
 PUT /api/Books/id/1
@@ -104,7 +104,7 @@ Content-Type: application/json
 }
 ```
 
-Response:
+Response
 
 ```http
 HTTP/1.1 200 OK
@@ -120,7 +120,7 @@ Content-Type: application/json
 
 ## Example: PUT inserting new row
 
-Request:
+Request
 
 ```http
 PUT /api/Books/id/500
@@ -132,7 +132,7 @@ Content-Type: application/json
 }
 ```
 
-Response:
+Response
 
 ```http
 HTTP/1.1 201 Created
@@ -149,7 +149,7 @@ Content-Type: application/json
 
 ## Example: PUT with If-Match and row missing
 
-Request:
+Request
 
 ```http
 PUT /api/Books/id/500
@@ -161,7 +161,7 @@ Content-Type: application/json
 }
 ```
 
-Response:
+Response
 
 ```http
 HTTP/1.1 404 Not Found
@@ -173,12 +173,6 @@ Content-Type: application/json
 ```
 
 (No `Location` header.)
-
-## Guidance
-
-* Rely on `Location` only for `POST`-based creation flows.
-* For `PUT` or `PATCH` inserts, read the response body to get identifiers; don't assume `Location` is provided.
-* When present, `Location` encodes primary key structure using REST-exposed field names and ordering.
 
 ## Review
 

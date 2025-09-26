@@ -1,5 +1,5 @@
 ---
-title: Use the If-Match HTTP header in PUT and PATCH operations
+title: Use the If-Match HTTP Header in PUT and PATCH Operations
 description: Use http headers to control upsert operations
 author: seesharprun
 ms.author: sidandrews
@@ -10,7 +10,7 @@ ms.date: 09/26/2025
 # Customer Intent: As a developer, I want to add use http headers to control PUT and PATCH operations.
 ---
 
-# Use the If-Match HTTP header in PUT and PATCH operations
+# Use the If-Match HTTP Header in PUT and PATCH Operations
 
 For REST endpoints, developers often want control over whether updates create new records or only modify existing ones. The `If-Match` HTTP header provides that control in Data API builder (DAB).
 
@@ -34,7 +34,7 @@ Adding `If-Match: *` changes this behavior to update-only semantics.
 | `If-Match: <any other>` | Rejected; 400 Bad Request (`Etags not supported, use '*'`).             |
 | (absent)                | Upsert behavior (insert if not found, otherwise update).                |
 
-Notes:
+### Behavior overview
 
 * DAB doesn't implement per-record ETag or version matching.
 * No concurrency token is evaluated. `*` only asserts "must exist."
@@ -47,9 +47,9 @@ Without `If-Match`, PUT inserts when the resource doesn't exist (returns `201 Cr
 
 ### Update-only example
 
-Request:
+Request
 
-```
+```sh
 PUT /api/Books/id/1
 If-Match: *
 Content-Type: application/json
@@ -59,7 +59,7 @@ Content-Type: application/json
 }
 ```
 
-Success (record existed):
+Success (record existed)
 
 ```
 HTTP/1.1 200 OK
@@ -71,7 +71,7 @@ Content-Type: application/json
 }
 ```
 
-Failure (record missing):
+Failure (record missing)
 
 ```
 HTTP/1.1 404 Not Found
@@ -84,6 +84,8 @@ Content-Type: application/json
 
 ### Upsert insert example (no If-Match and record didn't exist)
 
+Request 
+
 ```
 PUT /api/Books/id/500
 Content-Type: application/json
@@ -94,7 +96,7 @@ Content-Type: application/json
 }
 ```
 
-Response:
+Response
 
 ```
 HTTP/1.1 201 Created
@@ -112,7 +114,7 @@ Content-Type: application/json
 
 `PATCH` behaves similarly. Without `If-Match`, it performs an incremental upsert. With `If-Match: *`, it only updates existing rows.
 
-Request:
+Request
 
 ```
 PATCH /api/Books/id/1
@@ -124,7 +126,7 @@ Content-Type: application/json
 }
 ```
 
-Success:
+Response when Success
 
 ```
 HTTP/1.1 200 OK
@@ -136,7 +138,7 @@ Content-Type: application/json
 }
 ```
 
-Not found:
+Response when Not found
 
 ```
 HTTP/1.1 404 Not Found
@@ -151,7 +153,7 @@ Content-Type: application/json
 
 Any value other than `*` (including quoted strings) is rejected.
 
-Request:
+Request
 
 ```
 PUT /api/Books/id/1
@@ -163,7 +165,7 @@ Content-Type: application/json
 }
 ```
 
-Response:
+Response
 
 ```
 HTTP/1.1 400 Bad Request

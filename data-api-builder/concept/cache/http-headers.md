@@ -25,14 +25,14 @@ If caching is disabled in the runtime configuration, these directives are ignore
 
 ## Supported request directives
 
-| Header Value                    | Behavior                                                                                                                                     |
+| Cache-Control Value                    | Behavior                                                                                                                                     |
 | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Cache-Control: no-cache`       | Always executes the query against the database, then refreshes (overwrites) the cache with the fresh result.                                 |
-| `Cache-Control: no-store`       | Returns a cached result if already present; if not cached, queries the database but doesn't store the new result.                            |
-| `Cache-Control: only-if-cached` | Returns the cached result only. If not cached, responds with `504 Gateway Timeout` and an error message.                                     |
+| `no-cache`       | Always executes the query against the database, then refreshes (overwrites) the cache with the fresh result.                                 |
+| `no-store`       | Returns a cached result if already present; if not cached, queries the database but doesn't store the new result.                            |
+| `only-if-cached` | Returns the cached result only. If not cached, responds with `504 Gateway Timeout` and an error message.                                     |
 | (Absent or unsupported value)   | Default caching: returns cached result if present; otherwise queries the database and stores the result using configured time-to-live (TTL). |
 
-Notes:
+### Behavior
 
 * Directive matching is case-insensitive.
 * DAB doesn't interpret other standard `Cache-Control` directives such as max-age or max-stale.
@@ -42,7 +42,7 @@ Notes:
 
 Forces a fresh read and updates the cache layers.
 
-Request:
+Request
 
 ```http
 GET /api/Books
@@ -50,7 +50,7 @@ Cache-Control: no-cache
 Accept: application/json
 ```
 
-Response (example):
+Response (example)
 
 ```http
 HTTP/1.1 200 OK
@@ -68,7 +68,7 @@ Effect: Cache now holds this fresh result (subject to configured TTL).
 
 Uses an existing cached value if present; otherwise queries the database but doesn't populate (or refresh) the cache with the new result.
 
-Request:
+Request
 
 ```http
 GET /api/Books
@@ -76,7 +76,7 @@ Cache-Control: no-store
 Accept: application/json
 ```
 
-Response (example):
+Response (example)
 
 ```http
 HTTP/1.1 200 OK
@@ -94,13 +94,15 @@ Effect: If this result wasn't already cached, it won't be stored. A later `only-
 
 Returns the cached result only. If no cached entry exists, DAB returns an error.
 
-Cache hit example:
+Request (Cache hit example)
 
 ```http
 GET /api/Books
 Cache-Control: only-if-cached
 Accept: application/json
 ```
+
+Response
 
 ```http
 HTTP/1.1 200 OK
@@ -109,13 +111,15 @@ Content-Type: application/json
 [ ...cached result... ]
 ```
 
-Cache miss example:
+Request (Cache miss example)
 
 ```http
 GET /api/Books
 Cache-Control: only-if-cached
 Accept: application/json
 ```
+
+Response
 
 ```http
 HTTP/1.1 504 Gateway Timeout
@@ -125,15 +129,6 @@ Content-Type: application/json
   "error": "Header 'only-if-cached' was used but item was not found in cache."
 }
 ```
-
-## Default behavior (no directive)
-
-If `Cache-Control` is absent (or contains an unrecognized directive), DAB:
-
-1. Checks cache (L1 or L2 depending on configuration).
-2. Returns cached result if present.
-3. Otherwise queries the database and stores the result (respecting configured TTLs).
-4. Returns `200 OK`.
 
 ## Review
 
