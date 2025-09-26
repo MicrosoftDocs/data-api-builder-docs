@@ -10,7 +10,8 @@ ms.date: 09/26/2025
 # Customer Intent: As a developer, I want to add use http headers to control PUT and PATCH operations.
 ---
 
-# Use the If-Match HTTP Header in PUT and PATCH Operations
+# Use the If-Match HTTP Header in PUT and PATCH operations
+
 
 For REST endpoints, developers often want control over whether updates create new records or only modify existing ones. The `If-Match` HTTP header provides that control in Data API builder (DAB).
 
