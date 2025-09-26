@@ -7,7 +7,7 @@ ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: best-practice
 ms.date: 07/01/2025
-ms.custom: security-horizontal-2025
+ms.custom: [security-horizontal-2025, horz-security]
 ai-usage: ai-generated
 ---
 
