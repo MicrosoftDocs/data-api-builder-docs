@@ -248,6 +248,10 @@
         - name: How to use built-in pagination
           href: concept/api/pagination.md
           displayName: pagination, limit, offset, top, skip, page size, results
+        - name: How to use the If-Match HTTP Header
+          href: concept/api/http-if-match.md
+        - name: How to use the Location HTTP Header
+          href: concept/api/http-location.md
     - name: Data caching
       items:
         - name: How to use built-in level 1 Cache
@@ -256,7 +260,7 @@
         - name: How to use built-in level 2 Cache
           href: concept/cache/level-2.md
           displayName: level 2 cache, L2, global cache, prefetch, fusioncache, redis
-        - name: How to control Cache with HTTP headers
+        - name: How to use the Cache-Control HTTP header
           href: concept/cache/http-headers.md
           displayName: cache headers, HTTP, control, TTL, freshness
     - name: Configuration file
@@ -269,7 +273,10 @@
           displayName: environment, config, dev, prod, variables, @env
         - name: How to use the env() function in a configuration
           href: concept/config/env-function.md
-          displayName: functions, helpers, filters, expressions, macros
+          displayName: functions, helpers, filters, expressions, macros, @env, environment
+        - name: How to use the akv() function in a configuration
+          href: concept/config/akv-function.md
+          displayName: functions, helpers, filters, expressions, macros, @akv, azure key vault
         - name: How to use multiple data sources at once time
           href: concept/config/multi-data-source.md
           displayName: multiple databases, cross-DB, data source, federation
