@@ -1,6 +1,11 @@
 {
   "redirections": [
     {
+      "source_path_from_root": "/data-api-builder/reference-command-line-interface.md",
+      "redirect_url": "/azure/data-api-builder/command-line/",
+      "redirect_document_id": true
+    },
+    {
       "source_path_from_root": "/data-api-builder/schema-inference-nosql.md",
       "redirect_url": "/azure/data-api-builder/command-line/dab-export",
       "redirect_document_id": true
