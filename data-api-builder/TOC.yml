@@ -24,9 +24,6 @@
           href: whats-new/version-1-1.md
     - name: Feature availability
       href: feature-availability.md
-    - name: Command-line interface
-      displayName: CLI
-      href: reference-command-line-interface.md
     - name: Database-specific features
       displayName: sql, cosmos, pg, postgres, mysql, dw
       href: reference-database-specific-features.md
@@ -59,6 +56,34 @@
         - name: Azure Cosmos DB for NoSQL
           href: quickstart/azure-cosmos-db-nosql.md
           displayName: azure, cosmos, nosql, cloud, database
+- name: Command-Line interface
+  items:
+    - name: Overview
+      href: command-line/index.yaml
+      displayName: CLI, command line, terminal, local
+    - name: Sections
+      items:
+      - name: dab add (CLI)
+        displayName: command line, terminal, local
+        href: command-line/dab-add.md
+      - name: dab configure (CLI)
+        displayName: command line, terminal, local
+        href: command-line/dab-configure.md
+      - name: dab export (CLI)
+        displayName: command line, terminal, local, cosmos
+        href: command-line/dab-export.md
+      - name: dab init (CLI)
+        displayName: command line, terminal, local
+        href: command-line/dab-init.md
+      - name: dab start (CLI)
+        displayName: command line, terminal, local
+        href: command-line/dab-start.md
+      - name: dab update (CLI)
+        displayName: command line, terminal, local
+        href: command-line/dab-update.md
+      - name: dab validate (CLI)
+        displayName: command line, terminal, local, CI, CICD, CI/CD, pipeline, devops
+        href: command-line/dab-validate.md
 - name: Configuration file
   items:
     - name: Overview
