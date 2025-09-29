@@ -22,10 +22,12 @@ landingContent:
 
   - title: Add
     linkLists:
+      - linkListType: overview
+        links:
+          - text: dab add 
+            url: dab-add.md
       - linkListType: reference
         links:
-          - text: Overview
-            url: dab-add.md
           - text: Cache options
             url: dab-add.md
           - text: Fields options
@@ -41,10 +43,12 @@ landingContent:
 
   - title: Configure
     linkLists:
+      - linkListType: overview
+        links:
+          - text: dab configure 
+            url: dab-configure.md
       - linkListType: reference
         links:
-          - text: Overview
-            url: dab-configure.md
           - text: Azure Key Vault
             url: dab-configure.md
           - text: Data source
@@ -62,10 +66,12 @@ landingContent:
 
   - title: Export
     linkLists:
+      - linkListType: overview
+        links:
+          - text: dab export
+            url: dab-export.md
       - linkListType: reference
         links:
-          - text: Overview
-            url: dab-export.md
           - text: Sampling modes
             url: dab-export.md
           - text: Options
@@ -79,10 +85,12 @@ landingContent:
 
   - title: Init
     linkLists:
+      - linkListType: overview
+        links:
+          - text: dab init
+            url: dab-init.md
       - linkListType: reference
         links:
-          - text: Overview
-            url: dab-init.md
           - text: Data source
             url: dab-init.md
           - text: GraphQL
@@ -98,10 +106,12 @@ landingContent:
 
   - title: Start
     linkLists:
+      - linkListType: overview
+        links:
+          - text: dab start
+            url: dab-start.md
       - linkListType: reference
         links:
-          - text: Overview
-            url: dab-start.md
           - text: Options
             url: dab-start.md
           - text: Examples
@@ -109,10 +119,12 @@ landingContent:
 
   - title: Update
     linkLists:
+      - linkListType: overview
+        links:
+          - text: dab update
+            url: dab-update.md
       - linkListType: reference
         links:
-          - text: Overview
-            url: dab-update.md
           - text: Cache
             url: dab-update.md
           - text: Fields
@@ -130,10 +142,12 @@ landingContent:
 
   - title: Validate
     linkLists:
+      - linkListType: overview
+        links:
+          - text: dab validate
+            url: dab-validate.md
       - linkListType: reference
         links:
-          - text: Overview
-            url: dab-validate.md
           - text: Rules
             url: dab-validate.md
           - text: Failures and fixes
