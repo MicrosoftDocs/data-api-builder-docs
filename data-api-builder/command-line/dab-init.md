@@ -1,3 +1,15 @@
+---
+title: Initialize a config with the DAB CLI
+description: Use the Data API builder (DAB) CLI to initialize a new API configuration file.
+author: seesharprun
+ms.author: jerrynixon
+ms.reviewer: sidandrews
+ms.service: data-api-builder
+ms.topic: command-line
+ms.date: 09/29/2025
+# Customer Intent: As a developer, I want to initialize a Data API builder configuration, so that I can begin defining APIs for my database.
+---
+
 # `init` command
 
 Initialize a new Data API builder configuration file. The resulting JSON captures data source details, enabled endpoints (REST, GraphQL, MCP), authentication, and runtime behaviors.
@@ -12,32 +24,65 @@ If the target config file already exists, the command overwrites it. There is no
 
 ### Quick glance
 
-| Option                                                                  | Summary                                                                                          |
-| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| [`-c, --config`](#-c---config)                                          | Output config file name (default dab-config.json)                                                |
-| [`--auth.audience`](#--authaudience)                                    | JWT audience claim                                                                               |
-| [`--auth.issuer`](#--authissuer)                                        | JWT issuer claim                                                                                 |
-| [`--auth.provider`](#--authprovider)                                    | Identity provider (default StaticWebApps)                                                        |
-| [`--connection-string`](#--connection-string)                           | Database connection string (supports `@env()`)                                                   |
-| [`--cors-origin`](#--cors-origin)                                       | Allowed origins list (comma-separated)                                                           |
-| [`--cosmosdb_nosql-container`](#--cosmosdb_nosql-container)             | Cosmos DB NoSQL container name (optional)                                                        |
-| [`--cosmosdb_nosql-database`](#--cosmosdb_nosql-database)               | Cosmos DB NoSQL database name (required for cosmosdb_nosql)                                      |
-| [`--database-type`](#--database-type)                                   | Required. Database type: `mssql`, `mysql`, `postgresql`, `cosmosdb_postgresql`, `cosmosdb_nosql` |
-| [`--graphql.disabled`](#--graphqldisabled)                              | Deprecated. Disables GraphQL (use `--graphql.enabled false`)                                     |
-| [`--graphql.enabled`](#--graphqlenabled)                                | Enable GraphQL (default true)                                                                    |
-| [`--graphql.multiple-create.enabled`](#--graphqlmultiple-createenabled) | Allow multiple create mutations (default false)                                                  |
-| [`--graphql.path`](#--graphqlpath)                                      | GraphQL endpoint prefix (default /graphql)                                                       |
-| [`--graphql-schema`](#--graphql-schema)                                 | Path to GraphQL schema (required for cosmosdb_nosql)                                             |
-| [`--host-mode`](#--host-mode)                                           | Host mode: Development or Production (default Production)                                        |
-| [`--mcp.disabled`](#--mcpdisabled)                                      | Deprecated. Disables MCP (use `--mcp.enabled false`)                                             |
-| [`--mcp.enabled`](#--mcpenabled)                                        | Enable MCP (default true)                                                                        |
-| [`--mcp.path`](#--mcppath)                                              | MCP endpoint prefix (default /mcp)                                                               |
-| [`--rest.disabled`](#--restdisabled)                                    | Deprecated. Disables REST (use `--rest.enabled false`)                                           |
-| [`--rest.enabled`](#--restenabled)                                      | Enable REST (default true, prefer over `--rest.disabled`)                                        |
-| [`--rest.path`](#--restpath)                                            | REST endpoint prefix (default /api, ignored for cosmosdb_nosql)                                  |
-| [`--rest.request-body-strict`](#--restrequest-body-strict)              | Enforce strict request body validation (default true, ignored for cosmosdb_nosql)                |
-| [`--runtime.base-route`](#--runtimebase-route)                          | Global prefix for all endpoints                                                                  |
-| [`--set-session-context`](#--set-session-context)                       | Enable SQL Server session context (mssql only)                                                   |
+| Option                         | Summary                                           |
+| ------------------------------ | ------------------------------------------------- |
+| [`-c, --config`](#-c---config) | Output config file name (default dab-config.json) |
+
+#### Authentication
+
+| Option                               | Summary                                   |
+| ------------------------------------ | ----------------------------------------- |
+| [`--auth.audience`](#--authaudience) | JWT audience claim                        |
+| [`--auth.issuer`](#--authissuer)     | JWT issuer claim                          |
+| [`--auth.provider`](#--authprovider) | Identity provider (default StaticWebApps) |
+
+#### Data Source
+
+| Option                                                      | Summary                                                                                |
+| ----------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| [`--connection-string`](#--connection-string)               | Database connection string (supports `@env()`)                                         |
+| [`--cosmosdb_nosql-container`](#--cosmosdb_nosql-container) | Cosmos DB NoSQL container name (optional)                                              |
+| [`--cosmosdb_nosql-database`](#--cosmosdb_nosql-database)   | Cosmos DB NoSQL database name (required for cosmosdb_nosql)                            |
+| [`--database-type`](#--database-type)                       | Database type: `mssql`, `mysql`, `postgresql`, `cosmosdb_postgresql`, `cosmosdb_nosql` |
+| [`--set-session-context`](#--set-session-context)           | Enable SQL Server session context (mssql only)                                         |
+
+#### GraphQL
+
+| Option                                                                  | Summary                                                      |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------ |
+| [`--graphql.disabled`](#--graphqldisabled)                              | Deprecated. Disables GraphQL (use `--graphql.enabled false`) |
+| [`--graphql.enabled`](#--graphqlenabled)                                | Enable GraphQL (default true)                                |
+| [`--graphql.multiple-create.enabled`](#--graphqlmultiple-createenabled) | Allow multiple create mutations (default false)              |
+| [`--graphql.path`](#--graphqlpath)                                      | GraphQL endpoint prefix (default /graphql)                   |
+| [`--graphql-schema`](#--graphql-schema)                                 | Path to GraphQL schema (required for cosmosdb_nosql)         |
+
+#### Host and authentication
+
+| Option                                         | Summary                                                   |
+| ---------------------------------------------- | --------------------------------------------------------- |
+| [`--host-mode`](#--host-mode)                  | Host mode: Development or Production (default Production) |
+| [`--cors-origin`](#--cors-origin)              | Allowed origins list (comma-separated)                    |
+| [`--runtime.base-route`](#--runtimebase-route) | Global prefix for all endpoints                           |
+
+#### MCP
+
+| Option                             | Summary                                              |
+| ---------------------------------- | ---------------------------------------------------- |
+| [`--mcp.disabled`](#--mcpdisabled) | Deprecated. Disables MCP (use `--mcp.enabled false`) |
+| [`--mcp.enabled`](#--mcpenabled)   | Enable MCP (default true)                            |
+| [`--mcp.path`](#--mcppath)         | MCP endpoint prefix (default /mcp)                   |
+
+> [!Note]
+> MCP capability will be part of version 1.7.
+
+#### REST
+
+| Option                                                     | Summary                                                                           |
+| ---------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| [`--rest.disabled`](#--restdisabled)                       | Deprecated. Disables REST (use `--rest.enabled false`)                            |
+| [`--rest.enabled`](#--restenabled)                         | Enable REST (default true, prefer over `--rest.disabled`)                         |
+| [`--rest.path`](#--restpath)                               | REST endpoint prefix (default /api, ignored for cosmosdb_nosql)                   |
+| [`--rest.request-body-strict`](#--restrequest-body-strict) | Enforce strict request body validation (default true, ignored for cosmosdb_nosql) |
 
 > [!IMPORTANT]
 > Do not mix the new `--*.enabled` flags and the legacy `--*.disabled` flags for the same subsystem in the same command. Prefer the `--*.enabled` pattern; the `--rest.disabled`, `--graphql.disabled`, and `--mcp.disabled` options log warnings and will be removed in future versions.

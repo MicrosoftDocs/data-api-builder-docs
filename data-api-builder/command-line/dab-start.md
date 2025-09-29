@@ -1,3 +1,15 @@
+---
+title: Start the runtime with the DAB CLI
+description: Use the Data API builder (DAB) CLI to start the runtime and serve APIs based on your configuration.
+author: seesharprun
+ms.author: jerrynixon
+ms.reviewer: sidandrews
+ms.service: data-api-builder
+ms.topic: command-line
+ms.date: 09/29/2025
+# Customer Intent: As a developer, I want to start the Data API builder runtime, so that my APIs become available for requests.
+---
+
 # `start` command
 
 Start the Data API builder runtime with an existing configuration file.

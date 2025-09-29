@@ -1,3 +1,15 @@
+---
+title: Update entities with the DAB CLI
+description: Use the Data API builder (DAB) CLI to update existing entities in your API configuration.
+author: seesharprun
+ms.author: jerrynixon
+ms.reviewer: sidandrews
+ms.service: data-api-builder
+ms.topic: command-line
+ms.date: 09/29/2025
+# Customer Intent: As a developer, I want to update existing entities in my Data API builder configuration, so that I can adjust API behavior without recreating them.
+---
+
 # `update` command
 
 Update an existing entity definition in the Data API builder configuration file. Use this command to adjust source metadata, permissions, exposure (REST/GraphQL), policies, caching, relationships, mappings, and descriptive metadata after the entity has already been added.
@@ -13,49 +25,65 @@ dab update <entity-name> [options]
 
 ### Quick glance
 
-| Option                                           | Summary                                                              |
-| ------------------------------------------------ | -------------------------------------------------------------------- |
-| `<entity-name>`                                  | Required positional argument. Logical entity name.                   |
-| [`-c, --config`](#-c---config)                   | Path to config file. Default resolution applies if omitted.          |
-| [`--cache.enabled`](#--cacheenabled)             | Enable or disable entity caching.                                    |
-| [`--cache.ttl`](#--cachettl)                     | Cache time-to-live in seconds.                                       |
-| [`--description`](#--description)                | Replace entity description.                                          |
-| [`--fields.exclude`](#--fieldsexclude)           | Comma-separated list of excluded fields.                             |
-| [`--fields.include`](#--fieldsinclude)           | Comma-separated list of included fields (`*` = all).                 |
-| [`--graphql`](#--graphql)                        | GraphQL exposure: `false`, `true`, `singular`, or `singular:plural`. |
-| [`--graphql.operation`](#--graphqloperation)     | Stored procedures only: `query` or `mutation` (default mutation).    |
-| [`-m, --map`](#-m---map)                         | Field mapping pairs `db:exposed`. Replaces entire set.               |
-| [`--permissions`](#--permissions)                | One or more `role:actions` pairs. Replaces existing list.            |
-| [`--policy-database`](#--policy-database)        | OData-style filter injected in DB query.                             |
-| [`--policy-request`](#--policy-request)          | Pre-database request filter.                                         |
-| [`--relationship`](#--relationship)              | Relationship name. Use with relationship options.                    |
-| [`--relationship.fields`](#--relationshipfields) | Field mappings for direct relationships.                             |
-| [`--rest`](#--rest)                              | REST exposure: `false`, `true`, or custom path.                      |
-| [`--rest.methods`](#--restmethods)               | Stored procedures only. Replace allowed HTTP verbs.                  |
-| [`-s, --source`](#-s---source)                   | Underlying database object name.                                     |
-| [`--source.key-fields`](#--sourcekey-fields)     | Required for views or non-PK tables.                                 |
-| [`--source.params`](#--sourceparams)             | Stored procedures only. Replace default params.                      |
-| [`--source.type`](#--sourcetype)                 | Source type: `table`, `view`, or `stored-procedure`.                 |
+| Option                            | Summary                                                     |
+| --------------------------------- | ----------------------------------------------------------- |
+| `<entity-name>`                   | Required positional argument. Logical entity name.          |
+| `-c, --config`    | Path to config file. Default resolution applies if omitted. |
+| [`--description`](#--description) | Replace entity description.                                 |
 
-## `<entity-name>`
+#### Cache
 
-Required positional argument. Must match the logical entity name in the configuration.
+| Option                               | Summary                           |
+| ------------------------------------ | --------------------------------- |
+| [`--cache.enabled`](#--cacheenabled) | Enable or disable entity caching. |
+| [`--cache.ttl`](#--cachettl)         | Cache time-to-live in seconds.    |
 
-**Example**
+#### Fields
 
-```sh
-dab update Book
-```
+| Option                                 | Summary                                                |
+| -------------------------------------- | ------------------------------------------------------ |
+| [`--fields.exclude`](#--fieldsexclude) | Comma-separated list of excluded fields.               |
+| [`--fields.include`](#--fieldsinclude) | Comma-separated list of included fields (`*` = all).   |
+| [`-m, --map`](#-m---map)               | Field mapping pairs `name:alias`. Replaces entire set. |
 
-## `-c, --config`
+#### GraphQL
 
-Path to the configuration file. Default is `dab-config.<DAB_ENVIRONMENT>.json` if present, else `dab-config.json`.
+| Option                                       | Summary                                                              |
+| -------------------------------------------- | -------------------------------------------------------------------- |
+| [`--graphql`](#--graphql)                    | GraphQL exposure: `false`, `true`, `singular`, or `singular:plural`. |
+| [`--graphql.operation`](#--graphqloperation) | Stored procedures only: `query` or `mutation` (default mutation).    |
 
-**Example**
+#### Permissions & Policies
 
-```sh
-dab update Book --config ./dab-config.json
-```
+| Option                                    | Summary                                                   |
+| ----------------------------------------- | --------------------------------------------------------- |
+| [`--permissions`](#--permissions)         | One or more `role:actions` pairs. Replaces existing list. |
+| [`--policy-database`](#--policy-database) | OData-style filter injected in DB query.                  |
+| [`--policy-request`](#--policy-request)   | Pre-database request filter.                              |
+
+#### Relationships
+
+| Option                                           | Summary                                           |
+| ------------------------------------------------ | ------------------------------------------------- |
+| [`--relationship`](#--relationship)              | Relationship name. Use with relationship options. |
+| [`--relationship.fields`](#--relationshipfields) | Field mappings for direct relationships.          |
+
+#### REST
+
+| Option                             | Summary                                             |
+| ---------------------------------- | --------------------------------------------------- |
+| [`--rest`](#--rest)                | REST exposure: `false`, `true`, or custom path.     |
+| [`--rest.methods`](#--restmethods) | Stored procedures only. Replace allowed HTTP verbs. |
+
+#### Source
+
+| Option                                       | Summary                                              |
+| -------------------------------------------- | ---------------------------------------------------- |
+| [`-s, --source`](#-s---source)               | Underlying database object name.                     |
+| [`--source.key-fields`](#--sourcekey-fields) | Required for views or non-PK tables.                 |
+| [`--source.params`](#--sourceparams)         | Stored procedures only. Replace default params.      |
+| [`--source.type`](#--sourcetype)             | Source type: `table`, `view`, or `stored-procedure`. |
+
 
 ## `--cache.enabled`
 

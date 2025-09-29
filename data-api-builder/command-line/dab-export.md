@@ -1,13 +1,13 @@
 ---
-title: Schema Generation for Azure Cosmos DB for NOSQL
-description: Feature that allows for automatic schema generation from Azure Cosmos DB collections
-author: sajeetharan
-ms.author: sasinnat
-ms.reviewer: jerrynixon
+title: Export schema with the DAB CLI
+description: Use the Data API builder (DAB) CLI to export or generate GraphQL schemas from existing configurations or Cosmos DB data.
+author: seesharprun
+ms.author: jerrynixon
+ms.reviewer: sidandrews
 ms.service: data-api-builder
-ms.topic: reference
-ms.date: 05/13/2025
-show_latex: true
+ms.topic: command-line
+ms.date: 09/29/2025
+# Customer Intent: As a developer, I want to export a GraphQL schema from my Data API builder configuration or generate one from Cosmos DB, so that I can use it with my API.
 ---
 
 # `export` command

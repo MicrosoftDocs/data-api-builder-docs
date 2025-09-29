@@ -1,13 +1,13 @@
 ---
 title: Install the DAB CLI
-description: Get started using the Data API builder (DAB) to generate APIs by installing the command-line interface (CLI).
+description: Use the Data API builder (DAB) command-line interface (CLI) to create APIs for your databases by installing it on your system.
 author: seesharprun
-ms.author: sidandrews
-ms.reviewer: jerrynixon
+ms.author: jerrynixon
+ms.reviewer: sidandrews
 ms.service: data-api-builder
-ms.topic: how-to
-ms.date: 06/11/2025
-# Customer Intent: As a developer, I want to install the Data API builder, so that I can use it to create APIs for my databases.
+ms.topic: command-line
+ms.date: 09/29/2025
+# Customer Intent: As a developer, I want to install the Data API builder CLI, so that I can begin creating APIs for my databases.
 ---
 
 # Install the Data API builder command-line interface
@@ -40,8 +40,3 @@ Installing the .NET tool makes the `dab` command available on your local machine
     ```output
     Microsoft.DataApiBuilder 1.0.0
     ```
-
-## Related content
-
-- [.NET tools](/dotnet/core/tools/global-tools)
-- [How-to: Use environments](use-environments.md)

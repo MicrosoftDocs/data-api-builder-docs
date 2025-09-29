@@ -1,3 +1,15 @@
+---
+title: Validate configuration with the DAB CLI
+description: Use the Data API builder (DAB) CLI to validate configuration files for schema, permissions, connectivity, and metadata before runtime starts.
+author: seesharprun
+ms.author: jerrynixon
+ms.reviewer: sidandrews
+ms.service: data-api-builder
+ms.topic: command-line
+ms.date: 09/29/2025
+# Customer Intent: As a developer, I want to validate my Data API builder configuration, so that I can catch errors before starting the runtime or deploying.
+---
+
 # `validate` command
 
 Validate a Data API builder configuration file without starting the runtime. Runs a sequence of checks (schema, structure, permissions, connectivity, metadata) and returns an exit code for success (0) or failure (non-zero). Useful in CI/CD pipelines.
