@@ -46,25 +46,21 @@ landingContent:
           - text: Overview
             url: dab-configure.md
           - text: Azure Key Vault
-            url: dab-configure.md#azure-key-vault
-          - text: Cache
-            url: dab-configure.md#cache
+            url: dab-configure.md
           - text: Data source
-            url: dab-configure.md#data-source
+            url: dab-configure.md
           - text: GraphQL runtime
-            url: dab-configure.md#graphql
+            url: dab-configure.md
           - text: Host
-            url: dab-configure.md#host
+            url: dab-configure.md
           - text: MCP runtime
-            url: dab-configure.md#mcp
-          - text: MCP DML tools
-            url: dab-configure.md#mcp-dml-tools
+            url: dab-configure.md
           - text: REST runtime
-            url: dab-configure.md#rest
+            url: dab-configure.md
           - text: Telemetry – Azure Log Analytics
-            url: dab-configure.md#telemetry--azure-log-analytics
+            url: dab-configure.md
           - text: Telemetry – File sink
-            url: dab-configure.md#telemetry--file-sink
+            url: dab-configure.md
 
   - title: Export
     linkLists:
@@ -73,15 +69,15 @@ landingContent:
           - text: Overview
             url: dab-export.md
           - text: Sampling modes
-            url: dab-export.md#sampling-modes
+            url: dab-export.md
           - text: Options
-            url: dab-export.md#options
+            url: dab-export.md
           - text: Examples
-            url: dab-export.md#examples
+            url: dab-export.md
           - text: Troubleshooting
-            url: dab-export.md#troubleshooting
+            url: dab-export.md
           - text: Best practices
-            url: dab-export.md#best-practices
+            url: dab-export.md
 
   - title: Init
     linkLists:
@@ -90,17 +86,17 @@ landingContent:
           - text: Overview
             url: dab-init.md
           - text: Data source
-            url: dab-init.md#data-source
+            url: dab-init.md
           - text: GraphQL
-            url: dab-init.md#graphql
+            url: dab-init.md
           - text: REST
-            url: dab-init.md#rest
+            url: dab-init.md
           - text: Host
-            url: dab-init.md#host
+            url: dab-init.md
           - text: Authentication
-            url: dab-init.md#authentication
+            url: dab-init.md
           - text: Cache
-            url: dab-init.md#cache
+            url: dab-init.md
 
   - title: Start
     linkLists:
@@ -109,9 +105,9 @@ landingContent:
           - text: Overview
             url: dab-start.md
           - text: Options
-            url: dab-start.md#options
+            url: dab-start.md
           - text: Examples
-            url: dab-start.md#examples
+            url: dab-start.md
 
   - title: Update
     linkLists:
@@ -120,19 +116,19 @@ landingContent:
           - text: Overview
             url: dab-update.md
           - text: Cache
-            url: dab-update.md#cache
+            url: dab-update.md
           - text: Fields
-            url: dab-update.md#fields
+            url: dab-update.md
           - text: GraphQL
-            url: dab-update.md#graphql
+            url: dab-update.md
           - text: Permissions and policies
-            url: dab-update.md#permissions--policies
+            url: dab-update.md
           - text: Relationships
-            url: dab-update.md#relationships
+            url: dab-update.md
           - text: REST
-            url: dab-update.md#rest
+            url: dab-update.md
           - text: Source
-            url: dab-update.md#source
+            url: dab-update.md
 
   - title: Validate
     linkLists:
@@ -141,8 +137,8 @@ landingContent:
           - text: Overview
             url: dab-validate.md
           - text: Rules
-            url: dab-validate.md#rules
+            url: dab-validate.md
           - text: Failures and fixes
-            url: dab-validate.md#failures-and-fixes
+            url: dab-validate.md
           - text: Examples
-            url: dab-validate.md#examples
+            url: dab-validate.md
