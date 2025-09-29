@@ -12,8 +12,6 @@ metadata:
   ms.topic: landing-page
   ms.date: 09/29/2025
 
-# linkListType: architecture | concept | deploy | download | get-started | how-to-guide | learn | overview | quickstart | reference | sample | tutorial | video | whats-new
-
 landingContent:
   - title: Install
     linkLists:
@@ -26,48 +24,125 @@ landingContent:
     linkLists:
       - linkListType: reference
         links:
-          - text: `add` command
+          - text: Overview
             url: dab-add.md
+          - text: Cache options
+            url: dab-add.md#cache
+          - text: Fields options
+            url: dab-add.md#fields
+          - text: GraphQL options
+            url: dab-add.md#graphql
+          - text: Permissions and policies
+            url: dab-add.md#permissions--policies
+          - text: REST options
+            url: dab-add.md#rest
+          - text: Source options
+            url: dab-add.md#source
 
   - title: Configure
     linkLists:
       - linkListType: reference
         links:
-          - text: `configure` command
+          - text: Overview
             url: dab-configure.md
+          - text: Azure Key Vault
+            url: dab-configure.md#azure-key-vault
+          - text: Cache
+            url: dab-configure.md#cache
+          - text: Data source
+            url: dab-configure.md#data-source
+          - text: GraphQL runtime
+            url: dab-configure.md#graphql
+          - text: Host
+            url: dab-configure.md#host
+          - text: MCP runtime
+            url: dab-configure.md#mcp
+          - text: MCP DML tools
+            url: dab-configure.md#mcp-dml-tools
+          - text: REST runtime
+            url: dab-configure.md#rest
+          - text: Telemetry – Azure Log Analytics
+            url: dab-configure.md#telemetry--azure-log-analytics
+          - text: Telemetry – File sink
+            url: dab-configure.md#telemetry--file-sink
 
   - title: Export
     linkLists:
-      - linkListType: how-to-guide
+      - linkListType: reference
         links:
-          - text: `export` command
+          - text: Overview
             url: dab-export.md
+          - text: Sampling modes
+            url: dab-export.md#sampling-modes
+          - text: Options
+            url: dab-export.md#options
+          - text: Examples
+            url: dab-export.md#examples
+          - text: Troubleshooting
+            url: dab-export.md#troubleshooting
+          - text: Best practices
+            url: dab-export.md#best-practices
 
   - title: Init
     linkLists:
       - linkListType: reference
         links:
-          - text: `init` command
+          - text: Overview
             url: dab-init.md
+          - text: Data source
+            url: dab-init.md#data-source
+          - text: GraphQL
+            url: dab-init.md#graphql
+          - text: REST
+            url: dab-init.md#rest
+          - text: Host
+            url: dab-init.md#host
+          - text: Authentication
+            url: dab-init.md#authentication
+          - text: Cache
+            url: dab-init.md#cache
 
   - title: Start
     linkLists:
       - linkListType: reference
         links:
-          - text: `start` command
+          - text: Overview
             url: dab-start.md
+          - text: Options
+            url: dab-start.md#options
+          - text: Examples
+            url: dab-start.md#examples
 
   - title: Update
     linkLists:
       - linkListType: reference
         links:
-          - text: `update` command
+          - text: Overview
             url: dab-update.md
+          - text: Cache
+            url: dab-update.md#cache
+          - text: Fields
+            url: dab-update.md#fields
+          - text: GraphQL
+            url: dab-update.md#graphql
+          - text: Permissions and policies
+            url: dab-update.md#permissions--policies
+          - text: Relationships
+            url: dab-update.md#relationships
+          - text: REST
+            url: dab-update.md#rest
+          - text: Source
+            url: dab-update.md#source
 
   - title: Validate
     linkLists:
-      - linkListType: concept
+      - linkListType: reference
         links:
-          - text: `validate` command
+          - text: Overview
             url: dab-validate.md
-
+          - text: Rules
+            url: dab-validate.md#rules
+          - text: Failures and fixes
+            url: dab-validate.md#failures-and-fixes
+          - text: Examples
+            url: dab-validate.md#examples

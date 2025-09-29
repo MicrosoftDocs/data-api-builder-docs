@@ -1,11 +1,11 @@
 ---
 title: Add entities with the DAB CLI
 description: Use the Data API builder (DAB) CLI to add new entities to your API configuration.
-author: seesharprun
-ms.author: jerrynixon
+author: jerrynixon
+ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
-ms.topic: command-line
+ms.topic: reference
 ms.date: 09/29/2025
 # Customer Intent: As a developer, I want to add entities to my Data API builder configuration, so that I can expose database objects as APIs.
 ---

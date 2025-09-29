@@ -1,11 +1,11 @@
 ---
 title: Install the DAB CLI
 description: Use the Data API builder (DAB) command-line interface (CLI) to create APIs for your databases by installing it on your system.
-author: seesharprun
-ms.author: jerrynixon
+author: jerrynixon
+ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
-ms.topic: command-line
+ms.topic: reference
 ms.date: 09/29/2025
 # Customer Intent: As a developer, I want to install the Data API builder CLI, so that I can begin creating APIs for my databases.
 ---

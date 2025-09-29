@@ -1,11 +1,11 @@
 ---
 title: Export schema with the DAB CLI
 description: Use the Data API builder (DAB) CLI to export or generate GraphQL schemas from existing configurations or Cosmos DB data.
-author: seesharprun
-ms.author: jerrynixon
+author: jerrynixon
+ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
-ms.topic: command-line
+ms.topic: reference
 ms.date: 09/29/2025
 # Customer Intent: As a developer, I want to export a GraphQL schema from my Data API builder configuration or generate one from Cosmos DB, so that I can use it with my API.
 ---
