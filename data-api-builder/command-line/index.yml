@@ -5,8 +5,8 @@ summary: The Data API builder (DAB) command-line interface (CLI) lets you config
 metadata:
   title: Data API builder CLI reference
   description: The Data API builder (DAB) command-line interface (CLI) provides commands to add entities, configure runtime settings, export schema, initialize configs, start the runtime, update entities, and validate configurations.
-  author: seesharprun
-  ms.author: jerrynixon
+  author: jerrynixon
+  ms.author: jnixon
   ms.reviewer: sidandrews
   ms.service: data-api-builder
   ms.topic: landing-page
