@@ -13,9 +13,9 @@ dab start [options]
 | Option                                        | Summary                                                                                            |
 | --------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | [`-c, --config`](#-c---config)                | Use a specific config file (defaults to `dab-config.json` or environment-specific file if present) |
-| [`--verbose`](#--verbose)                     | Sets log level to Information                                                                      |
 | [`--LogLevel <level>`](#--loglevel-level)     | Sets log level explicitly (name or number 0–6)                                                     |
 | [`--no-https-redirect`](#--no-https-redirect) | Disables automatic HTTP→HTTPS redirection                                                          |
+| [`--verbose`](#--verbose)                     | Sets log level to Information                                                                      |
 
 ## `-c, --config`
 
@@ -33,24 +33,6 @@ Path to the configuration file. Defaults to `dab-config.json`. If an environment
 
 ```sh
 dab start --config ./settings/dab-config.json
-```
-
-## `--verbose`
-
-Sets the minimum log level to `Information`.
-
-**Behavior**
-
-* Cannot be combined with `--LogLevel`.
-* Overrides host mode defaults.
-
-> [!Note]
-> Equivalent to using `--LogLevel Information`. The parser prevents both `--verbose` and `--LogLevel` from being provided together, so there is no conflict path.
-
-**Example**
-
-```sh
-dab start --verbose
 ```
 
 ## `--LogLevel <level>`
@@ -100,10 +82,20 @@ Disables automatic HTTP→HTTPS redirection.
 dab start --no-https-redirect
 ```
 
-## Additional example
+## `--verbose`
 
-Use environment-specific config:
+Sets the minimum log level to `Information`.
+
+**Behavior**
+
+* Cannot be combined with `--LogLevel`.
+* Overrides host mode defaults.
+
+> [!Note]
+> Equivalent to using `--LogLevel Information`. The parser prevents both `--verbose` and `--LogLevel` from being provided together, so there is no conflict path.
+
+**Example**
 
 ```sh
-DAB_ENVIRONMENT=staging dab start
+dab start --verbose
 ```

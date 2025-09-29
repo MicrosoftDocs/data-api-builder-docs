@@ -42,8 +42,6 @@ If the target config file already exists, the command overwrites it. There is no
 > [!IMPORTANT]
 > Do not mix the new `--*.enabled` flags and the legacy `--*.disabled` flags for the same subsystem in the same command. Prefer the `--*.enabled` pattern; the `--rest.disabled`, `--graphql.disabled`, and `--mcp.disabled` options log warnings and will be removed in future versions.
 
----
-
 ## `-c, --config`
 
 Output configuration file name. Default is `dab-config.json`.
@@ -58,17 +56,10 @@ dab init --database-type mssql --config dab-config.local.json
 
 ```json
 {
-  "$schema": "https://github.com/Azure/data-api-builder/releases/download/v1.5.0/dab.draft.schema.json",
   "data-source": {
     "database-type": "mssql",
     "connection-string": "@env('MSSQL_CONNECTION_STRING')"
-  },
-  "runtime": {
-    "rest": { "enabled": true },
-    "graphql": { "enabled": true },
-    "mcp": { "enabled": true }
-  },
-  "entities": {}
+  }
 }
 ```
 
@@ -85,9 +76,11 @@ dab init --database-type mssql --auth.audience "https://example.com/api"
 **Resulting config**
 
 ```json
-"runtime": {
-  "authentication": {
-    "audience": "https://example.com/api"
+{
+  "runtime": {
+    "authentication": {
+      "audience": "https://example.com/api"
+    }
   }
 }
 ```
@@ -105,9 +98,11 @@ dab init --database-type mssql --auth.issuer "https://login.microsoftonline.com/
 **Resulting config**
 
 ```json
-"runtime": {
-  "authentication": {
-    "issuer": "https://login.microsoftonline.com/{tenant-id}/v2.0"
+{
+  "runtime": {
+    "authentication": {
+      "issuer": "https://login.microsoftonline.com/{tenant-id}/v2.0"
+    }
   }
 }
 ```
@@ -125,9 +120,11 @@ dab init --database-type mssql --auth.provider AzureAD
 **Resulting config**
 
 ```json
-"runtime": {
-  "authentication": {
-    "provider": "AzureAD"
+{
+  "runtime": {
+    "authentication": {
+      "provider": "AzureAD"
+    }
   }
 }
 ```
@@ -145,8 +142,10 @@ dab init --database-type mssql --connection-string "@env('MSSQL_CONNECTION_STRIN
 **Resulting config**
 
 ```json
-"data-source": {
-  "connection-string": "@env('MSSQL_CONNECTION_STRING')"
+{
+  "data-source": {
+    "connection-string": "@env('MSSQL_CONNECTION_STRING')"
+  }
 }
 ```
 
@@ -163,9 +162,11 @@ dab init --database-type mssql --cors-origin "https://app.example.com,https://ad
 **Resulting config**
 
 ```json
-"runtime": {
-  "cors": {
-    "origins": [ "https://app.example.com", "https://admin.example.com" ]
+{
+  "runtime": {
+    "cors": {
+      "origins": [ "https://app.example.com", "https://admin.example.com" ]
+    }
   }
 }
 ```
@@ -183,10 +184,12 @@ dab init --database-type cosmosdb_nosql --cosmosdb_nosql-container MyContainer
 **Resulting config**
 
 ```json
-"data-source": {
-  "database-type": "cosmosdb_nosql",
-  "options": {
-    "container": "MyContainer"
+{
+  "data-source": {
+    "database-type": "cosmosdb_nosql",
+    "options": {
+      "container": "MyContainer"
+    }
   }
 }
 ```
@@ -204,10 +207,12 @@ dab init --database-type cosmosdb_nosql --cosmosdb_nosql-database MyDb
 **Resulting config**
 
 ```json
-"data-source": {
-  "database-type": "cosmosdb_nosql",
-  "options": {
-    "database": "MyDb"
+{
+  "data-source": {
+    "database-type": "cosmosdb_nosql",
+    "options": {
+      "database": "MyDb"
+    }
   }
 }
 ```
@@ -225,8 +230,10 @@ dab init --database-type mssql
 **Resulting config**
 
 ```json
-"data-source": {
-  "database-type": "mssql"
+{
+  "data-source": {
+    "database-type": "mssql"
+  }
 }
 ```
 
@@ -247,9 +254,11 @@ dab init --database-type mssql --graphql.enabled false
 **Resulting config**
 
 ```json
-"runtime": {
-  "graphql": {
-    "enabled": false
+{
+  "runtime": {
+    "graphql": {
+      "enabled": false
+    }
   }
 }
 ```
@@ -267,9 +276,11 @@ dab init --database-type mssql --graphql.multiple-create.enabled true
 **Resulting config**
 
 ```json
-"runtime": {
-  "graphql": {
-    "multiple-create": { "enabled": true }
+{
+  "runtime": {
+    "graphql": {
+      "multiple-create": { "enabled": true }
+    }
   }
 }
 ```
@@ -287,9 +298,11 @@ dab init --database-type mssql --graphql.path /gql
 **Resulting config**
 
 ```json
-"runtime": {
-  "graphql": {
-    "path": "/gql"
+{
+  "runtime": {
+    "graphql": {
+      "path": "/gql"
+    }
   }
 }
 ```
@@ -307,9 +320,11 @@ dab init --database-type cosmosdb_nosql --graphql-schema ./schema.gql
 **Resulting config**
 
 ```json
-"runtime": {
-  "graphql": {
-    "schema": "./schema.gql"
+{
+  "runtime": {
+    "graphql": {
+      "schema": "./schema.gql"
+    }
   }
 }
 ```
@@ -329,9 +344,11 @@ dab init --database-type mssql --host-mode development
 **Resulting config**
 
 ```json
-"runtime": {
-  "host": {
-    "mode": "development"
+{
+  "runtime": {
+    "host": {
+      "mode": "development"
+    }
   }
 }
 ```
@@ -353,9 +370,11 @@ dab init --database-type mssql --mcp.enabled false
 **Resulting config**
 
 ```json
-"runtime": {
-  "mcp": {
-    "enabled": false
+{
+  "runtime": {
+    "mcp": {
+      "enabled": false
+    }
   }
 }
 ```
@@ -373,9 +392,11 @@ dab init --database-type mssql --mcp.path /model
 **Resulting config**
 
 ```json
-"runtime": {
-  "mcp": {
-    "path": "/model"
+{
+  "runtime": {
+    "mcp": {
+      "path": "/model"
+    }
   }
 }
 ```
@@ -397,9 +418,11 @@ dab init --database-type mssql --rest.enabled false
 **Resulting config**
 
 ```json
-"runtime": {
-  "rest": {
-    "enabled": false
+{
+  "runtime": {
+    "rest": {
+      "enabled": false
+    }
   }
 }
 ```
@@ -420,9 +443,11 @@ dab init --database-type mssql --rest.path /rest
 **Resulting config**
 
 ```json
-"runtime": {
-  "rest": {
-    "path": "/rest"
+{
+  "runtime": {
+    "rest": {
+      "path": "/rest"
+    }
   }
 }
 ```
@@ -446,9 +471,11 @@ dab init --database-type mssql --rest.request-body-strict false
 **Resulting config**
 
 ```json
-"runtime": {
-  "rest": {
-    "request-body-strict": false
+{
+  "runtime": {
+    "rest": {
+      "request-body-strict": false
+    }
   }
 }
 ```
@@ -466,8 +493,10 @@ dab init --database-type mssql --runtime.base-route /v1
 **Resulting config**
 
 ```json
-"runtime": {
-  "base-route": "/v1"
+{
+  "runtime": {
+    "base-route": "/v1"
+  }
 }
 ```
 
@@ -484,9 +513,11 @@ dab init --database-type mssql --set-session-context true
 **Resulting config**
 
 ```json
-"runtime": {
-  "mssql": {
-    "set-session-context": true
+{
+  "runtime": {
+    "mssql": {
+      "set-session-context": true
+    }
   }
 }
 ```

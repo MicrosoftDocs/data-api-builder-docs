@@ -2,6 +2,9 @@
 
 Add a new entity definition to an existing Data API builder configuration file. You must already have a config created with `dab init`. Use `dab update` to modify entities after creation.
 
+> [!TIP]
+> Use `dab add` to create new entities, and [`dab update`](./dab-update.md) to evolve them. Field name remapping (`--map`) is only available in `update`, not in `add`.
+
 ## Syntax
 
 ```bash
@@ -46,18 +49,20 @@ dab add Book --source dbo.Books --permissions "anonymous:read"
 **Resulting config**
 
 ```json
-"entities": {
-  "Book": {
-    "source": {
-      "type": "table",
-      "object": "dbo.Books"
-    },
-    "permissions": [
-      {
-        "role": "anonymous",
-        "actions": [ "read" ]
-      }
-    ]
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "table",
+        "object": "dbo.Books"
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [ "read" ]
+        }
+      ]
+    }
   }
 }
 ```
@@ -72,6 +77,8 @@ Config file path. Default is `dab-config.json`.
 dab add Book --config ./dab-config.mssql.json --source dbo.Books --permissions "anonymous:read"
 ```
 
+---
+
 ## `--cache.enabled`
 
 Enable or disable caching.
@@ -85,17 +92,19 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --cache.enabled t
 **Resulting config**
 
 ```json
-"entities": {
-  "Book": {
-    "source": {
-      "type": "table",
-      "object": "dbo.Books"
-    },
-    "permissions": [
-      { "role": "anonymous", "actions": [ "read" ] }
-    ],
-    "cache": {
-      "enabled": true
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "table",
+        "object": "dbo.Books"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ],
+      "cache": {
+        "enabled": true
+      }
     }
   }
 }
@@ -114,14 +123,19 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --cache.ttl 300
 **Resulting config**
 
 ```json
-"entities": {
-  "Book": {
-    "source": { "type": "table", "object": "dbo.Books" },
-    "permissions": [
-      { "role": "anonymous", "actions": [ "read" ] }
-    ],
-    "cache": {
-      "ttl-seconds": 300
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "table",
+        "object": "dbo.Books"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ],
+      "cache": {
+        "ttl-seconds": 300
+      }
     }
   }
 }
@@ -140,13 +154,18 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --description "En
 **Resulting config**
 
 ```json
-"entities": {
-  "Book": {
-    "source": { "type": "table", "object": "dbo.Books" },
-    "permissions": [
-      { "role": "anonymous", "actions": [ "read" ] }
-    ],
-    "description": "Entity for managing book inventory"
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "table",
+        "object": "dbo.Books"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ],
+      "description": "Entity for managing book inventory"
+    }
   }
 }
 ```
@@ -164,15 +183,17 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --fields.exclude 
 **Resulting config**
 
 ```json
-"entities": {
-  "Book": {
-    "source": { "type": "table", "object": "dbo.Books" },
-    "permissions": [
-      { "role": "anonymous", "actions": [ "read" ] }
-    ],
-    "graphql": {
-      "fields": {
-        "exclude": [ "internal_flag", "secret_note" ]
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ],
+      "graphql": {
+        "fields": {
+          "exclude": [ "internal_flag", "secret_note" ]
+        }
       }
     }
   }
@@ -192,15 +213,17 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --fields.include 
 **Resulting config**
 
 ```json
-"entities": {
-  "Book": {
-    "source": { "type": "table", "object": "dbo.Books" },
-    "permissions": [
-      { "role": "anonymous", "actions": [ "read" ] }
-    ],
-    "graphql": {
-      "fields": {
-        "include": [ "id", "title", "price" ]
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ],
+      "graphql": {
+        "fields": {
+          "include": [ "id", "title", "price" ]
+        }
       }
     }
   }
@@ -220,15 +243,17 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --graphql book:bo
 **Resulting config**
 
 ```json
-"entities": {
-  "Book": {
-    "source": { "type": "table", "object": "dbo.Books" },
-    "permissions": [
-      { "role": "anonymous", "actions": [ "read" ] }
-    ],
-    "graphql": {
-      "singular": "book",
-      "plural": "books"
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ],
+      "graphql": {
+        "singular": "book",
+        "plural": "books"
+      }
     }
   }
 }
@@ -247,14 +272,16 @@ dab add BookProc --source dbo.MyProc --source.type stored-procedure --permission
 **Resulting config**
 
 ```json
-"entities": {
-  "BookProc": {
-    "source": { "type": "stored-procedure", "object": "dbo.MyProc" },
-    "permissions": [
-      { "role": "admin", "actions": [ "execute" ] }
-    ],
-    "graphql": {
-      "operation": "query"
+{
+  "entities": {
+    "BookProc": {
+      "source": { "type": "stored-procedure", "object": "dbo.MyProc" },
+      "permissions": [
+        { "role": "admin", "actions": [ "execute" ] }
+      ],
+      "graphql": {
+        "operation": "query"
+      }
     }
   }
 }
@@ -273,13 +300,15 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --permissions "au
 **Resulting config**
 
 ```json
-"entities": {
-  "Book": {
-    "source": { "type": "table", "object": "dbo.Books" },
-    "permissions": [
-      { "role": "anonymous", "actions": [ "read" ] },
-      { "role": "authenticated", "actions": [ "create", "read", "update", "delete" ] }
-    ]
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] },
+        { "role": "authenticated", "actions": [ "create", "read", "update", "delete" ] }
+      ]
+    }
   }
 }
 ```
@@ -297,14 +326,16 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --policy-database
 **Resulting config**
 
 ```json
-"entities": {
-  "Book": {
-    "source": { "type": "table", "object": "dbo.Books" },
-    "permissions": [
-      { "role": "anonymous", "actions": [ "read" ] }
-    ],
-    "policies": {
-      "database": "region eq 'US'"
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ],
+      "policies": {
+        "database": "region eq 'US'"
+      }
     }
   }
 }
@@ -323,14 +354,16 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --policy-request 
 **Resulting config**
 
 ```json
-"entities": {
-  "Book": {
-    "source": { "type": "table", "object": "dbo.Books" },
-    "permissions": [
-      { "role": "anonymous", "actions": [ "read" ] }
-    ],
-    "policies": {
-      "request": "@claims.role == 'admin'"
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ],
+      "policies": {
+        "request": "@claims.role == 'admin'"
+      }
     }
   }
 }
@@ -349,14 +382,16 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --rest BooksApi
 **Resulting config**
 
 ```json
-"entities": {
-  "Book": {
-    "source": { "type": "table", "object": "dbo.Books" },
-    "permissions": [
-      { "role": "anonymous", "actions": [ "read" ] }
-    ],
-    "rest": {
-      "path": "BooksApi"
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ],
+      "rest": {
+        "path": "BooksApi"
+      }
     }
   }
 }
@@ -375,15 +410,17 @@ dab add BookProc --source dbo.MyProc --source.type stored-procedure --permission
 **Resulting config**
 
 ```json
-"entities": {
-  "BookProc": {
-    "source": { "type": "stored-procedure", "object": "dbo.MyProc" },
-    "permissions": [
-      { "role": "admin", "actions": [ "execute" ] }
-    ],
-    "rest": {
-      "path": "BookProc",
-      "methods": [ "GET", "POST" ]
+{
+  "entities": {
+    "BookProc": {
+      "source": { "type": "stored-procedure", "object": "dbo.MyProc" },
+      "permissions": [
+        { "role": "admin", "actions": [ "execute" ] }
+      ],
+      "rest": {
+        "path": "BookProc",
+        "methods": [ "GET", "POST" ]
+      }
     }
   }
 }
@@ -402,15 +439,17 @@ dab add Book --source dbo.Books --permissions "anonymous:read"
 **Resulting config**
 
 ```json
-"entities": {
-  "Book": {
-    "source": {
-      "type": "table",
-      "object": "dbo.Books"
-    },
-    "permissions": [
-      { "role": "anonymous", "actions": [ "read" ] }
-    ]
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "table",
+        "object": "dbo.Books"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ]
+    }
   }
 }
 ```
@@ -428,16 +467,18 @@ dab add BookView --source dbo.MyView --source.type view --source.key-fields "id,
 **Resulting config**
 
 ```json
-"entities": {
-  "BookView": {
-    "source": {
-      "type": "view",
-      "object": "dbo.MyView",
-      "keyFields": [ "id", "region" ]
-    },
-    "permissions": [
-      { "role": "anonymous", "actions": [ "read" ] }
-    ]
+{
+  "entities": {
+    "BookView": {
+      "source": {
+        "type": "view",
+        "object": "dbo.MyView",
+        "keyFields": [ "id", "region" ]
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ]
+    }
   }
 }
 ```
@@ -455,19 +496,21 @@ dab add BookProc --source dbo.MyProc --source.type stored-procedure --source.par
 **Resulting config**
 
 ```json
-"entities": {
-  "BookProc": {
-    "source": {
-      "type": "stored-procedure",
-      "object": "dbo.MyProc",
-      "params": {
-        "year": 2024,
-        "active": true
-      }
-    },
-    "permissions": [
-      { "role": "admin", "actions": [ "execute" ] }
-    ]
+{
+  "entities": {
+    "BookProc": {
+      "source": {
+        "type": "stored-procedure",
+        "object": "dbo.MyProc",
+        "params": {
+          "year": 2024,
+          "active": true
+        }
+      },
+      "permissions": [
+        { "role": "admin", "actions": [ "execute" ] }
+      ]
+    }
   }
 }
 ```
@@ -485,15 +528,17 @@ dab add Book --source dbo.Books --source.type table --permissions "anonymous:rea
 **Resulting config**
 
 ```json
-"entities": {
-  "Book": {
-    "source": {
-      "type": "table",
-      "object": "dbo.Books"
-    },
-    "permissions": [
-      { "role": "anonymous", "actions": [ "read" ] }
-    ]
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "table",
+        "object": "dbo.Books"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ]
+    }
   }
 }
 ```
