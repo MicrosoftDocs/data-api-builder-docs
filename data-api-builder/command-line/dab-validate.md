@@ -27,7 +27,7 @@ dab validate [options]
 CI example:
 
 ```bash
-dab validate || { echo "Config invalid"; exit 1; }
+dab validate && echo "OK" || { echo "INVALID CONFIG"; exit 1; }
 ```
 
 ## `-c, --config`
