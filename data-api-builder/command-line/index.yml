@@ -27,17 +27,17 @@ landingContent:
           - text: Overview
             url: dab-add.md
           - text: Cache options
-            url: dab-add.md#cache
+            url: dab-add.md
           - text: Fields options
-            url: dab-add.md#fields
+            url: dab-add.md
           - text: GraphQL options
-            url: dab-add.md#graphql
+            url: dab-add.md
           - text: Permissions and policies
-            url: dab-add.md#permissions--policies
+            url: dab-add.md
           - text: REST options
-            url: dab-add.md#rest
+            url: dab-add.md
           - text: Source options
-            url: dab-add.md#source
+            url: dab-add.md
 
   - title: Configure
     linkLists:
@@ -51,15 +51,13 @@ landingContent:
             url: dab-configure.md
           - text: GraphQL runtime
             url: dab-configure.md
-          - text: Host
-            url: dab-configure.md
           - text: MCP runtime
             url: dab-configure.md
           - text: REST runtime
             url: dab-configure.md
-          - text: Telemetry – Azure Log Analytics
+          - text: Azure Log Analytics
             url: dab-configure.md
-          - text: Telemetry – File sink
+          - text: Log File Sink
             url: dab-configure.md
 
   - title: Export
