@@ -59,7 +59,7 @@
 - name: Command-Line interface
   items:
     - name: Overview
-      href: command-line/
+      href: command-line
       displayName: CLI, command line, terminal, local
     - name: Commands
       items:
