@@ -6,56 +6,52 @@
     - name: What is Data API builder?
       displayName: overview
       href: overview.md
-    - name: Overview
+    - name: What's new?
       displayName: changelog, diff, release
       href: whats-new/index.yml
-      items:
-        - name: DAB 1.6 (Stability release)
-          href: whats-new/version-1-6.md
-        - name: DAB 1.5 (Feature release)
-          href: whats-new/version-1-5.md
-        - name: DAB 1.4 (Stability release)
-          href: whats-new/version-1-4.md
-        - name: DAB 1.3 (Feature release)
-          href: whats-new/version-1-3.md
-        - name: DAB 1.2 (Stability release)
-          href: whats-new/version-1-2.md
-        - name: DAB 1.1 (GA)
-          href: whats-new/version-1-1.md
+#      items:
+#        - name: DAB 1.6 (Stability release)
+#          href: whats-new/version-1-6.md
+#        - name: DAB 1.5 (Feature release)
+#          href: whats-new/version-1-5.md
+#        - name: DAB 1.4 (Stability release)
+#          href: whats-new/version-1-4.md
+#        - name: DAB 1.3 (Feature release)
+#          href: whats-new/version-1-3.md
+#        - name: DAB 1.2 (Stability release)
+#          href: whats-new/version-1-2.md
+#        - name: DAB 1.1 (GA)
+#          href: whats-new/version-1-1.md
     - name: Feature availability
       href: feature-availability.md
+    - name: Supported data types
+      href: reference-data-types.md
     - name: Database-specific features
       displayName: sql, cosmos, pg, postgres, mysql, dw
       href: reference-database-specific-features.md
-    - name: Supported data types
-      href: reference-data-types.md
     - name: Security Overview
       href: concept/security/index.md
       displayName: security, auth, identity, roles, protection, access
 - name: Quickstarts
   items:
-    - name: Local data sources
-      items:
-        - name: SQL
-          href: quickstart/mssql.md
-          displayName: mssql, local, sql server, database
-        - name: NoSQL
-          href: quickstart/nosql.md
-          displayName: cosmos, nosql, local, database
-        - name: PostgreSQL
-          href: quickstart/postgresql.md
-          displayName: postgres, pg, local, database
-        - name: MySQL
-          href: quickstart/mysql.md
-          displayName: mysql, local, database
-    - name: Azure data sources
-      items:
-        - name: Azure SQL
-          href: quickstart/azure-sql.md
-          displayName: azure, sql server, database, cloud
-        - name: Azure Cosmos DB for NoSQL
-          href: quickstart/azure-cosmos-db-nosql.md
-          displayName: azure, cosmos, nosql, cloud, database
+    - name: Local SQL database
+      href: quickstart/mssql.md
+      displayName: mssql, local, sql server, database
+    - name: Local Cosmos emulator
+      href: quickstart/nosql.md
+      displayName: cosmos, nosql, local, database
+    - name: Local PostgreSQL
+      href: quickstart/postgresql.md
+      displayName: postgres, pg, local, database
+    - name: Local MySQL
+      href: quickstart/mysql.md
+      displayName: mysql, local, database
+    - name: Azure SQL database
+      href: quickstart/azure-sql.md
+      displayName: azure, sql server, database, cloud
+    - name: Azure Cosmos DB 
+      href: quickstart/azure-cosmos-db-nosql.md
+      displayName: azure, cosmos, nosql, cloud, database
 - name: Command-Line interface
   items:
     - name: Overview
