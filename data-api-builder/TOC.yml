@@ -59,29 +59,29 @@
 - name: Command-Line interface
   items:
     - name: Overview
-      href: command-line/index.yaml
+      href: command-line/
       displayName: CLI, command line, terminal, local
-    - name: Sections
+    - name: Commands
       items:
-      - name: dab add (CLI)
+      - name: dab add
         displayName: command line, terminal, local
         href: command-line/dab-add.md
-      - name: dab configure (CLI)
+      - name: dab configure
         displayName: command line, terminal, local
         href: command-line/dab-configure.md
-      - name: dab export (CLI)
+      - name: dab export
         displayName: command line, terminal, local, cosmos
         href: command-line/dab-export.md
-      - name: dab init (CLI)
+      - name: dab init
         displayName: command line, terminal, local
         href: command-line/dab-init.md
-      - name: dab start (CLI)
+      - name: dab start
         displayName: command line, terminal, local
         href: command-line/dab-start.md
-      - name: dab update (CLI)
+      - name: dab update
         displayName: command line, terminal, local
         href: command-line/dab-update.md
-      - name: dab validate (CLI)
+      - name: dab validate
         displayName: command line, terminal, local, CI, CICD, CI/CD, pipeline, devops
         href: command-line/dab-validate.md
 - name: Configuration file
