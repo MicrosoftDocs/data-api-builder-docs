@@ -14,8 +14,8 @@ ms.date: 09/29/2025
 
 Export or generate a GraphQL schema file and save it to disk. Two modes are supported:
 
-1. Fetch existing schema from a temporary DAB runtime instance
-2. Generate schema from Cosmos DB for NoSQL data using sampling
+ - Fetch existing schema from a temporary DAB runtime instance
+ - Generate schema from Cosmos DB for NoSQL data using sampling
 
 ## Syntax
 

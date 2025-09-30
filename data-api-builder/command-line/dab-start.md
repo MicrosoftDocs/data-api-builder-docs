@@ -33,7 +33,7 @@ dab start [options]
 
 Path to the configuration file. Defaults to `dab-config.json`. If an environment-specific file `dab-config.<DAB_ENVIRONMENT>.json` exists, that file is used instead (`DAB_ENVIRONMENT` is read from the environment variable).
 
-**Behavior**
+### Behavior
 
 * If both the base and environment-specific file exist, the environment-specific file is chosen.
 * No mutation of config happens, `start` only consumes.
@@ -41,7 +41,7 @@ Path to the configuration file. Defaults to `dab-config.json`. If an environment
 > [!Note]
 > Providing `--config` (or `-c`) overrides the environment-variable–based selection logic. If you pass a path explicitly, the `DAB_ENVIRONMENT` variable is ignored and only the specified file is used. This means environment-specific layering is bypassed. If you want automatic environment resolution, omit `--config` and rely on `DAB_ENVIRONMENT` plus the matching file naming convention.
 
-**Example**
+### Example
 
 ```sh
 dab start --config ./settings/dab-config.json
@@ -51,7 +51,7 @@ dab start --config ./settings/dab-config.json
 
 Sets the minimum log level explicitly. Accepts names (`Trace`, `Debug`, `Information`, `Warning`, `Error`, `Critical`, `None`) or numeric values `0–6`. Case-insensitive.
 
-**Behavior**
+### Behavior
 
 * Cannot be combined with `--verbose`.
 * Invalid values outside `0–6` cause startup to fail.
@@ -60,7 +60,7 @@ Sets the minimum log level explicitly. Accepts names (`Trace`, `Debug`, `Informa
   * Development host mode: `Debug`
   * Production host mode: `Error`
 
-**Examples**
+### Example
 
 ```sh
 dab start --LogLevel Warning
@@ -76,7 +76,7 @@ For more about levels, see [.NET log levels](/dotnet/api/microsoft.extensions.lo
 
 Disables automatic HTTP→HTTPS redirection.
 
-**Behavior**
+### Behavior
 
 * Default is secure redirection enabled.
 * Supplying this flag disables redirection.
@@ -88,7 +88,7 @@ Disables automatic HTTP→HTTPS redirection.
 > * If only HTTPS is configured, the flag changes nothing because there is no HTTP traffic to upgrade.
 > * If both HTTP and HTTPS are configured, the flag suppresses the automatic redirect, allowing both endpoints to serve requests directly.
 
-**Example**
+### Example
 
 ```sh
 dab start --no-https-redirect
@@ -98,7 +98,7 @@ dab start --no-https-redirect
 
 Sets the minimum log level to `Information`.
 
-**Behavior**
+### Behavior
 
 * Cannot be combined with `--LogLevel`.
 * Overrides host mode defaults.
@@ -106,7 +106,7 @@ Sets the minimum log level to `Information`.
 > [!Note]
 > Equivalent to using `--LogLevel Information`. The parser prevents both `--verbose` and `--LogLevel` from being provided together, so there is no conflict path.
 
-**Example**
+### Example
 
 ```sh
 dab start --verbose

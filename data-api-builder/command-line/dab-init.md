@@ -91,13 +91,13 @@ If the target config file already exists, the command overwrites it. There is no
 
 Output configuration file name. Default is `dab-config.json`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --config dab-config.local.json
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -112,13 +112,13 @@ dab init --database-type mssql --config dab-config.local.json
 
 JWT audience claim.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --auth.audience "https://example.com/api"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -134,13 +134,13 @@ dab init --database-type mssql --auth.audience "https://example.com/api"
 
 JWT issuer claim.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --auth.issuer "https://login.microsoftonline.com/{tenant-id}/v2.0"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -156,13 +156,13 @@ dab init --database-type mssql --auth.issuer "https://login.microsoftonline.com/
 
 Identity provider. Default is `StaticWebApps`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --auth.provider AzureAD
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -178,13 +178,13 @@ dab init --database-type mssql --auth.provider AzureAD
 
 Database connection string. Supports `@env()`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --connection-string "@env('MSSQL_CONNECTION_STRING')"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -198,13 +198,13 @@ dab init --database-type mssql --connection-string "@env('MSSQL_CONNECTION_STRIN
 
 Comma-separated list of allowed origins.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --cors-origin "https://app.example.com,https://admin.example.com"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -220,13 +220,13 @@ dab init --database-type mssql --cors-origin "https://app.example.com,https://ad
 
 Cosmos DB NoSQL container name.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type cosmosdb_nosql --cosmosdb_nosql-container MyContainer
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -243,13 +243,13 @@ dab init --database-type cosmosdb_nosql --cosmosdb_nosql-container MyContainer
 
 Cosmos DB NoSQL database name. Required for `cosmosdb_nosql`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type cosmosdb_nosql --cosmosdb_nosql-database MyDb
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -266,13 +266,13 @@ dab init --database-type cosmosdb_nosql --cosmosdb_nosql-database MyDb
 
 Specifies the target database engine. Supported values: `mssql`, `mysql`, `postgresql`, `cosmosdb_postgresql`, `cosmosdb_nosql`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -290,13 +290,13 @@ Deprecated. Disables GraphQL. Prefer `--graphql.enabled false`.
 
 Enable GraphQL endpoint. Default is `true`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --graphql.enabled false
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -312,13 +312,13 @@ dab init --database-type mssql --graphql.enabled false
 
 Allows multiple row creation in a single mutation. Default is `false`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --graphql.multiple-create.enabled true
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -334,13 +334,13 @@ dab init --database-type mssql --graphql.multiple-create.enabled true
 
 GraphQL endpoint prefix. Default is `/graphql`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --graphql.path /gql
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -356,13 +356,13 @@ dab init --database-type mssql --graphql.path /gql
 
 Path to a GraphQL schema file. Required for `cosmosdb_nosql`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type cosmosdb_nosql --graphql-schema ./schema.gql
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -380,13 +380,13 @@ Host mode. Default is `Production`.
 
 Valid values: `Development`, `Production`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --host-mode development
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -406,13 +406,13 @@ Deprecated. Disables MCP. Prefer `--mcp.enabled false`.
 
 Enable MCP endpoint. Default is `true`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --mcp.enabled false
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -428,13 +428,13 @@ dab init --database-type mssql --mcp.enabled false
 
 MCP endpoint prefix. Default is `/mcp`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --mcp.path /model
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -454,13 +454,13 @@ Deprecated. Disables REST. Prefer `--rest.enabled false`.
 
 Enable REST endpoint. Default is `true`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --rest.enabled false
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -479,13 +479,13 @@ REST endpoint prefix. Default is `/api`.
 > [!Note]
 > Ignored for `cosmosdb_nosql`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --rest.path /rest
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -507,13 +507,13 @@ Controls handling of extra fields in request bodies. Default is `true`.
 > [!Note]
 > Ignored for `cosmosdb_nosql`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --rest.request-body-strict false
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -529,13 +529,13 @@ dab init --database-type mssql --rest.request-body-strict false
 
 Global prefix prepended to all endpoints. Must begin with `/`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --runtime.base-route /v1
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -549,13 +549,13 @@ dab init --database-type mssql --runtime.base-route /v1
 
 Enable sending data to SQL Server using session context. Only valid for `mssql`. Default is `false`.
 
-**Example**
+### Example
 
 ```bash
 dab init --database-type mssql --set-session-context true
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {

@@ -46,7 +46,7 @@ dab validate && echo "OK" || { echo "INVALID CONFIG"; exit 1; }
 
 Path to the config file. If omitted, validator looks for `dab-config.<DAB_ENVIRONMENT>.json` first, then `dab-config.json`.
 
-**Example**
+### Example
 
 ```bash
 dab validate --config ./dab-config.prod.json
@@ -60,14 +60,14 @@ Validation happens in order. If one stage fails, later stages are skipped.
 
 Checks that the config JSON matches the schema.
 
-**Rules**
+#### Rules
 
 * `$schema` is reachable or structurally valid
 * `data-source`, `runtime`, and `entities` sections exist and are well-formed
 * Disallowed unexpected properties (per schema)
 * Enum values (like `database-type`) are valid
 
-**Failures & Fixes**
+#### Failures & Fixes
 
 | Problem             | Example                   | Fix                               |
 | ------------------- | ------------------------- | --------------------------------- |
@@ -79,7 +79,7 @@ Checks that the config JSON matches the schema.
 
 Checks consistency beyond schema.
 
-**Rules**
+#### Rules
 
 * Valid `database-type` supplied
 * For `cosmosdb_nosql`, database and GraphQL schema path are required. A container may also be required depending on entities. REST settings are ignored.
@@ -88,7 +88,7 @@ Checks consistency beyond schema.
 * Legacy `*.disabled` flags emit warnings but do not fail
 * If using JWT, both issuer and audience must be set
 
-**Failures & Fixes**
+#### Failures & Fixes
 
 | Problem                  | Example                              | Fix                      |
 | ------------------------ | ------------------------------------ | ------------------------ |
@@ -100,7 +100,7 @@ Checks consistency beyond schema.
 
 Checks that each entity’s permissions are valid.
 
-**Rules**
+#### Rules
 
 * Each entry has a non-empty role
 * Actions must be valid:
@@ -110,7 +110,7 @@ Checks that each entity’s permissions are valid.
 * No empty action lists
 * A single action set must be either `*` OR explicit actions, not both
 
-**Failures & Fixes**
+#### Failures & Fixes
 
 | Problem            | Example                   | Fix                   |
 | ------------------ | ------------------------- | --------------------- |
@@ -122,13 +122,13 @@ Checks that each entity’s permissions are valid.
 
 Checks that the database connection works.
 
-**Rules**
+#### Rules
 
 * Connection string parseable
 * Credentials valid
 * Database/container exists
 
-**Failures & Fixes**
+#### Failures & Fixes
 
 | Problem    | Example            | Fix                         |
 | ---------- | ------------------ | --------------------------- |
@@ -140,7 +140,7 @@ Checks that the database connection works.
 
 Checks entity definitions against the database.
 
-**Rules**
+#### Rules
 
 * Source object exists
 * Tables/views: key fields valid, included/excluded fields exist
@@ -150,7 +150,7 @@ Checks entity definitions against the database.
 * Policies reference valid fields
 * Caching TTL non-negative
 
-**Failures & Fixes**
+#### Failures & Fixes
 
 | Problem               | Example                               | Fix                      |
 | --------------------- | ------------------------------------- | ------------------------ |
@@ -182,7 +182,7 @@ Config is invalid.
 
 If `DAB_ENVIRONMENT` is set, `validate` loads `dab-config.<DAB_ENVIRONMENT>.json`.
 
-**Example**
+#### Example
 
 ```bash
 DAB_ENVIRONMENT=Staging dab validate

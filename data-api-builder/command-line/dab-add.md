@@ -52,13 +52,13 @@ dab add <entity-name> [options]
 
 Logical name of the entity in config. Case-sensitive.
 
-**Example**
+### Example
 
 ```bash
 dab add Book --source dbo.Books --permissions "anonymous:read"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -83,7 +83,7 @@ dab add Book --source dbo.Books --permissions "anonymous:read"
 
 Config file path. Default is `dab-config.json`.
 
-**Example**
+### Example
 
 ```bash
 dab add Book --config ./dab-config.mssql.json --source dbo.Books --permissions "anonymous:read"
@@ -95,13 +95,13 @@ dab add Book --config ./dab-config.mssql.json --source dbo.Books --permissions "
 
 Enable or disable caching.
 
-**Example**
+### Example
 
 ```bash
 dab add Book --source dbo.Books --permissions "anonymous:read" --cache.enabled true
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -126,13 +126,13 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --cache.enabled t
 
 Cache time-to-live in seconds.
 
-**Example**
+### Example
 
 ```bash
 dab add Book --source dbo.Books --permissions "anonymous:read" --cache.ttl 300
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -157,13 +157,13 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --cache.ttl 300
 
 Free-text description of the entity.
 
-**Example**
+### Example
 
 ```bash
 dab add Book --source dbo.Books --permissions "anonymous:read" --description "Entity for managing book inventory"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -186,13 +186,13 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --description "En
 
 Comma-separated list of fields to exclude.
 
-**Example**
+### Example
 
 ```bash
 dab add Book --source dbo.Books --permissions "anonymous:read" --fields.exclude "internal_flag,secret_note"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -216,13 +216,13 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --fields.exclude 
 
 Comma-separated list of fields to expose.
 
-**Example**
+### Example
 
 ```bash
 dab add Book --source dbo.Books --permissions "anonymous:read" --fields.include "id,title,price"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -246,13 +246,13 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --fields.include 
 
 Control GraphQL exposure.
 
-**Example**
+### Example
 
 ```bash
 dab add Book --source dbo.Books --permissions "anonymous:read" --graphql book:books
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -275,13 +275,13 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --graphql book:bo
 
 Stored procedures only. GraphQL operation type. Default is `mutation`.
 
-**Example**
+### Example
 
 ```bash
 dab add BookProc --source dbo.MyProc --source.type stored-procedure --permissions "admin:execute" --graphql.operation query
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -303,13 +303,13 @@ dab add BookProc --source dbo.MyProc --source.type stored-procedure --permission
 
 Defines role→actions pairs. Use repeated flags for multiple roles.
 
-**Example**
+### Example
 
 ```bash
 dab add Book --source dbo.Books --permissions "anonymous:read" --permissions "authenticated:create,read,update,delete"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -329,13 +329,13 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --permissions "au
 
 Database-level policy.
 
-**Example**
+### Example
 
 ```bash
 dab add Book --source dbo.Books --permissions "anonymous:read" --policy-database "region eq 'US'"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -357,13 +357,13 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --policy-database
 
 Request-level policy.
 
-**Example**
+### Example
 
 ```bash
 dab add Book --source dbo.Books --permissions "anonymous:read" --policy-request "@claims.role == 'admin'"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -385,13 +385,13 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --policy-request 
 
 Control REST exposure.
 
-**Example**
+### Example
 
 ```bash
 dab add Book --source dbo.Books --permissions "anonymous:read" --rest BooksApi
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -413,13 +413,13 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --rest BooksApi
 
 Stored procedures only. HTTP verbs allowed for execution. Defaults to POST. Ignored for tables/views.
 
-**Example**
+### Example
 
 ```bash
 dab add BookProc --source dbo.MyProc --source.type stored-procedure --permissions "admin:execute" --rest true --rest.methods GET,POST
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -442,13 +442,13 @@ dab add BookProc --source dbo.MyProc --source.type stored-procedure --permission
 
 Required. Name of the database object: table, view, or stored procedure.
 
-**Example**
+### Example
 
 ```bash
 dab add Book --source dbo.Books --permissions "anonymous:read"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -470,13 +470,13 @@ dab add Book --source dbo.Books --permissions "anonymous:read"
 
 Required for views. Also required for tables without an inferable PK. Not allowed for stored procedures.
 
-**Example**
+### Example
 
 ```bash
 dab add BookView --source dbo.MyView --source.type view --source.key-fields "id,region" --permissions "anonymous:read"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -499,13 +499,13 @@ dab add BookView --source dbo.MyView --source.type view --source.key-fields "id,
 
 Stored procedures only. Comma-separated `name:value` pairs. Not allowed for tables or views.
 
-**Example**
+### Example
 
 ```bash
 dab add BookProc --source dbo.MyProc --source.type stored-procedure --source.params "year:2024,active:true" --permissions "admin:execute"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -531,13 +531,13 @@ dab add BookProc --source dbo.MyProc --source.type stored-procedure --source.par
 
 Type of database object. Default: `table`.
 
-**Example**
+### Example
 
 ```bash
 dab add Book --source dbo.Books --source.type table --permissions "anonymous:read"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {

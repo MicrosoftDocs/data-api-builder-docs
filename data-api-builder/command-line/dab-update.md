@@ -89,13 +89,13 @@ dab update <entity-name> [options]
 
 Enable or disable caching for this entity.
 
-**Example**
+### Example
 
 ```sh
 dab update Book --cache.enabled true
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -113,13 +113,13 @@ dab update Book --cache.enabled true
 
 Set cache time-to-live in seconds. Only effective if caching is enabled.
 
-**Example**
+### Example
 
 ```sh
 dab update Book --cache.ttl 600
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -140,13 +140,13 @@ dab update Book --cache.ttl 600
 
 Replace entity description.
 
-**Example**
+### Example
 
 ```sh
 dab update Book --description "Updated description"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -162,13 +162,13 @@ dab update Book --description "Updated description"
 
 Comma-separated list of fields to exclude.
 
-**Example**
+### Example
 
 ```sh
 dab update Book --fields.exclude "internal_flag,secret_note"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -188,13 +188,13 @@ dab update Book --fields.exclude "internal_flag,secret_note"
 
 Comma-separated list of fields to include. `*` includes all fields. Replaces existing include list.
 
-**Example**
+### Example
 
 ```sh
 dab update Book --fields.include "id,title,author"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -214,13 +214,13 @@ dab update Book --fields.include "id,title,author"
 
 Control GraphQL exposure.
 
-**Example**
+### Example
 
 ```sh
 dab update Book --graphql book:books
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -239,13 +239,13 @@ dab update Book --graphql book:books
 
 Stored procedures only. Sets operation type. Default is `mutation`.
 
-**Example**
+### Example
 
 ```sh
 dab update RunReport --graphql.operation query
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -266,13 +266,13 @@ dab update RunReport --graphql.operation query
 
 Map database fields to exposed names. Replaces the entire mapping set.
 
-**Example**
+### Example
 
 ```sh
 dab update Book --map "id:bookId,title:bookTitle"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -294,13 +294,13 @@ dab update Book --map "id:bookId,title:bookTitle"
 
 Replace all permissions with new role/action sets. Repeat flag for multiple roles.
 
-**Example**
+### Example
 
 ```sh
 dab update Book --permissions "anonymous:read" --permissions "authenticated:create,read,update"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -328,13 +328,13 @@ dab update Book --permissions "anonymous:read" --permissions "authenticated:crea
 
 OData-style filter appended to DB query.
 
-**Example**
+### Example
 
 ```sh
 dab update Book --policy-database "region eq 'US'"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -352,13 +352,13 @@ dab update Book --policy-database "region eq 'US'"
 
 Request-level policy evaluated before hitting the database.
 
-**Example**
+### Example
 
 ```sh
 dab update Book --policy-request "@claims.role == 'admin'"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -376,13 +376,13 @@ dab update Book --policy-request "@claims.role == 'admin'"
 
 Define or update a relationship. Use with other relationship options.
 
-**Example**
+### Example
 
 ```sh
 dab update Book --relationship publisher --cardinality one --target.entity Publisher --relationship.fields "publisher_id:id"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -406,13 +406,13 @@ dab update Book --relationship publisher --cardinality one --target.entity Publi
 
 Colon-separated field mappings for direct relationships.
 
-**Example**
+### Example
 
 ```sh
 dab update Book --relationship author --cardinality one --target.entity Author --relationship.fields "author_id:id"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -436,13 +436,13 @@ dab update Book --relationship author --cardinality one --target.entity Author -
 
 Control REST exposure.
 
-**Example**
+### Example
 
 ```sh
 dab update Book --rest BooksApi
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -460,13 +460,13 @@ dab update Book --rest BooksApi
 
 Stored procedures only. Replace allowed HTTP methods. Defaults to POST.
 
-**Example**
+### Example
 
 ```sh
 dab update RunReport --rest true --rest.methods GET,POST
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -488,13 +488,13 @@ dab update RunReport --rest true --rest.methods GET,POST
 
 Update the underlying database object.
 
-**Example**
+### Example
 
 ```sh
 dab update Book --source dbo.Books
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -513,13 +513,13 @@ dab update Book --source dbo.Books
 
 For views or tables without an inferred PK. Replaces existing keys. Not valid for stored procedures.
 
-**Example**
+### Example
 
 ```sh
 dab update SalesSummary --source.type view --source.key-fields "year,region"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -542,13 +542,13 @@ dab update SalesSummary --source.type view --source.key-fields "year,region"
 
 Stored procedures only. Replace parameter defaults.
 
-**Example**
+### Example
 
 ```sh
 dab update RunReport --source.type stored-procedure --source.params "year:2024,region:west"
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
@@ -574,13 +574,13 @@ dab update RunReport --source.type stored-procedure --source.params "year:2024,r
 
 Change the source object type.
 
-**Example**
+### Example
 
 ```sh
 dab update Book --source.type view
 ```
 
-**Resulting config**
+### Resulting config
 
 ```json
 {
