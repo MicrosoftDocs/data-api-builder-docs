@@ -58,7 +58,7 @@
       href: command-line/index.yml
       displayName: CLI, command line, terminal, local
     - name: Installation
-      href: how-to/install.md
+      href: command-line/install.md
       displayName: CLI, command-line, install
     - name: dab add
       displayName: command line, terminal, local
