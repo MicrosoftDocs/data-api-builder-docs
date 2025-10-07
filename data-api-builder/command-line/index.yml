@@ -1,0 +1,146 @@
+### YamlMime:Landing
+
+title: Data API builder CLI reference
+summary: The Data API builder (DAB) command-line interface (CLI) lets you configure, run, and validate Data API builder projects. Use these commands to create, manage, and operate your configuration files and runtime.
+metadata:
+  title: Data API builder CLI reference
+  description: The Data API builder (DAB) command-line interface (CLI) provides commands to add entities, configure runtime settings, export schema, initialize configs, start the runtime, update entities, and validate configurations.
+  author: jerrynixon
+  ms.author: jnixon
+  ms.reviewer: sidandrews
+  ms.service: data-api-builder
+  ms.topic: landing-page
+  ms.date: 09/29/2025
+
+landingContent:
+  - title: Install
+    linkLists:
+      - linkListType: get-started
+        links:
+          - text: Install the CLI
+            url: install.md
+
+  - title: Add
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: dab add 
+            url: dab-add.md
+      - linkListType: reference
+        links:
+          - text: Cache options
+            url: dab-add.md#--cacheenabled
+          - text: Fields options
+            url: dab-add.md#--fieldsexclude
+          - text: GraphQL options
+            url: dab-add.md#--graphql
+          - text: Permissions and policies
+            url: dab-add.md#--permissions
+          - text: REST options
+            url: dab-add.md#--rest
+          - text: Source options
+            url: dab-add.md#-s---source
+
+  - title: Configure
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: dab configure 
+            url: dab-configure.md
+      - linkListType: reference
+        links:
+          - text: Azure Key Vault
+            url: dab-configure.md#azure-key-vault
+          - text: Data source
+            url: dab-configure.md#cache
+          - text: GraphQL runtime
+            url: dab-configure.md#data-source
+          - text: MCP runtime
+            url: dab-configure.md#graphql
+          - text: REST runtime
+            url: dab-configure.md#rest
+          - text: Azure Log Analytics
+            url: dab-configure.md#telemetry--azure-log-analytics
+          - text: Log File Sink
+            url: dab-configure.md#telemetry--file-sink
+
+  - title: Export
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: dab export
+            url: dab-export.md
+      - linkListType: reference
+        links:
+          - text: Sampling modes
+            url: dab-export.md#sampling-modes
+          - text: Examples
+            url: dab-export.md#examples
+      - linkListType: how-to-guide
+        links:
+          - text: Troubleshooting
+            url: dab-export.md#troubleshooting
+          - text: Best practices
+            url: dab-export.md#best-practices
+
+  - title: Init
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: dab init
+            url: dab-init.md
+      - linkListType: reference
+        links:
+          - text: Data source
+            url: dab-init.md#data-source
+          - text: GraphQL
+            url: dab-init.md#graphql
+          - text: REST
+            url: dab-init.md#rest
+          - text: Authentication
+            url: dab-init.md#host-and-authentication
+
+  - title: Start
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: dab start
+            url: dab-start.md
+
+  - title: Update
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: dab update
+            url: dab-update.md
+      - linkListType: reference
+        links:
+          - text: Cache
+            url: dab-update.md#cache
+          - text: Fields
+            url: dab-update.md#fields
+          - text: GraphQL
+            url: dab-update.md#graphql
+          - text: Permissions and policies
+            url: dab-update.md#permissions--policies
+          - text: Relationships
+            url: dab-update.md#relationships
+          - text: REST
+            url: dab-update.md#rest
+          - text: Source
+            url: dab-update.md#source
+
+  - title: Validate
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: dab validate
+            url: dab-validate.md
+      - linkListType: reference
+        links:
+          - text: Validation Stages
+            url: dab-validate.md#validation-stages
+      - linkListType: how-to-guide
+        links:
+          - text: Examples
+            url: dab-validate.md#example-usage
