@@ -1,6 +1,11 @@
 {
   "redirections": [
     {
+      "source_path_from_root": "/data-api-builder/how-to/use-environments.md",
+      "redirect_url": "/azure/data-api-builder/concept/config/environments",
+      "redirect_document_id": false
+    },
+    {
       "source_path_from_root": "/data-api-builder/reference-command-line-interface.md",
       "redirect_url": "/azure/data-api-builder/command-line/",
       "redirect_document_id": false
