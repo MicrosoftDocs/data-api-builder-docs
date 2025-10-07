@@ -14,7 +14,7 @@ ms.date: 07/16/2025
 
 For REST endpoints, you can influence how Data API builder (DAB) uses its internal query result cache with the `Cache-Control` request header.
 
-> [!INFORMATION]
+> [!Important]
 > If caching is disabled in the runtime configuration, these directives are ignored and queries run normally.
 
 ## Supported Cache-Control values
