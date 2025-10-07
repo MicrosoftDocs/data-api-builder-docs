@@ -277,7 +277,7 @@
         - name: How to use Level 2 Cache
           href: concept/cache/level-2.md
           displayName: level 2 cache, L2, global cache, prefetch, fusioncache, redis
-        - name: How to use HTTP header: Cache-Control 
+        - name: "How to use HTTP header: Cache-Control"
           href: concept/cache/http-headers.md
           displayName: cache headers, HTTP, control, TTL, freshness
     - name: Configuration file
