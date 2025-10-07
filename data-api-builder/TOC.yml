@@ -98,7 +98,6 @@
       href: configuration/index.md#data-source-files
     - name: Runtime
       href: configuration/runtime.md#runtime
-      items:
     - name: Runtime / GraphQL 
       displayName: API
       items:
