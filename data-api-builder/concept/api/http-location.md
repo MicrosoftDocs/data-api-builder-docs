@@ -50,7 +50,7 @@ Response
 
 ```http
 HTTP/1.1 201 Created
-Location: id/123
+Location: http://localhost:50246/api/Books/id/123
 Content-Type: application/json
 
 {
@@ -60,7 +60,7 @@ Content-Type: application/json
 }
 ```
 
-Client can now `GET /api/Books/id/123`.
+Client can now `GET http://localhost:50246/api/Books/id/123`.
 
 ## Example: POST inserting into composite key table
 
@@ -81,7 +81,7 @@ Response
 
 ```http
 HTTP/1.1 201 Created
-Location: categoryid/3/pieceid/1
+Location: http://localhost:50246/api/Inventory/categoryid/3/pieceid/1
 Content-Type: application/json
 
 {
@@ -96,7 +96,7 @@ Content-Type: application/json
 Request
 
 ```http
-PUT /api/Books/id/1
+PUT http://localhost:50246/api/Books/id/1
 Content-Type: application/json
 
 {
@@ -123,7 +123,7 @@ Content-Type: application/json
 Request
 
 ```http
-PUT /api/Books/id/500
+PUT http://localhost:50246/api/Books/id/500
 Content-Type: application/json
 
 {
@@ -152,7 +152,7 @@ Content-Type: application/json
 Request
 
 ```http
-PUT /api/Books/id/500
+PUT http://localhost:50246/api/Books/id/500
 If-Match: *
 Content-Type: application/json
 
