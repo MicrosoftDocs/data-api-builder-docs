@@ -259,39 +259,36 @@
         - name: How to call GraphQL endpoints
           href: concept/api/graphql.md
           displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
-        - name: How to insert multiple records with GraphQL 
+        - name: How to insert multiple records (GraphQL)
           href: how-to/multiple-mutations.md
           displayName: batch, transaction, graphql, createMany, mutation
         - name: How to use built-in pagination
           href: concept/api/pagination.md
           displayName: pagination, limit, offset, top, skip, page size, results
-        - name: How to use the If-Match HTTP Header
+        - name: "How to use HTTP Header: If-Match"
           href: concept/api/http-if-match.md
-        - name: How to use the Location HTTP Header
+        - name: "How to use HTTP Header: Location"
           href: concept/api/http-location.md
     - name: Data caching
       items:
-        - name: How to use built-in level 1 Cache
+        - name: How to use Level 1 Cache
           href: concept/cache/level-1.md
           displayName: level 1 cache, L1, entity cache, query result, fusioncache, memory
-        - name: How to use built-in level 2 Cache
+        - name: How to use Level 2 Cache
           href: concept/cache/level-2.md
           displayName: level 2 cache, L2, global cache, prefetch, fusioncache, redis
-        - name: How to use the Cache-Control HTTP header
+        - name: "How to use HTTP header: Cache-Control"
           href: concept/cache/http-headers.md
           displayName: cache headers, HTTP, control, TTL, freshness
     - name: Configuration file
       items:
-        - name: How to use different configurations per environment
+        - name: How to use different configs per environment
           href: concept/config/environments.md
           displayName: environment, config, dev, prod, @env, variables
-        - name: How to configure environment variables with a local file
-          href: how-to/use-environments.md
-          displayName: environment, config, dev, prod, variables, @env
-        - name: How to use the env() function in a configuration
+        - name: How to use the env() function 
           href: concept/config/env-function.md
           displayName: functions, helpers, filters, expressions, macros, @env, environment
-        - name: How to use the akv() function in a configuration
+        - name: How to use the akv() function 
           href: concept/config/akv-function.md
           displayName: functions, helpers, filters, expressions, macros, @akv, azure key vault
         - name: How to use multiple data sources at once time

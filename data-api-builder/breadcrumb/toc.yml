@@ -1,4 +1,11 @@
 - name: Azure
+  tocHref: /samples/
+  topicHref: /azure/index
+  items:
+  - name: Data API builder
+    tocHref: /samples/
+    topicHref: /azure/data-api-builder/index
+- name: Azure
   tocHref: /azure/
   topicHref: /azure/index
   items:
