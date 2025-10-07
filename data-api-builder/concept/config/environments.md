@@ -24,7 +24,7 @@ PROD_CONNECTION_STRING=Server=tcp:127.0.0.1,1433;User ID=<username>;Password=<pa
 ```
 
 > [!NOTE]
-> The `.env` file has no filename, only an extension. Exclude it from source control to protect secrets.
+> The `.env` file has no filename, only an extension. 
 
 ### Run `dab init` to create the base configuration file
 
