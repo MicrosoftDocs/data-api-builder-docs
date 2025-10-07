@@ -1,0 +1,396 @@
+- name: Data API builder documentation
+  href: index.yml
+- name: Overview
+  expanded: true
+  items:
+    - name: What is Data API builder?
+      displayName: overview
+      href: overview.md
+    - name: What's new?
+      displayName: changelog, diff, release
+      href: whats-new/index.yml
+      items:
+        - name: DAB 1.6 (Stability release)
+          href: whats-new/version-1-6.md
+        - name: DAB 1.5 (Feature release)
+          href: whats-new/version-1-5.md
+        - name: DAB 1.4 (Stability release)
+          href: whats-new/version-1-4.md
+        - name: DAB 1.3 (Feature release)
+          href: whats-new/version-1-3.md
+        - name: DAB 1.2 (Stability release)
+          href: whats-new/version-1-2.md
+        - name: DAB 1.1 (GA)
+          href: whats-new/version-1-1.md
+    - name: Feature availability
+      href: feature-availability.md
+    - name: Supported data types
+      href: reference-data-types.md
+    - name: Database-specific features
+      displayName: sql, cosmos, pg, postgres, mysql, dw
+      href: reference-database-specific-features.md
+    - name: Security Overview
+      href: concept/security/index.md
+      displayName: security, auth, identity, roles, protection, access
+- name: Quickstarts
+  items:
+    - name: Local SQL database
+      href: quickstart/mssql.md
+      displayName: mssql, local, sql server, database
+    - name: Local Cosmos emulator
+      href: quickstart/nosql.md
+      displayName: cosmos, nosql, local, database
+    - name: Local PostgreSQL
+      href: quickstart/postgresql.md
+      displayName: postgres, pg, local, database
+    - name: Local MySQL
+      href: quickstart/mysql.md
+      displayName: mysql, local, database
+    - name: Azure SQL database
+      href: quickstart/azure-sql.md
+      displayName: azure, sql server, database, cloud
+    - name: Azure Cosmos DB 
+      href: quickstart/azure-cosmos-db-nosql.md
+      displayName: azure, cosmos, nosql, cloud, database
+- name: Command-Line interface
+  items:
+    - name: Overview
+      href: command-line/index.yml
+      displayName: CLI, command line, terminal, local
+    - name: Installation
+      href: command-line/install.md
+      displayName: CLI, command-line, install
+    - name: dab add
+      displayName: command line, terminal, local
+      href: command-line/dab-add.md
+    - name: dab configure
+      displayName: command line, terminal, local
+      href: command-line/dab-configure.md
+    - name: dab export
+      displayName: command line, terminal, local, cosmos
+      href: command-line/dab-export.md
+    - name: dab init
+      displayName: command line, terminal, local
+      href: command-line/dab-init.md
+    - name: dab start
+      displayName: command line, terminal, local
+      href: command-line/dab-start.md
+    - name: dab update
+      displayName: command line, terminal, local
+      href: command-line/dab-update.md
+    - name: dab validate
+      displayName: command line, terminal, local, CI, CICD, CI/CD, pipeline, devops
+      href: command-line/dab-validate.md
+- name: Configuration file
+  items:
+    - name: Overview
+      href: configuration/index.md
+      displayName: Config, JSON
+    - name: Data source
+      items:
+        - name: Database type
+          href: configuration/data-source.md#data-source
+        - name: Connection string
+          href: configuration/data-source.md#data-source
+        - name: Options (data source)
+          href: configuration/data-source.md#data-source
+    - name: Data source files
+      href: configuration/index.md#data-source-files
+    - name: Runtime
+      href: configuration/runtime.md#runtime
+      items:
+    - name: Runtime / GraphQL 
+      displayName: API
+      items:
+        - name: Enabled (runtime graphql)
+          href: configuration/runtime.md#graphql-runtime
+        - name: Path (runtime graphql)
+          href: configuration/runtime.md#graphql-runtime
+        - name: Depth limit (runtime graphql)
+          href: configuration/runtime.md#graphql-runtime
+        - name: Allow introspection (runtime graphql)
+          href: configuration/runtime.md#graphql-runtime
+        - name: Multiple mutations (runtime graphql)
+          displayName: multiple create, transaction
+          href: configuration/runtime.md#graphql-runtime
+    - name: Runtime / REST
+      displayName: API
+      items:
+        - name: Enabled (runtime rest)
+          href: configuration/runtime.md#rest-runtime
+        - name: Path (runtime rest)
+          href: configuration/runtime.md#rest-runtime
+        - name: Request body strict (runtime rest)
+          displayName: dotnet, poco, dto
+          href: configuration/runtime.md#rest-runtime
+    - name: Runtime / Host
+      items:
+        - name: Mode (host)
+          displayName: development, production, swagger, nitro
+          href: configuration/runtime.md#mode-host-runtime
+        - name: Maximum response size
+          href: configuration/runtime.md#maximum-response-size-host-runtime
+          displayName: mb, megabyte
+        - name: CORS (host)
+          href: configuration/runtime.md#cors-host-runtime
+        - name: Allow credentials (host CORS)
+          href: configuration/runtime.md#cors-host-runtime
+        - name: Origins (host CORS)
+          href: configuration/runtime.md#cors-host-runtime
+        - name: Authentication (host)
+          href: configuration/runtime.md#provider-authentication-host-runtime
+          displayName: claims, predicate, item
+        - name: Provider (host authentication)
+          href: configuration/runtime.md#provider-authentication-host-runtime
+        - name: JSON Web Tokens (host)
+          displayName: JWT
+          href: configuration/runtime.md#jwt-authentication-host-runtime
+        - name: Audience (host JWT)
+          href: configuration/runtime.md#jwt-authentication-host-runtime
+        - name: Issuer (host JWT)
+          href: configuration/runtime.md#jwt-authentication-host-runtime
+    - name: Runtime / Cache
+      items:
+        - name: Enabled (global cache)
+          href: configuration/runtime.md#cache-runtime
+        - name: Time-to-live in seconds
+          displayName: TTL (global cache)
+          href: configuration/runtime.md#cache-runtime
+    - name: Runtime / Pagination
+      items:
+        - name: Default page size
+          displayName: default-page-size
+          href: configuration/runtime.md#pagination-runtime
+        - name: Maximum page size
+          displayName: max-page-size
+          href: configuration/runtime.md#pagination-runtime
+    - name: Entities
+      items:
+        - name: Source (entity)
+          items:
+            - name: Object (entity source)
+              href: configuration/entities.md#source-entity-name-entities
+            - name: Type (entity source)
+              href: configuration/entities.md#source-entity-name-entities
+              displayName: table, view, stored procedure
+            - name: Key fields (entity source)
+              href: configuration/entities.md#source-entity-name-entities
+              displayName: table
+            - name: Parameters (entity source)
+              href: configuration/entities.md#source-entity-name-entities
+              displayName: stored procedure
+        - name: Mappings (entity)
+          displayName: field, column, property, alias
+          href: configuration/entities.md#mappings-entity-name-entities
+        - name: REST (entity)
+          items:
+            - name: Enabled (entity rest)
+              href: configuration/entities.md#rest-entity-name-entities
+            - name: Path (entity rest)
+              href: configuration/entities.md#rest-entity-name-entities
+            - name: Methods (entity rest)
+              href: configuration/entities.md#rest-entity-name-entities
+        - name: GraphQL (entity)
+          items:
+            - name: Enabled (entity graphql)
+              href: configuration/entities.md#enabled-graphql-entity-name-entities
+            - name: Type (entity graphql)
+              href: configuration/entities.md#type-graphql-entity-name-entities
+            - name: Operation (entity graphql)
+              href: configuration/entities.md#operation-graphql-entity-name-entities
+        - name: Relationships (entity)
+          items:
+            - name: Cardinality (relationship)
+              href: configuration/entities.md#relationships-entity-name-entities
+            - name: Target entity (relationship)
+              href: configuration/entities.md#relationships-entity-name-entities
+            - name: Source fields (relationship)
+              href: configuration/entities.md#relationships-entity-name-entities
+            - name: Target fields (relationship)
+              href: configuration/entities.md#relationships-entity-name-entities
+            - name: Linking object or entity (relationship)
+              href: configuration/entities.md#relationships-entity-name-entities
+            - name: Linking source fields (relationship)
+              href: configuration/entities.md#relationships-entity-name-entities
+            - name: Linking target fields (relationship)
+              href: configuration/entities.md#relationships-entity-name-entities
+        - name: Cache (entity)
+          items:
+            - name: Enabled (entity cache)
+              href: configuration/entities.md#cache-entity-name-entities
+            - name: Time-to-live in seconds
+              displayName: TTL (entity cache)
+              href: configuration/entities.md#cache-entity-name-entities
+        - name: Permissions (entity)
+          items:
+            - name: Role (entity permissions)
+              href: configuration/entities.md#permissions-entity-name-entities
+            - name: Actions as string-array (entity permissions)
+              href: configuration/entities.md#actions-string-array-permissions-entity-name-entities
+            - name: Actions as object-array (entity permissions)
+              href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
+            - name: Action as string (entity permissions)
+              href: configuration/entities.md#actions-object-array-permissions-entity-name-entities
+            - name: Fields (entity permissions)
+              href: configuration/entities.md#nested-properties-1
+            - name: Policy (entity permissions)
+              href: configuration/entities.md#nested-properties-1
+              displayName: policy, claims, predicate, item, database
+    - name: JSON Schema
+      href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
+- name: How-to
+  items:
+    - name: Run DAB
+      items:
+        - name: How to run DAB in a container
+          href: how-to/run-container.md
+          displayName: docker, container, dab, run
+        - name: How to run DAB from source
+          href: how-to/run-from-source.md
+          displayName: source, github, OSS, build, run
+    - name: API access
+      items:
+        - name: How to call REST endpoints
+          href: concept/api/rest.md
+          displayName: HTTP, GET, POST, PATCH, DELETE, verbs, REST API
+        - name: How to test REST endpoints
+          href: concept/api/openapi.md
+          displayName: OpenAPI, Swagger, API docs, schema definition, HTTP interface
+        - name: How to call GraphQL endpoints
+          href: concept/api/graphql.md
+          displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
+        - name: How to insert multiple records with GraphQL 
+          href: how-to/multiple-mutations.md
+          displayName: batch, transaction, graphql, createMany, mutation
+        - name: How to use built-in pagination
+          href: concept/api/pagination.md
+          displayName: pagination, limit, offset, top, skip, page size, results
+        - name: How to use the If-Match HTTP Header
+          href: concept/api/http-if-match.md
+        - name: How to use the Location HTTP Header
+          href: concept/api/http-location.md
+    - name: Data caching
+      items:
+        - name: How to use built-in level 1 Cache
+          href: concept/cache/level-1.md
+          displayName: level 1 cache, L1, entity cache, query result, fusioncache, memory
+        - name: How to use built-in level 2 Cache
+          href: concept/cache/level-2.md
+          displayName: level 2 cache, L2, global cache, prefetch, fusioncache, redis
+        - name: How to use the Cache-Control HTTP header
+          href: concept/cache/http-headers.md
+          displayName: cache headers, HTTP, control, TTL, freshness
+    - name: Configuration file
+      items:
+        - name: How to use different configurations per environment
+          href: concept/config/environments.md
+          displayName: environment, config, dev, prod, @env, variables
+        - name: How to configure environment variables with a local file
+          href: how-to/use-environments.md
+          displayName: environment, config, dev, prod, variables, @env
+        - name: How to use the env() function in a configuration
+          href: concept/config/env-function.md
+          displayName: functions, helpers, filters, expressions, macros, @env, environment
+        - name: How to use the akv() function in a configuration
+          href: concept/config/akv-function.md
+          displayName: functions, helpers, filters, expressions, macros, @akv, azure key vault
+        - name: How to use multiple data sources at once time
+          href: concept/config/multi-data-source.md
+          displayName: multiple databases, cross-DB, data source, federation
+    - name: Database structures
+      items:
+        - name: How to use database views 
+          href: concept/database/views.md
+          displayName: views, SQL, read-only
+        - name: How to use database stored procedures
+          href: concept/database/stored-procedures.md
+          displayName: stored procedures, procs, SQL, read-only
+        - name: How to use table relationships in GraphQL
+          href: concept/database/relationships.md
+          displayName: relationships, foreign key, navigation, linking, cardinality
+    - name: Monitoring and telemetry
+      items:
+        - name: How to export telemetry to Application Insights
+          href: concept/monitor/application-insights.md
+          displayName: app insights, telemetry, metrics, diagnostics, Azure Monitor
+        - name: How to monitor endpoints with Health Checks
+          href: concept/monitor/health-checks.md
+          displayName: health, health endpoint, ping, liveness, readiness, monitor, probe
+        - name: How to customize log verbosity with customize levels
+          href: concept/monitor/log-levels.md
+          displayName: logging, trace, info, debug, warn, error
+        - name: How to use OpenTelemetry
+          href: concept/monitor/open-telemetry.md
+          displayName: OTEL, tracing, distributed trace, metrics
+    - name: Security
+      items:
+        - name: How to use authorization with entities permissions
+          href: concept/security/authorization.md
+          displayName: roles, claims, policies, access control, permissions
+        - name: How to use Azure authentication
+          href: concept/security/authentication-azure.md
+          displayName: AAD, Microsoft Entra ID, Azure AD, SSO, OAuth
+        - name: How to use Local authentication
+          href: concept/security/authentication-local.md
+          displayName: local auth, simulated auth, development, static users
+        - name: How to use Row-level security
+          href: concept/security/row-level-security.md
+          displayName: RLS, predicates, SQL security, claim-based access
+    - name: Deploy and Host
+      items:
+        - name: Deployment Overview
+          href: deployment/index.md
+          displayName: deployment, hosting, summary, intro
+        - name: Deployment Checklist
+          href: deployment/checklist.md
+          displayName: deployment, validation, steps, readiness
+        - name: Deployment Hosting Options
+          href: deployment/hosting-options.md
+          displayName: hosting, container, azure, options
+        - name: How to deploy to Azure Container Apps using Azure Portal
+          href: deployment/how-to-publish-container-apps.md
+          displayName: azure, container apps, publish, deploy
+        - name: How to deploy to Azure Container Apps using Azure CLI
+          href: tutorial-deploy-container-app-cli.md
+          displayName: azure, deploy, ACA, container, cli
+        - name: How to deploy to Azure Container Instances
+          href: deployment/how-to-publish-container-instances.md
+          displayName: azure, container instances, publish, deploy
+        - name: How to deploy to Azure Static Web Apps (preview)
+          href: deployment/how-to-host-static-web-apps.md
+          displayName: swa, static web apps, azure, preview
+        - name: Configuration best practices
+          href: deployment/best-practices-configuration.md
+          displayName: configuration, deployment, settings, optimize
+        - name: Security best practices
+          href: deployment/best-practices-security.md
+          displayName: security, deployment, hardening, guidance
+- name: Samples
+  items:
+    - name: Devcontainer with Azure SQL
+      href: /samples/microsoft/vscode-remote-try-dab/devcontainer
+      displayName: devcontainer, codespaces, azure sql, docker
+    - name: Library app with Blazor and Azure SQL
+      href: /samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
+      displayName: blazor, aspnet, webassembly, azure sql, sample
+    - name: Library app with SWA and Azure SQL
+      href: /samples/azure-samples/dab-swa-library-demo/sample
+      displayName: static web apps, azure sql, sample, dab
+    - name: Todo app with SWA and Azure SQL
+      href: /samples/azure-samples/dab-swa-todo/sample
+      displayName: todo, dab, static web apps, sample, azure sql
+- name: Troubleshooting
+  items:
+    - name: FAQ
+      displayName: frequently asked questions, Q&A
+      href: faq.yml
+    - name: Installation
+      href: /troubleshoot/azure/data-api-builder/installation?context=/azure/data-api-builder/context/context
+    - name: Runtime
+      href: /troubleshoot/azure/data-api-builder/usage?context=/azure/data-api-builder/context/context
+    - name: Known issues
+      displayName: bugs
+      href: https://github.com/azure/data-api-builder/labels/known-issue
+    - name: Support
+      displayName: ticket, css, feedback, help, assistance
+      href: https://github.com/Azure/data-api-builder/blob/main/SUPPORT.md
