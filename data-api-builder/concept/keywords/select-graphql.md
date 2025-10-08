@@ -10,61 +10,68 @@ ms.date: 10/07/2025
 # Customer Intent: As a developer, I want to reduce payload size and surface only allowed columns.
 ---
 
-# Field Selection (Projection) in GraphQL 
+# Field selection (Projection) in GraphQL
 
-In GraphQL, the selection set determines which fields appear in the response—no more, no less. Data API builder (DAB) compiles your GraphQL field selections into parameterized SQL (or provider‐specific queries) that retrieves only the referenced columns plus any required key/foreign key columns for relationship resolution.
+In GraphQL, the fields you request define exactly what Data API builder (DAB) returns—no more, no less. DAB compiles these selections into parameterized SQL, including only the exposed columns and any foreign key fields required for relationships. Projection is governed by the entity configuration in `dab-config.json`.
 
-> [!NOTE]
-> GraphQL has no wildcard equivalent to `SELECT *`. Always request only what you need for performance, network efficiency, and clarity.
-
-## Quick glance
-
-| Concept                  | Description                                                                 |
-| ------------------------ | --------------------------------------------------------------------------- |
-| Field selection          | Controls which scalar/object fields are returned                            |
-| Nested fields            | Parent and related entities resolved with batched queries                   |
-| Aliases                  | Rename fields in the GraphQL response (does not expose hidden fields)       |
-| Pagination compatibility | Works seamlessly with `first`, `after`, and `orderBy`                       |
-| Safety                   | Only fields exposed in the DAB configuration are selectable                 |
+> GraphQL has no wildcard like `SELECT *`. Clients must specify each field explicitly.
 
 ## Basic selection
 
-Selecting only `id`, `title`, and `price`:
+Querying a few mapped fields.
+
+#### GraphQL query
 
 ```graphql
 query {
   books {
-    items { id title price }
+    items {
+      id
+      title
+      price
+    }
   }
 }
 ```
 
-### Conceptual SQL (may vary by database)
+#### Conceptual SQL
 
 ```sql
-SELECT id, title, price
-FROM Books;
+SELECT
+  id,
+  sku_title AS title,
+  sku_price AS price
+FROM dbo.books;
 ```
 
-### Sample response
+#### Sample response
 
 ```json
 {
   "data": {
     "books": {
       "items": [
-        { "id": 1, "title": "Dune", "price": 20 },
-        { "id": 2, "title": "Foundation", "price": 18 },
-        { "id": 3, "title": "Hyperion", "price": 22 }
+        {
+          "id": 1,
+          "title": "Dune",
+          "price": 20
+        },
+        {
+          "id": 2,
+          "title": "Foundation",
+          "price": 18
+        }
       ]
     }
   }
 }
 ```
 
-## Aliases
+## Field aliases
 
-GraphQL aliases change the field name in the response, not the underlying column name.
+Aliases rename fields in the response, not the database.
+
+#### GraphQL query
 
 ```graphql
 query {
@@ -77,86 +84,149 @@ query {
 }
 ```
 
-### Conceptual SQL
+#### Conceptual SQL
 
 ```sql
-SELECT title, price
-FROM Books;
+SELECT
+  sku_title AS title,
+  sku_price AS price
+FROM dbo.books;
 ```
 
-> The alias mapping (`bookTitle`, `cost`) is handled in the GraphQL layer; the physical SQL may not use `AS`.
-
-### Sample response
+#### Sample response
 
 ```json
 {
   "data": {
     "books": {
       "items": [
-        { "bookTitle": "Dune", "cost": 20 },
-        { "bookTitle": "Foundation", "cost": 18 }
+        {
+          "bookTitle": "Dune",
+          "cost": 20
+        },
+        {
+          "bookTitle": "Foundation",
+          "cost": 18
+        }
       ]
     }
   }
 }
 ```
 
-## Nested list with sort
+## Nested selection
 
-Sorting can be applied at any list level independently.
+Relationships defined in the configuration allow nested queries.
+
+#### GraphQL query
 
 ```graphql
 query {
-  authors {
+  books {
     items {
       id
-      name
-      books(orderBy: { year: ASC }) {
-        items { title year }
+      title
+      category {
+        id
+        name
       }
     }
   }
 }
 ```
 
-### Conceptual SQL
+#### Conceptual SQL
 
 ```sql
--- Parents
-SELECT id, name
-FROM Authors;
-
--- Child list (batched by author IDs)
-SELECT author_id, title, year
-FROM Books
-WHERE author_id IN (@a1, @a2, @a3)
-ORDER BY year ASC;
+SELECT
+  b.id,
+  b.sku_title AS title,
+  c.id AS category_id,
+  c.name AS category_name
+FROM dbo.books AS b
+JOIN dbo.categories AS c
+  ON b.category_id = c.id;
 ```
 
-### Sample response
+#### Sample response
 
 ```json
 {
   "data": {
-    "authors": {
+    "books": {
       "items": [
         {
-          "id": 11,
-          "name": "Frank Herbert",
-          "books": {
-            "items": [
-              { "title": "Dune", "year": 1965 },
-              { "title": "Dune Messiah", "year": 1969 }
-            ]
+          "id": 1,
+          "title": "Dune",
+          "category": {
+            "id": 10,
+            "name": "Sci-Fi"
           }
         },
         {
-          "id": 12,
-          "name": "Isaac Asimov",
+          "id": 2,
+          "title": "Foundation",
+          "category": {
+            "id": 10,
+            "name": "Sci-Fi"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+## One-to-many selection
+
+You can also traverse the inverse relationship when defined on the other entity.
+
+#### GraphQL query
+
+```graphql
+query {
+  categories {
+    items {
+      id
+      name
+      books {
+        items {
+          id
+          title
+        }
+      }
+    }
+  }
+}
+```
+
+#### Conceptual SQL
+
+```sql
+SELECT
+  c.id,
+  c.name,
+  b.id AS book_id,
+  b.sku_title AS title
+FROM dbo.categories AS c
+JOIN dbo.books AS b
+  ON c.id = b.category_id;
+```
+
+#### Sample response
+
+```json
+{
+  "data": {
+    "categories": {
+      "items": [
+        {
+          "id": 10,
+          "name": "Sci-Fi",
           "books": {
             "items": [
-              { "title": "Foundation", "year": 1951 },
-              { "title": "Foundation and Empire", "year": 1952 }
+              { "id": 1, "title": "Dune" },
+              { "id": 2, "title": "Foundation" }
             ]
           }
         }
@@ -166,38 +236,36 @@ ORDER BY year ASC;
 }
 ```
 
-## Projection with pagination
+## Pagination with projection
 
-Projection behaves the same with pagination arguments. The pagination metadata fields `hasNextPage` and `endCursor` appear directly alongside `items`—there is no `pageInfo` wrapper object.
+Projection and pagination combine seamlessly.
+
+#### GraphQL query
 
 ```graphql
 query {
-  books(first: 5) {
-    items { id title }
+  books(first: 3) {
+    items {
+      id
+      title
+    }
     hasNextPage
     endCursor
   }
 }
 ```
 
-### Conceptual SQL (SQL Server variant)
+#### Conceptual SQL
 
 ```sql
-SELECT TOP (5) id, title
-FROM Books
+SELECT TOP (3)
+  id,
+  sku_title AS title
+FROM dbo.books
 ORDER BY id ASC;
 ```
 
-### Conceptual SQL (PostgreSQL/MySQL variant)
-
-```sql
-SELECT id, title
-FROM Books
-ORDER BY id ASC
-LIMIT 5;
-```
-
-### Sample response
+#### Sample response
 
 ```json
 {
@@ -206,53 +274,50 @@ LIMIT 5;
       "items": [
         { "id": 1, "title": "Dune" },
         { "id": 2, "title": "Foundation" },
-        { "id": 3, "title": "Hyperion" },
-        { "id": 4, "title": "I, Robot" },
-        { "id": 5, "title": "Neuromancer" }
+        { "id": 3, "title": "Hyperion" }
       ],
       "hasNextPage": true,
-      "endCursor": "eyJpZCI6NX0="
+      "endCursor": "eyJpZCI6M30="
     }
   }
 }
 ```
 
-> [!NOTE]
-> This differs from the Relay Cursor Connections Specification, which uses a `pageInfo` object. DAB exposes the pagination token (`endCursor`) and `hasNextPage` directly. A stable ordering (often by primary key) underpins deterministic cursor generation.
+## Relevant configuration
 
-## Computed or mapped fields
-
-Computed (or mapped) fields are defined in the DAB configuration and expanded during query compilation. Clients cannot inject arbitrary SQL expressions.
+To control selection, configure `mappings` and `relationships` under `entities`.
 
 ```jsonc
 {
   "entities": {
-    "Books": {
-      "source": { "type": "table", "name": "Books" },
+    "Book": {
+      "source": {
+        "object": "dbo.books",
+        "type": "table"
+      },
       "mappings": {
-        "displayPrice": { "source": "price * 1.08" } // e.g., tax-inclusive
+        "sku_title": "title",
+        "sku_price": "price"
+      },
+      "relationships": {
+        "book_category": {
+          "cardinality": "one",
+          "target.entity": "Category",
+          "source.fields": [
+            "category_id"
+          ],
+          "target.fields": [
+            "id"
+          ]
+        }
+      }
+    },
+    "Category": {
+      "source": {
+        "object": "dbo.categories",
+        "type": "table"
       }
     }
   }
 }
 ```
-
-GraphQL query:
-
-```graphql
-query {
-  books {
-    items { title displayPrice }
-  }
-}
-```
-
-Conceptual SQL (simplified):
-
-```sql
-SELECT title, (price * 1.08) AS displayPrice
-FROM Books;
-```
-
-> [!NOTE]
-> Exact computed field configuration syntax may differ—refer to the official DAB configuration reference.
