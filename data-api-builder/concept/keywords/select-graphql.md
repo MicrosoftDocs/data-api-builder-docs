@@ -12,7 +12,11 @@ ms.date: 10/07/2025
 
 # Field selection (Projection) in GraphQL
 
-In GraphQL, the fields you request define exactly what Data API builder (DAB) returns—no more, no less. DAB compiles these selections into parameterized SQL, including only the exposed columns and any foreign key fields required for relationships. Projection is governed by the entity configuration in `dab-config.json`.
+In GraphQL, the fields you request define exactly what Data API builder (DAB) returns—no more, no less. DAB compiles these selections into parameterized SQL, including only the mapped (exposed) columns you asked for plus any columns it must internally fetch to satisfy:
+* Relationship joins (foreign key columns).
+* Primary key / ordering columns needed for stable pagination and cursor construction.
+
+These internally fetched columns are stripped before the response if you did not select them. Projection is governed by the entity configuration in `dab-config.json`.
 
 > GraphQL has no wildcard like `SELECT *`. Clients must specify each field explicitly.
 
@@ -37,6 +41,8 @@ query {
 #### Conceptual SQL
 
 ```sql
+-- Internally DAB may also read primary key columns (e.g. id) even if not shown;
+-- shown here for clarity. Mapping sku_title -> title, sku_price -> price.
 SELECT
   id,
   sku_title AS title,
@@ -53,8 +59,8 @@ FROM dbo.books;
       "items": [
         {
           "id": 1,
-          "title": "Dune",
-          "price": 20
+            "title": "Dune",
+            "price": 20
         },
         {
           "id": 2,
@@ -69,7 +75,7 @@ FROM dbo.books;
 
 ## Field aliases
 
-Aliases rename fields in the response, not the database.
+Aliases rename fields in the response, not the database. The SQL layer does not need to alias to the GraphQL alias names; aliasing is applied after data retrieval.
 
 #### GraphQL query
 
@@ -116,7 +122,7 @@ FROM dbo.books;
 
 ## Nested selection
 
-Relationships defined in the configuration allow nested queries.
+Relationships defined in the configuration allow nested queries. The conceptual SQL below shows a single JOIN; in practice DAB may execute one or more parameterized queries (e.g., a parent query plus a batched child fetch) rather than a single flattened join—this is illustrative.
 
 #### GraphQL query
 
@@ -179,7 +185,7 @@ JOIN dbo.categories AS c
 
 ## One-to-many selection
 
-You can also traverse the inverse relationship when defined on the other entity.
+You can also traverse the inverse relationship. Again, SQL is conceptual; actual execution may de-duplicate parent rows and materialize child collections separately.
 
 #### GraphQL query
 
@@ -238,7 +244,7 @@ JOIN dbo.books AS b
 
 ## Pagination with projection
 
-Projection and pagination combine seamlessly.
+Projection and pagination combine seamlessly. DAB defaults ordering to the primary key (`id ASC`) when no `orderBy` is supplied. Internally it fetches one extra row (`first + 1`) to determine `hasNextPage`; the conceptual SQL below shows only the visible limit (TOP (3)) for readability.
 
 #### GraphQL query
 
@@ -258,6 +264,7 @@ query {
 #### Conceptual SQL
 
 ```sql
+-- Internally may issue: SELECT TOP (4) ... to probe hasNextPage.
 SELECT TOP (3)
   id,
   sku_title AS title
@@ -283,9 +290,11 @@ ORDER BY id ASC;
 }
 ```
 
+> The cursor value is illustrative; real cursors encode ordered column metadata in a base64 JSON array.
+
 ## Relevant configuration
 
-To control selection, configure `mappings` and `relationships` under `entities`.
+To control selection, configure `mappings` and `relationships` under `entities`. Mapping keys are source columns; values are exposed GraphQL field names (so `sku_title` → `title`). Relationship syntax shown with dotted properties (illustrative—verify against your DAB version’s schema; some versions may nest these fields).
 
 ```jsonc
 {
@@ -303,12 +312,8 @@ To control selection, configure `mappings` and `relationships` under `entities`.
         "book_category": {
           "cardinality": "one",
           "target.entity": "Category",
-          "source.fields": [
-            "category_id"
-          ],
-          "target.fields": [
-            "id"
-          ]
+          "source.fields": [ "category_id" ],
+          "target.fields": [ "id" ]
         }
       }
     },

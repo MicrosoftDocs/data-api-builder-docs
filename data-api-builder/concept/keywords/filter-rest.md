@@ -47,7 +47,7 @@ GET /api/books?$filter=
 > [!NOTE]
 > `$filter` supports `eq null` and `ne null` directly for null comparisons.
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT * FROM Books
@@ -81,7 +81,7 @@ GET /api/books?$filter=
 > * Wrong: `$filter=Date ge datetime'2025-01-01'`
 > * Correct: `$filter=Date ge 2025-01-01T00:00:00Z`
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT * FROM Books
@@ -106,10 +106,7 @@ GET /api/books?$filter=
   published_on gt 2020-01-01T00:00:00Z
 ```
 
-> [!NOTE]
-> Always use the ISO 8601 UTC format (`yyyy-MM-ddTHH:mm:ssZ`) for date filters.
-
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT * FROM Books
@@ -133,7 +130,7 @@ GET /api/books?$filter=
   published_on ge 2020-01-01T00:00:00Z
 ```
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT * FROM Books
@@ -157,7 +154,7 @@ GET /api/books?$filter=
   published_on lt 2030-01-01T00:00:00Z
 ```
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT * FROM Books
@@ -181,7 +178,7 @@ GET /api/books?$filter=
   published_on le 2030-01-01T00:00:00Z
 ```
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT * FROM Books
@@ -206,7 +203,7 @@ GET /api/books?$filter=
   rating eq null
 ```
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT * FROM Books
@@ -232,7 +229,7 @@ GET /api/books?$filter=
   rating eq null
 ```
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT * FROM Books
@@ -260,7 +257,7 @@ GET /api/books?$filter=
   )
 ```
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT * FROM Books
@@ -287,7 +284,7 @@ GET /api/books?$filter=
   rating eq null
 ```
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT * FROM Books
