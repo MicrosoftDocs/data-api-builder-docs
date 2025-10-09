@@ -183,26 +183,26 @@ landingContent:
       - linkListType: concept
         links:
           - text: Overview
-            url: command-line/
+            url: command-line/index.yml
       - linkListType: how-to-guide
         links:
           - text: Installation
             url: command-line/install.md
       - linkListType: reference
         links:
-          - text: The add command
+          - text: dab add
             url: command-line/dab-add.md
-          - text: The configure command
+          - text: dab configure 
             url: command-line/dab-configure.md
-          - text: The export command
+          - text: dab export 
             url: command-line/dab-export.md
-          - text: The init command
+          - text: dab init 
             url: command-line/dab-init.md
-          - text: The start command
+          - text: dab start 
             url: command-line/dab-start.md
-          - text: The update command
+          - text: dab update 
             url: command-line/dab-update.md
-          - text: The validate command
+          - text: dab validate 
             url: command-line/dab-validate.md
   - title: Database Objects
     linkLists:
