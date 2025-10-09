@@ -255,21 +255,21 @@
         - name: How to insert multiple records with GraphQL 
           href: how-to/multiple-mutations.md
           displayName: batch, transaction, graphql, createMany, mutation
-        - name: How to use the $after keyword to page
+        - name: How to use keyword - after 
           href: keywords/after-graphql.md
-          displayName: page, pagination
-        - name: How to use the $filter keyword to limit rows
+          displayName: page, pagination, cursor
+        - name: How to use keyword - filter 
           href: keywords/filter-graphql.md
-          displayName: predicate, where
-        - name: How to use the $first keyword to page
+          displayName: predicate, where, limit
+        - name: How to use keyword - first
           href: keywords/first-graphql.md
-          displayName: pagination, top
-        - name: How to use the $orderby keyword to sort
+          displayName: pagination, top, page
+        - name: How to use keyword - orderby 
           href: keywords/orderby-graphql.md
           displayName: sort, bubble, arrange, align
-        - name: How to use the $select keyword to project
+        - name: How to use keyword - select 
           href: keywords/select-graphql.md
-          displayName: projection, choose
+          displayName: projection, choose, columns, items
     - name: REST API
       items:
         - name: How to call REST endpoints
@@ -282,21 +282,21 @@
           href: concept/api/http-if-match.md
         - name: How to use the Location HTTP Header
           href: concept/api/http-location.md
-        - name: How to use the $after keyword to page
+        - name: How to use keyword - $after 
           href: keywords/after-rest.md
-          displayName: page, pagination
-        - name: How to use the $filter keyword to limit rows
+          displayName: page, pagination, cursor
+        - name: How to use keyword - $filter 
           href: keywords/filter-rest.md
-          displayName: predicate, where
-        - name: How to use the $first keyword to page
+          displayName: predicate, where, limit
+        - name: How to use keyword - $first
           href: keywords/first-rest.md
-          displayName: pagination, top
-        - name: How to use the $orderby keyword to sort
+          displayName: pagination, top, page
+        - name: How to use keyword - $orderby 
           href: keywords/orderby-rest.md
           displayName: sort, bubble, arrange, align
-        - name: How to use the $select keyword to project
+        - name: How to use keyword - $select 
           href: keywords/select-rest.md
-          displayName: projection, choose
+          displayName: projection, choose, columns, items
     - name: Data caching
       items:
         - name: How to use built-in level 1 Cache
