@@ -377,14 +377,14 @@
           displayName: hosting, container, azure, options
         - name: How to deploy to Azure Container Apps using Azure Portal
           href: deployment/how-to-publish-container-apps.md
-          displayName: azure, container apps, publish, deploy
+          displayName: azure, container apps, publish, deploy, aca
         - name: How to deploy to Azure Container Apps using Azure CLI
           href: tutorial-deploy-container-app-cli.md
           displayName: azure, deploy, ACA, container, cli
         - name: How to deploy to Azure Container Instances
           href: deployment/how-to-publish-container-instances.md
-          displayName: azure, container instances, publish, deploy
-        - name: How to deploy to Azure Static Web Apps (preview)
+          displayName: azure, container instances, publish, deploy, aci
+        - name: How to deploy to Azure Static Web Apps (retired)
           href: deployment/how-to-host-static-web-apps.md
           displayName: swa, static web apps, azure, preview
         - name: Configuration best practices
@@ -396,16 +396,16 @@
 - name: Samples
   items:
     - name: Devcontainer with Azure SQL
-      href: /samples/microsoft/vscode-remote-try-dab/devcontainer
+      href: samples/microsoft/vscode-remote-try-dab/devcontainer
       displayName: devcontainer, codespaces, azure sql, docker
     - name: Library app with Blazor and Azure SQL
-      href: /samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
+      href: samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
       displayName: blazor, aspnet, webassembly, azure sql, sample
     - name: Library app with SWA and Azure SQL
-      href: /samples/azure-samples/dab-swa-library-demo/sample
+      href: samples/azure-samples/dab-swa-library-demo/sample
       displayName: static web apps, azure sql, sample, dab
     - name: Todo app with SWA and Azure SQL
-      href: /samples/azure-samples/dab-swa-todo/sample
+      href: samples/azure-samples/dab-swa-todo/sample
       displayName: todo, dab, static web apps, sample, azure sql
 - name: Troubleshooting
   items:
@@ -413,9 +413,9 @@
       displayName: frequently asked questions, Q&A
       href: faq.yml
     - name: Installation
-      href: /troubleshoot/azure/data-api-builder/installation?context=/azure/data-api-builder/context/context
+      href: troubleshoot/azure/data-api-builder/installation?context=/azure/data-api-builder/context/context
     - name: Runtime
-      href: /troubleshoot/azure/data-api-builder/usage?context=/azure/data-api-builder/context/context
+      href: troubleshoot/azure/data-api-builder/usage?context=/azure/data-api-builder/context/context
     - name: Known issues
       displayName: bugs
       href: https://github.com/azure/data-api-builder/labels/known-issue

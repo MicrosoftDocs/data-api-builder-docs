@@ -66,7 +66,7 @@ landingContent:
             url: https://youtu.be/YadKjVk-q0k
           - text: The DAB VS Code Extension
             url: https://youtu.be/KcFFRbITAAI
-          - text: DAB and the CORS pattern
+          - text: DAB and the CQRS pattern
             url: https://youtu.be/pSuMIvXRM1Q
           - text: DAB and how it works
             url: https://youtu.be/kxy4hA2YoME
@@ -183,7 +183,7 @@ landingContent:
       - linkListType: concept
         links:
           - text: Overview
-            url: command-line/index.yaml
+            url: command-line
       - linkListType: how-to-guide
         links:
           - text: Installation
