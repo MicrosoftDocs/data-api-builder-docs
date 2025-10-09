@@ -1,106 +1,139 @@
 ---
-title: Use after (GraphQL)
-description: Learn how cursor-based pagination works in GraphQL for Data API builder, how continuation tokens are generated, and how to request subsequent pages safely and efficiently.
+title: Use after (REST)
+description: Learn how cursor-based pagination works in REST for Data API builder, how continuation tokens are generated, and how to request subsequent pages safely and efficiently.
 author: jnixon
 ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: reference
 ms.date: 10/08/2025
-# Customer Intent: As a developer, I want to understand how to page through large GraphQL datasets safely, efficiently, and without duplicates or missing data.
+# Customer Intent: As a developer, I want to understand how to page through large REST datasets safely, efficiently, and without duplicates or missing data.
 ---
 
 # Pagination with `$after` in REST
 
-Pagination narrows large datasets to smaller, manageable pages. In REST, Data API builder (DAB) uses the `$after` query parameter for **keyset pagination**, providing stable and efficient traversal through ordered results.
+Pagination narrows large datasets to smaller, manageable pages. In REST, Data API builder (DAB) uses the `$after` query parameter for **keyset pagination**, providing stable and efficient traversal through ordered results. Each token represents the position of the last record from the previous page, allowing the next request to continue from that point. Unlike offset pagination, keyset pagination avoids missing or duplicated rows when data changes between requests.
 
-Each token represents the position of the last record from the previous page, allowing the next request to continue from that point. Unlike offset pagination, keyset pagination avoids missing or duplicated rows when data changes between requests.
+Go to the [GraphQL version of this document](./after-graphql.md).
 
-> [!Note]
-> `$after` carries an opaque token that identifies where the last page ended. Treat tokens as immutable and never attempt to construct or modify them.
-
-### Quick glance
+## Quick glance
 
 | Concept    | Description                                                   |
 | ---------- | ------------------------------------------------------------- |
 | `$after`   | The opaque continuation token returned from the prior request |
 | `$first`   | The maximum number of records to fetch per page               |
 | `nextLink` | URL for the next page, includes `$after`                      |
-| `value`    | The array of returned items for the current page              |
 
-### How pagination works
+## Basic pagination
 
-1. The client requests the first page using `$first` to set page size.
-2. DAB returns a list of items and a `nextLink` that includes `$after`.
-3. The client uses the `nextLink` or copies the `$after` value into the next request.
-4. The process repeats until `nextLink` is no longer present.
+In this example we are getting the first three books.
 
-### `$after`
-
-Specifies the continuation token for the next page. The value is a base64-encoded string that represents the last record of the previous result set.
-
-In this example we are getting the next three products after the last page’s token.
+### HTTP request
 
 ```http
-GET /api/products?$first=3&$after=eyJpZCI6MywidHMiOjE3MDA4MDg1NTU1fQ==
+GET /api/books?$first=3
 ```
 
-#### Resulting SQL from the above example
+### Conceptual SQL
 
 ```sql
-SELECT TOP (3) id, name
-FROM Products
-WHERE (id > 3)
+SELECT TOP (3)
+  id,
+  sku_title AS title
+FROM dbo.books
 ORDER BY id ASC;
 ```
 
-### `$first`
+### Sample response
 
-Defines how many records to return per request. Used with `$after`, it determines a precise window over the ordered dataset.
-
-In this example we are getting the first three products.
-
-```http
-GET /api/products?$first=3
-```
-
-Sample response:
-
-```json
+```jsonc
 {
   "value": [
-    { "id": 1, "name": "Item A" },
-    { "id": 2, "name": "Item B" },
-    { "id": 3, "name": "Item C" }
+    { "id": 1, "title": "Dune" },
+    { "id": 2, "title": "Foundation" },
+    { "id": 3, "title": "Hyperion" }
   ],
-  "nextLink": "/api/products?$first=3&$after=eyJpZCI6MywidHMiOjE3MDA4MDg1NTU1fQ=="
+  "nextLink": "/api/books?$first=3&$after=eyJpZCI6M30="
 }
 ```
 
-If `next-link-relative=true` in configuration, `nextLink` will contain a relative path; otherwise, it will be an absolute URL.
+> [!NOTE]
+> If `next-link-relative=true` in configuration, `nextLink` will contain a relative path; otherwise, it will be an absolute URL.
 
-### How tokens are formed
+## Continuation with `$after`
 
-Internally, DAB encodes the last record of each page as a token:
+The `$after` parameter specifies the continuation token for the next page. The value is a base64-encoded string representing the last record of the previous page.
 
-1. DAB collects pagination columns from the current order (including direction).
-2. It includes any remaining primary key columns as tie-breakers.
-3. Each field is serialized into JSON and base64-encoded.
+> [!WARNING]
+> `$after` carries an opaque token that identifies where the last page ended. Treat tokens as immutable and never attempt to construct or modify them.
 
-Decoded example:
+In this example we are getting the next three books after the last page’s token.
 
-```json
-[
-  { "EntityName": "Product", "FieldName": "createdOn", "FieldValue": "2024-11-05T12:34:56Z", "Direction": 0 },
-  { "EntityName": "Product", "FieldName": "id", "FieldValue": 42, "Direction": 0 }
-]
+### HTTP request
+
+```http
+GET /api/books?$first=3&$after=eyJpZCI6M30=
 ```
 
-> [!Note]
-> Any schema or ordering change invalidates previously issued tokens. Clients must restart pagination from the first page.
+### Conceptual SQL
 
-### End of data
+```sql
+SELECT TOP (3)
+  id,
+  sku_title AS title
+FROM dbo.books
+WHERE id > 3
+ORDER BY id ASC;
+```
+
+### Sample response
+
+```jsonc
+{
+  "value": [
+    { "id": 4, "title": "I, Robot" },
+    { "id": 5, "title": "The Left Hand of Darkness" },
+    { "id": 6, "title": "The Martian" }
+  ],
+  "nextLink": "/api/books?$first=3&$after=eyJpZCI6Nn0="
+}
+```
+
+## End of data
 
 When `nextLink` is absent, there are no additional records to fetch.
-
 The final page response includes only a `value` array without a `nextLink`.
+
+### Sample response
+
+```jsonc
+{
+  "value": [
+    { "id": 7, "title": "Rendezvous with Rama" },
+    { "id": 8, "title": "The Dispossessed" }
+  ]
+}
+```
+
+> [!NOTE]
+> Any schema or ordering change invalidates previously issued tokens. Clients must restart pagination from the first page.
+
+## Relevant configuration
+
+To enable paging in REST, define your entities in `dab-config.json`. Stable ordering columns (typically primary keys) ensure consistent pagination tokens.
+
+```jsonc
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "object": "dbo.books",
+        "type": "table"
+      },
+      "mappings": {
+        "sku_title": "title"
+      }
+    }
+  }
+}
+```

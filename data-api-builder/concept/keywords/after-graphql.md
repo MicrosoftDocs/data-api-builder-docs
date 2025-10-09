@@ -12,102 +12,241 @@ ms.date: 10/08/2025
 
 # Pagination with `after` in GraphQL
 
-Pagination narrows large datasets to smaller, manageable pages. In GraphQL, Data API builder (DAB) uses the `after` argument for **keyset pagination**, which provides stable and efficient traversal through ordered results.
+Pagination narrows large datasets to smaller, manageable pages. In GraphQL, Data API builder (DAB) uses the `after` argument for **keyset pagination**, providing stable and efficient traversal through ordered results. Each cursor encodes the position of the last record in the previous page, allowing the next query to continue from that point. Unlike offset pagination, keyset pagination avoids gaps or duplicates when data changes between requests.
 
-Each cursor encodes the position of the last record in the previous page, allowing the next query to continue from that point. Unlike offset pagination, keyset pagination avoids gaps or duplicates when data changes between requests.
+Go to the [REST version of this document](./after-rest.md).
 
-> [!Note]
-> The `after` argument carries an opaque token that marks where the previous page ended. Treat tokens as immutable. Never attempt to construct or edit them.
+## Quick glance
 
-### Quick glance
+| Concept       | Description                                      |
+| ------------- | ------------------------------------------------ |
+| `after`       | The continuation token from the prior request    |
+| `first`       | The maximum number of records to fetch per page  |
+| `hasNextPage` | Indicates whether more data exists               |
+| `endCursor`   | The token to include in the next `after` request |
 
-| Concept       | Description                                                   |
-| ------------- | ------------------------------------------------------------- |
-| `after`       | The opaque continuation token returned from the prior request |
-| `first`       | The maximum number of records to fetch per page               |
-| `hasNextPage` | Indicates whether more data exists                            |
-| `endCursor`   | The token to include in the next `after` request              |
+## Basic pagination
 
-### How pagination works
+### GraphQL query
 
-1. The client requests a page using `first` to set page size.
-2. DAB returns a list of items and a `pageInfo` object containing `hasNextPage` and `endCursor`.
-3. The client passes that `endCursor` into the next query’s `after` argument.
-4. The process repeats until `hasNextPage` is false.
-
-### `after`
-
-Specifies the continuation token for the next page. The value is a base64-encoded string that represents the last record of the previous result set.
-
-In this example we are getting the next three products after the last page’s cursor.
+In this example we are getting the first three books.
 
 ```graphql
 query {
-  products(first: 3, after: "eyJpZCI6MywidHMiOjE3MDA4MDg1NTU1fQ==") {
-    items { id name }
-    pageInfo {
-      hasNextPage
-      endCursor
+  books(first: 3) {
+    items {
+      id
+      title
+    }
+    hasNextPage
+    endCursor
+  }
+}
+```
+
+### Conceptual SQL
+
+```sql
+SELECT TOP (3)
+  id,
+  sku_title AS title
+FROM dbo.books
+ORDER BY id ASC;
+```
+
+### Sample response
+
+```jsonc
+{
+  "data": {
+    "books": {
+      "items": [
+        { "id": 1, "title": "Dune" },
+        { "id": 2, "title": "Foundation" },
+        { "id": 3, "title": "Hyperion" }
+      ],
+      "hasNextPage": true,
+      "endCursor": "eyJpZCI6M30="
     }
   }
 }
 ```
 
-#### Resulting SQL from the above example
+## Continuation with `after`
 
-```sql
-SELECT TOP (3) id, name
-FROM Products
-WHERE (id > 3)
-ORDER BY id ASC;
-```
+The `after` argument specifies the continuation token for the next page. The value is a base64-encoded cursor representing the last record from the previous page.
 
-### `first`
+> [!WARNING]
+> The `after` argument carries an opaque token that marks where the previous page ended. Treat tokens as immutable and never attempt to construct or edit them.
 
-Defines how many records to return per request. Used with `after`, it determines a precise window over the ordered dataset.
+In this example we are getting the next three books after the last page’s cursor.
 
-In this example we are getting the first three products.
+### GraphQL query
 
 ```graphql
 query {
-  products(first: 3) {
-    items { id name }
-    pageInfo {
-      hasNextPage
-      endCursor
+  books(first: 3, after: "eyJpZCI6M30=") {
+    items {
+      id
+      title
+    }
+    hasNextPage
+    endCursor
+  }
+}
+```
+
+### Conceptual SQL
+
+```sql
+SELECT TOP (3)
+  id,
+  sku_title AS title
+FROM dbo.books
+WHERE id > 3
+ORDER BY id ASC;
+```
+
+### Sample response
+
+```jsonc
+{
+  "data": {
+    "books": {
+      "items": [
+        { "id": 4, "title": "I, Robot" },
+        { "id": 5, "title": "The Left Hand of Darkness" },
+        { "id": 6, "title": "The Martian" }
+      ],
+      "hasNextPage": true,
+      "endCursor": "eyJpZCI6Nn0="
     }
   }
 }
 ```
 
-#### Resulting SQL from the above example
+## Nested pagination
+
+Pagination can be applied to related collections, such as retrieving authors with a paged list of books.
+
+### GraphQL query
+
+```graphql
+query {
+  authors {
+    items {
+      id
+      name
+      books(first: 2) {
+        items {
+          id
+          title
+        }
+        hasNextPage
+        endCursor
+      }
+    }
+  }
+}
+```
+
+### Conceptual SQL
 
 ```sql
-SELECT TOP (3) id, name
-FROM Products
+-- parent
+SELECT
+  id,
+  name
+FROM dbo.authors;
+
+-- child
+SELECT TOP (2)
+  author_id,
+  id,
+  sku_title AS title
+FROM dbo.books
+WHERE author_id IN (@a1, @a2)
 ORDER BY id ASC;
 ```
 
-### How cursors are formed
+### Sample response
 
-Internally, DAB encodes the last record of each page as a cursor:
-
-1. DAB collects pagination columns from the current order (including direction).
-2. It includes any remaining primary key columns as tie-breakers.
-3. Each field is serialized into JSON and base64-encoded.
-
-Decoded example:
-
-```json
-[
-  { "EntityName": "Product", "FieldName": "createdOn", "FieldValue": "2024-11-05T12:34:56Z", "Direction": 0 },
-  { "EntityName": "Product", "FieldName": "id", "FieldValue": 42, "Direction": 0 }
-]
+```jsonc
+{
+  "data": {
+    "authors": {
+      "items": [
+        {
+          "id": 1,
+          "name": "Frank Herbert",
+          "books": {
+            "items": [
+              { "id": 1, "title": "Dune" },
+              { "id": 2, "title": "Dune Messiah" }
+            ],
+            "hasNextPage": true,
+            "endCursor": "eyJpZCI6Mn0="
+          }
+        },
+        {
+          "id": 2,
+          "name": "Isaac Asimov",
+          "books": {
+            "items": [
+              { "id": 3, "title": "Foundation" },
+              { "id": 4, "title": "Foundation and Empire" }
+            ],
+            "hasNextPage": false,
+            "endCursor": null
+          }
+        }
+      ]
+    }
+  }
+}
 ```
 
-> [!Note]
-> Any schema or ordering change invalidates prior cursors. Clients must start a new pagination cycle.
+> [!NOTE]
+> Any schema or ordering change invalidates previously issued tokens. Clients must restart pagination from the first page.
 
-### End of data
+## Relevant configuration
 
-When `hasNextPage` is false, there are no more records to fetch. The `endCursor` may be null on the final page.
+To enable pagination and nested relationships, define your entities with mappings and relationships in `dab-config.json`.
+
+```jsonc
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "object": "dbo.books",
+        "type": "table"
+      },
+      "mappings": {
+        "sku_title": "title"
+      },
+      "relationships": {
+        "book_author": {
+          "cardinality": "one",
+          "target.entity": "Author",
+          "source.fields": [ "author_id" ],
+          "target.fields": [ "id" ]
+        }
+      }
+    },
+    "Author": {
+      "source": {
+        "object": "dbo.authors",
+        "type": "table"
+      },
+      "relationships": {
+        "author_books": {
+          "cardinality": "many",
+          "target.entity": "Book",
+          "source.fields": [ "id" ],
+          "target.fields": [ "author_id" ]
+        }
+      }
+    }
+  }
+}
+```
