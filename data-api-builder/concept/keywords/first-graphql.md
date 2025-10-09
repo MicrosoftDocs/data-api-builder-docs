@@ -124,4 +124,5 @@ Invalid number of items requested, first argument must be either -1 or a positiv
 }
 ```
 
-[!INCLUDE[Install CLI](./includes/see-also.md)]
+[!INCLUDE[Sample Configuration](./includes/sample-config.md)]
+[!INCLUDE[See Also](./includes/see-also.md)]

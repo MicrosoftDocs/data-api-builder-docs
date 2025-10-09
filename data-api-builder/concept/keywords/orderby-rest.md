@@ -114,4 +114,5 @@ When you sort by a field not present in `$select`, DAB fetches it internally for
 }
 ```
 
-[!INCLUDE[Install CLI](./includes/see-also.md)]
+[!INCLUDE[Sample Configuration](./includes/sample-config.md)]
+[!INCLUDE[See Also](./includes/see-also.md)]

@@ -265,4 +265,5 @@ FROM Books
 WHERE rating IS NULL;
 ```
 
-[!INCLUDE[Install CLI](./includes/see-also.md)]
+[!INCLUDE[Sample Configuration](./includes/sample-config.md)]
+[!INCLUDE[See Also](./includes/see-also.md)]

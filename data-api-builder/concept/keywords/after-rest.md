@@ -137,4 +137,5 @@ To enable paging in REST, define your entities in `dab-config.json`. Stable orde
   }
 }
 ```
-[!INCLUDE[Install CLI](./includes/see-also.md)]
+[!INCLUDE[Sample Configuration](./includes/sample-config.md)]
+[!INCLUDE[See Also](./includes/see-also.md)]

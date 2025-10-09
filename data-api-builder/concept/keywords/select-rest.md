@@ -116,4 +116,5 @@ Projection behavior is shaped by entity configuration in `dab-config.json`:
 }
 ```
 
-[!INCLUDE[Install CLI](./includes/see-also.md)]
+[!INCLUDE[Sample Configuration](./includes/sample-config.md)]
+[!INCLUDE[See Also](./includes/see-also.md)]

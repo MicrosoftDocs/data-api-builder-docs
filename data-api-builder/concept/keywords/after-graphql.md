@@ -209,46 +209,5 @@ ORDER BY id ASC;
 > [!NOTE]
 > Any schema or ordering change invalidates previously issued tokens. Clients must restart pagination from the first page.
 
-## Relevant configuration
-
-To enable pagination and nested relationships, define your entities with mappings and relationships in `dab-config.json`.
-
-```jsonc
-{
-  "entities": {
-    "Book": {
-      "source": {
-        "object": "dbo.books",
-        "type": "table"
-      },
-      "mappings": {
-        "sku_title": "title"
-      },
-      "relationships": {
-        "book_author": {
-          "cardinality": "one",
-          "target.entity": "Author",
-          "source.fields": [ "author_id" ],
-          "target.fields": [ "id" ]
-        }
-      }
-    },
-    "Author": {
-      "source": {
-        "object": "dbo.authors",
-        "type": "table"
-      },
-      "relationships": {
-        "author_books": {
-          "cardinality": "many",
-          "target.entity": "Book",
-          "source.fields": [ "id" ],
-          "target.fields": [ "author_id" ]
-        }
-      }
-    }
-  }
-}
-```
-
-[!INCLUDE[Install CLI](./includes/see-also.md)]
+[!INCLUDE[Sample Configuration](./includes/sample-config.md)]
+[!INCLUDE[See Also](./includes/see-also.md)]
