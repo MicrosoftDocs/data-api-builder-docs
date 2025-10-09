@@ -139,7 +139,7 @@ landingContent:
           - text: Location Header
             url: concept/api/http-location.md
           - text: Cache-Control Header
-            url: concept/api/http-location.md
+            url: concept/cache/http-headers.md
       - linkListType: reference
         links:
           - text: Field projection
