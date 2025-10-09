@@ -98,38 +98,12 @@ landingContent:
         links:
           - text: Samples
             url: https://github.com/Azure-Samples/data-api-builder
-  - title: Guides
-    linkLists:
-      - linkListType: how-to-guide
-        links:
-          - text: Install the CLI
-            url: how-to/install-cli.md
-          - text: Run in a container
-            url: how-to/run-container.md
-          - text: Run from source code
-            url: how-to/run-from-source.md
-          - text: Set up row-level security
-            url: how-to/row-level-security.md
-      - linkListType: deploy
-        links:
-          - text: Azure Container Instances
-            url: deployment/how-to-publish-container-instances.md
-          - text: Azure Container Apps
-            url: deployment/how-to-publish-container-apps.md
-          - text: Azure Static Web Apps
-            url: deployment/how-to-host-static-web-apps.md
-      - linkListType: tutorial
-        links:
-          - text: Deploy to Azure Container Apps with Azure SQL and Azure CLI
-            url: tutorial-deploy-container-app-cli.md
   - title: Developer Reference
     linkLists:
       - linkListType: reference
         links:
           - text: Configuration syntax
             url: configuration/index.md
-          - text: Command-line interface (CLI)
-            url: reference-command-line-interface.md
           - text: Database-specific features
             url: reference-database-specific-features.md
           - text: Code Policies
@@ -144,18 +118,52 @@ landingContent:
             url: /samples/azure-samples/dab-swa-library-demo/sample
           - text: Sample devcontainer for Data API builder and Azure SQL Database
             url: /samples/microsoft/vscode-remote-try-dab/devcontainer
-  - title: Data API
+      - linkListType: deploy
+        links:
+          - text: Azure Container Instances
+            url: deployment/how-to-publish-container-instances.md
+          - text: Azure Container Apps
+            url: deployment/how-to-publish-container-apps.md
+  - title: REST API
+    linkLists:
+      - linkListType: concept  
+        links:
+          - text: REST endpoints
+            url: concept/api/rest.md
+          - text: OpenAPI documents
+            url: concept/api/openapi.md
+      - linkListType: how-to-guide
+        links:
+          - text: If-Match Header
+            url: concept/api/http-if-match.md
+          - text: Location Header
+            url: concept/api/http-location.md
+          - text: Cache-Control Header
+            url: concept/api/http-location.md
+      - linkListType: reference
+        links:
+          - text: Field projection
+            url: keywords/select-rest.md
+          - text: Pagination
+            url: keywords/after-rest.md
+          - text: Record filtering
+            url: keywords/filter-rest.md
+  - title: GraphQL API
     linkLists:
       - linkListType: concept  
         links:
           - text: GraphQL endpoints
             url: concept/api/graphql.md
-          - text: REST endpoints
-            url: concept/api/rest.md
           - text: OpenAPI documents
             url: concept/api/openapi.md
-          - text: Data Pagination
-            url: concept/api/pagination.md
+      - linkListType: reference
+        links:
+          - text: Field projection
+            url: keywords/select-graphql.md
+          - text: Pagination
+            url: keywords/after-graphql.md
+          - text: Record filtering
+            url: keywords/filter-graphql.md
   - title: Configuration File
     linkLists:
       - linkListType: concept
@@ -170,6 +178,32 @@ landingContent:
             url: concept/config/multi-data-source.md
           - text: Best Practices
             url: deployment/best-practices-configuration.md
+  - title: Command Line
+    linkLists:
+      - linkListType: concept
+        links:
+          - text: Overview
+            url: command-line/index.yaml
+      - linkListType: how-to-guide
+        links:
+          - text: Installation
+            url: command-line/install.md
+      - linkListType: reference
+        links:
+          - text: The add command
+            url: command-line/dab-add.md
+          - text: The configure command
+            url: command-line/dab-configure.md
+          - text: The export command
+            url: command-line/dab-export.md
+          - text: The init command
+            url: command-line/dab-init.md
+          - text: The start command
+            url: command-line/dab-start.md
+          - text: The update command
+            url: command-line/dab-update.md
+          - text: The validate command
+            url: command-line/dab-validate.md
   - title: Database Objects
     linkLists:
       - linkListType: concept
@@ -198,14 +232,18 @@ landingContent:
         links:
           - text: Security Overview
             url: concept/security/index.md
+      - linkListType: how-to-guide
+        links:
           - text: Azure Authentication
             url: concept/security/authentication-azure.md
           - text: Local Authentication
             url: concept/security/authentication-local.md
-          - text: Authorization
+          - text: Entity Authorization
             url: concept/security/authorization.md
           - text: Row-Level Security
             url: concept/security/row-level-security.md
+      - linkListType: reference
+        links:
           - text: Best Practices
             url: deployment/best-practices-security.md
   - title: Data Caching
@@ -216,5 +254,7 @@ landingContent:
             url: concept/cache/level-1.md
           - text: Level 2 Cache
             url: concept/cache/level-2.md
+      - linkListType: reference
+        links:
           - text: Cache HTTP headers
             url: concept/cache/http-headers.md
