@@ -183,7 +183,7 @@ landingContent:
       - linkListType: concept
         links:
           - text: Overview
-            url: command-line
+            url: command-line/
       - linkListType: how-to-guide
         links:
           - text: Installation

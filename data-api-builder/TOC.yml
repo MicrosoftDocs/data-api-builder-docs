@@ -396,16 +396,16 @@
 - name: Samples
   items:
     - name: Devcontainer with Azure SQL
-      href: samples/microsoft/vscode-remote-try-dab/devcontainer
+      href: /samples/microsoft/vscode-remote-try-dab/devcontainer
       displayName: devcontainer, codespaces, azure sql, docker
     - name: Library app with Blazor and Azure SQL
-      href: samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
+      href: /samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
       displayName: blazor, aspnet, webassembly, azure sql, sample
     - name: Library app with SWA and Azure SQL
-      href: samples/azure-samples/dab-swa-library-demo/sample
+      href: /samples/azure-samples/dab-swa-library-demo/sample
       displayName: static web apps, azure sql, sample, dab
     - name: Todo app with SWA and Azure SQL
-      href: samples/azure-samples/dab-swa-todo/sample
+      href: /samples/azure-samples/dab-swa-todo/sample
       displayName: todo, dab, static web apps, sample, azure sql
 - name: Troubleshooting
   items:
@@ -413,9 +413,9 @@
       displayName: frequently asked questions, Q&A
       href: faq.yml
     - name: Installation
-      href: troubleshoot/azure/data-api-builder/installation?context=/azure/data-api-builder/context/context
+      href: /troubleshoot/azure/data-api-builder/installation?context=/azure/data-api-builder/context/context
     - name: Runtime
-      href: troubleshoot/azure/data-api-builder/usage?context=/azure/data-api-builder/context/context
+      href: /troubleshoot/azure/data-api-builder/usage?context=/azure/data-api-builder/context/context
     - name: Known issues
       displayName: bugs
       href: https://github.com/azure/data-api-builder/labels/known-issue
