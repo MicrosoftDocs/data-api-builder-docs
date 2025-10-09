@@ -43,6 +43,14 @@ Filtering narrows large data sets to only the records you need. In GraphQL, Data
 
 Equal to. Returns records where a field’s value exactly matches the provided literal or is null if using `isNull`.
 
+> [!NOTE]
+> When filtering on date or datetime fields in REST, use **unquoted** ISO 8601 UTC format (`yyyy-MM-ddTHH:mm:ssZ`).
+> Quoted or OData-style formats are invalid.
+>
+> * Wrong: `$filter=Date ge '2025-01-01'`
+> * Wrong: `$filter=Date ge datetime'2025-01-01'`
+> * Correct: `$filter=Date ge 2025-01-01T00:00:00Z`
+
 In this example we are getting books where the title is `'Dune'`, the available flag is true, the price is 20, the published date is January 1, 2024, and the rating is null.
 
 ```graphql
@@ -61,7 +69,7 @@ query {
 }
 ```
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT id, title, available, price, publishedOn, rating
@@ -95,7 +103,7 @@ query {
 }
 ```
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT id, title, available, price, publishedOn, rating
@@ -128,7 +136,7 @@ query {
 }
 ```
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT id, title, available, price, publishedOn
@@ -160,7 +168,7 @@ query {
 }
 ```
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT id, title, available, price, publishedOn
@@ -192,7 +200,7 @@ query {
 }
 ```
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT id, title, available, price, publishedOn
@@ -224,7 +232,7 @@ query {
 }
 ```
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT id, title, available, price, publishedOn
@@ -249,7 +257,7 @@ query {
 }
 ```
 
-### Resulting SQL
+#### Conceptual SQL
 
 ```sql
 SELECT id, title, rating
