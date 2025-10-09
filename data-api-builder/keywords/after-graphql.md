@@ -169,43 +169,6 @@ WHERE author_id IN (@a1, @a2)
 ORDER BY id ASC;
 ```
 
-### Sample response
-
-```jsonc
-{
-  "data": {
-    "authors": {
-      "items": [
-        {
-          "id": 1,
-          "name": "Frank Herbert",
-          "books": {
-            "items": [
-              { "id": 1, "title": "Dune" },
-              { "id": 2, "title": "Dune Messiah" }
-            ],
-            "hasNextPage": true,
-            "endCursor": "eyJpZCI6Mn0="
-          }
-        },
-        {
-          "id": 2,
-          "name": "Isaac Asimov",
-          "books": {
-            "items": [
-              { "id": 3, "title": "Foundation" },
-              { "id": 4, "title": "Foundation and Empire" }
-            ],
-            "hasNextPage": false,
-            "endCursor": null
-          }
-        }
-      ]
-    }
-  }
-}
-```
-
 > [!NOTE]
 > Any schema or ordering change invalidates previously issued tokens. Clients must restart pagination from the first page.
 

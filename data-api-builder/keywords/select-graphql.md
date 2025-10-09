@@ -12,7 +12,7 @@ ms.date: 10/07/2025
 
 # Field selection (Projection) in GraphQL
 
-In GraphQL, the fields you request define exactly what Data API builder (DAB) returns, no more, no less. DAB compiles these selections into parameterized SQL, including only the mapped (exposed) columns you asked for plus any columns it must internally fetch to satisfy relationship joins (foreign key columns) and primary key / ordering columns needed for stable pagination and cursor construction.
+In GraphQL, the fields you request define exactly what Data API builder (DAB) returns, no more, no less. DAB compiles these selections into parameterized SQL, including only the mapped (exposed) columns you asked for and any extra columns it must fetch internally. These may include columns required for relationships (foreign keys), primary keys, or stable ordering used in pagination and cursor construction.
 
 > [!NOTE]
 > GraphQL has no wildcard like `SELECT *`. Clients must specify each field explicitly.
@@ -54,19 +54,20 @@ FROM dbo.books;
   "data": {
     "books": {
       "items": [
-        {                 
+        {
           "id": 1,
           "title": "Dune",
           "price": 20
         }
       ]
-    }    
+    }
   }
 }
 ```
 
 ## Field aliases
-Aliases rename fields in the response, not the database. The SQL layer does not need to alias to the GraphQL alias names; aliasing is applied after data retrieval.
+
+Aliases rename fields in the response, not in the database. The SQL layer doesn't alias to GraphQL field names; aliasing happens after data retrieval.
 
 ```graphql
 query {
@@ -92,13 +93,14 @@ FROM dbo.books;
 
 #### Sample response
 
-With aliases
+With aliases:
+
 ```jsonc
 {
   "data": {
     "books": {
       "items": [
-        {                 
+        {
           "id": 2,
           "bookTitle": "Foundation",
           "cost": 18
@@ -111,7 +113,7 @@ With aliases
 
 ## Nested selection
 
-Relationships defined in the configuration allow nested queries. The conceptual SQL below shows a single JOIN; in practice DAB may execute one or more parameterized queries (e.g., a parent query plus a batched child fetch) rather than a single flattened join.
+Relationships defined in the configuration allow nested queries. The conceptual SQL below shows a single join. In practice, DAB may execute one or more parameterized queries (for example, a parent query plus a batched child fetch) rather than a single flattened join.
 
 #### GraphQL query
 
@@ -174,7 +176,7 @@ JOIN dbo.categories AS c
 
 ## One-to-many selection
 
-You can also traverse the inverse relationship. Again, SQL is conceptual; actual execution may de-duplicate parent rows and materialize child collections separately.
+You can also traverse the inverse relationship. Again, SQL is conceptual; actual execution may deduplicate parent rows and materialize child collections separately.
 
 #### GraphQL query
 
@@ -226,41 +228,6 @@ JOIN dbo.books AS b
           }
         }
       ]
-    }
-  }
-}
-```
-
-## Relevant configuration
-
-To control selection, configure `mappings` and `relationships` under `entities`. Mapping keys are source columns; values are exposed GraphQL field names (so `sku_title` → `title`). Relationship syntax shown with dotted properties (illustrative—verify against your DAB version’s schema; some versions may nest these fields).
-
-```jsonc
-{
-  "entities": {
-    "Book": {
-      "source": {
-        "object": "dbo.books",
-        "type": "table"
-      },
-      "mappings": {
-        "sku_title": "title",
-        "sku_price": "price"
-      },
-      "relationships": {
-        "book_category": {
-          "cardinality": "one",
-          "target.entity": "Category",
-          "source.fields": [ "category_id" ],
-          "target.fields": [ "id" ]
-        }
-      }
-    },
-    "Category": {
-      "source": {
-        "object": "dbo.categories",
-        "type": "table"
-      }
     }
   }
 }

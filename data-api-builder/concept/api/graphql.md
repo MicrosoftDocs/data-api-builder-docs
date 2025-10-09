@@ -1,317 +1,212 @@
 ---
-title: Host GraphQL endpoints
-description: Review GraphQL endpoint hosting for Data API builder including, how to expose endpoints, schema definition, endpoint configuration, and invocation.
-author: seesharprun
+title: How to call GraphQL endpoints
+description: Learn how to call and use GraphQL endpoints in Data API builder, including how to query, filter, sort, and page results.
+author: jnixon
 ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 06/11/2025
-# Customer Intent: As a developer, I want to use the Data API Builder, so that I can host GraphQL endpoints.
+ms.date: 10/09/2025
+# Customer Intent: As a developer, I want to call GraphQL endpoints in Data API builder to query, filter, and modify data safely and efficiently.
 ---
 
-# Host GraphQL endpoints in Data API builder
+# How to call GraphQL endpoints
 
-Entities configured to be available via GraphQL are available at the default path: `https://{base_url}//graphql`. Data API builder automatically generates a GraphQL schema with query and mutation fields for all configured entities. The GraphQL schema can be explored using a modern GraphQL client that includes features like autocomplete.
+GraphQL endpoints in Data API builder (DAB) let you query and modify data with precision.
+Each query declares exactly what fields you need and supports arguments for filtering, ordering, and paging results.
 
-If you followed the [Getting Started](../../get-started/get-started-with-data-api-builder.md) example, where there are the `books` and the `authors` entity configured for GraphQL access, you can see how easy is to use GraphQL.
+By default, DAB hosts its GraphQL endpoint at:
 
-## Result set format
+```
+https://{base_url}/graphql
+```
 
-The returned result is a JSON object with this format:
+Entities exposed through configuration are automatically included in the GraphQL schema.
+For example, if you have `books` and `authors` entities, both appear as root fields in the schema.
+
+> [!NOTE]
+> Use any modern GraphQL client or IDE (like Apollo, Insomnia, or VS Code GraphQL) to explore the schema and autocomplete fields.
+
+#### Keywords supported in Data API builder
+
+| Concept | GraphQL | Purpose |
+|----------|------------------|----------|
+| Projection |  [items](../../keywords/select-graphql.md) | Choose which fields to return |
+| Filtering | [filter](../../keywords/filter-graphql.md) | Restrict rows by condition |
+| Sorting | [orderBy](../../keywords/orderby-graphql.md) | Define the sort order |
+| Page size | [first](../../keywords/first-graphql.md) | Limit the items per page |
+| Continuation | [after](../../keywords/after-graphql.md) | Continue from the last page |
+
+## Basic structure
+
+Every GraphQL query starts with a root field that represents an entity.
+
+```graphql
+{
+  books {
+    items {
+      id
+      title
+      price
+    }
+  }
+}
+```
+
+The result is a JSON object with the same shape as your selection set:
 
 ```json
 {
-    "data": {}    
+  "data": {
+    "books": {
+      "items": [
+        { "id": 1, "title": "Dune", "price": 20 },
+        { "id": 2, "title": "Foundation", "price": 18 }
+      ]
+    }
+  }
 }
 ```
 
 > [!NOTE]
-> Only the first 100 items are returned by default.
+> By default, DAB returns up to 100 items per query unless configured otherwise (`runtime.pagination.default-page-size`).
 
-## Supported root types
+## Query types
 
-Data API builder supports the following GraphQL root types:
+Each entity supports two standard root queries:
 
-[Queries](#queries)
-[Mutations](#mutations)
+| Query          | Description                                  |
+| -------------- | -------------------------------------------- |
+| `entity_by_pk` | Returns one record by its primary key        |
+| `entities`     | Returns a list of records that match filters |
 
-## Queries
-
-Each entity has support for the following actions:
-
-- [Pagination](#pagination)
-- [Query by Primary key](#query-by-primary-key)
-- [Generic Query](#generic-query)
-
-Data API builder, unless otherwise specified, uses the *singular* name of an entity whenever the query is expected to return a single item. Conversely, the Data API builder  uses the *plural* name of an entity whenever the query is expected to return a list of items. For example, the `book` entity has:
-
-- `book_by_pk()`: to return zero or one entity
-- `books()`: to return a list of zero or more entities
-
-### Pagination
-
-All query types returning zero or more items support pagination:
+Example returning one record:
 
 ```graphql
 {
-  books
-  {
-    items {
-      title
-    }
-    hasNextPage
-    endCursor
-  }
-}
-```
-
-- the `item` object allows access to entity fields
-- `hasNextPage` is set to true if there are more items to be returned
-- `endCursor` returns an opaque cursor string that can be used with [`first` and `after`](#first-and-after) query parameters to get the next set (or page) of items.
-
-### Query by primary key
-
-Every entity support retrieval of a specific item via its Primary Key, using the following query format:
-
-```graphql
-<entity>_by_pk(<pk_colum>:<pk_value>)
-{
-    <fields>
-}
-```
-
-For example:
-
-```graphql
-{
-  book_by_pk(id:1010) {
-    title
-  }
-}
-```
-
-### Generic query
-
-Every entity also supports a generic query pattern so that you can ask for  only the items you want, in the order you want, using the following parameters:
-
-- [`filter`](#filter): filters the returned items
-- [`orderBy`](#orderby): defines how the returned data is sorted
-- [`first` and `after`](#first-and-after): returns only the top `n` items
-
-For example:
-
-```graphql
-{
-  authors(
-    filter: {
-        or: [
-          { first_name: { eq: "Isaac" } }
-          { last_name: { eq: "Asimov" } }
-        ]
-    }
-  ) {
-    items {
-      first_name
-      last_name
-      books(orderBy: { year: ASC }) {
-        items {
-          title
-          year
-        }
-      }
-    }
-  }
-}
-```
-
-### `filter`
-
-The value of the `filter` parameter is predicate expression (an expression that returns a boolean value) using entity's fields. Only items where the expression evaluates to 'True' are included in the response. For example:
-
-```graphql
-{
-  books(filter: { title: { contains: "Foundation" } })
-  {
-    items {
-      id
-      title
-      authors {
-        items {
-          first_name
-          last_name
-        }
-      }
-    }
-  }
-}
-```
-
-This query returns all the books with the word `Foundation` in the title.
-
-The operators supported by the `filter` parameter are:
-
-| Operator | Type | Description | Example |
-| --- | --- | --- | --- |
-| `eq` | Comparison | Equal | `books(filter: { title: { eq: "Foundation" } })` |
-| `neq` | Comparison | Not equal | `books(filter: { title: { neq: "Foundation" } })` |
-| `gt` | Comparison | Greater than | `books(filter: { year: { gt: 1990 } })` |
-| `gte` | Comparison | Greater than or equal | `books(filter: { year: { gte: 1990 } })` |
-| `lt` | Comparison | Less than | `books(filter: { year: { lt: 1990 } })` |
-| `lte` | Comparison | Less than or equal | `books(filter: { year: { lte: 1990 } })` |
-| `isNull` | Comparison | Is null | `books(filter: { year: { isNull: true} })` |
-| `contains` | String | Contains | `books(filter: { title: { contains: "Foundation" } })` |
-| `notContains` | String | Doesn't Contain | `books(filter: { title: { notContains: "Foundation" } })` |
-| `startsWith` | String | Starts with | `books(filter: { title: { startsWith: "Foundation" } })` |
-| `endsWith` | String | End with | `books(filter: { title: { endsWith: "Empire" } })` |
-| `and` | Logical | Logical and | `authors(filter: { and: [ { first_name: { eq: "Robert" } } { last_name: { eq: "Heinlein" } } ] })` |
-| `or` | Logical | Logical or | `authors(filter: { or: [ { first_name: { eq: "Isaac" } } { first_name: { eq: "Dan" } } ] })` |
-
-### `orderBy`
-
-The value of the `orderby` set the order with which the items in the resultset are returned. For example:
-
-```graphql
-{
-  books(orderBy: {title: ASC} )
-  {
-    items {
-      id
-      title
-    }
-  }
-}
-```
-
-This query returns books ordered by `title`.
-
-### `first` and `after`
-
-The parameter `first` limits the number of items returned. For example:
-
-```graphql
-query {
-  books(first: 5)
-  {
-    items {
-      id
-      title
-    }
-    hasNextPage
-    endCursor
-  }
-}
-```
-
-This query returns the first five books. When no `orderBy` is specified, items are ordered based on the underlying primary key. The value provided to `orderBy` must be a positive integer.
-
-If there are more items in the `book` entity than those entities requested via `first`, the `hasNextPage` field will evaluate to `true`, and the `endCursor` will return a string that can be used with the `after` parameter to access the next items. For example:
-
-```graphql
-query {
-  books(first: 5, after: "W3siVmFsdWUiOjEwMDQsIkRpcmVjdGlvbiI6MCwiVGFibGVTY2hlbWEiOiIiLCJUYWJsZU5hbWUiOiIiLCJDb2x1bW5OYW1lIjoiaWQifV0=")
-  {
-    items {
-      id
-      title
-    }
-    hasNextPage
-    endCursor
-  }
-}
-```
-
-## Mutations
-
-For each entity, mutations to support create, update, and delete operations are automatically created. The mutation operation is created using the following name pattern: `<operation><entity>`. For example, for the `book` entity, the mutations would be:
-
-- `createbook`: create a new book
-- `updatebook`: update an existing book
-- `deletebook`: delete the specified book
-
-### Create
-
-To create a new element of the desired entity, the `create<entity>` mutation is provided. The created mutation requires the `item` parameter, where values for entity's mandatory fields, to be used when creating the new item, are specified.
-
-```graphql
-create<entity>(item: <entity_fields>)
-{
-    <fields>
-}
-```
-
-For example:
-
-```graphql
-mutation {
-  createbook(item: {
-    id: 2000,
-    title: "Leviathan Wakes"    
-  }) {
-    id
-    title
-  }  
-}
-```
-
-### Update
-
-To update an element of the desired entity, the `update<entity>` mutation is provided. The update mutation requires two parameters:
-
-- `<primary_key>`, the key-value list of primary key columns and related values to identify the element to be updated
-- `item`: parameter, with entity's mandatory fields values, to be used when updating the specified item
-
-```graphql
-update<entity>(<pk_colum>:<pk_value>, [<pk_colum>:<pk_value> ... <pk_colum>:<pk_value>,] item: <entity_fields>)
-{
-    <fields>
-}
-```
-
-For example:
-
-```graphql
-mutation {
-  updatebook(id: 2000, item: {
-    year: 2011,
-    pages: 577    
-  }) {
-    id
+  book_by_pk(id: 1010) {
     title
     year
-    pages
   }
 }
 ```
 
-### Delete
-
-To delete an element of the desired entity, the `delete<entity>` mutation is provided. The primary key of the element to be deleted is the required parameter.
+Example returning many:
 
 ```graphql
-delete<entity>(<pk_colum>:<pk_value>, [<pk_colum>:<pk_value> ... <pk_colum>:<pk_value>,])
 {
-    <fields>
+  books {
+    items {
+      id
+      title
+    }
+  }
 }
 ```
 
-For example:
+## Filtering results
+
+Use the `filter` argument to restrict which records are returned.
 
 ```graphql
-mutation {
-  deletebook(id: 1234)
-  {
-    id
-    title
-  }  
+{
+  books(filter: { title: { contains: "Foundation" } }) {
+    items { id title }
+  }
 }
 ```
 
-### Database transactions for a mutation
+This query returns all books whose title contains “Foundation.”
 
-To process a typical GraphQL mutation request, Data API builder constructs two database queries. One of the database queries performs the update (or) insert (or) delete action that is associated with the mutation.
-The other database query fetches the data requested in the selection set.
+Filters can combine comparisons with logical operators:
 
-Data API builder executes both database queries in a transaction. Transactions are created only for SQL database types.
+```graphql
+{
+  authors(filter: {
+    or: [
+      { first_name: { eq: "Isaac" } }
+      { last_name: { eq: "Asimov" } }
+    ]
+  }) {
+    items { first_name last_name }
+  }
+}
+```
 
-[!INCLUDE[Database isolation levels../includes/database-isolation-levels.md)]
+See the [filter argument reference](../../keywords/filter-graphql.md) for supported operators like `eq`, `neq`, `lt`, `lte`, and `isNull`.
+
+## Sorting results
+
+The `orderBy` argument defines how records are sorted.
+
+```graphql
+{
+  books(orderBy: { year: DESC, title: ASC }) {
+    items { id title year }
+  }
+}
+```
+
+This returns books ordered by `year` descending, then by `title`.
+
+See the [orderBy argument reference](../../keywords/orderby-graphql.md) for more details.
+
+## Limiting results
+
+The `first` argument limits how many records are returned in a single request.
+
+```graphql
+{
+  books(first: 5) {
+    items { id title }
+  }
+}
+```
+
+This returns the first five books, ordered by primary key by default.
+You can also use `first: -1` to request the configured maximum page size.
+
+Learn more in the [first argument reference](../../keywords/first-graphql.md).
+
+## Continuing results
+
+To fetch the next page, use the `after` argument with the cursor from the previous query.
+
+```graphql
+{
+  books(first: 5, after: "eyJpZCI6NX0=") {
+    items { id title }
+  }
+}
+```
+
+The `after` token marks where the prior page ended.
+See [after argument reference](../../keywords/after-graphql.md) for more details.
+
+## Field selection (projection)
+
+In GraphQL, you choose exactly which fields appear in the response.
+There is no wildcard like `SELECT *`. Request only what you need.
+
+```graphql
+{
+  books {
+    items { id title price }
+  }
+}
+```
+
+You can also use aliases to rename fields in the response:
+
+```graphql
+{
+  books {
+    items {
+      bookTitle: title
+      cost: price
+    }
+  }
+}
+```
+
+See [field projection reference](../../keywords/select-graphql.md) for details.

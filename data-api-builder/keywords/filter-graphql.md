@@ -12,7 +12,7 @@ ms.date: 10/08/2025
 
 # Filtering data in GraphQL (`filter`)
 
-Filtering narrows large data sets to only the records you need. In GraphQL, Data API builder (DAB) supports a structured `filter` argument on entity queries. Each filter compiles to parameterized SQL for safety and consistency.
+Filtering narrows large datasets to only the records you need. In GraphQL, Data API builder (DAB) supports a structured `filter` argument on entity queries. Each filter compiles to parameterized SQL for safety and consistency.
 
 > [!NOTE]
 > GraphQL filtering supports comparison, logical, string pattern, membership, and null operators.
@@ -44,14 +44,14 @@ Filtering narrows large data sets to only the records you need. In GraphQL, Data
 Equal to. Returns records where a field’s value exactly matches the provided literal or is null if using `isNull`.
 
 > [!NOTE]
-> When filtering on date or datetime fields in REST, use **unquoted** ISO 8601 UTC format (`yyyy-MM-ddTHH:mm:ssZ`).
+> When filtering on date or datetime fields, use **unquoted** ISO 8601 UTC format (`yyyy-MM-ddTHH:mm:ssZ`).
 > Quoted or OData-style formats are invalid.
 >
 > * Wrong: `$filter=Date ge '2025-01-01'`
 > * Wrong: `$filter=Date ge datetime'2025-01-01'`
 > * Correct: `$filter=Date ge 2025-01-01T00:00:00Z`
 
-In this example we are getting books where the title is `'Dune'`, the available flag is true, the price is 20, the published date is January 1, 2024, and the rating is null.
+In this example, we're getting books where the title is `'Dune'`, the available flag is true, the price is 20, the published date is January 1, 2024, and the rating is null.
 
 ```graphql
 query {
@@ -83,9 +83,9 @@ WHERE title = 'Dune'
 
 ## `neq` {#neq-graphql}
 
-Not equal to. Returns records where a field’s value does not match the literal or is not null when combined with `isNull: false`.
+Not equal to. Returns records where a field’s value doesn’t match the literal or isn’t null when combined with `isNull: false`.
 
-In this example we are getting books where the title is not `'Foundation'`, the available flag is not false, the price is not zero, the published date is not December 31, 2023, and the rating is not null.
+In this example, we're getting books where the title isn't `'Foundation'`, the available flag isn't false, the price isn't zero, the published date isn't December 31, 2023, and the rating isn't null.
 
 ```graphql
 query {
@@ -119,7 +119,7 @@ WHERE title <> 'Foundation'
 
 Greater than. Returns records where a field’s value is strictly higher than the provided literal.
 
-In this example we are getting books whose title sorts alphabetically after `'A'`, the available flag is true, the price is greater than 10, and the published date is after January 1, 2020.
+In this example, we're getting books whose title sorts alphabetically after `'A'`, the available flag is true, the price is greater than 10, and the published date is after January 1, 2020.
 
 ```graphql
 query {
@@ -149,9 +149,9 @@ WHERE title > 'A'
 
 ## `gte` {#gte-graphql}
 
-Greater than or equal. Returns records where a field’s value is higher than or equal to the given literal.
+Greater than or equal to. Returns records where a field’s value is higher than or equal to the given literal.
 
-In this example we are getting books whose title is `'A'` or later, the available flag is true, the price is at least 10, and the published date is on or after January 1, 2020.
+In this example, we're getting books whose title is `'A'` or later, the available flag is true, the price is at least 10, and the published date is on or after January 1, 2020.
 
 ```graphql
 query {
@@ -183,7 +183,7 @@ WHERE title >= 'A'
 
 Less than. Returns records where a field’s value is strictly lower than the given literal.
 
-In this example we are getting books whose title sorts before `'Z'`, the available flag is false, the price is less than 50, and the published date is before January 1, 2030.
+In this example, we're getting books whose title sorts before `'Z'`, the available flag is false, the price is less than 50, and the published date is before January 1, 2030.
 
 ```graphql
 query {
@@ -213,9 +213,9 @@ WHERE title < 'Z'
 
 ## `lte` {#lte-graphql}
 
-Less than or equal. Returns records where a field’s value is lower than or equal to the given literal.
+Less than or equal to. Returns records where a field’s value is lower than or equal to the given literal.
 
-In this example we are getting books whose title sorts before or equal to `'Z'`, the available flag is true, the price is 100 or less, and the published date is on or before January 1, 2030.
+In this example, we're getting books whose title sorts before or equal to `'Z'`, the available flag is true, the price is 100 or less, and the published date is on or before January 1, 2030.
 
 ```graphql
 query {
@@ -247,7 +247,7 @@ WHERE title <= 'Z'
 
 Null check. Returns records where a field’s value is either null or not null depending on the boolean literal.
 
-In this example we are getting books where the rating is null.
+In this example, we're getting books where the rating is null.
 
 ```graphql
 query {

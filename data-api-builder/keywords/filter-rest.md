@@ -12,7 +12,7 @@ ms.date: 10/08/2025
 
 # Filtering data in REST ($filter)
 
-Filtering narrows large data sets to only the records you need. In REST, Data API builder (DAB) supports an OData-inspired `$filter` query parameter. Each filter compiles to parameterized SQL for safety and consistency.
+Filtering narrows large datasets to only the records you need. In REST, Data API builder (DAB) supports an OData-inspired `$filter` query parameter. Each filter compiles to parameterized SQL for safety and consistency.
 
 ## Quick glance
 
@@ -33,7 +33,7 @@ Filtering narrows large data sets to only the records you need. In REST, Data AP
 
 Equal to. Returns records where a field’s value exactly matches the provided literal or `null`.
 
-In this example we are getting books where the title is equal to `'Dune'`, the available flag is true, the price is 20, the published date is January 1, 2024, and the rating is null.
+In this example, we're getting books where the title equals `'Dune'`, the available flag is true, the price is 20, the published date is January 1, 2024, and the rating is null.
 
 ```
 GET /api/books?$filter=
@@ -60,9 +60,9 @@ WHERE title = 'Dune'
 
 ## `ne`
 
-Not equal to. Returns records where a field’s value does not match the given literal or is not null.
+Not equal to. Returns records where a field’s value doesn’t match the given literal or isn’t null.
 
-In this example we are getting books where the title is not `'Foundation'`, the available flag is not false, the price is not zero, the published date is not December 31, 2023, and the rating is not null.
+In this example, we're getting books where the title isn't `'Foundation'`, the available flag isn't false, the price isn't zero, the published date isn't December 31, 2023, and the rating isn't null.
 
 ```
 GET /api/books?$filter=
@@ -74,7 +74,7 @@ GET /api/books?$filter=
 ```
 
 > [!NOTE]
-> When filtering on date or datetime fields in REST, use **unquoted** ISO 8601 UTC format (`yyyy-MM-ddTHH:mm:ssZ`).
+> When filtering on date or datetime fields, use **unquoted** ISO 8601 UTC format (`yyyy-MM-ddTHH:mm:ssZ`).
 > Quoted or OData-style formats are invalid.
 >
 > * Wrong: `$filter=Date ge '2025-01-01'`
@@ -96,7 +96,7 @@ WHERE title <> 'Foundation'
 
 Greater than. Returns records where a field’s value is strictly higher than the given literal.
 
-In this example we are getting books whose title sorts alphabetically after `'A'`, the available flag is true, the price is greater than 10, and the published date is after January 1, 2020.
+In this example, we're getting books whose title sorts alphabetically after `'A'`, the available flag is true, the price is greater than 10, and the published date is after January 1, 2020.
 
 ```
 GET /api/books?$filter=
@@ -120,7 +120,7 @@ WHERE title > 'A'
 
 Greater than or equal. Returns records where a field’s value is higher than or equal to the given literal.
 
-In this example we are getting books whose title is `'A'` or later, the available flag is true, the price is at least 10, and the published date is on or after January 1, 2020.
+In this example, we're getting books whose title is `'A'` or later, the available flag is true, the price is at least 10, and the published date is on or after January 1, 2020.
 
 ```
 GET /api/books?$filter=
@@ -144,7 +144,7 @@ WHERE title >= 'A'
 
 Less than. Returns records where a field’s value is strictly lower than the given literal.
 
-In this example we are getting books whose title sorts before `'Z'`, the available flag is false, the price is less than 50, and the published date is before January 1, 2030.
+In this example, we're getting books whose title sorts before `'Z'`, the available flag is false, the price is less than 50, and the published date is before January 1, 2030.
 
 ```
 GET /api/books?$filter=
@@ -168,7 +168,7 @@ WHERE title < 'Z'
 
 Less than or equal. Returns records where a field’s value is lower than or equal to the given literal.
 
-In this example we are getting books whose title sorts before or equal to `'Z'`, the available flag is true, the price is 100 or less, and the published date is on or before January 1, 2030.
+In this example, we're getting books whose title sorts before or equal to `'Z'`, the available flag is true, the price is 100 or less, and the published date is on or before January 1, 2030.
 
 ```
 GET /api/books?$filter=
@@ -192,7 +192,7 @@ WHERE title <= 'Z'
 
 Logical AND. Combines multiple conditions that must all be true for a record to match.
 
-In this example we are getting books where the title is `'Dune'`, the available flag is true, the price is less than 50, the published date is after January 1, 2020, and the rating is null.
+In this example, we're getting books where the title is `'Dune'`, the available flag is true, the price is less than 50, the published date is after January 1, 2020, and the rating is null.
 
 ```
 GET /api/books?$filter=
@@ -218,7 +218,7 @@ WHERE title = 'Dune'
 
 Logical OR. Combines conditions where at least one must be true for a record to match.
 
-In this example we are getting books where the title is `'Dune'` or the available flag is true or the price is greater than 20 or the published date is before January 1, 2025, or the rating is null.
+In this example, we're getting books where the title is `'Dune'`, or the available flag is true, or the price is greater than 20, or the published date is before January 1, 2025, or the rating is null.
 
 ```
 GET /api/books?$filter=
@@ -244,7 +244,7 @@ WHERE title = 'Dune'
 
 Logical NOT. Negates a condition so records are returned only if the condition is false.
 
-In this example we are getting all books that do **not** have the title `'Romance'`, are not unavailable, do not cost less than $10, were not published before January 1, 2020, and do not have a null rating.
+In this example, we're getting all books that don’t have the title `'Romance'`, aren’t unavailable, don’t cost less than $10, weren’t published before January 1, 2020, and don’t have a null rating.
 
 ```
 GET /api/books?$filter=
@@ -272,9 +272,9 @@ WHERE NOT (
 
 ## `( )` grouping
 
-Groups sub-expressions so you can control evaluation order in complex filters.
+Groups subexpressions so you can control evaluation order in complex filters.
 
-In this example we are getting books where the title is either `'Fiction'` or `'SciFi'`, and the book is either available or priced below $25, and the published date is after January 1, 2020, and the rating is null.
+In this example, we're getting books where the title is either `'Fiction'` or `'SciFi'`, and the book is either available or priced below $25, and the published date is after January 1, 2020, and the rating is null.
 
 ```
 GET /api/books?$filter=

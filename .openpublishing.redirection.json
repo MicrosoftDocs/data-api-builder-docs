@@ -2,7 +2,7 @@
   "redirections": [
     {
       "source_path_from_root": "/data-api-builder/concept/api/pagination.md",
-      "redirect_url": "/azure/data-api-builder/concept/keywords",
+      "redirect_url": "/azure/data-api-builder/keywords/after-rest",
       "redirect_document_id": false
     },
     {

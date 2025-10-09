@@ -15,7 +15,7 @@ ms.date: 10/07/2025
 Limiting page size prevents overwhelming clients or servers when querying large datasets. In GraphQL, Data API builder (DAB) uses the `first` argument to control how many records are returned in a single response. DAB applies cursor-based pagination internally, but `first` can be used independently to simply cap result size.
 
 > [!NOTE]
-> `first` limits the number of returned records but does not itself handle continuation. For multiple pages, use `after`.
+> `first` limits the number of returned records but doesn't itself handle continuation. For multiple pages, use `after`.
 
 Go to the [REST version of this document](./first-rest.md).
 
@@ -42,7 +42,7 @@ query {
 
 #### Example
 
-Limit the results to 5 books.
+Limit the results to five books.
 
 ```graphql
 query {
@@ -98,30 +98,6 @@ ORDER BY id ASC;
 
 ```
 Invalid number of items requested, first argument must be either -1 or a positive number within the max page size limit of 100000. Actual value: 0
-```
-
-## Relevant configuration
-
-```jsonc
-{
-  "runtime": {
-    "pagination": {
-      "default-page-size": 100,
-      "max-page-size": 100000
-    }
-  },
-  "entities": {
-    "Book": {
-      "source": {
-        "object": "dbo.books",
-        "type": "table"
-      },
-      "mappings": {
-        "sku_title": "title"
-      }
-    }
-  }
-}
 ```
 
 [!INCLUDE[Sample Configuration](./includes/sample-config.md)]

@@ -12,10 +12,10 @@ ms.date: 10/07/2025
 
 # Limiting page size with `$first` in REST
 
-Limiting page size prevents overwhelming clients or servers when querying large datasets. In REST, Data API builder (DAB) uses the `$first` parameter to control how many records are returned in a single response. DAB applies cursor-based pagination internally, but `$first` can be used even when continuation is not required.
+Limiting page size prevents overwhelming clients or servers when querying large datasets. In REST, Data API builder (DAB) uses the `$first` parameter to control how many records are returned in a single response. DAB applies cursor-based pagination internally, but `$first` can be used even when continuation isn't required.
 
 > [!NOTE]
-> `$first` limits the number of rows returned but does not itself handle continuation. For multiple pages, use `$after`.
+> `$first` limits the number of rows returned but doesn't itself handle continuation. For multiple pages, use `$after`.
 
 Go to the [GraphQL version of this document](./first-graphql.md).
 
@@ -38,7 +38,7 @@ GET /api/{entity}?$first=N
 
 #### Example
 
-Limit the results to 5 books.
+Limit the results to five books.
 
 ```http
 GET /api/books?$first=5
@@ -83,30 +83,6 @@ ORDER BY id ASC;
 
 ```
 Invalid number of items requested, first argument must be either -1 or a positive number within the max page size limit of 100000. Actual value: 0
-```
-
-## Relevant configuration
-
-```jsonc
-{
-  "runtime": {
-    "pagination": {
-      "default-page-size": 100,
-      "max-page-size": 100000
-    }
-  },
-  "entities": {
-    "Book": {
-      "source": {
-        "object": "dbo.books",
-        "type": "table"
-      },
-      "mappings": {
-        "sku_title": "title"
-      }
-    }
-  }
-}
 ```
 
 [!INCLUDE[Sample Configuration](./includes/sample-config.md)]

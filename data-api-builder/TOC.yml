@@ -27,7 +27,7 @@
     - name: Supported data types
       href: reference-data-types.md
     - name: Endpoint keywords
-      href: concept/keywords/index.md
+      href: keywords/index.md
     - name: Database-specific features
       displayName: sql, cosmos, pg, postgres, mysql, dw
       href: reference-database-specific-features.md
@@ -258,19 +258,19 @@
           href: how-to/multiple-mutations.md
           displayName: batch, transaction, graphql, createMany, mutation
         - name: How to use the $after keyword to page
-          href: concept/keywords/after-graphql.md
+          href: keywords/after-graphql.md
           displayName: page, pagination
         - name: How to use the $filter keyword to limit rows
-          href: concept/keywords/filter-graphql.md
+          href: keywords/filter-graphql.md
           displayName: predicate, where
         - name: How to use the $first keyword to page
-          href: concept/keywords/first-graphql.md
+          href: keywords/first-graphql.md
           displayName: pagination, top
         - name: How to use the $orderby keyword to sort
-          href: concept/keywords/orderby-graphql.md
+          href: keywords/orderby-graphql.md
           displayName: sort, bubble, arrange, align
         - name: How to use the $select keyword to project
-          href: concept/keywords/select-graphql.md
+          href: keywords/select-graphql.md
           displayName: projection, choose
     - name: REST API
       items:
@@ -285,19 +285,19 @@
         - name: How to use the Location HTTP Header
           href: concept/api/http-location.md
         - name: How to use the $after keyword to page
-          href: concept/keywords/after-rest.md
+          href: keywords/after-rest.md
           displayName: page, pagination
         - name: How to use the $filter keyword to limit rows
-          href: concept/keywords/filter-rest.md
+          href: keywords/filter-rest.md
           displayName: predicate, where
         - name: How to use the $first keyword to page
-          href: concept/keywords/first-rest.md
+          href: keywords/first-rest.md
           displayName: pagination, top
         - name: How to use the $orderby keyword to sort
-          href: concept/keywords/orderby-rest.md
+          href: keywords/orderby-rest.md
           displayName: sort, bubble, arrange, align
         - name: How to use the $select keyword to project
-          href: concept/keywords/select-rest.md
+          href: keywords/select-rest.md
           displayName: projection, choose
     - name: Data caching
       items:
