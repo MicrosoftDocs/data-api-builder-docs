@@ -26,6 +26,8 @@
       href: feature-availability.md
     - name: Supported data types
       href: reference-data-types.md
+    - name: Endpoint keywords
+      href: concept/keywords/index.md
     - name: Database-specific features
       displayName: sql, cosmos, pg, postgres, mysql, dw
       href: reference-database-specific-features.md
@@ -247,7 +249,30 @@
         - name: How to run DAB from source
           href: how-to/run-from-source.md
           displayName: source, github, OSS, build, run
-    - name: API access
+    - name: GraphQL API
+      items:
+        - name: How to call GraphQL endpoints
+          href: concept/api/graphql.md
+          displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
+        - name: How to insert multiple records with GraphQL 
+          href: how-to/multiple-mutations.md
+          displayName: batch, transaction, graphql, createMany, mutation
+        - name: How to use the $after keyword to page
+          href: concept/keywords/after-graphql.md
+          displayName: page, pagination
+        - name: How to use the $filter keyword to limit rows
+          href: concept/keywords/filter-graphql.md
+          displayName: predicate, where
+        - name: How to use the $first keyword to page
+          href: concept/keywords/first-graphql.md
+          displayName: pagination, top
+        - name: How to use the $orderby keyword to sort
+          href: concept/keywords/orderby-graphql.md
+          displayName: sort, bubble, arrange, align
+        - name: How to use the $select keyword to project
+          href: concept/keywords/select-graphql.md
+          displayName: projection, choose
+    - name: REST API
       items:
         - name: How to call REST endpoints
           href: concept/api/rest.md
@@ -255,19 +280,25 @@
         - name: How to test REST endpoints
           href: concept/api/openapi.md
           displayName: OpenAPI, Swagger, API docs, schema definition, HTTP interface
-        - name: How to call GraphQL endpoints
-          href: concept/api/graphql.md
-          displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
-        - name: How to insert multiple records with GraphQL 
-          href: how-to/multiple-mutations.md
-          displayName: batch, transaction, graphql, createMany, mutation
-        - name: How to use built-in pagination
-          href: concept/api/pagination.md
-          displayName: pagination, limit, offset, top, skip, page size, results
         - name: How to use the If-Match HTTP Header
           href: concept/api/http-if-match.md
         - name: How to use the Location HTTP Header
           href: concept/api/http-location.md
+        - name: How to use the $after keyword to page
+          href: concept/keywords/after-rest.md
+          displayName: page, pagination
+        - name: How to use the $filter keyword to limit rows
+          href: concept/keywords/filter-rest.md
+          displayName: predicate, where
+        - name: How to use the $first keyword to page
+          href: concept/keywords/first-rest.md
+          displayName: pagination, top
+        - name: How to use the $orderby keyword to sort
+          href: concept/keywords/orderby-rest.md
+          displayName: sort, bubble, arrange, align
+        - name: How to use the $select keyword to project
+          href: concept/keywords/select-rest.md
+          displayName: projection, choose
     - name: Data caching
       items:
         - name: How to use built-in level 1 Cache
