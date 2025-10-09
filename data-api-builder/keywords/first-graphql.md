@@ -1,6 +1,6 @@
 ---
 title: Use first (GraphQL) and $first (REST)
-description: Learn how to control page size limits, leverage -1 for maximum pages, and understand validation for pagination size in Data API builder.
+description: Learn how to use the GraphQL `first` argument to cap page size, request the configured maximum with -1, and understand pagination validation in Data API builder.
 author: jnixon
 ms.author: sidandrews
 ms.reviewer: jerrynixon

@@ -24,20 +24,20 @@ Filtering narrows large datasets to only the records you need. In GraphQL, Data 
 
 | Operator                              | Meaning               |
 | ------------------------------------- | --------------------- |
-| [`eq`](#eq-eq-graphql)                   | equal                 |
-| [`neq`](#neq-neq-graphql)                 | not equal             |
-| [`gt`](#gt-gt-graphql)                   | greater than          |
-| [`gte`](#gte-gte-graphql)                 | greater than or equal |
-| [`lt`](#lt-lt-graphql)                   | less than             |
-| [`lte`](#lte-lte-graphql)                 | less than or equal    |
-| [`and`](#and-and-graphql)                 | logical AND           |
-| [`or`](#or-or-graphql)                   | logical OR            |
-| [`contains`](#contains-contains-graphql)       | substring match       |
-| [`notContains`](#notcontains-notcontains-graphql) | not substring match   |
-| [`startsWith`](#startswith-startswith-graphql)   | prefix match          |
-| [`endsWith`](#endswith-endswith-graphql)       | suffix match          |
-| [`in`](#in-in-graphql)                   | membership            |
-| [`isNull`](#isnull-isnull-graphql)           | null check            |
+| [`eq`](#eq-graphql)                   | equal                 |
+| [`neq`](#neq-graphql)                 | not equal             |
+| [`gt`](#gt-graphql)                   | greater than          |
+| [`gte`](#gte-graphql)                 | greater than or equal |
+| [`lt`](#lt-graphql)                   | less than             |
+| [`lte`](#lte-graphql)                 | less than or equal    |
+| [`and`](#and-graphql)                 | logical AND           |
+| [`or`](#or-graphql)                   | logical OR            |
+| [`contains`](#contains-graphql)       | substring match       |
+| [`notContains`](#notcontains-graphql) | not substring match   |
+| [`startsWith`](#startswith-graphql)   | prefix match          |
+| [`endsWith`](#endswith-graphql)       | suffix match          |
+| [`in`](#in-graphql)                   | membership            |
+| [`isNull`](#isnull-graphql)           | null check            |
 
 ## `eq` {#eq-graphql}
 
@@ -241,6 +241,174 @@ WHERE title <= 'Z'
   AND available <= 1
   AND price <= 100
   AND publishedOn <= '2030-01-01T00:00:00Z';
+```
+
+## `and` {#and-graphql}
+
+Logical AND. Combines multiple predicates that must all be true for a record to match.
+
+In this example, we’re getting books that are available, cost less than 30, and were published after January 1, 2022.
+
+```graphql
+query {
+  books(filter: {
+    and: [
+      { available: { eq: true } }
+      { price: { lt: 30 } }
+      { publishedOn: { gt: "2022-01-01T00:00:00Z" } }
+    ]
+  }) {
+    items { id title available price publishedOn }
+  }
+}
+```
+
+#### Conceptual SQL
+
+```sql
+SELECT id, title, available, price, publishedOn
+FROM Books
+WHERE available = 1
+  AND price < 30
+  AND publishedOn > '2022-01-01T00:00:00Z';
+```
+
+## `or` {#or-graphql}
+
+Logical OR. Returns records where at least one predicate in the array evaluates to true.
+
+In this example, we’re getting books that are either out of stock or priced above 50.
+
+```graphql
+query {
+  books(filter: {
+    or: [
+      { available: { eq: false } }
+      { price: { gt: 50 } }
+    ]
+  }) {
+    items { id title available price }
+  }
+}
+```
+
+#### Conceptual SQL
+
+```sql
+SELECT id, title, available, price
+FROM Books
+WHERE available = 0
+   OR price > 50;
+```
+
+## `contains` {#contains-graphql}
+
+Substring match. Returns records where the field contains the provided substring (case sensitivity depends on the database collation).
+
+In this example, we’re getting books whose title includes the word “Dune.”
+
+```graphql
+query {
+  books(filter: { title: { contains: "Dune" } }) {
+    items { id title }
+  }
+}
+```
+
+#### Conceptual SQL
+
+```sql
+SELECT id, title
+FROM Books
+WHERE title LIKE '%Dune%';
+```
+
+## `notContains` {#notcontains-graphql}
+
+Negative substring match. Returns records where the field does **not** contain the provided substring.
+
+In this example, we’re getting books whose title doesn’t include “Guide.”
+
+```graphql
+query {
+  books(filter: { title: { notContains: "Guide" } }) {
+    items { id title }
+  }
+}
+```
+
+#### Conceptual SQL
+
+```sql
+SELECT id, title
+FROM Books
+WHERE title NOT LIKE '%Guide%';
+```
+
+## `startsWith` {#startswith-graphql}
+
+Prefix match. Returns records where the field begins with the provided string.
+
+In this example, we’re getting books whose title starts with “The.”
+
+```graphql
+query {
+  books(filter: { title: { startsWith: "The" } }) {
+    items { id title }
+  }
+}
+```
+
+#### Conceptual SQL
+
+```sql
+SELECT id, title
+FROM Books
+WHERE title LIKE 'The%';
+```
+
+## `endsWith` {#endswith-graphql}
+
+Suffix match. Returns records where the field ends with the provided string.
+
+In this example, we’re getting books whose title ends with “Chronicles.”
+
+```graphql
+query {
+  books(filter: { title: { endsWith: "Chronicles" } }) {
+    items { id title }
+  }
+}
+```
+
+#### Conceptual SQL
+
+```sql
+SELECT id, title
+FROM Books
+WHERE title LIKE '%Chronicles';
+```
+
+## `in` {#in-graphql}
+
+Membership match. Returns records where the field’s value exists in the provided list.
+
+In this example, we’re getting books whose genre is either “SciFi” or “Fantasy.”
+
+```graphql
+query {
+  books(filter: { genre: { in: ["SciFi", "Fantasy"] } }) {
+    items { id title genre }
+  }
+}
+```
+
+#### Conceptual SQL
+
+```sql
+SELECT id, title, genre
+FROM Books
+WHERE genre IN ('SciFi', 'Fantasy');
 ```
 
 ## `isNull` {#isnull-graphql}

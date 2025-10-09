@@ -113,7 +113,7 @@ This returns books ordered by `year` descending, then by `title`.
 
 See the [$orderby argument reference](../../keywords/orderby-rest.md) for more details.
 
-## Limiting results
+## Limiting results {#first-and-after}
 
 The `$first` parameter limits how many records are returned in one request.
 

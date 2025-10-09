@@ -26,8 +26,6 @@
       href: feature-availability.md
     - name: Supported data types
       href: reference-data-types.md
-    - name: Endpoint keywords
-      href: keywords/index.md
     - name: Database-specific features
       displayName: sql, cosmos, pg, postgres, mysql, dw
       href: reference-database-specific-features.md

@@ -1,6 +1,6 @@
 ---
 title: Use $orderby (REST) and orderBy (GraphQL)
-description: Learn how to sort data, apply multi-field ordering, and understand how Data API builder enforces stable ordering for pagination and consistency.
+description: Learn how to sort REST responses with `$orderby`, chain multiple fields, and understand how Data API builder keeps pagination stable with deterministic ordering.
 author: jnixon
 ms.author: sidandrews
 ms.reviewer: jerrynixon
