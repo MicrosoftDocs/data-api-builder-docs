@@ -265,3 +265,5 @@ To control selection, configure `mappings` and `relationships` under `entities`.
   }
 }
 ```
+
+[!INCLUDE[Install CLI](./includes/see-also.md)]

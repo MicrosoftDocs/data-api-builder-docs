@@ -293,3 +293,5 @@ WHERE (title = 'Fiction' OR title = 'SciFi')
   AND published_on >= '2020-01-01T00:00:00Z'
   AND rating IS NULL;
 ```
+
+[!INCLUDE[Install CLI](./includes/see-also.md)]

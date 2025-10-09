@@ -250,3 +250,5 @@ To enable pagination and nested relationships, define your entities with mapping
   }
 }
 ```
+
+[!INCLUDE[Install CLI](./includes/see-also.md)]

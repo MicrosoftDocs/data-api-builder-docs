@@ -134,3 +134,4 @@ query ($dir: OrderBy) {
 }
 ```
 
+[!INCLUDE[Install CLI](./includes/see-also.md)]

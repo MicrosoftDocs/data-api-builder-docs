@@ -264,3 +264,5 @@ SELECT id, title, rating
 FROM Books
 WHERE rating IS NULL;
 ```
+
+[!INCLUDE[Install CLI](./includes/see-also.md)]
