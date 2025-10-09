@@ -9,18 +9,14 @@ ms.date: 10/07/2025
 
 ## See also
 
-### REST API keywords
+| Concept      | REST                                       | GraphQL                                      | Purpose                                    |
+| ------------ | ------------------------------------------ | -------------------------------------------- | ------------------------------------------ |
+| Projection   | [$select](../../keywords/select-rest.md)   | [items](../../keywords/select-graphql.md)    | Choose which fields to return              |
+| Filtering    | [$filter](../../keywords/filter-rest.md)   | [filter](../../keywords/filter-graphql.md)   | Restrict rows by condition                 |
+| Sorting      | [$orderby](../../keywords/orderby-rest.md) | [orderBy](../../keywords/orderby-graphql.md) | Define the sort order                      |
+| Page size    | [$first](../../keywords/first-rest.md)     | [first](../../keywords/first-graphql.md)     | Limit the number of items per page         |
+| Continuation | [$after](../../keywords/after-rest.md)     | [after](../../keywords/after-graphql.md)     | Continue from the last page using a cursor |
 
-* Keyword [$select](~/keywords/select-rest.md) to impact the SELECT clause in data source queries
-* Keyword [$filter](~/keywords/filter-rest.md) to impact the WHERE clause in data source queries
-* Keyword [$orderby](~/keywords/orderby-rest.md) to impact the ORDER BY clause in data source queries
-* Keyword [$first](~/keywords/first-rest.md) to impact the TOP clause in data source queries
-* Keyword [$after](~/keywords/after-rest.md) to handle pagination in data source queries
+> [!NOTE]
+> REST keywords begin with `$`, following OData conventions.
 
-### GraphQL API keywords
-
-* Keyword [$select](~/keywords/select-rest.md) to impact the SELECT clause in data source queries
-* Keyword [$filter](~/keywords/filter-rest.md) to impact the WHERE clause in data source queries
-* Keyword [$orderby](~/keywords/orderby-rest.md) to impact the ORDER BY clause in data source queries
-* Keyword [$first](~/keywords/first-rest.md) to impact the TOP clause in data source queries
-* Keyword [$after](~/keywords/after-rest.md) to handle pagination in data source queries
