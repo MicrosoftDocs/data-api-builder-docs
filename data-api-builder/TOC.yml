@@ -338,7 +338,7 @@
           displayName: relationships, foreign key, navigation, linking, cardinality
     - name: Monitoring and telemetry
       items:
-        - name: How to export to Application Insights
+        - name: How to use Application Insights
           href: concept/monitor/application-insights.md
           displayName: app insights, telemetry, metrics, diagnostics, Azure Monitor
         - name: How to use Health Checks
