@@ -282,7 +282,7 @@
           href: concept/api/http-if-match.md
         - name: How to use header - Location
           href: concept/api/http-location.md
-        - name: How to use handle pagination ($after)
+        - name: How to handle pagination ($after)
           href: keywords/after-rest.md
           displayName: page, pagination, cursor
         - name: How to use keyword - $filter 
