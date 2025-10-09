@@ -12,13 +12,12 @@ ms.date: 10/07/2025
 
 # Field selection (Projection) in GraphQL
 
-In GraphQL, the fields you request define exactly what Data API builder (DAB) returns—no more, no less. DAB compiles these selections into parameterized SQL, including only the mapped (exposed) columns you asked for plus any columns it must internally fetch to satisfy:
-* Relationship joins (foreign key columns).
-* Primary key / ordering columns needed for stable pagination and cursor construction.
+In GraphQL, the fields you request define exactly what Data API builder (DAB) returns, no more, no less. DAB compiles these selections into parameterized SQL, including only the mapped (exposed) columns you asked for plus any columns it must internally fetch to satisfy relationship joins (foreign key columns) and primary key / ordering columns needed for stable pagination and cursor construction.
 
-These internally fetched columns are stripped before the response if you did not select them. Projection is governed by the entity configuration in `dab-config.json`.
-
+> [!NOTE]
 > GraphQL has no wildcard like `SELECT *`. Clients must specify each field explicitly.
+
+Go to the [REST version of this document](./select-rest.md).
 
 ## Basic selection
 
@@ -41,8 +40,6 @@ query {
 #### Conceptual SQL
 
 ```sql
--- Internally DAB may also read primary key columns (e.g. id) even if not shown;
--- shown here for clarity. Mapping sku_title -> title, sku_price -> price.
 SELECT
   id,
   sku_title AS title,
@@ -52,37 +49,30 @@ FROM dbo.books;
 
 #### Sample response
 
-```json
+```jsonc
 {
   "data": {
     "books": {
       "items": [
-        {
+        {                 
           "id": 1,
-            "title": "Dune",
-            "price": 20
-        },
-        {
-          "id": 2,
-          "title": "Foundation",
-          "price": 18
+          "title": "Dune",
+          "price": 20
         }
       ]
-    }
+    }    
   }
 }
 ```
 
 ## Field aliases
-
 Aliases rename fields in the response, not the database. The SQL layer does not need to alias to the GraphQL alias names; aliasing is applied after data retrieval.
-
-#### GraphQL query
 
 ```graphql
 query {
   books {
     items {
+      id
       bookTitle: title
       cost: price
     }
@@ -94,6 +84,7 @@ query {
 
 ```sql
 SELECT
+  id,
   sku_title AS title,
   sku_price AS price
 FROM dbo.books;
@@ -101,16 +92,14 @@ FROM dbo.books;
 
 #### Sample response
 
-```json
+With aliases
+```jsonc
 {
   "data": {
     "books": {
       "items": [
-        {
-          "bookTitle": "Dune",
-          "cost": 20
-        },
-        {
+        {                 
+          "id": 2,
           "bookTitle": "Foundation",
           "cost": 18
         }
@@ -122,7 +111,7 @@ FROM dbo.books;
 
 ## Nested selection
 
-Relationships defined in the configuration allow nested queries. The conceptual SQL below shows a single JOIN; in practice DAB may execute one or more parameterized queries (e.g., a parent query plus a batched child fetch) rather than a single flattened join—this is illustrative.
+Relationships defined in the configuration allow nested queries. The conceptual SQL below shows a single JOIN; in practice DAB may execute one or more parameterized queries (e.g., a parent query plus a batched child fetch) rather than a single flattened join.
 
 #### GraphQL query
 
@@ -241,56 +230,6 @@ JOIN dbo.books AS b
   }
 }
 ```
-
-## Pagination with projection
-
-Projection and pagination combine seamlessly. DAB defaults ordering to the primary key (`id ASC`) when no `orderBy` is supplied. Internally it fetches one extra row (`first + 1`) to determine `hasNextPage`; the conceptual SQL below shows only the visible limit (TOP (3)) for readability.
-
-#### GraphQL query
-
-```graphql
-query {
-  books(first: 3) {
-    items {
-      id
-      title
-    }
-    hasNextPage
-    endCursor
-  }
-}
-```
-
-#### Conceptual SQL
-
-```sql
--- Internally may issue: SELECT TOP (4) ... to probe hasNextPage.
-SELECT TOP (3)
-  id,
-  sku_title AS title
-FROM dbo.books
-ORDER BY id ASC;
-```
-
-#### Sample response
-
-```json
-{
-  "data": {
-    "books": {
-      "items": [
-        { "id": 1, "title": "Dune" },
-        { "id": 2, "title": "Foundation" },
-        { "id": 3, "title": "Hyperion" }
-      ],
-      "hasNextPage": true,
-      "endCursor": "eyJpZCI6M30="
-    }
-  }
-}
-```
-
-> The cursor value is illustrative; real cursors encode ordered column metadata in a base64 JSON array.
 
 ## Relevant configuration
 

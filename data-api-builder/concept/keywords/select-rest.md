@@ -17,15 +17,13 @@ Projection helps you return only what your client actually needs. Smaller payloa
 > [!NOTE]
 > REST query parameter names (including `$select`) are case sensitive. Field names are also case sensitive with respect to what you exposed/configured.
 
-> GraphQL performs projection intrinsically through selection sets. This document focuses on REST; a sister document covers GraphQL projection in depth.
+Go to the [GraphQL version of this document](./select-graphql.md).
 
----
+## Basic selection
 
-## Basic usage
+#### Pattern
 
-Pattern:
-
-```
+```http
 GET /api/{entity}?$select=FieldA,FieldB,FieldC
 ```
 
@@ -40,30 +38,18 @@ GET /api/author
 # Return only first_name
 GET /api/author?$select=first_name
 
-# Return only first_name and last_name (whitespace tolerated around commas is ignored)
+# Return only first_name and last_name
 GET /api/author?$select=first_name,last_name
 ```
 
 ## Internal vs response columns
 
-You are **not** required to project primary key or ordering fields. If omitted, they do not appear in the JSON response. However DAB may internally fetch additional columns needed to:
+You are **not** required to project primary key or ordering fields. If omitted, they do not appear in the JSON response. However DAB may internally fetch additional columns needed toEnforce security policies (row-level filters, field masks) and handle pagination cursors (`$after` / `nextLink`).
 
-* Enforce security policies (row-level filters, field masks)
-* Build stable pagination cursors (`$after` / `nextLink`)
-* Provide deterministic ordering tie-breaks (remaining primary key columns)
-* Satisfy relationship materialization (foreign keys) in scenarios where related data is resolved (e.g., future expansion patterns)
+> [!NOTE]
+> These internally fetched columns are removed before the response unless you explicitly requested them.
 
-These internally fetched columns are removed before the response unless you explicitly requested them.
-
-## Interaction with `$orderby`
-
-When combining `$select` with ordering and pagination:
-
-1. DAB augments the underlying SQL SELECT list with any ordering columns not already present plus required primary key columns.
-2. It executes a keyset pagination probe (fetches `first + 1` rows) to compute `hasNextPage` / `nextLink`.
-3. It strips non-requested columns and the probe row before forming the `value` array.
-
-#### Example:
+#### Example
 
 ```http
 GET /api/book?$select=id,title&$orderby=publisher_id desc&$first=5
@@ -72,7 +58,7 @@ GET /api/book?$select=id,title&$orderby=publisher_id desc&$first=5
 #### Conceptual SQL
 
 ```sql
-SELECT TOP (6)           -- first (5) + 1 probe row for paging
+SELECT TOP (6) -- first (5) + 1 probe row for paging
   [b].[id],
   [b].[sku_title] AS title
 FROM dbo.books AS [b]
@@ -90,34 +76,17 @@ ORDER BY [b].[publisher_id] DESC, [b].[id] ASC;
     { "id": 33,  "title": "Example 4" },
     { "id": 5,   "title": "Example 5" }
   ],
-  "nextLink": "/api/book?$select=id,title&$orderby=publisher_id%20desc&$first=5&$after=eyJ...=="
+  "nextLink": "..."
 }
 ```
 
+Learn more about [pagination and the after keyword](./after-graphql.md). 
+
 > The extra internal columns and the 6th probe row are not visible in the payload.
-
-## Composite primary keys
-
-You may omit some or all columns of a composite key:
-
-```http
-GET /api/order?$select=order_date,total
-```
-
-DAB can still (internally) fetch the remaining key columns to ensure:
-* Deterministic ordering / cursor generation
-* Correct policy enforcement
-
-Only `order_date` and `total` appear in the response.
 
 ## Stored procedures
 
-For stored procedure–backed entities:
-* `$select` is **not** interpreted as a projection clause.
-* Query string key/value pairs (except recognized system parameters like `$filter`, `$orderby`, etc.) are treated as stored procedure parameters.
-* Attempting to use `$select` to trim columns has no effect; the procedure’s result set defines the shape.
-
-If you need column-level shaping for a stored procedure, implement it inside the procedure or expose a view/table entity instead.
+For stored procedure–backed entities, `$select` is **not** interpreted as a projection clause. Instead, query string key/value pairs (except recognized system parameters like `$filter`, `$orderby`, etc.) are treated as stored procedure parameters. `$select` has no effect; the procedure’s result set defines the shape.
 
 ## Sample configuration
 
