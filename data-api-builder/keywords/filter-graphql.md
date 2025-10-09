@@ -24,22 +24,22 @@ Filtering narrows large datasets to only the records you need. In GraphQL, Data 
 
 | Operator                              | Meaning               |
 | ------------------------------------- | --------------------- |
-| [`eq`](#eq-graphql)                   | equal                 |
-| [`neq`](#neq-graphql)                 | not equal             |
-| [`gt`](#gt-graphql)                   | greater than          |
-| [`gte`](#gte-graphql)                 | greater than or equal |
-| [`lt`](#lt-graphql)                   | less than             |
-| [`lte`](#lte-graphql)                 | less than or equal    |
-| [`and`](#and-graphql)                 | logical AND           |
-| [`or`](#or-graphql)                   | logical OR            |
-| [`contains`](#contains-graphql)       | substring match       |
-| [`notContains`](#notcontains-graphql) | not substring match   |
-| [`startsWith`](#startswith-graphql)   | prefix match          |
-| [`endsWith`](#endswith-graphql)       | suffix match          |
-| [`in`](#in-graphql)                   | membership            |
-| [`isNull`](#isnull-graphql)           | null check            |
+| [`eq`](#eq)                   | equal                 |
+| [`neq`](#neq)                 | not equal             |
+| [`gt`](#gt)                   | greater than          |
+| [`gte`](#gte)                 | greater than or equal |
+| [`lt`](#lt)                   | less than             |
+| [`lte`](#lte)                 | less than or equal    |
+| [`and`](#and)                 | logical AND           |
+| [`or`](#or)                   | logical OR            |
+| [`contains`](#contains)       | substring match       |
+| [`notContains`](#notcontains) | not substring match   |
+| [`startsWith`](#startswith)   | prefix match          |
+| [`endsWith`](#endswith)       | suffix match          |
+| [`in`](#in)                   | membership            |
+| [`isNull`](#isnull)           | null check            |
 
-## `eq` {#eq-graphql}
+## `eq`
 
 Equal to. Returns records where a field’s value exactly matches the provided literal or is null if using `isNull`.
 
@@ -81,7 +81,7 @@ WHERE title = 'Dune'
   AND rating IS NULL;
 ```
 
-## `neq` {#neq-graphql}
+## `neq`
 
 Not equal to. Returns records where a field’s value doesn’t match the literal or isn’t null when combined with `isNull: false`.
 
@@ -115,7 +115,7 @@ WHERE title <> 'Foundation'
   AND rating IS NOT NULL;
 ```
 
-## `gt` {#gt-graphql}
+## `gt`
 
 Greater than. Returns records where a field’s value is strictly higher than the provided literal.
 
@@ -147,7 +147,7 @@ WHERE title > 'A'
   AND publishedOn > '2020-01-01T00:00:00Z';
 ```
 
-## `gte` {#gte-graphql}
+## `gte`
 
 Greater than or equal to. Returns records where a field’s value is higher than or equal to the given literal.
 
@@ -179,7 +179,7 @@ WHERE title >= 'A'
   AND publishedOn >= '2020-01-01T00:00:00Z';
 ```
 
-## `lt` {#lt-graphql}
+## `lt`
 
 Less than. Returns records where a field’s value is strictly lower than the given literal.
 
@@ -211,7 +211,7 @@ WHERE title < 'Z'
   AND publishedOn < '2030-01-01T00:00:00Z';
 ```
 
-## `lte` {#lte-graphql}
+## `lte`
 
 Less than or equal to. Returns records where a field’s value is lower than or equal to the given literal.
 
@@ -243,7 +243,7 @@ WHERE title <= 'Z'
   AND publishedOn <= '2030-01-01T00:00:00Z';
 ```
 
-## `and` {#and-graphql}
+## `and`
 
 Logical AND. Combines multiple predicates that must all be true for a record to match.
 
@@ -273,7 +273,7 @@ WHERE available = 1
   AND publishedOn > '2022-01-01T00:00:00Z';
 ```
 
-## `or` {#or-graphql}
+## `or`
 
 Logical OR. Returns records where at least one predicate in the array evaluates to true.
 
@@ -301,7 +301,7 @@ WHERE available = 0
    OR price > 50;
 ```
 
-## `contains` {#contains-graphql}
+## `contains`
 
 Substring match. Returns records where the field contains the provided substring (case sensitivity depends on the database collation).
 
@@ -323,7 +323,7 @@ FROM Books
 WHERE title LIKE '%Dune%';
 ```
 
-## `notContains` {#notcontains-graphql}
+## `notContains`
 
 Negative substring match. Returns records where the field does **not** contain the provided substring.
 
@@ -345,7 +345,7 @@ FROM Books
 WHERE title NOT LIKE '%Guide%';
 ```
 
-## `startsWith` {#startswith-graphql}
+## `startsWith`
 
 Prefix match. Returns records where the field begins with the provided string.
 
@@ -367,7 +367,7 @@ FROM Books
 WHERE title LIKE 'The%';
 ```
 
-## `endsWith` {#endswith-graphql}
+## `endsWith`
 
 Suffix match. Returns records where the field ends with the provided string.
 
@@ -389,7 +389,7 @@ FROM Books
 WHERE title LIKE '%Chronicles';
 ```
 
-## `in` {#in-graphql}
+## `in`
 
 Membership match. Returns records where the field’s value exists in the provided list.
 
@@ -411,7 +411,7 @@ FROM Books
 WHERE genre IN ('SciFi', 'Fantasy');
 ```
 
-## `isNull` {#isnull-graphql}
+## `isNull`
 
 Null check. Returns records where a field’s value is either null or not null depending on the boolean literal.
 

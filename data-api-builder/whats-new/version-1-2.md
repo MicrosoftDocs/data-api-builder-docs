@@ -21,7 +21,7 @@ Release notes and information about the updates and enhancements in Data API bui
 
 Data API builder [automatically paginates](../configuration/runtime.md#pagination-settings) query results in REST and GraphQL endpoints. Pagination ensures queries against large tables return manageable results and protects both the database and DAB from overly large responses. 
 
-By default, DAB uses a page size of `100` records, configurable through the [`default-page-size`](../configuration/runtime.md#max-page-size-supported-values) setting. Users can request more records using the [`$first` keyword](../concept/api/rest.md#first-and-after), bypassing the default.
+By default, DAB uses a page size of `100` records, configurable through the [`default-page-size`](../configuration/runtime.md#max-page-size-supported-values) setting. Users can request more records using the [`$first` keyword](../keywords/first-rest.md), bypassing the default.
 
 To prevent abuse and help maintain endpoint performance, DAB now supports the `max-page-size` setting, which caps the maximum number of records a user can request. This option gives developers control and flexibility while adding important safeguards.
 
