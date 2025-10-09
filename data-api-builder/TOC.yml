@@ -255,13 +255,13 @@
         - name: How to insert multiple records
           href: how-to/multiple-mutations.md
           displayName: batch, transaction, graphql, createMany, mutation
-        - name: How to use keyword - after - for pagination
+        - name: How to use keyword - after - for response pagination
           href: keywords/after-graphql.md
           displayName: page, pagination, cursor
         - name: How to use keyword - filter 
           href: keywords/filter-graphql.md
           displayName: predicate, where, limit
-        - name: How to use keyword - first - for pagination
+        - name: How to use keyword - first
           href: keywords/first-graphql.md
           displayName: pagination, top, page
         - name: How to use keyword - orderby 
@@ -282,13 +282,13 @@
           href: concept/api/http-if-match.md
         - name: How to use header - Location
           href: concept/api/http-location.md
-        - name: How to use keyword - $after - for pagination
+        - name: How to use keyword - $after - for response pagination
           href: keywords/after-rest.md
           displayName: page, pagination, cursor
         - name: How to use keyword - $filter 
           href: keywords/filter-rest.md
           displayName: predicate, where, limit
-        - name: How to use keyword - $first - for pagination
+        - name: How to use keyword - $first
           href: keywords/first-rest.md
           displayName: pagination, top, page
         - name: How to use keyword - $orderby 
