@@ -24,20 +24,20 @@ Filtering narrows large datasets to only the records you need. In GraphQL, Data 
 
 | Operator                              | Meaning               |
 | ------------------------------------- | --------------------- |
-| [`eq`](#eq-graphql)                   | equal                 |
-| [`neq`](#neq-graphql)                 | not equal             |
-| [`gt`](#gt-graphql)                   | greater than          |
-| [`gte`](#gte-graphql)                 | greater than or equal |
-| [`lt`](#lt-graphql)                   | less than             |
-| [`lte`](#lte-graphql)                 | less than or equal    |
-| [`and`](#and-graphql)                 | logical AND           |
-| [`or`](#or-graphql)                   | logical OR            |
-| [`contains`](#contains-graphql)       | substring match       |
-| [`notContains`](#notcontains-graphql) | not substring match   |
-| [`startsWith`](#startswith-graphql)   | prefix match          |
-| [`endsWith`](#endswith-graphql)       | suffix match          |
-| [`in`](#in-graphql)                   | membership            |
-| [`isNull`](#isnull-graphql)           | null check            |
+| [`eq`](#eq-eq-graphql)                   | equal                 |
+| [`neq`](#neq-neq-graphql)                 | not equal             |
+| [`gt`](#gt-gt-graphql)                   | greater than          |
+| [`gte`](#gte-gte-graphql)                 | greater than or equal |
+| [`lt`](#lt-lt-graphql)                   | less than             |
+| [`lte`](#lte-lte-graphql)                 | less than or equal    |
+| [`and`](#and-and-graphql)                 | logical AND           |
+| [`or`](#or-or-graphql)                   | logical OR            |
+| [`contains`](#contains-contains-graphql)       | substring match       |
+| [`notContains`](#notcontains-notcontains-graphql) | not substring match   |
+| [`startsWith`](#startswith-startswith-graphql)   | prefix match          |
+| [`endsWith`](#endswith-endswith-graphql)       | suffix match          |
+| [`in`](#in-in-graphql)                   | membership            |
+| [`isNull`](#isnull-isnull-graphql)           | null check            |
 
 ## `eq` {#eq-graphql}
 

@@ -27,7 +27,7 @@ Filtering narrows large datasets to only the records you need. In REST, Data API
 | [`and`](#and)      | logical AND           |
 | [`or`](#or)        | logical OR            |
 | [`not`](#not)      | logical NOT           |
-| [`( )`](#grouping) | grouping              |
+| [`( )`](#--grouping) | grouping              |
 
 ## `eq`
 

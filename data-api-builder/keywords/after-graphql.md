@@ -1,13 +1,13 @@
 ---
-title: Use after (REST)
-description: Learn how cursor-based pagination works in REST for Data API builder, how continuation tokens are generated, and how to request subsequent pages safely and efficiently.
+title: Use after (GraphQL)
+description: Learn how cursor-based pagination works in GraphQL for Data API builder, how continuation tokens are generated, and how to request subsequent pages safely and efficiently.
 author: jnixon
 ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: reference
 ms.date: 10/08/2025
-# Customer Intent: As a developer, I want to understand how to page through large REST datasets safely, efficiently, and without duplicates or missing data.
+# Customer Intent: As a developer, I want to understand how to page through large GraphQL datasets safely, efficiently, and without duplicates or missing data.
 ---
 
 # Pagination with `after` in GraphQL
