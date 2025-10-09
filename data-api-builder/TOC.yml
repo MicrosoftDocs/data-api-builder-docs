@@ -255,7 +255,7 @@
         - name: How to insert multiple records
           href: how-to/multiple-mutations.md
           displayName: batch, transaction, graphql, createMany, mutation
-        - name: How to use keyword - after - for response pagination
+        - name: How to handle pagination (after)
           href: keywords/after-graphql.md
           displayName: page, pagination, cursor
         - name: How to use keyword - filter 
@@ -282,7 +282,7 @@
           href: concept/api/http-if-match.md
         - name: How to use header - Location
           href: concept/api/http-location.md
-        - name: How to use keyword - $after - for response pagination
+        - name: How to use handle pagination ($after)
           href: keywords/after-rest.md
           displayName: page, pagination, cursor
         - name: How to use keyword - $filter 
