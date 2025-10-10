@@ -26,7 +26,7 @@ In this guide, walk through the steps to build a DAB configuration file, host th
 > [!IMPORTANT]
 > Support for Data API builder (DAB) in Azure Static Web Apps using database connections is in preview. Azure Static Web Apps uses a fixed version of the DAB engine that can vary from the latest stable version of DAB. To access the latest DAB features, consider an alternative host for DAB using the latest version of the engine from GitHub, Microsoft Container Registry (Docker Hub), or NuGet.
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - Azure Static Web Apps CLI. [Install the Static Web Apps (SWA) CLI](/azure/static-web-apps/static-web-apps-cli-install).
 - Data API builder CLI. [Install the Data API builder (DAB) CLI](../how-to-install-cli.md).
 - Existing supported database addressable from Azure.
