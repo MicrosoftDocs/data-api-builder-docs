@@ -20,7 +20,7 @@ In this quickstart, you deploy Data API builder (DAB) as a Docker container to A
 - Azure Developer CLI
 - .NET 9.0
 
-If you don't have an Azure account, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure account, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 ## Initialize the project
 

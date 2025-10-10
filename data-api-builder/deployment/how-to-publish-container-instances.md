@@ -22,7 +22,7 @@ In this guide, walk through the steps to build a Data API builder configuration 
 
 ## Prerequisites
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 - Data API builder CLI. [Install the CLI](../how-to-install-cli.md).
 
