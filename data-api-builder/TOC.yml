@@ -98,7 +98,6 @@
       href: configuration/index.md#data-source-files
     - name: Runtime
       href: configuration/runtime.md#runtime
-      items:
     - name: Runtime / GraphQL 
       displayName: API
       items:
@@ -248,7 +247,30 @@
         - name: How to run DAB from source
           href: how-to/run-from-source.md
           displayName: source, github, OSS, build, run
-    - name: API access
+    - name: GraphQL API
+      items:
+        - name: How to call GraphQL endpoints
+          href: concept/api/graphql.md
+          displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
+        - name: How to insert multiple records
+          href: how-to/multiple-mutations.md
+          displayName: batch, transaction, graphql, createMany, mutation
+        - name: How to handle pagination (after)
+          href: keywords/after-graphql.md
+          displayName: page, pagination, cursor
+        - name: How to use keyword - filter 
+          href: keywords/filter-graphql.md
+          displayName: predicate, where, limit
+        - name: How to use keyword - first
+          href: keywords/first-graphql.md
+          displayName: pagination, top, page
+        - name: How to use keyword - orderby 
+          href: keywords/orderby-graphql.md
+          displayName: sort, bubble, arrange, align
+        - name: How to use keyword - select 
+          href: keywords/select-graphql.md
+          displayName: projection, choose, columns, items
+    - name: REST API
       items:
         - name: How to call REST endpoints
           href: concept/api/rest.md
@@ -256,42 +278,51 @@
         - name: How to test REST endpoints
           href: concept/api/openapi.md
           displayName: OpenAPI, Swagger, API docs, schema definition, HTTP interface
-        - name: How to call GraphQL endpoints
-          href: concept/api/graphql.md
-          displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
-        - name: How to insert multiple records (GraphQL)
-          href: how-to/multiple-mutations.md
-          displayName: batch, transaction, graphql, createMany, mutation
-        - name: How to use built-in pagination
-          href: concept/api/pagination.md
-          displayName: pagination, limit, offset, top, skip, page size, results
-        - name: "How to use HTTP Header: If-Match"
+        - name: How to use header - If-Match 
           href: concept/api/http-if-match.md
-        - name: "How to use HTTP Header: Location"
+        - name: How to use header - Location
           href: concept/api/http-location.md
+        - name: How to handle pagination ($after)
+          href: keywords/after-rest.md
+          displayName: page, pagination, cursor
+        - name: How to use keyword - $filter 
+          href: keywords/filter-rest.md
+          displayName: predicate, where, limit
+        - name: How to use keyword - $first
+          href: keywords/first-rest.md
+          displayName: pagination, top, page
+        - name: How to use keyword - $orderby 
+          href: keywords/orderby-rest.md
+          displayName: sort, bubble, arrange, align
+        - name: How to use keyword - $select 
+          href: keywords/select-rest.md
+          displayName: projection, choose, columns, items
     - name: Data caching
       items:
-        - name: How to use Level 1 Cache
+        - name: How to use level 1 Cache
           href: concept/cache/level-1.md
           displayName: level 1 cache, L1, entity cache, query result, fusioncache, memory
-        - name: How to use Level 2 Cache
+        - name: How to use level 2 Cache
           href: concept/cache/level-2.md
           displayName: level 2 cache, L2, global cache, prefetch, fusioncache, redis
-        - name: "How to use HTTP header: Cache-Control"
+        - name: How to use header - Cache-Control
           href: concept/cache/http-headers.md
           displayName: cache headers, HTTP, control, TTL, freshness
     - name: Configuration file
       items:
-        - name: How to use different configs per environment
+        - name: How to use different configurations per environment
           href: concept/config/environments.md
           displayName: environment, config, dev, prod, @env, variables
-        - name: How to use the env() function 
+        - name: How to configure environment variables with a local file
+          href: how-to/use-environments.md
+          displayName: environment, config, dev, prod, variables, @env
+        - name: How to use the env() function
           href: concept/config/env-function.md
           displayName: functions, helpers, filters, expressions, macros, @env, environment
-        - name: How to use the akv() function 
+        - name: How to use the akv() function
           href: concept/config/akv-function.md
           displayName: functions, helpers, filters, expressions, macros, @akv, azure key vault
-        - name: How to use multiple data sources at once time
+        - name: How to use multiple data sources
           href: concept/config/multi-data-source.md
           displayName: multiple databases, cross-DB, data source, federation
     - name: Database structures
@@ -307,13 +338,13 @@
           displayName: relationships, foreign key, navigation, linking, cardinality
     - name: Monitoring and telemetry
       items:
-        - name: How to export telemetry to Application Insights
+        - name: How to use Application Insights
           href: concept/monitor/application-insights.md
           displayName: app insights, telemetry, metrics, diagnostics, Azure Monitor
-        - name: How to monitor endpoints with Health Checks
+        - name: How to use Health Checks
           href: concept/monitor/health-checks.md
           displayName: health, health endpoint, ping, liveness, readiness, monitor, probe
-        - name: How to customize log verbosity with customize levels
+        - name: How to customize log verbosity
           href: concept/monitor/log-levels.md
           displayName: logging, trace, info, debug, warn, error
         - name: How to use OpenTelemetry
@@ -321,15 +352,15 @@
           displayName: OTEL, tracing, distributed trace, metrics
     - name: Security
       items:
-        - name: How to use authorization with entities permissions
+        - name: How to use entity permissions
           href: concept/security/authorization.md
-          displayName: roles, claims, policies, access control, permissions
+          displayName: roles, claims, policies, access control, permissions, authentication, authorization
         - name: How to use Azure authentication
           href: concept/security/authentication-azure.md
-          displayName: AAD, Microsoft Entra ID, Azure AD, SSO, OAuth
+          displayName: AAD, Microsoft Entra ID, Azure AD, SSO, OAuth, authorization
         - name: How to use Local authentication
           href: concept/security/authentication-local.md
-          displayName: local auth, simulated auth, development, static users
+          displayName: local auth, simulated auth, development, static users, authorization
         - name: How to use Row-level security
           href: concept/security/row-level-security.md
           displayName: RLS, predicates, SQL security, claim-based access
@@ -346,14 +377,14 @@
           displayName: hosting, container, azure, options
         - name: How to deploy to Azure Container Apps using Azure Portal
           href: deployment/how-to-publish-container-apps.md
-          displayName: azure, container apps, publish, deploy
+          displayName: azure, container apps, publish, deploy, aca
         - name: How to deploy to Azure Container Apps using Azure CLI
           href: tutorial-deploy-container-app-cli.md
           displayName: azure, deploy, ACA, container, cli
         - name: How to deploy to Azure Container Instances
           href: deployment/how-to-publish-container-instances.md
-          displayName: azure, container instances, publish, deploy
-        - name: How to deploy to Azure Static Web Apps (preview)
+          displayName: azure, container instances, publish, deploy, aci
+        - name: How to deploy to Azure Static Web Apps (retired)
           href: deployment/how-to-host-static-web-apps.md
           displayName: swa, static web apps, azure, preview
         - name: Configuration best practices
