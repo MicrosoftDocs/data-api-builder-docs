@@ -90,13 +90,15 @@ Previously, DAB developers were mostly limited to console logs in the container.
 
 ```json
 {
-  "telemetry": {
-      "file": {
-        "enabled": ...,               // Turn file logging on or off
-        "path": ...,                  // Folder path for log files
-        "rolling-interval": ...,      // How often a new log file is created
-        "retained-file-count-limit": ..., // Max number of log files to keep
-        "file-size-limit-bytes": ..., // Max size of a log file before rolling
+  "runtime": {
+    "telemetry": {
+        "file": {
+          "enabled": ...,               // Turn file logging on or off
+          "path": ...,                  // Folder path for log files
+          "rolling-interval": ...,      // How often a new log file is created
+          "retained-file-count-limit": ..., // Max number of log files to keep
+          "file-size-limit-bytes": ..., // Max size of a log file before rolling
+        }
       }
     }
   }
@@ -199,12 +201,15 @@ DAB's new relative `nextLink` option lets developers configure the engine to emi
 ```json
 {
   "runtime": {
-    "rest": {
+    "pagination": {
       "next-link-relative": true // default is false
     }
   }
 }
 ```
+
+ - When next-link-relative is `true`, `nextLink` will be relative (start with `/`).
+ - When `false`, it will be an absolute URL.
 
 ## Health checks
 
