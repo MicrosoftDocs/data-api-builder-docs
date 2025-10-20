@@ -132,6 +132,8 @@ Enterprise developers often face stricter requirements than local debugging can 
 
 Where Application Insights focuses on app performance monitoring (APM), Azure Log Analytics provides broader coverage. It aggregates logs from apps, Azure resources, VMs, containers, networks, and security tools. These logs are centralized in a workspace for Kusto Query Language (KQL) queries, correlation, and compliance.
 
+<!--
+
 ## Introducing: Azure Key Vault support
 
 Since the beginning, Data API builder configuration files supported the `@env()` function to replace values in the configuration file with environment variables. This ensures secrets are never checked in with the configuration file. DAB also supports `.env` files in local development so developers can simulate and test configurations.
@@ -179,6 +181,8 @@ Using the `@akv()` function:
   }
 }
 ```
+
+-->
 
 ## Query and Pagination Enhancements
 

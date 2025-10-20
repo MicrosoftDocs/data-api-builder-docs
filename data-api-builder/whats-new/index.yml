@@ -22,8 +22,8 @@ landingContent:
       url: version-1-6.md
     - text: Introducing - Azure Log Analytics Sink
       url: version-1-6.md
-    - text: Introducing - Azure Key Vault
-      url: version-1-6.md
+#    - text: Introducing - Azure Key Vault
+#      url: version-1-6.md
     - text: GraphQL IN operator
       url: version-1-6.md
     - text: Parallel Health Checks
