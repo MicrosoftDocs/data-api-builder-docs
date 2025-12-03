@@ -1,0 +1,82 @@
+### YamlMime:Landing
+
+title: SQL MCP Server
+summary: Data API builder (DAB) doesn't just provide secure REST and GraphQL APIs over Microsoft SQL for custom apps, it also provides a robust MCP Remote Server for AI agentic apps. Starting with version 1.6, DAB gives developers a drop-in MCP solution for secure, production-ready operations against SQL. Self-hosted and scalable, the SQL MCP Server works in any cloud and on premise. Open source and free, the SQL MCP Server is available to every user without special licenses. Built on Data API builder, the SQL MCP Server supports multiple simultaneous data sources as well as backend databases other than SQL, including Postgres, Azure Cosmos DB, and MySQL.
+metadata:
+  title: SQL MCP Server documentation
+  description: Starting with version 1.6, DAB gives developers a drop-in MCP solution for secure, production-ready operations against SQL.
+  author: jnixon
+  ms.author: jerrynixon
+  ms.reviewer: sidandrews
+  ms.service: data-api-builder
+  ms.topic: landing-page
+  ms.date: 12/02/2026
+
+# linkListType: architecture | concept | deploy | download | get-started | how-to-guide | learn | overview | quickstart | reference | sample | tutorial | video | whats-new
+
+landingContent:
+  - title: Learn SQL MCP Server
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: What is MCP?
+            url: overview.md#what-is-mcp
+          - text: What is SQL MCP Server?
+            url: overview.md#what-is-the-sql-mcp-server
+          - text: Typical use cases
+            url: overview.md#typical-use-cases
+      - linkListType: concept
+        links:
+          - text: Securing the schema
+            url: overview.md#securing-the-schema
+          - text: Solving NL2SQL
+            url: overview.md#solving-nl2sql
+          - text: Support for DML
+            url: overview.md#support-for-dml
+          - text: Support for RBAC
+            url: overview.md#support-for-rbac
+
+  - title: Configure the server
+    linkLists:
+      - linkListType: get-started
+        links:
+          - text: How to configure SQL MCP Server
+            url: overview.md#how-to-configure-sql-mcp-server
+      - linkListType: how-to-guide
+        links:
+          - text: Runtime settings
+            url: overview.md#runtime-settings
+          - text: Entity settings
+            url: overview.md#entity-settings
+          - text: Guidance for configuring MCP
+            url: overview.md#guidance-for-configuring-mcp
+
+  - title: Use the DML tools
+    linkLists:
+      - linkListType: concept
+        links:
+          - text: The DML tools
+            url: overview.md#the-dml-tools
+          - text: list_tools response
+            url: overview.md#list_tools-response
+          - text: describe_entities and example
+            url: overview.md#example-response
+      - linkListType: learn
+        links:
+          - text: Agent workflow with DML tools
+            url: overview.md#the-dml-tools
+
+  - title: Operate and monitor
+    linkLists:
+      - linkListType: concept
+        links:
+          - text: Support for caching
+            url: overview.md#support-for-caching
+          - text: Support for monitoring
+            url: overview.md#support-for-monitoring
+      - linkListType: reference
+        links:
+          - text: Telemetry and Open Telemetry
+            url: overview.md#telemetry
+          - text: Health checks
+            url: overview.md#health-checks
