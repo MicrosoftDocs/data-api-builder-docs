@@ -6,7 +6,7 @@ MCP (Model Context Protocol) is a standard that defines how AI agents discover a
 
 ## What is the SQL MCP Server?
 
-The SQL MCP Server is included in Data API builder (DAB) starting in version 1.6. It exposes SQL operations as MCP tools so agents can interact with database entities through a controlled contract. The server is self hosted but, for developers, it can also run locally through the [DAB command-line](../../command-line/index.yml).
+SQL MCP Server is Microsoft's dynamic, open source engine for agentic apps. You configure it with a JSON file that defines how to connect to your database and which tables, views, or stored procedures should be exposed, along with the permissions that apply to each. SQL MCP Server is included as part of Data API builder (DAB) starting in version 1.6. It exposes SQL operations as a small family of MCP tools so agents can interact with database entities through a controlled contract. The server is self hosted but, for developers, it can also run locally through the [DAB command-line](../../command-line/index.yml).
 
 > [!TIP]
 > Data API builder is open source and free to use.
@@ -81,21 +81,13 @@ When MCP is enabled, SQL MCP Server generates its tool surface automatically bas
 > [!NOTE]
 > In the upcoming 1.7 release, you will be able to elevate stored procedures as custom tools. This allows you to host an MCP Server dedicated to a specific set of operations. While this is already possible through the `dml-tools` system, developers who want to define custom tools directly will have a new, simpler option.
 
-### Guidance for configuring MCP
+### Get started
 
-* **Start with the global settings.** Enable MCP in the runtime block to activate the SQL MCP Server for your application. The defaults are usually enough because MCP follows the same permissions and security rules as REST and GraphQL.
+Getting started means creating your `dab-config.json` which tells the engine (TODO...)
 
-* **Use entity-level settings only when needed.** Entities participate automatically. Use the `mcp` block on an entity when you want to narrow or disable its MCP capabilities, such as allowing full CRUD on one entity and read-only access on another.
-
-* **Reuse existing roles.** MCP uses the same role names and RBAC rules already defined for REST and GraphQL. No new security model is required.
-
-* **Constrain exposure purposefully.** If you want an entity excluded from MCP, set its `dml-tools` property to false. If you make no changes, the defaults ensure consistent behavior with the rest of your DAB configuration.
-
-* **Validate with describe_entities.** The output of `describe_entities` shows exactly what an agent can see. This is the effective contract and should be your reference when refining access.
-
-* **Expose procedures intentionally.** Stored procedures become MCP tools only when defined as entities. Once defined, the `execute_record` tool handles them automatically.
-
-* **Avoid repetition.** You never redefine schema for MCP. All shapes, fields, and constraints come directly from your database and the entities already configured for DAB's REST API.
+```sh
+command line here...
+```
 
 ### Runtime settings
 
