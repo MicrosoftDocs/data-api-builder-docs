@@ -1,3 +1,15 @@
+---
+title: SQL MCP Server Overview
+description: Enable and configure SQL MCP Server over a SQL data source. 
+author: jnixon
+ms.author: sidandrews
+ms.reviewer: jerrynixon
+ms.service: data-api-builder
+ms.topic: concept-article
+ms.date: 12/03/2026
+# Customer Intent: As a developer, I want to create and configure a SQL MCP Server over a SQL data source. 
+---
+
 ## Overview
 
 ## What is MCP?
@@ -6,7 +18,7 @@ MCP (Model Context Protocol) is a standard that defines how AI agents discover a
 
 ## What is the SQL MCP Server?
 
-SQL MCP Server is Microsoft's dynamic, open source engine for agentic apps. You configure it with a JSON file that defines how to connect to your database and which tables, views, or stored procedures should be exposed, along with the permissions that apply to each. SQL MCP Server is included as part of Data API builder (DAB) starting in version 1.6. It exposes SQL operations as a small family of MCP tools so agents can interact with database entities through a controlled contract. The server is self hosted but, for developers, it can also run locally through the [DAB command-line](../../command-line/index.yml).
+SQL MCP Server is Microsoft's dynamic, open source engine for agentic apps. You configure it with a JSON file that defines how to connect to your database and which tables, views, or stored procedures should be exposed, along with the permissions that apply to each. SQL MCP Server is included as part of Data API builder (DAB) starting in version 1.7. It exposes SQL operations as a small [family of MCP tools](#the-dml-tools) so agents can interact with database entities through a controlled contract. The server is self hosted but, for developers, it can also run locally through the [DAB command-line](../../command-line/index.yml).
 
 > [!TIP]
 > Data API builder is open source and free to use.
@@ -70,7 +82,7 @@ SQL MCP Server provides detailed health and entity checks across REST, GraphQL, 
 
 ## How to configure SQL MCP Server?
 
-MCP is configured in your DAB configuration file. If you already have a working Data API builder config, upgrading to version 1.6 or later automatically gives you a working SQL MCP Server with no extra steps required.
+MCP is configured in your DAB configuration file. If you already have a working Data API builder config, upgrading to version 1.7 or later automatically gives you a working SQL MCP Server with no extra steps required.
 
 ### Configuration
 
@@ -83,10 +95,20 @@ When MCP is enabled, SQL MCP Server generates its tool surface automatically bas
 
 ### Get started
 
-Getting started means creating your `dab-config.json` which tells the engine (TODO...)
+Getting started means creating the `dab-config.json` to control the engine. You can do this manually, or you can use the [Data API builder (DAB) CLI](../../command-line/index.yml). The CLI simplifies the task, letting you initialize the file with a single command. Configuration property values can use literal strings, [environment variables](../config/env-function.md), or [Azure Key Vault](../config/akv-function.md) secrets. 
 
 ```sh
-command line here...
+dab init --database-type mssql --connection-string "<todo>" --config dab-config.json --host-mode development
+```
+
+You can specify each table, view or stored procedure you want the SQL MCP Server to expose by adding them to the configuration. The CLI lets you easily add them, assign aliases, configure their permissions, and map columns if you want. Most importantly, with the `description` property, you can include semantic details to help language models better understand your data. 
+
+```sh
+dab add {entity-name} \                          # object alias (Employees)
+  --source {table-or-view-name} \                # database object (dbo.Employees)
+  --source.type {table|view|stored-procedure} \  # object type (table)
+  --permissions "{role:actions}" \               # role and allowed actions (anonymous:*)
+  --description "{text}"                         # semantic description (Company employee records)
 ```
 
 ### Runtime settings
@@ -96,18 +118,31 @@ The SQL MCP Server is enabled by default in the Data API builder configuration. 
 ```json
 "runtime": {
   "mcp": {
-    "enabled": true,
-    "path": "/mcp",
+    "enabled": true,              // default: true
+    "path": "/mcp",               // default: /mcp
     "dml-tools": {
-      "describe-entities": true,
-      "create-record": true,
-      "read-records": true,
-      "update-record": true,
-      "delete-record": true,
-      "execute-entity": true
+      "describe-entities": true,  // default: true
+      "create-record": true,      // default: true
+      "read-records": true,       // default: true
+      "update-record": true,      // default: true
+      "delete-record": true,      // default: true
+      "execute-entity": true      // default: true
     }
   }
 }
+```
+
+The CLI also lets you set every property individually or programmatically through scripting. 
+
+```sh
+dab configure runtime mcp --enabled true
+dab configure runtime mcp --path "/mcp"
+dab configure runtime mcp --describe-entities true
+dab configure runtime mcp --create-record true
+dab configure runtime mcp --read-records true
+dab configure runtime mcp --update-record true
+dab configure runtime mcp --delete-record true
+dab configure runtime mcp --execute-entity true
 ```
 
 **Why disable individual tools?**
@@ -168,7 +203,7 @@ When DML tools are enabled globally and for an entity, SQL MCP Server exposes th
       ],
       "operations": [
         "read_records",
-        "update_records"
+        "update_record"
       ]
     }
   ]
@@ -179,8 +214,17 @@ When DML tools are enabled globally and for an entity, SQL MCP Server exposes th
 > The entity options used by any of the CRUD and execute DML tools come directly from `describe_entities`. This two-step flow is enforced by the internal semantic description attached to each tool.
 
 **create_record** creates a new row.
+
 **read_records** queries a table or view.
-**update_records** modifies an existing row.
-**delete_records** removes an existing row.
+
+**update_record** modifies an existing row.
+
+**delete_record** removes an existing row.
+
 **execute_record** runs a stored procedure.
 
+## Conclusion
+
+SQL MCP Server gives developers a simple, predictable, and secure way to bring AI agents into their data workflows without exposing the database or relying on fragile natural language parsing. By building on Data API builder’s entity abstraction, RBAC, caching, and telemetry, it delivers a production-ready surface that works the same across REST, GraphQL, and MCP. You configure it once, and the engine handles the rest.
+
+As MCP adoption grows, this approach keeps agents safe, keeps queries deterministic, and keeps developers in control. With each release, the tooling becomes more capable, but the core idea stays the same: secure defaults, clear contracts, and a fast on-ramp for agentic apps that work anywhere SQL does.
