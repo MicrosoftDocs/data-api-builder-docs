@@ -10,7 +10,7 @@ metadata:
   ms.reviewer: sidandrews
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 12/02/2026
+  ms.date: 12/02/2025
 
 landingContent:
   - title: Learn SQL MCP Server
@@ -46,8 +46,6 @@ landingContent:
             url: overview.md#runtime-settings
           - text: Entity settings
             url: overview.md#entity-settings
-          - text: Guidance for configuring MCP
-            url: overview.md#guidance-for-configuring-mcp
 
   - title: Use the DML tools
     linkLists:

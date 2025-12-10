@@ -10,7 +10,7 @@ ms.date: 12/03/2025
 # Customer Intent: As a developer, I want to create and configure a SQL MCP Server over a SQL data source. 
 ---
 
-## Overview
+# SQL MCP Server Overview
 
 ## What is MCP?
 

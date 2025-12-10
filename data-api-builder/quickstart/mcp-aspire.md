@@ -1,6 +1,5 @@
 ---
-
-title: Quickstart: Run a local SQL MCP Server with Aspire
+title: Quickstart - Run a local SQL MCP Server with Aspire
 description: Start a local SQL MCP Server using Aspire with a SQL database, Data API builder, and MCP Inspector.
 author: jnixon
 ms.author: sidandrews
@@ -8,9 +7,6 @@ ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: quickstart
 ms.date: 12/05/2025
-
-# Customer Intent: As a developer, I want a fast local experience so I can try the SQL MCP Server without learning deployment first.
-
 ---
 
 # Quickstart: Run a local SQL MCP Server with Aspire
