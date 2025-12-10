@@ -11,6 +11,9 @@ ms.date: 12/05/2025
 
 # Quickstart: Run a local SQL MCP Server with Aspire
 
+> [!IMPORTANT]
+> The SQL MCP Server is in preview and this documentation and the engine implementation is subject to change during this evaluation period.
+
 This quickstart uses Aspire to build a container-based solution. The solution includes:
 
 - A SQL database with sample data

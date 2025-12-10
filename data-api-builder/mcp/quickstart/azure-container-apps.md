@@ -11,6 +11,9 @@ ms.date: 12/09/2025
 
 # Quickstart: Deploy SQL MCP Server to Azure Container Apps
 
+> [!IMPORTANT]
+> The SQL MCP Server is in preview and this documentation and the engine implementation is subject to change during this evaluation period.
+
 This quickstart shows you how to deploy SQL MCP Server to Azure Container Apps. Once deployed, you can connect to it from VS Code, Microsoft Foundry, or any other Model Context Protocol (MCP) client as a remote server endpoint.
 
 ## Prerequisites
@@ -411,11 +414,11 @@ Your SQL MCP Server is now deployed and ready to use. Here's how to connect from
 
 ### VS Code
 
-Follow the [Quickstart with VS Code](mcp-vscode.md) guide and use your deployed MCP server URL instead of running locally.
+Follow the [Quickstart with VS Code](visual-studio-code.md) guide and use your deployed MCP server URL instead of running locally.
 
-### Microsoft Foundry
+### From Microsoft Foundry
 
-Follow the [Quickstart with Microsoft Foundry](mcp-foundry.md) guide to add your MCP server as a Custom MCP Tool.
+Follow the [Quickstart with Microsoft Foundry](foundry.md) guide to add your MCP server as a Custom MCP Tool.
 
 ### Other MCP clients
 
@@ -486,14 +489,14 @@ az group delete --name $RESOURCE_GROUP --yes --no-wait
 
 ## Next steps
 
-- [Connect from VS Code](mcp-vscode.md)
-- [Connect from Microsoft Foundry](mcp-foundry.md)
-- [Add more entities and descriptions](../concept/mcp/descriptions.md)
-- [Configure authentication for production](../deployment/best-practices-security.md)
-- [Monitor with Application Insights](../concept/monitor/application-insights.md)
+- [Connect from VS Code](visual-studio-code.md)
+- [Connect from Microsoft Foundry](foundry.md)
+- [Add more entities and descriptions](../descriptions.md)
+- [Configure authentication for production](../../deployment/best-practices-security.md)
+- [Monitor with Application Insights](../../concept/monitor/application-insights.md)
 
 ## Related content
 
-- [SQL MCP Server Overview](../concept/mcp/overview.md)
-- [Deploy to Azure Container Apps](../deployment/how-to-publish-container-apps.md)
-- [Configuration reference](../configuration/index.md)
+- [SQL MCP Server Overview](../introduction.md)
+- [Deploy to Azure Container Apps](../../deployment/how-to-publish-container-apps.md)
+- [Configuration reference](../../configuration/index.md)

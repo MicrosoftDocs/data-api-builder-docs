@@ -111,10 +111,10 @@ Your SQL MCP Server is fully configured.
 ### Run:
 
 ```
-dab start --config dab-config.json --mcp-stdio
+dab start --config dab-config.json
 ```
 
-This starts SQL MCP Server in MCP mode. It waits for a client such as VS Code or an AI agent to connect over standard input and output. The server is now ready for MCP-aware tools and extensions.
+This starts SQL MCP Server in MCP mode. It waits for a client such as VS Code or an AI agent to connect. The server is now ready for MCP-aware tools and extensions.
 
 ## 4. Connect your MCP to VS Code 
 

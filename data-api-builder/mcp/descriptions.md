@@ -11,6 +11,9 @@ ms.date: 12/09/2025
 
 # Adding descriptions to SQL MCP Server entities
 
+> [!IMPORTANT]
+> The SQL MCP Server is in preview and this documentation and the engine implementation is subject to change during this evaluation period.
+
 Descriptions are semantic metadata that help AI agents understand your database schema. When you add descriptions to entities, fields, and parameters, language models can make better decisions about which data to query and how to use it. This article shows you how to add descriptions at every level using the Data API builder CLI.
 
 ## Why add descriptions?
@@ -433,7 +436,7 @@ done
 
 ## Related content
 
-- [SQL MCP Server Overview](overview.md)
-- [Configuration reference - Entities](../../configuration/entities.md)
-- [DAB CLI reference - add command](../../command-line/dab-add.md)
-- [DAB CLI reference - update command](../../command-line/dab-update.md)
+- [SQL MCP Server Overview](introduction.md)
+- [Configuration reference - Entities](../configuration/entities.md)
+- [DAB CLI reference - add command](../command-line/dab-add.md)
+- [DAB CLI reference - update command](../command-line/dab-update.md)

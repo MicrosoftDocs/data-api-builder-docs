@@ -35,23 +35,23 @@
 - name: SQL MCP Server
   items:
     - name: SQL MCP Server
-      href: concept/mcp/index.yml
+      href: mcp/index.yml
       displayName: MCP, Model Context Protocol, agents, AI
     - name: SQL MCP Server Introduction
-      href: concept/mcp/introduction.md
+      href: mcp/introduction.md
     - name: Add semantic descriptions
-      href: concept/mcp/descriptions.md
+      href: mcp/descriptions.md
     - name: Deploy to Azure Container Apps
-      href: quickstart/mcp-aca.md
+      href: mcp/quickstart/azure-container-apps.md
       displayName: ACA, container apps, deployment
     - name: Quickstart with VS Code
-      href: quickstart/mcp-vscode.md
+      href: mcp/quickstart/visual-studio-code.md
       displayName: Visual Studio Code, local, development
     - name: Quickstart with .NET Aspire
-      href: quickstart/mcp-aspire.md
+      href: mcp/quickstart/dotnet-aspire.md
       displayName: Aspire, .NET, development
     - name: Quickstart with Microsoft Foundry
-      href: quickstart/mcp-foundry.md
+      href: mcp/quickstart/foundry.md
       displayName: Foundry, Azure AI, agents, playground
 - name: Quickstarts
   items:

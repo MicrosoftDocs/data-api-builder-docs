@@ -12,6 +12,9 @@ ms.date: 12/03/2025
 
 # SQL MCP Server Overview
 
+> [!IMPORTANT]
+> The SQL MCP Server is in preview and this documentation and the engine implementation is subject to change during this evaluation period.
+
 ## What is MCP?
 
 MCP (Model Context Protocol) is a standard that defines how AI agents discover and call external tools. A tool is a single operation such as creating a record or reading data. Each tool describes its inputs, outputs, and behavior. MCP provides a predictable way for agents to discover and use capabilities.
@@ -24,7 +27,7 @@ SQL MCP Server is Microsoft's dynamic, open source engine for agentic apps. You 
 - Which tables, views, or stored procedures to expose
 - The permissions that apply to each object
 
-SQL MCP Server is included as part of Data API builder (DAB) starting in version 1.7. It exposes SQL operations as a small [family of MCP tools](#the-dml-tools) so agents can interact with database entities through a controlled contract. The server is self hosted but, for developers, it can also run locally through the [DAB command-line](../../command-line/index.yml).
+SQL MCP Server is included as part of Data API builder (DAB) starting in version 1.7. It exposes SQL operations as a small [family of MCP tools](#the-dml-tools) so agents can interact with database entities through a controlled contract. The server is self hosted but, for developers, it can also run locally through the [DAB command-line](../command-line/index.yml).
 
 > [!TIP]
 > Data API builder is open source and free to use.
@@ -71,19 +74,19 @@ SQL MCP Server benefits from the same proven role-based access control (RBAC) sy
 
 ## Support for caching
 
-SQL MCP Server automatically caches results from the `read_records` tool. [Caching in Data API builder](../cache/level-1.md) is enabled globally, and you can configure it per entity. Both level 1 and level 2 caching help reduce database load, prevent request stampedes, and support warm-start scenarios in horizontally scaled environments.
+SQL MCP Server automatically caches results from the `read_records` tool. [Caching in Data API builder](../concept/cache/level-1.md) is enabled globally, and you can configure it per entity. Both level 1 and level 2 caching help reduce database load, prevent request stampedes, and support warm-start scenarios in horizontally scaled environments.
 
 ## Support for monitoring
 
-SQL MCP Server emits logs and telemetry that let enterprises monitor and validate activity from a single pane of glass. This capability includes Azure Log Analytics, [Application Insights](../monitor/application-insights.md), and local file logs inside a container.
+SQL MCP Server emits logs and telemetry that let enterprises monitor and validate activity from a single pane of glass. This capability includes Azure Log Analytics, [Application Insights](../concept/monitor/application-insights.md), and local file logs inside a container.
 
 ### Telemetry
 
-SQL MCP Server is fully instrumented with OpenTelemetry (OTEL) spans and activities. Each operation is traced so developers can correlate behavior across distributed systems. Learn more about Data API builder's native [Open Telemetry](../monitor/open-telemetry.md) support.
+SQL MCP Server is fully instrumented with OpenTelemetry (OTEL) spans and activities. Each operation is traced so developers can correlate behavior across distributed systems. Learn more about Data API builder's native [Open Telemetry](../concept/monitor/open-telemetry.md) support.
 
 ### Health checks
 
-SQL MCP Server provides detailed health and entity checks across REST, GraphQL, and MCP endpoints. [Data API builder Health](../monitor/health-checks.md) lets developers define performance expectations, set thresholds, and verify that each endpoint is functioning as expected.
+SQL MCP Server provides detailed health and entity checks across REST, GraphQL, and MCP endpoints. [Data API builder Health](../concept/monitor/health-checks.md) lets developers define performance expectations, set thresholds, and verify that each endpoint is functioning as expected.
 
 
 ## How to configure SQL MCP Server?
@@ -101,7 +104,7 @@ When MCP is enabled, SQL MCP Server generates its tool surface automatically bas
 
 ### Get started
 
-Getting started means creating the `dab-config.json` to control the engine. You can do this task manually, or you can use the [Data API builder (DAB) CLI](../../command-line/index.yml). The CLI simplifies the task, letting you initialize the file with a single command. Configuration property values can use literal strings, [environment variables](../config/env-function.md), or [Azure Key Vault](../config/akv-function.md) secrets. 
+Getting started means creating the `dab-config.json` to control the engine. You can do this task manually, or you can use the [Data API builder (DAB) CLI](../command-line/index.yml). The CLI simplifies the task, letting you initialize the file with a single command. Configuration property values can use literal strings, [environment variables](../concept/config/env-function.md), or [Azure Key Vault](../concept/config/akv-function.md) secrets. 
 
 ```sh
 dab init --database-type mssql --connection-string "<todo>" --config dab-config.json --host-mode development
