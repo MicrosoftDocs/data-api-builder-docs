@@ -31,7 +31,7 @@ landingContent:
           - text: Solving NL2SQL
             url: introduction.md#solving-nl2sql
           - text: Support for DML
-            url: introduction.md#support-for-dml
+            url: introduction.md#the-dml-tools
           - text: Support for RBAC
             url: introduction.md#support-for-rbac
           - text: Support for caching
