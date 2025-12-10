@@ -44,7 +44,7 @@
       displayName: tools, CRUD, operations, create, read, update, delete
     - name: What are semantic descriptions?
       href: mcp/descriptions.md
-    - name: Deploy to Azure Container Apps
+    - name: Quickstart with Azure Container Apps
       href: mcp/quickstart/azure-container-apps.md
       displayName: ACA, container apps, deployment
     - name: Quickstart with VS Code

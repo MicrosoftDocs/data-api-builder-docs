@@ -163,7 +163,7 @@ dab update Products \
 
 ## Parameter descriptions
 
-Parameter descriptions help agents understand what values to supply when executing stored procedures. This is especially important for MCP tools that call stored procedures.
+Parameter descriptions help agents understand what values to supply when executing stored procedures. This approach is especially important for MCP tools that call stored procedures.
 
 ### Adding parameter descriptions with `dab add`
 
@@ -404,7 +404,7 @@ The agent uses this information to:
 
 ## Scripting description updates
 
-For large schemas, you can script description updates:
+For large schemas, you can script description updates using a loop:
 
 ```bash
 #!/bin/bash

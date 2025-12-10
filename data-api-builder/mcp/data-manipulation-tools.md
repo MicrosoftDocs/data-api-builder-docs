@@ -98,7 +98,7 @@ Creates a new row in a table. Requires create permission on the entity for the c
 
 Queries a table or view. Supports filtering, sorting, pagination, and field selection. The tool builds deterministic SQL from structured parameters, applies read permissions and field projections, and enforces row-level security policies.
 
-Results from `read_records` are automatically cached using Data API builder's caching system. You can configure cache TTL globally or per-entity to reduce database load.
+Results from `read_records` are automatically cached using Data API builder's caching system. You can configure cache time-to-live (TTL) globally or per-entity to reduce database load.
 
 ### update_record
 
@@ -163,7 +163,7 @@ Common scenarios:
 - Disable `create-record` for read-only reporting endpoints
 - Disable `execute-entity` when stored procedures aren't used
 
-When a tool is disabled globally, it's hidden from the `list_tools` response and can't be invoked.
+When a tool is disabled globally, the tool is hidden from the `list_tools` response and can't be invoked.
 
 ## Entity settings
 
@@ -215,7 +215,7 @@ This configuration allows agents to create and read audit logs but prevents modi
 
 Every DML tool operation enforces your role-based access control rules. An agent's role determines which entities are visible, which operations are allowed, which fields are included, and whether row-level policies apply.
 
-If the `anonymous` role only has read permission on `Products`:
+If the `anonymous` role only allows read permission on `Products`:
 
 - `describe_entities` only shows `read_records` in operations
 - `create_record`, `update_record`, and `delete_record` aren't available
