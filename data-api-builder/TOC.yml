@@ -32,6 +32,16 @@
     - name: Security Overview
       href: concept/security/index.md
       displayName: security, auth, identity, roles, protection, access
+- name: SQL MCP Server
+  items:
+    - name: Overview
+      href: concept/mcp/overview.md
+    - name: Add semantic descriptions
+      href: concept/mcp/overview.md
+    - name: Quickstart with Aspire
+      href: quickstart/mcp-aspire.md
+    - name: Quickstart with VS Code
+      href: quickstart/mcp-vscode.md
 - name: Quickstarts
   items:
     - name: Local SQL database
