@@ -37,7 +37,7 @@
     - name: Overview
       href: concept/mcp/overview.md
     - name: Add semantic descriptions
-      href: concept/mcp/overview.md
+      href: concept/mcp/descriptions.md
     - name: Quickstart with Aspire
       href: quickstart/mcp-aspire.md
     - name: Quickstart with VS Code
