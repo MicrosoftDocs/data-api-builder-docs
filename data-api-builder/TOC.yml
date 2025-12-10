@@ -34,12 +34,15 @@
       displayName: security, auth, identity, roles, protection, access
 - name: SQL MCP Server
   items:
-    - name: SQL MCP Server
+    - name: Overview
       href: mcp/index.yml
       displayName: MCP, Model Context Protocol, agents, AI
-    - name: SQL MCP Server Introduction
+    - name: What is SQL MCP Server?
       href: mcp/introduction.md
-    - name: Add semantic descriptions
+    - name: What are the DML tools?
+      href: mcp/dml-tools.md
+      displayName: tools, CRUD, operations, create, read, update, delete
+    - name: What are semantic descriptions?
       href: mcp/descriptions.md
     - name: Deploy to Azure Container Apps
       href: mcp/quickstart/azure-container-apps.md

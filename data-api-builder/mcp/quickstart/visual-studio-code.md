@@ -14,7 +14,7 @@ ms.date: 12/05/2025
 > [!IMPORTANT]
 > The SQL MCP Server is in preview and this documentation and the engine implementation is subject to change during this evaluation period.
 
-This quickstart uses the Data API builder CLI to run a SQL MCP Server locally without Aspire. You'll create a database, configure a config file, start SQL MCP Server, and connect to it from VS Code using a custom tool. This path is the easiest way to explore SQL MCP Server without containers or hosting frameworks.
+This quickstart uses the Data API builder CLI to run a SQL MCP Server locally without Aspire. You create a database, configure a config file, start SQL MCP Server, and connect to it from Visual Studio Code (VS Code) using a custom tool. This path is the easiest way to explore SQL MCP Server without containers or hosting frameworks.
 
 ## Prerequisites
 
@@ -41,7 +41,7 @@ dotnet tool install microsoft.dataapibuilder --prerelease
 
 ## 1. Create your sample database
 
-In this step, you'll create a database named `ProductsDb` and seed it with a single table named `Products`.
+In this step, you create a database named `ProductsDb` and seed it with a single table named `Products`.
 
 Connect to your SQL instance using SQLCMD, Azure Data Studio, SQL Server Management Studio, or any preferred tool, then run:
 
@@ -119,7 +119,7 @@ Before connecting from VS Code, you need to start the SQL MCP Server in a separa
 dab start --config dab-config.json
 ```
 
-This starts the SQL MCP Server on `http://localhost:5000`. Keep this terminal running - VS Code will connect to this HTTP endpoint.
+This command starts the SQL MCP Server on `http://localhost:23241`. Keep this terminal running - Visual Studio Code (VS Code) connects to this HTTP endpoint.
 
 > [!NOTE]
 > The default MCP endpoint is `http://localhost:5000/mcp`. You can customize the port using the `--host-mode` flag or by configuring the runtime settings in your `dab-config.json`.

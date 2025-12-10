@@ -173,64 +173,11 @@ You also don't need to enable MCP on each entity. Entities participate automatic
 
 ## The DML tools
 
-When DML tools are enabled globally and for an entity, SQL MCP Server exposes the following tools to agents. These tools form a typed CRUD surface that always reflects your configuration.
+SQL MCP Server exposes six Data Manipulation Language (DML) tools that enable AI agents to perform secure, type-safe database operations: `describe_entities`, `create_record`, `read_records`, `update_record`, `delete_record`, and `execute_entity`. These tools form a predictable CRUD surface that always reflects your configuration, permissions, and schema.
 
-#### list_tools response
+Each tool respects role-based access control (RBAC), entity permissions, and policies. Agents never interact directly with your database - they work through the secure Data API builder abstraction layer.
 
-```json
-{
-  "tools": [
-    { "name": "describe_entities" },
-    { "name": "create_record" },
-    { "name": "read_records" },
-    { "name": "update_record" },
-    { "name": "delete_record" },
-    { "name": "execute_entity" }
-  ]
-}
-```
-
-**describe_entities** returns the entities available to the current role. Each entry includes field names, data types, primary keys, and allowed operations. This tool doesn't query the database. Instead, it reads from the in-memory configuration of the endpoint, which is built from the provided configuration file or files.
-
-#### Example response
-
-```json
-{
-  "entities": [
-    {
-      "name": "Products",
-      "fields": [
-        {
-          "name": "ProductId",
-          "type": "int",
-          "isKey": true
-        },
-        {
-          "name": "ProductName",
-          "type": "string"
-        }
-      ],
-      "operations": [
-        "read_records",
-        "update_record"
-      ]
-    }
-  ]
-}
-```
-
-> [!NOTE]
-> The entity options used by any of the CRUD and execute DML tools come directly from `describe_entities`. The internal semantic description attached to each tool enforces this two-step flow.
-
-**create_record** creates a new row.
-
-**read_records** queries a table or view.
-
-**update_record** modifies an existing row.
-
-**delete_record** removes an existing row.
-
-**execute_record** runs a stored procedure.
+For complete details on each tool, configuration options, and best practices, see [DML tools reference](dml-tools.md).
 
 ## Conclusion
 

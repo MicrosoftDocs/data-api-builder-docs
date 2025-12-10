@@ -222,7 +222,9 @@ dab add Products \
   --description "Product catalog with pricing, category, and inventory information"
 ```
 
-### 3. Add field descriptions to help AI agents
+### 3. Provide AI agent context with field descriptions
+
+Add field descriptions to help AI agents understand your database schema:
 
 #### Windows PowerShell
 
@@ -390,7 +392,7 @@ MCP_URL=$(az containerapp show \
 echo "Your MCP Server URL: https://$MCP_URL/mcp"
 ```
 
-Save this URL - you'll use it to connect from MCP clients.
+Save this URL - you use it to connect from MCP clients.
 
 ### 5. Test your deployment
 
@@ -412,13 +414,13 @@ You should see a healthy response.
 
 Your SQL MCP Server is now deployed and ready to use. Here's how to connect from various clients:
 
-### VS Code
+### Visual Studio Code (VS Code)
 
 Follow the [Quickstart with VS Code](visual-studio-code.md) guide and use your deployed MCP server URL instead of running locally.
 
 ### From Microsoft Foundry
 
-Follow the [Quickstart with Microsoft Foundry](foundry.md) guide to add your MCP server as a Custom MCP Tool.
+To add your MCP server as a Custom MCP Tool, follow the [Quickstart with Microsoft Foundry](foundry.md) guide.
 
 ### Other MCP clients
 

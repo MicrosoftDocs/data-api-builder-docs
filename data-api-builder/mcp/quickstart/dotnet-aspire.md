@@ -28,7 +28,7 @@ Install these tools before you start.
 
 ### 1. .NET 10
 
-In this step, you'll prepare your machine with the prerequisites required for this quickstart.
+In this step, you prepare your machine with the prerequisites required for this quickstart.
 
 > [!IMPORTANT]
 > You may already have this tool installed. Test it by running `dotnet --version` and confirm it reports version 10 or later. If you run this installation and .NET is already present, it refreshes your system without causing any issues.
@@ -47,7 +47,7 @@ https://get.dot.net
 
 ### 2. Container runtime
 
-In this step, you'll install Docker Desktop to support the Aspire project.
+In this step, you install Docker Desktop to support the Aspire project.
 
 > [!IMPORTANT]
 > You may already have this tool installed. Test it by running `docker --version` and confirm it reports version 29 or later. If you run this installation and Docker is already present, it refreshes your system without causing any issues.
@@ -69,7 +69,7 @@ brew install --cask docker
 
 ### 3. Aspire and Data API builder tools
 
-In this step, you'll create the default Aspire project files used later.
+In this step, you create the default Aspire project files used later.
 
 #### Run the following commands
 
@@ -222,7 +222,7 @@ dab update Products --fields.name Cost --fields.description "Store cost"
 
 ## Test your solution
 
-In this step, you'll run your Aspire environment and confirm that SQL Server, SQL MCP Server, and MCP Inspector are working together.
+In this step, you run your Aspire environment and confirm that SQL Server, SQL MCP Server, and MCP Inspector are working together.
 
 ### 1. Start Aspire
 
@@ -230,7 +230,7 @@ In this step, you'll run your Aspire environment and confirm that SQL Server, SQ
 aspire run
 ```
 
-When the dashboard opens, you'll see links for Swagger, Inspector, and Commander.
+When the dashboard opens, you see links for Swagger, Inspector, and Commander.
 
 ### 2. Query your data with SQL Commander
 

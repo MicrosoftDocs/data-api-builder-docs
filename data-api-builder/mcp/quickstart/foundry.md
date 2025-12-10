@@ -23,7 +23,7 @@ This quickstart shows you how to connect a deployed SQL MCP Server to Microsoft 
 
 ### 1. Deployed SQL MCP Server
 
-You need a SQL MCP Server deployed to Azure Container Apps. If you haven't deployed one yet, complete the [Deploy SQL MCP Server to Azure Container Apps](azure-container-apps.md) quickstart first.
+You need a SQL MCP Server deployed to Azure Container Apps. If you don't have a deployment yet, complete the [Deploy SQL MCP Server to Azure Container Apps](azure-container-apps.md) quickstart first.
 
 You need the MCP endpoint URL from that deployment (for example, `https://your-app.azurecontainerapps.io/mcp`).
 
@@ -62,14 +62,15 @@ The **Add Model Context Protocol tool** dialog appears. Fill in the following in
 
 **Remote MCP Server endpoint** (required):
 
-- Enter your MCP server URL: `https://<your-container-app-url>/mcp` (from your ACA deployment)
+- Enter your MCP server URL: `https://<your-container-app-url>/mcp` (from your Azure Container Apps (ACA) deployment)
 
 **Authentication** (required):
 
 - Select **Unauthenticated** from the dropdown
 
 > [!NOTE]
-> This works because the quickstart configured `anonymous:read` permissions. SQL MCP Server doesn't support Key-based or Passthrough authentication modes.
+> [!NOTE]
+> This configuration works because the quickstart configured `anonymous:read` permissions. SQL MCP Server doesn't support Key-based or Passthrough authentication modes.
 
 Select **Connect** to add the tool.
 
@@ -169,10 +170,10 @@ For deployment issues, see the [troubleshooting section](azure-container-apps.md
 - [Add more entities to your MCP server](../descriptions.md)
 - [Run SQL MCP Server locally with VS Code](visual-studio-code.md)
 - [Run SQL MCP Server with .NET Aspire](dotnet-aspire.md)
-- [Learn about MCP tools in Foundry](https://learn.microsoft.com/azure/ai-foundry/agents/concepts/tool-catalog)
+- [Learn about MCP tools in Foundry](/azure/ai-foundry/agents/concepts/tool-catalog)
 
 ## Related content
 
 - [SQL MCP Server Overview](../introduction.md)
 - [Deploy to Azure Container Apps](azure-container-apps.md)
-- [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)
+- [Microsoft Foundry documentation](/azure/ai-foundry/)

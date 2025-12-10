@@ -6,7 +6,7 @@ metadata:
   title: SQL MCP Server documentation
   description: Starting with version 1.7, DAB gives developers a drop-in MCP solution for secure, production-ready operations against SQL.
   author: jnixon
-  ms.author: jerrynixon
+  ms.author: sidandrews
   ms.reviewer: sidandrews
   ms.service: data-api-builder
   ms.topic: landing-page
@@ -21,6 +21,8 @@ landingContent:
             url: introduction.md#what-is-mcp
           - text: What is SQL MCP Server?
             url: introduction.md#what-is-the-sql-mcp-server
+          - text: What are DML tools?
+            url: dml-tools.md#what-are-dml-tools
           - text: Typical use cases
             url: introduction.md#typical-use-cases
       - linkListType: concept
@@ -37,6 +39,8 @@ landingContent:
             url: introduction.md#support-for-caching
           - text: Support for monitoring
             url: introduction.md#support-for-monitoring
+          - text: RBAC integration with DML tools
+            url: dml-tools.md#rbac-integration
 
   - title: Get started
     linkLists:
@@ -74,24 +78,34 @@ landingContent:
     linkLists:
       - linkListType: concept
         links:
-          - text: The DML tools overview
-            url: introduction.md#the-dml-tools
+          - text: What are DML tools?
+            url: dml-tools.md#what-are-dml-tools
+          - text: The tools
+            url: dml-tools.md#the-tools
           - text: describe_entities tool
-            url: introduction.md#example-response
+            url: dml-tools.md#describe_entities
           - text: create_record tool
-            url: introduction.md#the-dml-tools
+            url: dml-tools.md#create_record
           - text: read_records tool
-            url: introduction.md#the-dml-tools
+            url: dml-tools.md#read_records
           - text: update_record tool
-            url: introduction.md#the-dml-tools
+            url: dml-tools.md#update_record
           - text: delete_record tool
-            url: introduction.md#the-dml-tools
+            url: dml-tools.md#delete_record
           - text: execute_entity tool
-            url: introduction.md#the-dml-tools
+            url: dml-tools.md#execute_entity
+      - linkListType: how-to-guide
+        links:
+          - text: Configure DML tools globally
+            url: dml-tools.md#runtime-configuration
+          - text: Configure DML tools per entity
+            url: dml-tools.md#entity-settings
+          - text: Use DML tools with RBAC
+            url: dml-tools.md#rbac-integration
       - linkListType: reference
         links:
           - text: list_tools response
-            url: introduction.md#list_tools-response
+            url: dml-tools.md#list_tools-response
 
   - title: Monitor and troubleshoot
     linkLists:
@@ -109,3 +123,21 @@ landingContent:
             url: ../concept/monitor/open-telemetry.md
           - text: Health checks reference
             url: ../concept/monitor/health-checks.md
+
+  - title: Deploy and secure
+    linkLists:
+      - linkListType: deploy
+        links:
+          - text: Deploy to Azure Container Apps
+            url: quickstart/azure-container-apps.md
+          - text: Deployment best practices
+            url: ../deployment/best-practices-configuration.md
+          - text: Security best practices
+            url: ../deployment/best-practices-security.md
+      - linkListType: tutorial
+        links:
+          - text: Monitor with Application Insights
+            url: quickstart/azure-container-apps.md#monitoring-and-troubleshooting
+          - text: Configure authentication
+            url: ../deployment/best-practices-security.md
+
