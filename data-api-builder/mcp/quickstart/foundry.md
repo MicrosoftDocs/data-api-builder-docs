@@ -170,10 +170,10 @@ For deployment issues, see the [troubleshooting section](azure-container-apps.md
 - [Add more entities to your MCP server](../descriptions.md)
 - [Run SQL MCP Server locally with VS Code](visual-studio-code.md)
 - [Run SQL MCP Server with .NET Aspire](dotnet-aspire.md)
-- [Learn about MCP tools in Foundry](../../ai-foundry/agents/concepts/tool-catalog.md)
+- [Learn about MCP tools in Foundry](/azure/ai-foundry/agents/concepts/tool-catalog)
 
 ## Related content
 
 - [SQL MCP Server Overview](../introduction.md)
 - [Deploy to Azure Container Apps](azure-container-apps.md)
-- [Microsoft Foundry documentation](../../ai-foundry/index.yml)
+- [Microsoft Foundry documentation](/azure/ai-foundry/)

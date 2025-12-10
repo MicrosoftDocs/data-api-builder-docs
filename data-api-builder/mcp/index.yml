@@ -5,7 +5,6 @@ summary: Data API builder (DAB) doesn't just provide secure REST and GraphQL API
 metadata:
   title: SQL MCP Server documentation
   description: Starting with version 1.7, DAB gives developers a drop-in MCP solution for secure, production-ready operations against SQL.
-  author: sidandrews
   ms.author: sidandrews
   ms.reviewer: sidandrews
   ms.service: data-api-builder

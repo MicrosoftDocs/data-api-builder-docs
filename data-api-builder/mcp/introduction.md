@@ -58,7 +58,7 @@ Why? Models aren't deterministic, and complex queries are the most likely to pro
 
 Instead, SQL MCP Server supports what might be called an NL2DAB model. This approach uses the secure Data API builder entity abstraction layer and the built-in DAB Query Builder. Together, they produce accurate, well-formed Transact-SQL (T-SQL) in a fully deterministic way. This approach removes the risk, overhead, and nuisance associated with NL2SQL while preserving safety and reliability for agent-generated queries.
 
-## Support for DML
+## Support for DDL
 
 DDL (Data Definition Language) is the database language used to create and alter objects such as tables and views. SQL MCP Server is built around DML (Data Manipulation Language), the database language used to create, read, update, and delete data in existing tables and views. DML also covers the execution of stored procedures. As a result, SQL MCP Server is designed to work with data, not schema. This design aligns with production MCP use cases where AI agents interact with mission critical or business sensitive systems.
 
