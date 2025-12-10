@@ -1,7 +1,7 @@
 ### YamlMime:Landing
 
 title: SQL MCP Server
-summary: Data API builder (DAB) doesn't just provide secure REST and GraphQL APIs over Microsoft SQL for custom apps, it also provides a robust MCP Remote Server for AI agentic apps. Starting with version 1.7, DAB gives developers a drop-in MCP solution for secure, production-ready operations against SQL. Self-hosted and scalable, the SQL MCP Server works in any cloud and on premise. Open source and free, the SQL MCP Server is available to every user without special licenses. Built on Data API builder, the SQL MCP Server supports multiple simultaneous data sources as well as backend databases other than SQL, including Postgres, Azure Cosmos DB, and MySQL.
+summary: Data API builder (DAB) doesn't just provide secure REST and GraphQL APIs over Microsoft SQL for custom apps, it also provides a robust MCP Remote Server for AI agentic apps. Starting with version 1.7, DAB gives developers a drop-in MCP solution for secure, production-ready operations against SQL. Self-hosted and scalable, the SQL MCP Server works in any cloud and on premise. Open source and free, the SQL MCP Server is available to every user without special licenses. Built on Data API builder, the SQL MCP Server supports multiple simultaneous data sources and backend databases other than SQL, including Postgres, Azure Cosmos DB, and MySQL.
 metadata:
   title: SQL MCP Server documentation
   description: Starting with version 1.7, DAB gives developers a drop-in MCP solution for secure, production-ready operations against SQL.

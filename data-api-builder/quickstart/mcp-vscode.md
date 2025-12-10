@@ -13,17 +13,17 @@ ms.date: 12/05/2025
 
 ---
 
-# Quickstart: Run a local SQL MCP Server with VS Code
+# Quickstart: Run a local SQL MCP Server with Visual Studio Code (VS Code)
 
-This quickstart uses the Data API builder CLI to run a SQL MCP Server locally without Aspire. You will create a simple database, configure a config file, start SQL MCP Server, and connect to it from VS Code using a custom tool. This path is the simplest way to explore SQL MCP Server without containers or hosting frameworks.
+This quickstart uses the Data API builder CLI to run a SQL MCP Server locally without Aspire. You'll create a database, configure a config file, start SQL MCP Server, and connect to it from VS Code using a custom tool. This path is the easiest way to explore SQL MCP Server without containers or hosting frameworks.
 
 ## Prerequisites
 
-Install these before you start.
+Install these tools before you start.
 
 ### 1. .NET 9+
 
-You may already have this installed. Run `dotnet --version` and confirm it reports version 10 or later. If .NET is already present, reinstalling is safe and will only refresh your runtime.
+You may already have this tool installed. Run `dotnet --version` and confirm it reports version 10 or later. If .NET is already present, reinstalling is safe and only refreshes your runtime.
 
 ### 2. SQL Server 2016+
 
@@ -42,7 +42,7 @@ dotnet tool install microsoft.dataapibuilder --prerelease
 
 ## 1. Create your sample database
 
-In this step, you will create a database named `ProductsDb` and seed it with a single table named `Products`.
+In this step, you'll create a database named `ProductsDb` and seed it with a single table named `Products`.
 
 Connect to your SQL instance using SQLCMD, Azure Data Studio, SQL Server Management Studio, or any preferred tool, then run:
 
@@ -88,7 +88,7 @@ Place it in the same folder as your `dab-config.json`, then add the following li
 MSSQL_CONNECTION_STRING=Server=localhost;Database=ProductsDb;Trusted_Connection=True;TrustServerCertificate=True
 ```
 
-SQL MCP Server automatically loads variables from a local `.env` file, so the following command will now work without setting anything in your terminal.
+SQL MCP Server automatically loads variables from a local `.env` file, so the following command works without setting anything in your terminal.
 
 ### Run the following script:
 
@@ -123,7 +123,7 @@ This starts SQL MCP Server in MCP mode. It waits for a client such as VS Code or
 ## 4. Connect your MCP to VS Code 
 
 > [!IMPORTANT]
-> A workspace is the root folder that VS Code treats as your project. Settings and MCP server definitions only apply inside that folder. If you open a single file, you are not in a workspace. You must open a folder.
+> A workspace is the root folder that VS Code treats as your project. Settings and MCP server definitions only apply inside that folder. If you open a single file, you aren't in a workspace. You must open a folder.
 
 ### In VS Code:
 
@@ -151,7 +151,7 @@ $/.vscode/mcp.json
 }
 ```
 
-Save the file. VS Code will automatically detect the MCP server and list the available tools created by your SQL MCP Server. The `Products` entity will appear as MCP tools such as `read_records`, `list_records`, and `create_record`.
+Save the file. VS Code automatically detects the MCP server and lists the available tools created by your SQL MCP Server. The `Products` entity appears as MCP tools such as `read_records`, `list_records`, and `create_record`.
 
 ### Try a tool call
 
