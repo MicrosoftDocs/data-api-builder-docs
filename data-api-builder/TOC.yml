@@ -40,7 +40,7 @@
     - name: What is SQL MCP Server?
       href: mcp/introduction.md
     - name: What are the DML tools?
-      href: mcp/dml-tools.md
+      href: mcp/data-manipulation-tools.md
       displayName: tools, CRUD, operations, create, read, update, delete
     - name: What are semantic descriptions?
       href: mcp/descriptions.md

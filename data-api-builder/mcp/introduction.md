@@ -177,7 +177,7 @@ SQL MCP Server exposes six Data Manipulation Language (DML) tools that enable AI
 
 Each tool respects role-based access control (RBAC), entity permissions, and policies. Agents never interact directly with your database - they work through the secure Data API builder abstraction layer.
 
-For complete details on each tool, configuration options, and best practices, see [DML tools reference](dml-tools.md).
+For complete details on each tool, configuration options, and best practices, see [DML tools reference](data-manipulation-tools.md).
 
 ## Conclusion
 
