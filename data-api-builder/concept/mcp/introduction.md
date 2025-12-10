@@ -141,14 +141,14 @@ The SQL MCP Server is enabled by default in the Data API builder configuration. 
 The CLI also lets you set every property individually or programmatically through scripting. 
 
 ```sh
-dab configure runtime mcp --enabled true
-dab configure runtime mcp --path "/mcp"
-dab configure runtime mcp --describe-entities true
-dab configure runtime mcp --create-record true
-dab configure runtime mcp --read-records true
-dab configure runtime mcp --update-record true
-dab configure runtime mcp --delete-record true
-dab configure runtime mcp --execute-entity true
+dab configure --runtime.mcp.enabled true
+dab configure --runtime.mcp.path "/mcp"
+dab configure --runtime.mcp.dml-tools.describe-entities true
+dab configure --runtime.mcp.dml-tools.create-record true
+dab configure --runtime.mcp.dml-tools.read-records true
+dab configure --runtime.mcp.dml-tools.update-record true
+dab configure --runtime.mcp.dml-tools.delete-record true
+dab configure --runtime.mcp.dml-tools.execute-entity true
 ```
 
 **Why disable individual tools?**

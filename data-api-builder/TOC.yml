@@ -34,16 +34,25 @@
       displayName: security, auth, identity, roles, protection, access
 - name: SQL MCP Server
   items:
-    - name: Overview
-      href: concept/mcp/overview.md
+    - name: SQL MCP Server
+      href: concept/mcp/index.yml
+      displayName: MCP, Model Context Protocol, agents, AI
+    - name: SQL MCP Server Introduction
+      href: concept/mcp/introduction.md
     - name: Add semantic descriptions
       href: concept/mcp/descriptions.md
-    - name: Quickstart with Aspire
-      href: quickstart/mcp-aspire.md
+    - name: Deploy to Azure Container Apps
+      href: quickstart/mcp-aca.md
+      displayName: ACA, container apps, deployment
     - name: Quickstart with VS Code
       href: quickstart/mcp-vscode.md
-    - name: Quickstart with Foundry
+      displayName: Visual Studio Code, local, development
+    - name: Quickstart with .NET Aspire
+      href: quickstart/mcp-aspire.md
+      displayName: Aspire, .NET, development
+    - name: Quickstart with Microsoft Foundry
       href: quickstart/mcp-foundry.md
+      displayName: Foundry, Azure AI, agents, playground
 - name: Quickstarts
   items:
     - name: Local SQL database
