@@ -42,6 +42,8 @@
       href: quickstart/mcp-aspire.md
     - name: Quickstart with VS Code
       href: quickstart/mcp-vscode.md
+    - name: Quickstart with Foundry
+      href: quickstart/mcp-foundry.md
 - name: Quickstarts
   items:
     - name: Local SQL database
