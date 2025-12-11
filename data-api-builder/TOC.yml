@@ -44,18 +44,18 @@
       displayName: tools, CRUD, operations, create, read, update, delete
     - name: What are semantic descriptions?
       href: mcp/descriptions.md
-    - name: SQL MCP with Azure Container Apps
-      href: mcp/quickstart/azure-container-apps.md
-      displayName: ACA, container apps, deployment
-    - name: SQL MCP with VS Code
+    - name: SQL MCP and VS Code
       href: mcp/quickstart/visual-studio-code.md
       displayName: Visual Studio Code, local, development
-    - name: SQL MCP with .NET Aspire
+    - name: SQL MCP and .NET Aspire
       href: mcp/quickstart/dotnet-aspire.md
       displayName: Aspire, .NET, development
-    - name: SQL MCP with Microsoft Foundry
+    - name: SQL MCP and Microsoft Foundry
       href: mcp/quickstart/foundry.md
       displayName: Foundry, Azure AI, agents, playground
+    - name: SQL MCP and Azure Container Apps
+      href: mcp/quickstart/azure-container-apps.md
+      displayName: ACA, container apps, deployment
 - name: Quickstarts
   items:
     - name: Local SQL database

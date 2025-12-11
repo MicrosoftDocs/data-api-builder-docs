@@ -1,10 +1,10 @@
 ### YamlMime:Landing
 
 title: SQL MCP Server
-summary: Data API builder (DAB) doesn't just provide secure REST and GraphQL APIs over Microsoft SQL for custom apps, it also provides a robust MCP Remote Server for AI agentic apps. Starting with version 1.7, DAB gives developers a drop-in MCP solution for secure, production-ready operations against SQL. Self-hosted and scalable, the SQL MCP Server works in any cloud and on premise. Open source and free, the SQL MCP Server is available to every user without special licenses. Built on Data API builder, the SQL MCP Server supports multiple simultaneous data sources and backend databases other than SQL, including Postgres, Azure Cosmos DB, and MySQL.
+summary: SQL MCP Server gives developers a drop-in MCP solution for secure, production-ready operations against SQL. Self-hosted and scalable, it runs in any cloud and on premise. Open source and free, the SQL MCP Server is available to every user without special licenses. It supports multiple simultaneous data sources and backend databases other than SQL, including Postgres, Azure Cosmos DB, and MySQL.
 metadata:
   title: SQL MCP Server documentation
-  description: Starting with version 1.7, DAB gives developers a drop-in MCP solution for secure, production-ready operations against SQL.
+  description: Starting with version 1.7, the SQL MCP Server gives developers a drop-in MCP solution for secure, production-ready operations against SQL.
   ms.author: sidandrews
   ms.reviewer: sidandrews
   ms.service: data-api-builder
@@ -45,14 +45,14 @@ landingContent:
     linkLists:
       - linkListType: quickstart
         links:
-          - text: Deploy to Azure Container Apps
-            url: quickstart/azure-container-apps.md
           - text: Quickstart with VS Code
             url: quickstart/visual-studio-code.md
           - text: Quickstart with .NET Aspire
             url: quickstart/dotnet-aspire.md
           - text: Quickstart with Microsoft Foundry
             url: quickstart/foundry.md
+          - text: Deploy to Azure Container Apps
+            url: quickstart/azure-container-apps.md
       - linkListType: how-to-guide
         links:
           - text: Add semantic descriptions

@@ -18,11 +18,11 @@ SQL MCP Server exposes six Data Manipulation Language (DML) tools to AI agents. 
 
 ## What are DML tools?
 
-DML (Data Manipulation Language) tools handle data operations - creating, reading, updating, and deleting records, plus executing stored procedures. Unlike DDL (Data Definition Language) which modifies schema, DML works exclusively with data in existing tables and views.
+DML (Data Manipulation Language) tools handle data operations: creating, reading, updating, and deleting records, plus executing stored procedures. Unlike DDL (Data Definition Language) which modifies schema, DML works exclusively on the data plane in existing tables and views.
 
 The six DML tools are:
 
-- `describe_entities` - Discovers available entities and their operations
+- `describe_entities` - Discovers available entities and operations
 - `create_record` - Inserts new rows
 - `read_records` - Queries tables and views
 - `update_record` - Modifies existing rows
@@ -109,7 +109,7 @@ Modifies an existing row. Requires the primary key and fields to update. The too
 Removes an existing row. Requires the primary key. The tool validates the primary key exists, enforces delete permissions and policies, and performs safe deletion with transaction support.
 
 > [!WARNING]
-> Many production scenarios disable this tool globally to prevent accidental deletions.
+> Some production scenarios will disable this tool globally to broadly constrain models.
 
 ### execute_entity
 
