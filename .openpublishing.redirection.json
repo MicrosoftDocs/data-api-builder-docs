@@ -6,6 +6,11 @@
       "redirect_document_id": false
     },
     {
+      "source_path_from_root": "/data-api-builder/mcp/index.yml",
+      "redirect_url": "/azure/sql-mcp-server",
+      "redirect_document_id": false
+    },
+    {
       "source_path_from_root": "/data-api-builder/how-to/use-environments.md",
       "redirect_url": "/azure/data-api-builder/concept/config/environments",
       "redirect_document_id": false
