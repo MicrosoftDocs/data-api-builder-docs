@@ -40,7 +40,7 @@ dab add <entity-name> [options]
 | [`--fields.primary-key`](#--fieldsprimary-key) | Primary key flags (comma-separated, aligned to `--fields.name`).    |
 | [`--graphql`](#--graphql)                    | GraphQL exposure: `false`, `true`, `singular`, or `singular:plural`. |
 | [`--graphql.operation`](#--graphqloperation) | Stored procedures only. `Query` or `Mutation` (default mutation).    |
-| [`--permissions`](#--permissions)            | Required. One or more `role:actions` pairs. Repeatable.              |
+| [`--permissions`](#--permissions)            | Required. `role:actions` for a single role.                          |
 | [`--policy-database`](#--policy-database)    | OData-style filter applied in DB query.                              |
 | [`--policy-request`](#--policy-request)      | Request policy evaluated before DB call.                             |
 | [`--parameters.name`](#--parametersname)     | Stored procedures only. Parameter names (comma-separated).           |
@@ -130,7 +130,7 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --cache.enabled t
         "object": "dbo.Books"
       },
       "permissions": [
-        { "role": "anonymous", "actions": [ "read" ] }
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
       ],
       "cache": {
         "enabled": true
@@ -161,9 +161,10 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --cache.ttl 300
         "object": "dbo.Books"
       },
       "permissions": [
-        { "role": "anonymous", "actions": [ "read" ] }
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
       ],
       "cache": {
+        "enabled": false,
         "ttl-seconds": 300
       }
     }
@@ -174,6 +175,9 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --cache.ttl 300
 ## `--description`
 
 Free-text description of the entity.
+
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
 
 ### Example
 
@@ -192,7 +196,7 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --description "En
         "object": "dbo.Books"
       },
       "permissions": [
-        { "role": "anonymous", "actions": [ "read" ] }
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
       ],
       "description": "Entity for managing book inventory"
     }
@@ -229,8 +233,7 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --fields.exclude 
             }
           ]
         }
-      ],
-      "graphql": true
+      ]
     }
   }
 }
@@ -265,8 +268,7 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --fields.include 
             }
           ]
         }
-      ],
-      "graphql": true
+      ]
     }
   }
 }
@@ -290,11 +292,14 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --graphql book:bo
     "Book": {
       "source": { "type": "table", "object": "dbo.Books" },
       "permissions": [
-        { "role": "anonymous", "actions": [ "read" ] }
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
       ],
       "graphql": {
-        "singular": "book",
-        "plural": "books"
+        "enabled": true,
+        "type": {
+          "singular": "book",
+          "plural": "books"
+        }
       }
     }
   }
@@ -319,9 +324,10 @@ dab add BookProc --source dbo.MyProc --source.type stored-procedure --permission
     "BookProc": {
       "source": { "type": "stored-procedure", "object": "dbo.MyProc" },
       "permissions": [
-        { "role": "admin", "actions": [ "execute" ] }
+        { "role": "admin", "actions": [ { "action": "execute" } ] }
       ],
       "graphql": {
+        "enabled": true,
         "operation": "query"
       }
     }
@@ -331,12 +337,16 @@ dab add BookProc --source dbo.MyProc --source.type stored-procedure --permission
 
 ## `--permissions`
 
-Defines role→actions pairs. Use repeated flags for multiple roles.
+Defines role→actions pairs.
+
+`--permissions` isn't repeatable. To add more roles, run `dab add` with one role and then run `dab update` for additional roles.
 
 ### Example
 
 ```bash
-dab add Book --source dbo.Books --permissions "anonymous:read" --permissions "authenticated:create,read,update,delete"
+dab add Book --source dbo.Books --permissions "anonymous:read"
+
+dab update Book --permissions "authenticated:create,read,update,delete"
 ```
 
 ## `--parameters.name`
@@ -384,7 +394,7 @@ dab add GetOrdersByDateRange \
           {
             "name": "CustomerID",
             "required": false,
-            "default": null,
+            "default": "null",
             "description": "Optional customer ID filter"
           }
         ]
@@ -392,7 +402,11 @@ dab add GetOrdersByDateRange \
       "permissions": [
         {
           "role": "authenticated",
-          "actions": [ "execute" ]
+          "actions": [
+            {
+              "action": "execute"
+            }
+          ]
         }
       ]
     }
@@ -466,7 +480,7 @@ dab add Products \
     "Products": {
       "source": { "type": "table", "object": "dbo.Products" },
       "permissions": [
-        { "role": "anonymous", "actions": [ "*" ] }
+        { "role": "anonymous", "actions": [ { "action": "*" } ] }
       ],
       "fields": [
         {
@@ -534,7 +548,7 @@ dab add Products --source dbo.Products --permissions "anonymous:*" --fields.name
     "Products": {
       "source": { "type": "table", "object": "dbo.Products" },
       "permissions": [
-        { "role": "anonymous", "actions": [ "*" ] }
+        { "role": "anonymous", "actions": [ { "action": "*" } ] }
       ],
       "fields": [
         {
@@ -592,6 +606,31 @@ Request-level policy.
 dab add Book --source dbo.Books --permissions "anonymous:read" --policy-request "@claims.role == 'admin'"
 ```
 
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "read",
+              "policy": {
+                "request": "@claims.role == 'admin'"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
 ## `--rest`
 
 Control REST exposure.
@@ -610,10 +649,11 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --rest BooksApi
     "Book": {
       "source": { "type": "table", "object": "dbo.Books" },
       "permissions": [
-        { "role": "anonymous", "actions": [ "read" ] }
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
       ],
       "rest": {
-        "path": "BooksApi"
+        "enabled": true,
+        "path": "/BooksApi"
       }
     }
   }
@@ -638,10 +678,10 @@ dab add BookProc --source dbo.MyProc --source.type stored-procedure --permission
     "BookProc": {
       "source": { "type": "stored-procedure", "object": "dbo.MyProc" },
       "permissions": [
-        { "role": "admin", "actions": [ "execute" ] }
+        { "role": "admin", "actions": [ { "action": "execute" } ] }
       ],
       "rest": {
-        "path": "BookProc",
+        "enabled": true,
         "methods": [ "get", "post" ]
       }
     }
@@ -670,7 +710,7 @@ dab add Book --source dbo.Books --permissions "anonymous:read"
         "object": "dbo.Books"
       },
       "permissions": [
-        { "role": "anonymous", "actions": [ "read" ] }
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
       ]
     }
   }
@@ -699,7 +739,7 @@ dab add BookView --source dbo.MyView --source.type view --source.key-fields "id,
         "key-fields": [ "id", "region" ]
       },
       "permissions": [
-        { "role": "anonymous", "actions": [ "read" ] }
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
       ]
     }
   }
@@ -709,6 +749,9 @@ dab add BookView --source dbo.MyView --source.type view --source.key-fields "id,
 ## `--source.params`
 
 Stored procedures only. Comma-separated `name:value` pairs. Not allowed for tables or views.
+
+> [!NOTE]
+> In the v1.7 prerelease CLI (currently RC), `--source.params` is deprecated. Use `--parameters.name`, `--parameters.default`, and related `--parameters.*` options instead.
 
 ### Example
 
@@ -725,13 +768,21 @@ dab add BookProc --source dbo.MyProc --source.type stored-procedure --source.par
       "source": {
         "type": "stored-procedure",
         "object": "dbo.MyProc",
-        "parameters": {
-          "year": 2024,
-          "active": true
-        }
+        "parameters": [
+          {
+            "name": "year",
+            "required": false,
+            "default": "2024"
+          },
+          {
+            "name": "active",
+            "required": false,
+            "default": "True"
+          }
+        ]
       },
       "permissions": [
-        { "role": "admin", "actions": [ "execute" ] }
+        { "role": "admin", "actions": [ { "action": "execute" } ] }
       ]
     }
   }
@@ -779,7 +830,7 @@ dab add Book --source dbo.Books --source.type table --permissions "anonymous:rea
         "object": "dbo.Books"
       },
       "permissions": [
-        { "role": "anonymous", "actions": [ "read" ] }
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
       ]
     }
   }

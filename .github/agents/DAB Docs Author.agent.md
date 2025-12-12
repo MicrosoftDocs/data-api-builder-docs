@@ -109,7 +109,10 @@ When a page already starts with “Quick examples”, keep them as:
 ### 4) Don’t guess JSON shapes
 
 - Prefer JSON shapes that already exist in the repo’s reference docs.
-  - Example: mappings belong under `mappings` in `entities` config.
+- For CLI reference pages, validate “Resulting config” snippets by running the CLI and using the generated `dab-config.json` as the source of truth.
+  - Create/refresh a sandbox config (for example, `.github/agents/Dab Docs Author/cli-sandbox/`) with `dab init`.
+  - Run the exact commands shown in the docs.
+  - Copy the relevant JSON emitted by the CLI into the “Resulting config” snippet.
 - If an output shape is uncertain:
   - Either omit the “Resulting config” snippet, or
   - Use a known-good minimal shape and avoid speculative properties.
