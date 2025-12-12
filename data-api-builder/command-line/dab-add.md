@@ -52,31 +52,128 @@ dab add <entity-name> [options]
 
 Logical name of the entity in config. Case-sensitive.
 
-### Example
+### Quick examples for tables, views, and stored procedures
+
+#### Add a table
 
 ```bash
-dab add Book --source dbo.Books --permissions "anonymous:read"
+dab add Book 
+  --source dbo.Books 
+  --source.type table
+  --permissions "anonymous:read"
+  -- description "Example for managing book inventory"
 ```
 
-### Resulting config
+#### Optionally include table columns (use [dab update](./dab-update.md))
 
-```json
-{
-  "entities": {
-    "Book": {
-      "source": {
-        "type": "table",
-        "object": "dbo.Books"
-      },
-      "permissions": [
-        {
-          "role": "anonymous",
-          "actions": [ "read" ]
-        }
-      ]
-    }
-  }
-}
+```bash
+# all at once
+
+dab update Book 
+  --fields.name "Id,Title,Price"
+  --fields.alias "id,book_title,retail_price"
+  --fields.description "Book identifier,Book title in store,Retail price in USD"
+
+# or one at a time
+
+dab update Book 
+  --fields.name "Id"
+  --fields.alias "id"
+  --fields.description "Book identifier"
+dab update Book
+  --fields.name "Title"
+  --fields.alias "book_title"
+  --fields.description "Book title in store"
+dab update Book
+  --fields.name "Price"
+  --fields.alias "retail_price"
+  --fields.description "Retail price in USD"
+
+```
+
+#### Add a view
+
+```bash
+dab add BookView
+  --source dbo.MyView 
+  --source.type view 
+  --source.key-fields "id,region" // required for views
+  --permissions "anonymous:read"  
+  --description "Example for managing book inventory from view"
+```
+
+#### Optionally include view columns (use [dab update](./dab-update.md))
+
+```bash
+# all at once
+
+dab update BookView 
+  --fields.name "Id,Title,Price"
+  --fields.primary-key "true,false,false"
+  --fields.alias "id,book_title,retail_price"
+  --fields.description "Book identifier,Book title in store,Retail price in USD"
+
+# or one at a time
+
+dab update BookView 
+  --fields.name "Id"
+  --fields.primary-key true
+  --fields.alias "id"
+  --fields.description "Book identifier"
+dab update BookView
+  --fields.name "Title"
+  --fields.alias "book_title"
+  --fields.description "Book title in store"
+dab update BookView
+  --fields.name "Price"
+  --fields.alias "retail_price"
+  --fields.description "Retail price in USD"
+```
+
+#### Add a stored procedure 
+
+```bash
+# without parameters
+
+dab add BookProcNoParams 
+  --source dbo.MyProcNoParams 
+  --source.type stored-procedure 
+  --permissions "anonymous:execute" 
+  --description "Example for executing book stored procedure without parameters"
+
+# with parameters
+
+dab add BookProc 
+  --source dbo.MyProc 
+  --source.type stored-procedure 
+  --source.params "year:2024,active:true" 
+  --permissions "anonymous:execute" 
+  --description "Example for executing book stored procedure"
+```
+
+#### Optionally update parameters with [dab update](./dab-update.md)
+
+```bash 
+# all at once
+
+dab update BookProc 
+  --parameters.name "year,active"
+  --parameters.description "Year for filtering active books,Flag to include only active books"
+  --parameters.required "false,false"
+  --parameters.default "2024,true"
+
+# or one at a time
+
+dab update BookProc 
+  --parameters.name "year"
+  --parameters.description "Year for filtering active books"
+  --parameters.required false
+  --parameters.default "2024"
+dab update BookProc
+  --parameters.name "active"
+  --parameters.description "Flag to include only active books"
+  --parameters.required false
+  --parameters.default "true"  
 ```
 
 ## `-c, --config`
