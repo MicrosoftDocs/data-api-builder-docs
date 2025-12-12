@@ -24,7 +24,7 @@ To simulate an authenticated request without configuring an authentication provi
 - If desired, the request is evaluated in the context of any role denoted in the `X-MS-API-ROLE` Http header.
 
 > [!NOTE]
-> While the desired role will be honored, authorization permissions defining database policies will not work because custom claims can't be set for the authenticated user with the `Simulator` provider.
+> While the desired role is honored, authorization permissions that define database policies don't work because custom claims can't be set for the authenticated user with the `Simulator` provider.
 
 ### 1. Update the runtime configuration authentication provider
 

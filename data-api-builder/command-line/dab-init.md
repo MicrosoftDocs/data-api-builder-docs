@@ -20,7 +20,7 @@ Initialize a new Data API builder configuration file. The resulting JSON capture
 dab init [options]
 ```
 
-If the target config file already exists, the command overwrites it. There is no merge. Use version control or backups if you need to preserve the previous file.
+If the target config file already exists, the command overwrites it. There's no merge. Use version control or backups if you need to preserve the previous file.
 
 ### Quick glance
 
@@ -32,8 +32,8 @@ If the target config file already exists, the command overwrites it. There is no
 
 | Option                               | Summary                                   |
 | ------------------------------------ | ----------------------------------------- |
-| [`--auth.audience`](#--authaudience) | JWT audience claim                        |
-| [`--auth.issuer`](#--authissuer)     | JWT issuer claim                          |
+| [`--auth.audience`](#--authaudience) | JSON Web Token (JWT) audience claim       |
+| [`--auth.issuer`](#--authissuer)     | JSON Web Token (JWT) issuer claim         |
 | [`--auth.provider`](#--authprovider) | Identity provider |
 
 #### Data Source
@@ -85,7 +85,7 @@ If the target config file already exists, the command overwrites it. There is no
 | [`--rest.request-body-strict`](#--restrequest-body-strict) | Enforce strict request body validation (default true, ignored for cosmosdb_nosql) |
 
 > [!IMPORTANT]
-> Do not mix the new `--*.enabled` flags and the legacy `--*.disabled` flags for the same subsystem in the same command. Prefer the `--*.enabled` pattern; the `--rest.disabled`, `--graphql.disabled`, and `--mcp.disabled` options log warnings and will be removed in future versions.
+> Don't mix the new `--*.enabled` flags and the legacy `--*.disabled` flags for the same subsystem in the same command. Prefer the `--*.enabled` pattern; the `--rest.disabled`, `--graphql.disabled`, and `--mcp.disabled` options log warnings and will be removed in future versions.
 
 ## `-c, --config`
 
@@ -110,7 +110,7 @@ dab init --database-type mssql --config dab-config.local.json
 
 ## `--auth.audience`
 
-JWT audience claim.
+JSON Web Token (JWT) audience claim.
 
 ### Example
 
@@ -132,7 +132,7 @@ dab init --database-type mssql --auth.audience "https://example.com/api"
 
 ## `--auth.issuer`
 
-JWT issuer claim.
+JSON Web Token (JWT) issuer claim.
 
 ### Example
 
@@ -310,7 +310,7 @@ dab init --database-type mssql --graphql.enabled false
 
 ## `--graphql.multiple-create.enabled`
 
-Allows multiple row creation in a single mutation. Default is `false`.
+Allows creating multiple rows in a single mutation. Default is `false`.
 
 ### Example
 

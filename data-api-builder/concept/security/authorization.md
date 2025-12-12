@@ -16,7 +16,7 @@ Data API builder uses a role-based authorization workflow. Any incoming request,
 
 ### Determining the user's role
 
-No `role` has default permissions. Once a rule is determined by Data API builder, the entity's `permissions` must define `actions` for that role for the request to be successful.
+No `role` has default permissions. Once Data API builder determines a rule, the entity's `permissions` must define `actions` for that role for the request to be successful.
 
 | Token Provided | `x-ms-api-role` Provided | `x-ms-api-role` in Token | Resulting Role        |
 | -------------- | ------------------------ | ------------------------ | --------------------- |
@@ -143,7 +143,7 @@ By default, an entity has no permissions configured, which means no one can acce
 
 #### Permissions must be explicitly configured
 
-To allow unauthenticated access to an entity, the `anonymous` role must be explicitly defined in the entity's permissions. For example, the `book` entity's permissions is explicitly set to allow unauthenticated read access:
+To allow unauthenticated access to an entity, the `anonymous` role must be explicitly defined in the entity's permissions. For example, the `book` entity's permissions are explicitly set to allow unauthenticated read access:
 
 ```json
 "book": {
@@ -184,7 +184,7 @@ In the following example, the user role `administrator` is the only defined role
 ```
 
 > [!NOTE]
-> To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you are required to use the `@authorize` directive in your supplied [GraphQL schema file](../../reference-database-specific-features.md). However, for GraphQL mutations and filters in GraphQL queries, access control still is enforced by the permissions configuration as described previously.
+> To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you must use the `@authorize` directive in your supplied [GraphQL schema file](../../reference-database-specific-features.md). However, for GraphQL mutations and filters in GraphQL queries, the permissions configuration still enforces access control as described previously.
 
 #### Actions
 
@@ -225,7 +225,7 @@ The following example prevents users in the `free-access` role from performing r
 ```
 
 > [!NOTE]
-> To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you are required to use the `@authorize` directive in your supplied [GraphQL schema file](../../reference-database-specific-features.md). However, for GraphQL mutations and filters in GraphQL queries, access control still is enforced by the permissions configuration as described here.
+> To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you must use the `@authorize` directive in your supplied [GraphQL schema file](../../reference-database-specific-features.md). However, for GraphQL mutations and filters in GraphQL queries, the permissions configuration still enforces access control as described here.
 
 #### Item level security
 
@@ -242,7 +242,7 @@ The following example prevents users in the `free-access` role from performing r
 > The **execute** action, used with stored procedures, **does not support** database policies.
 
 > [!NOTE]
-> Database policies are not currently supported by CosmosDB for NoSQL.
+> Azure Cosmos DB for NoSQL doesn't currently support database policies.
 
 For more information about database policies, see the [configuration file](../../configuration/entities.md#policy-notes) documentation.
 

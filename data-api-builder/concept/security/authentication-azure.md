@@ -16,9 +16,9 @@ Data API builder allows developers to define the authentication mechanism (ident
 
 Authentication is delegated to a supported identity provider where access token can be issued. An acquired access token must be included with incoming requests to Data API builder. Data API builder then validates any presented access tokens, ensuring that Data API builder was the intended audience of the token.
 
-## In Development (AZ Login)
+## In development (`az login`)
 
-Using `Authentication='Active Directory Default'` in Azure SQL Database connection strings means the client will authenticate using Microsoft Entra credentials. The exact authentication method is determined by the environment. When a developer runs `az login`, the Azure CLI opens a browser window prompting the user to sign in with a Microsoft account or corporate credentials. Once authenticated, Azure CLI retrieves and caches the token linked to the Microsoft Entra identity. This token is then used to authenticate requests to Azure services without requiring credentials in the connection string.
+Using `Authentication='Active Directory Default'` in Azure SQL Database connection strings means the client authenticates using Microsoft Entra credentials. The environment determines the exact authentication method. When a developer runs `az login`, the Azure CLI opens a browser window prompting the user to sign in with a Microsoft account or corporate credentials. Once authenticated, Azure CLI retrieves and caches the token linked to the Microsoft Entra identity. This token is then used to authenticate requests to Azure services without requiring credentials in the connection string.
 
 ```json
 "data-source": {
@@ -26,13 +26,13 @@ Using `Authentication='Active Directory Default'` in Azure SQL Database connecti
 }
 ```
 
-To set up local credentials, simply use `az login` after you install the [Azure CLI](/cli/azure/authenticate-azure-cli). 
+To set up local credentials, use `az login` after you install the [Azure CLI](/cli/azure/authenticate-azure-cli). 
 
 ```bash
 az login
 ```
 
-## JWT
+## JSON Web Token (JWT)
 
 To use the JWT provider, you need to configure the `runtime.host.authentication` section by providing the needed information to verify the received JWT token:
 
