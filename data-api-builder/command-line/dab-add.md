@@ -66,6 +66,8 @@ Logical name of the entity in config. Case-sensitive.
 
 #### Add a table
 
+#### [Bash](#tab/bash)
+
 ```bash
 dab add Book \
   --source dbo.Books \
@@ -74,7 +76,21 @@ dab add Book \
   --description "Example for managing book inventory"
 ```
 
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --source.type table ^
+  --permissions "anonymous:read" ^
+  --description "Example for managing book inventory"
+```
+
+---
+
 #### Add a view
+
+#### [Bash](#tab/bash)
 
 ```bash
 dab add BookView \
@@ -85,7 +101,22 @@ dab add BookView \
   --description "Example for managing book inventory from view"
 ```
 
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add BookView ^
+  --source dbo.MyView ^
+  --source.type view ^
+  --source.key-fields "id,region" ^
+  --permissions "anonymous:read" ^
+  --description "Example for managing book inventory from view"
+```
+
+---
+
 #### Add a stored procedure
+
+#### [Bash](#tab/bash)
 
 ```bash
 dab add BookProc \
@@ -97,15 +128,45 @@ dab add BookProc \
   --description "Example for executing a stored procedure"
 ```
 
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add BookProc ^
+  --source dbo.MyProc ^
+  --source.type stored-procedure ^
+  --source.params "year:2024,active:true" ^
+  --permissions "anonymous:execute" ^
+  --graphql.operation query ^
+  --description "Example for executing a stored procedure"
+```
+
+---
+
 ## `-c, --config`
 
 Config file path. Default is `dab-config.json`.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add Book --config ./dab-config.mssql.json --source dbo.Books --permissions "anonymous:read"
+dab add Book \
+  --config ./dab-config.mssql.json \
+  --source dbo.Books \
+  --permissions "anonymous:read"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --config ./dab-config.mssql.json ^
+  --source dbo.Books ^
+  --permissions "anonymous:read"
+```
+
+---
 
 ---
 
@@ -115,9 +176,25 @@ Enable or disable caching.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add Book --source dbo.Books --permissions "anonymous:read" --cache.enabled true
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --cache.enabled true
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --cache.enabled true
+```
+
+---
 
 ### Resulting config
 
@@ -146,9 +223,25 @@ Cache time-to-live in seconds.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add Book --source dbo.Books --permissions "anonymous:read" --cache.ttl 300
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --cache.ttl 300
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --cache.ttl 300
+```
+
+---
 
 ### Resulting config
 
@@ -181,9 +274,25 @@ Free-text description of the entity.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add Book --source dbo.Books --permissions "anonymous:read" --description "Entity for managing book inventory"
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --description "Entity for managing book inventory"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --description "Entity for managing book inventory"
+```
+
+---
 
 ### Resulting config
 
@@ -210,9 +319,25 @@ Comma-separated list of fields to exclude.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add Book --source dbo.Books --permissions "anonymous:read" --fields.exclude "internal_flag,secret_note"
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --fields.exclude "internal_flag,secret_note"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --fields.exclude "internal_flag,secret_note"
+```
+
+---
 
 ### Resulting config
 
@@ -245,9 +370,25 @@ Comma-separated list of fields to expose.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add Book --source dbo.Books --permissions "anonymous:read" --fields.include "id,title,price"
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --fields.include "id,title,price"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --fields.include "id,title,price"
+```
+
+---
 
 ### Resulting config
 
@@ -280,9 +421,25 @@ Control GraphQL exposure.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add Book --source dbo.Books --permissions "anonymous:read" --graphql book:books
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --graphql book:books
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --graphql book:books
+```
+
+---
 
 ### Resulting config
 
@@ -312,9 +469,27 @@ Stored procedures only. GraphQL operation type. Default is `mutation`.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add BookProc --source dbo.MyProc --source.type stored-procedure --permissions "admin:execute" --graphql.operation Query
+dab add BookProc \
+  --source dbo.MyProc \
+  --source.type stored-procedure \
+  --permissions "admin:execute" \
+  --graphql.operation Query
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add BookProc ^
+  --source dbo.MyProc ^
+  --source.type stored-procedure ^
+  --permissions "admin:execute" ^
+  --graphql.operation Query
+```
+
+---
 
 ### Resulting config
 
@@ -343,11 +518,29 @@ Defines role→actions pairs.
 
 ### Example
 
-```bash
-dab add Book --source dbo.Books --permissions "anonymous:read"
+#### [Bash](#tab/bash)
 
-dab update Book --permissions "authenticated:create,read,update,delete"
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read"
+
+dab update Book \
+  --permissions "authenticated:create,read,update,delete"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read"
+
+dab update Book ^
+  --permissions "authenticated:create,read,update,delete"
+```
+
+---
 
 ## `--parameters.name`
 
@@ -357,6 +550,8 @@ Stored procedures only. Comma-separated list of parameter names.
 > This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
 
 ### Example
+
+#### [Bash](#tab/bash)
 
 ```bash
 dab add GetOrdersByDateRange \
@@ -369,6 +564,22 @@ dab add GetOrdersByDateRange \
   --parameters.required "true,true,false" \
   --parameters.default ",,null"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add GetOrdersByDateRange ^
+  --source dbo.usp_GetOrdersByDateRange ^
+  --source.type stored-procedure ^
+  --permissions "authenticated:execute" ^
+  --description "Retrieves all orders placed within a specified date range" ^
+  --parameters.name "StartDate,EndDate,CustomerID" ^
+  --parameters.description "Beginning of date range (inclusive),End of date range (inclusive),Optional customer ID filter" ^
+  --parameters.required "true,true,false" ^
+  --parameters.default ",,null"
+```
+
+---
 
 ### Resulting config
 
@@ -423,9 +634,29 @@ Stored procedures only. Comma-separated list of parameter descriptions aligned t
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add GetOrdersByDateRange --source dbo.usp_GetOrdersByDateRange --source.type stored-procedure --permissions "authenticated:execute" --parameters.name "StartDate,EndDate" --parameters.description "Beginning of date range (inclusive),End of date range (inclusive)"
+dab add GetOrdersByDateRange \
+  --source dbo.usp_GetOrdersByDateRange \
+  --source.type stored-procedure \
+  --permissions "authenticated:execute" \
+  --parameters.name "StartDate,EndDate" \
+  --parameters.description "Beginning of date range (inclusive),End of date range (inclusive)"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add GetOrdersByDateRange ^
+  --source dbo.usp_GetOrdersByDateRange ^
+  --source.type stored-procedure ^
+  --permissions "authenticated:execute" ^
+  --parameters.name "StartDate,EndDate" ^
+  --parameters.description "Beginning of date range (inclusive),End of date range (inclusive)"
+```
+
+---
 
 ## `--parameters.required`
 
@@ -436,9 +667,29 @@ Stored procedures only. Comma-separated list of `true`/`false` values aligned to
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add GetOrdersByDateRange --source dbo.usp_GetOrdersByDateRange --source.type stored-procedure --permissions "authenticated:execute" --parameters.name "StartDate,EndDate" --parameters.required "true,true"
+dab add GetOrdersByDateRange \
+  --source dbo.usp_GetOrdersByDateRange \
+  --source.type stored-procedure \
+  --permissions "authenticated:execute" \
+  --parameters.name "StartDate,EndDate" \
+  --parameters.required "true,true"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add GetOrdersByDateRange ^
+  --source dbo.usp_GetOrdersByDateRange ^
+  --source.type stored-procedure ^
+  --permissions "authenticated:execute" ^
+  --parameters.name "StartDate,EndDate" ^
+  --parameters.required "true,true"
+```
+
+---
 
 ## `--parameters.default`
 
@@ -449,9 +700,29 @@ Stored procedures only. Comma-separated list of default values aligned to `--par
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add GetOrdersByDateRange --source dbo.usp_GetOrdersByDateRange --source.type stored-procedure --permissions "authenticated:execute" --parameters.name "CustomerID" --parameters.default "null"
+dab add GetOrdersByDateRange \
+  --source dbo.usp_GetOrdersByDateRange \
+  --source.type stored-procedure \
+  --permissions "authenticated:execute" \
+  --parameters.name "CustomerID" \
+  --parameters.default "null"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add GetOrdersByDateRange ^
+  --source dbo.usp_GetOrdersByDateRange ^
+  --source.type stored-procedure ^
+  --permissions "authenticated:execute" ^
+  --parameters.name "CustomerID" ^
+  --parameters.default "null"
+```
+
+---
 
 ## `--fields.name`
 
@@ -462,6 +733,8 @@ Name of the database column to describe.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
 dab add Products \
   --source dbo.Products \
@@ -471,6 +744,20 @@ dab add Products \
   --fields.description "Unique identifier for each product,Display name of the product" \
   --fields.primary-key "true,false"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Products ^
+  --source dbo.Products ^
+  --permissions "anonymous:*" ^
+  --fields.name "ProductID,ProductName" ^
+  --fields.alias "product_id,product_name" ^
+  --fields.description "Unique identifier for each product,Display name of the product" ^
+  --fields.primary-key "true,false"
+```
+
+---
 
 ### Resulting config
 
@@ -510,9 +797,27 @@ Alias for the field. Use a comma-separated list aligned to `--fields.name`.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add Products --source dbo.Products --permissions "anonymous:*" --fields.name "ProductID" --fields.alias "product_id"
+dab add Products \
+  --source dbo.Products \
+  --permissions "anonymous:*" \
+  --fields.name "ProductID" \
+  --fields.alias "product_id"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Products ^
+  --source dbo.Products ^
+  --permissions "anonymous:*" ^
+  --fields.name "ProductID" ^
+  --fields.alias "product_id"
+```
+
+---
 
 ## `--fields.description`
 
@@ -523,9 +828,27 @@ Description for the field. Use a comma-separated list aligned to `--fields.name`
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add Products --source dbo.Products --permissions "anonymous:*" --fields.name "ProductID" --fields.description "Unique identifier"
+dab add Products \
+  --source dbo.Products \
+  --permissions "anonymous:*" \
+  --fields.name "ProductID" \
+  --fields.description "Unique identifier"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Products ^
+  --source dbo.Products ^
+  --permissions "anonymous:*" ^
+  --fields.name "ProductID" ^
+  --fields.description "Unique identifier"
+```
+
+---
 
 ## `--fields.primary-key`
 
@@ -536,9 +859,27 @@ Primary key flag for the field. Use a comma-separated list of `true`/`false` val
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add Products --source dbo.Products --permissions "anonymous:*" --fields.name "ProductID" --fields.primary-key "true"
+dab add Products \
+  --source dbo.Products \
+  --permissions "anonymous:*" \
+  --fields.name "ProductID" \
+  --fields.primary-key "true"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Products ^
+  --source dbo.Products ^
+  --permissions "anonymous:*" ^
+  --fields.name "ProductID" ^
+  --fields.primary-key "true"
+```
+
+---
 
 ### Resulting config
 
@@ -567,9 +908,25 @@ Database-level policy.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add Book --source dbo.Books --permissions "anonymous:read" --policy-database "region eq 'US'"
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --policy-database "region eq 'US'"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --policy-database "region eq 'US'"
+```
+
+---
 
 ### Resulting config
 
@@ -602,9 +959,25 @@ Request-level policy.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add Book --source dbo.Books --permissions "anonymous:read" --policy-request "@claims.role == 'admin'"
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --policy-request "@claims.role == 'admin'"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --policy-request "@claims.role == 'admin'"
+```
+
+---
 
 ### Resulting config
 
@@ -637,9 +1010,25 @@ Control REST exposure.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add Book --source dbo.Books --permissions "anonymous:read" --rest BooksApi
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --rest BooksApi
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --rest BooksApi
+```
+
+---
 
 ### Resulting config
 
@@ -666,9 +1055,29 @@ Stored procedures only. HTTP verbs allowed for execution: `GET`, `POST`, `PUT`, 
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add BookProc --source dbo.MyProc --source.type stored-procedure --permissions "admin:execute" --rest true --rest.methods GET,POST
+dab add BookProc \
+  --source dbo.MyProc \
+  --source.type stored-procedure \
+  --permissions "admin:execute" \
+  --rest true \
+  --rest.methods GET,POST
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add BookProc ^
+  --source dbo.MyProc ^
+  --source.type stored-procedure ^
+  --permissions "admin:execute" ^
+  --rest true ^
+  --rest.methods GET,POST
+```
+
+---
 
 ### Resulting config
 
@@ -695,9 +1104,23 @@ Required. Name of the database object: table, view, container, or stored procedu
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add Book --source dbo.Books --permissions "anonymous:read"
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read"
+```
+
+---
 
 ### Resulting config
 
@@ -723,9 +1146,27 @@ The field(s) to be used as primary keys. Required for views when generated throu
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add BookView --source dbo.MyView --source.type view --source.key-fields "id,region" --permissions "anonymous:read"
+dab add BookView \
+  --source dbo.MyView \
+  --source.type view \
+  --source.key-fields "id,region" \
+  --permissions "anonymous:read"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add BookView ^
+  --source dbo.MyView ^
+  --source.type view ^
+  --source.key-fields "id,region" ^
+  --permissions "anonymous:read"
+```
+
+---
 
 ### Resulting config
 
@@ -755,9 +1196,27 @@ Stored procedures only. Comma-separated `name:value` pairs. Not allowed for tabl
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add BookProc --source dbo.MyProc --source.type stored-procedure --source.params "year:2024,active:true" --permissions "admin:execute"
+dab add BookProc \
+  --source dbo.MyProc \
+  --source.type stored-procedure \
+  --source.params "year:2024,active:true" \
+  --permissions "admin:execute"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add BookProc ^
+  --source dbo.MyProc ^
+  --source.type stored-procedure ^
+  --source.params "year:2024,active:true" ^
+  --permissions "admin:execute"
+```
+
+---
 
 ### Resulting config
 
@@ -795,9 +1254,21 @@ Display this help screen.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add --help
+dab add \
+  --help
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add ^
+  --help
+```
+
+---
 
 ## `--version`
 
@@ -805,9 +1276,21 @@ Display version information.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add --version
+dab add \
+  --version
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add ^
+  --version
+```
+
+---
 
 ## `--source.type`
 
@@ -815,9 +1298,25 @@ Type of database object. Default: `table`.
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab add Book --source dbo.Books --source.type table --permissions "anonymous:read"
+dab add Book \
+  --source dbo.Books \
+  --source.type table \
+  --permissions "anonymous:read"
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --source.type table ^
+  --permissions "anonymous:read"
+```
+
+---
 
 ### Resulting config
 

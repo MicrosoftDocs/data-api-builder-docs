@@ -180,6 +180,27 @@ Keep `description` meaningful and typically 100–160 characters.
 - Use fenced code blocks with an explicit language (for example, `bash`, `json`, `http`).
 - Ensure code fences are closed.
 - Keep examples short and single-purpose.
+- For DAB CLI command examples, include both Bash and Windows Command Prompt using Learn conceptual tabs:
+
+  ```markdown
+  #### [Bash](#tab/bash)
+
+  ```bash
+  dab <command> \
+    --flag value
+  ```
+
+  #### [Command Prompt](#tab/cmd)
+
+  ```cmd
+  dab <command> ^
+    --flag value
+  ```
+
+  ---
+  ```
+
+- Prefer multi-line commands over one-liners. Use `\` for Bash and `^` for Command Prompt line continuation.
 
 ### Links
 

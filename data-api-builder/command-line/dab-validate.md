@@ -38,9 +38,20 @@ dab validate [options]
 
 CI example:
 
+#### [Bash](#tab/bash)
+
 ```bash
 dab validate && echo "OK" || { echo "INVALID CONFIG"; exit 1; }
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab validate
+if %errorlevel%==0 (echo OK) else (echo INVALID CONFIG & exit /b 1)
+```
+
+---
 
 ## `-c, --config`
 
@@ -48,9 +59,21 @@ Path to the config file. If omitted, validator looks for `dab-config.<DAB_ENVIRO
 
 ### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-dab validate --config ./dab-config.prod.json
+dab validate \
+  --config ./dab-config.prod.json
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab validate ^
+  --config ./dab-config.prod.json
+```
+
+---
 
 ## Validation Stages
 
@@ -184,9 +207,21 @@ If `DAB_ENVIRONMENT` is set, `validate` loads `dab-config.<DAB_ENVIRONMENT>.json
 
 #### Example
 
+#### [Bash](#tab/bash)
+
 ```bash
-DAB_ENVIRONMENT=Staging dab validate
+export DAB_ENVIRONMENT=Staging
+dab validate
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+set DAB_ENVIRONMENT=Staging
+dab validate
+```
+
+---
 
 > [!Note]
 > The validator checks only a single resolved file. It does not merge environment variants.
@@ -195,17 +230,41 @@ DAB_ENVIRONMENT=Staging dab validate
 
 Basic:
 
+#### [Bash](#tab/bash)
+
 ```bash
 dab validate
 ```
 
-Explicit file:
+#### [Command Prompt](#tab/cmd)
 
-```bash
-dab validate --config ./configs/dab-config.test.json
+```cmd
+dab validate
 ```
 
+---
+
+Explicit file:
+
+#### [Bash](#tab/bash)
+
+```bash
+dab validate \
+  --config ./configs/dab-config.test.json
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab validate ^
+  --config ./configs/dab-config.test.json
+```
+
+---
+
 Multi-environment:
+
+#### [Bash](#tab/bash)
 
 ```bash
 for env in Development Staging Production; do
@@ -214,11 +273,32 @@ for env in Development Staging Production; do
 done
 ```
 
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+for %E in (Development Staging Production) do ^
+  echo Validating %E... ^
+  set DAB_ENVIRONMENT=%E ^& dab validate ^|^| exit /b 1
+```
+
+---
+
 CI fast-fail:
+
+#### [Bash](#tab/bash)
 
 ```bash
 dab validate && echo "OK" || { echo "INVALID CONFIG"; exit 1; }
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab validate
+if %errorlevel%==0 (echo OK) else (echo INVALID CONFIG & exit /b 1)
+```
+
+---
 
 ## Workflow
 
