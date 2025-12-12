@@ -62,6 +62,13 @@ function Get-ChangedPaths {
       $path = ($rest -split '\s->\s')[-1].Trim()
     }
 
+    # git status may quote paths with spaces (for example, "a b.txt").
+    if ($path.Length -ge 2 -and $path.StartsWith('"') -and $path.EndsWith('"')) {
+      $path = $path.Substring(1, $path.Length - 2)
+      $path = $path -replace '\\"', '"'
+      $path = $path -replace '\\\\', '\\'
+    }
+
     if ($Staged) {
       # Include staged changes only.
       if ($x -ne ' ' -and $x -ne '?') {
@@ -164,6 +171,8 @@ $paths = $paths | Where-Object {
   $ext = [System.IO.Path]::GetExtension($_).ToLowerInvariant()
   $includeExtensions -contains $ext
 }
+
+$paths = @($paths)
 
 if (-not $paths -or $paths.Count -eq 0) {
   Write-Host 'No matching files to scan.'
