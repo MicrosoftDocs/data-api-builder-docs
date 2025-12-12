@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 09/29/2025
+ms.date: 12/12/2025
 # Customer Intent: As a developer, I want to configure runtime and data source settings in Data API builder, so that my API runs correctly.
 ---
 
@@ -26,104 +26,830 @@ dab configure [options]
 
 ## Quick glance
 
-| Option         | Summary                                              |
-| -------------- | ---------------------------------------------------- |
-| `-c, --config` | Path to the config file (default `dab-config.json`). |
+| Option                                         | Summary                                              |
+| ---------------------------------------------- | ---------------------------------------------------- |
+| [`-c, --config`](#-c---config)                 | Path to the config file (default `dab-config.json`). |
+| [`--data-source.database-type`](#--data-sourcedatabase-type) | Set the database type.                               |
+| [`--data-source.connection-string`](#--data-sourceconnection-string) | Set the database connection string.                  |
+| [`--data-source.options.database`](#--data-sourceoptionsdatabase) | Database name for Cosmos DB for NoSql.               |
+| [`--data-source.options.container`](#--data-sourceoptionscontainer) | Container name for Cosmos DB for NoSql.              |
+| [`--data-source.options.schema`](#--data-sourceoptionsschema) | Schema path for Cosmos DB for NoSql.                 |
+| [`--data-source.options.set-session-context`](#--data-sourceoptionsset-session-context) | Enable session context.                              |
+| [`--runtime.graphql.depth-limit`](#--runtimegraphqldepth-limit) | Limit maximum query depth.                           |
+| [`--runtime.graphql.enabled`](#--runtimegraphqlenabled) | Enable or disable GraphQL endpoint.                  |
+| [`--runtime.graphql.path`](#--runtimegraphqlpath) | Customize the GraphQL endpoint path.                 |
+| [`--runtime.graphql.allow-introspection`](#--runtimegraphqlallow-introspection) | Allow or deny GraphQL introspection.                 |
+| [`--runtime.graphql.multiple-mutations.create.enabled`](#--runtimegraphqlmultiple-mutationscreateenabled) | Enable multiple-create mutations.                    |
+| [`--runtime.rest.enabled`](#--runtimerestenabled) | Enable or disable REST endpoint.                     |
+| [`--runtime.rest.path`](#--runtimerestpath)     | Customize the REST endpoint path.                    |
+| [`--runtime.rest.request-body-strict`](#--runtimerestrequest-body-strict) | Enforce strict REST request body validation.         |
+| [`--runtime.mcp.enabled`](#--runtimemcpenabled) | Enable or disable MCP endpoint.                      |
+| [`--runtime.mcp.path`](#--runtimemcppath)       | Customize the MCP endpoint path.                     |
+| [`--runtime.mcp.dml-tools.enabled`](#--runtimemcpdml-toolsenabled) | Enable or disable all MCP DML tools.                 |
+| [`--runtime.mcp.dml-tools.describe-entities.enabled`](#--runtimemcpdml-toolsdescribe-entitiesenabled) | Enable or disable the describe-entities tool.        |
+| [`--runtime.mcp.dml-tools.create-record.enabled`](#--runtimemcpdml-toolscreate-recordenabled) | Enable or disable the create-record tool.            |
+| [`--runtime.mcp.dml-tools.read-records.enabled`](#--runtimemcpdml-toolsread-recordsenabled) | Enable or disable the read-records tool.             |
+| [`--runtime.mcp.dml-tools.update-record.enabled`](#--runtimemcpdml-toolsupdate-recordenabled) | Enable or disable the update-record tool.            |
+| [`--runtime.mcp.dml-tools.delete-record.enabled`](#--runtimemcpdml-toolsdelete-recordenabled) | Enable or disable the delete-record tool.            |
+| [`--runtime.mcp.dml-tools.execute-entity.enabled`](#--runtimemcpdml-toolsexecute-entityenabled) | Enable or disable the execute-entity tool.           |
+| [`--runtime.cache.enabled`](#--runtimecacheenabled) | Enable or disable global cache.                      |
+| [`--runtime.cache.ttl-seconds`](#--runtimecachettl-seconds) | Global cache TTL in seconds.                         |
+| [`--runtime.host.mode`](#--runtimehostmode)     | Set host mode: Development or Production.            |
+| [`--runtime.host.cors.origins`](#--runtimehostcorsorigins) | Allowed CORS origins.                                |
+| [`--runtime.host.cors.allow-credentials`](#--runtimehostcorsallow-credentials) | Set CORS allow-credentials.                          |
+| [`--runtime.host.authentication.provider`](#--runtimehostauthenticationprovider) | Authentication provider.                             |
+| [`--runtime.host.authentication.jwt.audience`](#--runtimehostauthenticationjwtaudience) | JWT audience claim.                                  |
+| [`--runtime.host.authentication.jwt.issuer`](#--runtimehostauthenticationjwtissuer) | JWT issuer claim.                                    |
+| [`--azure-key-vault.endpoint`](#--azure-key-vaultendpoint) | Azure Key Vault base endpoint.                       |
+| [`--azure-key-vault.retry-policy.mode`](#--azure-key-vaultretry-policymode) | Retry policy mode.                                   |
+| [`--azure-key-vault.retry-policy.max-count`](#--azure-key-vaultretry-policymax-count) | Max retry attempts.                                  |
+| [`--azure-key-vault.retry-policy.delay-seconds`](#--azure-key-vaultretry-policydelay-seconds) | Delay between retries.                               |
+| [`--azure-key-vault.retry-policy.max-delay-seconds`](#--azure-key-vaultretry-policymax-delay-seconds) | Max delay for exponential retries.                   |
+| [`--azure-key-vault.retry-policy.network-timeout-seconds`](#--azure-key-vaultretry-policynetwork-timeout-seconds) | Timeout for network calls.                           |
+| [`--runtime.telemetry.azure-log-analytics.enabled`](#--runtimetelemetryazure-log-analyticsenabled) | Enable Azure Log Analytics telemetry.                |
+| [`--runtime.telemetry.azure-log-analytics.dab-identifier`](#--runtimetelemetryazure-log-analyticsdab-identifier) | Distinguish log origin.                              |
+| [`--runtime.telemetry.azure-log-analytics.flush-interval-seconds`](#--runtimetelemetryazure-log-analyticsflush-interval-seconds) | Flush cadence in seconds.                            |
+| [`--runtime.telemetry.azure-log-analytics.auth.custom-table-name`](#--runtimetelemetryazure-log-analyticsauthcustom-table-name) | Custom table name.                                   |
+| [`--runtime.telemetry.azure-log-analytics.auth.dcr-immutable-id`](#--runtimetelemetryazure-log-analyticsauthdcr-immutable-id) | Data Collection Rule ID.                             |
+| [`--runtime.telemetry.azure-log-analytics.auth.dce-endpoint`](#--runtimetelemetryazure-log-analyticsauthdce-endpoint) | Data Collection Endpoint.                            |
+| [`--runtime.telemetry.file.enabled`](#--runtimetelemetryfileenabled) | Enable file sink telemetry.                          |
+| [`--runtime.telemetry.file.path`](#--runtimetelemetryfilepath) | Path to log file.                                    |
+| [`--runtime.telemetry.file.rolling-interval`](#--runtimetelemetryfilerolling-interval) | Rolling interval.                                    |
+| [`--runtime.telemetry.file.retained-file-count-limit`](#--runtimetelemetryfileretained-file-count-limit) | Max number of files retained.                        |
+| [`--runtime.telemetry.file.file-size-limit-bytes`](#--runtimetelemetryfilefile-size-limit-bytes) | Max size per file before rolling.                    |
+| [`--help`](#--help)                               | Display this help screen.                            |
+| [`--version`](#--version)                         | Display version information.                         |
 
-### Azure Key Vault
+---
 
-| Option                                                   | Summary                                   |
-| -------------------------------------------------------- | ----------------------------------------- |
-| `--azure-key-vault.endpoint`                             | Azure Key Vault base endpoint.            |
-| `--azure-key-vault.retry-policy.delay-seconds`           | Delay between retries.                    |
-| `--azure-key-vault.retry-policy.max-count`               | Max retry attempts.                       |
-| `--azure-key-vault.retry-policy.max-delay-seconds`       | Max delay for exponential retries.        |
-| `--azure-key-vault.retry-policy.mode`                    | Retry policy mode (fixed or exponential). |
-| `--azure-key-vault.retry-policy.network-timeout-seconds` | Timeout for network calls.                |
+## `-c, --config`
 
-### Cache
+Path to the config file. Defaults to `dab-config.json` unless `dab-config.<DAB_ENVIRONMENT>.json` exists, where `DAB_ENVIRONMENT` is an environment variable.
 
-| Option                        | Summary                         |
-| ----------------------------- | ------------------------------- |
-| `--runtime.cache.enabled`     | Enable or disable global cache. |
-| `--runtime.cache.ttl-seconds` | Global cache TTL in seconds.    |
+### Example
 
-### Data Source
+```bash
+dab configure --config ./dab-config.json --runtime.rest.enabled true
+```
 
-| Option                                      | Summary                                                                                |
-| ------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `--data-source.connection-string`           | Set the database connection string.                                                    |
-| `--data-source.database-type`               | Set the database type (mssql, mysql, postgresql, cosmosdb_postgresql, cosmosdb_nosql). |
-| `--data-source.options.container`           | Container name (Cosmos DB).                                                            |
-| `--data-source.options.database`            | Database name (Cosmos DB, PostgreSQL).                                                 |
-| `--data-source.options.schema`              | Schema name (SQL Server, PostgreSQL).                                                  |
-| `--data-source.options.set-session-context` | Enable SQL Server session context (mssql only).                                        |
+## `--data-source.database-type`
 
-### GraphQL
+Database type.
 
-| Option                                                | Summary                                  |
-| ----------------------------------------------------- | ---------------------------------------- |
-| `--runtime.graphql.allow-introspection`               | Enable or disable GraphQL introspection. |
-| `--runtime.graphql.depth-limit`                       | Limit maximum query depth.               |
-| `--runtime.graphql.enabled`                           | Enable or disable GraphQL endpoint.      |
-| `--runtime.graphql.multiple-mutations.create.enabled` | Enable multiple create mutations.        |
-| `--runtime.graphql.path`                              | Path prefix for GraphQL endpoint.        |
+Allowed values:
 
-### Host
+- `MSSQL`
+- `PostgreSQL`
+- `CosmosDB_NoSQL`
+- `MySQL`
 
-| Option                                       | Summary                                   |
-| -------------------------------------------- | ----------------------------------------- |
-| `--runtime.host.authentication.jwt.audience` | JWT audience claim.                       |
-| `--runtime.host.authentication.jwt.issuer`   | JWT issuer claim.                         |
-| `--runtime.host.authentication.provider`     | Authentication provider.                  |
-| `--runtime.host.cors.allow-credentials`      | Whether CORS allows credentials.          |
-| `--runtime.host.cors.origins`                | Allowed CORS origins.                     |
-| `--runtime.host.mode`                        | Set host mode: Development or Production. |
+### Example
 
-### MCP
+```bash
+dab configure --data-source.database-type PostgreSQL
+```
 
-| Option                  | Summary                         |
-| ----------------------- | ------------------------------- |
-| `--runtime.mcp.enabled` | Enable or disable MCP endpoint. |
-| `--runtime.mcp.path`    | Path prefix for MCP endpoint.   |
+### Resulting config
 
-### MCP DML Tools
+```json
+{
+  "data-source": {
+    "database-type": "postgresql"
+  }
+}
+```
 
-| Option                                              | Summary                                       |
-| --------------------------------------------------- | --------------------------------------------- |
-| `--runtime.mcp.dml-tools.create-record.enabled`     | Enable or disable the create-record tool.     |
-| `--runtime.mcp.dml-tools.delete-record.enabled`     | Enable or disable the delete-record tool.     |
-| `--runtime.mcp.dml-tools.describe-entities.enabled` | Enable or disable the describe-entities tool. |
-| `--runtime.mcp.dml-tools.enabled`                   | Enable or disable all MCP DML tools.          |
-| `--runtime.mcp.dml-tools.execute-entity.enabled`    | Enable or disable the execute-entity tool.    |
-| `--runtime.mcp.dml-tools.read-records.enabled`      | Enable or disable the read-records tool.      |
-| `--runtime.mcp.dml-tools.update-record.enabled`     | Enable or disable the update-record tool.     |
+## `--data-source.connection-string`
 
-### REST
+Connection string for the data source.
 
-| Option                               | Summary                                 |
-| ------------------------------------ | --------------------------------------- |
-| `--runtime.rest.enabled`             | Enable or disable REST endpoint.        |
-| `--runtime.rest.path`                | Path prefix for REST endpoint.          |
-| `--runtime.rest.request-body-strict` | Enforce strict request body validation. |
+### Example
 
-### Telemetry – Azure Log Analytics
+```bash
+dab configure --data-source.connection-string "Server=myserver;Database=mydb;User Id=myuser;Password=mypassword;"
+```
 
-| Option                                                           | Summary                               |
-| ---------------------------------------------------------------- | ------------------------------------- |
-| `--runtime.telemetry.azure-log-analytics.auth.custom-table-name` | Custom table name.                    |
-| `--runtime.telemetry.azure-log-analytics.auth.dce-endpoint`      | Data Collection Endpoint.             |
-| `--runtime.telemetry.azure-log-analytics.auth.dcr-immutable-id`  | Data Collection Rule ID.              |
-| `--runtime.telemetry.azure-log-analytics.dab-identifier`         | Distinguishes log origin.             |
-| `--runtime.telemetry.azure-log-analytics.enabled`                | Enable Azure Log Analytics telemetry. |
-| `--runtime.telemetry.azure-log-analytics.flush-interval-seconds` | Flush cadence in seconds.             |
+## `--data-source.options.database`
 
-### Telemetry – File Sink
+Database name for Cosmos DB for NoSql.
 
-| Option                                               | Summary                                                      |
-| ---------------------------------------------------- | ------------------------------------------------------------ |
-| `--runtime.telemetry.file.enabled`                   | Enable file sink telemetry.                                  |
-| `--runtime.telemetry.file.file-size-limit-bytes`     | Max size per file before rolling.                            |
-| `--runtime.telemetry.file.path`                      | Path to log file.                                            |
-| `--runtime.telemetry.file.retained-file-count-limit` | Max number of files retained.                                |
-| `--runtime.telemetry.file.rolling-interval`          | Rolling interval (Minute, Hour, Day, Month, Year, Infinite). |
+### Example
+
+```bash
+dab configure --data-source.options.database MyCosmosDatabase
+```
+
+## `--data-source.options.container`
+
+Container name for Cosmos DB for NoSql.
+
+### Example
+
+```bash
+dab configure --data-source.options.container MyCosmosContainer
+```
+
+## `--data-source.options.schema`
+
+Schema path for Cosmos DB for NoSql.
+
+### Example
+
+```bash
+dab configure --data-source.options.schema ./schema.gql
+```
+
+## `--data-source.options.set-session-context`
+
+Enable session context.
+
+Allowed values:
+
+- `true` (default)
+- `false`
+
+### Example
+
+```bash
+dab configure --data-source.options.set-session-context false
+```
+
+### Resulting config
+
+```json
+{
+  "data-source": {
+    "options": {
+      "set-session-context": false
+    }
+  }
+}
+```
+
+## `--runtime.graphql.depth-limit`
+
+Max allowed depth of the nested query.
+
+Allowed values:
+
+- $(0,2147483647]$ (inclusive)
+- `-1` to remove limit
+
+### Example
+
+```bash
+dab configure --runtime.graphql.depth-limit 3
+```
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "graphql": {
+      "depth-limit": 3
+    }
+  }
+}
+```
+
+## `--runtime.graphql.enabled`
+
+Enable DAB's GraphQL endpoint.
+
+### Example
+
+```bash
+dab configure --runtime.graphql.enabled false
+```
+
+## `--runtime.graphql.path`
+
+Customize DAB's GraphQL endpoint path. Prefix path with `/`.
+
+### Example
+
+```bash
+dab configure --runtime.graphql.path /graphql
+```
+
+## `--runtime.graphql.allow-introspection`
+
+Allow or deny GraphQL introspection requests.
+
+### Example
+
+```bash
+dab configure --runtime.graphql.allow-introspection false
+```
+
+## `--runtime.graphql.multiple-mutations.create.enabled`
+
+Enable or disable multiple-mutation create operations in the generated GraphQL schema.
+
+### Example
+
+```bash
+dab configure --runtime.graphql.multiple-mutations.create.enabled true
+```
+
+## `--runtime.rest.enabled`
+
+Enable DAB's REST endpoint.
+
+### Example
+
+```bash
+dab configure --runtime.rest.enabled false
+```
+
+## `--runtime.rest.path`
+
+Customize DAB's REST endpoint path. Prefix path with `/`.
+
+### Example
+
+```bash
+dab configure --runtime.rest.path /myapi
+```
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "rest": {
+      "path": "/myapi"
+    }
+  }
+}
+```
+
+## `--runtime.rest.request-body-strict`
+
+Prohibit extraneous REST request body fields.
+
+### Example
+
+```bash
+dab configure --runtime.rest.request-body-strict true
+```
+
+## `--runtime.mcp.enabled`
+
+Enable DAB's MCP endpoint.
+
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+
+### Example
+
+```bash
+dab configure --runtime.mcp.enabled false
+```
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "enabled": false
+    }
+  }
+}
+```
+
+## `--runtime.mcp.path`
+
+Customize DAB's MCP endpoint path. Prefix path with `/`.
+
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+
+### Example
+
+```bash
+dab configure --runtime.mcp.path /mcp2
+```
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "path": "/mcp2"
+    }
+  }
+}
+```
+
+## `--runtime.mcp.dml-tools.enabled`
+
+Enable DAB's MCP DML tools endpoint.
+
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+
+For MCP DML tools, see `../mcp/data-manipulation-tools.md`.
+
+### Example
+
+```bash
+dab configure --runtime.mcp.dml-tools.enabled false
+```
+
+## `--runtime.mcp.dml-tools.describe-entities.enabled`
+
+Enable DAB's MCP describe entities tool.
+
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+
+### Example
+
+```bash
+dab configure --runtime.mcp.dml-tools.describe-entities.enabled false
+```
+
+## `--runtime.mcp.dml-tools.create-record.enabled`
+
+Enable DAB's MCP create record tool.
+
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+
+### Example
+
+```bash
+dab configure --runtime.mcp.dml-tools.create-record.enabled false
+```
+
+## `--runtime.mcp.dml-tools.read-records.enabled`
+
+Enable DAB's MCP read record tool.
+
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+
+### Example
+
+```bash
+dab configure --runtime.mcp.dml-tools.read-records.enabled false
+```
+
+## `--runtime.mcp.dml-tools.update-record.enabled`
+
+Enable DAB's MCP update record tool.
+
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+
+### Example
+
+```bash
+dab configure --runtime.mcp.dml-tools.update-record.enabled false
+```
+
+## `--runtime.mcp.dml-tools.delete-record.enabled`
+
+Enable DAB's MCP delete record tool.
+
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+
+### Example
+
+```bash
+dab configure --runtime.mcp.dml-tools.delete-record.enabled false
+```
+
+## `--runtime.mcp.dml-tools.execute-entity.enabled`
+
+Enable DAB's MCP execute entity tool.
+
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+
+### Example
+
+```bash
+dab configure --runtime.mcp.dml-tools.execute-entity.enabled false
+```
+
+## `--runtime.cache.enabled`
+
+Enable DAB's cache globally. You must also enable caching for each entity.
+
+### Example
+
+```bash
+dab configure --runtime.cache.enabled true
+```
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "cache": {
+      "enabled": true
+    }
+  }
+}
+```
+
+## `--runtime.cache.ttl-seconds`
+
+Customize the DAB cache's global default time to live in seconds.
+
+### Example
+
+```bash
+dab configure --runtime.cache.ttl-seconds 30
+```
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "cache": {
+      "enabled": false,
+      "ttl-seconds": 30
+    }
+  }
+}
+```
+
+## `--runtime.host.mode`
+
+Set the host running mode of DAB.
+
+Allowed values:
+
+- `Development`
+- `Production`
+
+### Example
+
+```bash
+dab configure --runtime.host.mode Development
+```
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "host": {
+      "mode": "development"
+    }
+  }
+}
+```
+
+## `--runtime.host.cors.origins`
+
+Overwrite allowed origins in CORS. Provide values as a space-separated list.
+
+### Example
+
+```bash
+dab configure --runtime.host.cors.origins https://contoso.com https://fabrikam.com
+```
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "host": {
+      "cors": {
+        "origins": [
+          "https://contoso.com",
+          "https://fabrikam.com"
+        ]
+      }
+    }
+  }
+}
+```
+
+## `--runtime.host.cors.allow-credentials`
+
+Set the value for the `Access-Control-Allow-Credentials` header.
+
+### Example
+
+```bash
+dab configure --runtime.host.cors.allow-credentials true
+```
+
+## `--runtime.host.authentication.provider`
+
+Configure the name of authentication provider.
+
+### Example
+
+```bash
+dab configure --runtime.host.authentication.provider AppService
+```
+
+## `--runtime.host.authentication.jwt.audience`
+
+Configure the intended recipient(s) of the JWT token.
+
+### Example
+
+```bash
+dab configure --runtime.host.authentication.jwt.audience api://my-app
+```
+
+## `--runtime.host.authentication.jwt.issuer`
+
+Configure the entity that issued the JWT token.
+
+### Example
+
+```bash
+dab configure --runtime.host.authentication.jwt.issuer https://login.microsoftonline.com/common/v2.0
+```
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "host": {
+      "authentication": {
+        "provider": "AppService",
+        "jwt": {
+          "audience": "api://my-app",
+          "issuer": "https://login.microsoftonline.com/common/v2.0"
+        }
+      }
+    }
+  }
+}
+```
+
+## `--azure-key-vault.endpoint`
+
+Configure the Azure Key Vault endpoint URL.
+
+### Example
+
+```bash
+dab configure --azure-key-vault.endpoint https://my-vault.vault.azure.net
+```
+
+## `--azure-key-vault.retry-policy.mode`
+
+Configure the retry policy mode.
+
+Allowed values:
+
+- `fixed`
+- `exponential`
+
+### Example
+
+```bash
+dab configure --azure-key-vault.retry-policy.mode fixed
+```
+
+## `--azure-key-vault.retry-policy.max-count`
+
+Configure the maximum number of retry attempts.
+
+### Example
+
+```bash
+dab configure --azure-key-vault.retry-policy.max-count 5
+```
+
+## `--azure-key-vault.retry-policy.delay-seconds`
+
+Configure the initial delay between retries in seconds.
+
+### Example
+
+```bash
+dab configure --azure-key-vault.retry-policy.delay-seconds 2
+```
+
+## `--azure-key-vault.retry-policy.max-delay-seconds`
+
+Configure the maximum delay between retries in seconds (for exponential mode).
+
+### Example
+
+```bash
+dab configure --azure-key-vault.retry-policy.max-delay-seconds 30
+```
+
+## `--azure-key-vault.retry-policy.network-timeout-seconds`
+
+Configure the network timeout for requests in seconds.
+
+### Example
+
+```bash
+dab configure --azure-key-vault.retry-policy.network-timeout-seconds 20
+```
+
+### Resulting config
+
+```json
+{
+  "azure-key-vault": {
+    "retry-policy": {
+      "mode": "fixed",
+      "max-count": 5,
+      "delay-seconds": 2,
+      "max-delay-seconds": 30,
+      "network-timeout-seconds": 20
+    }
+  }
+}
+```
+
+## `--runtime.telemetry.azure-log-analytics.enabled`
+
+Enable or disable Azure Log Analytics.
+
+### Example
+
+```bash
+dab configure --runtime.telemetry.azure-log-analytics.enabled true
+```
+
+## `--runtime.telemetry.azure-log-analytics.dab-identifier`
+
+Configure a DAB identifier string used in Azure Log Analytics.
+
+### Example
+
+```bash
+dab configure --runtime.telemetry.azure-log-analytics.dab-identifier MyDab
+```
+
+## `--runtime.telemetry.azure-log-analytics.flush-interval-seconds`
+
+Configure flush interval in seconds for Azure Log Analytics.
+
+### Example
+
+```bash
+dab configure --runtime.telemetry.azure-log-analytics.flush-interval-seconds 10
+```
+
+## `--runtime.telemetry.azure-log-analytics.auth.custom-table-name`
+
+Configure custom table name for Azure Log Analytics.
+
+### Example
+
+```bash
+dab configure --runtime.telemetry.azure-log-analytics.auth.custom-table-name MyDabLogs
+```
+
+## `--runtime.telemetry.azure-log-analytics.auth.dcr-immutable-id`
+
+Configure DCR immutable ID for Azure Log Analytics.
+
+### Example
+
+```bash
+dab configure --runtime.telemetry.azure-log-analytics.auth.dcr-immutable-id dcr-123
+```
+
+## `--runtime.telemetry.azure-log-analytics.auth.dce-endpoint`
+
+Configure DCE endpoint for Azure Log Analytics.
+
+### Example
+
+```bash
+dab configure --runtime.telemetry.azure-log-analytics.auth.dce-endpoint https://example.eastus-1.ingest.monitor.azure.com
+```
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "azure-log-analytics": {
+        "enabled": true,
+        "auth": {
+          "custom-table-name": "MyDabLogs",
+          "dcr-immutable-id": "dcr-123",
+          "dce-endpoint": "https://example.eastus-1.ingest.monitor.azure.com"
+        },
+        "dab-identifier": "MyDab",
+        "flush-interval-seconds": 10
+      }
+    }
+  }
+}
+```
+
+## `--runtime.telemetry.file.enabled`
+
+Enable or disable file sink logging.
+
+### Example
+
+```bash
+dab configure --runtime.telemetry.file.enabled true
+```
+
+## `--runtime.telemetry.file.path`
+
+Configure path for file sink logging.
+
+### Example
+
+```bash
+dab configure --runtime.telemetry.file.path C:\\logs\\dab-log.txt
+```
+
+## `--runtime.telemetry.file.rolling-interval`
+
+Configure rolling interval for file sink logging.
+
+Allowed values:
+
+- `Minute`
+- `Hour`
+- `Day`
+- `Month`
+- `Year`
+- `Infinite`
+
+### Example
+
+```bash
+dab configure --runtime.telemetry.file.rolling-interval Month
+```
+
+## `--runtime.telemetry.file.retained-file-count-limit`
+
+Configure maximum number of retained files.
+
+### Example
+
+```bash
+dab configure --runtime.telemetry.file.retained-file-count-limit 5
+```
+
+## `--runtime.telemetry.file.file-size-limit-bytes`
+
+Configure maximum file size limit in bytes.
+
+### Example
+
+```bash
+dab configure --runtime.telemetry.file.file-size-limit-bytes 2097152
+```
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "file": {
+        "enabled": true,
+        "path": "C:\\logs\\dab-log.txt",
+        "rolling-interval": "Month",
+        "retained-file-count-limit": 5,
+        "file-size-limit-bytes": 2097152
+      }
+    }
+  }
+}
+```
+
+## `--help`
+
+Display this help screen.
+
+### Example
+
+```bash
+dab configure --help
+```
+
+## `--version`
+
+Display version information.
+
+### Example
+
+```bash
+dab configure --version
+```
