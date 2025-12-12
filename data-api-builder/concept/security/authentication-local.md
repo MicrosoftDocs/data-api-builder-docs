@@ -14,7 +14,7 @@ ms.date: 06/11/2025
 
 When developing a solution using Data API builder locally, or when running Data API builder on-premises, you need to test the configured authentication and authorization options by simulating a request with a specific role or claim.
 
-To simulate an authenticated request without configuring an authentication provider (like Microsoft Entra ID, for example), you can utilize either the `Simulator` or `StaticWebApps` authentication providers:
+To simulate an authenticated request without configuring an authentication provider (like Microsoft Entra ID, for example), you can utilize the `Simulator` authentication providers:
 
 ## Use the `Simulator` provider
 
@@ -24,7 +24,7 @@ To simulate an authenticated request without configuring an authentication provi
 - If desired, the request is evaluated in the context of any role denoted in the `X-MS-API-ROLE` Http header.
 
 > [!NOTE]
-> While the desired role will be honored, authorization permissions defining database policies will not work because custom claims can't be set for the authenticated user with the `Simulator` provider. Continue to the section [Use the `StaticWebApps` provider](#use-the-staticwebapps-provider) for testing database authorization policies.
+> While the desired role will be honored, authorization permissions defining database policies will not work because custom claims can't be set for the authenticated user with the `Simulator` provider.
 
 ### 1. Update the runtime configuration authentication provider
 
@@ -56,27 +56,22 @@ curl --request GET \
   --header 'X-MS-API-ROLE: author' \
 ```
 
-## Use the `StaticWebApps` provider
+## Use the `AppService` provider
 
-The `StaticWebApps` authentication provider instructs Data API builder to look for a set of HTTP headers only present when running within a Static Web Apps environment. The client sets these HTTP headers when running locally to simulate an authenticated user, including any role membership or custom claims.
-
-> [!NOTE]
-> Client provided instances of the Http header, `X-MS-CLIENT-PRINCIPAL`, will only work when developing locally because production Azure Static Web Apps environments [drop all client provided instances](/azure/static-web-apps/user-information?tabs=javascript) of that header.
-
-Make sure that in the configuration file you're using the `StaticWebApps` authentication provider. Refer to this sample `host` configuration section:
+The `AppService` authentication provider instructs Data API builder to look for a set of HTTP headers only present when running within an Azure Container Apps environment. The client sets these HTTP headers when running locally to simulate an authenticated user, including any role membership or custom claims.
 
 ```json
 "host": {
   "mode": "development",
   "authentication": {
-    "provider": "StaticWebApps"
+    "provider": "AppService"
   }
 }
 ```
 
 ### 1. Send requests providing a generated `X-MS-CLIENT-PRINCIPAL` header
 
-Once Data API builder is running locally and configured to use the `StaticWebApps` authentication provider, you can generate a client principal object manually using the following template:
+Once Data API builder is running locally and configured to use the `AppService` authentication provider, you can generate a client principal object manually using the following template:
 
 ```json
 {  
@@ -87,7 +82,7 @@ Once Data API builder is running locally and configured to use the `StaticWebApp
 }
 ```
 
-Static Web App's [authenticated user metadata](/azure/static-web-apps/user-information?tabs=javascript#client-principal-data) has the following properties:
+App Service has the following properties:
 
 |Property|Description|
 |---|---|
@@ -95,9 +90,6 @@ Static Web App's [authenticated user metadata](/azure/static-web-apps/user-infor
 |userId|A unique identifier for the user.|
 |userDetails|Username or email address of the user.|
 |userRoles|An array of the user's assigned roles.|
-
-> [!NOTE]
-> As noted in [Static Web Apps documentation](/azure/static-web-apps/user-information?tabs=javascript), the `X-MS-CLIENT-PRINCIPAL` header does not contain the `claims` array.
 
 In order to be passed with the `X-MS-CLIENT-PRINCIPAL` header, the JSON payload must be Base64-encoded. You can use any online or offline tool to do that. One such tool is [DevToys](https://github.com/veler/DevToys). A sample Base64-encoded payload that represents the JSON previously referenced:
 

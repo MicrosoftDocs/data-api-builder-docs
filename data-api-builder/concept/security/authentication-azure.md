@@ -16,11 +16,6 @@ Data API builder allows developers to define the authentication mechanism (ident
 
 Authentication is delegated to a supported identity provider where access token can be issued. An acquired access token must be included with incoming requests to Data API builder. Data API builder then validates any presented access tokens, ensuring that Data API builder was the intended audience of the token.
 
-The supported identity provider configuration options are:
-
-- StaticWebApps
-- JSON Web Tokens (JWT)
-
 ## In Development (AZ Login)
 
 Using `Authentication='Active Directory Default'` in Azure SQL Database connection strings means the client will authenticate using Microsoft Entra credentials. The exact authentication method is determined by the environment. When a developer runs `az login`, the Azure CLI opens a browser window prompting the user to sign in with a Microsoft account or corporate credentials. Once authenticated, Azure CLI retrieves and caches the token linked to the Microsoft Entra identity. This token is then used to authenticate requests to Azure services without requiring credentials in the connection string.
@@ -36,20 +31,6 @@ To set up local credentials, simply use `az login` after you install the [Azure 
 ```bash
 az login
 ```
-
-## Azure Static Web Apps authentication (EasyAuth)
-
-Data API builder expects [Azure Static Web Apps authentication](/azure/static-web-apps/authentication-authorization) (EasyAuth) to authenticate the request, and to provide metadata about the authenticated user in the `X-MS-CLIENT-PRINCIPAL` HTTP header when using the option `StaticWebApps`. The authenticated user metadata provided by Static Web Apps can be referenced in the following documentation: [Accessing User Information](/azure/static-web-apps/user-information?tabs=csharp).
-
-To use the `StaticWebApps` provider, you need to specify the following configuration in the `runtime.host` section of the configuration file:
-
-```json
-"authentication": {
-    "provider": "StaticWebApps"
-}
-```
-
-Using the `StaticWebApps` provider is useful when you plan to run Data API builder in Azure, hosting it using App Service and running it in a container: [Run a custom container in Azure App Service](/azure/app-service/quickstart-custom-container?tabs=dotnet&pivots=container-linux-vscode).
 
 ## JWT
 

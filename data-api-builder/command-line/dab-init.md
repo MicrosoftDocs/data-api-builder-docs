@@ -34,7 +34,7 @@ If the target config file already exists, the command overwrites it. There is no
 | ------------------------------------ | ----------------------------------------- |
 | [`--auth.audience`](#--authaudience) | JWT audience claim                        |
 | [`--auth.issuer`](#--authissuer)     | JWT issuer claim                          |
-| [`--auth.provider`](#--authprovider) | Identity provider (default StaticWebApps) |
+| [`--auth.provider`](#--authprovider) | Identity provider |
 
 #### Data Source
 
@@ -154,7 +154,7 @@ dab init --database-type mssql --auth.issuer "https://login.microsoftonline.com/
 
 ## `--auth.provider`
 
-Identity provider. Default is `StaticWebApps`.
+Identity provider. 
 
 ### Example
 

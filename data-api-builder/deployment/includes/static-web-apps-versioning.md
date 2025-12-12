@@ -7,5 +7,7 @@ ms.topic: include
 ms.date: 06/11/2025
 ---
 
+# ☹️ Azure Static Web Apps
+
 > [!IMPORTANT]
-> Support for Data API builder (DAB) in Azure Static Web Apps using database connections is in preview. Azure Static Web Apps uses a fixed version of the DAB engine that can vary from the latest stable version of DAB. To access the latest DAB features, consider an alternative host for DAB using the latest version of the engine from GitHub, Microsoft Container Registry (Docker Hub), or NuGet.
+> In November 2025, the Database Connection feature of Static Web Apps was retired. As a result, neither Data API builder nor SQL MCP Server are natively deployed into the Static Web Apps environment, and the `StaticWebApps` authentication provider in DAB is effectively deprecated and no longer supported.

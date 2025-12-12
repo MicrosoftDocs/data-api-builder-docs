@@ -107,18 +107,7 @@ The following example demonstrates requests made to the `Book` entity that is co
 }
 ```
 
-In Static Web Apps, a user is a member of the anonymous role [by default](/azure/static-web-apps/authentication-custom?tabs=aad%2Cinvitations#manage-roles). If the user is authenticated, the user is a member of both the `anonymous` and `authenticated` roles.
-
-When a client app sends an authenticated request to Data API builder [deployed using Static Web Apps database connections (Preview)](/azure/static-web-apps/database-overview), the client app supplies an access token that Static Web Apps [transforms into JSON](/azure/static-web-apps/user-information?tabs=javascript#client-principal-data):
-
-```json
-{
-  "identityProvider": "azuread",
-  "userId": "d75b260a64504067bfc5b2905e3b8182",
-  "userDetails": "username",
-  "userRoles": ["anonymous", "authenticated", "author"]
-}
-```
+In App Service, a user is a member of the anonymous role by default. If the user is authenticated, the user is a member of both the `anonymous` and `authenticated` roles.
 
 Because Data API builder evaluates requests in the context of a single role, it evaluates the request in the context of the system role `authenticated` by default.
 

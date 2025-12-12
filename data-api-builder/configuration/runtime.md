@@ -337,9 +337,6 @@ Global REST configuration.
 }
 ```
 
-> [!NOTE]
-> When deploying Data API builder using Static Web Apps (preview), the Azure service automatically injects another subpath `/data-api` to the url. This behavior ensures compatibility with existing Static Web App features. The resulting endpoint would be `/data-api/api/<entity>`. This note is only relevant to Static Web Apps.
-
 ### Example: request-body-strict
 
    - Columns with a `default()` value are ignored during `INSERT` only when their value in the payload is `null`. As a consequence, `INSERT` operations into `default()` columns, when `request-body-strict` is `true`, can't result in explicit `null` values. To accomplish this, an `UPDATE` operation is required.
@@ -496,23 +493,6 @@ An example of entity permissions.
 ```
 
 In this example, since no `authentication` provider is configured, all incoming requests are automatically considered to be from an `anonymous` user. The `permissions` array for the `Book` entity explicitly grants the `anonymous` role the ability to perform `read` operations. Any attempt to perform other actions (like `create`, `update`, `delete`) or access other entities not configured for `anonymous` access is denied.
-
-### StaticWebApps (auth provider) \[deprecated]
-
-```json
-{
- "host": {
-  "authentication": {
-   "provider": "StaticWebApps"
-  }
- }
-}
-```
-
-This provider is deprecated because the Static Web Apps preview feature `Data Connections` was retired in November 2025. While it remains functional, it was designed for a legacy implementation of authentication in Azure Static Web Apps. Developers should migrate to the `AppService` provider for better long-term support and consistency with Azure's broader "Easy Auth" platform.
-
-> \[!Note]
-> Migrating isn't as simple as changing the provider name in the configuration file. The `StaticWebApps` and `AppService` providers expect different JSON structures within the `x-ms-client-principal` header for processing roles.
 
 ### AppService (auth provider)
 
