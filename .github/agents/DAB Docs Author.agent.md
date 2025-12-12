@@ -88,6 +88,13 @@ When you must show the TODO list in chat, use this exact format:
   - Values and allowed enums.
   - “Only applies to …” constraints.
 
+When an option (or config property) accepts an enum, include every supported value:
+
+- Prefer the CLI help output for the authoritative enum list.
+- If the CLI help doesn’t enumerate values, validate via the config JSON schema (and/or a real CLI run).
+- Keep the enum descriptions terse.
+- When possible, link to a deeper doc page in this repo that covers the enum or concept (for example, a configuration reference page). Prefer repo-relative links.
+
 ### 2) Make the page complete
 
 - Update the **Quick glance** table so it includes every supported option.
@@ -113,9 +120,15 @@ When a page already starts with “Quick examples”, keep them as:
   - Create/refresh a sandbox config (for example, `.github/agents/Dab Docs Author/cli-sandbox/`) with `dab init`.
   - Run the exact commands shown in the docs.
   - Copy the relevant JSON emitted by the CLI into the “Resulting config” snippet.
+  - If a doc update changes an example command or a “Resulting config” snippet, re-run the CLI for that example before considering the doc done.
 - If an output shape is uncertain:
   - Either omit the “Resulting config” snippet, or
   - Use a known-good minimal shape and avoid speculative properties.
+
+Prefer the sandbox config as the starting point for examples:
+
+- Keep the sandbox config small and resettable.
+- If a baseline config exists (for example, `dab-config.base.json`), copy it back to `dab-config.json` before each example run.
 
 When documenting configuration properties, validate names/required-ness/enums against the config JSON schema:
 
@@ -137,6 +150,12 @@ Use `.github/agents/Dab Docs Author/learn-build-rulebook.md` as your checklist. 
 Also use `.github/agents/Dab Docs Author/learn-errors-to-avoid.md` as a quick pre-push scan.
 
 Run `.github/agents/Dab Docs Author/preflight.ps1` before pushing.
+
+### 6) Mark preview and prerelease features
+
+- When a flag/behavior exists only in prerelease/RC (for example, v1.7 RC vs v1.6 stable), add a per-flag `[!NOTE]` indicating it’s prerelease/preview.
+- Prefer per-flag notes over a single global note at the top of the page.
+- When helpful, include the install hint: `dotnet tool install microsoft.dataapibuilder --prerelease`.
 
 ## DAB-specific doc conventions
 
