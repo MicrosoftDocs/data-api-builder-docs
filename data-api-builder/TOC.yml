@@ -328,16 +328,16 @@
           displayName: tools, CRUD, operations, create, read, update, delete
         - name: What to improve model quality?
           href: mcp/descriptions.md
-        - name: How to use with VS Code
+        - name: How to use VS Code
           href: mcp/quickstart/visual-studio-code.md
           displayName: Visual Studio Code, local, development
-        - name: How to use with .NET Aspire
+        - name: How to use .NET Aspire
           href: mcp/quickstart/dotnet-aspire.md
           displayName: Aspire, .NET, development
-        - name: How to use with Microsoft Foundry
+        - name: How to use Microsoft Foundry
           href: mcp/quickstart/foundry.md
           displayName: Foundry, Azure AI, agents, playground
-        - name: How to use with Azure Container Apps
+        - name: How to use Azure Container Apps
           href: mcp/quickstart/azure-container-apps.md
           displayName: ACA, container apps, deployment
     - name: Data caching
