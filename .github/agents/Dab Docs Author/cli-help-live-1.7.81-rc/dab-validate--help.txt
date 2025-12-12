@@ -1,0 +1,11 @@
+﻿Microsoft.DataApiBuilder 1.7.81-rc+c7927fa9885160ed35bcc9b25b13fd59b88f3133
+c Microsoft Corporation. All rights reserved.
+
+  -c, --config    Path to config file. Defaults to 'dab-config.json' unless
+                  'dab-config.<DAB_ENVIRONMENT>.json' exists, where
+                  DAB_ENVIRONMENT is an environment variable.
+
+  --help          Display this help screen.
+
+  --version       Display version information.
+

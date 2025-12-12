@@ -78,6 +78,7 @@ When you must show the TODO list in chat, use this exact format:
 
 - Obtain the authoritative option list from the CLI’s help output.
   - Prefer `dab <command> --help`.
+  - If output is long, redirect it to a file to avoid terminal truncation (for example, `dab configure --help | Out-File -Encoding utf8 .github/agents/Dab\ Docs\ Author/cli-help-live-<version>/dab-configure--help.txt`).
   - If you only have captured output, use these captures as baselines:
     - v1.6 (stable): `.github/agents/Dab Docs Author/dab-cli-help-1.6.84.md`
     - v1.7 (RC): `.github/agents/Dab Docs Author/dab-cli-help-1.7.81-rc.md`
@@ -198,6 +199,8 @@ Keep `description` meaningful and typically 100–160 characters.
   ```
 
   ---
+
+- Don’t place the tab headings inside indented list items (4+ spaces) because they won’t render as headings; if an example must stay inside a list, use two labeled code fences (`bash` and `cmd`) instead.
   ```
 
 - Prefer multi-line commands over one-liners. Use `\` for Bash and `^` for Command Prompt line continuation.

@@ -26,17 +26,21 @@ In this guide, you go through the steps to install the Data API builder (DAB) co
 
 Installing the .NET tool makes the `dab` command available on your local machine.
 
-1. Use the `--version` argument to determine the version of your current installation.
+Use the `--version` argument to determine the version of your current installation.
 
-    ```dotnetcli
-    dab --version
-    ```
+```bash
+dab --version
+```
 
-    > [!IMPORTANT]
-    > If you are running on Linux or macOS, you could see an error when invoking `dab` directly. To resolve this error, add the .NET global tools to your `PATH`. For more information, see [troubleshooting Data API builder installation](../troubleshoot-installation.md).
+```cmd
+dab --version
+```
 
-1. Observe the output of the previous command. Assuming the current version of the DAB CLI is `1.0.0`, the command would output would include the following content.
+> [!IMPORTANT]
+> If you are running on Linux or macOS, you could see an error when invoking `dab` directly. To resolve this error, add the .NET global tools to your `PATH`. For more information, see [troubleshooting Data API builder installation](../troubleshoot-installation.md).
 
-    ```output
-    Microsoft.DataApiBuilder 1.0.0
-    ```
+Observe the output of the previous command. Assuming the current version of the DAB CLI is `1.0.0`, the command output would include the following content.
+
+```output
+Microsoft.DataApiBuilder 1.0.0
+```

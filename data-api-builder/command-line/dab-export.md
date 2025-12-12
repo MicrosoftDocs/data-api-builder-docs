@@ -40,6 +40,8 @@ dab export --graphql -o <output-directory> [options]
 | `-d, --sampling-days <int>`            | No       | –                                 | Restrict to records newer than N days                                    |
 | `--sampling-group-count <int>`         | No       | –                                 | For `TimePartitionedSampler` only                                        |
 | `-c, --config <file>`                  | No       | Env-specific or `dab-config.json` | Path to config file                                                      |
+| `--help`                               | No       | –                                 | Display the help screen                                                  |
+| `--version`                            | No       | –                                 | Display version information                                              |
 
 ## Behavior
 
@@ -79,54 +81,324 @@ Use when schema evolves over time
 > [!Note]
 > More resource intensive due to multiple queries.
 
-## Options
-
-### `--graphql`
+## `--graphql`
 
 Enables schema export. Without it, nothing happens.
 
-### `-o, --output`
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab export \
+  --graphql \
+  -o ./schema-out
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export ^
+  --graphql ^
+  -o .\schema-out
+```
+
+---
+
+## `-o, --output`
 
 Directory for schema file. Created if missing.
 
-### `-g, --graphql-schema-file`
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab export \
+  --graphql \
+  -o ./schema-out
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export ^
+  --graphql ^
+  -o .\schema-out
+```
+
+---
+
+## `-g, --graphql-schema-file`
 
 Output filename only, defaults to `schema.gql`.
 
-### `--generate`
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab export \
+  --graphql \
+  -o ./out \
+  -g custom-schema.gql
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export ^
+  --graphql ^
+  -o .\out ^
+  -g custom-schema.gql
+```
+
+---
+
+## `--generate`
 
 * false (default): Start runtime, introspect schema
 * true: Generate schema from Cosmos DB data
 
-### `-m, --sampling-mode`
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab export \
+  --graphql \
+  -o ./schema-gen \
+  --generate
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export ^
+  --graphql ^
+  -o .\schema-gen ^
+  --generate
+```
+
+---
+
+## `-m, --sampling-mode`
 
 Options: `TopNExtractor`, `EligibleDataSampler`, `TimePartitionedSampler`
 Default: `TopNExtractor`
 
-### `-n, --sampling-count`
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab export \
+  --graphql \
+  -o ./schema-gen \
+  --generate \
+  --sampling-mode TopNExtractor
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export ^
+  --graphql ^
+  -o .\schema-gen ^
+  --generate ^
+  --sampling-mode TopNExtractor
+```
+
+---
+
+## `-n, --sampling-count`
 
 * TopNExtractor: total documents
 * EligibleDataSampler: per partition
 * TimePartitionedSampler: per time group
 
-### `--sampling-partition-key-path`
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab export \
+  --graphql \
+  -o ./schema-gen \
+  --generate \
+  --sampling-mode TopNExtractor \
+  --sampling-count 25
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export ^
+  --graphql ^
+  -o .\schema-gen ^
+  --generate ^
+  --sampling-mode TopNExtractor ^
+  --sampling-count 25
+```
+
+---
+
+## `--sampling-partition-key-path`
 
 Partition key path for EligibleDataSampler
 
-### `-d, --sampling-days`
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab export \
+  --graphql \
+  -o ./schema-partitions \
+  --generate \
+  --sampling-mode EligibleDataSampler \
+  --sampling-partition-key-path /customerId
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export ^
+  --graphql ^
+  -o .\schema-partitions ^
+  --generate ^
+  --sampling-mode EligibleDataSampler ^
+  --sampling-partition-key-path /customerId
+```
+
+---
+
+## `-d, --sampling-days`
 
 Filter documents by recency (days)
 
-### `--sampling-group-count`
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab export \
+  --graphql \
+  -o ./schema-gen \
+  --generate \
+  --sampling-days 14
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export ^
+  --graphql ^
+  -o .\schema-gen ^
+  --generate ^
+  --sampling-days 14
+```
+
+---
+
+## `--sampling-group-count`
 
 Number of time groups for TimePartitionedSampler
 
-### `-c, --config`
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab export \
+  --graphql \
+  -o ./schema-time \
+  --generate \
+  --sampling-mode TimePartitionedSampler \
+  --sampling-group-count 8
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export ^
+  --graphql ^
+  -o .\schema-time ^
+  --generate ^
+  --sampling-mode TimePartitionedSampler ^
+  --sampling-group-count 8
+```
+
+---
+
+## `-c, --config`
 
 Config file path. If omitted:
 
 1. `dab-config.<DAB_ENVIRONMENT>.json` if env var is set
 2. Otherwise `dab-config.json`
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab export \
+  --graphql \
+  -o ./schema-out \
+  --config ./dab-config.json
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export ^
+  --graphql ^
+  -o .\schema-out ^
+  --config .\dab-config.json
+```
+
+---
+
+## `--help`
+
+Display the help screen.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab export --help
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export --help
+```
+
+---
+
+## `--version`
+
+Display version information.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab export --version
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export --version
+```
+
+---
 
 ## Return codes
 
@@ -139,34 +411,88 @@ Config file path. If omitted:
 
 ### Export existing schema
 
-```sh
-dab export --graphql -o ./schema-out
+#### [Bash](#tab/bash)
+
+```bash
+dab export \
+  --graphql \
+  -o ./schema-out
 ```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export ^
+  --graphql ^
+  -o .\schema-out
+```
+
+---
 
 ### Generate schema (TopNExtractor)
 
-```sh
-dab export --graphql -o ./schema-gen \
+#### [Bash](#tab/bash)
+
+```bash
+dab export \
+  --graphql \
+  -o ./schema-gen \
   --generate \
   --sampling-mode TopNExtractor \
   --sampling-count 25 \
   --sampling-days 14
 ```
 
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export ^
+  --graphql ^
+  -o .\schema-gen ^
+  --generate ^
+  --sampling-mode TopNExtractor ^
+  --sampling-count 25 ^
+  --sampling-days 14
+```
+
+---
+
 ### Partition-aware sampling
 
-```sh
-dab export --graphql -o ./schema-partitions \
+#### [Bash](#tab/bash)
+
+```bash
+dab export \
+  --graphql \
+  -o ./schema-partitions \
   --generate \
   --sampling-mode EligibleDataSampler \
   --sampling-partition-key-path /customerId \
   --sampling-count 10
 ```
 
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export ^
+  --graphql ^
+  -o .\schema-partitions ^
+  --generate ^
+  --sampling-mode EligibleDataSampler ^
+  --sampling-partition-key-path /customerId ^
+  --sampling-count 10
+```
+
+---
+
 ### Time-based sampling
 
-```sh
-dab export --graphql -o ./schema-time \
+#### [Bash](#tab/bash)
+
+```bash
+dab export \
+  --graphql \
+  -o ./schema-time \
   --generate \
   --sampling-mode TimePartitionedSampler \
   --sampling-group-count 8 \
@@ -174,33 +500,52 @@ dab export --graphql -o ./schema-time \
   --sampling-days 60
 ```
 
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export ^
+  --graphql ^
+  -o .\schema-time ^
+  --generate ^
+  --sampling-mode TimePartitionedSampler ^
+  --sampling-group-count 8 ^
+  --sampling-count 5 ^
+  --sampling-days 60
+```
+
+---
+
 ### Custom output filename
 
-```sh
-dab export --graphql -o ./out \
+#### [Bash](#tab/bash)
+
+```bash
+dab export \
+  --graphql \
+  -o ./out \
   -g cosmos-schema.graphql \
   --generate \
   --sampling-mode TopNExtractor \
   --sampling-count 15
 ```
 
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab export ^
+  --graphql ^
+  -o .\out ^
+  -g cosmos-schema.graphql ^
+  --generate ^
+  --sampling-mode TopNExtractor ^
+  --sampling-count 15
+```
+
+---
+
 ## Generated file usage
 
-Update config:
-
-```json
-{
-  "data-source": {
-    "database-type": "cosmosdb_nosql"
-  },
-  "runtime": {
-    "graphql": {
-      "enabled": true,
-      "schema-file": "schema.gql"
-    }
-  }
-}
-```
+Set `runtime.graphql.schema` to the exported schema file path. For more information, see [Runtime configuration](../configuration/runtime.md).
 
 > [!TIP]
 > Commit the generated schema once stable. Re-run if data model changes.
