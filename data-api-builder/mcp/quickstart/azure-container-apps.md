@@ -16,7 +16,7 @@ ms.date: 12/09/2025
 
 This quickstart shows you how to deploy SQL MCP Server to Azure Container Apps. Once deployed, you can connect to it from VS Code, Microsoft Foundry, or any other Model Context Protocol (MCP) client as a remote server endpoint.
 
-![Solution overview](../media/quickstart-aca-01.png)
+![Solution overview showing SQL MCP Server deployment](../media/quickstart-azure-container-apps-01.png)
 
 ## Prerequisites
 
@@ -66,7 +66,7 @@ dotnet tool install microsoft.dataapibuilder --prerelease
 
 ### 5. PowerShell
 
-[Install PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.5) if you do not have it already installed.
+[Install PowerShell](/powershell/scripting/install/install-powershell-on-windows) if you do not have it already installed.
 
 ```sh
 dotnet tool install --global PowerShell
@@ -281,7 +281,7 @@ az containerapp create `
 
 #### Your resource group should resemble this:
 
-![Solution overview](../media/quickstart-aca-02.png)
+![Resource group after deployment](../media/quickstart-azure-container-apps-02.png)
 
 ### 4. Get your MCP endpoint URL
 
