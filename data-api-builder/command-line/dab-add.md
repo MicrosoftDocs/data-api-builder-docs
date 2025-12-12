@@ -343,6 +343,9 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --permissions "au
 
 Stored procedures only. Comma-separated list of parameter names.
 
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+
 ### Example
 
 ```bash
@@ -401,6 +404,9 @@ dab add GetOrdersByDateRange \
 
 Stored procedures only. Comma-separated list of parameter descriptions aligned to `--parameters.name`.
 
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+
 ### Example
 
 ```bash
@@ -410,6 +416,9 @@ dab add GetOrdersByDateRange --source dbo.usp_GetOrdersByDateRange --source.type
 ## `--parameters.required`
 
 Stored procedures only. Comma-separated list of `true`/`false` values aligned to `--parameters.name`.
+
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
 
 ### Example
 
@@ -421,6 +430,9 @@ dab add GetOrdersByDateRange --source dbo.usp_GetOrdersByDateRange --source.type
 
 Stored procedures only. Comma-separated list of default values aligned to `--parameters.name`.
 
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+
 ### Example
 
 ```bash
@@ -430,6 +442,9 @@ dab add GetOrdersByDateRange --source dbo.usp_GetOrdersByDateRange --source.type
 ## `--fields.name`
 
 Name of the database column to describe.
+
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
 
 ### Example
 
@@ -476,6 +491,9 @@ dab add Products \
 
 Alias for the field. Use a comma-separated list aligned to `--fields.name`.
 
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+
 ### Example
 
 ```bash
@@ -486,6 +504,9 @@ dab add Products --source dbo.Products --permissions "anonymous:*" --fields.name
 
 Description for the field. Use a comma-separated list aligned to `--fields.name`.
 
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+
 ### Example
 
 ```bash
@@ -495,6 +516,9 @@ dab add Products --source dbo.Products --permissions "anonymous:*" --fields.name
 ## `--fields.primary-key`
 
 Primary key flag for the field. Use a comma-separated list of `true`/`false` values aligned to `--fields.name`.
+
+> [!NOTE]
+> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
 
 ### Example
 
