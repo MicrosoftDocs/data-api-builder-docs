@@ -42,11 +42,14 @@ dotnet tool install microsoft.dataapibuilder --prerelease
 dotnet tool restore
 ```
 
+> [!NOTE]
+> SQL MCP Server is currently in prerelease. Using the `--prerelease` flag ensures you get the latest version of Data API builder with all the features used in this quickstart.
+
 ## 1. Create your sample database
 
 In this step, you create a database named `ProductsDb` and seed it with a single table named `Products`.
 
-Connect to your SQL instance using SQLCMD, Azure Data Studio, SQL Server Management Studio, or any preferred tool, then run:
+Connect to your SQL instance using SQLCMD, SQL Server Management Studio, or any preferred tool, then run:
 
 ```sql
 CREATE DATABASE ProductsDb;

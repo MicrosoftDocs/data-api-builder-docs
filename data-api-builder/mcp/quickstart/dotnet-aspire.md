@@ -82,6 +82,9 @@ dotnet tool install microsoft.dataapibuilder --prerelease
 aspire init
 ```
 
+> [!NOTE]
+> SQL MCP Server is currently in prerelease. Using the `--prerelease` flag ensures you get the latest version of Data API builder with all the features used in this quickstart.
+
 When prompted, select all defaults.
 
 #### This command installs the tooling and creates the following files
@@ -101,73 +104,87 @@ In this step, you update `AppHost.cs` with the correct code to run this quicksta
 #### Replace the contents of AppHost.cs with the following
 
 ```csharp
-#:sdk Aspire.AppHost.Sdk/9.2.0
-#:package Aspire.Hosting.SqlServer/9.2.0
-#:package CommunityToolkit.Aspire.Hosting.Mcp.Inspector/9.6.0
+#:sdk Aspire.AppHost.Sdk@13.0.2
+#:package Aspire.Hosting.SqlServer@13.0.2
+#:package CommunityToolkit.Aspire.Hosting.McpInspector@9.8.0
 
+using System.ComponentModel;
 using Aspire.Hosting;
+using Aspire.Hosting.ApplicationModel;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var sql = builder
-    .AddSqlServer("sql")
-    .WithDataVolume()
-    .WithLifetime(ContainerLifetime.Persistent);
+var db = AddSqlServer(builder);
+WithSqlCommander(db);
 
-var db = sql
-    .AddDatabase("productsdb")
-    .WithInitScript("init-db.sql");
-
-var mcp = builder
-    .AddContainer("sql-mcp-server", "mcr.microsoft.com/azure-databases/data-api-builder", "1.7.6")
-    .WithHttpEndpoint(targetPort: 5000, name: "http")
-    .WithEnvironment("MSSQL_CONNECTION_STRING", db)
-    .WithBindMount("./dab-config.json", "/App/dab-config.json", isReadOnly: true)
-    .WithArgs("--config", "/App/dab-config.json")
-    .WaitFor(db)
-    .WithUrls(c =>
-    {
-        c.Urls.Clear();
-        c.Urls.Add(new() { Url = "/swagger", DisplayText = "Swagger", Endpoint = c.GetEndpoint("http") });
-        c.Urls.Add(new() { Url = "/mcp", DisplayText = "MCP", Endpoint = c.GetEndpoint("http") });
-    });
-
-builder
-    .AddMcpInspector("inspector")
-    .WithHttpTransport(mcp, endpointName: "http", mcpPath: "/mcp")
-    .WaitFor(mcp);
+var mcp = AddMcpServer(db);
+WithMcpInspector(mcp);
 
 await builder.Build().RunAsync();
-```
 
-> [!NOTE]
-> `WithInitScript("init-db.sql")` expects the script file to be available to the AppHost at runtime (typically in the AppHost project directory alongside `AppHost.cs`). If Aspire can't find the file, verify the script is in the correct folder and is marked to copy to output if required.
+IResourceBuilder<SqlServerDatabaseResource> AddSqlServer(IDistributedApplicationBuilder builder) => builder
+    .AddSqlServer("sql-server").WithDataVolume()
+    .AddDatabase("sql-database", "productsdb")
+    .WithCreationScript(SqlScript("productsdb"));
 
-#### Create the database initialization script
+IResourceBuilder<ContainerResource> WithSqlCommander(IResourceBuilder<SqlServerDatabaseResource> db) => db
+    .ApplicationBuilder.AddContainer("sql-cmdr", "jerrynixon/sql-commander", "latest")
+    .WithImageRegistry("docker.io")
+    .WithHttpEndpoint(targetPort: 8080, name: "http")
+    .WithEnvironment("ConnectionStrings__db", db)
+    .WithParentRelationship(db)
+    .WaitFor(db)
+    .WithUrls(x =>
+    {
+        x.Urls.Clear();
+        x.Urls.Add(new() { Url = "/", DisplayText = "Commander", Endpoint = x.GetEndpoint("http") });
+    });
 
-Create a file named `init-db.sql` in your project folder with the following content:
+IResourceBuilder<ContainerResource> AddMcpServer(IResourceBuilder<SqlServerDatabaseResource> db) => db
+    .ApplicationBuilder.AddContainer("sql-mcp-server", "azure-databases/data-api-builder", "1.7.83-rc")
+    .WithImageRegistry("mcr.microsoft.com")
+    .WithHttpEndpoint(targetPort: 5000, name: "http")
+    .WithEnvironment("MSSQL_CONNECTION_STRING", db)
+    .WithBindMount("dab-config.json", "/App/dab-config.json", true)
+    .WaitFor(db)
+    .WithUrls(x =>
+    {
+        x.Urls.Clear();
+        x.Urls.Add(new() { Url = "/swagger", DisplayText = "Swagger", Endpoint = x.GetEndpoint("http") });
+    });
 
-```sql
-CREATE TABLE dbo.Products (
-    Id INT PRIMARY KEY,
-    Name NVARCHAR(100) NOT NULL,
-    Inventory INT NOT NULL,
-    Price DECIMAL(10,2) NOT NULL,
-    Cost DECIMAL(10,2) NOT NULL
-);
+IResourceBuilder<McpInspectorResource> WithMcpInspector(IResourceBuilder<ContainerResource> mcp) => mcp
+    .ApplicationBuilder.AddMcpInspector("mcp-inspector")
+    .WithMcpServer(mcp)
+    .WithParentRelationship(mcp)
+    .WaitFor(mcp)
+    .WithUrls(x =>
+    {
+        x.Urls[0].DisplayText = "Inspector";
+    });
 
-INSERT INTO dbo.Products (Id, Name, Inventory, Price, Cost)
-VALUES
-    (1, 'Action Figure', 40, 14.99, 5.00),
-    (2, 'Building Blocks', 25, 29.99, 10.00),
-    (3, 'Puzzle 500 pcs', 30, 12.49, 4.00),
-    (4, 'Toy Car', 50, 7.99, 2.50),
-    (5, 'Board Game', 20, 34.99, 12.50),
-    (6, 'Doll House', 10, 79.99, 30.00),
-    (7, 'Stuffed Bear', 45, 15.99, 6.00),
-    (8, 'Water Blaster', 35, 19.99, 7.00),
-    (9, 'Art Kit', 28, 24.99, 8.00),
-    (10, 'RC Helicopter', 12, 59.99, 22.00);
+string SqlScript(string db) => $"""
+    CREATE DATABASE {db};
+    GO
+
+    SELECT *
+    INTO {db}.dbo.Products
+    FROM (VALUES
+        (1, 'Action Figure', 40, 14.99, 5.00),
+        (2, 'Building Blocks', 25, 29.99, 10.00),
+        (3, 'Puzzle 500 pcs', 30, 12.49, 4.00),
+        (4, 'Toy Car', 50, 7.99, 2.50),
+        (5, 'Board Game', 20, 34.99, 12.50),
+        (6, 'Doll House', 10, 79.99, 30.00),
+        (7, 'Stuffed Bear', 45, 15.99, 6.00),
+        (8, 'Water Blaster', 35, 19.99, 7.00),
+        (9, 'Art Kit', 28, 24.99, 8.00),
+        (10,'RC Helicopter', 12, 59.99, 22.00)
+    ) AS x (Id, Name, Inventory, Price, Cost);
+
+    ALTER TABLE {db}.dbo.Products
+    ADD CONSTRAINT PK_Products PRIMARY KEY (Id);
+    """;
 ```
 
 #### This code configures the following resources
@@ -179,6 +196,8 @@ VALUES
 └── SQL MCP Server (sql-mcp-server)
     └── MCP Inspector (inspector)
 ```
+
+![Resource overview](../media/quickstart-aspire-03.png)
 
 ### 5. Create your dab-config.json file
 
@@ -227,7 +246,12 @@ In this step, you run your Aspire environment and confirm that SQL Server, SQL M
 aspire run
 ```
 
+> [!IMPORTANT]
+> Ensure Docker is running. Aspire requires your container host to work properly.
+
 When the dashboard opens, you see links for Swagger, MCP, and Inspector.
+
+![Running environment](../media/quickstart-aspire-02.png)
 
 #### Expected URLs
 

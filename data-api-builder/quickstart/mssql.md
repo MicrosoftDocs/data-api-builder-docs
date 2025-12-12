@@ -20,7 +20,7 @@ In this Quickstart, you build a set of Data API builder configuration files to t
 - [Docker](https://www.docker.com/products/docker-desktop/)
 - [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0)
 - A data management client
-  - If you don't have a client installed, [install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
+  - If you don't have a client installed, install SQL Server Management Studio.
 
 > [!TIP]
 > Alternatively, open this Quickstart in GitHub Codespaces with all developer prerequisites already installed. Simply bring your own Azure subscription. GitHub accounts include an entitlement of storage and core hours at no cost. For more information, see [included storage and core hours for GitHub accounts](https://docs.github.com/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts).

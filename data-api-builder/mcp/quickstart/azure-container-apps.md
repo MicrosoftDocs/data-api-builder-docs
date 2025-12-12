@@ -61,6 +61,18 @@ dotnet new tool-manifest
 dotnet tool install microsoft.dataapibuilder --prerelease
 ```
 
+> [!NOTE]
+> SQL MCP Server is currently in prerelease. Using the `--prerelease` flag ensures you get the latest version of Data API builder with all the features used in this quickstart.
+
+### 5. PowerShell
+
+[Install PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.5) if you do not have it already installed.
+
+```sh
+dotnet tool install --global PowerShell
+```
+
+
 ## Step 1: Create and deploy Azure SQL Database
 
 ### 1. Sign in to Azure
@@ -72,7 +84,7 @@ az account set --subscription "<your-subscription-id>"
 
 ### 2. Set variables for your deployment
 
-#### Windows PowerShell
+#### PowerShell Command
 
 ```powershell
 $RESOURCE_GROUP = "rg-sql-mcp"
@@ -81,17 +93,6 @@ $SQL_SERVER = "sql-mcp-$(Get-Random -Minimum 1000 -Maximum 9999)"
 $SQL_DATABASE = "ProductsDB"
 $SQL_ADMIN = "sqladmin"
 $SQL_PASSWORD = "<YourStrongPassword123!>"
-```
-
-#### Linux/macOS
-
-```sh
-RESOURCE_GROUP="rg-sql-mcp"
-LOCATION="eastus"
-SQL_SERVER="sql-mcp-$RANDOM"
-SQL_DATABASE="ProductsDB"
-SQL_ADMIN="sqladmin"
-SQL_PASSWORD="<YourStrongPassword123!>"
 ```
 
 ### 3. Create a resource group
@@ -138,16 +139,10 @@ az sql db create \
 
 Get your connection string first:
 
-#### Windows PowerShell
+#### PowerShell Command
 
 ```powershell
 $CONNECTION_STRING = "Server=tcp:$SQL_SERVER.database.windows.net,1433;Database=$SQL_DATABASE;User ID=$SQL_ADMIN;Password=$SQL_PASSWORD;Encrypt=true;TrustServerCertificate=false;Connection Timeout=30;"
-```
-
-#### Linux/macOS
-
-```sh
-CONNECTION_STRING="Server=tcp:$SQL_SERVER.database.windows.net,1433;Database=$SQL_DATABASE;User ID=$SQL_ADMIN;Password=$SQL_PASSWORD;Encrypt=true;TrustServerCertificate=false;Connection Timeout=30;"
 ```
 
 Create a SQL script file `create-products.sql`:
@@ -176,7 +171,7 @@ INSERT INTO dbo.Products (ProductName, Category, UnitPrice, UnitsInStock, Discon
 ('Water Bottle', 'Office Supplies', 19.99, 120, 0);
 ```
 
-Execute it using Azure Data Studio, SQL Server Management Studio, or sqlcmd.
+Execute it using VS Code, SQL Server Management Studio, or sqlcmd.
 
 ## Step 2: Configure SQL MCP Server
 
@@ -184,7 +179,7 @@ Execute it using Azure Data Studio, SQL Server Management Studio, or sqlcmd.
 
 Initialize the configuration:
 
-#### Windows PowerShell
+#### PowerShell Command
 
 ```powershell
 dab init `
@@ -194,19 +189,9 @@ dab init `
   --config dab-config.json
 ```
 
-#### Linux/macOS
-
-```sh
-dab init \
-  --database-type mssql \
-  --connection-string "@env('MSSQL_CONNECTION_STRING')" \
-  --host-mode Production \
-  --config dab-config.json
-```
-
 ### 2. Add the Products entity with descriptions
 
-#### Windows PowerShell
+#### PowerShell Command
 
 ```powershell
 dab add Products `
@@ -215,20 +200,11 @@ dab add Products `
   --description "Product catalog with pricing, category, and inventory information"
 ```
 
-#### Linux/macOS
-
-```sh
-dab add Products \
-  --source dbo.Products \
-  --permissions "anonymous:read" \
-  --description "Product catalog with pricing, category, and inventory information"
-```
-
 ### 3. Provide AI agent context with field descriptions
 
 Add field descriptions to help AI agents understand your database schema:
 
-#### Windows PowerShell
+#### PowerShell Command
 
 ```powershell
 dab update Products `
@@ -257,40 +233,11 @@ dab update Products `
   --fields.description "True if product is no longer available for sale"
 ```
 
-#### Linux/macOS
-
-```sh
-dab update Products \
-  --fields.name ProductID \
-  --fields.description "Unique product identifier" \
-  --fields.primary-key true
-
-dab update Products \
-  --fields.name ProductName \
-  --fields.description "Name of the product"
-
-dab update Products \
-  --fields.name Category \
-  --fields.description "Product category (Electronics, Furniture, Office Supplies, Appliances)"
-
-dab update Products \
-  --fields.name UnitPrice \
-  --fields.description "Retail price per unit in USD"
-
-dab update Products \
-  --fields.name UnitsInStock \
-  --fields.description "Current inventory count available for purchase"
-
-dab update Products \
-  --fields.name Discontinued \
-  --fields.description "True if product is no longer available for sale"
-```
-
 ## Step 3: Deploy SQL MCP Server to Azure Container Apps
 
 ### 1. Create Container Apps environment
 
-#### Windows PowerShell
+#### PowerShell Command
 
 ```powershell
 $CONTAINERAPP_ENV = "sql-mcp-env"
@@ -302,21 +249,9 @@ az containerapp env create `
   --location $LOCATION
 ```
 
-#### Linux/macOS
-
-```sh
-CONTAINERAPP_ENV="sql-mcp-env"
-CONTAINERAPP_NAME="sql-mcp-server"
-
-az containerapp env create \
-  --name $CONTAINERAPP_ENV \
-  --resource-group $RESOURCE_GROUP \
-  --location $LOCATION
-```
-
 ### 2. Create base64 encoded config
 
-#### Windows PowerShell
+#### PowerShell Command
 
 ```powershell
 $CONFIG_JSON = Get-Content dab-config.json -Raw
@@ -324,15 +259,9 @@ $CONFIG_BYTES = [System.Text.Encoding]::UTF8.GetBytes($CONFIG_JSON)
 $CONFIG_BASE64 = [Convert]::ToBase64String($CONFIG_BYTES)
 ```
 
-#### Linux/macOS
-
-```sh
-CONFIG_BASE64=$(cat dab-config.json | base64 -w 0)
-```
-
 ### 3. Deploy the SQL MCP Server container
 
-#### Windows PowerShell
+#### PowerShell Command
 
 ```powershell
 az containerapp create `
@@ -350,27 +279,13 @@ az containerapp create `
   --memory 1.0Gi
 ```
 
-#### Linux/macOS
+#### Your resource group should resemble this:
 
-```sh
-az containerapp create \
-  --name $CONTAINERAPP_NAME \
-  --resource-group $RESOURCE_GROUP \
-  --environment $CONTAINERAPP_ENV \
-  --image mcr.microsoft.com/azure-databases/data-api-builder:latest \
-  --target-port 5000 \
-  --ingress external \
-  --min-replicas 1 \
-  --max-replicas 3 \
-  --secrets "mssql-connection-string=$CONNECTION_STRING" "dab-config-base64=$CONFIG_BASE64" \
-  --env-vars "MSSQL_CONNECTION_STRING=secretref:mssql-connection-string" "DAB_CONFIG_BASE64=secretref:dab-config-base64" \
-  --cpu 0.5 \
-  --memory 1.0Gi
-```
+![Solution overview](../media/quickstart-aca-02.png)
 
 ### 4. Get your MCP endpoint URL
 
-#### Windows PowerShell
+#### PowerShell Command
 
 ```powershell
 $MCP_URL = az containerapp show `
@@ -382,31 +297,13 @@ $MCP_URL = az containerapp show `
 Write-Host "Your MCP Server URL: https://$MCP_URL/mcp"
 ```
 
-#### Linux/macOS
-
-```sh
-MCP_URL=$(az containerapp show \
-  --name $CONTAINERAPP_NAME \
-  --resource-group $RESOURCE_GROUP \
-  --query "properties.configuration.ingress.fqdn" \
-  --output tsv)
-
-echo "Your MCP Server URL: https://$MCP_URL/mcp"
-```
-
 Save this URL - you use it to connect from MCP clients.
 
 ### 5. Test your deployment
 
-#### Windows PowerShell
+#### PowerShell Command
 
 ```powershell
-curl "https://$MCP_URL/health"
-```
-
-#### Linux/macOS
-
-```sh
 curl "https://$MCP_URL/health"
 ```
 
@@ -441,15 +338,9 @@ az containerapp logs show \
 
 ### Check MCP endpoint health
 
-#### Windows PowerShell
+#### PowerShell Command
 
 ```powershell
-curl "https://$MCP_URL/health"
-```
-
-#### Linux/macOS
-
-```sh
 curl "https://$MCP_URL/health"
 ```
 
