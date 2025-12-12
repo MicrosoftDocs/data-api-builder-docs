@@ -10,7 +10,9 @@ VS Code/Copilot entrypoints:
 Use these files when creating or updating docs:
 
 - `../DAB Docs Author.agent.md` — primary authoring playbook (structure, style, completeness workflow).
-- `dab-cli-help-1.7.81-rc.md` — captured `dab` help output for key commands (useful for Quick glance completeness).
+- `dab-cli-help-1.6.84.md` — captured `dab` help output for key commands (v1.6 stable).
+- `dab-cli-help-1.7.81-rc.md` — captured `dab` help output for key commands (v1.7 RC).
+- `dab-cli-version-notes.md` — notes on observed option surface differences between v1.6 and v1.7 RC.
 - `dab-config-schema-source.md` — link to the authoritative DAB config JSON schema + key excerpts.
 - `learn-build-rulebook.md` — consolidated Learn build/review validations (what they mean + how to fix).
 - `learn-errors-to-avoid.md` — fast checklist of the most common validation failures.

@@ -78,7 +78,10 @@ When you must show the TODO list in chat, use this exact format:
 
 - Obtain the authoritative option list from the CLI’s help output.
   - Prefer `dab <command> --help`.
-  - If you only have captured output, use `.github/agents/Dab Docs Author/dab-cli-help-1.7.81-rc.md` as a baseline and call out version differences when uncertain.
+  - If you only have captured output, use these captures as baselines:
+    - v1.6 (stable): `.github/agents/Dab Docs Author/dab-cli-help-1.6.84.md`
+    - v1.7 (RC): `.github/agents/Dab Docs Author/dab-cli-help-1.7.81-rc.md`
+  - Use `.github/agents/Dab Docs Author/dab-cli-version-notes.md` to call out version differences, and treat v1.7 as RC.
 - Create a checklist of:
   - Positional arguments.
   - Flags (including synonyms like `-c, --config`).
