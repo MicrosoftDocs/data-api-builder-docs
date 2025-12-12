@@ -1,0 +1,12 @@
+{
+  "includeExtensions": [".md"],
+  "allowedDuplicateAltTexts": [],
+  "maxNameLength": 80,
+  "skipH1PathGlobs": [
+    "**/includes/**",
+    "**/keywords/includes/**",
+    "README.md",
+    "SECURITY.md",
+    "ThirdPartyNotices.md"
+  ]
+}
