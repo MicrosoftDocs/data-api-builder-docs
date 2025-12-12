@@ -22,7 +22,7 @@ Install these tools before you start.
 
 ### 1. .NET 9+
 
-You may already have this tool installed. Run `dotnet --version` and confirm it reports version 10 or later. If .NET is already present, reinstalling is safe and only refreshes your runtime.
+You may already have this tool installed. Run `dotnet --version` and confirm it reports version 9.0 or later. If .NET is already present, reinstalling is safe and only refreshes your runtime.
 
 ### 2. SQL Server 2016+
 
@@ -34,9 +34,10 @@ You need access to a SQL Server database. Any of the following work:
 
 ### 3. Install the Data API builder CLI
 
-```
+```bash
 dotnet new tool-manifest
 dotnet tool install microsoft.dataapibuilder --prerelease
+dotnet tool restore
 ```
 
 ## 1. Create your sample database
@@ -52,9 +53,16 @@ GO
 USE ProductsDb;
 GO
 
-SELECT *
-INTO dbo.Products
-FROM (VALUES
+CREATE TABLE dbo.Products (
+    Id INT PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    Inventory INT NOT NULL,
+    Price DECIMAL(10,2) NOT NULL,
+    Cost DECIMAL(10,2) NOT NULL
+);
+
+INSERT INTO dbo.Products (Id, Name, Inventory, Price, Cost)
+VALUES
     (1, 'Action Figure', 40, 14.99, 5.00),
     (2, 'Building Blocks', 25, 29.99, 10.00),
     (3, 'Puzzle 500 pcs', 30, 12.49, 4.00),
@@ -64,42 +72,41 @@ FROM (VALUES
     (7, 'Stuffed Bear', 45, 15.99, 6.00),
     (8, 'Water Blaster', 35, 19.99, 7.00),
     (9, 'Art Kit', 28, 24.99, 8.00),
-    (10,'RC Helicopter', 12, 59.99, 22.00)
-) AS x (Id, Name, Inventory, Price, Cost);
-
-ALTER TABLE dbo.Products
-ADD CONSTRAINT PK_Products PRIMARY KEY (Id);
+    (10,'RC Helicopter', 12, 59.99, 22.00);
 ```
 
 Your sample database is ready.
 
-## 2. Configure SQL MCP Server 
+## 2. Configure SQL MCP Server
 
-### Create a file named:
+Run all commands in the folder where you want to create your `dab-config.json` file.
 
-```
-.env
-```
+### Create your environment file
 
-Place it in the same folder as your `dab-config.json`, then add the following line (customize with your SQL Server information):
+Create a file named `.env` in your working directory and add the following line (customize with your SQL Server information):
 
-```
+```text
 MSSQL_CONNECTION_STRING=Server=localhost;Database=ProductsDb;Trusted_Connection=True;TrustServerCertificate=True
 ```
 
-SQL MCP Server automatically loads variables from a local `.env` file, so the following command works without setting anything in your terminal.
+> [!NOTE]
+> Integrated authentication (`Trusted_Connection=True`) works on Windows. For SQL authentication (common with Docker or cross-platform), use `Server=localhost,1433;Database=ProductsDb;User Id=sa;Password=<YourPassword>;TrustServerCertificate=True` instead (assuming your container maps port 1433 to localhost).
 
-### Run the following script:
+Data API builder can read variables from a local `.env` file when present in the working directory. If your environment doesn't support `.env` files, set `MSSQL_CONNECTION_STRING` as an environment variable in your terminal session before running the following commands.
 
-```
+### Initialize and configure the server
+
+Run the following commands:
+
+```bash
 dab init --database-type mssql --connection-string "@env('MSSQL_CONNECTION_STRING')" --host-mode Development --config dab-config.json
 
-dab add Products --source dbo.Products --permissions "anonymous:*" --description "Toy store products with inventory, price, and cost."
+dab add Products --source dbo.Products --permissions "anonymous:read" --description "Toy store products with inventory, price, and cost."
 ```
 
-### Optionally add field descriptions:
+### Optionally add field descriptions
 
-```
+```bash
 dab update Products --fields.name Id --fields.primary-key true --fields.description "Product Id"
 dab update Products --fields.name Name --fields.description "Product name"
 dab update Products --fields.name Inventory --fields.description "Units in stock"
@@ -111,38 +118,32 @@ Your SQL MCP Server is fully configured.
 
 ## 3. Start SQL MCP Server
 
-Before connecting from VS Code, you need to start the SQL MCP Server in a separate terminal.
+Before connecting from VS Code, start the SQL MCP Server in a separate terminal.
 
-### Open a terminal and run:
+### Open a terminal and run
 
 ```bash
 dab start --config dab-config.json
 ```
 
-This command starts the SQL MCP Server on `http://localhost:23241`. Keep this terminal running - Visual Studio Code (VS Code) connects to this HTTP endpoint.
+This command starts the SQL MCP Server. After startup, the terminal output shows the listening URLs. This quickstart assumes the MCP endpoint is `http://localhost:5000/mcp`. Keep this terminal running - Visual Studio Code connects to this HTTP endpoint.
 
 > [!NOTE]
-> The default MCP endpoint is `http://localhost:5000/mcp`. You can customize the port using the `--host-mode` flag or by configuring the runtime settings in your `dab-config.json`.
+> You can customize the port by configuring the runtime settings in your `dab-config.json` or by setting environment variables such as `ASPNETCORE_URLS`.
 
-## 4. Connect VS Code to your MCP Server
+## 4. Connect from VS Code
 
 > [!IMPORTANT]
 > A workspace is the root folder that VS Code treats as your project. Settings and MCP server definitions only apply inside that folder. If you open a single file, you aren't in a workspace. You must open a folder.
 
-### In VS Code:
+### Open your project folder
 
 1. Select **File** > **Open Folder**
 2. Open the folder that contains your `dab-config.json` file
 
 ### Create your MCP server definition
 
-#### Create a file named:
-
-```
-.vscode/mcp.json
-```
-
-#### Add the following content:
+Create a file named `.vscode/mcp.json` and add the following content:
 
 ```json
 {
@@ -155,13 +156,18 @@ This command starts the SQL MCP Server on `http://localhost:23241`. Keep this te
 }
 ```
 
-Save the file. VS Code automatically detects the MCP server configuration and connects to the running SQL MCP Server at the specified HTTP endpoint. The `Products` entity appears as MCP tools such as `read_records`, `list_records`, and `create_record`.
+Save the file. VS Code should detect the MCP server configuration and connect to the running SQL MCP Server at the specified HTTP endpoint. You may need to reload the window (**Developer: Reload Window** from the Command Palette).
+
+The `Products` entity appears as MCP tools such as `describe_entities` and `read_records`. Tool names may vary based on your configuration.
+
+> [!NOTE]
+> VS Code MCP support is evolving. The configuration schema may change in future releases. For the latest guidance, see the VS Code documentation for MCP integration.
 
 ### Try a tool call
 
-#### Open the VS Code chat and try this prompt:
+Open the VS Code chat and try this prompt:
 
-```
+```text
 @sql-mcp-server Which products have an inventory under 30?
 ```
 

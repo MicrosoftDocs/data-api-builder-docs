@@ -20,7 +20,7 @@ This quickstart uses Aspire to build a container-based solution. The solution in
 - A SQL Model Context Protocol (MCP) Server powered by Data API builder
 - MCP Inspector for testing
 
-Aspire runs everything for you, starts services and connects containers, and cleans it all up when you close it.
+Aspire runs everything for you, starts services and connects containers, and stops services when you close it.
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ In this step, you prepare your machine with the prerequisites required for this 
 #### Windows
 
 ```sh
-winget install Microsoft.DotNet.Runtime.10
+winget install Microsoft.DotNet.SDK.10
 ```
 
 #### Or download
@@ -50,7 +50,7 @@ https://get.dot.net
 In this step, you install Docker Desktop to support the Aspire project.
 
 > [!IMPORTANT]
-> You may already have this tool installed. Test it by running `docker --version` and confirm it reports version 29 or later. If you run this installation and Docker is already present, it refreshes your system without causing any issues.
+> You may already have this tool installed. Test it by running `docker --version` to confirm Docker is available. If you run this installation and Docker is already present, it refreshes your system without causing any issues.
 
 #### Windows
 
@@ -84,129 +84,124 @@ When prompted, select all defaults.
 
 #### This command installs the tooling and creates the following files
 
-```
+```text
 .
 ├── .config
 │   └── dotnet-tools.json
-├── apphost.cs
+├── AppHost.cs
 └── apphost.run.json
 ```
 
-### 4. Complete the apphost.cs file
+### 4. Complete the AppHost.cs file
 
-In this step, you update `apphost.cs` with the correct code to run this quickstart.
+In this step, you update `AppHost.cs` with the correct code to run this quickstart.
 
-#### Replace the contents of apphost.cs with the following
+#### Replace the contents of AppHost.cs with the following
 
-```cs
-#:sdk Aspire.AppHost.Sdk@13.0.2
-#:package Aspire.Hosting.SqlServer@13.0.2
-#:package CommunityToolkit.Aspire.Hosting.McpInspector@9.8.0
+```csharp
+#:sdk Aspire.AppHost.Sdk/9.2.0
+#:package Aspire.Hosting.SqlServer/9.2.0
+#:package CommunityToolkit.Aspire.Hosting.Mcp.Inspector/9.6.0
 
-using System.ComponentModel;
 using Aspire.Hosting;
-using Aspire.Hosting.ApplicationModel;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var db = AddSqlServer(builder);
-WithSqlCommander(db);
+var sql = builder
+    .AddSqlServer("sql")
+    .WithDataVolume()
+    .WithLifetime(ContainerLifetime.Persistent);
 
-var mcp = AddMcpServer(db);
-WithMcpInspector(mcp);
-
-await builder.Build().RunAsync();
-
-IResourceBuilder<SqlServerDatabaseResource> AddSqlServer(IDistributedApplicationBuilder builder) => builder
-    .AddSqlServer("sql").WithDataVolume()
+var db = sql
     .AddDatabase("productsdb")
-    .WithCreationScript(SqlScript("productsdb"));
+    .WithInitScript("init-db.sql");
 
-IResourceBuilder<ContainerResource> WithSqlCommander(IResourceBuilder<SqlServerDatabaseResource> db) => db
-    .ApplicationBuilder.AddContainer("sql-cmdr", "jerrynixon/sql-commander", "latest")
-    .WithImageRegistry("docker.io")
-    .WithHttpEndpoint(targetPort: 8080, name: "http")
-    .WithEnvironment("ConnectionStrings__db", db)
-    .WaitFor(db)
-    .WithUrls(x =>
-    {
-        x.Urls.Clear();
-        x.Urls.Add(new() { Url = "/", DisplayText = "Commander", Endpoint = x.GetEndpoint("http") });
-    });
-
-IResourceBuilder<ContainerResource> AddMcpServer(IResourceBuilder<SqlServerDatabaseResource> db) => db
-    .ApplicationBuilder.AddContainer("sql-mcp-server", "azure-databases/data-api-builder", "1.7.83-rc")
-    .WithImageRegistry("mcr.microsoft.com")
+var mcp = builder
+    .AddContainer("sql-mcp-server", "mcr.microsoft.com/azure-databases/data-api-builder", "1.7.6")
     .WithHttpEndpoint(targetPort: 5000, name: "http")
     .WithEnvironment("MSSQL_CONNECTION_STRING", db)
-    .WithBindMount("dab-config.json", "/App/dab-config.json", true)
+    .WithBindMount("./dab-config.json", "/App/dab-config.json", isReadOnly: true)
+    .WithArgs("--config", "/App/dab-config.json")
     .WaitFor(db)
-    .WithUrls(x =>
+    .WithUrls(c =>
     {
-        x.Urls.Clear();
-        x.Urls.Add(new() { Url = "/swagger", DisplayText = "Swagger", Endpoint = x.GetEndpoint("http") });
+        c.Urls.Clear();
+        c.Urls.Add(new() { Url = "/swagger", DisplayText = "Swagger", Endpoint = c.GetEndpoint("http") });
+        c.Urls.Add(new() { Url = "/mcp", DisplayText = "MCP", Endpoint = c.GetEndpoint("http") });
     });
 
-IResourceBuilder<McpInspectorResource> WithMcpInspector(IResourceBuilder<ContainerResource> mcp) => mcp
-    .ApplicationBuilder.AddMcpInspector("inspector")
-    .WithMcpServer(mcp)
-    .WaitFor(mcp)
-    .WithUrls(x =>
-    {
-        x.Urls[0].DisplayText = "Inspector";
-    });
+builder
+    .AddMcpInspector("inspector")
+    .WithHttpTransport(mcp, endpointName: "http", mcpPath: "/mcp")
+    .WaitFor(mcp);
 
-string SqlScript(string db) => $"""
-    CREATE DATABASE {db};
-    GO
+await builder.Build().RunAsync();
+```
 
-    SELECT *
-    INTO {db}.dbo.Products
-    FROM (VALUES
-        (1, 'Action Figure', 40, 14.99, 5.00),
-        (2, 'Building Blocks', 25, 29.99, 10.00),
-        (3, 'Puzzle 500 pcs', 30, 12.49, 4.00),
-        (4, 'Toy Car', 50, 7.99, 2.50),
-        (5, 'Board Game', 20, 34.99, 12.50),
-        (6, 'Doll House', 10, 79.99, 30.00),
-        (7, 'Stuffed Bear', 45, 15.99, 6.00),
-        (8, 'Water Blaster', 35, 19.99, 7.00),
-        (9, 'Art Kit', 28, 24.99, 8.00),
-        (10,'RC Helicopter', 12, 59.99, 22.00)
-    ) AS x (Id, Name, Inventory, Price, Cost);
+> [!NOTE]
+> `WithInitScript("init-db.sql")` expects the script file to be available to the AppHost at runtime (typically in the AppHost project directory alongside `AppHost.cs`). If Aspire can't find the file, verify the script is in the correct folder and is marked to copy to output if required.
 
-    ALTER TABLE {db}.dbo.Products
-    ADD CONSTRAINT PK_Products PRIMARY KEY (Id);
-    """;
+#### Create the database initialization script
+
+Create a file named `init-db.sql` in your project folder with the following content:
+
+```sql
+CREATE TABLE dbo.Products (
+    Id INT PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    Inventory INT NOT NULL,
+    Price DECIMAL(10,2) NOT NULL,
+    Cost DECIMAL(10,2) NOT NULL
+);
+
+INSERT INTO dbo.Products (Id, Name, Inventory, Price, Cost)
+VALUES
+    (1, 'Action Figure', 40, 14.99, 5.00),
+    (2, 'Building Blocks', 25, 29.99, 10.00),
+    (3, 'Puzzle 500 pcs', 30, 12.49, 4.00),
+    (4, 'Toy Car', 50, 7.99, 2.50),
+    (5, 'Board Game', 20, 34.99, 12.50),
+    (6, 'Doll House', 10, 79.99, 30.00),
+    (7, 'Stuffed Bear', 45, 15.99, 6.00),
+    (8, 'Water Blaster', 35, 19.99, 7.00),
+    (9, 'Art Kit', 28, 24.99, 8.00),
+    (10, 'RC Helicopter', 12, 59.99, 22.00);
 ```
 
 #### This code configures the following resources
 
-```
+```text
 .
 ├── SQL Server (sql)
-│   └── SQL Database (sql-database)
-│       └── SQL Commander (sql-cmdr)
+│   └── SQL Database (productsdb)
 └── SQL MCP Server (sql-mcp-server)
-    └── MCP Inspector (sql-inspector)
+    └── MCP Inspector (inspector)
 ```
 
-### 5. Build your dab-config.json file
+### 5. Create your dab-config.json file
 
-Run these commands in your project folder:
+Run these commands in your project folder (the same folder where `AppHost.cs` is located).
+
+The `@env('MSSQL_CONNECTION_STRING')` syntax tells Data API builder to read the connection string from an environment variable at runtime. Aspire sets this variable automatically when it starts the container, so you don't need to set it locally.
 
 ```cmd
 dab init --database-type mssql --connection-string "@env('MSSQL_CONNECTION_STRING')" --host-mode Development --config dab-config.json
-dab add Products --source dbo.Products --permissions "anonymous:*" --description "Toy store products with inventory, price, and cost."
+dab add Products --source dbo.Products --permissions "anonymous:read" --description "Toy store products with inventory, price, and cost."
 ```
+
+> [!NOTE]
+> The `@env(...)` expression is a DAB configuration feature that resolves environment variables at runtime, not during `dab init`. The generated `dab-config.json` contains the literal string `@env('MSSQL_CONNECTION_STRING')`, which DAB resolves when the container starts.
 
 The `dab-config.json` file configures SQL MCP Server to connect to your database and identifies which objects to expose. In this case, `Products` is exposed.
 
 #### This command adds a new file to your project
 
-```
+```text
 dab-config.json
 ```
+
+> [!IMPORTANT]
+> The `dab-config.json` file must be in the same directory where you run `aspire run`, because the bind mount uses a relative path (`./dab-config.json`).
 
 #### Optionally, add field descriptions
 
@@ -230,34 +225,34 @@ In this step, you run your Aspire environment and confirm that SQL Server, SQL M
 aspire run
 ```
 
-When the dashboard opens, you see links for Swagger, Inspector, and Commander.
+When the dashboard opens, you see links for Swagger, MCP, and Inspector.
 
-### 2. Query your data with SQL Commander
+#### Expected URLs
 
-Select Commander from the Aspire dashboard.
+The Aspire dashboard displays these links (ports are assigned dynamically):
 
-```sql
-SELECT * FROM dbo.Products;
-```
+| Resource | Link | Description |
+|----------|------|-------------|
+| sql-mcp-server | Swagger | REST API documentation |
+| sql-mcp-server | MCP | MCP endpoint (`/mcp`) |
+| inspector | Inspector | MCP Inspector UI |
 
-This query confirms SQL Server is running and the sample data loaded.
+### 2. Test the REST API with Swagger
 
-### 3. Test the REST API with Swagger
+Select **Swagger** from the dashboard.
 
-Select Swagger from the dashboard.
+Try the `GET` operation for Products. This test confirms SQL MCP Server is running and can connect to the database.
 
-Try the `GET` operation for Products. This test confirms SQL MCP Server is exposing the optional REST API.
+### 3. Explore the MCP tools
 
-### 4. Explore the MCP tools
-
-Open Inspector from the dashboard.
+Select **Inspector** from the dashboard.
 
 Try:
 
-* `list_tools`
+* `list_tools` to see available MCP tools
 * `read_records` for the `Products` entity
 
-Try a filter:
+Try a filter (example syntax):
 
 ```json
 { "filter": "Price gt 20" }
@@ -265,7 +260,26 @@ Try a filter:
 
 This test confirms MCP is working.
 
-### 5. Stop Aspire
+### 4. Stop Aspire
 
 To stop Aspire, press `Ctrl+C`.
-Aspire removes all containers and cleans up the environment.
+
+Aspire stops all services. SQL Server data persists between runs because the code uses `.WithDataVolume()` and `.WithLifetime(ContainerLifetime.Persistent)`.
+
+## Troubleshooting
+
+### SQL MCP Server container fails to start
+
+- Check the container logs in the Aspire dashboard for error details
+- Verify the `--config` argument matches the DAB container's expected syntax (some versions may use `--ConfigFileName` instead)
+- Ensure `dab-config.json` exists in the same directory where you run `aspire run`
+
+### Database initialization script not found
+
+- Verify `init-db.sql` is in the AppHost project directory
+- Check that the file is included in the project and copies to output if required
+
+### MCP Inspector can't connect
+
+- Confirm the SQL MCP Server container is running and healthy
+- Verify the MCP endpoint path (`/mcp`) matches the DAB configuration

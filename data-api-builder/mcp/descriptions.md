@@ -20,7 +20,7 @@ Descriptions are semantic metadata that help AI agents understand your database 
 
 AI agents rely on context to understand your data. Without descriptions, an agent only sees technical names like `ProductID` or `dbo.Orders`. With descriptions, the agent understands that `ProductID` is "Unique identifier for each product in the catalog" and `dbo.Orders` contains "Customer purchase orders with line items and shipping details."
 
-Descriptions improve:
+### Descriptions improve:
 
 - **Tool discovery** - Agents find the right entities faster
 - **Query accuracy** - Agents build better queries with proper context
@@ -56,7 +56,7 @@ dab update Products \
 
 ### Examples
 
-**Table description:**
+#### Table description:
 
 ```bash
 dab add Orders \
@@ -65,7 +65,7 @@ dab add Orders \
   --description "Customer purchase orders with line items, shipping details, and payment status"
 ```
 
-**View description:**
+#### View description:
 
 ```bash
 dab add ActiveProducts \
@@ -76,7 +76,7 @@ dab add ActiveProducts \
   --description "Currently available products with positive inventory and active status"
 ```
 
-**Stored procedure description:**
+#### Stored procedure description:
 
 ```bash
 dab add GetOrderHistory \
@@ -137,7 +137,7 @@ Use clear, concise descriptions that include:
 - **Format** - Date formats, string patterns
 - **Business rules** - Valid ranges, constraints
 
-**Good examples:**
+#### Good examples:
 
 ```bash
 # Include units
@@ -201,7 +201,7 @@ Parameters use comma-separated lists where:
 - `--parameters.required` - Whether each parameter is required (`true`/`false`)
 - `--parameters.default` - Default values (empty string for required parameters)
 
-**Example with detailed parameter descriptions:**
+#### Example with detailed parameter descriptions:
 
 ```bash
 dab add SearchProducts \

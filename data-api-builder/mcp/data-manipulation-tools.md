@@ -157,7 +157,7 @@ dab configure --runtime.mcp.dml-tools.execute-entity true
 
 When you disable a tool at the runtime level, it never appears to agents, regardless of entity permissions or role configuration. This setting is useful when you need strict operational boundaries.
 
-Common scenarios:
+#### Common scenarios
 
 - Disable `delete-record` to prevent data loss in production
 - Disable `create-record` for read-only reporting endpoints
@@ -221,7 +221,7 @@ If the `anonymous` role only allows read permission on `Products`:
 - `create_record`, `update_record`, and `delete_record` aren't available
 - Only fields allowed for `anonymous` appear in the schema
 
-Configure roles in your `dab-config.json`:
+### Configure roles in your `dab-config.json`:
 
 ```json
 {

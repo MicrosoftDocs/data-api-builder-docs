@@ -1,6 +1,6 @@
 ---
-title: Quickstart - Connect SQL MCP Server to Microsoft Foundry
-description: Deploy SQL MCP Server to Azure Container Apps and connect it to Microsoft Foundry agents using the Chat Playground.
+title: Quickstart - Connect SQL MCP Server to Azure AI Foundry
+description: Deploy SQL MCP Server to Azure Container Apps and connect it to Azure AI Foundry agents using the Chat Playground.
 author: jnixon
 ms.author: sidandrews
 ms.reviewer: jerrynixon
@@ -9,34 +9,37 @@ ms.topic: quickstart
 ms.date: 12/09/2025
 ---
 
-# Quickstart: Connect SQL MCP Server to Microsoft Foundry
+# Quickstart: Connect SQL MCP Server to Azure AI Foundry
 
 > [!IMPORTANT]
 > The SQL MCP Server is in preview and this documentation and the engine implementation is subject to change during this evaluation period.
 
-This quickstart shows you how to connect a deployed SQL MCP Server to Microsoft Foundry (Azure AI Foundry) using a Custom MCP Tool. You test everything using the Chat Playground with the GPT-5-mini model - no coding required.
+This quickstart shows you how to connect a deployed SQL MCP Server to Azure AI Foundry using a Custom MCP Tool. You test everything using the Chat Playground with a chat model such as GPT-5-mini - no coding required.
 
 > [!NOTE]
-> Microsoft Foundry is in preview. You need to select the "new" Foundry experience in the header when you access https://ai.azure.com.
+> The **new Foundry experience** is in preview. You need to select the preview toggle in the header when you access https://ai.azure.com.
 
 ## Prerequisites
 
 ### 1. Deployed SQL MCP Server
 
-You need a SQL MCP Server deployed to Azure Container Apps. If you don't have a deployment yet, complete the [Deploy SQL MCP Server to Azure Container Apps](azure-container-apps.md) quickstart first.
+You need a SQL MCP Server deployed to Azure Container Apps with public ingress enabled. If you don't have a deployment yet, complete the [Deploy SQL MCP Server to Azure Container Apps](azure-container-apps.md) quickstart first.
 
 You need the MCP endpoint URL from that deployment (for example, `https://your-app.azurecontainerapps.io/mcp`).
 
-### 2. Microsoft Foundry project
+### 2. Azure AI Foundry project
 
-You need access to Microsoft Foundry with an existing project and a deployed GPT-5-mini model.
+You need access to Azure AI Foundry with an existing project and access to a chat model (for example, GPT-5-mini).
 
-## Step 1: Access Microsoft Foundry
+## Step 1: Access Azure AI Foundry
 
 1. Navigate to https://ai.azure.com
 2. In the header, select the **new Foundry experience** (preview toggle)
 3. Select your Foundry project
 4. In the left navigation, select **Playground**
+
+> [!NOTE]
+> UI text and navigation may vary as Azure AI Foundry evolves. For the latest guidance, see [MCP tools in Azure AI Foundry](/azure/ai-foundry/agents/concepts/tool-catalog).
 
 ## Step 2: Create or open an agent
 
@@ -56,21 +59,20 @@ You need access to Microsoft Foundry with an existing project and a deployed GPT
 
 The **Add Model Context Protocol tool** dialog appears. Fill in the following information:
 
-**Name** (required):
+### Name (required)
 
-- Enter a unique name: `AcunsoInc`
+Enter a descriptive name: `products-mcp`
 
-**Remote MCP Server endpoint** (required):
+### Remote MCP Server endpoint (required)
 
-- Enter your MCP server URL: `https://<your-container-app-url>/mcp` (from your Azure Container Apps (ACA) deployment)
+Enter your MCP server URL: `https://<your-container-app-url>/mcp` (from your Azure Container Apps deployment)
 
-**Authentication** (required):
+### Authentication (required)
 
-- Select **Unauthenticated** from the dropdown
+Select **Unauthenticated** from the dropdown
 
 > [!NOTE]
-> [!NOTE]
-> This configuration works because the quickstart configured `anonymous:read` permissions. SQL MCP Server doesn't support Key-based or Passthrough authentication modes.
+> This configuration works because the Azure Container Apps quickstart configured **anonymous** permissions (for example, `anonymous:read`). At the time of writing, this quickstart uses Unauthenticated mode. If you enable authentication on your MCP server, configure the MCP tool accordingly (authentication configuration is not covered in this quickstart).
 
 Select **Connect** to add the tool.
 
@@ -82,83 +84,82 @@ In the **Instructions** section at the top of the agent configuration, add or re
 You are a helpful product catalog assistant. When answering questions about products, use the products-mcp tool to query the database. 
 
 The Products entity contains:
-- ProductName: Name of the product
-- Category: Product category (Electronics, Furniture, Office Supplies, Appliances)  
-- UnitPrice: Price in USD
-- UnitsInStock: Current inventory count
-- Discontinued: Whether the product is still available
+- Id: Product identifier
+- Name: Product name
+- Inventory: Units in stock
+- Price: Retail price in USD
+- Cost: Store cost in USD
 
-Always use describe_entities first to understand the schema, then use read_records to query the data.
+Always use the schema discovery tool first to understand the schema, then use the query tool to retrieve data.
 ```
 
 ## Step 6: Test your agent
 
 Try these prompts in the chat:
 
-**Example 1: Schema discovery**
+### Example 1: Schema discovery
 
 ```text
-What products are available?
+What tables or entities are available in the database?
 ```
 
-The agent should call `describe_entities` to see the Products entity structure.
+The agent should call a schema discovery tool (such as `describe_entities`) to see the Products entity structure.
 
-**Example 2: Simple query**
+### Example 2: Simple query
 
 ```text
-List all electronics products
+List all products
 ```
 
-The agent should call `read_records` with a filter for Category = 'Electronics'.
+The agent should call a query tool (such as `read_records`) to retrieve product data.
 
-**Example 3: Price query**
+### Example 3: Price query
 
 ```text
-Show me products under $50
+Show me products under $20
 ```
 
-The agent should query products where UnitPrice < 50.
+The agent should query products where Price < 20.
 
-**Example 4: Inventory check**
+### Example 4: Inventory check
 
 ```text
-Which products are low in stock (less than 50 units)?
+Which products are low in stock (less than 30 units)?
 ```
 
-The agent should filter UnitsInStock < 50.
+The agent should filter Inventory < 30.
 
-**Example 5: Complex query**
+### Example 5: Complex query
 
 ```text
-What's the most expensive furniture item, and do we have it in stock?
+What's the most expensive product, and how many do we have in stock?
 ```
 
 The agent should:
-1. Call `read_records` filtered by Category = 'Furniture'
-2. Sort by UnitPrice descending
-3. Check UnitsInStock
+1. Query products sorted by Price descending
+2. Return the top result with Inventory count
 
 ## Step 7: View tool calls
 
-In the Chat Playground, you see the agent's reasoning and tool calls:
+In the Chat Playground, you can see tool calls and their arguments/responses:
 
-1. **Tool called**: `describe_entities` or `read_records`
+1. **Tool called**: The schema discovery or query tool used
 2. **Arguments**: The parameters passed (filters, fields, etc.)
 3. **Response**: The data returned from your SQL database
 
 ## Troubleshooting
 
-**Issue: Tool not appearing in Foundry**
+### Tool not appearing in Azure AI Foundry
 
 - Verify the MCP URL is correct and accessible
-- Check that the Container App is running (see [monitoring guidance](azure-container-apps.md#monitoring-and-troubleshooting))
-- Test the `/mcp` endpoint directly
+- Check that the Container App is running with public ingress enabled (see [monitoring guidance](azure-container-apps.md#monitoring-and-troubleshooting))
+- Test the `/mcp` endpoint using curl or a REST client to verify reachability
 
-**Issue: Tool calls require approval**
+### Tool calls require approval
 
 - In the MCP tool configuration, ensure **Require approval** is set to `never`
 
-**Issue: Agent not using the tool**
+### Agent not using the tool
 
 - Check your system message includes clear instructions about when to use the tool
 - Try asking more specific questions that relate to the Products data
@@ -170,10 +171,10 @@ For deployment issues, see the [troubleshooting section](azure-container-apps.md
 - [Add more entities to your MCP server](../descriptions.md)
 - [Run SQL MCP Server locally with VS Code](visual-studio-code.md)
 - [Run SQL MCP Server with .NET Aspire](dotnet-aspire.md)
-- [Learn about MCP tools in Foundry](/azure/ai-foundry/agents/concepts/tool-catalog)
+- [Learn about MCP tools in Azure AI Foundry](/azure/ai-foundry/agents/concepts/tool-catalog)
 
 ## Related content
 
 - [SQL MCP Server Overview](../introduction.md)
 - [Deploy to Azure Container Apps](azure-container-apps.md)
-- [Microsoft Foundry documentation](/azure/ai-foundry/)
+- [Azure AI Foundry documentation](/azure/ai-foundry/)

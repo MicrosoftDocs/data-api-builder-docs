@@ -154,7 +154,8 @@ dab configure --runtime.mcp.dml-tools.delete-record true
 dab configure --runtime.mcp.dml-tools.execute-entity true
 ```
 
-**Why disable individual tools?**
+#### Why disable individual tools?
+
 Developers may want to restrict specific actions even when roles or entity permissions allow them. Disabling a tool at the runtime level ensures it never appears to agents. For example, turning off `delete_record` hides delete capability completely, regardless of configuration elsewhere. This scenario is uncommon but useful when strict operational boundaries are required.
 
 ### Entity settings

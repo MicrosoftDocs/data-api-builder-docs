@@ -453,19 +453,19 @@ curl "https://$MCP_URL/health"
 
 ### Common issues
 
-**Issue: "Connection failed" error**
+#### Connection failed error
 
 - Ensure Container Apps ingress is set to `external`
 - Verify the SQL connection string is correct
 - Check firewall rules on Azure SQL
 
-**Issue: "No data returned"**
+#### No data returned
 
 - Verify the Products table was created and populated
 - Check entity permissions in `dab-config.json`
 - Review Container Apps logs for errors
 
-**Issue: Performance is slow**
+#### Performance is slow
 
 - Consider increasing CPU/memory allocation
 - Check if you need to scale up replicas
