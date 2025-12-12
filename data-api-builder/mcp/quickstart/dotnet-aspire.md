@@ -22,6 +22,8 @@ This quickstart uses Aspire to build a container-based solution. The solution in
 
 Aspire runs everything for you, starts services and connects containers, and stops services when you close it.
 
+![Solution overview](../media/quickstart-aspire-01.png)
+
 ## Prerequisites
 
 Install these tools before you start.
