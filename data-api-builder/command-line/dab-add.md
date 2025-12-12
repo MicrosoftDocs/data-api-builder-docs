@@ -15,7 +15,7 @@ ms.date: 09/29/2025
 Add a new entity definition to an existing Data API builder configuration file. You must already have a config created with `dab init`. Use `dab update` to modify entities after creation.
 
 > [!TIP]
-> Use `dab add` to create new entities, and [`dab update`](./dab-update.md) to evolve them. Field name remapping (`--map`) is only available in `update`, not in `add`.
+> Use `dab add` to create new entities, and [`dab update`](./dab-update.md) to evolve them.
 
 ## Syntax
 
@@ -34,13 +34,29 @@ dab add <entity-name> [options]
 | [`--description`](#--description)            | Free-form description for entity.                                    |
 | [`--fields.exclude`](#--fieldsexclude)       | Comma-separated excluded fields.                                     |
 | [`--fields.include`](#--fieldsinclude)       | Comma-separated allowed fields (`*` = all).                          |
+| [`--fields.name`](#--fieldsname)             | Field names to describe (repeatable or comma-separated).             |
+| [`--fields.alias`](#--fieldsalias)           | Field aliases (comma-separated, aligned to `--fields.name`).         |
+| [`--fields.description`](#--fieldsdescription) | Field descriptions (comma-separated, aligned to `--fields.name`).  |
+| [`--fields.primary-key`](#--fieldsprimary-key) | Primary key flags (comma-separated, aligned to `--fields.name`).    |
 | [`--graphql`](#--graphql)                    | GraphQL exposure: `false`, `true`, `singular`, or `singular:plural`. |
 | [`--graphql.operation`](#--graphqloperation) | Stored procedures only. `query` or `mutation` (default mutation).    |
+| [`--relationship`](#--relationship)          | Relationship name. Use with relationship options.                    |
+| [`--cardinality`](#--cardinality)            | Relationship cardinality: `one` or `many`.                           |
+| [`--target.entity`](#--targetentity)         | Target entity name for relationship.                                 |
+| [`--linking.object`](#--linkingobject)       | Join object for many-to-many relationships.                           |
+| [`--linking.source.fields`](#--linkingsourcefields) | Fields in join object that refer to source entity.            |
+| [`--linking.target.fields`](#--linkingtargetfields) | Fields in join object that refer to target entity.            |
+| [`--relationship.fields`](#--relationshipfields) | Field mappings for direct relationships.                          |
+| [`-m, --map`](#-m---map)                     | Field mapping pairs `backend:exposed`.                               |
 | [`--permissions`](#--permissions)            | Required. One or more `role:actions` pairs. Repeatable.              |
 | [`--policy-database`](#--policy-database)    | OData-style filter applied in DB query.                              |
 | [`--policy-request`](#--policy-request)      | Request policy evaluated before DB call.                             |
+| [`--parameters.name`](#--parametersname)     | Stored procedures only. Parameter names (comma-separated).           |
+| [`--parameters.description`](#--parametersdescription) | Stored procedures only. Parameter descriptions.              |
+| [`--parameters.required`](#--parametersrequired) | Stored procedures only. Parameter required flags.                 |
+| [`--parameters.default`](#--parametersdefault) | Stored procedures only. Parameter default values.                  |
 | [`--rest`](#--rest)                          | REST exposure: `false`, `true`, or custom route.                     |
-| [`--rest.methods`](#--restmethods)           | Stored procedures only. Allowed HTTP verbs. Default POST.            |
+| [`--rest.methods`](#--restmethods)           | Stored procedures only. Allowed verbs: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`. Default POST. |
 | [`-s, --source`](#-s---source)               | Required. Database object name (table, view, or stored procedure).   |
 | [`--source.key-fields`](#--sourcekey-fields) | Required for views or when PK not inferred. Not allowed for procs.   |
 | [`--source.params`](#--sourceparams)         | Stored procedures only. Default parameter values.                    |
@@ -57,123 +73,34 @@ Logical name of the entity in config. Case-sensitive.
 #### Add a table
 
 ```bash
-dab add Book 
-  --source dbo.Books 
-  --source.type table
-  --permissions "anonymous:read"
-  -- description "Example for managing book inventory"
-```
-
-#### Optionally include table columns (use [dab update](./dab-update.md))
-
-```bash
-# all at once
-
-dab update Book 
-  --fields.name "Id,Title,Price"
-  --fields.alias "id,book_title,retail_price"
-  --fields.description "Book identifier,Book title in store,Retail price in USD"
-
-# or one at a time
-
-dab update Book 
-  --fields.name "Id"
-  --fields.alias "id"
-  --fields.description "Book identifier"
-dab update Book
-  --fields.name "Title"
-  --fields.alias "book_title"
-  --fields.description "Book title in store"
-dab update Book
-  --fields.name "Price"
-  --fields.alias "retail_price"
-  --fields.description "Retail price in USD"
-
+dab add Book \
+  --source dbo.Books \
+  --source.type table \
+  --permissions "anonymous:read" \
+  --description "Example for managing book inventory"
 ```
 
 #### Add a view
 
 ```bash
-dab add BookView
-  --source dbo.MyView 
-  --source.type view 
-  --source.key-fields "id,region" // required for views
-  --permissions "anonymous:read"  
+dab add BookView \
+  --source dbo.MyView \
+  --source.type view \
+  --source.key-fields "id,region" \
+  --permissions "anonymous:read" \
   --description "Example for managing book inventory from view"
 ```
 
-#### Optionally include view columns (use [dab update](./dab-update.md))
+#### Add a stored procedure
 
 ```bash
-# all at once
-
-dab update BookView 
-  --fields.name "Id,Title,Price"
-  --fields.primary-key "true,false,false"
-  --fields.alias "id,book_title,retail_price"
-  --fields.description "Book identifier,Book title in store,Retail price in USD"
-
-# or one at a time
-
-dab update BookView 
-  --fields.name "Id"
-  --fields.primary-key true
-  --fields.alias "id"
-  --fields.description "Book identifier"
-dab update BookView
-  --fields.name "Title"
-  --fields.alias "book_title"
-  --fields.description "Book title in store"
-dab update BookView
-  --fields.name "Price"
-  --fields.alias "retail_price"
-  --fields.description "Retail price in USD"
-```
-
-#### Add a stored procedure 
-
-```bash
-# without parameters
-
-dab add BookProcNoParams 
-  --source dbo.MyProcNoParams 
-  --source.type stored-procedure 
-  --permissions "anonymous:execute" 
-  --description "Example for executing book stored procedure without parameters"
-
-# with parameters
-
-dab add BookProc 
-  --source dbo.MyProc 
-  --source.type stored-procedure 
-  --source.params "year:2024,active:true" 
-  --permissions "anonymous:execute" 
-  --description "Example for executing book stored procedure"
-```
-
-#### Optionally update parameters with [dab update](./dab-update.md)
-
-```bash 
-# all at once
-
-dab update BookProc 
-  --parameters.name "year,active"
-  --parameters.description "Year for filtering active books,Flag to include only active books"
-  --parameters.required "false,false"
-  --parameters.default "2024,true"
-
-# or one at a time
-
-dab update BookProc 
-  --parameters.name "year"
-  --parameters.description "Year for filtering active books"
-  --parameters.required false
-  --parameters.default "2024"
-dab update BookProc
-  --parameters.name "active"
-  --parameters.description "Flag to include only active books"
-  --parameters.required false
-  --parameters.default "true"  
+dab add BookProc \
+  --source dbo.MyProc \
+  --source.type stored-procedure \
+  --source.params "year:2024,active:true" \
+  --permissions "anonymous:execute" \
+  --graphql.operation query \
+  --description "Example for executing a stored procedure"
 ```
 
 ## `-c, --config`
@@ -406,6 +333,265 @@ Defines role→actions pairs. Use repeated flags for multiple roles.
 dab add Book --source dbo.Books --permissions "anonymous:read" --permissions "authenticated:create,read,update,delete"
 ```
 
+## `-m, --map`
+
+Specify mappings between database fields and exposed GraphQL/REST fields.
+
+### Example
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --map "Title:title,Price:retail_price"
+```
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ],
+      "mappings": {
+        "Title": "title",
+        "Price": "retail_price"
+      }
+    }
+  }
+}
+```
+
+## `--relationship`
+
+Define a relationship for GraphQL. Use with `--cardinality`, `--target.entity`, and other relationship options.
+
+### Example (many-to-one)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --relationship publisher \
+  --target.entity Publisher \
+  --cardinality one \
+  --relationship.fields "publisher_id:id"
+```
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ],
+      "relationships": {
+        "publisher": {
+          "cardinality": "one",
+          "target.entity": "Publisher",
+          "source.fields": [ "publisher_id" ],
+          "target.fields": [ "id" ]
+        }
+      }
+    }
+  }
+}
+```
+
+## `--cardinality`
+
+Relationship cardinality: `one` or `many`.
+
+## `--target.entity`
+
+Target entity name for the relationship.
+
+## `--relationship.fields`
+
+Field mappings for the relationship. Use `sourceField:targetField` pairs.
+
+## `--linking.object`
+
+Database object that supports a many-to-many relationship.
+
+### Example (many-to-many)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --relationship authors \
+  --target.entity Author \
+  --cardinality many \
+  --relationship.fields "id:id" \
+  --linking.object "dbo.books_authors" \
+  --linking.source.fields "book_id" \
+  --linking.target.fields "author_id"
+```
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ],
+      "relationships": {
+        "authors": {
+          "cardinality": "many",
+          "target.entity": "Author",
+          "source.fields": [ "id" ],
+          "target.fields": [ "id" ],
+          "linking.object": "dbo.books_authors",
+          "linking.source.fields": [ "book_id" ],
+          "linking.target.fields": [ "author_id" ]
+        }
+      }
+    }
+  }
+}
+```
+
+## `--linking.source.fields`
+
+Database fields in the linking object that connect to the source entity.
+
+## `--linking.target.fields`
+
+Database fields in the linking object that connect to the target entity.
+
+## `--parameters.name`
+
+Stored procedures only. Comma-separated list of parameter names.
+
+### Example
+
+```bash
+dab add GetOrdersByDateRange \
+  --source dbo.usp_GetOrdersByDateRange \
+  --source.type stored-procedure \
+  --permissions "authenticated:execute" \
+  --description "Retrieves all orders placed within a specified date range" \
+  --parameters.name "StartDate,EndDate,CustomerID" \
+  --parameters.description "Beginning of date range (inclusive),End of date range (inclusive),Optional customer ID filter" \
+  --parameters.required "true,true,false" \
+  --parameters.default ",,null"
+```
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "GetOrdersByDateRange": {
+      "description": "Retrieves all orders placed within a specified date range",
+      "source": {
+        "object": "dbo.usp_GetOrdersByDateRange",
+        "type": "stored-procedure",
+        "parameters": {
+          "StartDate": {
+            "description": "Beginning of date range (inclusive)",
+            "required": true
+          },
+          "EndDate": {
+            "description": "End of date range (inclusive)",
+            "required": true
+          },
+          "CustomerID": {
+            "description": "Optional customer ID filter",
+            "required": false,
+            "default": null
+          }
+        }
+      },
+      "permissions": [
+        {
+          "role": "authenticated",
+          "actions": [ "execute" ]
+        }
+      ]
+    }
+  }
+}
+```
+
+## `--parameters.description`
+
+Stored procedures only. Comma-separated list of parameter descriptions aligned to `--parameters.name`.
+
+## `--parameters.required`
+
+Stored procedures only. Comma-separated list of `true`/`false` values aligned to `--parameters.name`.
+
+## `--parameters.default`
+
+Stored procedures only. Comma-separated list of default values aligned to `--parameters.name`.
+
+## `--fields.name`
+
+Name of the database column to describe.
+
+### Example
+
+```bash
+dab add Products \
+  --source dbo.Products \
+  --permissions "anonymous:*" \
+  --fields.name "ProductID,ProductName" \
+  --fields.alias "product_id,product_name" \
+  --fields.description "Unique identifier for each product,Display name of the product" \
+  --fields.primary-key "true,false"
+```
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Products": {
+      "source": { "type": "table", "object": "dbo.Products" },
+      "permissions": [
+        { "role": "anonymous", "actions": [ "*" ] }
+      ],
+      "mappings": {
+        "ProductID": "product_id",
+        "ProductName": "product_name"
+      },
+      "fields": {
+        "ProductID": {
+          "description": "Unique identifier for each product",
+          "isPrimaryKey": true
+        },
+        "ProductName": {
+          "description": "Display name of the product"
+        }
+      }
+    }
+  }
+}
+```
+
+## `--fields.alias`
+
+Alias for the field. Use a comma-separated list aligned to `--fields.name`. This sets `mappings`.
+
+## `--fields.description`
+
+Description for the field. Use a comma-separated list aligned to `--fields.name`.
+
+## `--fields.primary-key`
+
+Primary key flag for the field. Use a comma-separated list of `true`/`false` values aligned to `--fields.name`.
+
 ### Resulting config
 
 ```json
@@ -508,7 +694,7 @@ dab add Book --source dbo.Books --permissions "anonymous:read" --rest BooksApi
 
 ## `--rest.methods`
 
-Stored procedures only. HTTP verbs allowed for execution. Defaults to POST. Ignored for tables/views.
+Stored procedures only. HTTP verbs allowed for execution: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`. Defaults to POST. Ignored for tables/views.
 
 ### Example
 
@@ -537,7 +723,7 @@ dab add BookProc --source dbo.MyProc --source.type stored-procedure --permission
 
 ## `-s, --source`
 
-Required. Name of the database object: table, view, or stored procedure.
+Required. Name of the database object: table, view, container, or stored procedure.
 
 ### Example
 
