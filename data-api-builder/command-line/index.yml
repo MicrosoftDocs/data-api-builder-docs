@@ -50,19 +50,19 @@ landingContent:
       - linkListType: reference
         links:
           - text: Azure Key Vault
-            url: dab-configure.md#azure-key-vault
+            url: dab-configure.md#--azure-key-vaultendpoint
           - text: Data source
-            url: dab-configure.md#cache
+            url: dab-configure.md#--data-sourcedatabase-type
           - text: GraphQL runtime
-            url: dab-configure.md#data-source
+            url: dab-configure.md#--runtimegraphqlenabled
           - text: MCP runtime
-            url: dab-configure.md#graphql
+            url: dab-configure.md#--runtimemcpenabled
           - text: REST runtime
-            url: dab-configure.md#rest
+            url: dab-configure.md#--runtimerestenabled
           - text: Azure Log Analytics
-            url: dab-configure.md#telemetry--azure-log-analytics
+            url: dab-configure.md#--runtimetelemetryazure-log-analyticsenabled
           - text: Log File Sink
-            url: dab-configure.md#telemetry--file-sink
+            url: dab-configure.md#--runtimetelemetryfileenabled
 
   - title: Export
     linkLists:
