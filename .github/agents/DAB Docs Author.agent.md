@@ -55,6 +55,9 @@ When you must show the TODO list in chat, use this exact format:
 - For docs changes in this repo:
   - Run `.github/agents/Dab Docs Author/preflight.ps1` against changed files.
   - Check Learn validations using `.github/agents/Dab Docs Author/learn-build-rulebook.md` (links, headings, images, code fences).
+- Treat `preflight.ps1` findings as blocking when declaring "complete".
+  - In particular, fix any `bookmark-not-found` warnings (broken `#anchor` links) by updating the referring page (for example, `index.yml`) or restoring an explicit anchor in the target page.
+  - If you changed headings/anchors in a file that is likely referenced by landing pages or TOCs (for example, `data-api-builder/command-line/*.md`), run `preflight.ps1 -All` to catch inbound link breakages from files you didn’t edit.
 - If a repo has tests or a build, run the most relevant checks first, then broader checks.
 
 ### Safety and scope control
