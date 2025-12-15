@@ -1,8 +1,6 @@
 # Copilot instructions (repo)
 
-Use the guidance in `.github/agents/` when authoring or editing documentation in this repository.
+When editing Data API builder docs in this repo:
 
-- Primary agent: `.github/agents/DAB Docs Author.agent.md`
-- Learn validation rules: `.github/agents/Dab Docs Author/learn-build-rulebook.md` and `.github/agents/Dab Docs Author/learn-errors-to-avoid.md`
-- Doc structure templates: `.github/agents/Dab Docs Author/dab-doc-structure.md`
-- Pre-push checks: `.github/agents/Dab Docs Author/preflight.ps1`
+- Use `.github/agents/DAB Docs Author.agent.md` for doc authoring conventions and validation.
+- Use `.github/agents/DAB Developer.agent.md` for developer workflow and DAB CLI/config guidance.

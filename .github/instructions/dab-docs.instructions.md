@@ -13,21 +13,16 @@ These instructions apply when editing documentation under `data-api-builder/`.
 - Don’t change product behavior/meaning without explicit confirmation.
 - Don’t add unrelated “nice-to-have” sections.
 
-## Agent operating mode (Beast Mode behaviors)
-
-- Persist until the request is fully resolved (implement + validate + summarize).
-- Use a step-by-step TODO list for non-trivial work; complete one step at a time.
-- Before each tool call, state (in one sentence) what you’re about to do and why.
-- Research freshness: if URLs are provided, fetch them and recursively fetch relevant links; verify third-party package usage via official docs before recommending/installing.
-- Validate frequently:
-  - Run `.github/agents/Dab Docs Author/preflight.ps1` on changed files.
-  - Follow `.github/agents/Dab Docs Author/learn-build-rulebook.md` and `.github/agents/Dab Docs Author/learn-errors-to-avoid.md`.
-- Don’t guess JSON/config shapes—verify in-repo references or omit speculative “Resulting config”.
-
 ## CLI command page requirements
 
-- Ensure the **Quick glance** table covers every option from CLI `--help`.
+- Ensure the **Quick glance** table covers every option from `dab <command> --help`.
 - Ensure each option has a matching `##` section and a minimal example.
 - Keep opening examples “fast-start” and only using the documented command.
+- For CLI examples, prefer multi-line commands and include both Bash and Windows Command Prompt via Learn conceptual tabs.
 
-Use `.github/agents/DAB Docs Author.agent.md` for the full playbook and conventions.
+## Validation (Markdown-only)
+
+- Treat DocFX build warnings as blocking, especially broken links and `bookmark-not-found`.
+- If you changed headings/anchors in commonly-linked pages (for example, `data-api-builder/command-line/*.md`), search the repo for inbound links and update them.
+
+Use `.github/agents/DAB Docs Author.agent.md` for the full playbook.
