@@ -16,7 +16,7 @@ ms.date: 12/05/2025
 
 This quickstart uses the Data API builder CLI to run a SQL MCP Server locally without Aspire. You create a database, configure a config file, start SQL MCP Server, and connect to it from Visual Studio Code (VS Code) using a custom tool. This path is the easiest way to explore SQL MCP Server without containers or hosting frameworks.
 
-![Solution summary](../media/quickstart-vscode-01.png)
+![Diagram that shows a local SQL MCP Server connected to Visual Studio Code.](../media/quickstart-vscode-01.png)
 
 ## Prerequisites
 
@@ -45,7 +45,7 @@ dotnet tool restore
 > [!NOTE]
 > SQL MCP Server is currently in prerelease. Using the `--prerelease` flag ensures you get the latest version of Data API builder with all the features used in this quickstart.
 
-## 1. Create your sample database
+## Step 1: Create your sample database
 
 In this step, you create a database named `ProductsDb` and seed it with a single table named `Products`.
 
@@ -82,7 +82,7 @@ VALUES
 
 Your sample database is ready.
 
-## 2. Configure SQL MCP Server
+## Step 2: Configure SQL MCP Server
 
 Run all commands in the folder where you want to create your `dab-config.json` file.
 
@@ -121,7 +121,7 @@ dab update Products --fields.name Cost --fields.description "Store cost"
 
 Your SQL MCP Server is fully configured.
 
-## 3. Start SQL MCP Server
+## Step 3: Start SQL MCP Server
 
 Before connecting from VS Code, start the SQL MCP Server in a separate terminal.
 
@@ -136,7 +136,7 @@ This command starts the SQL MCP Server. After startup, the terminal output shows
 > [!NOTE]
 > You can customize the port by configuring the runtime settings in your `dab-config.json` or by setting environment variables such as `ASPNETCORE_URLS`.
 
-## 4. Connect from VS Code
+## Step 4: Connect from VS Code
 
 > [!IMPORTANT]
 > A workspace is the root folder that VS Code treats as your project. Settings and MCP server definitions only apply inside that folder. If you open a single file, you aren't in a workspace. You must open a folder.

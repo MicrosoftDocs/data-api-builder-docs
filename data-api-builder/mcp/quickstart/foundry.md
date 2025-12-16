@@ -19,7 +19,7 @@ This quickstart shows you how to connect a deployed SQL MCP Server to Azure AI F
 > [!NOTE]
 > The **new Foundry experience** is in preview. You need to select the preview toggle in the header when you access https://ai.azure.com.
 
-![Solution overview](../media/quickstart-foundry-01.png)
+![Diagram that shows a deployed SQL MCP Server connected to Azure AI Foundry.](../media/quickstart-foundry-01.png)
 
 ## Prerequisites
 

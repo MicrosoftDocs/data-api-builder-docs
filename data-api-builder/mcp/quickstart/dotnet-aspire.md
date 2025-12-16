@@ -22,7 +22,7 @@ This quickstart uses Aspire to build a container-based solution. The solution in
 
 Aspire runs everything for you, starts services and connects containers, and stops services when you close it.
 
-![Solution overview](../media/quickstart-aspire-01.png)
+![Diagram that shows the Aspire solution with SQL Server, SQL MCP Server, and MCP Inspector.](../media/quickstart-aspire-01.png)
 
 ## Prerequisites
 
@@ -197,7 +197,7 @@ string SqlScript(string db) => $"""
     └── MCP Inspector (inspector)
 ```
 
-![Resource overview](../media/quickstart-aspire-03.png)
+![Diagram that shows the Aspire resources and their connections.](../media/quickstart-aspire-03.png)
 
 ### 5. Create your dab-config.json file
 
@@ -251,7 +251,7 @@ aspire run
 
 When the dashboard opens, you see links for Swagger, MCP, and Inspector.
 
-![Running environment](../media/quickstart-aspire-02.png)
+![Screenshot of the Aspire dashboard showing the running environment.](../media/quickstart-aspire-02.png)
 
 #### Expected URLs
 

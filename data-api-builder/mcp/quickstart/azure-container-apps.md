@@ -16,7 +16,7 @@ ms.date: 12/09/2025
 
 This quickstart shows you how to deploy SQL MCP Server to Azure Container Apps. Once deployed, you can connect to it from Visual Studio Code (VS Code), Microsoft Foundry, or any other Model Context Protocol (MCP) client as a remote server endpoint.
 
-![Solution overview showing SQL MCP Server deployment](../media/quickstart-azure-container-apps-01.png)
+![Diagram that shows a SQL MCP Server deployed to Azure Container Apps.](../media/quickstart-azure-container-apps-01.png)
 
 ## Prerequisites
 
@@ -84,8 +84,6 @@ az account set --subscription "<your-subscription-id>"
 
 ### 2. Set variables for your deployment
 
-#### PowerShell Command
-
 ```powershell
 $RESOURCE_GROUP = "rg-sql-mcp"
 $LOCATION = "eastus"
@@ -139,8 +137,6 @@ az sql db create \
 
 Get your connection string first:
 
-#### PowerShell Command
-
 ```powershell
 $CONNECTION_STRING = "Server=tcp:$SQL_SERVER.database.windows.net,1433;Database=$SQL_DATABASE;User ID=$SQL_ADMIN;Password=$SQL_PASSWORD;Encrypt=true;TrustServerCertificate=false;Connection Timeout=30;"
 ```
@@ -179,8 +175,6 @@ Execute it using VS Code, SQL Server Management Studio, or sqlcmd.
 
 Initialize the configuration:
 
-#### PowerShell Command
-
 ```powershell
 dab init `
   --database-type mssql `
@@ -190,8 +184,6 @@ dab init `
 ```
 
 ### 2. Add the Products entity with descriptions
-
-#### PowerShell Command
 
 ```powershell
 dab add Products `
@@ -203,8 +195,6 @@ dab add Products `
 ### 3. Provide AI agent context with field descriptions
 
 Add field descriptions to help AI agents understand your database schema:
-
-#### PowerShell Command
 
 ```powershell
 dab update Products `
@@ -237,8 +227,6 @@ dab update Products `
 
 ### 1. Create Container Apps environment
 
-#### PowerShell Command
-
 ```powershell
 $CONTAINERAPP_ENV = "sql-mcp-env"
 $CONTAINERAPP_NAME = "sql-mcp-server"
@@ -251,8 +239,6 @@ az containerapp env create `
 
 ### 2. Create base64 encoded config
 
-#### PowerShell Command
-
 ```powershell
 $CONFIG_JSON = Get-Content dab-config.json -Raw
 $CONFIG_BYTES = [System.Text.Encoding]::UTF8.GetBytes($CONFIG_JSON)
@@ -260,8 +246,6 @@ $CONFIG_BASE64 = [Convert]::ToBase64String($CONFIG_BYTES)
 ```
 
 ### 3. Deploy the SQL MCP Server container
-
-#### PowerShell Command
 
 ```powershell
 az containerapp create `
@@ -281,11 +265,9 @@ az containerapp create `
 
 #### Your resource group should resemble the following example:
 
-![Resource group after deployment](../media/quickstart-azure-container-apps-02.png)
+![Screenshot of the Azure portal resource group after deployment.](../media/quickstart-azure-container-apps-02.png)
 
 ### 4. Get your MCP endpoint URL
-
-#### PowerShell Command
 
 ```powershell
 $MCP_URL = az containerapp show `
@@ -300,8 +282,6 @@ Write-Host "Your MCP Server URL: https://$MCP_URL/mcp"
 Save this URL - you use it to connect from MCP clients.
 
 ### 5. Test your deployment
-
-#### PowerShell Command
 
 ```powershell
 curl "https://$MCP_URL/health"
@@ -337,8 +317,6 @@ az containerapp logs show \
 ```
 
 ### Check MCP endpoint health
-
-#### PowerShell Command
 
 ```powershell
 curl "https://$MCP_URL/health"

@@ -16,7 +16,7 @@ When developing a solution using Data API builder locally, or when running Data 
 
 To simulate an authenticated request without configuring an authentication provider (like Microsoft Entra ID, for example), you can utilize the `Simulator` authentication providers:
 
-## Use the `Simulator` provider
+## 1. Use the `Simulator` provider
 
 `Simulator` is a configurable authentication provider that instructs the Data API builder engine to treat all requests as authenticated.
 
@@ -26,7 +26,7 @@ To simulate an authenticated request without configuring an authentication provi
 > [!NOTE]
 > While the desired role is honored, authorization permissions that define database policies don't work because custom claims can't be set for the authenticated user with the `Simulator` provider.
 
-### 1. Update the runtime configuration authentication provider
+### Update the runtime configuration authentication provider
 
 Make sure that in the configuration file you're using the `Simulator` authentication provider and `development` mode is specified. Refer to this sample `host` configuration section:
 
@@ -39,7 +39,7 @@ Make sure that in the configuration file you're using the `Simulator` authentica
 }
 ```
 
-### 2. Specify the role context of the request
+### Specify the role context of the request
 
 With `Simulator` as Data API builder's authentication provider, no custom header is necessary to set the role context to the system role `Authenticated`:
 
@@ -56,7 +56,7 @@ curl --request GET \
   --header 'X-MS-API-ROLE: author' \
 ```
 
-## Use the `AppService` provider
+## 2. Use the `AppService` provider
 
 The `AppService` authentication provider instructs Data API builder to look for a set of HTTP headers only present when running within an Azure Container Apps environment. The client sets these HTTP headers when running locally to simulate an authenticated user, including any role membership or custom claims.
 
@@ -69,7 +69,7 @@ The `AppService` authentication provider instructs Data API builder to look for 
 }
 ```
 
-### 1. Send requests providing a generated `X-MS-CLIENT-PRINCIPAL` header
+### Send requests providing a generated `X-MS-CLIENT-PRINCIPAL` header
 
 Once Data API builder is running locally and configured to use the `AppService` authentication provider, you can generate a client principal object manually using the following template:
 
