@@ -28,7 +28,7 @@ Data API builder is designed for developers. DAB features a cross-platform CLI, 
 
 Data API builder (DAB) supports multiple backend data sources simultaneously, including relational and NoSQL sources. DAB also integrates seamlessly with Application Insights. The configuration file can reflect relationships in the database or define new, virtual ones with support for hot reloading. GraphQL endpoints allow multiple nested Create statements within a single transaction, while REST endpoints feature in-memory caching and rich support for OData-like query string keywords.
 
-DAB natively integrates with Azure Static Web Apps. It also works great with Azure Container Apps, Azure Container Instances, Azure Kubernetes Services, and Azure Web Apps for Containers. DAB works with these services while fully supporting custom, on-premises deployments.
+DAB works great with Azure Container Apps, Azure Container Instances, Azure Kubernetes Services, and Azure Web Apps for Containers. DAB works with these services while fully supporting custom, on-premises deployments.
 
 DAB supports:
 
@@ -70,7 +70,6 @@ This diagram breaks down the relationship between all of the components of the D
   - Relationship navigation
   - Dynamic schemas
 - Easy development via dedicated CLI
-- Integration for Static Web Apps via Database Connection
 - Open Source & free
 
 ## Open source
@@ -80,5 +79,3 @@ Data API builder is open source and released under the MIT license. The reposito
 ## Related content
 
 - [Install the Data API builder CLI](how-to/install-cli.md)
-- [Todo app sample with Data API builder, Azure Static Web Apps, and Azure SQL](https://github.com/azure-samples/dab-swa-todo)
-- [Library app sample with Data API builder, Azure Static Web Apps, and Azure SQL](https://github.com/azure-samples/dab-swa-library-demo)
