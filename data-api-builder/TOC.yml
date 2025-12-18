@@ -32,30 +32,6 @@
     - name: Security Overview
       href: concept/security/index.md
       displayName: security, auth, identity, roles, protection, access
-- name: SQL MCP Server
-  items:
-    - name: Overview
-      href: mcp/index.yml
-      displayName: MCP, Model Context Protocol, agents, AI
-    - name: What is SQL MCP Server?
-      href: mcp/introduction.md
-    - name: What are the DML tools?
-      href: mcp/data-manipulation-tools.md
-      displayName: tools, CRUD, operations, create, read, update, delete
-    - name: What are semantic descriptions?
-      href: mcp/descriptions.md
-    - name: SQL MCP and VS Code
-      href: mcp/quickstart/visual-studio-code.md
-      displayName: Visual Studio Code, local, development
-    - name: SQL MCP and .NET Aspire
-      href: mcp/quickstart/dotnet-aspire.md
-      displayName: Aspire, .NET, development
-    - name: SQL MCP and Microsoft Foundry
-      href: mcp/quickstart/foundry.md
-      displayName: Foundry, Azure AI, agents, playground
-    - name: SQL MCP and Azure Container Apps
-      href: mcp/quickstart/azure-container-apps.md
-      displayName: ACA, container apps, deployment
 - name: Quickstarts
   items:
     - name: Local SQL database
@@ -321,25 +297,6 @@
         - name: How to use keyword - $select 
           href: keywords/select-rest.md
           displayName: projection, choose, columns, items
-    - name: MCP Server
-      items:
-        - name: How to use DML tools?
-          href: mcp/data-manipulation-tools.md
-          displayName: tools, CRUD, operations, create, read, update, delete
-        - name: What to improve model quality?
-          href: mcp/descriptions.md
-        - name: How to use VS Code
-          href: mcp/quickstart/visual-studio-code.md
-          displayName: Visual Studio Code, local, development
-        - name: How to use .NET Aspire
-          href: mcp/quickstart/dotnet-aspire.md
-          displayName: Aspire, .NET, development
-        - name: How to use Microsoft Foundry
-          href: mcp/quickstart/foundry.md
-          displayName: Foundry, Azure AI, agents, playground
-        - name: How to use Azure Container Apps
-          href: mcp/quickstart/azure-container-apps.md
-          displayName: ACA, container apps, deployment
     - name: Data caching
       items:
         - name: How to use level 1 Cache
