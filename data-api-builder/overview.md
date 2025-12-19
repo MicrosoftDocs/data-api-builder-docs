@@ -15,7 +15,7 @@ ms.date: 06/11/2025
 
 :::row:::
   :::column span="3":::
-    Data API builder (DAB) provides a REST API over a database. It also provides a GraphQL API. It supports not just SQL Server, but Azure SQL Database, Azure Cosmos DB, PostgreSQL, MySQL, and SQL Data Warehouse. DAB runs in any cloud or on-prem, and it is open source and free to use. It's secure, feature-rich, and a foundational component of Microsoft Fabric—which is another way of saying it’s high-performance and capable of handling massive data operations.
+    Data API builder (DAB) provides a REST API over a database. It also provides a GraphQL API. It supports not just SQL Server, but Azure SQL Database, Azure Cosmos DB, PostgreSQL, MySQL, and SQL Data Warehouse. DAB runs in any cloud or on-premises, and it is open source and free to use. It's secure, feature-rich, and a foundational component of Microsoft Fabric—which is another way of saying it’s high-performance and capable of handling massive data operations.
 
     Data API builder replaces most custom data APIs that perform generic CRUD (Create, Read, Update, Delete) operations against a database. DAB is independent of language, technology, and framework. It requires zero code and a single configuration file. Best of all, it’s truly free, with no premium tier, and runs statelessly anywhere.
   :::column-end:::
