@@ -20,10 +20,10 @@ In this Quickstart, you build a set of Data API builder configuration files to t
 - [Docker](https://www.docker.com/products/docker-desktop/)
 - [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0)
 - A data management client
-  - If you don't have a client installed, [install Azure Data Studio](/azure-data-studio/download-azure-data-studio)
+  - If you don't have a client installed, install SQL Server Management Studio.
 
 > [!TIP]
-> Alternatively, open this Quickstart in GitHub Codespaces with all developer prerequisites already installed. Simply bring your own Azure subscription. GitHub accounts include an entitlement of storage and core hours at no cost. For more information, see [included storage and core hours for GitHub accounts](https://docs.github.com/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts).
+> Alternatively, open this Quickstart in GitHub Codespaces with all developer prerequisites already installed. Bring your own Azure subscription. GitHub accounts include an entitlement of storage and core hours at no cost. For more information, see [included storage and core hours for GitHub accounts](https://docs.github.com/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts).
 >
 > [![Open in GitHub Codespaces](https://img.shields.io/badge/Open-Open?style=for-the-badge&label=GitHub+Codespaces&logo=github&labelColor=0078D7&color=303030)](https://codespaces.new/azure-samples/dab-quickstart?template=true&quickstart=1)
 
@@ -52,10 +52,10 @@ Start by configuring and running the local database to set the relevant credenti
         mcr.microsoft.com/mssql/server:2022-latest
     ```
 
-1. Connect to your local database using your preferred data management environment. Examples include, but aren't limited to: [SQL Server Management Studio](/sql/ssms) and and the [SQL Server extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql).
+1. Connect to your local database using your preferred data management environment. Examples include, but aren't limited to: [SQL Server Management Studio](/sql/ssms) and the [SQL Server extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql).
 
     > [!TIP]
-    > If you're using default networking for your Docker Linux container images, the connection string will likely be `Server=localhost,1433;User Id=sa;Password=<your-password>;TrustServerCertificate=True;Encrypt=True;`. Replace `<your-password>` with the password you set earlier.
+    > If you're using default networking for your Docker Linux container images, the connection string is likely to be `Server=localhost,1433;User Id=sa;Password=<your-password>;TrustServerCertificate=True;Encrypt=True;`. Replace `<your-password>` with the password you set earlier.
 
 1. Create a new `bookshelf` database and use the database for your remaining queries.
 

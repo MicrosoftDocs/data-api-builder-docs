@@ -19,7 +19,7 @@ This article provides guidance on how to best secure your Data API builder solut
 
 ## Authentication
 
-- **Use strong authentication providers**: Always configure Data API builder to use a secure authentication provider such as Microsoft Entra ID or Azure Static Web Apps authentication. This configuration ensures only authorized users can access your APIs. For more information, see [authentication configuration](./authentication-local.md).
+- **Use strong authentication providers**: Always configure Data API builder to use a secure authentication provider such as Microsoft Entra ID or App Services authentication. This configuration ensures only authorized users can access your APIs. For more information, see [authentication configuration](./authentication-local.md).
 - **Avoid hardcoding secrets**: Never store authentication secrets or credentials directly in your configuration files or source code. Use secure methods such as environment variables or Azure Key Vault. For more information, see [Azure authentication](./authentication-azure.md).
 
 ## Authorization

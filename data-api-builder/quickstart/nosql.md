@@ -131,9 +131,6 @@ Start by running the local emulator. Then, you can seed a new container with sam
     ]
     ```
 
-    > [!TIP]
-    > The method used to seed data will largely depend on the data management tool. For Azure Data Studio, you can save this JSON array as a *.json* file and then use the **Import** feature.
-
 ## Create configuration files
 
 Create a baseline configuration file using the DAB CLI. Then, add a development configuration file with your current credentials.
