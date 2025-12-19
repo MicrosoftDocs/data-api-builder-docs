@@ -18,9 +18,9 @@ Configuration settings for database entities.
 
 |Property|Description|
 |-|-|
-|[`entities.entity-name.health.enabled`](#health-entity-name-entities)|Enables the health check endpoint for the entity|
-|[`entities.entity-name.health.first`](#health-entity-name-entities)|Number of rows returned in health check query|
-|[`entities.entity-name.health.threshold-ms`](#health-entity-name-entities)|Maximum duration in milliseconds for health check query|
+|[`entities.entity-name.health.enabled`](#health-entity-name-entities)|Enables health checks for the entity (both REST and GraphQL endpoints)|
+|[`entities.entity-name.health.first`](#health-entity-name-entities)|Number of rows returned in health check query (range: 1-500)|
+|[`entities.entity-name.health.threshold-ms`](#health-entity-name-entities)|Maximum duration in milliseconds for health check query (min: 1)|
 
 ## Source
 
@@ -153,7 +153,7 @@ The database source details of the entity.
 
 * `key-fields` is only required when `type` is `view`. The value represents the primary keys.
 
-** `parameters` is only required when `type` is `stored-procedure` and only for parameters with default values. The data type of the paramter is inferred. Parameters without a default can be omited.
+** `parameters` is only required when `type` is `stored-procedure` and only for parameters with default values. The data type of the parameter is inferred. Parameters without a default can be omitted.
 
 > [!TIP]
 > If the object belongs to the `dbo` schema, specifying the schema is optional. Additionally, square brackets around object names (for example, `dbo.Users` vs. `[dbo].[Users]`) can be used when required.
@@ -988,27 +988,11 @@ Enables and configures health checks for the entity.
 
 ### Nested properties
 
-|Parent|Property|Type|Required|Default|
+| Parent | Property | Type | Required | Default | 
 |-|-|-|-|-|
-|`entities.{entity-name}.health`|`enabled`|boolean|❌ No|True|
-|`entities.{entity-name}.health`|`first`|integer|❌ No|1|
-|`entities.{entity-name}.health`|`threshold-ms`|integer|❌ No|5|
-
-### Format
-
-```json
-{
-  "entities": {
-    "{entity-name}": {
-      "health": {
-        "enabled": true,
-        "first": 5,
-        "threshold-ms": 2000
-      }
-    }
-  }
-}
-```
+| `entities.{entity-name}.health` | `enabled` | boolean | ❌ No | `true` | 
+| `entities.{entity-name}.health` | `first` | integer | ❌ No | `100` | 
+| `entities.{entity-name}.health` | `threshold-ms` | integer | ❌ No | `1000` | 
 
 ### Example
 
@@ -1025,3 +1009,9 @@ Enables and configures health checks for the entity.
   }
 }
 ```
+
+> [!NOTE]
+> The `first` value must be less than or equal to the `runtime.pagination.max-page-size` setting. Smaller values help health checks complete faster.
+
+> [!IMPORTANT]
+> Stored procedures are automatically excluded from entity health checks because they require parameters and may not be deterministic.

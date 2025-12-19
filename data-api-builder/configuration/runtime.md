@@ -43,7 +43,7 @@ Configuration settings that determine runtime behavior.
 
 |Property|Default|Description|
 |-|-|-|
-|[runtime.host.max-response-size-mb](#maximum-response-size-host-runtime)|`100`|Maximum size (MB) of database response allowed in a single result|
+|[runtime.host.max-response-size-mb](#maximum-response-size-host-runtime)|`158`|Maximum size (MB) of database response allowed in a single result|
 |[runtime.host.mode](#mode-host-runtime)|`"production"`|Running mode; `"production"` or `"development"`|
 
 ### CORS settings
@@ -82,7 +82,8 @@ Configuration settings that determine runtime behavior.
 |[runtime.telemetry.log-level.namespace](#telemetry-runtime)|`null`|Namespace-specific log level override|
 |[runtime.health.enabled](#health-runtime)|`true`|Enables or disables the health check endpoint globally|
 |[runtime.health.roles](#health-runtime)|`null`|Allowed roles for the comprehensive health endpoint|
-|[runtime.health.cache-ttl-seconds](#health-runtime)|`30`|Time to live (seconds) for the health check report cache entry|
+|[runtime.health.cache-ttl-seconds](#health-runtime)|`5`|Time to live (seconds) for the health check report cache entry|
+|[runtime.health.max-query-parallelism](#health-runtime)|`4`|Maximum concurrent health check queries (range: 1-8)|
 
 ## Format overview
 
@@ -149,7 +150,8 @@ Configuration settings that determine runtime behavior.
   "health": {
     "enabled": <true>|<false> (default: `true`),
     "roles": [ "<string>" ],
-    "cache-ttl-seconds": <integer> (default: `5`)
+    "cache-ttl-seconds": <integer> (default: `5`),
+    "max-query-parallelism": <integer> (default: `4`)
   }
 }
 ```
@@ -703,6 +705,7 @@ Global pagination limits for REST and GraphQL endpoints.
 |-|-|-|-|-|
 | `runtime.pagination` | `max-page-size` | int | ❌ No | 100,000 |
 | `runtime.pagination` | `default-page-size` | int | ❌ No | 100 |
+| `runtime.pagination` | `next-link-relative` | boolean | ❌ No | `false` |
 
 ### Max-page-size supported values
 
@@ -722,6 +725,15 @@ Global pagination limits for REST and GraphQL endpoints.
 | `-1` | Defaults to the current `max-page-size` setting. |
 | `< -1` | Not supported. |
 
+### Next-link-relative behavior
+
+When `next-link-relative` is `true`, pagination `nextLink` values use relative URLs instead of absolute URLs.
+
+| Value | Example |
+|-|-|
+| `false` (default) | `"nextLink": "https://localhost:5001/api/users?$after=..."` |
+| `true` | `"nextLink": "/api/users?$after=..."` |
+
 ### Format
 
 ```json
@@ -729,7 +741,8 @@ Global pagination limits for REST and GraphQL endpoints.
   "runtime": {
     "pagination": {
       "max-page-size": <integer; default: 100000>,
-      "default-page-size": <integer; default: 100>
+      "default-page-size": <integer; default: 100>,
+      "next-link-relative": <boolean; default: false>
     }
   }
 }
@@ -1051,11 +1064,12 @@ Global [health check endpoint](../concept/monitor/health-checks.md) (`/health`) 
 
 ### Nested properties
 
-| Parent | Property | Type | Required | Default |
-| - | - | - | - | - |
-| `runtime.health` | `enabled` | boolean | ❌ No | true |
-| `runtime.health` | `roles` | string array | ✔️ Yes | None |
-| `runtime.health` | `cache-ttl-seconds` | integer | ❌ No | 5 |
+| Parent | Property | Type | Required | Default | Range/Notes |
+| - | - | - | - | - | - |
+| `runtime.health` | `enabled` | boolean | ❌ No | `true` | |
+| `runtime.health` | `roles` | string array | ✔️ Yes* | `null` | *Required in production mode |
+| `runtime.health` | `cache-ttl-seconds` | integer | ❌ No | `5` | Min: 0 |
+| `runtime.health` | `max-query-parallelism` | integer | ❌ No | `4` | Min: 1, Max: 8 (clamped) |
 
 ### Behavior in development vs. production
 
@@ -1075,7 +1089,8 @@ Global [health check endpoint](../concept/monitor/health-checks.md) (`/health`) 
   "health": {
     "enabled": <true> (default) | <false>,
     "roles": [ <string> ], // required in production
-    "cache-ttl-seconds": <integer>
+    "cache-ttl-seconds": <integer; default: 5>,
+    "max-query-parallelism": <integer; default: 4>
   }
 }
 ```
@@ -1090,7 +1105,8 @@ Global [health check endpoint](../concept/monitor/health-checks.md) (`/health`) 
   "health": {
     "enabled": true,
     "roles": ["admin", "support"],
-    "cache-ttl-seconds": 10
+    "cache-ttl-seconds": 10,
+    "max-query-parallelism": 6
   }
 }
 ```
