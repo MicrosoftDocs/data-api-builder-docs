@@ -152,7 +152,6 @@ These tables list the features available in Data API builder (DAB).
 
 | Feature | SQL Server | Azure SQL | Azure Cosmos DB<br/>for NoSQL | PostgreSQL | MySQL | SQLDW |
 | --- | --- | --- | --- | --- | --- | --- |
-| Azure Static Web Apps | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | Azure Container Apps | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | Azure Container Instances | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | Azure Kubernetes Services | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |

@@ -49,16 +49,6 @@ Run Data API builder as part of a [Kubernetes container cluster](/azure/aks/conc
 
 For more information, see [Azure Kubernetes Service](/azure/aks).
 
-## Azure Static Web Apps (preview)
-
-[!INCLUDE[SWA versioning](includes/static-web-apps-versioning.md)]
-
-Azure Static Web Apps is an Azure service that automatically builds and deploys full stack static web applications from a source control repository to a host in Azure. Azure Static Web Apps is ideal for solutions that are source controlled, built using an automation workflow, and then runs statically in the final hosting service. Use Azure Static Web Apps for applications that result in HTML, CSS, and JavaScript where server-side processing or rendering isn't required.
-
-Data API builder runs as a sidecar service to a static web app. The [database connections](/azure/static-web-apps/database-overview) feature uses a fixed version of the Data API builder engine and can be optionally configured on any static web app.
-
-For more information, see [Azure Static Web Apps](/azure/static-web-apps).
-
 ## Next step
 
 > [!div class="nextstepaction"]
@@ -66,6 +56,3 @@ For more information, see [Azure Static Web Apps](/azure/static-web-apps).
 
 > [!div class="nextstepaction"]
 > [Deploy to Azure Container Instances](how-to-publish-container-instances.md)
-
-> [!div class="nextstepaction"]
-> [Host in Azure Static Web Apps (preview)](how-to-host-static-web-apps.md)

@@ -384,9 +384,6 @@
         - name: How to deploy to Azure Container Instances
           href: deployment/how-to-publish-container-instances.md
           displayName: azure, container instances, publish, deploy, aci
-        - name: How to deploy to Azure Static Web Apps (retired)
-          href: deployment/how-to-host-static-web-apps.md
-          displayName: swa, static web apps, azure, preview
         - name: Configuration best practices
           href: deployment/best-practices-configuration.md
           displayName: configuration, deployment, settings, optimize
@@ -401,12 +398,12 @@
     - name: Library app with Blazor and Azure SQL
       href: /samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
       displayName: blazor, aspnet, webassembly, azure sql, sample
-    - name: Library app with SWA and Azure SQL
+    - name: Library app with Azure SQL
       href: /samples/azure-samples/dab-swa-library-demo/sample
-      displayName: static web apps, azure sql, sample, dab
+      displayName: azure sql, sample, dab
     - name: Todo app with SWA and Azure SQL
       href: /samples/azure-samples/dab-swa-todo/sample
-      displayName: todo, dab, static web apps, sample, azure sql
+      displayName: todo, dab, sample, azure sql
 - name: Troubleshooting
   items:
     - name: FAQ
