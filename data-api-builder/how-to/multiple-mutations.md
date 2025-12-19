@@ -18,7 +18,7 @@ Data API builder (DAB) supports combining multiple mutation operations together 
 
 - Existing SQL server and database.
 - Data API builder CLI. [Install the CLI](install-cli.md)
-- A database client (SQL Server Management Studio, , etc.)
+- A database client (SQL Server Management Studio, etc.)
   - If you don't have a client installed, install SQL Server Management Studio.
 
 ## Create tables
