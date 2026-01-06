@@ -558,7 +558,7 @@ Enable DAB's MCP DML tools endpoint.
 > [!NOTE]
 > This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
 
-For more information on MCP DML tools, see [SQL MCP Server data manipulation language tools](mcp/data-manipulation-language-tools.md).
+For more information on MCP DML tools, see [SQL MCP Server data manipulation language tools](../mcp/data-manipulation-language-tools.md).
 
 ### Example
 
