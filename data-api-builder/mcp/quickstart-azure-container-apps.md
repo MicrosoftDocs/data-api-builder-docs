@@ -359,8 +359,9 @@ When you're done, delete the resource group to remove all resources:
 az group delete --name $RESOURCE_GROUP --yes --no-wait
 ```
 
-## Related content
+## External content
 
+- [Example PowerShell Script](https://github.com/JerryNixon/dab-demo-environment-script)
 - [Overview of SQL MCP Server](overview.md)
 - [Data manipulation tools in SQL MCP Server](data-manipulation-language-tools.md)
 - [Adding semantic descriptions to SQL MCP Server](how-to-add-descriptions.md)
