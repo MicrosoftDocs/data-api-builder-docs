@@ -52,6 +52,8 @@
     - name: Azure Cosmos DB 
       href: quickstart/azure-cosmos-db-nosql.md
       displayName: azure, cosmos, nosql, cloud, database
+- name: SQL MCP Server (preview)
+  href: mcp/TOC.yml
 - name: Command-Line interface
   items:
     - name: Overview
@@ -239,8 +241,6 @@
       href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
 - name: How-to
   items:
-    - name: MCP Server
-      href: mcp/TOC.yml
     - name: Run DAB
       items:
         - name: How to run DAB in a container
