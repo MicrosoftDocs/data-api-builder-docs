@@ -239,6 +239,8 @@
       href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
 - name: How-to
   items:
+    - name: MCP Server
+      href: mcp/TOC.yml
     - name: Run DAB
       items:
         - name: How to run DAB in a container
