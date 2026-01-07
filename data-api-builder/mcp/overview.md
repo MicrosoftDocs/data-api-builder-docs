@@ -97,9 +97,6 @@ You can enable MCP globally or at the entity level. This capability lets you cho
 
 When MCP is enabled, SQL MCP Server generates its tool surface automatically based on your configuration. You don't define MCP tools manually. The built-in `dml-tools` system discovers and exposes entities procedurally, which scales well from small schemas to very large databases.
 
-> [!NOTE]
-> In the upcoming 1.7 release, you'll be able to elevate stored procedures as custom tools. This feature allows you to host an MCP Server dedicated to a specific set of operations. While this capability is already possible through the `dml-tools` system, developers who want to define custom tools directly have a new, simpler option.
-
 ### Get started
 
 Getting started means creating the `dab-config.json` to control the engine. You can do this task manually, or you can use the [Data API builder (DAB) CLI](/azure/data-api-builder/command-line). The CLI simplifies the task, letting you initialize the file with a single command. Configuration property values can use literal strings, [environment variables](/azure/data-api-builder/concept/config/env-function), or [Azure Key Vault](/azure/data-api-builder/concept/config/akv-function) secrets. 
