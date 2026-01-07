@@ -1,0 +1,70 @@
+### YamlMime:Landing
+title: SQL MCP Server
+summary: Enable AI agents to safely interact with SQL databases using Model Context Protocol. SQL MCP Server is built on Data API builder and provides deterministic, secure, and production-ready database operations for agentic applications.
+metadata:
+  title: SQL MCP Server
+  description: Learn how to use SQL MCP Server to integrate SQL database capabilities with AI applications. Get started with setup, configuration, and examples.
+  author: seesharprun
+  ms.author: sidandrews
+  ms.service: data-api-builder
+  ms.topic: landing-page
+  ms.date: 01/06/2026
+landingContent:
+  - title: About SQL MCP Server
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: What is SQL MCP Server?
+            url: overview.md
+          - text: Data manipulation tools
+            url: data-manipulation-language-tools.md
+      - linkListType: reference
+        links:
+          - text: Data API builder documentation
+            url: /azure/data-api-builder/
+          - text: Model Context Protocol specification
+            url: https://modelcontextprotocol.info/specification/
+  - title: Get started
+    linkLists:
+      - linkListType: quickstart
+        links:
+          - text: Visual Studio Code
+            url: quickstart-visual-studio-code.md
+          - text: .NET Aspire
+            url: quickstart-dotnet-aspire.md
+          - text: Azure AI Foundry
+            url: quickstart-azure-ai-foundry.md
+          - text: Azure Container Apps
+            url: quickstart-azure-container-apps.md
+  - title: Model Context Protocol (MCP)
+    linkLists:
+      - linkListType: concept
+        links:
+          - text: Model Context Protocol specification
+            url: https://modelcontextprotocol.info/specification/
+      - linkListType: how-to-guide
+        links:
+          - text: Add descriptions to entities
+            url: how-to-add-descriptions.md
+  - title: Data manipulation tools
+    linkLists:
+      - linkListType: reference
+        links:
+          - text: Data manipulation tools reference
+            url: data-manipulation-language-tools.md
+      - linkListType: how-to-guide
+        links:
+          - text: Add descriptions to entities
+            url: how-to-add-descriptions.md
+  - title: Data API builder
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: Data API builder overview
+            url: /azure/data-api-builder/overview
+      - linkListType: reference
+        links:
+          - text: Configuration file structure
+            url: /azure/data-api-builder/configuration-file
+          - text: Role-based access control
+            url: /azure/data-api-builder/authorization

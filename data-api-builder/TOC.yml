@@ -52,6 +52,8 @@
     - name: Azure Cosmos DB 
       href: quickstart/azure-cosmos-db-nosql.md
       displayName: azure, cosmos, nosql, cloud, database
+- name: SQL MCP Server (preview)
+  href: mcp/TOC.yml
 - name: Command-Line interface
   items:
     - name: Overview
