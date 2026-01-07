@@ -49,7 +49,33 @@
       "uhfHeaderId": "Azure",
       "titleSuffix": "Data API builder"
     },
-    "fileMetadata": {},
+    "fileMetadata": {
+      "titleSuffix": {
+        "mcp/**/index.yml": "",
+        "mcp/**/*.md": "SQL MCP Server",
+        "mcp/**/*.yml": "SQL MCP Server"
+      },
+      "author": {
+        "mcp/**/*.md": "jerrynixon",
+        "mcp/**/*.yml": "jerrynixon"
+      },
+      "ms.author": {
+        "mcp/**/*.md": "jnixon",
+        "mcp/**/*.yml": "jnixon"
+      },
+      "ms.reviewer": {
+        "mcp/*.md": "sidandrews",
+        "mcp/*.yml": "sidandrews"
+      },
+      "ms.service": {
+        "mcp/*.md": "data-api-builder",
+        "mcp/*.yml": "data-api-builder"
+      },
+      "ms.subservice": {
+        "mcp/*.md": "sql-mcp-server",
+        "mcp/*.yml": "sql-mcp-server"
+      }
+    },
     "template": [],
     "dest": "data-api-builder-docs"
   }
