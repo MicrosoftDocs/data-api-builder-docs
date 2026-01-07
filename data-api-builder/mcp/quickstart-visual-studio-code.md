@@ -21,11 +21,11 @@ This quickstart uses the Data API builder CLI to run a SQL MCP Server locally wi
 
 Install these tools before you start.
 
-### 1. .NET 9+
+### .NET 9+
 
 You may already have this tool installed. Run `dotnet --version` and confirm it reports version 9.0 or later. If .NET is already present, reinstalling is safe and only refreshes your runtime.
 
-### 2. SQL Server 2016+
+### SQL Server 2016+
 
 You need access to a SQL Server database. Any of the following work:
 
@@ -33,7 +33,7 @@ You need access to a SQL Server database. Any of the following work:
 * LocalDB (file-based SQL Server)
 * SQL Server in Docker
 
-### 3. Install the Data API builder CLI
+### Install the Data API builder CLI
 
 ```bash
 dotnet new tool-manifest

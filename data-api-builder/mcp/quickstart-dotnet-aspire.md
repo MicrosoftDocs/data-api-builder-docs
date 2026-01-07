@@ -196,7 +196,7 @@ string SqlScript(string db) => $"""
     └── MCP Inspector (inspector)
 ```
 
-![Diagram that shows the Aspire resources and their connections.](media/quickstart-dotnet-aspire/dashboard-resources-connections.png)
+:::image type="content" source="media/quickstart-dotnet-aspire/dashboard-resources-connections.png" lightbox="media/quickstart-dotnet-aspire/dashboard-resources-connections.png" alt-text="Diagram that shows the Aspire resources and their connections.":::
 
 ### 5. Create your dab-config.json file
 
@@ -250,7 +250,7 @@ aspire run
 
 When the dashboard opens, you see links for Swagger, MCP, and Inspector.
 
-![Screenshot of the Aspire dashboard showing the running environment.](media/quickstart-dotnet-aspire/dashboard-running-environment.png)
+:::image type="content" source="media/quickstart-dotnet-aspire/dashboard-running-environment.png" lightbox="media/quickstart-dotnet-aspire/dashboard-running-environment.png" alt-text="Screenshot of the Aspire dashboard showing the running environment.":::
 
 #### Expected URLs
 
