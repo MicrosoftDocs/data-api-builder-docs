@@ -373,10 +373,10 @@ When an AI agent calls the `describe_entities` MCP tool, it receives your descri
 
 The agent uses this information to:
 
-1. **Select the right entity** - Matches user intent to entity descriptions
-2. **Choose relevant fields** - Returns only the fields needed based on descriptions
-3. **Build accurate queries** - Understands relationships and constraints
-4. **Supply correct parameters** - Provides appropriate values to stored procedures
+- **Select the right entity** - Matches user intent to entity descriptions
+- **Choose relevant fields** - Returns only the fields needed based on descriptions
+- **Build accurate queries** - Understands relationships and constraints
+- **Supply correct parameters** - Provides appropriate values to stored procedures
 
 ## Best practices
 
@@ -433,6 +433,6 @@ done
 
 - [Overview of SQL MCP Server](overview.md)
 - [Data manipulation tools in SQL MCP Server](data-manipulation-language-tools.md)
-- [Data API builder (DAB) configuration reference - `entities`](/azure/data-api-builder/)configuration/index)
+- [Data API builder (DAB) configuration reference - `entities`](/azure/data-api-builder/configuration/index)
 - [Data API builder (DAB) command-line interface (CLI) reference - `add`](/azure/data-api-builder/command-line/dab-add)
 - [Data API builder (DAB) command-line interface (CLI) reference - `update`](/azure/data-api-builder/command-line/dab-update)

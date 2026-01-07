@@ -22,13 +22,13 @@ This quickstart shows you how to connect a deployed SQL MCP Server to Azure AI F
 
 ## Prerequisites
 
-### 1. Deployed SQL MCP Server
+### Deployed SQL MCP Server
 
 You need a SQL MCP Server deployed to Azure Container Apps with public ingress enabled. If you don't have a deployment yet, complete the [Deploy SQL MCP Server to Azure Container Apps](quickstart-azure-container-apps.md) quickstart first.
 
 You need the MCP endpoint URL from that deployment (for example, `https://your-app.azurecontainerapps.io/mcp`).
 
-### 2. Azure AI Foundry project
+### Azure AI Foundry project
 
 You need access to Azure AI Foundry with an existing project and access to a chat model (for example, GPT-5-mini).
 

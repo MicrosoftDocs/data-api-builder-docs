@@ -19,7 +19,7 @@ This quickstart shows you how to deploy SQL MCP Server to Azure Container Apps. 
 
 ## Prerequisites
 
-### 1. Azure subscription
+### Azure subscription
 
 You need an active Azure subscription. If you don't have one:
 
@@ -27,7 +27,7 @@ You need an active Azure subscription. If you don't have one:
 https://azure.microsoft.com/free
 ```
 
-### 2. Azure CLI
+### Azure CLI
 
 Install the Azure CLI to deploy resources:
 
@@ -43,7 +43,7 @@ winget install Microsoft.AzureCLI
 brew install azure-cli
 ```
 
-### 3. .NET 9+
+### .NET 9+
 
 You may already have this tool installed. Run `dotnet --version` and confirm it reports version 9 or later.
 
@@ -53,7 +53,7 @@ You may already have this tool installed. Run `dotnet --version` and confirm it 
 winget install Microsoft.DotNet.Runtime.9
 ```
 
-### 4. Data API builder CLI
+### Data API builder CLI
 
 ```sh
 dotnet new tool-manifest
@@ -63,7 +63,7 @@ dotnet tool install microsoft.dataapibuilder --prerelease
 > [!NOTE]
 > SQL MCP Server is currently in prerelease. Using the `--prerelease` flag ensures you get the latest version of Data API builder with all the features used in this quickstart.
 
-### 5. PowerShell
+### PowerShell
 
 [Install PowerShell](/powershell/scripting/install/install-powershell-on-windows) if it isn't already installed.
 
@@ -264,7 +264,7 @@ az containerapp create `
 
 #### Your resource group should resemble the following example:
 
-![Screenshot of the Azure portal resource group after deployment.](media/quickstart-azure-container-apps/azure-resource-group.png)
+:::image type="content" source="media/quickstart-azure-container-apps/azure-resource-group.png" lightbox="media/quickstart-azure-container-apps/azure-resource-group.png" alt-text="Screenshot of the Azure portal resource group after deployment.":::
 
 ### 4. Get your MCP endpoint URL
 
@@ -343,7 +343,7 @@ curl "https://$MCP_URL/health"
 
 ## Security best practices for production
 
-- **Enable authentication** - Configure EntraID authentication instead of anonymous access
+- **Enable authentication** - Configure Microsoft Entra ID authentication instead of anonymous access
 - **Use managed identities** - Let Container Apps authenticate to SQL using managed identity
 - **Implement CORS** - Restrict which domains can access your MCP server
 - **Enable rate limiting** - Protect against abuse
@@ -361,7 +361,7 @@ az group delete --name $RESOURCE_GROUP --yes --no-wait
 
 ## External content
 
-- [Example PowerShell Script](https://github.com/JerryNixon/dab-demo-environment-script)
+- [Example PowerShell Script](https://github.com/azure-samples/data-api-builder-demo-environment)
 - [Overview of SQL MCP Server](overview.md)
 - [Data manipulation tools in SQL MCP Server](data-manipulation-language-tools.md)
 - [Adding semantic descriptions to SQL MCP Server](how-to-add-descriptions.md)
