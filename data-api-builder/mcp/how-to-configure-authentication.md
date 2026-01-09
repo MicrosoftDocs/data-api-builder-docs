@@ -374,6 +374,13 @@ Use the same steps as [Microsoft Entra](#microsoft-entra).
 
 Configure Data API builder to use `Custom` JWT validation.
 
+> [!NOTE]
+> SQL MCP Server supports third-party identity providers (for example, Okta) through the `Custom` authentication provider. You must ensure the JWT format matches what Data API builder expects (for example, matching `iss` and `aud` values, and role values in a `roles` claim). Some providers require you to add or transform claims (for example, mapping groups to a `roles` array) so authorization works as intended.
+>
+> For details on the supported authentication providers and the expected JWT shape, see [Runtime configuration: authentication provider](../configuration/runtime.md#provider-authentication-host-runtime).
+>
+> For an Okta-oriented starting point on adding richer claims, see https://blog.poespas.me/posts/2025/02/13/implementing-advanced-jwt-claims-with-oktas-sdk/.
+
 ##### CLI
 
 ##### [Bash](#tab/bash)
