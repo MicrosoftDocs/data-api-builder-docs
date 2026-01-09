@@ -94,7 +94,9 @@ Use these steps when your client is a Microsoft AI Foundry agent.
 	- Set the **Remote MCP Server endpoint** (for example, `https://<your-server>/mcp`).
 	- Select an **Authentication** mode.
 
-![Add Model Context Protocol tool dialog with sample name and endpoint](media/how-to-configure-authentication/foundry-add-mcp-dialog.png)
+The following screenshot shows the **Unauthenticated** option selected. The dialog fields are similar for the other authentication modes.
+
+![Add Model Context Protocol tool dialog in Foundry with Unauthenticated selected](media/how-to-configure-authentication/foundry-add-mcp-dialog-unauthenticated.png)
 
 After you configure Foundry, you must configure SQL MCP Server to accept the same inbound authentication mode.
 
@@ -136,6 +138,8 @@ Use **Unauthenticated** when you want Foundry to call SQL MCP Server without pre
 ### Configure Foundry
 
 Set **Authentication** to **Unauthenticated**.
+
+![Add Model Context Protocol tool dialog in Foundry with Unauthenticated selected](media/how-to-configure-authentication/foundry-add-mcp-dialog-unauthenticated.png)
 
 ### Configure SQL MCP Server (DAB)
 
@@ -228,6 +232,8 @@ Use **Microsoft Entra** when you want Foundry to acquire a Microsoft Entra acces
 ### Configure Foundry
 
 Set **Authentication** to **Microsoft Entra**, then select the appropriate Entra configuration for your tenant/app.
+
+![Add Model Context Protocol tool dialog in Foundry with Microsoft Entra selected](media/how-to-configure-authentication/foundry-add-mcp-dialog-entra.png)
 
 ### Configure SQL MCP Server (DAB)
 
@@ -327,6 +333,8 @@ Use **OAuth Identity Passthrough** when Foundry can obtain an OAuth access token
 ### Configure Foundry
 
 Set **Authentication** to **OAuth Identity Passthrough**, then configure the OAuth provider details as required by Foundry.
+
+![Add Model Context Protocol tool dialog in Foundry with OAuth Identity Passthrough selected](media/how-to-configure-authentication/foundry-add-mcp-dialog-passthrough.png)
 
 ### Configure SQL MCP Server (DAB)
 
