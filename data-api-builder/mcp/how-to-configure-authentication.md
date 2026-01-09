@@ -1,29 +1,104 @@
 ---
 title: Configure Authentication for SQL MCP Server
-description: Learn how to configure authentication between Microsoft AI Foundry agents and SQL MCP Server (Data API builder). Covers Foundry authentication modes and matching DAB configuration with CLI and JSON examples.
+description: Learn how to configure inbound authentication (client-to-server) and outbound authentication (server-to-database) for SQL MCP Server (Data API builder), including Microsoft AI Foundry setup and matching DAB configuration.
 ms.topic: how-to
-ms.date: 01/07/2026
+ms.date: 01/09/2026
 ---
 
 # Configure authentication for SQL MCP Server
 
 [!INCLUDE[Note - Preview](includes/note-preview.md)]
 
-When you connect an agent in Microsoft AI Foundry to SQL MCP Server, the agent calls your MCP endpoint (for example, `https://<host>/mcp`). Authentication is configured on both sides:
+When you connect a client (for example, a Microsoft AI Foundry agent) to SQL MCP Server, authentication becomes a two-direction setup:
 
-- **Microsoft AI Foundry** decides *how it will authenticate to the MCP server*.
-- **SQL MCP Server (Data API builder)** decides *how it validates (or doesn’t validate) incoming requests*, and which role those requests run as (`anonymous`, `authenticated`, or an application role).
+- **Inbound authentication** (client to SQL MCP Server): how the client authenticates when calling your MCP endpoint (for example, `https://<host>/mcp`).
+- **Outbound authentication** (SQL MCP Server to database): how SQL MCP Server authenticates to your database.
 
-This article maps each Foundry authentication option to the matching Data API builder configuration, including CLI commands and JSON snippets.
+Use the following diagram to orient yourself. In the rest of this article, you configure **outbound** first (so the server can reach the database), then configure **inbound** (so your client can securely call the server).
 
-![alt text](media/how-to-configure-authentication.md/inbound-outbound-authentication.svg)
+![Inbound and outbound authentication flows for SQL MCP Server](media/how-to-configure-authentication/inbound-outbound-authentication.svg)
+
+> [!NOTE]
+> The “Client App” can be a Microsoft AI Foundry agent, a custom MCP client app, or another agent runtime. The inbound configuration on SQL MCP Server is the same regardless of which client calls the MCP endpoint.
+
 ## Prerequisites
 
 - SQL MCP Server running (Data API builder 1.7+)
 - An existing `dab-config.json` with at least one entity
 - A Microsoft AI Foundry project with an agent where you can add an MCP tool connection
 
-## Authentication options (Foundry)
+## Step 1: Configure outbound authentication (SQL MCP Server to database)
+
+Outbound authentication is defined by your `data-source` configuration—most commonly, the connection string.
+
+![Outbound authentication flow from SQL MCP Server to database](media/how-to-configure-authentication/outbound-authentication.svg)
+
+### Configure the database connection
+
+In your `dab-config.json`, set `data-source.database-type` and `data-source.connection-string`.
+
+> [!TIP]
+> Use `@env()` to keep secrets out of the configuration file.
+
+#### Example: SQL user/password (development)
+
+```json
+{
+	"data-source": {
+		"database-type": "mssql",
+		"connection-string": "@env('SQL_CONNECTION_STRING')"
+	}
+}
+```
+
+Example environment variable value:
+
+```text
+Server=tcp:<server>.database.windows.net,1433;Initial Catalog=<database>;User ID=<user>;Password=<password>;Encrypt=True;TrustServerCertificate=False;
+```
+
+#### Example: Managed identity (recommended for Azure)
+
+SQL MCP Server supports Managed Service Identities (MSI) for Azure SQL using `DefaultAzureCredential`. Configure your connection string to use managed identity authentication.
+
+```text
+Server=tcp:<server>.database.windows.net,1433;Initial Catalog=<database>;Authentication=Active Directory Managed Identity;
+```
+
+For user-assigned managed identity (UAMI), include the identity client ID:
+
+```text
+Server=tcp:<server>.database.windows.net,1433;Initial Catalog=<database>;Authentication=Active Directory Managed Identity;User Id=<uami-client-id>;
+```
+
+For complete details, see [Data source configuration](../configuration/data-source.md).
+
+## Step 2: Configure inbound authentication (client to SQL MCP Server)
+
+Inbound authentication controls how the MCP client authenticates to SQL MCP Server.
+
+![Inbound authentication flow from client to SQL MCP Server](media/how-to-configure-authentication/inbound-authentication.svg)
+
+### Add an MCP tool in Microsoft AI Foundry
+
+Use these steps when your client is a Microsoft AI Foundry agent.
+
+1. In your agent project, select **Add a tool**.
+2. Select the **Custom** tab.
+3. Select **Model Context Protocol**.
+
+![Select Model Context Protocol under Custom tools in Foundry](media/how-to-configure-authentication/foundry-select-a-tool-dialog.png)
+
+4. In the **Add Model Context Protocol tool** dialog:
+	- Set **Name** (for example, `MySalesData`).
+	- Set the **Remote MCP Server endpoint** (for example, `https://<your-server>/mcp`).
+	- Select an **Authentication** mode.
+
+![Add Model Context Protocol tool dialog with sample name and endpoint](media/how-to-configure-authentication/foundry-add-mcp-dialog.png)
+
+After you configure Foundry, you must configure SQL MCP Server to accept the same inbound authentication mode.
+
+### Authentication options (Foundry)
 
 Foundry currently offers these authentication modes when adding an MCP tool:
 
@@ -32,12 +107,21 @@ Foundry currently offers these authentication modes when adding an MCP tool:
 - **Microsoft Entra**
 - **OAuth Identity Passthrough**
 
+Use this table as a quick mapping between the Foundry selection and the SQL MCP Server configuration.
+
+|Foundry setting (inbound)|SQL MCP Server setting (inbound)|Notes|
+|---|---|---|
+|Unauthenticated|`provider: AppService` (or omit `runtime.host.authentication`)|Requests run as `anonymous` unless your hosting platform injects identity headers.|
+|Key-based|Not supported|Use Microsoft Entra/OAuth tokens, or front the server with a gateway.|
+|Microsoft Entra|`provider: EntraId` + `jwt.audience` + `jwt.issuer`|Requests run as `authenticated` unless a role header is provided by the client.|
+|OAuth Identity Passthrough|`provider: EntraId` (Entra tokens) or `provider: Custom` (non-Entra JWTs)|Uses `Authorization: Bearer <token>`.|
+
 The following sections describe each option in the same order.
 
 > [!TIP]
 > In Data API builder, authentication and authorization are separate. Even when authentication is enabled, *authorization is still enforced* by entity permissions.
 
-## Unauthenticated
+## Unauthenticated (inbound)
 
 Use **Unauthenticated** when you want Foundry to call SQL MCP Server without presenting any identity. On the Data API builder side, you must ensure those requests land in the `anonymous` role and that your entities grant only the permissions you intend to allow.
 
@@ -51,11 +135,7 @@ Use **Unauthenticated** when you want Foundry to call SQL MCP Server without pre
 
 ### Configure Foundry
 
-1. Add an MCP tool connection.
-2. Set **Authentication** to **Unauthenticated**.
-3. Set the MCP endpoint URL to your SQL MCP Server endpoint.
-
-> SCREENSHOT "Add Model Context Protocol tool dialog with Authentication set to Unauthenticated"
+Set **Authentication** to **Unauthenticated**.
 
 ### Configure SQL MCP Server (DAB)
 
@@ -127,7 +207,7 @@ Foundry’s **Key-based** authentication mode typically sends a static API key (
 - Use **Microsoft Entra** (recommended) or **OAuth Identity Passthrough** so SQL MCP Server can validate JWTs.
 - If you must use a static key, front SQL MCP Server with a gateway that validates the key and then forwards an authenticated request (for example, by exchanging the key for a token). This gateway pattern is outside the scope of this article.
 
-> SCREENSHOT "Add Model Context Protocol tool dialog with Authentication set to Key-based"
+In Foundry, this option appears in the authentication list, but SQL MCP Server doesn't support key-based authentication.
 
 ## Microsoft Entra
 
@@ -147,11 +227,7 @@ Use **Microsoft Entra** when you want Foundry to acquire a Microsoft Entra acces
 
 ### Configure Foundry
 
-1. Add an MCP tool connection.
-2. Set **Authentication** to **Microsoft Entra**.
-3. Select the Entra configuration appropriate for your tenant/app.
-
-> SCREENSHOT "Foundry MCP tool configuration showing Microsoft Entra authentication"
+Set **Authentication** to **Microsoft Entra**, then select the appropriate Entra configuration for your tenant/app.
 
 ### Configure SQL MCP Server (DAB)
 
@@ -235,7 +311,7 @@ Keep these points in mind when troubleshooting:
 - **Issuer**: Must match the token’s `iss` claim. For tenant-specific tokens, use `https://login.microsoftonline.com/<tenant-id>/v2.0`.
 - **Roles**: Data API builder expects role values in the token’s `roles` claim.
 
-For the full list of required fields and supported provider values, see `runtime.host.authentication` in the runtime configuration reference: https://review.learn.microsoft.com/en-us/azure/data-api-builder/configuration/runtime?branch=main#provider-authentication-host-runtime.
+For the full list of supported providers and fields, see [Runtime configuration: authentication provider](../configuration/runtime.md).
 
 ## OAuth Identity Passthrough
 
@@ -250,11 +326,7 @@ Use **OAuth Identity Passthrough** when Foundry can obtain an OAuth access token
 
 ### Configure Foundry
 
-1. Add an MCP tool connection.
-2. Set **Authentication** to **OAuth Identity Passthrough**.
-3. Configure the OAuth provider details as required by Foundry.
-
-> SCREENSHOT "Foundry MCP tool configuration showing OAuth Identity Passthrough authentication"
+Set **Authentication** to **OAuth Identity Passthrough**, then configure the OAuth provider details as required by Foundry.
 
 ### Configure SQL MCP Server (DAB)
 
@@ -318,7 +390,8 @@ dab configure ^
 
 ## Related content
 
+- [Data source configuration](../configuration/data-source.md)
 - [Runtime configuration: authentication provider](../configuration/runtime.md)
 - [Local authentication (Simulator/AppService)](../concept/security/authentication-local.md)
 - [Azure authentication (JWT/roles)](../concept/security/authentication-azure.md)
-- Foundry MCP authentication guidance: https://learn.microsoft.com/en-us/azure/ai-foundry/agents/how-to/mcp-authentication?view=foundry&branch=release-ignite-foundry-nextgen
+- [Foundry MCP authentication guidance](/azure/ai-foundry/agents/how-to/mcp-authentication)
