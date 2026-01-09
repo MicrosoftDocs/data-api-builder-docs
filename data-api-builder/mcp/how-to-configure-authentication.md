@@ -229,9 +229,35 @@ Use **Microsoft Entra** when you want Foundry to acquire a Microsoft Entra acces
 > [!NOTE]
 > Many MCP clients (including managed experiences) don’t let you set arbitrary headers like `X-MS-API-ROLE`. In that case, plan your permissions around the `authenticated` system role.
 
+### Register an app in Microsoft Entra ID (server audience)
+
+To use Microsoft Entra tokens with SQL MCP Server, you typically create an app registration that represents your **SQL MCP Server API**. Tokens issued for your client (for example, the Foundry agent identity) should have an audience (`aud`) that matches the value you configure in SQL MCP Server.
+
+1. In the [Microsoft Entra admin center](https://entra.microsoft.com/), go to **App registrations** and select **New registration**.
+2. Enter a name for the app registration.
+3. Select the appropriate **Supported account types** (single-tenant is common for internal MCP servers).
+4. Select **Register**.
+
+![Register an application pane in Microsoft Entra admin center](media/how-to-configure-authentication/entra-register-an-application.png)
+
+After the app is created, record these values from the app’s **Overview** page:
+
+- **Directory (tenant) ID**: used to build the DAB `jwt.issuer` value.
+- **Application ID URI** (recommended): use this value as the DAB `jwt.audience` and the Foundry **Audience**.
+
+![App registration overview showing Application (client) ID and Directory (tenant) ID](media/how-to-configure-authentication/entra-app-registration.png)
+
+For detailed registration steps, see [Register an application in Microsoft Entra ID](/entra/identity-platform/quickstart-register-app).
+
+> [!TIP]
+> If you don't already have an Application ID URI configured, set one under **Expose an API**, then use that URI as your audience. For more information, see [Configure an application to expose a web API](/entra/identity-platform/quickstart-configure-app-expose-web-apis).
+
 ### Configure Foundry
 
-Set **Authentication** to **Microsoft Entra**, then select the appropriate Entra configuration for your tenant/app.
+Set **Authentication** to **Microsoft Entra**. Then configure the Entra settings:
+
+- **Type**: Select the appropriate identity type for your scenario (the default is often **Agent Identity**).
+- **Audience**: Set to the Application ID URI you want tokens issued for (this should match `runtime.host.authentication.jwt.audience` in DAB).
 
 ![Add Model Context Protocol tool dialog in Foundry with Microsoft Entra selected](media/how-to-configure-authentication/foundry-add-mcp-dialog-entra.png)
 
