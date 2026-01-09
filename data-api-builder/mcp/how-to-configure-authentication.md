@@ -16,6 +16,7 @@ When you connect an agent in Microsoft AI Foundry to SQL MCP Server, the agent c
 
 This article maps each Foundry authentication option to the matching Data API builder configuration, including CLI commands and JSON snippets.
 
+![alt text](media/how-to-configure-authentication.md/inbound-outbound-authentication.svg)
 ## Prerequisites
 
 - SQL MCP Server running (Data API builder 1.7+)
