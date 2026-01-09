@@ -35,7 +35,14 @@ To define multiple data sources, create multiple configuration files and referen
   "runtime": {
     "rest": {
       "enabled": true
+    },
+    "graphql": {
+      "enabled": true
+    },
+    "mcp": {
+      "enabled": true
     }
+
   }
 }
 ```
@@ -68,7 +75,9 @@ To define multiple data sources, create multiple configuration files and referen
   "data-source": {
     "database-type": "cosmosdb_nosql",
     "connection-string": "@env('COSMOS_CONNECTION_STRING')",
-    "database-name": "library"
+    "options": {
+      "database": "library"
+    }
   },
   "entities": {
     "LoanRecord": {
