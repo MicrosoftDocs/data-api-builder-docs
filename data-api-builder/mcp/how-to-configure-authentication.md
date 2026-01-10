@@ -87,6 +87,17 @@ Inbound authentication controls how the MCP client authenticates to SQL MCP Serv
 
 ![Illustration of inbound authentication flow from client app to SQL MCP Server](media/how-to-configure-authentication/inbound-authentication.svg)
 
+### Multiple clients, one inbound authentication configuration
+
+Inbound authentication is configured once per SQL MCP Server instance (for example, `runtime.host.authentication.provider`). This means that all clients calling the same MCP endpoint must authenticate using a compatible approach (for example, all clients use Microsoft Entra tokens for the same audience).
+
+![Illustration of multiple client apps using the same inbound authentication configuration to access SQL MCP Server](media/how-to-configure-authentication/multiple-inbound-authentication.svg)
+
+> [!TIP]
+> If you need two different inbound authentication schemes (for example, one client uses Microsoft Entra and another uses a different identity provider), run two SQL MCP Server instances with different `runtime.host.authentication` settings.
+>
+> To avoid duplicating entity and data-source configuration, both server instances can reference the same child configuration files using `data-source-files`, while each instance has its own top-level configuration file that sets unique runtime/security settings.
+
 ### Add an MCP tool in Microsoft AI Foundry
 
 Use these steps when your client is a Microsoft AI Foundry agent.
@@ -146,8 +157,6 @@ Use **Unauthenticated** when you want Foundry to call SQL MCP Server without pre
 ### Configure Foundry
 
 Set **Authentication** to **Unauthenticated**.
-
-![Screenshot of the Add Model Context Protocol tool dialog in Foundry with Unauthenticated selected](media/how-to-configure-authentication/foundry-add-mcp-dialog-unauthenticated.png)
 
 ### Configure SQL MCP Server (DAB)
 
@@ -225,6 +234,8 @@ In Foundry, this option appears in the authentication list, but SQL MCP Server d
 
 Use **Microsoft Entra** when you want Foundry to acquire a Microsoft Entra access token and send it to SQL MCP Server. On the Data API builder side, configure the `EntraId` provider so DAB validates the JWT’s issuer and audience.
 
+![Screenshot of the Add Model Context Protocol tool dialog in Foundry with Microsoft Entra selected](media/how-to-configure-authentication/foundry-add-mcp-dialog-entra.png)
+
 ### What happens
 
 - Foundry acquires an access token from Microsoft Entra.
@@ -266,8 +277,6 @@ Set **Authentication** to **Microsoft Entra**. Then configure the Entra settings
 
 - **Type**: Select the appropriate identity type for your scenario (the default is often **Agent Identity**).
 - **Audience**: Set to the Application ID URI you want tokens issued for (this should match `runtime.host.authentication.jwt.audience` in DAB).
-
-![Screenshot of the Add Model Context Protocol tool dialog in Foundry with Microsoft Entra selected](media/how-to-configure-authentication/foundry-add-mcp-dialog-entra.png)
 
 ### Configure SQL MCP Server (DAB)
 
