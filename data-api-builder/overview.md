@@ -7,7 +7,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: overview
-ms.date: 06/11/2025
+ms.date: 01/08/2026
 #Customer Intent: As a developer, I want to learn more about DAB, so that I can determine if it's the right tool for my scenario.
 ---
 
@@ -15,67 +15,75 @@ ms.date: 06/11/2025
 
 :::row:::
   :::column span="3":::
-    Data API builder (DAB) provides a REST API over a database. It also provides a GraphQL API. It supports not just SQL Server, but Azure SQL Database, Azure Cosmos DB, PostgreSQL, MySQL, and SQL Data Warehouse. DAB runs in any cloud or on-premises, and it is open source and free to use. It's secure, feature-rich, and a foundational component of Microsoft Fabric—which is another way of saying it’s high-performance and capable of handling massive data operations.
-
-    Data API builder replaces most custom data APIs that perform generic CRUD (Create, Read, Update, Delete) operations against a database. DAB is independent of language, technology, and framework. It requires zero code and a single configuration file. Best of all, it’s truly free, with no premium tier, and runs statelessly anywhere.
+    Data API builder (DAB) is an open source, configuration-based engine that creates REST and GraphQL APIs for supported databases such as SQL Server, Azure Cosmos DB, PostgreSQL, and MySQL. DAB runs in any cloud or on-premises, and it's free to use. You configure it using a single JSON file, so you can expose database objects without writing a custom API.
   :::column-end:::
   :::column span="1":::
-    :::image type="content" source="media/overview/mascot.png" alt-text="Illustration of the Data API builder mascot, which is a database with a construction hat featuring a cloud logo." border="false":::
+    :::image type="content" source="media/overview/mascot.png" alt-text="Illustration of the Data API builder mascot wearing a construction hat." border="false":::
   :::column-end:::
 :::row-end:::
 
-Data API builder is designed for developers. DAB features a cross-platform CLI, Open Telemetry, and Health Checks with native OpenAPI, Swagger for REST endpoints, and Nitro (previously called Banana Cake Pop) for GraphQL endpoints. Its stateless, Docker-friendly container can be secured with EasyAuth, Microsoft Entra Identity, or any JSON Web Token (JWT) server an enterprise chooses. It has a flexible policy engine, granular security controls, and automatically passes claims data to the SQL session context.
+Data API builder replaces most custom data APIs that perform generic CRUD (Create, Read, Update, Delete) operations against a database. DAB is independent of language, technology, and framework. It requires no application code and a single configuration file. Best of all, it’s truly free, with no premium tier, and runs statelessly anywhere.
 
-Data API builder (DAB) supports multiple backend data sources simultaneously, including relational and NoSQL sources. DAB also integrates seamlessly with Application Insights. The configuration file can reflect relationships in the database or define new, virtual ones with support for hot reloading. GraphQL endpoints allow multiple nested Create statements within a single transaction, while REST endpoints feature in-memory caching and rich support for OData-like query string keywords.
+## Endpoint support
 
-DAB works great with Azure Container Apps, Azure Container Instances, Azure Kubernetes Services, and Azure Web Apps for Containers. DAB works with these services while fully supporting custom, on-premises deployments.
+Data API builder supports both REST and GraphQL endpoints out of the box and simultaneously. With version 1.7 and later, DAB also supports [Model Context Protocol (MCP) for agent apps](mcp/overview.md) with the same rich functionality.
 
-DAB supports:
+![Diagram of endpoint support in Data API builder.](media/overview/endpoint-support.svg)
 
-- SQL Server
-- Azure SQL
-- Azure Cosmos DB for NoSQL
-- PostgreSQL
-- Azure Database for PostgreSQL
-- Azure Cosmos DB for PostgreSQL
-- MySQL
-- Azure Database for MySQL
-- Azure SQL Data Warehouse
+DAB includes a cross-platform CLI, OpenTelemetry, and health checks. It also supports OpenAPI and Swagger for REST endpoints and Nitro (previously called Banana Cake Pop) for GraphQL endpoints.
 
-DAB can reduce a typical codebase by a third, eliminate suites of unit tests, shorten CI/CD pipelines, and introduce standards and advanced capabilities typically reserved for the largest development teams. It’s secure and feature-rich while remaining incredibly simple, scalable, and observable.
+> [!TIP]
+> Out-of-the-box endpoint features:
+>
+> - Data Pagination
+> - Data Filtering
+> - Data Sorting
+> - Column Selection
+> - Stored Procedures
+> - Relationship navigation
+
+## Database support
+
+Data API builder (DAB) supports multiple backend data sources simultaneously, including relational and NoSQL sources. Supported databases include SQL Server and Azure SQL, Azure Cosmos DB, PostgreSQL, and MySQL. For details and limitations by database, see [Database-specific features](reference-database-specific-features.md).
+
+![Diagram of supported databases for Data API builder.](media/overview/supported-databases.svg)
+
+Data API builder can connect to multiple data sources at the same time. You can combine relational sources with JSON or document databases and mix cloud and on-premises databases. This flexibility lets DAB support everything from simple setups to complex deployment topologies.
+
+## Security
+
+Its stateless, Docker-friendly container can be secured with EasyAuth, Microsoft Entra Identity, or any JSON Web Token (JWT) server an enterprise chooses. It has a flexible policy engine, granular security controls, and automatically passes claims data to the SQL session context.
+
+![Diagram of authentication options for Data API builder.](media/overview/authentication-options.svg)
 
 ## Architecture
 
-This diagram breaks down the relationship between all of the components of the Data API builder.
+This diagram breaks down the relationship between all of the components of the Data API builder. It starts with the database schema, which defines tables, views, and stored procedures. The DAB configuration file projects these objects into an abstraction layer. In that layer, you name entities, select or alias fields, define relationships, and apply permissions. At runtime, Data API builder reads this configuration to generate a consistent API surface, exposing the same entity model through REST and GraphQL endpoints. This separation lets you evolve the database independently while keeping a stable, secure contract for applications and clients.
 
-![Diagram that shows an overview of the Data API Builder architecture. The diagram includes schema files, abstractions, configuration files, and resulting GraphQL+REST endpoints.](media/overview/architecture.png)
+![Diagram of the Data API builder architecture.](media/overview/architecture.svg)
 
-## Key Features
+You configure Data API builder with a single JSON file. In the file, you define:
 
-- Support for NoSQL collections
-- Support for relational tables, views, and stored procedures
-- Support multiple, simultaneous data sources
-- Support for authentication via OAuth2/JWT
-- Support for EasyAuth and Microsoft Entra Identity
-- Role-based authorization using received claims
-- Item-level security via policy expressions
-- REST endpoints
-  - POST, GET, PUT, PATCH, DELETE
-  - Filtering, sorting, and pagination
-  - In-memory cache
-  - Support for OpenAPI
-- GraphQL endpoints
-  - Queries and mutations
-  - Filtering, sorting and pagination
-  - Relationship navigation
-  - Dynamic schemas
-- Easy development via dedicated CLI
-- Open Source & free
+- How the server connects to data sources
+- Which tables, views, and stored procedures are exposed
+- How entities are shaped, named, and related
+- Which roles are allowed to access each operation
+
+## Deployment options
+
+![Diagram of container hosting options for Data API builder.](media/overview/container-service.svg)
+
+DAB works great with Azure Container Apps, Azure Container Instances, Azure Kubernetes Service, and Azure Web Apps for Containers. DAB works with these services while fully supporting custom, on-premises deployments.
+
+## Integrations and capabilities
+
+DAB also integrates seamlessly with Application Insights. The configuration file can reflect relationships in the database or define new, virtual ones with support for hot reloading. GraphQL endpoints allow multiple nested Create statements within a single transaction, while REST endpoints feature in-memory caching and rich support for OData-like query string keywords.
+
+## Less code, more features
+
+DAB can help reduce custom API code, shorten CI/CD pipelines, and introduce standards and advanced capabilities typically reserved for the largest development teams. It’s secure and feature-rich while remaining incredibly simple, scalable, and observable.
 
 ## Open source
 
 Data API builder is open source and released under the MIT license. The repository is available on GitHub at [azure/data-api-builder](https://github.com/Azure/data-api-builder).
 
-## Related content
-
-- [Install the Data API builder CLI](how-to/install-cli.md)
