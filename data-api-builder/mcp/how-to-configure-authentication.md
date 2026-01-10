@@ -18,7 +18,7 @@ When you connect a client (for example, a Microsoft AI Foundry agent) to SQL MCP
 
 Use the following diagram to orient yourself. In the rest of this article, you configure **outbound** first (so the server can reach the database), then configure **inbound** (so your client can securely call the server).
 
-![Illustration of inbound and outbound authentication flows between the client app, SQL MCP Server, and database](media/how-to-configure-authentication/inbound-outbound-authentication.svg)
+![Illustration of inbound and outbound authentication flows between the client app, SQL MCP Server, and database.](media/how-to-configure-authentication/inbound-outbound-authentication.svg)
 
 > [!NOTE]
 > The "Client App" can be a Microsoft AI Foundry agent, a custom MCP client app, or another agent runtime. The inbound configuration on SQL MCP Server is the same regardless of which client calls the MCP endpoint.
@@ -33,13 +33,13 @@ Use the following diagram to orient yourself. In the rest of this article, you c
 
 You define outbound authentication in your `data-source` configuration. It's most commonly the connection string.
 
-![Illustration of outbound authentication flow from SQL MCP Server to the database](media/how-to-configure-authentication/outbound-authentication.svg)
+![Illustration of outbound authentication flow from SQL MCP Server to the database.](media/how-to-configure-authentication/outbound-authentication.svg)
 
 ### Multiple data sources
 
 SQL MCP Server supports multiple data sources through `data-source-files`. Each data source can have its own outbound authentication settings. For example, one database can use managed identity while another uses a SQL username and password. Data sources can also share a single identity, depending on how you configure database access.
 
-![Illustration of outbound authentication from SQL MCP Server to multiple databases with per-database credentials](media/how-to-configure-authentication/multiple-outbound-authentication.svg)
+![Illustration of outbound authentication from SQL MCP Server to multiple databases with per-database credentials.](media/how-to-configure-authentication/multiple-outbound-authentication.svg)
 
 For more information, see [Add more than one data source](../concept/config/multi-data-source.md) and [Data source configuration](../configuration/data-source.md).
 
@@ -87,13 +87,13 @@ For complete details, see [Data source configuration](../configuration/data-sour
 
 Inbound authentication controls how the MCP client authenticates to SQL MCP Server.
 
-![Illustration of inbound authentication flow from client app to SQL MCP Server](media/how-to-configure-authentication/inbound-authentication.svg)
+![Illustration of inbound authentication flow from client app to SQL MCP Server.](media/how-to-configure-authentication/inbound-authentication.svg)
 
 ### Multiple clients, one inbound authentication configuration
 
 Inbound authentication is configured once per SQL MCP Server instance, for example by using `runtime.host.authentication.provider`. All clients that call the same MCP endpoint must use a compatible authentication approach. For example, all clients can use Microsoft Entra tokens for the same audience.
 
-![Illustration of multiple client apps using the same inbound authentication configuration to access SQL MCP Server](media/how-to-configure-authentication/multiple-inbound-authentication.svg)
+![Illustration of multiple client apps using the same inbound authentication configuration to access SQL MCP Server.](media/how-to-configure-authentication/multiple-inbound-authentication.svg)
 
 > [!TIP]
 > If you need two different inbound authentication schemes (for example, one client uses Microsoft Entra and another uses a different identity provider), run two SQL MCP Server instances with different `runtime.host.authentication` settings.
@@ -108,7 +108,7 @@ Use these steps when your client is a Microsoft AI Foundry agent.
 2. Select the **Custom** tab.
 3. Select **Model Context Protocol**.
 
-![Screenshot of Microsoft AI Foundry tool picker showing the Custom tab and Model Context Protocol option](media/how-to-configure-authentication/foundry-select-a-tool-dialog.png)
+![Screenshot of Microsoft AI Foundry tool picker showing the Custom tab and Model Context Protocol option.](media/how-to-configure-authentication/foundry-select-a-tool-dialog.png)
 
 4. In the **Add Model Context Protocol tool** dialog:
 	- Set **Name** (for example, `MySalesData`).
@@ -117,7 +117,7 @@ Use these steps when your client is a Microsoft AI Foundry agent.
 
 The following screenshot shows the **Unauthenticated** option selected. The dialog fields are similar for the other authentication modes.
 
-![Screenshot of the Add Model Context Protocol tool dialog in Foundry with Unauthenticated selected](media/how-to-configure-authentication/foundry-add-mcp-dialog-unauthenticated.png)
+![Screenshot of the Add Model Context Protocol tool dialog in Foundry with Unauthenticated selected.](media/how-to-configure-authentication/foundry-add-mcp-dialog-unauthenticated.png)
 
 After you configure Foundry, you must configure SQL MCP Server to accept the same inbound authentication mode.
 
@@ -236,7 +236,7 @@ In Foundry, this option appears in the authentication list, but SQL MCP Server d
 
 Use **Microsoft Entra** when you want Foundry to acquire a Microsoft Entra access token and send it to SQL MCP Server. On the Data API builder side, configure the `EntraId` provider so DAB validates the JWT’s issuer and audience.
 
-![Screenshot of the Add Model Context Protocol tool dialog in Foundry with Microsoft Entra selected](media/how-to-configure-authentication/foundry-add-mcp-dialog-entra.png)
+![Screenshot of the Add Model Context Protocol tool dialog in Foundry with Microsoft Entra selected.](media/how-to-configure-authentication/foundry-add-mcp-dialog-entra.png)
 
 ### What happens
 
@@ -259,14 +259,14 @@ To use Microsoft Entra tokens with SQL MCP Server, you typically create an app r
 3. Select the appropriate **Supported account types** (single-tenant is common for internal MCP servers).
 4. Select **Register**.
 
-![Screenshot of the Microsoft Entra admin center Register an application page](media/how-to-configure-authentication/entra-register-an-application.png)
+![Screenshot of the Microsoft Entra admin center Register an application page.](media/how-to-configure-authentication/entra-register-an-application.png)
 
 After the app is created, record these values from the app’s **Overview** page:
 
 - **Directory (tenant) ID**: used to build the DAB `jwt.issuer` value.
 - **Application ID URI** (recommended): use this value as the DAB `jwt.audience` and the Foundry **Audience**.
 
-![Screenshot of the Microsoft Entra admin center app registration overview showing the application (client) ID and directory (tenant) ID](media/how-to-configure-authentication/entra-app-registration.png)
+![Screenshot of the Microsoft Entra admin center app registration overview showing the application (client) ID and directory (tenant) ID.](media/how-to-configure-authentication/entra-app-registration.png)
 
 For detailed registration steps, see [Register an application in Microsoft Entra ID](/entra/identity-platform/quickstart-register-app).
 
@@ -379,7 +379,7 @@ Use **OAuth Identity Passthrough** when Foundry can obtain an OAuth access token
 
 Set **Authentication** to **OAuth Identity Passthrough**, then configure the OAuth provider details as required by Foundry.
 
-![Screenshot of the Add Model Context Protocol tool dialog in Foundry with OAuth Identity Passthrough selected](media/how-to-configure-authentication/foundry-add-mcp-dialog-passthrough.png)
+![Screenshot of the Add Model Context Protocol tool dialog in Foundry with OAuth Identity Passthrough selected.](media/how-to-configure-authentication/foundry-add-mcp-dialog-passthrough.png)
 
 ### Configure SQL MCP Server (DAB)
 
