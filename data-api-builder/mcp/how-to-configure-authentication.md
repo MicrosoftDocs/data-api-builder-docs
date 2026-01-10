@@ -1,6 +1,6 @@
 ---
 title: Configure Authentication for SQL MCP Server
-description: Learn how to configure inbound authentication (client-to-server) and outbound authentication (server-to-database) for SQL MCP Server (Data API builder), including Microsoft AI Foundry setup and matching DAB configuration.
+description: Learn how to configure inbound authentication from your client to SQL MCP Server and outbound authentication from SQL MCP Server to the database. This article includes Microsoft AI Foundry setup and the matching DAB configuration.
 ms.topic: how-to
 ms.date: 01/09/2026
 ---
@@ -8,6 +8,8 @@ ms.date: 01/09/2026
 # Configure authentication for SQL MCP Server
 
 [!INCLUDE[Note - Preview](includes/note-preview.md)]
+
+SQL MCP Server exposes a Model Context Protocol (MCP) endpoint in Data API builder. Some authentication options use JSON Web Tokens (JWTs).
 
 When you connect a client (for example, a Microsoft AI Foundry agent) to SQL MCP Server, authentication becomes a two-direction setup:
 
@@ -19,7 +21,7 @@ Use the following diagram to orient yourself. In the rest of this article, you c
 ![Illustration of inbound and outbound authentication flows between the client app, SQL MCP Server, and database](media/how-to-configure-authentication/inbound-outbound-authentication.svg)
 
 > [!NOTE]
-> The “Client App” can be a Microsoft AI Foundry agent, a custom MCP client app, or another agent runtime. The inbound configuration on SQL MCP Server is the same regardless of which client calls the MCP endpoint.
+> The "Client App" can be a Microsoft AI Foundry agent, a custom MCP client app, or another agent runtime. The inbound configuration on SQL MCP Server is the same regardless of which client calls the MCP endpoint.
 
 ## Prerequisites
 
@@ -29,13 +31,13 @@ Use the following diagram to orient yourself. In the rest of this article, you c
 
 ## Step 1: Configure outbound authentication (SQL MCP Server to database)
 
-Outbound authentication is defined by your `data-source` configuration—most commonly, the connection string.
+You define outbound authentication in your `data-source` configuration. It's most commonly the connection string.
 
 ![Illustration of outbound authentication flow from SQL MCP Server to the database](media/how-to-configure-authentication/outbound-authentication.svg)
 
 ### Multiple data sources
 
-SQL MCP Server supports multiple data sources through `data-source-files`. Each data source can have its own outbound authentication settings (for example, one database uses managed identity while another uses a SQL user/password), or they can share a single identity depending on how your database access is configured.
+SQL MCP Server supports multiple data sources through `data-source-files`. Each data source can have its own outbound authentication settings. For example, one database can use managed identity while another uses a SQL username and password. Data sources can also share a single identity, depending on how you configure database access.
 
 ![Illustration of outbound authentication from SQL MCP Server to multiple databases with per-database credentials](media/how-to-configure-authentication/multiple-outbound-authentication.svg)
 
@@ -89,7 +91,7 @@ Inbound authentication controls how the MCP client authenticates to SQL MCP Serv
 
 ### Multiple clients, one inbound authentication configuration
 
-Inbound authentication is configured once per SQL MCP Server instance (for example, `runtime.host.authentication.provider`). This means that all clients calling the same MCP endpoint must authenticate using a compatible approach (for example, all clients use Microsoft Entra tokens for the same audience).
+Inbound authentication is configured once per SQL MCP Server instance, for example by using `runtime.host.authentication.provider`. All clients that call the same MCP endpoint must use a compatible authentication approach. For example, all clients can use Microsoft Entra tokens for the same audience.
 
 ![Illustration of multiple client apps using the same inbound authentication configuration to access SQL MCP Server](media/how-to-configure-authentication/multiple-inbound-authentication.svg)
 
@@ -140,7 +142,7 @@ Use this table as a quick mapping between the Foundry selection and the SQL MCP 
 The following sections describe each option in the same order.
 
 > [!TIP]
-> In Data API builder, authentication and authorization are separate. Even when authentication is enabled, *authorization is still enforced* by entity permissions.
+> In Data API builder, authentication and authorization are separate. Even when authentication is enabled, entity permissions still enforce authorization.
 
 ## Unauthenticated (inbound)
 
@@ -276,7 +278,7 @@ For detailed registration steps, see [Register an application in Microsoft Entra
 Set **Authentication** to **Microsoft Entra**. Then configure the Entra settings:
 
 - **Type**: Select the appropriate identity type for your scenario (the default is often **Agent Identity**).
-- **Audience**: Set to the Application ID URI you want tokens issued for (this should match `runtime.host.authentication.jwt.audience` in DAB).
+- **Audience**: Set it to the Application ID URI that you want tokens issued for. It should match `runtime.host.authentication.jwt.audience` in DAB.
 
 ### Configure SQL MCP Server (DAB)
 
@@ -364,7 +366,7 @@ For the full list of supported providers and fields, see [Runtime configuration:
 
 ## OAuth Identity Passthrough
 
-Use **OAuth Identity Passthrough** when Foundry can obtain an OAuth access token from an identity provider and pass it through to the MCP server. Conceptually this is the same as the **Microsoft Entra** option, but it can work with non-Entra identity providers.
+Use **OAuth Identity Passthrough** when Foundry can obtain an OAuth access token from an identity provider and pass it through to the MCP server. Conceptually, this option works like the **Microsoft Entra** option, but it can also work with non-Entra identity providers.
 
 ### What happens
 
