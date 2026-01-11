@@ -12,9 +12,9 @@ ms.date: 07/16/2025
 
 # Add more than one data source
 
-Data API builder supports hybrid endpoints through the use of **data source files**, allowing you to define multiple data sources and their entities in separate configuration files.
+Data API builder supports hybrid endpoints by using **data source files**, allowing you to define multiple data sources and their entities in separate configuration files.
 
-This is useful when:
+This approach is useful for scenarios such as:
 
 * You need to expose entities from more than one database
 * You want to organize configurations modularly
@@ -35,7 +35,14 @@ To define multiple data sources, create multiple configuration files and referen
   "runtime": {
     "rest": {
       "enabled": true
+    },
+    "graphql": {
+      "enabled": true
+    },
+    "mcp": {
+      "enabled": true
     }
+
   }
 }
 ```
@@ -68,7 +75,9 @@ To define multiple data sources, create multiple configuration files and referen
   "data-source": {
     "database-type": "cosmosdb_nosql",
     "connection-string": "@env('COSMOS_CONNECTION_STRING')",
-    "database-name": "library"
+    "options": {
+      "database": "library"
+    }
   },
   "entities": {
     "LoanRecord": {
@@ -100,6 +109,6 @@ To define multiple data sources, create multiple configuration files and referen
 ## Limitations
 
 * No relationships across configuration files
-* Circular file references are not allowed
+* Circular file references aren't allowed
 * Only the top-level file controls runtime behavior
 
