@@ -46,6 +46,8 @@ landingContent:
         links:
           - text: Add descriptions to entities
             url: how-to-add-descriptions.md
+          - text: Configure authentication
+            url: how-to-configure-authentication.md
   - title: Data manipulation tools
     linkLists:
       - linkListType: reference
@@ -56,6 +58,8 @@ landingContent:
         links:
           - text: Add descriptions to entities
             url: how-to-add-descriptions.md
+          - text: Configure authentication
+            url: how-to-configure-authentication.md
   - title: Data API builder
     linkLists:
       - linkListType: overview

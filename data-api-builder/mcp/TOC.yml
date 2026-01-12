@@ -10,11 +10,9 @@
       href: quickstart-visual-studio-code.md
     - name: Azure Container Apps
       href: quickstart-azure-container-apps.md
-- name: Tune and optimize
-  items:
-    - name: Add descriptions to entities
-      href: how-to-add-descriptions.md
-- name: Explore the architecture
-  items:
-    - name: Data manipulation tools
-      href: data-manipulation-language-tools.md
+- name: Add descriptions to entities
+  href: how-to-add-descriptions.md
+- name: Configure authentication
+  href: how-to-configure-authentication.md
+- name: Data manipulation tools
+  href: data-manipulation-language-tools.md
