@@ -24,6 +24,9 @@ dab configure [options]
 > [!NOTE]
 > This command does not alter the `entities` section. Use `dab update` for entity changes.
 
+> [!NOTE]
+> OpenTelemetry and Application Insights settings are configured with `dab add-telemetry`, not `dab configure`. See [concept/monitor/open-telemetry.md](../concept/monitor/open-telemetry.md) and [concept/monitor/application-insights.md](../concept/monitor/application-insights.md).
+
 ## Quick glance
 
 | Option                                         | Summary                                              |

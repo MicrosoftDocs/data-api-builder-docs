@@ -1,20 +1,76 @@
 ---
-title: Use Open Telemetry and Activity Traces
-description: Use Open Telemetry and Activity Traces
+title: Use OpenTelemetry and activity traces
+description: Configure OpenTelemetry tracing and metrics in Data API builder.
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: reference
-ms.date: 07/16/2025
+ms.topic: how-to
+ms.date: 01/23/2026
 # Customer Intent: As a developer, I want to trace my activity through connected logs, so I can debug distributed operations. 
 ---
 
-# Use Open Telemetry and Activity Traces
+# Use OpenTelemetry and activity traces
 
-Data API Builder (DAB) supports OpenTelemetry for distributed tracing and metrics, enabling you to monitor and diagnose your application's behavior across REST, GraphQL, database operations, and internal middleware.
+Data API builder (DAB) supports OpenTelemetry for distributed tracing and metrics, enabling you to monitor and diagnose behavior across REST, GraphQL, database operations, and internal middleware.
 
-## Data API builder Traces
+![Illustration of the OpenTelemetry flow.](media/open-telemetry-flow.svg)
+
+## Prerequisites
+
+- Existing DAB configuration file.
+- Running OpenTelemetry collector or backend (for example, Azure Monitor or Jaeger).
+- Data API builder CLI. [Install the CLI](../../how-to/install-cli.md)
+
+## Run tool
+
+Use `dab add-telemetry` to add OpenTelemetry settings to your config.
+
+1. Ensure you have a configuration file. If you need to create one, run:
+
+        ```dotnetcli
+        dab init \
+            --database-type mssql \
+            --connection-string "<sql-connection-string>"
+        ```
+
+1. Add OpenTelemetry settings to your configuration file.
+
+        #### [Bash](#tab/bash)
+
+        ```bash
+        dab add-telemetry \
+            -c dab-config.json \
+            --otel-enabled true \
+            --otel-endpoint "http://localhost:4317" \
+            --otel-protocol "grpc" \
+            --otel-service-name "dab"
+        ```
+
+        #### [Command Prompt](#tab/cmd)
+
+        ```cmd
+        dab add-telemetry ^
+            -c dab-config.json ^
+            --otel-enabled true ^
+            --otel-endpoint "http://localhost:4317" ^
+            --otel-protocol "grpc" ^
+            --otel-service-name "dab"
+        ```
+
+1. Start DAB.
+
+    ```dotnetcli
+    dab start
+    ```
+
+## Test in your telemetry backend
+
+1. Open your OpenTelemetry backend or collector UI.
+
+1. Confirm that traces and metrics are arriving for REST, GraphQL, or database calls.
+
+## Data API builder traces
 
 DAB creates OpenTelemetry "activities" for:
 
@@ -32,7 +88,7 @@ Each activity includes detailed tags (metadata), such as:
 
 Errors and exceptions are also traced with detailed info.
 
-## Data API builder Metrics
+## Data API builder metrics
 
 DAB emits OpenTelemetry metrics such as:
 
@@ -45,7 +101,7 @@ Metrics use the .NET `Meter` API and OpenTelemetry SDK.
 
 ## Configuration
 
-Add an [`open-telemetry` section](../../configuration/runtime.md#opentelemetry-telemetry) under `runtime.telemetry` in your config file. 
+Add an [`open-telemetry` section](../../configuration/runtime.md#opentelemetry-telemetry) under `runtime.telemetry` in your config file.
 
 ```json
 {
@@ -62,22 +118,33 @@ Add an [`open-telemetry` section](../../configuration/runtime.md#opentelemetry-t
 }
 ```
 
-## CLI Options
+## CLI options
 
-Configure OpenTelemetry via [CLI flags](../../reference-command-line-interface.md#configure):
+Configure OpenTelemetry via `dab add-telemetry`.
 
-* `dab configure --otel-enabled true`
-* `dab configure --otel-endpoint "http://otel-collector:4317"`
-* `dab configure --otel-protocol "grpc"`
-* `dab configure --otel-service-name "dab"`
-* `dab configure --otel-headers`
+- `--otel-enabled`
+- `--otel-endpoint`
+- `--otel-protocol`
+- `--otel-service-name`
+- `--otel-headers`
 
-## Export and Visualization
+> [!NOTE]
+> OpenTelemetry options aren't available on `dab configure`.
+
+## Export and visualization
 
 Telemetry is exported via .NET OpenTelemetry SDK to your configured backend such as Azure Monitor or Jaeger. Ensure your backend is running and reachable at the specified `endpoint`.
 
-## Implementation Notes
+> [!NOTE]
+> Export timing is controlled by the OpenTelemetry SDK. Traces are exported when activities complete, while metrics are exported on a periodic interval configured by the SDK (defaults apply if you don't set one).
+
+## Implementation notes
 
 * Traces and metrics cover all REST, GraphQL, and DB operations
 * Middleware and error handlers also emit telemetry
 * Context is propagated through requests
+
+## Related content
+
+- [Runtime configuration](../../configuration/runtime.md)
+- [Use Azure Application Insights](application-insights.md)
