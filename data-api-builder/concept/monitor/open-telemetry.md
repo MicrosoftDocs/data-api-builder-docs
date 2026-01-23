@@ -70,6 +70,9 @@ Use `dab add-telemetry` to add OpenTelemetry settings to your config.
 
 1. Confirm that traces and metrics are arriving for REST, GraphQL, or database calls.
 
+> [!NOTE]
+> The .NET Aspire dashboard is an ideal part of the developer loop. It includes built-in views for OpenTelemetry traces and metrics.
+
 ## Data API builder traces
 
 DAB creates OpenTelemetry "activities" for:
@@ -118,7 +121,7 @@ Add an [`open-telemetry` section](../../configuration/runtime.md#opentelemetry-t
 }
 ```
 
-## CLI options
+## Command-line
 
 Configure OpenTelemetry via `dab add-telemetry`.
 
@@ -127,6 +130,47 @@ Configure OpenTelemetry via `dab add-telemetry`.
 - `--otel-protocol`
 - `--otel-service-name`
 - `--otel-headers`
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab add-telemetry \
+    -c dab-config.json \
+    --otel-enabled true \
+    --otel-endpoint "http://localhost:4317" \
+    --otel-protocol "grpc" \
+    --otel-service-name "dab"
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add-telemetry ^
+    -c dab-config.json ^
+    --otel-enabled true ^
+    --otel-endpoint "http://localhost:4317" ^
+    --otel-protocol "grpc" ^
+    --otel-service-name "dab"
+```
+
+### Resulting config
+
+```json
+{
+    "runtime": {
+        "telemetry": {
+            "open-telemetry": {
+                "enabled": true,
+                "endpoint": "http://localhost:4317",
+                "service-name": "dab",
+                "exporter-protocol": "grpc"
+            }
+        }
+    }
+}
+```
 
 > [!NOTE]
 > OpenTelemetry options aren't available on `dab configure`.

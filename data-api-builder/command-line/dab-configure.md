@@ -15,6 +15,8 @@ ms.date: 12/12/2025
 Configure non-entity runtime and data source properties in an existing Data API builder configuration file.
 Unspecified options leave existing values unchanged. If any provided option is invalid, the entire update fails (all-or-nothing).
 
+Acronyms used in this reference: MCP (Model Context Protocol), DML (data manipulation language), TTL (time to live), JWT (JSON Web Token), RC (release candidate), DCR (data collection rule), DCE (data collection endpoint).
+
 ## Syntax
 
 ```bash
