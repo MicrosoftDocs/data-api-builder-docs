@@ -41,7 +41,7 @@ For this short guide, a simple table with a few rows of data is sufficient to de
     ```
 
     > [!IMPORTANT]
-    > This is a simple fictiuous password for this guide. In the real world, you would use a different authentication mechanism and ideally a different account.
+    > This password is a simple fictitious value for this guide. In the real world, you would use a different authentication mechanism and ideally a different account.
 
 1. Connect to the SQL server using your preferred client or tool. The connection string is `Server=localhost,1433;User Id=sa;Password=<your-password>;TrustServerCertificate=true;`.
 
@@ -96,7 +96,7 @@ Create a configuration file that maps to the table created in the previous steps
 1. Create a file named `dab-config.json`.
 
     > [!TIP]
-    > This is the default filename for configuration files. By using the default filename, you avoid having to specify the configuration file when running the container.
+    > This filename is the default for configuration files. By using the default filename, you avoid having to specify the configuration file when running the container.
 
 1. Add this JSON content to your file. This configuration creates a single entity named `book` mapped to the existing `dbo.Books` table.
 
@@ -186,11 +186,11 @@ Run DAB using the Docker container image hosted on Microsoft Container Registry.
     ```
 
     > [!NOTE]
-    > This guide uses a HTTP connection. When running a Data API builder container in Docker, you'll see that only the HTTP endpoint is mapped. If you want your Docker container to support HTTPS for local development, you need to provide your own SSL/TLS certificate and private key files required for SSL/TLS encryption and expose the HTTPS port.
+    > This guide uses an HTTP connection. When running a Data API builder container in Docker, you see that only the HTTP endpoint is mapped. If you want your Docker container to support HTTPS for local development, you need to provide your own SSL/TLS certificate and private key files required for SSL/TLS encryption and expose the HTTPS port.
     > A reverse proxy can also be used to enforce that clients connect to your server over HTTPS to ensure that the communication channel is encrypted before forwarding the request to your container.
 
 ## Related content
 
 - [Run from source](run-from-source.md)
-- [Install the CLI](install-cli.md)
+- [Install the CLI](../command-line/install.md)
 - [`mcr.microsoft.com/azure-databases/data-api-builder` on Microsoft Artifact Registry](https://mcr.microsoft.com/artifact/mar/azure-databases/data-api-builder)

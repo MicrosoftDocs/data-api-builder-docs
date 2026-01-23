@@ -1,7 +1,7 @@
 ### YamlMime:Landing
 
 title: Data API builder documentation
-summary: Data API builder (DAB) provides a REST API over a database. It also provides a GraphQL API. It supports not just SQL Server, but Azure SQL Database, Azure Cosmos DB, PostgreSQL, MySQL, and SQL Data Warehouse. DAB runs in any cloud or on-premises, and it is open source and free to use. It's secure, feature-rich, and a foundational component of Microsoft Fabric—which is another way of saying it’s high-performance and capable of handling massive data operations.
+summary: Data API builder (DAB) provides a REST API over a database. It also provides a GraphQL API. It supports not just SQL Server, but Azure SQL Database, Azure Cosmos DB, PostgreSQL, MySQL, and SQL Data Warehouse. DAB runs in any cloud or on-premises, and it's open source and free to use. It's secure, feature-rich, and a foundational component of Microsoft Fabric—which is another way of saying it's high-performance and capable of handling massive data operations.
 metadata:
   title: Data API builder documentation
   description: With Data API builder, database objects can be exposed via REST or GraphQL endpoints so that your data can be accessed using modern techniques on any platform, any language, and any device.
@@ -232,19 +232,23 @@ landingContent:
         links:
           - text: Security Overview
             url: concept/security/index.md
+          - text: Authorization and roles
+            url: concept/security/authorization.md
       - linkListType: how-to-guide
         links:
-          - text: Azure Authentication
-            url: concept/security/authentication-azure.md
-          - text: Local Authentication
-            url: concept/security/authentication-local.md
-          - text: Entity Authorization
-            url: concept/security/authorization.md
-          - text: Row-Level Security
+          - text: Configure Entra ID authentication
+            url: concept/security/how-to-authenticate-entra.md
+          - text: Configure custom JWT (Okta/Auth0)
+            url: concept/security/how-to-authenticate-custom.md
+          - text: Configure App Service authentication
+            url: concept/security/how-to-authenticate-app-service.md
+          - text: Configure Simulator for testing
+            url: concept/security/how-to-authenticate-simulator.md
+          - text: Implement row-level security
             url: concept/security/row-level-security.md
       - linkListType: reference
         links:
-          - text: Best Practices
+          - text: Security best practices
             url: deployment/best-practices-security.md
   - title: Data Caching
     linkLists:

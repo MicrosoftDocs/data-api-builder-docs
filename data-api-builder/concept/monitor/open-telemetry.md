@@ -21,7 +21,7 @@ DAB creates OpenTelemetry "activities" for:
 - **Incoming HTTP requests** (REST endpoints)
 - **GraphQL operations**
 - **Database queries** (per entity)
-- **Internal middleware steps** (e.g., request handling, error tracking)
+- **Internal middleware steps** (for example, request handling, error tracking)
 
 Each activity includes detailed tags (metadata), such as:
 - `http.method`, `http.url`, `http.querystring`, `status.code`
@@ -38,7 +38,7 @@ DAB emits OpenTelemetry metrics such as:
 
 - **Total Requests**: Counter, labeled by HTTP method, status, endpoint, and API type.
 - **Errors**: Counter, labeled by error type, HTTP method, status, endpoint, and API type.
-- **Request Duration**: Histogram (in milliseconds), labeled as above.
+- **Request Duration**: Histogram (in milliseconds), labeled by HTTP method, status, endpoint, and API type.
 - **Active Requests**: Up/down counter for concurrent requests.
 
 Metrics use the .NET `Meter` API and OpenTelemetry SDK.
@@ -64,7 +64,7 @@ Add an [`open-telemetry` section](../../configuration/runtime.md#opentelemetry-t
 
 ## CLI Options
 
-Configure OpenTelemetry via [CLI flags](../../reference-command-line-interface.md#configure):
+Configure OpenTelemetry via [CLI flags](../../command-line/dab-configure.md):
 
 * `dab configure --otel-enabled true`
 * `dab configure --otel-endpoint "http://otel-collector:4317"`
@@ -78,6 +78,6 @@ Telemetry is exported via .NET OpenTelemetry SDK to your configured backend such
 
 ## Implementation Notes
 
-* Traces and metrics cover all REST, GraphQL, and DB operations
+* Traces and metrics cover all REST, GraphQL, and database operations
 * Middleware and error handlers also emit telemetry
 * Context is propagated through requests

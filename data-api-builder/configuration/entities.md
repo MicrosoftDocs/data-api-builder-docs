@@ -183,7 +183,10 @@ The database source details of the entity.
 |-|-|-|-|-|
 |`entities.permissions`|`role`|string|✔️ Yes|None|
 
-A string specifying the name of the role to which permissions apply.
+Specifies the role name to which permissions apply. Use system roles (`Anonymous`, `Authenticated`) or custom roles defined in your identity provider.
+
+> [!TIP]
+> For detailed information on role evaluation, system roles, and the `X-MS-API-ROLE` header, see [Authorization and roles](../concept/security/authorization.md).
 
 ### Format
 
@@ -193,7 +196,8 @@ A string specifying the name of the role to which permissions apply.
     "{entity-name}": {
       "permissions": [
         {
-          "role": <"anonymous" | "authenticated" | "custom-role">
+          "role": <"Anonymous" | "Authenticated" | "custom-role">,
+          "actions": [ <string> ]
         }
       ]
     }
@@ -203,15 +207,13 @@ A string specifying the name of the role to which permissions apply.
 
 ### Example
 
-This example defines the role `custom-role` with only `read` permissions on the `User` entity.
-
 ```json
 {
   "entities": {
     "User": {
       "permissions": [
         {
-          "role": "custom-role",
+          "role": "reader",
           "actions": ["read"]
         }
       ]
@@ -219,59 +221,6 @@ This example defines the role `custom-role` with only `read` permissions on the 
   }
 }
 ```
-
-### Usage examples
-
-### [HTTP](#tab/http)
-
-```http
-GET https://localhost:5001/api/User
-Authorization: Bearer <your_access_token>
-X-MS-API-ROLE: custom-role
-```
-
-### [C#](#tab/csharp)
-
-```csharp
-using System.Net.Http;
-using System.Net.Http.Headers;
-
-var client = new HttpClient();
-client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "<your_access_token>");
-client.DefaultRequestHeaders.Add("X-MS-API-ROLE", "custom-role");
-var response = await client.GetAsync("https://localhost:5001/api/User");
-// To read the response content:
-// var content = await response.Content.ReadAsStringAsync();
-```
-
-### [JavaScript/TypeScript](#tab/javascript-typescript)
-
-```typescript
-const response = await fetch('https://localhost:5001/api/User', {
-  headers: {
-    "Authorization": "Bearer <your_access_token>",
-    "X-MS-API-ROLE": "custom-role"
-  }
-});
-// To read the response body as JSON:
-// const data = await response.json();
-```
-
-### [Python](#tab/python)
-
-```python
-import requests
-
-headers = {
-    "Authorization": "Bearer <your_access_token>",
-    "X-MS-API-ROLE": "custom-role"
-}
-response = requests.get('https://localhost:5001/api/User', headers=headers)
-# To print the response JSON:
-print(response.json())
-```
-
----
 
 ## Actions (string-array Permissions entity-name entities)
 
@@ -432,11 +381,18 @@ This grants `read` permission to `auditor` on the `User` entity, with field and 
 
 ### Policy notes
 
-- Policies support OData operators like `eq`.
-- Policies support compound predicates using `and` and `or`. 
-- Only supported for actions: `create`, `read`, `update`, and `delete`. (Not `execute`)
-- Policies filter results but don't prevent query execution in the database.
-- Field must use the field alias, if mapped.
+Database policies filter query results using OData-style predicates. Use `@item.<field>` to reference entity fields and `@claims.<type>` to inject authenticated user claims.
+
+| Aspect | Details |
+|--------|---------|
+| Syntax | OData predicates (`eq`, `ne`, `and`, `or`, `gt`, `lt`) |
+| Field reference | `@item.<field>` (use mapped name if applicable) |
+| Claim reference | `@claims.<claimType>` |
+| Supported actions | `read`, `update`, `delete` |
+| Not supported | `create`, `execute` |
+
+> [!TIP]
+> For comprehensive guidance on database policies, including claim substitution and troubleshooting, see [Configure database policies](../concept/security/how-to-configure-database-policies.md).
 
 ## Type (GraphQL entity-name entities)
 

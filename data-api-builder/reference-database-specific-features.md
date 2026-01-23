@@ -102,7 +102,7 @@ There are a few specific properties that are unique to various APIs in Azure Cos
 
 #### Schema in API for NoSQL
 
-Azure Cosmos DB for NoSQL is schema-agnostic. In order to use Data API builder with the API for NoSQL, you must create a GraphQL schema file that includes the object type definitions representing your container's data model. Data API builder also expects your GraphQL object type definitions and fields to include the GraphQL schema directive `authorize` when you want to enforce more restrictive read access than `anonymous`.
+Azure Cosmos DB for NoSQL is schema-agnostic. In order to use Data API builder with the API for NoSQL, you must create a GraphQL schema file that includes the object type definitions representing your container's data model. Data API builder also expects your GraphQL object type definitions and fields to include the GraphQL schema directive `authorize` when you want to enforce more restrictive read access than `Anonymous`.
 
 For example, this schema file represents a `Book` item within a container. This item contains, at a minimum, `title` and `Authors` properties.
 
@@ -137,7 +137,7 @@ This example schema corresponds to the following entity configuration in the DAB
 
 ```
 
-The `@authorize` directive with `roles:["metadataviewer","authenticated"]` restricts access to the `title` field to only users with the roles `metadataviewer` and `authenticated`. For authenticated requestors, the system role `authenticated` is automatically assigned, eliminating the need for an `X-MS-API-ROLE` header.
+The `@authorize` directive with `roles:["metadataviewer","Authenticated"]` restricts access to the `title` field to only users with the roles `metadataviewer` and `Authenticated`. For authenticated requestors, the system role `Authenticated` is automatically assigned, eliminating the need for an `X-MS-API-ROLE` header.
 
 If the authenticated request needs to be executed in context of `metadataviewer`, it should be accompanied with a request header of type `X-MS-API-ROLE` set to `metadataviewer`. However, if anonymous access is desired, you must omit the authorized directive.
 

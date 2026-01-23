@@ -1,6 +1,16 @@
 {
   "redirections": [
     {
+      "source_path_from_root": "/data-api-builder/concept/security/authentication-azure.md",
+      "redirect_url": "/azure/data-api-builder/concept/security/authorization",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/security/authentication-local.md",
+      "redirect_url": "/azure/data-api-builder/concept/security/authorization",
+      "redirect_document_id": false
+    },
+    {
       "source_path_from_root": "/data-api-builder/concept/api/pagination.md",
       "redirect_url": "/azure/data-api-builder/keywords/after-rest",
       "redirect_document_id": false

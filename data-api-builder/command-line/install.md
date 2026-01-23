@@ -37,7 +37,7 @@ dab --version
 ```
 
 > [!IMPORTANT]
-> If you are running on Linux or macOS, you could see an error when invoking `dab` directly. To resolve this error, add the .NET global tools to your `PATH`. For more information, see [troubleshooting Data API builder installation](../troubleshoot-installation.md).
+> If you're running on Linux or macOS, you could see an error when invoking `dab` directly. To resolve this error, add the .NET global tools to your `PATH`. For more information, see [Install .NET tools](/dotnet/core/tools/global-tools#add-a-tool-to-the-path).
 
 Observe the output of the previous command. Assuming the current version of the DAB CLI is `1.0.0`, the command output would include the following content.
 

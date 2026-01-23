@@ -29,9 +29,6 @@
     - name: Database-specific features
       displayName: sql, cosmos, pg, postgres, mysql, dw
       href: reference-database-specific-features.md
-    - name: Security Overview
-      href: concept/security/index.md
-      displayName: security, auth, identity, roles, protection, access
 - name: Quickstarts
   items:
     - name: Local SQL database
@@ -150,6 +147,9 @@
           href: configuration/runtime.md#jwt-authentication-host-runtime
         - name: Issuer (host JWT)
           href: configuration/runtime.md#jwt-authentication-host-runtime
+    - name: Runtime / Authentication (host)
+      href: configuration/runtime.md#provider-authentication-host-runtime
+      displayName: claims, predicate, item
     - name: Runtime / Cache
       items:
         - name: Enabled (global cache)
@@ -316,7 +316,7 @@
           href: concept/config/environments.md
           displayName: environment, config, dev, prod, @env, variables
         - name: How to configure environment variables with a local file
-          href: how-to/use-environments.md
+          href: concept/config/env-function.md
           displayName: environment, config, dev, prod, variables, @env
         - name: How to use the env() function
           href: concept/config/env-function.md
@@ -354,16 +354,25 @@
           displayName: OTEL, tracing, distributed trace, metrics
     - name: Security
       items:
-        - name: How to use entity permissions
+        - name: Configure Entra ID authentication
+          href: concept/security/how-to-authenticate-entra.md
+          displayName: AAD, Microsoft Entra ID, Azure AD, SSO, OAuth, JWT, token
+        - name: Configure custom JWT authentication
+          href: concept/security/how-to-authenticate-custom.md
+          displayName: Okta, Auth0, JWT, third-party, custom IdP
+        - name: Configure App Service authentication
+          href: concept/security/how-to-authenticate-app-service.md
+          displayName: EasyAuth, App Service, X-MS-CLIENT-PRINCIPAL
+        - name: Configure Simulator authentication
+          href: concept/security/how-to-authenticate-simulator.md
+          displayName: local auth, simulated auth, development, testing
+        - name: Configure entity permissions
           href: concept/security/authorization.md
-          displayName: roles, claims, policies, access control, permissions, authentication, authorization
-        - name: How to use Azure authentication
-          href: concept/security/authentication-azure.md
-          displayName: AAD, Microsoft Entra ID, Azure AD, SSO, OAuth, authorization
-        - name: How to use Local authentication
-          href: concept/security/authentication-local.md
-          displayName: local auth, simulated auth, development, static users, authorization
-        - name: How to use Row-level security
+          displayName: roles, claims, policies, access control, permissions, authorization
+        - name: Configure database policies
+          href: concept/security/how-to-configure-database-policies.md
+          displayName: policies, predicates, row-level, filtering, claims, OData
+        - name: Implement Row-level security
           href: concept/security/row-level-security.md
           displayName: RLS, predicates, SQL security, claim-based access
     - name: Deploy and Host

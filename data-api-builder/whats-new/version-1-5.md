@@ -55,7 +55,7 @@ Health endpoints follow DAB’s role-based access model. Checks run in parallel 
 
 ## Introducing: Schema Inference for Azure Cosmos DB for NOSQL
 
-This enhancement to Azure Data API Builder (DAB) enables automated schema creation directly from Azure CosmosDB NOSQL API collections. earlier, users had to manually define the schema using a schema.gql file. With the new capability, schema generation can be handled through cli, streamlining configuration and reducing the need for upfront knowledge of the database structure.[Read more](../schema-inference-nosql.md)
+This enhancement to Azure Data API Builder (DAB) enables automated schema creation directly from Azure CosmosDB NOSQL API collections. Earlier, users had to manually define the schema using a schema.gql file. With the new capability, schema generation can be handled through cli, streamlining configuration and reducing the need for upfront knowledge of the database structure. For more information, see [Quickstart: Use Data API builder with Azure Cosmos DB for NoSQL](../quickstart/azure-cosmos-db-nosql.md).
 
 ## Introducing: Custom Log-Level
 
