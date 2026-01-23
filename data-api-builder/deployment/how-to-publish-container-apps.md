@@ -20,7 +20,7 @@ Diagram of the sequence of the deployment guide including these locations, in or
 
 - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
-- Data API builder CLI. [Install the CLI](../how-to-install-cli.md).
+- Data API builder CLI. [Install the CLI](../command-line/install.md).
 
 - Azure CLI. [Install the Azure CLI](/cli/azure/install-azure-cli).
 
@@ -32,21 +32,21 @@ To start, build a Data API builder (DAB) configuration file to connect to your e
 
 1. Create an empty directory on your local machine to store the configuration file.
 
-1. Initialize a new base configuration file using [`dab init`](../reference-cli.md#init). Use the following settings at a minimum on initialization.
+1. Initialize a new base configuration file using [`dab init`](../command-line/dab-init.md). Use the following settings at a minimum on initialization.
 
     | Setting               | Value                                                                                                                          |
     | --------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
     | **Database type**     | Select a supported database type.                                                                                              |
-    | **Connection string** | Use the [`@env()`](../reference-functions.md#env) function to reference the `DATABASE_CONNECTION_STRING` environment variable. |
+    | **Connection string** | Use the [`@env()`](../concept/config/env-function.md) function to reference the `DATABASE_CONNECTION_STRING` environment variable. |
 
     ```dotnetcli
     dab init --database-type "<database-type>" --connection-string "@env('DATABASE_CONNECTION_STRING')"
     ```
 
     > [!IMPORTANT]
-    > Some database types will require additional configuration settings on initialization.
+    > Some database types require extra configuration settings on initialization.
 
-1. Add at least one database entity to the configuration. Use the [`dab add`](../reference-cli.md#add) command to configure an entity. Configure each entity to allow all permissions for anonymous users. Repeat `dab add` as many times as you like for your entities.
+1. Add at least one database entity to the configuration. Use the [`dab add`](../command-line/dab-add.md) command to configure an entity. Configure each entity to allow all permissions for anonymous users. Repeat `dab add` as many times as you like for your entities.
 
     ```dotnetcli
     dab add "<entity-name>" --source "<schema>.<table>" --permissions "anonymous:*"
@@ -60,7 +60,7 @@ Next, upload the configuration file to a file share created within Azure Files. 
 
 1. Sign into the Azure portal ([https://portal.azure.com](https://portal.azure.com/)).
 
-1. Create a new resource group. You will use this resource group to for all new resources in this guide.
+1. Create a new resource group. You use this resource group for all new resources in this guide.
 
     :::image type="content" source="media/how-to-publish-container-apps/create-resource-group.png" lightbox="media/how-to-publish-container-apps/create-resource-group.png" alt-text="Screenshot of the 'Create a resource group' page's 'Basics' tab in the Azure portal.":::
 
@@ -88,7 +88,7 @@ Next, upload the configuration file to a file share created within Azure Files. 
     | ----------------- | -------------- |
     | **Name**          | Enter `config` |
     | **Access tier**   | Select **Hot** |
-    | **Enable backup** | Do not select  |
+    | **Enable backup** | Don't select   |
 
     :::image type="content" source="media/how-to-publish-container-apps/storage-file-share-option.png" alt-text="Screenshot of the **File share** resource menu and command bar options in the Azure portal.":::
 
@@ -96,7 +96,7 @@ Next, upload the configuration file to a file share created within Azure Files. 
 
     :::image type="content" source="media/how-to-publish-container-apps/upload-files.png" alt-text="Screenshot of the **Upload files** dialog in the Azure portal.":::
 
-1. Select **Access keys** in the **Security + networking** section of the resource menu. Then, record the **Storage account name** and **Key** values from this page. You will use these values later in this guide.
+1. Select **Access keys** in the **Security + networking** section of the resource menu. Then, record the **Storage account name** and **Key** values from this page. You use these values later in this guide.
 
     :::image type="content" source="media/how-to-publish-container-apps/storage-credentials.png" alt-text="Screenshot of the 'Access Keys' page within a storage account in the Azure portal.":::
 
@@ -104,7 +104,7 @@ Next, upload the configuration file to a file share created within Azure Files. 
 
 Now, create the container in Azure using Azure Container Apps. This container hosts the Data API builder image without a configuration.
 
-1. Create an Azure Container Apps resource. As part of the process of creating the app resource, you will be required to create an environment. Use these settings to configure both resources.
+1. Create an Azure Container Apps resource. As part of the process of creating the app resource, you're required to create an environment. Use these settings to configure both resources.
 
     | Resource        | Setting                           | Value                                           |
     | --------------- | --------------------------------- | ----------------------------------------------- |
@@ -114,7 +114,7 @@ Now, create the container in Azure using Azure Container Apps. This container ho
     | **App**         | **Resource group**                | Select the resource group you created earlier   |
     | **App**         | **Storage account name**          | Enter a globally unique name                    |
     | **App**         | **Region**                        | Select the same region as the storage account   |
-    | **App**         | **Use quickstart image**          | Do not select                                   |
+    | **App**         | **Use quickstart image**          | Don't select                                    |
     | **App**         | **Image source**                  | Select **Docker Hub or other registries**       |
     | **App**         | **Image type**                    | Select **Public**                               |
     | **App**         | **Registry login server**         | Enter `mcr.microsoft.com`                       |
@@ -132,7 +132,7 @@ Now, create the container in Azure using Azure Container Apps. This container ho
     :::image type="content" source="media/how-to-publish-container-apps/create-container-app-environment.png" alt-text="Screenshot of the 'Create Container Apps Environment' page's 'Basics' tab in the Azure portal.":::
 
     > [!TIP]
-    > We recommend using a connection string that does not include authorization keys. Instead, use managed identities and role-based access control to manage access between your database and host. For more information, see [Azure services that use managed identities](/entra/identity/managed-identities-azure-resources/managed-identities-status).    
+    > We recommend using a connection string that doesn't include authorization keys. Instead, use managed identities and role-based access control to manage access between your database and host. For more information, see [Azure services that use managed identities](/entra/identity/managed-identities-azure-resources/managed-identities-status).    
 
 1. Navigate to the new container app in the Azure portal.
 
@@ -147,7 +147,7 @@ Now, create the container in Azure using Azure Container Apps. This container ho
     ```
 
     > [!NOTE]
-    > The version number and name will vary based on your current version of Data API builder. At this point, you cannot navigate to any API endpoints. These endpoints will be available once you mount a DAB configuration file.
+    > The version number and name vary based on your current version of Data API builder. At this point, you can't navigate to any API endpoints. These endpoints are available once you mount a DAB configuration file.
 
 ## Mount the configuration files
 

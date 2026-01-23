@@ -57,7 +57,7 @@ mutation {
 }
 ```
 
-This feature is documented in-depth in our [Multiple mutations guide](../how-to-multiple-mutations.md).
+This feature is documented in-depth in our [Multiple mutations guide](../how-to/multiple-mutations.md).
 
 For more information, see [azure/data-api-builder - Multiple mutations in GraphQL](https://github.com/azure/data-api-builder/pull/2122).
 

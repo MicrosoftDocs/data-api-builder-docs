@@ -17,7 +17,7 @@ Data API builder (DAB) supports combining multiple mutation operations together 
 ## Prerequisites
 
 - Existing SQL server and database.
-- Data API builder CLI. [Install the CLI](install-cli.md)
+- Data API builder CLI. [Install the CLI](../command-line/install.md)
 - A database client (SQL Server Management Studio, etc.)
   - If you don't have a client installed, install SQL Server Management Studio.
 
@@ -69,7 +69,7 @@ Start by creating two basic tables to represent books and their respective chapt
     ```
 
     > [!NOTE]
-    > At this point, the queries should not return any data.
+    > At this point, the queries shouldn't return any data.
 
 ## Build configuration file
 
@@ -87,7 +87,7 @@ Now, use the DAB CLI to create a configuration file, entities, and entity relati
     $SQL_CONNECTION_STRING="<your-sql-connection-string>"
     ```
   
-1. Run [`dab init`](../reference-command-line-interface.md#init) specifying the following properties.
+1. Run [`dab init`](../command-line/dab-init.md) specifying the following properties.
 
     | | Value |
     | --- | --- |
@@ -100,7 +100,7 @@ Now, use the DAB CLI to create a configuration file, entities, and entity relati
     dab init --database-type "mssql" --graphql.multiple-create.enabled true --host-mode "development" --connection-string $SQL_CONNECTION_STRING
     ```
   
-1. Run [`dab add`](../reference-command-line-interface.md#add) to add a **Book** entity specifying the following properties.
+1. Run [`dab add`](../command-line/dab-add.md) to add a **Book** entity specifying the following properties.
 
     | | Value |
     | --- | --- |
@@ -122,7 +122,7 @@ Now, use the DAB CLI to create a configuration file, entities, and entity relati
     dab add Chapter --source "dbo.Chapters" --permissions "anonymous:*"  
     ```
   
-1. Run [`dab update`](../reference-command-line-interface.md#update) to create the **Book to Chapter** relationship specifying the following properties.
+1. Run [`dab update`](../command-line/dab-update.md) to create the **Book to Chapter** relationship specifying the following properties.
 
     | | Value |
     | --- | --- |
@@ -157,7 +157,7 @@ To wrap up things, use the DAB CLI to run the API and test the GraphQL endpoint 
 1. Navigate to the `/graphql` relative endpoint for your running application. This endpoint opens the Banana Cake Pop interface.
 
     > [!NOTE]
-    > By default, this would be `https://localhost:5001/graphql`.
+    > By default, this endpoint would be `https://localhost:5001/graphql`.
 
 1. Author a GraphQL mutation to create three distinct rows across two tables in your database. This mutation uses both the `Book` and `Chapter` entities in a single "multiple create" operation. Use the following properties for the mutation.
 

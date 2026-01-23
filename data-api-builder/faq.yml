@@ -22,7 +22,7 @@ sections:
       - question: |
           How do I install the Data API builder CLI?
         answer: |
-          You can install the Data API builder CLI using the .NET CLI. For more information, see the [installation guide](how-to/install-cli.md).
+          You can install the Data API builder CLI using the .NET CLI. For more information, see the [installation guide](command-line/install.md).
   - name: Multiple mutations
     questions:
       - question: |

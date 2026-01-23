@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 06/11/2025
+ms.date: 01/21/2026
 # Customer Intent: As a developer, I want to configure roles, so that I can use roles to authorize certain endpoints.
 ---
 
@@ -14,40 +14,50 @@ ms.date: 06/11/2025
 
 Data API builder uses a role-based authorization workflow. Any incoming request, authenticated or not, is assigned to a role. Roles can be [System Roles](#system-roles) or [User Roles](#user-roles). The assigned role is then checked against the defined [permissions](#permissions) specified in the configuration to understand what actions, fields, and policies are available for that role on the requested entity.
 
+![Illustration of how Data API builder selects a role and evaluates permissions for a request.](media/authorization/authorization-role-evaluation.svg)
+
 ### Determining the user's role
 
-No `role` has default permissions. Once Data API builder determines a rule, the entity's `permissions` must define `actions` for that role for the request to be successful.
+No role has default permissions. Once Data API builder determines a role, the entity's `permissions` must define `actions` for that role for the request to be successful.
 
-| Token Provided | `x-ms-api-role` Provided | `x-ms-api-role` in Token | Resulting Role        |
-| -------------- | ------------------------ | ------------------------ | --------------------- |
-| No             | No                       | No                       | `anonymous`           |
-| Yes            | No                       | No                       | `authenticated`       |
-| Yes            | Yes                      | No                       | Exception             |
-| Yes            | Yes                      | Yes                      | `x-ms-api-role` value |
+The following role evaluation matrix applies to JWT bearer providers (for example, `EntraID`/`AzureAD` and `Custom`) where the client sends `Authorization: Bearer <token>`.
 
-To have a role other than `anonymous` or `authenticated`, the `x-ms-api-role` header is required.
+| Bearer token provided | `X-MS-API-ROLE` provided | Requested role present in token `roles` claim | Effective role / outcome |
+| --- | --- | --- | --- |
+| No | No | N/A | `Anonymous` |
+| Yes (valid) | No | N/A | `Authenticated` |
+| Yes (valid) | Yes | No | Rejected (403 Forbidden) |
+| Yes (valid) | Yes | Yes | `X-MS-API-ROLE` value |
+| Yes (invalid) | Any | N/A | Rejected (401 Unauthorized) |
+
+To use a role other than `Anonymous` or `Authenticated`, the `X-MS-API-ROLE` header is required.
 
 > [!NOTE]
-> A request can have only one role. Even if the token indicates multiple roles, the `x-ms-api-role` value selects which role is assigned to the request. 
+> A request can be associated with many roles in the authenticated principal. However, Data API builder evaluates permissions and policies in the context of exactly one effective role. When provided, the `X-MS-API-ROLE` header selects which role is used.
+
+Provider notes:
+
+- EasyAuth providers (for example, `AppService`): authentication can be established by platform-injected headers (such as `X-MS-CLIENT-PRINCIPAL`) rather than a bearer token.
+- `Simulator`: requests are treated as authenticated for development/testing, without validating a real token.
 
 ### System roles
 
-System roles are built-in roles recognized by Data API builder. A system role is autoassigned to a requestor regardless of the requestor's role membership denoted in their access tokens. There are two system roles: `anonymous` and `authenticated`.
+System roles are built-in roles recognized by Data API builder. A system role is autoassigned to a requestor regardless of the requestor's role membership denoted in their access tokens. There are two system roles: `Anonymous` and `Authenticated`.
 
 #### Anonymous system role
 
-The `anonymous` system role is assigned to requests executed by unauthenticated users. Runtime configuration defined entities must include permissions for the `anonymous` role if unauthenticated access is desired.
+The `Anonymous` system role is assigned to requests executed by unauthenticated users. Runtime configuration defined entities must include permissions for the `Anonymous` role if unauthenticated access is desired.
 
 ##### Example
 
-The following Data API builder runtime configuration demonstrates explicitly configuring the system role `anonymous` to include *read* access to the Book entity:
+The following Data API builder runtime configuration demonstrates explicitly configuring the system role `Anonymous` to include *read* access to the Book entity:
 
 ```json
 "Book": {
     "source": "books",
     "permissions": [
         {
-            "role": "anonymous",
+            "role": "Anonymous",
             "actions": [ "read" ]
         }
     ]
@@ -58,18 +68,18 @@ When a client application sends a request accessing the Book entity on behalf of
 
 #### Authenticated system role
 
-The `authenticated` system role is assigned to requests executed by authenticated users.
+The `Authenticated` system role is assigned to requests executed by authenticated users.
 
 ##### Example
 
-The following Data API builder runtime configuration demonstrates explicitly configuring the system role `authenticated` to include *read* access to the Book entity:
+The following Data API builder runtime configuration demonstrates explicitly configuring the system role `Authenticated` to include *read* access to the Book entity:
 
 ```json
 "Book": {
     "source": "books",
     "permissions": [
         {
-            "role": "authenticated",
+            "role": "Authenticated",
             "actions": [ "read" ]
         }
     ]
@@ -80,7 +90,7 @@ The following Data API builder runtime configuration demonstrates explicitly con
 
 User roles are nonsystem roles that are assigned to users within the identity provider you set in the runtime config. For Data API builder to evaluate a request in the context of a user role, two requirements must be met:
 
-1. The client app supplied access token must include role claims that list a user's role membership.
+1. The authenticated principal must include role claims that list a user's role membership (for example, the JWT `roles` claim).
 1. The client app must include the HTTP header `X-MS-API-ROLE` with requests and set the header's value as the desired user role.
 
 #### Role evaluation example
@@ -92,11 +102,11 @@ The following example demonstrates requests made to the `Book` entity that is co
     "source": "books",
     "permissions": [
         {
-            "role": "anonymous",
+      "role": "Anonymous",
             "actions": [ "read" ]
         },
         {
-            "role": "authenticated",
+      "role": "Authenticated",
             "actions": [ "read" ]
         },
         {
@@ -107,14 +117,15 @@ The following example demonstrates requests made to the `Book` entity that is co
 }
 ```
 
-In App Service, a user is a member of the anonymous role by default. If the user is authenticated, the user is a member of both the `anonymous` and `authenticated` roles.
-
-Because Data API builder evaluates requests in the context of a single role, it evaluates the request in the context of the system role `authenticated` by default.
+Data API builder evaluates requests in the context of a single effective role. If a request is authenticated and no `X-MS-API-ROLE` header is provided, Data API builder evaluates the request in the context of the `Authenticated` system role by default.
 
 If the client application's request also includes the HTTP header `X-MS-API-ROLE` with the value `author`, the request is evaluated in the context of the `author` role. An example request including an access token and `X-MS-API-ROLE` HTTP header:
 
 ```bash
-curl -k -r GET -H 'Authorization: Bearer ey...' -H 'X-MS-API-ROLE: author' https://localhost:5001/api/Book
+curl -k -X GET \
+  -H 'Authorization: Bearer ey...' \
+  -H 'X-MS-API-ROLE: author' \
+  https://localhost:5001/api/Book
 ```
 
 > [!IMPORTANT]
@@ -134,7 +145,7 @@ The syntax for defining permissions is described in the [runtime configuration a
 > [!IMPORTANT]
 > There may be multiple roles defined within a single entity's permissions configuration. However, a request is only evaluated in the context of a single role:
 >
-> - By default, either the system role `anonymous` or `authenticated`
+> - By default, either the system role `Anonymous` or `Authenticated`
 > - When included, the role set in the `X-MS-API-ROLE` HTTP header.
 
 ### Secure by default
@@ -143,19 +154,19 @@ By default, an entity has no permissions configured, which means no one can acce
 
 #### Permissions must be explicitly configured
 
-To allow unauthenticated access to an entity, the `anonymous` role must be explicitly defined in the entity's permissions. For example, the `book` entity's permissions are explicitly set to allow unauthenticated read access:
+To allow unauthenticated access to an entity, the `Anonymous` role must be explicitly defined in the entity's permissions. For example, the `book` entity's permissions are explicitly set to allow unauthenticated read access:
 
 ```json
 "book": {
   "source": "dbo.books",
   "permissions": [{
-    "role": "anonymous",
+    "role": "Anonymous",
     "actions": [ "read" ]
   }]
 }
 ```
 
-To simplify permissions definition on an entity, assume that if there are no specific permissions for the `authenticated` role, then the permissions defined for the `anonymous` role are used. The `book` configuration shown previously allows any anonymous or authenticated user's to perform read operations on the `book` entity.
+If you want both unauthenticated and authenticated users to have access, explicitly grant permissions to both system roles (`Anonymous` and `Authenticated`).
 
 When read operations should be restricted to authenticated users only, the following permissions configuration should be set, resulting in the rejection of unauthenticated requests:
 
@@ -163,13 +174,13 @@ When read operations should be restricted to authenticated users only, the follo
 "book": {
   "source": "dbo.books",
   "permissions": [{
-    "role": "authenticated",
+    "role": "Authenticated",
     "actions": [ "read" ]
   }]
 }
 ```
 
-An entity doesn't require and isn't preconfigured with permissions for the `anonymous` and `authenticated` roles. One or more user roles can be defined within an entity's permissions configuration and all other undefined roles, system, or user defined, are automatically denied access.
+An entity doesn't require and isn't preconfigured with permissions for the `Anonymous` and `Authenticated` roles. One or more user roles can be defined within an entity's permissions configuration and all other undefined roles, system, or user defined, are automatically denied access.
 
 In the following example, the user role `administrator` is the only defined role for the `book` entity. A user must be a member of the `administrator` role and include that role in the `X-MS-API-ROLE` HTTP header to operate on the `book` entity:
 
@@ -229,26 +240,18 @@ The following example prevents users in the `free-access` role from performing r
 
 #### Item level security
 
-**Database policy** expressions enable results to be restricted even further. Database policies translate expressions to query predicates executed against the database. Database policy expressions are supported for the following actions:
+**Database policies** let you filter results at the row level. Policies translate to query predicates that the database evaluates, ensuring users access only authorized records.
 
-> [!div class="checklist"]
->
-> - create
-> - read
-> - update
-> - delete
-
-> [!WARNING]
-> The **execute** action, used with stored procedures, **does not support** database policies.
+| Supported actions | Not supported |
+|-------------------|---------------|
+| `read`, `update`, `delete` | `create`, `execute` |
 
 > [!NOTE]
 > Azure Cosmos DB for NoSQL doesn't currently support database policies.
 
-For more information about database policies, see the [configuration file](../../configuration/entities.md#policy-notes) documentation.
+For detailed configuration steps, syntax reference, and examples, see [Configure database policies](how-to-configure-database-policies.md).
 
-##### Example
-
-A database policy restricting the `read` action on the `consumer` role to only return records where the *title* is "Sample Title."
+##### Quick example
 
 ```json
 {
@@ -257,7 +260,7 @@ A database policy restricting the `read` action on the `consumer` role to only r
     {
       "action": "read",
       "policy": {
-        "database": "@item.title eq 'Sample Title'"
+        "database": "@item.ownerId eq @claims.userId"
       }
     }
   ]
@@ -266,5 +269,6 @@ A database policy restricting the `read` action on the `consumer` role to only r
 
 ## Related content
 
-- [Azure authentication](authentication-azure.md)
-- [Local authentication](authentication-local.md)
+- [Configure database policies for row-level filtering](how-to-configure-database-policies.md)
+- [Configure Microsoft Entra ID authentication](how-to-authenticate-entra.md)
+- [Configure Simulator authentication for local testing](how-to-authenticate-simulator.md)
