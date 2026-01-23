@@ -17,13 +17,7 @@ Unspecified options leave existing values unchanged. If any provided option is i
 
 Acronyms used in this reference:
 
-- MCP: Model Context Protocol.
-- DML: data manipulation language.
-- TTL: time to live.
-- JWT: JSON Web Token.
-- RC: release candidate.
-- DCR: data collection rule.
-- DCE: data collection endpoint.
+MCP stands for Model Context Protocol. DML stands for data manipulation language. TTL stands for time to live. JWT stands for JSON Web Token. RC stands for release candidate. DCR stands for data collection rule. DCE stands for data collection endpoint.
 
 ## Syntax
 

@@ -76,7 +76,7 @@ Add an `application-insights` section under `runtime.telemetry` in your config f
 }
 ```
 
-This assumes `app-insights-connection-string` is set as an environment variable. You can use an `.env` file to define it.
+This configuration assumes the `app-insights-connection-string` value is set as an environment variable. You can use an `.env` file to define it.
 
 ## Command-line
 

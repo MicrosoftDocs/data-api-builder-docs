@@ -178,7 +178,7 @@ Health checks are controlled in the `runtime.health` section:
 
 **`roles`** (string[], default: `null`) controls access to the `/health` endpoint.
 
-**`cache-ttl-seconds`** (integer, default: `5`) sets the cached health report TTL.
+**`cache-ttl-seconds`** (integer, default: `5`) sets the cached health report time to live (TTL).
 
 **`max-query-parallelism`** (integer, default: `4`) sets the maximum concurrent health check queries (range: `1`-`8`).
 
@@ -187,7 +187,7 @@ Health checks are controlled in the `runtime.health` section:
 In development mode (`host.mode: development`), the health endpoint is accessible to all users when `roles` isn't configured. When `roles` is configured, only specified roles can access the endpoint. In production mode (`host.mode: production`), `roles` must be explicitly defined. Omitting `roles` returns 403 Forbidden for all requests. To allow public access, set `"roles": ["anonymous"]`.
 
 > [!IMPORTANT]
-> Roles configured here control access to the health endpoint, not permissions for individual entity operations. If a role lacks permission to query an entity, the health check for that entity will reflect a failure, which is expected behavior.
+> Roles configured here control access to the health endpoint, not permissions for individual entity operations. If a role lacks permission to query an entity, the health check for that entity reflects a failure, which is expected behavior.
 
 ### Basic health endpoint at the root path
 
@@ -246,13 +246,13 @@ Entity checks can be enabled per entity in `entities.{entity-name}.health`:
 **`threshold-ms`** (integer, default: `1000`) sets the maximum allowed query execution time in milliseconds.
 
 > [!NOTE]
-> The value of `first` must be less than or equal to the runtime configuration for `max-page-size`. A smaller `first` value improves performance. When monitoring many entities, higher `first` values can slow down reports.
+> The value of `first` must be less than or equal to the runtime configuration for `max-page-size`. A smaller `first` value improves performance. If you monitor many entities, higher `first` values can slow down reports.
 
 Entity health checks run for both REST and GraphQL if enabled. Each appears as a separate entry in the report with tags (`rest` or `graphql`).
 
 ## Performance and caching considerations
 
-`cache-ttl-seconds` prevents rapid requests from overwhelming the system and caches the complete health report for the configured TTL. Set it to `0` to disable caching. The default is `5` seconds. `max-query-parallelism` controls how many health check queries run concurrently. Higher values speed up checks but increase database load. The range is `1`-`8`, and the default is `4`. Use lower values if you have many entities or tight resource limits.
+`cache-ttl-seconds` prevents rapid requests from overwhelming the system and caches the complete health report for the configured time to live. Set it to `0` to disable caching. The default is `5` seconds. `max-query-parallelism` controls the number of health check queries that run concurrently. Higher values speed up checks but increase database load. The range is `1`-`8`, and the default is `4`. Use lower values if you have many entities or tight resource limits.
 
 ## Sample health check response
 
@@ -302,6 +302,6 @@ Entity health checks run for both REST and GraphQL if enabled. Each appears as a
 }
 ```
 
-## Additional considerations
+## Other considerations
 
 Health checks respect entity and endpoint authorization. If a role lacks permission to access an entity, the health check reports it. Stored procedures are excluded because they require parameters and may have side effects. Entities with `rest.enabled: false` or `graphql.enabled: false` are excluded from those checks. When `data-source.health.enabled: false`, data source checks are skipped.
