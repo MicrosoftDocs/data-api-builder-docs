@@ -182,8 +182,10 @@ dab add-telemetry ^
 
 Telemetry is exported via .NET OpenTelemetry SDK to your configured backend such as Azure Monitor or Jaeger. Ensure your backend is running and reachable at the specified `endpoint`.
 
+The OpenTelemetry SDK controls export timing. It exports traces when activities complete. It exports metrics on a periodic interval configured by the SDK. If you don't set an interval, the SDK uses its default.
+
 > [!NOTE]
-> The OpenTelemetry SDK controls export timing. It exports traces when activities complete. It exports metrics on a periodic interval configured by the SDK. If you don't set an interval, the SDK uses its default.
+> Ephemeral containers that shut down quickly can exit before exports complete. Allow a graceful shutdown window and avoid aggressive termination so pending telemetry can flush.
 
 ## Implementation notes
 
