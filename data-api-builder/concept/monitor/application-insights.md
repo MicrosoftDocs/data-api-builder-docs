@@ -14,7 +14,7 @@ ms.date: 01/23/2026
 
 Azure Application Insights is a monitoring service that captures telemetry such as request details, performance counters, logs, and exceptions. Integrating it with Data API builder (DAB) helps you diagnose issues and monitor runtime behavior in production.
 
-![alt text](media/application-insights/application-insights-flow.svg)
+![Illustration of the Application Insights telemetry flow.](media/application-insights/application-insights-flow.svg)
 
 > **Warning**
 > Application Insights isn't supported when DAB is hosted using Azure App Service web apps. Use Application Insights with DAB when you self-host it (for example, in containers, Azure Container Apps, or AKS). If you must use App Service, consider an alternative monitoring approach or a different hosting platform.
