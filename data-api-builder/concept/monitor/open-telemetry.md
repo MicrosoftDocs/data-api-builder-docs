@@ -28,35 +28,35 @@ Use `dab add-telemetry` to add OpenTelemetry settings to your config.
 
 1. Ensure you have a configuration file. If you need to create one, run:
 
-        ```dotnetcli
-        dab init \
-            --database-type mssql \
-            --connection-string "<sql-connection-string>"
-        ```
+    ```dotnetcli
+    dab init \
+        --database-type mssql \
+        --connection-string "<sql-connection-string>"
+    ```
 
 1. Add OpenTelemetry settings to your configuration file.
 
-        #### [Bash](#tab/bash)
+    #### [Bash](#tab/bash)
 
-        ```bash
-        dab add-telemetry \
-            -c dab-config.json \
-            --otel-enabled true \
-            --otel-endpoint "http://localhost:4317" \
-            --otel-protocol "grpc" \
-            --otel-service-name "dab"
-        ```
+    ```bash
+    dab add-telemetry \
+        -c dab-config.json \
+        --otel-enabled true \
+        --otel-endpoint "http://localhost:4317" \
+        --otel-protocol "grpc" \
+        --otel-service-name "dab"
+    ```
 
-        #### [Command Prompt](#tab/cmd)
+    #### [Command Prompt](#tab/cmd)
 
-        ```cmd
-        dab add-telemetry ^
-            -c dab-config.json ^
-            --otel-enabled true ^
-            --otel-endpoint "http://localhost:4317" ^
-            --otel-protocol "grpc" ^
-            --otel-service-name "dab"
-        ```
+    ```cmd
+    dab add-telemetry ^
+        -c dab-config.json ^
+        --otel-enabled true ^
+        --otel-endpoint "http://localhost:4317" ^
+        --otel-protocol "grpc" ^
+        --otel-service-name "dab"
+    ```
 
 1. Start DAB.
 
@@ -77,7 +77,7 @@ DAB creates OpenTelemetry "activities" for:
 - **Incoming HTTP requests** (REST endpoints)
 - **GraphQL operations**
 - **Database queries** (per entity)
-- **Internal middleware steps** (e.g., request handling, error tracking)
+- **Internal middleware steps** (for example, request handling, error tracking)
 
 Each activity includes detailed tags (metadata), such as:
 - `http.method`, `http.url`, `http.querystring`, `status.code`
@@ -94,7 +94,7 @@ DAB emits OpenTelemetry metrics such as:
 
 - **Total Requests**: Counter, labeled by HTTP method, status, endpoint, and API type.
 - **Errors**: Counter, labeled by error type, HTTP method, status, endpoint, and API type.
-- **Request Duration**: Histogram (in milliseconds), labeled as above.
+- **Request Duration**: Histogram (in milliseconds), labeled by HTTP method, status, endpoint, and API type.
 - **Active Requests**: Up/down counter for concurrent requests.
 
 Metrics use the .NET `Meter` API and OpenTelemetry SDK.
@@ -136,11 +136,11 @@ Configure OpenTelemetry via `dab add-telemetry`.
 Telemetry is exported via .NET OpenTelemetry SDK to your configured backend such as Azure Monitor or Jaeger. Ensure your backend is running and reachable at the specified `endpoint`.
 
 > [!NOTE]
-> Export timing is controlled by the OpenTelemetry SDK. Traces are exported when activities complete, while metrics are exported on a periodic interval configured by the SDK (defaults apply if you don't set one).
+> The OpenTelemetry SDK controls export timing. It exports traces when activities complete. It exports metrics on a periodic interval configured by the SDK. If you don't set an interval, the SDK uses its default.
 
 ## Implementation notes
 
-* Traces and metrics cover all REST, GraphQL, and DB operations
+* Traces and metrics cover all REST, GraphQL, and database operations
 * Middleware and error handlers also emit telemetry
 * Context is propagated through requests
 

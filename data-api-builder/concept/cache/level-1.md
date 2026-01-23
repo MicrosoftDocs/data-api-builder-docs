@@ -12,7 +12,7 @@ ms.date: 07/16/2025
 
 # Implement level 1 cache
 
-Level 1 cache in Data API builder reduces redundant requests to the database by temporarily caching entity results in memory. This improves performance for frequent queries and avoids hitting the database unnecessarily.
+Level 1 cache in Data API builder reduces redundant requests to the database by temporarily caching entity results in memory. This caching improves performance for frequent queries and avoids hitting the database unnecessarily.
 
 ## Enable cache globally
 
@@ -46,7 +46,7 @@ Each entity must also opt in to use cache:
 ```
 
 * `enabled`: Required. Enables caching for this specific entity.
-* `ttl-seconds`: Optional. If not specified, inherits from the global TTL.
+* `ttl-seconds`: Optional. If not specified, inherits from the global time-to-live (TTL) value.
 
 See [entity cache settings](../../configuration/entities.md#cache-entity-name-entities).
 
@@ -65,4 +65,4 @@ See [entity cache settings](../../configuration/entities.md#cache-entity-name-en
 ## Related content
 
 * [Configuration reference](../../configuration/index.md)
-* [Install the CLI](../../how-to/install-cli.md)
+* [Install the CLI](../../command-line/install.md)

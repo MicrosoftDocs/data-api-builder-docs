@@ -52,9 +52,20 @@ Data API builder can connect to multiple data sources at the same time. You can 
 
 ## Security
 
-Its stateless, Docker-friendly container can be secured with EasyAuth, Microsoft Entra Identity, or any JSON Web Token (JWT) server an enterprise chooses. It has a flexible policy engine, granular security controls, and automatically passes claims data to the SQL session context.
+Data API builder's stateless, Docker-friendly container can be secured with Azure App Service EasyAuth, Microsoft Entra ID, or any JSON Web Token (JWT) server. It has a flexible policy engine, granular security controls, and automatically passes claims data to the SQL session context.
 
 ![Diagram of authentication options for Data API builder.](media/overview/authentication-options.svg)
+
+Data API builder supports multiple authentication providers:
+
+| Provider | Use case |
+|----------|----------|
+| **Microsoft Entra ID** | Production apps using Microsoft identity |
+| **Custom JWT** | Third-party identity providers (Okta, Auth0, Keycloak) |
+| **App Service** | Apps running behind Azure App Service EasyAuth |
+| **Simulator** | Local development and testing |
+
+For step-by-step configuration guides, see [Security overview](concept/security/index.md).
 
 ## Architecture
 
