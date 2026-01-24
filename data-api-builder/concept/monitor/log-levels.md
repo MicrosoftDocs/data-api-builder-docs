@@ -28,23 +28,23 @@ Use `dab configure` to set log levels in the configuration file.
 
 ### Configure log levels
 
-    #### [Bash](#tab/bash)
+#### [Bash](#tab/bash)
 
-    ```bash
-    dab configure \
-      --runtime.telemetry.log-level.default Warning \
-      --runtime.telemetry.log-level.Azure.DataApiBuilder.Core Information \
-      --runtime.telemetry.log-level.Azure.DataApiBuilder.Core.Configurations.RuntimeConfigValidator Debug
-    ```
+```bash
+dab configure \
+  --runtime.telemetry.log-level.default Warning \
+  --runtime.telemetry.log-level.Azure.DataApiBuilder.Core Information \
+  --runtime.telemetry.log-level.Azure.DataApiBuilder.Core.Configurations.RuntimeConfigValidator Debug
+```
 
-    #### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd)
 
-    ```cmd
-    dab configure ^
-      --runtime.telemetry.log-level.default Warning ^
-      --runtime.telemetry.log-level.Azure.DataApiBuilder.Core Information ^
-      --runtime.telemetry.log-level.Azure.DataApiBuilder.Core.Configurations.RuntimeConfigValidator Debug
-    ```
+```cmd
+dab configure ^
+  --runtime.telemetry.log-level.default Warning ^
+  --runtime.telemetry.log-level.Azure.DataApiBuilder.Core Information ^
+  --runtime.telemetry.log-level.Azure.DataApiBuilder.Core.Configurations.RuntimeConfigValidator Debug
+```
 
 1. Start DAB.
 
