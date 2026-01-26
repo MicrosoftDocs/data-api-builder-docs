@@ -46,11 +46,13 @@ dab configure ^
   --runtime.telemetry.log-level.Azure.DataApiBuilder.Core.Configurations.RuntimeConfigValidator Debug
 ```
 
-1. Start DAB.
+---
 
-    ```dotnetcli
-    dab start
-    ```
+Start DAB.
+
+```dotnetcli
+dab start
+```
 
 ## Test logging
 
@@ -114,7 +116,7 @@ Configure log levels via `dab configure`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
@@ -123,7 +125,7 @@ dab configure \
   --runtime.telemetry.log-level.Azure.DataApiBuilder.Core.Configurations.RuntimeConfigValidator Debug
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^

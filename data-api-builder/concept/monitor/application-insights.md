@@ -16,7 +16,7 @@ Azure Application Insights is a monitoring service that captures telemetry such 
 
 ![Illustration of the Application Insights telemetry flow.](media/application-insights/application-insights-flow.svg)
 
-> **Warning**
+> [!WARNING]
 > Application Insights isn't supported when DAB is hosted using Azure App Service web apps. Use Application Insights with DAB when you self-host it (for example, in containers, Azure Container Apps, or AKS). If you must use App Service, consider an alternative monitoring approach or a different hosting platform.
 
 ## Prerequisites
@@ -155,7 +155,7 @@ LogLevel mapping:
 
 3. Check **Live Metrics**
 
-![Screenshot of the live metrics page for Data API builder data in Application Insights.](media/application-insights/live-metrics.png)
+:::image type="content" source="media/application-insights/live-metrics.png" alt-text="Screenshot of the live metrics page for Data API builder data in Application Insights." border="true":::
 
 4. Run this query for requests:
 
@@ -164,7 +164,7 @@ requests
 | order by timestamp
 ```
 
-![Screenshot of the results of a query for Data API builder application requests in Application Insights.](media/application-insights/requests-results.png)
+:::image type="content" source="media/application-insights/requests-results.png" alt-text="Screenshot of the results of a query for Data API builder application requests in Application Insights." border="true":::
 
 5. Run this query for exceptions:
 
@@ -173,7 +173,7 @@ exceptions
 | order by timestamp
 ```
 
-![Screenshot of the results of a query for Data API builder exceptions in Application Insights.](media/application-insights/exceptions-results.png)
+:::image type="content" source="media/application-insights/exceptions-results.png" alt-text="Screenshot of the results of a query for Data API builder exceptions in Application Insights." border="true":::
 
 ## Export and visualization
 

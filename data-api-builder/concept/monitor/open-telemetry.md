@@ -180,11 +180,7 @@ dab add-telemetry ^
 
 ## Export and visualization
 
-Telemetry is exported via .NET OpenTelemetry SDK to your configured backend such as Azure Monitor or Jaeger. Ensure your backend is running and reachable at the specified `endpoint`.
-
-![Screenshot of a Jaeger trace view for Data API builder telemetry.](media/open-telemetry/jaeger-trace-view.png)
-
-This example uses Jaeger for visualization, but you can use any OpenTelemetry-compatible backend.
+Telemetry is exported via .NET OpenTelemetry SDK to your configured back end such as Azure Monitor or Jaeger. Ensure your back end is running and reachable at the specified `endpoint`. You can use any OpenTelemetry-compatible back end for visualization.
 
 The OpenTelemetry SDK controls export timing. It exports traces when activities complete. It exports metrics on a periodic interval configured by the SDK. If you don't set an interval, the SDK uses its default.
 
