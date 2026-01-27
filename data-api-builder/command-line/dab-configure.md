@@ -12,8 +12,12 @@ ms.date: 12/12/2025
 
 # `configure` command
 
-Configure non-entity runtime and data source properties in an existing Data API builder configuration file.
+Configure runtime and data source properties that aren't entity-specific in an existing Data API builder configuration file.
 Unspecified options leave existing values unchanged. If any provided option is invalid, the entire update fails (all-or-nothing).
+
+Acronyms used in this reference:
+
+MCP stands for Model Context Protocol. DML stands for data manipulation language. TTL stands for time to live. JWT stands for JSON Web Token. RC stands for release candidate. DCR stands for data collection rule. DCE stands for data collection endpoint.
 
 ## Syntax
 
@@ -22,7 +26,10 @@ dab configure [options]
 ```
 
 > [!NOTE]
-> This command does not alter the `entities` section. Use `dab update` for entity changes.
+> This command doesn't alter the `entities` section. Use `dab update` for entity changes.
+
+> [!NOTE]
+> OpenTelemetry and Application Insights settings are configured with `dab add-telemetry`, not `dab configure`. See [concept/monitor/open-telemetry.md](../concept/monitor/open-telemetry.md) and [concept/monitor/application-insights.md](../concept/monitor/application-insights.md).
 
 ## Quick glance
 
@@ -925,7 +932,7 @@ dab configure ^
 
 ## `--runtime.host.authentication.jwt.audience`
 
-Configure the intended recipient(s) of the JWT token.
+Configure one or more intended recipients of the JWT token.
 
 ### Example
 
