@@ -201,3 +201,8 @@ Now, start the Data API builder tool to validate that your configuration files a
 
 > [!div class="nextstepaction"]
 > [Quickstart: Deploy Data API builder to Azure](azure-cosmos-db-nosql.md)
+
+## Related content
+
+- [Set up Data API builder for Azure Cosmos DB for NoSQL](../how-to/set-up-cosmosdb.md)
+- [Feature availability for Data API builder](../feature-availability.md)

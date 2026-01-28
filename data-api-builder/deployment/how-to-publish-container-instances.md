@@ -16,9 +16,7 @@ ms.date: 06/11/2025
 Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Publish' location is currently highlighted.
 :::image-end:::
 
-Deploy the Data API builder quickly to Azure using just a configuration file and no custom code. This guide includes steps to host the Data API builder container image from Docker as a container in Azure Container Instances. 
-
-In this guide, walk through the steps to build a Data API builder configuration file, host the file in Azure Files, and then mount the file to a container in Azure Container Instances.
+Deploy the Data API builder quickly to Azure using a custom container image that includes your configuration. This guide includes steps to build a custom image and run it in Azure Container Instances.
 
 ## Prerequisites
 
@@ -58,58 +56,50 @@ To start, build a Data API builder (DAB) configuration file to connect to your e
 
 1. Open and review the contents of the *dab-config.json* file. You use this file later in this guide.
 
-## Host configuration in Azure Files
+## Build a custom container image
 
-Next, upload the configuration file to a file share created within Azure Files. This file share is eventually mounted to the final container as a volume.
-
-1. Sign into the Azure portal ([https://portal.azure.com](https://portal.azure.com/)).
+Build a custom image that includes `dab-config.json` at `/App/dab-config.json`. Run these commands from the folder that contains `dab-config.json`.
 
 1. Create a new resource group. You use this resource group for all new resources in this guide.
 
-    :::image type="content" source="media/how-to-publish-container-instances/create-resource-group.png" lightbox="media/how-to-publish-container-instances/create-resource-group.png" alt-text="Screenshot of the 'Create a resource group' page's 'Basics' tab in the Azure portal.":::
-
     > [!TIP]
-    > We recommend naming the resource group **msdocs-dab-aci**. All screenshots in this guide use this name.
+    > We recommend naming the resource group **msdocs-dab-aci**.
 
-1. Create an Azure Storage account. Use these settings to configure the account.
+1. Create an Azure Container Registry (ACR) and build the image.
 
-    | Setting                               | Value                                         |
-    | ------------------------------------- | --------------------------------------------- |
-    | **Resource group**                    | Select the resource group you created earlier |
-    | **Storage account name**              | Enter a globally unique name                  |
-    | **Region**                            | Select an Azure region                        |
-    | **Performance**                       | Select **Standard**                           |
-    | **Redundancy**                        | Select **Locally-redundant storage (LRS)**    |
-    | **Enable storage account key access** | Select **Enabled**                            |
-    
-    :::image type="content" source="media/how-to-publish-container-instances/create-storage-account.png" alt-text="Screenshot of the 'Create a storage account' page's 'Advanced' tab in the Azure portal.":::
+    ```azurecli
+    az acr create \
+        --resource-group "<resource-group-name>" \
+        --name "<registry-name>" \
+        --sku Basic \
+        --admin-enabled true
 
-1. Navigate to the new storage account in the Azure portal.
+    # Create a Dockerfile that embeds dab-config.json
+    cat <<'EOF' > Dockerfile
+    FROM mcr.microsoft.com/azure-databases/data-api-builder:latest
+    COPY dab-config.json /App/dab-config.json
+    EOF
 
-1. Select **File shares** in the **Data storage** section of the resource menu. Then, select **File share** from the command bar to create a new share in the storage account. Use the following settings to configure the new file share.
+    # Build and push the image
+    az acr build \
+        --registry "<registry-name>" \
+        --image "dab:1" \
+        .
+    ```
 
-    | Setting | Value |
-    | --- | --- |
-    | **Name** | Enter `config` |
-    | **Access tier** | Select **Hot** |
-    | **Enable backup** | Don't select |
+1. Record the registry login server (`<registry-name>.azurecr.io`) and image tag (`dab:1`). You use these values when creating the container instance.
 
-    :::image type="content" source="media/how-to-publish-container-instances/storage-file-share-option.png" alt-text="Screenshot of the **File share** resource menu and command bar options in the Azure portal.":::    
+1. Get the registry username and password.
 
-1. Upload the *dab-config.json* and any other required files to the share. Use the **Upload** option in the command bar to open the **Upload files** dialog. Select both files and then select **Upload**.
+    ```azurecli
+    az acr credential show \
+        --name "<registry-name>" \
+        --query "{username:username,password:passwords[0].value}"
+    ```
 
-    :::image type="content" source="media/how-to-publish-container-instances/upload-files.png" alt-text="Screenshot of the **Upload files** dialog in the Azure portal.":::
+## Create the container instance
 
-1. Select **Access keys** in the **Security + networking** section of the resource menu. Then, record the **Storage account name** and **Key** values from this page. You use these values later in this guide.
-
-    :::image type="content" source="media/how-to-publish-container-instances/storage-credentials.png" alt-text="Screenshot of the 'Access Keys' page within a storage account in the Azure portal.":::
-
-## Create the base container instance
-
-Finally, create the container in Azure using Azure Container Instances. This container hosts the Data API builder image with a configuration file to connect to your database.
-
-> [!IMPORTANT]
-> Today, the only way to create a container instance with a mounted volume is with the Azure CLI.
+Create the container in Azure using Azure Container Instances with your custom image.
 
 1. Create an Azure Container Instances resource using [`az container create`](/cli/azure/container#az-container-create). Use these settings to configure the resource.
 
@@ -117,10 +107,9 @@ Finally, create the container in Azure using Azure Container Instances. This con
     | --- | --- |
     | **Resource group** | Use the resource group you created earlier |
     | **Container name** | Enter a globally unique name |
-    | **Region** | Use the same region as the storage account |
+    | **Region** | Use the same region as the resource group |
     | **SKU** | Use **Standard** |
-    | **Image type** | Use **Public** |
-    | **Image** | Enter `mcr.microsoft.com/azure-databases/data-api-builder:latest` |
+    | **Image** | Enter `<registry-name>.azurecr.io/dab:1` |
     | **OS Type** | Use **Linux** |
     | **Networking type** | Use **Public** |
     | **Networking ports** | Enter `5000` |
@@ -131,7 +120,7 @@ Finally, create the container in Azure using Azure Container Instances. This con
     az container create \
         --resource-group "<resource-group-name>" \
         --name "<unique-container-instance-name>" \
-        --image "mcr.microsoft.com/azure-databases/data-api-builder:latest" \
+        --image "<registry-name>.azurecr.io/dab:1" \
         --location "<region>" \
         --sku "Standard" \
         --os-type "Linux" \
@@ -139,12 +128,9 @@ Finally, create the container in Azure using Azure Container Instances. This con
         --ports "5000" \
         --dns-name-label "<unique-dns-label>" \
         --environment-variables "DATABASE_CONNECTION_STRING=<database-connection-string>" \
-        --azure-file-volume-mount-path "/cfg" \
-        --azure-file-volume-account-name "<storage-account-name>" \
-        --azure-file-volume-account-key "<storage-account-key>" \
-        --azure-file-volume-share-name "config" \
-        --command-line "dotnet Azure.DataApiBuilder.Service.dll --ConfigFileName /cfg/dab-config.json"
-        --
+        --registry-login-server "<registry-name>.azurecr.io" \
+        --registry-username "<registry-username>" \
+        --registry-password "<registry-password>"
     ```
     
     > [!TIP]
@@ -171,7 +157,7 @@ Finally, create the container in Azure using Azure Container Instances. This con
     ```
 
     > [!NOTE]
-    > The version number and name vary based on your current version of Data API builder. At this point, you can't navigate to any API endpoints. These endpoints are available once you mount a DAB configuration file.
+    > The version number and name vary based on your current version of Data API builder.
 
 1. Navigate to the `/api/swagger` path for the current running application. Use the Swagger UI to issue an **HTTP GET** request for one of your entities.
 

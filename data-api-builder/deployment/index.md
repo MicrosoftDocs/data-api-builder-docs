@@ -38,7 +38,7 @@ For example, you can run the latest stable generally available 1.x release of DA
 
 Configuration file\[s\] largely drive the behavior of the running DAB engine. Use configuration files to ensure that your DAB instance\[s\] behave as you expect across deployments, versions, or environments. Additionally, use combinations of configuration files to apply specific behaviors to distinct environments.
 
-For example, you can use a baseline configuration file with universal settings that apply to most of your environments. For specific environments, like development, staging, or production, you can apply enviornment-specific configuration files with settings that should be overridden for specific environments. Even further, you can reference environment variables of your host to ensure that you reference environment-specific configurations in the most secure manner possible.
+For example, you can use a baseline configuration file with universal settings that apply to most of your environments. For specific environments, like development, staging, or production, you can apply environment-specific configuration files with settings that should be overridden for specific environments. Even further, you can reference environment variables of your host to ensure that you reference environment-specific configurations in the most secure manner possible.
 
 ## Next step
 

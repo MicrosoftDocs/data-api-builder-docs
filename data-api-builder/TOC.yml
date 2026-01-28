@@ -24,11 +24,6 @@
           href: whats-new/version-1-1.md
     - name: Feature availability
       href: feature-availability.md
-    - name: Supported data types
-      href: reference-data-types.md
-    - name: Database-specific features
-      displayName: sql, cosmos, pg, postgres, mysql, dw
-      href: reference-database-specific-features.md
 - name: Quickstarts
   items:
     - name: Local SQL database
@@ -243,113 +238,124 @@
   items:
     - name: Run DAB
       items:
-        - name: How to run DAB in a container
+        - name: Run in a container
           href: how-to/run-container.md
           displayName: docker, container, dab, run
-        - name: How to run DAB from source
+        - name: Run from source
           href: how-to/run-from-source.md
           displayName: source, github, OSS, build, run
+        - name: Set up Azure Cosmos DB
+          href: how-to/set-up-cosmosdb.md
+          displayName: cosmos, nosql, schema, graphql, authorize
     - name: GraphQL API
       items:
-        - name: How to call GraphQL endpoints
+        - name: Call GraphQL endpoints
           href: concept/api/graphql.md
           displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
-        - name: How to insert multiple records
+        - name: Aggregate data
+          href: how-to/aggregate-data.md
+          displayName: aggregation, groupBy, sum, avg, min, max, graphql
+        - name: Insert multiple records
           href: how-to/multiple-mutations.md
           displayName: batch, transaction, graphql, createMany, mutation
-        - name: How to handle pagination (after)
+        - name: Paginate with after
           href: keywords/after-graphql.md
           displayName: page, pagination, cursor
-        - name: How to use keyword - filter 
+        - name: Filter results
           href: keywords/filter-graphql.md
           displayName: predicate, where, limit
-        - name: How to use keyword - first
+        - name: Limit with first
           href: keywords/first-graphql.md
           displayName: pagination, top, page
-        - name: How to use keyword - orderby 
+        - name: Sort with orderby
           href: keywords/orderby-graphql.md
           displayName: sort, bubble, arrange, align
-        - name: How to use keyword - select 
+        - name: Project with select
           href: keywords/select-graphql.md
           displayName: projection, choose, columns, items
     - name: REST API
       items:
-        - name: How to call REST endpoints
+        - name: Call REST endpoints
           href: concept/api/rest.md
           displayName: HTTP, GET, POST, PATCH, DELETE, verbs, REST API
-        - name: How to test REST endpoints
+        - name: Test with OpenAPI
           href: concept/api/openapi.md
           displayName: OpenAPI, Swagger, API docs, schema definition, HTTP interface
-        - name: How to use header - If-Match 
+        - name: Use If-Match header
           href: concept/api/http-if-match.md
-        - name: How to use header - Location
+          displayName: HTTP
+        - name: Use Location header
           href: concept/api/http-location.md
-        - name: How to handle pagination ($after)
+          displayName: HTTP
+        - name: Paginate with $after
           href: keywords/after-rest.md
           displayName: page, pagination, cursor
-        - name: How to use keyword - $filter 
+        - name: Filter with $filter
           href: keywords/filter-rest.md
           displayName: predicate, where, limit
-        - name: How to use keyword - $first
+        - name: Limit with $first
           href: keywords/first-rest.md
           displayName: pagination, top, page
-        - name: How to use keyword - $orderby 
+        - name: Sort with $orderby
           href: keywords/orderby-rest.md
           displayName: sort, bubble, arrange, align
-        - name: How to use keyword - $select 
+        - name: Project with $select
           href: keywords/select-rest.md
           displayName: projection, choose, columns, items
     - name: Data caching
       items:
-        - name: How to use level 1 Cache
+        - name: Use level 1 cache
           href: concept/cache/level-1.md
           displayName: level 1 cache, L1, entity cache, query result, fusioncache, memory
-        - name: How to use level 2 Cache
+        - name: Use level 2 cache
           href: concept/cache/level-2.md
           displayName: level 2 cache, L2, global cache, prefetch, fusioncache, redis
-        - name: How to use header - Cache-Control
+        - name: Use Cache-Control header
           href: concept/cache/http-headers.md
           displayName: cache headers, HTTP, control, TTL, freshness
     - name: Configuration file
       items:
-        - name: How to use different configurations per environment
+        - name: Use environment-specific configs
           href: concept/config/environments.md
           displayName: environment, config, dev, prod, @env, variables
-        - name: How to configure environment variables with a local file
+        - name: Use environment variables
           href: concept/config/env-function.md
           displayName: environment, config, dev, prod, variables, @env
-        - name: How to use the env() function
+        - name: Use env() function
           href: concept/config/env-function.md
           displayName: functions, helpers, filters, expressions, macros, @env, environment
-        - name: How to use the akv() function
+        - name: Use akv() function
           href: concept/config/akv-function.md
           displayName: functions, helpers, filters, expressions, macros, @akv, azure key vault
-        - name: How to use multiple data sources
+        - name: Use multiple data sources
           href: concept/config/multi-data-source.md
           displayName: multiple databases, cross-DB, data source, federation
     - name: Database structures
       items:
-        - name: How to use database views 
+        - name: Use database views
           href: concept/database/views.md
           displayName: views, SQL, read-only
-        - name: How to use database stored procedures
+        - name: Use stored procedures
           href: concept/database/stored-procedures.md
           displayName: stored procedures, procs, SQL, read-only
-        - name: How to use table relationships in GraphQL
+        - name: Use table relationships
           href: concept/database/relationships.md
           displayName: relationships, foreign key, navigation, linking, cardinality
     - name: Monitoring and telemetry
       items:
-        - name: How to use Application Insights
+        - name: Use Application Insights
           href: concept/monitor/application-insights.md
           displayName: app insights, telemetry, metrics, diagnostics, Azure Monitor
-        - name: How to use Health Checks
+        - name: Use Log Analytics
+          href: concept/monitor/log-analytics.md
+          displayName: log analytics, centralized logging, KQL, compliance, Azure Monitor
+        - name: Use health checks
           href: concept/monitor/health-checks.md
           displayName: health, health endpoint, ping, liveness, readiness, monitor, probe
-        - name: How to customize log verbosity
+        - name: Customize log verbosity
           href: concept/monitor/log-levels.md
           displayName: logging, trace, info, debug, warn, error
-        - name: How to use OpenTelemetry
+        - name: Use OpenTelemetry
           href: concept/monitor/open-telemetry.md
           displayName: OTEL, tracing, distributed trace, metrics
     - name: Security
@@ -372,27 +378,27 @@
         - name: Configure database policies
           href: concept/security/how-to-configure-database-policies.md
           displayName: policies, predicates, row-level, filtering, claims, OData
-        - name: Implement Row-level security
+        - name: Implement row-level security
           href: concept/security/row-level-security.md
           displayName: RLS, predicates, SQL security, claim-based access
     - name: Deploy and Host
       items:
-        - name: Deployment Overview
+        - name: Deployment overview
           href: deployment/index.md
           displayName: deployment, hosting, summary, intro
-        - name: Deployment Checklist
+        - name: Deployment checklist
           href: deployment/checklist.md
           displayName: deployment, validation, steps, readiness
-        - name: Deployment Hosting Options
+        - name: Hosting options
           href: deployment/hosting-options.md
           displayName: hosting, container, azure, options
-        - name: How to deploy to Azure Container Apps using Azure Portal
+        - name: Deploy to Container Apps (Portal)
           href: deployment/how-to-publish-container-apps.md
           displayName: azure, container apps, publish, deploy, aca
-        - name: How to deploy to Azure Container Apps using Azure CLI
+        - name: Deploy to Container Apps (CLI)
           href: tutorial-deploy-container-app-cli.md
           displayName: azure, deploy, ACA, container, cli
-        - name: How to deploy to Azure Container Instances
+        - name: Deploy to Container Instances
           href: deployment/how-to-publish-container-instances.md
           displayName: azure, container instances, publish, deploy, aci
         - name: Configuration best practices

@@ -9,6 +9,8 @@ ms.date: 12/22/2025
 
 [!INCLUDE[Section - Quickstart selector](includes/section-quickstart-selector.md)]
 
+![Diagram that shows the Aspire solution with SQL Server, SQL MCP Server, and MCP Inspector.](media/quickstart-dotnet-aspire/diagram.svg)
+
 [!INCLUDE[Note - Preview](includes/note-preview.md)]
 
 This quickstart uses Aspire to build a container-based solution. The solution includes:
@@ -18,10 +20,6 @@ This quickstart uses Aspire to build a container-based solution. The solution in
 - MCP Inspector for testing
 
 Aspire runs everything for you, starts services and connects containers, and stops services when you close it.
-
-:::image type="complex" source="media/quickstart-dotnet-aspire/diagram.svg" lightbox="media/quickstart-dotnet-aspire/diagram.svg" alt-text="Diagram that shows the Aspire solution with SQL Server, SQL MCP Server, and MCP Inspector.":::
-  This architecture diagram illustrates a containerized testing environment on a Local Machine with a Docker Environment (dashed-border rectangle). Inside the Docker container, three components are arranged: an MCP Inspector tool (orange box), an MCP (Model Context Protocol) server (green 3D box), and a SQL database (blue cylinder). A curved arrow flows from the MCP Inspector to the MCP server, which has a bidirectional connection to the database. This setup enables developers to test, debug, and inspect the MCP server's interactions with a SQL database in an isolated containerized environment, with the MCP Inspector serving as a diagnostic tool to validate communication between AI agents and the database.
-:::image-end:::
 
 ## Prerequisites
 
@@ -34,17 +32,17 @@ In this step, you prepare your machine with the prerequisites required for this 
 > [!IMPORTANT]
 > You may already have this tool installed. Test it by running `dotnet --version` and confirm it reports version 10 or later. If you run this installation and .NET is already present, it refreshes your system without causing any issues.
 
-#### Windows
+#### [Windows](#tab/windows)
 
-```sh
+```bash
 winget install Microsoft.DotNet.SDK.10
 ```
 
-#### Or download
+#### [macOS](#tab/macos)
 
-```text
-https://get.dot.net
-```
+Download and install from [get.dot.net](https://get.dot.net).
+
+---
 
 ### 2. Container runtime
 
@@ -53,28 +51,28 @@ In this step, you install Docker Desktop to support the Aspire project.
 > [!IMPORTANT]
 > You may already have this tool installed. Test it by running `docker --version` to confirm Docker is available. If you run this installation and Docker is already present, it refreshes your system without causing any issues.
 
-#### Windows
+#### [Windows](#tab/windows)
 
-```sh
+```bash
 winget install Docker.DockerDesktop
 ```
 
-#### macOS
+#### [macOS](#tab/macos)
 
-```sh
+```bash
 brew install --cask docker
 ```
+
+---
 
 > [!NOTE]
 > Podman also works, but setup varies. Developers who prefer Podman can adapt these steps.
 
 ### 3. Aspire and Data API builder tools
 
-In this step, you create the default Aspire project files used later.
+In this step, you create the default Aspire project files used later. Run the following commands:
 
-#### Run the following commands
-
-```sh
+```bash
 dotnet new tool-manifest
 dotnet tool install aspire.cli
 dotnet tool install microsoft.dataapibuilder --prerelease
@@ -86,7 +84,7 @@ aspire init
 
 When prompted, select all defaults.
 
-#### This command installs the tooling and creates the following files
+This command installs the tooling and creates the following files:
 
 ```text
 .
@@ -98,9 +96,7 @@ When prompted, select all defaults.
 
 ### 4. Complete the AppHost.cs file
 
-In this step, you update `AppHost.cs` with the correct code to run this quickstart.
-
-#### Replace the contents of AppHost.cs with the following
+In this step, you update `AppHost.cs` with the correct code to run this quickstart. Replace the contents of `AppHost.cs` with the following:
 
 ```csharp
 #:sdk Aspire.AppHost.Sdk@13.0.2
@@ -186,7 +182,7 @@ string SqlScript(string db) => $"""
     """;
 ```
 
-#### This code configures the following resources
+This code configures the following resources:
 
 ```text
 .
@@ -196,15 +192,15 @@ string SqlScript(string db) => $"""
     └── MCP Inspector (inspector)
 ```
 
-:::image type="content" source="media/quickstart-dotnet-aspire/dashboard-resources-connections.png" lightbox="media/quickstart-dotnet-aspire/dashboard-resources-connections.png" alt-text="Diagram that shows the Aspire resources and their connections.":::
+![Diagram showing the Aspire resources and their connections.](media/quickstart-dotnet-aspire/dashboard-resources-connections.png)
 
 ### 5. Create your dab-config.json file
 
-Run these commands in your project folder (the same folder where `AppHost.cs` is located).
+Run these commands in your project folder (the same folder where `AppHost.cs` is located):
 
 The `@env('MSSQL_CONNECTION_STRING')` syntax tells Data API builder to read the connection string from an environment variable at runtime. Aspire sets this variable automatically when it starts the container, so you don't need to set it locally.
 
-```cmd
+```bash
 dab init --database-type mssql --connection-string "@env('MSSQL_CONNECTION_STRING')" --host-mode Development --config dab-config.json
 dab add Products --source dbo.Products --permissions "anonymous:read" --description "Toy store products with inventory, price, and cost."
 ```
@@ -214,7 +210,7 @@ dab add Products --source dbo.Products --permissions "anonymous:read" --descript
 
 The `dab-config.json` file configures SQL MCP Server to connect to your database and identifies which objects to expose. In this case, `Products` is exposed.
 
-#### This command adds a new file to your project
+This command adds a new file to your project:
 
 ```text
 dab-config.json
@@ -223,11 +219,9 @@ dab-config.json
 > [!IMPORTANT]
 > The `dab-config.json` file must be in the same directory where you run `aspire run`, because the bind mount uses a relative path (`./dab-config.json`).
 
-#### Optionally, add field descriptions
+Optionally, add field descriptions. This metadata can help language models understand your schema.
 
-This metadata can help language models understand your schema.
-
-```cmd
+```bash
 dab update Products --fields.name Id --fields.primary-key true --fields.description "Product Id"
 dab update Products --fields.name Name --fields.description "Product name"
 dab update Products --fields.name Inventory --fields.description "Units in stock"
@@ -241,7 +235,7 @@ In this step, you run your Aspire environment and confirm that SQL Server, SQL M
 
 ### 1. Start Aspire
 
-```sh
+```bash
 aspire run
 ```
 
@@ -250,7 +244,7 @@ aspire run
 
 When the dashboard opens, you see links for Swagger, MCP, and Inspector.
 
-:::image type="content" source="media/quickstart-dotnet-aspire/dashboard-running-environment.png" lightbox="media/quickstart-dotnet-aspire/dashboard-running-environment.png" alt-text="Screenshot of the Aspire dashboard showing the running environment.":::
+![Screenshot of the Aspire dashboard showing the running environment.](media/quickstart-dotnet-aspire/dashboard-running-environment.png)
 
 #### Expected URLs
 

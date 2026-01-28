@@ -15,13 +15,13 @@ ms.date: 01/23/2026
 Data API builder (DAB) supports OpenTelemetry for distributed tracing and metrics, enabling you to monitor and diagnose behavior across REST, GraphQL, database operations, and internal middleware.
  
 
-![Illustration of the OpenTelemetry flow.](media/open-telemetry/open-telemetry-flow.svg)
+![Diagram showing the OpenTelemetry flow.](media/open-telemetry/open-telemetry-flow.svg)
 
 ## Prerequisites
 
 - Existing DAB configuration file.
 - Running OpenTelemetry collector or backend (for example, Azure Monitor or Jaeger).
-- Data API builder CLI. [Install the CLI](../../how-to/install-cli.md)
+- Data API builder CLI. [Install the CLI](../../command-line/install.md)
 
 ## Run tool
 

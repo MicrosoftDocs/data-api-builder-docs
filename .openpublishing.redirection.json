@@ -529,6 +529,16 @@
       "source_path_from_root": "/data-api-builder/concept/index.yml",
       "redirect_url": "/azure/data-api-builder/",
       "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/reference-data-types.md",
+      "redirect_url": "/azure/data-api-builder/feature-availability",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/reference-database-specific-features.md",
+      "redirect_url": "/azure/data-api-builder/feature-availability",
+      "redirect_document_id": false
     }
   ]
 }

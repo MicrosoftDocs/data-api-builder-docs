@@ -131,25 +131,32 @@ Create a configuration file that maps to the table created in the previous steps
     }
     ```
 
-## Pull and run the Docker container image
+## Build and run a custom Docker container image
 
-Run DAB using the Docker container image hosted on Microsoft Container Registry. When running the container image, mount a directory so DAB can read the configuration file.
+Build a custom image that includes `dab-config.json`, then run the image locally.
 
-1. Pull the `mcr.microsoft.com/azure-databases/data-api-builder` Docker container image.
+1. Create a Dockerfile in the same folder as `dab-config.json`.
 
-    ```bash
-    docker pull mcr.microsoft.com/azure-databases/data-api-builder
+    ```dockerfile
+    FROM mcr.microsoft.com/azure-databases/data-api-builder:latest
+    COPY dab-config.json /App/dab-config.json
     ```
 
-1. Run the container publishing the `5000` port and bind mounting the `dab-config.json` file.
+
+1. Build the image.
+
+    ```bash
+    docker build -t dab-local:1 .
+    ```
+
+1. Run the container publishing the `5000` port.
 
     ```bash
     docker run \
-        --name dab \
-        --publish 5000:5000 \
-        --detach \
-        --mount type=bind,source=$(pwd)/dab-config.json,target=/App/dab-config.json,readonly \
-        mcr.microsoft.com/azure-databases/data-api-builder
+      --name dab \
+      --publish 5000:5000 \
+      --detach \
+      dab-local:1
     ```
 
 1. Use a web browser to navigate to `http://localhost:5000/api/book`. The output should be a JSON array of book items from the REST API endpoint.
