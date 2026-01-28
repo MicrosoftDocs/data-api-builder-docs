@@ -41,10 +41,11 @@ DAB includes a cross-platform CLI, OpenTelemetry, and health checks. It also sup
 > - Column Selection
 > - Stored Procedures
 > - Relationship navigation
+> - Aggregation for SQL family databases
 
 ## Database support
 
-Data API builder (DAB) supports multiple backend data sources simultaneously, including relational and NoSQL sources. Supported databases include SQL Server and Azure SQL, Azure Cosmos DB, PostgreSQL, and MySQL. For details and limitations by database, see [Database-specific features](reference-database-specific-features.md).
+Data API builder (DAB) supports multiple backend data sources simultaneously, including relational and NoSQL sources. Supported databases include SQL Server and Azure SQL, Azure Cosmos DB, PostgreSQL, and MySQL. For details and limitations by database, see [Feature availability](feature-availability.md).
 
 ![Diagram of supported databases for Data API builder.](media/overview/supported-databases.svg)
 

@@ -104,10 +104,16 @@ landingContent:
         links:
           - text: Configuration syntax
             url: configuration/index.md
-          - text: Database-specific features
-            url: reference-database-specific-features.md
+          - text: Feature availability
+            url: feature-availability.md
           - text: Code Policies
             url: reference-policies.md
+          - text: Aggregate data with GraphQL
+            url: how-to/aggregate-data.md
+      - linkListType: how-to-guide
+        links:
+          - text: Set up Azure Cosmos DB
+            url: how-to/set-up-cosmosdb.md
       - linkListType: sample
         links:
           - text: Library app sample with Data API builder, SQL server, and Blazor

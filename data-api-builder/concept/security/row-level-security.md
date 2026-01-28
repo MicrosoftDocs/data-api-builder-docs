@@ -14,12 +14,22 @@ ms.date: 01/21/2026
 
 Use the **session context** feature of SQL to implement row-level security in Data API builder.
 
-![Illustration of how Data API builder can set SQL session context to enable row-level security.](media/row-level-security/row-level-security-session-context.svg)
+![Diagram showing how Data API builder can set SQL session context to enable row-level security.](media/row-level-security/row-level-security-session-context.svg)
+
+> [!IMPORTANT]
+> Session context with SQL Server row-level security differs from Data API builder database policies. Database policies (for example, `--policy-database "@item.owner eq @claims.user_id"`) are translated into WHERE clauses by Data API builder, while session context forwards claims to SQL Server so that SQL-native row-level security handles the filtering.
 
 ## Prerequisites
 
 - Existing SQL server and database.
 - Data API builder CLI. [Install the CLI](../../command-line/install.md)
+
+> [!NOTE]
+> Session context is supported in:
+> - SQL Server 2016 and later
+> - Azure SQL Database
+> - Azure Synapse Analytics (Dedicated SQL pool)
+> - Azure Synapse Analytics (Serverless SQL pool) isn't supported
 
 ## Create SQL table and data
 
@@ -54,6 +64,12 @@ Create a table with fictitious data to use in this example scenario.
 
     In this example, the `accessible_role` column stores the role name that can access the row.
 
+> [!TIP]
+> Common session context use cases:
+> - Role-based filtering (shown here) using `roles`
+> - Multitenant isolation using `tenant_id`
+> - User-specific filtering using `user_id`
+
 1. Test your data with a simple `SELECT *` query.
 
     ```sql
@@ -77,6 +93,9 @@ Create a table with fictitious data to use in this example scenario.
     ADD FILTER PREDICATE dbo.RevenuesPredicate(accessible_role)
     ON dbo.Revenues;
     ```
+
+> [!NOTE]
+> The `WITH SCHEMABINDING` clause is required for functions used in security policies so underlying schema changes do not invalidate the predicate.
 
 ## (Optional) Create a stored procedure
 
@@ -115,6 +134,9 @@ Run the Data API builder (DAB) tool to generate a configuration file and a singl
 
     When session context is enabled for SQL Server, Data API builder sends authenticated user claims to SQL by calling `sp_set_session_context` (for example, `roles`). Enabling session context also disables response caching for that data source.
 
+> [!WARNING]
+> When `set-session-context` is enabled, response caching is disabled for the data source. For high-traffic scenarios, consider testing performance, indexing the predicate column, or using Data API builder database policies when they meet your needs.
+
 1. Add a new entity named `revenue` for the `dbo.Revenues` table.
 
     ```dotnetcli
@@ -129,7 +151,10 @@ Run the Data API builder (DAB) tool to generate a configuration file and a singl
     dab start
     ```
 
-1. Query the endpoint without specifying an effective role. Observe that no data is returned because the effective role defaults to `Authenticated`.
+1. Query the endpoint without specifying an effective role. Observe that no data is returned because:
+    - The effective role defaults to `Authenticated`.
+    - No rows have `accessible_role = 'Authenticated'`.
+    - The security policy filters results when the role doesn't match.
 
     ```bash
     curl http://localhost:5000/api/revenue
@@ -146,6 +171,44 @@ Run the Data API builder (DAB) tool to generate a configuration file and a singl
     ```bash
     curl -H "X-MS-API-ROLE: Hannah" http://localhost:5000/api/revenue
     ```
+
+### Test with GraphQL
+
+Session context also works with GraphQL queries.
+
+```graphql
+query {
+    revenues {
+        items {
+            id
+            category
+            revenue
+            accessible_role
+        }
+    }
+}
+```
+
+Pass the role header:
+
+```bash
+curl -X POST http://localhost:5000/graphql \
+    -H "Content-Type: application/json" \
+    -H "X-MS-API-ROLE: Oscar" \
+    -d '{"query": "{ revenues { items { id category revenue accessible_role } } }"}'
+```
+
+## What Data API builder sends to SQL Server
+
+When session context is enabled, Data API builder sets session context values on every request before executing your query.
+
+```sql
+EXEC sp_set_session_context 'roles', 'Oscar', @read_only = 0;
+-- Then executes your query
+SELECT * FROM dbo.Revenues;
+```
+
+All authenticated user claims are sent as key-value pairs. Common claims include `roles`, `sub` or `oid`, and any custom claims from your identity provider.
 
 ## Test in SQL
 
@@ -170,6 +233,23 @@ Test the filter and predicate in SQL directly to ensure it's working.
     ```sql
     EXEC dbo.GetRevenuesForCurrentRole;
     ```
+
+## Clean up resources
+
+If you want to remove the sample objects, run:
+
+```sql
+DROP SECURITY POLICY IF EXISTS dbo.RevenuesSecurityPolicy;
+DROP FUNCTION IF EXISTS dbo.RevenuesPredicate;
+DROP PROCEDURE IF EXISTS dbo.GetRevenuesForCurrentRole;
+DROP TABLE IF EXISTS dbo.Revenues;
+```
+
+## Troubleshooting
+
+- **No results returned**: Verify the security policy is active (`SELECT * FROM sys.security_policies`), check the session context value (`SELECT SESSION_CONTEXT(N'roles')`), and confirm `--set-session-context true` is set in your Data API builder configuration.
+- **All rows returned**: Confirm the security policy isn't disabled (`WITH STATE = OFF`) and that the predicate returns `1` only for authorized rows.
+- **Performance issues**: Index the predicate column (`accessible_role`), and consider temporarily disabling the policy to isolate performance impact.
 
 ## Related content
 
