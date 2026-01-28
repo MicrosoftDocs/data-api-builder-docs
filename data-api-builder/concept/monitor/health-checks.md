@@ -14,7 +14,7 @@ ms.date: 01/23/2026
 
 Data API builder provides a `/health` endpoint to monitor the responsiveness and health of your API's data sources and entities. This endpoint runs checks against configured data sources and entities, validating that they respond within thresholds you set.
 
-![Illustration of the health check flow.](media/health-checks/health-check-flow.svg)
+![Diagram showing the health check flow.](media/health-checks/health-check-flow.svg)
 
 ## Prerequisites
 

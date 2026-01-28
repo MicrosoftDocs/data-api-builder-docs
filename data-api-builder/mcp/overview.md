@@ -101,13 +101,13 @@ When MCP is enabled, SQL MCP Server generates its tool surface automatically bas
 
 Getting started means creating the `dab-config.json` to control the engine. You can do this task manually, or you can use the [Data API builder (DAB) CLI](/azure/data-api-builder/command-line). The CLI simplifies the task, letting you initialize the file with a single command. Configuration property values can use literal strings, [environment variables](/azure/data-api-builder/concept/config/env-function), or [Azure Key Vault](/azure/data-api-builder/concept/config/akv-function) secrets. 
 
-```sh
+```bash
 dab init --database-type mssql --connection-string "<your-connection-string>" --config dab-config.json --host-mode development
 ```
 
 You can specify each table, view, or stored procedure you want the SQL MCP Server to expose by adding them to the configuration. The CLI lets you easily add them, assign aliases, configure their permissions, and map columns if you want. Most importantly, with the `description` property, you can include semantic details to help language models better understand your data. 
 
-```sh
+```bash
 dab add {entity-name} \                          # object alias (Employees)
   --source {table-or-view-name} \                # database object (dbo.Employees)
   --source.type {table|view|stored-procedure} \  # object type (table)
@@ -138,7 +138,7 @@ The SQL MCP Server is enabled by default in the Data API builder configuration. 
 
 The CLI also lets you set every property individually or programmatically through scripting. 
 
-```sh
+```bash
 dab configure --runtime.mcp.enabled true
 dab configure --runtime.mcp.path "/mcp"
 dab configure --runtime.mcp.dml-tools.describe-entities true

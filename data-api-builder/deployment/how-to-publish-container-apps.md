@@ -54,55 +54,42 @@ To start, build a Data API builder (DAB) configuration file to connect to your e
 
 1. Open and review the contents of the *dab-config.json* file. You use this file later in this guide.
 
-## Host configuration in Azure Files
+## Build a custom container image
 
-Next, upload the configuration file to a file share created within Azure Files. This file share is eventually mounted to the final container as a volume.
-
-1. Sign into the Azure portal ([https://portal.azure.com](https://portal.azure.com/)).
+Build a custom image that includes `dab-config.json` at `/App/dab-config.json`. Run these commands from the folder that contains `dab-config.json`.
 
 1. Create a new resource group. You use this resource group for all new resources in this guide.
 
-    :::image type="content" source="media/how-to-publish-container-apps/create-resource-group.png" lightbox="media/how-to-publish-container-apps/create-resource-group.png" alt-text="Screenshot of the 'Create a resource group' page's 'Basics' tab in the Azure portal.":::
-
     > [!TIP]
-    > We recommend naming the resource group **msdocs-dab-aca**. All screenshots in this guide use this name.
+    > We recommend naming the resource group **msdocs-dab-aca**.
 
-1. Create an Azure Storage account. Use these settings to configure the account.
+1. Create an Azure Container Registry (ACR) and build the image.
 
-    | Setting                               | Value                                         |
-    | ------------------------------------- | --------------------------------------------- |
-    | **Resource group**                    | Select the resource group you created earlier |
-    | **Storage account name**              | Enter a globally unique name                  |
-    | **Region**                            | Select an Azure region                        |
-    | **Performance**                       | Select **Standard**                           |
-    | **Redundancy**                        | Select **Locally-redundant storage (LRS)**    |
-    | **Enable storage account key access** | Select **Enabled**                            |
+    ```azurecli
+    az acr create \
+      --resource-group "<resource-group-name>" \
+      --name "<registry-name>" \
+      --sku Basic \
+      --admin-enabled true
 
-    :::image type="content" source="media/how-to-publish-container-apps/create-storage-account.png" alt-text="Screenshot of the 'Create a storage account' page's 'Advanced' tab in the Azure portal.":::
+    # Create a Dockerfile that embeds dab-config.json
+    cat <<'EOF' > Dockerfile
+    FROM mcr.microsoft.com/azure-databases/data-api-builder:latest
+    COPY dab-config.json /App/dab-config.json
+    EOF
 
-1. Navigate to the new storage account in the Azure portal.
+    # Build and push the image
+    az acr build \
+      --registry "<registry-name>" \
+      --image "dab:1" \
+      .
+    ```
 
-1. Select **File shares** in the **Data storage** section of the resource menu. Then, select **File share** from the command bar to create a new share in the storage account. Use the following settings to configure the new file share.
+1. Record the registry login server (`<registry-name>.azurecr.io`) and image tag (`dab:1`). You use these values when creating the container app.
 
-    | Setting           | Value          |
-    | ----------------- | -------------- |
-    | **Name**          | Enter `config` |
-    | **Access tier**   | Select **Hot** |
-    | **Enable backup** | Don't select   |
+## Create the container app
 
-    :::image type="content" source="media/how-to-publish-container-apps/storage-file-share-option.png" alt-text="Screenshot of the **File share** resource menu and command bar options in the Azure portal.":::
-
-1. Upload the *dab-config.json* and any other required files to the share. Use the **Upload** option in the command bar to open the **Upload files** dialog. Select both files and then select **Upload**.
-
-    :::image type="content" source="media/how-to-publish-container-apps/upload-files.png" alt-text="Screenshot of the **Upload files** dialog in the Azure portal.":::
-
-1. Select **Access keys** in the **Security + networking** section of the resource menu. Then, record the **Storage account name** and **Key** values from this page. You use these values later in this guide.
-
-    :::image type="content" source="media/how-to-publish-container-apps/storage-credentials.png" alt-text="Screenshot of the 'Access Keys' page within a storage account in the Azure portal.":::
-
-## Create the base container app
-
-Now, create the container in Azure using Azure Container Apps. This container hosts the Data API builder image without a configuration.
+Create the container app using the custom image that already includes `dab-config.json`.
 
 1. Create an Azure Container Apps resource. As part of the process of creating the app resource, you're required to create an environment. Use these settings to configure both resources.
 
@@ -112,13 +99,11 @@ Now, create the container in Azure using Azure Container Apps. This container ho
     | **Environment** | **Environment type**              | Select **Consumption only**                     |
     | **Environment** | **Logs destination**              | Select **Don't save logs**                      |
     | **App**         | **Resource group**                | Select the resource group you created earlier   |
-    | **App**         | **Storage account name**          | Enter a globally unique name                    |
-    | **App**         | **Region**                        | Select the same region as the storage account   |
+    | **App**         | **Region**                        | Select the same region as your resource group   |
     | **App**         | **Use quickstart image**          | Don't select                                    |
-    | **App**         | **Image source**                  | Select **Docker Hub or other registries**       |
-    | **App**         | **Image type**                    | Select **Public**                               |
-    | **App**         | **Registry login server**         | Enter `mcr.microsoft.com`                       |
-    | **App**         | **Image and tag**                 | Enter `azure-databases/data-api-builder:latest` |
+    | **App**         | **Image source**                  | Select **Azure Container Registry**             |
+    | **App**         | **Registry**                      | Select your ACR instance                         |
+    | **App**         | **Image and tag**                 | Enter `dab:1`                                    |
     | **App**         | **Environment variables - Name**  | Enter `DATABASE_CONNECTION_STRING`              |
     | **App**         | **Environment variables - Value** | Enter the connection string for your database.  |
     | **App**         | **Ingress**                       | Ensure **Enabled** is selected                  |
@@ -147,60 +132,7 @@ Now, create the container in Azure using Azure Container Apps. This container ho
     ```
 
     > [!NOTE]
-    > The version number and name vary based on your current version of Data API builder. At this point, you can't navigate to any API endpoints. These endpoints are available once you mount a DAB configuration file.
-
-## Mount the configuration files
-
-Finally, mount the configuration files from the Azure Files share to the container app. This step allows the Data API builder to use the configuration file to connect to your database.
-
-1. Navigate to the container environment created previously in this guide using the Azure portal.
-
-1. Select **Azure files** in the **Settings** section of the resource menu. Then, select **Add** from the command bar to add an existing file share to the container environment. Use the following settings to configure the new file share. Then **save** the new file share configuration.
-
-    | Setting | Value |
-    | --- | --- |
-    | **Name** | Enter `config-share` |
-    | **Storage account name** | Name of the storage account recorded earlier in this guide. |
-    | **Storage account key** | Key of the storage account recorded earlier in this guide. |
-    | **File share** | Enter `config` |
-    | **Access mode** | Select **Read only** |
-
-    :::image type="content" source="media/how-to-publish-container-apps/azure-files-option.png" alt-text="Screenshot of the 'Azure Files' option in the resource menu within the Azure portal.":::
-
-1. Navigate to the container app again in the Azure portal.
-
-1. Select Revisions and replicas in the Application section of the resource menu. Then, select Create new revision from the command bar to start the process of configuring a new revision for your container app.
-
-1. Navigate to the Volumes section and select the Add option. Use the following settings to configure the new volume. After configuring the volume, Add the volume to the container revision.
-
-    | Setting | Value |
-    | --- | --- |
-    | **Volume type** | Select **Azure file volume** |
-    | **Name** | Enter `config-volume` |
-    | **File share** | Enter `config` |
-
-
-    :::image type="content" source="media/how-to-publish-container-apps/add-volume.png" alt-text="Screenshot of the `Create new volume` section in the Azure portal.":::
-
-1. Navigate to the **Container** section, select the single current container, and then select the **Edit** option. Use the following settings to configure two mounts for the container. **Save** your changes.
-
-    | Setting         | Value                        |
-    | --------------- | ---------------------------- |
-    | **Volume name** | Enter `config-volume`        |
-    | **Mount path**  | Enter `/App/dab-config.json` |
-    | **Sub path**    | Enter `dab-config.json`      |
-
-    | Setting         | Value                       |
-    | --------------- | --------------------------- |
-    | **Volume name** | Enter `config-volume`       |
-    | **Mount path**  | Enter `/App/schema.graphql` |
-    | **Sub path**    | Enter `schema.graphql`      |
-
-    :::image type="content" source="media/how-to-publish-container-apps/edit-container.png" alt-text="Screenshot of the `Add volume mount` section in the Azure portal.":::
-    
-1. Select **Create** to create a new revision with the volume mounts you specified. With for the revision to finish deploying.
-
-1. Use the **Application URL** field in the **Essentials** section to browse to the container app's website again. Observe that the response still indicates that the DAB container is **healthy**.
+    > The version number and name vary based on your current version of Data API builder.
 
 1. Navigate to the `/api/swagger` path for the current running application. Use the Swagger UI to issue an **HTTP GET** request for one of your entities.
 

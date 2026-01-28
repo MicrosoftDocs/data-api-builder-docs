@@ -9,13 +9,11 @@ ms.date: 12/22/2025
 
 [!INCLUDE[Section - Quickstart selector](includes/section-quickstart-selector.md)]
 
+![Diagram that shows a local SQL MCP Server connected to Visual Studio Code.](media/quickstart-visual-studio-code/diagram.svg)
+
 [!INCLUDE[Note - Preview](includes/note-preview.md)]
 
 This quickstart uses the Data API builder CLI to run a SQL MCP Server locally without Aspire. You create a database, configure a config file, start SQL MCP Server, and connect to it from Visual Studio Code (VS Code) using a custom tool. This path is the easiest way to explore SQL MCP Server without containers or hosting frameworks.
-
-:::image type="complex" source="media/quickstart-visual-studio-code/diagram.svg" lightbox="media/quickstart-visual-studio-code/diagram.svg" alt-text="Diagram that shows a local SQL MCP Server connected to Visual Studio Code.":::
-  This architecture diagram illustrates a local development environment where GitHub Copilot connects to a Local Machine container. Inside the container, three components are arranged horizontally: VS Code (orange box), an MCP (Model Context Protocol) server (green 3D box), and a SQL database (blue cylinder). VS Code connects to the MCP server with a rightward arrow, and the MCP server has a bidirectional connection to the SQL database. This setup allows developers to leverage AI assistance through VS Code and GitHub Copilot for database operations during local development, with the MCP server acting as an intermediary that translates requests into database queries.
-:::image-end:::
 
 ## Prerequisites
 
@@ -160,22 +158,26 @@ Create a file named `.vscode/mcp.json` and add the following content:
 }
 ```
 
-Save the file. VS Code should detect the MCP server configuration and connect to the running SQL MCP Server at the specified HTTP endpoint. You may need to reload the window (**Developer: Reload Window** from the Command Palette).
+Save the file. VS Code detects the MCP server configuration automatically. You may need to reload the window (**Developer: Reload Window** from the Command Palette).
 
-The `Products` entity appears as MCP tools such as `describe_entities` and `read_records`. Tool names may vary based on your configuration.
+### Start the MCP server connection
+
+1. Open the Command Palette (**Ctrl+Shift+P** or **Cmd+Shift+P** on macOS).
+1. Run **MCP: List Servers** to view available servers.
+1. Select **sql-mcp-server** and choose **Start** to connect.
+
+Once connected, the `Products` entity appears as MCP tools such as `describe_entities` and `read_records`. Tool names may vary based on your configuration.
 
 > [!NOTE]
 > VS Code MCP support is evolving. The configuration schema may change in future releases. For the latest guidance, see the VS Code documentation for MCP integration.
 
 ### Try a tool call
 
-Open the VS Code chat and try this prompt:
+Open the VS Code Copilot Chat and try this prompt:
 
 ```text
-@sql-mcp-server Which products have an inventory under 30?
+Which products have an inventory under 30?
 ```
-
-You should see the toy store data you inserted earlier.
 
 ## Related content
 

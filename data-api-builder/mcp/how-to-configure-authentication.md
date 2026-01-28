@@ -213,6 +213,6 @@ dab update ^
 
 - [Data source configuration](../configuration/data-source.md)
 - [Runtime configuration: authentication provider](../configuration/runtime.md)
-- [Local authentication (Simulator/AppService)](../concept/security/authentication-local.md)
-- [Azure authentication (JWT/roles)](../concept/security/authentication-azure.md)
+- [Local authentication (Simulator/AppService)](../concept/security/how-to-authenticate-simulator.md)
+- [Azure authentication (JWT/roles)](../concept/security/how-to-authenticate-entra.md)
 - [Foundry MCP authentication guidance](/azure/ai-foundry/agents/how-to/mcp-authentication)

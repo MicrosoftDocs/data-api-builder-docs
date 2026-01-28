@@ -290,7 +290,7 @@ Next, build a container image using a Dockerfile. Then deploy that container ima
     
     RUN dotnet tool run dab -- add Product --source "SalesLT.Product" --permissions "anonymous:read"
     
-    FROM mcr.microsoft.com/azure-databases/data-api-builder
+    FROM mcr.microsoft.com/azure-databases/data-api-builder:latest
     
     COPY --from=build /config /App
     ```

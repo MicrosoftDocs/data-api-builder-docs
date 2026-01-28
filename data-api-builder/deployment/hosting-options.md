@@ -21,7 +21,7 @@ There are multiple options available to host Data API builder in Azure or on you
 
 Azure Container Apps is an Azure service that hosts a cluster of [Docker](https://www.docker.com) container images on your behalf. Azure Container Apps is a serverless platform that balances complexity with configuration by reducing the friction to have a container cluster. Azure Container Apps fully manages the details around infrastructure, orchestration, and deployment. Use Azure Container Apps to host a container cluster that can scale out or in quickly and also support multiple container workloads.
 
-Create Azure Container Apps [environments](/azure/container-apps/environment) that include [container\[s\] instances](/azure/container-apps/containers) running Data API builder. These environments could also conceivably include your application instances running in close proximity to the API instances.
+Create Azure Container Apps [environments](/azure/container-apps/environment) that include [container instances](/azure/container-apps/containers) running Data API builder. These environments could also conceivably include your application instances running in close proximity to the API instances.
 
 For more information, see [Azure Container Apps](/azure/container-apps).
 
@@ -37,13 +37,13 @@ For more information, see [Azure Container Instances](/azure/container-instances
 
 Azure App Service is an Azure service that hosts web applications or APIs either running in server-side code or a Docker container. Azure App Service is ideal for complex languages using your preferred programming language server-side. Azure App Service natively supports .NET, Java, Node.js, PHP, and Python applications. You can also support a myriad of extra frameworks and engines using Docker container images, Azure App Service.
 
-You can run Data API builder as either a [native .NET application]/azure/app-service/configure-language-dotnetcore) or a [Docker container image](/azure/app-service/configure-custom-container). Alternatively, you can create a [multi-container-app](/azure/app-service/quickstart-multi-container) using [Docker Compose](https://docs.docker.com/compose) that deploys Data API builder as a sidecar container to an application running your preferred stack.
+You can run Data API builder as either a [native .NET application](/azure/app-service/configure-language-dotnetcore) or a [Docker container image](/azure/app-service/configure-custom-container). Alternatively, you can create a [multi-container-app](/azure/app-service/quickstart-multi-container) using [Docker Compose](https://docs.docker.com/compose) that deploys Data API builder as a sidecar container to an application running your preferred stack.
 
 For more information, see [Azure App Service](/azure/app-service).
 
 ## Azure Kubernetes Service
 
-Azure Kubernetes Service is an Azure service that manages a [Kubernetes](https://kubernetes.io) cluster on your behalf. Azure Kubernetes Service is a manage service that handles the infrastructure for your Kubernetes solution while still exposing the individual components for further customizations. Azure Kubernetes Service supports the usage of common Kubernetes manifest files and command-line interfaces so you can apply any existing knowledge or skills about the platform.
+Azure Kubernetes Service is an Azure service that manages a [Kubernetes](https://kubernetes.io) cluster on your behalf. Azure Kubernetes Service is a managed service that handles the infrastructure for your Kubernetes solution while still exposing the individual components for further customizations. Azure Kubernetes Service supports the usage of common Kubernetes manifest files and command-line interfaces so you can apply any existing knowledge or skills about the platform.
 
 Run Data API builder as part of a [Kubernetes container cluster](/azure/aks/concepts-clusters-workloads#kubernetes-cluster-architecture) and allow Azure Kubernetes Service to manage the individual hosts at scale. Consider hosting your applications and API clusters in a manner where they are in close proximity and performant, while being allowed to scale independently using typical Kubernetes control mechanisms.
 

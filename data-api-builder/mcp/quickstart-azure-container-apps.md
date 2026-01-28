@@ -9,53 +9,59 @@ ms.date: 12/22/2025
 
 [!INCLUDE[Section - Quickstart selector](includes/section-quickstart-selector.md)]
 
+![Diagram that shows a SQL MCP Server deployed to Azure Container Apps.](media/quickstart-azure-container-apps/diagram.svg)
+
 [!INCLUDE[Note - Preview](includes/note-preview.md)]
 
 This quickstart shows you how to deploy SQL MCP Server to Azure Container Apps. Once deployed, you can connect to it from Visual Studio Code (VS Code), Microsoft Foundry, or any other Model Context Protocol (MCP) client as a remote server endpoint.
 
-:::image type="complex" source="media/quickstart-azure-container-apps/diagram.svg" lightbox="media/quickstart-azure-container-apps/diagram.svg" alt-text="Diagram that shows a SQL MCP Server deployed to Azure Container Apps.":::
-  This architecture diagram illustrates a production cloud deployment in Azure. Within Azure, an Azure Container Apps environment (blue-bordered rectangle) contains an MCP (Model Context Protocol) server (green 3D box). Outside the container apps boundary but still within Azure, a SQL database (blue cylinder) is positioned on the right. A curved arrow connects from the MCP server to the SQL database. This architecture represents a scalable production deployment where the MCP server runs as a containerized application that can automatically scale based on demand while maintaining secure connections to the separately managed database, making it suitable for production workloads where AI agents need reliable access to SQL data.
-:::image-end:::
+![Sequence diagram that shows the ACA deployment workflow.](media/quickstart-azure-container-apps/deployment-flow.svg)
 
 ## Prerequisites
 
 ### Azure subscription
 
-You need an active Azure subscription. If you don't have one:
-
-```text
-https://azure.microsoft.com/free
-```
+You need an active Azure subscription. If you don't have one, [create a free Azure account](https://azure.microsoft.com/free).
 
 ### Azure CLI
 
 Install the Azure CLI to deploy resources:
 
-#### Windows
+#### [Windows](#tab/windows)
 
-```sh
+```bash
 winget install Microsoft.AzureCLI
 ```
 
-#### macOS
+#### [macOS](#tab/macos)
 
-```sh
+```bash
 brew install azure-cli
 ```
+
+---
 
 ### .NET 9+
 
 You may already have this tool installed. Run `dotnet --version` and confirm it reports version 9 or later.
 
-#### Windows
+#### [Windows](#tab/windows)
 
-```sh
+```bash
 winget install Microsoft.DotNet.Runtime.9
 ```
 
+#### [macOS](#tab/macos)
+
+```bash
+brew install dotnet@9
+```
+
+---
+
 ### Data API builder CLI
 
-```sh
+```bash
 dotnet new tool-manifest
 dotnet tool install microsoft.dataapibuilder --prerelease
 ```
@@ -67,7 +73,7 @@ dotnet tool install microsoft.dataapibuilder --prerelease
 
 [Install PowerShell](/powershell/scripting/install/install-powershell-on-windows) if it isn't already installed.
 
-```sh
+```bash
 dotnet tool install --global PowerShell
 ```
 
@@ -76,7 +82,7 @@ dotnet tool install --global PowerShell
 
 ### 1. Sign in to Azure
 
-```sh
+```bash
 az login
 az account set --subscription "<your-subscription-id>"
 ```
@@ -94,7 +100,7 @@ $SQL_PASSWORD = "<YourStrongPassword123!>"
 
 ### 3. Create a resource group
 
-```sh
+```bash
 az group create \
   --name $RESOURCE_GROUP \
   --location $LOCATION
@@ -102,7 +108,7 @@ az group create \
 
 ### 4. Create Azure SQL Server
 
-```sh
+```bash
 az sql server create \
   --name $SQL_SERVER \
   --resource-group $RESOURCE_GROUP \
@@ -113,7 +119,7 @@ az sql server create \
 
 ### 5. Configure firewall to allow Azure services
 
-```sh
+```bash
 az sql server firewall-rule create \
   --resource-group $RESOURCE_GROUP \
   --server $SQL_SERVER \
@@ -124,7 +130,7 @@ az sql server firewall-rule create \
 
 ### 6. Create the database
 
-```sh
+```bash
 az sql db create \
   --resource-group $RESOURCE_GROUP \
   --server $SQL_SERVER \
@@ -224,7 +230,39 @@ dab update Products `
 
 ## Step 3: Deploy SQL MCP Server to Azure Container Apps
 
-### 1. Create Container Apps environment
+### 1. Create Azure Container Registry and build custom image
+
+Create a container registry and build a custom image with your configuration embedded:
+
+```powershell
+$ACR_NAME = "acrsqlmcp$(Get-Random -Minimum 1000 -Maximum 9999)"
+
+az acr create `
+  --resource-group $RESOURCE_GROUP `
+  --name $ACR_NAME `
+  --sku Basic `
+  --admin-enabled true
+```
+
+### 2. Create a Dockerfile
+
+Create a file named `Dockerfile` in the same folder as your `dab-config.json`:
+
+```dockerfile
+FROM mcr.microsoft.com/azure-databases/data-api-builder:1.7.83-rc
+COPY dab-config.json /App/dab-config.json
+```
+
+### 3. Build and push the image
+
+```powershell
+az acr build `
+  --registry $ACR_NAME `
+  --image sql-mcp-server:1 `
+  .
+```
+
+### 4. Create Container Apps environment
 
 ```powershell
 $CONTAINERAPP_ENV = "sql-mcp-env"
@@ -236,28 +274,38 @@ az containerapp env create `
   --location $LOCATION
 ```
 
-### 2. Create base64 encoded config
+### 5. Deploy the SQL MCP Server container
 
 ```powershell
-$CONFIG_JSON = Get-Content dab-config.json -Raw
-$CONFIG_BYTES = [System.Text.Encoding]::UTF8.GetBytes($CONFIG_JSON)
-$CONFIG_BASE64 = [Convert]::ToBase64String($CONFIG_BYTES)
-```
+$ACR_LOGIN_SERVER = az acr show `
+  --name $ACR_NAME `
+  --query loginServer `
+  --output tsv
 
-### 3. Deploy the SQL MCP Server container
+$ACR_USERNAME = az acr credential show `
+  --name $ACR_NAME `
+  --query username `
+  --output tsv
 
-```powershell
+$ACR_PASSWORD = az acr credential show `
+  --name $ACR_NAME `
+  --query "passwords[0].value" `
+  --output tsv
+
 az containerapp create `
   --name $CONTAINERAPP_NAME `
   --resource-group $RESOURCE_GROUP `
   --environment $CONTAINERAPP_ENV `
-  --image mcr.microsoft.com/azure-databases/data-api-builder:latest `
+  --image "$ACR_LOGIN_SERVER/sql-mcp-server:1" `
+  --registry-server $ACR_LOGIN_SERVER `
+  --registry-username $ACR_USERNAME `
+  --registry-password $ACR_PASSWORD `
   --target-port 5000 `
   --ingress external `
   --min-replicas 1 `
   --max-replicas 3 `
-  --secrets "mssql-connection-string=$CONNECTION_STRING" "dab-config-base64=$CONFIG_BASE64" `
-  --env-vars "MSSQL_CONNECTION_STRING=secretref:mssql-connection-string" "DAB_CONFIG_BASE64=secretref:dab-config-base64" `
+  --secrets "mssql-connection-string=$CONNECTION_STRING" `
+  --env-vars "MSSQL_CONNECTION_STRING=secretref:mssql-connection-string" `
   --cpu 0.5 `
   --memory 1.0Gi
 ```
@@ -266,7 +314,7 @@ az containerapp create `
 
 :::image type="content" source="media/quickstart-azure-container-apps/azure-resource-group.png" lightbox="media/quickstart-azure-container-apps/azure-resource-group.png" alt-text="Screenshot of the Azure portal resource group after deployment.":::
 
-### 4. Get your MCP endpoint URL
+### 6. Get your MCP endpoint URL
 
 ```powershell
 $MCP_URL = az containerapp show `
@@ -280,7 +328,7 @@ Write-Host "Your MCP Server URL: https://$MCP_URL/mcp"
 
 Save this URL - you use it to connect from MCP clients.
 
-### 5. Test your deployment
+### 7. Test your deployment
 
 ```powershell
 curl "https://$MCP_URL/health"
@@ -302,13 +350,13 @@ To add your MCP server as a Custom MCP Tool, follow the [Quickstart with Microso
 
 ### Other MCP clients
 
-Use the MCP server URL from Step 3.4 to connect from any MCP-compatible client.
+Use the MCP server URL from Step 3.6 to connect from any MCP-compatible client.
 
 ## Monitoring and troubleshooting
 
 ### View Container Apps logs
 
-```sh
+```bash
 az containerapp logs show \
   --name $CONTAINERAPP_NAME \
   --resource-group $RESOURCE_GROUP \
@@ -355,13 +403,199 @@ curl "https://$MCP_URL/health"
 
 When you're done, delete the resource group to remove all resources:
 
-```sh
+```bash
 az group delete --name $RESOURCE_GROUP --yes --no-wait
 ```
 
-## External content
+## Complete sample script
 
-- [Example PowerShell Script](https://github.com/azure-samples/data-api-builder-demo-environment)
+Here's a complete PowerShell script that performs all the steps in this quickstart. Before running, update the tenant ID, subscription ID, and password variables.
+
+> [!TIP]
+> For a production-ready deployment with managed identity authentication, health checks, and automatic cleanup, see the [Data API builder demo environment script](https://github.com/JerryNixon/dab-demo-environment-script).
+
+```powershell
+# ============================================
+# Variables - UPDATE THESE VALUES
+# ============================================
+$RESOURCE_GROUP = "rg-sql-mcp"
+$LOCATION = "centralus"
+$SQL_SERVER = "sql-mcp-$(Get-Random -Minimum 1000 -Maximum 9999)"
+$SQL_DATABASE = "ProductsDB"
+$SQL_ADMIN = "sqladmin"
+$SQL_PASSWORD = "P@ssw0rd!"  # Replace with a strong password
+$ACR_NAME = "acrsqlmcp$(Get-Random -Minimum 1000 -Maximum 9999)"
+$CONTAINERAPP_ENV = "sql-mcp-env"
+$CONTAINERAPP_NAME = "sql-mcp-server"
+
+# ============================================
+# Sign in to Azure
+# ============================================
+az login --tenant "<your-tenant-id>"
+az account set --subscription "<your-subscription-id>"
+
+# ============================================
+# Check if resource group exists and create unique name
+# ============================================
+$RG_COUNTER = 0
+$ORIGINAL_RG = $RESOURCE_GROUP
+while ($true) {
+    $RG_EXISTS = az group exists --name $RESOURCE_GROUP
+    if ($RG_EXISTS -eq "false") {
+        break
+    }
+    $RG_COUNTER++
+    $RESOURCE_GROUP = "$ORIGINAL_RG-$RG_COUNTER"
+}
+Write-Host "Using resource group: $RESOURCE_GROUP" -ForegroundColor Green
+
+# ============================================
+# Step 1: Create Azure SQL Database
+# ============================================
+az group create --name $RESOURCE_GROUP --location $LOCATION
+
+az sql server create `
+  --name $SQL_SERVER `
+  --resource-group $RESOURCE_GROUP `
+  --location $LOCATION `
+  --admin-user $SQL_ADMIN `
+  --admin-password $SQL_PASSWORD
+
+az sql server firewall-rule create `
+  --resource-group $RESOURCE_GROUP `
+  --server $SQL_SERVER `
+  --name AllowAzureServices `
+  --start-ip-address 0.0.0.0 `
+  --end-ip-address 0.0.0.0
+
+# Add current client IP to firewall
+$MY_IP = (Invoke-RestMethod -Uri 'https://api.ipify.org?format=text')
+az sql server firewall-rule create `
+  --resource-group $RESOURCE_GROUP `
+  --server $SQL_SERVER `
+  --name AllowMyIP `
+  --start-ip-address $MY_IP `
+  --end-ip-address $MY_IP
+
+az sql db create `
+  --resource-group $RESOURCE_GROUP `
+  --server $SQL_SERVER `
+  --name $SQL_DATABASE `
+  --service-objective S0
+
+$CONNECTION_STRING = "Server=tcp:$SQL_SERVER.database.windows.net,1433;Database=$SQL_DATABASE;User ID=$SQL_ADMIN;Password=$SQL_PASSWORD;Encrypt=true;TrustServerCertificate=false;Connection Timeout=30;"
+
+# Create sample table using sqlcmd
+Write-Host "Creating Products table and sample data..." -ForegroundColor Yellow
+
+$SQL_SCRIPT = @"
+CREATE TABLE dbo.Products (
+    ProductID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    ProductName NVARCHAR(100) NOT NULL,
+    Category NVARCHAR(50) NOT NULL,
+    UnitPrice DECIMAL(10,2) NOT NULL,
+    UnitsInStock INT NOT NULL,
+    Discontinued BIT NOT NULL DEFAULT 0
+);
+
+INSERT INTO dbo.Products (ProductName, Category, UnitPrice, UnitsInStock, Discontinued) VALUES
+('Laptop Pro 15', 'Electronics', 1299.99, 45, 0),
+('Wireless Mouse', 'Electronics', 29.99, 150, 0),
+('Office Chair', 'Furniture', 249.99, 30, 0),
+('Standing Desk', 'Furniture', 599.99, 15, 0),
+('Coffee Maker', 'Appliances', 89.99, 60, 0);
+"@
+
+# Use Invoke-Sqlcmd if available, otherwise skip table creation
+try {
+    $SQL_SCRIPT | Out-File -FilePath "create-table.sql" -Encoding utf8
+    sqlcmd -S "$SQL_SERVER.database.windows.net" -d $SQL_DATABASE -U $SQL_ADMIN -P $SQL_PASSWORD -i "create-table.sql"
+    Remove-Item "create-table.sql" -ErrorAction SilentlyContinue
+    Write-Host "Products table created successfully!" -ForegroundColor Green
+} catch {
+    Write-Host "Note: Could not create table automatically. You can create it manually later." -ForegroundColor Yellow
+    Write-Host "SQL Script saved for manual execution if needed." -ForegroundColor Yellow
+}
+
+# ============================================
+# Step 2: Configure SQL MCP Server
+# ============================================
+# Remove existing config if present
+if (Test-Path "dab-config.json") {
+    Remove-Item "dab-config.json" -Force
+}
+
+dab init `
+  --database-type mssql `
+  --connection-string "@env('MSSQL_CONNECTION_STRING')" `
+  --host-mode Production `
+  --config dab-config.json
+
+dab add Products `
+  --source dbo.Products `
+  --permissions "anonymous:read" `
+  --description "Product catalog with pricing, category, and inventory information"
+
+# ============================================
+# Step 3: Deploy to Azure Container Apps
+# ============================================
+az acr create `
+  --resource-group $RESOURCE_GROUP `
+  --name $ACR_NAME `
+  --sku Basic `
+  --admin-enabled true
+
+# Create Dockerfile
+@"
+FROM mcr.microsoft.com/azure-databases/data-api-builder:1.7.83-rc
+COPY dab-config.json /App/dab-config.json
+"@ | Out-File -FilePath Dockerfile -Encoding utf8
+
+az acr build --registry $ACR_NAME --image sql-mcp-server:1 .
+
+az containerapp env create `
+  --name $CONTAINERAPP_ENV `
+  --resource-group $RESOURCE_GROUP `
+  --location $LOCATION
+
+# Get ACR credentials for initial deployment
+$ACR_LOGIN_SERVER = az acr show --name $ACR_NAME --query loginServer --output tsv
+$ACR_USERNAME = az acr credential show --name $ACR_NAME --query username --output tsv
+$ACR_PASSWORD = az acr credential show --name $ACR_NAME --query "passwords[0].value" --output tsv
+
+az containerapp create `
+  --name $CONTAINERAPP_NAME `
+  --resource-group $RESOURCE_GROUP `
+  --environment $CONTAINERAPP_ENV `
+  --image "$ACR_LOGIN_SERVER/sql-mcp-server:1" `
+  --registry-server $ACR_LOGIN_SERVER `
+  --registry-username $ACR_USERNAME `
+  --registry-password $ACR_PASSWORD `
+  --target-port 5000 `
+  --ingress external `
+  --min-replicas 1 `
+  --max-replicas 3 `
+  --secrets "mssql-connection-string=$CONNECTION_STRING" `
+  --env-vars "MSSQL_CONNECTION_STRING=secretref:mssql-connection-string" `
+  --cpu 0.5 `
+  --memory 1.0Gi
+
+# ============================================
+# Output
+# ============================================
+$MCP_URL = az containerapp show `
+  --name $CONTAINERAPP_NAME `
+  --resource-group $RESOURCE_GROUP `
+  --query "properties.configuration.ingress.fqdn" `
+  --output tsv
+
+Write-Host ""
+Write-Host "Deployment complete!" -ForegroundColor Green
+Write-Host "MCP Server URL: https://$MCP_URL/mcp" -ForegroundColor Cyan
+Write-Host "Health check:   https://$MCP_URL/health" -ForegroundColor Cyan
+```
+
+## Related content
 - [Overview of SQL MCP Server](overview.md)
 - [Data manipulation tools in SQL MCP Server](data-manipulation-language-tools.md)
 - [Adding semantic descriptions to SQL MCP Server](how-to-add-descriptions.md)

@@ -14,7 +14,7 @@ ms.date: 01/23/2026
 
 Data API builder (DAB) supports filtered log levels to control verbosity. You can set a global level and override specific namespaces or classes for focused diagnostics.
 
-![Illustration of the log level filtering flow.](media/log-levels/log-level-flow.svg)
+![Diagram showing the log level filtering flow.](media/log-levels/log-level-flow.svg)
 
 Logging settings are configured in the [`runtime.telemetry.log-level` section](../../configuration/runtime.md#telemetry-runtime) of your configuration. You can specify log levels globally or target specific namespaces or classes for fine-grained control.
 
@@ -133,6 +133,8 @@ dab configure ^
   --runtime.telemetry.log-level.Azure.DataApiBuilder.Core Information ^
   --runtime.telemetry.log-level.Azure.DataApiBuilder.Core.Configurations.RuntimeConfigValidator Debug
 ```
+
+---
 
 ---
 
