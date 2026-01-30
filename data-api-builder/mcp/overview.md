@@ -1,6 +1,8 @@
 ---
-title: Overview/Introduction
+title: SQL MCP Server overview
 description: Learn how SQL MCP Server enables AI agents to safely interact with SQL databases. Configure your data source and expose tables, views, and stored procedures through MCP tools.
+author: jnixon
+ms.author: jnixon
 ms.topic: overview
 ms.date: 12/22/2025
 ---
@@ -9,7 +11,9 @@ ms.date: 12/22/2025
 
 [!INCLUDE[Note - Preview](includes/note-preview.md)]
 
-SQL MCP Server gives developers a simple, predictable, and secure way to bring AI agents into their data workflows. It accomplishes this without exposing the database or relying on fragile natural language parsing. By building on Data API builder's entity abstraction, RBAC, caching, and telemetry, SQL MCP Server delivers a production-ready surface that works the same across REST, GraphQL, and MCP. You configure it once, and the engine handles the rest.
+SQL MCP Server gives developers a simple, predictable, and secure way to bring AI agents into their data workflows. SQL MCP Server accomplishes this goal without exposing the database or relying on fragile natural language parsing. By building on Data API builder's [entity abstraction](../configuration/entities.md), [RBAC](../concept/security/authorization.md), [caching](/azure/data-api-builder/concept/cache/level-1), and telemetry, the server delivers a production-ready surface that works the same across REST, GraphQL, and MCP. You configure it once, and the engine handles the rest.
+
+![Diagram showing how SQL MCP Server connects AI agents to SQL databases through the Data API builder abstraction layer.](media/overview/architecture-summary.svg)
 
 ## Model Context Protocol (MCP)
 
@@ -28,6 +32,20 @@ SQL MCP Server is included as part of Data API builder (DAB) starting in version
 > [!TIP]
 > Data API builder is open source and free to use.
 
+### MCP protocol details
+
+SQL MCP Server implements MCP protocol version 2025-06-18 as a fixed default. It supports two transports: streamable HTTP for standard hosting scenarios and stdio for local or CLI scenarios. During initialization, the server advertises tool and logging capabilities, returns server metadata (name and DAB version), and returns the [`instructions` field](./how-to-add-descriptions.md) from `runtime.mcp.description` so clients understand the server's purpose.
+
+#### Stdio transport
+
+The stdio transport is useful for local development and CLI-based workflows. You can specify a role with `role:<role-name>`, which defaults to `anonymous` when omitted. In this mode, authentication uses [the simulator provider](../concept/security/how-to-authenticate-simulator.md) and incoming requests are limited to 1 MB.
+
+```bash
+dab --mcp-stdio role:<role-name>
+```
+
+You can test SQL MCP Server with the MCP Inspector.
+
 ## Use cases
 
 Here are some typical use cases for SQL MCP Server:
@@ -38,16 +56,16 @@ Here are some typical use cases for SQL MCP Server:
 
 ## Securing the schema
 
-Data API builder uses a well-defined entity abstraction layer that lists all tables, views, and stored procedures exposed through the API in the configuration. This layer lets you alias names and columns, describe objects and parameters, and limit which fields are available to different roles.
+Data API builder uses a well-defined [entity abstraction layer](../configuration/entities.md) that lists all tables, views, and stored procedures exposed through the API in the configuration. This layer lets you alias names and columns, describe objects and parameters, and limit which fields are available to different roles.
 
 > [!IMPORTANT]
 > Data API builder (DAB) is role-aware and only exposes the entities and operations the current role is permitted to access.
 
 Because the SQL MCP Server is a feature of Data API builder, it also uses this abstraction layer. This approach prevents the internal schema from being exposed to external consumers and allows you to define complex, and even cross-datasource, families of objects and relationships at the API layer.
 
-## Solving NL2SQL 
+## Solving NL2SQL
 
-SQL MCP Server takes [a different approach](#the-dml-tools) from many of the short-sighted database MCP servers available today. A key example is that **we intentionally don't support NL2SQL**.
+SQL MCP Server takes [a different approach](#the-dml-tools) from many of the short-sighted database MCP servers available today. A key example is that **SQL MCP Server intentionally doesn't support NL2SQL**.
 
 Why? Models aren't deterministic, and complex queries are the most likely to produce subtle errors. These complex queries are often the ones users hope AI can generate, yet they're also the ones that require the most scrutiny when produced in a nondeterministic way.
 
@@ -58,14 +76,14 @@ Instead, SQL MCP Server supports what might be called an NL2DAB model. This appr
 
 ## Support for DDL
 
-DDL (Data Definition Language) is the database language used to create and alter objects such as tables and views. SQL MCP Server is built around DML (Data Manipulation Language), the database language used to create, read, update, and delete data in existing tables and views. DML also covers the execution of stored procedures. As a result, SQL MCP Server is designed to work with data, not schema. This design aligns with production MCP use cases where AI agents interact with mission critical or business sensitive systems.
+DDL (Data Definition Language) is the database language used to create and alter objects such as tables and views. SQL MCP Server is built around [DML (Data Manipulation Language)](./data-manipulation-language-tools.md), the database language used to create, read, update, and delete data in existing tables and views. DML also covers the execution of stored procedures. As a result, SQL MCP Server is designed to work with data, not schema. This design aligns with production MCP use cases where AI agents interact with mission-critical or business-sensitive systems.
 
 > [!TIP]
-> To modify schema during local development, engineers can use the MSSQL extension in Visual Studio Code (VS Code), which provides comprehensive DDL support.
+> To modify schema during local development, you can use the Microsoft SQL Server (MSSQL) extension in Visual Studio Code, which provides comprehensive DDL support.
 
 ## Support for RBAC
 
-SQL MCP Server benefits from the same proven role-based access control (RBAC) system used throughout Data API builder. Each entity in your configuration defines which roles may read, create, update, or delete data, and which fields are included or excluded for those roles. These rules apply automatically to every MCP tool, ensuring security remains consistent across REST, GraphQL, and MCP with no extra configuration required.
+SQL MCP Server benefits from the same proven [role-based access control (RBAC)](../concept/security/authorization.md) system used throughout Data API builder. Each entity in your configuration defines which roles may read, create, update, or delete data, and which fields are included or excluded for those roles. These rules apply automatically to every MCP tool, ensuring security remains consistent across REST, GraphQL, and MCP with no extra configuration required.
 
 > [!IMPORTANT]
 > Role-based constraints apply at every step of agent interaction.
@@ -86,10 +104,9 @@ SQL MCP Server is fully instrumented with OpenTelemetry (OTEL) spans and activit
 
 SQL MCP Server provides detailed health and entity checks across REST, GraphQL, and MCP endpoints. [Data API builder Health](/azure/data-api-builder/concept/monitor/health-checks) lets developers define performance expectations, set thresholds, and verify that each endpoint is functioning as expected.
 
+## How to configure SQL MCP Server
 
-## How to configure SQL MCP Server?
-
-MCP is configured in your DAB configuration file. If you already have a working Data API builder config, upgrading to version 1.7 or later automatically gives you a working SQL MCP Server with no extra steps required.
+MCP is configured in your [DAB configuration file](../configuration/index.md). If you already have a working Data API builder config, upgrading to version 1.7 or later automatically gives you a working SQL MCP Server with no extra steps required.
 
 ### Configuration
 
@@ -105,7 +122,7 @@ Getting started means creating the `dab-config.json` to control the engine. You 
 dab init --database-type mssql --connection-string "<your-connection-string>" --config dab-config.json --host-mode development
 ```
 
-You can specify each table, view, or stored procedure you want the SQL MCP Server to expose by adding them to the configuration. The CLI lets you easily add them, assign aliases, configure their permissions, and map columns if you want. Most importantly, with the `description` property, you can include semantic details to help language models better understand your data. 
+You can specify each table, view, or stored procedure you want the SQL MCP Server to expose by adding them to the configuration. The CLI lets you easily add them, assign aliases, configure their permissions, and map columns if you want. Most importantly, with the [`description` property](./how-to-add-descriptions.md), you can include semantic details to help language models better understand your data. 
 
 ```bash
 dab add {entity-name} \                          # object alias (Employees)
@@ -169,14 +186,16 @@ You also don't need to enable MCP on each entity. Entities participate automatic
 
 ## The DML tools
 
-SQL MCP Server exposes six Data Manipulation Language (DML) tools that enable AI agents to perform secure, type-safe database operations: `describe_entities`, `create_record`, `read_records`, `update_record`, `delete_record`, and `execute_entity`. These tools form a predictable CRUD surface that always reflects your configuration, permissions, and schema.
+SQL MCP Server exposes six [Data Manipulation Language (DML) tools](./data-manipulation-language-tools.md) that enable AI agents to perform secure, type-safe database operations: `describe_entities`, `create_record`, `read_records`, `update_record`, `delete_record`, and `execute_entity`. These tools form a predictable CRUD surface that always reflects your configuration, permissions, and schema.
 
 Each tool respects role-based access control (RBAC), entity permissions, and policies. Agents never interact directly with your database - they work through the secure Data API builder abstraction layer.
-
-For complete details on each tool, configuration options, and best practices, see [DML tools reference](data-manipulation-language-tools.md).
 
 ## Related content
 
 - [Adding semantic descriptions to SQL MCP Server](how-to-add-descriptions.md)
+- [Configure authentication for SQL MCP Server](how-to-configure-authentication.md)
 - [Data manipulation tools in SQL MCP Server](data-manipulation-language-tools.md)
 - [Deploy SQL MCP Server to Azure Container Apps](quickstart-azure-container-apps.md)
+- [Get started with SQL MCP Server in Visual Studio Code](quickstart-visual-studio-code.md)
+- [Get started with SQL MCP Server in .NET Aspire](quickstart-dotnet-aspire.md)
+- [Get started with SQL MCP Server in Azure AI Foundry](quickstart-azure-ai-foundry.md)
