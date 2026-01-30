@@ -1,6 +1,8 @@
 ---
 title: Quickstart - Azure Container Apps
 description: Learn how to deploy SQL MCP Server to Azure Container Apps and connect it to Azure AI Foundry agents. Step-by-step guide with Azure CLI deployment steps.
+author: jnixon
+ms.author: jnixon
 ms.topic: quickstart
 ms.date: 12/22/2025
 ---
@@ -312,7 +314,7 @@ az containerapp create `
 
 #### Your resource group should resemble the following example:
 
-:::image type="content" source="media/quickstart-azure-container-apps/azure-resource-group.png" lightbox="media/quickstart-azure-container-apps/azure-resource-group.png" alt-text="Screenshot of the Azure portal resource group after deployment.":::
+![Screenshot of the Azure portal resource group after deployment.](media/quickstart-azure-container-apps/azure-resource-group.png)
 
 ### 6. Get your MCP endpoint URL
 

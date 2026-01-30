@@ -1,6 +1,8 @@
 ---
 title: Quickstart - .NET Aspire
 description: Start SQL MCP Server with .NET Aspire. Build container-based solutions with SQL database, Data API builder, and MCP Inspector. Get started now.
+author: jnixon
+ms.author: jnixon
 ms.topic: quickstart
 ms.date: 12/22/2025
 ---

@@ -1,6 +1,8 @@
 ---
 title: Quickstart - Visual Studio Code local
 description: Learn how to start a SQL MCP Server locally using Data API builder without Aspire. Connect Visual Studio Code to your database and execute queries in minutes.
+author: jnixon
+ms.author: jnixon
 ms.topic: quickstart
 ms.date: 12/22/2025
 ---
