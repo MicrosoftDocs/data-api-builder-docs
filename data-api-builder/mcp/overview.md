@@ -11,7 +11,7 @@ ms.date: 12/22/2025
 
 [!INCLUDE[Note - Preview](includes/note-preview.md)]
 
-SQL MCP Server gives developers a simple, predictable, and secure way to bring AI agents into their data workflows. It accomplishes this without exposing the database or relying on fragile natural language parsing. By building on Data API builder's [entity abstraction](../configuration/entities.md), [RBAC](../concept/security/authorization.md), [caching](/azure/data-api-builder/concept/cache/level-1), and telemetry, SQL MCP Server delivers a production-ready surface that works the same across REST, GraphQL, and MCP. You configure it once, and the engine handles the rest.
+SQL MCP Server gives developers a simple, predictable, and secure way to bring AI agents into their data workflows. SQL MCP Server accomplishes this goal without exposing the database or relying on fragile natural language parsing. By building on Data API builder's [entity abstraction](../configuration/entities.md), [RBAC](../concept/security/authorization.md), [caching](/azure/data-api-builder/concept/cache/level-1), and telemetry, the server delivers a production-ready surface that works the same across REST, GraphQL, and MCP. You configure it once, and the engine handles the rest.
 
 ![Diagram showing how SQL MCP Server connects AI agents to SQL databases through the Data API builder abstraction layer.](media/overview/architecture-summary.svg)
 
@@ -36,7 +36,7 @@ SQL MCP Server is included as part of Data API builder (DAB) starting in version
 
 SQL MCP Server implements MCP protocol version 2025-06-18 as a fixed default. It supports two transports: streamable HTTP for standard hosting scenarios and stdio for local or CLI scenarios. During initialization, the server advertises tool and logging capabilities, returns server metadata (name and DAB version), and returns the [`instructions` field](./how-to-add-descriptions.md) from `runtime.mcp.description` so clients understand the server's purpose.
 
-#### stdio transport
+#### Stdio transport
 
 The stdio transport is useful for local development and CLI-based workflows. You can specify a role with `role:<role-name>`, which defaults to `anonymous` when omitted. In this mode, authentication uses [the simulator provider](../concept/security/how-to-authenticate-simulator.md) and incoming requests are limited to 1 MB.
 
@@ -44,7 +44,7 @@ The stdio transport is useful for local development and CLI-based workflows. You
 dab --mcp-stdio role:<role-name>
 ```
 
-For testing, SQL MCP Server is compatible with the MCP Inspector. See [MCP Inspector testing](mcp-inspector-testing.md) for quick validation workflows.
+You can test SQL MCP Server with the MCP Inspector.
 
 ## Use cases
 
@@ -79,7 +79,7 @@ Instead, SQL MCP Server supports what might be called an NL2DAB model. This appr
 DDL (Data Definition Language) is the database language used to create and alter objects such as tables and views. SQL MCP Server is built around [DML (Data Manipulation Language)](./data-manipulation-language-tools.md), the database language used to create, read, update, and delete data in existing tables and views. DML also covers the execution of stored procedures. As a result, SQL MCP Server is designed to work with data, not schema. This design aligns with production MCP use cases where AI agents interact with mission-critical or business-sensitive systems.
 
 > [!TIP]
-> To modify schema during local development, engineers can use the MSSQL extension in Visual Studio Code (VS Code), which provides comprehensive DDL support.
+> To modify schema during local development, you can use the Microsoft SQL Server (MSSQL) extension in Visual Studio Code, which provides comprehensive DDL support.
 
 ## Support for RBAC
 

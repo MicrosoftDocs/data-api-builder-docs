@@ -98,7 +98,7 @@ This command installs the tooling and creates the following files:
 
 ### 4. Complete the AppHost.cs file
 
-In this step, you update `AppHost.cs` with the correct code to run this quickstart. Replace the contents of `AppHost.cs` with the following:
+In this step, you update `AppHost.cs` with the correct code to run this quickstart. Replace the contents of `AppHost.cs` with the following code:
 
 ```csharp
 #:sdk Aspire.AppHost.Sdk@13.0.2
@@ -298,7 +298,7 @@ Aspire stops all services. SQL Server data persists between runs because the cod
 ### Database initialization script not found
 
 - Verify `init-db.sql` is in the AppHost project directory
-- Check that the file is included in the project and copies to output if required
+- Check that the file is included in the project and copies to output if necessary
 
 ### MCP Inspector can't connect
 
