@@ -1,6 +1,8 @@
 ---
 title: Configure Authentication for SQL MCP Server
 description: Learn how to configure inbound authentication from your client to SQL MCP Server and outbound authentication from SQL MCP Server to the database. This article includes Microsoft AI Foundry setup and the matching DAB configuration.
+author: jnixon
+ms.author: jnixon
 ms.topic: how-to
 ms.date: 01/09/2026
 ---
@@ -18,7 +20,7 @@ When you connect a client (for example, a Microsoft AI Foundry agent) to SQL MCP
 
 Use the following diagram to orient yourself. In the rest of this article, you configure **outbound** first (so the server can reach the database), then configure **inbound** (so your client can securely call the server).
 
-![Illustration of inbound and outbound authentication flows between the client app, SQL MCP Server, and database.](media/how-to-configure-authentication/inbound-outbound-authentication.svg)
+![Diagram showing inbound and outbound authentication flows between the client app, SQL MCP Server, and database.](media/how-to-configure-authentication/inbound-outbound-authentication.svg)
 
 > [!NOTE]
 > The "Client App" can be a Microsoft AI Foundry agent, a custom MCP client app, or another agent runtime. The inbound configuration on SQL MCP Server is the same regardless of which client calls the MCP endpoint.
@@ -33,13 +35,13 @@ Use the following diagram to orient yourself. In the rest of this article, you c
 
 You define outbound authentication in your `data-source` configuration. It's most commonly the connection string.
 
-![Illustration of outbound authentication flow from SQL MCP Server to the database.](media/how-to-configure-authentication/outbound-authentication.svg)
+![Diagram showing outbound authentication flow from SQL MCP Server to the database.](media/how-to-configure-authentication/outbound-authentication.svg)
 
 ### Multiple data sources
 
 SQL MCP Server supports multiple data sources through `data-source-files`. Each data source can have its own outbound authentication settings. For example, one database can use managed identity while another uses a SQL username and password. Data sources can also share a single identity, depending on how you configure database access.
 
-![Illustration of outbound authentication from SQL MCP Server to multiple databases with per-database credentials.](media/how-to-configure-authentication/multiple-outbound-authentication.svg)
+![Diagram showing outbound authentication from SQL MCP Server to multiple databases with per-database credentials.](media/how-to-configure-authentication/multiple-outbound-authentication.svg)
 
 For more information, see [Add more than one data source](../concept/config/multi-data-source.md) and [Data source configuration](../configuration/data-source.md).
 

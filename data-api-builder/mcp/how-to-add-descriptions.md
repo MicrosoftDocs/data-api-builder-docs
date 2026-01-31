@@ -1,6 +1,8 @@
 ---
 title: Add Descriptions to Entities
 description: Learn how to add semantic descriptions to SQL MCP Server entities, fields, and parameters to improve AI agent accuracy. Includes CLI examples and best practices.
+author: jnixon
+ms.author: jnixon
 ms.topic: how-to
 ms.date: 12/22/2025
 ---
