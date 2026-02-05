@@ -44,6 +44,9 @@
     - name: Azure Cosmos DB 
       href: quickstart/azure-cosmos-db-nosql.md
       displayName: azure, cosmos, nosql, cloud, database
+    - name: Enable the CQRS pattern
+      href: https://youtu.be/pSuMIvXRM1Q?t=142
+      displayName: architecture, design, htap, read, write
 - name: SQL MCP Server (preview)
   href: mcp/TOC.yml
 - name: Command-Line interface
@@ -435,4 +438,6 @@
       href: https://github.com/azure/data-api-builder/labels/known-issue
     - name: Support
       displayName: ticket, css, feedback, help, assistance
+
       href: https://github.com/Azure/data-api-builder/blob/main/SUPPORT.md
+
