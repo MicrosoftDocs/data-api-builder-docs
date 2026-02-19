@@ -254,7 +254,7 @@ Data API builder extracts claims from the authenticated user's JWT or identity p
 
 | Claim | Description | Example value |
 |-------|-------------|---------------|
-| `sub` | Subject identifier (user ID) | `a1b2c3d4-e5f6-7890-abcd-ef1234567890` |
+| `sub` | Subject identifier (user ID) | `00aa00aa-bb11-cc22-dd33-44ee44ee44ee` |
 | `userId` | Custom user identifier | `user123` |
 | `email` | User's email address | `user@example.com` |
 | `name` | User's display name | `Jane Doe` |
