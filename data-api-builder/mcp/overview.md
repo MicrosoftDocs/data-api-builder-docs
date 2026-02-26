@@ -41,7 +41,7 @@ SQL MCP Server implements MCP protocol version 2025-06-18 as a fixed default. It
 The stdio transport is useful for local development and CLI-based workflows. You can specify a role with `role:<role-name>`, which defaults to `anonymous` when omitted. In this mode, authentication uses [the simulator provider](../concept/security/how-to-authenticate-simulator.md) and incoming requests are limited to 1 MB.
 
 ```bash
-dab --mcp-stdio role:<role-name>
+dab start --mcp-stdio role:<role-name>
 ```
 
 You can test SQL MCP Server with the MCP Inspector.
