@@ -13,7 +13,7 @@ ms.date: 01/22/2026
 
 This guide walks you through configuring Microsoft Entra ID (formerly Azure Active Directory) authentication for Data API builder. By the end, your client app authenticates users through Entra, acquires tokens for Data API builder, and DAB can use managed identity to connect to Azure SQL.
 
-Data API builder authenticates incoming requests using either JWT bearer validation (`EntraID`/`AzureAD`/`Custom`) or platform-provided identity headers (`AppService`). For local development and permission testing, use the `Simulator` provider.
+Data API builder authenticates incoming requests using either JSON Web Token (JWT) bearer validation (`EntraID`/`AzureAD`/`Custom`) or platform-provided identity headers (`AppService`). For local development and permission testing, use the `Simulator` provider.
 
 ![Illustration of how clients authenticate to Data API builder using JWT tokens.](media/how-to-authenticate-entra/authentication-inbound-flow.svg)
 
@@ -39,7 +39,7 @@ The flow has three distinct phases:
 | **Database access** | Data API builder validates the token, then connects to the database using its own identity (managed identity or connection string credentials) |
 
 > [!IMPORTANT]
-> Data API builder validates the incoming user token for API authentication, but connects to the database using its **own** credentials (managed identity or SQL authentication). DAB does not perform On-Behalf-Of (OBO) token exchange to access the database as the calling user.
+> Data API builder validates the incoming user token for API authentication, but connects to the database using its **own** credentials (managed identity or SQL authentication). DAB doesn't perform On-Behalf-Of (OBO) token exchange to access the database as the calling user.
 
 ## Prerequisites
 
@@ -62,11 +62,11 @@ The flow has three distinct phases:
 | Role claim type | `roles` (fixed, not configurable) |
 
 > [!NOTE]
-> When using `EntraID` or `AzureAD` as the provider, DAB enables extra signing key issuer validation specific to Microsoft Entra tokens. This provides stronger security compared to the generic `Custom` provider.
+> If you use `EntraID` or `AzureAD` as the provider, DAB enables extra signing key issuer validation specific to Microsoft Entra tokens. This validation provides stronger security compared to the generic `Custom` provider.
 
 ## Step 1: Register an application in Microsoft Entra ID
 
-Create an app registration that represents your Data API builder API. Client apps will request tokens with an audience that matches this registration.
+Create an app registration that represents your Data API builder API. Client apps request tokens with an audience that matches this registration.
 
 1. Sign in to the [Microsoft Entra admin center](https://entra.microsoft.com/).
 
@@ -142,7 +142,7 @@ If you want to use custom roles beyond `Anonymous` and `Authenticated`:
 
 1. Select **Apply**.
 
-1. Repeat for additional roles (for example, `writer`, `admin`).
+1. Repeat for more roles (for example, `writer`, `admin`).
 
 ### Set the manifest token version
 
@@ -155,7 +155,7 @@ By default, the app registration manifest sets `accessTokenAcceptedVersion` to `
 1. Select **Save**.
 
 > [!IMPORTANT]
-> If `accessTokenAcceptedVersion` is `null` or `1`, the `iss` claim in the token won't match the v2.0 issuer URL configured in DAB, and all requests will fail with `401 Unauthorized`.
+> If `accessTokenAcceptedVersion` is `null` or `1`, the `iss` claim in the token doesn't match the v2.0 issuer URL configured in DAB, and all requests fail with `401 Unauthorized`.
 
 ### Assign users to app roles
 
@@ -178,7 +178,7 @@ Creating app roles doesn't automatically grant them to users. You must assign us
 1. Repeat for each role you want to assign.
 
 > [!NOTE]
-> Without role assignment, the `roles` claim in the user's token will be empty, and requests using `X-MS-API-ROLE` with a custom role will be rejected with `403 Forbidden`.
+> Without role assignment, the `roles` claim in the user's token is empty, and requests using `X-MS-API-ROLE` with a custom role are rejected with `403 Forbidden`.
 
 ## Step 2: Configure Data API builder
 
@@ -311,7 +311,7 @@ dab update Book ^
 Data API builder connects to the database using its own identity, separate from the authenticated user. For production scenarios with Azure SQL, use managed identity.
 
 > [!NOTE]
-> The database connection uses DAB's service identity (managed identity or SQL credentials), not the calling user's identity. DAB does not pass through user tokens to the database.
+> The database connection uses DAB's service identity (managed identity or SQL credentials), not the calling user's identity. DAB doesn't pass through user tokens to the database.
 
 ### Option A: Managed identity (recommended for Azure)
 
@@ -402,7 +402,7 @@ az account get-access-token --scope api://<your-app-id>/Endpoint.Access --query 
 ```
 
 > [!NOTE]
-> If you receive an `AADSTS65001` consent error, verify that you added the Azure CLI client ID (`04b07795-a71b-4346-935f-02f9a1efa4ce`) as an authorized client application in the previous step.
+> If you received an `AADSTS65001` consent error, verify that you added the Azure CLI client ID (`04b07795-a71b-4346-935f-02f9a1efa4ce`) as an authorized client application in the previous step.
 
 You can inspect the token at [jwt.ms](https://jwt.ms) to verify the `aud`, `iss`, and `roles` claims.
 
@@ -451,7 +451,7 @@ Data API builder determines the request's role using this logic:
 | `401 Unauthorized` | Token expired or malformed | Acquire a fresh token; check token at [jwt.ms](https://jwt.ms) |
 | `401 Unauthorized` | Audience mismatch | Verify `jwt.audience` matches the token's `aud` claim |
 | `401 Unauthorized` | Issuer mismatch | Verify `jwt.issuer` matches the token's `iss` claim exactly |
-| `403 Forbidden` | Role not in token | Ensure the user is assigned the app role in Entra |
+| `403 Forbidden` | Role not in token | Ensure the user is assigned to the app role in Entra |
 | `403 Forbidden` | No permissions for role | Add the role to the entity's `permissions` array |
 
 ## Complete configuration example
