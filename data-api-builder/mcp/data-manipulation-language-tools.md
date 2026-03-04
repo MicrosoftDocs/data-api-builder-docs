@@ -98,7 +98,14 @@ Creates a new row in a table. Requires create permission on the entity for the c
 
 Queries a table or view. Supports filtering, sorting, pagination, and field selection. The tool builds deterministic SQL from structured parameters, applies read permissions and field projections, and enforces row-level security policies.
 
-Results from `read_records` are automatically cached using Data API builder's caching system. You can configure cache time-to-live (TTL) globally or per-entity to reduce database load.
+> [!IMPORTANT]
+> Results from `read_records` are automatically cached using Data API builder's caching system. You can configure cache [time-to-live (TTL) globally](../configuration/runtime.md#cache-runtime) or [per-entity](../configuration/entities.md#cache) to reduce database load.
+
+#### JOIN operations
+
+The `read_records` tool is designed for a single table or view. As a result, JOIN operations are not supported here. This helps isolate responsibility, improve performance, and limit the impact on your session’s context window. 
+
+However, JOIN operations are not an edge case, and Data API builder (DAB) already supports sophisticated querying through the GraphQL endpoint. Our goal is to soon bring that same capability to agents in a way that is safe, performant, and easy to understand. Today, for more complex queries, we recommend using a view instead of a table. You can also use the `execute_entity` tool to run stored procedures to encapsulate parameterized queries.
 
 ### update_record
 
@@ -108,8 +115,8 @@ Modifies an existing row. Requires the primary key and fields to update. The too
 
 Removes an existing row. Requires the primary key. The tool validates the primary key exists, enforces delete permissions and policies, and performs safe deletion with transaction support.
 
-> [!WARNING]
-> Some production scenarios will disable this tool globally to broadly constrain models.
+> [!NOTE]
+> Some production scenarios will disable this tool globally to broadly constrain models. This is up to you and it is worth remembering that entity-level permissions remain the most important way to control access. Even with `delete-record` enabled, if a role doesn't have delete permission on an entity, the tool won't be available for that entity.
 
 ### execute_entity
 
