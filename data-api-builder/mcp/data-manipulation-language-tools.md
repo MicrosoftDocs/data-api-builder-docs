@@ -51,6 +51,9 @@ When an agent calls `list_tools`, SQL MCP Server returns:
 
 Returns the entities available to the current role. Each entry includes field names, data types, primary keys, and allowed operations. This tool doesn't query the database. Instead, it reads from the in-memory configuration built from your config file.
 
+> [!IMPORTANT]
+> The `fields` information in `describe_entities` is derived from the `fields` data you provide in the configuration. Because this data is optional, if you do not include it, agents will only see entity names with an empty `fields` array. It is a best practice to include both fields and descriptions of those fields in your configuration. This gives agents more context to generate accurate queries and updates. Learn more about [field descriptions here](./how-to-add-descriptions.md#2-add-field-descriptions).
+
 ```json
 {
   "entities": [
