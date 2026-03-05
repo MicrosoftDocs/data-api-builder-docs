@@ -380,7 +380,7 @@ Before Azure CLI can acquire tokens for your API, you must add it as an authoriz
 
 1. Under **Authorized client applications**, select **Add a client application**.
 
-1. Enter the Azure CLI client ID: `04b07795-a71b-4346-935f-02f9a1efa4ce`.
+1. Enter the Azure CLI client ID: `00001111-aaaa-2222-bbbb-3333cccc4444`.
 
 1. Select the `api://<app-id>/Endpoint.Access` scope.
 
@@ -402,7 +402,7 @@ az account get-access-token --scope api://<your-app-id>/Endpoint.Access --query 
 ```
 
 > [!NOTE]
-> If you received an `AADSTS65001` consent error, verify that you added the Azure CLI client ID (`04b07795-a71b-4346-935f-02f9a1efa4ce`) as an authorized client application in the previous step.
+> If you received an `AADSTS65001` consent error, verify that you added the Azure CLI client ID (`00001111-aaaa-2222-bbbb-3333cccc4444`) as an authorized client application in the previous step.
 
 You can inspect the token at [jwt.ms](https://jwt.ms) to verify the `aud`, `iss`, and `roles` claims.
 
