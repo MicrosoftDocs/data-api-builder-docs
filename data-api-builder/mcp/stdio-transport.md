@@ -9,7 +9,7 @@ ms.date: 03/04/2026
 
 # Stdio transport for SQL MCP Server
 
-[!INCLUDE[Note - Preview](includes/note-preview.md)]
+[!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
 SQL MCP Server supports two transports: **streamable HTTP** for hosted and cloud scenarios, and **stdio** for local development and direct agent integration. This article covers the stdio transport.
 
