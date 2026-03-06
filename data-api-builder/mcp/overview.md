@@ -9,7 +9,7 @@ ms.date: 12/22/2025
 
 # What is SQL MCP Server?
 
-[!INCLUDE[Note - Preview](includes/note-preview.md)]
+[!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
 SQL MCP Server gives developers a simple, predictable, and secure way to bring AI agents into their data workflows. SQL MCP Server accomplishes this goal without exposing the database or relying on fragile natural language parsing. By building on Data API builder's [entity abstraction](../configuration/entities.md), [RBAC](../concept/security/authorization.md), [caching](/azure/data-api-builder/concept/cache/level-1), and telemetry, the server delivers a production-ready surface that works the same across REST, GraphQL, and MCP. You configure it once, and the engine handles the rest.
 

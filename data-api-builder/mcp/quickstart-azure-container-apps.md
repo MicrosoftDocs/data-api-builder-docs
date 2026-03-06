@@ -13,7 +13,7 @@ ms.date: 12/22/2025
 
 ![Diagram that shows a SQL MCP Server deployed to Azure Container Apps.](media/quickstart-azure-container-apps/diagram.svg)
 
-[!INCLUDE[Note - Preview](includes/note-preview.md)]
+[!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
 This quickstart shows you how to deploy SQL MCP Server to Azure Container Apps. Once deployed, you can connect to it from Visual Studio Code (VS Code), Microsoft Foundry, or any other Model Context Protocol (MCP) client as a remote server endpoint.
 
@@ -65,11 +65,11 @@ brew install dotnet@9
 
 ```bash
 dotnet new tool-manifest
-dotnet tool install microsoft.dataapibuilder --prerelease
+dotnet tool install microsoft.dataapibuilder
 ```
 
 > [!NOTE]
-> SQL MCP Server is currently in prerelease. Using the `--prerelease` flag ensures you get the latest version of Data API builder with all the features used in this quickstart.
+> SQL MCP Server features are available in Data API builder version 1.7 and later.
 
 ### PowerShell
 
@@ -251,7 +251,7 @@ az acr create `
 Create a file named `Dockerfile` in the same folder as your `dab-config.json`:
 
 ```dockerfile
-FROM mcr.microsoft.com/azure-databases/data-api-builder:1.7.83-rc
+FROM mcr.microsoft.com/azure-databases/data-api-builder:1.7
 COPY dab-config.json /App/dab-config.json
 ```
 
@@ -549,7 +549,7 @@ az acr create `
 
 # Create Dockerfile
 @"
-FROM mcr.microsoft.com/azure-databases/data-api-builder:1.7.83-rc
+FROM mcr.microsoft.com/azure-databases/data-api-builder:1.7
 COPY dab-config.json /App/dab-config.json
 "@ | Out-File -FilePath Dockerfile -Encoding utf8
 

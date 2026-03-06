@@ -9,7 +9,7 @@ ms.date: 01/09/2026
 
 # Configure authentication for SQL MCP Server
 
-[!INCLUDE[Note - Preview](includes/note-preview.md)]
+[!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
 SQL MCP Server exposes a Model Context Protocol (MCP) endpoint in Data API builder. Some authentication options use JSON Web Tokens (JWTs).
 

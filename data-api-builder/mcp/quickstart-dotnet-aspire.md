@@ -13,7 +13,7 @@ ms.date: 12/22/2025
 
 ![Diagram that shows the Aspire solution with SQL Server, SQL MCP Server, and MCP Inspector.](media/quickstart-dotnet-aspire/diagram.svg)
 
-[!INCLUDE[Note - Preview](includes/note-preview.md)]
+[!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
 This quickstart uses Aspire to build a container-based solution. The solution includes:
 
@@ -77,12 +77,12 @@ In this step, you create the default Aspire project files used later. Run the fo
 ```bash
 dotnet new tool-manifest
 dotnet tool install aspire.cli
-dotnet tool install microsoft.dataapibuilder --prerelease
+dotnet tool install microsoft.dataapibuilder
 aspire init
 ```
 
 > [!NOTE]
-> SQL MCP Server is currently in prerelease. Using the `--prerelease` flag ensures you get the latest version of Data API builder with all the features used in this quickstart.
+> SQL MCP Server features are available in Data API builder version 1.7 and later.
 
 When prompted, select all defaults.
 
@@ -138,7 +138,7 @@ IResourceBuilder<ContainerResource> WithSqlCommander(IResourceBuilder<SqlServerD
     });
 
 IResourceBuilder<ContainerResource> AddMcpServer(IResourceBuilder<SqlServerDatabaseResource> db) => db
-    .ApplicationBuilder.AddContainer("sql-mcp-server", "azure-databases/data-api-builder", "1.7.83-rc")
+    .ApplicationBuilder.AddContainer("sql-mcp-server", "azure-databases/data-api-builder", "1.7")
     .WithImageRegistry("mcr.microsoft.com")
     .WithHttpEndpoint(targetPort: 5000, name: "http")
     .WithEnvironment("MSSQL_CONNECTION_STRING", db)
