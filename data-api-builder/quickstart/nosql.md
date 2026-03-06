@@ -69,7 +69,7 @@ Start by running the local emulator. Then, you can seed a new container with sam
 1. Connect to your local database using your preferred data management environment. Examples include, but aren't limited to: the [Azure Databases extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-cosmosdb).
 
     > [!TIP]
-    > The default connection string for the emulator is `AccountEndpoint=https://localhost:8081;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==;`.
+    > The default emulator connection string is `AccountEndpoint=https://localhost:8081/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==`.
 
 1. Create a new `bookshelf` database and `authors` container.
 
@@ -135,7 +135,7 @@ Start by running the local emulator. Then, you can seed a new container with sam
 
 Create a baseline configuration file using the DAB CLI. Then, add a development configuration file with your current credentials.
 
-1. Create a new file named *schema.graphql* with this schema content.
+1. Create a new file named *schema.gql* with this schema content.
 
     ```graphql
     type Author @model {
@@ -146,10 +146,13 @@ Create a baseline configuration file using the DAB CLI. Then, add a development 
     }
     ```
 
+    > [!NOTE]
+    > In this example, `@model` doesn't specify a `name` argument. When `name` is omitted, DAB maps the GraphQL type name (`Author`) to the entity name (`Author`). The names must match exactly and are case-sensitive.
+
 1. Create a typical configuration file using `dab init`. Add the `--connection-string` argument with the emulator's default connection string.
 
     ```dotnetcli
-    dab init --database-type "cosmosdb_nosql" --host-mode "Development" --cosmosdb_nosql-database bookshelf --graphql-schema schema.graphql --connection-string "AccountEndpoint=https://localhost:8081;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==;"
+    dab init --database-type "cosmosdb_nosql" --host-mode "Development" --cosmosdb_nosql-database bookshelf --graphql-schema schema.gql --connection-string "AccountEndpoint=https://localhost:8081/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw=="
     ```
 
 1. Add an **Author** entity using `dab add`.
@@ -182,6 +185,8 @@ Now, start the Data API builder tool to validate that your configuration files a
 
 1. Go to the GraphQL endpoint by navigating to `/graphql` and running this operation.
 
+    Before querying GraphQL, you can validate startup by opening the root endpoint (`http://localhost:5000`). A healthy response includes fields such as `status`, `version`, and `app-name`.
+
     ```graphql
     query {
       authors {
@@ -195,7 +200,9 @@ Now, start the Data API builder tool to validate that your configuration files a
     ```
 
     > [!TIP]
-    > In this example, the URL would be `https://localhost:5000/graphql`. You can navigate to this URL using your web browser.
+    > In this example, the URL is `http://localhost:5000/graphql`.
+    >
+    > Because this quickstart uses `--host-mode "Development"`, browser navigation to `/graphql` opens Nitro. In Production mode, Nitro isn't shown for browser navigation to `/graphql`.
 
 ## Next step
 
