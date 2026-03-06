@@ -1,21 +1,21 @@
 ---
 title: Quickstart - Visual Studio Code local
-description: Learn how to start a SQL MCP Server locally using Data API builder without Aspire. Connect Visual Studio Code to your database and execute queries in minutes.
+description: Learn how to start a SQL Model Context Protocol (MCP) Server locally using Data API builder without Aspire. Connect Visual Studio (VS) Code to your database and execute queries in minutes.
 author: jnixon
 ms.author: jnixon
 ms.topic: quickstart
-ms.date: 12/22/2025
+ms.date: 03/04/2026
 ---
 
 # Quickstart: Use SQL MCP Server with Visual Studio Code locally
 
 [!INCLUDE[Section - Quickstart selector](includes/section-quickstart-selector.md)]
 
-![Diagram that shows a local SQL MCP Server connected to Visual Studio Code.](media/quickstart-visual-studio-code/diagram.svg)
+![Diagram showing a local SQL MCP Server connected to Visual Studio Code.](media/quickstart-visual-studio-code/diagram.svg)
 
 [!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
-This quickstart uses the Data API builder CLI to run a SQL MCP Server locally without Aspire. You create a database, configure a config file, start SQL MCP Server, and connect to it from Visual Studio Code (VS Code) using a custom tool. This path is the easiest way to explore SQL MCP Server without containers or hosting frameworks.
+This quickstart uses the Data API builder CLI to run a SQL Model Context Protocol (MCP) Server locally without Aspire. You create a database, configure a config file, start SQL MCP Server, and connect to it from Visual Studio (VS) Code using a custom tool. This path is the easiest way to explore SQL MCP Server without containers or hosting frameworks.
 
 ## Prerequisites
 
@@ -122,9 +122,15 @@ Your SQL MCP Server is fully configured.
 
 ## Step 3: Start SQL MCP Server
 
+SQL MCP Server supports two transport modes. Choose the one that fits your workflow.
+
+### Option A: HTTP transport (server runs separately)
+
+In HTTP mode, you start DAB as a long-running process in a terminal and VS Code connects to it over a local HTTP endpoint.
+
 Before connecting from VS Code, start the SQL MCP Server in a separate terminal.
 
-### Open a terminal and run
+#### Open a terminal and run
 
 ```bash
 dab start --config dab-config.json
@@ -134,6 +140,17 @@ This command starts the SQL MCP Server. After startup, the terminal output shows
 
 > [!NOTE]
 > You can customize the port by configuring the runtime settings in your `dab-config.json` or by setting environment variables such as `ASPNETCORE_URLS`.
+
+### Option B: stdio transport (VS Code manages the process)
+
+In `stdio` mode, DAB launches as a child process managed directly by VS Code. You do **not** need to run `dab start` in a terminal—VS Code starts and stops DAB automatically when you open the workspace.
+
+This mode is recommended for local development. There's no HTTP port to manage and no terminal process to keep running.
+
+> [!NOTE]
+> The `stdio` transport requires `"mcp": { "enabled": true }` in the `runtime` section of your `dab-config.json`. For full details, see [`stdio` transport for SQL MCP Server](stdio-transport.md).
+
+Skip to [Step 4](#step-4-connect-from-vs-code) to configure the VS Code MCP server definition for your chosen transport.
 
 ## Step 4: Connect from VS Code
 
@@ -147,7 +164,35 @@ This command starts the SQL MCP Server. After startup, the terminal output shows
 
 ### Create your MCP server definition
 
-Create a file named `.vscode/mcp.json` and add the following content:
+Create a file named `.vscode/mcp.json` and add the content for your chosen transport.
+
+#### [`stdio` transport (Option B—recommended for local dev)](#tab/stdio)
+
+In `stdio` mode, VS Code launches DAB as a child process. You don't need a running terminal—VS Code manages the process lifecycle.
+
+```json
+{
+  "servers": {
+    "sql-mcp-server": {
+      "type": "stdio",
+      "command": "dab",
+      "args": [
+        "start",
+        "--mcp-stdio",
+        "role:anonymous",
+        "--config",
+        "${workspaceFolder}/dab-config.json"
+      ]
+    }
+  }
+}
+```
+
+Replace `role:anonymous` with a role defined in your entity permissions if you want to restrict or expand access. For more information about roles and transport options, see [`stdio` transport for SQL MCP Server](stdio-transport.md).
+
+#### [HTTP transport (Option A)](#tab/http)
+
+In HTTP mode, VS Code connects to the DAB server you started in Step 3. Keep your `dab start` terminal running.
 
 ```json
 {
@@ -159,6 +204,8 @@ Create a file named `.vscode/mcp.json` and add the following content:
   }
 }
 ```
+
+---
 
 Save the file. VS Code detects the MCP server configuration automatically. You may need to reload the window (**Developer: Reload Window** from the Command Palette).
 
@@ -184,5 +231,6 @@ Which products have an inventory under 30?
 ## Related content
 
 - [Overview of SQL MCP Server](overview.md)
+- [`stdio` transport for SQL MCP Server](stdio-transport.md)
 - [Data manipulation tools in SQL MCP Server](data-manipulation-language-tools.md)
 - [Adding semantic descriptions to SQL MCP Server](how-to-add-descriptions.md)

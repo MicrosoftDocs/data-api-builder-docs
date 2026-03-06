@@ -152,12 +152,12 @@ Set properties individually using the Data API builder CLI:
 ```bash
 dab configure --runtime.mcp.enabled true
 dab configure --runtime.mcp.path "/mcp"
-dab configure --runtime.mcp.dml-tools.describe-entities true
-dab configure --runtime.mcp.dml-tools.create-record true
-dab configure --runtime.mcp.dml-tools.read-records true
-dab configure --runtime.mcp.dml-tools.update-record true
-dab configure --runtime.mcp.dml-tools.delete-record true
-dab configure --runtime.mcp.dml-tools.execute-entity true
+dab configure --runtime.mcp.dml-tools.describe-entities.enabled true
+dab configure --runtime.mcp.dml-tools.create-record.enabled true
+dab configure --runtime.mcp.dml-tools.read-records.enabled true
+dab configure --runtime.mcp.dml-tools.update-record.enabled true
+dab configure --runtime.mcp.dml-tools.delete-record.enabled true
+dab configure --runtime.mcp.dml-tools.execute-entity.enabled true
 ```
 
 ### Disabling tools
@@ -195,28 +195,42 @@ Entities participate in MCP automatically unless you explicitly restrict them. T
 
 If you don't specify `mcp.dml-tools` on an entity, it defaults to `true` when MCP is enabled globally.
 
-### Fine-grained control
+### Scope of per-tool control
 
-You can disable specific tools for individual entities:
+Per-tool toggles are configured only at the global runtime level under `runtime.mcp.dml-tools`.
+
+At the entity level, `mcp.dml-tools` is a boolean gate that enables or disables all DML tools for that entity.
 
 ```json
 {
   "entities": {
     "AuditLogs": {
       "mcp": {
-        "dml-tools": {
-          "create-record": true,
-          "read-records": true,
-          "update-record": false,
-          "delete-record": false
-        }
+        "dml-tools": false
       }
     }
   }
 }
 ```
 
-This configuration allows agents to create and read audit logs but prevents modification or deletion.
+```json
+{
+  "runtime": {
+    "mcp": {
+      "dml-tools": {
+        "describe-entities": true,
+        "create-record": true,
+        "read-records": true,
+        "update-record": true,
+        "delete-record": false,
+        "execute-entity": true
+      }
+    }
+  }
+}
+```
+
+A tool is available only if enabled globally and the entity allows DML tools.
 
 ## RBAC integration
 
