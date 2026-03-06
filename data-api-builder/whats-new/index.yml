@@ -12,6 +12,12 @@ metadata:
   ms.topic: landing-page
   ms.date: 09/24/2025
 landingContent:
+- title: Version 1.7
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: Release notes
+      url: version-1-7.md
 - title: Version 1.6
   linkLists:
   - linkListType: whats-new
