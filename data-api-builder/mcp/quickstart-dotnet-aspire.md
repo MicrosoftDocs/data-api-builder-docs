@@ -13,7 +13,7 @@ ms.date: 12/22/2025
 
 ![Diagram that shows the Aspire solution with SQL Server, SQL MCP Server, and MCP Inspector.](media/quickstart-dotnet-aspire/diagram.svg)
 
-[!INCLUDE[Note - SQL MCP availability](includes/note-preview.md)]
+[!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
 This quickstart uses Aspire to build a container-based solution. The solution includes:
 

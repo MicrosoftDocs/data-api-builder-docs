@@ -13,7 +13,7 @@ ms.date: 12/22/2025
 
 ![Diagram that shows a deployed SQL MCP Server connected to Azure AI Foundry.](media/quickstart-azure-ai-foundry/diagram.svg)
 
-[!INCLUDE[Note - SQL MCP availability](includes/note-preview.md)]
+[!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
 This quickstart shows you how to connect a deployed SQL MCP Server to Azure AI Foundry using a Custom MCP Tool. You test everything using the Chat Playground with a chat model such as GPT-5-mini - no coding required.
 

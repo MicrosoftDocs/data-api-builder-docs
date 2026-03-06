@@ -9,7 +9,7 @@ ms.date: 12/22/2025
 
 # Add descriptions to SQL MCP Server entities
 
-[!INCLUDE[Note - SQL MCP availability](includes/note-preview.md)]
+[!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
 Descriptions are semantic metadata that help AI agents understand your SQL MCP Server database schema. When you add descriptions to entities, fields, and parameters, language models make better decisions about which data to query and how to use it. This article shows you how to add descriptions at every level using the Data API builder CLI, improving AI agent accuracy and tool discovery.
 

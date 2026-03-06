@@ -9,7 +9,7 @@ ms.date: 12/22/2025
 
 # Data manipulation language (DML) tools in SQL MCP Server
 
-[!INCLUDE[Note - SQL MCP availability](includes/note-preview.md)]
+[!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
 SQL MCP Server exposes six Data Manipulation Language (DML) tools to AI agents. These tools provide a typed CRUD surface for database operations—creating, reading, updating, and deleting records plus executing stored procedures. All tools respect role-based access control (RBAC), entity permissions, and policies defined in your configuration.
 
