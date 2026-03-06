@@ -21,7 +21,7 @@ Azure Cosmos DB for NoSQL is a schema-agnostic document database. Unlike relatio
 
 ## Understand the schema requirement
 
-Because Azure Cosmos DB for NoSQL doesn't enforce a schema, DAB can't automatically generate GraphQL types from your data. Instead, you must provide a GraphQL schema file that defines:
+Because Azure Cosmos DB for NoSQL doesn't enforce a schema, DAB can't automatically generate GraphQL types from your data. Instead, you need to provide a GraphQL schema file that defines:
 
 - **Object types** that represent your container's document structure
 - **The `@model` directive** that maps GraphQL types to entity names in your DAB configuration
@@ -31,7 +31,7 @@ You can handcraft the schema (examples below) or generate it from existing Cosmo
 
 ## Create a GraphQL schema file
 
-Create a `.graphql` file that describes your data model. The schema file uses standard GraphQL Schema Definition Language (SDL) with custom directives for DAB.
+Create a `.gql` file that describes your data model. The schema file uses standard GraphQL Schema Definition Language (SDL) with custom directives for DAB.
 
 ### Basic schema example
 
@@ -55,7 +55,7 @@ type Author @model(name: "Author") {
 
 ### Generate a schema from Cosmos DB data
 
-If you already have data in your containers, you can sample it to create a starting schema. This command writes an inferred GraphQL schema to the `schema-out` folder.
+If you already have data in your containers, you can sample it to create a starting schema. This command writes an inferred GraphQL schema file to the output directory you specify with `-o`.
 
 #### [Bash](#tab/bash-cli)
 
@@ -77,7 +77,14 @@ dab export ^
 
 ---
 
-By default, sampling uses `TopNExtractor`. For other modes and options, see the [CLI reference for `dab export`](../command-line/dab-export.md).
+By default, sampling uses `TopNExtractor`.
+
+The supported sampling modes are `TopNExtractor`, `EligibleDataSampler`, and `TimePartitionedSampler`.
+
+> [!NOTE]
+> The `-o`/`--output` parameter is required. If you don't specify a schema file name, DAB generates `schema.gql` in the output directory.
+>
+> For other modes and options, see the [CLI reference for `dab export`](../command-line/dab-export.md).
 
 The `@model` directive is required. It maps the GraphQL type to an entity name in your DAB configuration file. The `name` parameter must match the entity name exactly.
 
@@ -106,7 +113,7 @@ In this example:
 You can also apply `@authorize` at the type level to restrict access to the entire type:
 
 ```graphql
-type InternalReport @model(name: "InternalReport") @authorize(roles: ["editor", "authenticated"]) {
+type InternalReport @model(name: "InternalReport") @authorize(roles: ["editor", "auditor"]) {
   id: ID
   title: String
   confidentialData: String
@@ -117,6 +124,9 @@ type InternalReport @model(name: "InternalReport") @authorize(roles: ["editor", 
 > The `@authorize` directive works **in addition to** entity-level permissions defined in the runtime configuration. Both the `@authorize` directive and entity permissions must allow access for a request to succeed.
 >
 > For example, if a field has `@authorize(roles: ["editor"])`, but the entity has no permission entry for the `editor` role, access to that field is denied.
+
+> [!WARNING]
+> `@authorize(policy: "...")` isn't supported in this schema flow. Use `@authorize(roles: [...])`.
 
 ## Configure the DAB runtime
 
@@ -132,7 +142,7 @@ Use the `dab init` command to create a configuration file for Azure Cosmos DB:
 dab init \
   --database-type cosmosdb_nosql \
   --cosmosdb_nosql-database <your-database-name> \
-  --graphql-schema schema.graphql \
+  --graphql-schema schema.gql \
   --connection-string "<your-connection-string>"
 ```
 
@@ -142,13 +152,15 @@ dab init \
 dab init ^
   --database-type cosmosdb_nosql ^
   --cosmosdb_nosql-database <your-database-name> ^
-  --graphql-schema schema.graphql ^
+  --graphql-schema schema.gql ^
   --connection-string "<your-connection-string>"
 ```
 
 ---
 
 Replace `<your-database-name>` with your Azure Cosmos DB database name and `<your-connection-string>` with your connection string.
+
+Optionally, include `--cosmosdb_nosql-container <your-container-name>` to set a default container in the data source configuration.
 
 > [!TIP]
 > For production environments, use environment variables for connection strings instead of hardcoding them:
@@ -157,7 +169,7 @@ Replace `<your-database-name>` with your Azure Cosmos DB database name and `<you
 > dab init \
 >     --database-type cosmosdb_nosql \
 >     --cosmosdb_nosql-database <your-database-name> \
->     --graphql-schema schema.graphql \
+>     --graphql-schema schema.gql \
 >     --connection-string "@env('COSMOSDB_CONNECTION_STRING')"
 > ```
 
@@ -183,7 +195,7 @@ dab add Book ^
 
 ---
 
-The `--source` parameter specifies the Azure Cosmos DB container name.
+The `--source` parameter accepts either `<container-name>` or `<database-name>.<container-name>`. Use the two-part format when you want to be explicit about both database and container.
 
 ### Configuration file example
 
@@ -196,7 +208,7 @@ After initialization, your configuration file should look similar to this:
     "database-type": "cosmosdb_nosql",
     "options": {
       "database": "Library",
-      "schema": "schema.graphql"
+      "schema": "schema.gql"
     },
     "connection-string": "@env('COSMOSDB_CONNECTION_STRING')"
   },
@@ -220,6 +232,8 @@ After initialization, your configuration file should look similar to this:
 
 > [!NOTE]
 > The `schema` path in the configuration file is relative to the location of the DAB configuration file. Ensure your GraphQL schema file is in the correct directory.
+>
+> This `$schema` URL points to a specific DAB release. Use the schema URL that matches your DAB version.
 
 ## Role-based field access
 
@@ -230,6 +244,8 @@ When using the `@authorize` directive with roles, consider how roles are assigne
 | **Anonymous request** | No roles assigned | Denied |
 | **Authenticated request** | The `authenticated` system role is automatically assigned | Allowed if role matches |
 | **Custom role request** | Include the `X-MS-API-ROLE` header with the role name | Allowed if role matches |
+
+This table applies to fields or types that explicitly include `@authorize`. For fields without `@authorize`, access is determined by entity-level permissions.
 
 For authenticated requests needing a custom role, send the `X-MS-API-ROLE` header:
 
@@ -242,7 +258,11 @@ X-MS-API-ROLE: metadataviewer
 
 ## Cross-container queries
 
-GraphQL operations across containers aren't currently supported in Azure Cosmos DB for NoSQL. If you attempt to configure relationships between entities in different containers, DAB returns an error indicating that relationships between containers aren't supported.
+GraphQL operations across containers aren't supported in Azure Cosmos DB for NoSQL.
+
+If you attempt to configure relationships between entities in different containers by using `dab add` or `dab update`, CLI validation fails.
+
+The CLI error message is: `Adding/updating Relationships is currently not supported in CosmosDB.`
 
 For relationship configuration details (supported for other databases), see [Relationships configuration](../configuration/entities.md#relationships-entity-name-entities).
 
@@ -272,7 +292,7 @@ For more information about data modeling strategies, see [Data modeling in Azure
 
 Data API builder doesn't generate REST endpoints for Azure Cosmos DB for NoSQL because Azure Cosmos DB already provides a comprehensive native REST API for document operations.
 
-When using DAB with Azure Cosmos DB for NoSQL, only GraphQL endpoints are available. To access your data via REST, use the [Azure Cosmos DB REST API](/rest/api/cosmos-db/) directly.
+When using DAB with Azure Cosmos DB for NoSQL, only GraphQL endpoints are available, and OpenAPI isn't generated. To access your data via REST, use the [Azure Cosmos DB REST API](/rest/api/cosmos-db/) directly.
 
 ## Common configuration issues
 
@@ -288,8 +308,8 @@ When using DAB with Azure Cosmos DB for NoSQL, only GraphQL endpoints are availa
 
 **Unauthorized field access**
 
-- Error: Field appears as `null` in response
-- Solution: Check that both `@authorize` roles AND entity permissions allow access for the requesting role.
+- Error: GraphQL authorization error (for example, when the role isn't allowed)
+- Solution: Check that both `@authorize` roles and entity permissions allow access for the requesting role.
 
 ## Next step
 

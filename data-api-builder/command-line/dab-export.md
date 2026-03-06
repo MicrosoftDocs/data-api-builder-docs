@@ -30,25 +30,31 @@ dab export --graphql -o <output-directory> [options]
 
 | Option                                 | Required | Default                           | Applies                                                                  |
 | -------------------------------------- | -------- | --------------------------------- | ------------------------------------------------------------------------ |
-| `--graphql`                            | Yes      | false                             | Must be set for schema export                                            |
+| `--graphql`                            | No*      | false                             | Must be set for schema export                                            |
 | `-o, --output <dir>`                   | Yes      | –                                 | Directory for output schema                                              |
 | `-g, --graphql-schema-file <name>`     | No       | `schema.gql`                      | Filename placed inside output dir                                        |
 | `--generate`                           | No       | false                             | Generate schema from Cosmos DB data                                      |
 | `-m, --sampling-mode <mode>`           | No       | `TopNExtractor`                   | One of: `TopNExtractor`, `EligibleDataSampler`, `TimePartitionedSampler` |
 | `-n, --sampling-count <int>`           | No       | Mode-dependent                    | Number of records per mode                                               |
 | `--sampling-partition-key-path <path>` | No       | –                                 | For `EligibleDataSampler` only                                           |
-| `-d, --sampling-days <int>`            | No       | –                                 | Restrict to records newer than N days                                    |
-| `--sampling-group-count <int>`         | No       | –                                 | For `TimePartitionedSampler` only                                        |
+| `-d, --sampling-days <int>`            | No       | Mode-dependent                    | Restrict to records newer than N days                                    |
+| `--sampling-group-count <int>`         | No       | `10` (TimePartitionedSampler)     | For `TimePartitionedSampler` only                                        |
 | `-c, --config <file>`                  | No       | Env-specific or `dab-config.json` | Path to config file                                                      |
 | `--help`                               | No       | –                                 | Display the help screen                                                  |
 | `--version`                            | No       | –                                 | Display version information                                              |
+
+\* `--graphql` isn't parser-required, but export fails unless you provide it.
 
 ## Behavior
 
 | Mode                   | Description                                                         |
 | ---------------------- | ------------------------------------------------------------------- |
 | Export existing schema | Starts a temporary runtime, introspects GraphQL schema, writes file |
-| Generate schema        | Samples Cosmos DB documents and infers schema                       |
+| Generate schema        | Samples Azure Cosmos DB for NoSQL documents and infers schema       |
+
+In export mode (without `--generate`), DAB first attempts `https://localhost:5001` and falls back to `http://localhost:5000`.
+
+Export mode retries schema retrieval up to five times. Generate mode uses a single attempt.
 
 Empty schema results in error:
 “Generated GraphQL schema is empty. Please ensure data is available to generate the schema.”
@@ -74,16 +80,16 @@ Use when partitions have varied schema
 
 * Splits min/max `_ts` into time groups
 * N documents per group
-* `--sampling-group-count` required
+* `--sampling-group-count` optional (default `10`)
 
 Use when schema evolves over time
 
-> [!Note]
+> [!NOTE]
 > More resource intensive due to multiple queries.
 
 ## `--graphql`
 
-Enables schema export. Without it, nothing happens.
+Enables schema export. Without it, export logs an error and doesn't produce a schema file.
 
 ### Example
 
@@ -158,7 +164,10 @@ dab export ^
 ## `--generate`
 
 * false (default): Start runtime, introspect schema
-* true: Generate schema from Cosmos DB data
+* true: Generate schema from Azure Cosmos DB for NoSQL data
+
+> [!IMPORTANT]
+> `--generate` is only supported with Azure Cosmos DB for NoSQL configuration.
 
 ### Example
 
@@ -216,6 +225,12 @@ dab export ^
 * TopNExtractor: total documents
 * EligibleDataSampler: per partition
 * TimePartitionedSampler: per time group
+
+Defaults are mode-dependent:
+
+- `TopNExtractor`: `10`
+- `EligibleDataSampler`: `5`
+- `TimePartitionedSampler`: `10`
 
 ### Example
 
@@ -276,6 +291,12 @@ dab export ^
 ## `-d, --sampling-days`
 
 Filter documents by recency (days)
+
+Defaults are mode-dependent:
+
+- `TopNExtractor`: no time limit (default `0`)
+- `EligibleDataSampler`: `30`
+- `TimePartitionedSampler`: `10`
 
 ### Example
 
@@ -405,7 +426,7 @@ dab export --version
 | Code     | Meaning          |
 | -------- | ---------------- |
 | 0        | Export succeeded |
-| Non-zero | Export failed    |
+| -1       | Export failed    |
 
 ## Examples
 
@@ -523,7 +544,7 @@ dab export ^
 dab export \
   --graphql \
   -o ./out \
-  -g cosmos-schema.graphql \
+  -g cosmos-schema.gql \
   --generate \
   --sampling-mode TopNExtractor \
   --sampling-count 15
@@ -535,7 +556,7 @@ dab export \
 dab export ^
   --graphql ^
   -o .\out ^
-  -g cosmos-schema.graphql ^
+  -g cosmos-schema.gql ^
   --generate ^
   --sampling-mode TopNExtractor ^
   --sampling-count 15
@@ -545,7 +566,7 @@ dab export ^
 
 ## Generated file usage
 
-Set `runtime.graphql.schema` to the exported schema file path. For more information, see [Runtime configuration](../configuration/runtime.md).
+Set `data-source.options.schema` to the exported schema file path. For more information, see [Data source configuration](../configuration/data-source.md).
 
 > [!TIP]
 > Commit the generated schema once stable. Re-run if data model changes.
