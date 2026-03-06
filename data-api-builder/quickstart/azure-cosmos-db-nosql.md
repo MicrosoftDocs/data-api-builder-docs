@@ -19,6 +19,8 @@ In this quickstart, you deploy Data API builder (DAB) as a Docker container to A
 
 - Azure Developer CLI
 - .NET 9.0
+- Azure subscription where you have at least the **Contributor** role
+- Docker running locally
 
 If you don't have an Azure account, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
@@ -42,15 +44,13 @@ Use the Azure Developer CLI (`azd`) to create an Azure Cosmos DB for NoSQL accou
 
 1. During initialization, configure a unique environment name.
 
-1.  Ensure that Docker is running on your machine before continuing to the next step.
-
-1. Deploy the full solution to Azure using `azd up`. The Bicep templates deploy an **Azure Cosmos DB for NoSQL account** DAB to Azure Container Apps, and a sample web application.
+1. Deploy the full solution to Azure using `azd up`. The Bicep templates deploy an **Azure Cosmos DB for NoSQL account**, DAB to Azure Container Apps, a sample web application, and a managed identity for secure data access.
 
     ```azurecli
     azd up
     ```
 
-1. During the provisioning process, select your subscription and desired location. Wait for the provisioning process to complete. The process can take **approximately seven minutes**.
+1. During the provisioning process, select your subscription and desired location. Wait for the provisioning process to complete. The process can take several minutes depending on your region and subscription.
 
 1. Once the provisioning of your Azure resources is done, a URL to the running web application is included in the output.
 
@@ -63,7 +63,7 @@ Use the Azure Developer CLI (`azd`) to create an Azure Cosmos DB for NoSQL accou
     (✓) Done: Deploying service web
     - Endpoint: <https://[container-app-sub-domain].azurecontainerapps.io>
 
-    SUCCESS: Your up workflow to provision and deploy to Azure completed in 7 minutes 0 seconds.
+    SUCCESS: Your up workflow to provision and deploy to Azure completed in <duration>.
     ```
 
 1. Record the values for the URL of the **api** and **web** services. You use these values later in this guide.
@@ -74,19 +74,22 @@ Now, browse to each containerized application in Azure Container Apps to validat
 
 1. First, navigate to the URL for the **api** service. This URL links to the running DAB instance.
 
-1. Observe the JSON output from DAB. It should indicate that the DAB container is running and the status is **healthy**.
+1. Observe the JSON output from DAB. It should indicate that the DAB container is running and the status is **Healthy**.
 
     ```json
     {
-      "status": "healthy",
+        "status": "Healthy",
       "version": "1.4.35",
       "app-name": "dab_oss_1.4.35"
     }
     ```
 
-1. Navigate to the relative `/graphql` path for the DAB instance. This URL should open the **Nitro** GraphQL integrated development environment (IDE).
+    1. Navigate to the relative `/graphql` path for the DAB instance.
 
-1. In the Nitro IDE, create a new document and run this query to get all 100 items in the Azure Cosmos DB for NoSQL `products` container.
+      - If the app is running in Development mode, this URL opens the **Nitro** GraphQL integrated development environment (IDE).
+      - If the app is running in Production mode, Nitro isn't shown for browser navigation to `/graphql`. In that case, use the sample web app or another GraphQL client.
+
+    1. If Nitro is available, create a new document and run this query to get all 100 items in the Azure Cosmos DB for NoSQL `products` container.
 
     ```graphql
     query {
@@ -107,7 +110,7 @@ Now, browse to each containerized application in Azure Container Apps to validat
 
 1. Observe the running web application and review the output data.
 
-    :::image type="content" source="media/azure-cosmos-db-nosql/running-application.png" alt-text="Screenshot of the running web application on Azure Container Apps.":::
+    ![Screenshot of the running web application on Azure Container Apps.](media/azure-cosmos-db-nosql/running-application.png)
 
 ## Clean up
 

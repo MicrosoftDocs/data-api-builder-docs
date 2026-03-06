@@ -12,6 +12,8 @@
       href: quickstart-visual-studio-code.md
     - name: Azure Container Apps
       href: quickstart-azure-container-apps.md
+- name: stdio transport
+  href: stdio-transport.md
 - name: Add descriptions to entities
   href: how-to-add-descriptions.md
 - name: Configure authentication

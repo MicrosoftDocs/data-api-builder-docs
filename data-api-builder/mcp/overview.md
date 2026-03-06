@@ -34,17 +34,45 @@ SQL MCP Server is included as part of Data API builder (DAB) starting in version
 
 ### MCP protocol details
 
-SQL MCP Server implements MCP protocol version 2025-06-18 as a fixed default. It supports two transports: streamable HTTP for standard hosting scenarios and stdio for local or CLI scenarios. During initialization, the server advertises tool and logging capabilities, returns server metadata (name and DAB version), and returns the [`instructions` field](./how-to-add-descriptions.md) from `runtime.mcp.description` so clients understand the server's purpose.
+SQL MCP Server implements MCP protocol version 2025-06-18 as a fixed default. It supports two transports: streamable HTTP for standard hosting scenarios and stdio for local or CLI scenarios. During initialization, the server advertises tool and logging capabilities, returns server metadata such as name and DAB version, and includes the [`instructions` field](./how-to-add-descriptions.md) from `runtime.mcp.description` so clients understand the server’s purpose.
+
+##### MCP Inspector
+
+For HTTP-based MCP endpoints, for example when DAB is running at [http://localhost:5000/mcp](http://localhost:5000/mcp), launch MCP Inspector in proxy mode by passing the endpoint URL directly:
+
+```
+npx -y @modelcontextprotocol/inspector http://localhost:5000/mcp
+```
+
+This routes requests through the Inspector proxy and helps avoid browser CORS and session header issues such as `Mcp-Session-Id` that can occur in direct mode.
 
 #### Stdio transport
 
-The stdio transport is useful for local development and CLI-based workflows. You can specify a role with `role:<role-name>`, which defaults to `anonymous` when omitted. In this mode, authentication uses [the simulator provider](../concept/security/how-to-authenticate-simulator.md) and incoming requests are limited to 1 MB.
+The stdio transport is useful for local development and CLI workflows. You can specify a role with `role:<role-name>`, which defaults to `anonymous` when omitted. In this mode, authentication uses the [simulator provider](../concept/security/how-to-authenticate-simulator.md), and incoming requests are limited to 1 MB.
 
 ```bash
-dab --mcp-stdio role:<role-name>
+dab start --mcp-stdio
 ```
 
-You can test SQL MCP Server with the MCP Inspector.
+```bash
+dab start --mcp-stdio role:<role-name>
+```
+
+##### MCP Inspector
+
+When testing SQL MCP Server over stdio, launch MCP Inspector in command mode so Inspector starts DAB as a child process:
+
+```
+npx -y @modelcontextprotocol/inspector --command "dab" --args "start --mcp-stdio"
+```
+
+To set a role:
+
+```
+npx -y @modelcontextprotocol/inspector --command "dab" --args "start --mcp-stdio role:<role-name>"
+```
+
+This keeps the transport local to the process, no `/mcp` URL required, and is the simplest way to validate stdio tool discovery and calls during development.
 
 ## Use cases
 
@@ -158,12 +186,12 @@ The CLI also lets you set every property individually or programmatically throug
 ```bash
 dab configure --runtime.mcp.enabled true
 dab configure --runtime.mcp.path "/mcp"
-dab configure --runtime.mcp.dml-tools.describe-entities true
-dab configure --runtime.mcp.dml-tools.create-record true
-dab configure --runtime.mcp.dml-tools.read-records true
-dab configure --runtime.mcp.dml-tools.update-record true
-dab configure --runtime.mcp.dml-tools.delete-record true
-dab configure --runtime.mcp.dml-tools.execute-entity true
+dab configure --runtime.mcp.dml-tools.describe-entities.enabled true
+dab configure --runtime.mcp.dml-tools.create-record.enabled true
+dab configure --runtime.mcp.dml-tools.read-records.enabled true
+dab configure --runtime.mcp.dml-tools.update-record.enabled true
+dab configure --runtime.mcp.dml-tools.delete-record.enabled true
+dab configure --runtime.mcp.dml-tools.execute-entity.enabled true
 ```
 
 #### Why disable individual tools?

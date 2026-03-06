@@ -293,18 +293,21 @@ Descriptions are stored in your `dab-config.json` file. Here's how they appear:
         "object": "dbo.Products",
         "type": "table"
       },
-      "fields": {
-        "ProductID": {
+      "fields": [
+        {
+          "name": "ProductID",
           "description": "Unique identifier for each product",
-          "isPrimaryKey": true
+          "primary-key": true
         },
-        "ProductName": {
+        {
+          "name": "ProductName",
           "description": "Display name of the product"
         },
-        "UnitPrice": {
+        {
+          "name": "UnitPrice",
           "description": "Retail price per unit in USD"
         }
-      },
+      ],
       "permissions": [
         {
           "role": "anonymous",
@@ -317,21 +320,24 @@ Descriptions are stored in your `dab-config.json` file. Here's how they appear:
       "source": {
         "object": "dbo.usp_GetOrdersByDateRange",
         "type": "stored-procedure",
-        "parameters": {
-          "StartDate": {
+        "parameters": [
+          {
+            "name": "StartDate",
             "description": "Beginning of date range (inclusive)",
             "required": true
           },
-          "EndDate": {
+          {
+            "name": "EndDate",
             "description": "End of date range (inclusive)",
             "required": true
           },
-          "CustomerID": {
+          {
+            "name": "CustomerID",
             "description": "Optional customer ID filter (null returns all customers)",
             "required": false,
             "default": null
           }
-        }
+        ]
       },
       "permissions": [
         {
