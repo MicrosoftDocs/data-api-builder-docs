@@ -27,6 +27,8 @@ landingContent:
             url: faq.yml
       - linkListType: whats-new
         links:
+          - text: Version 1.7
+            url: whats-new/version-1-7.md
           - text: Version 1.6
             url: whats-new/version-1-6.md
           - text: Version 1.5
@@ -46,11 +48,11 @@ landingContent:
     linkLists:
       - linkListType: quickstart
         links:
-          - text: DAB with MS SQL
+          - text: DAB with SQL Server
             url: quickstart/mssql.md
           - text: DAB with Azure SQL
             url: quickstart/azure-sql.md
-          - text: DAB with Cosmos DB
+          - text: DAB with Azure Cosmos DB for NoSQL
             url: quickstart/azure-cosmos-db-nosql.md
       - linkListType: quickstart
         links:
@@ -116,7 +118,7 @@ landingContent:
             url: how-to/set-up-cosmosdb.md
       - linkListType: sample
         links:
-          - text: Library app sample with Data API builder, SQL server, and Blazor
+          - text: Library app sample with Data API builder, SQL Server, and Blazor
             url: /samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
           - text: Todo app sample with Data API builder and Azure SQL
             url: /samples/azure-samples/dab-swa-todo/sample
@@ -230,7 +232,7 @@ landingContent:
             url: concept/monitor/health-checks.md
           - text: Log Levels
             url: concept/monitor/log-levels.md
-          - text: Open Telemetry
+          - text: OpenTelemetry
             url: concept/monitor/open-telemetry.md
   - title: API-level Security
     linkLists:
