@@ -1,6 +1,6 @@
 ---
 title: Data Manipulation Language Tools (DMT)
-description: Reference guide for the six DML tools that SQL MCP Server exposes to AI agents.
+description: Reference guide for the six Data Manipulation Language (DML) tools that SQL MCP Server (Model Context Protocol) exposes to AI agents.
 author: jnixon
 ms.author: jnixon
 ms.topic: concept-article
@@ -11,7 +11,7 @@ ms.date: 12/22/2025
 
 [!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
-SQL MCP Server exposes six Data Manipulation Language (DML) tools to AI agents. These tools provide a typed CRUD surface for database operations—creating, reading, updating, and deleting records plus executing stored procedures. All tools respect role-based access control (RBAC), entity permissions, and policies defined in your configuration.
+SQL MCP Server uses the Model Context Protocol (MCP) to expose six Data Manipulation Language (DML) tools to AI agents. These tools provide a typed CRUD surface for database operations—creating, reading, updating, and deleting records plus executing stored procedures. All tools respect role-based access control (RBAC), entity permissions, and policies defined in your configuration.
 
 ## What are DML tools?
 
@@ -52,7 +52,7 @@ When an agent calls `list_tools`, SQL MCP Server returns:
 Returns the entities available to the current role. Each entry includes field names, data types, primary keys, and allowed operations. This tool doesn't query the database. Instead, it reads from the in-memory configuration built from your config file.
 
 > [!IMPORTANT]
-> The `fields` information in `describe_entities` is derived from the `fields` data you provide in the configuration. Because this data is optional, if you do not include it, agents will only see entity names with an empty `fields` array. It is a best practice to include both fields and descriptions of those fields in your configuration. This gives agents more context to generate accurate queries and updates. Learn more about [field descriptions here](./how-to-add-descriptions.md#2-add-field-descriptions).
+> The `fields` information in `describe_entities` is derived from the `fields` data you provide in the configuration. Because this data is optional, if you don't include it, agents only see entity names with an empty `fields` array. It's a best practice to include both fields and descriptions of those fields in your configuration. This context gives agents more information to generate accurate queries and updates. Learn more about [field descriptions here](./how-to-add-descriptions.md#2-add-field-descriptions).
 
 ```json
 {
@@ -103,9 +103,9 @@ Queries a table or view. Supports filtering, sorting, pagination, and field sele
 
 #### JOIN operations
 
-The `read_records` tool is designed for a single table or view. As a result, JOIN operations are not supported here. This helps isolate responsibility, improve performance, and limit the impact on your session’s context window. 
+The `read_records` tool is designed for a single table or view. As a result, JOIN operations aren't supported here. This design helps isolate responsibility, improve performance, and limit the impact on your session’s context window.
 
-However, JOIN operations are not an edge case, and Data API builder (DAB) already supports sophisticated querying through the GraphQL endpoint. Our goal is to soon bring that same capability to agents in a way that is safe, performant, and easy to understand. Today, for more complex queries, we recommend using a view instead of a table. You can also use the `execute_entity` tool to run stored procedures to encapsulate parameterized queries.
+However, JOIN operations aren't an edge case, and Data API builder (DAB) already supports sophisticated querying through the GraphQL endpoint. For more complex agent queries today, we recommend using a view instead of a table. You can also use the `execute_entity` tool to run stored procedures that encapsulate parameterized queries.
 
 ### update_record
 
@@ -116,7 +116,7 @@ Modifies an existing row. Requires the primary key and fields to update. The too
 Removes an existing row. Requires the primary key. The tool validates the primary key exists, enforces delete permissions and policies, and performs safe deletion with transaction support.
 
 > [!NOTE]
-> Some production scenarios will disable this tool globally to broadly constrain models. This is up to you and it is worth remembering that entity-level permissions remain the most important way to control access. Even with `delete-record` enabled, if a role doesn't have delete permission on an entity, the tool won't be available for that entity.
+> Some production scenarios disable this tool globally to broadly constrain models. That decision is up to you, and it's worth remembering that entity-level permissions remain the most important way to control access. Even with `delete-record` enabled, if a role doesn't have delete permission on an entity, the tool isn't available for that entity.
 
 ### execute_entity
 

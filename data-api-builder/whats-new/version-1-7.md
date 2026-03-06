@@ -24,12 +24,12 @@ Learn more about [SQL MCP Server](../mcp/overview.md).
 
 ### MCP capability and tools
 
-- [MCP DML tools](../mcp/data-manipulation-language-tools.md) for interacting with configured entities.
-- [MCP stdio](../mcp/index.yml) support for local and host-driven scenarios.
+- [MCP Data Manipulation Language (DML) tools](../mcp/data-manipulation-language-tools.md) for interacting with configured entities.
+- [MCP standard input/output (`stdio`)](../mcp/index.yml) support for local and host-driven scenarios.
 
 ### Permission-aware behavior
 
-MCP behaviors align with DAB authorization, including explicit allowed-operation surfacing and improved role-aware behavior already built in to Data API builder.
+MCP behaviors align with DAB authorization, including explicit allowed-operation surfacing and improved role-aware behavior built into Data API builder.
 
 ## Introducing: `fields` for entities
 
@@ -139,7 +139,7 @@ dab add GetOrdersByDateRange \
 
 ## Introducing: Azure Key Vault (AKV) support
 
-This release adds optional AKV support for easy value substitution in the the DAB configuration file. Using Key Vault is an important option for securely managing secrets and other sensitive configuration values. 
+This release adds optional support for Azure Key Vault (AKV) for easy value substitution in the DAB configuration file. Using Key Vault is an important option for securely managing secrets and other sensitive configuration values.
 
 ```
 {
