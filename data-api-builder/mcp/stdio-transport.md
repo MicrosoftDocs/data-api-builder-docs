@@ -158,44 +158,6 @@ Save this file as `.vscode/mcp.json` inside your project folder. VS Code detects
 }
 ```
 
-### Generic MCP client
-
-```json
-{
-  "mcpServers": {
-    "my-database": {
-      "command": "dab",
-      "args": [
-        "start",
-        "--mcp-stdio",
-        "role:anonymous",
-        "--config",
-        "./dab-config.json"
-      ]
-    }
-  }
-}
-```
-
-> [!NOTE]
-> Use absolute paths when configuring clients that launch from outside your project folder. The `${workspaceFolder}` variable is only available in VS Code.
-
-## Test with MCP Inspector
-
-MCP Inspector can start DAB as a child process and exercise the stdio transport directly:
-
-```bash
-npx -y @modelcontextprotocol/inspector --command "dab" --args "start --mcp-stdio"
-```
-
-To use a specific role:
-
-```bash
-npx -y @modelcontextprotocol/inspector --command "dab" --args "start --mcp-stdio role:authenticated"
-```
-
-This validation path is the fastest way to confirm that your entities and tools are discoverable and callable before you connect a real agent.
-
 ## Combine with other `dab start` options
 
 `--mcp-stdio` is compatible with all other `dab start` options:
