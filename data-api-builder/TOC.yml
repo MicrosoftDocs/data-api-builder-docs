@@ -47,7 +47,7 @@
     - name: Enable the CQRS pattern
       href: https://youtu.be/pSuMIvXRM1Q?t=142
       displayName: architecture, design, htap, read, write
-- name: SQL MCP Server (preview)
+- name: SQL MCP Server
   href: mcp/TOC.yml
 - name: Command-Line interface
   items:

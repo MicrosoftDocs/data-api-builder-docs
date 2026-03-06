@@ -13,7 +13,7 @@ ms.date: 12/22/2025
 
 ![Diagram that shows a local SQL MCP Server connected to Visual Studio Code.](media/quickstart-visual-studio-code/diagram.svg)
 
-[!INCLUDE[Note - Preview](includes/note-preview.md)]
+[!INCLUDE[Note - SQL MCP availability](includes/note-preview.md)]
 
 This quickstart uses the Data API builder CLI to run a SQL MCP Server locally without Aspire. You create a database, configure a config file, start SQL MCP Server, and connect to it from Visual Studio Code (VS Code) using a custom tool. This path is the easiest way to explore SQL MCP Server without containers or hosting frameworks.
 
@@ -37,12 +37,12 @@ You need access to a SQL Server database. Any of the following work:
 
 ```bash
 dotnet new tool-manifest
-dotnet tool install microsoft.dataapibuilder --prerelease
+dotnet tool install microsoft.dataapibuilder
 dotnet tool restore
 ```
 
 > [!NOTE]
-> SQL MCP Server is currently in prerelease. Using the `--prerelease` flag ensures you get the latest version of Data API builder with all the features used in this quickstart.
+> SQL MCP Server features are available in Data API builder version 1.7 and later.
 
 ## Step 1: Create your sample database
 
