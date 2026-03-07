@@ -40,6 +40,14 @@ SQL MCP Server implements MCP protocol version 2025-06-18 as a fixed default. It
 
 For HTTP-based MCP endpoints, for example when DAB is running at [http://localhost:5000/mcp](http://localhost:5000/mcp), launch MCP Inspector in proxy mode by passing the endpoint URL directly:
 
+First, start Data API builder:
+
+```
+dab start
+```
+
+Then, in another terminal, start MCP Inspector with the endpoint URL:
+
 ```
 npx -y @modelcontextprotocol/inspector http://localhost:5000/mcp
 ```
@@ -57,22 +65,6 @@ dab start --mcp-stdio
 ```bash
 dab start --mcp-stdio role:<role-name>
 ```
-
-##### MCP Inspector
-
-When testing SQL MCP Server over stdio, launch MCP Inspector in command mode so Inspector starts DAB as a child process:
-
-```
-npx -y @modelcontextprotocol/inspector --command "dab" --args "start --mcp-stdio"
-```
-
-To set a role:
-
-```
-npx -y @modelcontextprotocol/inspector --command "dab" --args "start --mcp-stdio role:<role-name>"
-```
-
-This keeps the transport local to the process, no `/mcp` URL required, and is the simplest way to validate stdio tool discovery and calls during development.
 
 ## Use cases
 
