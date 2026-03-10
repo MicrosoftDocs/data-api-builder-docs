@@ -1,6 +1,6 @@
 ---
 title: Quickstart - Visual Studio Code local
-description: Learn how to start a SQL Model Context Protocol (MCP) Server locally using Data API builder without Aspire. Connect Visual Studio (VS) Code to your database and execute queries in minutes.
+description: Learn how to start a SQL Model Context Protocol (MCP) Server locally using Data API builder without Aspire. Connect Visual Studio Code (VS Code) to your database and execute queries in minutes.
 author: jnixon
 ms.author: jnixon
 ms.topic: quickstart
@@ -15,7 +15,7 @@ ms.date: 03/04/2026
 
 [!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
-This quickstart uses the Data API builder CLI to run a SQL Model Context Protocol (MCP) Server locally without Aspire. You create a database, configure a config file, start SQL MCP Server, and connect to it from Visual Studio (VS) Code using a custom tool. This path is the easiest way to explore SQL MCP Server without containers or hosting frameworks.
+This quickstart uses the Data API builder CLI to run a SQL Model Context Protocol (MCP) Server locally without Aspire. You create a database, configure a config file, start SQL MCP Server, and connect to it from Visual Studio Code (VS Code) using a custom tool. This path is the easiest way to explore SQL MCP Server without containers or hosting frameworks.
 
 ## Prerequisites
 
@@ -141,7 +141,7 @@ This command starts the SQL MCP Server. After startup, the terminal output shows
 > [!NOTE]
 > You can customize the port by configuring the runtime settings in your `dab-config.json` or by setting environment variables such as `ASPNETCORE_URLS`.
 
-### Option B: stdio transport (VS Code manages the process)
+### Option B: `stdio` transport (VS Code manages the process)
 
 In `stdio` mode, DAB launches as a child process managed directly by VS Code. You do **not** need to run `dab start` in a terminal—VS Code starts and stops DAB automatically when you open the workspace.
 
@@ -180,6 +180,8 @@ In `stdio` mode, VS Code launches DAB as a child process. You don't need a runni
         "start",
         "--mcp-stdio",
         "role:anonymous",
+        "--loglevel",
+        "none",
         "--config",
         "${workspaceFolder}/dab-config.json"
       ]
@@ -188,7 +190,12 @@ In `stdio` mode, VS Code launches DAB as a child process. You don't need a runni
 }
 ```
 
-Replace `role:anonymous` with a role defined in your entity permissions if you want to restrict or expand access. For more information about roles and transport options, see [`stdio` transport for SQL MCP Server](stdio-transport.md).
+To install this exact configuration, use the following button.
+
+[![Screenshot that shows Add MCP Server.](https://img.shields.io/badge/Add%20MCP%20Server-VS%20Code-blue?logo=visualstudiocode)](vscode:mcp/install?%7B%22name%22%3A%22sql-mcp-server%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22dab%22%2C%22args%22%3A%5B%22start%22%2C%22--mcp-stdio%22%2C%22role%3Aanonymous%22%2C%22--config%22%2C%22%24%7BworkspaceFolder%7D%2Fdab-config.json%22%5D%7D)
+
+> [!NOTE]
+> Replace `role:anonymous` with a role defined in your entity permissions if you want to restrict or expand access. For more information about roles and transport options, see [`stdio` transport for SQL MCP Server](stdio-transport.md).
 
 #### [HTTP transport (Option A)](#tab/http)
 
@@ -205,15 +212,15 @@ In HTTP mode, VS Code connects to the DAB server you started in Step 3. Keep you
 }
 ```
 
----
+To install this exact configuration, use the following button.
 
-Save the file. VS Code detects the MCP server configuration automatically. You may need to reload the window (**Developer: Reload Window** from the Command Palette).
+[![Screenshot that shows Add MCP Server to VS Code.](https://img.shields.io/badge/Add%20MCP%20Server-VS%20Code-blue?logo=visualstudiocode)](vscode:mcp/install?%7B%22name%22%3A%22sql-mcp-server%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22http%3A%2F%2Flocalhost%3A5000%2Fmcp%22%7D)
 
 ### Start the MCP server connection
 
 1. Open the Command Palette (**Ctrl+Shift+P** or **Cmd+Shift+P** on macOS).
 1. Run **MCP: List Servers** to view available servers.
-1. Select **sql-mcp-server** and choose **Start** to connect.
+1. Select **sql-mcp-server** (or whatever you name it) and choose **Start** to connect.
 
 Once connected, the `Products` entity appears as MCP tools such as `describe_entities` and `read_records`. Tool names may vary based on your configuration.
 
