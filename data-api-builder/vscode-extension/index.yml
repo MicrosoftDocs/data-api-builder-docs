@@ -1,0 +1,100 @@
+### YamlMime:Landing
+title: Visual Studio Code extensions for Data API builder
+summary: Use Visual Studio Code extensions to initialize, configure, validate, visualize, and run Data API builder projects with fewer manual steps.
+metadata:
+  title: Visual Studio Code extensions for Data API builder
+  description: Learn how to use Data API builder Visual Studio Code extensions for setup, entity management, runtime operations, and Copilot-assisted workflows.
+  author: jnixon
+  ms.author: jnixon
+  ms.service: data-api-builder
+  ms.topic: landing-page
+  ms.date: 03/10/2026
+landingContent:
+  - title: Overview
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: What are Data API builder Visual Studio Code extensions?
+            url: overview.md
+          - text: DAB Omnibus in Visual Studio Marketplace
+            url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.omnibus-data-api-builder
+  - title: DAB Init extension
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Create a DAB configuration file
+            url: init.md
+      - linkListType: reference
+        links:
+          - text: DAB Init in Visual Studio Marketplace
+            url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.init-data-api-builder
+  - title: DAB Add extension
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Add entities and relationships
+            url: add.md
+      - linkListType: reference
+        links:
+          - text: DAB Add extension in Visual Studio Marketplace
+            url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.add-data-api-builder
+  - title: DAB Start extension
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Start the DAB runtime
+            url: start.md
+      - linkListType: reference
+        links:
+          - text: DAB Start in Visual Studio Marketplace
+            url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.start-data-api-builder
+  - title: DAB Validate extension
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Validate a DAB configuration file
+            url: validate.md
+      - linkListType: reference
+        links:
+          - text: DAB Validate in Visual Studio Marketplace
+            url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.validate-data-api-builder
+  - title: DAB Health extension
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Check DAB runtime health
+            url: health.md
+      - linkListType: reference
+        links:
+          - text: DAB Health in Visual Studio Marketplace
+            url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.health-data-api-builder
+  - title: DAB Visualize extension
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Generate a Mermaid ER diagram
+            url: visualize.md
+      - linkListType: reference
+        links:
+          - text: DAB Visualize in Visual Studio Marketplace
+            url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.visualize-api-builder
+  - title: DAB Code Gen extension
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Generate C# scaffolding artifacts
+            url: code-gen.md
+      - linkListType: reference
+        links:
+          - text: DAB Code Gen in Visual Studio Marketplace
+            url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.poco-data-api-builder
+  - title: DAB Agent extension
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Use @dab in Copilot Chat
+            url: agent.md
+      - linkListType: reference
+        links:
+          - text: DAB Agent in Visual Studio Marketplace
+            url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.agent-data-api-builder

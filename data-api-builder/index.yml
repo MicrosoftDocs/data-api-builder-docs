@@ -66,9 +66,9 @@ landingContent:
             url: https://youtu.be/xAlaoDQolLw
           - text: DAB system walkthrough
             url: https://youtu.be/YadKjVk-q0k
-          - text: The DAB VS Code Extension
+          - text: The DAB Visual Studio Code extension
             url: https://youtu.be/KcFFRbITAAI
-          - text: DAB and the CQRS pattern
+          - text: DAB and the Command Query Responsibility Segregation (CQRS) pattern
             url: https://youtu.be/pSuMIvXRM1Q
           - text: DAB and how it works
             url: https://youtu.be/kxy4hA2YoME
@@ -92,7 +92,7 @@ landingContent:
             url: https://aka.ms/dab/issues
           - text: Feature Backlog
             url: https://aka.ms/dab/backlog
-          - text: OSS License
+          - text: Open-source software (OSS) license
             url: https://github.com/Azure/data-api-builder/blob/main/LICENSE.txt
           - text: Discussions
             url: https://github.com/Azure/data-api-builder/discussions
@@ -112,6 +112,14 @@ landingContent:
             url: reference-policies.md
           - text: Aggregate data with GraphQL
             url: how-to/aggregate-data.md
+      - linkListType: concept
+        links:
+          - text: Database Views
+            url: concept/database/views.md
+          - text: Stored Procedures
+            url: concept/database/stored-procedures.md
+          - text: Table Relationships
+            url: concept/database/relationships.md
       - linkListType: how-to-guide
         links:
           - text: Set up Azure Cosmos DB
@@ -212,16 +220,26 @@ landingContent:
             url: command-line/dab-update.md
           - text: dab validate 
             url: command-line/dab-validate.md
-  - title: Database Objects
+  - title: Visual Studio Code extensions
     linkLists:
-      - linkListType: concept
+      - linkListType: overview
         links:
-          - text: Database Views
-            url: concept/database/views.md
-          - text: Stored Procedures
-            url: concept/database/stored-procedures.md
-          - text: Table Relationships
-            url: concept/database/relationships.md
+          - text: Visual Studio Code extensions overview
+            url: vscode-extension/index.yml
+      - linkListType: how-to-guide
+        links:
+          - text: DAB Init extension
+            url: vscode-extension/init.md
+          - text: DAB Add extension
+            url: vscode-extension/add.md
+          - text: DAB Start extension
+            url: vscode-extension/start.md
+          - text: DAB Validate extension
+            url: vscode-extension/validate.md
+      - linkListType: download
+        links:
+          - text: DAB Omnibus in Visual Studio Marketplace
+            url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.omnibus-data-api-builder
   - title: Logs and Monitoring
     linkLists:
       - linkListType: concept
@@ -246,7 +264,7 @@ landingContent:
         links:
           - text: Configure Entra ID authentication
             url: concept/security/how-to-authenticate-entra.md
-          - text: Configure custom JWT (Okta/Auth0)
+          - text: Configure custom JSON Web Token (JWT) authentication (Okta/Auth0)
             url: concept/security/how-to-authenticate-custom.md
           - text: Configure App Service authentication
             url: concept/security/how-to-authenticate-app-service.md

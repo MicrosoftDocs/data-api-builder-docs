@@ -36,6 +36,8 @@
       displayName: architecture, design, htap, read, write
 - name: SQL MCP Server
   href: mcp/TOC.yml
+- name: VS Code extensions
+  href: vscode-extension/toc.yml
 - name: Command-Line interface
   items:
     - name: Overview
