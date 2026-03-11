@@ -333,6 +333,9 @@
         - name: Use table relationships
           href: concept/database/relationships.md
           displayName: relationships, foreign key, navigation, linking, cardinality
+        - name: Configure query timeout
+          href: how-to/configure-timeout.md
+          displayName: timeout, command timeout, connection string, long-running, stored procedure, query, sql server, postgresql, mysql, cosmos db, mssql
     - name: Monitoring and telemetry
       items:
         - name: Use Application Insights
