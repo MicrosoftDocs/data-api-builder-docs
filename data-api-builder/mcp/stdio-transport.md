@@ -127,10 +127,9 @@ MCP clients that support stdio transport launch DAB as a subprocess and pipe its
       "command": "dab",
       "args": [
         "start",
-        "--mcp-stdio",
-        "role:anonymous",
-        "--config",
-        "${workspaceFolder}/dab-config.json"
+        "--mcp-stdio", "role:anonymous",
+        "--config", "{path}/dab-config.json",
+        "--LogLevel", "none"
       ]
     }
   }
@@ -145,13 +144,13 @@ Save this file as `.vscode/mcp.json` inside your project folder. VS Code detects
 {
   "mcpServers": {
     "sql-mcp-server": {
+      "type": "stdio",
       "command": "dab",
       "args": [
         "start",
-        "--mcp-stdio",
-        "role:anonymous",
-        "--config",
-        "/absolute/path/to/dab-config.json"
+        "--mcp-stdio", "role:anonymous",
+        "--config", "{path}/dab-config.json",
+        "--LogLevel", "none"
       ]
     }
   }
@@ -165,15 +164,13 @@ Save this file as `.vscode/mcp.json` inside your project folder. VS Code detects
 | Option | Behavior with `--mcp-stdio` |
 |---|---|
 | `--config` | Uses the specified config file (same as HTTP mode) |
-| `--LogLevel` | Applies the specified log level |
-| `--verbose` | Sets log level to Information |
-| `--no-https-redirect` | Accepted but has no effect—no HTTP server runs |
+| `--LogLevel` | Applies the specified log level (`none`: recommended for stdio) |
 
 ```bash
 dab start \
   --mcp-stdio role:api-reader \
   --config ./dab-config.json \
-  --LogLevel Information
+  --LogLevel None
 ```
 
 ## Troubleshoot stdio mode
