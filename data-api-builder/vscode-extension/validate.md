@@ -1,6 +1,6 @@
 ---
 title: DAB Validate extension
-description: Validate Data API builder configuration files and review detailed output in Visual Studio Code.
+description: Validate Data API builder configuration files and review the detailed output in Visual Studio Code.
 author: jnixon
 ms.author: jnixon
 ms.service: data-api-builder
@@ -19,13 +19,5 @@ Use the DAB Validate extension to run configuration validation before runtime st
 | Command | Command ID |
 |---|---|
 | DAB Validate | `dabExtension.validateDab` |
-
-## Access
-
-- Explorer: right-click a supported configuration file and select **DAB Validate**.
-
-## Behavior
-
-The extension runs `dab validate` in the configuration directory and streams messages to a dedicated output channel. Validation failures provide quick access to the output for troubleshooting.
 
 [!INCLUDE [Related content](includes/related-content.md)]

@@ -20,12 +20,4 @@ Use the DAB Start extension to run `dab start` for a selected configuration file
 |---|---|
 | DAB Start | `dabExtension.startDab` |
 
-## Access
-
-- Explorer: right-click a supported configuration file and select **DAB Start**.
-
-## Behavior
-
-The extension validates the selected file, opens an integrated terminal, switches to the file directory, and starts the DAB runtime with that config.
-
 [!INCLUDE [Related content](includes/related-content.md)]
