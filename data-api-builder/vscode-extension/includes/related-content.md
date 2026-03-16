@@ -6,7 +6,10 @@ Every extension for Data API builder (DAB) is included in the [Omnibus extension
 
 ## Related content
 
-- [What are Data API builder Visual Studio Code extensions?](../overview.md)
+> [!NOTE]
+> DAB Visual Studio Code (VS Code) extensions only support Microsoft SQL (`mssql`). 
+
+- [What are VS Code extensions?](../overview.md)
 - [DAB Init extension](../init.md)
 - [DAB Add extension](../add.md)
 - [DAB Start extension](../start.md)
@@ -14,5 +17,6 @@ Every extension for Data API builder (DAB) is included in the [Omnibus extension
 - [DAB Health extension](../health.md)
 - [DAB Visualize extension](../visualize.md)
 - [DAB Code Gen extension](../code-gen.md)
-- [DAB Agent extension](../agent.md)
+- [DAB Docker extension](../docker.md)
+- [DAB Model Context Protocol (MCP) extension](../mcp.md)
 

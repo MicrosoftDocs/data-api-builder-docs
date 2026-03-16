@@ -20,8 +20,4 @@ Use the DAB Visualize extension to generate a Mermaid ER diagram from your confi
 |---|---|
 | DAB Visualize | `dabExtension.visualizeDab` |
 
-## Behavior
-
-The extension parses configured entities and relationships, emits Mermaid ER syntax into a Markdown file, and opens the preview so you can inspect shape and cardinality quickly.
-
 [!INCLUDE [Related content](includes/related-content.md)]

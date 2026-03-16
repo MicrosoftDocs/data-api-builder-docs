@@ -25,7 +25,10 @@
 - name: DAB Code Gen 
   href: code-gen.md
   displayName: VS Code, omnibus, extension
-- name: DAB Agent 
-  href: agent.md
+- name: DAB Docker 
+  href: docker.md
+  displayName: VS Code, omnibus, extension
+- name: DAB Model Context Protocol (MCP)
+  href: mcp.md
   displayName: VS Code, omnibus, extension
 

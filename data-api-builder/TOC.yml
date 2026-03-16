@@ -31,12 +31,12 @@
     - name: Azure Cosmos DB 
       href: quickstart/azure-cosmos-db-nosql.md
       displayName: azure, cosmos, nosql, cloud, database
-    - name: Enable the CQRS pattern
+    - name: Enable the Command Query Responsibility Segregation (CQRS) pattern
       href: https://youtu.be/pSuMIvXRM1Q?t=142
       displayName: architecture, design, htap, read, write
-- name: SQL MCP Server
+- name: SQL Model Context Protocol (MCP) Server
   href: mcp/TOC.yml
-- name: VS Code extensions
+- name: Visual Studio Code extension
   href: vscode-extension/toc.yml
 - name: Command-Line interface
   items:
@@ -413,7 +413,7 @@
     - name: Library app with Azure SQL
       href: /samples/azure-samples/dab-swa-library-demo/sample
       displayName: azure sql, sample, dab
-    - name: Todo app with SWA and Azure SQL
+    - name: Todo app with Static Web Apps (SWA) and Azure SQL
       href: /samples/azure-samples/dab-swa-todo/sample
       displayName: todo, dab, sample, azure sql
 - name: Troubleshooting

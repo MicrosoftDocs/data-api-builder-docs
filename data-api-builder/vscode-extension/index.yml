@@ -88,13 +88,23 @@ landingContent:
         links:
           - text: DAB Code Gen in Visual Studio Marketplace
             url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.poco-data-api-builder
-  - title: DAB Agent extension
+  - title: DAB Docker extension
     linkLists:
       - linkListType: how-to-guide
         links:
-          - text: Use @dab in Copilot Chat
-            url: agent.md
+          - text: Build and run DAB in Docker
+            url: docker.md
       - linkListType: reference
         links:
-          - text: DAB Agent in Visual Studio Marketplace
-            url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.agent-data-api-builder
+          - text: DAB Docker in Visual Studio Marketplace
+            url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.docker-data-api-builder
+  - title: DAB Model Context Protocol (MCP) extension
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Install DAB as an MCP server
+            url: mcp.md
+      - linkListType: reference
+        links:
+          - text: DAB MCP in Visual Studio Marketplace
+            url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.mcp-data-api-builder

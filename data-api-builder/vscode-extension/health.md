@@ -20,8 +20,4 @@ Use the DAB Health extension to query the runtime `/health` endpoint and review 
 |---|---|
 | Health Check | `healthDataApiBuilder.healthCheck` |
 
-## Behavior
-
-The extension opens a health report webview and retrieves health data from a local or custom runtime URL. The report includes overall status, runtime details, and check-level timing/threshold information.
-
 [!INCLUDE [Related content](includes/related-content.md)]
