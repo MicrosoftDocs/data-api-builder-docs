@@ -376,4 +376,7 @@ If the `anonymous` role only allows read permission on `Products`:
 - [Overview of SQL MCP Server](overview.md)
 - [Adding semantic descriptions to SQL MCP Server](how-to-add-descriptions.md)
 - [Data API builder (DAB) configuration reference](/azure/data-api-builder/configuration)
+- [Entity-level MCP configuration](../configuration/entities.md#mcp-entity-name-entities)
+- [Runtime MCP configuration](../configuration/runtime.md#mcp-runtime)
 - [Deploy SQL MCP Server to Azure Container Apps](quickstart-azure-container-apps.md)
+- [What's new in Data API builder version 2.0](../whats-new/version-2-0.md)
