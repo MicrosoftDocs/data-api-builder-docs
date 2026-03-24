@@ -49,6 +49,12 @@
     - name: dab add
       displayName: command line, terminal, local
       href: command-line/dab-add.md
+    - name: dab auto-config
+      displayName: command line, terminal, local, autoentities
+      href: command-line/dab-auto-config.md
+    - name: dab auto-config-simulate
+      displayName: command line, terminal, local, autoentities, simulate
+      href: command-line/dab-auto-config-simulate.md
     - name: dab configure
       displayName: command line, terminal, local
       href: command-line/dab-configure.md
@@ -224,6 +230,9 @@
             - name: Policy (entity permissions)
               href: configuration/entities.md#nested-properties-1
               displayName: policy, claims, predicate, item, database
+    - name: Autoentities
+      displayName: auto-config, auto entities, pattern, MSSQL
+      href: configuration/index.md#autoentities
     - name: JSON Schema
       href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
 - name: How-to

@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 06/06/2025
+ms.date: 03/24/2026
 show_latex: true
 ---
 
@@ -23,6 +23,7 @@ Data API builder requires at least one configuration file to run. This JSON-base
 |[data-source-files](#data-source-files)|Array of other configuration file paths.|
 |[runtime](runtime.md#runtime)|Object configuring runtime behaviors.|
 |[entities](entities.md#entities)|Object defining all entities exposed via REST or GraphQL.|
+|[autoentities](#autoentities)|Object defining pattern-based rules that automatically expose matching database objects as entities (MSSQL only).|
 
 ### Data-source properties
 
@@ -121,7 +122,7 @@ Data API builder supports multiple configuration files, with one designated as t
 ### Multiple configuration rules
 
 * Every configuration file must include the `data-source` property.
-* Every configuration file must include the `entities` property.
+* Every configuration file must include the `entities` property (or `autoentities`).
 * The top-level configuration must include `runtime`.
 * Child configurations can include `runtime`, but it's ignored.
 * Child configuration files can include their own child files.
@@ -140,3 +141,101 @@ Data API builder supports multiple configuration files, with one designated as t
   ]
 }
 ```
+
+## Autoentities
+
+| Parent | Property | Type | Required | Default |
+| - | - | - | - | - |
+| `$root` | `autoentities` | object | ❌ No | None |
+
+The `autoentities` section defines pattern-based rules that automatically expose matching database objects as DAB entities at startup. Each key in the object is a named definition containing patterns, a template, and permissions.
+
+> [!IMPORTANT]
+> Autoentities currently support **MSSQL** data sources only.
+
+When `autoentities` is present, the `entities` section is no longer required. The configuration schema allows either `autoentities` or `entities` (or both). If both are present, explicitly defined entities take precedence over autoentities matches with the same name.
+
+### Format
+
+```json
+{
+  "autoentities": {
+    "<definition-name>": {
+      "patterns": {
+        "include": [ "<string>" ],
+        "exclude": [ "<string>" ],
+        "name": "<string>"
+      },
+      "template": {
+        "mcp": { "dml-tools": <boolean> },
+        "rest": { "enabled": <boolean> },
+        "graphql": { "enabled": <boolean> },
+        "health": { "enabled": <boolean> },
+        "cache": {
+          "enabled": <boolean>,
+          "ttl-seconds": <integer>,
+          "level": "<string>"
+        }
+      },
+      "permissions": [
+        {
+          "role": "<string>",
+          "actions": [ { "action": "<string>" } ]
+        }
+      ]
+    }
+  }
+}
+```
+
+### Properties
+
+| Property | Type | Required | Default | Description |
+| - | - | - | - | - |
+| `patterns` | object | ✔️ Yes | — | Defines include, exclude, and naming rules. |
+| `patterns.include` | string array | ❌ No | `["%.%"]` | MSSQL `LIKE` patterns for objects to include. |
+| `patterns.exclude` | string array | ❌ No | `null` | MSSQL `LIKE` patterns for objects to exclude. |
+| `patterns.name` | string | ❌ No | `"{object}"` | Interpolation pattern using `{schema}` and `{object}`. |
+| `template` | object | ❌ No | — | Default configuration applied to all matched entities. |
+| `template.mcp` | object | ❌ No | — | MCP settings for matched entities. |
+| `template.mcp.dml-tools` | boolean | ❌ No | `true` | Enable MCP DML tools. |
+| `template.rest` | object | ❌ No | — | REST settings for matched entities. |
+| `template.rest.enabled` | boolean | ❌ No | `true` | Enable REST endpoints. |
+| `template.graphql` | object | ❌ No | — | GraphQL settings for matched entities. |
+| `template.graphql.enabled` | boolean | ❌ No | `true` | Enable GraphQL. |
+| `template.health` | object | ❌ No | — | Health-check settings for matched entities. |
+| `template.health.enabled` | boolean | ❌ No | `false` | Enable health checks. |
+| `template.cache` | object | ❌ No | — | Cache settings for matched entities. |
+| `template.cache.enabled` | boolean | ❌ No | `false` | Enable response caching. |
+| `template.cache.ttl-seconds` | integer | ❌ No | `null` | Cache time-to-live in seconds. |
+| `template.cache.level` | string | ❌ No | `"L1L2"` | Cache level. |
+| `permissions` | array | ❌ No | — | Permissions applied to all matched entities. |
+
+### Example
+
+```json
+{
+  "autoentities": {
+    "my-def": {
+      "patterns": {
+        "include": [ "dbo.%" ],
+        "exclude": [ "dbo.internal%" ],
+        "name": "{schema}_{object}"
+      },
+      "template": {
+        "rest": { "enabled": true },
+        "graphql": { "enabled": true },
+        "cache": { "enabled": true, "ttl-seconds": 30, "level": "l1l2" }
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ]
+    }
+  }
+}
+```
+
+With this configuration, every table and view in the `dbo` schema (except those matching `dbo.internal%`) is automatically exposed as a DAB entity. Each entity is named using the `{schema}_{object}` pattern (for example, `dbo_Products`), has REST and GraphQL enabled, uses caching with a 30-second TTL, and grants `read` access to the `anonymous` role.
+
+> [!TIP]
+> Use [`dab auto-config`](../command-line/dab-auto-config.md) to create autoentities definitions from the CLI, and [`dab auto-config-simulate`](../command-line/dab-auto-config-simulate.md) to preview which objects match before committing changes. For more information, see [what's new in version 2.0](../whats-new/version-2-0.md).

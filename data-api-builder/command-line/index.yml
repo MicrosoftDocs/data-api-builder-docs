@@ -10,7 +10,7 @@ metadata:
   ms.reviewer: sidandrews
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 09/29/2025
+  ms.date: 03/24/2026
 
 landingContent:
   - title: Install
@@ -40,6 +40,25 @@ landingContent:
             url: dab-add.md#--rest
           - text: Source options
             url: dab-add.md#-s---source
+
+  - title: Auto-config
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: dab auto-config
+            url: dab-auto-config.md
+          - text: dab auto-config-simulate
+            url: dab-auto-config-simulate.md
+      - linkListType: reference
+        links:
+          - text: Patterns
+            url: dab-auto-config.md#--patternsinclude
+          - text: Template
+            url: dab-auto-config.md#--templaterestenabled
+          - text: Permissions
+            url: dab-auto-config.md#--permissions
+          - text: CSV output
+            url: dab-auto-config-simulate.md#--output
 
   - title: Configure
     linkLists:
