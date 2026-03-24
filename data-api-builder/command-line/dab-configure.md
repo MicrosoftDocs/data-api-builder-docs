@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 12/12/2025
+ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to configure runtime and data source settings in Data API builder, so that my API runs correctly.
 ---
 
@@ -67,6 +67,10 @@ dab configure [options]
 | [`--runtime.host.authentication.provider`](#--runtimehostauthenticationprovider) | Authentication provider.                             |
 | [`--runtime.host.authentication.jwt.audience`](#--runtimehostauthenticationjwtaudience) | JWT audience claim.                                  |
 | [`--runtime.host.authentication.jwt.issuer`](#--runtimehostauthenticationjwtissuer) | JWT issuer claim.                                    |
+| [`--show-effective-permissions`](#--show-effective-permissions) | Display resolved permissions after inheritance.      |
+| [`--data-source.user-delegated-auth.enabled`](#--data-sourceuser-delegated-authenabled) | Enable OBO user-delegated authentication.            |
+| [`--data-source.user-delegated-auth.provider`](#--data-sourceuser-delegated-authprovider) | OBO identity provider.                               |
+| [`--data-source.user-delegated-auth.database-audience`](#--data-sourceuser-delegated-authdatabase-audience) | Target audience for the downstream SQL token.        |
 | [`--azure-key-vault.endpoint`](#--azure-key-vaultendpoint) | Azure Key Vault base endpoint.                       |
 | [`--azure-key-vault.retry-policy.mode`](#--azure-key-vaultretry-policymode) | Retry policy mode.                                   |
 | [`--azure-key-vault.retry-policy.max-count`](#--azure-key-vaultretry-policymax-count) | Max retry attempts.                                  |
@@ -987,6 +991,141 @@ dab configure ^
           "issuer": "https://login.microsoftonline.com/common/v2.0"
         }
       }
+    }
+  }
+}
+```
+
+## `--show-effective-permissions`
+
+Display the resolved permissions for every entity after role inheritance is applied. Use this option to see what each role can actually do without reasoning through the config manually.
+
+> [!TIP]
+> This option was introduced in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab configure \
+  --show-effective-permissions
+```
+
+```bash
+dab configure \
+  --show-effective-permissions --config my-config.json
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab configure ^
+  --show-effective-permissions
+```
+
+```cmd
+dab configure ^
+  --show-effective-permissions --config my-config.json
+```
+
+---
+
+### Example output
+
+```text
+Entity: Book
+	Role: anonymous        | Actions: Read
+	Role: authenticated    | Actions: Read (inherited from: anonymous)
+	Unconfigured roles inherit from: anonymous
+
+Entity: Order
+	Role: admin            | Actions: Create, Read, Update, Delete
+	Role: anonymous        | Actions: Read
+	Role: authenticated    | Actions: Read (inherited from: anonymous)
+	Unconfigured roles inherit from: authenticated
+```
+
+## `--data-source.user-delegated-auth.enabled`
+
+Enable or disable On-Behalf-Of (OBO) user-delegated authentication. Supported only for `mssql` data sources.
+
+> [!TIP]
+> This option was introduced in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab configure \
+  --data-source.user-delegated-auth.enabled true
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab configure ^
+  --data-source.user-delegated-auth.enabled true
+```
+
+---
+
+## `--data-source.user-delegated-auth.provider`
+
+Set the OBO identity provider. Currently only `EntraId` is supported.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab configure \
+  --data-source.user-delegated-auth.provider EntraId
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab configure ^
+  --data-source.user-delegated-auth.provider EntraId
+```
+
+---
+
+## `--data-source.user-delegated-auth.database-audience`
+
+Set the target audience for the downstream SQL token when OBO is enabled.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab configure \
+  --data-source.user-delegated-auth.database-audience "https://database.windows.net"
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab configure ^
+  --data-source.user-delegated-auth.database-audience "https://database.windows.net"
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string": "@env('SQL_CONNECTION_STRING')",
+    "user-delegated-auth": {
+      "enabled": true,
+      "provider": "EntraId",
+      "database-audience": "https://database.windows.net"
     }
   }
 }

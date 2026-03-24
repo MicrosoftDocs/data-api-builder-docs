@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 01/21/2026
+ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to configure roles, so that I can use roles to authorize certain endpoints.
 ---
 
@@ -152,6 +152,39 @@ The syntax for defining permissions is described in the [runtime configuration a
 
 By default, an entity has no permissions configured, which means no one can access the entity. Additionally, Data API builder ignores database objects when they aren't referenced in the runtime configuration.
 
+### Role inheritance
+
+DAB 2.0 introduces role inheritance so you don't need to repeat the same permission block across every role. The inheritance chain is:
+
+```text
+named-role → authenticated → anonymous
+```
+
+- If `authenticated` is not explicitly configured for an entity, it inherits from `anonymous`.
+- If a named role is not configured, it inherits from `authenticated`, or from `anonymous` if `authenticated` is also absent.
+
+You can define permissions once on `anonymous` and every broader role gets the same access automatically, with no duplication required.
+
+> [!TIP]
+> This behavior was introduced in version 2.0. For more information, see [what's new](../../whats-new/version-2-0.md).
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": "dbo.books",
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ]
+    }
+  }
+}
+```
+
+With this configuration, `anonymous`, `authenticated`, and any unconfigured named role can all read `Book`.
+
+Use [`dab configure --show-effective-permissions`](../../command-line/dab-configure.md#--show-effective-permissions) to display the resolved permissions for every entity after inheritance is applied.
+
 #### Permissions must be explicitly configured
 
 To allow unauthenticated access to an entity, the `Anonymous` role must be explicitly defined in the entity's permissions. For example, the `book` entity's permissions are explicitly set to allow unauthenticated read access:
@@ -166,7 +199,7 @@ To allow unauthenticated access to an entity, the `Anonymous` role must be expli
 }
 ```
 
-If you want both unauthenticated and authenticated users to have access, explicitly grant permissions to both system roles (`Anonymous` and `Authenticated`).
+With role inheritance, when `anonymous` has read access, `authenticated` and unconfigured named roles inherit that access automatically. You don't need to grant permissions to both system roles explicitly unless you want different actions per role.
 
 When read operations should be restricted to authenticated users only, the following permissions configuration should be set, resulting in the rejection of unauthenticated requests:
 

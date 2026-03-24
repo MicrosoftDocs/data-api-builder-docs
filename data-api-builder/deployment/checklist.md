@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: checklist
-ms.date: 06/11/2025
+ms.date: 03/24/2026
 ---
 
 # Deployment checklist for Data API builder
@@ -39,6 +39,10 @@ Next, determine which specific entities you wish to expose as APIs. Plan for any
 ## Decide which features to use
 
 Finally, decide if you want to use Data API builder with all default features enabled, or if you want to further customize the configuration of the engine.
+
+| | Recommendation |
+| --- | --- |
+| **&#9744;** | **Configure your authentication provider.** Starting in DAB 2.0, the default authentication provider is `Unauthenticated`, which means DAB does not inspect or validate any JWT. All requests run as `anonymous`. If your deployment requires JWT-based authentication, set the provider explicitly (for example, `--auth.provider EntraID`). For more information, see [runtime authentication configuration](../configuration/runtime.md#provider-authentication-host-runtime). |
 
 | | Recommendation |
 | --- | --- |

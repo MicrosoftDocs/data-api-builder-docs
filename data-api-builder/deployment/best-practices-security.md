@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: best-practice
-ms.date: 06/11/2025
+ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to review best practices, so that I can configure my API using current best practices.
 ---
 
@@ -63,3 +63,16 @@ TLS 1.2 is enabled by default on the latest versions of .NET and many of the lat
   - Includes [OpenSSL](https://www.openssl.org/) where the latest versions support TLS protocol versions up through TLS 1.3. [OpenSSL Wiki](https://wiki.openssl.org/index.php/TLS1.3)
 
 ---
+
+## Configure authentication for production
+
+Starting in DAB 2.0, the default authentication provider is `Unauthenticated`. This means DAB does not inspect or validate any JWT, and all requests run as `anonymous`. This is appropriate when DAB sits behind a trusted front end (such as Azure API Management or an application gateway) that handles authentication upstream.
+
+> [!IMPORTANT]
+> If you expose DAB directly to clients, configure a production-grade authentication provider (such as `EntraID` or `Custom`) rather than relying on `Unauthenticated`. When `Unauthenticated` is active, `authenticated` and custom roles defined in entity permissions are never activated.
+
+For more information, see [runtime authentication configuration](../configuration/runtime.md#provider-authentication-host-runtime).
+
+### On-Behalf-Of (OBO) user-delegated authentication
+
+For SQL Server and Azure SQL deployments that require row-level security with the real user identity, consider enabling On-Behalf-Of (OBO) authentication. OBO exchanges the incoming user token for a downstream SQL token so the database authenticates as the actual calling user. For more information, see [user-delegated auth](../configuration/data-source.md#user-delegated-auth).

@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: best-practice
-ms.date: 01/21/2026
+ms.date: 03/24/2026
 ms.custom: [security-horizontal-2025, horz-security]
 ---
 
@@ -30,6 +30,7 @@ Data API builder supports multiple authentication providers. Choose the one that
 
 | Provider | Use case | Guide |
 |----------|----------|-------|
+| **Unauthenticated** | DAB sits behind a trusted front end that handles identity (default) | — |
 | **Microsoft Entra ID** (`EntraID`/`AzureAD`) | Production apps using Microsoft identity | [Configure Entra authentication](how-to-authenticate-entra.md) |
 | **Custom JWT** | Third-party IdPs (Okta, Auth0, Keycloak) | [Configure custom JWT authentication](how-to-authenticate-custom.md) |
 | **App Service** | Apps running behind Azure App Service EasyAuth (platform headers) | [Configure App Service authentication](how-to-authenticate-app-service.md) |
@@ -37,7 +38,7 @@ Data API builder supports multiple authentication providers. Choose the one that
 | **Static Web Apps** | Apps fronted by SWA auth headers | [Configure App Service authentication](how-to-authenticate-app-service.md)
 
 > [!TIP]
-> Start with the **Simulator** provider during development to test permissions without configuring an identity provider. Switch to a production provider before deploying.
+> The default provider changed to `Unauthenticated` in version 2.0. For more information, see [what's new](../../whats-new/version-2-0.md).
 
 ## Authentication
 
@@ -56,9 +57,9 @@ Authentication verifies the caller's identity. Data API builder authenticates re
 
 | Setting | Description |
 |---------|-------------|
-| `runtime.host.authentication.provider` | The authentication provider (`EntraID`/`AzureAD`, `Custom`, `AppService`, `StaticWebApps`, `Simulator`) |
-| `runtime.host.authentication.jwt.audience` | Expected audience claim for JWT providers (not used by AppService/StaticWebApps/Simulator) |
-| `runtime.host.authentication.jwt.issuer` | Expected issuer/authority for JWT providers (not used by AppService/StaticWebApps/Simulator) |
+| `runtime.host.authentication.provider` | The authentication provider (`Unauthenticated`, `EntraID`/`AzureAD`, `Custom`, `AppService`, `StaticWebApps`, `Simulator`) |
+| `runtime.host.authentication.jwt.audience` | Expected audience claim for JWT providers (not used by AppService/StaticWebApps/Simulator/Unauthenticated) |
+| `runtime.host.authentication.jwt.issuer` | Expected issuer/authority for JWT providers (not used by AppService/StaticWebApps/Simulator/Unauthenticated) |
 
 For detailed configuration, see [Configure Microsoft Entra ID authentication](how-to-authenticate-entra.md).
 
@@ -109,6 +110,11 @@ Go beyond entity-level permissions with fine-grained access control:
 |---------|-------------|-------|
 | **Database policies (row-level security)** | Translate policy expressions into query predicates that filter rows based on claims or session context | [Implement row-level security](row-level-security.md) |
 | **Field-level security** | Include or exclude specific columns per role | [Field access](authorization.md#field-access) |
+| **On-Behalf-Of (OBO)** | Exchange the incoming user token for a downstream SQL token so the database authenticates as the actual calling user (mssql only) | [User-delegated auth](../../configuration/data-source.md#user-delegated-auth) |
+
+## Role inheritance
+
+DAB 2.0 introduces role inheritance for entity permissions. The inheritance chain is `named-role → authenticated → anonymous`. If a role is not explicitly configured for an entity, it inherits from the next broader role. Define permissions once on `anonymous` and every broader role gets the same access. For details, see [Authorization and roles](authorization.md#role-inheritance).
 
 ## Transport and configuration security
 

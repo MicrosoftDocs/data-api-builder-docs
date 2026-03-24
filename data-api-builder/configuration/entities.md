@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 06/06/2025
+ms.date: 03/24/2026
 show_latex: true
 ---
 
@@ -221,6 +221,39 @@ Specifies the role name to which permissions apply. Use system roles (`Anonymous
   }
 }
 ```
+
+### Role inheritance
+
+DAB 2.0 introduces role inheritance for entity permissions. When a role is not explicitly configured for an entity, it inherits permissions from a broader role using the following chain:
+
+```text
+named-role → authenticated → anonymous
+```
+
+- If `authenticated` is not configured for an entity, it inherits from `anonymous`.
+- If a named role is not configured, it inherits from `authenticated`, or from `anonymous` if `authenticated` is also absent.
+
+This means you can define permissions once on `anonymous` and every broader role gets the same access automatically, with no duplication required.
+
+> [!TIP]
+> This behavior was introduced in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
+
+#### Example
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": "dbo.books",
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ]
+    }
+  }
+}
+```
+
+With this configuration, `anonymous`, `authenticated`, and any unconfigured named role can all read `Book`. Use [`dab configure --show-effective-permissions`](../command-line/dab-configure.md#--show-effective-permissions) to see the resolved permissions for every entity after inheritance is applied.
 
 ## Actions (string-array Permissions entity-name entities)
 

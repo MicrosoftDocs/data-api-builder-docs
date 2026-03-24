@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 06/06/2025
+ms.date: 03/24/2026
 show_latex: true
 ---
 
@@ -57,7 +57,7 @@ Configuration settings that determine runtime behavior.
 
 |Property|Default|Description|
 |-|-|-|
-|[runtime.host.authentication.provider](#provider-authentication-host-runtime)|`null`|Authentication provider|
+|[runtime.host.authentication.provider](#provider-authentication-host-runtime)|`Unauthenticated`|Authentication provider|
 |[runtime.host.authentication.jwt.audience](#jwt-authentication-host-runtime)|`null`|JWT audience|
 |[runtime.host.authentication.jwt.issuer](#jwt-authentication-host-runtime)|`null`|JWT issuer|
 
@@ -118,7 +118,7 @@ Configuration settings that determine runtime behavior.
         "allow-credentials": <true>|<false> (default: `false`)
       },
       "authentication": {
-        "provider": <string> (default: "AppService"),
+        "provider": <string> (default: "Unauthenticated"),
         "jwt": {
           "audience": "<string>",
           "issuer": "<string>"
@@ -457,15 +457,18 @@ Global CORS configuration.
 
 | Parent                        | Property   | Type                                                         | Required | Default      |
 | ----------------------------- | ---------- | ------------------------------------------------------------ | -------- | ------------ |
-| `runtime.host.authentication` | `provider` | enum (`AppService` \| `EntraId` \|  `Custom` \| `Simulator`) | ❌ No     | None |
+| `runtime.host.authentication` | `provider` | enum (`Unauthenticated` \| `AppService` \| `EntraId` \| `Custom` \| `Simulator`) | ❌ No     | `Unauthenticated` |
 
 Selects the authentication method. Each provider validates identity differently. For step-by-step setup, see the how-to guides linked below.
+
+> [!TIP]
+> The default authentication provider changed in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
 
 ### Provider summary
 
 | Provider | Use case | Identity source | How-to guide |
 |----------|----------|-----------------|--------------|
-| *(omitted)* | Anonymous-only access | None | — |
+| `Unauthenticated` | DAB sits behind a trusted front end (default) | None — all requests run as `anonymous` | — |
 | `AppService` | Azure-hosted apps (EasyAuth) | `X-MS-CLIENT-PRINCIPAL` header | [Configure App Service authentication](../concept/security/how-to-authenticate-app-service.md) |
 | `EntraID` | Microsoft Entra ID (Azure AD) | JWT bearer token | [Configure Entra ID authentication](../concept/security/how-to-authenticate-entra.md) |
 | `Custom` | Third-party IdPs (Okta, Auth0) | JWT bearer token | [Configure custom JWT authentication](../concept/security/how-to-authenticate-custom.md) |
@@ -474,14 +477,19 @@ Selects the authentication method. Each provider validates identity differently.
 > [!NOTE]
 > The `EntraId` provider was previously named `AzureAd`. The old name still works for compatibility.
 
-### Anonymous-only (no provider)
+### Unauthenticated (default)
 
-When the `authentication` section is omitted, DAB operates in anonymous-only mode. All requests are assigned the `Anonymous` system role.
+When `Unauthenticated` is set (or no provider is specified), DAB does not inspect or validate any JWT. All requests run as the `anonymous` role. Authentication is expected to be handled upstream, for example by Azure API Management or an application gateway.
+
+> [!IMPORTANT]
+> When `Unauthenticated` is active, `authenticated` and custom roles defined in entity permissions are never activated. If your config contains those roles, DAB emits a warning at startup.
 
 ```json
 {
   "host": {
-    // authentication section omitted
+    "authentication": {
+      "provider": "Unauthenticated"
+    }
   }
 }
 ```

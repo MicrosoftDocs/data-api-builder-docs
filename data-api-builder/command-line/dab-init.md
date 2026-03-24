@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 09/29/2025
+ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to initialize a Data API builder configuration, so that I can begin defining APIs for my database.
 ---
 
@@ -34,7 +34,7 @@ If the target config file already exists, the command overwrites it. There's no 
 | ------------------------------------ | ----------------------------------------- |
 | [`--auth.audience`](#--authaudience) | JSON Web Token (JWT) audience claim       |
 | [`--auth.issuer`](#--authissuer)     | JSON Web Token (JWT) issuer claim         |
-| [`--auth.provider`](#--authprovider) | Identity provider |
+| [`--auth.provider`](#--authprovider) | Identity provider (default `Unauthenticated`) |
 
 #### Data Source
 
@@ -196,7 +196,14 @@ dab init ^
 
 ## `--auth.provider`
 
-Identity provider. 
+Identity provider. Default is `Unauthenticated`.
+
+When `Unauthenticated` is active, DAB does not inspect or validate any JWT. All requests run as `anonymous`. Authentication is expected to be handled upstream. To use a different provider, set it explicitly.
+
+> [!TIP]
+> The default authentication provider changed in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
+
+Valid values: `Unauthenticated`, `StaticWebApps`, `EntraID`, `AzureAD`, `AppService`, `Simulator`, `Custom`.
 
 ### Example
 

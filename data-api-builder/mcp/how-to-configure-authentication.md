@@ -4,7 +4,7 @@ description: Learn how to configure inbound authentication from your client to S
 author: jnixon
 ms.author: jnixon
 ms.topic: how-to
-ms.date: 01/09/2026
+ms.date: 03/24/2026
 ---
 
 # Configure authentication for SQL MCP Server
@@ -140,7 +140,7 @@ After you configure Foundry, you must configure SQL MCP Server to accept the sam
 ### Foundry authentication modes
 
 #### Unauthenticated
-Configure SQL MCP Server to treat requests as `anonymous` (for example, set `provider: AppService` or omit `runtime.host.authentication`) and grant only the `anonymous` permissions you intend.
+Starting in DAB 2.0, the default authentication provider is `Unauthenticated`. Configure SQL MCP Server to treat requests as `anonymous` by using the default `Unauthenticated` provider (or set `provider: AppService`) and grant only the `anonymous` permissions you intend.
 
 ![Diagram showing the Foundry unauthenticated authentication flow.](media/how-to-configure-authentication/foundry-unauthenticated.svg)
 
