@@ -606,6 +606,9 @@ Lets developers selectively include entities in the GraphQL schema.
 \* The `methods` property is only for `stored-procedure`
 endpoints. 
 
+> [!TIP]
+> Starting in Data API builder 2.0, the `path` property supports forward slashes to create subdirectory-style URL segments (for example, `"shopping-cart/item"` results in `/api/shopping-cart/item`). DAB uses longest-prefix matching for routing. Path traversal patterns, backslashes, and percent-encoded separators are blocked by validation. For more information, see [What's new in version 2.0](../whats-new/version-2-0.md).
+
 ### Format
 
 ```json
@@ -1103,80 +1106,3 @@ dab add Book --source books --permissions "anonymous:*" --mcp.dml-tools true
 ```bash
 dab add GetBookById --source dbo.get_book_by_id --source.type stored-procedure --permissions "anonymous:execute" --mcp.custom-tool true
 ```
-
-## MCP (entity-name entities)
-
-|Parent|Property|Type|Required|Default|
-|-|-|-|-|-|
-|`entities.{entity-name}`|`mcp`|boolean or object|❌ No|`true` (DML tools enabled)|
-
-Controls MCP participation for this entity. Accepts a boolean shorthand or an object with `dml-tools` and `custom-tool` properties.
-
-- When set to `true`, DML tools are enabled for this entity.
-- When set to `false`, the entity is excluded from MCP entirely.
-- When omitted, the entity participates in MCP with DML tools enabled by default.
-
-> [!TIP]
-> For more information about MCP changes in version 2.0, see [What's new in Data API builder version 2.0](../whats-new/version-2-0.md#mcp-and-ai-integration).
-
-### Nested properties
-
-|Parent|Property|Type|Required|Default|
-|-|-|-|-|-|
-|`entities.{entity-name}.mcp`|`dml-tools`|boolean|❌ No|`true`|
-|`entities.{entity-name}.mcp`|`custom-tool`|boolean|❌ No|`false`|
-
-- `dml-tools` — Enables or disables the standard DML tools (`create_record`, `read_records`, `update_record`, `delete_record`, `execute_entity`) for this entity.
-- `custom-tool` — Registers the stored procedure as a named MCP tool. Valid only for `stored-procedure` entities. The schema enforces this constraint.
-
-`dml-tools` and `custom-tool` are independent. You can enable both, either, or neither.
-
-### Example: Boolean shorthand
-
-```json
-{
-  "entities": {
-    "Book": {
-      "source": "dbo.books",
-      "mcp": true,
-      "permissions": [
-        { "role": "anonymous", "actions": ["read"] }
-      ]
-    },
-    "AuditLog": {
-      "source": "dbo.audit_log",
-      "mcp": false,
-      "permissions": [
-        { "role": "admin", "actions": ["*"] }
-      ]
-    }
-  }
-}
-```
-
-### Example: Object format with custom-tool
-
-```json
-{
-  "entities": {
-    "GetBookById": {
-      "source": {
-        "object": "dbo.get_book_by_id",
-        "type": "stored-procedure"
-      },
-      "mcp": {
-        "dml-tools": false,
-        "custom-tool": true
-      },
-      "permissions": [
-        { "role": "anonymous", "actions": ["execute"] }
-      ]
-    }
-  }
-}
-```
-
-When `custom-tool` is `true`, DAB dynamically registers the stored procedure as a named MCP tool. The tool appears in the MCP `tools/list` response and can be called through `tools/call`. For more information, see [Data manipulation language (DML) tools in SQL MCP Server](../mcp/data-manipulation-language-tools.md).
-
-> [!IMPORTANT]
-> `custom-tool` is valid only for entities with `source.type` set to `stored-procedure`. The configuration schema rejects `custom-tool` on table or view entities.

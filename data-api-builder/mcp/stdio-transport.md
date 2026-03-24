@@ -47,7 +47,8 @@ Before using stdio transport, enable MCP in your `dab-config.json`:
       "create-record": true,
       "read-records": true,
       "update-record": true,
-      "delete-record": true
+      "delete-record": true,
+      "aggregate-records": true
     }
   }
 }
@@ -110,6 +111,7 @@ The following tools are available in stdio mode, subject to your `dml-tools` con
 | `update_record` | Updates an existing record |
 | `delete_record` | Deletes an existing record (tables and views) |
 | `execute_entity` | Executes a stored procedure entity |
+| `aggregate_records` | Performs aggregation queries on tables and views |
 
 Custom MCP tools backed by stored procedures are also registered when you use `--mcp-stdio`.
 

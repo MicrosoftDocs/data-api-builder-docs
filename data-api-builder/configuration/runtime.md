@@ -68,6 +68,12 @@ Configuration settings that determine runtime behavior.
 |[runtime.cache.enabled](#cache-runtime)|`false`|Enables caching of responses globally|
 |[runtime.cache.ttl-seconds](#cache-runtime)|`5`|Time to live (seconds) for global cache|
 
+### Compression settings
+
+|Property|Default|Description|
+|-|-|-|
+|[runtime.compression.level](#compression-runtime)|`none`|HTTP response compression level (`optimal`, `fastest`, or `none`)|
+
 ### Telemetry settings
 
 |Property|Default|Description|
@@ -141,6 +147,9 @@ Configuration settings that determine runtime behavior.
         }
       }
     }
+  },
+  "compression": {
+    "level": <"none"> (default) | <"optimal"> | <"fastest">
   },
   "cache": {
     "enabled": <true>|<false> (default: `false`),
@@ -816,6 +825,55 @@ query {
 }
 ```
 
+## Compression (runtime)
+
+> [!TIP]
+> This feature is new in Data API builder 2.0. For more information, see [What's new in version 2.0](../whats-new/version-2-0.md).
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime` | `compression` | object | ❌ No | - |
+
+HTTP response compression configuration. When enabled, DAB compresses response bodies to reduce payload sizes and improve transfer speeds.
+
+### Nested properties
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime.compression` | `level` | string | ❌ No | `"none"` |
+
+### Supported values for `level`
+
+| Value | Description |
+|---|---|
+| `none` | No compression (default) |
+| `optimal` | Balances compression ratio and speed |
+| `fastest` | Prioritizes compression speed over ratio |
+
+### Format
+
+```json
+{
+  "runtime": {
+    "compression": {
+      "level": <"none"> (default) | <"optimal"> | <"fastest">
+    }
+  }
+}
+```
+
+### Example
+
+```json
+{
+  "runtime": {
+    "compression": {
+      "level": "optimal"
+    }
+  }
+}
+```
+
 ## Cache (runtime)
 
 | Parent | Property | Type | Required | Default |
@@ -1084,6 +1142,24 @@ The `aggregate-records` tool accepts a boolean or an object with additional sett
 }
 ```
 
+The `dml-tools` property also accepts a boolean shorthand. Setting `"dml-tools": true` enables all tools; `"dml-tools": false` disables all tools.
+
+When you disable a tool at the runtime level, the tool never appears in the MCP `tools/list` response and can't be invoked, regardless of entity-level permissions. For more details on individual DML tools, see [Data manipulation language (DML) tools](../mcp/data-manipulation-language-tools.md).
+
+### Using the CLI
+
+```bash
+dab configure --runtime.mcp.enabled true
+dab configure --runtime.mcp.path "/mcp"
+dab configure --runtime.mcp.dml-tools.describe-entities.enabled true
+dab configure --runtime.mcp.dml-tools.create-record.enabled true
+dab configure --runtime.mcp.dml-tools.read-records.enabled true
+dab configure --runtime.mcp.dml-tools.update-record.enabled true
+dab configure --runtime.mcp.dml-tools.delete-record.enabled true
+dab configure --runtime.mcp.dml-tools.execute-entity.enabled true
+dab configure --runtime.mcp.dml-tools.aggregate-records.enabled true
+```
+
 ## Health (runtime)
 
 | Parent | Property | Type | Required | Default |
@@ -1139,127 +1215,4 @@ Global [health check endpoint](../concept/monitor/health-checks.md) (`/health`) 
     "max-query-parallelism": 6
   }
 }
-```
-
-## MCP (runtime)
-
-|Parent|Property|Type|Required|Default|
-|-|-|-|-|-|
-|`runtime`|`mcp`|object|❌ No|None (MCP enabled with defaults)|
-
-Configures the MCP (Model Context Protocol) endpoint and controls which DML tools are available to AI agents. MCP is enabled by default when Data API builder is running. Configure this section only when you need to restrict or customize MCP behavior.
-
-> [!TIP]
-> For more information about MCP changes in version 2.0, see [What's new in Data API builder version 2.0](../whats-new/version-2-0.md#mcp-and-ai-integration).
-
-### Nested properties
-
-|Parent|Property|Type|Required|Default|
-|-|-|-|-|-|
-|`runtime.mcp`|`enabled`|boolean|❌ No|`true`|
-|`runtime.mcp`|`path`|string|❌ No|`"/mcp"`|
-|`runtime.mcp`|`description`|string|❌ No|`null`|
-|`runtime.mcp`|`dml-tools`|boolean or object|❌ No|`true`|
-
-The `dml-tools` property accepts either a boolean (enable or disable all tools) or an object with per-tool toggles.
-
-#### DML tools properties
-
-|Parent|Property|Type|Required|Default|
-|-|-|-|-|-|
-|`runtime.mcp.dml-tools`|`describe-entities`|boolean|❌ No|`true`|
-|`runtime.mcp.dml-tools`|`create-record`|boolean|❌ No|`true`|
-|`runtime.mcp.dml-tools`|`read-records`|boolean|❌ No|`true`|
-|`runtime.mcp.dml-tools`|`update-record`|boolean|❌ No|`true`|
-|`runtime.mcp.dml-tools`|`delete-record`|boolean|❌ No|`true`|
-|`runtime.mcp.dml-tools`|`execute-entity`|boolean|❌ No|`true`|
-|`runtime.mcp.dml-tools`|`aggregate-records`|boolean or object|❌ No|`true`|
-
-The `aggregate-records` tool can be a boolean or an object. When set to an object, it supports these properties:
-
-|Parent|Property|Type|Required|Default|
-|-|-|-|-|-|
-|`runtime.mcp.dml-tools.aggregate-records`|`enabled`|boolean|❌ No|`true`|
-|`runtime.mcp.dml-tools.aggregate-records`|`query-timeout`|integer|❌ No|`30`|
-
-The `query-timeout` value specifies the maximum duration in seconds for aggregate queries. Valid range is 1–600 seconds. Default is 30 seconds.
-
-### Format
-
-```json
-{
-  "runtime": {
-    "mcp": {
-      "enabled": <true> (default) | <false>,
-      "path": <string> (default: "/mcp"),
-      "description": <string>,
-      "dml-tools": <true> (default) | <false> | {
-        "describe-entities": <true> (default) | <false>,
-        "create-record": <true> (default) | <false>,
-        "read-records": <true> (default) | <false>,
-        "update-record": <true> (default) | <false>,
-        "delete-record": <true> (default) | <false>,
-        "execute-entity": <true> (default) | <false>,
-        "aggregate-records": <true> (default) | <false> | {
-          "enabled": <true> (default) | <false>,
-          "query-timeout": <integer; default: 30>
-        }
-      }
-    }
-  }
-}
-```
-
-### Example: Enable all tools (default)
-
-```json
-{
-  "runtime": {
-    "mcp": {
-      "enabled": true,
-      "path": "/mcp"
-    }
-  }
-}
-```
-
-### Example: Granular DML tool control
-
-```json
-{
-  "runtime": {
-    "mcp": {
-      "enabled": true,
-      "path": "/mcp",
-      "dml-tools": {
-        "describe-entities": true,
-        "create-record": true,
-        "read-records": true,
-        "update-record": true,
-        "delete-record": false,
-        "execute-entity": true,
-        "aggregate-records": {
-          "enabled": true,
-          "query-timeout": 60
-        }
-      }
-    }
-  }
-}
-```
-
-When you disable a tool at the runtime level, the tool never appears in the MCP `tools/list` response and can't be invoked, regardless of entity-level permissions. For more details on individual DML tools, see [Data manipulation language (DML) tools](../mcp/data-manipulation-language-tools.md).
-
-### Using the CLI
-
-```bash
-dab configure --runtime.mcp.enabled true
-dab configure --runtime.mcp.path "/mcp"
-dab configure --runtime.mcp.dml-tools.describe-entities.enabled true
-dab configure --runtime.mcp.dml-tools.create-record.enabled true
-dab configure --runtime.mcp.dml-tools.read-records.enabled true
-dab configure --runtime.mcp.dml-tools.update-record.enabled true
-dab configure --runtime.mcp.dml-tools.delete-record.enabled true
-dab configure --runtime.mcp.dml-tools.execute-entity.enabled true
-dab configure --runtime.mcp.dml-tools.aggregate-records.enabled true
 ```

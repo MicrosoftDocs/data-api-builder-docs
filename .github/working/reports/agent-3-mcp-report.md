@@ -2,66 +2,59 @@
 
 ## Summary
 
-Updated MCP documentation across 7 files to reflect DAB 2.0 changes including entity-level MCP configuration, custom MCP tools from stored procedures, granular runtime DML tool settings, the new `aggregate-records` tool, and OpenTelemetry tracing for MCP.
+Updated MCP documentation across multiple files to reflect DAB 2.0 changes including entity-level MCP configuration, custom MCP tools from stored procedures, granular runtime DML tool settings, the new `aggregate-records` tool, and OpenTelemetry tracing for MCP.
 
 ## Files Edited
 
-### 1. `data-api-builder/mcp/overview.md`
-- Updated `ms.date` to `03/24/2026`
-- Expanded entity settings section with boolean shorthand (`"mcp": true/false`) and object format
-- Added `custom-tool` documentation for stored-procedure entities
-- Updated DML tools count from six to seven (added `aggregate_records`)
-- Added "Custom MCP tools" section explaining stored procedure registration
-- Added "OpenTelemetry tracing for MCP" section
-- Updated runtime config example to include `aggregate-records`
-- Updated CLI configure examples to include `aggregate-records`
-- Added cross-link TIP to what's-new article
+### 1. `data-api-builder/configuration/entities.md`
+- Added **MCP** summary table in the top-level property index (between Cache and Format overview)
+- Added `mcp` property to the **Format overview** JSON schema (boolean or object with `dml-tools` and `custom-tool`)
+- Added full **MCP (entity-name entities)** section at end with:
+  - Property tables (parent, property, type, required, default)
+  - Nested properties (`dml-tools`, `custom-tool`)
+  - Boolean shorthand example
+  - Object format example with `custom-tool` for stored procedures
+  - Cross-link TIP to what's-new article
+  - Important callout: `custom-tool` valid only for stored-procedure entities
 
-### 2. `data-api-builder/mcp/data-manipulation-language-tools.md`
-- Updated `ms.date` to `03/24/2026`
-- Updated tool count from six to seven
-- Added `aggregate_records` to tool list and `list_tools` response
-- Added `aggregate_records` tool section with configuration (boolean and object with `query-timeout`)
-- Updated runtime config section with granular object format and boolean shorthand
-- Updated CLI configure examples to include `aggregate-records`
-- Expanded entity settings section with boolean shorthand, object format, and custom tools
-- Updated scope of per-tool control section
-- Added cross-link TIP to what's-new article
+### 2. `data-api-builder/configuration/runtime.md`
+- Added **MCP settings** table in the top-level property index (after Telemetry settings)
+- Added `mcp` block to the **Format overview** JSON schema (all 7 DML tools including `aggregate-records` object config)
+- Added full **MCP (runtime)** section at end with:
+  - Top-level property table
+  - Nested properties tables (mcp, dml-tools, aggregate-records)
+  - `query-timeout` documentation (1–600 seconds, default 30)
+  - Format JSON, default example, granular example
+  - CLI commands for all MCP settings
+  - Cross-link TIP to what's-new article
 
-### 3. `data-api-builder/configuration/entities.md`
-- `ms.date` already set to `03/24/2026` by previous agent
-- Added new "MCP (entity-name entities)" section after Health section
-- Documented boolean shorthand and object format
-- Documented `dml-tools` and `custom-tool` properties with tables
-- Added stored-procedure custom tool example with full config
-- Added CLI examples for `--mcp.dml-tools` and `--mcp.custom-tool`
-- Added cross-link TIP to what's-new article
+### 3. `data-api-builder/command-line/dab-add.md`
+- Added `--mcp.dml-tools` and `--mcp.custom-tool` to the **Quick glance** table
+- Added full `--mcp.dml-tools` section with Bash/CMD examples and resulting config
+- Added full `--mcp.custom-tool` section with Bash/CMD examples, resulting config, and important callout
 
-### 4. `data-api-builder/configuration/runtime.md`
-- `ms.date` already set to `03/24/2026` by previous agent
-- Added new "MCP (runtime)" section before Health section
-- Documented nested properties including `enabled`, `path`, `description`, `dml-tools`
-- Documented individual DML tool toggles with property tables
-- Documented `aggregate-records` object format with `enabled` and `query-timeout` (1–600s)
-- Added format and example blocks
-- Added cross-link TIP to what's-new article
+### 4. `data-api-builder/mcp/overview.md`
+- Added note about `aggregate-records` object config with cross-link to runtime configuration reference
 
-### 5. `data-api-builder/command-line/dab-add.md`
-- Updated `ms.date` to `03/24/2026`
-- MCP flag sections (`--mcp.dml-tools`, `--mcp.custom-tool`) already added by previous agent
-- Added cross-link TIP to what's-new article in `--mcp.dml-tools` section
+### 5. `data-api-builder/mcp/data-manipulation-language-tools.md`
+- Updated YAML front matter description from "six" to "seven"
+- Added cross-links to entity-level and runtime MCP configuration in Related content
+- Added link to what's-new article in Related content
 
-### 6. `data-api-builder/concept/database/stored-procedures.md`
-- Updated `ms.date` to `03/24/2026`
-- Added "MCP custom tools" section after Limitations
-- Documented configuration and CLI examples for `custom-tool`
-- Added cross-link TIP to what's-new article
+### 6. `data-api-builder/mcp/stdio-transport.md`
+- Added `aggregate_records` to the Available MCP tools table
+- Added `aggregate-records` to the required configuration JSON example
 
-### 7. `data-api-builder/concept/monitor/open-telemetry.md`
-- Updated `ms.date` to `03/24/2026`
-- Added "MCP tool execution" to the list of OpenTelemetry activities
-- Added TIP callout about DAB 2.0 MCP tracing instrumentation
-- Updated implementation notes to include MCP alongside REST and GraphQL
+### 7. `data-api-builder/concept/database/stored-procedures.md`
+- Added **Custom MCP tools** section explaining stored procedure registration as named MCP tools
+- Included JSON config example and CLI example
+- Added cross-links to what's-new article and DML tools doc
+
+## Files Reviewed but Not Modified
+- `data-api-builder/mcp/how-to-configure-authentication.md` — Already has Unauthenticated provider reference
+- `data-api-builder/mcp/how-to-add-descriptions.md` — No MCP config changes needed
+- `data-api-builder/mcp/quickstart-*.md` — Config examples are generic enough
+- `data-api-builder/whats-new/version-2-0.md` — Source of truth, already complete
 
 ## Cross-Links Added
-All edited files include `> [!TIP]` callouts linking to `../whats-new/version-2-0.md` (or `../../whats-new/version-2-0.md` from nested paths).
+All edited files include `> [!TIP]` callouts linking to `../whats-new/version-2-0.md`.
