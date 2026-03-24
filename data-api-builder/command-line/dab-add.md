@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 09/29/2025
+ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to add entities to my Data API builder configuration, so that I can expose database objects as APIs.
 ---
 
@@ -53,6 +53,8 @@ dab add <entity-name> [options]
 | [`--source.key-fields`](#--sourcekey-fields) | The field(s) to be used as primary keys.                             |
 | [`--source.params`](#--sourceparams)         | Stored procedures only. Default parameter values.                    |
 | [`--source.type`](#--sourcetype)             | Source type: `table`, `view`, `stored-procedure` (default table).    |
+| [`--mcp.dml-tools`](#--mcpdml-tools)        | Enable/disable DML tools for entity in MCP. Default `true`.         |
+| [`--mcp.custom-tool`](#--mcpcustom-tool)    | Stored procedures only. Register as a named MCP tool.               |
 | [`--help`](#--help)                          | Display this help screen.                                            |
 | [`--version`](#--version)                    | Display version information.                                         |
 
@@ -1247,6 +1249,108 @@ dab add BookProc ^
   }
 }
 ```
+
+## `--mcp.dml-tools`
+
+Enable or disable DML tools for this entity in MCP. Default: `true`. When set to `false`, the entity is excluded from the MCP DML tool surface. When `mcp` is omitted entirely, DML tools are enabled by default.
+
+> [!TIP]
+> For more details on MCP configuration in DAB 2.0, see [What's new in version 2.0](../whats-new/version-2-0.md).
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --mcp.dml-tools true
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --mcp.dml-tools true
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "table",
+        "object": "dbo.Books"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ],
+      "mcp": {
+        "dml-tools": true
+      }
+    }
+  }
+}
+```
+
+## `--mcp.custom-tool`
+
+Register a stored procedure entity as a named MCP tool. Valid only when `--source.type` is `stored-procedure`. When `true`, DAB dynamically registers the procedure in the MCP `tools/list` response and agents can call it through `tools/call`.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab add GetBookById \
+  --source dbo.get_book_by_id \
+  --source.type stored-procedure \
+  --permissions "anonymous:execute" \
+  --mcp.custom-tool true
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add GetBookById ^
+  --source dbo.get_book_by_id ^
+  --source.type stored-procedure ^
+  --permissions "anonymous:execute" ^
+  --mcp.custom-tool true
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "GetBookById": {
+      "source": {
+        "type": "stored-procedure",
+        "object": "dbo.get_book_by_id"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "execute" } ] }
+      ],
+      "mcp": {
+        "custom-tool": true
+      }
+    }
+  }
+}
+```
+
+> [!IMPORTANT]
+> `--mcp.custom-tool` is valid only for stored-procedure entities. Using it with table or view entities causes a validation error.
 
 ## `--help`
 

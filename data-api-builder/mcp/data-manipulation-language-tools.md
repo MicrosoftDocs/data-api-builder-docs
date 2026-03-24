@@ -1,23 +1,23 @@
 ---
 title: Data Manipulation Language Tools (DML)
-description: Reference guide for the six DML tools that SQL MCP Server exposes to AI agents.
+description: Reference guide for the seven DML tools that SQL MCP Server exposes to AI agents.
 author: jnixon
 ms.author: jnixon
 ms.topic: concept-article
-ms.date: 12/22/2025
+ms.date: 03/24/2026
 ---
 
 # Data manipulation language (DML) tools in SQL MCP Server
 
 [!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
-SQL MCP Server exposes six Data Manipulation Language (DML) tools to AI agents. These tools provide a typed CRUD surface for database operations—creating, reading, updating, and deleting records plus executing stored procedures. All tools respect role-based access control (RBAC), entity permissions, and policies defined in your configuration.
+SQL MCP Server exposes seven Data Manipulation Language (DML) tools to AI agents. These tools provide a typed CRUD surface for database operations—creating, reading, updating, and deleting records, aggregating data, plus executing stored procedures. All tools respect role-based access control (RBAC), entity permissions, and policies defined in your configuration.
 
 ## What are DML tools?
 
-DML (Data Manipulation Language) tools handle data operations: creating, reading, updating, and deleting records, plus executing stored procedures. Unlike DDL (Data Definition Language) which modifies schema, DML works exclusively on the data plane in existing tables and views.
+DML (Data Manipulation Language) tools handle data operations: creating, reading, updating, and deleting records, aggregating data, plus executing stored procedures. Unlike DDL (Data Definition Language) which modifies schema, DML works exclusively on the data plane in existing tables and views.
 
-The six DML tools are:
+The seven DML tools are:
 
 - `describe_entities` - Discovers available entities and operations
 - `create_record` - Inserts new rows
@@ -25,6 +25,10 @@ The six DML tools are:
 - `update_record` - Modifies existing rows
 - `delete_record` - Removes rows
 - `execute_entity` - Runs stored procedures
+- `aggregate_records` - Performs aggregation queries
+
+> [!TIP]
+> For a complete list of DAB 2.0 features, see [What's new in version 2.0](../whats-new/version-2-0.md).
 
 When DML tools are enabled globally and for an entity, SQL MCP Server exposes them through the MCP protocol. Agents never interact directly with your database schema - they work through the Data API builder abstraction layer.
 
@@ -42,7 +46,8 @@ When an agent calls `list_tools`, SQL MCP Server returns:
     { "name": "read_records" },
     { "name": "update_record" },
     { "name": "delete_record" },
-    { "name": "execute_entity" }
+    { "name": "execute_entity" },
+    { "name": "aggregate_records" }
   ]
 }
 ```
@@ -122,6 +127,29 @@ Removes an existing row. Requires the primary key. The tool validates the primar
 
 Runs a stored procedure. Supports input parameters and output results. The tool validates input parameters against the procedure signature, enforces execute permissions, and passes parameters safely.
 
+### aggregate_records
+
+Performs aggregation queries on tables and views. Supports common aggregate functions such as count, sum, average, minimum, and maximum. The tool builds deterministic SQL from structured parameters, applies read permissions and field projections, and enforces row-level security policies.
+
+The `aggregate-records` tool can be configured as a boolean or as an object with additional settings:
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "dml-tools": {
+        "aggregate-records": {
+          "enabled": true,
+          "query-timeout": 30
+        }
+      }
+    }
+  }
+}
+```
+
+The `query-timeout` property specifies the maximum execution time in seconds (range: 1–600). This setting helps prevent long-running aggregation queries from consuming excessive resources.
+
 ## Runtime configuration
 
 Configure DML tools globally in the runtime section of your `dab-config.json`:
@@ -138,12 +166,39 @@ Configure DML tools globally in the runtime section of your `dab-config.json`:
         "read-records": true,
         "update-record": true,
         "delete-record": true,
-        "execute-entity": true
+        "execute-entity": true,
+        "aggregate-records": true
       }
     }
   }
 }
 ```
+
+Each DML tool can also accept an object with an `enabled` property. The `aggregate-records` tool additionally supports a `query-timeout` property:
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "enabled": true,
+      "dml-tools": {
+        "describe-entities": true,
+        "create-record": true,
+        "read-records": true,
+        "update-record": true,
+        "delete-record": true,
+        "execute-entity": true,
+        "aggregate-records": {
+          "enabled": true,
+          "query-timeout": 30
+        }
+      }
+    }
+  }
+}
+```
+
+The `dml-tools` property also accepts a boolean shorthand. Setting `"dml-tools": true` enables all tools; `"dml-tools": false` disables all tools.
 
 ### Using the CLI
 
@@ -158,6 +213,7 @@ dab configure --runtime.mcp.dml-tools.read-records.enabled true
 dab configure --runtime.mcp.dml-tools.update-record.enabled true
 dab configure --runtime.mcp.dml-tools.delete-record.enabled true
 dab configure --runtime.mcp.dml-tools.execute-entity.enabled true
+dab configure --runtime.mcp.dml-tools.aggregate-records.enabled true
 ```
 
 ### Disabling tools
@@ -169,12 +225,32 @@ When you disable a tool at the runtime level, it never appears to agents, regard
 - Disable `delete-record` to prevent data loss in production
 - Disable `create-record` for read-only reporting endpoints
 - Disable `execute-entity` when stored procedures aren't used
+- Disable `aggregate-records` when aggregation queries aren't needed
 
 When a tool is disabled globally, the tool is hidden from the `list_tools` response and can't be invoked.
 
 ## Entity settings
 
-Entities participate in MCP automatically unless you explicitly restrict them. The `dml-tools` property exists so you can exclude an entity from MCP or narrow its capabilities, but you don't need to set anything for normal use.
+Entities participate in MCP automatically unless you explicitly restrict them. The `mcp` property on an entity controls its MCP participation. You can use a boolean shorthand or an object format.
+
+### Boolean shorthand
+
+```json
+{
+  "entities": {
+    "Products": {
+      "mcp": true
+    },
+    "SensitiveData": {
+      "mcp": false
+    }
+  }
+}
+```
+
+Setting `"mcp": true` enables DML tools for the entity. Setting `"mcp": false` disables MCP entirely for the entity.
+
+### Object format
 
 ```json
 {
@@ -193,13 +269,36 @@ Entities participate in MCP automatically unless you explicitly restrict them. T
 }
 ```
 
-If you don't specify `mcp.dml-tools` on an entity, it defaults to `true` when MCP is enabled globally.
+If you don't specify `mcp` on an entity, DML tools default to enabled when MCP is enabled globally.
+
+### Custom tools for stored procedures
+
+For stored-procedure entities, use the `custom-tool` property to register the procedure as a named MCP tool:
+
+```json
+{
+  "entities": {
+    "GetBookById": {
+      "source": {
+        "type": "stored-procedure",
+        "object": "dbo.get_book_by_id"
+      },
+      "mcp": {
+        "custom-tool": true
+      }
+    }
+  }
+}
+```
+
+> [!IMPORTANT]
+> The `custom-tool` property is only valid for stored-procedure entities. Setting it on a table or view entity results in a configuration error.
 
 ### Scope of per-tool control
 
 Per-tool toggles are configured only at the global runtime level under `runtime.mcp.dml-tools`.
 
-At the entity level, `mcp.dml-tools` is a boolean gate that enables or disables all DML tools for that entity.
+At the entity level, `mcp` is a boolean gate or an object with `dml-tools` and `custom-tool` properties.
 
 ```json
 {
@@ -223,7 +322,8 @@ At the entity level, `mcp.dml-tools` is a boolean gate that enables or disables 
         "read-records": true,
         "update-record": true,
         "delete-record": false,
-        "execute-entity": true
+        "execute-entity": true,
+        "aggregate-records": true
       }
     }
   }

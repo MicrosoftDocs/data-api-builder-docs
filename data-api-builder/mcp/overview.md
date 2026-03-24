@@ -4,7 +4,7 @@ description: Learn how SQL MCP Server enables AI agents to safely interact with 
 author: jnixon
 ms.author: jnixon
 ms.topic: overview
-ms.date: 12/22/2025
+ms.date: 03/24/2026
 ---
 
 # What is SQL MCP Server?
@@ -167,11 +167,14 @@ The SQL MCP Server is enabled by default in the Data API builder configuration. 
       "read-records": true,       // default: true
       "update-record": true,      // default: true
       "delete-record": true,      // default: true
-      "execute-entity": true      // default: true
+      "execute-entity": true,     // default: true
+      "aggregate-records": true   // default: true
     }
   }
 }
 ```
+
+The `dml-tools` property can be a boolean (enable or disable all tools) or an object with per-tool toggles. The `aggregate-records` tool can also accept an object with `enabled` and `query-timeout` (1–600 seconds, default 30) properties. For the full configuration reference, see [MCP runtime configuration](../configuration/runtime.md#mcp-runtime).
 
 The CLI also lets you set every property individually or programmatically through scripting. 
 
@@ -184,6 +187,7 @@ dab configure --runtime.mcp.dml-tools.read-records.enabled true
 dab configure --runtime.mcp.dml-tools.update-record.enabled true
 dab configure --runtime.mcp.dml-tools.delete-record.enabled true
 dab configure --runtime.mcp.dml-tools.execute-entity.enabled true
+dab configure --runtime.mcp.dml-tools.aggregate-records.enabled true
 ```
 
 #### Why disable individual tools?
@@ -192,11 +196,19 @@ Developers may want to restrict specific actions even when roles or entity permi
 
 ### Entity settings
 
-You also don't need to enable MCP on each entity. Entities participate automatically unless you choose to restrict them. The `dml-tools` property exists so you can exclude an entity from MCP or narrow its capabilities, but you don't need to set anything for normal use. The defaults handle everything.
+You also don't need to enable MCP on each entity. Entities participate automatically unless you choose to restrict them. The `mcp` property exists so you can exclude an entity from MCP or narrow its capabilities, but you don't need to set anything for normal use. The defaults handle everything.
+
+You can use a boolean shorthand or an object format:
 
 ```json
 "entities": {
-  "products": {
+  "Products": {
+    "mcp": true
+  },
+  "SensitiveData": {
+    "mcp": false
+  },
+  "Orders": {
     "mcp": {
       "dml-tools": true
     }
@@ -204,11 +216,43 @@ You also don't need to enable MCP on each entity. Entities participate automatic
 }
 ```
 
+For stored-procedure entities, you can also enable `custom-tool` to register the procedure as a named MCP tool:
+
+```json
+"entities": {
+  "GetBookById": {
+    "source": {
+      "type": "stored-procedure",
+      "object": "dbo.get_book_by_id"
+    },
+    "mcp": {
+      "custom-tool": true
+    }
+  }
+}
+```
+
+When `custom-tool` is `true`, SQL MCP Server registers the stored procedure as a named tool via `tools/list` and `tools/call`, allowing agents to discover and invoke it directly by name. The `custom-tool` property is only valid for stored-procedure entities.
+
+> [!TIP]
+> For more details on entity-level MCP configuration, see [What's new in version 2.0](../whats-new/version-2-0.md).
+
 ## The DML tools
 
-SQL MCP Server exposes six [Data Manipulation Language (DML) tools](./data-manipulation-language-tools.md) that enable AI agents to perform secure, type-safe database operations: `describe_entities`, `create_record`, `read_records`, `update_record`, `delete_record`, and `execute_entity`. These tools form a predictable CRUD surface that always reflects your configuration, permissions, and schema.
+SQL MCP Server exposes seven [Data Manipulation Language (DML) tools](./data-manipulation-language-tools.md) that enable AI agents to perform secure, type-safe database operations: `describe_entities`, `create_record`, `read_records`, `update_record`, `delete_record`, `execute_entity`, and `aggregate_records`. These tools form a predictable CRUD surface that always reflects your configuration, permissions, and schema.
 
 Each tool respects role-based access control (RBAC), entity permissions, and policies. Agents never interact directly with your database - they work through the secure Data API builder abstraction layer.
+
+## Custom MCP tools
+
+In addition to the built-in DML tools, SQL MCP Server supports custom MCP tools derived from stored procedures. When you set `"custom-tool": true` on a stored-procedure entity, DAB registers it as a named tool via MCP `tools/list` and `tools/call`. This approach lets agents discover and invoke stored procedures directly by name, complementing the generic `execute_entity` DML tool.
+
+## OpenTelemetry tracing for MCP
+
+MCP tool execution is fully instrumented with OpenTelemetry (OTEL) spans. Each MCP tool call generates trace data alongside REST and GraphQL operations, enabling unified observability across all API surfaces. Learn more about [OpenTelemetry tracing](../concept/monitor/open-telemetry.md).
+
+> [!TIP]
+> For a complete list of DAB 2.0 features, see [What's new in version 2.0](../whats-new/version-2-0.md).
 
 ## Related content
 

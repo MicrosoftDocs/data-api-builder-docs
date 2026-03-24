@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 07/21/2025
+ms.date: 03/24/2026
 # Customer Intent: Customer Intent: As a developer, I want to expose stored procedures in DAB so I can reuse business logic or parameterized queries as endpoints.
 ---
 
@@ -108,4 +108,41 @@ query {
 * Requires metadata from `sys.dm_exec_describe_first_result_set`
 * Can't return a single item by key
 * No parameter-level authorization
+
+## MCP custom tools
+
+In Data API builder 2.0, stored procedures can be registered as custom MCP tools. When you set `"custom-tool": true` in the entity's `mcp` configuration, DAB registers the stored procedure as a named tool via MCP `tools/list` and `tools/call`. This lets AI agents discover and invoke the procedure directly by name.
+
+### Configuration example
+
+```json
+"GetBookById": {
+  "source": {
+    "type": "stored-procedure",
+    "object": "dbo.get_book_by_id"
+  },
+  "mcp": {
+    "custom-tool": true
+  },
+  "permissions": [
+    {
+      "role": "anonymous",
+      "actions": [ "execute" ]
+    }
+  ]
+}
+```
+
+### CLI example
+
+```bash
+dab add GetBookById \
+  --source dbo.get_book_by_id \
+  --source.type stored-procedure \
+  --permissions "anonymous:execute" \
+  --mcp.custom-tool true
+```
+
+> [!TIP]
+> For more details on MCP custom tools in DAB 2.0, see [What's new in version 2.0](../../whats-new/version-2-0.md).
 

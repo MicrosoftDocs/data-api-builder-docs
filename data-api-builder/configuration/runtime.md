@@ -85,6 +85,22 @@ Configuration settings that determine runtime behavior.
 |[runtime.health.cache-ttl-seconds](#health-runtime)|`5`|Time to live (seconds) for the health check report cache entry|
 |[runtime.health.max-query-parallelism](#health-runtime)|`4`|Maximum concurrent health check queries (range: 1-8)|
 
+### MCP settings
+
+|Property|Default|Description|
+|-|-|-|
+|[runtime.mcp.enabled](#mcp-runtime)|`true`|Enables or disables the MCP endpoint globally|
+|[runtime.mcp.path](#mcp-runtime)|`"/mcp"`|Base path for the MCP endpoint|
+|[runtime.mcp.description](#mcp-runtime)|`null`|Server description sent to MCP clients during initialization|
+|[runtime.mcp.dml-tools](#mcp-runtime)|`true`|Enables or disables all DML tools, or an object for per-tool control|
+|[runtime.mcp.dml-tools.describe-entities](#mcp-runtime)|`true`|Enables the describe_entities tool|
+|[runtime.mcp.dml-tools.create-record](#mcp-runtime)|`true`|Enables the create_record tool|
+|[runtime.mcp.dml-tools.read-records](#mcp-runtime)|`true`|Enables the read_records tool|
+|[runtime.mcp.dml-tools.update-record](#mcp-runtime)|`true`|Enables the update_record tool|
+|[runtime.mcp.dml-tools.delete-record](#mcp-runtime)|`true`|Enables the delete_record tool|
+|[runtime.mcp.dml-tools.execute-entity](#mcp-runtime)|`true`|Enables the execute_entity tool|
+|[runtime.mcp.dml-tools.aggregate-records](#mcp-runtime)|`true`|Enables the aggregate_records tool (boolean or object with query-timeout)|
+
 ## Format overview
 
 ```json
@@ -152,6 +168,23 @@ Configuration settings that determine runtime behavior.
     "roles": [ "<string>" ],
     "cache-ttl-seconds": <integer> (default: `5`),
     "max-query-parallelism": <integer> (default: `4`)
+  },
+  "mcp": {
+    "enabled": <true>|<false> (default: `true`),
+    "path": <string> (default: `"/mcp"`),
+    "description": <string>,
+    "dml-tools": <true>|<false> | {
+      "describe-entities": <true>|<false> (default: `true`),
+      "create-record": <true>|<false> (default: `true`),
+      "read-records": <true>|<false> (default: `true`),
+      "update-record": <true>|<false> (default: `true`),
+      "delete-record": <true>|<false> (default: `true`),
+      "execute-entity": <true>|<false> (default: `true`),
+      "aggregate-records": <true>|<false> | {
+        "enabled": <true>|<false> (default: `true`),
+        "query-timeout": <integer> (default: `30`)
+      }
+    }
   }
 }
 ```
@@ -962,6 +995,95 @@ Learn more about [OTEL_EXPORTER_OTLP_HEADERS](https://opentelemetry.io/docs/lang
 > [!NOTE]
 > gRPC (`4317`) is faster and supports streaming but requires more setup steps. HTTP/protobuf (`4318`) is simpler and easier to debug but less efficient. 
 
+## MCP (runtime)
+
+| Parent | Property | Type | Required | Default |
+| - | - | - | - | - |
+| `runtime` | `mcp` | object | ❌ No | - |
+
+Configures the SQL MCP Server, which exposes database entities as MCP tools for AI agents.
+
+> [!TIP]
+> For more details on MCP changes in DAB 2.0, see [What's new in version 2.0](../whats-new/version-2-0.md).
+
+### Nested properties
+
+| Parent | Property | Type | Required | Default |
+| - | - | - | - | - |
+| `runtime.mcp` | `enabled` | boolean | ❌ No | `true` |
+| `runtime.mcp` | `path` | string | ❌ No | `"/mcp"` |
+| `runtime.mcp` | `description` | string | ❌ No | `null` |
+| `runtime.mcp` | `dml-tools` | boolean or object | ❌ No | `true` |
+
+The `dml-tools` property accepts a boolean to enable or disable all tools, or an object to control individual tools:
+
+| Parent | Property | Type | Required | Default |
+| - | - | - | - | - |
+| `runtime.mcp.dml-tools` | `describe-entities` | boolean | ❌ No | `true` |
+| `runtime.mcp.dml-tools` | `create-record` | boolean | ❌ No | `true` |
+| `runtime.mcp.dml-tools` | `read-records` | boolean | ❌ No | `true` |
+| `runtime.mcp.dml-tools` | `update-record` | boolean | ❌ No | `true` |
+| `runtime.mcp.dml-tools` | `delete-record` | boolean | ❌ No | `true` |
+| `runtime.mcp.dml-tools` | `execute-entity` | boolean | ❌ No | `true` |
+| `runtime.mcp.dml-tools` | `aggregate-records` | boolean or object | ❌ No | `true` |
+
+The `aggregate-records` tool accepts a boolean or an object with additional settings:
+
+| Parent | Property | Type | Required | Default | Range |
+| - | - | - | - | - | - |
+| `runtime.mcp.dml-tools.aggregate-records` | `enabled` | boolean | ❌ No | `true` | |
+| `runtime.mcp.dml-tools.aggregate-records` | `query-timeout` | integer | ❌ No | `30` | 1–600 seconds |
+
+### Format
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "enabled": <true> (default) | <false>,
+      "path": <string> (default: "/mcp"),
+      "description": <string>,
+      "dml-tools": {
+        "describe-entities": <true> | <false>,
+        "create-record": <true> | <false>,
+        "read-records": <true> | <false>,
+        "update-record": <true> | <false>,
+        "delete-record": <true> | <false>,
+        "execute-entity": <true> | <false>,
+        "aggregate-records": {
+          "enabled": <true> | <false>,
+          "query-timeout": <integer; default: 30>
+        }
+      }
+    }
+  }
+}
+```
+
+### Example
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "enabled": true,
+      "dml-tools": {
+        "describe-entities": true,
+        "create-record": true,
+        "read-records": true,
+        "update-record": true,
+        "delete-record": true,
+        "execute-entity": true,
+        "aggregate-records": {
+          "enabled": true,
+          "query-timeout": 30
+        }
+      }
+    }
+  }
+}
+```
+
 ## Health (runtime)
 
 | Parent | Property | Type | Required | Default |
@@ -1017,4 +1139,127 @@ Global [health check endpoint](../concept/monitor/health-checks.md) (`/health`) 
     "max-query-parallelism": 6
   }
 }
+```
+
+## MCP (runtime)
+
+|Parent|Property|Type|Required|Default|
+|-|-|-|-|-|
+|`runtime`|`mcp`|object|❌ No|None (MCP enabled with defaults)|
+
+Configures the MCP (Model Context Protocol) endpoint and controls which DML tools are available to AI agents. MCP is enabled by default when Data API builder is running. Configure this section only when you need to restrict or customize MCP behavior.
+
+> [!TIP]
+> For more information about MCP changes in version 2.0, see [What's new in Data API builder version 2.0](../whats-new/version-2-0.md#mcp-and-ai-integration).
+
+### Nested properties
+
+|Parent|Property|Type|Required|Default|
+|-|-|-|-|-|
+|`runtime.mcp`|`enabled`|boolean|❌ No|`true`|
+|`runtime.mcp`|`path`|string|❌ No|`"/mcp"`|
+|`runtime.mcp`|`description`|string|❌ No|`null`|
+|`runtime.mcp`|`dml-tools`|boolean or object|❌ No|`true`|
+
+The `dml-tools` property accepts either a boolean (enable or disable all tools) or an object with per-tool toggles.
+
+#### DML tools properties
+
+|Parent|Property|Type|Required|Default|
+|-|-|-|-|-|
+|`runtime.mcp.dml-tools`|`describe-entities`|boolean|❌ No|`true`|
+|`runtime.mcp.dml-tools`|`create-record`|boolean|❌ No|`true`|
+|`runtime.mcp.dml-tools`|`read-records`|boolean|❌ No|`true`|
+|`runtime.mcp.dml-tools`|`update-record`|boolean|❌ No|`true`|
+|`runtime.mcp.dml-tools`|`delete-record`|boolean|❌ No|`true`|
+|`runtime.mcp.dml-tools`|`execute-entity`|boolean|❌ No|`true`|
+|`runtime.mcp.dml-tools`|`aggregate-records`|boolean or object|❌ No|`true`|
+
+The `aggregate-records` tool can be a boolean or an object. When set to an object, it supports these properties:
+
+|Parent|Property|Type|Required|Default|
+|-|-|-|-|-|
+|`runtime.mcp.dml-tools.aggregate-records`|`enabled`|boolean|❌ No|`true`|
+|`runtime.mcp.dml-tools.aggregate-records`|`query-timeout`|integer|❌ No|`30`|
+
+The `query-timeout` value specifies the maximum duration in seconds for aggregate queries. Valid range is 1–600 seconds. Default is 30 seconds.
+
+### Format
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "enabled": <true> (default) | <false>,
+      "path": <string> (default: "/mcp"),
+      "description": <string>,
+      "dml-tools": <true> (default) | <false> | {
+        "describe-entities": <true> (default) | <false>,
+        "create-record": <true> (default) | <false>,
+        "read-records": <true> (default) | <false>,
+        "update-record": <true> (default) | <false>,
+        "delete-record": <true> (default) | <false>,
+        "execute-entity": <true> (default) | <false>,
+        "aggregate-records": <true> (default) | <false> | {
+          "enabled": <true> (default) | <false>,
+          "query-timeout": <integer; default: 30>
+        }
+      }
+    }
+  }
+}
+```
+
+### Example: Enable all tools (default)
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "enabled": true,
+      "path": "/mcp"
+    }
+  }
+}
+```
+
+### Example: Granular DML tool control
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "enabled": true,
+      "path": "/mcp",
+      "dml-tools": {
+        "describe-entities": true,
+        "create-record": true,
+        "read-records": true,
+        "update-record": true,
+        "delete-record": false,
+        "execute-entity": true,
+        "aggregate-records": {
+          "enabled": true,
+          "query-timeout": 60
+        }
+      }
+    }
+  }
+}
+```
+
+When you disable a tool at the runtime level, the tool never appears in the MCP `tools/list` response and can't be invoked, regardless of entity-level permissions. For more details on individual DML tools, see [Data manipulation language (DML) tools](../mcp/data-manipulation-language-tools.md).
+
+### Using the CLI
+
+```bash
+dab configure --runtime.mcp.enabled true
+dab configure --runtime.mcp.path "/mcp"
+dab configure --runtime.mcp.dml-tools.describe-entities.enabled true
+dab configure --runtime.mcp.dml-tools.create-record.enabled true
+dab configure --runtime.mcp.dml-tools.read-records.enabled true
+dab configure --runtime.mcp.dml-tools.update-record.enabled true
+dab configure --runtime.mcp.dml-tools.delete-record.enabled true
+dab configure --runtime.mcp.dml-tools.execute-entity.enabled true
+dab configure --runtime.mcp.dml-tools.aggregate-records.enabled true
 ```
