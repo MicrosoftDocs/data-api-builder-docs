@@ -10,8 +10,14 @@ metadata:
   ms.reviewer: sidandrews
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 09/24/2025
+  ms.date: 03/24/2026
 landingContent:
+- title: Version 2.0
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: Release notes
+      url: version-2-0.md
 - title: Version 1.7
   linkLists:
   - linkListType: whats-new

@@ -28,7 +28,6 @@ dab start [options]
 | [`--LogLevel <level>`](#--loglevel-level)     | Specifies logging level as provided value.                                                         |
 | [`--mcp-stdio`](#--mcp-stdio)                 | *(Model Context Protocol (MCP))* Starts DAB as an MCP standard input/output (stdio) server instead of an HTTP server. Requires `mcp.enabled: true` in config. |
 | [`--no-https-redirect`](#--no-https-redirect) | Disables automatic HTTP→HTTPS redirection                                                          |
-| [`--verbose`](#--verbose)                     | Sets log level to Information                                                                      |
 | [`--help`](#--help)                           | Display the help screen.                                                                           |
 | [`--version`](#--version)                     | Display version information.                                                                       |
 
@@ -94,28 +93,6 @@ dab start \
 ```cmd
 dab start ^
   --no-https-redirect
-```
-
----
-
-## `--verbose`
-
-Sets the minimum log level to `Information`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab start \
-  --verbose
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab start ^
-  --verbose
 ```
 
 ---
