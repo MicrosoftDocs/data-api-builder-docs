@@ -1,12 +1,12 @@
 ---
 title: How to call REST endpoints
 description: Learn how to call and use REST endpoints in Data API builder, including how to query, filter, sort, and page results.
-author: jnixon
-ms.author: sidandrews
-ms.reviewer: jerrynixon
+author: jerrynixon
+ms.author: jnixon
+ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 2/25/2026
+ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to call REST endpoints in Data API builder to query, filter, and modify data safely and efficiently.
 ---
 
@@ -563,3 +563,87 @@ if (data.error) {
 
 ---
 
+## Advanced REST paths with subdirectories
+
+> [!TIP]
+> This feature is new in Data API builder 2.0. For more information, see [What's new in version 2.0](../../whats-new/version-2-0.md).
+
+Entity REST paths can include forward slashes to create subdirectory-style URL segments. This enables more expressive, hierarchical URL structures for your API.
+
+Configure a subdirectory path in the entity's `rest.path` property:
+
+```json
+{
+  "entities": {
+    "ShoppingCartItem": {
+      "source": "dbo.ShoppingCartItem",
+      "rest": {
+        "path": "shopping-cart/item"
+      }
+    }
+  }
+}
+```
+
+This configuration results in the endpoint:
+
+```http
+GET /api/shopping-cart/item
+```
+
+DAB uses longest-prefix matching for routing, so more specific paths are matched before shorter ones. For security, path traversal patterns (such as `..`), backslashes, and percent-encoded separators are blocked by validation.
+
+For more information, see the [REST path configuration](../../configuration/entities.md#rest-entity-name-entities).
+
+## Keyless PUT and PATCH for auto-generated primary keys
+
+> [!TIP]
+> This feature is new in Data API builder 2.0. For more information, see [What's new in version 2.0](../../whats-new/version-2-0.md).
+
+When all primary key columns for an entity are auto-generated (for example, `IDENTITY` columns in SQL Server), you can send `PUT` and `PATCH` requests without specifying a primary key in the URL. DAB automatically assigns the key during insertion.
+
+```http
+PUT /api/Book
+Content-Type: application/json
+
+{
+  "title": "My New Book",
+  "publisher_id": 1234
+}
+```
+
+This request creates a new `Book` record with an auto-generated primary key.
+
+### Rules for keyless operations
+
+- All omitted primary key columns must be auto-generated. If any omitted key column isn't auto-generated, the request fails.
+- For composite primary keys, you must still supply any non-auto-generated portions of the key in the URL.
+- Stored procedures are unaffected by this feature. They continue to use their own parameter handling.
+- The OpenAPI document reflects keyless operations on the base entity path (for example, `PUT /api/Book` without key segments).
+
+## HTTP response compression
+
+> [!TIP]
+> This feature is new in Data API builder 2.0. For more information, see [What's new in version 2.0](../../whats-new/version-2-0.md).
+
+DAB supports HTTP response compression to reduce payload sizes and improve transfer speeds. Configure compression in the `runtime.compression` section of your configuration file:
+
+```json
+{
+  "runtime": {
+    "compression": {
+      "level": "optimal"
+    }
+  }
+}
+```
+
+Available compression levels:
+
+| Level | Description |
+|---|---|
+| `optimal` | Balances compression ratio and speed (recommended for most scenarios) |
+| `fastest` | Prioritizes compression speed over ratio |
+| `none` | Disables compression |
+
+For more information on configuring compression, see [runtime compression configuration](../../configuration/runtime.md#compression-runtime).

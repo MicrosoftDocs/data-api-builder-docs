@@ -1,12 +1,12 @@
 ---
 title: Use the If-Match HTTP Header in PUT and PATCH Operations
 description: Use http headers to control upsert operations
-author: seesharprun
-ms.author: sidandrews
-ms.reviewer: jerrynixon
+author: jerrynixon
+ms.author: jnixon
+ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 09/26/2025
+ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to add use http headers to control PUT and PATCH operations.
 ---
 
@@ -182,3 +182,6 @@ Content-Type: application/json
 * Omit `If-Match` for upsert (insert-or-update) semantics.
 * Use `If-Match: *` for strict update-only semantics (404 if the item is missing).
 * Don't use any other value. Real ETag matching isn't implemented.
+
+> [!TIP]
+> Starting in Data API builder 2.0, `PUT` and `PATCH` requests can omit the primary key from the URL when all key columns are auto-generated. For more information, see [keyless PUT and PATCH](./rest.md#keyless-put-and-patch-for-auto-generated-primary-keys).

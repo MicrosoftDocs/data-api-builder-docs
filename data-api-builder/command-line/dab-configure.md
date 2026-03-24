@@ -61,6 +61,7 @@ dab configure [options]
 | [`--runtime.mcp.dml-tools.execute-entity.enabled`](#--runtimemcpdml-toolsexecute-entityenabled) | Enable or disable the execute-entity tool.           |
 | [`--runtime.cache.enabled`](#--runtimecacheenabled) | Enable or disable global cache.                      |
 | [`--runtime.cache.ttl-seconds`](#--runtimecachettl-seconds) | Global cache TTL in seconds.                         |
+| [`--runtime.compression.level`](#--runtimecompressionlevel) | Set HTTP response compression level.                 |
 | [`--runtime.host.mode`](#--runtimehostmode)     | Set host mode: Development or Production.            |
 | [`--runtime.host.cors.origins`](#--runtimehostcorsorigins) | Allowed CORS origins.                                |
 | [`--runtime.host.cors.allow-credentials`](#--runtimehostcorsallow-credentials) | Set CORS allow-credentials.                          |
@@ -803,6 +804,49 @@ dab configure ^
     "cache": {
       "enabled": false,
       "ttl-seconds": 30
+    }
+  }
+}
+```
+
+## `--runtime.compression.level`
+
+> [!TIP]
+> This feature is new in Data API builder 2.0. For more information, see [What's new in version 2.0](../whats-new/version-2-0.md).
+
+Set the HTTP response compression level.
+
+Allowed values:
+
+- `optimal` — balances compression ratio and speed
+- `fastest` — prioritizes compression speed over ratio
+- `none` — disables compression (default)
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab configure \
+  --runtime.compression.level optimal
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab configure ^
+  --runtime.compression.level optimal
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "compression": {
+      "level": "optimal"
     }
   }
 }

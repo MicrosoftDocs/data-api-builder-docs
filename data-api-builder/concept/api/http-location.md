@@ -1,12 +1,12 @@
 ---
 title: The Location Response Header in REST Create Operation
 description: Learn how Data API builder (DAB) uses the Location header to indicate where newly created resources can be retrieved after POST or PUT inserts.
-author: seesharprun
-ms.author: sidandrews
-ms.reviewer: jerrynixon
+author: jerrynixon
+ms.author: jnixon
+ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 09/26/2025
+ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to understand how the Location header works in DAB REST endpoints so I can reliably find the path of newly created resources.
 ---
 
@@ -180,3 +180,6 @@ Content-Type: application/json
 * **PUT or PATCH with update**: No `Location`.
 * **PUT or PATCH with insert**: Returns `201 Created`; `Location` may be omitted (don't depend on it).
 * When you include [`If-Match: *`](./http-if-match.md), DAB only performs an update if the row already exists. If the row is missing, the request fails with `404 Not Found` and no insert is performed, so no `Location` header is returned.
+
+> [!TIP]
+> Starting in Data API builder 2.0, `PUT` and `PATCH` requests can omit the primary key from the URL when all key columns are auto-generated. For more information, see [keyless PUT and PATCH](./rest.md#keyless-put-and-patch-for-auto-generated-primary-keys).
