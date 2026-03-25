@@ -29,7 +29,8 @@ To expose a view:
 dab add BookDetail \
   --source dbo.vw_books_details \
   --source.type "view" \
-  --source.key-fields "id" \
+  --fields.name "id" \
+  --fields.primary-key "true" \
   --permissions "anonymous:read"
 ```
 

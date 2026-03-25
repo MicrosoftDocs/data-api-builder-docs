@@ -50,8 +50,6 @@ dab add <entity-name> [options]
 | [`--rest`](#--rest)                          | REST exposure: `false`, `true`, or custom route.                     |
 | [`--rest.methods`](#--restmethods)           | Stored procedures only. Allowed verbs: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`. Default POST. |
 | [`-s, --source`](#-s---source)               | Required. Database object name (table, view, or stored procedure).   |
-| [`--source.key-fields`](#--sourcekey-fields) | The field(s) to be used as primary keys.                             |
-| [`--source.params`](#--sourceparams)         | Stored procedures only. Default parameter values.                    |
 | [`--source.type`](#--sourcetype)             | Source type: `table`, `view`, `stored-procedure` (default table).    |
 | [`--mcp.dml-tools`](#--mcpdml-tools)        | Enable/disable DML tools for entity in MCP. Default `true`.         |
 | [`--mcp.custom-tool`](#--mcpcustom-tool)    | Stored procedures only. Register as a named MCP tool.               |
@@ -98,7 +96,8 @@ dab add Book ^
 dab add BookView \
   --source dbo.MyView \
   --source.type view \
-  --source.key-fields "id,region" \
+  --fields.name "id,region" \
+  --fields.primary-key "true,true" \
   --permissions "anonymous:read" \
   --description "Example for managing book inventory from view"
 ```
@@ -109,7 +108,8 @@ dab add BookView \
 dab add BookView ^
   --source dbo.MyView ^
   --source.type view ^
-  --source.key-fields "id,region" ^
+  --fields.name "id,region" ^
+  --fields.primary-key "true,true" ^
   --permissions "anonymous:read" ^
   --description "Example for managing book inventory from view"
 ```
@@ -124,7 +124,9 @@ dab add BookView ^
 dab add BookProc \
   --source dbo.MyProc \
   --source.type stored-procedure \
-  --source.params "year:2024,active:true" \
+  --parameters.name "year,active" \
+  --parameters.required "false,false" \
+  --parameters.default "2024,true" \
   --permissions "anonymous:execute" \
   --graphql.operation query \
   --description "Example for executing a stored procedure"
@@ -136,7 +138,9 @@ dab add BookProc \
 dab add BookProc ^
   --source dbo.MyProc ^
   --source.type stored-procedure ^
-  --source.params "year:2024,active:true" ^
+  --parameters.name "year,active" ^
+  --parameters.required "false,false" ^
+  --parameters.default "2024,true" ^
   --permissions "anonymous:execute" ^
   --graphql.operation query ^
   --description "Example for executing a stored procedure"
@@ -272,7 +276,7 @@ dab add Book ^
 Free-text description of the entity.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -549,7 +553,7 @@ dab update Book ^
 Stored procedures only. Comma-separated list of parameter names.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -632,7 +636,7 @@ dab add GetOrdersByDateRange ^
 Stored procedures only. Comma-separated list of parameter descriptions aligned to `--parameters.name`.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -665,7 +669,7 @@ dab add GetOrdersByDateRange ^
 Stored procedures only. Comma-separated list of `true`/`false` values aligned to `--parameters.name`.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -698,7 +702,7 @@ dab add GetOrdersByDateRange ^
 Stored procedures only. Comma-separated list of default values aligned to `--parameters.name`.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -731,7 +735,7 @@ dab add GetOrdersByDateRange ^
 Name of the database column to describe.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -795,7 +799,7 @@ dab add Products ^
 Alias for the field. Use a comma-separated list aligned to `--fields.name`.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -826,7 +830,7 @@ dab add Products ^
 Description for the field. Use a comma-separated list aligned to `--fields.name`.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -857,7 +861,7 @@ dab add Products ^
 Primary key flag for the field. Use a comma-separated list of `true`/`false` values aligned to `--fields.name`.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -1136,114 +1140,6 @@ dab add Book ^
       },
       "permissions": [
         { "role": "anonymous", "actions": [ { "action": "read" } ] }
-      ]
-    }
-  }
-}
-```
-
-## `--source.key-fields`
-
-The field(s) to be used as primary keys. Required for views when generated through the CLI.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add BookView \
-  --source dbo.MyView \
-  --source.type view \
-  --source.key-fields "id,region" \
-  --permissions "anonymous:read"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add BookView ^
-  --source dbo.MyView ^
-  --source.type view ^
-  --source.key-fields "id,region" ^
-  --permissions "anonymous:read"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "BookView": {
-      "source": {
-        "type": "view",
-        "object": "dbo.MyView",
-        "key-fields": [ "id", "region" ]
-      },
-      "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "read" } ] }
-      ]
-    }
-  }
-}
-```
-
-## `--source.params`
-
-Stored procedures only. Comma-separated `name:value` pairs. Not allowed for tables or views.
-
-> [!NOTE]
-> In the v1.7 prerelease CLI (currently RC), `--source.params` is deprecated. Use `--parameters.name`, `--parameters.default`, and related `--parameters.*` options instead.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add BookProc \
-  --source dbo.MyProc \
-  --source.type stored-procedure \
-  --source.params "year:2024,active:true" \
-  --permissions "admin:execute"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add BookProc ^
-  --source dbo.MyProc ^
-  --source.type stored-procedure ^
-  --source.params "year:2024,active:true" ^
-  --permissions "admin:execute"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "BookProc": {
-      "source": {
-        "type": "stored-procedure",
-        "object": "dbo.MyProc",
-        "parameters": [
-          {
-            "name": "year",
-            "required": false,
-            "default": "2024"
-          },
-          {
-            "name": "active",
-            "required": false,
-            "default": "True"
-          }
-        ]
-      },
-      "permissions": [
-        { "role": "admin", "actions": [ { "action": "execute" } ] }
       ]
     }
   }

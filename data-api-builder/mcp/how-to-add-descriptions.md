@@ -68,7 +68,8 @@ dab add Orders \
 dab add ActiveProducts \
   --source dbo.vw_ActiveProducts \
   --source.type view \
-  --source.key-fields "ProductID" \
+  --fields.name "ProductID" \
+  --fields.primary-key "true" \
   --permissions "anonymous:read" \
   --description "Currently available products with positive inventory and active status"
 ```

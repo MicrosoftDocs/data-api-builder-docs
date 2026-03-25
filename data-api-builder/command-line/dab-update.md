@@ -15,7 +15,7 @@ ms.date: 09/29/2025
 Update an existing entity definition in the Data API builder configuration file. Use this command to adjust source metadata, permissions, exposure (REST/GraphQL), policies, caching, relationships, mappings, and descriptive metadata after the entity has already been added.
 
 > [!TIP]
-> Use `dab add` to create new entities, and `dab update` to evolve them. Field name remapping (`--map`) is only available in `update`, not in `add`.
+> Use `dab add` to create new entities, and `dab update` to evolve them. Use `--fields.name` with `--fields.alias`, `--fields.description`, and `--fields.primary-key` to manage field metadata.
 
 ## Syntax
 
@@ -48,7 +48,6 @@ dab update <entity-name> [options]
 | -------------------------------------- | ------------------------------------------------------ |
 | [`--fields.exclude`](#--fieldsexclude) | Comma-separated list of excluded fields.               |
 | [`--fields.include`](#--fieldsinclude) | Comma-separated list of included fields (`*` = all).   |
-| [`-m, --map`](#-m---map)               | Field mapping pairs `name:alias`. Replaces entire set. |
 
 #### Fields metadata
 
@@ -98,8 +97,6 @@ dab update <entity-name> [options]
 | Option                                       | Summary                                              |
 | -------------------------------------------- | ---------------------------------------------------- |
 | [`-s, --source`](#-s---source)               | Underlying database object name.                     |
-| [`--source.key-fields`](#--sourcekey-fields) | Required for views or non-PK tables.                 |
-| [`--source.params`](#--sourceparams)         | Stored procedures only. Replace default params.      |
 | [`--source.type`](#--sourcetype)             | Source type: `table`, `view`, or `stored-procedure`. |
 
 #### Parameters (stored procedures)
@@ -196,7 +193,7 @@ dab update ^
 Replace entity description.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -413,56 +410,6 @@ dab update ^
 
 > [!NOTE]
 > Supplying `--graphql.operation` for tables or views is ignored.
-
-## `-m, --map`
-
-Map database fields to exposed names. Replaces the entire mapping set.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab update \
-  Book \
-  --map "id:bookId,title:bookTitle"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab update ^
-  Book ^
-  --map "id:bookId,title:bookTitle"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "Book": {
-      "fields": [
-        {
-          "name": "id",
-          "alias": "bookId",
-          "primary-key": false
-        },
-        {
-          "name": "title",
-          "alias": "bookTitle",
-          "primary-key": false
-        }
-      ]
-    }
-  }
-}
-```
-
-> [!IMPORTANT]
-> Any existing mappings are overwritten. Restate all mappings you want to keep.
 
 ## `--permissions`
 
@@ -1018,99 +965,6 @@ dab update ^
 }
 ```
 
-## `--source.key-fields`
-
-For views or tables without an inferred PK. Replaces existing keys. Not valid for stored procedures.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab update \
-  SalesSummary \
-  --source.type view \
-  --source.key-fields "year,region"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab update ^
-  SalesSummary ^
-  --source.type view ^
-  --source.key-fields "year,region"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "SalesSummary": {
-      "fields": [
-        { "name": "year", "primary-key": true },
-        { "name": "region", "primary-key": true }
-      ]
-    }
-  }
-}
-```
-
-> [!NOTE]
-> Using `--source.key-fields` with stored procedures is not allowed.
-
-## `--source.params`
-
-Stored procedures only. Replace parameter defaults.
-
-> [!NOTE]
-> In the v1.7 prerelease CLI, `--source.params` is deprecated. Use `--parameters.name`/`--parameters.description`/`--parameters.required`/`--parameters.default`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab update \
-  RunReport \
-  --source.type stored-procedure \
-  --source.params "year:2024,region:west"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab update ^
-  RunReport ^
-  --source.type stored-procedure ^
-  --source.params "year:2024,region:west"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "RunReport": {
-      "source": {
-        "parameters": [
-          { "name": "year", "required": false, "default": "2024" },
-          { "name": "region", "required": false, "default": "west" }
-        ]
-      }
-    }
-  }
-}
-```
-
-> [!NOTE]
-> Using `--source.params` with tables or views is not allowed.
-
 ## `--source.type`
 
 Change the source object type.
@@ -1155,7 +1009,10 @@ dab update ^
 Stored procedures only. Comma-separated list of parameter names.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+
+> [!TIP]
+> Use `--parameters.name` with `--parameters.description`, `--parameters.required`, and `--parameters.default` to define stored procedure parameters.
 
 ### Example
 
@@ -1211,7 +1068,7 @@ dab update ^
 Stored procedures only. Comma-separated list of parameter descriptions aligned to `--parameters.name`.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -1240,7 +1097,7 @@ dab update ^
 Stored procedures only. Comma-separated list of `true`/`false` values aligned to `--parameters.name`.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -1269,7 +1126,7 @@ dab update ^
 Stored procedures only. Comma-separated list of default values aligned to `--parameters.name`.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -1298,7 +1155,7 @@ dab update ^
 Name of the database column to describe.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -1347,7 +1204,10 @@ dab update ^
 Alias for the field. Use a comma-separated list aligned to `--fields.name`.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+
+> [!TIP]
+> Use `--fields.alias` with `--fields.name` to define exposed field names.
 
 ### Example
 
@@ -1356,8 +1216,8 @@ Alias for the field. Use a comma-separated list aligned to `--fields.name`.
 ```bash
 dab update \
   Products \
-  --fields.name Id \
-  --fields.alias product_id
+  --fields.name "Id,Title" \
+  --fields.alias "product_id,product_title"
 ```
 
 #### [Command Prompt](#tab/cmd)
@@ -1365,8 +1225,8 @@ dab update \
 ```cmd
 dab update ^
   Products ^
-  --fields.name Id ^
-  --fields.alias product_id
+  --fields.name "Id,Title" ^
+  --fields.alias "product_id,product_title"
 ```
 
 ---
@@ -1376,7 +1236,7 @@ dab update ^
 Description for the field. Use a comma-separated list aligned to `--fields.name`.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -1405,7 +1265,10 @@ dab update ^
 Primary key flag for the field. Use a comma-separated list of `true`/`false` values aligned to `--fields.name`.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+
+> [!TIP]
+> Use `--fields.primary-key` with `--fields.name` to define primary key fields for views or tables without an inferred key.
 
 ### Example
 
@@ -1413,26 +1276,30 @@ Primary key flag for the field. Use a comma-separated list of `true`/`false` val
 
 ```bash
 dab update \
-  Products \
-  --fields.name Id \
-  --fields.primary-key true
+  SalesSummary \
+  --fields.name "year,region" \
+  --fields.primary-key "true,true"
 ```
 
 #### [Command Prompt](#tab/cmd)
 
 ```cmd
 dab update ^
-  Products ^
-  --fields.name Id ^
-  --fields.primary-key true
+  SalesSummary ^
+  --fields.name "year,region" ^
+  --fields.primary-key "true,true"
 ```
 
 ---
 
-## `-c, --config`
+    "SalesSummary": {
 
 Path to the configuration file.
-
+          "name": "year",
+          "primary-key": true
+        },
+        {
+          "name": "region",
 ### Example
 
 #### [Bash](#tab/bash)

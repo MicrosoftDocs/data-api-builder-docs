@@ -67,6 +67,10 @@ Configuration settings that determine runtime behavior.
 |-|-|-|
 |[runtime.cache.enabled](#cache-runtime)|`false`|Enables caching of responses globally|
 |[runtime.cache.ttl-seconds](#cache-runtime)|`5`|Time to live (seconds) for global cache|
+|[runtime.cache.level-2.enabled](#cache-runtime)|`false`|Enables distributed level 2 cache globally|
+|[runtime.cache.level-2.provider](#cache-runtime)|`"redis"`|Distributed cache provider for level 2 cache|
+|[runtime.cache.level-2.connection-string](#cache-runtime)|`null`|Connection string for the level 2 cache provider|
+|[runtime.cache.level-2.partition](#cache-runtime)|`null`|Optional partition name for isolating distributed cache space|
 
 ### Compression settings
 
@@ -148,50 +152,57 @@ Configuration settings that determine runtime behavior.
       }
     }
   },
-  "compression": {
-    "level": <"none"> (default) | <"optimal"> | <"fastest">
-  },
-  "cache": {
-    "enabled": <true>|<false> (default: `false`),
-    "ttl-seconds": <integer> (default: `5`)
-  },
-  "telemetry": {
-    "application-insights": {
-      "connection-string": "<string>",
-      "enabled": <true>|<false> (default: `true`)
+    "compression": {
+      "level": <"none"> (default) | <"optimal"> | <"fastest">
     },
-    "open-telemetry": {
-      "endpoint": "<string>",
-      "headers": "<string>",
-      "service-name": <string> (default: "dab"),
-      "exporter-protocol": <"grpc"> (default) | <"httpprotobuf">,
-      "enabled": <true>|<false> (default: `true`)
+    "cache": {
+      "enabled": <true>|<false> (default: `false`),
+      "ttl-seconds": <integer> (default: `5`),
+      "level-2": {
+        "enabled": <true>|<false> (default: `false`),
+        "provider": <"redis">,
+        "connection-string": <string>,
+        "partition": <string>
+      }
     },
-    "log-level": {
-      // namespace keys
-      "<namespace>": <"trace"|"debug"|"information"|"warning"|"error"|"critical"|"none"|null>
-    }
-  },
-  "health": {
-    "enabled": <true>|<false> (default: `true`),
-    "roles": [ "<string>" ],
-    "cache-ttl-seconds": <integer> (default: `5`),
-    "max-query-parallelism": <integer> (default: `4`)
-  },
-  "mcp": {
-    "enabled": <true>|<false> (default: `true`),
-    "path": <string> (default: `"/mcp"`),
-    "description": <string>,
-    "dml-tools": <true>|<false> | {
-      "describe-entities": <true>|<false> (default: `true`),
-      "create-record": <true>|<false> (default: `true`),
-      "read-records": <true>|<false> (default: `true`),
-      "update-record": <true>|<false> (default: `true`),
-      "delete-record": <true>|<false> (default: `true`),
-      "execute-entity": <true>|<false> (default: `true`),
-      "aggregate-records": <true>|<false> | {
-        "enabled": <true>|<false> (default: `true`),
-        "query-timeout": <integer> (default: `30`)
+    "telemetry": {
+      "application-insights": {
+        "connection-string": "<string>",
+        "enabled": <true>|<false> (default: `true`)
+      },
+      "open-telemetry": {
+        "endpoint": "<string>",
+        "headers": "<string>",
+        "service-name": <string> (default: "dab"),
+        "exporter-protocol": <"grpc"> (default) | <"httpprotobuf">,
+        "enabled": <true>|<false> (default: `true`)
+      },
+      "log-level": {
+        // namespace keys
+        "<namespace>": <"trace"|"debug"|"information"|"warning"|"error"|"critical"|"none"|null>
+      }
+    },
+    "health": {
+      "enabled": <true>|<false> (default: `true`),
+      "roles": [ "<string>" ],
+      "cache-ttl-seconds": <integer> (default: `5`),
+      "max-query-parallelism": <integer> (default: `4`)
+    },
+    "mcp": {
+      "enabled": <true>|<false> (default: `true`),
+      "path": <string> (default: `"/mcp"`),
+      "description": <string>,
+      "dml-tools": <true>|<false> | {
+        "describe-entities": <true>|<false> (default: `true`),
+        "create-record": <true>|<false> (default: `true`),
+        "read-records": <true>|<false> (default: `true`),
+        "update-record": <true>|<false> (default: `true`),
+        "delete-record": <true>|<false> (default: `true`),
+        "execute-entity": <true>|<false> (default: `true`),
+        "aggregate-records": <true>|<false> | {
+          "enabled": <true>|<false> (default: `true`),
+          "query-timeout": <integer> (default: `30`)
+        }
       }
     }
   }
@@ -888,9 +899,20 @@ Global Cache configuration.
 |-|-|-|-|-|
 | `runtime.cache` | `enabled` | boolean | ❌ No | False |
 | `runtime.cache` | `ttl-seconds` | integer | ❌ No | 5 |
+| `runtime.cache` | `level-2` | object | ❌ No | - |
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime.cache.level-2` | `enabled` | boolean | ❌ No | False |
+| `runtime.cache.level-2` | `provider` | string | ❌ No | `redis` |
+| `runtime.cache.level-2` | `connection-string` | string | ❌ No | None |
+| `runtime.cache.level-2` | `partition` | string | ❌ No | None |
 
 > [!TIP]
 > The entity-level `cache.ttl-seconds` property defaults to this global value. 
+
+> [!TIP]
+> For end-to-end setup, cache-level behavior, and Redis examples, see [Implement level 2 cache](../concept/cache/level-2.md).
 
 ### Format
 
@@ -899,7 +921,13 @@ Global Cache configuration.
   "runtime": {
     "cache":  {
       "enabled": <boolean>,
-      "ttl-seconds": <integer>
+      "ttl-seconds": <integer>,
+      "level-2": {
+        "enabled": <boolean>,
+        "provider": "redis",
+        "connection-string": <string>,
+        "partition": <string>
+      }
     }
   }
 }
@@ -907,6 +935,8 @@ Global Cache configuration.
 
 > [!IMPORTANT]
 > If global `enabled` is `false`, individual entity-level `enabled` doesn't matter.
+
+When `level-2.enabled` is `true`, DAB uses the configured distributed cache provider in addition to local in-memory cache. An entity configured with cache level `L1L2` checks local cache first, then distributed cache, before going to the database.
 
 ## Telemetry (runtime)
 

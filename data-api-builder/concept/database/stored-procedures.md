@@ -31,7 +31,10 @@ To expose a stored procedure:
 dab add GetCowrittenBooksByAuthor \
   --source dbo.stp_get_all_cowritten_books_by_author \
   --source.type "stored-procedure" \
-  --source.params "searchType:default-value" \
+  --parameters.name "searchType" \
+  --parameters.required "false" \
+  --parameters.default "default-value" \
+  --parameters.description "The type of search to perform" \
   --permissions "anonymous:execute" \
   --rest.methods "get" \
   --graphql.operation "query"
@@ -44,9 +47,14 @@ dab add GetCowrittenBooksByAuthor \
   "source": {
     "type": "stored-procedure",
     "object": "dbo.stp_get_all_cowritten_books_by_author",
-    "parameters": {
-      "searchType": "default-value"
-    }
+    "parameters": [
+      {
+        "name": "searchType",
+        "required": false,
+        "default": "default-value",
+        "description": "The type of search to perform"
+      }
+    ]
   },
   "rest": {
     "methods": [ "GET" ]
@@ -62,6 +70,12 @@ dab add GetCowrittenBooksByAuthor \
   ]
 }
 ```
+
+> [!WARNING]
+> The dictionary format for `parameters` (for example, `{ "searchType": "default-value" }`) is deprecated in DAB 2.0. Use the array format shown above. The old format is still accepted for backward compatibility.
+
+> [!TIP]
+> For more information on the parameters array format, see [source configuration](../../configuration/entities.md#source-entity-name-entities).
 
 ## REST support
 

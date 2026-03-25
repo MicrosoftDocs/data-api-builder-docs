@@ -160,6 +160,12 @@
           href: configuration/runtime.md#pagination-runtime
     - name: Entities
       items:
+        - name: Description (entity)
+          displayName: entity description, human-readable
+          href: configuration/entities.md#description-entity-name-entities
+        - name: Fields (entity)
+          displayName: field, alias, primary-key, description, mappings replacement
+          href: configuration/entities.md#fields-entity-name-entities
         - name: Source (entity)
           items:
             - name: Object (entity source)
@@ -214,6 +220,9 @@
               href: configuration/entities.md#cache-entity-name-entities
             - name: Time-to-live in seconds
               displayName: TTL (entity cache)
+              href: configuration/entities.md#cache-entity-name-entities
+            - name: Level (entity cache)
+              displayName: L1, L1L2, cache level
               href: configuration/entities.md#cache-entity-name-entities
         - name: Permissions (entity)
           items:

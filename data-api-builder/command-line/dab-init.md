@@ -73,7 +73,7 @@ If the target config file already exists, the command overwrites it. There's no 
 | [`--mcp.path`](#--mcppath)         | MCP endpoint prefix (default /mcp)                   |
 
 > [!Note]
-> MCP capability will be part of version 1.7.
+> MCP capability is available in version `1.7` and later.
 
 #### REST
 

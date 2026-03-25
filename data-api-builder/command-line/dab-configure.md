@@ -494,7 +494,7 @@ dab configure ^
 Enable DAB's MCP endpoint.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -531,7 +531,7 @@ dab configure ^
 Customize DAB's MCP endpoint path. Prefix path with `/`.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -568,7 +568,7 @@ dab configure ^
 Enable DAB's MCP DML tools endpoint.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 For more information on MCP DML tools, see [SQL MCP Server data manipulation language tools](../mcp/data-manipulation-language-tools.md).
 
@@ -595,7 +595,7 @@ dab configure ^
 Enable DAB's MCP describe entities tool.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -620,7 +620,7 @@ dab configure ^
 Enable DAB's MCP create record tool.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -645,7 +645,7 @@ dab configure ^
 Enable DAB's MCP read record tool.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -670,7 +670,7 @@ dab configure ^
 Enable DAB's MCP update record tool.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -695,7 +695,7 @@ dab configure ^
 Enable DAB's MCP delete record tool.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
@@ -720,7 +720,7 @@ dab configure ^
 Enable DAB's MCP execute entity tool.
 
 > [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 ### Example
 
