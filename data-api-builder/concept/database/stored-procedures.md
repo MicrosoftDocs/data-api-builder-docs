@@ -156,7 +156,7 @@ dab add GetBookById \
 ```
 
 > [!TIP]
-> For more information about MCP custom tools, see [What's new in Data API builder version 2.0](../whats-new/version-2-0.md#custom-mcp-tools-from-stored-procedures) and [Data manipulation language (DML) tools](../mcp/data-manipulation-language-tools.md#custom-tools-for-stored-procedures).
+> For more information about MCP custom tools, see [What's new in Data API builder version 2.0](../../whats-new/version-2-0.md#custom-mcp-tools-from-stored-procedures) and [Data manipulation language (DML) tools](../../mcp/data-manipulation-language-tools.md#custom-tools-for-stored-procedures).
 
 ## MCP custom tools
 

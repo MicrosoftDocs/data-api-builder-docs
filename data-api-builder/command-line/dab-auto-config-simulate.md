@@ -1,13 +1,13 @@
 ---
-title: Simulate autoentities matching with the DAB CLI
-description: Use the Data API builder (DAB) CLI to preview which database objects match your autoentities patterns before committing changes.
+title: Auto-config-simulate command reference for DAB CLI
+description: Use the Data API builder (DAB) CLI auto-config-simulate command to preview which database objects match your autoentities patterns before committing changes.
 author: jerrynixon
 ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
 ms.date: 03/24/2026
-# Customer Intent: As a developer, I want to preview which database objects my autoentities patterns match, so that I can verify my include and exclude rules before applying them.
+# Customer Intent: As a developer, I want to preview which database objects match my autoentities patterns so I can verify include and exclude rules before applying them.
 ---
 
 # `auto-config-simulate` command
@@ -15,14 +15,14 @@ ms.date: 03/24/2026
 Preview which database objects match the autoentities patterns defined in your Data API builder configuration file. The command connects to the database, resolves each pattern, and prints the matched objects. No changes are written to the configuration.
 
 > [!TIP]
-> Use [`dab auto-config`](./dab-auto-config.md) to define autoentities patterns, and `dab auto-config-simulate` to verify them.
+> For in-depth explanations and conceptual guidance, see [Auto configuration](../concept/config/auto-config.md#auto-config-simulate-command). For the JSON configuration reference, see [Autoentities configuration](../configuration/autoentities.md).
 
 > [!IMPORTANT]
 > `dab auto-config-simulate` currently supports **MSSQL** data sources only.
 
 ## Syntax
 
-```bash
+```sh
 dab auto-config-simulate [options]
 ```
 
@@ -31,13 +31,11 @@ dab auto-config-simulate [options]
 | Option | Summary |
 | --- | --- |
 | [`-c, --config`](#-c---config) | Config file path. Default `dab-config.json`. |
-| [`--output`](#--output) | Write results to a CSV file instead of the console. |
-
----
+| [`-o, --output`](#-o---output) | Path to output CSV file. If not specified, results print to console. |
 
 ## `-c, --config`
 
-Path to the config file. Defaults to `dab-config.json` unless `dab-config.<DAB_ENVIRONMENT>.json` exists, where `DAB_ENVIRONMENT` is an environment variable.
+Path to config file. Defaults to `dab-config.json` unless `dab-config.<DAB_ENVIRONMENT>.json` exists, where `DAB_ENVIRONMENT` is an environment variable.
 
 ### Example
 
@@ -57,9 +55,9 @@ dab auto-config-simulate ^
 
 ---
 
-## `--output`
+## `-o, --output`
 
-Write simulation results to a CSV file instead of printing to the console. The CSV includes columns for the filter name, entity name, and database object.
+Path to output CSV file. If not specified, results are printed to the console. The CSV includes columns for the filter name, entity name, and database object.
 
 ### Example
 
@@ -122,7 +120,7 @@ Matches: 3
 
 ## Related content
 
-- [What's new in version 2.0](../../whats-new/version-2-0.md)
-- [`auto-config` command](./dab-auto-config.md)
-- [Autoentities configuration](../../configuration/index.md#autoentities)
-- [Entities configuration](../../configuration/entities.md)
+- [Auto configuration (concept)](../concept/config/auto-config.md)
+- [`dab auto-config` command](dab-auto-config.md)
+- [Autoentities configuration](../configuration/autoentities.md)
+- [What's new in version 2.0](../whats-new/version-2-0.md)

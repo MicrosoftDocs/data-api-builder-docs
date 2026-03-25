@@ -39,7 +39,7 @@ The flow has three distinct phases:
 | **Database access** | Data API builder validates the token, then connects to the database using its own identity (managed identity or connection string credentials) |
 
 > [!IMPORTANT]
-> Data API builder validates the incoming user token for API authentication, but connects to the database using its **own** credentials (managed identity or SQL authentication). DAB doesn't perform On-Behalf-Of (OBO) token exchange to access the database as the calling user.
+> Data API builder validates the incoming user token for API authentication, but connects to the database using its **own** credentials (managed identity or SQL authentication). DAB doesn't perform On-Behalf-Of (OBO) token exchange to access the database as the calling user by default. To enable OBO so the database authenticates as the actual caller, see [Configure OBO authentication](how-to-authenticate-obo.md).
 
 ## Prerequisites
 

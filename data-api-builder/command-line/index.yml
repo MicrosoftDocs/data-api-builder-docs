@@ -48,7 +48,7 @@ landingContent:
           - text: dab auto-config
             url: ../concept/config/dab-auto-config.md
           - text: dab auto-config-simulate
-            url: ../concept/config/dab-auto-config-simulate.md
+            url: ../concept/config/dab-auto-config.md#auto-config-simulate-command
       - linkListType: reference
         links:
           - text: Patterns
@@ -58,7 +58,7 @@ landingContent:
           - text: Permissions
             url: ../concept/config/dab-auto-config.md#--permissions
           - text: CSV output
-            url: ../concept/config/dab-auto-config-simulate.md#--output
+            url: ../concept/config/dab-auto-config.md#--output
 
   - title: Configure
     linkLists:

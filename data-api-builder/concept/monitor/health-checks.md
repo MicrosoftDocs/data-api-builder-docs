@@ -312,7 +312,7 @@ The health response includes a `currentRole` field indicating the role used to a
 1. **`anonymous`**—if no principal is present.
 
 > [!TIP]
-> This field was introduced in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
+> This field was introduced in version 2.0. For more information, see [what's new](../../whats-new/version-2-0.md).
 
 ## Other considerations
 

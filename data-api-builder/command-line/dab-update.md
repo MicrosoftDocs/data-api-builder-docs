@@ -1292,14 +1292,31 @@ dab update ^
 
 ---
 
-    "SalesSummary": {
+### Resulting config
 
-Path to the configuration file.
+```json
+{
+  "entities": {
+    "SalesSummary": {
+      "fields": [
+        {
           "name": "year",
           "primary-key": true
         },
         {
           "name": "region",
+          "primary-key": true
+        }
+      ]
+    }
+  }
+}
+```
+
+## `-c, --config`
+
+Path to the configuration file.
+
 ### Example
 
 #### [Bash](#tab/bash)
