@@ -1,32 +1,32 @@
 ---
 title: Stdio transport for SQL MCP Server
-description: Learn how to run SQL MCP Server in stdio mode using the dab start --mcp-stdio flag. Connect AI agents such as GitHub Copilot and Visual Studio (VS) Code directly to your database over standard input/output without exposing an HTTP endpoint.
+description: Learn how to run SQL MCP Server in stdio mode using the "dab start --mcp-stdio" flag. Connect AI agents such as GitHub Copilot and Visual Studio (VS) Code directly to your database over standard input/output without exposing an HTTP endpoint.
 author: jerrynixon
 ms.author: jnixon
 ms.topic: concept-article
 ms.date: 03/04/2026
 ---
 
-# Stdio transport for SQL MCP Server
+# `Stdio` transport for SQL MCP Server
 
 [!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
-SQL MCP Server supports two transports: **streamable HTTP** for hosted and cloud scenarios, and **stdio** for local development and direct agent integration. This article covers the stdio transport.
+SQL MCP Server supports two transports: **streamable HTTP** for hosted and cloud scenarios, and `stdio` for local development and direct agent integration. This article covers the `stdio` transport.
 
-In stdio mode, Data API builder (DAB) communicates with an MCP client entirely over standard input/output (stdin/stdout). No HTTP server or network port is started. The MCP client launches DAB as a child process and pipes messages back and forth using the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/).
+In `stdio` mode, Data API builder (DAB) communicates with an MCP client entirely over standard input/output (`stdin`/`stdout`). No HTTP server or network port is started. The MCP client launches DAB as a child process and pipes messages back and forth using the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/).
 
-## When to use stdio transport
+## When to use `stdio` transport
 
 | Scenario | Recommended transport |
 |---|---|
-| Local development on a developer workstation | **stdio** |
-| VS Code with GitHub Copilot (agent mode) | **stdio** |
-| CI/CD pipelines or scripted agent automation | **stdio** |
+| Local development on a developer workstation | `stdio` |
+| VS Code with GitHub Copilot (agent mode) | `stdio` |
+| CI/CD pipelines or scripted agent automation | `stdio` |
 | Cloud hosting (Container Apps, App Service) | HTTP |
 | AI Foundry agent with remote MCP endpoint | HTTP |
 | Teams of agents sharing the same endpoint | HTTP |
 
-Choose stdio when you want the simplest possible local setup with no open ports. Choose HTTP when the MCP server needs to be reachable across a network.
+Choose `stdio` when you want the simplest possible local setup with no open ports. Choose HTTP when the MCP server needs to be reachable across a network.
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ Choose stdio when you want the simplest possible local setup with no open ports.
 
 ## Required configuration
 
-Before using stdio transport, enable MCP in your `dab-config.json`:
+Before using `stdio` transport, enable MCP in your `dab-config.json`:
 
 ```json
 "runtime": {
@@ -54,12 +54,12 @@ Before using stdio transport, enable MCP in your `dab-config.json`:
 }
 ```
 
-The `path` field is used for HTTP transport only and is ignored in stdio mode. The `dml-tools` block controls which data manipulation operations are available as MCP tools.
+The `path` field is used for HTTP transport only and is ignored in `stdio` mode. The `dml-tools` block controls which data manipulation operations are available as MCP tools.
 
 > [!IMPORTANT]
-> If `"mcp": { "enabled": false }` or the `mcp` block is missing, DAB fails to start in stdio mode.
+> If `"mcp": { "enabled": false }` or the `mcp` block is missing, DAB fails to start in `stdio` mode.
 
-## Start in stdio mode
+## Start in `stdio` mode
 
 Use the `--mcp-stdio` flag on `dab start`:
 
@@ -75,17 +75,17 @@ dab start --mcp-stdio role:authenticated --config ./dab-config.json
 
 The `role:<name>` argument is positional and must immediately follow `--mcp-stdio`. If omitted, the role defaults to `anonymous`. The role name must match a role defined in the `permissions` section of at least one entity in your config.
 
-## How stdio mode works
+## How `stdio` mode works
 
 When `--mcp-stdio` is detected, DAB makes the following changes internally:
 
 ### UTF-8 encoding (no byte-order mark)
 
-Console input and output are forced to UTF-8 without a byte-order mark (BOM). This UTF-8 setting is required for clean JSON-over-stdio communication because many MCP clients reject BOM-prefixed streams.
+Console input and output are forced to UTF-8 without a byte-order mark (BOM). This UTF-8 setting is required for clean `JSON-over-stdio` communication because many MCP clients reject BOM-prefixed streams.
 
 ### Simulator authentication
 
-The authentication provider is overridden to **Simulator** mode, regardless of what your config file specifies. This Simulator mode lets the specified role be applied directly without a real JSON Web Token (JWT) or identity provider. The Simulator provider is designed for development scenarios and shouldn't be used to secure production HTTP endpoints—but it's exactly right for local stdio sessions.
+The authentication provider is overridden to **Simulator** mode, regardless of what your config file specifies. This Simulator mode lets the specified role be applied directly without a real JSON Web Token (JWT) or identity provider. The Simulator provider is designed for development scenarios and shouldn't be used to secure production HTTP endpoints—but it's exactly right for local `stdio` sessions.
 
 The following values are applied in-memory and override your config during the session:
 
@@ -97,11 +97,11 @@ The following values are applied in-memory and override your config during the s
 
 ### No HTTP listener
 
-The ASP.NET Core host starts and all services are registered, but DAB calls `stdio.RunAsync()` instead of `host.Run()`. No Transmission Control Protocol (TCP) port is bound. All MCP protocol messages flow through stdin/stdout.
+The ASP.NET Core host starts and all services are registered, but DAB calls `stdio.RunAsync()` instead of `host.Run()`. No Transmission Control Protocol (TCP) port is bound. All MCP protocol messages flow through `stdin`/`stdout`.
 
 ## Available MCP tools
 
-The following tools are available in stdio mode, subject to your `dml-tools` configuration and entity permissions:
+The following tools are available in `stdio` mode, subject to your `dml-tools` configuration and entity permissions:
 
 | Tool | Description |
 |---|---|
@@ -115,9 +115,9 @@ The following tools are available in stdio mode, subject to your `dml-tools` con
 
 Custom MCP tools backed by stored procedures are also registered when you use `--mcp-stdio`.
 
-## Configure an MCP client for stdio
+## Configure an MCP client for `stdio`
 
-MCP clients that support stdio transport launch DAB as a subprocess and pipe its stdin/stdout. The client configuration syntax varies by client.
+MCP clients that support `stdio` transport launch DAB as a subprocess and pipe its `stdin`/`stdout`. The client configuration syntax varies by client.
 
 ### VS Code (`mcp.json`)
 
@@ -166,7 +166,7 @@ Save this file as `.vscode/mcp.json` inside your project folder. VS Code detects
 | Option | Behavior with `--mcp-stdio` |
 |---|---|
 | `--config` | Uses the specified config file (same as HTTP mode) |
-| `--LogLevel` | Applies the specified log level (`error`: recommended for stdio) |
+| `--LogLevel` | Applies the specified log level (`error`: recommended for `stdio`) |
 
 ```bash
 dab start \
@@ -175,9 +175,9 @@ dab start \
   --LogLevel Error
 ```
 
-## Troubleshoot stdio mode
+## Troubleshoot `stdio` mode
 
-### `Failed to start the engine in MCP stdio mode.`
+### `Failed to start the engine in MCP stdio mode`
 
 DAB couldn't start. Check that:
 
