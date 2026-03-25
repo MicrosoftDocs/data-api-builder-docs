@@ -61,7 +61,7 @@ Data API builder requires at least one configuration file to run. This JSON-base
 |[entities.entity-name.cache](entities.md#cache-entity-name-entities)|Entity-level caching configuration.|
 |[entities.entity-name.health](entities.md#health-entity-name-entities)|Entity-level health check configuration.|
 
-### Autoentities properties
+### `Autoentities` properties
 
 |Property|Description|
 |-|-|
@@ -151,7 +151,7 @@ Data API builder supports multiple configuration files, with one designated as t
 }
 ```
 
-## Autoentities
+## `Autoentities`
 
 | Parent | Property | Type | Required | Default |
 | - | - | - | - | - |
@@ -160,11 +160,11 @@ Data API builder supports multiple configuration files, with one designated as t
 The `autoentities` section defines pattern-based rules that automatically expose matching database objects as DAB entities at startup. Each key in the object is a named definition containing patterns, a template, and permissions.
 
 > [!IMPORTANT]
-> Autoentities currently support **MSSQL** data sources only.
+> `Autoentities` currently support **MSSQL** data sources only.
 
-When `autoentities` is present, the `entities` section is no longer required. The configuration schema allows either `autoentities` or `entities` (or both). If both are present, explicitly defined entities take precedence over autoentities matches with the same name.
+When `autoentities` is present, the `entities` section is no longer required. The configuration schema allows either `autoentities` or `entities` (or both). If both are present, explicitly defined entities take precedence over `autoentities` matches with the same name.
 
-For the full property reference, see [Autoentities configuration](autoentities.md).
+For the full property reference, see [`Autoentities` configuration](autoentities.md).
 
 > [!TIP]
-> Use [`dab auto-config`](../concept/config/dab-auto-config.md) to create autoentities definitions from the CLI, and [`dab auto-config-simulate`](../concept/config/dab-auto-config.md#auto-config-simulate-command) to preview which objects match before committing changes. For more information, see [what's new in version 2.0](../whats-new/version-2-0.md).
+> Use [`dab auto-config`](../concept/config/dab-auto-config.md) to create `autoentities` definitions from the CLI, and [`dab auto-config-simulate`](../concept/config/dab-auto-config.md#auto-config-simulate-command) to preview which objects match before committing changes. For more information, see [what's new in version 2.0](../whats-new/version-2-0.md).

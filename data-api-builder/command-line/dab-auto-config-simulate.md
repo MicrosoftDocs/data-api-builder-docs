@@ -12,10 +12,10 @@ ms.date: 03/24/2026
 
 # `auto-config-simulate` command
 
-Preview which database objects match the autoentities patterns defined in your Data API builder configuration file. The command connects to the database, resolves each pattern, and prints the matched objects. No changes are written to the configuration.
+Preview which database objects match the `autoentities` patterns defined in your Data API builder configuration file. The command connects to the database, resolves each pattern, and prints the matched objects. No changes are written to the configuration.
 
 > [!TIP]
-> For in-depth explanations and conceptual guidance, see [Auto configuration](../concept/config/auto-config.md#auto-config-simulate-command). For the JSON configuration reference, see [Autoentities configuration](../configuration/autoentities.md).
+> For in-depth explanations and conceptual guidance, see [Auto configuration](../concept/config/auto-config.md#auto-config-simulate-command). For the JSON configuration reference, see [`Autoentities` configuration](../configuration/autoentities.md).
 
 > [!IMPORTANT]
 > `dab auto-config-simulate` currently supports **MSSQL** data sources only.
@@ -122,5 +122,5 @@ Matches: 3
 
 - [Auto configuration (concept)](../concept/config/auto-config.md)
 - [`dab auto-config` command](dab-auto-config.md)
-- [Autoentities configuration](../configuration/autoentities.md)
+- [`Autoentities` configuration](../configuration/autoentities.md)
 - [What's new in version 2.0](../whats-new/version-2-0.md)

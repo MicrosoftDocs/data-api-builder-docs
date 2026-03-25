@@ -25,11 +25,13 @@ DAB 2.0 introduces `Unauthenticated` as a new authentication provider and makes 
 
 Now, when DAB sits behind a trusted front end that handles identity, you don't need to configure a JWT provider just to get started. Running `dab init` produces a working config without any extra auth options.
 
+### Command line
+
 ```bash
 dab init --database-type mssql --connection-string "Server=localhost;Database=mydb;"
 ```
 
-### Generated configuration
+#### Resulting configuration
 
 ```json
 {
@@ -85,12 +87,14 @@ With this configuration, `anonymous`, `authenticated`, and any unconfigured name
 
 As a result of role inheritance, a new `--show-effective-permissions` option on `dab configure` displays the resolved permissions for every entity after inheritance is applied. If you're unsure what a role can do after inheritance rules take effect, run this command to get the answer instead of reasoning through the config manually.
 
+### Command line
+
 ```bash
 dab configure --show-effective-permissions
 dab configure --show-effective-permissions --config my-config.json
 ```
 
-### Example output
+#### Resulting output
 
 ```text
 Entity: Book
@@ -125,7 +129,7 @@ With OBO authentication, you can build APIs where the SQL database sees and enfo
 2. An upstream identity provider that issues JWTs accepted by DAB (Entra ID or a custom provider you configure)
 3. MSSQL database configured to accept Azure AD tokens
 
-### Configuration
+### Configuration requirements
 
  - requires `data-source.database-type: "mssql"`
  - requires `data-source.user-delegated-auth.database-audience`
@@ -133,6 +137,8 @@ With OBO authentication, you can build APIs where the SQL database sees and enfo
  - requires env var `DAB_OBO_CLIENT_ID` with the client ID of the OBO app registration
  - requires env var `DAB_OBO_TENANT_ID` with the tenant ID of the OBO app registration
  - requires env var `DAB_OBO_CLIENT_SECRET` with the client secret of the OBO app registration
+
+### Command line
 
 ```sh
 set DAB_OBO_CLIENT_ID=1234-abcd-5678-efgh
@@ -146,6 +152,8 @@ dab configure --data-source.user-delegated-auth.enabled true
 dab configure --data-source.user-delegated-auth.provider EntraId
 dab configure --data-source.user-delegated-auth.database-audience "https://database.windows.net"
 ```
+
+#### Resulting configuration
 
 ```json
 {
@@ -180,13 +188,13 @@ dab configure --data-source.user-delegated-auth.database-audience "https://datab
 Auto configuration is a powerful feature that allows you to define patterns that automatically find and expose database objects in your configuration. This can dramatically shrink a configuration file, especially when objects and permissions are predictable. In addition, `autoentities` reevaluate and apply the patterns each time DAB starts, so new tables that match the pattern are automatically added as entities without manual config changes.
 
 > [!NOTE]
-> In version 2.0, `dab auto-config` supports only tables in a Microsoft SQL database. If you need another data source or database type, you can still [define your entities manually](../command-line/dab-add.md). That said, view and stored procedure support are on the roadmap for future releases.
+> In version 2.0, `dab auto-config` supports only tables in a one or more Microsoft SQL database. If you need another data source or database type, you can still [define your entities manually](../command-line/dab-add.md). That said, view and stored procedure support are on the roadmap for future releases.
 
 ### Why?
 
 With `auto-config`, you can wire up an entire database schema as a DAB API without writing a single entity block by hand. Define your patterns once and DAB does the rest.
 
-It’s worth noting that autoentities are not a shift in DAB to a schema-driven API. The problem with schema-driven APIs is that they leak the schema and place a burden on the database to conform to the API instead of a well-designed store. Autoentities solve this by letting you define patterns that match your database schema and automatically generate a subset of entities from those patterns. In addition, you can define multiple autoentities with unique patterns and permissions, participate in MCP, and more, all without manual config updates as your database evolves.
+It's worth noting that `autoentities` are not a shift in DAB to a schema-driven API. The problem with schema-driven APIs is that they leak the schema and place a burden on the database to conform to the API instead of a well-designed store. `Autoentities` solve this by letting you define patterns that match your database schema and automatically generate a subset of entities from those patterns. In addition, you can define multiple `autoentities` with unique patterns and permissions, participate in MCP, and more, all without manual config updates as your database evolves.
 
 ### Command-line
 
@@ -205,7 +213,7 @@ dab auto-config my-def \
 	--template.cache.level L1L2
 ```
 
-### Configuration
+#### Resulting configuration
 
 ```json
 {
@@ -231,13 +239,14 @@ dab auto-config my-def \
 
 ### Testing your configuration
 
-`dab auto-config-simulate` previews which database objects match your autoentities patterns before you commit any changes. It connects to the database, resolves each pattern, and prints the matched objects. Now, you can verify your include and exclude patterns produce exactly the entities you expect before touching the live config.
+`dab auto-config-simulate` previews which database objects match your `autoentities` patterns before you commit any changes. It connects to the database, resolves each pattern, and prints the matched objects. Now, you can verify your include and exclude patterns produce exactly the entities you expect before touching the live config.
 
 #### [Console](#tab/console)
 
 ```bash
 dab auto-config-simulate
 ```
+##### Resulting output
 
 ```text
 AutoEntities Simulation Results
@@ -255,6 +264,8 @@ Matches: 3
 dab auto-config-simulate --output results.csv
 ```
 
+##### Resulting output
+
 ```csv
 filter_name,entity_name,database_object
 my-def,dbo_Products,dbo.Products
@@ -266,7 +277,7 @@ my-def,dbo_Pricing,dbo.Pricing
 
 ### Read the docs
 
-- [Autoentities configuration](../configuration/autoentities.md)
+- [`Autoentities` configuration](../configuration/autoentities.md)
 - [`dab auto-config` command reference](../concept/config/dab-auto-config.md)
 - [`dab auto-config-simulate` command reference](../concept/config/dab-auto-config.md#auto-config-simulate-command)
 
@@ -298,65 +309,7 @@ If the environment variables aren't set, DAB starts normally and skips OpenTelem
 - [OpenTelemetry configuration](../configuration/runtime.md#opentelemetry-telemetry)
 - [Use OpenTelemetry and activity traces](../concept/monitor/open-telemetry.md)
 
-## Entity-level MCP configuration
-
-DAB 2.0 adds an `mcp` property at the entity level to control MCP participation per entity. It accepts a boolean shorthand or a full object.
-
-### Why?
-
-With entity-level MCP configuration, you can expose only the entities that make sense for AI tools, disable MCP on sensitive tables, and enable custom tool generation for stored procedures—all without changing your REST or GraphQL configuration.
-
-### [Boolean shorthand](#tab/bool)
-
-```json
-{
-	"entities": {
-		"Book": {
-			"source": "books",
-			"mcp": true
-		}
-	}
-}
-```
-
-`true` enables data manipulation language (DML) tools. `false` disables MCP for this entity entirely.
-
-### [Object format](#tab/object)
-
-```json
-{
-	"entities": {
-		"GetBookById": {
-			"source": {
-				"object": "dbo.get_book_by_id",
-				"type": "stored-procedure"
-			},
-			"mcp": {
-				"dml-tools": false,
-				"custom-tool": true
-			}
-		}
-	}
-}
-```
-
-
-`dml-tools` and `custom-tool` are independent. `custom-tool` is valid only for stored-procedure entities. If `mcp` is omitted from an entity, DML tools remain enabled by default.
-
-CLI equivalents:
-
-```bash
-dab add Book --source books --permissions "anonymous:*" --mcp.dml-tools true
-dab add GetBookById --source dbo.get_book_by_id --source.type stored-procedure \
-	--permissions "anonymous:execute" --mcp.custom-tool true
-```
-
-### Read the docs
-
-- [MCP entity configuration](../configuration/entities.md#mcp)
-- [Entity settings in MCP overview](../mcp/overview.md#entity-settings)
-
-## Custom MCP tools from stored procedures
+## Introducing: Custom MCP tools 
 
 When `custom-tool: true` is set on a stored-procedure entity, DAB dynamically registers that procedure as a named MCP tool exposed through the standard `tools/list` and `tools/call` methods.
 
@@ -364,15 +317,37 @@ When `custom-tool: true` is set on a stored-procedure entity, DAB dynamically re
 
 Now, you can give AI agents purpose-built tools backed by your existing stored procedures—without writing any glue code. The tool appears in the MCP tool list and accepts the same parameters as the procedure.
 
+### Command line
+
+```
+dab add GetBookById \
+  --source dbo.get_book_by_id \
+  --source.type "stored-procedure" \
+  --permissions "anonymous:execute" \
+  --mcp.custom-tool true
+```
+
+#### Resulting configuration
+
 ```json
 {
-	"jsonrpc": "2.0",
-	"method": "tools/call",
-	"params": {
-		"name": "get_book_by_id",
-		"arguments": { "id": 1 }
-	},
-	"id": 1
+	"entities": {
+		"GetBookById": {
+			"source": {
+				"type": "stored-procedure",
+				"object": "dbo.get_book_by_id"
+			},
+			"mcp": {
+				"custom-tool": true
+			},
+			"permissions": [
+				{
+					"role": "anonymous",
+					"actions": [ "execute" ]
+				}
+			]
+		}
+	}
 }
 ```
 
@@ -381,7 +356,7 @@ Now, you can give AI agents purpose-built tools backed by your existing stored p
 - [Custom tools for stored procedures](../mcp/data-manipulation-language-tools.md#custom-tools-for-stored-procedures)
 - [MCP entity configuration](../configuration/entities.md#mcp)
 
-## OpenAPI now reflects actual permissions
+## Introducing: permission-aware OpenAPI
 
 The OpenAPI document now shows only the HTTP methods and fields that are accessible based on permissions. A new role-specific path `/openapi/{role}` lets you see exactly what a given role can do.
 
@@ -395,17 +370,8 @@ With permission-aware OpenAPI, your document is a reliable contract. Clients and
 /openapi
 /openapi/anonymous
 /openapi/authenticated
-/openapi/admin
+/openapi/{custom-role}
 ```
-
-### Permission-to-method mapping
-
-| Permission | HTTP methods |
-|---|---|
-| `read` | `GET` |
-| `create` | `POST` |
-| `create` + `update` | `PUT`, `PATCH` |
-| `delete` | `DELETE` |
 
 > [!IMPORTANT]
 > `/openapi/{role}` is available in **Development** mode only to prevent role enumeration in production.
@@ -415,13 +381,27 @@ With permission-aware OpenAPI, your document is a reliable contract. Clients and
 - [Permission-aware OpenAPI](../concept/api/openapi.md#permission-aware-openapi)
 - [Role-specific OpenAPI paths](../concept/api/openapi.md#role-specific-openapi-paths)
 
-## Advanced REST paths with subdirectories
+## Introducing: advanced REST paths
 
 Entity REST paths can now include forward slashes, allowing subdirectory-style URL segments.
 
 ### Why?
 
-Now, you can group related entities under a shared path prefix, making your REST API feel more naturally organized without any router configuration.
+Now, you can group related entities under a shared path prefix, making your REST API feel more naturally organized without any router configuration. This can be particularly helpful for multi-tenant scenarios where a tenant ID segment can segment endpoints with the same name, like `/api/shopping-cart/item` and `/api/invoice/items`, which would previously have required paths.
+
+### Command line
+
+```bash
+dab add ShoppingCartItem \
+  --source dbo.ShoppingCartItem \
+  --rest.path "shopping-cart/item"
+
+dab add InvoiceItem \
+  --source dbo.InvoiceItem \
+  --rest.path "invoice/item"
+```
+
+#### Resulting configuration
 
 ```json
 {
@@ -438,65 +418,30 @@ Now, you can group related entities under a shared path prefix, making your REST
 }
 ```
 
-### Resulting paths
+#### Resulting paths
 
 ```text
-/api/shopping-cart/item
-/api/invoice/item
+https://{server-name}/api/shopping-cart/item
+https://{server-name}/api/invoice/item
 ```
-
-DAB uses longest-prefix matching for routing. Validation blocks path traversal patterns, backslashes, and percent-encoded path separators in config values.
 
 ### Read the docs
 
 - [Advanced REST paths with subdirectories](../concept/api/rest.md#advanced-rest-paths-with-subdirectories)
 
-## Keyless `PUT` and `PATCH` for autogenerated primary keys
+## Introducing: HTTP response compression
 
-DAB 2.0 allows `PUT` and `PATCH` requests without a primary key in the URL when the database autogenerates all omitted key columns.
+DAB 2.0 adds HTTP response compression for REST and GraphQL responses. Now, you can reduce payload sizes over the wire with a single config setting, which is especially useful for large result sets or low-bandwidth environments.
 
-### Why?
+Supported levels: `optimal`, `fastest`, `none`.
 
-With keyless upserts, you can insert a new row with a server-generated key using the same upsert semantics you're used to—no need to pregenerate or supply the key yourself.
+### Command line
 
-### [PUT](#tab/put)
-
-```http
-PUT /api/Book
-Content-Type: application/json
-
-{
-	"title": "My New Book",
-	"publisher_id": 1234
-}
+```bash
+dab configure --runtime.compression.level "optimal"
 ```
 
-### [PATCH](#tab/patch)
-
-```http
-PATCH /api/Book
-Content-Type: application/json
-
-{
-	"title": "Another New Book",
-	"publisher_id": 5678
-}
-```
-
-
-For composite keys, any non-autogenerated portions must still be supplied. Stored procedures are unaffected. OpenAPI documents these keyless operations on the base entity path automatically.
-
-### Read the docs
-
-- [Keyless PUT and PATCH](../concept/api/rest.md#keyless-put-and-patch-for-autogenerated-primary-keys)
-
-## HTTP response compression
-
-DAB 2.0 adds HTTP response compression for REST and GraphQL responses.
-
-### Why?
-
-Now, you can reduce payload sizes over the wire with a single config setting, which is especially useful for large result sets or low-bandwidth environments.
+#### Resulting configuration
 
 ```json
 {
@@ -508,88 +453,23 @@ Now, you can reduce payload sizes over the wire with a single config setting, wh
 }
 ```
 
-### Supported levels and CLI
-
-Supported levels: `optimal`, `fastest`, `none`.
-
-```bash
-dab configure --runtime.compression.level optimal
-```
-
 ### Read the docs
 
 - [Compression configuration](../configuration/runtime.md#compression-runtime)
 - [HTTP response compression](../concept/api/rest.md#http-response-compression)
 
-## `currentRole` in the `/health` response
+## Keyless `PUT` and `PATCH` for autogenerated keys
 
-The `/health` endpoint now includes a `currentRole` field indicating the effective role of the caller.
-
-### Why?
-
-With this field, you can confirm at a glance what role DAB is using to evaluate a request, which is especially handy when debugging auth configuration or upstream header forwarding.
-
-### Role resolution order
-
-An explicit `X-MS-API-ROLE` header wins; otherwise `authenticated` if a client principal token is present; otherwise `anonymous`.
-
-### [Anonymous request](#tab/anon)
-
-```http
-GET /health
-```
-
-```json
-{
-	"status": "Healthy",
-	"version": "2.0.0",
-	"currentRole": "anonymous"
-}
-```
-
-### [Authenticated request](#tab/auth)
-
-```http
-GET /health
-X-MS-CLIENT-PRINCIPAL: <base64-token>
-```
-
-```json
-{
-	"status": "Healthy",
-	"version": "2.0.0",
-	"currentRole": "authenticated"
-}
-```
-
-### [Explicit role header](#tab/role)
-
-```http
-GET /health
-X-MS-API-ROLE: myrole
-```
-
-```json
-{
-	"status": "Healthy",
-	"version": "2.0.0",
-	"currentRole": "myrole"
-}
-```
+DAB 2.0 allows `PUT` and `PATCH` requests without a key in the URL when the database autogenerates all omitted key columns.With keyless upserts, you can insert a new row with a server-generated key using the same upsert semantics you're used to—no need to pregenerate or supply the key yourself.
 
 ### Read the docs
 
-- [The `currentRole` field](../concept/monitor/health-checks.md#the-currentrole-field)
+- [Keyless PUT and PATCH](../concept/api/rest.md#keyless-put-and-patch-for-autogenerated-primary-keys)
+
 
 ## OpenTelemetry tracing for MCP execution
 
-MCP tool execution is now included in OpenTelemetry traces alongside REST and GraphQL traffic.
-
-### Why?
-
-Now, you can monitor and correlate AI agent tool calls the same way you monitor API requests—using the same dashboards, the same trace IDs, and the same tooling.
-
-This works automatically when OpenTelemetry is configured. Because `dab init` now generates a default telemetry section, new apps have out-of-the-box observability for all three endpoint types.
+MCP tool execution is now included in OpenTelemetry traces alongside REST and GraphQL traffic. Now, you can monitor and correlate AI agent tool calls the same way you monitor API requests—using the same dashboards, the same trace IDs, and the same tooling. This works automatically when OpenTelemetry is configured. Because `dab init` now generates a default telemetry section, new apps have out-of-the-box observability for all three endpoint types.
 
 ### Read the docs
 

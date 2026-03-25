@@ -10,12 +10,12 @@ ms.date: 03/24/2026
 show_latex: true
 ---
 
-# Autoentities
+# `Autoentities`
 
-Configuration settings for automatic entity generation based on pattern-matching rules. Autoentities is a peer to the [`entities`](entities.md) section—when `autoentities` is present, `entities` is no longer required. The schema allows either `autoentities` or `entities` (or both). If both are present, explicitly defined entities take precedence over autoentities matches with the same name.
+Configuration settings for automatic entity generation based on pattern-matching rules. `Autoentities` is a peer to the [`entities`](entities.md) section—when `autoentities` is present, `entities` is no longer required. The schema allows either `autoentities` or `entities` (or both). If both are present, explicitly defined entities take precedence over `autoentities` matches with the same name.
 
 > [!TIP]
-> Use [`dab auto-config`](../concept/config/dab-auto-config.md) to create and update autoentities definitions from the CLI, and [`dab auto-config-simulate`](../concept/config/dab-auto-config.md#auto-config-simulate-command) to preview which objects match before committing changes.
+> Use [`dab auto-config`](../concept/config/dab-auto-config.md) to create and update `autoentities` definitions from the CLI, and [`dab auto-config-simulate`](../concept/config/dab-auto-config.md#auto-config-simulate-command) to preview which objects match before committing changes.
 
 ## Patterns
 
@@ -77,7 +77,7 @@ Configuration settings for automatic entity generation based on pattern-matching
 }
 ```
 
-## Definition name (autoentities)
+## Definition name (`autoentities`)
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
@@ -112,7 +112,7 @@ Each key in the `autoentities` object is a named definition. The name is case-se
 }
 ```
 
-## Patterns (definition-name autoentities)
+## Patterns (definition-name `autoentities`)
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
@@ -168,7 +168,7 @@ Defines include, exclude, and naming rules that determine which database objects
 
 With this configuration, every table in the `dbo` schema (except those matching `dbo.internal%`) is exposed as an entity. A table named `dbo.Products` becomes an entity named `dbo_Products`.
 
-## Name (patterns definition-name autoentities)
+## Name (patterns definition-name `autoentities`)
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
@@ -205,7 +205,7 @@ When omitted, the default `"{object}"` means the entity name matches the databas
 | `"{schema}_{object}"` | `dbo.Products` | `dbo_Products` |
 | `"{schema}.{object}"` | `sales.Orders` | `sales.Orders` |
 
-## REST (template definition-name autoentities)
+## REST (template definition-name `autoentities`)
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
@@ -245,7 +245,7 @@ When omitted, the default `"{object}"` means the entity name matches the databas
 }
 ```
 
-## GraphQL (template definition-name autoentities)
+## GraphQL (template definition-name `autoentities`)
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
@@ -285,7 +285,7 @@ When omitted, the default `"{object}"` means the entity name matches the databas
 }
 ```
 
-## MCP (template definition-name autoentities)
+## MCP (template definition-name `autoentities`)
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
@@ -327,7 +327,7 @@ Enables or disables MCP data manipulation language (DML) tools for all matched e
 }
 ```
 
-## Health (template definition-name autoentities)
+## Health (template definition-name `autoentities`)
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
@@ -367,7 +367,7 @@ Enables or disables MCP data manipulation language (DML) tools for all matched e
 }
 ```
 
-## Cache (template definition-name autoentities)
+## Cache (template definition-name `autoentities`)
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
@@ -429,13 +429,13 @@ The `level` property controls which cache tiers are used:
 }
 ```
 
-## Permissions (definition-name autoentities)
+## Permissions (definition-name `autoentities`)
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
 | `autoentities.<definition-name>` | `permissions` | array | ❌ No | None |
 
-Permissions applied to every entity matched by this autoentities definition. Each element is an object with a `role` and an `actions` array.
+Permissions applied to every entity matched by this `autoentities` definition. Each element is an object with a `role` and an `actions` array.
 
 ### Nested properties
 

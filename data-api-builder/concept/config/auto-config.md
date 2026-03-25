@@ -17,11 +17,11 @@ Auto configuration lets you define patterns that automatically find and expose d
 When `autoentities` is present in the configuration, the `entities` section is no longer required. The schema requires either `autoentities` or `entities` (or both).
 
 > [!TIP]
-> Use the [`dab auto-config`](../../command-line/dab-auto-config.md) command to create autoentities definitions from the CLI, and [`dab auto-config-simulate`](../../command-line/dab-auto-config-simulate.md) to preview matched objects before committing changes. For the JSON configuration reference, see [Autoentities configuration](../../configuration/autoentities.md).
+> Use the [`dab auto-config`](../../command-line/dab-auto-config.md) command to create `autoentities` definitions from the CLI, and [`dab auto-config-simulate`](../../command-line/dab-auto-config-simulate.md) to preview matched objects before committing changes. For the JSON configuration reference, see [`Autoentities` configuration](../../configuration/autoentities.md).
 
 ## Definitions
 
-Each autoentities definition is a named configuration block that combines a set of patterns with a template and permissions. The definition name is case-sensitive and acts as a logical identifier. You can have multiple definitions, each targeting different sets of database objects and permissions.
+Each `autoentities` definition is a named configuration block that combines a set of patterns with a template and permissions. The definition name is case-sensitive and acts as a logical identifier. You can have multiple definitions, each targeting different sets of database objects and permissions.
 
 ```json
 {
@@ -36,7 +36,7 @@ Each autoentities definition is a named configuration block that combines a set 
 ```
 
 > [!NOTE]
-> Autoentities currently support **MSSQL** data sources only.
+> `Autoentities` currently support **MSSQL** data sources only.
 
 ## Patterns
 
@@ -248,7 +248,7 @@ dab auto-config my-def \
 Supported actions include `create`, `read`, `update`, `delete`, and `*` (all). You can assign multiple roles with different action sets.
 
 ## Full configuration example
-A complete autoentities definition combining patterns, template, and permissions.
+A complete `autoentities` definition combining patterns, template, and permissions.
 
 ### Command line
 
@@ -293,7 +293,7 @@ This definition includes all objects in the `dbo` schema except those starting w
 
 ## Simulation
 
-Before committing autoentities patterns to your configuration, you can simulate the results to preview which database objects would be matched. The simulation connects to the database, resolves each pattern, and reports the matched objects without writing any changes. Simulation output shows each definition's matches with entity names and their corresponding database objects.
+Before committing `autoentities` patterns to your configuration, you can simulate the results to preview which database objects would be matched. The simulation connects to the database, resolves each pattern, and reports the matched objects without writing any changes. Simulation output shows each definition's matches with entity names and their corresponding database objects.
 
 > [!TIP]
 > Use [`dab auto-config-simulate`](../../command-line/dab-auto-config-simulate.md) to run simulations from the CLI. See the [command reference](../../command-line/dab-auto-config-simulate.md) for all options.
@@ -341,6 +341,6 @@ my-def,dbo_Pricing,dbo.Pricing
 
 - [`dab auto-config` command reference](../../command-line/dab-auto-config.md)
 - [`dab auto-config-simulate` command reference](../../command-line/dab-auto-config-simulate.md)
-- [Autoentities configuration reference](../../configuration/autoentities.md)
+- [`Autoentities` configuration reference](../../configuration/autoentities.md)
 - [Entities configuration](../../configuration/entities.md)
 - [What's new in version 2.0](../../whats-new/version-2-0.md)

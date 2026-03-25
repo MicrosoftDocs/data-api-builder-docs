@@ -12,13 +12,13 @@ ms.date: 03/24/2026
 
 # `auto-config` command
 
-Create or update an `autoentities` definition in an existing Data API builder configuration file. Autoentities define pattern-based rules that automatically expose matching database objects as DAB entities at startup.
+Create or update an `autoentities` definition in an existing Data API builder configuration file. `Autoentities` define pattern-based rules that automatically expose matching database objects as DAB entities at startup.
 
 > [!TIP]
-> For in-depth explanations, examples with resulting configuration output, and conceptual guidance, see [Auto configuration](../concept/config/auto-config.md). For the JSON configuration reference, see [Autoentities configuration](../configuration/autoentities.md).
+> For in-depth explanations, examples with resulting configuration output, and conceptual guidance, see [Auto configuration](../concept/config/auto-config.md). For the JSON configuration reference, see [`Autoentities` configuration](../configuration/autoentities.md).
 
 > [!IMPORTANT]
-> Autoentities currently support **MSSQL** data sources only.
+> `Autoentities` currently support **MSSQL** data sources only.
 
 ## Syntax
 
@@ -30,7 +30,7 @@ dab auto-config <definition-name> [options]
 
 | Option | Summary |
 | --- | --- |
-| `<definition-name>` | Required. Name of the autoentities definition to configure. |
+| `<definition-name>` | Required. Name of the `autoentities` definition to configure. |
 | [`-c, --config`](#-c---config) | Config file path. Default `dab-config.json`. |
 | [`--patterns.include`](#--patternsinclude) | T-SQL `LIKE` pattern(s) to include database objects. Default: `%.%`. |
 | [`--patterns.exclude`](#--patternsexclude) | T-SQL `LIKE` pattern(s) to exclude database objects. Default: `null`. |
@@ -46,7 +46,7 @@ dab auto-config <definition-name> [options]
 
 ## `<definition-name>`
 
-Required positional argument. Logical name of the autoentities definition. Case-sensitive. If the definition already exists, it's updated; otherwise it's created.
+Required positional argument. Logical name of the `autoentities` definition. Case-sensitive. If the definition already exists, it's updated; otherwise it's created.
 
 ### Example
 
@@ -638,5 +638,5 @@ dab auto-config my-def ^
 
 - [Auto configuration (concept)](../concept/config/auto-config.md)
 - [`dab auto-config-simulate` command](dab-auto-config-simulate.md)
-- [Autoentities configuration](../configuration/autoentities.md)
+- [`Autoentities` configuration](../configuration/autoentities.md)
 - [What's new in version 2.0](../whats-new/version-2-0.md)
