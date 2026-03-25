@@ -640,7 +640,7 @@ dab auto-config my-def ^
 
 ## Related content
 
-- [What's new in version 2.0](../whats-new/version-2-0.md)
+- [What's new in version 2.0](../../whats-new/version-2-0.md)
 - [`auto-config-simulate` command](./dab-auto-config-simulate.md)
-- [Autoentities configuration](../configuration/index.md#autoentities)
-- [Entities configuration](../configuration/entities.md)
+- [Autoentities configuration](../../configuration/index.md#autoentities)
+- [Entities configuration](../../configuration/entities.md)

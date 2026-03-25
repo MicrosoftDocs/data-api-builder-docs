@@ -51,10 +51,10 @@
       href: command-line/dab-add.md
     - name: dab auto-config
       displayName: command line, terminal, local, autoentities
-      href: command-line/dab-auto-config.md
+      href: concept/config/dab-auto-config.md
     - name: dab auto-config-simulate
       displayName: command line, terminal, local, autoentities, simulate
-      href: command-line/dab-auto-config-simulate.md
+      href: concept/config/dab-auto-config-simulate.md
     - name: dab configure
       displayName: command line, terminal, local
       href: command-line/dab-configure.md

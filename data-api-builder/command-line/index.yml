@@ -46,19 +46,19 @@ landingContent:
       - linkListType: overview
         links:
           - text: dab auto-config
-            url: dab-auto-config.md
+            url: ../concept/config/dab-auto-config.md
           - text: dab auto-config-simulate
-            url: dab-auto-config-simulate.md
+            url: ../concept/config/dab-auto-config-simulate.md
       - linkListType: reference
         links:
           - text: Patterns
-            url: dab-auto-config.md#--patternsinclude
+            url: ../concept/config/dab-auto-config.md#--patternsinclude
           - text: Template
-            url: dab-auto-config.md#--templaterestenabled
+            url: ../concept/config/dab-auto-config.md#--templaterestenabled
           - text: Permissions
-            url: dab-auto-config.md#--permissions
+            url: ../concept/config/dab-auto-config.md#--permissions
           - text: CSV output
-            url: dab-auto-config-simulate.md#--output
+            url: ../concept/config/dab-auto-config-simulate.md#--output
 
   - title: Configure
     linkLists:

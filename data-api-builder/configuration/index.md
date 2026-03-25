@@ -238,4 +238,4 @@ When `autoentities` is present, the `entities` section is no longer required. Th
 With this configuration, every table and view in the `dbo` schema (except those matching `dbo.internal%`) is automatically exposed as a DAB entity. Each entity is named using the `{schema}_{object}` pattern (for example, `dbo_Products`), has REST and GraphQL enabled, uses caching with a 30-second TTL, and grants `read` access to the `anonymous` role.
 
 > [!TIP]
-> Use [`dab auto-config`](../command-line/dab-auto-config.md) to create autoentities definitions from the CLI, and [`dab auto-config-simulate`](../command-line/dab-auto-config-simulate.md) to preview which objects match before committing changes. For more information, see [what's new in version 2.0](../whats-new/version-2-0.md).
+> Use [`dab auto-config`](../concept/config/dab-auto-config.md) to create autoentities definitions from the CLI, and [`dab auto-config-simulate`](../concept/config/dab-auto-config-simulate.md) to preview which objects match before committing changes. For more information, see [what's new in version 2.0](../whats-new/version-2-0.md).
