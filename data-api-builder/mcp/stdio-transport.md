@@ -131,7 +131,7 @@ MCP clients that support stdio transport launch DAB as a subprocess and pipe its
         "start",
         "--mcp-stdio", "role:anonymous",
         "--config", "{path}/dab-config.json",
-        "--LogLevel", "none"
+        "--LogLevel", "error"
       ]
     }
   }
@@ -152,7 +152,7 @@ Save this file as `.vscode/mcp.json` inside your project folder. VS Code detects
         "start",
         "--mcp-stdio", "role:anonymous",
         "--config", "{path}/dab-config.json",
-        "--LogLevel", "none"
+        "--LogLevel", "error"
       ]
     }
   }
@@ -166,13 +166,13 @@ Save this file as `.vscode/mcp.json` inside your project folder. VS Code detects
 | Option | Behavior with `--mcp-stdio` |
 |---|---|
 | `--config` | Uses the specified config file (same as HTTP mode) |
-| `--LogLevel` | Applies the specified log level (`none`: recommended for stdio) |
+| `--LogLevel` | Applies the specified log level (`error`: recommended for stdio) |
 
 ```bash
 dab start \
   --mcp-stdio role:api-reader \
   --config ./dab-config.json \
-  --LogLevel None
+  --LogLevel Error
 ```
 
 ## Troubleshoot stdio mode
