@@ -56,13 +56,13 @@ landingContent:
       url: version-1-5.md#http-cache-headers
     - text: Enhanced - Custom OpenTelemetry Metrics
       url: version-1-5.md#enhanced-opentelemetry
-    - text: Enhanced - EntraId Auth Provider
+    - text: Enhanced - Entra ID Auth Provider
       url: version-1-5.md#enhanced-entra-id-auth-provider
 - title: Version 1.4
   linkLists:
   - linkListType: whats-new
     links:
-    - text: Introducing - Open Telemetry
+    - text: Introducing - OpenTelemetry
       url: version-1-4.md
     - text: Enhancement - Cosmos Schema Generation now with Multi-Container Support
       url: version-1-4.md

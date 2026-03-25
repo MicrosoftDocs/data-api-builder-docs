@@ -12,10 +12,10 @@ ms.date: 09/29/2025
 
 # `update` command
 
-Update an existing entity definition in the Data API builder configuration file. Use this command to adjust source metadata, permissions, exposure (REST/GraphQL), policies, caching, relationships, mappings, and descriptive metadata after the entity has already been added.
+Update an existing entity definition in the Data API builder configuration file. Use this command to adjust source metadata, permissions, exposure (REST/GraphQL), policies, caching, relationships, mappings, and descriptive metadata for an existing entity.
 
 > [!TIP]
-> Use `dab add` to create new entities, and `dab update` to evolve them. Use `--fields.name` with `--fields.alias`, `--fields.description`, and `--fields.primary-key` to manage field metadata.
+> Use `dab add` to create new entities, and `dab update` to evolve them. To manage field metadata, use `--fields.name` with `--fields.alias`, `--fields.description`, and `--fields.primary-key`.
 
 ## Syntax
 
@@ -70,7 +70,7 @@ dab update <entity-name> [options]
 | Option                                    | Summary                                                   |
 | ----------------------------------------- | --------------------------------------------------------- |
 | [`--permissions`](#--permissions)         | `role:actions` for a single role. Run multiple times for multiple roles. |
-| [`--policy-database`](#--policy-database) | OData-style filter injected in DB query.                  |
+| [`--policy-database`](#--policy-database) | OData-style filter injected in database query.             |
 | [`--policy-request`](#--policy-request)   | Pre-database request filter.                              |
 
 #### Relationships
@@ -186,7 +186,7 @@ dab update ^
 ```
 
 > [!NOTE]
-> Supplying TTL when cache is disabled has no effect until caching is enabled.
+> Supplying TTL (time-to-live) when cache is disabled has no effect until caching is enabled.
 
 ## `--description`
 
@@ -479,7 +479,7 @@ dab update ^
 
 ## `--policy-database`
 
-OData-style filter appended to DB query.
+OData-style filter appended to database query.
 
 ### Example
 
@@ -1012,7 +1012,7 @@ Stored procedures only. Comma-separated list of parameter names.
 > This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
 
 > [!TIP]
-> Use `--parameters.name` with `--parameters.description`, `--parameters.required`, and `--parameters.default` to define stored procedure parameters.
+> To define stored procedure parameters, use `--parameters.name` with `--parameters.description`, `--parameters.required`, and `--parameters.default`.
 
 ### Example
 

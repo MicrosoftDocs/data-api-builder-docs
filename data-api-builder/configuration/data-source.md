@@ -188,7 +188,7 @@ Managed Service Identities (MSI) are supported with `DefaultAzureCredential` def
 
 #### User-Assigned Managed Identities (UAMI)
 
-For User Assigned Managed Identity, append the *Authentication* and *User Id* properties to your connection string while substituting in your User Assigned Managed Identity's client id: `Authentication=Active Directory Managed Identity; User Id=<UMI_CLIENT_ID>;`.
+For User Assigned Managed Identity, append the *Authentication* and *User ID* properties to your connection string while substituting in your User Assigned Managed Identity's client ID: `Authentication=Active Directory Managed Identity; User Id=<UMI_CLIENT_ID>;`.
 
 #### System-Assigned Managed Identity (SAMI)
 
@@ -252,9 +252,9 @@ On-Behalf-Of (OBO) user-delegated authentication for SQL Server and Azure SQL. W
 |`data-source.user-delegated-auth`|`provider`|string|No|None|
 |`data-source.user-delegated-auth`|`database-audience`|string|Yes (when enabled)|None|
 
-- `enabled` — turns OBO on or off.
-- `provider` — the identity provider for the token exchange. Currently only `EntraId` is supported.
-- `database-audience` — the target audience for the downstream SQL token (for example, `https://database.windows.net`).
+- `enabled`—turns OBO on or off.
+- `provider`—the identity provider for the token exchange. Currently only `EntraId` is supported.
+- `database-audience`—the target audience for the downstream SQL token (for example, `https://database.windows.net`).
 
 ### Required environment variables
 

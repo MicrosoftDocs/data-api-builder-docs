@@ -74,7 +74,7 @@ landingContent:
             url: dab-configure.md#--data-sourcedatabase-type
           - text: GraphQL runtime
             url: dab-configure.md#--runtimegraphqlenabled
-          - text: MCP runtime
+          - text: Model Context Protocol (MCP) runtime
             url: dab-configure.md#--runtimemcpenabled
           - text: REST runtime
             url: dab-configure.md#--runtimerestenabled

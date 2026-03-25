@@ -79,7 +79,7 @@ Create a table with fictitious data to use in this example scenario.
     SELECT * FROM dbo.Revenues
     ```
 
-1. Create a function named `RevenuesPredicate`. This function will filter results based on the current session context.
+1. Create a function named `RevenuesPredicate`. This function filters results based on the current session context.
 
     ```sql
     CREATE FUNCTION dbo.RevenuesPredicate(@accessible_role varchar(max))
@@ -98,7 +98,7 @@ Create a table with fictitious data to use in this example scenario.
     ```
 
 > [!NOTE]
-> The `WITH SCHEMABINDING` clause is required for functions used in security policies so underlying schema changes do not invalidate the predicate.
+> The `WITH SCHEMABINDING` clause is required for functions used in security policies so underlying schema changes don't invalidate the predicate.
 
 ## (Optional) Create a stored procedure
 
@@ -252,7 +252,7 @@ DROP TABLE IF EXISTS dbo.Revenues;
 
 - **No results returned**: Verify the security policy is active (`SELECT * FROM sys.security_policies`), check the session context value (`SELECT SESSION_CONTEXT(N'roles')`), and confirm `--set-session-context true` is set in your Data API builder configuration.
 - **All rows returned**: Confirm the security policy isn't disabled (`WITH STATE = OFF`) and that the predicate returns `1` only for authorized rows.
-- **Performance issues**: Index the predicate column (`accessible_role`), and consider temporarily disabling the policy to isolate performance impact.
+- **Performance issues**: Index the predicate column (`accessible_role`), and consider temporarily disabling the policy to isolate performance effect.
 
 ## Related content
 

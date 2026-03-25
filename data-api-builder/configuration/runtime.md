@@ -512,7 +512,7 @@ Global CORS configuration.
 | ----------------------------- | ---------- | ------------------------------------------------------------ | -------- | ------------ |
 | `runtime.host.authentication` | `provider` | enum (`Unauthenticated` \| `AppService` \| `EntraId` \| `Custom` \| `Simulator`) | ❌ No     | `Unauthenticated` |
 
-Selects the authentication method. Each provider validates identity differently. For step-by-step setup, see the how-to guides linked below.
+Selects the authentication method. Each provider validates identity differently. For step-by-step setup, see the how-to guides in the following table.
 
 > [!TIP]
 > The default authentication provider changed in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
@@ -521,7 +521,7 @@ Selects the authentication method. Each provider validates identity differently.
 
 | Provider | Use case | Identity source | How-to guide |
 |----------|----------|-----------------|--------------|
-| `Unauthenticated` | DAB sits behind a trusted front end (default) | None — all requests run as `anonymous` | — |
+| `Unauthenticated` | DAB sits behind a trusted front end (default) | None—all requests run as `anonymous` | — |
 | `AppService` | Azure-hosted apps (EasyAuth) | `X-MS-CLIENT-PRINCIPAL` header | [Configure App Service authentication](../concept/security/how-to-authenticate-app-service.md) |
 | `EntraID` | Microsoft Entra ID (Azure AD) | JWT bearer token | [Configure Entra ID authentication](../concept/security/how-to-authenticate-entra.md) |
 | `Custom` | Third-party IdPs (Okta, Auth0) | JWT bearer token | [Configure custom JWT authentication](../concept/security/how-to-authenticate-custom.md) |
@@ -532,7 +532,7 @@ Selects the authentication method. Each provider validates identity differently.
 
 ### Unauthenticated (default)
 
-When `Unauthenticated` is set (or no provider is specified), DAB does not inspect or validate any JWT. All requests run as the `anonymous` role. Authentication is expected to be handled upstream, for example by Azure API Management or an application gateway.
+When `Unauthenticated` is set (or no provider is specified), DAB doesn't inspect or validate any JWT. All requests run as the `anonymous` role. A front-end service such as Azure API Management or an application gateway should handle authentication upstream.
 
 > [!IMPORTANT]
 > When `Unauthenticated` is active, `authenticated` and custom roles defined in entity permissions are never activated. If your config contains those roles, DAB emits a warning at startup.
@@ -954,7 +954,7 @@ Global telemetry configuration.
 | `runtime.telemetry` | [`application-insights`](#application-insights-telemetry) | object | ❌ No | - |
 | `runtime.telemetry` | [`open-telemetry`](#opentelemetry-telemetry) | object | ❌ No | - |
 
-Configures logging verbosity per namespace. This follows standard .NET logging conventions and allows granular control, though it assumes some familiarity with Data API builder internals. Data API builder is open source: [https://aka.ms/dab](https://aka.ms/dab)
+Configures logging verbosity per namespace. This configuration follows standard .NET logging conventions and allows granular control, though it assumes some familiarity with Data API builder internals. Data API builder is open source: [https://aka.ms/dab](https://aka.ms/dab)
 
 ### Format
 
@@ -1089,10 +1089,10 @@ Learn more about [OTEL_EXPORTER_OTLP_HEADERS](https://opentelemetry.io/docs/lang
 | - | - | - | - | - |
 | `runtime` | `mcp` | object | ❌ No | - |
 
-Configures the SQL MCP Server, which exposes database entities as MCP tools for AI agents.
+Configures the SQL Model Context Protocol (MCP) Server, which exposes database entities as MCP tools for AI agents.
 
 > [!TIP]
-> For more details on MCP changes in DAB 2.0, see [What's new in version 2.0](../whats-new/version-2-0.md).
+> For more information on MCP changes in DAB 2.0, see [What's new in version 2.0](../whats-new/version-2-0.md).
 
 ### Nested properties
 
@@ -1115,7 +1115,7 @@ The `dml-tools` property accepts a boolean to enable or disable all tools, or an
 | `runtime.mcp.dml-tools` | `execute-entity` | boolean | ❌ No | `true` |
 | `runtime.mcp.dml-tools` | `aggregate-records` | boolean or object | ❌ No | `true` |
 
-The `aggregate-records` tool accepts a boolean or an object with additional settings:
+The `aggregate-records` tool accepts a boolean or an object with more settings:
 
 | Parent | Property | Type | Required | Default | Range |
 | - | - | - | - | - | - |
@@ -1174,7 +1174,7 @@ The `aggregate-records` tool accepts a boolean or an object with additional sett
 
 The `dml-tools` property also accepts a boolean shorthand. Setting `"dml-tools": true` enables all tools; `"dml-tools": false` disables all tools.
 
-When you disable a tool at the runtime level, the tool never appears in the MCP `tools/list` response and can't be invoked, regardless of entity-level permissions. For more details on individual DML tools, see [Data manipulation language (DML) tools](../mcp/data-manipulation-language-tools.md).
+When you disable a tool at the runtime level, the tool never appears in the MCP `tools/list` response and can't be invoked, regardless of entity-level permissions. For more information on individual DML tools, see [Data manipulation language (DML) tools](../mcp/data-manipulation-language-tools.md).
 
 ### Using the CLI
 

@@ -34,11 +34,11 @@ As detailed in [OWASP's Transport Layer Protection](https://cheatsheetseries.owa
 One way to help configure TLS securely is **to disable usage of legacy versions of TLS at the server level**. Data API builder is built on Kestrel, a [cross-platform web server for ASP.NET Core](/aspnet/core/fundamentals/servers/kestrel?view=aspnetcore-6.0&preserve-view=true) and is configured by default to defer to the operating system's TLS version configuration. Microsoft's [TLS best practices for .NET guidance](/dotnet/framework/network-programming/tls) describe the motivation behind such behavior:
 
 > [!NOTE]
-> TLS 1.2 is a standard that provides security improvements over previous versions. TLS 1.2 will eventually be replaced by the newest released standard TLS 1.3 which is faster and has improved security.
+> TLS 1.2 is a standard that provides security improvements over previous versions. The newest released standard TLS 1.3, which is faster and more secure, will eventually replace TLS 1.2.
 >
-> To ensure .NET Framework applications remain secure, the TLS version should not be hardcoded. .NET Framework applications should use the TLS version the operating system (OS) supports.
+> To ensure .NET Framework applications remain secure, the TLS version shouldn't be hardcoded. .NET Framework applications should use the TLS version the operating system (OS) supports.
 
-While explicitly defining supported TLS protocol versions for Kestrel is supported, doing so isn't recommended. These definitions translate to an allowlist, which prevents support for future TLS versions as they become available. More information about Kestrel's default TLS protocol version behavior can be found [here](/dotnet/core/compatibility/aspnet-core/5.0/kestrel-default-supported-tls-protocol-versions-changed).
+While explicitly defining supported TLS protocol versions for Kestrel is supported, doing so isn't recommended. These definitions translate to an allow list, which prevents support for future TLS versions as they become available. More information about Kestrel's default TLS protocol version behavior can be found [here](/dotnet/core/compatibility/aspnet-core/5.0/kestrel-default-supported-tls-protocol-versions-changed).
 
 ## TLS support
 
@@ -66,7 +66,7 @@ TLS 1.2 is enabled by default on the latest versions of .NET and many of the lat
 
 ## Configure authentication for production
 
-Starting in DAB 2.0, the default authentication provider is `Unauthenticated`. This means DAB does not inspect or validate any JWT, and all requests run as `anonymous`. This is appropriate when DAB sits behind a trusted front end (such as Azure API Management or an application gateway) that handles authentication upstream.
+Starting in DAB 2.0, the default authentication provider is `Unauthenticated`. This means DAB doesn't inspect or validate any JSON Web Token (JWT), and all requests run as `anonymous`. This configuration is appropriate when DAB sits behind a trusted front end (such as Azure API Management or an application gateway) that handles authentication upstream.
 
 > [!IMPORTANT]
 > If you expose DAB directly to clients, configure a production-grade authentication provider (such as `EntraID` or `Custom`) rather than relying on `Unauthenticated`. When `Unauthenticated` is active, `authenticated` and custom roles defined in entity permissions are never activated.

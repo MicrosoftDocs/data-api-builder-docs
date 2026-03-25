@@ -235,7 +235,7 @@ For stored-procedure entities, you can also enable `custom-tool` to register the
 When `custom-tool` is `true`, SQL MCP Server registers the stored procedure as a named tool via `tools/list` and `tools/call`, allowing agents to discover and invoke it directly by name. The `custom-tool` property is only valid for stored-procedure entities.
 
 > [!TIP]
-> For more details on entity-level MCP configuration, see [What's new in version 2.0](../whats-new/version-2-0.md).
+> For more information on entity-level MCP configuration, see [What's new in version 2.0](../whats-new/version-2-0.md).
 
 ## The DML tools
 

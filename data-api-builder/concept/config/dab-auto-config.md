@@ -49,7 +49,7 @@ When `autoentities` is present in the configuration, the `entities` section is n
 | --- | --- |
 | [`--template.rest.enabled`](#--templaterestenabled) | Enable REST for matched entities. |
 | [`--template.graphql.enabled`](#--templategraphqlenabled) | Enable GraphQL for matched entities. |
-| [`--template.mcp.dml-tools`](#--templatemcpdml-tools) | Enable MCP DML tools for matched entities. |
+| [`--template.mcp.dml-tools`](#--templatemcpdml-tools) | Enable Model Context Protocol (MCP) data manipulation language (DML) tools for matched entities. |
 | [`--template.health.enabled`](#--templatehealthenabled) | Enable health checks for matched entities. |
 | [`--template.cache.enabled`](#--templatecacheenabled) | Enable caching for matched entities. |
 | [`--template.cache.ttl-seconds`](#--templatecachettl-seconds) | Cache time-to-live in seconds. |
@@ -65,7 +65,7 @@ When `autoentities` is present in the configuration, the `entities` section is n
 
 ## `<definition-name>`
 
-Logical name of the autoentities definition. Case-sensitive. If the definition already exists, it's updated; otherwise, it's created.
+Logical name of the autoentities definition. Case-sensitive. If the definition already exists, the command updates it; otherwise, the command creates it.
 
 ### Example
 

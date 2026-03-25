@@ -84,7 +84,7 @@ landingContent:
             url: https://www.nuget.org/packages/Microsoft.DataApiBuilder
           - text: MCR container
             url: https://aka.ms/dab/registry
-          - text: VS Code extension
+          - text: Visual Studio Code extension
             url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.omnibus-data-api-builder
       - linkListType: reference
         links:

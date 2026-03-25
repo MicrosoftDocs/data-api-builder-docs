@@ -307,9 +307,9 @@ Entity health checks run for both REST and GraphQL if enabled. Each appears as a
 
 The health response includes a `currentRole` field indicating the role used to authorize the request. DAB resolves the current role using the following priority:
 
-1. **`X-MS-API-ROLE` header** — if present, the specified role is used.
-1. **`authenticated`** — if the request includes a valid principal (for example, a JWT token) but no `X-MS-API-ROLE` header.
-1. **`anonymous`** — if no principal is present.
+1. **`X-MS-API-ROLE` header**—if present, the specified role is used.
+1. **`authenticated`**—if the request includes a valid principal (for example, a JWT token) but no `X-MS-API-ROLE` header.
+1. **`anonymous`**—if no principal is present.
 
 > [!TIP]
 > This field was introduced in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).

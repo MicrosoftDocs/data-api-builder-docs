@@ -26,7 +26,7 @@ The OpenAPI specification is a language-agnostic standard for documenting HTTP A
 
 Data API builder generates an OpenAPI description document using the runtime configuration and the database metadata for each REST-enabled entity.
 
-The schema is built using the [OpenAPI.NET SDK](https://github.com/microsoft/OpenAPI.NET) and conforms to the [OpenAPI Specification v3.0.1](https://spec.openapis.org/oas/v3.0.1.html). It is output as a JSON document.
+The schema is built using the [OpenAPI.NET SDK](https://github.com/microsoft/OpenAPI.NET) and conforms to the [OpenAPI Specification v3.0.1](https://spec.openapis.org/oas/v3.0.1.html). It's output as a JSON document.
 
 You can access the OpenAPI document at:
 
@@ -56,7 +56,7 @@ For example, if the `anonymous` role has only `read` permission on the `Book` en
 
 ### Field-level filtering
 
-When permissions include field-level `include` or `exclude` rules, the OpenAPI schema reflects those constraints. Only fields accessible to the role appear in the request and response schemas. This gives consumers an accurate picture of what the API accepts and returns for their role.
+When permissions include field-level `include` or `exclude` rules, the OpenAPI schema reflects those constraints. Only fields accessible to the role appear in the request and response schemas. This filtering gives consumers an accurate picture of what the API accepts and returns for their role.
 
 ### Role-specific OpenAPI paths
 
@@ -117,4 +117,4 @@ In `Development` mode, Data API builder exposes Swagger UI at:
 GET /swagger
 ```
 
-This endpoint is not nested under the `rest-path` to avoid conflicts with user-defined entities.
+This endpoint isn't nested under the `rest-path` to avoid conflicts with user-defined entities.

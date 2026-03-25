@@ -12,7 +12,7 @@ ms.date: 03/24/2026
 
 # Using stored procedures in Data API builder
 
-Stored procedures can be exposed as REST or GraphQL endpoints in DAB. This is useful for scenarios that involve custom logic, filtering, validation, or computed results not handled by simple tables or views.
+Stored procedures can be exposed as REST or GraphQL endpoints in DAB. This approach is useful for scenarios that involve custom logic, filtering, validation, or computed results not handled by simple tables or views.
 
 ## Configuration
 
@@ -72,7 +72,7 @@ dab add GetCowrittenBooksByAuthor \
 ```
 
 > [!WARNING]
-> The dictionary format for `parameters` (for example, `{ "searchType": "default-value" }`) is deprecated in DAB 2.0. Use the array format shown above. The old format is still accepted for backward compatibility.
+> The dictionary format for `parameters` (for example, `{ "searchType": "default-value" }`) is deprecated in DAB 2.0. Use the array format shown in the preceding example. The old format is still accepted for backward compatibility.
 
 > [!TIP]
 > For more information on the parameters array format, see [source configuration](../../configuration/entities.md#source-entity-name-entities).
@@ -125,7 +125,7 @@ query {
 
 ## Custom MCP tools
 
-Starting in DAB 2.0, stored procedures can be exposed as custom MCP tools. When you set `"custom-tool": true` on a stored-procedure entity, DAB dynamically registers the procedure as a named tool in the MCP `tools/list` and `tools/call` endpoints. AI agents can discover and invoke the tool directly by name, with parameters matching the procedure signature.
+Starting in DAB 2.0, stored procedures can be exposed as custom Model Context Protocol (MCP) tools. When you set `"custom-tool": true` on a stored-procedure entity, DAB dynamically registers the procedure as a named tool in the MCP `tools/list` and `tools/call` endpoints. AI agents can discover and invoke the tool directly by name, with parameters matching the procedure signature.
 
 ```json
 "GetBookById": {
@@ -160,7 +160,7 @@ dab add GetBookById \
 
 ## MCP custom tools
 
-In Data API builder 2.0, stored procedures can be registered as custom MCP tools. When you set `"custom-tool": true` in the entity's `mcp` configuration, DAB registers the stored procedure as a named tool via MCP `tools/list` and `tools/call`. This lets AI agents discover and invoke the procedure directly by name.
+In Data API builder 2.0, stored procedures can be registered as custom MCP tools. When you set `"custom-tool": true` in the entity's `mcp` configuration, DAB registers the stored procedure as a named tool via MCP `tools/list` and `tools/call`. This configuration lets AI agents discover and invoke the procedure directly by name.
 
 ### Configuration example
 
@@ -193,5 +193,5 @@ dab add GetBookById \
 ```
 
 > [!TIP]
-> For more details on MCP custom tools in DAB 2.0, see [What's new in version 2.0](../../whats-new/version-2-0.md).
+> For more information about MCP custom tools in DAB 2.0, see [What's new in version 2.0](../../whats-new/version-2-0.md).
 

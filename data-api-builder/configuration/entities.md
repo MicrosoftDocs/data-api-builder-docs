@@ -95,8 +95,8 @@ Configuration settings for database entities.
 
 |Property|Description|
 |-|-|
-|[`entities.entity-name.mcp`](#mcp-entity-name-entities)|Boolean shorthand or object to control MCP participation for the entity|
-|[`entities.entity-name.mcp.dml-tools`](#mcp-entity-name-entities)|Enables or disables DML tools for the entity|
+|[`entities.entity-name.mcp`](#mcp-entity-name-entities)|Boolean shorthand or object to control Model Context Protocol (MCP) participation for the entity|
+|[`entities.entity-name.mcp.dml-tools`](#mcp-entity-name-entities)|Enables or disables data manipulation language (DML) tools for the entity|
 |[`entities.entity-name.mcp.custom-tool`](#mcp-entity-name-entities)|Registers the stored procedure as a named MCP tool (stored-procedure entities only)|
 
 ## Format overview
@@ -200,7 +200,7 @@ The database source details of the entity.
 |`entities.{entity-name}.source`|`key-fields`|string array|❌ No*|None|
 |`entities.{entity-name}.source`|`parameters`|array or object|❌ No**|None|
 
-\* `key-fields` is only required when `type` is `view` and the `fields` array is not used. The value represents the primary keys.
+\* `key-fields` is only required when `type` is `view` and the `fields` array isn't used. The value represents the primary keys.
 
 > [!WARNING]
 > The `key-fields` property is deprecated in DAB 2.0. Use the [`fields`](#fields-entity-name-entities) array with `primary-key: true` instead. The schema enforces that `fields` and `key-fields` can't coexist on the same entity.
@@ -247,7 +247,7 @@ Starting in DAB 2.0, `parameters` supports a structured array format with richer
 | `default` | any | ❌ No | Default value used when the parameter isn't supplied |
 | `description` | string | ❌ No | Human-readable description of the parameter |
 
-#### Example (array format — preferred)
+#### Example (array format—preferred)
 
 ```json
 {
@@ -271,7 +271,7 @@ Starting in DAB 2.0, `parameters` supports a structured array format with richer
 ```
 
 > [!WARNING]
-> The dictionary format for `parameters` (for example, `{ "id": 0 }`) is deprecated in DAB 2.0. Use the array format shown above. The old format is still accepted for backward compatibility but will be removed in a future release.
+> The dictionary format for `parameters` (for example, `{ "id": 0 }`) is deprecated in DAB 2.0. Use the preceding array format. The old format is still accepted for backward compatibility but will be removed in a future release.
 
 > [!TIP]
 > This feature was introduced in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
@@ -323,14 +323,14 @@ Specifies the role name to which permissions apply. Use system roles (`Anonymous
 
 ### Role inheritance
 
-DAB 2.0 introduces role inheritance for entity permissions. When a role is not explicitly configured for an entity, it inherits permissions from a broader role using the following chain:
+DAB 2.0 introduces role inheritance for entity permissions. When a role isn't explicitly configured for an entity, it inherits permissions from a broader role using the following chain:
 
 ```text
 named-role → authenticated → anonymous
 ```
 
-- If `authenticated` is not configured for an entity, it inherits from `anonymous`.
-- If a named role is not configured, it inherits from `authenticated`, or from `anonymous` if `authenticated` is also absent.
+- If `authenticated` isn't configured for an entity, it inherits from `anonymous`.
+- If a named role isn't configured, it inherits from `authenticated`, or from `anonymous` if `authenticated` is also absent.
 
 This means you can define permissions once on `anonymous` and every broader role gets the same access automatically, with no duplication required.
 
@@ -694,7 +694,7 @@ Lets developers selectively include entities in the GraphQL schema.
 endpoints. 
 
 > [!TIP]
-> Starting in Data API builder 2.0, the `path` property supports forward slashes to create subdirectory-style URL segments (for example, `"shopping-cart/item"` results in `/api/shopping-cart/item`). DAB uses longest-prefix matching for routing. Path traversal patterns, backslashes, and percent-encoded separators are blocked by validation. For more information, see [What's new in version 2.0](../whats-new/version-2-0.md).
+> Starting in Data API builder 2.0, the `path` property supports forward slashes to create subdirectory-style URL segments (for example, `"shopping-cart/item"` results in `/api/shopping-cart/item`). DAB uses longest-prefix matching for routing. Validation blocks path traversal patterns, backslashes, and percent-encoded separators. For more information, see [What's new in version 2.0](../whats-new/version-2-0.md).
 
 ### Format
 
@@ -1235,7 +1235,7 @@ Enables and configures health checks for the entity.
 > The `first` value must be less than or equal to the `runtime.pagination.max-page-size` setting. Smaller values help health checks complete faster.
 
 > [!IMPORTANT]
-> Stored procedures are automatically excluded from entity health checks because they require parameters and may not be deterministic.
+> Stored procedures are automatically excluded from entity health checks because they require parameters and might not be deterministic.
 
 ## MCP (entity-name entities)
 
@@ -1246,7 +1246,7 @@ Enables and configures health checks for the entity.
 Controls MCP participation for the entity. When MCP is enabled globally, entities participate by default. Use this property to opt out or to enable custom MCP tools for stored-procedure entities.
 
 > [!TIP]
-> For more details on MCP changes in DAB 2.0, see [What's new in version 2.0](../whats-new/version-2-0.md).
+> For more information on MCP changes in DAB 2.0, see [What's new in version 2.0](../whats-new/version-2-0.md).
 
 ### Boolean shorthand
 

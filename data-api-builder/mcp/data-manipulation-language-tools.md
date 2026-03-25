@@ -11,7 +11,7 @@ ms.date: 03/24/2026
 
 [!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
-SQL MCP Server exposes seven Data Manipulation Language (DML) tools to AI agents. These tools provide a typed CRUD surface for database operations—creating, reading, updating, and deleting records, aggregating data, plus executing stored procedures. All tools respect role-based access control (RBAC), entity permissions, and policies defined in your configuration.
+SQL Model Context Protocol (MCP) Server exposes seven Data Manipulation Language (DML) tools to AI agents. These tools provide a typed CRUD surface for database operations—creating, reading, updating, and deleting records, aggregating data, plus executing stored procedures. All tools respect role-based access control (RBAC), entity permissions, and policies defined in your configuration.
 
 ## What are DML tools?
 
@@ -131,7 +131,7 @@ Runs a stored procedure. Supports input parameters and output results. The tool 
 
 Performs aggregation queries on tables and views. Supports common aggregate functions such as count, sum, average, minimum, and maximum. The tool builds deterministic SQL from structured parameters, applies read permissions and field projections, and enforces row-level security policies.
 
-The `aggregate-records` tool can be configured as a boolean or as an object with additional settings:
+The `aggregate-records` tool can be configured as a boolean or as an object with more settings:
 
 ```json
 {

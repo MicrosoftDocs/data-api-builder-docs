@@ -198,7 +198,7 @@ dab init ^
 
 Identity provider. Default is `Unauthenticated`.
 
-When `Unauthenticated` is active, DAB does not inspect or validate any JWT. All requests run as `anonymous`. Authentication is expected to be handled upstream. To use a different provider, set it explicitly.
+When `Unauthenticated` is active, DAB doesn't inspect or validate any JWT. All requests run as `anonymous`. The upstream service handles authentication. To use a different provider, set it explicitly.
 
 > [!TIP]
 > The default authentication provider changed in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).

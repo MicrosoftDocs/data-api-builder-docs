@@ -28,7 +28,7 @@ Use level 2 cache when you want to:
 
 ## Configure runtime cache settings
 
-Level 2 cache is configured globally under `runtime.cache`. The runtime cache block enables caching, sets the default TTL, and configures the distributed cache provider.
+Level 2 cache is configured globally under `runtime.cache`. The runtime cache block enables caching, sets the default time to live (TTL), and configures the distributed cache provider.
 
 ```json
 {
@@ -84,14 +84,14 @@ Use `cache.level` to control which cache tiers an entity uses.
 | Value | Description |
 |---|---|
 | `L1` | In-memory cache only. Fast and local to the current DAB process. |
-| `L1L2` | In-memory plus distributed cache. This is the default for cached entities. |
+| `L1L2` | In-memory plus distributed cache. This level is the default for cached entities. |
 
 If `L2` isn't enabled globally, an entity configured with `L1L2` behaves as `L1`.
 
 ## How `L1L2` works
 
 > [!TIP]
-> **TL;DR** `L1L2` = Request → L1 → L2 → DB → L2 → L1 → Response
+> **TL;DR** `L1L2` = Request → L1 → L2 → database → L2 → L1 → Response
 
 By default, an entity with caching enabled uses level `L1L2`.
 
@@ -110,7 +110,7 @@ This combination gives you a warm distributed cache across scaled-out or recycle
 
 ## Redis support
 
-Redis is the current provider for level 2 cache. It is well-suited for this scenario because it supports:
+Redis is the current provider for level 2 cache. It's well-suited for this scenario because it supports:
 
 * Shared access across multiple DAB instances
 * Key expiration for TTL-based caching
@@ -121,7 +121,7 @@ Redis is the current provider for level 2 cache. It is well-suited for this scen
 
 Use the optional `partition` setting to isolate distributed cache activity. DAB uses the partition value to namespace Redis keys and the backplane channel. Only containers sharing the same partition participate in the same distributed cache space.
 
-This is useful when you want to:
+This setting is useful when you want to:
 
 * Separate production and nonproduction traffic
 * Isolate tenants or environments

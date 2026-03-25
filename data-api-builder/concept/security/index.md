@@ -22,7 +22,7 @@ Data API builder exposes your data through REST and GraphQL endpoints. Securing 
 |--------|---------------------|-------------|
 | **Authentication** | Who is the caller? | Validate tokens from an identity provider |
 | **Authorization** | What can they do? | Role-based permissions on entities |
-| **Transport** | Is the connection secure? | TLS encryption for all traffic |
+| **Transport** | Is the connection secure? | Transport Layer Security (TLS) encryption for all traffic |
 
 ## Choose your authentication provider
 
@@ -31,11 +31,11 @@ Data API builder supports multiple authentication providers. Choose the one that
 | Provider | Use case | Guide |
 |----------|----------|-------|
 | **Unauthenticated** | DAB sits behind a trusted front end that handles identity (default) | — |
-| **Microsoft Entra ID** (`EntraID`/`AzureAD`) | Production apps using Microsoft identity | [Configure Entra authentication](how-to-authenticate-entra.md) |
-| **Custom JWT** | Third-party IdPs (Okta, Auth0, Keycloak) | [Configure custom JWT authentication](how-to-authenticate-custom.md) |
+| **Microsoft Entra ID** (`EntraID`/`AzureAD`) | Production apps using Microsoft identity | [Configure Microsoft Entra authentication](how-to-authenticate-entra.md) |
+| **Custom JSON Web Token (JWT)** | Third-party IdPs (Okta, Auth0, Keycloak) | [Configure custom JWT authentication](how-to-authenticate-custom.md) |
 | **App Service** | Apps running behind Azure App Service EasyAuth (platform headers) | [Configure App Service authentication](how-to-authenticate-app-service.md) |
 | **Simulator** | Local development and testing | [Configure Simulator authentication](how-to-authenticate-simulator.md) |
-| **Static Web Apps** | Apps fronted by SWA auth headers | [Configure App Service authentication](how-to-authenticate-app-service.md)
+| **Static Web Apps** | Apps fronted by Static Web Apps (SWA) auth headers | [Configure App Service authentication](how-to-authenticate-app-service.md)
 
 > [!TIP]
 > The default provider changed to `Unauthenticated` in version 2.0. For more information, see [what's new](../../whats-new/version-2-0.md).
@@ -114,7 +114,7 @@ Go beyond entity-level permissions with fine-grained access control:
 
 ## Role inheritance
 
-DAB 2.0 introduces role inheritance for entity permissions. The inheritance chain is `named-role → authenticated → anonymous`. If a role is not explicitly configured for an entity, it inherits from the next broader role. Define permissions once on `anonymous` and every broader role gets the same access. For details, see [Authorization and roles](authorization.md#role-inheritance).
+DAB 2.0 introduces role inheritance for entity permissions. The inheritance chain is `named-role → authenticated → anonymous`. If a role isn't explicitly configured for an entity, it inherits from the next broader role. Define permissions once on `anonymous` and every broader role gets the same access. For details, see [Authorization and roles](authorization.md#role-inheritance).
 
 ## Transport and configuration security
 
@@ -150,7 +150,7 @@ For details, see [Security best practices](../../deployment/best-practices-secur
 
 | Task | Guide |
 |------|-------|
-| Set up Microsoft Entra ID authentication | [Configure Entra authentication](how-to-authenticate-entra.md) |
+| Set up Microsoft Entra ID authentication | [Configure Microsoft Entra authentication](how-to-authenticate-entra.md) |
 | Use Okta or Auth0 | [Configure custom JWT authentication](how-to-authenticate-custom.md) |
 | Run behind Azure App Service | [Configure App Service authentication](how-to-authenticate-app-service.md) |
 | Test permissions locally | [Configure Simulator authentication](how-to-authenticate-simulator.md) |

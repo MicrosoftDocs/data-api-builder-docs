@@ -20,7 +20,7 @@ Data API builder uses a role-based authorization workflow. Any incoming request,
 
 No role has default permissions. Once Data API builder determines a role, the entity's `permissions` must define `actions` for that role for the request to be successful.
 
-The following role evaluation matrix applies to JWT bearer providers (for example, `EntraID`/`AzureAD` and `Custom`) where the client sends `Authorization: Bearer <token>`.
+The following role evaluation matrix applies to JSON Web Token (JWT) bearer providers (for example, `EntraID`/`AzureAD` and `Custom`) where the client sends `Authorization: Bearer <token>`.
 
 | Bearer token provided | `X-MS-API-ROLE` provided | Requested role present in token `roles` claim | Effective role / outcome |
 | --- | --- | --- | --- |
@@ -37,7 +37,7 @@ To use a role other than `Anonymous` or `Authenticated`, the `X-MS-API-ROLE` hea
 
 Provider notes:
 
-- EasyAuth providers (for example, `AppService`): authentication can be established by platform-injected headers (such as `X-MS-CLIENT-PRINCIPAL`) rather than a bearer token.
+- EasyAuth providers (for example, `AppService`): platform-injected headers (such as `X-MS-CLIENT-PRINCIPAL`) establish authentication rather than a bearer token.
 - `Simulator`: requests are treated as authenticated for development/testing, without validating a real token.
 
 ### System roles
@@ -143,7 +143,7 @@ Permissions describe:
 The syntax for defining permissions is described in the [runtime configuration article](../../configuration/entities.md#permissions).
 
 > [!IMPORTANT]
-> There may be multiple roles defined within a single entity's permissions configuration. However, a request is only evaluated in the context of a single role:
+> There might be multiple roles defined within a single entity's permissions configuration. However, a request is only evaluated in the context of a single role:
 >
 > - By default, either the system role `Anonymous` or `Authenticated`
 > - When included, the role set in the `X-MS-API-ROLE` HTTP header.
@@ -160,8 +160,8 @@ DAB 2.0 introduces role inheritance so you don't need to repeat the same permiss
 named-role → authenticated → anonymous
 ```
 
-- If `authenticated` is not explicitly configured for an entity, it inherits from `anonymous`.
-- If a named role is not configured, it inherits from `authenticated`, or from `anonymous` if `authenticated` is also absent.
+- If `authenticated` isn't explicitly configured for an entity, it inherits from `anonymous`.
+- If a named role isn't configured, it inherits from `authenticated`, or from `anonymous` if `authenticated` is also absent.
 
 You can define permissions once on `anonymous` and every broader role gets the same access automatically, with no duplication required.
 

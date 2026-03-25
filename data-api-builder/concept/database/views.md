@@ -20,7 +20,7 @@ To expose a view:
 
 * Set `source.type` to `"view"`
 * Set `source.object` to the fully qualified view name
-* Define `key-fields` to identify a row uniquely
+* To identify a row uniquely, define `key-fields`
 * Grant permission using the `"read"` action (and optionally `"create"`, `"update"`, `"delete"` if the view is updatable)
 
 ### CLI example
@@ -81,6 +81,6 @@ Returns the row from `vw_books_details` with `id = 42`.
 ## Limitations
 
 * `key-fields` are required
-* Views do not support relationships
+* Views don't support relationships
 * Pagination, filtering, and sorting are supported if the view behaves like a table
 

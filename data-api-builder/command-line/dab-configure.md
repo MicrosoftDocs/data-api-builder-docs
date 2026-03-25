@@ -818,9 +818,9 @@ Set the HTTP response compression level.
 
 Allowed values:
 
-- `optimal` — balances compression ratio and speed
-- `fastest` — prioritizes compression speed over ratio
-- `none` — disables compression (default)
+- `optimal`—balances compression ratio and speed
+- `fastest`—prioritizes compression speed over ratio
+- `none`—disables compression (default)
 
 ### Example
 

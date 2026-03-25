@@ -41,8 +41,8 @@ dab add <entity-name> [options]
 | [`--graphql`](#--graphql)                    | GraphQL exposure: `false`, `true`, `singular`, or `singular:plural`. |
 | [`--graphql.operation`](#--graphqloperation) | Stored procedures only. `Query` or `Mutation` (default mutation).    |
 | [`--permissions`](#--permissions)            | Required. `role:actions` for a single role.                          |
-| [`--policy-database`](#--policy-database)    | OData-style filter applied in DB query.                              |
-| [`--policy-request`](#--policy-request)      | Request policy evaluated before DB call.                             |
+| [`--policy-database`](#--policy-database)    | OData-style filter applied in database query.                        |
+| [`--policy-request`](#--policy-request)      | Request policy evaluated before database call.                       |
 | [`--parameters.name`](#--parametersname)     | Stored procedures only. Parameter names (comma-separated).           |
 | [`--parameters.description`](#--parametersdescription) | Stored procedures only. Parameter descriptions.              |
 | [`--parameters.required`](#--parametersrequired) | Stored procedures only. Parameter required flags.                 |
@@ -51,7 +51,7 @@ dab add <entity-name> [options]
 | [`--rest.methods`](#--restmethods)           | Stored procedures only. Allowed verbs: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`. Default POST. |
 | [`-s, --source`](#-s---source)               | Required. Database object name (table, view, or stored procedure).   |
 | [`--source.type`](#--sourcetype)             | Source type: `table`, `view`, `stored-procedure` (default table).    |
-| [`--mcp.dml-tools`](#--mcpdml-tools)        | Enable/disable DML tools for entity in MCP. Default `true`.         |
+| [`--mcp.dml-tools`](#--mcpdml-tools)        | Enable/disable data manipulation language (DML) tools for entity in Model Context Protocol (MCP). Default `true`. |
 | [`--mcp.custom-tool`](#--mcpcustom-tool)    | Stored procedures only. Register as a named MCP tool.               |
 | [`--help`](#--help)                          | Display this help screen.                                            |
 | [`--version`](#--version)                    | Display version information.                                         |
@@ -520,7 +520,7 @@ dab add BookProc ^
 
 Defines role→actions pairs.
 
-`--permissions` isn't repeatable. To add more roles, run `dab add` with one role and then run `dab update` for additional roles.
+`--permissions` isn't repeatable. To add more roles, run `dab add` with one role and then run `dab update` for more roles.
 
 ### Example
 
@@ -1151,7 +1151,7 @@ dab add Book ^
 Enable or disable DML tools for this entity in MCP. Default: `true`. When set to `false`, the entity is excluded from the MCP DML tool surface. When `mcp` is omitted entirely, DML tools are enabled by default.
 
 > [!TIP]
-> For more details on MCP configuration in DAB 2.0, see [What's new in version 2.0](../whats-new/version-2-0.md).
+> For more information on MCP configuration in DAB 2.0, see [What's new in version 2.0](../whats-new/version-2-0.md).
 
 ### Example
 

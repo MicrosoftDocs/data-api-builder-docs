@@ -124,7 +124,7 @@ Data API builder supports multiple configuration files, with one designated as t
 * Every configuration file must include the `data-source` property.
 * Every configuration file must include the `entities` property (or `autoentities`).
 * The top-level configuration must include `runtime`.
-* Child configurations can include `runtime`, but it's ignored.
+* Child configurations can include `runtime`, but DAB ignores it.
 * Child configuration files can include their own child files.
 * Configuration files can be organized into subfolders.
 * Entity names must be unique across all configuration files.
@@ -192,24 +192,24 @@ When `autoentities` is present, the `entities` section is no longer required. Th
 
 | Property | Type | Required | Default | Description |
 | - | - | - | - | - |
-| `patterns` | object | ✔️ Yes | — | Defines include, exclude, and naming rules. |
+| `patterns` | object | ✔️ Yes |—| Defines include, exclude, and naming rules. |
 | `patterns.include` | string array | ❌ No | `["%.%"]` | MSSQL `LIKE` patterns for objects to include. |
 | `patterns.exclude` | string array | ❌ No | `null` | MSSQL `LIKE` patterns for objects to exclude. |
 | `patterns.name` | string | ❌ No | `"{object}"` | Interpolation pattern using `{schema}` and `{object}`. |
-| `template` | object | ❌ No | — | Default configuration applied to all matched entities. |
-| `template.mcp` | object | ❌ No | — | MCP settings for matched entities. |
-| `template.mcp.dml-tools` | boolean | ❌ No | `true` | Enable MCP DML tools. |
-| `template.rest` | object | ❌ No | — | REST settings for matched entities. |
+| `template` | object | ❌ No |—| Default configuration applied to all matched entities. |
+| `template.mcp` | object | ❌ No |—| Model Context Protocol (MCP) settings for matched entities. |
+| `template.mcp.dml-tools` | boolean | ❌ No | `true` | Enable MCP data manipulation language (DML) tools. |
+| `template.rest` | object | ❌ No |—| REST settings for matched entities. |
 | `template.rest.enabled` | boolean | ❌ No | `true` | Enable REST endpoints. |
-| `template.graphql` | object | ❌ No | — | GraphQL settings for matched entities. |
+| `template.graphql` | object | ❌ No |—| GraphQL settings for matched entities. |
 | `template.graphql.enabled` | boolean | ❌ No | `true` | Enable GraphQL. |
-| `template.health` | object | ❌ No | — | Health-check settings for matched entities. |
+| `template.health` | object | ❌ No |—| Health-check settings for matched entities. |
 | `template.health.enabled` | boolean | ❌ No | `false` | Enable health checks. |
-| `template.cache` | object | ❌ No | — | Cache settings for matched entities. |
+| `template.cache` | object | ❌ No |—| Cache settings for matched entities. |
 | `template.cache.enabled` | boolean | ❌ No | `false` | Enable response caching. |
 | `template.cache.ttl-seconds` | integer | ❌ No | `null` | Cache time-to-live in seconds. |
 | `template.cache.level` | string | ❌ No | `"L1L2"` | Cache level. |
-| `permissions` | array | ❌ No | — | Permissions applied to all matched entities. |
+| `permissions` | array | ❌ No |—| Permissions applied to all matched entities. |
 
 ### Example
 
@@ -235,7 +235,7 @@ When `autoentities` is present, the `entities` section is no longer required. Th
 }
 ```
 
-With this configuration, every table and view in the `dbo` schema (except those matching `dbo.internal%`) is automatically exposed as a DAB entity. Each entity is named using the `{schema}_{object}` pattern (for example, `dbo_Products`), has REST and GraphQL enabled, uses caching with a 30-second TTL, and grants `read` access to the `anonymous` role.
+With this configuration, every table and view in the `dbo` schema (except those matching `dbo.internal%`) is automatically exposed as a DAB entity. Each entity is named using the `{schema}_{object}` pattern (for example, `dbo_Products`), has REST and GraphQL enabled, uses caching with a 30-second time to live (TTL), and grants `read` access to the `anonymous` role.
 
 > [!TIP]
 > Use [`dab auto-config`](../concept/config/dab-auto-config.md) to create autoentities definitions from the CLI, and [`dab auto-config-simulate`](../concept/config/dab-auto-config-simulate.md) to preview which objects match before committing changes. For more information, see [what's new in version 2.0](../whats-new/version-2-0.md).
