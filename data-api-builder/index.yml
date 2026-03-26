@@ -62,6 +62,8 @@ landingContent:
             url: quickstart/postgresql.md
           - text: DAB with MySQL
             url: quickstart/mysql.md
+          - text: DAB with local Cosmos DB emulator
+            url: quickstart/nosql.md
       - linkListType: video
         links:
           - text: DAB basics 101
@@ -102,18 +104,8 @@ landingContent:
         links:
           - text: Samples
             url: https://github.com/Azure-Samples/data-api-builder
-  - title: Developer Reference
+  - title: Database
     linkLists:
-      - linkListType: reference
-        links:
-          - text: Configuration syntax
-            url: configuration/index.md
-          - text: Feature availability
-            url: feature-availability.md
-          - text: Code Policies
-            url: reference-policies.md
-          - text: Aggregate data with GraphQL
-            url: concept/database/aggregate-data.md
       - linkListType: concept
         links:
           - text: Database Views
@@ -122,26 +114,50 @@ landingContent:
             url: concept/database/stored-procedures.md
           - text: Table Relationships
             url: concept/database/relationships.md
+          - text: Configure query timeout
+            url: concept/database/timeout.md
       - linkListType: how-to-guide
         links:
           - text: Set up Azure Cosmos DB
             url: concept/database/set-up-cosmosdb.md
+          - text: Aggregate data with GraphQL
+            url: concept/database/aggregate-data.md
+      - linkListType: reference
+        links:
+          - text: Feature availability
+            url: feature-availability.md
+          - text: Code Policies
+            url: reference-policies.md
       - linkListType: sample
         links:
-          - text: Library app sample with Data API builder, SQL Server, and Blazor
+          - text: Library app with Blazor and Azure SQL
             url: /samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
-          - text: Todo app sample with Data API builder and Azure SQL
+          - text: Todo app with Azure SQL
             url: /samples/azure-samples/dab-swa-todo/sample
-          - text: Library app sample with Data API builder and Azure SQL
-            url: /samples/azure-samples/dab-swa-library-demo/sample
-          - text: Sample devcontainer for Data API builder and Azure SQL Database
+          - text: Devcontainer for Azure SQL
             url: /samples/microsoft/vscode-remote-try-dab/devcontainer
+  - title: Deployment
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: Deployment overview
+            url: deployment/overview.md
       - linkListType: deploy
         links:
+          - text: Azure Container Apps (Portal)
+            url: deployment/azure-container-apps.md
+          - text: Azure Container Apps (CLI)
+            url: tutorial-deploy-container-app-cli.md
           - text: Azure Container Instances
             url: deployment/azure-container-instances.md
-          - text: Azure Container Apps
-            url: deployment/azure-container-apps.md
+          - text: Azure Kubernetes Service
+            url: deployment/azure-kubernetes-service.md
+      - linkListType: how-to-guide
+        links:
+          - text: Run in a local container
+            url: deployment/local-container.md
+          - text: Run from source
+            url: deployment/run-from-source.md
   - title: REST API
     linkLists:
       - linkListType: concept  
@@ -160,41 +176,65 @@ landingContent:
             url: concept/cache/http-headers.md
       - linkListType: reference
         links:
-          - text: Field projection
+          - text: Field projection ($select)
             url: keywords/select-rest.md
-          - text: Pagination
+          - text: Pagination ($after)
             url: keywords/after-rest.md
-          - text: Record filtering
+          - text: Record filtering ($filter)
             url: keywords/filter-rest.md
+          - text: Limit results ($first)
+            url: keywords/first-rest.md
+          - text: Sort results ($orderby)
+            url: keywords/orderby-rest.md
   - title: GraphQL API
     linkLists:
       - linkListType: concept  
         links:
           - text: GraphQL endpoints
             url: concept/api/graphql.md
-          - text: OpenAPI documents
-            url: concept/api/openapi.md
+          - text: Multiple mutations
+            url: concept/api/multiple-mutations.md
+          - text: Aggregate data
+            url: concept/database/aggregate-data.md
       - linkListType: reference
         links:
-          - text: Field projection
+          - text: Field projection (select)
             url: keywords/select-graphql.md
-          - text: Pagination
+          - text: Pagination (after)
             url: keywords/after-graphql.md
-          - text: Record filtering
+          - text: Record filtering (filter)
             url: keywords/filter-graphql.md
+          - text: Limit results (first)
+            url: keywords/first-graphql.md
+          - text: Sort results (orderby)
+            url: keywords/orderby-graphql.md
   - title: Configuration File
     linkLists:
       - linkListType: concept
         links:
           - text: Schema Reference
             url: configuration/index.md
+          - text: Entity configuration
+            url: configuration/entities.md
+          - text: Runtime configuration
+            url: configuration/runtime.md
+          - text: Data source configuration
+            url: configuration/data-source.md
+      - linkListType: how-to-guide
+        links:
           - text: File Environments
             url: concept/config/environments.md
           - text: Env() Function
             url: concept/config/env-function.md
+          - text: Akv() Function
+            url: concept/config/akv-function.md
+          - text: Auto configuration
+            url: concept/config/auto-config.md
           - text: Multiple Data Sources
             url: concept/config/multi-data-source.md
-          - text: Best Practices
+      - linkListType: reference
+        links:
+          - text: Configuration best practices
             url: concept/config/best-practices.md
   - title: Command Line
     linkLists:
@@ -210,6 +250,10 @@ landingContent:
         links:
           - text: dab add
             url: command-line/dab-add.md
+          - text: dab auto-config
+            url: command-line/dab-auto-config.md
+          - text: dab auto-config-simulate
+            url: command-line/dab-auto-config-simulate.md
           - text: dab configure 
             url: command-line/dab-configure.md
           - text: dab export 
@@ -248,6 +292,8 @@ landingContent:
         links:
           - text: Application Insights
             url: concept/monitor/application-insights.md
+          - text: Log Analytics
+            url: concept/monitor/log-analytics.md
           - text: Health Checks
             url: concept/monitor/health-checks.md
           - text: Log Levels
@@ -262,16 +308,22 @@ landingContent:
             url: concept/security/index.md
           - text: Authorization and roles
             url: concept/security/authorization.md
+          - text: Database policies
+            url: concept/security/database-policies.md
       - linkListType: how-to-guide
         links:
           - text: Configure Entra ID authentication
             url: concept/security/authenticate-entra.md
-          - text: Configure custom JSON Web Token (JWT) authentication (Okta/Auth0)
+          - text: Configure custom JWT authentication (Okta/Auth0)
             url: concept/security/authenticate-custom.md
           - text: Configure App Service authentication
-            url: concept/security/authenticate-app-service.md
+            url: concept/security/authenticate-easy-auth.md
           - text: Configure Simulator for testing
             url: concept/security/authenticate-simulator.md
+          - text: Configure Unauthenticated provider
+            url: concept/security/authenticate-unauthenticated.md
+          - text: Configure On-Behalf-Of (OBO)
+            url: concept/security/authenticate-on-behalf-of.md
           - text: Implement row-level security
             url: concept/security/row-level-security.md
       - linkListType: reference

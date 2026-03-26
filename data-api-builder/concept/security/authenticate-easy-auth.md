@@ -20,7 +20,7 @@ Azure App Service provides built-in authentication (often called "EasyAuth") tha
 
 When Data API builder runs behind Azure App Service with authentication enabled, App Service handles the OAuth flow and passes identity information via HTTP headers:
 
-![Illustration of the App Service authentication flow showing how EasyAuth injects identity headers.](media/authenticate-app-service/sequence-app-service.svg)
+![Illustration of the App Service authentication flow showing how EasyAuth injects identity headers.](media/authenticate-easy-auth/sequence-app-service.svg)
 
 | Phase | What happens |
 |-------|--------------|

@@ -20,7 +20,7 @@ During development, you can test authentication and authorization without config
 | Provider | Best for | Notes |
 |----------|----------|-------|
 | **Simulator** | Quick permission testing | Development-only. Treats every request as authenticated. Defaults to `Authenticated` role; override with `X-MS-API-ROLE`. |
-| **AppService** | Claim-driven testing | Simulate EasyAuth locally by sending `X-MS-CLIENT-PRINCIPAL` with custom claims. For details, see [Configure App Service authentication](authenticate-app-service.md). |
+| **AppService** | Claim-driven testing | Simulate EasyAuth locally by sending `X-MS-CLIENT-PRINCIPAL` with custom claims. For details, see [Configure App Service authentication](authenticate-easy-auth.md). |
 
 ## Authentication flow
 
@@ -258,7 +258,7 @@ The Simulator provider has these limitations:
 | Development mode only | Use a real provider in production |
 
 > [!TIP]
-> If you need to test database policies that use claims (like `@claims.userId`), use the [AppService provider](authenticate-app-service.md) instead. It lets you provide custom claims via the `X-MS-CLIENT-PRINCIPAL` header.
+> If you need to test database policies that use claims (like `@claims.userId`), use the [AppService provider](authenticate-easy-auth.md) instead. It lets you provide custom claims via the `X-MS-CLIENT-PRINCIPAL` header.
 
 ## Transition to production
 
@@ -331,6 +331,6 @@ When you're ready to deploy, replace the Simulator provider with a production pr
 ## Related content
 
 - [Authorization and roles](authorization.md)
-- [Configure App Service authentication](authenticate-app-service.md)
+- [Configure App Service authentication](authenticate-easy-auth.md)
 - [Configure Microsoft Entra ID authentication](authenticate-entra.md)
 - [Runtime configuration reference](../../configuration/runtime.md)

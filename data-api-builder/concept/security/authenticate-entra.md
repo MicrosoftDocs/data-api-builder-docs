@@ -25,7 +25,7 @@ Choose a guide based on your identity provider:
 |----------|-------|
 | Microsoft Entra ID | This article |
 | Okta, Auth0, or other | [Configure custom JWT authentication](authenticate-custom.md) |
-| Azure App Service | [Configure App Service authentication](authenticate-app-service.md) |
+| Azure App Service | [Configure App Service authentication](authenticate-easy-auth.md) |
 | Local testing | [Configure Simulator authentication](authenticate-simulator.md) |
 
 ## Authentication flow
@@ -496,5 +496,5 @@ Data API builder determines the request's role using this logic:
 
 - [Authorization and roles](authorization.md)
 - [Configure Simulator authentication for testing](authenticate-simulator.md)
-- [Configure App Service authentication](authenticate-app-service.md)
+- [Configure App Service authentication](authenticate-easy-auth.md)
 - [Runtime configuration reference](../../configuration/runtime.md)

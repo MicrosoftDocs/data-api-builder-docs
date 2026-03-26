@@ -13,7 +13,7 @@ ms.date: 01/22/2026
 
 Data API builder supports **database policies** that filter query results based on expressions you define. These policies translate to query predicates (WHERE clauses) that the database evaluates, ensuring users see only the data they're authorized to access.
 
-![A sequence diagram showing the application of policies.](media/configure-database-policies/policy-flow.svg)
+![A sequence diagram showing the application of policies.](media/database-policies/policy-flow.svg)
 
 ## When to use database policies
 

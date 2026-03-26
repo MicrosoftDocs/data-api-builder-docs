@@ -522,7 +522,7 @@ Database policies filter query results using OData-style predicates. Use `@item.
 | Not supported | `create`, `execute` |
 
 > [!TIP]
-> For comprehensive guidance on database policies, including claim substitution and troubleshooting, see [Configure database policies](../concept/security/configure-database-policies.md).
+> For comprehensive guidance on database policies, including claim substitution and troubleshooting, see [Configure database policies](../concept/security/database-policies.md).
 
 ## Type (GraphQL entity-name entities)
 

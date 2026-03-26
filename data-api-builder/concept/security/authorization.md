@@ -281,7 +281,7 @@ The following example prevents users in the `free-access` role from performing r
 > [!NOTE]
 > Azure Cosmos DB for NoSQL doesn't currently support database policies.
 
-For detailed configuration steps, syntax reference, and examples, see [Configure database policies](configure-database-policies.md).
+For detailed configuration steps, syntax reference, and examples, see [Configure database policies](database-policies.md).
 
 ##### Quick example
 
@@ -301,6 +301,6 @@ For detailed configuration steps, syntax reference, and examples, see [Configure
 
 ## Related content
 
-- [Configure database policies for row-level filtering](configure-database-policies.md)
+- [Configure database policies for row-level filtering](database-policies.md)
 - [Configure Microsoft Entra ID authentication](authenticate-entra.md)
 - [Configure Simulator authentication for local testing](authenticate-simulator.md)
