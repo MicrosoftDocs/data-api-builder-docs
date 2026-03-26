@@ -1,5 +1,5 @@
 ---
-title: What's new for version 2.0
+title: What's new for version 2.0 - Preview
 description: Release notes with new features, bug fixes, and updates listed for the Data API builder version 2.0.
 author: jerrynixon
 ms.author: jnixon
@@ -11,11 +11,10 @@ ms.date: 03/24/2026
 
 # What's new in Data API builder version 2.0 (March 2026)
 
-Data API builder 2.0 focuses on Model Context Protocol (MCP) and AI integration, simpler authentication defaults, and better configuration automation. This release also brings stronger observability and more flexible REST and OpenAPI behavior.
-
 > [!NOTE]
 > Version 2.0 is in public preview. Some features may not yet be recommended for production use. Refer to the documentation for details on feature availability and stability.
 
+Data API builder 2.0 focuses on Model Context Protocol (MCP) and AI integration, simpler authentication defaults, and better configuration automation. This release also brings stronger observability and more flexible REST and OpenAPI behavior.
 
 ## Introducing: the new `Unauthenticated` provider
 

@@ -1,6 +1,6 @@
 - name: Overview
   href: index.yml
-- name: DAB 2.0 (GA)
+- name: DAB 2.0 (Preview)
   href: version-2-0.md
 - name: DAB 1.7 (Feature release)
   href: version-1-7.md
