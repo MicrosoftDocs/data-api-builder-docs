@@ -14,7 +14,7 @@ ms.date: 03/24/2026
 Data API builder 2.0 focuses on Model Context Protocol (MCP) and AI integration, simpler authentication defaults, and better configuration automation. This release also brings stronger observability and more flexible REST and OpenAPI behavior.
 
 > [!NOTE]
-> In the month of March 2026, we are in a public preview phase for version 2.0. During this time, we encourage you to try out the new features and provide feedback. Some features may be in preview and not yet recommended for production use. Please refer to the documentation for details on feature availability and stability.
+> Version 2.0 is in public preview. Some features may not yet be recommended for production use. Refer to the documentation for details on feature availability and stability.
 
 
 ## Introducing: the new `Unauthenticated` provider
@@ -121,7 +121,7 @@ DAB 2.0 adds On-Behalf-Of (OBO) authentication, sometimes referred to as pass-th
 
 ### Why?
 
-With OBO authentication, you can build APIs where the SQL database sees and enforces the real user identity, which can be helpful for some row-level security scenarios and compliance auditing. This is especially valuable in MCP scenarios where it can become unclear who is acting; OBO allows for transparent user identification. 
+With OBO authentication, you can build APIs where the SQL database sees and enforces the real user identity, which can be helpful for some row-level security scenarios and compliance auditing. This is especially valuable in MCP scenarios where it can become unclear who is acting; OBO allows for transparent user identification.
 
 ### Prerequisites for OBO
 
@@ -188,7 +188,7 @@ dab configure --data-source.user-delegated-auth.database-audience "https://datab
 Auto configuration is a powerful feature that allows you to define patterns that automatically find and expose database objects in your configuration. This can dramatically shrink a configuration file, especially when objects and permissions are predictable. In addition, `autoentities` reevaluate and apply the patterns each time DAB starts, so new tables that match the pattern are automatically added as entities without manual config changes.
 
 > [!NOTE]
-> In version 2.0, `dab auto-config` supports only tables in a one or more Microsoft SQL database. If you need another data source or database type, you can still [define your entities manually](../command-line/dab-add.md). That said, view and stored procedure support are on the roadmap for future releases.
+> In version 2.0, `dab auto-config` supports only tables in one or more Microsoft SQL databases. If you need another data source or database type, you can still [define your entities manually](../command-line/dab-add.md).
 
 ### Why?
 
@@ -196,7 +196,7 @@ With `auto-config`, you can wire up an entire database schema as a DAB API witho
 
 It's worth noting that `autoentities` are not a shift in DAB to a schema-driven API. The problem with schema-driven APIs is that they leak the schema and place a burden on the database to conform to the API instead of a well-designed store. `Autoentities` solve this by letting you define patterns that match your database schema and automatically generate a subset of entities from those patterns. In addition, you can define multiple `autoentities` with unique patterns and permissions, participate in MCP, and more, all without manual config updates as your database evolves.
 
-### Command-line
+### Command line
 
 ```bash
 dab auto-config my-def \
@@ -278,8 +278,8 @@ my-def,dbo_Pricing,dbo.Pricing
 ### Read the docs
 
 - [`Autoentities` configuration](../configuration/autoentities.md)
-- [`dab auto-config` command reference](../concept/config/dab-auto-config.md)
-- [`dab auto-config-simulate` command reference](../concept/config/dab-auto-config.md#auto-config-simulate-command)
+- [`dab auto-config` command reference](../command-line/dab-auto-config.md)
+- [`dab auto-config-simulate` command reference](../command-line/dab-auto-config-simulate.md)
 
 ## Default OpenTelemetry settings in `dab init`
 
@@ -319,7 +319,7 @@ Now, you can give AI agents purpose-built tools backed by your existing stored p
 
 ### Command line
 
-```
+```bash
 dab add GetBookById \
   --source dbo.get_book_by_id \
   --source.type "stored-procedure" \
@@ -387,7 +387,7 @@ Entity REST paths can now include forward slashes, allowing subdirectory-style U
 
 ### Why?
 
-Now, you can group related entities under a shared path prefix, making your REST API feel more naturally organized without any router configuration. This can be particularly helpful for multi-tenant scenarios where a tenant ID segment can segment endpoints with the same name, like `/api/shopping-cart/item` and `/api/invoice/items`, which would previously have required paths.
+Now, you can group related entities under a shared path prefix, making your REST API feel more naturally organized without any router configuration. This can be particularly helpful for multi-tenant scenarios where a tenant ID segment can segment endpoints with the same name, like `/api/shopping-cart/item` and `/api/invoice/items`, which would previously have required unique entity names.
 
 ### Command line
 
@@ -460,7 +460,7 @@ dab configure --runtime.compression.level "optimal"
 
 ## Keyless `PUT` and `PATCH` for autogenerated keys
 
-DAB 2.0 allows `PUT` and `PATCH` requests without a key in the URL when the database autogenerates all omitted key columns.With keyless upserts, you can insert a new row with a server-generated key using the same upsert semantics you're used to—no need to pregenerate or supply the key yourself.
+DAB 2.0 allows `PUT` and `PATCH` requests without a key in the URL when the database autogenerates all omitted key columns. With keyless upserts, you can insert a new row with a server-generated key using the same upsert semantics you're used to—no need to pregenerate or supply the key yourself.
 
 ### Read the docs
 
