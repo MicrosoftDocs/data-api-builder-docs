@@ -12,8 +12,7 @@ ms.date: 03/24/2026
 
 # OpenAPI in Data API builder
 
-> [!TIP]
-> This feature is new or updated in Data API builder 2.0. For more information, see [What's new in version 2.0](../../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../../includes/note-dab-2-preview.md)]
 
 The OpenAPI specification is a language-agnostic standard for documenting HTTP APIs. Data API builder supports OpenAPI by:
 

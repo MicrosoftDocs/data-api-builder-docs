@@ -94,7 +94,7 @@ landingContent:
             url: https://aka.ms/dab/issues
           - text: Feature Backlog
             url: https://aka.ms/dab/backlog
-          - text: Open-source software (OSS) license
+          - text: Open source software (OSS) license
             url: https://github.com/Azure/data-api-builder/blob/main/LICENSE.txt
           - text: Discussions
             url: https://github.com/Azure/data-api-builder/discussions

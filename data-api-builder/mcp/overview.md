@@ -11,7 +11,7 @@ ms.date: 03/24/2026
 
 [!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
-SQL MCP Server gives developers a simple, predictable, and secure way to bring AI agents into their data workflows. SQL MCP Server accomplishes this goal without exposing the database or relying on fragile natural language parsing. By building on Data API builder's [entity abstraction](../configuration/entities.md), [RBAC](../concept/security/authorization.md), [caching](/azure/data-api-builder/concept/cache/level-1), and telemetry, the server delivers a production-ready surface that works the same across REST, GraphQL, and MCP. You configure it once, and the engine handles the rest.
+SQL MCP Server gives developers a simple, predictable, and secure way to bring AI agents into their data workflows. SQL MCP Server accomplishes this goal without exposing the database or relying on fragile natural language parsing. The server builds on Data API builder's [entity abstraction](../configuration/entities.md), [RBAC](../concept/security/authorization.md), [caching](/azure/data-api-builder/concept/cache/level-1), and telemetry to deliver a production-ready surface that works the same across REST, GraphQL, and MCP. You configure it once, and the engine handles the rest.
 
 ![Diagram showing how SQL MCP Server connects AI agents to SQL databases through the Data API builder abstraction layer.](media/overview/architecture-summary.svg)
 
@@ -234,8 +234,7 @@ For stored-procedure entities, you can also enable `custom-tool` to register the
 
 When `custom-tool` is `true`, SQL MCP Server registers the stored procedure as a named tool via `tools/list` and `tools/call`, allowing agents to discover and invoke it directly by name. The `custom-tool` property is only valid for stored-procedure entities.
 
-> [!TIP]
-> For more information on entity-level MCP configuration, see [What's new in version 2.0](../whats-new/version-2-0.md).
+[!INCLUDE[Note - SQL MCP Server 2.0 preview](includes/note-sql-mcp-server-2-preview.md)]
 
 ## The DML tools
 
@@ -251,8 +250,7 @@ In addition to the built-in DML tools, SQL MCP Server supports custom MCP tools 
 
 MCP tool execution is fully instrumented with OpenTelemetry (OTEL) spans. Each MCP tool call generates trace data alongside REST and GraphQL operations, enabling unified observability across all API surfaces. Learn more about [OpenTelemetry tracing](../concept/monitor/open-telemetry.md).
 
-> [!TIP]
-> For a complete list of DAB 2.0 features, see [What's new in version 2.0](../whats-new/version-2-0.md).
+[!INCLUDE[Note - SQL MCP Server 2.0 preview](includes/note-sql-mcp-server-2-preview.md)]
 
 ## Related content
 

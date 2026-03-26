@@ -14,11 +14,7 @@ ms.date: 03/24/2026
 
 Preview which database objects match the `autoentities` patterns defined in your Data API builder configuration file. The command connects to the database, resolves each pattern, and prints the matched objects. No changes are written to the configuration.
 
-> [!TIP]
-> For in-depth explanations and conceptual guidance, see [Auto configuration concepts](../concept/config/auto-config.md#simulation). For the JSON configuration reference, see [`Autoentities` configuration](../configuration/autoentities.md).
-
-> [!IMPORTANT]
-> `dab auto-config-simulate` currently supports **MSSQL** data sources only.
+See [Auto configuration concepts](../concept/config/auto-config.md#simulation). 
 
 ## Syntax
 
@@ -57,7 +53,7 @@ dab auto-config-simulate ^
 
 ## `-o, --output`
 
-Path to output CSV file. If not specified, results are printed to the console. The CSV includes columns for the filter name, entity name, and database object.
+Path to output CSV (Comma Separated Values) file. If not specified, results are printed to the console. The CSV includes columns for the filter name, entity name, and database object. This approach is handy when you want to programmatically analyze the results in a CICD (Continuous Integration/Continuous Deployment) pipeline or elsewhere.
 
 ### Example
 

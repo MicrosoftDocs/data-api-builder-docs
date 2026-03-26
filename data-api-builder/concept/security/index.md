@@ -30,7 +30,7 @@ Data API builder supports multiple authentication providers. Choose the one that
 
 | Provider | Use case | Guide |
 |----------|----------|-------|
-| **Unauthenticated** | DAB sits behind a trusted front end that handles identity (default) | — |
+| **Unauthenticated** | DAB sits behind a trusted front end that handles identity (default) | [Configure the Unauthenticated provider](how-to-authenticate-unauthenticated.md) |
 | **Microsoft Entra ID** (`EntraID`/`AzureAD`) | Production apps using Microsoft identity | [Configure Microsoft Entra authentication](how-to-authenticate-entra.md) |
 | **Custom JSON Web Token (JWT)** | Third-party IdPs (Okta, Auth0, Keycloak) | [Configure custom JWT authentication](how-to-authenticate-custom.md) |
 | **App Service** | Apps running behind Azure App Service EasyAuth (platform headers) | [Configure App Service authentication](how-to-authenticate-app-service.md) |
@@ -38,8 +38,7 @@ Data API builder supports multiple authentication providers. Choose the one that
 | **OBO (user-delegated)** | SQL databases that require the real user identity (row-level security, auditing) | [Configure OBO authentication](how-to-authenticate-on-behalf-of.md) |
 | **Static Web Apps** | Apps fronted by Static Web Apps (SWA) auth headers | [Configure App Service authentication](how-to-authenticate-app-service.md)
 
-> [!TIP]
-> The default provider changed to `Unauthenticated` in version 2.0. For more information, see [what's new](../../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../../includes/note-dab-2-preview.md)]
 
 ## Authentication
 
@@ -62,7 +61,7 @@ Authentication verifies the caller's identity. Data API builder authenticates re
 | `runtime.host.authentication.jwt.audience` | Expected audience claim for JWT providers (not used by AppService/StaticWebApps/Simulator/Unauthenticated) |
 | `runtime.host.authentication.jwt.issuer` | Expected issuer/authority for JWT providers (not used by AppService/StaticWebApps/Simulator/Unauthenticated) |
 
-For detailed configuration, see [Configure Microsoft Entra ID authentication](how-to-authenticate-entra.md).
+For provider-specific configuration, see the authentication guides in this section.
 
 ## Authorization
 
@@ -151,6 +150,7 @@ For details, see [Security best practices](../../deployment/best-practices-secur
 
 | Task | Guide |
 |------|-------|
+| Use a trusted front end without JWT validation in DAB | [Configure the Unauthenticated provider](how-to-authenticate-unauthenticated.md) |
 | Set up Microsoft Entra ID authentication | [Configure Microsoft Entra authentication](how-to-authenticate-entra.md) |
 | Use Okta or Auth0 | [Configure custom JWT authentication](how-to-authenticate-custom.md) |
 | Run behind Azure App Service | [Configure App Service authentication](how-to-authenticate-app-service.md) |
@@ -160,6 +160,7 @@ For details, see [Security best practices](../../deployment/best-practices-secur
 
 ## Related content
 
+- [Configure the Unauthenticated provider](how-to-authenticate-unauthenticated.md)
 - [Configure Microsoft Entra ID authentication](how-to-authenticate-entra.md)
 - [Authorization and roles](authorization.md)
 - [Security best practices](../../deployment/best-practices-security.md)

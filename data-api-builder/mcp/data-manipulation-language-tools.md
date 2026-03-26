@@ -27,8 +27,7 @@ The seven DML tools are:
 - `execute_entity` - Runs stored procedures
 - `aggregate_records` - Performs aggregation queries
 
-> [!TIP]
-> For a complete list of DAB 2.0 features, see [What's new in version 2.0](../whats-new/version-2-0.md).
+[!INCLUDE[Note - SQL MCP Server 2.0 preview](includes/note-sql-mcp-server-2-preview.md)]
 
 When DML tools are enabled globally and for an entity, SQL MCP Server exposes them through the MCP protocol. Agents never interact directly with your database schema - they work through the Data API builder abstraction layer.
 

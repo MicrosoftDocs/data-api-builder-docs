@@ -52,8 +52,7 @@ Each entity must also opt in to use cache:
 
 See [entity cache settings](../../configuration/entities.md#cache-entity-name-entities).
 
-> [!TIP]
-> The `level` property was introduced in version 2.0. For more information, see [what's new](../../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../../includes/note-dab-2-preview.md)]
 
 ## Behavior
 

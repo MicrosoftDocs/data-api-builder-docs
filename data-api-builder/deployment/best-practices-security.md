@@ -66,12 +66,12 @@ TLS 1.2 is enabled by default on the latest versions of .NET and many of the lat
 
 ## Configure authentication for production
 
-Starting in DAB 2.0, the default authentication provider is `Unauthenticated`. This means DAB doesn't inspect or validate any JSON Web Token (JWT), and all requests run as `anonymous`. This configuration is appropriate when DAB sits behind a trusted front end (such as Azure API Management or an application gateway) that handles authentication upstream.
+Starting in DAB 2.0, which is currently in preview, the default authentication provider is `Unauthenticated`. This means DAB doesn't inspect or validate any JSON Web Token (JWT), and all requests run as `anonymous`. Another service in front of DAB can authenticate callers or restrict access, but DAB still authorizes only as `anonymous`.
 
 > [!IMPORTANT]
 > If you expose DAB directly to clients, configure a production-grade authentication provider (such as `EntraID` or `Custom`) rather than relying on `Unauthenticated`. When `Unauthenticated` is active, `authenticated` and custom roles defined in entity permissions are never activated.
 
-For more information, see [runtime authentication configuration](../configuration/runtime.md#provider-authentication-host-runtime).
+For more information, see [Configure the Unauthenticated provider](../concept/security/how-to-authenticate-unauthenticated.md) and [runtime authentication configuration](../configuration/runtime.md#provider-authentication-host-runtime).
 
 ### On-Behalf-Of (OBO) user-delegated authentication
 

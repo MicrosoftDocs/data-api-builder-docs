@@ -18,6 +18,22 @@ landingContent:
     links:
     - text: Release notes
       url: version-2-0.md
+    - text: "Introducing: Auto configuration"
+      url: version-2-0.md#introducing-auto-configuration
+    - text: "Introducing: On-Behalf-Of (OBO) user-delegation"
+      url: version-2-0.md#introducing-on-behalf-of-obo-user-delegation
+    - text: "Introducing: Custom MCP tools"
+      url: version-2-0.md#introducing-custom-mcp-tools
+    - text: "Introducing: the Unauthenticated provider"
+      url: version-2-0.md#introducing-the-new-unauthenticated-provider
+    - text: "Introducing: Role inheritance"
+      url: version-2-0.md#introducing-role-inheritance
+    - text: "Enhancement: Advanced REST paths"
+      url: version-2-0.md#introducing-advanced-rest-paths
+    - text: "Enhancement: Permission-aware OpenAPI"
+      url: version-2-0.md#introducing-permission-aware-openapi
+    - text: "Enhancement: OpenTelemetry defaults and tracing"
+      url: version-2-0.md#default-opentelemetry-settings-in-dab-init
 - title: Version 1.7
   linkLists:
   - linkListType: whats-new

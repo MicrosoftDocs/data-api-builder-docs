@@ -11,6 +11,8 @@ ms.date: 03/24/2026
 
 [!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
+[!INCLUDE[Note - SQL MCP Server 2.0 preview](includes/note-sql-mcp-server-2-preview.md)]
+
 SQL MCP Server exposes a Model Context Protocol (MCP) endpoint in Data API builder. Some authentication options use JSON Web Tokens (JWTs).
 
 When you connect a client (for example, a Microsoft AI Foundry agent) to SQL MCP Server, authentication becomes a two-direction setup:
@@ -141,6 +143,8 @@ After you configure Foundry, you must configure SQL MCP Server to accept the sam
 
 #### Unauthenticated
 Starting in DAB 2.0, the default authentication provider is `Unauthenticated`. Configure SQL MCP Server to treat requests as `anonymous` by using the default `Unauthenticated` provider (or set `provider: AppService`) and grant only the `anonymous` permissions you intend.
+
+For the underlying DAB authentication behavior, see [Configure the Unauthenticated provider](../concept/security/how-to-authenticate-unauthenticated.md).
 
 ![Diagram showing the Foundry unauthenticated authentication flow.](media/how-to-configure-authentication/foundry-unauthenticated.svg)
 

@@ -275,8 +275,7 @@ dab add Book ^
 
 Free-text description of the entity.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -552,8 +551,7 @@ dab update Book ^
 
 Stored procedures only. Comma-separated list of parameter names.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -635,8 +633,7 @@ dab add GetOrdersByDateRange ^
 
 Stored procedures only. Comma-separated list of parameter descriptions aligned to `--parameters.name`.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -668,8 +665,7 @@ dab add GetOrdersByDateRange ^
 
 Stored procedures only. Comma-separated list of `true`/`false` values aligned to `--parameters.name`.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -701,8 +697,7 @@ dab add GetOrdersByDateRange ^
 
 Stored procedures only. Comma-separated list of default values aligned to `--parameters.name`.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -734,8 +729,7 @@ dab add GetOrdersByDateRange ^
 
 Name of the database column to describe.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -798,8 +792,7 @@ dab add Products ^
 
 Alias for the field. Use a comma-separated list aligned to `--fields.name`.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -829,8 +822,7 @@ dab add Products ^
 
 Description for the field. Use a comma-separated list aligned to `--fields.name`.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -860,8 +852,7 @@ dab add Products ^
 
 Primary key flag for the field. Use a comma-separated list of `true`/`false` values aligned to `--fields.name`.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -1150,8 +1141,7 @@ dab add Book ^
 
 Enable or disable DML tools for this entity in MCP. Default: `true`. When set to `false`, the entity is excluded from the MCP DML tool surface. When `mcp` is omitted entirely, DML tools are enabled by default.
 
-> [!TIP]
-> For more information on MCP configuration in DAB 2.0, see [What's new in version 2.0](../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 ### Example
 

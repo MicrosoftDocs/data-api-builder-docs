@@ -493,8 +493,7 @@ dab configure ^
 
 Enable DAB's MCP endpoint.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -530,8 +529,7 @@ dab configure ^
 
 Customize DAB's MCP endpoint path. Prefix path with `/`.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -567,8 +565,7 @@ dab configure ^
 
 Enable DAB's MCP DML tools endpoint.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 For more information on MCP DML tools, see [SQL MCP Server data manipulation language tools](../mcp/data-manipulation-language-tools.md).
 
@@ -594,8 +591,7 @@ dab configure ^
 
 Enable DAB's MCP describe entities tool.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -619,8 +615,7 @@ dab configure ^
 
 Enable DAB's MCP create record tool.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -644,8 +639,7 @@ dab configure ^
 
 Enable DAB's MCP read record tool.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -669,8 +663,7 @@ dab configure ^
 
 Enable DAB's MCP update record tool.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -694,8 +687,7 @@ dab configure ^
 
 Enable DAB's MCP delete record tool.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -719,8 +711,7 @@ dab configure ^
 
 Enable DAB's MCP execute entity tool.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -811,8 +802,7 @@ dab configure ^
 
 ## `--runtime.compression.level`
 
-> [!TIP]
-> This feature is new in Data API builder 2.0. For more information, see [What's new in version 2.0](../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 Set the HTTP response compression level.
 
@@ -1044,8 +1034,7 @@ dab configure ^
 
 Display the resolved permissions for every entity after role inheritance is applied. Use this option to see what each role can actually do without reasoning through the config manually.
 
-> [!TIP]
-> This option was introduced in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 ### Example
 
@@ -1094,8 +1083,7 @@ Entity: Order
 
 Enable or disable On-Behalf-Of (OBO) user-delegated authentication. Supported only for `mssql` data sources.
 
-> [!TIP]
-> This option was introduced in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 ### Example
 

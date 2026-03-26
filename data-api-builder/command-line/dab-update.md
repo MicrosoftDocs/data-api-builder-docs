@@ -71,7 +71,7 @@ dab update <entity-name> [options]
 | ----------------------------------------- | --------------------------------------------------------- |
 | [`--permissions`](#--permissions)         | `role:actions` for a single role. Run multiple times for multiple roles. |
 | [`--policy-database`](#--policy-database) | OData-style filter injected in database query.             |
-| [`--policy-request`](#--policy-request)   | Pre-database request filter.                              |
+| [`--policy-request`](#--policy-request)   | Predatabase request filter.                              |
 
 #### Relationships
 
@@ -192,8 +192,7 @@ dab update ^
 
 Replace entity description.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -688,7 +687,7 @@ dab update ^
 
 ## `--linking.object`
 
-Many-to-many only. Database object name used as the linking object.
+Many-to-many only. Name of the database object to use as the linking object.
 
 ### Example
 
@@ -1008,8 +1007,7 @@ dab update ^
 
 Stored procedures only. Comma-separated list of parameter names.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 > [!TIP]
 > To define stored procedure parameters, use `--parameters.name` with `--parameters.description`, `--parameters.required`, and `--parameters.default`.
@@ -1067,8 +1065,7 @@ dab update ^
 
 Stored procedures only. Comma-separated list of parameter descriptions aligned to `--parameters.name`.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -1096,8 +1093,7 @@ dab update ^
 
 Stored procedures only. Comma-separated list of `true`/`false` values aligned to `--parameters.name`.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -1125,8 +1121,7 @@ dab update ^
 
 Stored procedures only. Comma-separated list of default values aligned to `--parameters.name`.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -1154,8 +1149,7 @@ dab update ^
 
 Name of the database column to describe.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -1203,8 +1197,7 @@ dab update ^
 
 Alias for the field. Use a comma-separated list aligned to `--fields.name`.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 > [!TIP]
 > Use `--fields.alias` with `--fields.name` to define exposed field names.
@@ -1235,8 +1228,7 @@ dab update ^
 
 Description for the field. Use a comma-separated list aligned to `--fields.name`.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 ### Example
 
@@ -1264,8 +1256,7 @@ dab update ^
 
 Primary key flag for the field. Use a comma-separated list of `true`/`false` values aligned to `--fields.name`.
 
-> [!NOTE]
-> This option is available in the `2.0.0-rc` CLI. Install with `dotnet tool install microsoft.dataapibuilder --version 2.0.0-rc --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
 
 > [!TIP]
 > Use `--fields.primary-key` with `--fields.name` to define primary key fields for views or tables without an inferred key.

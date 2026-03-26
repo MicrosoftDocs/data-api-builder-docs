@@ -20,7 +20,7 @@ Configuration settings for database entities.
 |-|-|
 |[`entities.entity-name.health.enabled`](#health-entity-name-entities)|Enables health checks for the entity (both REST and GraphQL endpoints)|
 |[`entities.entity-name.health.first`](#health-entity-name-entities)|Number of rows returned in health check query (range: 1-500)|
-|[`entities.entity-name.health.threshold-ms`](#health-entity-name-entities)|Maximum duration in milliseconds for health check query (min: 1)|
+|[`entities.entity-name.health.threshold-ms`](#health-entity-name-entities)|Maximum duration in milliseconds for health check query (min: One)|
 
 ## Description
 
@@ -238,7 +238,7 @@ The database source details of the entity.
 
 ### Parameters array format
 
-Starting in DAB 2.0, `parameters` supports a structured array format with richer metadata. Each parameter is an object with the following properties:
+In DAB 2.0 preview, `parameters` supports a structured array format with richer metadata. Each parameter is an object with the following properties:
 
 | Property | Type | Required | Description |
 |-|-|-|-|
@@ -273,8 +273,7 @@ Starting in DAB 2.0, `parameters` supports a structured array format with richer
 > [!WARNING]
 > The dictionary format for `parameters` (for example, `{ "id": 0 }`) is deprecated in DAB 2.0. Use the preceding array format. The old format is still accepted for backward compatibility but will be removed in a future release.
 
-> [!TIP]
-> This feature was introduced in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 ## Permissions (entity-name entities)
 
@@ -334,8 +333,7 @@ named-role → authenticated → anonymous
 
 This means you can define permissions once on `anonymous` and every broader role gets the same access automatically, with no duplication required.
 
-> [!TIP]
-> This behavior was introduced in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 #### Example
 
@@ -693,8 +691,7 @@ Lets developers selectively include entities in the GraphQL schema.
 \* The `methods` property is only for `stored-procedure`
 endpoints. 
 
-> [!TIP]
-> Starting in Data API builder 2.0, the `path` property supports forward slashes to create subdirectory-style URL segments (for example, `"shopping-cart/item"` results in `/api/shopping-cart/item`). DAB uses longest-prefix matching for routing. Validation blocks path traversal patterns, backslashes, and percent-encoded separators. For more information, see [What's new in version 2.0](../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 ### Format
 
@@ -719,8 +716,7 @@ endpoints.
 
 An optional human-readable description of the entity. This value is surfaced in generated API documentation and as a comment in the GraphQL schema.
 
-> [!TIP]
-> This feature was introduced in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 ### Format
 
@@ -758,8 +754,7 @@ An optional human-readable description of the entity. This value is surfaced in 
 
 Defines metadata for individual database fields, including aliases, descriptions, and primary key designations. The `fields` array replaces both `mappings` (via the `alias` property) and `source.key-fields` (via the `primary-key` property) in a single, unified structure.
 
-> [!TIP]
-> This feature was introduced in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 ### Nested properties
 
@@ -923,8 +918,7 @@ The `level` property controls which cache tiers are used:
 | `L1` | In-memory cache only. Fastest, but not shared across instances. |
 | `L1L2` | In-memory cache plus distributed (Redis) cache. Shared across scaled-out instances. Default. |
 
-> [!TIP]
-> This property was introduced in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 > [!NOTE]
 > When not specified, `ttl-seconds` inherits the global value set under `runtime.cache`.
@@ -1245,8 +1239,7 @@ Enables and configures health checks for the entity.
 
 Controls MCP participation for the entity. When MCP is enabled globally, entities participate by default. Use this property to opt out or to enable custom MCP tools for stored-procedure entities.
 
-> [!TIP]
-> For more information on MCP changes in DAB 2.0, see [What's new in version 2.0](../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 ### Boolean shorthand
 

@@ -12,7 +12,7 @@ ms.date: 03/24/2026
 
 # Auto configuration concepts
 
-Auto configuration lets you define patterns that automatically find and expose database objects in your configuration. This can dramatically shrink a configuration file, especially when objects and permissions are predictable. In addition, `autoentities` reevaluate and apply the patterns each time DAB starts, so new tables that match the pattern are automatically added as entities without manual config changes.
+Auto configuration lets you define patterns that automatically find and expose database objects in your configuration. Auto configuration can dramatically shrink a configuration file, especially when objects and permissions are predictable. In addition, `autoentities` reevaluate and apply the patterns each time DAB starts, so new tables that match the pattern are automatically added as entities without manual config changes.
 
 When `autoentities` is present in the configuration, the `entities` section is no longer required. The schema requires either `autoentities` or `entities` (or both).
 
@@ -46,7 +46,33 @@ Patterns control which database objects are discovered and how they're named as 
 
 The `include` array specifies which objects to match. Use `%` as a wildcard. For example, `dbo.%` matches all objects in the `dbo` schema. The default is `%.%` (all objects in all schemas).
 
-The `exclude` array removes objects from the matched set. Exclude patterns are evaluated after include patterns. This is useful for keeping internal or staging tables out of your API.
+Since `include` is a string array, you can combine multiple patterns to target different schemas, prefixes, or even list specific tables by name. When listing individual tables, always include the schema name (for example, `dbo.Products` not just `Products`).
+
+#### Include examples
+
+| Pattern | Matches | Description |
+| --- | --- | --- |
+| `%.%` | All objects in all schemas | Default. Matches everything. |
+| `dbo.%` | All objects in `dbo` schema | Single-schema wildcard. |
+| `dbo.Product%` | `dbo.Products`, `dbo.ProductDetails`, etc. | Object name prefix in one schema. |
+| `%.Product%` | `dbo.Products`, `sales.ProductOrders`, etc. | Object name prefix across all schemas. |
+| `dbo.Products` | `dbo.Products` only | Exact match, no wildcard. |
+| `dbo.%` `sales.%` | All objects in `dbo` and `sales` | Multiple wildcard patterns combined. |
+| `dbo.Products` `dbo.Orders` `dbo.Customers` | Those three tables only | Explicit table list. Schema name required. |
+| `dbo.%` `sales.Invoices` | All `dbo` objects plus `sales.Invoices` | Mix of wildcard and explicit table. |
+
+The `exclude` array removes objects from the matched set. Exclude patterns are evaluated after include patterns. The exclude pattern is useful for keeping internal or staging tables out of your API. Like `include`, `exclude` is a string array and supports multiple patterns.
+
+#### Exclude examples
+
+| Pattern | Excludes | Description |
+| --- | --- | --- |
+| `dbo.internal%` | `dbo.internalLogs`, `dbo.internalAudit`, etc. | Remove objects with a name prefix. |
+| `%.%_staging` | `dbo.Orders_staging`, `sales.Items_staging`, etc. | Remove staging tables across all schemas. |
+| `dbo.__migration%` | `dbo.__migrationHistory`, etc. | Remove migration-tracking tables. |
+| `dbo.sysdiagrams` | `dbo.sysdiagrams` only | Remove a single specific object. |
+| `%.vw_%` | `dbo.vw_Summary`, `reports.vw_Daily`, etc. | Remove views by naming convention. |
+| `dbo.Logs` `dbo.AuditTrail` | Those two tables only | Exclude specific tables by name. |
 
 #### Command line
 
@@ -54,6 +80,14 @@ The `exclude` array removes objects from the matched set. Exclude patterns are e
 dab auto-config my-def \
   --patterns.include "dbo.%" \
   --patterns.exclude "dbo.internal%"
+```
+
+Multiple patterns are space-separated on the CLI:
+
+```bash
+dab auto-config my-def \
+  --patterns.include "dbo.Products" "dbo.Orders" "dbo.Customers" \
+  --permissions "anonymous:read"
 ```
 
 ##### Resulting configuration
@@ -71,7 +105,7 @@ dab auto-config my-def \
 }
 ```
 
-In this example, all objects in the `dbo` schema are included except those whose names start with `internal`.
+In this example, all objects in the `dbo` schema are included except objects whose names start with `internal`.
 
 ### Entity naming
 
@@ -124,7 +158,7 @@ The template defines the default configuration applied to every entity matched b
 
 ### API protocols
 
-You can enable or disable REST, GraphQL, and MCP independently for matched entities.
+You can enable or disable REST, GraphQL, and Model Context Protocol (MCP) independently for matched entities.
 
 #### Command line
   
@@ -289,7 +323,7 @@ dab auto-config my-def \
 }
 ```
 
-This definition includes all objects in the `dbo` schema except those starting with `internal`, names them using the `schema_object` format, enables REST and GraphQL, caches responses for 30 seconds, and grants anonymous read access.
+This definition includes all objects in the `dbo` schema except objects starting with `internal`, names them using the `schema_object` format, enables REST and GraphQL, caches responses for 30 seconds, and grants anonymous read access.
 
 ## Simulation
 

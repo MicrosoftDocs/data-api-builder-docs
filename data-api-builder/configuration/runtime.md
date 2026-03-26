@@ -514,14 +514,13 @@ Global CORS configuration.
 
 Selects the authentication method. Each provider validates identity differently. For step-by-step setup, see the how-to guides in the following table.
 
-> [!TIP]
-> The default authentication provider changed in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 ### Provider summary
 
 | Provider | Use case | Identity source | How-to guide |
 |----------|----------|-----------------|--------------|
-| `Unauthenticated` | DAB sits behind a trusted front end (default) | None—all requests run as `anonymous` | — |
+| `Unauthenticated` | DAB sits behind a trusted front end (default) | None—all requests run as `anonymous` | [Configure the Unauthenticated provider](../concept/security/how-to-authenticate-unauthenticated.md) |
 | `AppService` | Azure-hosted apps (EasyAuth) | `X-MS-CLIENT-PRINCIPAL` header | [Configure App Service authentication](../concept/security/how-to-authenticate-app-service.md) |
 | `EntraID` | Microsoft Entra ID (Azure AD) | JWT bearer token | [Configure Entra ID authentication](../concept/security/how-to-authenticate-entra.md) |
 | `Custom` | Third-party IdPs (Okta, Auth0) | JWT bearer token | [Configure custom JWT authentication](../concept/security/how-to-authenticate-custom.md) |
@@ -532,7 +531,7 @@ Selects the authentication method. Each provider validates identity differently.
 
 ### Unauthenticated (default)
 
-When `Unauthenticated` is set (or no provider is specified), DAB doesn't inspect or validate any JWT. All requests run as the `anonymous` role. A front-end service such as Azure API Management or an application gateway should handle authentication upstream.
+When `Unauthenticated` is set (or no provider is specified), DAB doesn't inspect or validate any JWT. All requests run as the `anonymous` role. A front-end service such as Azure API Management or an application gateway can still handle authentication or access policy before requests reach DAB, but DAB continues to authorize only as `anonymous`.
 
 > [!IMPORTANT]
 > When `Unauthenticated` is active, `authenticated` and custom roles defined in entity permissions are never activated. If your config contains those roles, DAB emits a warning at startup.
@@ -838,8 +837,7 @@ query {
 
 ## Compression (runtime)
 
-> [!TIP]
-> This feature is new in Data API builder 2.0. For more information, see [What's new in version 2.0](../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
@@ -1091,8 +1089,7 @@ Learn more about [OTEL_EXPORTER_OTLP_HEADERS](https://opentelemetry.io/docs/lang
 
 Configures the SQL Model Context Protocol (MCP) Server, which exposes database entities as MCP tools for AI agents.
 
-> [!TIP]
-> For more information on MCP changes in DAB 2.0, see [What's new in version 2.0](../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 ### Nested properties
 
@@ -1205,7 +1202,7 @@ Global [health check endpoint](../concept/monitor/health-checks.md) (`/health`) 
 | `runtime.health` | `enabled` | boolean | ❌ No | `true` | |
 | `runtime.health` | `roles` | string array | ✔️ Yes* | `null` | *Required in production mode |
 | `runtime.health` | `cache-ttl-seconds` | integer | ❌ No | `5` | Min: 0 |
-| `runtime.health` | `max-query-parallelism` | integer | ❌ No | `4` | Min: 1, Max: 8 (clamped) |
+| `runtime.health` | `max-query-parallelism` | integer | ❌ No | `4` | Min: One, Max: Eight (clamped) |
 
 ### Behavior in development vs. production
 

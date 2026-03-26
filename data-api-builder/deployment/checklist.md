@@ -42,7 +42,7 @@ Finally, decide if you want to use Data API builder with all default features en
 
 | | Recommendation |
 | --- | --- |
-| **&#9744;** | **Configure your authentication provider.** Starting in DAB 2.0, the default authentication provider is `Unauthenticated`, which means DAB doesn't inspect or validate any JSON Web Token (JWT). All requests run as `anonymous`. If your deployment requires JWT-based authentication, set the provider explicitly (for example, `--auth.provider EntraID`). For more information, see [runtime authentication configuration](../configuration/runtime.md#provider-authentication-host-runtime). |
+| **&#9744;** | **Configure your authentication provider.** Starting in DAB 2.0, which is currently in preview, the default authentication provider is `Unauthenticated`, which means DAB doesn't inspect or validate any JSON Web Token (JWT). All requests run as `anonymous`. If your deployment requires JWT-based authentication, set the provider explicitly (for example, `--auth.provider EntraID`). For more information, see [Configure the Unauthenticated provider](../concept/security/how-to-authenticate-unauthenticated.md) and [runtime authentication configuration](../configuration/runtime.md#provider-authentication-host-runtime). |
 
 | | Recommendation |
 | --- | --- |

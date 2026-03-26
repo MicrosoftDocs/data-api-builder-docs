@@ -311,8 +311,7 @@ The health response includes a `currentRole` field indicating the role used to a
 1. **`authenticated`**—if the request includes a valid principal (for example, a JWT token) but no `X-MS-API-ROLE` header.
 1. **`anonymous`**—if no principal is present.
 
-> [!TIP]
-> This field was introduced in version 2.0. For more information, see [what's new](../../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../../includes/note-dab-2-preview.md)]
 
 ## Other considerations
 

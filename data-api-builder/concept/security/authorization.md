@@ -165,8 +165,7 @@ named-role → authenticated → anonymous
 
 You can define permissions once on `anonymous` and every broader role gets the same access automatically, with no duplication required.
 
-> [!TIP]
-> This behavior was introduced in version 2.0. For more information, see [what's new](../../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../../includes/note-dab-2-preview.md)]
 
 ```json
 {

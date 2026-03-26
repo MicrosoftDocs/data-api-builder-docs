@@ -46,19 +46,19 @@ landingContent:
       - linkListType: overview
         links:
           - text: dab auto-config
-            url: ../concept/config/dab-auto-config.md
+            url: dab-auto-config.md
           - text: dab auto-config-simulate
-            url: ../concept/config/dab-auto-config.md#auto-config-simulate-command
+            url: dab-auto-config-simulate.md
       - linkListType: reference
         links:
           - text: Patterns
-            url: ../concept/config/dab-auto-config.md#--patternsinclude
+            url: dab-auto-config.md#--patternsinclude
           - text: Template
-            url: ../concept/config/dab-auto-config.md#--templaterestenabled
+            url: dab-auto-config.md#--templaterestenabled
           - text: Permissions
-            url: ../concept/config/dab-auto-config.md#--permissions
+            url: dab-auto-config.md#--permissions
           - text: CSV output
-            url: ../concept/config/dab-auto-config.md#--output
+            url: dab-auto-config-simulate.md#--output
 
   - title: Configure
     linkLists:
@@ -74,7 +74,7 @@ landingContent:
             url: dab-configure.md#--data-sourcedatabase-type
           - text: GraphQL runtime
             url: dab-configure.md#--runtimegraphqlenabled
-          - text: Model Context Protocol (MCP) runtime
+          - text: MCP runtime
             url: dab-configure.md#--runtimemcpenabled
           - text: REST runtime
             url: dab-configure.md#--runtimerestenabled

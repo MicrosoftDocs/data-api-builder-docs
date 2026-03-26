@@ -241,8 +241,7 @@ The simplest possible query—specific to the database type—is executed agains
 
 On-Behalf-Of (OBO) user-delegated authentication for SQL Server and Azure SQL. When enabled, DAB exchanges the incoming user token for a downstream SQL token so the database authenticates as the actual calling user. This feature is supported only for `mssql` data sources and requires Entra ID authentication upstream.
 
-> [!TIP]
-> This feature was introduced in version 2.0. For more information, see [what's new](../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 ### Nested properties
 

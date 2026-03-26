@@ -1,6 +1,6 @@
 ---
-title: Auto-config command reference for DAB CLI
-description: Use the Data API builder (DAB) CLI auto-config command to create or update autoentities definitions from the command line.
+title: Autoconfig command reference for DAB CLI
+description: Use the Data API builder (DAB) CLI autoconfig command to create or update autoentities definitions from the command line.
 author: jerrynixon
 ms.author: jnixon
 ms.reviewer: sidandrews
@@ -14,11 +14,7 @@ ms.date: 03/24/2026
 
 Create or update an `autoentities` definition in an existing Data API builder configuration file. `Autoentities` define pattern-based rules that automatically expose matching database objects as DAB entities at startup.
 
-> [!TIP]
-> For in-depth explanations, examples with resulting configuration output, and conceptual guidance, see [Auto configuration](../concept/config/auto-config.md). For the JSON configuration reference, see [`Autoentities` configuration](../configuration/autoentities.md).
-
-> [!IMPORTANT]
-> `Autoentities` currently support **MSSQL** data sources only.
+See [Auto configuration](../concept/config/auto-config.md). 
 
 ## Syntax
 
@@ -32,12 +28,12 @@ dab auto-config <definition-name> [options]
 | --- | --- |
 | `<definition-name>` | Required. Name of the `autoentities` definition to configure. |
 | [`-c, --config`](#-c---config) | Config file path. Default `dab-config.json`. |
-| [`--patterns.include`](#--patternsinclude) | T-SQL `LIKE` pattern(s) to include database objects. Default: `%.%`. |
-| [`--patterns.exclude`](#--patternsexclude) | T-SQL `LIKE` pattern(s) to exclude database objects. Default: `null`. |
+| [`--patterns.include`](#--patternsinclude) | T-SQL `LIKE` patterns to include database objects. Default: `%.%`. |
+| [`--patterns.exclude`](#--patternsexclude) | T-SQL `LIKE` patterns to exclude database objects. Default: `null`. |
 | [`--patterns.name`](#--patternsname) | Interpolation syntax for entity naming. Default: `{object}`. |
 | [`--template.rest.enabled`](#--templaterestenabled) | Enable/disable REST for matched entities. Default: `true`. |
 | [`--template.graphql.enabled`](#--templategraphqlenabled) | Enable/disable GraphQL for matched entities. Default: `true`. |
-| [`--template.mcp.dml-tool`](#--templatemcpdml-tool) | Enable/disable MCP DML tools for matched entities. Default: `true`. |
+| [`--template.mcp.dml-tool`](#--templatemcpdml-tool) | Enable/disable Model Context Protocol (MCP) data manipulation language (DML) tools for matched entities. Default: `true`. |
 | [`--template.health.enabled`](#--templatehealthenabled) | Enable/disable health checks for matched entities. Default: `true`. |
 | [`--template.cache.enabled`](#--templatecacheenabled) | Enable/disable caching for matched entities. Default: `false`. |
 | [`--template.cache.ttl-seconds`](#--templatecachettl-seconds) | Cache time-to-live in seconds. Default: `null`. |
@@ -46,7 +42,7 @@ dab auto-config <definition-name> [options]
 
 ## `<definition-name>`
 
-Required positional argument. Logical name of the `autoentities` definition. Case-sensitive. If the definition already exists, it's updated; otherwise it's created.
+Required positional argument. Logical name of the `autoentities` definition. Case-sensitive. If the definition already exists, DAB updates it; otherwise, DAB creates it.
 
 ### Example
 
@@ -78,7 +74,10 @@ dab auto-config my-def ^
         "include": [ "dbo.%" ]
       },
       "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+        { 
+          "role": "anonymous", 
+          "actions": [ "read" ] 
+        }
       ]
     }
   }
@@ -125,7 +124,7 @@ dab auto-config my-def ^
 
 ## `--patterns.include`
 
-T-SQL `LIKE` pattern(s) to include database objects. Space-separated array. The pattern format is `schema.object` (for example, `dbo.%`). Default: `%.%`.
+T-SQL `LIKE` patterns to include database objects. Space-separated array. The pattern format is `schema.object` (for example, `dbo.%`). Default: `%.%`.
 
 ### Example
 
@@ -157,7 +156,10 @@ dab auto-config my-def ^
         "include": [ "dbo.%" ]
       },
       "permissions": [
-        { "role": "anonymous", "actions": [ "read" ] }
+        { 
+          "role": "anonymous", 
+          "actions": [ "read" ] 
+        }
       ]
     }
   }
@@ -166,7 +168,7 @@ dab auto-config my-def ^
 
 ## `--patterns.exclude`
 
-T-SQL `LIKE` pattern(s) to exclude database objects. Space-separated array. Exclude patterns are evaluated after include patterns. Default: `null`.
+T-SQL `LIKE` patterns to exclude database objects. Space-separated array. Exclude patterns are evaluated after include patterns. Default: `null`.
 
 ### Example
 
@@ -201,7 +203,10 @@ dab auto-config my-def ^
         "exclude": [ "dbo.internal%" ]
       },
       "permissions": [
-        { "role": "anonymous", "actions": [ "read" ] }
+        { 
+          "role": "anonymous", 
+          "actions": [ "read" ] 
+        }
       ]
     }
   }
@@ -245,7 +250,10 @@ dab auto-config my-def ^
         "name": "{schema}_{object}"
       },
       "permissions": [
-        { "role": "anonymous", "actions": [ "read" ] }
+        { 
+          "role": "anonymous", 
+          "actions": [ "read" ] 
+        }
       ]
     }
   }
@@ -487,7 +495,10 @@ dab auto-config my-def ^
   "autoentities": {
     "my-def": {
       "template": {
-        "cache": { "enabled": true, "ttl-seconds": 30 }
+        "cache": { 
+          "enabled": true, 
+          "ttl-seconds": 30 
+        }
       }
     }
   }
@@ -531,7 +542,11 @@ dab auto-config my-def ^
   "autoentities": {
     "my-def": {
       "template": {
-        "cache": { "enabled": true, "ttl-seconds": 30, "level": "l1l2" }
+        "cache": { 
+            "enabled": true, 
+            "ttl-seconds": 30, 
+            "level": "l1l2" 
+        }
       }
     }
   }
@@ -569,7 +584,10 @@ dab auto-config my-def ^
   "autoentities": {
     "my-def": {
       "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+        { 
+          "role": "anonymous", 
+          "actions": [ "read" ] 
+        }
       ]
     }
   }
@@ -624,10 +642,17 @@ dab auto-config my-def ^
       "template": {
         "rest": { "enabled": true },
         "graphql": { "enabled": true },
-        "cache": { "enabled": true, "ttl-seconds": 30, "level": "l1l2" }
+        "cache": { 
+            "enabled": true, 
+            "ttl-seconds": 30, 
+            "level": "l1l2" 
+        }
       },
       "permissions": [
-        { "role": "anonymous", "actions": [ "read" ] }
+        { 
+          "role": "anonymous", 
+          "actions": [ "read" ] 
+        }
       ]
     }
   }

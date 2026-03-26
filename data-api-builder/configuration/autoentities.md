@@ -15,7 +15,7 @@ show_latex: true
 Configuration settings for automatic entity generation based on pattern-matching rules. `Autoentities` is a peer to the [`entities`](entities.md) section—when `autoentities` is present, `entities` is no longer required. The schema allows either `autoentities` or `entities` (or both). If both are present, explicitly defined entities take precedence over `autoentities` matches with the same name.
 
 > [!TIP]
-> Use [`dab auto-config`](../concept/config/dab-auto-config.md) to create and update `autoentities` definitions from the CLI, and [`dab auto-config-simulate`](../concept/config/dab-auto-config.md#auto-config-simulate-command) to preview which objects match before committing changes.
+> Use [`dab auto-config`](../command-line/dab-auto-config.md) to create and update `autoentities` definitions from the CLI, and [`dab auto-config-simulate`](../command-line/dab-auto-config-simulate.md) to preview which objects match before committing changes.
 
 ## Patterns
 
@@ -31,7 +31,7 @@ Configuration settings for automatic entity generation based on pattern-matching
 |-|-|
 | [`autoentities.definition-name.template.rest.enabled`](#rest-template-definition-name-autoentities) | Enable REST for matched entities |
 | [`autoentities.definition-name.template.graphql.enabled`](#graphql-template-definition-name-autoentities) | Enable GraphQL for matched entities |
-| [`autoentities.definition-name.template.mcp.dml-tools`](#mcp-template-definition-name-autoentities) | Enable MCP DML tools for matched entities |
+| [`autoentities.definition-name.template.mcp.dml-tools`](#mcp-template-definition-name-autoentities) | Enable Model Context Protocol (MCP) data manipulation language (DML) tools for matched entities |
 | [`autoentities.definition-name.template.health.enabled`](#health-template-definition-name-autoentities) | Enable health checks for matched entities |
 | [`autoentities.definition-name.template.cache.enabled`](#cache-template-definition-name-autoentities) | Enable response caching for matched entities |
 | [`autoentities.definition-name.template.cache.ttl-seconds`](#cache-template-definition-name-autoentities) | Cache time-to-live in seconds |
@@ -128,11 +128,11 @@ Defines include, exclude, and naming rules that determine which database objects
 | `autoentities.<definition-name>.patterns` | `exclude` | string array | ❌ No | `null` |
 | `autoentities.<definition-name>.patterns` | `name` | string | ❌ No | `"{object}"` |
 
-- **`include`** — One or more MSSQL `LIKE` patterns specifying which database objects to include. Use `%` as a wildcard. The pattern format is `schema.object` (for example, `dbo.%` matches all objects in the `dbo` schema). When `null` or omitted, defaults to `["%.%"]` (all objects in all schemas).
+- **`include`**—One or more MSSQL `LIKE` patterns specifying which database objects to include. Use `%` as a wildcard. The pattern format is `schema.object` (for example, `dbo.%` matches all objects in the `dbo` schema). When `null` or omitted, defaults to `["%.%"]` (all objects in all schemas).
 
-- **`exclude`** — One or more MSSQL `LIKE` patterns specifying which database objects to exclude. Exclude patterns are evaluated after include patterns. When `null` or omitted, no objects are excluded.
+- **`exclude`**—One or more MSSQL `LIKE` patterns specifying which database objects to exclude. Exclude patterns are evaluated after include patterns. When `null` or omitted, no objects are excluded.
 
-- **`name`** — Interpolation pattern that controls how matched database objects are named as entities. Supports `{schema}` and `{object}` placeholders. Each resolved name must be unique across all entities in the configuration.
+- **`name`**—Interpolation pattern that controls how matched database objects are named as entities. Supports `{schema}` and `{object}` placeholders. Each resolved name must be unique across all entities in the configuration.
 
 ### Format
 
@@ -512,7 +512,7 @@ With this configuration, every table in the `dbo` schema (except those matching 
 
 ## Related content
 
-- [`dab auto-config` command reference](../concept/config/dab-auto-config.md)
-- [`dab auto-config-simulate` command reference](../concept/config/dab-auto-config.md#auto-config-simulate-command)
+- [`dab auto-config` command reference](../command-line/dab-auto-config.md)
+- [`dab auto-config-simulate` command reference](../command-line/dab-auto-config-simulate.md)
 - [What's new in version 2.0](../whats-new/version-2-0.md)
 - [Entities configuration](entities.md)

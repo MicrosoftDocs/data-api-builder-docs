@@ -155,12 +155,11 @@ dab add GetBookById \
   --mcp.custom-tool true
 ```
 
-> [!TIP]
-> For more information about MCP custom tools, see [What's new in Data API builder version 2.0](../../whats-new/version-2-0.md#introducing-custom-mcp-tools) and [Data manipulation language (DML) tools](../../mcp/data-manipulation-language-tools.md#custom-tools-for-stored-procedures).
+[!INCLUDE[Note - SQL MCP Server 2.0 preview](../../mcp/includes/note-sql-mcp-server-2-preview.md)]
 
 ## MCP custom tools
 
-In Data API builder 2.0, stored procedures can be registered as custom MCP tools. When you set `"custom-tool": true` in the entity's `mcp` configuration, DAB registers the stored procedure as a named tool via MCP `tools/list` and `tools/call`. This configuration lets AI agents discover and invoke the procedure directly by name.
+In Data API builder 2.0 preview, stored procedures can be registered as custom MCP tools. When you set `"custom-tool": true` in the entity's `mcp` configuration, DAB registers the stored procedure as a named tool via MCP `tools/list` and `tools/call`. This configuration lets AI agents discover and invoke the procedure directly by name.
 
 ### Configuration example
 
@@ -192,6 +191,5 @@ dab add GetBookById \
   --mcp.custom-tool true
 ```
 
-> [!TIP]
-> For more information about MCP custom tools in DAB 2.0, see [What's new in version 2.0](../../whats-new/version-2-0.md).
+[!INCLUDE[Note - SQL MCP Server 2.0 preview](../../mcp/includes/note-sql-mcp-server-2-preview.md)]
 

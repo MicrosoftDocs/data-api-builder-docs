@@ -84,8 +84,7 @@ DAB creates OpenTelemetry "activities" for:
 - **Internal middleware steps** (for example, request handling, error tracking)
 - **MCP tool execution** (each data manipulation language (DML) tool call and custom tool invocation)
 
-> [!TIP]
-> In DAB 2.0, MCP tool execution is fully instrumented with OpenTelemetry spans, enabling unified observability across REST, GraphQL, and MCP surfaces. For more information, see [What's new in version 2.0](../../whats-new/version-2-0.md).
+[!INCLUDE[Note - DAB 2.0 preview](../../includes/note-dab-2-preview.md)]
 
 Each activity includes detailed tags (metadata), such as:
 - `http.method`, `http.url`, `http.querystring`, `status.code`
