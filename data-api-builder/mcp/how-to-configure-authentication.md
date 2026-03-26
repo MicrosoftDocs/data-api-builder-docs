@@ -144,7 +144,7 @@ After you configure Foundry, you must configure SQL MCP Server to accept the sam
 #### Unauthenticated
 Starting in DAB 2.0, the default authentication provider is `Unauthenticated`. Configure SQL MCP Server to treat requests as `anonymous` by using the default `Unauthenticated` provider (or set `provider: AppService`) and grant only the `anonymous` permissions you intend.
 
-For the underlying DAB authentication behavior, see [Configure the Unauthenticated provider](../concept/security/how-to-authenticate-unauthenticated.md).
+For the underlying DAB authentication behavior, see [Configure the Unauthenticated provider](../concept/security/authenticate-unauthenticated.md).
 
 ![Diagram showing the Foundry unauthenticated authentication flow.](media/how-to-configure-authentication/foundry-unauthenticated.svg)
 
@@ -219,6 +219,6 @@ dab update ^
 
 - [Data source configuration](../configuration/data-source.md)
 - [Runtime configuration: authentication provider](../configuration/runtime.md)
-- [Local authentication (Simulator/AppService)](../concept/security/how-to-authenticate-simulator.md)
-- [Azure authentication (JWT/roles)](../concept/security/how-to-authenticate-entra.md)
+- [Local authentication (Simulator/AppService)](../concept/security/authenticate-simulator.md)
+- [Azure authentication (JWT/roles)](../concept/security/authenticate-entra.md)
 - [Foundry MCP authentication guidance](/azure/ai-foundry/agents/how-to/mcp-authentication)

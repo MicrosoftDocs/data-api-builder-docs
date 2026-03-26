@@ -130,24 +130,24 @@ The key to this table is that Data API builder can run in any environment with c
 
 | Feature | SQL Family | Cosmos DB | PGSQL | MySQL | SQLDW¹ |
 | --- | :---: | :---: | :---: | :---: | :---: |
-| [`C`reate](concept/security/how-to-configure-database-policies.md) | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✅ Yes |
-| [`R`ead](concept/security/how-to-configure-database-policies.md) | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✅ Yes |
-| [`U`pdate](concept/security/how-to-configure-database-policies.md) | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✅ Yes |
-| [`D`elete](concept/security/how-to-configure-database-policies.md) | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✅ Yes |
-| [`E`xecute](concept/security/how-to-configure-database-policies.md) | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| [Single-Table Policies](concept/security/how-to-configure-database-policies.md) | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✅ Yes |
-| [Multi-Table Policies](concept/security/how-to-configure-database-policies.md) | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| [Request Policy](concept/security/how-to-configure-database-policies.md) | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
+| [`C`reate](concept/security/configure-database-policies.md) | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✅ Yes |
+| [`R`ead](concept/security/configure-database-policies.md) | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✅ Yes |
+| [`U`pdate](concept/security/configure-database-policies.md) | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✅ Yes |
+| [`D`elete](concept/security/configure-database-policies.md) | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✅ Yes |
+| [`E`xecute](concept/security/configure-database-policies.md) | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
+| [Single-Table Policies](concept/security/configure-database-policies.md) | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✅ Yes |
+| [Multi-Table Policies](concept/security/configure-database-policies.md) | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
+| [Request Policy](concept/security/configure-database-policies.md) | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 
 ## Authentication Features
 
 | Feature | SQL Family | Cosmos DB | PGSQL | MySQL | SQLDW¹ |
 | --- | :---: | :---: | :---: | :---: | :---: |
-| [UAMI (Entra ID)⁴](concept/security/how-to-authenticate-entra.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
-| [SAMI (Entra ID)⁴](concept/security/how-to-authenticate-entra.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
-| [Azure EasyAuth](concept/security/how-to-authenticate-app-service.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
-| [On-Behalf-Of (OBO)](concept/security/how-to-authenticate-on-behalf-of.md) | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
-| [Unauthenticated Provider](concept/security/how-to-authenticate-unauthenticated.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| [UAMI (Entra ID)⁴](concept/security/authenticate-entra.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| [SAMI (Entra ID)⁴](concept/security/authenticate-entra.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| [Azure EasyAuth](concept/security/authenticate-app-service.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| [On-Behalf-Of (OBO)](concept/security/authenticate-on-behalf-of.md) | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
+| [Unauthenticated Provider](concept/security/authenticate-unauthenticated.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | [Role Inheritance](concept/security/authorization.md#role-inheritance) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | API-key security | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 

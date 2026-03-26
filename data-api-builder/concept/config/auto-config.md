@@ -26,10 +26,24 @@ Each `autoentities` definition is a named configuration block that combines a se
 ```json
 {
   "autoentities": {
-    "my-def": {
-      "patterns": { ... },
-      "template": { ... },
-      "permissions": [ ... ]
+    "my-def-name": {
+      "patterns": { 
+        "include": [ "dbo.table1", "dbo.table2" ], 
+        "exclude": [ ], 
+        "name": "{schema}{object}" 
+      },
+      "template": { 
+        "rest": { "enabled": true },
+        "graphql": { "enabled": true },
+        "mcp": { "dml-tools": true },
+        "health": { "enabled": false },
+        "cache": { "enabled": false }
+       },
+      "permissions": [ 
+        { 
+          "role": "anonymous", 
+          "actions": [ "*" ] }
+       ]
     }
   }
 }

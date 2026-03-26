@@ -249,13 +249,13 @@
     - name: Run DAB
       items:
         - name: Run in a container
-          href: how-to/run-container.md
+          href: deployment/local-container.md
           displayName: docker, container, dab, run
         - name: Run from source
-          href: how-to/run-from-source.md
+          href: deployment/run-from-source.md
           displayName: source, github, OSS, build, run
         - name: Set up Azure Cosmos DB
-          href: how-to/set-up-cosmosdb.md
+          href: concept/database/set-up-cosmosdb.md
           displayName: cosmos, nosql, schema, graphql, authorize
     - name: GraphQL API
       items:
@@ -263,10 +263,10 @@
           href: concept/api/graphql.md
           displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
         - name: Aggregate data
-          href: how-to/aggregate-data.md
+          href: concept/database/aggregate-data.md
           displayName: aggregation, groupBy, sum, avg, min, max, graphql
         - name: Insert multiple records
-          href: how-to/multiple-mutations.md
+          href: concept/api/multiple-mutations.md
           displayName: batch, transaction, graphql, createMany, mutation
         - name: Paginate with after
           href: keywords/after-graphql.md
@@ -352,7 +352,7 @@
           href: concept/database/relationships.md
           displayName: relationships, foreign key, navigation, linking, cardinality
         - name: Configure query timeout
-          href: how-to/configure-timeout.md
+          href: concept/database/configure-timeout.md
           displayName: timeout, command timeout, connection string, long-running, stored procedure, query, sql server, postgresql, mysql, cosmos db, mssql
     - name: Monitoring and telemetry
       items:
@@ -374,22 +374,22 @@
     - name: Security
       items:
         - name: Configure Entra ID authentication
-          href: concept/security/how-to-authenticate-entra.md
+          href: concept/security/authenticate-entra.md
           displayName: AAD, Microsoft Entra ID, Azure AD, SSO, OAuth, JWT, token
         - name: Configure custom JWT authentication
-          href: concept/security/how-to-authenticate-custom.md
+          href: concept/security/authenticate-custom.md
           displayName: Okta, Auth0, JWT, third-party, custom IdP
         - name: Configure App Service authentication
-          href: concept/security/how-to-authenticate-app-service.md
+          href: concept/security/authenticate-app-service.md
           displayName: EasyAuth, App Service, X-MS-CLIENT-PRINCIPAL
         - name: Configure Simulator authentication
-          href: concept/security/how-to-authenticate-simulator.md
+          href: concept/security/authenticate-simulator.md
           displayName: local auth, simulated auth, development, testing
         - name: Configure entity permissions
           href: concept/security/authorization.md
           displayName: roles, claims, policies, access control, permissions, authorization
         - name: Configure database policies
-          href: concept/security/how-to-configure-database-policies.md
+          href: concept/security/configure-database-policies.md
           displayName: policies, predicates, row-level, filtering, claims, OData
         - name: Implement row-level security
           href: concept/security/row-level-security.md
@@ -397,28 +397,22 @@
     - name: Deploy and Host
       items:
         - name: Deployment overview
-          href: deployment/index.md
-          displayName: deployment, hosting, summary, intro
-        - name: Deployment checklist
-          href: deployment/checklist.md
-          displayName: deployment, validation, steps, readiness
-        - name: Hosting options
-          href: deployment/hosting-options.md
-          displayName: hosting, container, azure, options
+          href: deployment/overview.md
+          displayName: deployment, hosting, checklist, options
         - name: Deploy to Container Apps (Portal)
-          href: deployment/how-to-publish-container-apps.md
+          href: deployment/azure-container-apps.md
           displayName: azure, container apps, publish, deploy, aca
         - name: Deploy to Container Apps (CLI)
           href: tutorial-deploy-container-app-cli.md
           displayName: azure, deploy, ACA, container, cli
         - name: Deploy to Container Instances
-          href: deployment/how-to-publish-container-instances.md
+          href: deployment/azure-container-instances.md
           displayName: azure, container instances, publish, deploy, aci
         - name: Configuration best practices
-          href: deployment/best-practices-configuration.md
+          href: concept/config/best-practices.md
           displayName: configuration, deployment, settings, optimize
         - name: Security best practices
-          href: deployment/best-practices-security.md
+          href: concept/security/best-practices.md
           displayName: security, deployment, hardening, guidance
 - name: Samples
   items:

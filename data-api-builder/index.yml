@@ -113,7 +113,7 @@ landingContent:
           - text: Code Policies
             url: reference-policies.md
           - text: Aggregate data with GraphQL
-            url: how-to/aggregate-data.md
+            url: concept/database/aggregate-data.md
       - linkListType: concept
         links:
           - text: Database Views
@@ -125,7 +125,7 @@ landingContent:
       - linkListType: how-to-guide
         links:
           - text: Set up Azure Cosmos DB
-            url: how-to/set-up-cosmosdb.md
+            url: concept/database/set-up-cosmosdb.md
       - linkListType: sample
         links:
           - text: Library app sample with Data API builder, SQL Server, and Blazor
@@ -139,9 +139,9 @@ landingContent:
       - linkListType: deploy
         links:
           - text: Azure Container Instances
-            url: deployment/how-to-publish-container-instances.md
+            url: deployment/azure-container-instances.md
           - text: Azure Container Apps
-            url: deployment/how-to-publish-container-apps.md
+            url: deployment/azure-container-apps.md
   - title: REST API
     linkLists:
       - linkListType: concept  
@@ -195,7 +195,7 @@ landingContent:
           - text: Multiple Data Sources
             url: concept/config/multi-data-source.md
           - text: Best Practices
-            url: deployment/best-practices-configuration.md
+            url: concept/config/best-practices.md
   - title: Command Line
     linkLists:
       - linkListType: concept
@@ -265,19 +265,19 @@ landingContent:
       - linkListType: how-to-guide
         links:
           - text: Configure Entra ID authentication
-            url: concept/security/how-to-authenticate-entra.md
+            url: concept/security/authenticate-entra.md
           - text: Configure custom JSON Web Token (JWT) authentication (Okta/Auth0)
-            url: concept/security/how-to-authenticate-custom.md
+            url: concept/security/authenticate-custom.md
           - text: Configure App Service authentication
-            url: concept/security/how-to-authenticate-app-service.md
+            url: concept/security/authenticate-app-service.md
           - text: Configure Simulator for testing
-            url: concept/security/how-to-authenticate-simulator.md
+            url: concept/security/authenticate-simulator.md
           - text: Implement row-level security
             url: concept/security/row-level-security.md
       - linkListType: reference
         links:
           - text: Security best practices
-            url: deployment/best-practices-security.md
+            url: concept/security/best-practices.md
   - title: Data Caching
     linkLists:
       - linkListType: concept 

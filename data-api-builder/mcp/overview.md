@@ -56,7 +56,7 @@ This routes requests through the Inspector proxy and helps avoid browser CORS an
 
 #### Stdio transport
 
-The stdio transport is useful for local development and CLI workflows. You can specify a role with `role:<role-name>`, which defaults to `anonymous` when omitted. In this mode, authentication uses the [simulator provider](../concept/security/how-to-authenticate-simulator.md), and incoming requests are limited to 1 MB.
+The stdio transport is useful for local development and CLI workflows. You can specify a role with `role:<role-name>`, which defaults to `anonymous` when omitted. In this mode, authentication uses the [simulator provider](../concept/security/authenticate-simulator.md), and incoming requests are limited to 1 MB.
 
 ```bash
 dab start --mcp-stdio

@@ -185,9 +185,9 @@ dab configure --data-source.user-delegated-auth.database-audience "https://datab
 
 ### Read the docs
 
-- [Configure OBO authentication](../concept/security/how-to-authenticate-on-behalf-of.md)
+- [Configure OBO authentication](../concept/security/authenticate-on-behalf-of.md)
 - [User-delegated auth configuration](../configuration/data-source.md#user-delegated-auth)
-- [Security best practices](../deployment/best-practices-security.md)
+- [Security best practices](../concept/security/best-practices.md)
 
 ## Introducing: Custom MCP tools
 
@@ -269,7 +269,7 @@ dab init --database-type mssql --connection-string "Server=localhost;Database=my
 
 ### Read the docs
 
-- [Configure the Unauthenticated provider](../concept/security/how-to-authenticate-unauthenticated.md)
+- [Configure the Unauthenticated provider](../concept/security/authenticate-unauthenticated.md)
 - [Choose your authentication provider](../concept/security/index.md#choose-your-authentication-provider)
 - [`dab init --auth.provider`](../command-line/dab-init.md#--authprovider)
 

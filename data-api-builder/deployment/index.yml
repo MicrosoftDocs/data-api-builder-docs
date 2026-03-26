@@ -1,0 +1,80 @@
+### YamlMime:Landing
+
+title: Deploy Data API builder
+summary: Deploy and host Data API builder (DAB) on Azure or your own infrastructure. Choose from multiple Azure hosting options, follow step-by-step deployment guides, and apply best practices for configuration and security.
+metadata:
+  title: Deploy Data API builder
+  description: Deploy and host Data API builder (DAB) using Azure Container Apps, Azure Container Instances, Azure Kubernetes Service, or local Docker containers.
+  author: jerrynixon
+  ms.author: jnixon
+  ms.reviewer: sidandrews
+  ms.service: data-api-builder
+  ms.topic: landing-page
+  ms.date: 03/26/2026
+
+landingContent:
+  - title: Get started
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: Deployment overview
+            url: overview.md
+      - linkListType: concept
+        links:
+          - text: Hosting options
+            url: overview.md#hosting-options
+          - text: Deployment checklist
+            url: overview.md#deployment-checklist
+
+  - title: Azure Container Apps
+    linkLists:
+      - linkListType: deploy
+        links:
+          - text: Deploy with Azure portal
+            url: azure-container-apps.md
+          - text: Deploy with Azure CLI
+            url: ../tutorial-deploy-container-app-cli.md
+      - linkListType: concept
+        links:
+          - text: About Azure Container Apps
+            url: /azure/container-apps
+
+  - title: Azure Container Instances
+    linkLists:
+      - linkListType: deploy
+        links:
+          - text: Deploy to Container Instances
+            url: azure-container-instances.md
+      - linkListType: concept
+        links:
+          - text: About Azure Container Instances
+            url: /azure/container-instances
+
+  - title: Azure Kubernetes Service
+    linkLists:
+      - linkListType: deploy
+        links:
+          - text: Deploy to AKS
+            url: azure-kubernetes-service.md
+      - linkListType: concept
+        links:
+          - text: About Azure Kubernetes Service
+            url: /azure/aks
+
+  - title: Local development
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Run in a local container
+            url: local-container.md
+          - text: Run from source
+            url: run-from-source.md
+
+  - title: Best practices
+    linkLists:
+      - linkListType: concept
+        links:
+          - text: Configuration best practices
+            url: ../concept/config/best-practices.md
+          - text: Security best practices
+            url: ../concept/security/best-practices.md

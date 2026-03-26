@@ -200,7 +200,7 @@ Identity provider. Default is `Unauthenticated`.
 
 When `Unauthenticated` is active, DAB doesn't inspect or validate any JWT. All requests run as `anonymous`. Another service can authenticate or filter requests before they reach DAB, but DAB still authorizes only as `anonymous`. To use a different provider, set it explicitly.
 
-For configuration guidance, see [Configure the Unauthenticated provider](../concept/security/how-to-authenticate-unauthenticated.md).
+For configuration guidance, see [Configure the Unauthenticated provider](../concept/security/authenticate-unauthenticated.md).
 
 [!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 

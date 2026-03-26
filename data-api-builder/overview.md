@@ -61,7 +61,7 @@ Data API builder supports multiple authentication providers:
 
 | Provider | Use case |
 |----------|----------|
-| [**Unauthenticated**](concept/security/how-to-authenticate-unauthenticated.md) | DAB sits behind a trusted front end that handles identity (default) |
+| [**Unauthenticated**](concept/security/authenticate-unauthenticated.md) | DAB sits behind a trusted front end that handles identity (default) |
 | **Microsoft Entra ID** | Production apps using Microsoft identity |
 | **Custom JWT** | Third-party identity providers (Okta, Auth0, Keycloak) |
 | **App Service** | Apps running behind Azure App Service EasyAuth |

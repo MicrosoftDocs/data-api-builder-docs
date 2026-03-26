@@ -142,12 +142,12 @@
     },
     {
       "source_path_from_root": "/data-api-builder/security-considerations.md",
-      "redirect_url": "/azure/data-api-builder/best-practices-security",
+      "redirect_url": "/azure/data-api-builder/concept/security/best-practices",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/best-practices.md",
-      "redirect_url": "/azure/data-api-builder/best-practices-configuration",
+      "redirect_url": "/azure/data-api-builder/concept/config/best-practices",
       "redirect_document_id": true
     },
     {
@@ -207,12 +207,12 @@
     },
     {
       "source_path_from_root": "/data-api-builder/run-using-container.md",
-      "redirect_url": "/azure/data-api-builder/how-to/run-container",
+      "redirect_url": "/azure/data-api-builder/deployment/local-container",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/run-from-source-code.md",
-      "redirect_url": "/azure/data-api-builder/how-to/run-from-source",
+      "redirect_url": "/azure/data-api-builder/deployment/run-from-source",
       "redirect_document_id": true
     },
     {
@@ -317,32 +317,32 @@
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-deploy-container-app.md",
-      "redirect_url": "/azure/data-api-builder/deployment/how-to-publish-container-apps",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-container-apps",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-deploy-container-instance.md",
-      "redirect_url": "/azure/data-api-builder/deployment/how-to-publish-container-instances",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-container-instances",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-deploy-static-web-app.md",
-      "redirect_url": "/azure/data-api-builder/deployment/hosting-options",
+      "redirect_url": "/azure/data-api-builder/deployment/overview",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/deployment/how-to-host-static-web-apps.md",
-      "redirect_url": "/azure/data-api-builder/deployment/hosting-options",
+      "redirect_url": "/azure/data-api-builder/deployment/overview",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/best-practices-security.md",
-      "redirect_url": "/azure/data-api-builder/deployment/best-practices-security",
+      "redirect_url": "/azure/data-api-builder/concept/security/best-practices",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/best-practices-configuration.md",
-      "redirect_url": "/azure/data-api-builder/deployment/best-practices-configuration",
+      "redirect_url": "/azure/data-api-builder/concept/config/best-practices",
       "redirect_document_id": true
     },
     {
@@ -367,7 +367,7 @@
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-multiple-mutations.md",
-      "redirect_url": "/azure/data-api-builder/how-to/multiple-mutations",
+      "redirect_url": "/azure/data-api-builder/concept/api/multiple-mutations",
       "redirect_document_id": true
     },
     {
@@ -377,12 +377,12 @@
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-run-container.md",
-      "redirect_url": "/azure/data-api-builder/how-to/run-container",
+      "redirect_url": "/azure/data-api-builder/deployment/local-container",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-run-from-source.md",
-      "redirect_url": "/azure/data-api-builder/how-to/run-from-source",
+      "redirect_url": "/azure/data-api-builder/deployment/run-from-source",
       "redirect_document_id": false
     },
     {
@@ -543,6 +543,131 @@
     {
       "source_path_from_root": "/data-api-builder/vscode-extension/agent.md",
       "redirect_url": "/azure/data-api-builder/vscode-extension/overview",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to/aggregate-data.md",
+      "redirect_url": "/azure/data-api-builder/concept/database/aggregate-data",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to/configure-timeout.md",
+      "redirect_url": "/azure/data-api-builder/concept/database/configure-timeout",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to/multiple-mutations.md",
+      "redirect_url": "/azure/data-api-builder/concept/api/multiple-mutations",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to/run-container.md",
+      "redirect_url": "/azure/data-api-builder/deployment/local-container",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to/run-from-source.md",
+      "redirect_url": "/azure/data-api-builder/deployment/run-from-source",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to/set-up-cosmosdb.md",
+      "redirect_url": "/azure/data-api-builder/concept/database/set-up-cosmosdb",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/how-to-publish-container-apps.md",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-container-apps",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/how-to-publish-container-instances.md",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-container-instances",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/how-to-publish-aks.md",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-kubernetes-service",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/aks.md",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-kubernetes-service",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/container-apps.md",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-container-apps",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/container-instances.md",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-container-instances",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/run-container.md",
+      "redirect_url": "/azure/data-api-builder/deployment/local-container",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/best-practices-configuration.md",
+      "redirect_url": "/azure/data-api-builder/concept/config/best-practices",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/best-practices-security.md",
+      "redirect_url": "/azure/data-api-builder/concept/security/best-practices",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/index.md",
+      "redirect_url": "/azure/data-api-builder/deployment/overview",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/checklist.md",
+      "redirect_url": "/azure/data-api-builder/deployment/overview",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/hosting-options.md",
+      "redirect_url": "/azure/data-api-builder/deployment/overview",
+      "redirect_document_id": false
+    },
+    {
+      "redirect_url": "/azure/data-api-builder/concept/security/authenticate-app-service",
+      "source_path_from_root": "/data-api-builder/concept/security/how-to-authenticate-app-service.md",
+      "redirect_document_id": false
+    },
+    {
+      "redirect_url": "/azure/data-api-builder/concept/security/authenticate-custom",
+      "source_path_from_root": "/data-api-builder/concept/security/how-to-authenticate-custom.md",
+      "redirect_document_id": false
+    },
+    {
+      "redirect_url": "/azure/data-api-builder/concept/security/authenticate-entra",
+      "source_path_from_root": "/data-api-builder/concept/security/how-to-authenticate-entra.md",
+      "redirect_document_id": false
+    },
+    {
+      "redirect_url": "/azure/data-api-builder/concept/security/authenticate-on-behalf-of",
+      "source_path_from_root": "/data-api-builder/concept/security/how-to-authenticate-on-behalf-of.md",
+      "redirect_document_id": false
+    },
+    {
+      "redirect_url": "/azure/data-api-builder/concept/security/authenticate-simulator",
+      "source_path_from_root": "/data-api-builder/concept/security/how-to-authenticate-simulator.md",
+      "redirect_document_id": false
+    },
+    {
+      "redirect_url": "/azure/data-api-builder/concept/security/authenticate-unauthenticated",
+      "source_path_from_root": "/data-api-builder/concept/security/how-to-authenticate-unauthenticated.md",
+      "redirect_document_id": false
+    },
+    {
+      "redirect_url": "/azure/data-api-builder/concept/security/configure-database-policies",
+      "source_path_from_root": "/data-api-builder/concept/security/how-to-configure-database-policies.md",
       "redirect_document_id": false
     }
   ]

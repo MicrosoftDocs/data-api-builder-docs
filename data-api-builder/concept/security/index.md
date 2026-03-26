@@ -30,13 +30,13 @@ Data API builder supports multiple authentication providers. Choose the one that
 
 | Provider | Use case | Guide |
 |----------|----------|-------|
-| **Unauthenticated** | DAB sits behind a trusted front end that handles identity (default) | [Configure the Unauthenticated provider](how-to-authenticate-unauthenticated.md) |
-| **Microsoft Entra ID** (`EntraID`/`AzureAD`) | Production apps using Microsoft identity | [Configure Microsoft Entra authentication](how-to-authenticate-entra.md) |
-| **Custom JSON Web Token (JWT)** | Third-party IdPs (Okta, Auth0, Keycloak) | [Configure custom JWT authentication](how-to-authenticate-custom.md) |
-| **App Service** | Apps running behind Azure App Service EasyAuth (platform headers) | [Configure App Service authentication](how-to-authenticate-app-service.md) |
-| **Simulator** | Local development and testing | [Configure Simulator authentication](how-to-authenticate-simulator.md) |
-| **OBO (user-delegated)** | SQL databases that require the real user identity (row-level security, auditing) | [Configure OBO authentication](how-to-authenticate-on-behalf-of.md) |
-| **Static Web Apps** | Apps fronted by Static Web Apps (SWA) auth headers | [Configure App Service authentication](how-to-authenticate-app-service.md)
+| **Unauthenticated** | DAB sits behind a trusted front end that handles identity (default) | [Configure the Unauthenticated provider](authenticate-unauthenticated.md) |
+| **Microsoft Entra ID** (`EntraID`/`AzureAD`) | Production apps using Microsoft identity | [Configure Microsoft Entra authentication](authenticate-entra.md) |
+| **Custom JSON Web Token (JWT)** | Third-party IdPs (Okta, Auth0, Keycloak) | [Configure custom JWT authentication](authenticate-custom.md) |
+| **App Service** | Apps running behind Azure App Service EasyAuth (platform headers) | [Configure App Service authentication](authenticate-app-service.md) |
+| **Simulator** | Local development and testing | [Configure Simulator authentication](authenticate-simulator.md) |
+| **OBO (user-delegated)** | SQL databases that require the real user identity (row-level security, auditing) | [Configure OBO authentication](authenticate-on-behalf-of.md) |
+| **Static Web Apps** | Apps fronted by Static Web Apps (SWA) auth headers | [Configure App Service authentication](authenticate-app-service.md)
 
 [!INCLUDE[Note - DAB 2.0 preview](../../includes/note-dab-2-preview.md)]
 
@@ -124,7 +124,7 @@ DAB 2.0 introduces role inheritance for entity permissions. The inheritance chai
 - **Disable legacy TLS versions**: Rely on TLS 1.2+ only
 - **Use HTTPS endpoints**: Never expose DAB over unencrypted HTTP in production
 
-For details, see [Security best practices](../../deployment/best-practices-security.md).
+For details, see [Security best practices](best-practices.md).
 
 ### Configuration security
 
@@ -150,18 +150,18 @@ For details, see [Security best practices](../../deployment/best-practices-secur
 
 | Task | Guide |
 |------|-------|
-| Use a trusted front end without JWT validation in DAB | [Configure the Unauthenticated provider](how-to-authenticate-unauthenticated.md) |
-| Set up Microsoft Entra ID authentication | [Configure Microsoft Entra authentication](how-to-authenticate-entra.md) |
-| Use Okta or Auth0 | [Configure custom JWT authentication](how-to-authenticate-custom.md) |
-| Run behind Azure App Service | [Configure App Service authentication](how-to-authenticate-app-service.md) |
-| Test permissions locally | [Configure Simulator authentication](how-to-authenticate-simulator.md) |
+| Use a trusted front end without JWT validation in DAB | [Configure the Unauthenticated provider](authenticate-unauthenticated.md) |
+| Set up Microsoft Entra ID authentication | [Configure Microsoft Entra authentication](authenticate-entra.md) |
+| Use Okta or Auth0 | [Configure custom JWT authentication](authenticate-custom.md) |
+| Run behind Azure App Service | [Configure App Service authentication](authenticate-app-service.md) |
+| Test permissions locally | [Configure Simulator authentication](authenticate-simulator.md) |
 | Restrict rows by user | [Implement row-level security](row-level-security.md) |
 | Understand role assignment | [Authorization and roles](authorization.md) |
 
 ## Related content
 
-- [Configure the Unauthenticated provider](how-to-authenticate-unauthenticated.md)
-- [Configure Microsoft Entra ID authentication](how-to-authenticate-entra.md)
+- [Configure the Unauthenticated provider](authenticate-unauthenticated.md)
+- [Configure Microsoft Entra ID authentication](authenticate-entra.md)
 - [Authorization and roles](authorization.md)
-- [Security best practices](../../deployment/best-practices-security.md)
+- [Security best practices](best-practices.md)
 - [Runtime configuration reference](../../configuration/runtime.md)

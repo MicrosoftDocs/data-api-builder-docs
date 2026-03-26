@@ -520,11 +520,11 @@ Selects the authentication method. Each provider validates identity differently.
 
 | Provider | Use case | Identity source | How-to guide |
 |----------|----------|-----------------|--------------|
-| `Unauthenticated` | DAB sits behind a trusted front end (default) | None—all requests run as `anonymous` | [Configure the Unauthenticated provider](../concept/security/how-to-authenticate-unauthenticated.md) |
-| `AppService` | Azure-hosted apps (EasyAuth) | `X-MS-CLIENT-PRINCIPAL` header | [Configure App Service authentication](../concept/security/how-to-authenticate-app-service.md) |
-| `EntraID` | Microsoft Entra ID (Azure AD) | JWT bearer token | [Configure Entra ID authentication](../concept/security/how-to-authenticate-entra.md) |
-| `Custom` | Third-party IdPs (Okta, Auth0) | JWT bearer token | [Configure custom JWT authentication](../concept/security/how-to-authenticate-custom.md) |
-| `Simulator` | Local testing only | Simulated | [Configure Simulator authentication](../concept/security/how-to-authenticate-simulator.md) |
+| `Unauthenticated` | DAB sits behind a trusted front end (default) | None—all requests run as `anonymous` | [Configure the Unauthenticated provider](../concept/security/authenticate-unauthenticated.md) |
+| `AppService` | Azure-hosted apps (EasyAuth) | `X-MS-CLIENT-PRINCIPAL` header | [Configure App Service authentication](../concept/security/authenticate-app-service.md) |
+| `EntraID` | Microsoft Entra ID (Azure AD) | JWT bearer token | [Configure Entra ID authentication](../concept/security/authenticate-entra.md) |
+| `Custom` | Third-party IdPs (Okta, Auth0) | JWT bearer token | [Configure custom JWT authentication](../concept/security/authenticate-custom.md) |
+| `Simulator` | Local testing only | Simulated | [Configure Simulator authentication](../concept/security/authenticate-simulator.md) |
 
 > [!NOTE]
 > The `EntraId` provider was previously named `AzureAd`. The old name still works for compatibility.
@@ -853,11 +853,21 @@ HTTP response compression configuration. When enabled, DAB compresses response b
 
 ### Supported values for `level`
 
-| Value | Description |
-|---|---|
-| `none` | No compression (default) |
-| `optimal` | Balances compression ratio and speed |
-| `fastest` | Prioritizes compression speed over ratio |
+| Value | Description | Compression savings | Performance impact |
+|---|---|---|---|
+| `none` | No compression (default) | 0% (baseline: 12,673 bytes) | None |
+| `fastest` | Prioritizes speed over ratio | Gzip: 89.8% / Brotli: 91.1% | Low CPU usage, minimal latency |
+| `optimal` | Balances ratio and speed | Gzip: 90.5% / Brotli: 92.2% | Moderate CPU usage, slight latency increase |
+
+### Client HTTP headers
+
+Compression is invoked by the client's `Accept-Encoding` header. Supported algorithms are Gzip and Brotli. The `level` setting configures the compression strategy when both the client and server support multiple algorithms.
+
+#### Supported headers
+| | Algorithm Used |
+|-------------------------|---------------------------|
+| `Accept-Encoding: gzip` | Gzip |
+| `Accept-Encoding: br` | Brotli |
 
 ### Format
 
