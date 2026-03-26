@@ -4,6 +4,8 @@ _site/
 .optemp/
 _themes*/
 _repo.*/
+.github/*
+.tmp-data-api-builder/*
 
 # DocFX output (dest in data-api-builder/docfx.json)
 data-api-builder/data-api-builder-docs/
