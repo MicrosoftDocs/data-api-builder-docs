@@ -179,7 +179,7 @@ dab configure --data-source.user-delegated-auth.database-audience "https://datab
 
 ### Read the docs
 
-- [Configure OBO authentication](../concept/security/how-to-authenticate-obo.md)
+- [Configure OBO authentication](../concept/security/how-to-authenticate-on-behalf-of.md)
 - [User-delegated auth configuration](../configuration/data-source.md#user-delegated-auth)
 - [Security best practices](../deployment/best-practices-security.md)
 

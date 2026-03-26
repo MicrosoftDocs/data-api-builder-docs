@@ -16,7 +16,7 @@ Data API builder 2.0 supports On-Behalf-Of (OBO) authentication, sometimes refer
 With standard authentication, DAB validates the caller's token but connects to the database using its own credentials (managed identity or connection string). With OBO, DAB performs a token exchange so the database sees the real user identity.
 
 > [!TIP]
-> This feature was introduced in version 2.0. For more information, see [what's new](../../whats-new/version-2-0.md#on-behalf-of-obo-user-delegated-authentication-for-sql).
+> This feature was introduced in version 2.0. For more information, see [what's new](../../whats-new/version-2-0.md#introducing-on-behalf-of-obo-user-delegation).
 
 ## When to use OBO
 
@@ -153,4 +153,4 @@ When OBO is enabled, DAB maintains separate SQL connection pools per user so tha
 - [User-delegated auth configuration reference](../../configuration/data-source.md#user-delegated-auth)
 - [Configure Microsoft Entra ID authentication](how-to-authenticate-entra.md)
 - [Row-level security](row-level-security.md)
-- [What's new in version 2.0](../../whats-new/version-2-0.md#on-behalf-of-obo-user-delegated-authentication-for-sql)
+- [What's new in version 2.0](../../whats-new/version-2-0.md#introducing-on-behalf-of-obo-user-delegation)

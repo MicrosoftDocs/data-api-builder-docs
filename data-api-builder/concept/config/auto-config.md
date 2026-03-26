@@ -10,7 +10,7 @@ ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to understand how autoentities patterns and templates work so I can wire up an entire schema without writing individual entity blocks.
 ---
 
-# Auto configuration
+# Auto configuration concepts
 
 Auto configuration lets you define patterns that automatically find and expose database objects in your configuration. This can dramatically shrink a configuration file, especially when objects and permissions are predictable. In addition, `autoentities` reevaluate and apply the patterns each time DAB starts, so new tables that match the pattern are automatically added as entities without manual config changes.
 
@@ -40,7 +40,7 @@ Each `autoentities` definition is a named configuration block that combines a se
 
 ## Patterns
 
-Patterns control which database objects are discovered and how they're named as entities. DAB evaluates patterns using [T-SQL `LIKE` syntax](/sql/t-sql/language-elements/like-transact-sql?view=sql-server-ver17) against the `schema.object` format of each database object.
+Patterns control which database objects are discovered and how they're named as entities. DAB evaluates patterns using [T-SQL `LIKE` syntax](/sql/t-sql/language-elements/like-transact-sql) against the `schema.object` format of each database object.
 
 ### Include and exclude
 

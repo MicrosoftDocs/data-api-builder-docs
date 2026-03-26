@@ -10,7 +10,7 @@ ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to define pattern-based rules that automatically expose matching database objects as DAB entities, so that I can wire up an entire schema without writing individual entity blocks.
 ---
 
-# Auto configuration
+# Create autoentities with the DAB CLI
 
 Auto configuration is a powerful feature that allows you to define patterns that automatically find and expose database objects in your configuration. This can dramatically shrink a configuration file, especially when objects and permissions are predictable. In addition, `autoentities` reevaluate and apply the patterns each time DAB starts, so new tables that match the pattern are automatically added as entities without manual config changes.
 

@@ -35,7 +35,7 @@ Data API builder supports multiple authentication providers. Choose the one that
 | **Custom JSON Web Token (JWT)** | Third-party IdPs (Okta, Auth0, Keycloak) | [Configure custom JWT authentication](how-to-authenticate-custom.md) |
 | **App Service** | Apps running behind Azure App Service EasyAuth (platform headers) | [Configure App Service authentication](how-to-authenticate-app-service.md) |
 | **Simulator** | Local development and testing | [Configure Simulator authentication](how-to-authenticate-simulator.md) |
-| **OBO (user-delegated)** | SQL databases that require the real user identity (row-level security, auditing) | [Configure OBO authentication](how-to-authenticate-obo.md) |
+| **OBO (user-delegated)** | SQL databases that require the real user identity (row-level security, auditing) | [Configure OBO authentication](how-to-authenticate-on-behalf-of.md) |
 | **Static Web Apps** | Apps fronted by Static Web Apps (SWA) auth headers | [Configure App Service authentication](how-to-authenticate-app-service.md)
 
 > [!TIP]
