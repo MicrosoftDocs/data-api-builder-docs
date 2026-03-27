@@ -26,7 +26,7 @@ dab start [options]
 | --------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | [`-c, --config`](#-c---config)                | Use a specific config file (defaults to `dab-config.json` or environment-specific file if present) |
 | [`--LogLevel <level>`](#--loglevel-level)     | Specifies logging level as provided value.                                                         |
-| [`--mcp-stdio`](#--mcp-stdio)                 | *(Model Context Protocol (MCP))* Starts DAB as an MCP standard input/output (stdio) server instead of an HTTP server. Requires `mcp.enabled: true` in config. |
+| [`--mcp-stdio`](#--mcp-stdio)                 | *(Model Context Protocol (MCP))* Starts DAB as an MCP server that uses standard input and output (STDIO) instead of HTTP. Requires `mcp.enabled: true` in config. |
 | [`--no-https-redirect`](#--no-https-redirect) | Disables automatic HTTP→HTTPS redirection                                                          |
 | [`--help`](#--help)                           | Display the help screen.                                                                           |
 | [`--version`](#--version)                     | Display version information.                                                                       |
@@ -102,7 +102,7 @@ dab start ^
 > [!NOTE]
 > This option is a **Model Context Protocol (MCP) feature** available in release `1.7` and later. It requires `"mcp": { "enabled": true }` in the `runtime` section of your `dab-config.json`. For full MCP configuration details, see [SQL MCP Server overview](../mcp/overview.md).
 
-Starts Data API builder as an MCP standard input/output (stdio) server instead of binding to an HTTP port. In this mode, DAB communicates with an MCP client (such as GitHub Copilot, Visual Studio (VS) Code, or any MCP-compatible AI agent) entirely over standard input/output (stdin/stdout) using the [Model Context Protocol](https://modelcontextprotocol.io/). No HTTP server or network port is exposed.
+Starts Data API builder as an MCP server that uses standard input and output instead of binding to an HTTP port. In this mode, DAB communicates with an MCP client (such as GitHub Copilot, Visual Studio (VS) Code, or any MCP-compatible AI agent) entirely over `stdin` and `stdout` by using the [Model Context Protocol](https://modelcontextprotocol.io/). No HTTP server or network port is exposed.
 
 This flag also accepts an optional positional `role:<role-name>` argument that specifies the DAB permission role under which all MCP tool calls execute. The role must match a name defined in the `permissions` section of your entity configuration. If omitted, the role defaults to `anonymous`.
 
@@ -180,7 +180,7 @@ dab start ^
 
 ### MCP client configuration
 
-Because DAB runs as a subprocess communicating over standard input/output (stdio), your MCP client must launch DAB as a child process and pipe its stdin/stdout. A typical MCP client configuration for Visual Studio (VS) Code or a compatible agent looks like:
+Because DAB runs as a subprocess that communicates over standard input and output, your MCP client must launch DAB as a child process and pipe `stdin` and `stdout`. A typical MCP client configuration for Visual Studio (VS) Code or a compatible agent looks like:
 
 ```json
 {
@@ -200,7 +200,7 @@ Because DAB runs as a subprocess communicating over standard input/output (stdio
 }
 ```
 
-For a complete walkthrough, see [standard input/output (stdio) transport for SQL MCP Server](../mcp/stdio-transport.md).
+For a complete walkthrough, see [standard input and output transport for SQL MCP Server](../mcp/stdio-transport.md).
 
 ---
 

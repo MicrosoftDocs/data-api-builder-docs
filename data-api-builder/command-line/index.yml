@@ -41,13 +41,13 @@ landingContent:
           - text: Source options
             url: dab-add.md#-s---source
 
-  - title: Auto-config
+  - title: Auto-configuration
     linkLists:
       - linkListType: overview
         links:
-          - text: dab auto-config
+          - text: Generate auto-configuration 
             url: dab-auto-config.md
-          - text: dab auto-config-simulate
+          - text: Simulate auto-configuration
             url: dab-auto-config-simulate.md
       - linkListType: reference
         links:

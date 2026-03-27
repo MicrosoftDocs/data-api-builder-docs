@@ -254,10 +254,6 @@ landingContent:
         links:
           - text: dab add
             url: command-line/dab-add.md
-          - text: dab auto-config
-            url: command-line/dab-auto-config.md
-          - text: dab auto-config-simulate
-            url: command-line/dab-auto-config-simulate.md
           - text: dab configure 
             url: command-line/dab-configure.md
           - text: dab export 
@@ -270,6 +266,10 @@ landingContent:
             url: command-line/dab-update.md
           - text: dab validate 
             url: command-line/dab-validate.md
+          - text: dab auto-config
+            url: command-line/dab-auto-config.md
+          - text: dab auto-config-simulate
+            url: command-line/dab-auto-config-simulate.md
   - title: Visual Studio Code extensions
     linkLists:
       - linkListType: overview

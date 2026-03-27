@@ -42,7 +42,7 @@ sections:
         answer: |
           Authorization for multiple mutations in GraphQL is handled similarly to single mutations. All entities involved in the multiple mutation operation must be configured to support the same role from the request. For example, if a multiple mutation operation creates both a **Book** and **Publisher** entity, then both entities should have the same authenticated role defined. 
           
-          For more information on authorization, see [authorization guide](authorization.md).
+          For more information on authorization, see [authorization guide](concept/security/authorization.md).
       - question: |
           Do GraphQL multiple mutations support atomic behaviors?
         answer: |
