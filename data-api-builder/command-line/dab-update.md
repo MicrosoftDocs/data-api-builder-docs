@@ -23,90 +23,90 @@ Update an existing entity definition in the Data API builder configuration file.
 dab update <entity-name> [options]
 ```
 
-### Quick glance
+## Quick glance
 
-| Option                            | Summary                                                     |
-| --------------------------------- | ----------------------------------------------------------- |
-| `<entity-name>`                   | Required positional argument. Logical entity name.          |
-| [`-s, --source`](#-s---source)    | Name of the source table, view, or stored procedure.        |
-| [`--permissions`](#--permissions) | Role and actions in `role:actions` format.                  |
-| [`--description`](#--description) | Replace entity description.                                 |
-| [`-c, --config`](#-c---config)    | Path to config file. Default resolution applies if omitted. |
-| [`--help`](#--help)               | Display the help screen.                                    |
-| [`--version`](#--version)         | Display version information.                                |
+| Option | Summary |
+| - | - |
+| `<entity-name>` | Required positional argument. Logical entity name. |
+| [`-s, --source`](#-s---source) | Name of the source table, view, or stored procedure. |
+| [`--permissions`](#--permissions) | Role and actions in `role:actions` format. |
+| [`--description`](#--description) | Replace entity description. |
+| [`-c, --config`](#-c---config) | Path to config file. Default resolution applies if omitted. |
+| [`--help`](#--help) | Display the help screen. |
+| [`--version`](#--version) | Display version information. |
 
 #### Cache
 
-| Option                               | Summary                           |
-| ------------------------------------ | --------------------------------- |
+| Option | Summary |
+| - | - |
 | [`--cache.enabled`](#--cacheenabled) | Enable or disable entity caching. |
-| [`--cache.ttl`](#--cachettl)         | Cache time-to-live in seconds.    |
+| [`--cache.ttl`](#--cachettl) | Cache time-to-live in seconds. |
 
 #### Fields
 
-| Option                                 | Summary                                                |
-| -------------------------------------- | ------------------------------------------------------ |
-| [`--fields.exclude`](#--fieldsexclude) | Comma-separated list of excluded fields.               |
-| [`--fields.include`](#--fieldsinclude) | Comma-separated list of included fields (`*` = all).   |
+| Option | Summary |
+| - | - |
+| [`--fields.exclude`](#--fieldsexclude) | Comma-separated list of excluded fields. |
+| [`--fields.include`](#--fieldsinclude) | Comma-separated list of included fields (`*` = all). |
 
 #### Fields metadata
 
-| Option                                       | Summary                                  |
-| -------------------------------------------- | ---------------------------------------- |
-| [`--fields.name`](#--fieldsname)             | Name of the database column to describe. |
-| [`--fields.alias`](#--fieldsalias)           | Alias for the field.                     |
-| [`--fields.description`](#--fieldsdescription) | Description for the field.             |
-| [`--fields.primary-key`](#--fieldsprimary-key) | Set this field as a primary key.       |
+| Option | Summary |
+| - | - |
+| [`--fields.name`](#--fieldsname) | Name of the database column to describe. |
+| [`--fields.alias`](#--fieldsalias) | Alias for the field. |
+| [`--fields.description`](#--fieldsdescription) | Description for the field. |
+| [`--fields.primary-key`](#--fieldsprimary-key) | Set this field as a primary key. |
 
 #### GraphQL
 
-| Option                                       | Summary                                                              |
-| -------------------------------------------- | -------------------------------------------------------------------- |
-| [`--graphql`](#--graphql)                    | GraphQL exposure: `false`, `true`, `singular`, or `singular:plural`. |
-| [`--graphql.operation`](#--graphqloperation) | Stored procedures only: `query` or `mutation` (default mutation).    |
+| Option | Summary |
+| - | - |
+| [`--graphql`](#--graphql) | GraphQL exposure: `false`, `true`, `singular`, or `singular:plural`. |
+| [`--graphql.operation`](#--graphqloperation) | Stored procedures only: `query` or `mutation` (default mutation). |
 
 #### Permissions & Policies
 
-| Option                                    | Summary                                                   |
-| ----------------------------------------- | --------------------------------------------------------- |
-| [`--permissions`](#--permissions)         | `role:actions` for a single role. Run multiple times for multiple roles. |
-| [`--policy-database`](#--policy-database) | OData-style filter injected in database query.             |
-| [`--policy-request`](#--policy-request)   | Predatabase request filter.                              |
+| Option | Summary |
+| - | - |
+| [`--permissions`](#--permissions) | `role:actions` for a single role. Run multiple times for multiple roles. |
+| [`--policy-database`](#--policy-database) | OData-style filter injected in database query. |
+| [`--policy-request`](#--policy-request) | Predatabase request filter. |
 
 #### Relationships
 
-| Option                                           | Summary                                           |
-| ------------------------------------------------ | ------------------------------------------------- |
-| [`--relationship`](#--relationship)              | Relationship name. Use with relationship options. |
-| [`--cardinality`](#--cardinality)                | Relationship cardinality: `one` or `many`.        |
-| [`--target.entity`](#--targetentity)             | Target entity name.                               |
-| [`--linking.object`](#--linkingobject)           | Linking object for many-to-many.                  |
-| [`--linking.source.fields`](#--linkingsourcefields) | Linking object fields pointing to source.      |
-| [`--linking.target.fields`](#--linkingtargetfields) | Linking object fields pointing to target.      |
-| [`--relationship.fields`](#--relationshipfields) | Field mappings for direct relationships.          |
+| Option | Summary |
+| - | - |
+| [`--relationship`](#--relationship) | Relationship name. Use with relationship options. |
+| [`--cardinality`](#--cardinality) | Relationship cardinality: `one` or `many`. |
+| [`--target.entity`](#--targetentity) | Target entity name. |
+| [`--linking.object`](#--linkingobject) | Linking object for many-to-many. |
+| [`--linking.source.fields`](#--linkingsourcefields) | Linking object fields pointing to source. |
+| [`--linking.target.fields`](#--linkingtargetfields) | Linking object fields pointing to target. |
+| [`--relationship.fields`](#--relationshipfields) | Field mappings for direct relationships. |
 
 #### REST
 
-| Option                             | Summary                                             |
-| ---------------------------------- | --------------------------------------------------- |
-| [`--rest`](#--rest)                | REST exposure: `false`, `true`, or custom path.     |
+| Option | Summary |
+| - | - |
+| [`--rest`](#--rest) | REST exposure: `false`, `true`, or custom path. |
 | [`--rest.methods`](#--restmethods) | Stored procedures only. Replace allowed HTTP verbs. |
 
 #### Source
 
-| Option                                       | Summary                                              |
-| -------------------------------------------- | ---------------------------------------------------- |
-| [`-s, --source`](#-s---source)               | Underlying database object name.                     |
-| [`--source.type`](#--sourcetype)             | Source type: `table`, `view`, or `stored-procedure`. |
+| Option | Summary |
+| - | - |
+| [`-s, --source`](#-s---source) | Underlying database object name. |
+| [`--source.type`](#--sourcetype) | Source type: `table`, `view`, or `stored-procedure`. |
 
 #### Parameters (stored procedures)
 
-| Option                                       | Summary                                     |
-| -------------------------------------------- | ------------------------------------------- |
-| [`--parameters.name`](#--parametersname)     | Comma-separated list of parameter names.    |
+| Option | Summary |
+| - | - |
+| [`--parameters.name`](#--parametersname) | Comma-separated list of parameter names. |
 | [`--parameters.description`](#--parametersdescription) | Comma-separated list of parameter descriptions. |
-| [`--parameters.required`](#--parametersrequired) | Comma-separated list of required flags.  |
-| [`--parameters.default`](#--parametersdefault) | Comma-separated list of default values.   |
+| [`--parameters.required`](#--parametersrequired) | Comma-separated list of required flags. |
+| [`--parameters.default`](#--parametersdefault) | Comma-separated list of default values. |
 
 
 ## `--cache.enabled`
@@ -130,8 +130,6 @@ dab update ^
   Book ^
   --cache.enabled true
 ```
-
----
 
 ### Resulting config
 
@@ -168,8 +166,6 @@ dab update ^
   Book ^
   --cache.ttl 600
 ```
-
----
 
 ### Resulting config
 
@@ -212,8 +208,6 @@ dab update ^
   --description "Updated description"
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -249,8 +243,6 @@ dab update ^
   --permissions "anonymous:read" ^
   --fields.exclude "internal_flag,secret_note"
 ```
-
----
 
 ### Resulting config
 
@@ -300,8 +292,6 @@ dab update ^
   --fields.include "id,title,author"
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -349,8 +339,6 @@ dab update ^
   --graphql book:books
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -390,8 +378,6 @@ dab update ^
   RunReport ^
   --graphql.operation query
 ```
-
----
 
 ### Resulting config
 
@@ -441,8 +427,6 @@ dab update ^
   Book ^
   --permissions "authenticated:create,read,update"
 ```
-
----
 
 ### Resulting config
 
@@ -500,8 +484,6 @@ dab update ^
   --policy-database "region eq 'US'"
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -549,8 +531,6 @@ dab update ^
   --permissions "anonymous:read" ^
   --policy-request "@claims.role == 'admin'"
 ```
-
----
 
 ### Resulting config
 
@@ -604,8 +584,6 @@ dab update ^
   --relationship.fields "id:user_id"
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -653,8 +631,6 @@ dab update ^
   --relationship.fields "id:user_id"
 ```
 
----
-
 ## `--target.entity`
 
 Target entity name for the relationship. Use with `--relationship`.
@@ -682,8 +658,6 @@ dab update ^
   --cardinality one ^
   --relationship.fields "id:user_id"
 ```
-
----
 
 ## `--linking.object`
 
@@ -719,8 +693,6 @@ dab update ^
   --linking.target.fields author_id
 ```
 
----
-
 ## `--linking.source.fields`
 
 Many-to-many only. Comma-separated list of linking object fields pointing to the source entity.
@@ -754,8 +726,6 @@ dab update ^
   --linking.source.fields book_id ^
   --linking.target.fields author_id
 ```
-
----
 
 ## `--linking.target.fields`
 
@@ -791,8 +761,6 @@ dab update ^
   --linking.target.fields author_id
 ```
 
----
-
 ## `--relationship.fields`
 
 Colon-separated field mappings for direct relationships.
@@ -822,8 +790,6 @@ dab update ^
   --cardinality one ^
   --relationship.fields "id:user_id"
 ```
-
----
 
 ### Resulting config
 
@@ -864,8 +830,6 @@ dab update ^
   --rest BooksApi
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -904,8 +868,6 @@ dab update ^
   --rest true ^
   --rest.methods GET,POST
 ```
-
----
 
 ### Resulting config
 
@@ -947,8 +909,6 @@ dab update ^
   --source dbo.Books
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -985,8 +945,6 @@ dab update ^
   Book ^
   --source.type view
 ```
-
----
 
 ### Resulting config
 
@@ -1033,8 +991,6 @@ dab update ^
   --parameters.required "true,true" ^
   --parameters.description "Beginning of date range,End of date range"
 ```
-
----
 
 ### Resulting config
 
@@ -1087,8 +1043,6 @@ dab update ^
   --parameters.description "Beginning of date range,End of date range"
 ```
 
----
-
 ## `--parameters.required`
 
 Stored procedures only. Comma-separated list of `true`/`false` values aligned to `--parameters.name`.
@@ -1115,8 +1069,6 @@ dab update ^
   --parameters.required "true,true"
 ```
 
----
-
 ## `--parameters.default`
 
 Stored procedures only. Comma-separated list of default values aligned to `--parameters.name`.
@@ -1142,8 +1094,6 @@ dab update ^
   --parameters.name "CustomerID" ^
   --parameters.default "null"
 ```
-
----
 
 ## `--fields.name`
 
@@ -1172,8 +1122,6 @@ dab update ^
   --fields.primary-key true ^
   --fields.description "Product Id"
 ```
-
----
 
 ### Resulting config
 
@@ -1222,8 +1170,6 @@ dab update ^
   --fields.alias "product_id,product_title"
 ```
 
----
-
 ## `--fields.description`
 
 Description for the field. Use a comma-separated list aligned to `--fields.name`.
@@ -1249,8 +1195,6 @@ dab update ^
   --fields.name Id ^
   --fields.description "Product Id"
 ```
-
----
 
 ## `--fields.primary-key`
 
@@ -1280,8 +1224,6 @@ dab update ^
   --fields.name "year,region" ^
   --fields.primary-key "true,true"
 ```
-
----
 
 ### Resulting config
 
@@ -1328,8 +1270,6 @@ dab update ^
   --config dab-config.json
 ```
 
----
-
 ## `--help`
 
 Display the help screen.
@@ -1348,8 +1288,6 @@ dab update --help
 dab update --help
 ```
 
----
-
 ## `--version`
 
 Display version information.
@@ -1367,8 +1305,6 @@ dab update --version
 ```cmd
 dab update --version
 ```
-
----
 
 > [!Important]
 > Changing source type may invalidate other properties. For example, views always require key-fields; stored procedures cannot define key-fields.

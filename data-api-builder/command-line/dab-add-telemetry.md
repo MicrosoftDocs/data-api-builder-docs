@@ -25,16 +25,26 @@ For conceptual guidance and end-to-end walkthroughs, see [Use OpenTelemetry and 
 dab add-telemetry [options]
 ```
 
-### Quick glance
+## Quick glance
 
 | Option | Summary |
 | --- | --- |
 | [`-c, --config`](#-c---config) | Config file path. Default `dab-config.json`. |
+
+### OpenTelemetry section
+
+| Option | Summary |
+| --- | --- |
 | [`--otel-enabled`](#--otel-enabled) | Enable or disable OpenTelemetry. |
 | [`--otel-endpoint`](#--otel-endpoint) | OpenTelemetry collector endpoint URL. |
 | [`--otel-protocol`](#--otel-protocol) | Export protocol. Allowed values: `grpc`, `http`. |
 | [`--otel-service-name`](#--otel-service-name) | Service name tag on all telemetry. |
 | [`--otel-headers`](#--otel-headers) | Extra headers to send to the OpenTelemetry collector. |
+
+### Azure Application Insights section
+
+| Option | Summary |
+| --- | --- |
 | [`--app-insights-enabled`](#--app-insights-enabled) | Enable or disable Azure Application Insights. |
 | [`--app-insights-conn-string`](#--app-insights-conn-string) | Application Insights connection string. |
 
@@ -60,8 +70,6 @@ dab add-telemetry ^
   --otel-enabled true
 ```
 
----
-
 ## `--otel-enabled`
 
 Enable or disable the OpenTelemetry exporter. Accepted values: `true`, `false`.
@@ -82,9 +90,7 @@ dab add-telemetry ^
   --otel-enabled true
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -120,9 +126,7 @@ dab add-telemetry ^
   --otel-endpoint "http://localhost:4317"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -161,9 +165,7 @@ dab add-telemetry ^
   --otel-protocol "http"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -201,9 +203,7 @@ dab add-telemetry ^
   --otel-service-name "my-dab-api"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -242,8 +242,6 @@ dab add-telemetry ^
   --otel-headers "api-key=my-secret-key"
 ```
 
----
-
 ## `--app-insights-enabled`
 
 Enable or disable Azure Application Insights telemetry. Accepted values: `true`, `false`.
@@ -264,9 +262,7 @@ dab add-telemetry ^
   --app-insights-enabled true
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -305,9 +301,7 @@ dab add-telemetry ^
   --app-insights-conn-string "@env('APP_INSIGHTS_CONN_STRING')"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -350,9 +344,7 @@ dab add-telemetry ^
   --app-insights-conn-string "@env('APP_INSIGHTS_CONN_STRING')"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {

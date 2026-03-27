@@ -23,40 +23,66 @@ Add a new entity definition to an existing Data API builder configuration file. 
 dab add <entity-name> [options]
 ```
 
-### Quick glance
+## Quick glance
 
-| Option                                       | Summary                                                              |
-| -------------------------------------------- | -------------------------------------------------------------------- |
-| `<entity-name>`                              | Required positional argument. Logical entity name.                   |
-| [`-c, --config`](#-c---config)               | Config file path. Default `dab-config.json`.                         |
-| [`--cache.enabled`](#--cacheenabled)         | Enable/disable caching for entity.                                   |
-| [`--cache.ttl`](#--cachettl)                 | Cache time-to-live in seconds.                                       |
-| [`--description`](#--description)            | Free-form description for entity.                                    |
-| [`--fields.exclude`](#--fieldsexclude)       | Comma-separated excluded fields.                                     |
-| [`--fields.include`](#--fieldsinclude)       | Comma-separated allowed fields (`*` = all).                          |
-| [`--fields.name`](#--fieldsname)             | Field names to describe (repeatable or comma-separated).             |
-| [`--fields.alias`](#--fieldsalias)           | Field aliases (comma-separated, aligned to `--fields.name`).         |
-| [`--fields.description`](#--fieldsdescription) | Field descriptions (comma-separated, aligned to `--fields.name`).  |
-| [`--fields.primary-key`](#--fieldsprimary-key) | Primary key flags (comma-separated, aligned to `--fields.name`).    |
-| [`--graphql`](#--graphql)                    | GraphQL exposure: `false`, `true`, `singular`, or `singular:plural`. |
-| [`--graphql.operation`](#--graphqloperation) | Stored procedures only. `Query` or `Mutation` (default mutation).    |
-| [`--permissions`](#--permissions)            | Required. `role:actions` for a single role.                          |
-| [`--policy-database`](#--policy-database)    | OData-style filter applied in database query.                        |
-| [`--policy-request`](#--policy-request)      | Request policy evaluated before database call.                       |
-| [`--parameters.name`](#--parametersname)     | Stored procedures only. Parameter names (comma-separated).           |
-| [`--parameters.description`](#--parametersdescription) | Stored procedures only. Parameter descriptions.              |
-| [`--parameters.required`](#--parametersrequired) | Stored procedures only. Parameter required flags.                 |
-| [`--parameters.default`](#--parametersdefault) | Stored procedures only. Parameter default values.                  |
-| [`--rest`](#--rest)                          | REST exposure: `false`, `true`, or custom route.                     |
-| [`--rest.methods`](#--restmethods)           | Stored procedures only. Allowed verbs: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`. Default POST. |
-| [`-s, --source`](#-s---source)               | Required. Database object name (table, view, or stored procedure).   |
-| [`--source.type`](#--sourcetype)             | Source type: `table`, `view`, `stored-procedure` (default table).    |
-| [`--mcp.dml-tools`](#--mcpdml-tools)        | Enable/disable data manipulation language (DML) tools for entity in Model Context Protocol (MCP). Default `true`. |
-| [`--mcp.custom-tool`](#--mcpcustom-tool)    | Stored procedures only. Register as a named MCP tool.               |
-| [`--help`](#--help)                          | Display this help screen.                                            |
-| [`--version`](#--version)                    | Display version information.                                         |
+| Option | Summary |
+| - | - |
+| [`-c, --config`](#-c---config) | Config file path. Default `dab-config.json`. |
 
----
+### Head section
+
+| Option | Summary |
+| - | - |
+| `<entity-name>` | Required positional argument. Logical entity name. |
+| [`-s, --source`](#-s---source) | Required. Database object name (table, view, or stored procedure). |
+| [`--source.type`](#--sourcetype) | Source type: `table`, `view`, `stored-procedure` (default table). |
+
+### Cache section
+
+| Option | Summary |
+| - | - |
+| [`--cache.enabled`](#--cacheenabled) | Enable/disable caching for entity. |
+| [`--cache.ttl`](#--cachettl) | Cache time-to-live in seconds. |
+| [`--description`](#--description) | Free-form description for entity. |
+
+### Parameters section
+
+| Option | Summary |
+| - | - |
+| [`--parameters.name`](#--parametersname) | Stored procedures only. Parameter names (comma-separated). |
+| [`--parameters.description`](#--parametersdescription) | Stored procedures only. Parameter descriptions. |
+| [`--parameters.required`](#--parametersrequired) | Stored procedures only. Parameter required flags. |
+| [`--parameters.default`](#--parametersdefault) | Stored procedures only. Parameter default values. |
+
+### Fields section
+
+| Option | Summary |
+| - | - |
+| [`--fields.exclude`](#--fieldsexclude) | Comma-separated excluded fields. |
+| [`--fields.include`](#--fieldsinclude) | Comma-separated allowed fields (`*` = all). |
+| [`--fields.name`](#--fieldsname) | Field names to describe (repeatable or comma-separated). |
+| [`--fields.alias`](#--fieldsalias) | Field aliases (comma-separated, aligned to `--fields.name`). |
+| [`--fields.description`](#--fieldsdescription) | Field descriptions (comma-separated, aligned to `--fields.name`). |
+| [`--fields.primary-key`](#--fieldsprimary-key) | Primary key flags (comma-separated, aligned to `--fields.name`). |
+
+### API section
+
+| Option | Summary |
+| - | - |
+| [`--graphql`](#--graphql) | GraphQL exposure: `false`, `true`, `singular`, or `singular:plural`. |
+| [`--graphql.operation`](#--graphqloperation) | Stored procedures only. `Query` or `Mutation` (default mutation). |
+| [`--rest`](#--rest) | REST exposure: `false`, `true`, or custom route. |
+| [`--rest.methods`](#--restmethods) | Stored procedures only. Allowed verbs: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`. Default POST. |
+| [`--mcp.dml-tools`](#--mcpdml-tools) | Enable/disable data manipulation language (DML) tools for entity in Model Context Protocol (MCP). Default `true`. |
+| [`--mcp.custom-tool`](#--mcpcustom-tool) | Stored procedures only. Register as a named MCP tool. |
+
+### Permissions section
+
+| Option | Summary |
+| - | - |
+| [`--permissions`](#--permissions) | Required. `role:actions` for a single role. |
+| [`--policy-database`](#--policy-database) | OData-style filter applied in database query. |
+| [`--policy-request`](#--policy-request) | Request policy evaluated before database call. |
 
 ## `<entity-name>`
 
@@ -86,8 +112,6 @@ dab add Book ^
   --description "Example for managing book inventory"
 ```
 
----
-
 #### Add a view
 
 #### [Bash](#tab/bash)
@@ -113,8 +137,6 @@ dab add BookView ^
   --permissions "anonymous:read" ^
   --description "Example for managing book inventory from view"
 ```
-
----
 
 #### Add a stored procedure
 
@@ -146,8 +168,6 @@ dab add BookProc ^
   --description "Example for executing a stored procedure"
 ```
 
----
-
 ## `-c, --config`
 
 Config file path. Default is `dab-config.json`.
@@ -172,9 +192,87 @@ dab add Book ^
   --permissions "anonymous:read"
 ```
 
----
+## `-s, --source`
 
----
+Required. Name of the database object: table, view, container, or stored procedure.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read"
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read"
+```
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "table",
+        "object": "dbo.Books"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ]
+    }
+  }
+}
+```
+
+## `--source.type`
+
+Type of database object. Default: `table`.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --source.type table \
+  --permissions "anonymous:read"
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --source.type table ^
+  --permissions "anonymous:read"
+```
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "table",
+        "object": "dbo.Books"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ]
+    }
+  }
+}
+```
 
 ## `--cache.enabled`
 
@@ -199,8 +297,6 @@ dab add Book ^
   --permissions "anonymous:read" ^
   --cache.enabled true
 ```
-
----
 
 ### Resulting config
 
@@ -246,8 +342,6 @@ dab add Book ^
   --permissions "anonymous:read" ^
   --cache.ttl 300
 ```
-
----
 
 ### Resulting config
 
@@ -297,8 +391,6 @@ dab add Book ^
   --description "Entity for managing book inventory"
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -317,235 +409,6 @@ dab add Book ^
   }
 }
 ```
-
-## `--fields.exclude`
-
-Comma-separated list of fields to exclude.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add Book \
-  --source dbo.Books \
-  --permissions "anonymous:read" \
-  --fields.exclude "internal_flag,secret_note"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add Book ^
-  --source dbo.Books ^
-  --permissions "anonymous:read" ^
-  --fields.exclude "internal_flag,secret_note"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "Book": {
-      "source": { "type": "table", "object": "dbo.Books" },
-      "permissions": [
-        {
-          "role": "anonymous",
-          "actions": [
-            {
-              "action": "read",
-              "fields": {
-                "exclude": [ "internal_flag", "secret_note" ]
-              }
-            }
-          ]
-        }
-      ]
-    }
-  }
-}
-```
-
-## `--fields.include`
-
-Comma-separated list of fields to expose.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add Book \
-  --source dbo.Books \
-  --permissions "anonymous:read" \
-  --fields.include "id,title,price"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add Book ^
-  --source dbo.Books ^
-  --permissions "anonymous:read" ^
-  --fields.include "id,title,price"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "Book": {
-      "source": { "type": "table", "object": "dbo.Books" },
-      "permissions": [
-        {
-          "role": "anonymous",
-          "actions": [
-            {
-              "action": "read",
-              "fields": {
-                "include": [ "id", "title", "price" ]
-              }
-            }
-          ]
-        }
-      ]
-    }
-  }
-}
-```
-
-## `--graphql`
-
-Control GraphQL exposure.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add Book \
-  --source dbo.Books \
-  --permissions "anonymous:read" \
-  --graphql book:books
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add Book ^
-  --source dbo.Books ^
-  --permissions "anonymous:read" ^
-  --graphql book:books
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "Book": {
-      "source": { "type": "table", "object": "dbo.Books" },
-      "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "read" } ] }
-      ],
-      "graphql": {
-        "enabled": true,
-        "type": {
-          "singular": "book",
-          "plural": "books"
-        }
-      }
-    }
-  }
-}
-```
-
-## `--graphql.operation`
-
-Stored procedures only. GraphQL operation type. Default is `mutation`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add BookProc \
-  --source dbo.MyProc \
-  --source.type stored-procedure \
-  --permissions "admin:execute" \
-  --graphql.operation Query
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add BookProc ^
-  --source dbo.MyProc ^
-  --source.type stored-procedure ^
-  --permissions "admin:execute" ^
-  --graphql.operation Query
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "BookProc": {
-      "source": { "type": "stored-procedure", "object": "dbo.MyProc" },
-      "permissions": [
-        { "role": "admin", "actions": [ { "action": "execute" } ] }
-      ],
-      "graphql": {
-        "enabled": true,
-        "operation": "query"
-      }
-    }
-  }
-}
-```
-
-## `--permissions`
-
-Defines role→actions pairs.
-
-`--permissions` isn't repeatable. To add more roles, run `dab add` with one role and then run `dab update` for more roles.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add Book \
-  --source dbo.Books \
-  --permissions "anonymous:read"
-
-dab update Book \
-  --permissions "authenticated:create,read,update,delete"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add Book ^
-  --source dbo.Books ^
-  --permissions "anonymous:read"
-
-dab update Book ^
-  --permissions "authenticated:create,read,update,delete"
-```
-
----
 
 ## `--parameters.name`
 
@@ -582,8 +445,6 @@ dab add GetOrdersByDateRange ^
   --parameters.required "true,true,false" ^
   --parameters.default ",,null"
 ```
-
----
 
 ### Resulting config
 
@@ -659,8 +520,6 @@ dab add GetOrdersByDateRange ^
   --parameters.description "Beginning of date range (inclusive),End of date range (inclusive)"
 ```
 
----
-
 ## `--parameters.required`
 
 Stored procedures only. Comma-separated list of `true`/`false` values aligned to `--parameters.name`.
@@ -690,8 +549,6 @@ dab add GetOrdersByDateRange ^
   --parameters.name "StartDate,EndDate" ^
   --parameters.required "true,true"
 ```
-
----
 
 ## `--parameters.default`
 
@@ -723,7 +580,103 @@ dab add GetOrdersByDateRange ^
   --parameters.default "null"
 ```
 
----
+## `--fields.exclude`
+
+Comma-separated list of fields to exclude.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --fields.exclude "internal_flag,secret_note"
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --fields.exclude "internal_flag,secret_note"
+```
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "read",
+              "fields": {
+                "exclude": [ "internal_flag", "secret_note" ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+## `--fields.include`
+
+Comma-separated list of fields to expose.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --fields.include "id,title,price"
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --fields.include "id,title,price"
+```
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "read",
+              "fields": {
+                "include": [ "id", "title", "price" ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
 
 ## `--fields.name`
 
@@ -756,8 +709,6 @@ dab add Products ^
   --fields.description "Unique identifier for each product,Display name of the product" ^
   --fields.primary-key "true,false"
 ```
-
----
 
 ### Resulting config
 
@@ -816,8 +767,6 @@ dab add Products ^
   --fields.alias "product_id"
 ```
 
----
-
 ## `--fields.description`
 
 Description for the field. Use a comma-separated list aligned to `--fields.name`.
@@ -845,8 +794,6 @@ dab add Products ^
   --fields.name "ProductID" ^
   --fields.description "Unique identifier"
 ```
-
----
 
 ## `--fields.primary-key`
 
@@ -876,8 +823,6 @@ dab add Products ^
   --fields.primary-key "true"
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -897,6 +842,314 @@ dab add Products ^
     }
   }
 }
+```
+
+## `--graphql`
+
+Control GraphQL exposure.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --graphql book:books
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --graphql book:books
+```
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ],
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "book",
+          "plural": "books"
+        }
+      }
+    }
+  }
+}
+```
+
+## `--graphql.operation`
+
+Stored procedures only. GraphQL operation type. Default is `mutation`.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab add BookProc \
+  --source dbo.MyProc \
+  --source.type stored-procedure \
+  --permissions "admin:execute" \
+  --graphql.operation Query
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add BookProc ^
+  --source dbo.MyProc ^
+  --source.type stored-procedure ^
+  --permissions "admin:execute" ^
+  --graphql.operation Query
+```
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "BookProc": {
+      "source": { "type": "stored-procedure", "object": "dbo.MyProc" },
+      "permissions": [
+        { "role": "admin", "actions": [ { "action": "execute" } ] }
+      ],
+      "graphql": {
+        "enabled": true,
+        "operation": "query"
+      }
+    }
+  }
+}
+```
+
+## `--rest`
+
+Control REST exposure.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --rest BooksApi
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --rest BooksApi
+```
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ],
+      "rest": {
+        "enabled": true,
+        "path": "/BooksApi"
+      }
+    }
+  }
+}
+```
+
+## `--rest.methods`
+
+Stored procedures only. HTTP verbs allowed for execution: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`. Defaults to POST. Ignored for tables/views.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab add BookProc \
+  --source dbo.MyProc \
+  --source.type stored-procedure \
+  --permissions "admin:execute" \
+  --rest true \
+  --rest.methods GET,POST
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add BookProc ^
+  --source dbo.MyProc ^
+  --source.type stored-procedure ^
+  --permissions "admin:execute" ^
+  --rest true ^
+  --rest.methods GET,POST
+```
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "BookProc": {
+      "source": { "type": "stored-procedure", "object": "dbo.MyProc" },
+      "permissions": [
+        { "role": "admin", "actions": [ { "action": "execute" } ] }
+      ],
+      "rest": {
+        "enabled": true,
+        "methods": [ "get", "post" ]
+      }
+    }
+  }
+}
+```
+
+## `--mcp.dml-tools`
+
+Enable or disable DML tools for this entity in MCP. Default: `true`. When set to `false`, the entity is excluded from the MCP DML tool surface. When `mcp` is omitted entirely, DML tools are enabled by default.
+
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --mcp.dml-tools true
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --mcp.dml-tools true
+```
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "table",
+        "object": "dbo.Books"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ],
+      "mcp": {
+        "dml-tools": true
+      }
+    }
+  }
+}
+```
+
+## `--mcp.custom-tool`
+
+Register a stored procedure entity as a named MCP tool. Valid only when `--source.type` is `stored-procedure`. When `true`, DAB dynamically registers the procedure in the MCP `tools/list` response and agents can call it through `tools/call`.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab add GetBookById \
+  --source dbo.get_book_by_id \
+  --source.type stored-procedure \
+  --permissions "anonymous:execute" \
+  --mcp.custom-tool true
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add GetBookById ^
+  --source dbo.get_book_by_id ^
+  --source.type stored-procedure ^
+  --permissions "anonymous:execute" ^
+  --mcp.custom-tool true
+```
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "GetBookById": {
+      "source": {
+        "type": "stored-procedure",
+        "object": "dbo.get_book_by_id"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "execute" } ] }
+      ],
+      "mcp": {
+        "custom-tool": true
+      }
+    }
+  }
+}
+```
+
+> [!IMPORTANT]
+> `--mcp.custom-tool` is valid only for stored-procedure entities. Using it with table or view entities causes a validation error.
+
+## `--permissions`
+
+Defines role→actions pairs.
+
+`--permissions` isn't repeatable. To add more roles, run `dab add` with one role and then run `dab update` for more roles.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read"
+
+dab update Book \
+  --permissions "authenticated:create,read,update,delete"
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read"
+
+dab update Book ^
+  --permissions "authenticated:create,read,update,delete"
 ```
 
 ## `--policy-database`
@@ -922,8 +1175,6 @@ dab add Book ^
   --permissions "anonymous:read" ^
   --policy-database "region eq 'US'"
 ```
-
----
 
 ### Resulting config
 
@@ -974,8 +1225,6 @@ dab add Book ^
   --policy-request "@claims.role == 'admin'"
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -1001,243 +1250,6 @@ dab add Book ^
 }
 ```
 
-## `--rest`
-
-Control REST exposure.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add Book \
-  --source dbo.Books \
-  --permissions "anonymous:read" \
-  --rest BooksApi
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add Book ^
-  --source dbo.Books ^
-  --permissions "anonymous:read" ^
-  --rest BooksApi
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "Book": {
-      "source": { "type": "table", "object": "dbo.Books" },
-      "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "read" } ] }
-      ],
-      "rest": {
-        "enabled": true,
-        "path": "/BooksApi"
-      }
-    }
-  }
-}
-```
-
-## `--rest.methods`
-
-Stored procedures only. HTTP verbs allowed for execution: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`. Defaults to POST. Ignored for tables/views.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add BookProc \
-  --source dbo.MyProc \
-  --source.type stored-procedure \
-  --permissions "admin:execute" \
-  --rest true \
-  --rest.methods GET,POST
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add BookProc ^
-  --source dbo.MyProc ^
-  --source.type stored-procedure ^
-  --permissions "admin:execute" ^
-  --rest true ^
-  --rest.methods GET,POST
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "BookProc": {
-      "source": { "type": "stored-procedure", "object": "dbo.MyProc" },
-      "permissions": [
-        { "role": "admin", "actions": [ { "action": "execute" } ] }
-      ],
-      "rest": {
-        "enabled": true,
-        "methods": [ "get", "post" ]
-      }
-    }
-  }
-}
-```
-
-## `-s, --source`
-
-Required. Name of the database object: table, view, container, or stored procedure.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add Book \
-  --source dbo.Books \
-  --permissions "anonymous:read"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add Book ^
-  --source dbo.Books ^
-  --permissions "anonymous:read"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "Book": {
-      "source": {
-        "type": "table",
-        "object": "dbo.Books"
-      },
-      "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "read" } ] }
-      ]
-    }
-  }
-}
-```
-
-## `--mcp.dml-tools`
-
-Enable or disable DML tools for this entity in MCP. Default: `true`. When set to `false`, the entity is excluded from the MCP DML tool surface. When `mcp` is omitted entirely, DML tools are enabled by default.
-
-[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add Book \
-  --source dbo.Books \
-  --permissions "anonymous:read" \
-  --mcp.dml-tools true
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add Book ^
-  --source dbo.Books ^
-  --permissions "anonymous:read" ^
-  --mcp.dml-tools true
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "Book": {
-      "source": {
-        "type": "table",
-        "object": "dbo.Books"
-      },
-      "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "read" } ] }
-      ],
-      "mcp": {
-        "dml-tools": true
-      }
-    }
-  }
-}
-```
-
-## `--mcp.custom-tool`
-
-Register a stored procedure entity as a named MCP tool. Valid only when `--source.type` is `stored-procedure`. When `true`, DAB dynamically registers the procedure in the MCP `tools/list` response and agents can call it through `tools/call`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add GetBookById \
-  --source dbo.get_book_by_id \
-  --source.type stored-procedure \
-  --permissions "anonymous:execute" \
-  --mcp.custom-tool true
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add GetBookById ^
-  --source dbo.get_book_by_id ^
-  --source.type stored-procedure ^
-  --permissions "anonymous:execute" ^
-  --mcp.custom-tool true
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "GetBookById": {
-      "source": {
-        "type": "stored-procedure",
-        "object": "dbo.get_book_by_id"
-      },
-      "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "execute" } ] }
-      ],
-      "mcp": {
-        "custom-tool": true
-      }
-    }
-  }
-}
-```
-
-> [!IMPORTANT]
-> `--mcp.custom-tool` is valid only for stored-procedure entities. Using it with table or view entities causes a validation error.
-
 ## `--help`
 
 Display this help screen.
@@ -1258,8 +1270,6 @@ dab add ^
   --help
 ```
 
----
-
 ## `--version`
 
 Display version information.
@@ -1278,50 +1288,4 @@ dab add \
 ```cmd
 dab add ^
   --version
-```
-
----
-
-## `--source.type`
-
-Type of database object. Default: `table`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add Book \
-  --source dbo.Books \
-  --source.type table \
-  --permissions "anonymous:read"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add Book ^
-  --source dbo.Books ^
-  --source.type table ^
-  --permissions "anonymous:read"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "Book": {
-      "source": {
-        "type": "table",
-        "object": "dbo.Books"
-      },
-      "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "read" } ] }
-      ]
-    }
-  }
-}
 ```

@@ -22,15 +22,26 @@ See [Auto configuration](../concept/config/auto-config.md).
 dab auto-config <definition-name> [options]
 ```
 
-### Quick glance
+## Quick glance
+
+| Option | Summary |
+| --- | --- |
+| [`-c, --config`](#-c---config) | Config file path. Default `dab-config.json`. |
+
+### Head section
 
 | Option | Summary |
 | --- | --- |
 | `<definition-name>` | Required. Name of the `autoentities` definition to configure. |
-| [`-c, --config`](#-c---config) | Config file path. Default `dab-config.json`. |
 | [`--patterns.include`](#--patternsinclude) | T-SQL `LIKE` patterns to include database objects. Default: `%.%`. |
 | [`--patterns.exclude`](#--patternsexclude) | T-SQL `LIKE` patterns to exclude database objects. Default: `null`. |
 | [`--patterns.name`](#--patternsname) | Interpolation syntax for entity naming. Default: `{object}`. |
+| [`--permissions`](#--permissions) | Permissions in `role:actions` format. Default: `null`. |
+
+### Template section
+
+| Option | Summary |
+| --- | --- |
 | [`--template.rest.enabled`](#--templaterestenabled) | Enable/disable REST for matched entities. Default: `true`. |
 | [`--template.graphql.enabled`](#--templategraphqlenabled) | Enable/disable GraphQL for matched entities. Default: `true`. |
 | [`--template.mcp.dml-tool`](#--templatemcpdml-tool) | Enable/disable Model Context Protocol (MCP) data manipulation language (DML) tools for matched entities. Default: `true`. |
@@ -38,7 +49,6 @@ dab auto-config <definition-name> [options]
 | [`--template.cache.enabled`](#--templatecacheenabled) | Enable/disable caching for matched entities. Default: `false`. |
 | [`--template.cache.ttl-seconds`](#--templatecachettl-seconds) | Cache time-to-live in seconds. Default: `null`. |
 | [`--template.cache.level`](#--templatecachelevel) | Cache level. Allowed values: `L1`, `L1L2`. Default: `L1L2`. |
-| [`--permissions`](#--permissions) | Permissions in `role:actions` format. Default: `null`. |
 
 ## `<definition-name>`
 
@@ -62,9 +72,7 @@ dab auto-config my-def ^
   --permissions "anonymous:read"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -106,9 +114,7 @@ dab auto-config my-def ^
   --patterns.include "dbo.%"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -144,9 +150,7 @@ dab auto-config my-def ^
   --permissions "anonymous:read"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -190,9 +194,7 @@ dab auto-config my-def ^
   --permissions "anonymous:read"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -237,9 +239,7 @@ dab auto-config my-def ^
   --permissions "anonymous:read"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -249,6 +249,45 @@ dab auto-config my-def ^
         "include": [ "dbo.%" ],
         "name": "{schema}_{object}"
       },
+      "permissions": [
+        { 
+          "role": "anonymous", 
+          "actions": [ "read" ] 
+        }
+      ]
+    }
+  }
+}
+```
+
+## `--permissions`
+
+Permissions for all matched entities in `role:actions` format. Default: `null`.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab auto-config my-def \
+  --patterns.include "dbo.%" \
+  --permissions "anonymous:read"
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab auto-config my-def ^
+  --patterns.include "dbo.%" ^
+  --permissions "anonymous:read"
+```
+
+### Resulting config
+
+```json
+{
+  "autoentities": {
+    "my-def": {
       "permissions": [
         { 
           "role": "anonymous", 
@@ -284,9 +323,7 @@ dab auto-config my-def ^
   --permissions "anonymous:read"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -324,9 +361,7 @@ dab auto-config my-def ^
   --permissions "anonymous:read"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -364,9 +399,7 @@ dab auto-config my-def ^
   --permissions "anonymous:read"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -404,9 +437,7 @@ dab auto-config my-def ^
   --permissions "anonymous:read"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -444,9 +475,7 @@ dab auto-config my-def ^
   --permissions "anonymous:read"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -486,9 +515,7 @@ dab auto-config my-def ^
   --permissions "anonymous:read"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -533,9 +560,7 @@ dab auto-config my-def ^
   --permissions "anonymous:read"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {
@@ -548,47 +573,6 @@ dab auto-config my-def ^
             "level": "l1l2" 
         }
       }
-    }
-  }
-}
-```
-
-## `--permissions`
-
-Permissions for all matched entities in `role:actions` format. Default: `null`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab auto-config my-def \
-  --patterns.include "dbo.%" \
-  --permissions "anonymous:read"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab auto-config my-def ^
-  --patterns.include "dbo.%" ^
-  --permissions "anonymous:read"
-```
-
----
-
-### Resulting configuration
-
-```json
-{
-  "autoentities": {
-    "my-def": {
-      "permissions": [
-        { 
-          "role": "anonymous", 
-          "actions": [ "read" ] 
-        }
-      ]
     }
   }
 }
@@ -626,9 +610,7 @@ dab auto-config my-def ^
   --permissions "anonymous:read"
 ```
 
----
-
-### Resulting configuration
+### Resulting config
 
 ```json
 {

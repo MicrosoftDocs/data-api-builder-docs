@@ -22,7 +22,7 @@ See [Auto configuration concepts](../concept/config/auto-config.md#simulation).
 dab auto-config-simulate [options]
 ```
 
-### Quick glance
+## Quick glance
 
 | Option | Summary |
 | --- | --- |
@@ -49,8 +49,6 @@ dab auto-config-simulate ^
   --config ./dab-config.json
 ```
 
----
-
 ## `-o, --output`
 
 Path to output CSV (Comma Separated Values) file. If not specified, results are printed to the console. The CSV includes columns for the filter name, entity name, and database object. This approach is handy when you want to programmatically analyze the results in a CICD (Continuous Integration/Continuous Deployment) pipeline or elsewhere.
@@ -70,8 +68,6 @@ dab auto-config-simulate \
 dab auto-config-simulate ^
   --output results.csv
 ```
-
----
 
 ### Example CSV output
 
@@ -99,8 +95,6 @@ dab auto-config-simulate
 ```cmd
 dab auto-config-simulate
 ```
-
----
 
 ### Example console output
 

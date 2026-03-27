@@ -28,29 +28,27 @@ dab export --graphql -o <output-directory> [options]
 
 ## Quick glance
 
-| Option                                 | Required | Default                           | Applies                                                                  |
-| -------------------------------------- | -------- | --------------------------------- | ------------------------------------------------------------------------ |
-| `--graphql`                            | No*      | false                             | Must be set for schema export                                            |
-| `-o, --output <dir>`                   | Yes      | –                                 | Directory for output schema                                              |
-| `-g, --graphql-schema-file <name>`     | No       | `schema.gql`                      | Filename placed inside output dir                                        |
-| `--generate`                           | No       | false                             | Generate schema from Cosmos DB data                                      |
-| `-m, --sampling-mode <mode>`           | No       | `TopNExtractor`                   | One of: `TopNExtractor`, `EligibleDataSampler`, `TimePartitionedSampler` |
-| `-n, --sampling-count <int>`           | No       | Mode-dependent                    | Number of records per mode                                               |
-| `--sampling-partition-key-path <path>` | No       | –                                 | For `EligibleDataSampler` only                                           |
-| `-d, --sampling-days <int>`            | No       | Mode-dependent                    | Restrict to records newer than N days                                    |
-| `--sampling-group-count <int>`         | No       | `10` (TimePartitionedSampler)     | For `TimePartitionedSampler` only                                        |
-| `-c, --config <file>`                  | No       | Env-specific or `dab-config.json` | Path to config file                                                      |
-| `--help`                               | No       | –                                 | Display the help screen                                                  |
-| `--version`                            | No       | –                                 | Display version information                                              |
+| Option | Required | Default | Applies |
+| - | - | - | - |
+| `--graphql` | No* | false | Must be set for schema export |
+| `-o, --output <dir>` | Yes | – | Directory for output schema |
+| `-g, --graphql-schema-file <name>` | No | `schema.gql` | Filename placed inside output dir |
+| `--generate` | No | false | Generate schema from Cosmos DB data |
+| `-m, --sampling-mode <mode>` | No | `TopNExtractor` | One of: `TopNExtractor`, `EligibleDataSampler`, `TimePartitionedSampler` |
+| `-n, --sampling-count <int>` | No | Mode-dependent | Number of records per mode |
+| `--sampling-partition-key-path <path>` | No | – | For `EligibleDataSampler` only |
+| `-d, --sampling-days <int>` | No | Mode-dependent | Restrict to records newer than N days |
+| `--sampling-group-count <int>` | No | `10` (TimePartitionedSampler) | For `TimePartitionedSampler` only |
+| `-c, --config <file>` | No | Env-specific or `dab-config.json` | Path to config file |
 
 \* `--graphql` isn't parser-required, but export fails unless you provide it.
 
 ## Behavior
 
-| Mode                   | Description                                                         |
-| ---------------------- | ------------------------------------------------------------------- |
+| Mode | Description |
+| - | - |
 | Export existing schema | Starts a temporary runtime, introspects GraphQL schema, writes file |
-| Generate schema        | Samples Azure Cosmos DB for NoSQL documents and infers schema       |
+| Generate schema | Samples Azure Cosmos DB for NoSQL documents and infers schema |
 
 In export mode (without `--generate`), DAB first attempts `https://localhost:5001` and falls back to `http://localhost:5000`.
 
@@ -109,8 +107,6 @@ dab export ^
   -o .\schema-out
 ```
 
----
-
 ## `-o, --output`
 
 Directory for schema file. Created if missing.
@@ -132,8 +128,6 @@ dab export ^
   --graphql ^
   -o .\schema-out
 ```
-
----
 
 ## `-g, --graphql-schema-file`
 
@@ -158,8 +152,6 @@ dab export ^
   -o .\out ^
   -g custom-schema.gql
 ```
-
----
 
 ## `--generate`
 
@@ -189,8 +181,6 @@ dab export ^
   --generate
 ```
 
----
-
 ## `-m, --sampling-mode`
 
 Options: `TopNExtractor`, `EligibleDataSampler`, `TimePartitionedSampler`
@@ -217,8 +207,6 @@ dab export ^
   --generate ^
   --sampling-mode TopNExtractor
 ```
-
----
 
 ## `-n, --sampling-count`
 
@@ -256,8 +244,6 @@ dab export ^
   --sampling-count 25
 ```
 
----
-
 ## `--sampling-partition-key-path`
 
 Partition key path for EligibleDataSampler
@@ -285,8 +271,6 @@ dab export ^
   --sampling-mode EligibleDataSampler ^
   --sampling-partition-key-path /customerId
 ```
-
----
 
 ## `-d, --sampling-days`
 
@@ -320,8 +304,6 @@ dab export ^
   --sampling-days 14
 ```
 
----
-
 ## `--sampling-group-count`
 
 Number of time groups for TimePartitionedSampler
@@ -350,8 +332,6 @@ dab export ^
   --sampling-group-count 8
 ```
 
----
-
 ## `-c, --config`
 
 Config file path. If omitted:
@@ -379,8 +359,6 @@ dab export ^
   --config .\dab-config.json
 ```
 
----
-
 ## `--help`
 
 Display the help screen.
@@ -398,8 +376,6 @@ dab export --help
 ```cmd
 dab export --help
 ```
-
----
 
 ## `--version`
 
@@ -419,14 +395,12 @@ dab export --version
 dab export --version
 ```
 
----
-
 ## Return codes
 
-| Code     | Meaning          |
-| -------- | ---------------- |
-| 0        | Export succeeded |
-| -1       | Export failed    |
+| Code | Meaning |
+| - | - |
+| 0 | Export succeeded |
+| -1 | Export failed |
 
 ## Examples
 
@@ -447,8 +421,6 @@ dab export ^
   --graphql ^
   -o .\schema-out
 ```
-
----
 
 ### Generate schema (TopNExtractor)
 
@@ -476,8 +448,6 @@ dab export ^
   --sampling-days 14
 ```
 
----
-
 ### Partition-aware sampling
 
 #### [Bash](#tab/bash)
@@ -503,8 +473,6 @@ dab export ^
   --sampling-partition-key-path /customerId ^
   --sampling-count 10
 ```
-
----
 
 ### Time-based sampling
 
@@ -534,8 +502,6 @@ dab export ^
   --sampling-days 60
 ```
 
----
-
 ### Custom output filename
 
 #### [Bash](#tab/bash)
@@ -562,8 +528,6 @@ dab export ^
   --sampling-count 15
 ```
 
----
-
 ## Generated file usage
 
 Set `data-source.options.schema` to the exported schema file path. For more information, see [Data source configuration](../configuration/data-source.md).
@@ -573,13 +537,13 @@ Set `data-source.options.schema` to the exported schema file path. For more info
 
 ## Troubleshooting
 
-| Symptom               | Cause                   | Fix                           |
-| --------------------- | ----------------------- | ----------------------------- |
-| Empty schema          | No or insufficient data | Add representative data       |
-| Connectivity error    | Bad connection string   | Fix credentials or network    |
-| Missing fields        | Not in sampled docs     | Increase count or change mode |
-| Few partition results | Wrong partition key     | Provide correct key path      |
-| Slow time sampling    | Large dataset           | Reduce groups or days         |
+| Symptom | Cause | Fix |
+| - | - | - |
+| Empty schema | No or insufficient data | Add representative data |
+| Connectivity error | Bad connection string | Fix credentials or network |
+| Missing fields | Not in sampled docs | Increase count or change mode |
+| Few partition results | Wrong partition key | Provide correct key path |
+| Slow time sampling | Large dataset | Reduce groups or days |
 
 ## Best practices
 

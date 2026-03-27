@@ -19,80 +19,115 @@ Acronyms used in this reference:
 
 MCP stands for Model Context Protocol. DML stands for data manipulation language. TTL stands for time to live. JWT stands for JSON Web Token. RC stands for release candidate. DCR stands for data collection rule. DCE stands for data collection endpoint.
 
+> [!NOTE]
+> This command doesn't alter the `entities` section. Use `dab update` for entity changes.
+
 ## Syntax
 
 ```bash
 dab configure [options]
 ```
 
-> [!NOTE]
-> This command doesn't alter the `entities` section. Use `dab update` for entity changes.
-
-> [!NOTE]
+> [!IMPORTANT]
 > OpenTelemetry and Application Insights settings are configured with `dab add-telemetry`, not `dab configure`. See [concept/monitor/open-telemetry.md](../concept/monitor/open-telemetry.md) and [concept/monitor/application-insights.md](../concept/monitor/application-insights.md).
 
 ## Quick glance
 
-| Option                                         | Summary                                              |
-| ---------------------------------------------- | ---------------------------------------------------- |
-| [`-c, --config`](#-c---config)                 | Path to the config file (default `dab-config.json`). |
-| [`--data-source.database-type`](#--data-sourcedatabase-type) | Set the database type.                               |
-| [`--data-source.connection-string`](#--data-sourceconnection-string) | Set the database connection string.                  |
-| [`--data-source.options.database`](#--data-sourceoptionsdatabase) | Database name for Cosmos DB for NoSql.               |
-| [`--data-source.options.container`](#--data-sourceoptionscontainer) | Container name for Cosmos DB for NoSql.              |
-| [`--data-source.options.schema`](#--data-sourceoptionsschema) | Schema path for Cosmos DB for NoSql.                 |
-| [`--data-source.options.set-session-context`](#--data-sourceoptionsset-session-context) | Enable session context.                              |
-| [`--runtime.graphql.depth-limit`](#--runtimegraphqldepth-limit) | Limit maximum query depth.                           |
-| [`--runtime.graphql.enabled`](#--runtimegraphqlenabled) | Enable or disable GraphQL endpoint.                  |
-| [`--runtime.graphql.path`](#--runtimegraphqlpath) | Customize the GraphQL endpoint path.                 |
-| [`--runtime.graphql.allow-introspection`](#--runtimegraphqlallow-introspection) | Allow or deny GraphQL introspection.                 |
-| [`--runtime.graphql.multiple-mutations.create.enabled`](#--runtimegraphqlmultiple-mutationscreateenabled) | Enable multiple-create mutations.                    |
-| [`--runtime.rest.enabled`](#--runtimerestenabled) | Enable or disable REST endpoint.                     |
-| [`--runtime.rest.path`](#--runtimerestpath)     | Customize the REST endpoint path.                    |
-| [`--runtime.rest.request-body-strict`](#--runtimerestrequest-body-strict) | Enforce strict REST request body validation.         |
-| [`--runtime.mcp.enabled`](#--runtimemcpenabled) | Enable or disable MCP endpoint.                      |
-| [`--runtime.mcp.path`](#--runtimemcppath)       | Customize the MCP endpoint path.                     |
-| [`--runtime.mcp.dml-tools.enabled`](#--runtimemcpdml-toolsenabled) | Enable or disable all MCP DML tools.                 |
-| [`--runtime.mcp.dml-tools.describe-entities.enabled`](#--runtimemcpdml-toolsdescribe-entitiesenabled) | Enable or disable the describe-entities tool.        |
-| [`--runtime.mcp.dml-tools.create-record.enabled`](#--runtimemcpdml-toolscreate-recordenabled) | Enable or disable the create-record tool.            |
-| [`--runtime.mcp.dml-tools.read-records.enabled`](#--runtimemcpdml-toolsread-recordsenabled) | Enable or disable the read-records tool.             |
-| [`--runtime.mcp.dml-tools.update-record.enabled`](#--runtimemcpdml-toolsupdate-recordenabled) | Enable or disable the update-record tool.            |
-| [`--runtime.mcp.dml-tools.delete-record.enabled`](#--runtimemcpdml-toolsdelete-recordenabled) | Enable or disable the delete-record tool.            |
-| [`--runtime.mcp.dml-tools.execute-entity.enabled`](#--runtimemcpdml-toolsexecute-entityenabled) | Enable or disable the execute-entity tool.           |
-| [`--runtime.cache.enabled`](#--runtimecacheenabled) | Enable or disable global cache.                      |
-| [`--runtime.cache.ttl-seconds`](#--runtimecachettl-seconds) | Global cache TTL in seconds.                         |
-| [`--runtime.compression.level`](#--runtimecompressionlevel) | Set HTTP response compression level.                 |
-| [`--runtime.host.mode`](#--runtimehostmode)     | Set host mode: Development or Production.            |
-| [`--runtime.host.cors.origins`](#--runtimehostcorsorigins) | Allowed CORS origins.                                |
-| [`--runtime.host.cors.allow-credentials`](#--runtimehostcorsallow-credentials) | Set CORS allow-credentials.                          |
-| [`--runtime.host.authentication.provider`](#--runtimehostauthenticationprovider) | Authentication provider.                             |
-| [`--runtime.host.authentication.jwt.audience`](#--runtimehostauthenticationjwtaudience) | JWT audience claim.                                  |
-| [`--runtime.host.authentication.jwt.issuer`](#--runtimehostauthenticationjwtissuer) | JWT issuer claim.                                    |
-| [`--show-effective-permissions`](#--show-effective-permissions) | Display resolved permissions after inheritance.      |
-| [`--data-source.user-delegated-auth.enabled`](#--data-sourceuser-delegated-authenabled) | Enable OBO user-delegated authentication.            |
-| [`--data-source.user-delegated-auth.provider`](#--data-sourceuser-delegated-authprovider) | OBO identity provider.                               |
-| [`--data-source.user-delegated-auth.database-audience`](#--data-sourceuser-delegated-authdatabase-audience) | Target audience for the downstream SQL token.        |
-| [`--azure-key-vault.endpoint`](#--azure-key-vaultendpoint) | Azure Key Vault base endpoint.                       |
-| [`--azure-key-vault.retry-policy.mode`](#--azure-key-vaultretry-policymode) | Retry policy mode.                                   |
-| [`--azure-key-vault.retry-policy.max-count`](#--azure-key-vaultretry-policymax-count) | Max retry attempts.                                  |
-| [`--azure-key-vault.retry-policy.delay-seconds`](#--azure-key-vaultretry-policydelay-seconds) | Delay between retries.                               |
-| [`--azure-key-vault.retry-policy.max-delay-seconds`](#--azure-key-vaultretry-policymax-delay-seconds) | Max delay for exponential retries.                   |
-| [`--azure-key-vault.retry-policy.network-timeout-seconds`](#--azure-key-vaultretry-policynetwork-timeout-seconds) | Timeout for network calls.                           |
-| [`--runtime.telemetry.azure-log-analytics.enabled`](#--runtimetelemetryazure-log-analyticsenabled) | Enable Azure Log Analytics telemetry.                |
-| [`--runtime.telemetry.azure-log-analytics.dab-identifier`](#--runtimetelemetryazure-log-analyticsdab-identifier) | Distinguish log origin.                              |
-| [`--runtime.telemetry.azure-log-analytics.flush-interval-seconds`](#--runtimetelemetryazure-log-analyticsflush-interval-seconds) | Flush cadence in seconds.                            |
-| [`--runtime.telemetry.azure-log-analytics.auth.custom-table-name`](#--runtimetelemetryazure-log-analyticsauthcustom-table-name) | Custom table name.                                   |
-| [`--runtime.telemetry.azure-log-analytics.auth.dcr-immutable-id`](#--runtimetelemetryazure-log-analyticsauthdcr-immutable-id) | Data Collection Rule ID.                             |
-| [`--runtime.telemetry.azure-log-analytics.auth.dce-endpoint`](#--runtimetelemetryazure-log-analyticsauthdce-endpoint) | Data Collection Endpoint.                            |
-| [`--runtime.telemetry.file.enabled`](#--runtimetelemetryfileenabled) | Enable file sink telemetry.                          |
-| [`--runtime.telemetry.file.path`](#--runtimetelemetryfilepath) | Path to log file.                                    |
-| [`--runtime.telemetry.file.rolling-interval`](#--runtimetelemetryfilerolling-interval) | Rolling interval.                                    |
-| [`--runtime.telemetry.file.retained-file-count-limit`](#--runtimetelemetryfileretained-file-count-limit) | Max number of files retained.                        |
-| [`--runtime.telemetry.file.file-size-limit-bytes`](#--runtimetelemetryfilefile-size-limit-bytes) | Max size per file before rolling.                    |
-| [`--help`](#--help)                               | Display this help screen.                            |
-| [`--version`](#--version)                         | Display version information.                         |
+| Option | Summary |
+| - | - |
+| [`-c, --config`](#-c---config) | Path to the config file (default `dab-config.json`). |
 
----
+### Data source section
+
+| Option | Summary |
+| - | - |
+| [`--data-source.database-type`](#--data-sourcedatabase-type) | Set the database type. |
+| [`--data-source.connection-string`](#--data-sourceconnection-string) | Set the database connection string. |
+| [`--data-source.options.database`](#--data-sourceoptionsdatabase) | Database name for Cosmos DB for NoSql. |
+| [`--data-source.options.container`](#--data-sourceoptionscontainer) | Container name for Cosmos DB for NoSql. |
+| [`--data-source.options.schema`](#--data-sourceoptionsschema) | Schema path for Cosmos DB for NoSql. |
+| [`--data-source.options.set-session-context`](#--data-sourceoptionsset-session-context) | Enable session context. |
+| [`--data-source.user-delegated-auth.enabled`](#--data-sourceuser-delegated-authenabled) | Enable OBO user-delegated authentication. |
+| [`--data-source.user-delegated-auth.provider`](#--data-sourceuser-delegated-authprovider) | OBO identity provider. |
+| [`--data-source.user-delegated-auth.database-audience`](#--data-sourceuser-delegated-authdatabase-audience) | Target audience for the downstream SQL token. |
+
+### GraphQL section
+
+| Option | Summary |
+| - | - |
+| [`--runtime.graphql.depth-limit`](#--runtimegraphqldepth-limit) | Limit maximum query depth. |
+| [`--runtime.graphql.enabled`](#--runtimegraphqlenabled) | Enable or disable GraphQL endpoint. |
+| [`--runtime.graphql.path`](#--runtimegraphqlpath) | Customize the GraphQL endpoint path. |
+| [`--runtime.graphql.allow-introspection`](#--runtimegraphqlallow-introspection) | Allow or deny GraphQL introspection. |
+| [`--runtime.graphql.multiple-mutations.create.enabled`](#--runtimegraphqlmultiple-mutationscreateenabled) | Enable multiple-create mutations. |
+
+### REST section
+
+| Option | Summary |
+| - | - |
+| [`--runtime.rest.enabled`](#--runtimerestenabled) | Enable or disable REST endpoint. |
+| [`--runtime.rest.path`](#--runtimerestpath) | Customize the REST endpoint path. |
+| [`--runtime.rest.request-body-strict`](#--runtimerestrequest-body-strict) | Enforce strict REST request body validation. |
+
+### MCP section
+
+| Option | Summary |
+| - | - |
+| [`--runtime.mcp.enabled`](#--runtimemcpenabled) | Enable or disable MCP endpoint. |
+| [`--runtime.mcp.path`](#--runtimemcppath) | Customize the MCP endpoint path. |
+| [`--runtime.mcp.dml-tools.enabled`](#--runtimemcpdml-toolsenabled) | Enable or disable all MCP DML tools. |
+| [`--runtime.mcp.dml-tools.describe-entities.enabled`](#--runtimemcpdml-toolsdescribe-entitiesenabled) | Enable or disable the describe-entities tool. |
+| [`--runtime.mcp.dml-tools.create-record.enabled`](#--runtimemcpdml-toolscreate-recordenabled) | Enable or disable the create-record tool. |
+| [`--runtime.mcp.dml-tools.read-records.enabled`](#--runtimemcpdml-toolsread-recordsenabled) | Enable or disable the read-records tool. |
+| [`--runtime.mcp.dml-tools.update-record.enabled`](#--runtimemcpdml-toolsupdate-recordenabled) | Enable or disable the update-record tool. |
+| [`--runtime.mcp.dml-tools.delete-record.enabled`](#--runtimemcpdml-toolsdelete-recordenabled) | Enable or disable the delete-record tool. |
+| [`--runtime.mcp.dml-tools.execute-entity.enabled`](#--runtimemcpdml-toolsexecute-entityenabled) | Enable or disable the execute-entity tool. |
+
+### Cache section
+
+| Option | Summary |
+| - | - |
+| [`--runtime.cache.enabled`](#--runtimecacheenabled) | Enable or disable global cache. |
+| [`--runtime.cache.ttl-seconds`](#--runtimecachettl-seconds) | Global cache TTL in seconds. |
+| [`--runtime.compression.level`](#--runtimecompressionlevel) | Set HTTP response compression level. |
+
+### Host section
+
+| Option | Summary |
+| - | - |
+| [`--runtime.host.mode`](#--runtimehostmode) | Set host mode: Development or Production. |
+| [`--runtime.host.cors.origins`](#--runtimehostcorsorigins) | Allowed CORS origins. |
+| [`--runtime.host.cors.allow-credentials`](#--runtimehostcorsallow-credentials) | Set CORS allow-credentials. |
+| [`--runtime.host.authentication.provider`](#--runtimehostauthenticationprovider) | Authentication provider. |
+| [`--runtime.host.authentication.jwt.audience`](#--runtimehostauthenticationjwtaudience) | JWT audience claim. |
+| [`--runtime.host.authentication.jwt.issuer`](#--runtimehostauthenticationjwtissuer) | JWT issuer claim. |
+
+### Key Vault section
+
+| Option | Summary |
+| - | - |
+| [`--azure-key-vault.endpoint`](#--azure-key-vaultendpoint) | Azure Key Vault base endpoint. |
+| [`--azure-key-vault.retry-policy.mode`](#--azure-key-vaultretry-policymode) | Retry policy mode. |
+| [`--azure-key-vault.retry-policy.max-count`](#--azure-key-vaultretry-policymax-count) | Max retry attempts. |
+| [`--azure-key-vault.retry-policy.delay-seconds`](#--azure-key-vaultretry-policydelay-seconds) | Delay between retries. |
+| [`--azure-key-vault.retry-policy.max-delay-seconds`](#--azure-key-vaultretry-policymax-delay-seconds) | Max delay for exponential retries. |
+| [`--azure-key-vault.retry-policy.network-timeout-seconds`](#--azure-key-vaultretry-policynetwork-timeout-seconds) | Timeout for network calls. |
+
+### Telemetry section
+
+| Option | Summary |
+| - | - |
+| [`--runtime.telemetry.azure-log-analytics.enabled`](#--runtimetelemetryazure-log-analyticsenabled) | Enable Azure Log Analytics telemetry. |
+| [`--runtime.telemetry.azure-log-analytics.dab-identifier`](#--runtimetelemetryazure-log-analyticsdab-identifier) | Distinguish log origin. |
+| [`--runtime.telemetry.azure-log-analytics.flush-interval-seconds`](#--runtimetelemetryazure-log-analyticsflush-interval-seconds) | Flush cadence in seconds. |
+| [`--runtime.telemetry.azure-log-analytics.auth.custom-table-name`](#--runtimetelemetryazure-log-analyticsauthcustom-table-name) | Custom table name. |
+| [`--runtime.telemetry.azure-log-analytics.auth.dcr-immutable-id`](#--runtimetelemetryazure-log-analyticsauthdcr-immutable-id) | Data Collection Rule ID. |
+| [`--runtime.telemetry.azure-log-analytics.auth.dce-endpoint`](#--runtimetelemetryazure-log-analyticsauthdce-endpoint) | Data Collection Endpoint. |
+| [`--runtime.telemetry.file.enabled`](#--runtimetelemetryfileenabled) | Enable file sink telemetry. |
+| [`--runtime.telemetry.file.path`](#--runtimetelemetryfilepath) | Path to log file. |
+| [`--runtime.telemetry.file.rolling-interval`](#--runtimetelemetryfilerolling-interval) | Rolling interval. |
+| [`--runtime.telemetry.file.retained-file-count-limit`](#--runtimetelemetryfileretained-file-count-limit) | Max number of files retained. |
+| [`--runtime.telemetry.file.file-size-limit-bytes`](#--runtimetelemetryfilefile-size-limit-bytes) | Max size per file before rolling. |
 
 ## `-c, --config`
 
@@ -115,8 +150,6 @@ dab configure ^
   --config ./dab-config.json ^
   --runtime.rest.enabled true
 ```
-
----
 
 ## `--data-source.database-type`
 
@@ -144,8 +177,6 @@ dab configure \
 dab configure ^
   --data-source.database-type PostgreSQL
 ```
-
----
 
 ### Resulting config
 
@@ -177,7 +208,15 @@ dab configure ^
   --data-source.connection-string "Server=myserver;Database=mydb;User Id=myuser;Password=mypassword;"
 ```
 
----
+### Resulting config
+
+```json
+{
+  "data-source": {
+    "connection-string": "Server=myserver;Database=mydb;User Id=myuser;Password=mypassword;"
+  }
+}
+```
 
 ## `--data-source.options.database`
 
@@ -199,7 +238,17 @@ dab configure ^
   --data-source.options.database MyCosmosDatabase
 ```
 
----
+### Resulting config
+
+```json
+{
+  "data-source": {
+    "options": {
+      "database": "MyCosmosDatabase"
+    }
+  }
+}
+```
 
 ## `--data-source.options.container`
 
@@ -221,7 +270,17 @@ dab configure ^
   --data-source.options.container MyCosmosContainer
 ```
 
----
+### Resulting config
+
+```json
+{
+  "data-source": {
+    "options": {
+      "container": "MyCosmosContainer"
+    }
+  }
+}
+```
 
 ## `--data-source.options.schema`
 
@@ -243,7 +302,17 @@ dab configure ^
   --data-source.options.schema ./schema.gql
 ```
 
----
+### Resulting config
+
+```json
+{
+  "data-source": {
+    "options": {
+      "schema": "./schema.gql"
+    }
+  }
+}
+```
 
 ## `--data-source.options.set-session-context`
 
@@ -270,8 +339,6 @@ dab configure ^
   --data-source.options.set-session-context false
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -279,6 +346,104 @@ dab configure ^
   "data-source": {
     "options": {
       "set-session-context": false
+    }
+  }
+}
+```
+
+## `--data-source.user-delegated-auth.enabled`
+
+Enable or disable On-Behalf-Of (OBO) user-delegated authentication. Supported only for `mssql` data sources.
+
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab configure \
+  --data-source.user-delegated-auth.enabled true
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab configure ^
+  --data-source.user-delegated-auth.enabled true
+```
+
+### Resulting config
+
+```json
+{
+  "data-source": {
+    "user-delegated-auth": {
+      "enabled": true
+    }
+  }
+}
+```
+
+## `--data-source.user-delegated-auth.provider`
+
+Set the OBO identity provider. Currently only `EntraId` is supported.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab configure \
+  --data-source.user-delegated-auth.provider EntraId
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab configure ^
+  --data-source.user-delegated-auth.provider EntraId
+```
+
+### Resulting config
+
+```json
+{
+  "data-source": {
+    "user-delegated-auth": {
+      "provider": "EntraId"
+    }
+  }
+}
+```
+
+## `--data-source.user-delegated-auth.database-audience`
+
+Set the target audience for the downstream SQL token when OBO is enabled.
+
+### Example
+
+#### [Bash](#tab/bash)
+
+```bash
+dab configure \
+  --data-source.user-delegated-auth.database-audience "https://database.windows.net"
+```
+
+#### [Command Prompt](#tab/cmd)
+
+```cmd
+dab configure ^
+  --data-source.user-delegated-auth.database-audience "https://database.windows.net"
+```
+
+### Resulting config
+
+```json
+{
+  "data-source": {
+    "user-delegated-auth": {
+      "database-audience": "https://database.windows.net"
     }
   }
 }
@@ -308,8 +473,6 @@ dab configure \
 dab configure ^
   --runtime.graphql.depth-limit 3
 ```
-
----
 
 ### Resulting config
 
@@ -343,7 +506,17 @@ dab configure ^
   --runtime.graphql.enabled false
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "graphql": {
+      "enabled": false
+    }
+  }
+}
+```
 
 ## `--runtime.graphql.path`
 
@@ -365,7 +538,17 @@ dab configure ^
   --runtime.graphql.path /graphql
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "graphql": {
+      "path": "/graphql"
+    }
+  }
+}
+```
 
 ## `--runtime.graphql.allow-introspection`
 
@@ -387,7 +570,17 @@ dab configure ^
   --runtime.graphql.allow-introspection false
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "graphql": {
+      "allow-introspection": false
+    }
+  }
+}
+```
 
 ## `--runtime.graphql.multiple-mutations.create.enabled`
 
@@ -409,7 +602,21 @@ dab configure ^
   --runtime.graphql.multiple-mutations.create.enabled true
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "graphql": {
+      "multiple-mutations": {
+        "create": {
+          "enabled": true
+        }
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.rest.enabled`
 
@@ -431,7 +638,17 @@ dab configure ^
   --runtime.rest.enabled false
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "rest": {
+      "enabled": false
+    }
+  }
+}
+```
 
 ## `--runtime.rest.path`
 
@@ -452,8 +669,6 @@ dab configure \
 dab configure ^
   --runtime.rest.path /myapi
 ```
-
----
 
 ### Resulting config
 
@@ -487,7 +702,17 @@ dab configure ^
   --runtime.rest.request-body-strict true
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "rest": {
+      "request-body-strict": true
+    }
+  }
+}
+```
 
 ## `--runtime.mcp.enabled`
 
@@ -510,8 +735,6 @@ dab configure \
 dab configure ^
   --runtime.mcp.enabled false
 ```
-
----
 
 ### Resulting config
 
@@ -546,8 +769,6 @@ dab configure \
 dab configure ^
   --runtime.mcp.path /mcp2
 ```
-
----
 
 ### Resulting config
 
@@ -585,7 +806,19 @@ dab configure ^
   --runtime.mcp.dml-tools.enabled false
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "dml-tools": {
+        "enabled": false
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.mcp.dml-tools.describe-entities.enabled`
 
@@ -609,7 +842,21 @@ dab configure ^
   --runtime.mcp.dml-tools.describe-entities.enabled false
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "dml-tools": {
+        "describe-entities": {
+          "enabled": false
+        }
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.mcp.dml-tools.create-record.enabled`
 
@@ -633,7 +880,21 @@ dab configure ^
   --runtime.mcp.dml-tools.create-record.enabled false
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "dml-tools": {
+        "create-record": {
+          "enabled": false
+        }
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.mcp.dml-tools.read-records.enabled`
 
@@ -657,7 +918,21 @@ dab configure ^
   --runtime.mcp.dml-tools.read-records.enabled false
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "dml-tools": {
+        "read-records": {
+          "enabled": false
+        }
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.mcp.dml-tools.update-record.enabled`
 
@@ -681,7 +956,21 @@ dab configure ^
   --runtime.mcp.dml-tools.update-record.enabled false
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "dml-tools": {
+        "update-record": {
+          "enabled": false
+        }
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.mcp.dml-tools.delete-record.enabled`
 
@@ -705,7 +994,21 @@ dab configure ^
   --runtime.mcp.dml-tools.delete-record.enabled false
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "dml-tools": {
+        "delete-record": {
+          "enabled": false
+        }
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.mcp.dml-tools.execute-entity.enabled`
 
@@ -729,7 +1032,21 @@ dab configure ^
   --runtime.mcp.dml-tools.execute-entity.enabled false
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "dml-tools": {
+        "execute-entity": {
+          "enabled": false
+        }
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.cache.enabled`
 
@@ -750,8 +1067,6 @@ dab configure \
 dab configure ^
   --runtime.cache.enabled true
 ```
-
----
 
 ### Resulting config
 
@@ -784,8 +1099,6 @@ dab configure \
 dab configure ^
   --runtime.cache.ttl-seconds 30
 ```
-
----
 
 ### Resulting config
 
@@ -828,8 +1141,6 @@ dab configure ^
   --runtime.compression.level optimal
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -867,8 +1178,6 @@ dab configure ^
   --runtime.host.mode Development
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -904,8 +1213,6 @@ dab configure ^
   https://contoso.com ^
   https://fabrikam.com
 ```
-
----
 
 ### Resulting config
 
@@ -944,7 +1251,19 @@ dab configure ^
   --runtime.host.cors.allow-credentials true
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "host": {
+      "cors": {
+        "allow-credentials": true
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.host.authentication.provider`
 
@@ -966,7 +1285,19 @@ dab configure ^
   --runtime.host.authentication.provider AppService
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "host": {
+      "authentication": {
+        "provider": "AppService"
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.host.authentication.jwt.audience`
 
@@ -988,7 +1319,21 @@ dab configure ^
   --runtime.host.authentication.jwt.audience api://my-app
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "host": {
+      "authentication": {
+        "jwt": {
+          "audience": "api://my-app"
+        }
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.host.authentication.jwt.issuer`
 
@@ -1010,8 +1355,6 @@ dab configure ^
   --runtime.host.authentication.jwt.issuer https://login.microsoftonline.com/common/v2.0
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -1025,139 +1368,6 @@ dab configure ^
           "issuer": "https://login.microsoftonline.com/common/v2.0"
         }
       }
-    }
-  }
-}
-```
-
-## `--show-effective-permissions`
-
-Display the resolved permissions for every entity after role inheritance is applied. Use this option to see what each role can actually do without reasoning through the config manually.
-
-[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab configure \
-  --show-effective-permissions
-```
-
-```bash
-dab configure \
-  --show-effective-permissions --config my-config.json
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab configure ^
-  --show-effective-permissions
-```
-
-```cmd
-dab configure ^
-  --show-effective-permissions --config my-config.json
-```
-
----
-
-### Example output
-
-```text
-Entity: Book
-	Role: anonymous        | Actions: Read
-	Role: authenticated    | Actions: Read (inherited from: anonymous)
-	Unconfigured roles inherit from: anonymous
-
-Entity: Order
-	Role: admin            | Actions: Create, Read, Update, Delete
-	Role: anonymous        | Actions: Read
-	Role: authenticated    | Actions: Read (inherited from: anonymous)
-	Unconfigured roles inherit from: authenticated
-```
-
-## `--data-source.user-delegated-auth.enabled`
-
-Enable or disable On-Behalf-Of (OBO) user-delegated authentication. Supported only for `mssql` data sources.
-
-[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab configure \
-  --data-source.user-delegated-auth.enabled true
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab configure ^
-  --data-source.user-delegated-auth.enabled true
-```
-
----
-
-## `--data-source.user-delegated-auth.provider`
-
-Set the OBO identity provider. Currently only `EntraId` is supported.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab configure \
-  --data-source.user-delegated-auth.provider EntraId
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab configure ^
-  --data-source.user-delegated-auth.provider EntraId
-```
-
----
-
-## `--data-source.user-delegated-auth.database-audience`
-
-Set the target audience for the downstream SQL token when OBO is enabled.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab configure \
-  --data-source.user-delegated-auth.database-audience "https://database.windows.net"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab configure ^
-  --data-source.user-delegated-auth.database-audience "https://database.windows.net"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "data-source": {
-    "database-type": "mssql",
-    "connection-string": "@env('SQL_CONNECTION_STRING')",
-    "user-delegated-auth": {
-      "enabled": true,
-      "provider": "EntraId",
-      "database-audience": "https://database.windows.net"
     }
   }
 }
@@ -1183,7 +1393,15 @@ dab configure ^
   --azure-key-vault.endpoint https://my-vault.vault.azure.net
 ```
 
----
+### Resulting config
+
+```json
+{
+  "azure-key-vault": {
+    "endpoint": "https://my-vault.vault.azure.net"
+  }
+}
+```
 
 ## `--azure-key-vault.retry-policy.mode`
 
@@ -1210,7 +1428,17 @@ dab configure ^
   --azure-key-vault.retry-policy.mode fixed
 ```
 
----
+### Resulting config
+
+```json
+{
+  "azure-key-vault": {
+    "retry-policy": {
+      "mode": "fixed"
+    }
+  }
+}
+```
 
 ## `--azure-key-vault.retry-policy.max-count`
 
@@ -1232,7 +1460,17 @@ dab configure ^
   --azure-key-vault.retry-policy.max-count 5
 ```
 
----
+### Resulting config
+
+```json
+{
+  "azure-key-vault": {
+    "retry-policy": {
+      "max-count": 5
+    }
+  }
+}
+```
 
 ## `--azure-key-vault.retry-policy.delay-seconds`
 
@@ -1254,7 +1492,17 @@ dab configure ^
   --azure-key-vault.retry-policy.delay-seconds 2
 ```
 
----
+### Resulting config
+
+```json
+{
+  "azure-key-vault": {
+    "retry-policy": {
+      "delay-seconds": 2
+    }
+  }
+}
+```
 
 ## `--azure-key-vault.retry-policy.max-delay-seconds`
 
@@ -1276,7 +1524,17 @@ dab configure ^
   --azure-key-vault.retry-policy.max-delay-seconds 30
 ```
 
----
+### Resulting config
+
+```json
+{
+  "azure-key-vault": {
+    "retry-policy": {
+      "max-delay-seconds": 30
+    }
+  }
+}
+```
 
 ## `--azure-key-vault.retry-policy.network-timeout-seconds`
 
@@ -1297,8 +1555,6 @@ dab configure \
 dab configure ^
   --azure-key-vault.retry-policy.network-timeout-seconds 20
 ```
-
----
 
 ### Resulting config
 
@@ -1336,7 +1592,19 @@ dab configure ^
   --runtime.telemetry.azure-log-analytics.enabled true
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "azure-log-analytics": {
+        "enabled": true
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.telemetry.azure-log-analytics.dab-identifier`
 
@@ -1358,7 +1626,19 @@ dab configure ^
   --runtime.telemetry.azure-log-analytics.dab-identifier MyDab
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "azure-log-analytics": {
+        "dab-identifier": "MyDab"
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.telemetry.azure-log-analytics.flush-interval-seconds`
 
@@ -1380,7 +1660,19 @@ dab configure ^
   --runtime.telemetry.azure-log-analytics.flush-interval-seconds 10
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "azure-log-analytics": {
+        "flush-interval-seconds": 10
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.telemetry.azure-log-analytics.auth.custom-table-name`
 
@@ -1402,7 +1694,21 @@ dab configure ^
   --runtime.telemetry.azure-log-analytics.auth.custom-table-name MyDabLogs
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "azure-log-analytics": {
+        "auth": {
+          "custom-table-name": "MyDabLogs"
+        }
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.telemetry.azure-log-analytics.auth.dcr-immutable-id`
 
@@ -1424,7 +1730,21 @@ dab configure ^
   --runtime.telemetry.azure-log-analytics.auth.dcr-immutable-id dcr-123
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "azure-log-analytics": {
+        "auth": {
+          "dcr-immutable-id": "dcr-123"
+        }
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.telemetry.azure-log-analytics.auth.dce-endpoint`
 
@@ -1445,8 +1765,6 @@ dab configure \
 dab configure ^
   --runtime.telemetry.azure-log-analytics.auth.dce-endpoint https://example.eastus-1.ingest.monitor.azure.com
 ```
-
----
 
 ### Resulting config
 
@@ -1489,7 +1807,19 @@ dab configure ^
   --runtime.telemetry.file.enabled true
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "file": {
+        "enabled": true
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.telemetry.file.path`
 
@@ -1511,7 +1841,19 @@ dab configure ^
   --runtime.telemetry.file.path C:\\logs\\dab-log.txt
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "file": {
+        "path": "C:\\logs\\dab-log.txt"
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.telemetry.file.rolling-interval`
 
@@ -1542,7 +1884,19 @@ dab configure ^
   --runtime.telemetry.file.rolling-interval Month
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "file": {
+        "rolling-interval": "Month"
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.telemetry.file.retained-file-count-limit`
 
@@ -1564,7 +1918,19 @@ dab configure ^
   --runtime.telemetry.file.retained-file-count-limit 5
 ```
 
----
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "file": {
+        "retained-file-count-limit": 5
+      }
+    }
+  }
+}
+```
 
 ## `--runtime.telemetry.file.file-size-limit-bytes`
 
@@ -1586,8 +1952,6 @@ dab configure ^
   --runtime.telemetry.file.file-size-limit-bytes 2097152
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -1606,31 +1970,11 @@ dab configure ^
 }
 ```
 
-## `--help`
+## `--show-effective-permissions`
 
-Display this help screen.
+Display the resolved permissions for every entity after role inheritance is applied. Use this option to see what each role can actually do without reasoning through the config manually.
 
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab configure \
-  --help
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab configure ^
-  --help
-```
-
----
-
-## `--version`
-
-Display version information.
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 ### Example
 
@@ -1638,14 +1982,38 @@ Display version information.
 
 ```bash
 dab configure \
-  --version
+  --show-effective-permissions
+```
+
+```bash
+dab configure \
+  --show-effective-permissions --config my-config.json
 ```
 
 #### [Command Prompt](#tab/cmd)
 
 ```cmd
 dab configure ^
-  --version
+  --show-effective-permissions
 ```
 
----
+```cmd
+dab configure ^
+  --show-effective-permissions --config my-config.json
+```
+
+### Example output
+
+```text
+Entity: Book
+	Role: anonymous        | Actions: Read
+	Role: authenticated    | Actions: Read (inherited from: anonymous)
+	Unconfigured roles inherit from: anonymous
+
+Entity: Order
+	Role: admin            | Actions: Create, Read, Update, Delete
+	Role: anonymous        | Actions: Read
+	Role: authenticated    | Actions: Read (inherited from: anonymous)
+	Unconfigured roles inherit from: authenticated
+```
+

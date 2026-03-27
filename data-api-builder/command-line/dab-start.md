@@ -20,16 +20,21 @@ Start the Data API builder runtime with an existing configuration file.
 dab start [options]
 ```
 
-### Quick glance
+## Quick glance
 
-| Option                                        | Summary                                                                                            |
-| --------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| [`-c, --config`](#-c---config)                | Use a specific config file (defaults to `dab-config.json` or environment-specific file if present) |
-| [`--LogLevel <level>`](#--loglevel-level)     | Specifies logging level as provided value.                                                         |
-| [`--mcp-stdio`](#--mcp-stdio)                 | *(Model Context Protocol (MCP))* Starts DAB as an MCP server that uses standard input and output (STDIO) instead of HTTP. Requires `mcp.enabled: true` in config. |
-| [`--no-https-redirect`](#--no-https-redirect) | Disables automatic HTTP→HTTPS redirection                                                          |
-| [`--help`](#--help)                           | Display the help screen.                                                                           |
-| [`--version`](#--version)                     | Display version information.                                                                       |
+| Option | Summary |
+| - | - |
+| [`-c, --config`](#-c---config) | Use a specific config file (defaults to `dab-config.json` or environment-specific file if present) |
+
+### Head section
+
+| Option | Summary |
+| - | - |
+| [`--LogLevel <level>`](#--loglevel-level) | Specifies logging level as provided value. |
+| [`--mcp-stdio`](#--mcp-stdio) | *(Model Context Protocol (MCP))* Starts DAB as an MCP server that uses standard input and output (STDIO) instead of HTTP. Requires `mcp.enabled: true` in config. |
+| [`--no-https-redirect`](#--no-https-redirect) | Disables automatic HTTP→HTTPS redirection |
+| [`--help`](#--help) | Display the help screen. |
+| [`--version`](#--version) | Display version information. |
 
 ## `-c, --config`
 
@@ -51,8 +56,6 @@ dab start ^
   --config .\settings\dab-config.json
 ```
 
----
-
 ## `--LogLevel <level>`
 
 Specifies logging level as provided value. For possible values, see [Log levels](https://go.microsoft.com/fwlink/?linkid=2263106).
@@ -73,8 +76,6 @@ dab start ^
   --LogLevel Warning
 ```
 
----
-
 ## `--no-https-redirect`
 
 Disables automatic HTTP→HTTPS redirection.
@@ -94,8 +95,6 @@ dab start \
 dab start ^
   --no-https-redirect
 ```
-
----
 
 ## `--mcp-stdio`
 
@@ -176,8 +175,6 @@ dab start ^
   --LogLevel Information
 ```
 
----
-
 ### MCP client configuration
 
 Because DAB runs as a subprocess that communicates over standard input and output, your MCP client must launch DAB as a child process and pipe `stdin` and `stdout`. A typical MCP client configuration for Visual Studio (VS) Code or a compatible agent looks like:
@@ -202,8 +199,6 @@ Because DAB runs as a subprocess that communicates over standard input and outpu
 
 For a complete walkthrough, see [standard input and output transport for SQL MCP Server](../mcp/stdio-transport.md).
 
----
-
 ## `--help`
 
 Display the help screen.
@@ -222,8 +217,6 @@ dab start --help
 dab start --help
 ```
 
----
-
 ## `--version`
 
 Display version information.
@@ -241,5 +234,3 @@ dab start --version
 ```cmd
 dab start --version
 ```
-
----

@@ -22,66 +22,66 @@ dab init [options]
 
 If the target config file already exists, the command overwrites it. There's no merge. Use version control or backups if you need to preserve the previous file.
 
-### Quick glance
+## Quick glance
 
-| Option                         | Summary                                           |
-| ------------------------------ | ------------------------------------------------- |
+| Option | Summary |
+| - | - |
 | [`-c, --config`](#-c---config) | Output config file name (default dab-config.json) |
 
-#### Authentication
+#### Authentication section
 
-| Option                               | Summary                                   |
-| ------------------------------------ | ----------------------------------------- |
-| [`--auth.audience`](#--authaudience) | JSON Web Token (JWT) audience claim       |
-| [`--auth.issuer`](#--authissuer)     | JSON Web Token (JWT) issuer claim         |
+| Option | Summary |
+| - | - |
+| [`--auth.audience`](#--authaudience) | JSON Web Token (JWT) audience claim |
+| [`--auth.issuer`](#--authissuer) | JSON Web Token (JWT) issuer claim |
 | [`--auth.provider`](#--authprovider) | Identity provider (default `Unauthenticated`) |
 
-#### Data Source
+#### Data Source section
 
-| Option                                                      | Summary                                                                                |
-| ----------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [`--connection-string`](#--connection-string)               | Database connection string (supports `@env()`)                                         |
-| [`--cosmosdb_nosql-container`](#--cosmosdb_nosql-container) | Cosmos DB NoSQL container name (optional)                                              |
-| [`--cosmosdb_nosql-database`](#--cosmosdb_nosql-database)   | Cosmos DB NoSQL database name (required for cosmosdb_nosql)                            |
-| [`--database-type`](#--database-type)                       | Database type: `mssql`, `mysql`, `postgresql`, `cosmosdb_postgresql`, `cosmosdb_nosql` |
-| [`--set-session-context`](#--set-session-context)           | Enable SQL Server session context (mssql only)                                         |
+| Option | Summary |
+| - | - |
+| [`--connection-string`](#--connection-string) | Database connection string (supports `@env()`) |
+| [`--cosmosdb_nosql-container`](#--cosmosdb_nosql-container) | Cosmos DB NoSQL container name (optional) |
+| [`--cosmosdb_nosql-database`](#--cosmosdb_nosql-database) | Cosmos DB NoSQL database name (required for cosmosdb_nosql) |
+| [`--database-type`](#--database-type) | Database type: `mssql`, `mysql`, `postgresql`, `cosmosdb_postgresql`, `cosmosdb_nosql` |
+| [`--set-session-context`](#--set-session-context) | Enable SQL Server session context (mssql only) |
 
-#### GraphQL
+#### GraphQL section
 
-| Option                                                                  | Summary                                                      |
-| ----------------------------------------------------------------------- | ------------------------------------------------------------ |
-| [`--graphql.disabled`](#--graphqldisabled)                              | Deprecated. Disables GraphQL (use `--graphql.enabled false`) |
-| [`--graphql.enabled`](#--graphqlenabled)                                | Enable GraphQL (default true)                                |
-| [`--graphql.multiple-create.enabled`](#--graphqlmultiple-createenabled) | Allow multiple create mutations (default false)              |
-| [`--graphql.path`](#--graphqlpath)                                      | GraphQL endpoint prefix (default /graphql)                   |
-| [`--graphql-schema`](#--graphql-schema)                                 | Path to GraphQL schema (required for cosmosdb_nosql)         |
+| Option | Summary |
+| - | - |
+| [`--graphql.disabled`](#--graphqldisabled) | Deprecated. Disables GraphQL (use `--graphql.enabled false`) |
+| [`--graphql.enabled`](#--graphqlenabled) | Enable GraphQL (default true) |
+| [`--graphql.multiple-create.enabled`](#--graphqlmultiple-createenabled) | Allow multiple create mutations (default false) |
+| [`--graphql.path`](#--graphqlpath) | GraphQL endpoint prefix (default /graphql) |
+| [`--graphql-schema`](#--graphql-schema) | Path to GraphQL schema (required for cosmosdb_nosql) |
 
-#### Host and authentication
+#### Host and authentication section
 
-| Option                                         | Summary                                                   |
-| ---------------------------------------------- | --------------------------------------------------------- |
-| [`--host-mode`](#--host-mode)                  | Host mode: Development or Production (default Production) |
-| [`--cors-origin`](#--cors-origin)              | Allowed origins list (comma-separated)                    |
-| [`--runtime.base-route`](#--runtimebase-route) | Global prefix for all endpoints                           |
+| Option | Summary |
+| - | - |
+| [`--host-mode`](#--host-mode) | Host mode: Development or Production (default Production) |
+| [`--cors-origin`](#--cors-origin) | Allowed origins list (comma-separated) |
+| [`--runtime.base-route`](#--runtimebase-route) | Global prefix for all endpoints |
 
-#### MCP
+#### MCP section
 
-| Option                             | Summary                                              |
-| ---------------------------------- | ---------------------------------------------------- |
+| Option | Summary |
+| - | - |
 | [`--mcp.disabled`](#--mcpdisabled) | Deprecated. Disables MCP (use `--mcp.enabled false`) |
-| [`--mcp.enabled`](#--mcpenabled)   | Enable MCP (default true)                            |
-| [`--mcp.path`](#--mcppath)         | MCP endpoint prefix (default /mcp)                   |
+| [`--mcp.enabled`](#--mcpenabled) | Enable MCP (default true) |
+| [`--mcp.path`](#--mcppath) | MCP endpoint prefix (default /mcp) |
 
 > [!Note]
 > MCP capability is available in version `1.7` and later.
 
-#### REST
+#### REST section
 
-| Option                                                     | Summary                                                                           |
-| ---------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| [`--rest.disabled`](#--restdisabled)                       | Deprecated. Disables REST (use `--rest.enabled false`)                            |
-| [`--rest.enabled`](#--restenabled)                         | Enable REST (default true, prefer over `--rest.disabled`)                         |
-| [`--rest.path`](#--restpath)                               | REST endpoint prefix (default /api, ignored for cosmosdb_nosql)                   |
+| Option | Summary |
+| - | - |
+| [`--rest.disabled`](#--restdisabled) | Deprecated. Disables REST (use `--rest.enabled false`) |
+| [`--rest.enabled`](#--restenabled) | Enable REST (default true, prefer over `--rest.disabled`) |
+| [`--rest.path`](#--restpath) | REST endpoint prefix (default /api, ignored for cosmosdb_nosql) |
 | [`--rest.request-body-strict`](#--restrequest-body-strict) | Enforce strict request body validation (default true, ignored for cosmosdb_nosql) |
 
 > [!IMPORTANT]
@@ -108,8 +108,6 @@ dab init ^
   --database-type mssql ^
   --config dab-config.local.json
 ```
-
----
 
 ### Resulting config
 
@@ -144,8 +142,6 @@ dab init ^
   --auth.audience "https://example.com/api"
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -179,8 +175,6 @@ dab init ^
   --database-type mssql ^
   --auth.issuer "https://login.microsoftonline.com/{tenant-id}/v2.0"
 ```
-
----
 
 ### Resulting config
 
@@ -224,8 +218,6 @@ dab init ^
   --auth.provider AzureAD
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -260,8 +252,6 @@ dab init ^
   --connection-string "@env('MSSQL_CONNECTION_STRING')"
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -293,8 +283,6 @@ dab init ^
   --database-type mssql ^
   --cors-origin "https://app.example.com,https://admin.example.com"
 ```
-
----
 
 ### Resulting config
 
@@ -329,8 +317,6 @@ dab init ^
   --database-type cosmosdb_nosql ^
   --cosmosdb_nosql-container MyContainer
 ```
-
----
 
 ### Resulting config
 
@@ -367,8 +353,6 @@ dab init ^
   --cosmosdb_nosql-database MyDb
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -401,8 +385,6 @@ dab init \
 dab init ^
   --database-type mssql
 ```
-
----
 
 ### Resulting config
 
@@ -440,8 +422,6 @@ dab init ^
   --graphql.enabled false
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -475,8 +455,6 @@ dab init ^
   --database-type mssql ^
   --graphql.multiple-create.enabled true
 ```
-
----
 
 ### Resulting config
 
@@ -512,8 +490,6 @@ dab init ^
   --graphql.path /gql
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -547,8 +523,6 @@ dab init ^
   --database-type cosmosdb_nosql ^
   --graphql-schema ./schema.gql
 ```
-
----
 
 ### Resulting config
 
@@ -585,8 +559,6 @@ dab init ^
   --database-type mssql ^
   --host-mode development
 ```
-
----
 
 ### Resulting config
 
@@ -626,8 +598,6 @@ dab init ^
   --mcp.enabled false
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -661,8 +631,6 @@ dab init ^
   --database-type mssql ^
   --mcp.path /model
 ```
-
----
 
 ### Resulting config
 
@@ -702,8 +670,6 @@ dab init ^
   --rest.enabled false
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -740,8 +706,6 @@ dab init ^
   --database-type mssql ^
   --rest.path /rest
 ```
-
----
 
 ### Resulting config
 
@@ -783,8 +747,6 @@ dab init ^
   --rest.request-body-strict false
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -819,8 +781,6 @@ dab init ^
   --runtime.base-route /v1
 ```
 
----
-
 ### Resulting config
 
 ```json
@@ -852,8 +812,6 @@ dab init ^
   --database-type mssql ^
   --set-session-context true
 ```
-
----
 
 ### Resulting config
 

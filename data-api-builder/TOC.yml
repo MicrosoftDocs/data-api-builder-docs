@@ -79,8 +79,17 @@
 - name: Configuration file
   items:
     - name: Overview
-      href: configuration/index.md
-      displayName: Config, JSON
+      items:
+        - name: Configuration schema overview
+          href: configuration/index.md
+          displayName: Config, JSON
+        - name: Data source files
+          href: configuration/index.md#data-source-files
+        - name: Autoentities
+          displayName: auto-config, auto entities, pattern, MSSQL
+          href: configuration/autoentities.md
+        - name: JSON Schema
+          href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
     - name: Data source
       items:
         - name: Database type
@@ -89,8 +98,6 @@
           href: configuration/data-source.md#data-source
         - name: Options (data source)
           href: configuration/data-source.md#data-source
-    - name: Data source files
-      href: configuration/index.md#data-source-files
     - name: Runtime
       href: configuration/runtime.md#runtime
     - name: Runtime / GraphQL 
@@ -242,11 +249,6 @@
             - name: Policy (entity permissions)
               href: configuration/entities.md#nested-properties-1
               displayName: policy, claims, predicate, item, database
-    - name: Autoentities
-      displayName: auto-config, auto entities, pattern, MSSQL
-      href: configuration/index.md#autoentities
-    - name: JSON Schema
-      href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
 - name: How-to
   items:
     - name: Run DAB
@@ -340,6 +342,9 @@
         - name: Use akv() function
           href: concept/config/akv-function.md
           displayName: functions, helpers, filters, expressions, macros, @akv, azure key vault
+        - name: Use auto configuration
+          href: concept/config/auto-config.md
+          displayName: auto configuration, autoentities, patterns, templates
         - name: Use multiple data sources
           href: concept/config/multi-data-source.md
           displayName: multiple databases, cross-DB, data source, federation
@@ -420,6 +425,9 @@
         - name: Deploy to Container Instances
           href: deployment/azure-container-instances.md
           displayName: azure, container instances, publish, deploy, aci
+        - name: Deploy to Azure Kubernetes Service
+          href: deployment/azure-kubernetes-service.md
+          displayName: azure, aks, kubernetes, publish, deploy
         - name: Configuration best practices
           href: concept/config/best-practices.md
           displayName: configuration, deployment, settings, optimize
