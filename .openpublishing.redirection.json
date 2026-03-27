@@ -536,11 +536,6 @@
       "redirect_document_id": false
     },
     {
-      "source_path_from_root": "/data-api-builder/reference-database-specific-features.md",
-      "redirect_url": "/azure/data-api-builder/feature-availability",
-      "redirect_document_id": false
-    },
-    {
       "source_path_from_root": "/data-api-builder/vscode-extension/agent.md",
       "redirect_url": "/azure/data-api-builder/vscode-extension/overview",
       "redirect_document_id": false
