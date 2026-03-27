@@ -47,30 +47,58 @@ You can also run Data API builder locally in a Docker container for development 
 
 ## Deployment checklist
 
-Before deploying your DAB solution, run through this checklist covering connection information, entity planning, and feature decisions.
+Before deploying your DAB solution, run through this checklist covering connection information, entity planning, feature decisions, security, and monitoring.
 
 ### Gather database credentials
 
 | | Recommendation |
 | --- | --- |
-| **&#9744;** | **Determine if your preferred database platform and version are supported.** Review the [database version support](../reference-database-specific-features.md#database-version-support) table to identify the minimum supported version for each database. Consider this minimum version in both your local and deployed instances of the database. |
-| **&#9744;** | **Obtain your database connection string.** Get the connection string for all instances of the database you plan to connect to. We recommend using the [environment variable function (`@env`)](../concept/config/env-function.md) in the DAB configuration file and then setting your connection string using environment variables. In local development, you can optionally use an *.env* file. |
-| **&#9744;** | **Configure your database for passwordless authentication.** We highly recommend not using plaintext username and password credentials whenever possible. For Azure-based deployments, use [managed identities](/entra/identity/managed-identities-azure-resources) to connect from the DAB host in development or production to your database. This configuration produces a connection string that only contains the endpoint of the database. Secure your solution further by storing the connection string in an [Azure Key Vault](/azure/key-vault) instance and referencing it using the `@env` function. |
+| **&#9744;** | **[Determine if your preferred database platform and version are supported.](../reference-database-specific-features.md#database-version-support)** Review the database version support table to identify the minimum supported version for each database. Consider this minimum version in both your local and deployed instances of the database. |
+| **&#9744;** | **[Obtain your database connection string.](../concept/config/env-function.md)** Get the connection string for all instances of the database you plan to connect to. We recommend using the environment variable function (`@env`) in the DAB configuration file and then setting your connection string using environment variables. In local development, you can optionally use an *.env* file. |
+| **&#9744;** | **[Configure your database for passwordless authentication.](/entra/identity/managed-identities-azure-resources)** We highly recommend not using plaintext username and password credentials whenever possible. For Azure-based deployments, use managed identities to connect from the DAB host in development or production to your database. Secure your solution further by storing the connection string in an [Azure Key Vault](/azure/key-vault) instance and referencing it using the [`@akv()` function](../concept/config/akv-function.md). |
 
 ### Plan the exposed entities
 
 | | Recommendation |
 | --- | --- |
-| **&#9744;** | **Produce a list of entities to expose as API endpoints.** List out any database entities that you wish to explicitly expose as endpoints using DAB. DAB doesn't expose entities implicitly, so it's imperative that you determine ahead of time which entities to manually expose through the configuration file and the [`dab add`](../command-line/dab-add.md) CLI command. Alternatively, you can write a custom database query to find all entities in your database and then generate the appropriate corresponding CLI commands. |
-| **&#9744;** | **Document any relationships between entities.** Relationships between entities must be defined in the configuration file. For more information, see [relationships](../concept/database/relationships.md). |
+| **&#9744;** | **[Produce a list of entities to expose as API endpoints.](../command-line/dab-add.md)** List out any database entities that you wish to explicitly expose as endpoints using DAB. DAB doesn't expose entities implicitly, so determine ahead of time which entities to expose through the configuration file and the `dab add` CLI command. Alternatively, use [`dab auto-config`](../command-line/dab-auto-config.md) to define pattern-based rules that automatically expose matching database objects. |
+| **&#9744;** | **[Document any relationships between entities.](../concept/database/relationships.md)** Relationships between entities must be defined in the configuration file. |
+| **&#9744;** | **[Consider using autoentities for large schemas.](../concept/config/auto-config.md)** If your database has many tables with predictable patterns, auto configuration can dramatically reduce configuration size. Use [`dab auto-config-simulate`](../command-line/dab-auto-config-simulate.md) to preview matched objects before committing changes. |
 
 ### Decide which features to use
 
 | | Recommendation |
 | --- | --- |
-| **&#9744;** | **Configure your authentication provider.** Starting in DAB 2.0, which is currently in preview, the default authentication provider is `Unauthenticated`, which means DAB doesn't inspect or validate any JSON Web Token (JWT). All requests run as `anonymous`. If your deployment requires JWT-based authentication, set the provider explicitly (for example, `--auth.provider EntraID`). For more information, see [Configure the Unauthenticated provider](../concept/security/authenticate-unauthenticated.md) and [runtime authentication configuration](../configuration/runtime.md#provider-authentication-host-runtime). |
-| **&#9744;** | **Decide if you want to use REST, GraphQL or both API types.** By default, DAB enables both REST and GraphQL endpoints. You can customize each endpoint by enabling or disabling either the [`runtime.graphql.enabled`](../configuration/runtime.md#graphql-runtime) or the [`runtime.rest.enabled`](../configuration/runtime.md#rest-runtime) configuration properties respectively. For more information on GraphQL, see [host GraphQL endpoints](../concept/api/graphql.md). For more information on REST, see [host REST endpoints](../concept/api/rest.md). |
-| **&#9744;** | **Select REST and GraphQL features that you wish to enable.** Each endpoint type ships with multiple features enabled out of the box. For example, the default REST endpoint URI is `/data`, but it can be customized using the [`runtime.rest.path`](../configuration/runtime.md#rest-runtime) property. Similarly, the default GraphQL endpoint URI is `/query` and that's customizable using the [`runtime.graphql.path`](../configuration/runtime.md#graphql-runtime) property. |
+| **&#9744;** | **[Decide if you want to use REST, GraphQL, or both API types.](../configuration/runtime.md#rest-runtime)** By default, DAB enables both REST and GraphQL endpoints. You can customize each endpoint by enabling or disabling either the [`runtime.graphql.enabled`](../configuration/runtime.md#graphql-runtime) or the [`runtime.rest.enabled`](../configuration/runtime.md#rest-runtime) configuration properties. For more information on GraphQL, see [GraphQL endpoints](../concept/api/graphql.md). For more information on REST, see [REST endpoints](../concept/api/rest.md). |
+| **&#9744;** | **[Select REST and GraphQL features that you wish to enable.](../configuration/runtime.md#graphql-runtime)** Each endpoint type ships with multiple features enabled out of the box. For example, the default REST endpoint URI is `/data`, but it can be customized using the [`runtime.rest.path`](../configuration/runtime.md#rest-runtime) property. Similarly, the default GraphQL endpoint URI is `/query` and that's customizable using the [`runtime.graphql.path`](../configuration/runtime.md#graphql-runtime) property. |
+| **&#9744;** | **[Plan your caching strategy.](../concept/cache/level-1.md)** DAB supports [Level 1 (in-memory)](../concept/cache/level-1.md) and [Level 2 (distributed)](../concept/cache/level-2.md) caching. Decide whether to enable caching and configure TTL values for your entities. |
+| **&#9744;** | **[Consider enabling MCP endpoints.](../mcp/overview.md)** If your application uses Model Context Protocol (MCP) clients, you can enable MCP tools to expose your entities to AI agents. |
+
+### Configure security
+
+| | Recommendation |
+| --- | --- |
+| **&#9744;** | **[Configure your authentication provider.](../concept/security/authenticate-unauthenticated.md)** Starting in DAB 2.0, the default authentication provider is `Unauthenticated`, which means DAB doesn't inspect or validate any JSON Web Token (JWT). All requests run as `anonymous`. If your deployment requires JWT-based authentication, set the provider explicitly (for example, `--auth.provider EntraID`). For more information, see [runtime authentication configuration](../configuration/runtime.md#provider-authentication-host-runtime). |
+| **&#9744;** | **[Define entity-level permissions.](../concept/security/authorization.md)** Configure which roles can perform which actions on each entity. |
+| **&#9744;** | **[Set up database policies for row-level security.](../concept/security/database-policies.md)** If you need to restrict data access at the row level based on user claims, configure database policies. |
+| **&#9744;** | **[Review security best practices.](../concept/security/best-practices.md)** Before going to production, review the security best practices guide. |
+
+### Set up monitoring
+
+| | Recommendation |
+| --- | --- |
+| **&#9744;** | **[Enable Application Insights.](../concept/monitor/application-insights.md)** Connect DAB to Application Insights for telemetry, request tracking, and diagnostics. |
+| **&#9744;** | **[Configure health checks.](../concept/monitor/health-checks.md)** Enable health check endpoints so your hosting platform can monitor DAB availability. |
+| **&#9744;** | **[Set appropriate log levels.](../concept/monitor/log-levels.md)** Configure log verbosity for your environment. Use verbose logging in development and reduced logging in production. |
+
+### Prepare for deployment
+
+| | Recommendation |
+| --- | --- |
+| **&#9744;** | **[Use environment-specific configuration files.](../concept/config/environments.md)** Use environment-specific configs to separate development, staging, and production settings. |
+| **&#9744;** | **[Store secrets securely.](../concept/config/akv-function.md)** Use the [`@env()` function](../concept/config/env-function.md) for environment variables and the `@akv()` function for Azure Key Vault references. Never store secrets in plain text in configuration files. |
+| **&#9744;** | **[Validate your configuration.](../command-line/dab-validate.md)** Run `dab validate` before deploying to catch configuration errors early. |
+| **&#9744;** | **Review configuration best practices.** Before going to production, review the [configuration best practices](../concept/config/best-practices.md) guide. |
 
 ## Related content
 
