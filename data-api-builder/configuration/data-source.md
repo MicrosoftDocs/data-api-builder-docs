@@ -165,7 +165,7 @@ END;
 Use environment variables to keep plain text secrets out of your configuration file. 
 
 > [!TIP]
-> Data API builder supports both the [`@env()` function`](../reference-functions.md#env) and [`.env` files](https://www.dotenv.org/docs/security/env.html). 
+> Data API builder supports both the [`@env()` function](../concept/config/env-function.md) and [`.env` files](https://www.dotenv.org/docs/security/env.html).
 
 ```json
 "data-source": {

@@ -11,6 +11,9 @@
       href: whats-new/TOC.yml
     - name: Feature availability
       href: feature-availability.md
+    - name: Database-specific features
+      displayName: session context, SESSION_CONTEXT, Cosmos DB, authorize directive, database version, unsupported data types
+      href: reference-database-specific-features.md
 - name: Quickstarts
   items:
     - name: Local SQL database
@@ -385,6 +388,12 @@
         - name: Configure Simulator authentication
           href: concept/security/authenticate-simulator.md
           displayName: local auth, simulated auth, development, testing
+        - name: Configure Unauthenticated provider
+          href: concept/security/authenticate-unauthenticated.md
+          displayName: anonymous, no auth, unauthenticated, default provider, pass-through
+        - name: Configure On-Behalf-Of authentication
+          href: concept/security/authenticate-on-behalf-of.md
+          displayName: OBO, on-behalf-of, user-delegated, pass-through, mssql, Entra ID
         - name: Configure entity permissions
           href: concept/security/authorization.md
           displayName: roles, claims, policies, access control, permissions, authorization
@@ -394,6 +403,9 @@
         - name: Implement row-level security
           href: concept/security/row-level-security.md
           displayName: RLS, predicates, SQL security, claim-based access
+        - name: Understand role inheritance
+          href: concept/security/role-inheritance.md
+          displayName: role inheritance, permission inheritance, anonymous, authenticated, named role
     - name: Deploy and Host
       items:
         - name: Deployment overview

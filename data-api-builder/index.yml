@@ -166,6 +166,10 @@ landingContent:
             url: concept/api/rest.md
           - text: OpenAPI documents
             url: concept/api/openapi.md
+          - text: Level 1 Cache
+            url: concept/cache/level-1.md
+          - text: Level 2 Cache
+            url: concept/cache/level-2.md
       - linkListType: how-to-guide
         links:
           - text: If-Match Header
@@ -330,15 +334,3 @@ landingContent:
         links:
           - text: Security best practices
             url: concept/security/best-practices.md
-  - title: Data Caching
-    linkLists:
-      - linkListType: concept 
-        links:
-          - text: Level 1 Cache
-            url: concept/cache/level-1.md
-          - text: Level 2 Cache
-            url: concept/cache/level-2.md
-      - linkListType: reference
-        links:
-          - text: Cache HTTP headers
-            url: concept/cache/http-headers.md

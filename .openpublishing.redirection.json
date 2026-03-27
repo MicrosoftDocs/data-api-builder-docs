@@ -143,12 +143,12 @@
     {
       "source_path_from_root": "/data-api-builder/security-considerations.md",
       "redirect_url": "/azure/data-api-builder/concept/security/best-practices",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/best-practices.md",
       "redirect_url": "/azure/data-api-builder/concept/config/best-practices",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/views-and-stored-procedures.md",

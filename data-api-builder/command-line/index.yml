@@ -58,7 +58,7 @@ landingContent:
           - text: Permissions
             url: dab-auto-config.md#--permissions
           - text: CSV output
-            url: dab-auto-config-simulate.md#--output
+            url: dab-auto-config-simulate.md#-o---output
 
   - title: Configure
     linkLists:

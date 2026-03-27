@@ -114,7 +114,7 @@ Go beyond entity-level permissions with fine-grained access control:
 
 ## Role inheritance
 
-DAB 2.0 introduces role inheritance for entity permissions. The inheritance chain is `named-role → authenticated → anonymous`. If a role isn't explicitly configured for an entity, it inherits from the next broader role. Define permissions once on `anonymous` and every broader role gets the same access. For details, see [Authorization and roles](authorization.md#role-inheritance).
+DAB 2.0 introduces role inheritance for entity permissions. The inheritance chain is `named-role → authenticated → anonymous`. If a role isn't explicitly configured for an entity, it inherits from the next broader role. Define permissions once on `anonymous` and every broader role gets the same access. For details, see [Role inheritance](role-inheritance.md).
 
 ## Transport and configuration security
 

@@ -71,8 +71,8 @@ Starting in DAB 2.0, which is currently in preview, the default authentication p
 > [!IMPORTANT]
 > If you expose DAB directly to clients, configure a production-grade authentication provider (such as `EntraID` or `Custom`) rather than relying on `Unauthenticated`. When `Unauthenticated` is active, `authenticated` and custom roles defined in entity permissions are never activated.
 
-For more information, see [Configure the Unauthenticated provider](authenticate-unauthenticated.md) and [runtime authentication configuration](../configuration/runtime.md#provider-authentication-host-runtime).
+For more information, see [Configure the Unauthenticated provider](authenticate-unauthenticated.md) and [runtime authentication configuration](../../configuration/runtime.md#provider-authentication-host-runtime).
 
 ### On-Behalf-Of (OBO) user-delegated authentication
 
-For SQL Server and Azure SQL deployments that require row-level security with the real user identity, consider enabling On-Behalf-Of (OBO) authentication. OBO exchanges the incoming user token for a downstream SQL token so the database authenticates as the actual calling user. For more information, see [user-delegated auth](../configuration/data-source.md#user-delegated-auth).
+For SQL Server and Azure SQL deployments that require row-level security with the real user identity, consider enabling On-Behalf-Of (OBO) authentication. OBO exchanges the incoming user token for a downstream SQL token so the database authenticates as the actual calling user. For more information, see [user-delegated auth](../../configuration/data-source.md#user-delegated-auth).

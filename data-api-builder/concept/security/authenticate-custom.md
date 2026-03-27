@@ -223,7 +223,7 @@ exports.onExecutePostLogin = async (event, api) => {
 4. Deploy the Action and add it to your Login flow.
 
 > [!TIP]
-> For detailed guidance on configuring JWT claims with Okta, see [Implementing Advanced JWT Claims with Okta's SDK](https://blog.poespas.me/posts/2025/02/13/implementing-advanced-jwt-claims-with-oktas-sdk/).
+> For detailed guidance on configuring JWT claims with Okta, see [Customize tokens returned from Okta](https://developer.okta.com/docs/guides/customize-tokens-returned-from-okta/main/).
 
 ## Step 5: Test the configuration
 

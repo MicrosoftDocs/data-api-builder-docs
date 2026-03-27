@@ -493,7 +493,7 @@ dab configure ^
 
 Enable DAB's MCP endpoint.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -529,7 +529,7 @@ dab configure ^
 
 Customize DAB's MCP endpoint path. Prefix path with `/`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -565,7 +565,7 @@ dab configure ^
 
 Enable DAB's MCP DML tools endpoint.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 For more information on MCP DML tools, see [SQL MCP Server data manipulation language tools](../mcp/data-manipulation-language-tools.md).
 
@@ -591,7 +591,7 @@ dab configure ^
 
 Enable DAB's MCP describe entities tool.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -615,7 +615,7 @@ dab configure ^
 
 Enable DAB's MCP create record tool.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -639,7 +639,7 @@ dab configure ^
 
 Enable DAB's MCP read record tool.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -663,7 +663,7 @@ dab configure ^
 
 Enable DAB's MCP update record tool.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -687,7 +687,7 @@ dab configure ^
 
 Enable DAB's MCP delete record tool.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -711,7 +711,7 @@ dab configure ^
 
 Enable DAB's MCP execute entity tool.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 

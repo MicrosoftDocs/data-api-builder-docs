@@ -275,7 +275,7 @@ dab add Book ^
 
 Free-text description of the entity.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -551,7 +551,7 @@ dab update Book ^
 
 Stored procedures only. Comma-separated list of parameter names.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -633,7 +633,7 @@ dab add GetOrdersByDateRange ^
 
 Stored procedures only. Comma-separated list of parameter descriptions aligned to `--parameters.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -665,7 +665,7 @@ dab add GetOrdersByDateRange ^
 
 Stored procedures only. Comma-separated list of `true`/`false` values aligned to `--parameters.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -697,7 +697,7 @@ dab add GetOrdersByDateRange ^
 
 Stored procedures only. Comma-separated list of default values aligned to `--parameters.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -729,7 +729,7 @@ dab add GetOrdersByDateRange ^
 
 Name of the database column to describe.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -792,7 +792,7 @@ dab add Products ^
 
 Alias for the field. Use a comma-separated list aligned to `--fields.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -822,7 +822,7 @@ dab add Products ^
 
 Description for the field. Use a comma-separated list aligned to `--fields.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -852,7 +852,7 @@ dab add Products ^
 
 Primary key flag for the field. Use a comma-separated list of `true`/`false` values aligned to `--fields.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 

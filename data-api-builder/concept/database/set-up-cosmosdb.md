@@ -27,7 +27,7 @@ Because Azure Cosmos DB for NoSQL doesn't enforce a schema, DAB can't automatica
 - **The `@model` directive** that maps GraphQL types to entity names in your DAB configuration
 - **The `@authorize` directive** (optional) that restricts field-level access to specific roles
 
-You can handcraft the schema (examples below) or generate it from existing Cosmos DB data with the `dab export` command.
+You can handcraft the schema by using the following examples or generate it from existing Cosmos DB data with the `dab export` command.
 
 ## Create a GraphQL schema file
 
@@ -199,7 +199,7 @@ The `--source` parameter accepts either `<container-name>` or `<database-name>.<
 
 ### Configuration file example
 
-After initialization, your configuration file should look similar to this:
+After initialization, your configuration file should look similar to the following example:
 
 ```json
 {
@@ -245,7 +245,7 @@ When using the `@authorize` directive with roles, consider how roles are assigne
 | **Authenticated request** | The `authenticated` system role is automatically assigned | Allowed if role matches |
 | **Custom role request** | Include the `X-MS-API-ROLE` header with the role name | Allowed if role matches |
 
-This table applies to fields or types that explicitly include `@authorize`. For fields without `@authorize`, access is determined by entity-level permissions.
+This table applies to fields or types that explicitly include `@authorize`. For fields without `@authorize`, entity-level permissions determine access.
 
 For authenticated requests needing a custom role, send the `X-MS-API-ROLE` header:
 
@@ -292,7 +292,7 @@ For more information about data modeling strategies, see [Data modeling in Azure
 
 Data API builder doesn't generate REST endpoints for Azure Cosmos DB for NoSQL because Azure Cosmos DB already provides a comprehensive native REST API for document operations.
 
-When using DAB with Azure Cosmos DB for NoSQL, only GraphQL endpoints are available, and OpenAPI isn't generated. To access your data via REST, use the [Azure Cosmos DB REST API](/rest/api/cosmos-db/) directly.
+When you use DAB with Azure Cosmos DB for NoSQL, DAB exposes only GraphQL endpoints and doesn't generate OpenAPI. To access your data via REST, use the [Azure Cosmos DB REST API](/rest/api/cosmos-db/) directly.
 
 ## Common configuration issues
 

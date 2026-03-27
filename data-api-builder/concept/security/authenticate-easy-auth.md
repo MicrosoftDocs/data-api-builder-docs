@@ -247,7 +247,7 @@ Data API builder parses the following properties from the client principal:
 
 ## Using claims in database policies
 
-With the AppService provider, you can use claims in database policies. This enables row-level security based on user identity.
+With the AppService provider, you can use claims in database policies. This capability enables row-level security based on user identity.
 
 ### Example: Filter by user object ID
 
@@ -298,7 +298,7 @@ When App Service allows unauthenticated requests, or when testing locally withou
 curl -X GET "http://localhost:5000/api/Book"
 ```
 
-For this to work, your entity must have permissions for the `anonymous` role:
+For anonymous access to work, your entity must have permissions for the `anonymous` role:
 
 ```json
 {
@@ -318,7 +318,7 @@ For this to work, your entity must have permissions for the `anonymous` role:
 | `401 Unauthorized` (or redirect to sign-in) | EasyAuth blocked the request before it reached DAB | Sign in through EasyAuth or send valid credentials; verify App Service **Authentication** settings |
 | `403 Forbidden` | Role not in permissions | Add the role to entity permissions |
 | `403 Forbidden` | `X-MS-API-ROLE` not in user's roles | Ensure the header value matches a role claim in the principal's `claims` array |
-| Claims not available | Missing `claims` array in principal | Add claims to the `X-MS-CLIENT-PRINCIPAL` JSON |
+| Claims not available | Missing `claims` array in the client principal | Add claims to the `X-MS-CLIENT-PRINCIPAL` JSON |
 | Role not recognized | Roles not in `claims` array | Add role claims with correct `role_typ` (for example, `{ "typ": "roles", "val": "editor" }`) |
 | Local testing fails | Header not Base64-encoded | Encode the JSON properly before sending |
 

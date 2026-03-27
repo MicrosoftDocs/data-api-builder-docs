@@ -864,7 +864,7 @@ HTTP response compression configuration. When enabled, DAB compresses response b
 Compression is invoked by the client's `Accept-Encoding` header. Supported algorithms are Gzip and Brotli. The `level` setting configures the compression strategy when both the client and server support multiple algorithms.
 
 #### Supported headers
-| | Algorithm Used |
+| HTTP Header | Algorithm Used |
 |-------------------------|---------------------------|
 | `Accept-Encoding: gzip` | Gzip |
 | `Accept-Encoding: br` | Brotli |

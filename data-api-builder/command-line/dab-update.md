@@ -192,7 +192,7 @@ dab update ^
 
 Replace entity description.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -1007,7 +1007,7 @@ dab update ^
 
 Stored procedures only. Comma-separated list of parameter names.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 > [!TIP]
 > To define stored procedure parameters, use `--parameters.name` with `--parameters.description`, `--parameters.required`, and `--parameters.default`.
@@ -1065,7 +1065,7 @@ dab update ^
 
 Stored procedures only. Comma-separated list of parameter descriptions aligned to `--parameters.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -1093,7 +1093,7 @@ dab update ^
 
 Stored procedures only. Comma-separated list of `true`/`false` values aligned to `--parameters.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -1121,7 +1121,7 @@ dab update ^
 
 Stored procedures only. Comma-separated list of default values aligned to `--parameters.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -1149,7 +1149,7 @@ dab update ^
 
 Name of the database column to describe.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -1197,7 +1197,7 @@ dab update ^
 
 Alias for the field. Use a comma-separated list aligned to `--fields.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 > [!TIP]
 > Use `--fields.alias` with `--fields.name` to define exposed field names.
@@ -1228,7 +1228,7 @@ dab update ^
 
 Description for the field. Use a comma-separated list aligned to `--fields.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -1256,7 +1256,7 @@ dab update ^
 
 Primary key flag for the field. Use a comma-separated list of `true`/`false` values aligned to `--fields.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-rc-cli.md)]
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 > [!TIP]
 > Use `--fields.primary-key` with `--fields.name` to define primary key fields for views or tables without an inferred key.

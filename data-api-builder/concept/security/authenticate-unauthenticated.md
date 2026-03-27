@@ -38,10 +38,10 @@ Use `Unauthenticated` in these scenarios:
 
 | Scenario | Good fit? | Why |
 |----------|-----------|-----|
-| API Management or gateway authenticates users first | Yes | The front end can gate access, while DAB still authorizes only as `anonymous` |
+| API Management or gateway authenticates users first | Yes | The front end can gate access, while DAB still authorizes requests only for the `anonymous` role |
 | Internal-only service behind a private network boundary | Yes | Network access is controlled outside DAB, and DAB can stay `anonymous`-only |
 | Quick local setup without configuring JWT validation | Yes | Simplest way to get started |
-| DAB exposed directly to browsers or public clients | No | DAB won't validate identity tokens |
+| DAB exposed directly to browsers or public clients | No | DAB doesn't validate identity tokens |
 | You need `authenticated` or custom role activation inside DAB | No | Only `anonymous` is active with this provider |
 
 ## Quick reference
@@ -132,7 +132,7 @@ Another service can still authenticate callers or apply coarse-grained access ru
 
 This pattern works well when a surrounding platform controls who can reach DAB, while DAB remains intentionally `anonymous`-only.
 
-## What this provider does not do
+## What this provider doesn't do
 
 The `Unauthenticated` provider doesn't:
 

@@ -299,8 +299,30 @@ For detailed configuration steps, syntax reference, and examples, see [Configure
 }
 ```
 
+## Role inheritance
+
+DAB 2.0 introduces role inheritance for entity permissions. The inheritance chain is `named-role → authenticated → anonymous`. If a role isn't explicitly configured for an entity, DAB walks up the chain until it finds a permission block. Define permissions once on `anonymous` and every broader role gets the same access automatically—no duplication required.
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": "dbo.books",
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] }
+      ]
+    }
+  }
+}
+```
+
+With this configuration, `anonymous`, `authenticated`, and any unconfigured named role can all read `Book`.
+
+For full details and examples, see [Role inheritance](role-inheritance.md).
+
 ## Related content
 
+- [Role inheritance](role-inheritance.md)
 - [Configure database policies for row-level filtering](database-policies.md)
 - [Configure Microsoft Entra ID authentication](authenticate-entra.md)
 - [Configure Simulator authentication for local testing](authenticate-simulator.md)

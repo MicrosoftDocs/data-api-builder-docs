@@ -46,7 +46,7 @@ The key to this table is that Data API builder can run in any environment with c
 | [Pagination](keywords/after-graphql.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | Throttling | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | [Filtering](keywords/filter-graphql.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
-| [Aggregation](how-to/aggregate-data.md) | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✅ Yes |
+| [Aggregation](concept/database/aggregate-data.md) | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✅ Yes |
 | [Sorting](keywords/orderby-graphql.md) | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✅ Yes |
 | [Selection](keywords/select-graphql.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | [Query-type](concept/api/graphql.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
@@ -148,7 +148,7 @@ The key to this table is that Data API builder can run in any environment with c
 | [Azure EasyAuth](concept/security/authenticate-easy-auth.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | [On-Behalf-Of (OBO)](concept/security/authenticate-on-behalf-of.md) | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | [Unauthenticated Provider](concept/security/authenticate-unauthenticated.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
-| [Role Inheritance](concept/security/authorization.md#role-inheritance) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| [Role Inheritance](concept/security/role-inheritance.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | API-key security | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 
 ## Other Features

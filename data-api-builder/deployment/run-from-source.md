@@ -81,7 +81,7 @@ The `Azure.DataApiBuilder` solution includes multiple projects. To run the tool 
     ```
 
     > [!IMPORTANT]
-    > This is a sample configuration that assumes you have a SQL Server available on your local machine. If you do not, you can run a Docker container for SQL Server with your sample data. For more information, see [creating sample data](local-container.md#create-sample-data).
+    > This is a sample configuration that assumes you have a SQL Server available on your local machine. If you don't, you can run a Docker container for SQL Server with your sample data. For more information, see [creating sample data](local-container.md#create-sample-data).
 
 1. Run the `src/Service/Azure.DataApiBuilder.Service.csproj` project. Use the `--ConfigFileName` argument to specify the configuration file created in the previous step.
 
@@ -90,7 +90,7 @@ The `Azure.DataApiBuilder` solution includes multiple projects. To run the tool 
     ```
 
     > [!TIP]
-    > The Data API builder engine will try to load the configuration from the `dab-config.json` file in the same folder, if present. If there is no `dab-config.json` file, the engine will start anyway but it will not be able to serve anything.
+    > The Data API builder engine tries to load the configuration from the `dab-config.json` file in the same folder, if present. If there's no `dab-config.json` file, the engine starts anyway but won't be able to serve anything.
 
 ## Related content
 
