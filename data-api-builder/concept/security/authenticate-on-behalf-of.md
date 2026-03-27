@@ -35,7 +35,7 @@ OBO is the right choice when the SQL database must know who the actual caller is
 ## Prerequisites
 
 - Data API builder CLI version 2.0 or later
-- An existing `dab-config.json` with `data-source.database-type` set to `mssql`
+- `dab-config.json` with `data-source.database-type` set to `mssql`
 - An Entra ID app registration with the appropriate API permissions to request tokens for the database
 - An upstream identity provider that issues JWTs accepted by DAB (Entra ID or a custom provider you configure)
 - An MSSQL database configured to accept Microsoft Entra ID tokens
@@ -143,9 +143,6 @@ dab configure --data-source.user-delegated-auth.database-audience "https://datab
 ## Per-user connection pooling
 
 When OBO is enabled, DAB maintains separate SQL connection pools per user so that one user's access token is never reused for another user's request. When row-level security depends on who is connected, you can be confident that connection reuse across users doesn't silently grant the wrong access.
-
-> [!NOTE]
-> Per-user connection pooling applies only when OBO authentication is active. Standard deployments are unaffected.
 
 ## Related content
 

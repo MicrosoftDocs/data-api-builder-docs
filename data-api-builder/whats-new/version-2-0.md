@@ -278,7 +278,7 @@ dab init --database-type mssql --connection-string "Server=localhost;Database=my
 DAB 2.0 adds role inheritance so you don't need to repeat the same permission block across every role. The inheritance chain is:
 
 ```
-named-role → authenticated → anonymous
+	named-role → authenticated → anonymous
 ```
 
 If `authenticated` isn't explicitly configured for an entity, it inherits from `anonymous`. If a named role isn't configured, it inherits from `authenticated`, or from `anonymous` if `authenticated` is also absent.
@@ -305,7 +305,7 @@ With this configuration, `anonymous`, `authenticated`, and any unconfigured name
 
 ### Show effective permissions with the CLI
 
-As a result of role inheritance, a new `--show-effective-permissions` option on `dab configure` displays the resolved permissions for every entity after inheritance is applied. If you're unsure what a role can do after inheritance rules take effect, run this command to get the answer instead of reasoning through the config manually.
+As a result of role inheritance, a new `--show-effective-permissions` option on `dab configure` displays the resolved permissions for every entity. If you're unsure what a role can do after inheritance rules take effect, run this command to get the answer instead of reasoning through the config manually.
 
 ### Command line
 

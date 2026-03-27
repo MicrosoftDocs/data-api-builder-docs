@@ -21,28 +21,28 @@ Configuration settings for automatic entity generation based on pattern-matching
 
 | Property | Description |
 |-|-|
-| [`autoentities.definition-name.patterns.include`](#patterns-definition-name-autoentities) | MSSQL `LIKE` patterns for objects to include |
-| [`autoentities.definition-name.patterns.exclude`](#patterns-definition-name-autoentities) | MSSQL `LIKE` patterns for objects to exclude |
-| [`autoentities.definition-name.patterns.name`](#name-patterns-definition-name-autoentities) | Interpolation pattern for entity naming |
+| [`patterns.include`](#patterns-definition-name-autoentities) | MSSQL `LIKE` patterns for objects to include |
+| [`patterns.exclude`](#patterns-definition-name-autoentities) | MSSQL `LIKE` patterns for objects to exclude |
+| [`patterns.name`](#name-patterns-definition-name-autoentities) | Interpolation pattern for entity naming |
 
 ## Template
 
 | Property | Description |
 |-|-|
-| [`autoentities.definition-name.template.rest.enabled`](#rest-template-definition-name-autoentities) | Enable REST for matched entities |
-| [`autoentities.definition-name.template.graphql.enabled`](#graphql-template-definition-name-autoentities) | Enable GraphQL for matched entities |
-| [`autoentities.definition-name.template.mcp.dml-tools`](#mcp-template-definition-name-autoentities) | Enable Model Context Protocol (MCP) data manipulation language (DML) tools for matched entities |
-| [`autoentities.definition-name.template.health.enabled`](#health-template-definition-name-autoentities) | Enable health checks for matched entities |
-| [`autoentities.definition-name.template.cache.enabled`](#cache-template-definition-name-autoentities) | Enable response caching for matched entities |
-| [`autoentities.definition-name.template.cache.ttl-seconds`](#cache-template-definition-name-autoentities) | Cache time-to-live in seconds |
-| [`autoentities.definition-name.template.cache.level`](#cache-template-definition-name-autoentities) | Cache level: `L1` or `L1L2` |
+| [`template.rest.enabled`](#rest-template-definition-name-autoentities) | Enable REST for matched entities |
+| [`template.graphql.enabled`](#graphql-template-definition-name-autoentities) | Enable GraphQL for matched entities |
+| [`template.mcp.dml-tools`](#mcp-template-definition-name-autoentities) | Enable Model Context Protocol (MCP) data manipulation language (DML) tools for matched entities |
+| [`template.health.enabled`](#health-template-definition-name-autoentities) | Enable health checks for matched entities |
+| [`template.cache.enabled`](#cache-template-definition-name-autoentities) | Enable response caching for matched entities |
+| [`template.cache.ttl-seconds`](#cache-template-definition-name-autoentities) | Cache time-to-live in seconds |
+| [`template.cache.level`](#cache-template-definition-name-autoentities) | Cache level: `L1` or `L1L2` |
 
 ## Permissions
 
 | Property | Description |
 |-|-|
-| [`autoentities.definition-name.permissions[].role`](#permissions-definition-name-autoentities) | Role name string |
-| [`autoentities.definition-name.permissions[].actions`](#permissions-definition-name-autoentities) | One or more of: `create`, `read`, `update`, `delete`, or `*` |
+| [`permissions[].role`](#permissions-definition-name-autoentities) | Role name string |
+| [`permissions[].actions`](#permissions-definition-name-autoentities) | One or more of: `create`, `read`, `update`, `delete`, or `*` |
 
 ## Format overview
 
