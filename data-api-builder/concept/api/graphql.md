@@ -459,8 +459,17 @@ GraphQL mutations allow you to create, update, and delete records depending on e
 | Mutation              | Action                   |
 | --------------------- | ------------------------ |
 | `createEntity`        | Create a new item        |
-| `updateEntity_by_pk`  | Update an existing item  |
-| `deleteEntity_by_pk`  | Remove an item           |
+| `updateEntity`        | Update an existing item  |
+| `deleteEntity`        | Remove an item           |
+
+> [!NOTE]
+> The `_by_pk` suffix applies only to *queries* (for example, `book_by_pk`). Mutation names don't include this suffix—use `updateBook` and `deleteBook`, not `updateBook_by_pk` or `deleteBook_by_pk`.
+
+> [!IMPORTANT]
+> GraphQL mutations require an active database connection pool. If your connection string sets `Pooling=False` or `MultipleActiveResultSets=False`, mutations fail with the error `Implicit distributed transactions have not been enabled`. Set `Pooling=True` and `MultipleActiveResultSets=True` (SQL Server) or the equivalent for your database provider.
+
+> [!TIP]
+> For stored procedures exposed through GraphQL, DAB prefixes the entity name with `execute`. For example, a stored-procedure entity named `GetBookById` becomes `executeGetBookById` in the schema. For more information, see [stored procedures](../database/stored-procedures.md#graphql-support).
 
 ## Create a new record
 
@@ -569,7 +578,7 @@ POST https://localhost:5001/graphql
 Content-Type: application/json
 
 {
-  "query": "mutation { updateBook_by_pk(id: 2000, item: { title: \"Leviathan Wakes\", year: 2011, pages: 577 }) { id title year pages } }"
+  "query": "mutation { updateBook(id: 2000, item: { title: \"Leviathan Wakes\", year: 2011, pages: 577 }) { id title year pages } }"
 }
 ```
 
@@ -578,7 +587,7 @@ Content-Type: application/json
 ```bash
 curl -X POST "https://localhost:5001/graphql" \
   -H "Content-Type: application/json" \
-  -d '{"query": "mutation { updateBook_by_pk(id: 2000, item: { title: \"Leviathan Wakes\", year: 2011, pages: 577 }) { id title year pages } }"}'
+  -d '{"query": "mutation { updateBook(id: 2000, item: { title: \"Leviathan Wakes\", year: 2011, pages: 577 }) { id title year pages } }"}'
 ```
 
 ### [C#](#tab/csharp)
@@ -588,7 +597,7 @@ var request = new GraphQLRequest
 {
     Query = @"
         mutation UpdateBook($id: Int!, $item: UpdateBookInput!) {
-            updateBook_by_pk(id: $id, item: $item) { id title year pages }
+            updateBook(id: $id, item: $item) { id title year pages }
         }",
     Variables = new
     {
@@ -612,7 +621,7 @@ if (result?.Errors?.Count > 0)
 ```python
 query = """
     mutation UpdateBook($id: Int!, $item: UpdateBookInput!) {
-        updateBook_by_pk(id: $id, item: $item) { id title year pages }
+        updateBook(id: $id, item: $item) { id title year pages }
     }
 """
 variables = {
@@ -635,7 +644,7 @@ if "errors" in data and data["errors"]:
 ```javascript
 const query = `
   mutation UpdateBook($id: Int!, $item: UpdateBookInput!) {
-    updateBook_by_pk(id: $id, item: $item) { id title year pages }
+    updateBook(id: $id, item: $item) { id title year pages }
   }
 `;
 const variables = {
@@ -668,7 +677,7 @@ POST https://localhost:5001/graphql
 Content-Type: application/json
 
 {
-  "query": "mutation { deleteBook_by_pk(id: 2000) { id title } }"
+  "query": "mutation { deleteBook(id: 2000) { id title } }"
 }
 ```
 
@@ -677,7 +686,7 @@ Content-Type: application/json
 ```bash
 curl -X POST "https://localhost:5001/graphql" \
   -H "Content-Type: application/json" \
-  -d '{"query": "mutation { deleteBook_by_pk(id: 2000) { id title } }"}'
+  -d '{"query": "mutation { deleteBook(id: 2000) { id title } }"}'
 ```
 
 ### [C#](#tab/csharp)
@@ -687,7 +696,7 @@ var request = new GraphQLRequest
 {
     Query = @"
         mutation DeleteBook($id: Int!) {
-            deleteBook_by_pk(id: $id) { id title }
+            deleteBook(id: $id) { id title }
         }",
     Variables = new { id = 2000 }
 };
@@ -707,7 +716,7 @@ if (result?.Errors?.Count > 0)
 ```python
 query = """
     mutation DeleteBook($id: Int!) {
-        deleteBook_by_pk(id: $id) { id title }
+        deleteBook(id: $id) { id title }
     }
 """
 variables = {"id": 2000}
@@ -727,7 +736,7 @@ if "errors" in data and data["errors"]:
 ```javascript
 const query = `
   mutation DeleteBook($id: Int!) {
-    deleteBook_by_pk(id: $id) { id title }
+    deleteBook(id: $id) { id title }
   }
 `;
 const variables = { id: 2000 };

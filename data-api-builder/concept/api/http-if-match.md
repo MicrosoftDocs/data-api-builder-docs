@@ -48,6 +48,9 @@ Without `If-Match`, PUT inserts when the resource doesn't exist (returns `201 Cr
 
 ### Update-only example
 
+> [!IMPORTANT]
+> Because `PUT` performs a full replacement, the request body must include **all** non-nullable columns. Omitting a required column causes a `400 Bad Request` database error, even when `If-Match: *` is present. Use `PATCH` instead of `PUT` if you only want to send a subset of fields.
+
 Request
 
 ```sh
@@ -56,7 +59,8 @@ If-Match: *
 Content-Type: application/json
 
 {
-  "title": "The Return of the King"
+  "title": "The Return of the King",
+  "publisher_id": 7
 }
 ```
 
@@ -68,7 +72,8 @@ Content-Type: application/json
 
 {
   "id": 1,
-  "title": "The Return of the King"
+  "title": "The Return of the King",
+  "publisher_id": 7
 }
 ```
 

@@ -73,6 +73,9 @@ The base `/openapi` path returns the default anonymous view. Each role-specific 
 > [!IMPORTANT]
 > Role-specific OpenAPI paths (`/openapi/{role}`) are available **only in Development mode**. In Production mode, these endpoints are disabled to prevent role enumeration. Only the base `/openapi` path is available in Production mode.
 
+> [!NOTE]
+> A role-specific endpoint returns `404 Not Found` if the role has no entity permissions configured anywhere in the runtime configuration. Only roles that have at least one `permissions` entry on at least one entity generate an OpenAPI document.
+
 ### Example
 
 Consider this permission configuration:
