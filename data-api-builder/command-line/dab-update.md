@@ -29,6 +29,7 @@ dab update <entity-name> [options]
 | - | - |
 | `<entity-name>` | Required positional argument. Logical entity name. |
 | [`-s, --source`](#-s---source) | Name of the source table, view, or stored procedure. |
+| [`-m, --map`](#-m---map) | Mappings between database fields and exposed names. |
 | [`--permissions`](#--permissions) | Role and actions in `role:actions` format. |
 | [`--description`](#--description) | Replace entity description. |
 | [`-c, --config`](#-c---config) | Path to config file. Default resolution applies if omitted. |
@@ -92,12 +93,27 @@ dab update <entity-name> [options]
 | [`--rest`](#--rest) | REST exposure: `false`, `true`, or custom path. |
 | [`--rest.methods`](#--restmethods) | Stored procedures only. Replace allowed HTTP verbs. |
 
+#### Mappings
+
+| Option | Summary |
+| - | - |
+| [`-m, --map`](#-m---map) | Mappings between database fields and exposed names. |
+
+#### MCP
+
+| Option | Summary |
+| - | - |
+| [`--mcp.dml-tools`](#--mcpdml-tools) | Enable or disable MCP DML tools for this entity. |
+| [`--mcp.custom-tool`](#--mcpcustom-tool) | Enable MCP custom tool (stored procedures only). |
+
 #### Source
 
 | Option | Summary |
 | - | - |
 | [`-s, --source`](#-s---source) | Underlying database object name. |
 | [`--source.type`](#--sourcetype) | Source type: `table`, `view`, or `stored-procedure`. |
+| [`--source.params`](#--sourceparams) | Default parameter values for stored procedures. |
+| [`--source.key-fields`](#--sourcekey-fields) | Primary key field(s) for views or tables. |
 
 #### Parameters (stored procedures)
 
@@ -137,13 +153,14 @@ dab update ^
 {
   "entities": {
     "Book": {
-      "cache": {
-        "enabled": true
-      }
+      "cache": {}
     }
   }
 }
 ```
+
+> [!NOTE]
+> When caching is enabled (the default), the CLI writes an empty `cache` object. The `"enabled"` property only appears explicitly when set to `false`.
 
 ## `--cache.ttl`
 
@@ -595,7 +612,9 @@ dab update ^
           "cardinality": "one",
           "target.entity": "Profile",
           "source.fields": [ "id" ],
-          "target.fields": [ "user_id" ]
+          "target.fields": [ "user_id" ],
+          "linking.source.fields": [],
+          "linking.target.fields": []
         }
       }
     }
@@ -799,8 +818,12 @@ dab update ^
     "User": {
       "relationships": {
         "profile": {
+          "cardinality": "one",
+          "target.entity": "Profile",
           "source.fields": [ "id" ],
-          "target.fields": [ "user_id" ]
+          "target.fields": [ "user_id" ],
+          "linking.source.fields": [],
+          "linking.target.fields": []
         }
       }
     }
@@ -928,6 +951,9 @@ dab update ^
 
 Change the source object type.
 
+> [!NOTE]
+> Views require `--source.key-fields`. Changing to `view` without specifying key-fields produces an error.
+
 ### Example
 
 #### [Bash](#tab/bash-cli)
@@ -935,7 +961,8 @@ Change the source object type.
 ```bash
 dab update \
   Book \
-  --source.type view
+  --source.type view \
+  --source.key-fields "id"
 ```
 
 #### [Command Prompt](#tab/cmd-cli)
@@ -943,7 +970,8 @@ dab update \
 ```cmd
 dab update ^
   Book ^
-  --source.type view
+  --source.type view ^
+  --source.key-fields "id"
 ```
 ---
 ### Resulting config
@@ -955,11 +983,161 @@ dab update ^
       "source": {
         "type": "view",
         "object": "Book"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "primary-key": true
+        }
+      ]
+    }
+  }
+}
+```
+
+## `--source.params`
+
+Stored procedures only. Default parameter values as `name:value` pairs.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab update \
+  RunReport \
+  --source.params "startDate:2024-01-01,endDate:2024-12-31"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab update ^
+  RunReport ^
+  --source.params "startDate:2024-01-01,endDate:2024-12-31"
+```
+---
+### Resulting config
+
+```json
+{
+  "entities": {
+    "RunReport": {
+      "source": {
+        "type": "stored-procedure",
+        "parameters": [
+          {
+            "name": "startDate",
+            "required": false,
+            "default": "2024-01-01"
+          },
+          {
+            "name": "endDate",
+            "required": false,
+            "default": "2024-12-31"
+          }
+        ]
       }
     }
   }
 }
 ```
+
+## `--source.key-fields`
+
+Specify primary key field(s) for views or tables without an inferred key.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab update \
+  Book \
+  --source.type view \
+  --source.key-fields "id"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab update ^
+  Book ^
+  --source.type view ^
+  --source.key-fields "id"
+```
+---
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "view",
+        "object": "Book"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "primary-key": true
+        }
+      ]
+    }
+  }
+}
+```
+
+> [!NOTE]
+> Views always require key-fields. The `--source.key-fields` option adds entries to the `fields` array with `"primary-key": true`.
+
+## `-m, --map`
+
+Specify mappings between database column names and exposed REST/GraphQL field names.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab update \
+  Book \
+  --map "id:bookId,title:bookTitle"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab update ^
+  Book ^
+  --map "id:bookId,title:bookTitle"
+```
+---
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "fields": [
+        {
+          "name": "id",
+          "alias": "bookId",
+          "primary-key": false
+        },
+        {
+          "name": "title",
+          "alias": "bookTitle",
+          "primary-key": false
+        }
+      ]
+    }
+  }
+}
+```
+
+> [!NOTE]
+> The `--map` option creates entries in the `fields` array with the `alias` property set.
 
 ## `--parameters.name`
 
@@ -1241,6 +1419,83 @@ dab update ^
           "primary-key": true
         }
       ]
+    }
+  }
+}
+```
+
+## `--mcp.dml-tools`
+
+Enable or disable MCP DML (data manipulation language) tools for this entity. Default is `true`.
+
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab update \
+  Book \
+  --mcp.dml-tools false
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab update ^
+  Book ^
+  --mcp.dml-tools false
+```
+---
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "mcp": false
+    }
+  }
+}
+```
+
+> [!NOTE]
+> When `--mcp.dml-tools` is used alone, the CLI writes the `mcp` property as a boolean shorthand. When combined with `--mcp.custom-tool`, both properties appear in an object form.
+
+## `--mcp.custom-tool`
+
+Stored procedures only. Enable MCP custom tool for this entity. Default is `false`.
+
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab update \
+  RunReport \
+  --mcp.custom-tool true
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab update ^
+  RunReport ^
+  --mcp.custom-tool true
+```
+---
+### Resulting config
+
+```json
+{
+  "entities": {
+    "RunReport": {
+      "mcp": {
+        "custom-tool": true
+      }
     }
   }
 }
