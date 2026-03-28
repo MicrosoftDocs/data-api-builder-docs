@@ -47,8 +47,8 @@ dab configure [options]
 | [`--data-source.options.container`](#--data-sourceoptionscontainer) | Container name for Cosmos DB for NoSql. |
 | [`--data-source.options.schema`](#--data-sourceoptionsschema) | Schema path for Cosmos DB for NoSql. |
 | [`--data-source.options.set-session-context`](#--data-sourceoptionsset-session-context) | Enable session context. |
+| [`--data-source.health.name`](#--data-sourcehealthname) | Identifier for data source in health check report. |
 | [`--data-source.user-delegated-auth.enabled`](#--data-sourceuser-delegated-authenabled) | Enable OBO user-delegated authentication. |
-| [`--data-source.user-delegated-auth.provider`](#--data-sourceuser-delegated-authprovider) | OBO identity provider. |
 | [`--data-source.user-delegated-auth.database-audience`](#--data-sourceuser-delegated-authdatabase-audience) | Target audience for the downstream SQL token. |
 
 ### GraphQL section
@@ -75,6 +75,7 @@ dab configure [options]
 | - | - |
 | [`--runtime.mcp.enabled`](#--runtimemcpenabled) | Enable or disable MCP endpoint. |
 | [`--runtime.mcp.path`](#--runtimemcppath) | Customize the MCP endpoint path. |
+| [`--runtime.mcp.description`](#--runtimemcpdescription) | Set the MCP server description. |
 | [`--runtime.mcp.dml-tools.enabled`](#--runtimemcpdml-toolsenabled) | Enable or disable all MCP DML tools. |
 | [`--runtime.mcp.dml-tools.describe-entities.enabled`](#--runtimemcpdml-toolsdescribe-entitiesenabled) | Enable or disable the describe-entities tool. |
 | [`--runtime.mcp.dml-tools.create-record.enabled`](#--runtimemcpdml-toolscreate-recordenabled) | Enable or disable the create-record tool. |
@@ -82,6 +83,8 @@ dab configure [options]
 | [`--runtime.mcp.dml-tools.update-record.enabled`](#--runtimemcpdml-toolsupdate-recordenabled) | Enable or disable the update-record tool. |
 | [`--runtime.mcp.dml-tools.delete-record.enabled`](#--runtimemcpdml-toolsdelete-recordenabled) | Enable or disable the delete-record tool. |
 | [`--runtime.mcp.dml-tools.execute-entity.enabled`](#--runtimemcpdml-toolsexecute-entityenabled) | Enable or disable the execute-entity tool. |
+| [`--runtime.mcp.dml-tools.aggregate-records.enabled`](#--runtimemcpdml-toolsaggregate-recordsenabled) | Enable or disable the aggregate-records tool. |
+| [`--runtime.mcp.dml-tools.aggregate-records.query-timeout`](#--runtimemcpdml-toolsaggregate-recordsquery-timeout) | Execution timeout in seconds for aggregate-records. |
 
 ### Cache section
 
@@ -101,6 +104,12 @@ dab configure [options]
 | [`--runtime.host.authentication.provider`](#--runtimehostauthenticationprovider) | Authentication provider. |
 | [`--runtime.host.authentication.jwt.audience`](#--runtimehostauthenticationjwtaudience) | JWT audience claim. |
 | [`--runtime.host.authentication.jwt.issuer`](#--runtimehostauthenticationjwtissuer) | JWT issuer claim. |
+
+### Effective permissions
+
+| Option | Summary |
+| - | - |
+| [`--show-effective-permissions`](#--show-effective-permissions) | Display resolved permissions for all entities. |
 
 ### Key Vault section
 
@@ -365,6 +374,40 @@ dab configure ^
 }
 ```
 
+## `--data-source.health.name`
+
+Identifier for data source in health check report.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --data-source.health.name my-sql-health
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --data-source.health.name my-sql-health
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "data-source": {
+    "health": {
+      "name": "my-sql-health"
+    }
+  }
+}
+```
+
 ## `--data-source.user-delegated-auth.enabled`
 
 Enable or disable On-Behalf-Of (OBO) user-delegated authentication. Supported only for `mssql` data sources.
@@ -396,40 +439,6 @@ dab configure ^
   "data-source": {
     "user-delegated-auth": {
       "enabled": true
-    }
-  }
-}
-```
-
-## `--data-source.user-delegated-auth.provider`
-
-Set the OBO identity provider. Currently only `EntraId` is supported.
-
-### Example
-
-#### [Bash](#tab/bash-cli)
-
-```bash
-dab configure \
-  --data-source.user-delegated-auth.provider EntraId
-```
-
-#### [Command Prompt](#tab/cmd-cli)
-
-```cmd
-dab configure ^
-  --data-source.user-delegated-auth.provider EntraId
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "data-source": {
-    "user-delegated-auth": {
-      "provider": "EntraId"
     }
   }
 }
@@ -822,6 +831,42 @@ dab configure ^
 }
 ```
 
+## `--runtime.mcp.description`
+
+Set the MCP server description to be exposed in the initialize response.
+
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --runtime.mcp.description "My MCP Server"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --runtime.mcp.description "My MCP Server"
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "description": "My MCP Server"
+    }
+  }
+}
+```
+
 ## `--runtime.mcp.dml-tools.enabled`
 
 Enable DAB's MCP DML tools endpoint.
@@ -854,9 +899,7 @@ dab configure ^
 {
   "runtime": {
     "mcp": {
-      "dml-tools": {
-        "enabled": false
-      }
+      "dml-tools": false
     }
   }
 }
@@ -893,9 +936,7 @@ dab configure ^
   "runtime": {
     "mcp": {
       "dml-tools": {
-        "describe-entities": {
-          "enabled": false
-        }
+        "describe-entities": false
       }
     }
   }
@@ -933,9 +974,7 @@ dab configure ^
   "runtime": {
     "mcp": {
       "dml-tools": {
-        "create-record": {
-          "enabled": false
-        }
+        "create-record": false
       }
     }
   }
@@ -973,9 +1012,7 @@ dab configure ^
   "runtime": {
     "mcp": {
       "dml-tools": {
-        "read-records": {
-          "enabled": false
-        }
+        "read-records": false
       }
     }
   }
@@ -1013,9 +1050,7 @@ dab configure ^
   "runtime": {
     "mcp": {
       "dml-tools": {
-        "update-record": {
-          "enabled": false
-        }
+        "update-record": false
       }
     }
   }
@@ -1053,9 +1088,7 @@ dab configure ^
   "runtime": {
     "mcp": {
       "dml-tools": {
-        "delete-record": {
-          "enabled": false
-        }
+        "delete-record": false
       }
     }
   }
@@ -1093,8 +1126,87 @@ dab configure ^
   "runtime": {
     "mcp": {
       "dml-tools": {
-        "execute-entity": {
-          "enabled": false
+        "execute-entity": false
+      }
+    }
+  }
+}
+```
+
+## `--runtime.mcp.dml-tools.aggregate-records.enabled`
+
+Enable DAB's MCP aggregate records tool.
+
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --runtime.mcp.dml-tools.aggregate-records.enabled false
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --runtime.mcp.dml-tools.aggregate-records.enabled false
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "dml-tools": {
+        "aggregate-records": false
+      }
+    }
+  }
+}
+```
+
+## `--runtime.mcp.dml-tools.aggregate-records.query-timeout`
+
+Set the execution timeout in seconds for the aggregate-records MCP tool.
+
+Default: `30`. Range: 1–600.
+
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --runtime.mcp.dml-tools.aggregate-records.query-timeout 60
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --runtime.mcp.dml-tools.aggregate-records.query-timeout 60
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "dml-tools": {
+        "aggregate-records": {
+          "enabled": true,
+          "query-timeout": 60
         }
       }
     }
@@ -1179,9 +1291,9 @@ Set the HTTP response compression level.
 
 Allowed values:
 
-- `optimal`—balances compression ratio and speed
+- `optimal`—balances compression ratio and speed (default)
 - `fastest`—prioritizes compression speed over ratio
-- `none`—disables compression (default)
+- `none`—disables compression
 
 ### Example
 
