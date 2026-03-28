@@ -62,10 +62,10 @@ SQL MCP Server supports SQL authentication with a username and password. This ap
 
 ```json
 {
-	"data-source": {
-		"database-type": "mssql",
-		"connection-string": "@env('SQL_CONNECTION_STRING')"
-	}
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string": "@env('SQL_CONNECTION_STRING')"
+  }
 }
 ```
 

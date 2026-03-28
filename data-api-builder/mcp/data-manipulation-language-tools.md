@@ -56,7 +56,7 @@ When an agent calls `list_tools`, SQL MCP Server returns:
 Returns the entities available to the current role. Each entry includes field names, data types, primary keys, and allowed operations. This tool doesn't query the database. Instead, it reads from the in-memory configuration built from your config file.
 
 > [!IMPORTANT]
-> The `fields` information in `describe_entities` is derived from the `fields` data you provide in the configuration. Because field metadata is optional, if you don't include it, agents only see entity names with an empty `fields` array. It's a best practice to include both field names and field descriptions in your configuration. This metadata gives agents more context to generate accurate queries and updates. Learn more about [field descriptions here](./how-to-add-descriptions.md#2-add-field-descriptions).
+> The `fields` information in `describe_entities` is derived from the `fields` data you provide in the configuration. Because field metadata is optional, if you don't include it, agents only see entity names with an empty `fields` array. It's a best practice to include both field names and field descriptions in your configuration. This metadata gives agents more context to generate accurate queries and updates. Learn more about [field descriptions here](./how-to-add-descriptions.md#field-descriptions).
 
 ```json
 {
@@ -362,7 +362,11 @@ If the `anonymous` role only allows read permission on `Products`:
         },
         {
           "role": "admin",
-          "actions": ["*"]
+          "actions": [
+            {
+              "action": "*"
+            }
+          ]
         }
       ]
     }

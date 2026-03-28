@@ -302,17 +302,33 @@ Descriptions are stored in your `dab-config.json` file. Here's how they appear:
         },
         {
           "name": "ProductName",
-          "description": "Display name of the product"
+          "description": "Display name of the product",
+          "primary-key": false
         },
         {
           "name": "UnitPrice",
-          "description": "Retail price per unit in USD"
+          "description": "Retail price per unit in USD",
+          "primary-key": false
         }
       ],
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "Products",
+          "plural": "Products"
+        }
+      },
+      "rest": {
+        "enabled": true
+      },
       "permissions": [
         {
           "role": "anonymous",
-          "actions": ["*"]
+          "actions": [
+            {
+              "action": "*"
+            }
+          ]
         }
       ]
     },
@@ -325,25 +341,45 @@ Descriptions are stored in your `dab-config.json` file. Here's how they appear:
           {
             "name": "StartDate",
             "description": "Beginning of date range (inclusive)",
-            "required": true
+            "required": true,
+            "default": ""
           },
           {
             "name": "EndDate",
             "description": "End of date range (inclusive)",
-            "required": true
+            "required": true,
+            "default": ""
           },
           {
             "name": "CustomerID",
             "description": "Optional customer ID filter (null returns all customers)",
             "required": false,
-            "default": null
+            "default": "null"
           }
+        ]
+      },
+      "graphql": {
+        "enabled": true,
+        "operation": "mutation",
+        "type": {
+          "singular": "GetOrdersByDateRange",
+          "plural": "GetOrdersByDateRanges"
+        }
+      },
+      "rest": {
+        "enabled": true,
+        "methods": [
+          "post"
         ]
       },
       "permissions": [
         {
           "role": "authenticated",
-          "actions": ["execute"]
+          "actions": [
+            {
+              "action": "execute"
+            }
+          ]
         }
       ]
     }

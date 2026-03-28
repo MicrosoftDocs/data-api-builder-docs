@@ -44,10 +44,12 @@ Before using `stdio` transport, enable MCP in your `dab-config.json`:
     "enabled": true,
     "path": "/mcp",
     "dml-tools": {
+      "describe-entities": true,
       "create-record": true,
       "read-records": true,
       "update-record": true,
       "delete-record": true,
+      "execute-entity": true,
       "aggregate-records": true
     }
   }

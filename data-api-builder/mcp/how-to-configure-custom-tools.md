@@ -80,18 +80,36 @@ This produces the following entity in `dab-config.json`:
   "entities": {
     "GetProductById": {
       "source": {
-        "type": "stored-procedure",
-        "object": "dbo.get_product_by_id"
+        "object": "dbo.get_product_by_id",
+        "type": "stored-procedure"
       },
-      "mcp": {
-        "custom-tool": true
+      "graphql": {
+        "enabled": true,
+        "operation": "mutation",
+        "type": {
+          "singular": "GetProductById",
+          "plural": "GetProductByIds"
+        }
+      },
+      "rest": {
+        "enabled": true,
+        "methods": [
+          "post"
+        ]
       },
       "permissions": [
         {
           "role": "anonymous",
-          "actions": [ "execute" ]
+          "actions": [
+            {
+              "action": "execute"
+            }
+          ]
         }
-      ]
+      ],
+      "mcp": {
+        "custom-tool": true
+      }
     }
   }
 }
@@ -124,23 +142,39 @@ dab update GetProductById ^
 {
   "entities": {
     "GetProductById": {
+      "description": "Returns full product details including pricing and inventory for a given product ID",
       "source": {
-        "type": "stored-procedure",
-        "object": "dbo.get_product_by_id"
+        "object": "dbo.get_product_by_id",
+        "type": "stored-procedure"
       },
-      "mcp": {
-        "custom-tool": true
+      "fields": [],
+      "graphql": {
+        "enabled": true,
+        "operation": "mutation",
+        "type": {
+          "singular": "GetProductById",
+          "plural": "GetProductByIds"
+        }
       },
       "rest": {
-        "methods": [ "GET" ]
+        "enabled": true,
+        "methods": [
+          "post"
+        ]
       },
-      "description": "Returns full product details including pricing and inventory for a given product ID",
       "permissions": [
         {
           "role": "anonymous",
-          "actions": [ "execute" ]
+          "actions": [
+            {
+              "action": "execute"
+            }
+          ]
         }
-      ]
+      ],
+      "mcp": {
+        "custom-tool": true
+      }
     }
   }
 }
@@ -237,15 +271,36 @@ Custom tools respect the same role-based access control (RBAC) as all other DAB 
   "entities": {
     "GetOrderSummary": {
       "source": {
-        "type": "stored-procedure",
-        "object": "dbo.get_order_summary"
+        "object": "dbo.get_order_summary",
+        "type": "stored-procedure"
       },
-      "mcp": {
-        "custom-tool": true
+      "graphql": {
+        "enabled": true,
+        "operation": "mutation",
+        "type": {
+          "singular": "GetOrderSummary",
+          "plural": "GetOrderSummarys"
+        }
+      },
+      "rest": {
+        "enabled": true,
+        "methods": [
+          "post"
+        ]
       },
       "permissions": [
-        { "role": "authenticated", "actions": [ "execute" ] }
-      ]
+        {
+          "role": "authenticated",
+          "actions": [
+            {
+              "action": "execute"
+            }
+          ]
+        }
+      ],
+      "mcp": {
+        "custom-tool": true
+      }
     }
   }
 }
