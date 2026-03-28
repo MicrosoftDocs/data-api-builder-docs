@@ -302,7 +302,7 @@ The response returns arrays for `items` and aggregates in the same order so you 
 
 ## HAVING to filter aggregated results
 
-Use `having` to filter groups after aggregation. This is equivalent to SQL's `HAVING` clause.
+Use `having` to filter groups after aggregation. This filter is equivalent to SQL's `HAVING` clause.
 
 ### Table schema
 
@@ -450,7 +450,7 @@ FOR JSON PATH, INCLUDE_NULL_VALUES
 The first `count` (with `distinct: true`) returns unique products per customer. The second `count` returns total orders.
 
 > [!NOTE]
-> When requesting multiple aggregates on the same field, DAB returns them in the order requested. Use aliases (for example, `uniqueProducts: count(distinct: true)`) to make responses self-documenting.
+> When you request multiple aggregates on the same field, DAB returns them in the order you specified. Use aliases (for example, `uniqueProducts: count(distinct: true)`) to make responses self-documenting.
 
 ## Combine filters with aggregation
 

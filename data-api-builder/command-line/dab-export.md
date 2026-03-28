@@ -47,7 +47,7 @@ dab export --graphql -o <output-directory> [options]
 
 | Mode | Description |
 | - | - |
-| Export existing schema | Starts a temporary runtime, introspects GraphQL schema, writes file |
+| Export existing schema | Starts a temporary runtime, introspects GraphQL schema, and writes file |
 | Generate schema | Samples Azure Cosmos DB for NoSQL documents and infers schema |
 
 In export mode (without `--generate`), DAB first attempts `https://localhost:5001` and falls back to `http://localhost:5000`.
@@ -55,7 +55,7 @@ In export mode (without `--generate`), DAB first attempts `https://localhost:500
 Export mode retries schema retrieval up to five times. Generate mode uses a single attempt.
 
 Empty schema results in error:
-“Generated GraphQL schema is empty. Please ensure data is available to generate the schema.”
+"Generated GraphQL schema is empty. Ensure data is available to generate the schema."
 
 ## Sampling modes
 
@@ -72,7 +72,7 @@ Use for smaller, uniform datasets
 * N documents per partition
 * `--sampling-partition-key-path` optional
 
-Use when partitions have varied schema
+Use for partitions with varied schemas
 
 ### TimePartitionedSampler
 
@@ -533,7 +533,7 @@ dab export ^
 Set `data-source.options.schema` to the exported schema file path. For more information, see [Data source configuration](../configuration/data-source.md).
 
 > [!TIP]
-> Commit the generated schema once stable. Re-run if data model changes.
+> Commit the generated schema once stable. Rerun if data model changes.
 
 ## Troubleshooting
 

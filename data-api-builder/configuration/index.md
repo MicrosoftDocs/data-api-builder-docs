@@ -130,7 +130,7 @@ Data API builder supports multiple configuration files, with one designated as t
 * Every configuration file must include the `data-source` property.
 * Every configuration file must include the `entities` property (or `autoentities`).
 * The top-level configuration must include `runtime`.
-* Child configurations can include `runtime`, but it's ignored.
+* Child configurations can include `runtime`, but Data API builder ignores it.
 * Child configuration files can include their own child files.
 * Configuration files can be organized into subfolders.
 * Entity names must be unique across all configuration files.
@@ -198,24 +198,24 @@ When `autoentities` is present, the `entities` section is no longer required. Th
 
 | Property | Type | Required | Default | Description |
 | - | - | - | - | - |
-| `patterns` | object | ✔️ Yes | — | Defines include, exclude, and naming rules. |
+| `patterns` | object | ✔️ Yes | None | Defines include, exclude, and naming rules. |
 | `patterns.include` | string array | ❌ No | `["%.%"]` | MSSQL `LIKE` patterns for objects to include. |
 | `patterns.exclude` | string array | ❌ No | `null` | MSSQL `LIKE` patterns for objects to exclude. |
 | `patterns.name` | string | ❌ No | `"{object}"` | Interpolation pattern using `{schema}` and `{object}`. |
-| `template` | object | ❌ No | — | Default configuration applied to all matched entities. |
-| `template.mcp` | object | ❌ No | — | MCP settings for matched entities. |
-| `template.mcp.dml-tools` | boolean | ❌ No | `true` | Enable MCP DML tools. |
-| `template.rest` | object | ❌ No | — | REST settings for matched entities. |
+| `template` | object | ❌ No | None | Default configuration applied to all matched entities. |
+| `template.mcp` | object | ❌ No | None | MCP settings for matched entities. |
+| `template.mcp.dml-tools` | boolean | ❌ No | `true` | Enable MCP data manipulation language (DML) tools. |
+| `template.rest` | object | ❌ No | None | REST settings for matched entities. |
 | `template.rest.enabled` | boolean | ❌ No | `true` | Enable REST endpoints. |
-| `template.graphql` | object | ❌ No | — | GraphQL settings for matched entities. |
+| `template.graphql` | object | ❌ No | None | GraphQL settings for matched entities. |
 | `template.graphql.enabled` | boolean | ❌ No | `true` | Enable GraphQL. |
-| `template.health` | object | ❌ No | — | Health-check settings for matched entities. |
+| `template.health` | object | ❌ No | None | Health-check settings for matched entities. |
 | `template.health.enabled` | boolean | ❌ No | `false` | Enable health checks. |
-| `template.cache` | object | ❌ No | — | Cache settings for matched entities. |
+| `template.cache` | object | ❌ No | None | Cache settings for matched entities. |
 | `template.cache.enabled` | boolean | ❌ No | `false` | Enable response caching. |
 | `template.cache.ttl-seconds` | integer | ❌ No | `null` | Cache time-to-live in seconds. |
 | `template.cache.level` | string | ❌ No | `"L1L2"` | Cache level. |
-| `permissions` | array | ❌ No | — | Permissions applied to all matched entities. |
+| `permissions` | array | ❌ No | None | Permissions applied to all matched entities. |
 
 ### Example
 
@@ -241,7 +241,7 @@ When `autoentities` is present, the `entities` section is no longer required. Th
 }
 ```
 
-With this configuration, every table and view in the `dbo` schema (except those matching `dbo.internal%`) is automatically exposed as a DAB entity. Each entity is named using the `{schema}_{object}` pattern (for example, `dbo_Products`), has REST and GraphQL enabled, uses caching with a 30-second TTL, and grants `read` access to the `anonymous` role.
+With this configuration, every table and view in the `dbo` schema (except those matching `dbo.internal%`) is automatically exposed as a DAB entity. Each entity is named using the `{schema}_{object}` pattern (for example, `dbo_Products`), has REST and GraphQL enabled, uses caching with a 30-second time-to-live (TTL), and grants `read` access to the `anonymous` role.
 
 > [!TIP]
 > Use [`dab auto-config`](../command-line/dab-auto-config.md) to create autoentities definitions from the CLI, and [`dab auto-config-simulate`](../command-line/dab-auto-config-simulate.md) to preview which objects match before committing changes. For more information, see [what's new in version 2.0](../whats-new/version-2-0.md).
@@ -269,7 +269,7 @@ Configures Azure Key Vault integration for managing secrets. When present, the `
 | `azure-key-vault.retry-policy` | `max-delay-seconds` | integer | ❌ No | `60` |
 | `azure-key-vault.retry-policy` | `network-timeout-seconds` | integer | ❌ No | `60` |
 
-Use the `@akv()` function in your configuration values to reference secrets stored in Azure Key Vault. Data API builder resolves these references at startup using the configured endpoint.
+To reference secrets stored in Azure Key Vault, use the `@akv()` function in your configuration values. Data API builder resolves these references at startup using the configured endpoint.
 
 ### Format
 

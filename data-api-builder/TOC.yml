@@ -37,9 +37,9 @@
     - name: Enable the Command Query Responsibility Segregation (CQRS) pattern
       href: https://youtu.be/pSuMIvXRM1Q?t=142
       displayName: architecture, design, htap, read, write
-- name: SQL Model Context Protocol (MCP) Server
+- name: SQL MCP Server
   href: mcp/TOC.yml
-- name: Visual Studio Code extension
+- name: VSCode extensions
   href: vscode-extension/toc.yml
 - name: Command-Line interface
   items:

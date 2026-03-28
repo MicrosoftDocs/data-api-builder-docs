@@ -12,7 +12,7 @@ ms.date: 09/29/2025
 
 # `validate` command
 
-Validate a Data API builder configuration file without starting the runtime. Runs a sequence of checks (schema, structure, permissions, connectivity, metadata) and returns an exit code for success (0) or failure (non-zero). Useful in CI/CD pipelines.
+Validate a Data API builder configuration file without starting the runtime. Runs a sequence of checks (schema, structure, permissions, connectivity, metadata) and returns an exit code for success (0) or failure (nonzero). Useful in CI/CD pipelines.
 
 ## Syntax
 
@@ -34,7 +34,7 @@ dab validate [options]
 | Code | Meaning |
 | - | - |
 | 0 | Config passed all stages. |
-| non-zero | One or more stages failed. See logs for details. |
+| nonzero | One or more stages failed. See logs for details. |
 
 CI example:
 
@@ -103,9 +103,9 @@ Checks consistency beyond schema.
 * Valid `database-type` supplied
 * For `cosmosdb_nosql`, database and GraphQL schema path are required. A container may also be required depending on entities. REST settings are ignored.
 * At least one endpoint (REST, GraphQL, MCP) must be enabled
-* REST/GraphQL paths start with `/` and do not collide
-* Legacy `*.disabled` flags emit warnings but do not fail
-* If using JWT, both issuer and audience must be set
+* REST/GraphQL paths start with `/` and don't collide
+* Legacy `*.disabled` flags emit warnings but don't fail
+* If using JSON Web Token (JWT), both issuer and audience must be set
 
 #### Failures & Fixes
 
@@ -121,7 +121,7 @@ Checks that each entity’s permissions are valid.
 
 #### Rules
 
-* Each entry has a non-empty role
+* Each entry has a nonempty role
 * Actions must be valid:
 
   * Tables/views: `create, read, update, delete, *`
@@ -134,7 +134,7 @@ Checks that each entity’s permissions are valid.
 | Problem | Example | Fix |
 | - | - | - |
 | Unsupported action | `"drop"` | Use `read`, etc. |
-| SP with CRUD | Stored proc uses `update` | Use `execute` or `*`. |
+| Stored procedure with CRUD | Stored proc uses `update` | Use `execute` or `*`. |
 | Empty list | `"actions": []` | Provide actions. |
 
 ### 4. Database Connection
@@ -153,7 +153,7 @@ Checks that the database connection works.
 | - | - | - |
 | Timeout | Server unreachable | Check network/firewall. |
 | Bad login | Auth failed | Fix username/password. |
-| Missing DB | DB not found | Create DB or update config. |
+| Missing database | Database not found | Create database or update config. |
 
 ### 5. Entity Metadata
 
@@ -167,7 +167,7 @@ Checks entity definitions against the database.
 * Stored procedures: params match signature
 * Relationships: target entity exists, linking fields align with keys; linking.object must exist for many-to-many
 * Policies reference valid fields
-* Caching TTL non-negative
+* Caching time-to-live (TTL) non-negative
 
 #### Failures & Fixes
 
@@ -175,7 +175,7 @@ Checks entity definitions against the database.
 | - | - | - |
 | Missing key fields | View without `key-fields` | Add `source.key-fields`. |
 | Bad column | `fields.include` lists missing column | Remove or fix name. |
-| Relationship mismatch | Linking fields count != PK count | Fix linking fields. |
+| Relationship mismatch | Linking fields count doesn't match primary key count | Fix linking fields. |
 
 ## Output Examples
 
@@ -290,7 +290,7 @@ if %errorlevel%==0 (echo OK) else (echo INVALID CONFIG & exit /b 1)
 
 1. Run `dab validate`
 2. Fix the first failing stage
-3. Re-run until exit code is 0
+3. Rerun until exit code is 0
 4. Commit validated config
 
 > [!TIP]

@@ -11,7 +11,7 @@ ms.date: 01/21/2026
 
 # Configure custom JWT authentication (Okta, Auth0)
 
-Data API builder supports third-party identity providers through the Custom authentication provider. Use this approach when your organization uses Okta, Auth0, or another OAuth 2.0/OpenID Connect-compliant identity provider.
+Data API builder supports third-party identity providers through the Custom authentication provider using JSON Web Token (JWT) validation. Use this approach when your organization uses Okta, Auth0, or another OAuth 2.0/OpenID Connect-compliant identity provider.
 
 ## Authentication flow
 
@@ -261,7 +261,7 @@ Data API builder validates these aspects of the JWT:
 
 | Check | Description |
 |-------|-------------|
-| **Signature** | Validated using signing keys discovered via the configured `jwt.issuer` authority (OpenID Connect metadata / JWKS) |
+| **Signature** | Validated using signing keys discovered via the configured `jwt.issuer` authority (OpenID Connect metadata or JSON Web Key Set (JWKS)) |
 | **Issuer** | Must exactly match `jwt.issuer` configuration |
 | **Audience** | Must exactly match `jwt.audience` configuration |
 | **Expiration** | Token must not be expired (`exp` claim) |
