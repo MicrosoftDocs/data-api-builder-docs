@@ -36,6 +36,8 @@ dab add <entity-name> [options]
 | `<entity-name>` | Required positional argument. Logical entity name. |
 | [`-s, --source`](#-s---source) | Required. Database object name (table, view, or stored procedure). |
 | [`--source.type`](#--sourcetype) | Source type: `table`, `view`, `stored-procedure` (default table). |
+| [`--source.key-fields`](#--sourcekey-fields) | Primary key fields for views (comma-separated). |
+| [`--source.params`](#--sourceparams) | Stored procedures only. Default parameter values as `param1:val1,param2:val2`. |
 
 ### Cache section
 
@@ -122,8 +124,7 @@ dab add Book ^
 dab add BookView \
   --source dbo.MyView \
   --source.type view \
-  --fields.name "id,region" \
-  --fields.primary-key "true,true" \
+  --source.key-fields "id,region" \
   --permissions "anonymous:read" \
   --description "Example for managing book inventory from view"
 ```
@@ -134,8 +135,7 @@ dab add BookView \
 dab add BookView ^
   --source dbo.MyView ^
   --source.type view ^
-  --fields.name "id,region" ^
-  --fields.primary-key "true,true" ^
+  --source.key-fields "id,region" ^
   --permissions "anonymous:read" ^
   --description "Example for managing book inventory from view"
 ```
@@ -286,6 +286,103 @@ dab add Book ^
 }
 ```
 
+## `--source.key-fields`
+
+The field(s) to be used as primary keys. Required for views, which lack intrinsic primary keys.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add BookView \
+  --source dbo.MyView \
+  --source.type view \
+  --source.key-fields "id,region" \
+  --permissions "anonymous:read"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add BookView ^
+  --source dbo.MyView ^
+  --source.type view ^
+  --source.key-fields "id,region" ^
+  --permissions "anonymous:read"
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "BookView": {
+      "source": {
+        "object": "dbo.MyView",
+        "type": "view",
+        "key-fields": [ "id", "region" ]
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ]
+    }
+  }
+}
+```
+
+## `--source.params`
+
+Dictionary of parameters and their default values for stored procedures. Use the format `param1:val1,param2:val2`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add BookProc \
+  --source dbo.MyProc \
+  --source.type stored-procedure \
+  --source.params "year:2024,active:true" \
+  --permissions "anonymous:execute"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add BookProc ^
+  --source dbo.MyProc ^
+  --source.type stored-procedure ^
+  --source.params "year:2024,active:true" ^
+  --permissions "anonymous:execute"
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "BookProc": {
+      "source": {
+        "object": "dbo.MyProc",
+        "type": "stored-procedure",
+        "parameters": [
+          { "name": "year", "required": false, "default": "2024" },
+          { "name": "active", "required": false, "default": "True" }
+        ]
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "execute" } ] }
+      ]
+    }
+  }
+}
+```
+
 ## `--cache.enabled`
 
 Enable or disable caching.
@@ -325,9 +422,7 @@ dab add Book ^
       "permissions": [
         { "role": "anonymous", "actions": [ { "action": "read" } ] }
       ],
-      "cache": {
-        "enabled": true
-      }
+      "cache": {}
     }
   }
 }
@@ -373,7 +468,6 @@ dab add Book ^
         { "role": "anonymous", "actions": [ { "action": "read" } ] }
       ],
       "cache": {
-        "enabled": false,
         "ttl-seconds": 300
       }
     }
@@ -480,11 +574,13 @@ dab add GetOrdersByDateRange ^
           {
             "name": "StartDate",
             "required": true,
+            "default": "",
             "description": "Beginning of date range (inclusive)"
           },
           {
             "name": "EndDate",
             "required": true,
+            "default": "",
             "description": "End of date range (inclusive)"
           },
           {
@@ -697,6 +793,7 @@ dab add Book ^
             {
               "action": "read",
               "fields": {
+                "exclude": [],
                 "include": [ "id", "title", "price" ]
               }
             }
@@ -744,32 +841,8 @@ dab add Products ^
 
 ### Resulting config
 
-```json
-{
-  "entities": {
-    "Products": {
-      "source": { "type": "table", "object": "dbo.Products" },
-      "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "*" } ] }
-      ],
-      "fields": [
-        {
-          "name": "ProductID",
-          "alias": "product_id",
-          "description": "Unique identifier for each product",
-          "primary-key": true
-        },
-        {
-          "name": "ProductName",
-          "alias": "product_name",
-          "description": "Display name of the product",
-          "primary-key": false
-        }
-      ]
-    }
-  }
-}
-```
+> [!NOTE]
+> In the current 2.0.0-rc release, `--fields.name`, `--fields.alias`, `--fields.description`, and `--fields.primary-key` are accepted by the CLI but do not yet persist entity-level field metadata to the configuration file. This behavior is expected to be resolved before GA.
 
 ## `--fields.alias`
 
@@ -861,26 +934,8 @@ dab add Products ^
 
 ---
 
-### Resulting config
-
-```json
-{
-  "entities": {
-    "Products": {
-      "source": { "type": "table", "object": "dbo.Products" },
-      "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "*" } ] }
-      ],
-      "fields": [
-        {
-          "name": "ProductID",
-          "primary-key": true
-        }
-      ]
-    }
-  }
-}
-```
+> [!NOTE]
+> In the current 2.0.0-rc release, `--fields.primary-key` is accepted by the CLI but does not yet persist entity-level field metadata to the configuration file. To specify primary key fields for views, use [`--source.key-fields`](#--sourcekey-fields) instead.
 
 ## `--graphql`
 
@@ -970,7 +1025,11 @@ dab add BookProc ^
       ],
       "graphql": {
         "enabled": true,
-        "operation": "query"
+        "operation": "query",
+        "type": {
+          "singular": "BookProc",
+          "plural": "BookProcs"
+        }
       }
     }
   }
@@ -1112,9 +1171,7 @@ dab add Book ^
       "permissions": [
         { "role": "anonymous", "actions": [ { "action": "read" } ] }
       ],
-      "mcp": {
-        "dml-tools": true
-      }
+      "mcp": true
     }
   }
 }
