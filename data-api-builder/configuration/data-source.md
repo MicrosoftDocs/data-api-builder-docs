@@ -69,7 +69,7 @@ The `data-source` section defines the database access details. It also defines d
 
 |Parent|Property|Type|Required|Default|
 |-|-|-|-|-|
-|`$root`|`database-source`|object|✔️ Yes|-|
+|`$root`|`data-source`|object|✔️ Yes|-|
 
 ### Nested properties
 
@@ -248,7 +248,7 @@ On-Behalf-Of (OBO) user-delegated authentication for SQL Server and Azure SQL. W
 |Parent|Property|Type|Required|Default|
 |-|-|-|-|-|
 |`data-source.user-delegated-auth`|`enabled`|boolean|No|false|
-|`data-source.user-delegated-auth`|`provider`|string|No|None|
+|`data-source.user-delegated-auth`|`provider`|enum (`EntraId`)|No|`EntraId`|
 |`data-source.user-delegated-auth`|`database-audience`|string|Yes (when enabled)|None|
 
 - `enabled`—turns OBO on or off.

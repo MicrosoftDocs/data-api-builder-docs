@@ -86,7 +86,7 @@ dab auto-config my-def ^
       "permissions": [
         { 
           "role": "anonymous", 
-          "actions": [ "read" ] 
+          "actions": [ { "action": "read" } ] 
         }
       ]
     }
@@ -168,7 +168,7 @@ dab auto-config my-def ^
       "permissions": [
         { 
           "role": "anonymous", 
-          "actions": [ "read" ] 
+          "actions": [ { "action": "read" } ] 
         }
       ]
     }
@@ -215,7 +215,7 @@ dab auto-config my-def ^
       "permissions": [
         { 
           "role": "anonymous", 
-          "actions": [ "read" ] 
+          "actions": [ { "action": "read" } ] 
         }
       ]
     }
@@ -262,7 +262,7 @@ dab auto-config my-def ^
       "permissions": [
         { 
           "role": "anonymous", 
-          "actions": [ "read" ] 
+          "actions": [ { "action": "read" } ] 
         }
       ]
     }
@@ -303,7 +303,7 @@ dab auto-config my-def ^
       "permissions": [
         { 
           "role": "anonymous", 
-          "actions": [ "read" ] 
+          "actions": [ { "action": "read" } ] 
         }
       ]
     }
@@ -661,7 +661,7 @@ dab auto-config my-def ^
       "permissions": [
         { 
           "role": "anonymous", 
-          "actions": [ "read" ] 
+          "actions": [ { "action": "read" } ] 
         }
       ]
     }

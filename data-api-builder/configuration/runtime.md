@@ -76,19 +76,31 @@ Configuration settings that determine runtime behavior.
 
 |Property|Default|Description|
 |-|-|-|
-|[runtime.compression.level](#compression-runtime)|`none`|HTTP response compression level (`optimal`, `fastest`, or `none`)|
+|[runtime.compression.level](#compression-runtime)|`optimal`|HTTP response compression level (`optimal`, `fastest`, or `none`)|
 
 ### Telemetry settings
 
 |Property|Default|Description|
 |-|-|-|
 |[runtime.telemetry.application-insights.connection-string](#telemetry-runtime)|`null`|Application Insights connection string|
-|[runtime.telemetry.application-insights.enabled](#telemetry-runtime)|`false`|Enables or disables Application Insights telemetry|
+|[runtime.telemetry.application-insights.enabled](#telemetry-runtime)|`true`|Enables or disables Application Insights telemetry|
 |[runtime.telemetry.open-telemetry.endpoint](#telemetry-runtime)|`null`|OpenTelemetry collector URL|
 |[runtime.telemetry.open-telemetry.headers](#telemetry-runtime)|`{}`|OpenTelemetry export headers|
 |[runtime.telemetry.open-telemetry.service-name](#telemetry-runtime)|`"dab"`|OpenTelemetry service name|
 |[runtime.telemetry.open-telemetry.exporter-protocol](#telemetry-runtime)|`"grpc"`|OpenTelemetry protocol ("grpc" or "httpprotobuf")|
 |[runtime.telemetry.open-telemetry.enabled](#telemetry-runtime)|`true`|Enables or disables OpenTelemetry|
+|[runtime.telemetry.open-telemetry.enabled](#telemetry-runtime)|`true`|Enables or disables OpenTelemetry|
+|[runtime.telemetry.azure-log-analytics.enabled](#azure-log-analytics-telemetry)|`false`|Enables or disables Azure Log Analytics|
+|[runtime.telemetry.azure-log-analytics.dab-identifier](#azure-log-analytics-telemetry)|`"DabLogs"`|Identifier for DAB in Azure Log Analytics|
+|[runtime.telemetry.azure-log-analytics.flush-interval-seconds](#azure-log-analytics-telemetry)|`5`|Interval between log batch pushes (seconds)|
+|[runtime.telemetry.azure-log-analytics.auth.custom-table-name](#azure-log-analytics-telemetry)|`null`|Custom table name for Azure Log Analytics|
+|[runtime.telemetry.azure-log-analytics.auth.dcr-immutable-id](#azure-log-analytics-telemetry)|`null`|Data collection rule immutable ID|
+|[runtime.telemetry.azure-log-analytics.auth.dce-endpoint](#azure-log-analytics-telemetry)|`null`|Data collection endpoint URL|
+|[runtime.telemetry.file.enabled](#file-telemetry)|`false`|Enables or disables file sink logging|
+|[runtime.telemetry.file.path](#file-telemetry)|`"/logs/dab-log.txt"`|File path for telemetry logs|
+|[runtime.telemetry.file.rolling-interval](#file-telemetry)|`"Day"`|Rolling interval for log files|
+|[runtime.telemetry.file.retained-file-count-limit](#file-telemetry)|`1`|Maximum number of retained log files|
+|[runtime.telemetry.file.file-size-limit-bytes](#file-telemetry)|`1048576`|Maximum file size in bytes before rolling|
 |[runtime.telemetry.log-level.namespace](#telemetry-runtime)|`null`|Namespace-specific log level override|
 |[runtime.health.enabled](#health-runtime)|`true`|Enables or disables the health check endpoint globally|
 |[runtime.health.roles](#health-runtime)|`null`|Allowed roles for the comprehensive health endpoint|
@@ -153,7 +165,7 @@ Configuration settings that determine runtime behavior.
     }
   },
     "compression": {
-      "level": <"none"> (default) | <"optimal"> | <"fastest">
+      "level": <"optimal"> (default) | <"fastest"> | <"none">
     },
     "cache": {
       "enabled": <true>|<false> (default: `false`),
@@ -176,6 +188,23 @@ Configuration settings that determine runtime behavior.
         "service-name": <string> (default: "dab"),
         "exporter-protocol": <"grpc"> (default) | <"httpprotobuf">,
         "enabled": <true>|<false> (default: `true`)
+      },
+      "azure-log-analytics": {
+        "enabled": <true>|<false> (default: `false`),
+        "dab-identifier": <string> (default: "DabLogs"),
+        "flush-interval-seconds": <integer> (default: `5`),
+        "auth": {
+          "custom-table-name": <string>,
+          "dcr-immutable-id": <string>,
+          "dce-endpoint": <string>
+        }
+      },
+      "file": {
+        "enabled": <true>|<false> (default: `false`),
+        "path": <string> (default: "/logs/dab-log.txt"),
+        "rolling-interval": <string> (default: "Day"),
+        "retained-file-count-limit": <integer> (default: `1`),
+        "file-size-limit-bytes": <integer> (default: `1048576`)
       },
       "log-level": {
         // namespace keys
@@ -298,8 +327,9 @@ Global GraphQL configuration.
       "allow-introspection": <true> (default) | <false>,
       "multiple-mutations": {
         "create": {
-          "enabled": <true> (default) | <false>
+          "enabled": <true> | <false> (default)
         }
+      }
     }
   }
 }
@@ -495,7 +525,7 @@ Global CORS configuration.
   "runtime": {
     "host": {
       "cors": {
-        "allow-credentials": <true> (default) | <false>,
+        "allow-credentials": <true> | <false> (default),
         "origins": ["<array-of-strings>"]
       }
     }
@@ -510,7 +540,7 @@ Global CORS configuration.
 
 | Parent                        | Property   | Type                                                         | Required | Default      |
 | ----------------------------- | ---------- | ------------------------------------------------------------ | -------- | ------------ |
-| `runtime.host.authentication` | `provider` | enum (`Unauthenticated` \| `AppService` \| `EntraId` \| `Custom` \| `Simulator`) | ❌ No     | `Unauthenticated` |
+| `runtime.host.authentication` | `provider` | enum (`Unauthenticated` \| `StaticWebApps` \| `AppService` \| `EntraId` \| `Custom` \| `Simulator`) | ❌ No     | `Unauthenticated` |
 
 Selects the authentication method. Each provider validates identity differently. For step-by-step setup, see the how-to guides in the following table.
 
@@ -521,6 +551,7 @@ Selects the authentication method. Each provider validates identity differently.
 | Provider | Use case | Identity source | How-to guide |
 |----------|----------|-----------------|--------------|
 | `Unauthenticated` | DAB sits behind a trusted front end (default) | None—all requests run as `anonymous` | [Configure the Unauthenticated provider](../concept/security/authenticate-unauthenticated.md) |
+| `StaticWebApps` | Azure Static Web Apps | `X-MS-CLIENT-PRINCIPAL` header | [Configure Static Web Apps authentication](../concept/security/authenticate-easy-auth.md) |
 | `AppService` | Azure-hosted apps (EasyAuth) | `X-MS-CLIENT-PRINCIPAL` header | [Configure App Service authentication](../concept/security/authenticate-easy-auth.md) |
 | `EntraID` | Microsoft Entra ID (Azure AD) | JWT bearer token | [Configure Entra ID authentication](../concept/security/authenticate-entra.md) |
 | `Custom` | Third-party IdPs (Okta, Auth0) | JWT bearer token | [Configure custom JWT authentication](../concept/security/authenticate-custom.md) |
@@ -631,8 +662,10 @@ Global JSON Web Token (JWT) configuration.
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime.host.authentication.jwt` | `audience` | string | ❌ No | None |
-| `runtime.host.authentication.jwt` | `issuer` | string | ❌ No | None |
+| `runtime.host.authentication.jwt` | `audience` | string | ✔️ Yes* | None |
+| `runtime.host.authentication.jwt` | `issuer` | string | ✔️ Yes* | None |
+
+\* Both `audience` and `issuer` are required when the `jwt` object is present. The `jwt` object itself is required when the provider is `EntraID`, `AzureAD`, or `Custom`.
 
 ### Format
 
@@ -849,15 +882,15 @@ HTTP response compression configuration. When enabled, DAB compresses response b
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime.compression` | `level` | string | ❌ No | `"none"` |
+| `runtime.compression` | `level` | string | ❌ No | `"optimal"` |
 
 ### Supported values for `level`
 
 | Value | Description | Compression savings | Performance impact |
 |---|---|---|---|
-| `none` | No compression (default) | 0% (baseline: 12,673 bytes) | None |
+| `optimal` | Balances ratio and speed (default) | Gzip: 90.5% / Brotli: 92.2% | Moderate CPU usage, slight latency increase |
 | `fastest` | Prioritizes speed over ratio | Gzip: 89.8% / Brotli: 91.1% | Low CPU usage, minimal latency |
-| `optimal` | Balances ratio and speed | Gzip: 90.5% / Brotli: 92.2% | Moderate CPU usage, slight latency increase |
+| `none` | No compression | 0% (baseline: 12,673 bytes) | None |
 
 ### Client HTTP headers
 
@@ -875,7 +908,7 @@ Compression is invoked by the client's `Accept-Encoding` header. Supported algor
 {
   "runtime": {
     "compression": {
-      "level": <"none"> (default) | <"optimal"> | <"fastest">
+      "level": <"optimal"> (default) | <"fastest"> | <"none">
     }
   }
 }
@@ -961,6 +994,8 @@ Global telemetry configuration.
 | `runtime.telemetry` | `log-level` | dictionary | ❌ No | None |
 | `runtime.telemetry` | [`application-insights`](#application-insights-telemetry) | object | ❌ No | - |
 | `runtime.telemetry` | [`open-telemetry`](#opentelemetry-telemetry) | object | ❌ No | - |
+| `runtime.telemetry` | [`azure-log-analytics`](#azure-log-analytics-telemetry) | object | ❌ No | - |
+| `runtime.telemetry` | [`file`](#file-telemetry) | object | ❌ No | - |
 
 Configures logging verbosity per namespace. This configuration follows standard .NET logging conventions and allows granular control, though it assumes some familiarity with Data API builder internals. Data API builder is open source: [https://aka.ms/dab](https://aka.ms/dab)
 
@@ -1010,7 +1045,7 @@ Configures logging to [Application Insights](../concept/monitor/application-insi
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime.telemetry.application-insights` | `enabled` | boolean | ❌ No | False |
+| `runtime.telemetry.application-insights` | `enabled` | boolean | ❌ No | `true` |
 | `runtime.telemetry.application-insights` | `connection-string` | string | ✔️ Yes | None |
 
 ### Format
@@ -1090,6 +1125,152 @@ Learn more about [OTEL_EXPORTER_OTLP_HEADERS](https://opentelemetry.io/docs/lang
 
 > [!NOTE]
 > gRPC (`4317`) is faster and supports streaming but requires more setup steps. HTTP/protobuf (`4318`) is simpler and easier to debug but less efficient. 
+
+## Azure Log Analytics (telemetry)
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime.telemetry` | `azure-log-analytics` | object | ❌ No | - |
+
+Configures logging to Azure Log Analytics via a data collection endpoint. When enabled, DAB sends telemetry data in batches at a configurable interval.
+
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+
+### Nested properties
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime.telemetry.azure-log-analytics` | `enabled` | boolean | ❌ No | `false` |
+| `runtime.telemetry.azure-log-analytics` | `dab-identifier` | string | ❌ No | `"DabLogs"` |
+| `runtime.telemetry.azure-log-analytics` | `flush-interval-seconds` | integer | ❌ No | `5` |
+| `runtime.telemetry.azure-log-analytics` | `auth` | object | ✔️ Yes* | - |
+
+\* `auth` is required when `enabled` is `true`.
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime.telemetry.azure-log-analytics.auth` | `custom-table-name` | string | ✔️ Yes* | `null` |
+| `runtime.telemetry.azure-log-analytics.auth` | `dcr-immutable-id` | string | ✔️ Yes* | `null` |
+| `runtime.telemetry.azure-log-analytics.auth` | `dce-endpoint` | string | ✔️ Yes* | `null` |
+
+\* Required when `enabled` is `true`.
+
+- **`dab-identifier`**—a label passed to Log Analytics to help differentiate which logs come from Data API builder.
+- **`flush-interval-seconds`**—the time interval (in seconds) between sending batches of telemetry data.
+- **`custom-table-name`**—the name of the custom table in Azure Log Analytics where data is stored.
+- **`dcr-immutable-id`**—the immutable ID of the data collection rule that defines how data is collected.
+- **`dce-endpoint`**—the data collection endpoint URL used to send telemetry data.
+
+### Format
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "azure-log-analytics": {
+        "enabled": <true> | <false> (default),
+        "dab-identifier": <string> (default: "DabLogs"),
+        "flush-interval-seconds": <integer> (default: 5),
+        "auth": {
+          "custom-table-name": "<string>",
+          "dcr-immutable-id": "<string>",
+          "dce-endpoint": "<string>"
+        }
+      }
+    }
+  }
+}
+```
+
+### Example
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "azure-log-analytics": {
+        "enabled": true,
+        "dab-identifier": "MyDabInstance",
+        "flush-interval-seconds": 10,
+        "auth": {
+          "custom-table-name": "DabTelemetry_CL",
+          "dcr-immutable-id": "dcr-abc123def456",
+          "dce-endpoint": "https://my-dce.eastus-1.ingest.monitor.azure.com"
+        }
+      }
+    }
+  }
+}
+```
+
+## File (telemetry)
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime.telemetry` | `file` | object | ❌ No | - |
+
+Configures writing telemetry logs to a local file. When enabled, DAB writes structured log output to the specified file path with configurable rolling intervals and size limits.
+
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+
+### Nested properties
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime.telemetry.file` | `enabled` | boolean | ❌ No | `false` |
+| `runtime.telemetry.file` | `path` | string | ✔️ Yes* | `"/logs/dab-log.txt"` |
+| `runtime.telemetry.file` | `rolling-interval` | enum | ❌ No | `"Day"` |
+| `runtime.telemetry.file` | `retained-file-count-limit` | integer | ❌ No | `1` |
+| `runtime.telemetry.file` | `file-size-limit-bytes` | integer | ❌ No | `1048576` |
+
+\* `path` is required when `enabled` is `true`.
+
+### Rolling interval values
+
+| Value | Description |
+|---|---|
+| `Minute` | New log file every minute |
+| `Hour` | New log file every hour |
+| `Day` | New log file every day (default) |
+| `Month` | New log file every month |
+| `Year` | New log file every year |
+| `Infinite` | Never roll to a new file |
+
+### Format
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "file": {
+        "enabled": <true> | <false> (default),
+        "path": <string> (default: "/logs/dab-log.txt"),
+        "rolling-interval": <"Day"> (default) | <"Minute"> | <"Hour"> | <"Month"> | <"Year"> | <"Infinite">,
+        "retained-file-count-limit": <integer> (default: 1),
+        "file-size-limit-bytes": <integer> (default: 1048576)
+      }
+    }
+  }
+}
+```
+
+### Example
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "file": {
+        "enabled": true,
+        "path": "/var/log/dab/dab-telemetry.txt",
+        "rolling-interval": "Hour",
+        "retained-file-count-limit": 24,
+        "file-size-limit-bytes": 5242880
+      }
+    }
+  }
+}
+```
 
 ## MCP (runtime)
 

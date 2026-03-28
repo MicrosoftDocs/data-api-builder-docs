@@ -33,6 +33,7 @@ dab start [options]
 | [`--LogLevel <level>`](#--loglevel-level) | Specifies logging level as provided value. |
 | [`--mcp-stdio`](#--mcp-stdio) | *(Model Context Protocol (MCP))* Starts DAB as an MCP server that uses standard input and output (STDIO) instead of HTTP. Requires `mcp.enabled: true` in config. |
 | [`--no-https-redirect`](#--no-https-redirect) | Disables automatic HTTP→HTTPS redirection |
+| [`--verbose`](#--verbose) | Sets logging level to Informational |
 | [`--help`](#--help) | Display the help screen. |
 | [`--version`](#--version) | Display version information. |
 
@@ -199,6 +200,26 @@ Because DAB runs as a subprocess that communicates over standard input and outpu
 
 For a complete walkthrough, see [standard input and output transport for SQL MCP Server](../mcp/stdio-transport.md).
 
+## `--verbose`
+
+Sets the logging level to Informational. This is a convenience flag equivalent to `--LogLevel Information`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab start \
+  --verbose
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab start ^
+  --verbose
+```
+---
 ## `--help`
 
 Display the help screen.

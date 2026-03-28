@@ -68,6 +68,7 @@ If the target config file already exists, the command overwrites it. There's no 
 
 | Option | Summary |
 | - | - |
+| [`--mcp.aggregate-records.query-timeout`](#--mcpaggregate-recordsquery-timeout) | Aggregate-records tool timeout in seconds (default 30, range 1–600) |
 | [`--mcp.disabled`](#--mcpdisabled) | Deprecated. Disables MCP (use `--mcp.enabled false`) |
 | [`--mcp.enabled`](#--mcpenabled) | Enable MCP (default true) |
 | [`--mcp.path`](#--mcppath) | MCP endpoint prefix (default /mcp) |
@@ -82,7 +83,7 @@ If the target config file already exists, the command overwrites it. There's no 
 | [`--rest.disabled`](#--restdisabled) | Deprecated. Disables REST (use `--rest.enabled false`) |
 | [`--rest.enabled`](#--restenabled) | Enable REST (default true, prefer over `--rest.disabled`) |
 | [`--rest.path`](#--restpath) | REST endpoint prefix (default /api, ignored for cosmosdb_nosql) |
-| [`--rest.request-body-strict`](#--restrequest-body-strict) | Enforce strict request body validation (default true, ignored for cosmosdb_nosql) |
+| [`--rest.request-body-strict`](#--restrequest-body-strict) | Enforce strict request body validation (default false, ignored for cosmosdb_nosql) |
 
 > [!IMPORTANT]
 > Don't mix the new `--*.enabled` flags and the legacy `--*.disabled` flags for the same subsystem in the same command. Prefer the `--*.enabled` pattern; the `--rest.disabled`, `--graphql.disabled`, and `--mcp.disabled` options log warnings and will be removed in future versions.
@@ -115,7 +116,7 @@ dab init ^
 {
   "data-source": {
     "database-type": "mssql",
-    "connection-string": "@env('MSSQL_CONNECTION_STRING')"
+    "connection-string": ""
   }
 }
 ```
@@ -147,8 +148,12 @@ dab init ^
 ```json
 {
   "runtime": {
-    "authentication": {
-      "audience": "https://example.com/api"
+    "host": {
+      "authentication": {
+        "jwt": {
+          "audience": "https://example.com/api"
+        }
+      }
     }
   }
 }
@@ -181,8 +186,12 @@ dab init ^
 ```json
 {
   "runtime": {
-    "authentication": {
-      "issuer": "https://login.microsoftonline.com/{tenant-id}/v2.0"
+    "host": {
+      "authentication": {
+        "jwt": {
+          "issuer": "https://login.microsoftonline.com/{tenant-id}/v2.0"
+        }
+      }
     }
   }
 }
@@ -200,6 +209,9 @@ For configuration guidance, see [Configure the Unauthenticated provider](../conc
 
 Valid values: `Unauthenticated`, `StaticWebApps`, `EntraID`, `AzureAD`, `AppService`, `Simulator`, `Custom`.
 
+> [!IMPORTANT]
+> Providers other than `Unauthenticated`, `StaticWebApps`, and `Simulator` require `--auth.audience` and `--auth.issuer`.
+
 ### Example
 
 #### [Bash](#tab/bash-cli)
@@ -207,7 +219,9 @@ Valid values: `Unauthenticated`, `StaticWebApps`, `EntraID`, `AzureAD`, `AppServ
 ```bash
 dab init \
   --database-type mssql \
-  --auth.provider AzureAD
+  --auth.provider AzureAD \
+  --auth.audience "https://example.com/api" \
+  --auth.issuer "https://login.microsoftonline.com/{tenant-id}/v2.0"
 ```
 
 #### [Command Prompt](#tab/cmd-cli)
@@ -215,7 +229,9 @@ dab init \
 ```cmd
 dab init ^
   --database-type mssql ^
-  --auth.provider AzureAD
+  --auth.provider AzureAD ^
+  --auth.audience "https://example.com/api" ^
+  --auth.issuer "https://login.microsoftonline.com/{tenant-id}/v2.0"
 ```
 ---
 ### Resulting config
@@ -223,8 +239,14 @@ dab init ^
 ```json
 {
   "runtime": {
-    "authentication": {
-      "provider": "AzureAD"
+    "host": {
+      "authentication": {
+        "provider": "AzureAD",
+        "jwt": {
+          "audience": "https://example.com/api",
+          "issuer": "https://login.microsoftonline.com/{tenant-id}/v2.0"
+        }
+      }
     }
   }
 }
@@ -289,8 +311,10 @@ dab init ^
 ```json
 {
   "runtime": {
-    "cors": {
-      "origins": [ "https://app.example.com", "https://admin.example.com" ]
+    "host": {
+      "cors": {
+        "origins": [ "https://app.example.com", "https://admin.example.com" ]
+      }
     }
   }
 }
@@ -462,7 +486,9 @@ dab init ^
 {
   "runtime": {
     "graphql": {
-      "multiple-create": { "enabled": true }
+      "multiple-mutations": {
+        "create": { "enabled": true }
+      }
     }
   }
 }
@@ -528,8 +554,9 @@ dab init ^
 
 ```json
 {
-  "runtime": {
-    "graphql": {
+  "data-source": {
+    "database-type": "cosmosdb_nosql",
+    "options": {
       "schema": "./schema.gql"
     }
   }
@@ -567,6 +594,44 @@ dab init ^
   "runtime": {
     "host": {
       "mode": "development"
+    }
+  }
+}
+```
+
+## `--mcp.aggregate-records.query-timeout`
+
+Execution timeout in seconds for the aggregate-records MCP tool. Default is `30`. Range: `1`–`600`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab init \
+  --database-type mssql \
+  --mcp.aggregate-records.query-timeout 60
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab init ^
+  --database-type mssql ^
+  --mcp.aggregate-records.query-timeout 60
+```
+---
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "dml-tools": {
+        "aggregate-records": {
+          "query-timeout": 60
+        }
+      }
     }
   }
 }
@@ -721,7 +786,7 @@ dab init ^
 
 ## `--rest.request-body-strict`
 
-Controls handling of extra fields in request bodies. Default is `true`.
+Controls handling of extra fields in request bodies. Default is `false`.
 
 * `true`: Rejects extraneous fields (HTTP 400).
 * `false`: Ignores extra fields.
@@ -763,6 +828,9 @@ dab init ^
 
 Global prefix prepended to all endpoints. Must begin with `/`.
 
+> [!IMPORTANT]
+> This option requires the authentication provider to be `StaticWebApps`. Set `--auth.provider StaticWebApps` alongside `--runtime.base-route`.
+
 ### Example
 
 #### [Bash](#tab/bash-cli)
@@ -770,6 +838,7 @@ Global prefix prepended to all endpoints. Must begin with `/`.
 ```bash
 dab init \
   --database-type mssql \
+  --auth.provider StaticWebApps \
   --runtime.base-route /v1
 ```
 
@@ -778,6 +847,7 @@ dab init \
 ```cmd
 dab init ^
   --database-type mssql ^
+  --auth.provider StaticWebApps ^
   --runtime.base-route /v1
 ```
 ---
@@ -817,8 +887,9 @@ dab init ^
 
 ```json
 {
-  "runtime": {
-    "mssql": {
+  "data-source": {
+    "database-type": "mssql",
+    "options": {
       "set-session-context": true
     }
   }

@@ -553,8 +553,10 @@ Sets the naming convention for an entity within the GraphQL schema.
 
 |Parent|Property|Required|Type|Default|
 |-|-|-|-|-|
-|`entities.{entity-name}.graphql.type`|`singular`|❌ No|string|None|
+|`entities.{entity-name}.graphql.type`|`singular`|✔️ Yes*|string|None|
 |`entities.{entity-name}.graphql.type`|`plural`|❌ No|string|N/A (defaults to singular value)|
+
+\* `singular` is required when `type` is specified as an object. When `type` is a plain string, that string is used as the singular name.
 
 ### Example
 

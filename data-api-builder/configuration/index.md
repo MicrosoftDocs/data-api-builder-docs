@@ -24,6 +24,7 @@ Data API builder requires at least one configuration file to run. This JSON-base
 |[runtime](runtime.md#runtime)|Object configuring runtime behaviors.|
 |[entities](entities.md#entities)|Object defining all entities exposed via REST or GraphQL.|
 |[autoentities](#autoentities)|Object defining pattern-based rules that automatically expose matching database objects as entities (MSSQL only).|
+|[azure-key-vault](#azure-key-vault)|Azure Key Vault configuration for secret management.|
 
 ### Data-source properties
 
@@ -45,6 +46,8 @@ Data API builder requires at least one configuration file to run. This JSON-base
 |[runtime.rest](runtime.md#rest-runtime)|REST API global configuration.|
 |[runtime.graphql](runtime.md#graphql-runtime)|GraphQL API global configuration.|
 |[runtime.cache](runtime.md#cache-runtime)|Global response caching configuration.|
+|[runtime.compression](runtime.md#compression-runtime)|HTTP response compression configuration.|
+|[runtime.mcp](runtime.md#mcp-runtime)|Model Context Protocol (MCP) global configuration.|
 |[runtime.telemetry](runtime.md#telemetry-runtime)|Telemetry, logging, and monitoring configuration.|
 |[runtime.health](runtime.md#health-runtime)|Global health check configuration.|
 
@@ -60,6 +63,9 @@ Data API builder requires at least one configuration file to run. This JSON-base
 |[entities.entity-name.relationships](entities.md#relationships-entity-name-entities)|Relationships to other entities.|
 |[entities.entity-name.cache](entities.md#cache-entity-name-entities)|Entity-level caching configuration.|
 |[entities.entity-name.health](entities.md#health-entity-name-entities)|Entity-level health check configuration.|
+|[entities.entity-name.mcp](entities.md#mcp-entity-name-entities)|Entity-level MCP configuration.|
+|[entities.entity-name.fields](entities.md#fields-entity-name-entities)|Field metadata, aliases, and primary key designations.|
+|[entities.entity-name.description](entities.md#description-entity-name-entities)|Human-readable entity description.|
 
 ## Schema
 
@@ -239,3 +245,66 @@ With this configuration, every table and view in the `dbo` schema (except those 
 
 > [!TIP]
 > Use [`dab auto-config`](../command-line/dab-auto-config.md) to create autoentities definitions from the CLI, and [`dab auto-config-simulate`](../command-line/dab-auto-config-simulate.md) to preview which objects match before committing changes. For more information, see [what's new in version 2.0](../whats-new/version-2-0.md).
+
+## Azure Key Vault
+
+| Parent | Property | Type | Required | Default |
+| - | - | - | - | - |
+| `$root` | `azure-key-vault` | object | ❌ No | None |
+
+Configures Azure Key Vault integration for managing secrets. When present, the `endpoint` property is required.
+
+### Nested properties
+
+| Parent | Property | Type | Required | Default |
+| - | - | - | - | - |
+| `azure-key-vault` | `endpoint` | string | ✔️ Yes | None |
+| `azure-key-vault` | `retry-policy` | object | ❌ No | None |
+
+| Parent | Property | Type | Required | Default |
+| - | - | - | - | - |
+| `azure-key-vault.retry-policy` | `mode` | enum (`fixed` \| `exponential`) | ❌ No | `"exponential"` |
+| `azure-key-vault.retry-policy` | `max-count` | integer | ❌ No | `3` |
+| `azure-key-vault.retry-policy` | `delay-seconds` | integer | ❌ No | `1` |
+| `azure-key-vault.retry-policy` | `max-delay-seconds` | integer | ❌ No | `60` |
+| `azure-key-vault.retry-policy` | `network-timeout-seconds` | integer | ❌ No | `60` |
+
+Use the `@akv()` function in your configuration values to reference secrets stored in Azure Key Vault. Data API builder resolves these references at startup using the configured endpoint.
+
+### Format
+
+```json
+{
+  "azure-key-vault": {
+    "endpoint": "<string>",
+    "retry-policy": {
+      "mode": <"exponential"> (default) | <"fixed">,
+      "max-count": <integer; default: 3>,
+      "delay-seconds": <integer; default: 1>,
+      "max-delay-seconds": <integer; default: 60>,
+      "network-timeout-seconds": <integer; default: 60>
+    }
+  }
+}
+```
+
+### Example
+
+```json
+{
+  "azure-key-vault": {
+    "endpoint": "https://my-vault.vault.azure.net/",
+    "retry-policy": {
+      "mode": "exponential",
+      "max-count": 5,
+      "delay-seconds": 2,
+      "max-delay-seconds": 120,
+      "network-timeout-seconds": 90
+    }
+  },
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string": "@akv('sql-connection-string')"
+  }
+}
+```

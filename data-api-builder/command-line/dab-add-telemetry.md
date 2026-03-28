@@ -37,7 +37,7 @@ dab add-telemetry [options]
 | --- | --- |
 | [`--otel-enabled`](#--otel-enabled) | Enable or disable OpenTelemetry. |
 | [`--otel-endpoint`](#--otel-endpoint) | OpenTelemetry collector endpoint URL. |
-| [`--otel-protocol`](#--otel-protocol) | Export protocol. Allowed values: `grpc`, `http`. |
+| [`--otel-protocol`](#--otel-protocol) | Export protocol. Allowed values: `grpc`, `httpprotobuf`. |
 | [`--otel-service-name`](#--otel-service-name) | Service name tag on all telemetry. |
 | [`--otel-headers`](#--otel-headers) | Extra headers to send to the OpenTelemetry collector. |
 
@@ -149,7 +149,7 @@ dab add-telemetry ^
 
 ## `--otel-protocol`
 
-Export protocol for the OpenTelemetry exporter. Allowed values: `grpc`, `http`. Defaults to `grpc`.
+Export protocol for the OpenTelemetry exporter. Allowed values: `grpc`, `httpprotobuf`. Defaults to `grpc`.
 
 ### Example
 
@@ -159,7 +159,7 @@ Export protocol for the OpenTelemetry exporter. Allowed values: `grpc`, `http`. 
 dab add-telemetry \
   --otel-enabled true \
   --otel-endpoint "http://localhost:4318" \
-  --otel-protocol "http"
+  --otel-protocol "httpprotobuf"
 ```
 
 #### [Command Prompt](#tab/cmd-cli)
@@ -168,7 +168,7 @@ dab add-telemetry \
 dab add-telemetry ^
   --otel-enabled true ^
   --otel-endpoint "http://localhost:4318" ^
-  --otel-protocol "http"
+  --otel-protocol "httpprotobuf"
 ```
 
 ---
@@ -182,7 +182,7 @@ dab add-telemetry ^
       "open-telemetry": {
         "enabled": true,
         "endpoint": "http://localhost:4318",
-        "exporter-protocol": "http"
+        "exporter-protocol": "httpprotobuf"
       }
     }
   }
