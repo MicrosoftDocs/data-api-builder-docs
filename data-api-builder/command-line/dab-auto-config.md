@@ -56,7 +56,7 @@ Required positional argument. Logical name of the `autoentities` definition. Cas
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config my-def \
@@ -64,13 +64,15 @@ dab auto-config my-def \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config my-def ^
   --patterns.include "dbo.%" ^
   --permissions "anonymous:read"
 ```
+
+---
 
 ### Resulting config
 
@@ -98,7 +100,7 @@ Path to config file. Defaults to `dab-config.json` unless `dab-config.<DAB_ENVIR
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config my-def \
@@ -106,13 +108,15 @@ dab auto-config my-def \
   --patterns.include "dbo.%"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config my-def ^
   --config ./dab-config.json ^
   --patterns.include "dbo.%"
 ```
+
+---
 
 ### Resulting config
 
@@ -134,7 +138,7 @@ T-SQL `LIKE` patterns to include database objects. Space-separated array. The pa
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config my-def \
@@ -142,13 +146,15 @@ dab auto-config my-def \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config my-def ^
   --patterns.include "dbo.%" ^
   --permissions "anonymous:read"
 ```
+
+---
 
 ### Resulting config
 
@@ -176,7 +182,7 @@ T-SQL `LIKE` patterns to exclude database objects. Space-separated array. Exclud
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config my-def \
@@ -185,7 +191,7 @@ dab auto-config my-def \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config my-def ^
@@ -193,6 +199,8 @@ dab auto-config my-def ^
   --patterns.exclude "dbo.internal%" ^
   --permissions "anonymous:read"
 ```
+
+---
 
 ### Resulting config
 
@@ -221,7 +229,7 @@ Interpolation syntax for entity naming. Supports `{schema}` and `{object}` place
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config my-def \
@@ -230,7 +238,7 @@ dab auto-config my-def \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config my-def ^
@@ -238,6 +246,8 @@ dab auto-config my-def ^
   --patterns.name "{schema}_{object}" ^
   --permissions "anonymous:read"
 ```
+
+---
 
 ### Resulting config
 
@@ -266,7 +276,7 @@ Permissions for all matched entities in `role:actions` format. Default: `null`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config my-def \
@@ -274,13 +284,15 @@ dab auto-config my-def \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config my-def ^
   --patterns.include "dbo.%" ^
   --permissions "anonymous:read"
 ```
+
+---
 
 ### Resulting config
 
@@ -305,7 +317,7 @@ Enable or disable REST endpoints for all matched entities. Allowed values: `true
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config my-def \
@@ -314,7 +326,7 @@ dab auto-config my-def \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config my-def ^
@@ -322,6 +334,8 @@ dab auto-config my-def ^
   --template.rest.enabled true ^
   --permissions "anonymous:read"
 ```
+
+---
 
 ### Resulting config
 
@@ -343,7 +357,7 @@ Enable or disable GraphQL for all matched entities. Allowed values: `true`, `fal
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config my-def \
@@ -352,7 +366,7 @@ dab auto-config my-def \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config my-def ^
@@ -360,6 +374,8 @@ dab auto-config my-def ^
   --template.graphql.enabled true ^
   --permissions "anonymous:read"
 ```
+
+---
 
 ### Resulting config
 
@@ -381,7 +397,7 @@ Enable or disable MCP DML tools for all matched entities. Allowed values: `true`
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config my-def \
@@ -390,7 +406,7 @@ dab auto-config my-def \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config my-def ^
@@ -398,6 +414,8 @@ dab auto-config my-def ^
   --template.mcp.dml-tool true ^
   --permissions "anonymous:read"
 ```
+
+---
 
 ### Resulting config
 
@@ -419,7 +437,7 @@ Enable or disable health checks for all matched entities. Allowed values: `true`
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config my-def \
@@ -428,7 +446,7 @@ dab auto-config my-def \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config my-def ^
@@ -436,6 +454,8 @@ dab auto-config my-def ^
   --template.health.enabled true ^
   --permissions "anonymous:read"
 ```
+
+---
 
 ### Resulting config
 
@@ -457,7 +477,7 @@ Enable or disable response caching for all matched entities. Allowed values: `tr
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config my-def \
@@ -466,7 +486,7 @@ dab auto-config my-def \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config my-def ^
@@ -474,6 +494,8 @@ dab auto-config my-def ^
   --template.cache.enabled true ^
   --permissions "anonymous:read"
 ```
+
+---
 
 ### Resulting config
 
@@ -495,7 +517,7 @@ Cache time-to-live in seconds for all matched entities. Default: `null`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config my-def \
@@ -505,7 +527,7 @@ dab auto-config my-def \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config my-def ^
@@ -514,6 +536,8 @@ dab auto-config my-def ^
   --template.cache.ttl-seconds 30 ^
   --permissions "anonymous:read"
 ```
+
+---
 
 ### Resulting config
 
@@ -538,7 +562,7 @@ Cache level for all matched entities. Allowed values: `L1`, `L1L2`. Default: `L1
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config my-def \
@@ -549,7 +573,7 @@ dab auto-config my-def \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config my-def ^
@@ -559,6 +583,8 @@ dab auto-config my-def ^
   --template.cache.level L1L2 ^
   --permissions "anonymous:read"
 ```
+
+---
 
 ### Resulting config
 
@@ -580,7 +606,7 @@ dab auto-config my-def ^
 
 ## Full example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config my-def \
@@ -595,7 +621,7 @@ dab auto-config my-def \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config my-def ^
@@ -609,6 +635,8 @@ dab auto-config my-def ^
   --template.cache.level L1L2 ^
   --permissions "anonymous:read"
 ```
+
+---
 
 ### Resulting config
 

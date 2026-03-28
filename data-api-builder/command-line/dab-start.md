@@ -42,60 +42,60 @@ Path to config file. Defaults to `dab-config.json` unless `dab-config.<DAB_ENVIR
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab start \
   --config ./settings/dab-config.json
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab start ^
   --config .\settings\dab-config.json
 ```
-
+---
 ## `--LogLevel <level>`
 
 Specifies logging level as provided value. For possible values, see [Log levels](https://go.microsoft.com/fwlink/?linkid=2263106).
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab start \
   --LogLevel Warning
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab start ^
   --LogLevel Warning
 ```
-
+---
 ## `--no-https-redirect`
 
 Disables automatic HTTP→HTTPS redirection.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab start \
   --no-https-redirect
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab start ^
   --no-https-redirect
 ```
-
+---
 ## `--mcp-stdio`
 
 > [!NOTE]
@@ -135,7 +135,7 @@ MCP must be enabled in your `dab-config.json` before using `--mcp-stdio`:
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 # Default anonymous role
@@ -155,7 +155,7 @@ dab start \
   --LogLevel Information
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 :: Default anonymous role
@@ -174,7 +174,7 @@ dab start ^
   --config .\dab-config.json ^
   --LogLevel Information
 ```
-
+---
 ### MCP client configuration
 
 Because DAB runs as a subprocess that communicates over standard input and output, your MCP client must launch DAB as a child process and pipe `stdin` and `stdout`. A typical MCP client configuration for Visual Studio (VS) Code or a compatible agent looks like:
@@ -205,31 +205,31 @@ Display the help screen.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab start --help
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab start --help
 ```
-
+---
 ## `--version`
 
 Display version information.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab start --version
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab start --version

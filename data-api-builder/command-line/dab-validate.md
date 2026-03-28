@@ -38,39 +38,39 @@ dab validate [options]
 
 CI example:
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab validate && echo "OK" || { echo "INVALID CONFIG"; exit 1; }
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab validate
 if %errorlevel%==0 (echo OK) else (echo INVALID CONFIG & exit /b 1)
 ```
-
+---
 ## `-c, --config`
 
 Path to the config file. If omitted, validator looks for `dab-config.<DAB_ENVIRONMENT>.json` first, then `dab-config.json`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab validate \
   --config ./dab-config.prod.json
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab validate ^
   --config ./dab-config.prod.json
 ```
-
+---
 ## Validation Stages
 
 Validation happens in order. If one stage fails, later stages are skipped.
@@ -203,20 +203,20 @@ If `DAB_ENVIRONMENT` is set, `validate` loads `dab-config.<DAB_ENVIRONMENT>.json
 
 #### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 export DAB_ENVIRONMENT=Staging
 dab validate
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 set DAB_ENVIRONMENT=Staging
 dab validate
 ```
-
+---
 > [!Note]
 > The validator checks only a single resolved file. It does not merge environment variants.
 
@@ -224,37 +224,37 @@ dab validate
 
 Basic:
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab validate
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab validate
 ```
-
+---
 Explicit file:
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab validate \
   --config ./configs/dab-config.test.json
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab validate ^
   --config ./configs/dab-config.test.json
 ```
-
+---
 Multi-environment:
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 for env in Development Staging Production; do
@@ -263,29 +263,29 @@ for env in Development Staging Production; do
 done
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 for %E in (Development Staging Production) do ^
   echo Validating %E... ^
   set DAB_ENVIRONMENT=%E ^& dab validate ^|^| exit /b 1
 ```
-
+---
 CI fast-fail:
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab validate && echo "OK" || { echo "INVALID CONFIG"; exit 1; }
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab validate
 if %errorlevel%==0 (echo OK) else (echo INVALID CONFIG & exit /b 1)
 ```
-
+---
 ## Workflow
 
 1. Run `dab validate`

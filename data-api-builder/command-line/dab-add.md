@@ -92,7 +92,7 @@ Logical name of the entity in config. Case-sensitive.
 
 #### Add a table
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -102,7 +102,7 @@ dab add Book \
   --description "Example for managing book inventory"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -112,9 +112,11 @@ dab add Book ^
   --description "Example for managing book inventory"
 ```
 
+---
+
 #### Add a view
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add BookView \
@@ -126,7 +128,7 @@ dab add BookView \
   --description "Example for managing book inventory from view"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add BookView ^
@@ -138,9 +140,11 @@ dab add BookView ^
   --description "Example for managing book inventory from view"
 ```
 
+---
+
 #### Add a stored procedure
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add BookProc \
@@ -154,7 +158,7 @@ dab add BookProc \
   --description "Example for executing a stored procedure"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add BookProc ^
@@ -168,13 +172,15 @@ dab add BookProc ^
   --description "Example for executing a stored procedure"
 ```
 
+---
+
 ## `-c, --config`
 
 Config file path. Default is `dab-config.json`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -183,7 +189,7 @@ dab add Book \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -192,13 +198,15 @@ dab add Book ^
   --permissions "anonymous:read"
 ```
 
+---
+
 ## `-s, --source`
 
 Required. Name of the database object: table, view, container, or stored procedure.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -206,13 +214,15 @@ dab add Book \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
   --source dbo.Books ^
   --permissions "anonymous:read"
 ```
+
+---
 
 ### Resulting config
 
@@ -238,7 +248,7 @@ Type of database object. Default: `table`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -247,7 +257,7 @@ dab add Book \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -255,6 +265,8 @@ dab add Book ^
   --source.type table ^
   --permissions "anonymous:read"
 ```
+
+---
 
 ### Resulting config
 
@@ -280,7 +292,7 @@ Enable or disable caching.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -289,7 +301,7 @@ dab add Book \
   --cache.enabled true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -297,6 +309,8 @@ dab add Book ^
   --permissions "anonymous:read" ^
   --cache.enabled true
 ```
+
+---
 
 ### Resulting config
 
@@ -325,7 +339,7 @@ Cache time-to-live in seconds.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -334,7 +348,7 @@ dab add Book \
   --cache.ttl 300
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -342,6 +356,8 @@ dab add Book ^
   --permissions "anonymous:read" ^
   --cache.ttl 300
 ```
+
+---
 
 ### Resulting config
 
@@ -373,7 +389,7 @@ Free-text description of the entity.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -382,7 +398,7 @@ dab add Book \
   --description "Entity for managing book inventory"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -390,6 +406,8 @@ dab add Book ^
   --permissions "anonymous:read" ^
   --description "Entity for managing book inventory"
 ```
+
+---
 
 ### Resulting config
 
@@ -418,7 +436,7 @@ Stored procedures only. Comma-separated list of parameter names.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add GetOrdersByDateRange \
@@ -432,7 +450,7 @@ dab add GetOrdersByDateRange \
   --parameters.default ",,null"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add GetOrdersByDateRange ^
@@ -445,6 +463,8 @@ dab add GetOrdersByDateRange ^
   --parameters.required "true,true,false" ^
   --parameters.default ",,null"
 ```
+
+---
 
 ### Resulting config
 
@@ -498,7 +518,7 @@ Stored procedures only. Comma-separated list of parameter descriptions aligned t
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add GetOrdersByDateRange \
@@ -509,7 +529,7 @@ dab add GetOrdersByDateRange \
   --parameters.description "Beginning of date range (inclusive),End of date range (inclusive)"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add GetOrdersByDateRange ^
@@ -519,6 +539,8 @@ dab add GetOrdersByDateRange ^
   --parameters.name "StartDate,EndDate" ^
   --parameters.description "Beginning of date range (inclusive),End of date range (inclusive)"
 ```
+
+---
 
 ## `--parameters.required`
 
@@ -528,7 +550,7 @@ Stored procedures only. Comma-separated list of `true`/`false` values aligned to
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add GetOrdersByDateRange \
@@ -539,7 +561,7 @@ dab add GetOrdersByDateRange \
   --parameters.required "true,true"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add GetOrdersByDateRange ^
@@ -550,6 +572,8 @@ dab add GetOrdersByDateRange ^
   --parameters.required "true,true"
 ```
 
+---
+
 ## `--parameters.default`
 
 Stored procedures only. Comma-separated list of default values aligned to `--parameters.name`.
@@ -558,7 +582,7 @@ Stored procedures only. Comma-separated list of default values aligned to `--par
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add GetOrdersByDateRange \
@@ -569,7 +593,7 @@ dab add GetOrdersByDateRange \
   --parameters.default "null"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add GetOrdersByDateRange ^
@@ -580,13 +604,15 @@ dab add GetOrdersByDateRange ^
   --parameters.default "null"
 ```
 
+---
+
 ## `--fields.exclude`
 
 Comma-separated list of fields to exclude.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -595,7 +621,7 @@ dab add Book \
   --fields.exclude "internal_flag,secret_note"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -603,6 +629,8 @@ dab add Book ^
   --permissions "anonymous:read" ^
   --fields.exclude "internal_flag,secret_note"
 ```
+
+---
 
 ### Resulting config
 
@@ -635,7 +663,7 @@ Comma-separated list of fields to expose.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -644,7 +672,7 @@ dab add Book \
   --fields.include "id,title,price"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -652,6 +680,8 @@ dab add Book ^
   --permissions "anonymous:read" ^
   --fields.include "id,title,price"
 ```
+
+---
 
 ### Resulting config
 
@@ -686,7 +716,7 @@ Name of the database column to describe.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Products \
@@ -698,7 +728,7 @@ dab add Products \
   --fields.primary-key "true,false"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Products ^
@@ -709,6 +739,8 @@ dab add Products ^
   --fields.description "Unique identifier for each product,Display name of the product" ^
   --fields.primary-key "true,false"
 ```
+
+---
 
 ### Resulting config
 
@@ -747,7 +779,7 @@ Alias for the field. Use a comma-separated list aligned to `--fields.name`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Products \
@@ -757,7 +789,7 @@ dab add Products \
   --fields.alias "product_id"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Products ^
@@ -766,6 +798,8 @@ dab add Products ^
   --fields.name "ProductID" ^
   --fields.alias "product_id"
 ```
+
+---
 
 ## `--fields.description`
 
@@ -775,7 +809,7 @@ Description for the field. Use a comma-separated list aligned to `--fields.name`
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Products \
@@ -785,7 +819,7 @@ dab add Products \
   --fields.description "Unique identifier"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Products ^
@@ -794,6 +828,8 @@ dab add Products ^
   --fields.name "ProductID" ^
   --fields.description "Unique identifier"
 ```
+
+---
 
 ## `--fields.primary-key`
 
@@ -803,7 +839,7 @@ Primary key flag for the field. Use a comma-separated list of `true`/`false` val
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Products \
@@ -813,7 +849,7 @@ dab add Products \
   --fields.primary-key "true"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Products ^
@@ -822,6 +858,8 @@ dab add Products ^
   --fields.name "ProductID" ^
   --fields.primary-key "true"
 ```
+
+---
 
 ### Resulting config
 
@@ -850,7 +888,7 @@ Control GraphQL exposure.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -859,7 +897,7 @@ dab add Book \
   --graphql book:books
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -867,6 +905,8 @@ dab add Book ^
   --permissions "anonymous:read" ^
   --graphql book:books
 ```
+
+---
 
 ### Resulting config
 
@@ -896,7 +936,7 @@ Stored procedures only. GraphQL operation type. Default is `mutation`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add BookProc \
@@ -906,7 +946,7 @@ dab add BookProc \
   --graphql.operation Query
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add BookProc ^
@@ -915,6 +955,8 @@ dab add BookProc ^
   --permissions "admin:execute" ^
   --graphql.operation Query
 ```
+
+---
 
 ### Resulting config
 
@@ -941,7 +983,7 @@ Control REST exposure.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -950,7 +992,7 @@ dab add Book \
   --rest BooksApi
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -958,6 +1000,8 @@ dab add Book ^
   --permissions "anonymous:read" ^
   --rest BooksApi
 ```
+
+---
 
 ### Resulting config
 
@@ -984,7 +1028,7 @@ Stored procedures only. HTTP verbs allowed for execution: `GET`, `POST`, `PUT`, 
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add BookProc \
@@ -995,7 +1039,7 @@ dab add BookProc \
   --rest.methods GET,POST
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add BookProc ^
@@ -1005,6 +1049,8 @@ dab add BookProc ^
   --rest true ^
   --rest.methods GET,POST
 ```
+
+---
 
 ### Resulting config
 
@@ -1033,7 +1079,7 @@ Enable or disable DML tools for this entity in MCP. Default: `true`. When set to
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -1042,7 +1088,7 @@ dab add Book \
   --mcp.dml-tools true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -1050,6 +1096,8 @@ dab add Book ^
   --permissions "anonymous:read" ^
   --mcp.dml-tools true
 ```
+
+---
 
 ### Resulting config
 
@@ -1078,7 +1126,7 @@ Register a stored procedure entity as a named MCP tool. Valid only when `--sourc
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add GetBookById \
@@ -1088,7 +1136,7 @@ dab add GetBookById \
   --mcp.custom-tool true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add GetBookById ^
@@ -1097,6 +1145,8 @@ dab add GetBookById ^
   --permissions "anonymous:execute" ^
   --mcp.custom-tool true
 ```
+
+---
 
 ### Resulting config
 
@@ -1130,7 +1180,7 @@ Defines role→actions pairs.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -1141,7 +1191,7 @@ dab update Book \
   --permissions "authenticated:create,read,update,delete"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -1152,13 +1202,15 @@ dab update Book ^
   --permissions "authenticated:create,read,update,delete"
 ```
 
+---
+
 ## `--policy-database`
 
 Database-level policy.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -1167,7 +1219,7 @@ dab add Book \
   --policy-database "region eq 'US'"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -1175,6 +1227,8 @@ dab add Book ^
   --permissions "anonymous:read" ^
   --policy-database "region eq 'US'"
 ```
+
+---
 
 ### Resulting config
 
@@ -1207,7 +1261,7 @@ Request-level policy.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -1216,7 +1270,7 @@ dab add Book \
   --policy-request "@claims.role == 'admin'"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -1224,6 +1278,8 @@ dab add Book ^
   --permissions "anonymous:read" ^
   --policy-request "@claims.role == 'admin'"
 ```
+
+---
 
 ### Resulting config
 
@@ -1256,19 +1312,21 @@ Display this help screen.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add \
   --help
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add ^
   --help
 ```
+
+---
 
 ## `--version`
 
@@ -1276,16 +1334,18 @@ Display version information.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add \
   --version
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add ^
   --version
 ```
+
+---

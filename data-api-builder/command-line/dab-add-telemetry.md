@@ -70,6 +70,8 @@ dab add-telemetry ^
   --otel-enabled true
 ```
 
+---
+
 ## `--otel-enabled`
 
 Enable or disable the OpenTelemetry exporter. Accepted values: `true`, `false`.
@@ -89,6 +91,8 @@ dab add-telemetry \
 dab add-telemetry ^
   --otel-enabled true
 ```
+
+---
 
 ### Resulting config
 
@@ -125,6 +129,8 @@ dab add-telemetry ^
   --otel-enabled true ^
   --otel-endpoint "http://localhost:4317"
 ```
+
+---
 
 ### Resulting config
 
@@ -165,6 +171,8 @@ dab add-telemetry ^
   --otel-protocol "http"
 ```
 
+---
+
 ### Resulting config
 
 ```json
@@ -202,6 +210,8 @@ dab add-telemetry ^
   --otel-enabled true ^
   --otel-service-name "my-dab-api"
 ```
+
+---
 
 ### Resulting config
 
@@ -242,6 +252,8 @@ dab add-telemetry ^
   --otel-headers "api-key=my-secret-key"
 ```
 
+---
+
 ## `--app-insights-enabled`
 
 Enable or disable Azure Application Insights telemetry. Accepted values: `true`, `false`.
@@ -261,6 +273,8 @@ dab add-telemetry \
 dab add-telemetry ^
   --app-insights-enabled true
 ```
+
+---
 
 ### Resulting config
 
@@ -300,6 +314,8 @@ dab add-telemetry ^
   --app-insights-enabled true ^
   --app-insights-conn-string "@env('APP_INSIGHTS_CONN_STRING')"
 ```
+
+---
 
 ### Resulting config
 
@@ -343,6 +359,8 @@ dab add-telemetry ^
   --app-insights-enabled true ^
   --app-insights-conn-string "@env('APP_INSIGHTS_CONN_STRING')"
 ```
+
+---
 
 ### Resulting config
 

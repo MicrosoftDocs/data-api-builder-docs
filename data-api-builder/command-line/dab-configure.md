@@ -135,7 +135,7 @@ Path to the config file. Defaults to `dab-config.json` unless `dab-config.<DAB_E
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
@@ -143,13 +143,15 @@ dab configure \
   --runtime.rest.enabled true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --config ./dab-config.json ^
   --runtime.rest.enabled true
 ```
+
+---
 
 ## `--data-source.database-type`
 
@@ -164,19 +166,21 @@ Allowed values:
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --data-source.database-type PostgreSQL
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --data-source.database-type PostgreSQL
 ```
+
+---
 
 ### Resulting config
 
@@ -194,19 +198,21 @@ Connection string for the data source.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --data-source.connection-string "Server=myserver;Database=mydb;User Id=myuser;Password=mypassword;"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --data-source.connection-string "Server=myserver;Database=mydb;User Id=myuser;Password=mypassword;"
 ```
+
+---
 
 ### Resulting config
 
@@ -224,19 +230,21 @@ Database name for Cosmos DB for NoSql.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --data-source.options.database MyCosmosDatabase
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --data-source.options.database MyCosmosDatabase
 ```
+
+---
 
 ### Resulting config
 
@@ -256,19 +264,21 @@ Container name for Cosmos DB for NoSql.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --data-source.options.container MyCosmosContainer
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --data-source.options.container MyCosmosContainer
 ```
+
+---
 
 ### Resulting config
 
@@ -288,19 +298,21 @@ Schema path for Cosmos DB for NoSql.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --data-source.options.schema ./schema.gql
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --data-source.options.schema ./schema.gql
 ```
+
+---
 
 ### Resulting config
 
@@ -325,19 +337,21 @@ Allowed values:
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --data-source.options.set-session-context false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --data-source.options.set-session-context false
 ```
+
+---
 
 ### Resulting config
 
@@ -359,19 +373,21 @@ Enable or disable On-Behalf-Of (OBO) user-delegated authentication. Supported on
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --data-source.user-delegated-auth.enabled true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --data-source.user-delegated-auth.enabled true
 ```
+
+---
 
 ### Resulting config
 
@@ -391,19 +407,21 @@ Set the OBO identity provider. Currently only `EntraId` is supported.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --data-source.user-delegated-auth.provider EntraId
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --data-source.user-delegated-auth.provider EntraId
 ```
+
+---
 
 ### Resulting config
 
@@ -423,19 +441,21 @@ Set the target audience for the downstream SQL token when OBO is enabled.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --data-source.user-delegated-auth.database-audience "https://database.windows.net"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --data-source.user-delegated-auth.database-audience "https://database.windows.net"
 ```
+
+---
 
 ### Resulting config
 
@@ -460,19 +480,21 @@ Allowed values:
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.graphql.depth-limit 3
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.graphql.depth-limit 3
 ```
+
+---
 
 ### Resulting config
 
@@ -492,19 +514,21 @@ Enable DAB's GraphQL endpoint.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.graphql.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.graphql.enabled false
 ```
+
+---
 
 ### Resulting config
 
@@ -524,19 +548,21 @@ Customize DAB's GraphQL endpoint path. Prefix path with `/`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.graphql.path /graphql
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.graphql.path /graphql
 ```
+
+---
 
 ### Resulting config
 
@@ -556,19 +582,21 @@ Allow or deny GraphQL introspection requests.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.graphql.allow-introspection false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.graphql.allow-introspection false
 ```
+
+---
 
 ### Resulting config
 
@@ -588,19 +616,21 @@ Enable or disable multiple-mutation create operations in the generated GraphQL s
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.graphql.multiple-mutations.create.enabled true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.graphql.multiple-mutations.create.enabled true
 ```
+
+---
 
 ### Resulting config
 
@@ -624,19 +654,21 @@ Enable DAB's REST endpoint.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.rest.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.rest.enabled false
 ```
+
+---
 
 ### Resulting config
 
@@ -656,19 +688,21 @@ Customize DAB's REST endpoint path. Prefix path with `/`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.rest.path /myapi
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.rest.path /myapi
 ```
+
+---
 
 ### Resulting config
 
@@ -688,19 +722,21 @@ Prohibit extraneous REST request body fields.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.rest.request-body-strict true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.rest.request-body-strict true
 ```
+
+---
 
 ### Resulting config
 
@@ -722,19 +758,21 @@ Enable DAB's MCP endpoint.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.mcp.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.mcp.enabled false
 ```
+
+---
 
 ### Resulting config
 
@@ -756,19 +794,21 @@ Customize DAB's MCP endpoint path. Prefix path with `/`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.mcp.path /mcp2
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.mcp.path /mcp2
 ```
+
+---
 
 ### Resulting config
 
@@ -792,19 +832,21 @@ For more information on MCP DML tools, see [SQL MCP Server data manipulation lan
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.mcp.dml-tools.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.mcp.dml-tools.enabled false
 ```
+
+---
 
 ### Resulting config
 
@@ -828,19 +870,21 @@ Enable DAB's MCP describe entities tool.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.mcp.dml-tools.describe-entities.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.mcp.dml-tools.describe-entities.enabled false
 ```
+
+---
 
 ### Resulting config
 
@@ -866,19 +910,21 @@ Enable DAB's MCP create record tool.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.mcp.dml-tools.create-record.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.mcp.dml-tools.create-record.enabled false
 ```
+
+---
 
 ### Resulting config
 
@@ -904,19 +950,21 @@ Enable DAB's MCP read record tool.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.mcp.dml-tools.read-records.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.mcp.dml-tools.read-records.enabled false
 ```
+
+---
 
 ### Resulting config
 
@@ -942,19 +990,21 @@ Enable DAB's MCP update record tool.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.mcp.dml-tools.update-record.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.mcp.dml-tools.update-record.enabled false
 ```
+
+---
 
 ### Resulting config
 
@@ -980,19 +1030,21 @@ Enable DAB's MCP delete record tool.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.mcp.dml-tools.delete-record.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.mcp.dml-tools.delete-record.enabled false
 ```
+
+---
 
 ### Resulting config
 
@@ -1018,19 +1070,21 @@ Enable DAB's MCP execute entity tool.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.mcp.dml-tools.execute-entity.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.mcp.dml-tools.execute-entity.enabled false
 ```
+
+---
 
 ### Resulting config
 
@@ -1054,19 +1108,21 @@ Enable DAB's cache globally. You must also enable caching for each entity.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.cache.enabled true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.cache.enabled true
 ```
+
+---
 
 ### Resulting config
 
@@ -1086,19 +1142,21 @@ Customize the DAB cache's global default time to live in seconds.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.cache.ttl-seconds 30
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.cache.ttl-seconds 30
 ```
+
+---
 
 ### Resulting config
 
@@ -1127,19 +1185,21 @@ Allowed values:
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.compression.level optimal
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.compression.level optimal
 ```
+
+---
 
 ### Resulting config
 
@@ -1164,19 +1224,21 @@ Allowed values:
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.host.mode Development
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.host.mode Development
 ```
+
+---
 
 ### Resulting config
 
@@ -1196,7 +1258,7 @@ Overwrite allowed origins in CORS. Provide values as a space-separated list.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
@@ -1205,7 +1267,7 @@ dab configure \
   https://fabrikam.com
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
@@ -1213,6 +1275,8 @@ dab configure ^
   https://contoso.com ^
   https://fabrikam.com
 ```
+
+---
 
 ### Resulting config
 
@@ -1237,19 +1301,21 @@ Set the value for the `Access-Control-Allow-Credentials` header.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.host.cors.allow-credentials true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.host.cors.allow-credentials true
 ```
+
+---
 
 ### Resulting config
 
@@ -1271,19 +1337,21 @@ Configure the name of authentication provider.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.host.authentication.provider AppService
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.host.authentication.provider AppService
 ```
+
+---
 
 ### Resulting config
 
@@ -1305,19 +1373,21 @@ Configure one or more intended recipients of the JWT token.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.host.authentication.jwt.audience api://my-app
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.host.authentication.jwt.audience api://my-app
 ```
+
+---
 
 ### Resulting config
 
@@ -1341,19 +1411,21 @@ Configure the entity that issued the JWT token.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.host.authentication.jwt.issuer https://login.microsoftonline.com/common/v2.0
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.host.authentication.jwt.issuer https://login.microsoftonline.com/common/v2.0
 ```
+
+---
 
 ### Resulting config
 
@@ -1379,19 +1451,21 @@ Configure the Azure Key Vault endpoint URL.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --azure-key-vault.endpoint https://my-vault.vault.azure.net
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --azure-key-vault.endpoint https://my-vault.vault.azure.net
 ```
+
+---
 
 ### Resulting config
 
@@ -1414,19 +1488,21 @@ Allowed values:
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --azure-key-vault.retry-policy.mode fixed
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --azure-key-vault.retry-policy.mode fixed
 ```
+
+---
 
 ### Resulting config
 
@@ -1446,19 +1522,21 @@ Configure the maximum number of retry attempts.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --azure-key-vault.retry-policy.max-count 5
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --azure-key-vault.retry-policy.max-count 5
 ```
+
+---
 
 ### Resulting config
 
@@ -1478,19 +1556,21 @@ Configure the initial delay between retries in seconds.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --azure-key-vault.retry-policy.delay-seconds 2
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --azure-key-vault.retry-policy.delay-seconds 2
 ```
+
+---
 
 ### Resulting config
 
@@ -1510,19 +1590,21 @@ Configure the maximum delay between retries in seconds (for exponential mode).
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --azure-key-vault.retry-policy.max-delay-seconds 30
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --azure-key-vault.retry-policy.max-delay-seconds 30
 ```
+
+---
 
 ### Resulting config
 
@@ -1542,19 +1624,21 @@ Configure the network timeout for requests in seconds.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --azure-key-vault.retry-policy.network-timeout-seconds 20
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --azure-key-vault.retry-policy.network-timeout-seconds 20
 ```
+
+---
 
 ### Resulting config
 
@@ -1578,19 +1662,21 @@ Enable or disable Azure Log Analytics.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.telemetry.azure-log-analytics.enabled true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.telemetry.azure-log-analytics.enabled true
 ```
+
+---
 
 ### Resulting config
 
@@ -1612,19 +1698,21 @@ Configure a DAB identifier string used in Azure Log Analytics.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.telemetry.azure-log-analytics.dab-identifier MyDab
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.telemetry.azure-log-analytics.dab-identifier MyDab
 ```
+
+---
 
 ### Resulting config
 
@@ -1646,19 +1734,21 @@ Configure flush interval in seconds for Azure Log Analytics.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.telemetry.azure-log-analytics.flush-interval-seconds 10
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.telemetry.azure-log-analytics.flush-interval-seconds 10
 ```
+
+---
 
 ### Resulting config
 
@@ -1680,19 +1770,21 @@ Configure custom table name for Azure Log Analytics.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.telemetry.azure-log-analytics.auth.custom-table-name MyDabLogs
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.telemetry.azure-log-analytics.auth.custom-table-name MyDabLogs
 ```
+
+---
 
 ### Resulting config
 
@@ -1716,19 +1808,21 @@ Configure DCR immutable ID for Azure Log Analytics.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.telemetry.azure-log-analytics.auth.dcr-immutable-id dcr-123
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.telemetry.azure-log-analytics.auth.dcr-immutable-id dcr-123
 ```
+
+---
 
 ### Resulting config
 
@@ -1752,19 +1846,21 @@ Configure DCE endpoint for Azure Log Analytics.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.telemetry.azure-log-analytics.auth.dce-endpoint https://example.eastus-1.ingest.monitor.azure.com
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.telemetry.azure-log-analytics.auth.dce-endpoint https://example.eastus-1.ingest.monitor.azure.com
 ```
+
+---
 
 ### Resulting config
 
@@ -1793,19 +1889,21 @@ Enable or disable file sink logging.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.telemetry.file.enabled true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.telemetry.file.enabled true
 ```
+
+---
 
 ### Resulting config
 
@@ -1827,19 +1925,21 @@ Configure path for file sink logging.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.telemetry.file.path C:\\logs\\dab-log.txt
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.telemetry.file.path C:\\logs\\dab-log.txt
 ```
+
+---
 
 ### Resulting config
 
@@ -1870,19 +1970,21 @@ Allowed values:
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.telemetry.file.rolling-interval Month
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.telemetry.file.rolling-interval Month
 ```
+
+---
 
 ### Resulting config
 
@@ -1904,19 +2006,21 @@ Configure maximum number of retained files.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.telemetry.file.retained-file-count-limit 5
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.telemetry.file.retained-file-count-limit 5
 ```
+
+---
 
 ### Resulting config
 
@@ -1938,19 +2042,21 @@ Configure maximum file size limit in bytes.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
   --runtime.telemetry.file.file-size-limit-bytes 2097152
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --runtime.telemetry.file.file-size-limit-bytes 2097152
 ```
+
+---
 
 ### Resulting config
 
@@ -1978,7 +2084,7 @@ Display the resolved permissions for every entity after role inheritance is appl
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab configure \
@@ -1990,12 +2096,14 @@ dab configure \
   --show-effective-permissions --config my-config.json
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
   --show-effective-permissions
 ```
+
+---
 
 ```cmd
 dab configure ^

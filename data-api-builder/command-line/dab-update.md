@@ -115,7 +115,7 @@ Enable or disable caching for this entity.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -123,14 +123,14 @@ dab update \
   --cache.enabled true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   Book ^
   --cache.enabled true
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -151,7 +151,7 @@ Set cache time-to-live in seconds. Only effective if caching is enabled.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -159,14 +159,14 @@ dab update \
   --cache.ttl 600
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   Book ^
   --cache.ttl 600
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -192,7 +192,7 @@ Replace entity description.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -200,14 +200,14 @@ dab update \
   --description "Updated description"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   Book ^
   --description "Updated description"
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -226,7 +226,7 @@ Comma-separated list of fields to exclude.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -235,7 +235,7 @@ dab update \
   --fields.exclude "internal_flag,secret_note"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -243,7 +243,7 @@ dab update ^
   --permissions "anonymous:read" ^
   --fields.exclude "internal_flag,secret_note"
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -274,7 +274,7 @@ Comma-separated list of fields to include. `*` includes all fields. Replaces exi
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -283,7 +283,7 @@ dab update \
   --fields.include "id,title,author"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -291,7 +291,7 @@ dab update ^
   --permissions "anonymous:read" ^
   --fields.include "id,title,author"
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -323,7 +323,7 @@ Control GraphQL exposure.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -331,14 +331,14 @@ dab update \
   --graphql book:books
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   Book ^
   --graphql book:books
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -363,7 +363,7 @@ Stored procedures only. Sets operation type. Default is `mutation`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -371,14 +371,14 @@ dab update \
   --graphql.operation query
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   RunReport ^
   --graphql.operation query
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -404,7 +404,7 @@ You can run `dab update` multiple times (once per role) to add multiple roles.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -416,7 +416,7 @@ dab update \
   --permissions "authenticated:create,read,update"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -427,7 +427,7 @@ dab update ^
   Book ^
   --permissions "authenticated:create,read,update"
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -466,7 +466,7 @@ OData-style filter appended to database query.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -475,7 +475,7 @@ dab update \
   --policy-database "region eq 'US'"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -483,7 +483,7 @@ dab update ^
   --permissions "anonymous:read" ^
   --policy-database "region eq 'US'"
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -514,7 +514,7 @@ Request-level policy evaluated before hitting the database.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -523,7 +523,7 @@ dab update \
   --policy-request "@claims.role == 'admin'"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -531,7 +531,7 @@ dab update ^
   --permissions "anonymous:read" ^
   --policy-request "@claims.role == 'admin'"
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -562,7 +562,7 @@ Define or update a relationship. Use with other relationship options.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -573,7 +573,7 @@ dab update \
   --relationship.fields "id:user_id"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -583,7 +583,7 @@ dab update ^
   --cardinality one ^
   --relationship.fields "id:user_id"
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -609,7 +609,7 @@ Cardinality for the relationship. Use with `--relationship`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -620,7 +620,7 @@ dab update \
   --relationship.fields "id:user_id"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -630,14 +630,14 @@ dab update ^
   --cardinality one ^
   --relationship.fields "id:user_id"
 ```
-
+---
 ## `--target.entity`
 
 Target entity name for the relationship. Use with `--relationship`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -648,7 +648,7 @@ dab update \
   --relationship.fields "id:user_id"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -658,14 +658,14 @@ dab update ^
   --cardinality one ^
   --relationship.fields "id:user_id"
 ```
-
+---
 ## `--linking.object`
 
 Many-to-many only. Name of the database object to use as the linking object.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -679,7 +679,7 @@ dab update \
   --linking.target.fields author_id
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -692,14 +692,14 @@ dab update ^
   --linking.source.fields book_id ^
   --linking.target.fields author_id
 ```
-
+---
 ## `--linking.source.fields`
 
 Many-to-many only. Comma-separated list of linking object fields pointing to the source entity.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -713,7 +713,7 @@ dab update \
   --linking.target.fields author_id
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -726,14 +726,14 @@ dab update ^
   --linking.source.fields book_id ^
   --linking.target.fields author_id
 ```
-
+---
 ## `--linking.target.fields`
 
 Many-to-many only. Comma-separated list of linking object fields pointing to the target entity.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -747,7 +747,7 @@ dab update \
   --linking.target.fields author_id
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -760,7 +760,7 @@ dab update ^
   --linking.source.fields book_id ^
   --linking.target.fields author_id
 ```
-
+---
 ## `--relationship.fields`
 
 Colon-separated field mappings for direct relationships.
@@ -769,7 +769,7 @@ The `--relationship.fields` value is a comma-separated list of `sourceField:targ
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -780,7 +780,7 @@ dab update \
   --relationship.fields "id:user_id"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -790,7 +790,7 @@ dab update ^
   --cardinality one ^
   --relationship.fields "id:user_id"
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -814,7 +814,7 @@ Control REST exposure.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -822,14 +822,14 @@ dab update \
   --rest BooksApi
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   Book ^
   --rest BooksApi
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -851,7 +851,7 @@ Stored procedures only. Replace allowed HTTP methods. Defaults to POST.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -860,7 +860,7 @@ dab update \
   --rest.methods GET,POST
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -868,7 +868,7 @@ dab update ^
   --rest true ^
   --rest.methods GET,POST
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -893,7 +893,7 @@ Update the underlying database object.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -901,14 +901,14 @@ dab update \
   --source dbo.Books
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   Book ^
   --source dbo.Books
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -930,7 +930,7 @@ Change the source object type.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -938,14 +938,14 @@ dab update \
   --source.type view
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   Book ^
   --source.type view
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -972,7 +972,7 @@ Stored procedures only. Comma-separated list of parameter names.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -982,7 +982,7 @@ dab update \
   --parameters.description "Beginning of date range,End of date range"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -991,7 +991,7 @@ dab update ^
   --parameters.required "true,true" ^
   --parameters.description "Beginning of date range,End of date range"
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -1025,7 +1025,7 @@ Stored procedures only. Comma-separated list of parameter descriptions aligned t
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -1034,7 +1034,7 @@ dab update \
   --parameters.description "Beginning of date range,End of date range"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -1042,7 +1042,7 @@ dab update ^
   --parameters.name "StartDate,EndDate" ^
   --parameters.description "Beginning of date range,End of date range"
 ```
-
+---
 ## `--parameters.required`
 
 Stored procedures only. Comma-separated list of `true`/`false` values aligned to `--parameters.name`.
@@ -1051,7 +1051,7 @@ Stored procedures only. Comma-separated list of `true`/`false` values aligned to
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -1060,7 +1060,7 @@ dab update \
   --parameters.required "true,true"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -1068,7 +1068,7 @@ dab update ^
   --parameters.name "StartDate,EndDate" ^
   --parameters.required "true,true"
 ```
-
+---
 ## `--parameters.default`
 
 Stored procedures only. Comma-separated list of default values aligned to `--parameters.name`.
@@ -1077,7 +1077,7 @@ Stored procedures only. Comma-separated list of default values aligned to `--par
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -1086,7 +1086,7 @@ dab update \
   --parameters.default "null"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -1094,7 +1094,7 @@ dab update ^
   --parameters.name "CustomerID" ^
   --parameters.default "null"
 ```
-
+---
 ## `--fields.name`
 
 Name of the database column to describe.
@@ -1103,7 +1103,7 @@ Name of the database column to describe.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -1113,7 +1113,7 @@ dab update \
   --fields.description "Product Id"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -1122,7 +1122,7 @@ dab update ^
   --fields.primary-key true ^
   --fields.description "Product Id"
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -1152,7 +1152,7 @@ Alias for the field. Use a comma-separated list aligned to `--fields.name`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -1161,7 +1161,7 @@ dab update \
   --fields.alias "product_id,product_title"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -1169,7 +1169,7 @@ dab update ^
   --fields.name "Id,Title" ^
   --fields.alias "product_id,product_title"
 ```
-
+---
 ## `--fields.description`
 
 Description for the field. Use a comma-separated list aligned to `--fields.name`.
@@ -1178,7 +1178,7 @@ Description for the field. Use a comma-separated list aligned to `--fields.name`
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -1187,7 +1187,7 @@ dab update \
   --fields.description "Product Id"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -1195,7 +1195,7 @@ dab update ^
   --fields.name Id ^
   --fields.description "Product Id"
 ```
-
+---
 ## `--fields.primary-key`
 
 Primary key flag for the field. Use a comma-separated list of `true`/`false` values aligned to `--fields.name`.
@@ -1207,7 +1207,7 @@ Primary key flag for the field. Use a comma-separated list of `true`/`false` val
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -1216,7 +1216,7 @@ dab update \
   --fields.primary-key "true,true"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -1224,7 +1224,7 @@ dab update ^
   --fields.name "year,region" ^
   --fields.primary-key "true,true"
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -1252,7 +1252,7 @@ Path to the configuration file.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -1261,7 +1261,7 @@ dab update \
   --config dab-config.json
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -1269,42 +1269,42 @@ dab update ^
   --description "Updated description" ^
   --config dab-config.json
 ```
-
+---
 ## `--help`
 
 Display the help screen.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update --help
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update --help
 ```
-
+---
 ## `--version`
 
 Display version information.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update --version
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update --version
 ```
-
+---
 > [!Important]
 > Changing source type may invalidate other properties. For example, views always require key-fields; stored procedures cannot define key-fields.

@@ -111,13 +111,13 @@ landingContent:
       - linkListType: reference
         links:
           - text: Data source
-            url: dab-init.md#data-source
+            url: dab-init.md#data-source-section
           - text: GraphQL
-            url: dab-init.md#graphql
+            url: dab-init.md#graphql-section
           - text: REST
-            url: dab-init.md#rest
+            url: dab-init.md#rest-section
           - text: Authentication
-            url: dab-init.md#host-and-authentication
+            url: dab-init.md#host-and-authentication-section
 
   - title: Start
     linkLists:

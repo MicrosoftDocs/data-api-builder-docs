@@ -93,7 +93,7 @@ Output configuration file name. Default is `dab-config.json`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -101,14 +101,14 @@ dab init \
   --config dab-config.local.json
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --config dab-config.local.json
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -126,7 +126,7 @@ JSON Web Token (JWT) audience claim.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -134,14 +134,14 @@ dab init \
   --auth.audience "https://example.com/api"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --auth.audience "https://example.com/api"
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -160,7 +160,7 @@ JSON Web Token (JWT) issuer claim.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -168,14 +168,14 @@ dab init \
   --auth.issuer "https://login.microsoftonline.com/{tenant-id}/v2.0"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --auth.issuer "https://login.microsoftonline.com/{tenant-id}/v2.0"
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -202,7 +202,7 @@ Valid values: `Unauthenticated`, `StaticWebApps`, `EntraID`, `AzureAD`, `AppServ
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -210,14 +210,14 @@ dab init \
   --auth.provider AzureAD
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --auth.provider AzureAD
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -236,7 +236,7 @@ Database connection string. Supports `@env()`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -244,14 +244,14 @@ dab init \
   --connection-string "@env('MSSQL_CONNECTION_STRING')"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --connection-string "@env('MSSQL_CONNECTION_STRING')"
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -268,7 +268,7 @@ Comma-separated list of allowed origins.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -276,14 +276,14 @@ dab init \
   --cors-origin "https://app.example.com,https://admin.example.com"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --cors-origin "https://app.example.com,https://admin.example.com"
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -302,7 +302,7 @@ Cosmos DB NoSQL container name.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -310,14 +310,14 @@ dab init \
   --cosmosdb_nosql-container MyContainer
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type cosmosdb_nosql ^
   --cosmosdb_nosql-container MyContainer
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -337,7 +337,7 @@ Cosmos DB NoSQL database name. Required for `cosmosdb_nosql`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -345,14 +345,14 @@ dab init \
   --cosmosdb_nosql-database MyDb
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type cosmosdb_nosql ^
   --cosmosdb_nosql-database MyDb
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -372,20 +372,20 @@ Specifies the target database engine. Supported values: `mssql`, `mysql`, `postg
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
   --database-type mssql
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -406,7 +406,7 @@ Enable GraphQL endpoint. Default is `true`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -414,14 +414,14 @@ dab init \
   --graphql.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --graphql.enabled false
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -440,7 +440,7 @@ Allows creating multiple rows in a single mutation. Default is `false`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -448,14 +448,14 @@ dab init \
   --graphql.multiple-create.enabled true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --graphql.multiple-create.enabled true
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -474,7 +474,7 @@ GraphQL endpoint prefix. Default is `/graphql`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -482,14 +482,14 @@ dab init \
   --graphql.path /gql
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --graphql.path /gql
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -508,7 +508,7 @@ Path to a GraphQL schema file. Required for `cosmosdb_nosql`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -516,14 +516,14 @@ dab init \
   --graphql-schema ./schema.gql
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type cosmosdb_nosql ^
   --graphql-schema ./schema.gql
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -544,7 +544,7 @@ Valid values: `Development`, `Production`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -552,14 +552,14 @@ dab init \
   --host-mode development
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --host-mode development
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -582,7 +582,7 @@ Enable MCP endpoint. Default is `true`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -590,14 +590,14 @@ dab init \
   --mcp.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --mcp.enabled false
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -616,7 +616,7 @@ MCP endpoint prefix. Default is `/mcp`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -624,14 +624,14 @@ dab init \
   --mcp.path /model
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --mcp.path /model
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -654,7 +654,7 @@ Enable REST endpoint. Default is `true`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -662,14 +662,14 @@ dab init \
   --rest.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --rest.enabled false
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -691,7 +691,7 @@ REST endpoint prefix. Default is `/api`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -699,14 +699,14 @@ dab init \
   --rest.path /rest
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --rest.path /rest
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -731,7 +731,7 @@ Controls handling of extra fields in request bodies. Default is `true`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -739,14 +739,14 @@ dab init \
   --rest.request-body-strict false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --rest.request-body-strict false
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -765,7 +765,7 @@ Global prefix prepended to all endpoints. Must begin with `/`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -773,14 +773,14 @@ dab init \
   --runtime.base-route /v1
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --runtime.base-route /v1
 ```
-
+---
 ### Resulting config
 
 ```json
@@ -797,7 +797,7 @@ Enable sending data to SQL Server using session context. Only valid for `mssql`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -805,14 +805,14 @@ dab init \
   --set-session-context true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --set-session-context true
 ```
-
+---
 ### Resulting config
 
 ```json

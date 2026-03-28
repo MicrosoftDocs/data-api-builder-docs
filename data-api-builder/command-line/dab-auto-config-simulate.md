@@ -35,19 +35,21 @@ Path to config file. Defaults to `dab-config.json` unless `dab-config.<DAB_ENVIR
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config-simulate \
   --config ./dab-config.json
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config-simulate ^
   --config ./dab-config.json
 ```
+
+---
 
 ## `-o, --output`
 
@@ -55,19 +57,21 @@ Path to output CSV (Comma Separated Values) file. If not specified, results are 
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config-simulate \
   --output results.csv
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config-simulate ^
   --output results.csv
 ```
+
+---
 
 ### Example CSV output
 
@@ -84,17 +88,19 @@ When `--output` isn't specified, results print directly to the console.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab auto-config-simulate
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab auto-config-simulate
 ```
+
+---
 
 ### Example console output
 
