@@ -496,6 +496,7 @@ If this works, the issue is with environment variable loading.
 
 ## Related content
 
+- [`dab add-telemetry` CLI reference](../../command-line/dab-add-telemetry.md)
 - [Use Azure Log Analytics](log-analytics.md)
 - [Use OpenTelemetry](open-telemetry.md)
 - [Customize log verbosity](log-levels.md)

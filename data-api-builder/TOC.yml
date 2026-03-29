@@ -134,6 +134,9 @@
     - name: dab add
       displayName: command line, terminal, local
       href: command-line/dab-add.md
+    - name: dab add-telemetry
+      displayName: command line, terminal, local, telemetry, opentelemetry, application insights
+      href: command-line/dab-add-telemetry.md
     - name: dab auto-config
       displayName: command line, terminal, local, autoentities
       href: command-line/dab-auto-config.md

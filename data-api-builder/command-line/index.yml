@@ -41,6 +41,19 @@ landingContent:
           - text: Source options
             url: dab-add.md#-s---source
 
+  - title: Add Telemetry
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: dab add-telemetry
+            url: dab-add-telemetry.md
+      - linkListType: reference
+        links:
+          - text: OpenTelemetry options
+            url: dab-add-telemetry.md#--otel-enabled
+          - text: Application Insights options
+            url: dab-add-telemetry.md#--app-insights-enabled
+
   - title: Autoconfiguration
     linkLists:
       - linkListType: overview

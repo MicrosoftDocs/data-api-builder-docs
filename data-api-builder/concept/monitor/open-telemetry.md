@@ -198,5 +198,6 @@ The OpenTelemetry SDK controls export timing. It exports traces when activities 
 
 ## Related content
 
+- [`dab add-telemetry` CLI reference](../../command-line/dab-add-telemetry.md)
 - [Runtime configuration](../../configuration/runtime.md)
 - [Use Azure Application Insights](application-insights.md)
