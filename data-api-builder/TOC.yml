@@ -19,15 +19,18 @@
     - name: Overview
       href: quickstart/index.yml
       displayName: quickstart, get started, landing
-    - name: SQL (SQL Server, PostgreSQL, MySQL)
-      href: quickstart/basic-sql.md
-      displayName: mssql, sql server, postgres, postgresql, mysql, local, database
-    - name: NoSQL (Azure Cosmos DB)
+    - name: SQL Server
+      href: quickstart/basic-sql.md?tabs=mssql
+      displayName: mssql, sql server, local, database
+    - name: PostgreSQL
+      href: quickstart/basic-sql.md?tabs=postgresql
+      displayName: postgres, postgresql, local, database
+    - name: MySQL
+      href: quickstart/basic-sql.md?tabs=mysql
+      displayName: mysql, local, database
+    - name: Azure Cosmos DB
       href: quickstart/basic-nosql.md
       displayName: cosmos, nosql, local, database, emulator
-    - name: Enable the Command Query Responsibility Segregation (CQRS) pattern
-      href: https://youtu.be/pSuMIvXRM1Q?t=142
-      displayName: architecture, design, htap, read, write
 - name: SQL MCP Server
   href: mcp/TOC.yml
 - name: REST Endpoint
@@ -455,20 +458,39 @@
     - name: Todo app with Static Web Apps (SWA) and Azure SQL
       href: /samples/azure-samples/dab-swa-todo/sample
       displayName: todo, dab, sample, azure sql
+    - name: Enable the CQRS pattern
+      href: https://youtu.be/pSuMIvXRM1Q?t=142
+      displayName: architecture, design, htap, read, write, cqrs
 - name: Troubleshooting
   items:
     - name: FAQ
       displayName: frequently asked questions, Q&A
       href: faq.yml
-    - name: Installation
-      href: /troubleshoot/azure/data-api-builder/installation?context=/azure/data-api-builder/context/context
-    - name: Runtime
-      href: /troubleshoot/azure/data-api-builder/usage?context=/azure/data-api-builder/context/context
+    - name: SQL Server
+      href: troubleshooting/mssql.md
+      displayName: sql server, mssql, connection, login, azure sql
+    - name: PostgreSQL
+      href: troubleshooting/postgresql.md
+      displayName: postgres, postgresql, connection, schema, ssl
+    - name: MySQL
+      href: troubleshooting/mysql.md
+      displayName: mysql, connection, access denied, column type
+    - name: Azure Cosmos DB
+      href: troubleshooting/cosmos.md
+      displayName: cosmos, nosql, emulator, certificate, graphql schema
+    - name: REST API
+      href: troubleshooting/rest.md
+      displayName: rest, 404, 405, filter, cors, odata
+    - name: GraphQL API
+      href: troubleshooting/graphql.md
+      displayName: graphql, schema, mutation, introspection, relationship
+    - name: SQL MCP Server
+      href: troubleshooting/mcp.md
+      displayName: mcp, stdio, tool, agent, authentication, foundry
     - name: Known issues
       displayName: bugs
       href: https://github.com/azure/data-api-builder/labels/known-issue
     - name: Support
       displayName: ticket, css, feedback, help, assistance
-
       href: https://github.com/Azure/data-api-builder/blob/main/SUPPORT.md
 

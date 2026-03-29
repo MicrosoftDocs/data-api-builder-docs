@@ -78,9 +78,6 @@ conceptualContent:
         - title: Concepts
           summary: Overview, transport, and built-in data tools.
           links:
-            - text: Overview
-              url: mcp/overview.md
-              itemType: overview
             - text: DML tools for agents
               url: mcp/data-manipulation-language-tools.md
               itemType: concept
@@ -130,9 +127,6 @@ conceptualContent:
         - title: Concepts and features
           summary: Endpoints, OpenAPI, database views, and stored procedures.
           links:
-            - text: Overview
-              url: concept/rest/overview.md
-              itemType: overview
             - text: OpenAPI and Swagger UI
               url: concept/rest/openapi.md
               itemType: concept
@@ -203,9 +197,6 @@ conceptualContent:
         - title: Concepts and features
           summary: Endpoints, mutations, aggregation, relationships, and stored procedures.
           links:
-            - text: Overview
-              url: concept/graphql/overview.md
-              itemType: overview
             - text: Multiple mutations (transactions)
               url: concept/graphql/multiple-mutations.md
               itemType: concept
@@ -225,19 +216,19 @@ conceptualContent:
         - title: Query operators
           summary: Filter, sort, paginate, and project fields in GraphQL queries.
           links:
-            - text: Record filtering (filter)
+            - text: Filter with $filter
               url: keywords/filter-graphql.md
               itemType: reference
-            - text: Field projection (select)
+            - text: Project with $select
               url: keywords/select-graphql.md
               itemType: reference
-            - text: Limit results (first)
+            - text: Limit with $first
               url: keywords/first-graphql.md
               itemType: reference
-            - text: Sort results (orderby)
+            - text: Sort with $orderBy
               url: keywords/orderby-graphql.md
               itemType: reference
-            - text: Cursor pagination (after)
+            - text: Paginate with $after
               url: keywords/after-graphql.md
               itemType: reference
 
@@ -265,7 +256,7 @@ additionalContent:
   sections:
 
     # Section: Data API builder
-    - title: Data API builder
+    - title: Data API builder Foundation
       items:
         - title: Quickstarts
           summary: Step-by-step setup for SQL Server, PostgreSQL, MySQL, and Azure Cosmos DB.

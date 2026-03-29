@@ -58,8 +58,16 @@ Run a local database instance in Docker.
 docker run --name dab-mssql --env "ACCEPT_EULA=Y" --env "MSSQL_SA_PASSWORD=P@ssw0rd1" --publish 1433:1433 --detach mcr.microsoft.com/mssql/server:2025-latest
 ```
 
-> [!NOTE]
-> Wait about 15 seconds for the SQL Server engine to finish starting before running the next command.
+> [!TIP]
+> If port `1433` is already in use (for example, by a local SQL Server installation), change `--publish` to a different host port like `1434:1433` and update `Server=localhost,1433` to `Server=localhost,1434` in later steps.
+
+Verify the database engine is ready before running the next command.
+
+```shell
+docker exec dab-mssql /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "P@ssw0rd1" -C -Q "SELECT 1"
+```
+
+If this returns an error, wait a few seconds and try again.
 
 # [PostgreSQL](#tab/postgresql)
 
@@ -73,8 +81,13 @@ docker run --name dab-postgres --env "POSTGRES_PASSWORD=P@ssw0rd1" --publish 543
 docker run --name dab-mysql --env "MYSQL_ROOT_PASSWORD=P@ssw0rd1" --publish 3306:3306 --detach mysql:8
 ```
 
-> [!NOTE]
-> Wait about 15 seconds for the MySQL engine to finish starting before running the next command.
+Verify the database engine is ready before running the next command.
+
+```shell
+docker exec dab-mysql mysql -uroot -pP@ssw0rd1 -e "SELECT 1"
+```
+
+If this returns an error, wait a few seconds and try again.
 
 ---
 

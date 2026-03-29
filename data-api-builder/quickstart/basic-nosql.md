@@ -37,14 +37,14 @@ docker pull mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
 
 ## Start the emulator
 
-Run the Cosmos DB emulator in Docker.
+Run the Cosmos DB emulator in Docker. The `AZURE_COSMOS_EMULATOR_IP_ADDRESS_OVERRIDE` setting is required so the emulator advertises `127.0.0.1` for its network endpoints, making them reachable from your host machine.
 
 ```shell
-docker run --name dab-cosmos --publish 8081:8081 --publish 10250-10255:10250-10255 --detach mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
+docker run --name dab-cosmos --publish 8081:8081 --publish 10250-10255:10250-10255 --env AZURE_COSMOS_EMULATOR_IP_ADDRESS_OVERRIDE=127.0.0.1 --detach mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
 ```
 
 > [!NOTE]
-> Wait about 30 seconds for the emulator to start. The emulator is ready when you can open `https://localhost:8081/_explorer/index.html` in your browser.
+> The emulator starts 11 internal partitions and can take **30 to 60 seconds** to become ready. You can verify it's running by opening `https://localhost:8081/_explorer/index.html` in your browser. Your browser may warn about the self-signed certificate—it's safe to proceed.
 
 ## Install the emulator certificate
 
@@ -69,8 +69,11 @@ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keyc
 
 ```powershell
 curl.exe -k https://localhost:8081/_explorer/emulator.pem -o "$env:USERPROFILE\emulatorcert.crt"
-certutil -f -addstore "Root" "$env:USERPROFILE\emulatorcert.crt"
+Import-Certificate -CertStoreLocation "Cert:\CurrentUser\Root" -FilePath "$env:USERPROFILE\emulatorcert.crt"
 ```
+
+> [!NOTE]
+> Windows displays a security dialog asking whether to trust the certificate. Select **Yes** to continue.
 
 ---
 
