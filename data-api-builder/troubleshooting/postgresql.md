@@ -61,3 +61,35 @@ Yes. DAB supports non-public schemas. Reference the schema explicitly in the ent
 **Cause:** Azure Database for PostgreSQL enforces SSL by default. Connections without SSL are rejected.
 
 **Resolution:** Append `Ssl Mode=Require;` to the connection string. For full certificate validation, also set `Trust Server Certificate=false` and provide the server CA certificate path via `Root Certificate=path/to/ca.pem`. Download the certificate bundle from the Azure portal under the server's **Networking** settings.
+
+### Stored procedures are not supported
+
+**Symptom:** Configuring a PostgreSQL stored procedure or function as an entity source fails or the entity does not behave as expected.
+
+**Cause:** Data API builder does not currently support stored procedures for PostgreSQL. This is a known limitation tracked in [GitHub issue #1023](https://github.com/Azure/data-api-builder/issues/1023).
+
+**Resolution:** Use a table or view as the entity source instead. Follow the GitHub issue for updates on when PostgreSQL stored procedure support is added.
+
+### Database policy is not enforced for Create operations
+
+**Symptom:** A create mutation or POST request succeeds even when a database policy should restrict the operation.
+
+**Cause:** Database policy support for Create actions in PostgreSQL is not yet implemented. This is a known limitation tracked in [GitHub issue #1334](https://github.com/Azure/data-api-builder/issues/1334).
+
+**Resolution:** Use role-based permissions to restrict create access until database policy support for PostgreSQL Create is available.
+
+### Database policy is not enforced for PUT and PATCH operations
+
+**Symptom:** A PUT or PATCH request on a PostgreSQL entity succeeds even when a database policy should restrict it.
+
+**Cause:** Database policy support for PUT and PATCH operations in PostgreSQL is not yet implemented. This is a known limitation tracked in [GitHub issue #1372](https://github.com/Azure/data-api-builder/issues/1372).
+
+**Resolution:** Use role-based permissions to restrict update access until database policy support for PostgreSQL update operations is available.
+
+### On-Behalf-Of (OBO) authentication is not supported
+
+**Symptom:** Configuring On-Behalf-Of (OBO) authentication for a PostgreSQL-backed DAB instance fails or the token is not forwarded to the database as expected.
+
+**Cause:** OBO authentication is currently only supported for SQL Server and Azure SQL. Support for PostgreSQL, MySQL, and Azure Cosmos DB has not yet been implemented. This is a known limitation tracked in [GitHub issue #3159](https://github.com/Azure/data-api-builder/issues/3159).
+
+**Resolution:** Use a supported authentication method such as connection string credentials or managed identity for PostgreSQL. Follow the GitHub issue for updates on when OBO support is expanded to non-SQL Server databases.

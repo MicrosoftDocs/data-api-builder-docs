@@ -61,3 +61,11 @@ DAB supports SQL authentication (username and password), Windows Integrated Auth
 **Cause:** The client IP address is not allowed by the Azure SQL server firewall rules, or the Azure service access setting is disabled.
 
 **Resolution:** In the Azure portal, navigate to the SQL server resource and select **Networking**. Add the client IP address to the firewall allow list, or enable **Allow Azure services and resources to access this server** if DAB is running in Azure. For managed identity authentication, verify the identity has been added as a database user with `CREATE USER [identity-name] FROM EXTERNAL PROVIDER`.
+
+### JSON columns are not detected automatically
+
+**Symptom:** A column with a JSON or NVARCHAR(MAX) type that stores JSON data is not exposed as a structured object in the API schema.
+
+**Cause:** Data API builder does not yet automatically detect and map JSON columns in Azure SQL. This is a known limitation tracked in [GitHub issue #444](https://github.com/Azure/data-api-builder/issues/444).
+
+**Resolution:** There is no workaround at this time. The column will be exposed as a plain string value. Follow the GitHub issue for updates on when native JSON column support is added.

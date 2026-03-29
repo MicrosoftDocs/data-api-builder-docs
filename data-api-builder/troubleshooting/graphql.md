@@ -61,3 +61,11 @@ No. Data API builder does not currently support GraphQL subscriptions. Only quer
 **Cause:** The relationship between the two entities is not configured in `dab-config.json`, or the linking fields are mapped incorrectly.
 
 **Resolution:** Use `dab update` to add the relationship, specifying `--relationship`, `--cardinality`, `--target.entity`, and the appropriate linking fields. Verify the foreign key column names in `--relationship.fields` and `--target.fields` match the actual column names in the database. Check DAB logs for join generation errors.
+
+### Relationship name overlaps with an exposed field name
+
+**Symptom:** Queries on an entity with a relationship return unexpected results or a schema error, particularly when a relationship name matches one of the entity's own field names.
+
+**Cause:** Data API builder does not currently validate that relationship names and exposed field names are distinct on the same entity. When they overlap, the generated schema is ambiguous and queries may behave incorrectly. This is a known limitation tracked in [GitHub issue #1937](https://github.com/Azure/data-api-builder/issues/1937).
+
+**Resolution:** Ensure relationship names do not duplicate any field name exposed by the same entity. Rename either the relationship (using --relationship in dab update) or the exposed field (using --map in dab update) to make them distinct.

@@ -61,3 +61,11 @@ Any MCP-compliant client can connect to DAB's MCP server. Tested clients include
 **Cause:** The DAB host is configured for anonymous access only, or the managed identity of the Foundry agent has not been granted access to the DAB host or the underlying database.
 
 **Resolution:** Configure DAB to accept Microsoft Entra tokens by setting `host.authentication.provider` to `StaticWebApps` or `AzureAD` and providing the correct audience. Ensure the Foundry agent's managed identity is assigned the appropriate role in the DAB permission model and that the identity has database access. For Azure SQL back ends, create a database user for the managed identity with `CREATE USER [agent-identity] FROM EXTERNAL PROVIDER`.
+
+### Aggregations are not available for Cosmos DB entities via MCP tools
+
+**Symptom:** An AI agent attempting to aggregate data (count, sum, average) from a Cosmos DB-backed entity receives no result or an error.
+
+**Cause:** Data API builder does not support aggregation operations for Azure Cosmos DB. MCP tool calls that translate to aggregate queries will fail for Cosmos DB entities. This is a known limitation tracked in [GitHub issue #2849](https://github.com/Azure/data-api-builder/issues/2849).
+
+**Resolution:** Direct the agent to retrieve the full result set and perform aggregations in the calling application or agent logic. Follow the GitHub issue for updates on when Cosmos DB aggregation support is added.
