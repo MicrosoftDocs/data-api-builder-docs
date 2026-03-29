@@ -256,7 +256,7 @@ additionalContent:
   sections:
 
     # Section: Data API builder
-    - title: Data API builder Foundation
+    - title: Data API builder 
       items:
         - title: Quickstarts
           summary: Step-by-step setup for SQL Server, PostgreSQL, MySQL, and Azure Cosmos DB.
