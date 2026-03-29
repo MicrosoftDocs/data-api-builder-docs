@@ -1,18 +1,18 @@
 ---
-title: Using Stored Procedures in DAB
-description: Learn how to expose stored procedures as endpoints in Data API builder for both REST and GraphQL.
-author: seesharprun
-ms.author: sidandrews
-ms.reviewer: jerrynixon
+title: Stored procedures in the GraphQL API
+description: Learn how to expose stored procedures as GraphQL operations in Data API builder with the execute prefix.
+author: jerrynixon
+ms.author: jnixon
+ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 03/24/2026
-# Customer Intent: Customer Intent: As a developer, I want to expose stored procedures in DAB so I can reuse business logic or parameterized queries as endpoints.
+ms.date: 03/28/2026
+# Customer Intent: As a developer, I want to call stored procedures through GraphQL so I can reuse existing database logic from GraphQL clients.
 ---
 
-# Using stored procedures in Data API builder
+# Stored procedures in the GraphQL API
 
-Stored procedures can be exposed as REST or GraphQL endpoints in DAB. This approach is useful for scenarios that involve custom logic, filtering, validation, or computed results not handled by simple tables or views.
+Stored procedures can be exposed as GraphQL operations in Data API builder (DAB). This approach is useful for scenarios that involve custom logic, filtering, validation, or computed results not handled by simple tables or views.
 
 ## Configuration
 
@@ -21,7 +21,6 @@ To expose a stored procedure:
 * Set `source.type` to `"stored-procedure"`
 * Set `source.object` to the fully qualified procedure name
 * Define optional `parameters` with their defaults, if necessary
-* Set `rest.methods` (for example, `"GET"`, `"POST"`) or `rest: false`
 * Set `graphql.operation` to `"query"` or `"mutation"`, or omit to default to `"mutation"`
 * Grant permission using the `"execute"` action
 
@@ -36,7 +35,6 @@ dab add GetCowrittenBooksByAuthor \
   --parameters.default "default-value" \
   --parameters.description "The type of search to perform" \
   --permissions "anonymous:execute" \
-  --rest.methods "get" \
   --graphql.operation "query"
 ```
 
@@ -56,9 +54,6 @@ dab add GetCowrittenBooksByAuthor \
       }
     ]
   },
-  "rest": {
-    "methods": [ "GET" ]
-  },
   "graphql": {
     "operation": "query"
   },
@@ -77,33 +72,13 @@ dab add GetCowrittenBooksByAuthor \
 > [!TIP]
 > For more information on the parameters array format, see [source configuration](../../configuration/entities.md#source-entity-name-entities).
 
-## REST support
-
-* Supports only `GET` and `POST`
-* Defaults to `POST` if `methods` is omitted
-* Sends parameters via query string with `GET`
-* Sends parameters via JSON body with `POST`
-* Disables REST for a stored procedure if `"rest": false` is set
-
-### Example requests
-
-`GET /api/GetCowrittenBooksByAuthor?author=asimov`
-
-`POST /api/GetCowrittenBooksByAuthor`
-
-```json
-{
-  "author": "asimov"
-}
-```
-
-## GraphQL support
+## GraphQL behavior
 
 * Requires `graphql.operation` to be `"query"` or `"mutation"`
 * Fields are autoprefixed with `execute`, for example, `executeGetCowrittenBooksByAuthor`
 * Parameters are passed as GraphQL arguments
 
-### Example GraphQL
+### Example query
 
 ```graphql
 query {
@@ -113,15 +88,6 @@ query {
   }
 }
 ```
-
-## Limitations
-
-* Only the **first result set** is returned
-* Pagination, filtering, and ordering aren't supported
-* Relationships aren't supported
-* Requires metadata from `sys.dm_exec_describe_first_result_set`
-* Can't return a single item by key
-* No parameter-level authorization
 
 ## Custom MCP tools
 
@@ -157,39 +123,16 @@ dab add GetBookById \
 
 [!INCLUDE[Note - SQL MCP Server 2.0 preview](../../mcp/includes/note-sql-mcp-server-2-preview.md)]
 
-## MCP custom tools
+## Limitations
 
-In Data API builder 2.0 preview, stored procedures can be registered as custom MCP tools. When you set `"custom-tool": true` in the entity's `mcp` configuration, DAB registers the stored procedure as a named tool via MCP `tools/list` and `tools/call`. This configuration lets AI agents discover and invoke the procedure directly by name.
+* Only the **first result set** is returned
+* Pagination, filtering, and ordering aren't supported
+* Relationships aren't supported
+* Requires metadata from `sys.dm_exec_describe_first_result_set`
+* Can't return a single item by key
+* No parameter-level authorization
 
-### Configuration example
+## Related content
 
-```json
-"GetBookById": {
-  "source": {
-    "type": "stored-procedure",
-    "object": "dbo.get_book_by_id"
-  },
-  "mcp": {
-    "custom-tool": true
-  },
-  "permissions": [
-    {
-      "role": "anonymous",
-      "actions": [ "execute" ]
-    }
-  ]
-}
-```
-
-### CLI example
-
-```bash
-dab add GetBookById \
-  --source dbo.get_book_by_id \
-  --source.type stored-procedure \
-  --permissions "anonymous:execute" \
-  --mcp.custom-tool true
-```
-
-[!INCLUDE[Note - SQL MCP Server 2.0 preview](../../mcp/includes/note-sql-mcp-server-2-preview.md)]
-
+* [Stored procedures in the REST API](../rest/stored-procedures.md)
+* [Source configuration](../../configuration/entities.md#source-entity-name-entities)

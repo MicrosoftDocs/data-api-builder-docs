@@ -367,7 +367,7 @@
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-multiple-mutations.md",
-      "redirect_url": "/azure/data-api-builder/concept/api/multiple-mutations",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/multiple-mutations",
       "redirect_document_id": true
     },
     {
@@ -422,12 +422,12 @@
     },
     {
       "source_path_from_root": "/data-api-builder/database-objects.md",
-      "redirect_url": "/azure/data-api-builder/concept/database/views",
+      "redirect_url": "/azure/data-api-builder/concept/rest/views",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/relationships.md",
-      "redirect_url": "/azure/data-api-builder/concept/database/relationships",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/relationships",
       "redirect_document_id": true
     },
     {
@@ -437,17 +437,17 @@
     },
     {
       "source_path_from_root": "/data-api-builder/graphql.md",
-      "redirect_url": "/azure/data-api-builder/concept/api/graphql",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/overview",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/openapi.md",
-      "redirect_url": "/azure/data-api-builder/concept/api/openapi",
+      "redirect_url": "/azure/data-api-builder/concept/rest/openapi",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/rest.md",
-      "redirect_url": "/azure/data-api-builder/concept/api/rest",
+      "redirect_url": "/azure/data-api-builder/concept/rest/overview",
       "redirect_document_id": true
     },
     {
@@ -542,7 +542,7 @@
     },
     {
       "source_path_from_root": "/data-api-builder/how-to/aggregate-data.md",
-      "redirect_url": "/azure/data-api-builder/concept/database/aggregate-data",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/aggregate-data",
       "redirect_document_id": false
     },
     {
@@ -552,7 +552,7 @@
     },
     {
       "source_path_from_root": "/data-api-builder/how-to/multiple-mutations.md",
-      "redirect_url": "/azure/data-api-builder/concept/api/multiple-mutations",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/multiple-mutations",
       "redirect_document_id": false
     },
     {
@@ -678,6 +678,91 @@
     {
       "source_path_from_root": "/data-api-builder/concept/database/configure-timeout.md",
       "redirect_url": "/azure/data-api-builder/concept/database/timeout",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/rest.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/overview",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/graphql.md",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/overview",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/openapi.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/openapi",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/http-if-match.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/http-if-match",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/http-location.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/http-location",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/multiple-mutations.md",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/multiple-mutations",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/database/aggregate-data.md",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/aggregate-data",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/database/views.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/views",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/database/stored-procedures.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/stored-procedures",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/database/relationships.md",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/relationships",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/relationships.md",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/relationships",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/stored-procedures.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/stored-procedures",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/views.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/views",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/timeout.md",
+      "redirect_url": "/azure/data-api-builder/concept/database/timeout",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/config/multi-data-source.md",
+      "redirect_url": "/azure/data-api-builder/concept/config/multi-config",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/rest/rest.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/overview",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/graphql/graphql.md",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/overview",
       "redirect_document_id": false
     }
   ]

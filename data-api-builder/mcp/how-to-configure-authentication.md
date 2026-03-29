@@ -45,7 +45,7 @@ SQL MCP Server supports multiple data sources through `data-source-files`. Each 
 
 ![Diagram showing outbound authentication from SQL MCP Server to multiple databases with per-database credentials.](media/how-to-configure-authentication/multiple-outbound-authentication.svg)
 
-For more information, see [Add more than one data source](../concept/config/multi-data-source.md) and [Data source configuration](../configuration/data-source.md).
+For more information, see [Add more than one data source](../concept/config/multi-config.md) and [Data source configuration](../configuration/data-source.md).
 
 ### Configure the database connection
 

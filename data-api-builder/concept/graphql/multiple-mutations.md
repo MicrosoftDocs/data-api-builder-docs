@@ -300,5 +300,5 @@ To wrap up things, use the DAB CLI to run the API and test the GraphQL endpoint 
 
 ## Related content
 
-- [Relationships](../database/relationships.md)
+- [Relationships](../api/relationships.md)
 - [GraphQL](graphql.md)

@@ -574,7 +574,7 @@ Numeric fields expose `sum`, `average`, `min`, `max`, and `count`. Non-numeric f
 
 ## Related content
 
-- [GraphQL in Data API builder](../api/graphql.md)
+- [GraphQL in Data API builder](graphql.md)
 - [Feature availability](../../feature-availability.md)
 
 ## Next step

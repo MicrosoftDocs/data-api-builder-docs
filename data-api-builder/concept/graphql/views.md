@@ -1,18 +1,18 @@
 ---
-title: Using Views in DAB
-description: Learn how to expose database views as REST or GraphQL endpoints using Data API builder.
-author: seesharprun
-ms.author: sidandrews
-ms.reviewer: jerrynixon
+title: Database views in the GraphQL API
+description: Learn how to expose database views as GraphQL types in Data API builder for queries and mutations.
+author: jerrynixon
+ms.author: jnixon
+ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 07/21/2025
-# Customer Intent: As a developer, I want to expose views as endpoints in DAB, so I can query read-only data models easily.
+ms.date: 03/28/2026
+# Customer Intent: As a developer, I want to expose views as GraphQL types so I can query read-only or updatable data models through GraphQL.
 ---
 
-# Using views in Data API builder
+# Database views in the GraphQL API
 
-Views are supported as alternatives to tables in DAB. A view can be exposed through REST or GraphQL endpoints with minimal configuration.
+Views are supported as alternatives to tables in Data API builder (DAB). A view can be exposed through GraphQL endpoints with minimal configuration.
 
 ## Configuration
 
@@ -52,26 +52,26 @@ dab add BookDetail \
 }
 ```
 
-## REST support
-
-* Supports all REST verbs: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`
-* Default behavior is identical to table-backed entities
-* Operations succeed only if the view is updatable and appropriate permissions are set
-
-### Example request
-
-```http
-GET /api/BookDetail/42
-```
-
-Returns the row from `vw_books_details` with `id = 42`.
-
-## GraphQL support
+## GraphQL behavior
 
 * View appears as a GraphQL type
 * Queries are always supported
 * Mutations are supported only if the view is updatable
 * Follows standard DAB GraphQL schema structure
+
+### Example query
+
+```graphql
+{
+  bookDetails {
+    items {
+      id
+      title
+      authorName
+    }
+  }
+}
+```
 
 ## Permissions
 
@@ -84,3 +84,7 @@ Returns the row from `vw_books_details` with `id = 42`.
 * Views don't support relationships
 * Pagination, filtering, and sorting are supported if the view behaves like a table
 
+## Related content
+
+* [Database views in the REST API](../rest/views.md)
+* [Source configuration](../../configuration/entities.md#source-entity-name-entities)

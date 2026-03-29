@@ -109,11 +109,11 @@ landingContent:
       - linkListType: concept
         links:
           - text: Database Views
-            url: concept/database/views.md
+            url: concept/rest/views.md
           - text: Stored Procedures
-            url: concept/database/stored-procedures.md
+            url: concept/rest/stored-procedures.md
           - text: Table Relationships
-            url: concept/database/relationships.md
+            url: concept/graphql/relationships.md
           - text: Configure query timeout
             url: concept/database/timeout.md
       - linkListType: how-to-guide
@@ -121,7 +121,7 @@ landingContent:
           - text: Set up Azure Cosmos DB
             url: concept/database/set-up-cosmosdb.md
           - text: Aggregate data with GraphQL
-            url: concept/database/aggregate-data.md
+            url: concept/graphql/aggregate-data.md
       - linkListType: reference
         links:
           - text: Feature availability
@@ -163,9 +163,9 @@ landingContent:
       - linkListType: concept  
         links:
           - text: REST endpoints
-            url: concept/api/rest.md
+            url: concept/rest/overview.md
           - text: OpenAPI documents
-            url: concept/api/openapi.md
+            url: concept/rest/openapi.md
           - text: Level 1 Cache
             url: concept/cache/level-1.md
           - text: Level 2 Cache
@@ -173,9 +173,9 @@ landingContent:
       - linkListType: how-to-guide
         links:
           - text: If-Match Header
-            url: concept/api/http-if-match.md
+            url: concept/rest/http-if-match.md
           - text: Location Header
-            url: concept/api/http-location.md
+            url: concept/rest/http-location.md
           - text: Cache-Control Header
             url: concept/cache/http-headers.md
       - linkListType: reference
@@ -195,11 +195,11 @@ landingContent:
       - linkListType: concept  
         links:
           - text: GraphQL endpoints
-            url: concept/api/graphql.md
+            url: concept/graphql/overview.md
           - text: Multiple mutations
-            url: concept/api/multiple-mutations.md
+            url: concept/graphql/multiple-mutations.md
           - text: Aggregate data
-            url: concept/database/aggregate-data.md
+            url: concept/graphql/aggregate-data.md
       - linkListType: reference
         links:
           - text: Field projection (select)
@@ -235,7 +235,7 @@ landingContent:
           - text: Auto configuration
             url: concept/config/auto-config.md
           - text: Multiple Data Sources
-            url: concept/config/multi-data-source.md
+            url: concept/config/multi-config.md
       - linkListType: reference
         links:
           - text: Configuration best practices

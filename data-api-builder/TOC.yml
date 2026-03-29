@@ -39,6 +39,88 @@
       displayName: architecture, design, htap, read, write
 - name: SQL MCP Server
   href: mcp/TOC.yml
+- name: REST Endpoint
+  items:
+    - name: Overview
+      href: concept/rest/index.yml
+      displayName: REST, HTTP, API, endpoints, landing
+    - name: Call REST endpoints
+      href: concept/rest/overview.md
+      displayName: HTTP, GET, POST, PATCH, DELETE, verbs, REST API
+    - name: Test with OpenAPI
+      href: concept/rest/openapi.md
+      displayName: OpenAPI, Swagger, API docs, schema definition, HTTP interface
+    - name: Use If-Match header
+      href: concept/rest/http-if-match.md
+      displayName: HTTP, conditional, update-only, etag
+    - name: Use Location header
+      href: concept/rest/http-location.md
+      displayName: HTTP, redirect, created, POST
+    - name: Paginate with $after
+      href: keywords/after-rest.md
+      displayName: page, pagination, cursor
+    - name: Filter with $filter
+      href: keywords/filter-rest.md
+      displayName: predicate, where, limit
+    - name: Limit with $first
+      href: keywords/first-rest.md
+      displayName: pagination, top, page
+    - name: Sort with $orderby
+      href: keywords/orderby-rest.md
+      displayName: sort, bubble, arrange, align
+    - name: Project with $select
+      href: keywords/select-rest.md
+      displayName: projection, choose, columns, items
+    - name: Database views
+      href: concept/rest/views.md
+      displayName: views, SQL, read-only, REST
+    - name: Stored procedures
+      href: concept/rest/stored-procedures.md
+      displayName: stored procedures, procs, SQL, REST
+    - name: Configure query timeout
+      href: concept/database/timeout.md
+      displayName: timeout, command timeout, connection string, long-running
+- name: GraphQL Endpoint
+  items:
+    - name: Overview
+      href: concept/graphql/index.yml
+      displayName: GraphQL, API, endpoints, landing
+    - name: Call GraphQL endpoints
+      href: concept/graphql/overview.md
+      displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
+    - name: Aggregate data
+      href: concept/graphql/aggregate-data.md
+      displayName: aggregation, groupBy, sum, avg, min, max, graphql
+    - name: Insert multiple records
+      href: concept/graphql/multiple-mutations.md
+      displayName: batch, transaction, graphql, createMany, mutation
+    - name: Define entity relationships
+      href: concept/graphql/relationships.md
+      displayName: relationships, foreign key, navigation, linking, cardinality
+    - name: Paginate with after
+      href: keywords/after-graphql.md
+      displayName: page, pagination, cursor
+    - name: Filter results
+      href: keywords/filter-graphql.md
+      displayName: predicate, where, limit
+    - name: Limit with first
+      href: keywords/first-graphql.md
+      displayName: pagination, top, page
+    - name: Sort with orderby
+      href: keywords/orderby-graphql.md
+      displayName: sort, bubble, arrange, align
+    - name: Project with select
+      href: keywords/select-graphql.md
+      displayName: projection, choose, columns, items
+    - name: Database views
+      href: concept/graphql/views.md
+      displayName: views, SQL, read-only, GraphQL
+    - name: Stored procedures
+      href: concept/graphql/stored-procedures.md
+      displayName: stored procedures, procs, SQL, GraphQL, execute prefix
+    - name: Configure query timeout
+      href: concept/database/timeout.md
+      displayName: timeout, command timeout, connection string, long-running
 - name: VSCode extensions
   href: vscode-extension/toc.yml
 - name: Command-Line interface
@@ -262,61 +344,6 @@
         - name: Set up Azure Cosmos DB
           href: concept/database/set-up-cosmosdb.md
           displayName: cosmos, nosql, schema, graphql, authorize
-    - name: GraphQL API
-      items:
-        - name: Call GraphQL endpoints
-          href: concept/api/graphql.md
-          displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
-        - name: Aggregate data
-          href: concept/database/aggregate-data.md
-          displayName: aggregation, groupBy, sum, avg, min, max, graphql
-        - name: Insert multiple records
-          href: concept/api/multiple-mutations.md
-          displayName: batch, transaction, graphql, createMany, mutation
-        - name: Paginate with after
-          href: keywords/after-graphql.md
-          displayName: page, pagination, cursor
-        - name: Filter results
-          href: keywords/filter-graphql.md
-          displayName: predicate, where, limit
-        - name: Limit with first
-          href: keywords/first-graphql.md
-          displayName: pagination, top, page
-        - name: Sort with orderby
-          href: keywords/orderby-graphql.md
-          displayName: sort, bubble, arrange, align
-        - name: Project with select
-          href: keywords/select-graphql.md
-          displayName: projection, choose, columns, items
-    - name: REST API
-      items:
-        - name: Call REST endpoints
-          href: concept/api/rest.md
-          displayName: HTTP, GET, POST, PATCH, DELETE, verbs, REST API
-        - name: Test with OpenAPI
-          href: concept/api/openapi.md
-          displayName: OpenAPI, Swagger, API docs, schema definition, HTTP interface
-        - name: Use If-Match header
-          href: concept/api/http-if-match.md
-          displayName: HTTP
-        - name: Use Location header
-          href: concept/api/http-location.md
-          displayName: HTTP
-        - name: Paginate with $after
-          href: keywords/after-rest.md
-          displayName: page, pagination, cursor
-        - name: Filter with $filter
-          href: keywords/filter-rest.md
-          displayName: predicate, where, limit
-        - name: Limit with $first
-          href: keywords/first-rest.md
-          displayName: pagination, top, page
-        - name: Sort with $orderby
-          href: keywords/orderby-rest.md
-          displayName: sort, bubble, arrange, align
-        - name: Project with $select
-          href: keywords/select-rest.md
-          displayName: projection, choose, columns, items
     - name: Data caching
       items:
         - name: Use level 1 cache
@@ -346,22 +373,8 @@
           href: concept/config/auto-config.md
           displayName: auto configuration, autoentities, patterns, templates
         - name: Use multiple data sources
-          href: concept/config/multi-data-source.md
+          href: concept/config/multi-config.md
           displayName: multiple databases, cross-DB, data source, federation
-    - name: Database structures
-      items:
-        - name: Use database views
-          href: concept/database/views.md
-          displayName: views, SQL, read-only
-        - name: Use stored procedures
-          href: concept/database/stored-procedures.md
-          displayName: stored procedures, procs, SQL, read-only
-        - name: Use table relationships
-          href: concept/database/relationships.md
-          displayName: relationships, foreign key, navigation, linking, cardinality
-        - name: Configure query timeout
-          href: concept/database/timeout.md
-          displayName: timeout, command timeout, connection string, long-running, stored procedure, query, sql server, postgresql, mysql, cosmos db, mssql
     - name: Monitoring and telemetry
       items:
         - name: Use Application Insights

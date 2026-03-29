@@ -469,7 +469,7 @@ GraphQL mutations allow you to create, update, and delete records depending on e
 > GraphQL mutations require an active database connection pool. If your connection string sets `Pooling=False` or `MultipleActiveResultSets=False`, mutations fail with the error `Implicit distributed transactions have not been enabled`. Set `Pooling=True` and `MultipleActiveResultSets=True` (SQL Server) or the equivalent for your database provider.
 
 > [!TIP]
-> For stored procedures exposed through GraphQL, DAB prefixes the entity name with `execute`. For example, a stored-procedure entity named `GetBookById` becomes `executeGetBookById` in the schema. For more information, see [stored procedures](../database/stored-procedures.md#graphql-support).
+> For stored procedures exposed through GraphQL, DAB prefixes the entity name with `execute`. For example, a stored-procedure entity named `GetBookById` becomes `executeGetBookById` in the schema. For more information, see [stored procedures](stored-procedures.md).
 
 ## Create a new record
 

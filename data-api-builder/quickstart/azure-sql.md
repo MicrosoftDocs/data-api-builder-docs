@@ -109,4 +109,4 @@ When you no longer need the sample application or resources, remove the correspo
 ## Next step
 
 > [!div class="nextstepaction"]
-> [REST endpoints](../concept/api/rest.md)
+> [REST endpoints](../concept/rest/overview.md)
