@@ -16,7 +16,10 @@ ms.date: 03/26/2026
 
 [!INCLUDE[Note - SQL MCP Server 2.0 preview](includes/note-sql-mcp-server-2-preview.md)]
 
-SQL MCP Server exposes tables and views through generic data manipulation language (DML) tools. For stored procedures, you can go further: set `custom-tool: true` on the entity so the procedure appears in the MCP tool list as a named, purpose-built tool. AI agents discover it by name, see its parameters, and call it directly—no SQL required.
+SQL MCP Server exposes tables and views through generic data manipulation language (DML) tools. For stored procedures, you can go further: set `custom-tool: true` on the entity so the procedure appears in the MCP tool list as a named, purpose-built tool. AI agents discover it by name, see its description, and call it directly—no SQL required.
+
+> [!IMPORTANT]
+> Custom tool names are derived from the entity name but converted to **snake_case**. For example, an entity named `GetProductById` becomes `get_product_by_id` in the MCP tool list. Use the snake_case name when calling the tool. The PascalCase entity name is not accepted as a tool name.
 
 The rest of this article shows how to add, configure, and test a custom MCP tool backed by a stored procedure.
 
@@ -204,21 +207,19 @@ When an MCP client calls `tools/list`, the response includes your custom tool al
 {
   "tools": [
     {
-      "name": "GetProductById",
+      "name": "get_product_by_id",
       "description": "Returns full product details including pricing and inventory for a given product ID",
       "inputSchema": {
         "type": "object",
-        "properties": {
-          "productId": { "type": "integer" }
-        },
-        "required": [ "productId" ]
+        "properties": {}
       }
     }
   ]
 }
 ```
 
-The parameter names and types are derived from the stored procedure signature. DAB reads the procedure's input parameters from the database at startup.
+> [!NOTE]
+> The tool name uses snake_case (for example, `get_product_by_id` for the `GetProductById` entity). The `inputSchema` currently returns empty `properties`. Agents rely on the tool description and `describe_entities` to determine the correct parameters.
 
 ## Configure multiple custom tools
 
@@ -306,7 +307,7 @@ Custom tools respect the same role-based access control (RBAC) as all other DAB 
 }
 ```
 
-When an agent calls with the `anonymous` role, `GetOrderSummary` doesn't appear in `tools/list` and any direct `tools/call` returns a permission error.
+When an agent calls with the `anonymous` role, `get_order_summary` doesn't appear in `tools/list` and any direct `tools/call` returns a permission error.
 
 ## Disable a custom tool without removing it
 
