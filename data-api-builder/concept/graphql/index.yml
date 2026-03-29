@@ -26,9 +26,9 @@ landingContent:
       - linkListType: quickstart
         links:
           - text: DAB with SQL Server
-            url: ../../quickstart/mssql.md
+            url: ../../quickstart/basic-sql.md?tabs=mssql
           - text: DAB with Azure Cosmos DB
-            url: ../../quickstart/azure-cosmos-db-nosql.md
+            url: ../../quickstart/basic-nosql.md
   - title: Schema and queries
     linkLists:
       - linkListType: how-to-guide

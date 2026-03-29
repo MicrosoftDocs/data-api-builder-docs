@@ -24,11 +24,11 @@ landingContent:
       - linkListType: quickstart
         links:
           - text: DAB with SQL Server
-            url: ../../quickstart/mssql.md
-          - text: DAB with Azure SQL
-            url: ../../quickstart/azure-sql.md
+            url: ../../quickstart/basic-sql.md?tabs=mssql
           - text: DAB with PostgreSQL
-            url: ../../quickstart/postgresql.md
+            url: ../../quickstart/basic-sql.md?tabs=postgresql
+          - text: DAB with MySQL
+            url: ../../quickstart/basic-sql.md?tabs=mysql
   - title: HTTP operations
     linkLists:
       - linkListType: how-to-guide

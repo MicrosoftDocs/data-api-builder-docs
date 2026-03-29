@@ -1,0 +1,32 @@
+### YamlMime:Landing
+
+title: Data API builder quickstarts
+summary: Get up and running with Data API builder in minutes. Each quickstart uses Docker to run a local database and walks you through creating REST or GraphQL API endpoints with the DAB CLI.
+
+metadata:
+  title: Data API builder quickstarts
+  description: Quickstart guides for using Data API builder with SQL Server, PostgreSQL, MySQL, or Azure Cosmos DB for NoSQL.
+  author: seesharprun
+  ms.author: sidandrews
+  ms.reviewer: jerrynixon
+  ms.service: data-api-builder
+  ms.topic: landing-page
+  ms.date: 03/29/2026
+
+landingContent:
+  - title: SQL databases
+    linkLists:
+      - linkListType: quickstart
+        links:
+          - text: Use with SQL Server
+            url: basic-sql.md?tabs=mssql
+          - text: Use with PostgreSQL
+            url: basic-sql.md?tabs=postgresql
+          - text: Use with MySQL
+            url: basic-sql.md?tabs=mysql
+  - title: NoSQL databases
+    linkLists:
+      - linkListType: quickstart
+        links:
+          - text: Use with Azure Cosmos DB for NoSQL
+            url: basic-nosql.md

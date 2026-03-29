@@ -314,10 +314,10 @@ When you use DAB with Azure Cosmos DB for NoSQL, DAB exposes only GraphQL endpoi
 ## Next step
 
 > [!div class="nextstepaction"]
-> [Quickstart: Use Data API builder with NoSQL](../../quickstart/nosql.md)
+> [Quickstart: Use Data API builder with NoSQL](../../quickstart/basic-nosql.md)
 
 ## Related content
 
-- [Quickstart: Use Data API builder with Azure Cosmos DB for NoSQL and Azure Container Apps](../../quickstart/azure-cosmos-db-nosql.md)
+- [Quickstart: Use Data API builder with NoSQL](../../quickstart/basic-nosql.md)
 - [Feature availability for Data API builder](../../feature-availability.md)
 - [Data modeling in Azure Cosmos DB](/azure/cosmos-db/nosql/modeling-data)

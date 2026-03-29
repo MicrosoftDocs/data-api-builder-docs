@@ -16,24 +16,15 @@
       href: reference-database-specific-features.md
 - name: Quickstarts
   items:
-    - name: Local SQL database
-      href: quickstart/mssql.md
-      displayName: mssql, local, sql server, database
-    - name: Local Cosmos emulator
-      href: quickstart/nosql.md
-      displayName: cosmos, nosql, local, database
-    - name: Local PostgreSQL
-      href: quickstart/postgresql.md
-      displayName: postgres, pg, local, database
-    - name: Local MySQL
-      href: quickstart/mysql.md
-      displayName: mysql, local, database
-    - name: Azure SQL database
-      href: quickstart/azure-sql.md
-      displayName: azure, sql server, database, cloud
-    - name: Azure Cosmos DB 
-      href: quickstart/azure-cosmos-db-nosql.md
-      displayName: azure, cosmos, nosql, cloud, database
+    - name: Overview
+      href: quickstart/index.yml
+      displayName: quickstart, get started, landing
+    - name: SQL (SQL Server, PostgreSQL, MySQL)
+      href: quickstart/basic-sql.md
+      displayName: mssql, sql server, postgres, postgresql, mysql, local, database
+    - name: NoSQL (Azure Cosmos DB)
+      href: quickstart/basic-nosql.md
+      displayName: cosmos, nosql, local, database, emulator
     - name: Enable the Command Query Responsibility Segregation (CQRS) pattern
       href: https://youtu.be/pSuMIvXRM1Q?t=142
       displayName: architecture, design, htap, read, write

@@ -2,7 +2,7 @@
 
 title: Data API builder documentation
 summary: >
-  Data API builder generates REST and GraphQL endpoints for your databases—SQL Server, Azure SQL,
+  Data API builder generates REST and GraphQL endpoints for your databases, including SQL Server, Azure SQL,
   Azure Cosmos DB, PostgreSQL, and MySQL. It also includes an MCP server for AI agent integration.
   Open source, secure, and production-ready.
 brand: azure
@@ -20,7 +20,7 @@ metadata:
   ms.date: 03/29/2026
 
 # =============================================================================
-# HIGHLIGHTED CONTENT — Top 8 cards (2 rows of 4)
+# HIGHLIGHTED CONTENT - Top 8 cards (2 rows of 4)
 # These are the highest-priority entry points for all visitors.
 # =============================================================================
 # itemType: architecture | concept | deploy | download | get-started | how-to-guide | learn | overview | quickstart | reference | sample | tutorial | video | whats-new
@@ -32,6 +32,10 @@ highlightedContent:
       itemType: overview
       url: overview.md
 
+    - title: SQL MCP server for AI agents
+      itemType: overview
+      url: mcp/overview.md
+
     - title: What's new in version 2.0
       itemType: whats-new
       url: whats-new/version-2-0.md
@@ -39,10 +43,6 @@ highlightedContent:
     - title: Feature availability by database
       itemType: reference
       url: feature-availability.md
-
-    - title: SQL MCP server for AI agents
-      itemType: overview
-      url: mcp/overview.md
 
     # Row 2
     - title: NuGet package
@@ -62,121 +62,80 @@ highlightedContent:
       url: https://aka.ms/dab/repo
 
 # =============================================================================
-# CONCEPTUAL CONTENT — Card-based sections (up to 3 sections)
+# CONCEPTUAL CONTENT - Card-based sections (up to 3 sections)
 # =============================================================================
 
 conceptualContent:
   sections:
 
     # =========================================================================
-    # SECTION 1: Get Started
+    # SECTION 1: SQL MCP Server (prioritized)
     # =========================================================================
-    - title: Get started with Data API builder
-      summary: Install the tools, follow a quickstart for your database, and explore learning resources.
+    - title: SQL MCP server for AI agents
+      summary: Give AI agents safe, structured access to your database through the Model Context Protocol.
       items:
 
-        # Card 1: Quickstarts by database
-        - title: Quickstarts
-          summary: Step-by-step setup for your database of choice.
+        - title: Overview and quickstarts
+          summary: Understand the MCP server and get running in minutes.
           links:
-            - text: SQL Server
-              url: quickstart/mssql.md
+            - text: MCP server overview
+              url: mcp/overview.md
+              itemType: overview
+            - text: "Quickstart: Visual Studio Code"
+              url: mcp/quickstart-visual-studio-code.md
               itemType: quickstart
-            - text: Azure SQL Database
-              url: quickstart/azure-sql.md
+            - text: "Quickstart: Azure AI Foundry"
+              url: mcp/quickstart-azure-ai-foundry.md
               itemType: quickstart
-            - text: Azure Cosmos DB for NoSQL
-              url: quickstart/azure-cosmos-db-nosql.md
+            - text: "Quickstart: .NET Aspire"
+              url: mcp/quickstart-dotnet-aspire.md
               itemType: quickstart
-            - text: PostgreSQL
-              url: quickstart/postgresql.md
-              itemType: quickstart
-            - text: MySQL
-              url: quickstart/mysql.md
-              itemType: quickstart
-            - text: Cosmos DB local emulator
-              url: quickstart/nosql.md
+            - text: "Quickstart: Azure Container Apps"
+              url: mcp/quickstart-azure-container-apps.md
               itemType: quickstart
 
-        # Card 2: Videos & learning
-        - title: Videos and learning
-          summary: Watch walkthroughs and dive into structured learning paths.
+        - title: Tools and capabilities
+          summary: Built-in DML tools, custom tools, and entity descriptions for agents.
           links:
-            - text: DAB basics 101
-              url: https://youtu.be/xAlaoDQolLw
-              itemType: video
-            - text: DAB system walkthrough
-              url: https://youtu.be/YadKjVk-q0k
-              itemType: video
-            - text: How DAB works
-              url: https://youtu.be/kxy4hA2YoME
-              itemType: video
-            - text: The VS Code extension
-              url: https://youtu.be/KcFFRbITAAI
-              itemType: video
-            - text: DAB and the CQRS pattern
-              url: https://youtu.be/pSuMIvXRM1Q
-              itemType: video
-            - text: DAB and .NET Aspire
-              url: https://youtu.be/ww5UUP4ur3M
-              itemType: video
-            - text: SQL developer learning path
-              url: https://aka.ms/sql/dev/path
-              itemType: learn
+            - text: DML tools for agents
+              url: mcp/data-manipulation-language-tools.md
+              itemType: concept
+            - text: Configure custom MCP tools
+              url: mcp/how-to-configure-custom-tools.md
+              itemType: how-to-guide
+            - text: Add entity descriptions for agents
+              url: mcp/how-to-add-descriptions.md
+              itemType: how-to-guide
 
-        # Card 3: Installation & setup
-        - title: Install and set up
-          summary: Get the CLI, extension, or container and start building.
+        - title: Configuration and authentication
+          summary: Set up transport, authentication, and hosting for the MCP server.
           links:
-            - text: Install the DAB CLI
-              url: command-line/install.md
-              itemType: get-started
+            - text: Stdio transport (local development)
+              url: mcp/stdio-transport.md
+              itemType: concept
+            - text: Configure MCP authentication
+              url: mcp/how-to-configure-authentication.md
+              itemType: how-to-guide
+
+        - title: MCP in the VS Code extension
+          summary: Use the MCP server directly from the Visual Studio Code extension.
+          links:
+            - text: MCP integration in VS Code
+              url: vscode-extension/mcp.md
+              itemType: how-to-guide
             - text: VS Code extension overview
               url: vscode-extension/index.yml
               itemType: overview
-            - text: Run in a local container
-              url: deployment/local-container.md
-              itemType: get-started
-            - text: Run from source
-              url: deployment/run-from-source.md
-              itemType: get-started
-            - text: Frequently asked questions
-              url: faq.yml
-              itemType: reference
-
-        # Card 4: Open source community
-        - title: Open source community
-          summary: Contribute, report issues, and explore samples.
-          links:
-            - text: GitHub repository
-              url: https://aka.ms/dab/repo
-              itemType: reference
-            - text: Open issues
-              url: https://aka.ms/dab/issues
-              itemType: reference
-            - text: Feature backlog
-              url: https://aka.ms/dab/backlog
-              itemType: reference
-            - text: Community discussions
-              url: https://github.com/Azure/data-api-builder/discussions
-              itemType: reference
-            - text: Sample projects
-              url: https://github.com/Azure-Samples/data-api-builder
-              itemType: sample
-            - text: OSS license
-              url: https://github.com/Azure/data-api-builder/blob/main/LICENSE.txt
-              itemType: reference
 
     # =========================================================================
-    # SECTION 2: Build APIs & AI Integrations
+    # SECTION 2: REST API
     # =========================================================================
-    - title: Build APIs and AI integrations
-      summary: Expose your database through REST endpoints, GraphQL queries, or MCP tools for AI agents.
+    - title: REST API
+      summary: Auto-generated RESTful endpoints with OpenAPI, caching, and rich query operators.
       items:
 
-        # Card 1: REST API
-        - title: REST API
-          summary: Auto-generated RESTful endpoints with OpenAPI support and caching.
+        - title: Concepts and features
+          summary: Endpoints, OpenAPI integration, views, and stored procedures.
           links:
             - text: REST endpoints overview
               url: concept/rest/overview.md
@@ -190,12 +149,29 @@ conceptualContent:
             - text: Stored procedures
               url: concept/rest/stored-procedures.md
               itemType: concept
-            - text: If-Match header (conditional updates)
-              url: concept/rest/http-if-match.md
-              itemType: how-to-guide
-            - text: Location header (POST responses)
-              url: concept/rest/http-location.md
-              itemType: how-to-guide
+
+        - title: Query operators
+          summary: Filter, sort, paginate, and project fields in REST requests.
+          links:
+            - text: Record filtering ($filter)
+              url: keywords/filter-rest.md
+              itemType: reference
+            - text: Field projection ($select)
+              url: keywords/select-rest.md
+              itemType: reference
+            - text: Limit results ($first)
+              url: keywords/first-rest.md
+              itemType: reference
+            - text: Sort results ($orderby)
+              url: keywords/orderby-rest.md
+              itemType: reference
+            - text: Cursor pagination ($after)
+              url: keywords/after-rest.md
+              itemType: reference
+
+        - title: Caching
+          summary: In-memory and distributed caching with HTTP cache headers.
+          links:
             - text: Level 1 cache (in-memory)
               url: concept/cache/level-1.md
               itemType: concept
@@ -206,9 +182,34 @@ conceptualContent:
               url: concept/cache/http-headers.md
               itemType: how-to-guide
 
-        # Card 2: GraphQL API
-        - title: GraphQL API
-          summary: Schema-driven queries, mutations, and relationships with introspection.
+        - title: HTTP headers and quickstarts
+          summary: Conditional updates, response headers, and database-specific quickstarts.
+          links:
+            - text: If-Match header (conditional updates)
+              url: concept/rest/http-if-match.md
+              itemType: how-to-guide
+            - text: Location header (POST responses)
+              url: concept/rest/http-location.md
+              itemType: how-to-guide
+            - text: "Quickstart: SQL Server"
+              url: quickstart/basic-sql.md?tabs=mssql
+              itemType: quickstart
+            - text: "Quickstart: PostgreSQL"
+              url: quickstart/basic-sql.md?tabs=postgresql
+              itemType: quickstart
+            - text: "Quickstart: Azure Cosmos DB"
+              url: quickstart/basic-nosql.md
+              itemType: quickstart
+
+    # =========================================================================
+    # SECTION 3: GraphQL API
+    # =========================================================================
+    - title: GraphQL API
+      summary: Schema-driven queries, mutations, relationships, and aggregation with introspection.
+      items:
+
+        - title: Concepts and features
+          summary: Endpoints, mutations, aggregation, relationships, and stored procedures.
           links:
             - text: GraphQL endpoints overview
               url: concept/graphql/overview.md
@@ -229,230 +230,229 @@ conceptualContent:
               url: concept/graphql/stored-procedures.md
               itemType: concept
 
-        # Card 3: Query operators
-        - title: Query operators reference
-          summary: Filter, sort, paginate, and project fields across REST and GraphQL.
+        - title: Query operators
+          summary: Filter, sort, paginate, and project fields in GraphQL queries.
           links:
-            - text: "REST: $filter"
-              url: keywords/filter-rest.md
-              itemType: reference
-            - text: "REST: $select"
-              url: keywords/select-rest.md
-              itemType: reference
-            - text: "REST: $first"
-              url: keywords/first-rest.md
-              itemType: reference
-            - text: "REST: $orderby"
-              url: keywords/orderby-rest.md
-              itemType: reference
-            - text: "REST: $after"
-              url: keywords/after-rest.md
-              itemType: reference
-            - text: "GraphQL: filter"
+            - text: Record filtering (filter)
               url: keywords/filter-graphql.md
               itemType: reference
-            - text: "GraphQL: select"
+            - text: Field projection (select)
               url: keywords/select-graphql.md
               itemType: reference
-            - text: "GraphQL: first"
+            - text: Limit results (first)
               url: keywords/first-graphql.md
               itemType: reference
-            - text: "GraphQL: orderby"
+            - text: Sort results (orderby)
               url: keywords/orderby-graphql.md
               itemType: reference
-            - text: "GraphQL: after"
+            - text: Cursor pagination (after)
               url: keywords/after-graphql.md
               itemType: reference
 
-        # Card 4: SQL MCP Server for AI
-        - title: SQL MCP server for AI agents
-          summary: Connect AI agents to your database through the Model Context Protocol.
+        - title: Quickstarts
+          summary: Get a GraphQL endpoint running with your database.
           links:
-            - text: MCP server overview
-              url: mcp/overview.md
-              itemType: overview
-            - text: "Quickstart: Visual Studio Code"
-              url: mcp/quickstart-visual-studio-code.md
+            - text: "Quickstart: SQL Server"
+              url: quickstart/basic-sql.md?tabs=mssql
               itemType: quickstart
-            - text: "Quickstart: Azure AI Foundry"
-              url: mcp/quickstart-azure-ai-foundry.md
+            - text: "Quickstart: PostgreSQL"
+              url: quickstart/basic-sql.md?tabs=postgresql
               itemType: quickstart
-            - text: "Quickstart: .NET Aspire"
-              url: mcp/quickstart-dotnet-aspire.md
+            - text: "Quickstart: MySQL"
+              url: quickstart/basic-sql.md?tabs=mysql
               itemType: quickstart
-            - text: "Quickstart: Azure Container Apps"
-              url: mcp/quickstart-azure-container-apps.md
+            - text: "Quickstart: Azure Cosmos DB"
+              url: quickstart/basic-nosql.md
               itemType: quickstart
-            - text: Stdio transport (local development)
-              url: mcp/stdio-transport.md
-              itemType: concept
-            - text: DML tools for agents
-              url: mcp/data-manipulation-language-tools.md
-              itemType: concept
-            - text: Configure custom MCP tools
-              url: mcp/how-to-configure-custom-tools.md
-              itemType: how-to-guide
-            - text: Add entity descriptions for agents
-              url: mcp/how-to-add-descriptions.md
-              itemType: how-to-guide
-            - text: Configure MCP authentication
-              url: mcp/how-to-configure-authentication.md
-              itemType: how-to-guide
 
-    # =========================================================================
-    # SECTION 3: Configure, Secure & Deploy
-    # =========================================================================
-    - title: Configure, secure, and deploy
-      summary: Set up your configuration file, lock down access, deploy to the cloud, and monitor in production.
+# =============================================================================
+# ADDITIONAL CONTENT - Bottom reference sections (simple link lists)
+# =============================================================================
+
+additionalContent:
+  sections:
+
+    # Section: Get started
+    - title: Get started
       items:
+        - title: Install and set up
+          summary: Get the CLI, extension, or container and start building.
+          links:
+            - text: Install the DAB CLI
+              url: command-line/install.md
+            - text: VS Code extension overview
+              url: vscode-extension/index.yml
+            - text: Run in a local container
+              url: deployment/local-container.md
+            - text: Run from source
+              url: deployment/run-from-source.md
+            - text: Frequently asked questions
+              url: faq.yml
 
-        # Card 1: Configuration
-        - title: Configuration file
-          summary: Define entities, data sources, and runtime settings in a single JSON file.
+        - title: Quickstarts
+          summary: Step-by-step setup for your database of choice.
+          links:
+            - text: SQL Server
+              url: quickstart/basic-sql.md?tabs=mssql
+            - text: PostgreSQL
+              url: quickstart/basic-sql.md?tabs=postgresql
+            - text: MySQL
+              url: quickstart/basic-sql.md?tabs=mysql
+            - text: Azure Cosmos DB for NoSQL
+              url: quickstart/basic-nosql.md
+
+        - title: Videos and learning
+          summary: Watch walkthroughs and dive into structured learning paths.
+          links:
+            - text: DAB basics 101
+              url: https://youtu.be/xAlaoDQolLw
+            - text: DAB system walkthrough
+              url: https://youtu.be/YadKjVk-q0k
+            - text: How DAB works
+              url: https://youtu.be/kxy4hA2YoME
+            - text: The VS Code extension
+              url: https://youtu.be/KcFFRbITAAI
+            - text: DAB and the CQRS pattern
+              url: https://youtu.be/pSuMIvXRM1Q
+            - text: DAB and .NET Aspire
+              url: https://youtu.be/ww5UUP4ur3M
+            - text: SQL developer learning path
+              url: https://aka.ms/sql/dev/path
+
+        - title: Open source community
+          summary: Contribute, report issues, and explore samples.
+          links:
+            - text: GitHub repository
+              url: https://aka.ms/dab/repo
+            - text: Open issues
+              url: https://aka.ms/dab/issues
+            - text: Feature backlog
+              url: https://aka.ms/dab/backlog
+            - text: Community discussions
+              url: https://github.com/Azure/data-api-builder/discussions
+            - text: Sample projects
+              url: https://github.com/Azure-Samples/data-api-builder
+            - text: OSS license
+              url: https://github.com/Azure/data-api-builder/blob/main/LICENSE.txt
+
+    # Section: Configuration file
+    - title: Configuration file
+      items:
+        - title: Schema reference
+          summary: The major sections of the DAB configuration file.
           links:
             - text: Configuration schema reference
               url: configuration/index.md
-              itemType: reference
             - text: Entity configuration
               url: configuration/entities.md
-              itemType: concept
             - text: Runtime configuration
               url: configuration/runtime.md
-              itemType: concept
             - text: Data source configuration
               url: configuration/data-source.md
-              itemType: concept
+
+        - title: Functions and environments
+          summary: Dynamic values, secret injection, and environment-specific files.
+          links:
             - text: Environment-specific files
               url: concept/config/environments.md
-              itemType: how-to-guide
             - text: "@env() function"
               url: concept/config/env-function.md
-              itemType: how-to-guide
             - text: "@azure() Key Vault function"
               url: concept/config/akv-function.md
-              itemType: how-to-guide
             - text: Auto-configuration
               url: concept/config/auto-config.md
-              itemType: how-to-guide
             - text: Multiple data sources
               url: concept/config/multi-config.md
-              itemType: how-to-guide
+
+        - title: Best practices
+          summary: Configuration patterns and optimization guidance.
+          links:
             - text: Configuration best practices
               url: concept/config/best-practices.md
-              itemType: reference
 
-        # Card 2: Security & authentication
-        - title: Security and authentication
-          summary: Authenticate users, authorize requests, and enforce row-level policies.
+    # Section: Security and authentication
+    - title: Security and authentication
+      items:
+        - title: Concepts
+          summary: How authentication and authorization work in DAB.
           links:
             - text: Security overview
               url: concept/security/index.md
-              itemType: overview
             - text: Authorization and roles
               url: concept/security/authorization.md
-              itemType: concept
             - text: Database policies
               url: concept/security/database-policies.md
-              itemType: concept
-            - text: Microsoft Entra ID authentication
-              url: concept/security/authenticate-entra.md
-              itemType: how-to-guide
-            - text: Custom JWT (Okta, Auth0, Keycloak)
-              url: concept/security/authenticate-custom.md
-              itemType: how-to-guide
-            - text: App Service EasyAuth
-              url: concept/security/authenticate-easy-auth.md
-              itemType: how-to-guide
-            - text: Simulator for testing
-              url: concept/security/authenticate-simulator.md
-              itemType: how-to-guide
-            - text: On-Behalf-Of (OBO) flow
-              url: concept/security/authenticate-on-behalf-of.md
-              itemType: how-to-guide
-            - text: Row-level security
-              url: concept/security/row-level-security.md
-              itemType: how-to-guide
             - text: Security best practices
               url: concept/security/best-practices.md
-              itemType: reference
 
-        # Card 3: Deployment
-        - title: Deployment
-          summary: Deploy to Azure Container Apps, AKS, ACI, or run locally.
+        - title: Authentication providers
+          summary: Configure identity providers for your DAB instance.
+          links:
+            - text: Microsoft Entra ID
+              url: concept/security/authenticate-entra.md
+            - text: Custom JWT (Okta, Auth0, Keycloak)
+              url: concept/security/authenticate-custom.md
+            - text: App Service EasyAuth
+              url: concept/security/authenticate-easy-auth.md
+            - text: Simulator for testing
+              url: concept/security/authenticate-simulator.md
+            - text: Unauthenticated provider
+              url: concept/security/authenticate-unauthenticated.md
+            - text: On-Behalf-Of (OBO) flow
+              url: concept/security/authenticate-on-behalf-of.md
+
+        - title: Row-level security
+          summary: Restrict data access at the row level with policies.
+          links:
+            - text: Implement row-level security
+              url: concept/security/row-level-security.md
+            - text: Database policies
+              url: concept/security/database-policies.md
+            - text: Code policies reference
+              url: reference-code-policies.md
+
+    # Section: Deployment and monitoring
+    - title: Deployment and monitoring
+      items:
+        - title: Cloud deployment
+          summary: Deploy DAB to Azure container services.
           links:
             - text: Deployment overview
               url: deployment/overview.md
-              itemType: overview
             - text: Azure Container Apps (Portal)
               url: deployment/azure-container-apps.md
-              itemType: deploy
             - text: Azure Container Apps (CLI)
               url: tutorial-deploy-container-app-cli.md
-              itemType: deploy
             - text: Azure Container Instances
               url: deployment/azure-container-instances.md
-              itemType: deploy
             - text: Azure Kubernetes Service
               url: deployment/azure-kubernetes-service.md
-              itemType: deploy
+
+        - title: Local development
+          summary: Run DAB locally in a container or from source.
+          links:
             - text: Run in a local container
               url: deployment/local-container.md
-              itemType: how-to-guide
             - text: Run from source
               url: deployment/run-from-source.md
-              itemType: how-to-guide
 
-        # Card 4: Monitoring & observability
         - title: Monitoring and observability
           summary: Instrument with Application Insights, Log Analytics, and OpenTelemetry.
           links:
             - text: Application Insights
               url: concept/monitor/application-insights.md
-              itemType: concept
             - text: Log Analytics
               url: concept/monitor/log-analytics.md
-              itemType: concept
             - text: OpenTelemetry
               url: concept/monitor/open-telemetry.md
-              itemType: concept
             - text: Health checks
               url: concept/monitor/health-checks.md
-              itemType: concept
             - text: Log levels
               url: concept/monitor/log-levels.md
-              itemType: concept
 
-# =============================================================================
-# ADDITIONAL CONTENT — Bottom reference sections (simple link lists)
-# =============================================================================
-
-additionalContent:
-  sections:
+    # Section: Reference and tools
     - title: Reference and tools
       items:
-
-        - title: What's new
-          summary: Release notes for every version.
-          links:
-            - text: Version 2.0 (Preview)
-              url: whats-new/version-2-0.md
-            - text: Version 1.7
-              url: whats-new/version-1-7.md
-            - text: Version 1.6
-              url: whats-new/version-1-6.md
-            - text: Version 1.5
-              url: whats-new/version-1-5.md
-            - text: Version 1.4
-              url: whats-new/version-1-4.md
-            - text: Version 1.3
-              url: whats-new/version-1-3.md
-            - text: Version 1.2
-              url: whats-new/version-1-2.md
-            - text: Version 1.1
-              url: whats-new/version-1-1.md
-            - text: All release notes
-              url: whats-new/index.yml
-
         - title: Command-line interface
           summary: Initialize, configure, validate, and run from the terminal.
           links:
@@ -476,49 +476,3 @@ additionalContent:
               url: command-line/dab-export.md
             - text: dab auto-config
               url: command-line/dab-auto-config.md
-
-        - title: Visual Studio Code extension
-          summary: Visual tools for initializing, configuring, and running DAB.
-          links:
-            - text: Extension overview
-              url: vscode-extension/index.yml
-            - text: DAB Init
-              url: vscode-extension/init.md
-            - text: DAB Add
-              url: vscode-extension/add.md
-            - text: DAB Start
-              url: vscode-extension/start.md
-            - text: DAB Validate
-              url: vscode-extension/validate.md
-            - text: Health check UI
-              url: vscode-extension/health.md
-            - text: Schema visualization
-              url: vscode-extension/visualize.md
-            - text: Code generation
-              url: vscode-extension/code-gen.md
-            - text: Docker integration
-              url: vscode-extension/docker.md
-            - text: Install from VS Marketplace
-              url: https://marketplace.visualstudio.com/items?itemName=jerry-nixon.omnibus-data-api-builder
-
-        - title: Database and samples
-          summary: Database-specific features, code policies, and sample apps.
-          links:
-            - text: Feature availability matrix
-              url: feature-availability.md
-            - text: Database-specific features
-              url: reference-database-specific-features.md
-            - text: Code policies reference
-              url: reference-code-policies.md
-            - text: Configure query timeout
-              url: concept/database/timeout.md
-            - text: Set up Azure Cosmos DB
-              url: concept/database/set-up-cosmosdb.md
-            - text: "Sample: Library app (Blazor + Azure SQL)"
-              url: /samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
-            - text: "Sample: Todo app (Azure SQL)"
-              url: /samples/azure-samples/dab-swa-todo/sample
-            - text: "Sample: Dev container for Azure SQL"
-              url: /samples/microsoft/vscode-remote-try-dab/devcontainer
-            - text: All samples on GitHub
-              url: https://github.com/Azure-Samples/data-api-builder

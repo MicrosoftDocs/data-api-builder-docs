@@ -182,27 +182,27 @@
     },
     {
       "source_path_from_root": "/data-api-builder/get-started/get-started-with-data-api-builder.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/get-started/get-started-azure-sql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/get-started/get-started-azure-cosmos-db.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-cosmos-db-nosql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/get-started/get-started-azure-postgresql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/get-started/get-started-azure-mysql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
@@ -392,32 +392,32 @@
     },
     {
       "source_path_from_root": "/data-api-builder/azure-cosmos-db-nosql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-cosmos-db-nosql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/azure-sql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/mssql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/mssql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/mysql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/mysql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/nosql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/nosql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/postgresql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/postgresql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": true
     },
     {
@@ -472,32 +472,32 @@
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart-azure-cosmos-db-nosql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-cosmos-db-nosql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart-azure-sql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart-sql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/mssql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart-mysql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/mysql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart-nosql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/nosql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart-postgresql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/postgresql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
@@ -764,6 +764,36 @@
       "source_path_from_root": "/data-api-builder/concept/graphql/graphql.md",
       "redirect_url": "/azure/data-api-builder/concept/graphql/overview",
       "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/quickstart/mssql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/quickstart/mysql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/quickstart/postgresql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/quickstart/azure-sql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/quickstart/nosql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
+      "redirect_document_id": true
+    },
+    {
+      "source_path_from_root": "/data-api-builder/quickstart/azure-cosmos-db-nosql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
+      "redirect_document_id": true
     }
   ]
 }
