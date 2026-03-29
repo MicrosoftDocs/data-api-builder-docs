@@ -69,18 +69,44 @@ conceptualContent:
   sections:
 
     # =========================================================================
-    # SECTION 1: SQL MCP Server (prioritized)
+    # SECTION 1: SQL MCP Server
     # =========================================================================
     - title: SQL MCP server
       summary: Connect AI agents to your database through the Model Context Protocol.
       items:
 
-        - title: Overview and quickstarts
-          summary: Start with the MCP server overview, then follow a quickstart for your environment.
+        - title: Concepts
+          summary: Overview, transport, and built-in data tools.
           links:
             - text: Overview
               url: mcp/overview.md
               itemType: overview
+            - text: DML tools for agents
+              url: mcp/data-manipulation-language-tools.md
+              itemType: concept
+            - text: Stdio transport (local development)
+              url: mcp/stdio-transport.md
+              itemType: concept
+            - text: MCP in the VS Code extension
+              url: vscode-extension/mcp.md
+              itemType: concept
+
+        - title: Tools and configuration
+          summary: Custom tools, entity descriptions, and authentication.
+          links:
+            - text: Configure custom MCP tools
+              url: mcp/how-to-configure-custom-tools.md
+              itemType: how-to-guide
+            - text: Add entity descriptions for agents
+              url: mcp/how-to-add-descriptions.md
+              itemType: how-to-guide
+            - text: Configure MCP authentication
+              url: mcp/how-to-configure-authentication.md
+              itemType: how-to-guide
+
+        - title: Quickstarts
+          summary: Connect your first AI agent client to the MCP server.
+          links:
             - text: "Quickstart: Visual Studio Code"
               url: mcp/quickstart-visual-studio-code.md
               itemType: quickstart
@@ -93,39 +119,6 @@ conceptualContent:
             - text: "Quickstart: Azure Container Apps"
               url: mcp/quickstart-azure-container-apps.md
               itemType: quickstart
-
-        - title: Tools and capabilities
-          summary: DML tools, custom tools, and entity descriptions.
-          links:
-            - text: DML tools for agents
-              url: mcp/data-manipulation-language-tools.md
-              itemType: concept
-            - text: Configure custom MCP tools
-              url: mcp/how-to-configure-custom-tools.md
-              itemType: how-to-guide
-            - text: Add entity descriptions for agents
-              url: mcp/how-to-add-descriptions.md
-              itemType: how-to-guide
-
-        - title: Configuration and authentication
-          summary: Set up transport, authentication, and hosting for the MCP server.
-          links:
-            - text: Stdio transport (local development)
-              url: mcp/stdio-transport.md
-              itemType: concept
-            - text: Configure MCP authentication
-              url: mcp/how-to-configure-authentication.md
-              itemType: how-to-guide
-
-        - title: MCP in the VS Code extension
-          summary: Manage the MCP server from the Visual Studio Code extension.
-          links:
-            - text: MCP integration in VS Code
-              url: vscode-extension/mcp.md
-              itemType: how-to-guide
-            - text: Overview
-              url: vscode-extension/index.yml
-              itemType: overview
 
     # =========================================================================
     # SECTION 2: REST API
@@ -149,9 +142,15 @@ conceptualContent:
             - text: Stored procedures
               url: concept/rest/stored-procedures.md
               itemType: concept
+            - text: If-Match header (conditional updates)
+              url: concept/rest/http-if-match.md
+              itemType: concept
+            - text: Location header (POST responses)
+              url: concept/rest/http-location.md
+              itemType: concept
 
-        - title: Query operators
-          summary: Filter, sort, paginate, and project fields in REST requests.
+        - title: Query operators & caching
+          summary: Filter, sort, paginate, and cache REST responses.
           links:
             - text: Record filtering ($filter)
               url: keywords/filter-rest.md
@@ -168,10 +167,6 @@ conceptualContent:
             - text: Cursor pagination ($after)
               url: keywords/after-rest.md
               itemType: reference
-
-        - title: Caching
-          summary: In-memory and distributed caching with HTTP cache headers.
-          links:
             - text: Level 1 cache (in-memory)
               url: concept/cache/level-1.md
               itemType: concept
@@ -182,20 +177,17 @@ conceptualContent:
               url: concept/cache/http-headers.md
               itemType: how-to-guide
 
-        - title: HTTP headers and quickstarts
-          summary: Conditional updates, location headers, and database-specific quickstarts.
+        - title: Quickstarts
+          summary: Get a REST endpoint running with your database of choice.
           links:
-            - text: If-Match header (conditional updates)
-              url: concept/rest/http-if-match.md
-              itemType: how-to-guide
-            - text: Location header (POST responses)
-              url: concept/rest/http-location.md
-              itemType: how-to-guide
             - text: "Quickstart: SQL Server"
               url: quickstart/basic-sql.md?tabs=mssql
               itemType: quickstart
             - text: "Quickstart: PostgreSQL"
               url: quickstart/basic-sql.md?tabs=postgresql
+              itemType: quickstart
+            - text: "Quickstart: MySQL"
+              url: quickstart/basic-sql.md?tabs=mysql
               itemType: quickstart
             - text: "Quickstart: Azure Cosmos DB"
               url: quickstart/basic-nosql.md
@@ -362,170 +354,3 @@ additionalContent:
               url: concept/security/database-policies.md
             - text: Security best practices
               url: concept/security/best-practices.md
-
-    # Section: REST API
-    - title: REST API
-      items:
-        - title: Concepts
-          summary: REST endpoint behavior, OpenAPI, views, and stored procedures.
-          links:
-            - text: Overview
-              url: concept/rest/overview.md
-            - text: OpenAPI
-              url: concept/rest/openapi.md
-            - text: Database views
-              url: concept/rest/views.md
-            - text: Stored procedures
-              url: concept/rest/stored-procedures.md
-            - text: HTTP If-Match header
-              url: concept/rest/http-if-match.md
-            - text: HTTP Location header
-              url: concept/rest/http-location.md
-
-        - title: Caching
-          summary: Layer 1, Layer 2, and HTTP cache-control headers.
-          links:
-            - text: Level 1 cache
-              url: concept/cache/level-1.md
-            - text: Level 2 cache
-              url: concept/cache/level-2.md
-            - text: HTTP cache headers
-              url: concept/cache/http-headers.md
-
-        - title: Query operators
-          summary: Filter, shape, and paginate REST responses.
-          links:
-            - text: $filter
-              url: keywords/filter-rest.md
-            - text: $select
-              url: keywords/select-rest.md
-            - text: $first
-              url: keywords/first-rest.md
-            - text: $orderby
-              url: keywords/orderby-rest.md
-            - text: $after
-              url: keywords/after-rest.md
-
-        - title: Command-line interface
-          summary: Initialize, configure, validate, and run from the terminal.
-          links:
-            - text: CLI overview
-              url: command-line/index.yml
-            - text: Install the CLI
-              url: command-line/install.md
-            - text: dab init
-              url: command-line/dab-init.md
-            - text: dab add
-              url: command-line/dab-add.md
-            - text: dab update
-              url: command-line/dab-update.md
-            - text: dab configure
-              url: command-line/dab-configure.md
-            - text: dab start
-              url: command-line/dab-start.md
-            - text: dab validate
-              url: command-line/dab-validate.md
-            - text: dab export
-              url: command-line/dab-export.md
-            - text: dab auto-config
-              url: command-line/dab-auto-config.md
-
-    # Section: GraphQL API
-    - title: GraphQL API
-      items:
-        - title: Concepts
-          summary: GraphQL endpoint behavior, mutations, aggregation, and relationships.
-          links:
-            - text: Overview
-              url: concept/graphql/overview.md
-            - text: Multiple mutations
-              url: concept/graphql/multiple-mutations.md
-            - text: Aggregate data
-              url: concept/graphql/aggregate-data.md
-            - text: Entity relationships
-              url: concept/graphql/relationships.md
-            - text: Database views
-              url: concept/graphql/views.md
-            - text: Stored procedures
-              url: concept/graphql/stored-procedures.md
-
-        - title: Query operators
-          summary: Filter, shape, and paginate GraphQL responses.
-          links:
-            - text: filter
-              url: keywords/filter-graphql.md
-            - text: select
-              url: keywords/select-graphql.md
-            - text: first
-              url: keywords/first-graphql.md
-            - text: orderBy
-              url: keywords/orderby-graphql.md
-            - text: after
-              url: keywords/after-graphql.md
-
-        - title: Command-line interface
-          summary: Initialize, configure, validate, and run from the terminal.
-          links:
-            - text: CLI overview
-              url: command-line/index.yml
-            - text: Install the CLI
-              url: command-line/install.md
-            - text: dab init
-              url: command-line/dab-init.md
-            - text: dab add
-              url: command-line/dab-add.md
-            - text: dab update
-              url: command-line/dab-update.md
-            - text: dab configure
-              url: command-line/dab-configure.md
-            - text: dab start
-              url: command-line/dab-start.md
-            - text: dab validate
-              url: command-line/dab-validate.md
-            - text: dab export
-              url: command-line/dab-export.md
-            - text: dab auto-config
-              url: command-line/dab-auto-config.md
-
-    # Section: MCP server
-    - title: MCP server
-      items:
-        - title: Overview and quickstarts
-          summary: Overview, quickstarts, and database-specific guides.
-          links:
-            - text: Overview
-              url: mcp/overview.md
-            - text: "Quickstart: Visual Studio Code"
-              url: mcp/quickstart-visual-studio-code.md
-            - text: "Quickstart: Azure AI Foundry"
-              url: mcp/quickstart-azure-ai-foundry.md
-            - text: "Quickstart: .NET Aspire"
-              url: mcp/quickstart-dotnet-aspire.md
-            - text: "Quickstart: Azure Container Apps"
-              url: mcp/quickstart-azure-container-apps.md
-
-        - title: Tools and capabilities
-          summary: DML tools, custom tools, and entity descriptions.
-          links:
-            - text: Data manipulation language (DML) tools
-              url: mcp/data-manipulation-language-tools.md
-            - text: Configure custom tools
-              url: mcp/how-to-configure-custom-tools.md
-            - text: Add entity descriptions
-              url: mcp/how-to-add-descriptions.md
-
-        - title: Configuration
-          summary: Transport options and authentication for the MCP server.
-          links:
-            - text: stdio transport
-              url: mcp/stdio-transport.md
-            - text: MCP authentication
-              url: mcp/how-to-configure-authentication.md
-
-        - title: VS Code extension
-          summary: Manage DAB configuration and MCP connections from VS Code.
-          links:
-            - text: Overview
-              url: vscode-extension/index.yml
-            - text: MCP in VS Code
-              url: vscode-extension/mcp.md
