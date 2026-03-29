@@ -768,32 +768,32 @@
     {
       "source_path_from_root": "/data-api-builder/quickstart/mssql.md",
       "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart/mysql.md",
       "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart/postgresql.md",
       "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart/azure-sql.md",
       "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart/nosql.md",
       "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart/azure-cosmos-db-nosql.md",
       "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
-      "redirect_document_id": true
+      "redirect_document_id": false
     }
   ]
 }

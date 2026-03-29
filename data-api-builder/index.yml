@@ -40,24 +40,24 @@ highlightedContent:
       itemType: overview
       url: concept/graphql/overview.md
 
-    - title: SQL MCP server for AI agents
+    - title: SQL MCP Server
       itemType: overview
       url: mcp/overview.md
 
     # Row 2: Where to go next
-    - title: What's new in version 2.0
+    - title: Version 2.0
       itemType: whats-new
       url: whats-new/version-2-0.md
 
-    - title: Feature availability by database
+    - title: Feature matrix
       itemType: reference
       url: feature-availability.md
 
-    - title: "Quickstart: SQL Server"
+    - title: "Quickstart: SQL"
       itemType: quickstart
       url: quickstart/basic-sql.md
 
-    - title: "Quickstart: Azure Cosmos DB"
+    - title: "Quickstart: NoSQL"
       itemType: quickstart
       url: quickstart/basic-nosql.md
 
@@ -71,14 +71,14 @@ conceptualContent:
     # =========================================================================
     # SECTION 1: SQL MCP Server (prioritized)
     # =========================================================================
-    - title: SQL MCP server for AI agents
-      summary: Give AI agents safe, structured access to your database through the Model Context Protocol.
+    - title: SQL MCP server
+      summary: Connect AI agents to your database through the Model Context Protocol.
       items:
 
         - title: Overview and quickstarts
-          summary: Understand the MCP server and get running in minutes.
+          summary: Start with the MCP server overview, then follow a quickstart for your environment.
           links:
-            - text: MCP server overview
+            - text: Overview
               url: mcp/overview.md
               itemType: overview
             - text: "Quickstart: Visual Studio Code"
@@ -95,7 +95,7 @@ conceptualContent:
               itemType: quickstart
 
         - title: Tools and capabilities
-          summary: Built-in DML tools, custom tools, and entity descriptions for agents.
+          summary: DML tools, custom tools, and entity descriptions.
           links:
             - text: DML tools for agents
               url: mcp/data-manipulation-language-tools.md
@@ -118,12 +118,12 @@ conceptualContent:
               itemType: how-to-guide
 
         - title: MCP in the VS Code extension
-          summary: Use the MCP server directly from the Visual Studio Code extension.
+          summary: Manage the MCP server from the Visual Studio Code extension.
           links:
             - text: MCP integration in VS Code
               url: vscode-extension/mcp.md
               itemType: how-to-guide
-            - text: VS Code extension overview
+            - text: Overview
               url: vscode-extension/index.yml
               itemType: overview
 
@@ -131,13 +131,13 @@ conceptualContent:
     # SECTION 2: REST API
     # =========================================================================
     - title: REST API
-      summary: Auto-generated RESTful endpoints with OpenAPI, caching, and rich query operators.
+      summary: Auto-generated REST endpoints with OpenAPI, caching, and query operators.
       items:
 
         - title: Concepts and features
-          summary: Endpoints, OpenAPI integration, views, and stored procedures.
+          summary: Endpoints, OpenAPI, database views, and stored procedures.
           links:
-            - text: REST endpoints overview
+            - text: Overview
               url: concept/rest/overview.md
               itemType: overview
             - text: OpenAPI and Swagger UI
@@ -183,7 +183,7 @@ conceptualContent:
               itemType: how-to-guide
 
         - title: HTTP headers and quickstarts
-          summary: Conditional updates, response headers, and database-specific quickstarts.
+          summary: Conditional updates, location headers, and database-specific quickstarts.
           links:
             - text: If-Match header (conditional updates)
               url: concept/rest/http-if-match.md
@@ -205,13 +205,13 @@ conceptualContent:
     # SECTION 3: GraphQL API
     # =========================================================================
     - title: GraphQL API
-      summary: Schema-driven queries, mutations, relationships, and aggregation with introspection.
+      summary: Schema-driven queries, mutations, relationships, and aggregation.
       items:
 
         - title: Concepts and features
           summary: Endpoints, mutations, aggregation, relationships, and stored procedures.
           links:
-            - text: GraphQL endpoints overview
+            - text: Overview
               url: concept/graphql/overview.md
               itemType: overview
             - text: Multiple mutations (transactions)
@@ -250,7 +250,7 @@ conceptualContent:
               itemType: reference
 
         - title: Quickstarts
-          summary: Get a GraphQL endpoint running with your database.
+          summary: Get a GraphQL endpoint running with your database of choice.
           links:
             - text: "Quickstart: SQL Server"
               url: quickstart/basic-sql.md?tabs=mssql
@@ -272,8 +272,8 @@ conceptualContent:
 additionalContent:
   sections:
 
-    # Section: Foundations
-    - title: Foundations
+    # Section: Data API builder
+    - title: Data API builder
       items:
         - title: Quickstarts
           summary: Step-by-step setup for SQL Server, PostgreSQL, MySQL, and Azure Cosmos DB.
@@ -369,11 +369,11 @@ additionalContent:
         - title: Concepts
           summary: REST endpoint behavior, OpenAPI, views, and stored procedures.
           links:
-            - text: REST overview
+            - text: Overview
               url: concept/rest/overview.md
             - text: OpenAPI
               url: concept/rest/openapi.md
-            - text: Views
+            - text: Database views
               url: concept/rest/views.md
             - text: Stored procedures
               url: concept/rest/stored-procedures.md
@@ -436,15 +436,15 @@ additionalContent:
         - title: Concepts
           summary: GraphQL endpoint behavior, mutations, aggregation, and relationships.
           links:
-            - text: GraphQL overview
+            - text: Overview
               url: concept/graphql/overview.md
             - text: Multiple mutations
               url: concept/graphql/multiple-mutations.md
             - text: Aggregate data
               url: concept/graphql/aggregate-data.md
-            - text: Relationships
+            - text: Entity relationships
               url: concept/graphql/relationships.md
-            - text: Views
+            - text: Database views
               url: concept/graphql/views.md
             - text: Stored procedures
               url: concept/graphql/stored-procedures.md
@@ -452,9 +452,9 @@ additionalContent:
         - title: Query operators
           summary: Filter, shape, and paginate GraphQL responses.
           links:
-            - text: _filter
+            - text: filter
               url: keywords/filter-graphql.md
-            - text: _select
+            - text: select
               url: keywords/select-graphql.md
             - text: first
               url: keywords/first-graphql.md
@@ -491,11 +491,11 @@ additionalContent:
     - title: MCP server
       items:
         - title: Overview and quickstarts
-          summary: Connect AI agents to your database with the built-in MCP server.
+          summary: Overview, quickstarts, and database-specific guides.
           links:
-            - text: MCP server overview
+            - text: Overview
               url: mcp/overview.md
-            - text: "Quickstart: VS Code"
+            - text: "Quickstart: Visual Studio Code"
               url: mcp/quickstart-visual-studio-code.md
             - text: "Quickstart: Azure AI Foundry"
               url: mcp/quickstart-azure-ai-foundry.md
@@ -505,7 +505,7 @@ additionalContent:
               url: mcp/quickstart-azure-container-apps.md
 
         - title: Tools and capabilities
-          summary: DML tools, custom tools, and entity descriptions for AI agents.
+          summary: DML tools, custom tools, and entity descriptions.
           links:
             - text: Data manipulation language (DML) tools
               url: mcp/data-manipulation-language-tools.md
@@ -525,7 +525,7 @@ additionalContent:
         - title: VS Code extension
           summary: Manage DAB configuration and MCP connections from VS Code.
           links:
-            - text: VS Code extension overview
+            - text: Overview
               url: vscode-extension/index.yml
             - text: MCP in VS Code
               url: vscode-extension/mcp.md
