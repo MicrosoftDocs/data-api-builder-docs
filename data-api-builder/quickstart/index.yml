@@ -5,28 +5,134 @@ summary: Get up and running with Data API builder in minutes. Each quickstart us
 
 metadata:
   title: Data API builder quickstarts
-  description: Quickstart guides for using Data API builder with SQL Server, PostgreSQL, MySQL, or Azure Cosmos DB for NoSQL.
+  description: Quickstart guides for using Data API builder with SQL Server, Azure SQL, PostgreSQL, MySQL, Azure Cosmos DB for NoSQL, Azure Cosmos DB for PostgreSQL, Microsoft Fabric SQL, and Azure Synapse Analytics.
   author: seesharprun
   ms.author: sidandrews
   ms.reviewer: jerrynixon
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 03/29/2026
+  ms.date: 03/30/2026
 
 landingContent:
-  - title: SQL databases
+  - title: "SQL Server (mssql)"
     linkLists:
       - linkListType: quickstart
         links:
-          - text: Use with SQL Server
+          - text: Get started with SQL Server
             url: basic-sql.md?tabs=mssql
-          - text: Use with PostgreSQL
-            url: basic-sql.md?tabs=postgresql
-          - text: Use with MySQL
-            url: basic-sql.md?tabs=mysql
-  - title: NoSQL databases
+      - linkListType: reference
+        links:
+          - text: Database-specific features
+            url: ../reference-database-specific-features.md
+          - text: Feature availability
+            url: ../feature-availability.md
+          - text: Troubleshooting
+            url: ../troubleshooting/mssql.md
+  - title: "Azure SQL Database (mssql)"
     linkLists:
       - linkListType: quickstart
         links:
-          - text: Use with Azure Cosmos DB for NoSQL
+          - text: Get started with SQL Server
+            url: basic-sql.md?tabs=mssql
+      - linkListType: sample
+        links:
+          - text: Devcontainer with Azure SQL
+            url: /samples/microsoft/vscode-remote-try-dab/devcontainer
+          - text: Library app with Blazor and Azure SQL
+            url: /samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
+      - linkListType: reference
+        links:
+          - text: Database-specific features
+            url: ../reference-database-specific-features.md
+          - text: Feature availability
+            url: ../feature-availability.md
+          - text: Troubleshooting
+            url: ../troubleshooting/mssql.md
+  - title: "Azure SQL Managed Instance (mssql)"
+    linkLists:
+      - linkListType: quickstart
+        links:
+          - text: Get started with SQL Server
+            url: basic-sql.md?tabs=mssql
+      - linkListType: reference
+        links:
+          - text: Database-specific features
+            url: ../reference-database-specific-features.md
+          - text: Feature availability
+            url: ../feature-availability.md
+          - text: Troubleshooting
+            url: ../troubleshooting/mssql.md
+  - title: "PostgreSQL and Azure Database for PostgreSQL (postgresql)"
+    linkLists:
+      - linkListType: quickstart
+        links:
+          - text: Get started with PostgreSQL
+            url: basic-sql.md?tabs=postgresql
+      - linkListType: reference
+        links:
+          - text: Feature availability
+            url: ../feature-availability.md
+          - text: Troubleshooting
+            url: ../troubleshooting/postgresql.md
+  - title: "MySQL and Azure Database for MySQL (mysql)"
+    linkLists:
+      - linkListType: quickstart
+        links:
+          - text: Get started with MySQL
+            url: basic-sql.md?tabs=mysql
+      - linkListType: reference
+        links:
+          - text: Feature availability
+            url: ../feature-availability.md
+          - text: Troubleshooting
+            url: ../troubleshooting/mysql.md
+  - title: "Azure Cosmos DB for NoSQL (cosmosdb_nosql)"
+    linkLists:
+      - linkListType: quickstart
+        links:
+          - text: Get started with Azure Cosmos DB
             url: basic-nosql.md
+      - linkListType: how-to-guide
+        links:
+          - text: Set up Cosmos DB for NoSQL
+            url: ../concept/database/set-up-cosmosdb.md
+      - linkListType: reference
+        links:
+          - text: Database-specific features
+            url: ../reference-database-specific-features.md
+          - text: Feature availability
+            url: ../feature-availability.md
+          - text: Troubleshooting
+            url: ../troubleshooting/cosmos.md
+  - title: "Azure Cosmos DB for PostgreSQL (cosmosdb_postgresql)"
+    linkLists:
+      - linkListType: quickstart
+        links:
+          - text: Get started with PostgreSQL
+            url: basic-sql.md?tabs=postgresql
+      - linkListType: reference
+        links:
+          - text: Feature availability
+            url: ../feature-availability.md
+  - title: "Microsoft Fabric SQL (mssql)"
+    linkLists:
+      - linkListType: quickstart
+        links:
+          - text: Get started with SQL Server
+            url: basic-sql.md?tabs=mssql
+      - linkListType: reference
+        links:
+          - text: Database-specific features
+            url: ../reference-database-specific-features.md
+          - text: Feature availability
+            url: ../feature-availability.md
+  - title: "Azure Synapse Analytics (dwsql)"
+    linkLists:
+      - linkListType: quickstart
+        links:
+          - text: Get started with SQL Server
+            url: basic-sql.md?tabs=mssql
+      - linkListType: reference
+        links:
+          - text: Feature availability
+            url: ../feature-availability.md
