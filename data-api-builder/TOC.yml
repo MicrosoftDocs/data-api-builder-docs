@@ -19,10 +19,10 @@
     - name: Overview
       href: quickstart/index.yml
       displayName: quickstart, get started, landing
-    - name: SQL Server, PostgreSQL & MySQL
+    - name: SQL Databases
       href: quickstart/basic-sql.md
       displayName: mssql, sql server, postgres, postgresql, mysql, local, database
-    - name: Azure Cosmos DB
+    - name: NoSQL Databases
       href: quickstart/basic-nosql.md
       displayName: cosmos, nosql, local, database, emulator
 - name: SQL MCP Server
