@@ -17,14 +17,17 @@ In this quickstart, you create REST and GraphQL endpoints for a local SQL databa
 
 ## Prerequisites
 
-- [Docker](https://www.docker.com/products/docker-desktop/)
-- [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [Docker](https://www.docker.com/products/docker-desktop/) *(optional if you already have a database)*
+- [.NET 8 (or newer)](https://dotnet.microsoft.com/download/dotnet/8.0)
 
 ## Install the Data API builder CLI
 
 [!INCLUDE[Install CLI](../includes/install-cli.md)]
 
 ## Pull the database image
+
+> [!TIP]
+> **Already have a database?** Skip to [Create and seed the database](#create-and-seed-the-database), run the SQL script for your engine, then jump to [Configure Data API builder](#configure-data-api-builder) with your own connection string.
 
 Download the Docker image for your database engine. This step can take a few minutes depending on your connection speed.
 
@@ -93,7 +96,7 @@ If this returns an error, wait a few seconds and try again.
 
 ## Create and seed the database
 
-Create a `todos` database and table, then add sample data. No SQL client is needed—`docker exec` runs the commands directly inside the container.
+Create a `todos` database and table, then add sample data. If you're using Docker, no SQL client is needed—`docker exec` runs the commands directly inside the container. If you're using your own database, run the SQL script in your preferred tool.
 
 # [SQL Server](#tab/mssql)
 
@@ -109,6 +112,18 @@ Create a `todos` database and table, then add sample data. No SQL client is need
     docker exec dab-mssql /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "P@ssw0rd1" -C -d todos -Q "CREATE TABLE dbo.todos (id int PRIMARY KEY, title nvarchar(100) NOT NULL, completed bit NOT NULL DEFAULT 0); INSERT INTO dbo.todos VALUES (1, 'Walk the dog', 0), (2, 'Feed the fish', 0), (3, 'Comb the cat', 1);"
     ```
 
+> [!TIP]
+> **Using your own SQL Server?** Run this script directly:
+>
+> ```sql
+> CREATE DATABASE todos;
+> GO
+> USE todos;
+> GO
+> CREATE TABLE dbo.todos (id int PRIMARY KEY, title nvarchar(100) NOT NULL, completed bit NOT NULL DEFAULT 0);
+> INSERT INTO dbo.todos VALUES (1, 'Walk the dog', 0), (2, 'Feed the fish', 0), (3, 'Comb the cat', 1);
+> ```
+
 # [PostgreSQL](#tab/postgresql)
 
 1. Create the database.
@@ -122,6 +137,16 @@ Create a `todos` database and table, then add sample data. No SQL client is need
     ```shell
     docker exec dab-postgres psql -U postgres -d todos -c "CREATE TABLE todos (id int PRIMARY KEY, title varchar(100) NOT NULL, completed boolean NOT NULL DEFAULT false); INSERT INTO todos VALUES (1, 'Walk the dog', false), (2, 'Feed the fish', false), (3, 'Comb the cat', true);"
     ```
+
+> [!TIP]
+> **Using your own PostgreSQL server?** Run this script directly:
+>
+> ```sql
+> CREATE DATABASE todos;
+> \c todos
+> CREATE TABLE todos (id int PRIMARY KEY, title varchar(100) NOT NULL, completed boolean NOT NULL DEFAULT false);
+> INSERT INTO todos VALUES (1, 'Walk the dog', false), (2, 'Feed the fish', false), (3, 'Comb the cat', true);
+> ```
 
 # [MySQL](#tab/mysql)
 
@@ -137,11 +162,28 @@ Create a `todos` database and table, then add sample data. No SQL client is need
     docker exec dab-mysql mysql -uroot -pP@ssw0rd1 -e "USE todos; CREATE TABLE todos (id int PRIMARY KEY, title varchar(100) NOT NULL, completed bool NOT NULL DEFAULT false); INSERT INTO todos VALUES (1, 'Walk the dog', false), (2, 'Feed the fish', false), (3, 'Comb the cat', true);"
     ```
 
+> [!TIP]
+> **Using your own MySQL server?** Run this script directly:
+>
+> ```sql
+> CREATE DATABASE todos;
+> USE todos;
+> CREATE TABLE todos (id int PRIMARY KEY, title varchar(100) NOT NULL, completed bool NOT NULL DEFAULT false);
+> INSERT INTO todos VALUES (1, 'Walk the dog', false), (2, 'Feed the fish', false), (3, 'Comb the cat', true);
+> ```
+
 ---
 
 ## Configure Data API builder
 
 Create a DAB configuration file and add a **Todo** entity.
+
+> [!TIP]
+> **Using your own database?** Replace the connection string in `dab init` with your own:
+>
+> - **SQL Server:** `Server=<host>,<port>;Database=todos;User Id=<user>;Password=<password>;TrustServerCertificate=true;Encrypt=true;`
+> - **PostgreSQL:** `Host=<host>;Port=5432;Database=todos;User ID=<user>;Password=<password>;`
+> - **MySQL:** `Server=<host>;Port=3306;Database=todos;User=<user>;Password=<password>;`
 
 # [SQL Server](#tab/mssql)
 

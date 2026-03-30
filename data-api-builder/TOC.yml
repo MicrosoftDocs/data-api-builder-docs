@@ -19,15 +19,9 @@
     - name: Overview
       href: quickstart/index.yml
       displayName: quickstart, get started, landing
-    - name: SQL Server
-      href: quickstart/basic-sql.md?tabs=mssql
-      displayName: mssql, sql server, local, database
-    - name: PostgreSQL
-      href: quickstart/basic-sql.md?tabs=postgresql
-      displayName: postgres, postgresql, local, database
-    - name: MySQL
-      href: quickstart/basic-sql.md?tabs=mysql
-      displayName: mysql, local, database
+    - name: SQL Server, PostgreSQL & MySQL
+      href: quickstart/basic-sql.md
+      displayName: mssql, sql server, postgres, postgresql, mysql, local, database
     - name: Azure Cosmos DB
       href: quickstart/basic-nosql.md
       displayName: cosmos, nosql, local, database, emulator
