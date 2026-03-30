@@ -235,7 +235,7 @@ Your `dab-config.json` file should now look similar to the following example:
 
 ```json
 {
-  "$schema": "https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json",
+  "$schema": "https://github.com/Azure/data-api-builder/releases/download/vmajor.minor.patch/dab.draft.schema.json",
   "data-source": {
     "database-type": "mssql",
     "connection-string": "Server=localhost,1433;Database=todos;User Id=sa;Password=P@ssw0rd1;TrustServerCertificate=true;Encrypt=true;"
@@ -274,7 +274,7 @@ Your `dab-config.json` file should now look similar to the following example:
 
 ```json
 {
-  "$schema": "https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json",
+  "$schema": "https://github.com/Azure/data-api-builder/releases/download/vmajor.minor.patch/dab.draft.schema.json",
   "data-source": {
     "database-type": "postgresql",
     "connection-string": "Host=localhost;Port=5432;Database=todos;User ID=postgres;Password=P@ssw0rd1;"
@@ -313,7 +313,7 @@ Your `dab-config.json` file should now look similar to the following example:
 
 ```json
 {
-  "$schema": "https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json",
+  "$schema": "https://github.com/Azure/data-api-builder/releases/download/vmajor.minor.patch/dab.draft.schema.json",
   "data-source": {
     "database-type": "mysql",
     "connection-string": "Server=localhost;Port=3306;Database=todos;User=root;Password=P@ssw0rd1;"

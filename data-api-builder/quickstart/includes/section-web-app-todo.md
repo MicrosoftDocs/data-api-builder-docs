@@ -88,5 +88,5 @@ Display your todos in a browser using a plain HTML file. Create a file named `to
 
 Open `todo.html` in your browser. The page fetches all todo items and renders them as a list, with completed items shown in strikethrough.
 
-> [!NOTE]
+> [!IMPORTANT]
 > The `cors` setting in your configuration allows this HTML file—opened from your local file system—to call the API. Without it, the browser blocks the request.
