@@ -1,6 +1,6 @@
 ---
 title: Stored procedures in the GraphQL API
-description: Learn how to expose stored procedures as GraphQL operations in Data API builder with the execute prefix.
+description: Learn how to expose stored procedures as GraphQL operations in Data API builder with the "execute" prefix.
 author: jerrynixon
 ms.author: jnixon
 ms.reviewer: sidandrews

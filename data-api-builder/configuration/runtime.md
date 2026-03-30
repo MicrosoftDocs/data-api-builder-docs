@@ -551,7 +551,6 @@ Selects the authentication method. Each provider validates identity differently.
 | Provider | Use case | Identity source | How-to guide |
 |----------|----------|-----------------|--------------|
 | `Unauthenticated` | DAB sits behind a trusted front end (default) | None—all requests run as `anonymous` | [Configure the Unauthenticated provider](../concept/security/authenticate-unauthenticated.md) |
-| `StaticWebApps` | Azure Static Web Apps | `X-MS-CLIENT-PRINCIPAL` header | [Configure Static Web Apps authentication](../concept/security/authenticate-easy-auth.md) |
 | `AppService` | Azure-hosted apps (EasyAuth) | `X-MS-CLIENT-PRINCIPAL` header | [Configure App Service authentication](../concept/security/authenticate-easy-auth.md) |
 | `EntraID` | Microsoft Entra ID (Azure AD) | JWT bearer token | [Configure Entra ID authentication](../concept/security/authenticate-entra.md) |
 | `Custom` | Third-party IdPs (Okta, Auth0) | JWT bearer token | [Configure custom JWT authentication](../concept/security/authenticate-custom.md) |

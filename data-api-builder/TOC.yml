@@ -446,12 +446,6 @@
     - name: Library app with Blazor and Azure SQL
       href: /samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
       displayName: blazor, aspnet, webassembly, azure sql, sample
-    - name: Library app with Azure SQL
-      href: /samples/azure-samples/dab-swa-library-demo/sample
-      displayName: azure sql, sample, dab
-    - name: Todo app with Static Web Apps (SWA) and Azure SQL
-      href: /samples/azure-samples/dab-swa-todo/sample
-      displayName: todo, dab, sample, azure sql
     - name: Enable the CQRS pattern
       href: https://youtu.be/pSuMIvXRM1Q?t=142
       displayName: architecture, design, htap, read, write, cqrs

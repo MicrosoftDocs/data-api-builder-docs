@@ -15,9 +15,7 @@ ms.date: 03/24/2026
 Configure runtime and data source properties that aren't entity-specific in an existing Data API builder configuration file.
 Unspecified options leave existing values unchanged. If any provided option is invalid, the entire update fails (all-or-nothing).
 
-Acronyms used in this reference:
-
-MCP stands for Model Context Protocol. DML stands for data manipulation language. TTL stands for time to live. JWT stands for JSON Web Token. RC stands for release candidate. DCR stands for data collection rule. DCE stands for data collection endpoint.
+Acronyms used in this reference: Model Context Protocol (MCP), data manipulation language (DML), time to live (TTL), JSON Web Token (JWT), release candidate (RC), data collection rule (DCR), and data collection endpoint (DCE).
 
 > [!NOTE]
 > This command doesn't alter the `entities` section. Use `dab update` for entity changes.
@@ -120,7 +118,7 @@ dab configure [options]
 | [`--azure-key-vault.retry-policy.max-count`](#--azure-key-vaultretry-policymax-count) | Max retry attempts. |
 | [`--azure-key-vault.retry-policy.delay-seconds`](#--azure-key-vaultretry-policydelay-seconds) | Delay between retries. |
 | [`--azure-key-vault.retry-policy.max-delay-seconds`](#--azure-key-vaultretry-policymax-delay-seconds) | Max delay for exponential retries. |
-| [`--azure-key-vault.retry-policy.network-timeout-seconds`](#--azure-key-vaultretry-policynetwork-timeout-seconds) | Timeout for network calls. |
+| [`--azure-key-vault.retry-policy.network-timeout-seconds`](#--azure-key-vaultretry-policynetwork-timeout-seconds) | Time out for network calls. |
 
 ### Telemetry section
 
@@ -833,7 +831,7 @@ dab configure ^
 
 ## `--runtime.mcp.description`
 
-Set the MCP server description to be exposed in the initialize response.
+Set the MCP server description to be exposed in the initialized response.
 
 [!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 

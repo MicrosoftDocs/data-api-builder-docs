@@ -36,7 +36,6 @@ Data API builder supports multiple authentication providers. Choose the one that
 | **App Service** | Apps running behind Azure App Service EasyAuth (platform headers) | [Configure App Service authentication](authenticate-easy-auth.md) |
 | **Simulator** | Local development and testing | [Configure Simulator authentication](authenticate-simulator.md) |
 | **OBO (user-delegated)** | SQL databases that require the real user identity (row-level security, auditing) | [Configure OBO authentication](authenticate-on-behalf-of.md) |
-| **Static Web Apps** | Apps fronted by Static Web Apps (SWA) auth headers | [Configure App Service authentication](authenticate-easy-auth.md)
 
 [!INCLUDE[Note - DAB 2.0 preview](../../includes/note-dab-2-preview.md)]
 

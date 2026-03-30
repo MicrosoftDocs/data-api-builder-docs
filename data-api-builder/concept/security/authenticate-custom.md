@@ -40,7 +40,7 @@ With a custom identity provider, your client app handles user authentication and
 |---------|-------|
 | Provider | `Custom` |
 | Required for validation | `iss`, `aud`, `exp`, valid signature |
-| Required for authorization | `roles` claim containing the selected role |
+| Required for authorization | `roles` claim that contains the selected role |
 | Token header | `Authorization: Bearer <token>` |
 | Role claim type | `roles` (fixed, not configurable) |
 | Role selection header | `X-MS-API-ROLE` |
@@ -276,7 +276,7 @@ Data API builder validates these aspects of the JWT:
 | `401 Unauthorized` | Token expired | Acquire a fresh token |
 | `401 Unauthorized` | Metadata unavailable | Ensure DAB can reach `<issuer>/.well-known/openid-configuration` |
 | `403 Forbidden` | Role not in token | Add the role to your IdP configuration |
-| `403 Forbidden` | Roles claim missing | Configure your IdP to include a `roles` claim |
+| `403 Forbidden` | No `roles` claim found | Configure your IdP to include a `roles` claim |
 | `403 Forbidden` | Wrong claim name | DAB uses claim type `roles` (fixed, not configurable) |
 
 > [!IMPORTANT]

@@ -31,7 +31,7 @@ Entity relationships allow GraphQL queries to traverse related entities, enablin
 }
 ```
 
-To achieve this, DAB must be told how entities are related via the [`relationships` section](../../configuration/entities.md#relationships) in the configuration file.
+To achieve this behavior, DAB must be told how entities are related via the [`relationships` section](../../configuration/entities.md#relationships) in the configuration file.
 
 ## Configuration
 
@@ -102,7 +102,7 @@ dab update Book \
 
 ## Many-to-Many (linking object)
 
-* Use a join table that is not exposed in GraphQL.
+* Use a join table that isn't exposed in GraphQL.
 * Define linking fields from source to target via the join table.
 
 ```sh
@@ -156,7 +156,7 @@ dab update Author \
   --linking.target.fields "book_id"
 ```
 
-This pairs with the `Book` to `Author` relationship and enables symmetric traversal in GraphQL:
+This configuration pairs with the `Book` to `Author` relationship and enables symmetric traversal in GraphQL:
 
 ```graphql
 {

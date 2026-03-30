@@ -11,7 +11,7 @@ ms.date: 01/22/2026
 
 # Configure database policies for row-level filtering
 
-Data API builder supports **database policies** that filter query results based on expressions you define. These policies translate to query predicates (WHERE clauses) that the database evaluates, ensuring users see only the data they're authorized to access.
+Data API builder supports **database policies** that filter query results based on expressions you define. The database evaluates these policies as query predicates (`WHERE` clauses), so users see only the data they're allowed to access.
 
 ![A sequence diagram showing the application of policies.](media/database-policies/policy-flow.svg)
 
@@ -43,7 +43,7 @@ Database policies apply to these actions:
 
 - Data API builder CLI installed ([installation guide](../../command-line/install.md))
 - An existing configuration file with at least one entity
-- An authentication provider configured (policies require authenticated requests)
+- An authentication provider is configured (policies require authenticated requests)
 
 ## Quick reference
 
@@ -250,7 +250,7 @@ WHERE [ownerId] = 'user123'
 
 ## Claim substitution
 
-Data API builder extracts claims from the authenticated user's JWT or identity principal. Common claims include:
+Data API builder extracts claims from the authenticated user's JSON Web Token (JWT) or identity principal. Common claims include:
 
 | Claim | Description | Example value |
 |-------|-------------|---------------|

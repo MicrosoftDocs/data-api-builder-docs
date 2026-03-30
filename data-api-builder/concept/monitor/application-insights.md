@@ -290,7 +290,7 @@ dependencies
 
 ## Live Metrics
 
-Live Metrics provides real-time monitoring with <1 second latency. It's automatically enabled when Application Insights is configured.
+Live Metrics provides real-time monitoring with <1-second latency. Application Insights enables it automatically when configured.
 
 ### Access Live Metrics
 
@@ -322,7 +322,7 @@ The Application Insights SDK automatically samples telemetry when volume is high
 
 **Default behavior:**
 
-- Low traffic: All telemetry sent (100%)
+- Low traffic: All telemetry data sent (100%)
 - High traffic: Sampling automatically reduces volume
 - Representative data maintained
 
@@ -331,7 +331,7 @@ The Application Insights SDK automatically samples telemetry when volume is high
 | Plan | Default retention | Maximum retention |
 | ---- | ----------------- | ----------------- |
 | Free tier | 90 days | 90 days |
-| Pay-as-you-go | 90 days | 730 days (2 years) |
+| Pay-as-you-go | 90 days | 730 days (two years) |
 
 Configure retention: Application Insights → **Usage and estimated costs** → **Data Retention**.
 
@@ -343,7 +343,7 @@ Application Insights adds minimal overhead:
 
 - **Memory**: ~10-50 MB depending on traffic
 - **CPU**: <1% under normal load
-- **Latency**: <1ms per request (async)
+- **Latency**: <1 ms per request (async)
 
 ### Best practices
 
@@ -407,7 +407,7 @@ While still supported, Microsoft recommends connection strings for new implement
 
 ## Troubleshooting
 
-### Error: "Application Insights connection string cannot be null or empty if enabled"
+### Error: "Application Insights connection string can't be null or empty if enabled"
 
 **Cause**: `enabled` is set to `true` but `connection-string` is missing or empty.
 
@@ -492,7 +492,7 @@ Temporarily use a direct connection string (not environment variable) to verify 
 }
 ```
 
-If this works, the issue is with environment variable loading.
+If this test works, the issue is with environment variable loading.
 
 ## Related content
 

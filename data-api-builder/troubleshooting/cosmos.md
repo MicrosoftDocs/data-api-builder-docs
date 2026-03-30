@@ -223,6 +223,6 @@ Ensuring id: ID! causes clients to receive a clear schema-level error if id is o
 
 **Symptom:** You cannot filter or traverse nested array properties within a Cosmos DB document using DAB. Queries that would require a Cosmos DB JOIN across array elements return no results or an error.
 
-**Cause:** Data API builder does not support Cosmos DB [intra-document joins](https://learn.microsoft.com/azure/cosmos-db/nosql/query/join) (also called in-item joins), which are needed to query nested arrays within a single document. This is a known limitation tracked in [GitHub issue #262](https://github.com/Azure/data-api-builder/issues/262).
+**Cause:** Data API builder does not support Cosmos DB [intra-document joins](/azure/cosmos-db/nosql/query/join) (also called in-item joins), which are needed to query nested arrays within a single document. This is a known limitation tracked in [GitHub issue #262](https://github.com/Azure/data-api-builder/issues/262).
 
 **Resolution:** Flatten nested arrays into separate entities or child documents if you need to filter on their contents. Alternatively, perform post-processing of the full document in your application layer. Follow the GitHub issue for updates on when intra-document join support is added.

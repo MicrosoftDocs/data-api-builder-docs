@@ -288,7 +288,7 @@ dab add Book ^
 
 ## `--source.key-fields`
 
-The field(s) to be used as primary keys. Required for views, which lack intrinsic primary keys.
+One or more fields to use as primary keys. Views lack intrinsic primary keys, so you must specify key fields explicitly.
 
 ### Example
 
@@ -842,7 +842,7 @@ dab add Products ^
 ### Resulting config
 
 > [!NOTE]
-> In the current 2.0.0-rc release, `--fields.name`, `--fields.alias`, `--fields.description`, and `--fields.primary-key` are accepted by the CLI but do not yet persist entity-level field metadata to the configuration file. This behavior is expected to be resolved before GA.
+> In the current 2.0.0-rc release, the CLI accepts `--fields.name`, `--fields.alias`, `--fields.description`, and `--fields.primary-key` but doesn't yet persist entity-level field metadata to the configuration file. The team expects to resolve this behavior before GA.
 
 ## `--fields.alias`
 
@@ -935,7 +935,7 @@ dab add Products ^
 ---
 
 > [!NOTE]
-> In the current 2.0.0-rc release, `--fields.primary-key` is accepted by the CLI but does not yet persist entity-level field metadata to the configuration file. To specify primary key fields for views, use [`--source.key-fields`](#--sourcekey-fields) instead.
+> In the current 2.0.0-rc release, the CLI accepts `--fields.primary-key` but doesn't yet persist entity-level field metadata to the configuration file. To specify primary key fields for views, use [`--source.key-fields`](#--sourcekey-fields) instead.
 
 ## `--graphql`
 
