@@ -248,7 +248,10 @@ Your `dab-config.json` file should now look similar to the following example:
       "enabled": true
     },
     "host": {
-      "mode": "development"
+      "mode": "development",
+      "cors": {
+        "origins": ["*"]
+      }
     }
   },
   "entities": {
@@ -284,7 +287,10 @@ Your `dab-config.json` file should now look similar to the following example:
       "enabled": true
     },
     "host": {
-      "mode": "development"
+      "mode": "development",
+      "cors": {
+        "origins": ["*"]
+      }
     }
   },
   "entities": {
@@ -320,7 +326,10 @@ Your `dab-config.json` file should now look similar to the following example:
       "enabled": true
     },
     "host": {
-      "mode": "development"
+      "mode": "development",
+      "cors": {
+        "origins": ["*"]
+      }
     }
   },
   "entities": {
@@ -388,6 +397,8 @@ info: Microsoft.Hosting.Lifetime[14]
     ```text
     http://localhost:5000/swagger
     ```
+
+[!INCLUDE[Build a web app](includes/section-web-app-todo.md)]
 
 ## Clean up
 
