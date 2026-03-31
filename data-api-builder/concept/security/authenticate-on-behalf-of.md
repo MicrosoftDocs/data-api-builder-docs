@@ -40,6 +40,17 @@ OBO is the right choice when the SQL database must know who the actual caller is
 - An upstream identity provider that issues JWTs accepted by DAB (Entra ID or a custom provider you configure)
 - An MSSQL database configured to accept Microsoft Entra ID tokens
 
+## Connection string requirement
+
+> [!IMPORTANT]
+> When OBO is enabled, the connection string must **not** include an `Authentication=` keyword (such as `Authentication=Active Directory Managed Identity`). The `Microsoft.Data.SqlClient` library throws an exception if `AccessToken` is set on a connection that already has `Authentication=` in its connection string. Use a bare connection string containing only server, database, and encryption settings:
+>
+> ```
+> Server=tcp:<server>.database.windows.net,1433;Database=<db>;Encrypt=true;TrustServerCertificate=true
+> ```
+>
+> DAB 2.0 with OBO acquires an MSI token automatically for health checks and internal operations, and injects the per-user OBO token for authenticated requests.
+
 ## Step 1: Set the required environment variables
 
 DAB reads the following environment variables for the OBO token exchange:
@@ -138,6 +149,12 @@ dab configure --data-source.user-delegated-auth.database-audience "https://datab
     }
   }
 }
+```
+
+Where `SQL_CONNECTION_STRING` must be a bare connection string with no `Authentication=` keyword — for example:
+
+```
+Server=tcp:<server>.database.windows.net,1433;Database=<db>;Encrypt=true;TrustServerCertificate=true
 ```
 
 ## Per-user connection pooling
