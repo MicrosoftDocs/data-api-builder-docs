@@ -181,7 +181,7 @@ In `stdio` mode, VS Code launches DAB as a child process. You don't need a runni
         "--mcp-stdio",
         "role:anonymous",
         "--loglevel",
-        "none",
+        "error",
         "--config",
         "${workspaceFolder}/dab-config.json"
       ]

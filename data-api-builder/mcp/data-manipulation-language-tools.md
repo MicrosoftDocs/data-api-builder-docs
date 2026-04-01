@@ -1,23 +1,23 @@
 ---
 title: Data Manipulation Language Tools (DML)
-description: Reference guide for the six DML tools that SQL MCP Server exposes to AI agents.
+description: Reference guide for the seven DML tools that SQL MCP Server exposes to AI agents.
 author: jnixon
 ms.author: jnixon
 ms.topic: concept-article
-ms.date: 12/22/2025
+ms.date: 03/24/2026
 ---
 
 # Data manipulation language (DML) tools in SQL MCP Server
 
 [!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
-SQL MCP Server exposes six Data Manipulation Language (DML) tools to AI agents. These tools provide a typed CRUD surface for database operations—creating, reading, updating, and deleting records plus executing stored procedures. All tools respect role-based access control (RBAC), entity permissions, and policies defined in your configuration.
+SQL Model Context Protocol (MCP) Server exposes seven Data Manipulation Language (DML) tools to AI agents. These tools provide a typed CRUD surface for database operations—creating, reading, updating, and deleting records, aggregating data, plus executing stored procedures. All tools respect role-based access control (RBAC), entity permissions, and policies defined in your configuration.
 
 ## What are DML tools?
 
-DML (Data Manipulation Language) tools handle data operations: creating, reading, updating, and deleting records, plus executing stored procedures. Unlike DDL (Data Definition Language) which modifies schema, DML works exclusively on the data plane in existing tables and views.
+DML (Data Manipulation Language) tools handle data operations: creating, reading, updating, and deleting records, aggregating data, plus executing stored procedures. Unlike DDL (Data Definition Language) which modifies schema, DML works exclusively on the data plane in existing tables and views.
 
-The six DML tools are:
+The seven DML tools are:
 
 - `describe_entities` - Discovers available entities and operations
 - `create_record` - Inserts new rows
@@ -25,6 +25,9 @@ The six DML tools are:
 - `update_record` - Modifies existing rows
 - `delete_record` - Removes rows
 - `execute_entity` - Runs stored procedures
+- `aggregate_records` - Performs aggregation queries
+
+[!INCLUDE[Note - SQL MCP Server 2.0 preview](includes/note-sql-mcp-server-2-preview.md)]
 
 When DML tools are enabled globally and for an entity, SQL MCP Server exposes them through the MCP protocol. Agents never interact directly with your database schema - they work through the Data API builder abstraction layer.
 
@@ -42,17 +45,44 @@ When an agent calls `list_tools`, SQL MCP Server returns:
     { "name": "read_records" },
     { "name": "update_record" },
     { "name": "delete_record" },
-    { "name": "execute_entity" }
+    { "name": "execute_entity" },
+    { "name": "aggregate_records" }
   ]
 }
 ```
 
 ### describe_entities
 
-Returns the entities available to the current role. Each entry includes field names, data types, primary keys, and allowed operations. This tool doesn't query the database. Instead, it reads from the in-memory configuration built from your config file.
+Returns the entities available to the current role. Each entry includes field names, descriptions, and allowed operations. This tool doesn't query the database. Instead, it reads from the in-memory configuration built from your config file.
 
 > [!IMPORTANT]
-> The `fields` information in `describe_entities` is derived from the `fields` data you provide in the configuration. Because field metadata is optional, if you don't include it, agents only see entity names with an empty `fields` array. It's a best practice to include both field names and field descriptions in your configuration. This metadata gives agents more context to generate accurate queries and updates. Learn more about [field descriptions here](./how-to-add-descriptions.md#2-add-field-descriptions).
+> The `fields` information in `describe_entities` is derived from the `fields` data you provide in the configuration. Because field metadata is optional, if you don't include it, agents only see entity names with an empty `fields` array. It's a best practice to include both field names and field descriptions in your configuration. This metadata gives agents more context to generate accurate queries and updates. Learn more about [field descriptions here](./how-to-add-descriptions.md#field-descriptions).
+
+> [!NOTE]
+> The response includes field `name` and `description` values from your configuration. Data types and primary key indicators aren't included in the current response. Stored procedure parameters also aren't listed. Agents rely on entity and field descriptions—along with error feedback—to determine correct usage.
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `nameOnly` | boolean | No | When `true`, returns a lightweight list of entity names and descriptions without field metadata. |
+| `entities` | array of strings | No | Limits the response to the specified entities. When omitted, all MCP-enabled entities are returned. |
+
+#### Example request
+
+```json
+{
+  "method": "tools/call",
+  "params": {
+    "name": "describe_entities",
+    "arguments": {
+      "entities": ["Products"]
+    }
+  }
+}
+```
+
+#### Example response
 
 ```json
 {
@@ -63,18 +93,14 @@ Returns the entities available to the current role. Each entry includes field na
       "fields": [
         {
           "name": "ProductId",
-          "type": "int",
-          "isKey": true,
           "description": "Unique product identifier"
         },
         {
           "name": "ProductName",
-          "type": "string",
           "description": "Display name of the product"
         },
         {
           "name": "Price",
-          "type": "decimal",
           "description": "Retail price in USD"
         }
       ],
@@ -94,9 +120,43 @@ Returns the entities available to the current role. Each entry includes field na
 
 Creates a new row in a table. Requires create permission on the entity for the current role. The tool validates input against the entity schema, enforces field-level permissions, applies create policies, and returns the created record with any generated values.
 
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `entity` | string | Yes | The entity name to create a record in. |
+| `data` | object | Yes | Key-value pairs of field names and values for the new record. |
+
 ### read_records
 
 Queries a table or view. Supports filtering, sorting, pagination, and field selection. The tool builds deterministic SQL from structured parameters, applies read permissions and field projections, and enforces row-level security policies.
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `entity` | string | Yes | The entity name to read from. |
+| `select` | string | No | Comma-separated list of field names to return (for example, `"id,title,price"`). |
+| `filter` | string | No | OData-style filter expression (for example, `"Price gt 10 and Category eq 'Books'"`). |
+| `orderby` | array of strings | No | Sort expressions. Each element is a field name with optional direction (for example, `["Price desc", "Name asc"]`). |
+| `first` | integer | No | Maximum number of records to return. |
+| `after` | string | No | Continuation cursor from a previous response for pagination. |
+
+> [!WARNING]
+> The `orderby` parameter must be an **array of strings**, not a single string. Passing a string value causes an `UnexpectedError`. Use `["Name asc"]` instead of `"Name asc"`.
+
+#### Pagination response
+
+When more results are available, the response includes an `after` cursor. Pass this value as the `after` parameter in the next request to fetch the next page.
+
+```json
+{
+  "value": [ ... ],
+  "after": "W3siRW50aXR5TmFtZ..."
+}
+```
+
+The presence of the `after` field indicates more pages exist. When `after` is absent, you've reached the last page.
 
 > [!IMPORTANT]
 > Results from `read_records` are automatically cached using Data API builder's caching system. You can configure cache [time-to-live (TTL) globally](../configuration/runtime.md#cache-runtime) or [per-entity](../configuration/entities.md#cache) to reduce database load.
@@ -111,9 +171,24 @@ However, JOIN operations aren't an edge case, and Data API builder (DAB) already
 
 Modifies an existing row. Requires the primary key and fields to update. The tool validates the primary key exists, enforces update permissions and policies, and only updates fields the current role can modify.
 
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `entity` | string | Yes | The entity name to update. |
+| `keys` | object | Yes | Key-value pairs identifying the record (for example, `{"id": 42}`). |
+| `fields` | object | Yes | Key-value pairs of field names and new values. |
+
 ### delete_record
 
 Removes an existing row. Requires the primary key. The tool validates the primary key exists, enforces delete permissions and policies, and performs safe deletion with transaction support.
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `entity` | string | Yes | The entity name to delete from. |
+| `keys` | object | Yes | Key-value pairs identifying the record (for example, `{"id": 42}`). |
 
 > [!NOTE]
 > Some production scenarios disable this tool globally to broadly constrain models. This choice is up to you, and it's worth remembering that entity-level permissions remain the most important way to control access. Even with `delete-record` enabled, if a role doesn't have delete permission on an entity, that role can't use this tool for that entity.
@@ -121,6 +196,69 @@ Removes an existing row. Requires the primary key. The tool validates the primar
 ### execute_entity
 
 Runs a stored procedure. Supports input parameters and output results. The tool validates input parameters against the procedure signature, enforces execute permissions, and passes parameters safely.
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `entity` | string | Yes | The stored-procedure entity name. |
+| `parameters` | object | No | Key-value pairs of input parameter names and values. |
+
+### aggregate_records
+
+Performs aggregation queries on tables and views. Supports common aggregate functions such as count, sum, average, minimum, and maximum. The tool builds deterministic SQL from structured parameters, applies read permissions and field projections, and enforces row-level security policies.
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `entity` | string | Yes | The entity name to aggregate. |
+| `function` | string | Yes | The aggregate function: `count`, `sum`, `avg`, `min`, or `max`. |
+| `field` | string | Yes | The field to aggregate. Use `"*"` for `count`. |
+| `filter` | string | No | OData-style filter applied before aggregation. |
+| `distinct` | boolean | No | When `true`, removes duplicate values before aggregating. |
+| `groupby` | array of strings | No | Field names to group results by (for example, `["Category", "Status"]`). |
+| `having` | object | No | Filters groups by aggregate value. Uses operators: `eq`, `neq`, `gt`, `gte`, `lt`, `lte`, `in`. |
+| `orderby` | array of strings | No | Sort expressions for grouped results (for example, `["count desc"]`). |
+| `first` | integer | No | Maximum number of grouped results to return. |
+| `after` | string | No | Continuation cursor for paginating grouped results. |
+
+#### Example: count with groupby and having
+
+```json
+{
+  "method": "tools/call",
+  "params": {
+    "name": "aggregate_records",
+    "arguments": {
+      "entity": "Todo",
+      "function": "count",
+      "field": "*",
+      "groupby": ["UserId"],
+      "having": { "gt": 2 }
+    }
+  }
+}
+```
+
+The `aggregate-records` tool can be configured as a boolean or as an object with more settings:
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "dml-tools": {
+        "aggregate-records": {
+          "enabled": true,
+          "query-timeout": 30
+        }
+      }
+    }
+  }
+}
+```
+
+The `query-timeout` property specifies the maximum execution time in seconds (range: 1–600). This setting helps prevent long-running aggregation queries from consuming excessive resources.
 
 ## Runtime configuration
 
@@ -138,12 +276,39 @@ Configure DML tools globally in the runtime section of your `dab-config.json`:
         "read-records": true,
         "update-record": true,
         "delete-record": true,
-        "execute-entity": true
+        "execute-entity": true,
+        "aggregate-records": true
       }
     }
   }
 }
 ```
+
+Each DML tool can also accept an object with an `enabled` property. The `aggregate-records` tool additionally supports a `query-timeout` property:
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "enabled": true,
+      "dml-tools": {
+        "describe-entities": true,
+        "create-record": true,
+        "read-records": true,
+        "update-record": true,
+        "delete-record": true,
+        "execute-entity": true,
+        "aggregate-records": {
+          "enabled": true,
+          "query-timeout": 30
+        }
+      }
+    }
+  }
+}
+```
+
+The `dml-tools` property also accepts a boolean shorthand. Setting `"dml-tools": true` enables all tools; `"dml-tools": false` disables all tools.
 
 ### Using the CLI
 
@@ -158,6 +323,7 @@ dab configure --runtime.mcp.dml-tools.read-records.enabled true
 dab configure --runtime.mcp.dml-tools.update-record.enabled true
 dab configure --runtime.mcp.dml-tools.delete-record.enabled true
 dab configure --runtime.mcp.dml-tools.execute-entity.enabled true
+dab configure --runtime.mcp.dml-tools.aggregate-records.enabled true
 ```
 
 ### Disabling tools
@@ -169,12 +335,32 @@ When you disable a tool at the runtime level, it never appears to agents, regard
 - Disable `delete-record` to prevent data loss in production
 - Disable `create-record` for read-only reporting endpoints
 - Disable `execute-entity` when stored procedures aren't used
+- Disable `aggregate-records` when aggregation queries aren't needed
 
 When a tool is disabled globally, the tool is hidden from the `list_tools` response and can't be invoked.
 
 ## Entity settings
 
-Entities participate in MCP automatically unless you explicitly restrict them. The `dml-tools` property exists so you can exclude an entity from MCP or narrow its capabilities, but you don't need to set anything for normal use.
+Entities participate in MCP automatically unless you explicitly restrict them. The `mcp` property on an entity controls its MCP participation. You can use a boolean shorthand or an object format.
+
+### Boolean shorthand
+
+```json
+{
+  "entities": {
+    "Products": {
+      "mcp": true
+    },
+    "SensitiveData": {
+      "mcp": false
+    }
+  }
+}
+```
+
+Setting `"mcp": true` enables DML tools for the entity. Setting `"mcp": false` disables MCP entirely for the entity.
+
+### Object format
 
 ```json
 {
@@ -193,13 +379,36 @@ Entities participate in MCP automatically unless you explicitly restrict them. T
 }
 ```
 
-If you don't specify `mcp.dml-tools` on an entity, it defaults to `true` when MCP is enabled globally.
+If you don't specify `mcp` on an entity, DML tools default to enabled when MCP is enabled globally.
+
+### Custom tools for stored procedures
+
+For stored-procedure entities, use the `custom-tool` property to register the procedure as a named MCP tool:
+
+```json
+{
+  "entities": {
+    "GetBookById": {
+      "source": {
+        "type": "stored-procedure",
+        "object": "dbo.get_book_by_id"
+      },
+      "mcp": {
+        "custom-tool": true
+      }
+    }
+  }
+}
+```
+
+> [!IMPORTANT]
+> The `custom-tool` property is only valid for stored-procedure entities. Setting it on a table or view entity results in a configuration error.
 
 ### Scope of per-tool control
 
 Per-tool toggles are configured only at the global runtime level under `runtime.mcp.dml-tools`.
 
-At the entity level, `mcp.dml-tools` is a boolean gate that enables or disables all DML tools for that entity.
+At the entity level, `mcp` is a boolean gate or an object with `dml-tools` and `custom-tool` properties.
 
 ```json
 {
@@ -223,7 +432,8 @@ At the entity level, `mcp.dml-tools` is a boolean gate that enables or disables 
         "read-records": true,
         "update-record": true,
         "delete-record": false,
-        "execute-entity": true
+        "execute-entity": true,
+        "aggregate-records": true
       }
     }
   }
@@ -263,7 +473,11 @@ If the `anonymous` role only allows read permission on `Products`:
         },
         {
           "role": "admin",
-          "actions": ["*"]
+          "actions": [
+            {
+              "action": "*"
+            }
+          ]
         }
       ]
     }
@@ -276,4 +490,7 @@ If the `anonymous` role only allows read permission on `Products`:
 - [Overview of SQL MCP Server](overview.md)
 - [Adding semantic descriptions to SQL MCP Server](how-to-add-descriptions.md)
 - [Data API builder (DAB) configuration reference](/azure/data-api-builder/configuration)
+- [Entity-level MCP configuration](../configuration/entities.md#mcp-entity-name-entities)
+- [Runtime MCP configuration](../configuration/runtime.md#mcp-runtime)
 - [Deploy SQL MCP Server to Azure Container Apps](quickstart-azure-container-apps.md)
+- [What's new in Data API builder version 2.0](../whats-new/version-2-0.md)

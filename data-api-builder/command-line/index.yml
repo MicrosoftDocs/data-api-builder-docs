@@ -10,7 +10,7 @@ metadata:
   ms.reviewer: sidandrews
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 09/29/2025
+  ms.date: 03/24/2026
 
 landingContent:
   - title: Install
@@ -41,6 +41,38 @@ landingContent:
           - text: Source options
             url: dab-add.md#-s---source
 
+  - title: Add Telemetry
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: dab add-telemetry
+            url: dab-add-telemetry.md
+      - linkListType: reference
+        links:
+          - text: OpenTelemetry options
+            url: dab-add-telemetry.md#--otel-enabled
+          - text: Application Insights options
+            url: dab-add-telemetry.md#--app-insights-enabled
+
+  - title: Autoconfiguration
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: Generate autoconfiguration 
+            url: dab-auto-config.md
+          - text: Simulate autoconfiguration
+            url: dab-auto-config-simulate.md
+      - linkListType: reference
+        links:
+          - text: Patterns
+            url: dab-auto-config.md#--patternsinclude
+          - text: Template
+            url: dab-auto-config.md#--templaterestenabled
+          - text: Permissions
+            url: dab-auto-config.md#--permissions
+          - text: CSV output
+            url: dab-auto-config-simulate.md#-o---output
+
   - title: Configure
     linkLists:
       - linkListType: overview
@@ -55,7 +87,7 @@ landingContent:
             url: dab-configure.md#--data-sourcedatabase-type
           - text: GraphQL runtime
             url: dab-configure.md#--runtimegraphqlenabled
-          - text: MCP runtime
+          - text: Model Context Protocol (MCP) runtime
             url: dab-configure.md#--runtimemcpenabled
           - text: REST runtime
             url: dab-configure.md#--runtimerestenabled
@@ -92,13 +124,13 @@ landingContent:
       - linkListType: reference
         links:
           - text: Data source
-            url: dab-init.md#data-source
+            url: dab-init.md#data-source-section
           - text: GraphQL
-            url: dab-init.md#graphql
+            url: dab-init.md#graphql-section
           - text: REST
-            url: dab-init.md#rest
+            url: dab-init.md#rest-section
           - text: Authentication
-            url: dab-init.md#host-and-authentication
+            url: dab-init.md#host-and-authentication-section
 
   - title: Start
     linkLists:

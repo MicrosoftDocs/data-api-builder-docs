@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 06/06/2025
+ms.date: 03/24/2026
 show_latex: true
 ---
 
@@ -23,6 +23,8 @@ Data API builder requires at least one configuration file to run. This JSON-base
 |[data-source-files](#data-source-files)|Array of other configuration file paths.|
 |[runtime](runtime.md#runtime)|Object configuring runtime behaviors.|
 |[entities](entities.md#entities)|Object defining all entities exposed via REST or GraphQL.|
+|[autoentities](#autoentities)|Object defining pattern-based rules that automatically expose matching database objects as entities (MSSQL only).|
+|[azure-key-vault](#azure-key-vault)|Azure Key Vault configuration for secret management.|
 
 ### Data-source properties
 
@@ -44,6 +46,8 @@ Data API builder requires at least one configuration file to run. This JSON-base
 |[runtime.rest](runtime.md#rest-runtime)|REST API global configuration.|
 |[runtime.graphql](runtime.md#graphql-runtime)|GraphQL API global configuration.|
 |[runtime.cache](runtime.md#cache-runtime)|Global response caching configuration.|
+|[runtime.compression](runtime.md#compression-runtime)|HTTP response compression configuration.|
+|[runtime.mcp](runtime.md#mcp-runtime)|Model Context Protocol (MCP) global configuration.|
 |[runtime.telemetry](runtime.md#telemetry-runtime)|Telemetry, logging, and monitoring configuration.|
 |[runtime.health](runtime.md#health-runtime)|Global health check configuration.|
 
@@ -59,6 +63,9 @@ Data API builder requires at least one configuration file to run. This JSON-base
 |[entities.entity-name.relationships](entities.md#relationships-entity-name-entities)|Relationships to other entities.|
 |[entities.entity-name.cache](entities.md#cache-entity-name-entities)|Entity-level caching configuration.|
 |[entities.entity-name.health](entities.md#health-entity-name-entities)|Entity-level health check configuration.|
+|[entities.entity-name.mcp](entities.md#mcp-entity-name-entities)|Entity-level MCP configuration.|
+|[entities.entity-name.fields](entities.md#fields-entity-name-entities)|Field metadata, aliases, and primary key designations.|
+|[entities.entity-name.description](entities.md#description-entity-name-entities)|Human-readable entity description.|
 
 ## Schema
 
@@ -121,9 +128,9 @@ Data API builder supports multiple configuration files, with one designated as t
 ### Multiple configuration rules
 
 * Every configuration file must include the `data-source` property.
-* Every configuration file must include the `entities` property.
+* Every configuration file must include the `entities` property (or `autoentities`).
 * The top-level configuration must include `runtime`.
-* Child configurations can include `runtime`, but it's ignored.
+* Child configurations can include `runtime`, but Data API builder ignores it.
 * Child configuration files can include their own child files.
 * Configuration files can be organized into subfolders.
 * Entity names must be unique across all configuration files.
@@ -138,5 +145,166 @@ Data API builder supports multiple configuration files, with one designated as t
     "my-folder/dab-config-3.json",
     "my-folder/my-other-folder/dab-config-4.json"
   ]
+}
+```
+
+## Autoentities
+
+| Parent | Property | Type | Required | Default |
+| - | - | - | - | - |
+| `$root` | `autoentities` | object | ❌ No | None |
+
+The `autoentities` section defines pattern-based rules that automatically expose matching database objects as DAB entities at startup. Each key in the object is a named definition containing patterns, a template, and permissions.
+
+> [!IMPORTANT]
+> Autoentities currently support **MSSQL** data sources only.
+
+When `autoentities` is present, the `entities` section is no longer required. The configuration schema allows either `autoentities` or `entities` (or both). If both are present, explicitly defined entities take precedence over autoentities matches with the same name.
+
+### Format
+
+```json
+{
+  "autoentities": {
+    "<definition-name>": {
+      "patterns": {
+        "include": [ "<string>" ],
+        "exclude": [ "<string>" ],
+        "name": "<string>"
+      },
+      "template": {
+        "mcp": { "dml-tools": <boolean> },
+        "rest": { "enabled": <boolean> },
+        "graphql": { "enabled": <boolean> },
+        "health": { "enabled": <boolean> },
+        "cache": {
+          "enabled": <boolean>,
+          "ttl-seconds": <integer>,
+          "level": "<string>"
+        }
+      },
+      "permissions": [
+        {
+          "role": "<string>",
+          "actions": [ { "action": "<string>" } ]
+        }
+      ]
+    }
+  }
+}
+```
+
+### Properties
+
+| Property | Type | Required | Default | Description |
+| - | - | - | - | - |
+| `patterns` | object | ✔️ Yes | None | Defines include, exclude, and naming rules. |
+| `patterns.include` | string array | ❌ No | `["%.%"]` | MSSQL `LIKE` patterns for objects to include. |
+| `patterns.exclude` | string array | ❌ No | `null` | MSSQL `LIKE` patterns for objects to exclude. |
+| `patterns.name` | string | ❌ No | `"{object}"` | Interpolation pattern using `{schema}` and `{object}`. |
+| `template` | object | ❌ No | None | Default configuration applied to all matched entities. |
+| `template.mcp` | object | ❌ No | None | MCP settings for matched entities. |
+| `template.mcp.dml-tools` | boolean | ❌ No | `true` | Enable MCP data manipulation language (DML) tools. |
+| `template.rest` | object | ❌ No | None | REST settings for matched entities. |
+| `template.rest.enabled` | boolean | ❌ No | `true` | Enable REST endpoints. |
+| `template.graphql` | object | ❌ No | None | GraphQL settings for matched entities. |
+| `template.graphql.enabled` | boolean | ❌ No | `true` | Enable GraphQL. |
+| `template.health` | object | ❌ No | None | Health-check settings for matched entities. |
+| `template.health.enabled` | boolean | ❌ No | `false` | Enable health checks. |
+| `template.cache` | object | ❌ No | None | Cache settings for matched entities. |
+| `template.cache.enabled` | boolean | ❌ No | `false` | Enable response caching. |
+| `template.cache.ttl-seconds` | integer | ❌ No | `null` | Cache time-to-live in seconds. |
+| `template.cache.level` | string | ❌ No | `"L1L2"` | Cache level. |
+| `permissions` | array | ❌ No | None | Permissions applied to all matched entities. |
+
+### Example
+
+```json
+{
+  "autoentities": {
+    "my-def": {
+      "patterns": {
+        "include": [ "dbo.%" ],
+        "exclude": [ "dbo.internal%" ],
+        "name": "{schema}_{object}"
+      },
+      "template": {
+        "rest": { "enabled": true },
+        "graphql": { "enabled": true },
+        "cache": { "enabled": true, "ttl-seconds": 30, "level": "l1l2" }
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ]
+    }
+  }
+}
+```
+
+With this configuration, every table and view in the `dbo` schema (except those matching `dbo.internal%`) is automatically exposed as a DAB entity. Each entity is named using the `{schema}_{object}` pattern (for example, `dbo_Products`), has REST and GraphQL enabled, uses caching with a 30-second time-to-live (TTL), and grants `read` access to the `anonymous` role.
+
+> [!TIP]
+> Use [`dab auto-config`](../command-line/dab-auto-config.md) to create autoentities definitions from the CLI, and [`dab auto-config-simulate`](../command-line/dab-auto-config-simulate.md) to preview which objects match before committing changes. For more information, see [what's new in version 2.0](../whats-new/version-2-0.md).
+
+## Azure Key Vault
+
+| Parent | Property | Type | Required | Default |
+| - | - | - | - | - |
+| `$root` | `azure-key-vault` | object | ❌ No | None |
+
+Configures Azure Key Vault integration for managing secrets. When present, the `endpoint` property is required.
+
+### Nested properties
+
+| Parent | Property | Type | Required | Default |
+| - | - | - | - | - |
+| `azure-key-vault` | `endpoint` | string | ✔️ Yes | None |
+| `azure-key-vault` | `retry-policy` | object | ❌ No | None |
+
+| Parent | Property | Type | Required | Default |
+| - | - | - | - | - |
+| `azure-key-vault.retry-policy` | `mode` | enum (`fixed` \| `exponential`) | ❌ No | `"exponential"` |
+| `azure-key-vault.retry-policy` | `max-count` | integer | ❌ No | `3` |
+| `azure-key-vault.retry-policy` | `delay-seconds` | integer | ❌ No | `1` |
+| `azure-key-vault.retry-policy` | `max-delay-seconds` | integer | ❌ No | `60` |
+| `azure-key-vault.retry-policy` | `network-timeout-seconds` | integer | ❌ No | `60` |
+
+To reference secrets stored in Azure Key Vault, use the `@akv()` function in your configuration values. Data API builder resolves these references at startup using the configured endpoint.
+
+### Format
+
+```json
+{
+  "azure-key-vault": {
+    "endpoint": "<string>",
+    "retry-policy": {
+      "mode": <"exponential"> (default) | <"fixed">,
+      "max-count": <integer; default: 3>,
+      "delay-seconds": <integer; default: 1>,
+      "max-delay-seconds": <integer; default: 60>,
+      "network-timeout-seconds": <integer; default: 60>
+    }
+  }
+}
+```
+
+### Example
+
+```json
+{
+  "azure-key-vault": {
+    "endpoint": "https://my-vault.vault.azure.net/",
+    "retry-policy": {
+      "mode": "exponential",
+      "max-count": 5,
+      "delay-seconds": 2,
+      "max-delay-seconds": 120,
+      "network-timeout-seconds": 90
+    }
+  },
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string": "@akv('sql-connection-string')"
+  }
 }
 ```

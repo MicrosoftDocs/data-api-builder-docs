@@ -12,10 +12,10 @@ ms.date: 09/29/2025
 
 # `update` command
 
-Update an existing entity definition in the Data API builder configuration file. Use this command to adjust source metadata, permissions, exposure (REST/GraphQL), policies, caching, relationships, mappings, and descriptive metadata after the entity has already been added.
+Update an existing entity definition in the Data API builder configuration file. Use this command to adjust source metadata, permissions, exposure (REST/GraphQL), policies, caching, relationships, mappings, and descriptive metadata for an existing entity.
 
 > [!TIP]
-> Use `dab add` to create new entities, and `dab update` to evolve them. Field name remapping (`--map`) is only available in `update`, not in `add`.
+> Use `dab add` to create new entities, and `dab update` to evolve them. To manage field metadata, use `--fields.name` with `--fields.alias`, `--fields.description`, and `--fields.primary-key`.
 
 ## Syntax
 
@@ -23,93 +23,106 @@ Update an existing entity definition in the Data API builder configuration file.
 dab update <entity-name> [options]
 ```
 
-### Quick glance
+## Quick glance
 
-| Option                            | Summary                                                     |
-| --------------------------------- | ----------------------------------------------------------- |
-| `<entity-name>`                   | Required positional argument. Logical entity name.          |
-| [`-s, --source`](#-s---source)    | Name of the source table, view, or stored procedure.        |
-| [`--permissions`](#--permissions) | Role and actions in `role:actions` format.                  |
-| [`--description`](#--description) | Replace entity description.                                 |
-| [`-c, --config`](#-c---config)    | Path to config file. Default resolution applies if omitted. |
-| [`--help`](#--help)               | Display the help screen.                                    |
-| [`--version`](#--version)         | Display version information.                                |
+| Option | Summary |
+| - | - |
+| `<entity-name>` | Required positional argument. Logical entity name. |
+| [`-s, --source`](#-s---source) | Name of the source table, view, or stored procedure. |
+| [`-m, --map`](#-m---map) | Mappings between database fields and exposed names. |
+| [`--permissions`](#--permissions) | Role and actions in `role:actions` format. |
+| [`--description`](#--description) | Replace entity description. |
+| [`-c, --config`](#-c---config) | Path to config file. Default resolution applies if omitted. |
+| [`--help`](#--help) | Display the help screen. |
+| [`--version`](#--version) | Display version information. |
 
 #### Cache
 
-| Option                               | Summary                           |
-| ------------------------------------ | --------------------------------- |
+| Option | Summary |
+| - | - |
 | [`--cache.enabled`](#--cacheenabled) | Enable or disable entity caching. |
-| [`--cache.ttl`](#--cachettl)         | Cache time-to-live in seconds.    |
+| [`--cache.ttl`](#--cachettl) | Cache time-to-live in seconds. |
 
 #### Fields
 
-| Option                                 | Summary                                                |
-| -------------------------------------- | ------------------------------------------------------ |
-| [`--fields.exclude`](#--fieldsexclude) | Comma-separated list of excluded fields.               |
-| [`--fields.include`](#--fieldsinclude) | Comma-separated list of included fields (`*` = all).   |
-| [`-m, --map`](#-m---map)               | Field mapping pairs `name:alias`. Replaces entire set. |
+| Option | Summary |
+| - | - |
+| [`--fields.exclude`](#--fieldsexclude) | Comma-separated list of excluded fields. |
+| [`--fields.include`](#--fieldsinclude) | Comma-separated list of included fields (`*` = all). |
 
 #### Fields metadata
 
-| Option                                       | Summary                                  |
-| -------------------------------------------- | ---------------------------------------- |
-| [`--fields.name`](#--fieldsname)             | Name of the database column to describe. |
-| [`--fields.alias`](#--fieldsalias)           | Alias for the field.                     |
-| [`--fields.description`](#--fieldsdescription) | Description for the field.             |
-| [`--fields.primary-key`](#--fieldsprimary-key) | Set this field as a primary key.       |
+| Option | Summary |
+| - | - |
+| [`--fields.name`](#--fieldsname) | Name of the database column to describe. |
+| [`--fields.alias`](#--fieldsalias) | Alias for the field. |
+| [`--fields.description`](#--fieldsdescription) | Description for the field. |
+| [`--fields.primary-key`](#--fieldsprimary-key) | Set this field as a primary key. |
 
 #### GraphQL
 
-| Option                                       | Summary                                                              |
-| -------------------------------------------- | -------------------------------------------------------------------- |
-| [`--graphql`](#--graphql)                    | GraphQL exposure: `false`, `true`, `singular`, or `singular:plural`. |
-| [`--graphql.operation`](#--graphqloperation) | Stored procedures only: `query` or `mutation` (default mutation).    |
+| Option | Summary |
+| - | - |
+| [`--graphql`](#--graphql) | GraphQL exposure: `false`, `true`, `singular`, or `singular:plural`. |
+| [`--graphql.operation`](#--graphqloperation) | Stored procedures only: `query` or `mutation` (default mutation). |
 
 #### Permissions & Policies
 
-| Option                                    | Summary                                                   |
-| ----------------------------------------- | --------------------------------------------------------- |
-| [`--permissions`](#--permissions)         | `role:actions` for a single role. Run multiple times for multiple roles. |
-| [`--policy-database`](#--policy-database) | OData-style filter injected in DB query.                  |
-| [`--policy-request`](#--policy-request)   | Pre-database request filter.                              |
+| Option | Summary |
+| - | - |
+| [`--permissions`](#--permissions) | `role:actions` for a single role. Run multiple times for multiple roles. |
+| [`--policy-database`](#--policy-database) | OData-style filter injected in database query. |
+| [`--policy-request`](#--policy-request) | Predatabase request filter. |
 
 #### Relationships
 
-| Option                                           | Summary                                           |
-| ------------------------------------------------ | ------------------------------------------------- |
-| [`--relationship`](#--relationship)              | Relationship name. Use with relationship options. |
-| [`--cardinality`](#--cardinality)                | Relationship cardinality: `one` or `many`.        |
-| [`--target.entity`](#--targetentity)             | Target entity name.                               |
-| [`--linking.object`](#--linkingobject)           | Linking object for many-to-many.                  |
-| [`--linking.source.fields`](#--linkingsourcefields) | Linking object fields pointing to source.      |
-| [`--linking.target.fields`](#--linkingtargetfields) | Linking object fields pointing to target.      |
-| [`--relationship.fields`](#--relationshipfields) | Field mappings for direct relationships.          |
+| Option | Summary |
+| - | - |
+| [`--relationship`](#--relationship) | Relationship name. Use with relationship options. |
+| [`--cardinality`](#--cardinality) | Relationship cardinality: `one` or `many`. |
+| [`--target.entity`](#--targetentity) | Target entity name. |
+| [`--linking.object`](#--linkingobject) | Linking object for many-to-many. |
+| [`--linking.source.fields`](#--linkingsourcefields) | Linking object fields pointing to source. |
+| [`--linking.target.fields`](#--linkingtargetfields) | Linking object fields pointing to target. |
+| [`--relationship.fields`](#--relationshipfields) | Field mappings for direct relationships. |
 
 #### REST
 
-| Option                             | Summary                                             |
-| ---------------------------------- | --------------------------------------------------- |
-| [`--rest`](#--rest)                | REST exposure: `false`, `true`, or custom path.     |
+| Option | Summary |
+| - | - |
+| [`--rest`](#--rest) | REST exposure: `false`, `true`, or custom path. |
 | [`--rest.methods`](#--restmethods) | Stored procedures only. Replace allowed HTTP verbs. |
+
+#### Mappings
+
+| Option | Summary |
+| - | - |
+| [`-m, --map`](#-m---map) | Mappings between database fields and exposed names. |
+
+#### MCP
+
+| Option | Summary |
+| - | - |
+| [`--mcp.dml-tools`](#--mcpdml-tools) | Enable or disable MCP DML tools for this entity. |
+| [`--mcp.custom-tool`](#--mcpcustom-tool) | Enable MCP custom tool (stored procedures only). |
 
 #### Source
 
-| Option                                       | Summary                                              |
-| -------------------------------------------- | ---------------------------------------------------- |
-| [`-s, --source`](#-s---source)               | Underlying database object name.                     |
-| [`--source.key-fields`](#--sourcekey-fields) | Required for views or non-PK tables.                 |
-| [`--source.params`](#--sourceparams)         | Stored procedures only. Replace default params.      |
-| [`--source.type`](#--sourcetype)             | Source type: `table`, `view`, or `stored-procedure`. |
+| Option | Summary |
+| - | - |
+| [`-s, --source`](#-s---source) | Underlying database object name. |
+| [`--source.type`](#--sourcetype) | Source type: `table`, `view`, or `stored-procedure`. |
+| [`--source.params`](#--sourceparams) | Default parameter values for stored procedures. |
+| [`--source.key-fields`](#--sourcekey-fields) | Primary key field(s) for views or tables. |
 
 #### Parameters (stored procedures)
 
-| Option                                       | Summary                                     |
-| -------------------------------------------- | ------------------------------------------- |
-| [`--parameters.name`](#--parametersname)     | Comma-separated list of parameter names.    |
+| Option | Summary |
+| - | - |
+| [`--parameters.name`](#--parametersname) | Comma-separated list of parameter names. |
 | [`--parameters.description`](#--parametersdescription) | Comma-separated list of parameter descriptions. |
-| [`--parameters.required`](#--parametersrequired) | Comma-separated list of required flags.  |
-| [`--parameters.default`](#--parametersdefault) | Comma-separated list of default values.   |
+| [`--parameters.required`](#--parametersrequired) | Comma-separated list of required flags. |
+| [`--parameters.default`](#--parametersdefault) | Comma-separated list of default values. |
 
 
 ## `--cache.enabled`
@@ -118,7 +131,7 @@ Enable or disable caching for this entity.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -126,29 +139,28 @@ dab update \
   --cache.enabled true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   Book ^
   --cache.enabled true
 ```
-
 ---
-
 ### Resulting config
 
 ```json
 {
   "entities": {
     "Book": {
-      "cache": {
-        "enabled": true
-      }
+      "cache": {}
     }
   }
 }
 ```
+
+> [!NOTE]
+> When caching is enabled (the default), the CLI writes an empty `cache` object. The `"enabled"` property only appears explicitly when set to `false`.
 
 ## `--cache.ttl`
 
@@ -156,7 +168,7 @@ Set cache time-to-live in seconds. Only effective if caching is enabled.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -164,16 +176,14 @@ dab update \
   --cache.ttl 600
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   Book ^
   --cache.ttl 600
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -189,18 +199,17 @@ dab update ^
 ```
 
 > [!NOTE]
-> Supplying TTL when cache is disabled has no effect until caching is enabled.
+> Supplying TTL (time-to-live) when cache is disabled has no effect until caching is enabled.
 
 ## `--description`
 
 Replace entity description.
 
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -208,16 +217,14 @@ dab update \
   --description "Updated description"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   Book ^
   --description "Updated description"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -236,7 +243,7 @@ Comma-separated list of fields to exclude.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -245,7 +252,7 @@ dab update \
   --fields.exclude "internal_flag,secret_note"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -253,9 +260,7 @@ dab update ^
   --permissions "anonymous:read" ^
   --fields.exclude "internal_flag,secret_note"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -286,7 +291,7 @@ Comma-separated list of fields to include. `*` includes all fields. Replaces exi
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -295,7 +300,7 @@ dab update \
   --fields.include "id,title,author"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -303,9 +308,7 @@ dab update ^
   --permissions "anonymous:read" ^
   --fields.include "id,title,author"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -337,7 +340,7 @@ Control GraphQL exposure.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -345,16 +348,14 @@ dab update \
   --graphql book:books
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   Book ^
   --graphql book:books
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -379,7 +380,7 @@ Stored procedures only. Sets operation type. Default is `mutation`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -387,16 +388,14 @@ dab update \
   --graphql.operation query
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   RunReport ^
   --graphql.operation query
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -414,56 +413,6 @@ dab update ^
 > [!NOTE]
 > Supplying `--graphql.operation` for tables or views is ignored.
 
-## `-m, --map`
-
-Map database fields to exposed names. Replaces the entire mapping set.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab update \
-  Book \
-  --map "id:bookId,title:bookTitle"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab update ^
-  Book ^
-  --map "id:bookId,title:bookTitle"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "Book": {
-      "fields": [
-        {
-          "name": "id",
-          "alias": "bookId",
-          "primary-key": false
-        },
-        {
-          "name": "title",
-          "alias": "bookTitle",
-          "primary-key": false
-        }
-      ]
-    }
-  }
-}
-```
-
-> [!IMPORTANT]
-> Any existing mappings are overwritten. Restate all mappings you want to keep.
-
 ## `--permissions`
 
 Adds or updates permissions for a single role and its actions.
@@ -472,7 +421,7 @@ You can run `dab update` multiple times (once per role) to add multiple roles.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -484,7 +433,7 @@ dab update \
   --permissions "authenticated:create,read,update"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -495,9 +444,7 @@ dab update ^
   Book ^
   --permissions "authenticated:create,read,update"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -532,11 +479,11 @@ dab update ^
 
 ## `--policy-database`
 
-OData-style filter appended to DB query.
+OData-style filter appended to database query.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -545,7 +492,7 @@ dab update \
   --policy-database "region eq 'US'"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -553,9 +500,7 @@ dab update ^
   --permissions "anonymous:read" ^
   --policy-database "region eq 'US'"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -586,7 +531,7 @@ Request-level policy evaluated before hitting the database.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -595,7 +540,7 @@ dab update \
   --policy-request "@claims.role == 'admin'"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -603,9 +548,7 @@ dab update ^
   --permissions "anonymous:read" ^
   --policy-request "@claims.role == 'admin'"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -636,7 +579,7 @@ Define or update a relationship. Use with other relationship options.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -647,7 +590,7 @@ dab update \
   --relationship.fields "id:user_id"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -657,9 +600,7 @@ dab update ^
   --cardinality one ^
   --relationship.fields "id:user_id"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -671,7 +612,9 @@ dab update ^
           "cardinality": "one",
           "target.entity": "Profile",
           "source.fields": [ "id" ],
-          "target.fields": [ "user_id" ]
+          "target.fields": [ "user_id" ],
+          "linking.source.fields": [],
+          "linking.target.fields": []
         }
       }
     }
@@ -685,7 +628,7 @@ Cardinality for the relationship. Use with `--relationship`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -696,7 +639,7 @@ dab update \
   --relationship.fields "id:user_id"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -706,16 +649,14 @@ dab update ^
   --cardinality one ^
   --relationship.fields "id:user_id"
 ```
-
 ---
-
 ## `--target.entity`
 
 Target entity name for the relationship. Use with `--relationship`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -726,7 +667,7 @@ dab update \
   --relationship.fields "id:user_id"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -736,16 +677,14 @@ dab update ^
   --cardinality one ^
   --relationship.fields "id:user_id"
 ```
-
 ---
-
 ## `--linking.object`
 
-Many-to-many only. Database object name used as the linking object.
+Many-to-many only. Name of the database object to use as the linking object.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -759,7 +698,7 @@ dab update \
   --linking.target.fields author_id
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -772,16 +711,14 @@ dab update ^
   --linking.source.fields book_id ^
   --linking.target.fields author_id
 ```
-
 ---
-
 ## `--linking.source.fields`
 
 Many-to-many only. Comma-separated list of linking object fields pointing to the source entity.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -795,7 +732,7 @@ dab update \
   --linking.target.fields author_id
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -808,16 +745,14 @@ dab update ^
   --linking.source.fields book_id ^
   --linking.target.fields author_id
 ```
-
 ---
-
 ## `--linking.target.fields`
 
 Many-to-many only. Comma-separated list of linking object fields pointing to the target entity.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -831,7 +766,7 @@ dab update \
   --linking.target.fields author_id
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -844,9 +779,7 @@ dab update ^
   --linking.source.fields book_id ^
   --linking.target.fields author_id
 ```
-
 ---
-
 ## `--relationship.fields`
 
 Colon-separated field mappings for direct relationships.
@@ -855,7 +788,7 @@ The `--relationship.fields` value is a comma-separated list of `sourceField:targ
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -866,7 +799,7 @@ dab update \
   --relationship.fields "id:user_id"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -876,9 +809,7 @@ dab update ^
   --cardinality one ^
   --relationship.fields "id:user_id"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -887,8 +818,12 @@ dab update ^
     "User": {
       "relationships": {
         "profile": {
+          "cardinality": "one",
+          "target.entity": "Profile",
           "source.fields": [ "id" ],
-          "target.fields": [ "user_id" ]
+          "target.fields": [ "user_id" ],
+          "linking.source.fields": [],
+          "linking.target.fields": []
         }
       }
     }
@@ -902,7 +837,7 @@ Control REST exposure.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -910,16 +845,14 @@ dab update \
   --rest BooksApi
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   Book ^
   --rest BooksApi
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -941,7 +874,7 @@ Stored procedures only. Replace allowed HTTP methods. Defaults to POST.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -950,7 +883,7 @@ dab update \
   --rest.methods GET,POST
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -958,9 +891,7 @@ dab update ^
   --rest true ^
   --rest.methods GET,POST
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -985,7 +916,7 @@ Update the underlying database object.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -993,16 +924,14 @@ dab update \
   --source dbo.Books
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   Book ^
   --source dbo.Books
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -1018,123 +947,33 @@ dab update ^
 }
 ```
 
-## `--source.key-fields`
-
-For views or tables without an inferred PK. Replaces existing keys. Not valid for stored procedures.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab update \
-  SalesSummary \
-  --source.type view \
-  --source.key-fields "year,region"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab update ^
-  SalesSummary ^
-  --source.type view ^
-  --source.key-fields "year,region"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "SalesSummary": {
-      "fields": [
-        { "name": "year", "primary-key": true },
-        { "name": "region", "primary-key": true }
-      ]
-    }
-  }
-}
-```
-
-> [!NOTE]
-> Using `--source.key-fields` with stored procedures is not allowed.
-
-## `--source.params`
-
-Stored procedures only. Replace parameter defaults.
-
-> [!NOTE]
-> In the v1.7 prerelease CLI, `--source.params` is deprecated. Use `--parameters.name`/`--parameters.description`/`--parameters.required`/`--parameters.default`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab update \
-  RunReport \
-  --source.type stored-procedure \
-  --source.params "year:2024,region:west"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab update ^
-  RunReport ^
-  --source.type stored-procedure ^
-  --source.params "year:2024,region:west"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "RunReport": {
-      "source": {
-        "parameters": [
-          { "name": "year", "required": false, "default": "2024" },
-          { "name": "region", "required": false, "default": "west" }
-        ]
-      }
-    }
-  }
-}
-```
-
-> [!NOTE]
-> Using `--source.params` with tables or views is not allowed.
-
 ## `--source.type`
 
 Change the source object type.
 
+> [!NOTE]
+> Views require `--source.key-fields`. Changing to `view` without specifying key-fields produces an error.
+
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
   Book \
-  --source.type view
+  --source.type view \
+  --source.key-fields "id"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   Book ^
-  --source.type view
+  --source.type view ^
+  --source.key-fields "id"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -1144,22 +983,174 @@ dab update ^
       "source": {
         "type": "view",
         "object": "Book"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "primary-key": true
+        }
+      ]
+    }
+  }
+}
+```
+
+## `--source.params`
+
+Stored procedures only. Default parameter values as `name:value` pairs.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab update \
+  RunReport \
+  --source.params "startDate:2024-01-01,endDate:2024-12-31"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab update ^
+  RunReport ^
+  --source.params "startDate:2024-01-01,endDate:2024-12-31"
+```
+---
+### Resulting config
+
+```json
+{
+  "entities": {
+    "RunReport": {
+      "source": {
+        "type": "stored-procedure",
+        "parameters": [
+          {
+            "name": "startDate",
+            "required": false,
+            "default": "2024-01-01"
+          },
+          {
+            "name": "endDate",
+            "required": false,
+            "default": "2024-12-31"
+          }
+        ]
       }
     }
   }
 }
 ```
 
+## `--source.key-fields`
+
+Specify primary key field(s) for views or tables without an inferred key.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab update \
+  Book \
+  --source.type view \
+  --source.key-fields "id"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab update ^
+  Book ^
+  --source.type view ^
+  --source.key-fields "id"
+```
+---
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "view",
+        "object": "Book"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "primary-key": true
+        }
+      ]
+    }
+  }
+}
+```
+
+> [!NOTE]
+> Views always require key-fields. The `--source.key-fields` option adds entries to the `fields` array with `"primary-key": true`.
+
+## `-m, --map`
+
+Specify mappings between database column names and exposed REST/GraphQL field names.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab update \
+  Book \
+  --map "id:bookId,title:bookTitle"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab update ^
+  Book ^
+  --map "id:bookId,title:bookTitle"
+```
+---
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "fields": [
+        {
+          "name": "id",
+          "alias": "bookId",
+          "primary-key": false
+        },
+        {
+          "name": "title",
+          "alias": "bookTitle",
+          "primary-key": false
+        }
+      ]
+    }
+  }
+}
+```
+
+> [!NOTE]
+> The `--map` option creates entries in the `fields` array with the `alias` property set.
+
 ## `--parameters.name`
 
 Stored procedures only. Comma-separated list of parameter names.
 
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+> [!TIP]
+> To define stored procedure parameters, use `--parameters.name` with `--parameters.description`, `--parameters.required`, and `--parameters.default`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -1169,7 +1160,7 @@ dab update \
   --parameters.description "Beginning of date range,End of date range"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -1178,9 +1169,7 @@ dab update ^
   --parameters.required "true,true" ^
   --parameters.description "Beginning of date range,End of date range"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -1210,12 +1199,11 @@ dab update ^
 
 Stored procedures only. Comma-separated list of parameter descriptions aligned to `--parameters.name`.
 
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -1224,7 +1212,7 @@ dab update \
   --parameters.description "Beginning of date range,End of date range"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -1232,19 +1220,16 @@ dab update ^
   --parameters.name "StartDate,EndDate" ^
   --parameters.description "Beginning of date range,End of date range"
 ```
-
 ---
-
 ## `--parameters.required`
 
 Stored procedures only. Comma-separated list of `true`/`false` values aligned to `--parameters.name`.
 
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -1253,7 +1238,7 @@ dab update \
   --parameters.required "true,true"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -1261,19 +1246,16 @@ dab update ^
   --parameters.name "StartDate,EndDate" ^
   --parameters.required "true,true"
 ```
-
 ---
-
 ## `--parameters.default`
 
 Stored procedures only. Comma-separated list of default values aligned to `--parameters.name`.
 
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -1282,7 +1264,7 @@ dab update \
   --parameters.default "null"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -1290,19 +1272,16 @@ dab update ^
   --parameters.name "CustomerID" ^
   --parameters.default "null"
 ```
-
 ---
-
 ## `--fields.name`
 
 Name of the database column to describe.
 
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -1312,7 +1291,7 @@ dab update \
   --fields.description "Product Id"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -1321,9 +1300,7 @@ dab update ^
   --fields.primary-key true ^
   --fields.description "Product Id"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -1346,41 +1323,40 @@ dab update ^
 
 Alias for the field. Use a comma-separated list aligned to `--fields.name`.
 
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+> [!TIP]
+> Use `--fields.alias` with `--fields.name` to define exposed field names.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
   Products \
-  --fields.name Id \
-  --fields.alias product_id
+  --fields.name "Id,Title" \
+  --fields.alias "product_id,product_title"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
   Products ^
-  --fields.name Id ^
-  --fields.alias product_id
+  --fields.name "Id,Title" ^
+  --fields.alias "product_id,product_title"
 ```
-
 ---
-
 ## `--fields.description`
 
 Description for the field. Use a comma-separated list aligned to `--fields.name`.
 
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -1389,7 +1365,7 @@ dab update \
   --fields.description "Product Id"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -1397,37 +1373,133 @@ dab update ^
   --fields.name Id ^
   --fields.description "Product Id"
 ```
-
 ---
-
 ## `--fields.primary-key`
 
 Primary key flag for the field. Use a comma-separated list of `true`/`false` values aligned to `--fields.name`.
 
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+> [!TIP]
+> Use `--fields.primary-key` with `--fields.name` to define primary key fields for views or tables without an inferred key.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
-  Products \
-  --fields.name Id \
-  --fields.primary-key true
+  SalesSummary \
+  --fields.name "year,region" \
+  --fields.primary-key "true,true"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
-  Products ^
-  --fields.name Id ^
-  --fields.primary-key true
+  SalesSummary ^
+  --fields.name "year,region" ^
+  --fields.primary-key "true,true"
+```
+---
+### Resulting config
+
+```json
+{
+  "entities": {
+    "SalesSummary": {
+      "fields": [
+        {
+          "name": "year",
+          "primary-key": true
+        },
+        {
+          "name": "region",
+          "primary-key": true
+        }
+      ]
+    }
+  }
+}
 ```
 
+## `--mcp.dml-tools`
+
+Enable or disable MCP DML (data manipulation language) tools for this entity. Default is `true`.
+
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab update \
+  Book \
+  --mcp.dml-tools false
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab update ^
+  Book ^
+  --mcp.dml-tools false
+```
 ---
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "mcp": false
+    }
+  }
+}
+```
+
+> [!NOTE]
+> When `--mcp.dml-tools` is used alone, the CLI writes the `mcp` property as a boolean shorthand. When combined with `--mcp.custom-tool`, both properties appear in an object form.
+
+## `--mcp.custom-tool`
+
+Stored procedures only. Enable MCP custom tool for this entity. Default is `false`.
+
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab update \
+  RunReport \
+  --mcp.custom-tool true
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab update ^
+  RunReport ^
+  --mcp.custom-tool true
+```
+---
+### Resulting config
+
+```json
+{
+  "entities": {
+    "RunReport": {
+      "mcp": {
+        "custom-tool": true
+      }
+    }
+  }
+}
+```
 
 ## `-c, --config`
 
@@ -1435,7 +1507,7 @@ Path to the configuration file.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update \
@@ -1444,7 +1516,7 @@ dab update \
   --config dab-config.json
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update ^
@@ -1452,48 +1524,42 @@ dab update ^
   --description "Updated description" ^
   --config dab-config.json
 ```
-
 ---
-
 ## `--help`
 
 Display the help screen.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update --help
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update --help
 ```
-
 ---
-
 ## `--version`
 
 Display version information.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab update --version
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab update --version
 ```
-
 ---
-
 > [!Important]
 > Changing source type may invalidate other properties. For example, views always require key-fields; stored procedures cannot define key-fields.

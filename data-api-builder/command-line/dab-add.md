@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 09/29/2025
+ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to add entities to my Data API builder configuration, so that I can expose database objects as APIs.
 ---
 
@@ -23,40 +23,68 @@ Add a new entity definition to an existing Data API builder configuration file. 
 dab add <entity-name> [options]
 ```
 
-### Quick glance
+## Quick glance
 
-| Option                                       | Summary                                                              |
-| -------------------------------------------- | -------------------------------------------------------------------- |
-| `<entity-name>`                              | Required positional argument. Logical entity name.                   |
-| [`-c, --config`](#-c---config)               | Config file path. Default `dab-config.json`.                         |
-| [`--cache.enabled`](#--cacheenabled)         | Enable/disable caching for entity.                                   |
-| [`--cache.ttl`](#--cachettl)                 | Cache time-to-live in seconds.                                       |
-| [`--description`](#--description)            | Free-form description for entity.                                    |
-| [`--fields.exclude`](#--fieldsexclude)       | Comma-separated excluded fields.                                     |
-| [`--fields.include`](#--fieldsinclude)       | Comma-separated allowed fields (`*` = all).                          |
-| [`--fields.name`](#--fieldsname)             | Field names to describe (repeatable or comma-separated).             |
-| [`--fields.alias`](#--fieldsalias)           | Field aliases (comma-separated, aligned to `--fields.name`).         |
-| [`--fields.description`](#--fieldsdescription) | Field descriptions (comma-separated, aligned to `--fields.name`).  |
-| [`--fields.primary-key`](#--fieldsprimary-key) | Primary key flags (comma-separated, aligned to `--fields.name`).    |
-| [`--graphql`](#--graphql)                    | GraphQL exposure: `false`, `true`, `singular`, or `singular:plural`. |
-| [`--graphql.operation`](#--graphqloperation) | Stored procedures only. `Query` or `Mutation` (default mutation).    |
-| [`--permissions`](#--permissions)            | Required. `role:actions` for a single role.                          |
-| [`--policy-database`](#--policy-database)    | OData-style filter applied in DB query.                              |
-| [`--policy-request`](#--policy-request)      | Request policy evaluated before DB call.                             |
-| [`--parameters.name`](#--parametersname)     | Stored procedures only. Parameter names (comma-separated).           |
-| [`--parameters.description`](#--parametersdescription) | Stored procedures only. Parameter descriptions.              |
-| [`--parameters.required`](#--parametersrequired) | Stored procedures only. Parameter required flags.                 |
-| [`--parameters.default`](#--parametersdefault) | Stored procedures only. Parameter default values.                  |
-| [`--rest`](#--rest)                          | REST exposure: `false`, `true`, or custom route.                     |
-| [`--rest.methods`](#--restmethods)           | Stored procedures only. Allowed verbs: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`. Default POST. |
-| [`-s, --source`](#-s---source)               | Required. Database object name (table, view, or stored procedure).   |
-| [`--source.key-fields`](#--sourcekey-fields) | The field(s) to be used as primary keys.                             |
-| [`--source.params`](#--sourceparams)         | Stored procedures only. Default parameter values.                    |
-| [`--source.type`](#--sourcetype)             | Source type: `table`, `view`, `stored-procedure` (default table).    |
-| [`--help`](#--help)                          | Display this help screen.                                            |
-| [`--version`](#--version)                    | Display version information.                                         |
+| Option | Summary |
+| - | - |
+| [`-c, --config`](#-c---config) | Config file path. Default `dab-config.json`. |
 
----
+### Head section
+
+| Option | Summary |
+| - | - |
+| `<entity-name>` | Required positional argument. Logical entity name. |
+| [`-s, --source`](#-s---source) | Required. Database object name (table, view, or stored procedure). |
+| [`--source.type`](#--sourcetype) | Source type: `table`, `view`, `stored-procedure` (default table). |
+| [`--source.key-fields`](#--sourcekey-fields) | Primary key fields for views (comma-separated). |
+| [`--source.params`](#--sourceparams) | Stored procedures only. Default parameter values as `param1:val1,param2:val2`. |
+
+### Cache section
+
+| Option | Summary |
+| - | - |
+| [`--cache.enabled`](#--cacheenabled) | Enable/disable caching for entity. |
+| [`--cache.ttl`](#--cachettl) | Cache time-to-live in seconds. |
+| [`--description`](#--description) | Free-form description for entity. |
+
+### Parameters section
+
+| Option | Summary |
+| - | - |
+| [`--parameters.name`](#--parametersname) | Stored procedures only. Parameter names (comma-separated). |
+| [`--parameters.description`](#--parametersdescription) | Stored procedures only. Parameter descriptions. |
+| [`--parameters.required`](#--parametersrequired) | Stored procedures only. Parameter required flags. |
+| [`--parameters.default`](#--parametersdefault) | Stored procedures only. Parameter default values. |
+
+### Fields section
+
+| Option | Summary |
+| - | - |
+| [`--fields.exclude`](#--fieldsexclude) | Comma-separated excluded fields. |
+| [`--fields.include`](#--fieldsinclude) | Comma-separated allowed fields (`*` = all). |
+| [`--fields.name`](#--fieldsname) | Field names to describe (repeatable or comma-separated). |
+| [`--fields.alias`](#--fieldsalias) | Field aliases (comma-separated, aligned to `--fields.name`). |
+| [`--fields.description`](#--fieldsdescription) | Field descriptions (comma-separated, aligned to `--fields.name`). |
+| [`--fields.primary-key`](#--fieldsprimary-key) | Primary key flags (comma-separated, aligned to `--fields.name`). |
+
+### API section
+
+| Option | Summary |
+| - | - |
+| [`--graphql`](#--graphql) | GraphQL exposure: `false`, `true`, `singular`, or `singular:plural`. |
+| [`--graphql.operation`](#--graphqloperation) | Stored procedures only. `Query` or `Mutation` (default mutation). |
+| [`--rest`](#--rest) | REST exposure: `false`, `true`, or custom route. |
+| [`--rest.methods`](#--restmethods) | Stored procedures only. Allowed verbs: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`. Default POST. |
+| [`--mcp.dml-tools`](#--mcpdml-tools) | Enable/disable data manipulation language (DML) tools for entity in Model Context Protocol (MCP). Default `true`. |
+| [`--mcp.custom-tool`](#--mcpcustom-tool) | Stored procedures only. Register as a named MCP tool. |
+
+### Permissions section
+
+| Option | Summary |
+| - | - |
+| [`--permissions`](#--permissions) | Required. `role:actions` for a single role. |
+| [`--policy-database`](#--policy-database) | OData-style filter applied in database query. |
+| [`--policy-request`](#--policy-request) | Request policy evaluated before database call. |
 
 ## `<entity-name>`
 
@@ -66,7 +94,7 @@ Logical name of the entity in config. Case-sensitive.
 
 #### Add a table
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -76,7 +104,7 @@ dab add Book \
   --description "Example for managing book inventory"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -90,7 +118,7 @@ dab add Book ^
 
 #### Add a view
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add BookView \
@@ -101,7 +129,7 @@ dab add BookView \
   --description "Example for managing book inventory from view"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add BookView ^
@@ -116,25 +144,29 @@ dab add BookView ^
 
 #### Add a stored procedure
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add BookProc \
   --source dbo.MyProc \
   --source.type stored-procedure \
-  --source.params "year:2024,active:true" \
+  --parameters.name "year,active" \
+  --parameters.required "false,false" \
+  --parameters.default "2024,true" \
   --permissions "anonymous:execute" \
   --graphql.operation query \
   --description "Example for executing a stored procedure"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add BookProc ^
   --source dbo.MyProc ^
   --source.type stored-procedure ^
-  --source.params "year:2024,active:true" ^
+  --parameters.name "year,active" ^
+  --parameters.required "false,false" ^
+  --parameters.default "2024,true" ^
   --permissions "anonymous:execute" ^
   --graphql.operation query ^
   --description "Example for executing a stored procedure"
@@ -148,7 +180,7 @@ Config file path. Default is `dab-config.json`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -157,7 +189,7 @@ dab add Book \
   --permissions "anonymous:read"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -168,7 +200,188 @@ dab add Book ^
 
 ---
 
+## `-s, --source`
+
+Required. Name of the database object: table, view, container, or stored procedure.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read"
+```
+
 ---
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "table",
+        "object": "dbo.Books"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ]
+    }
+  }
+}
+```
+
+## `--source.type`
+
+Type of database object. Default: `table`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --source.type table \
+  --permissions "anonymous:read"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --source.type table ^
+  --permissions "anonymous:read"
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "table",
+        "object": "dbo.Books"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ]
+    }
+  }
+}
+```
+
+## `--source.key-fields`
+
+One or more fields to use as primary keys. Views lack intrinsic primary keys, so you must specify key fields explicitly.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add BookView \
+  --source dbo.MyView \
+  --source.type view \
+  --source.key-fields "id,region" \
+  --permissions "anonymous:read"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add BookView ^
+  --source dbo.MyView ^
+  --source.type view ^
+  --source.key-fields "id,region" ^
+  --permissions "anonymous:read"
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "BookView": {
+      "source": {
+        "object": "dbo.MyView",
+        "type": "view",
+        "key-fields": [ "id", "region" ]
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ]
+    }
+  }
+}
+```
+
+## `--source.params`
+
+Dictionary of parameters and their default values for stored procedures. Use the format `param1:val1,param2:val2`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add BookProc \
+  --source dbo.MyProc \
+  --source.type stored-procedure \
+  --source.params "year:2024,active:true" \
+  --permissions "anonymous:execute"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add BookProc ^
+  --source dbo.MyProc ^
+  --source.type stored-procedure ^
+  --source.params "year:2024,active:true" ^
+  --permissions "anonymous:execute"
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "BookProc": {
+      "source": {
+        "object": "dbo.MyProc",
+        "type": "stored-procedure",
+        "parameters": [
+          { "name": "year", "required": false, "default": "2024" },
+          { "name": "active", "required": false, "default": "True" }
+        ]
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "execute" } ] }
+      ]
+    }
+  }
+}
+```
 
 ## `--cache.enabled`
 
@@ -176,7 +389,7 @@ Enable or disable caching.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -185,7 +398,7 @@ dab add Book \
   --cache.enabled true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -209,9 +422,7 @@ dab add Book ^
       "permissions": [
         { "role": "anonymous", "actions": [ { "action": "read" } ] }
       ],
-      "cache": {
-        "enabled": true
-      }
+      "cache": {}
     }
   }
 }
@@ -223,7 +434,7 @@ Cache time-to-live in seconds.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -232,7 +443,7 @@ dab add Book \
   --cache.ttl 300
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -257,7 +468,6 @@ dab add Book ^
         { "role": "anonymous", "actions": [ { "action": "read" } ] }
       ],
       "cache": {
-        "enabled": false,
         "ttl-seconds": 300
       }
     }
@@ -269,12 +479,11 @@ dab add Book ^
 
 Free-text description of the entity.
 
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -283,7 +492,7 @@ dab add Book \
   --description "Entity for managing book inventory"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -313,13 +522,193 @@ dab add Book ^
 }
 ```
 
+## `--parameters.name`
+
+Stored procedures only. Comma-separated list of parameter names.
+
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add GetOrdersByDateRange \
+  --source dbo.usp_GetOrdersByDateRange \
+  --source.type stored-procedure \
+  --permissions "authenticated:execute" \
+  --description "Retrieves all orders placed within a specified date range" \
+  --parameters.name "StartDate,EndDate,CustomerID" \
+  --parameters.description "Beginning of date range (inclusive),End of date range (inclusive),Optional customer ID filter" \
+  --parameters.required "true,true,false" \
+  --parameters.default ",,null"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add GetOrdersByDateRange ^
+  --source dbo.usp_GetOrdersByDateRange ^
+  --source.type stored-procedure ^
+  --permissions "authenticated:execute" ^
+  --description "Retrieves all orders placed within a specified date range" ^
+  --parameters.name "StartDate,EndDate,CustomerID" ^
+  --parameters.description "Beginning of date range (inclusive),End of date range (inclusive),Optional customer ID filter" ^
+  --parameters.required "true,true,false" ^
+  --parameters.default ",,null"
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "GetOrdersByDateRange": {
+      "description": "Retrieves all orders placed within a specified date range",
+      "source": {
+        "object": "dbo.usp_GetOrdersByDateRange",
+        "type": "stored-procedure",
+        "parameters": [
+          {
+            "name": "StartDate",
+            "required": true,
+            "default": "",
+            "description": "Beginning of date range (inclusive)"
+          },
+          {
+            "name": "EndDate",
+            "required": true,
+            "default": "",
+            "description": "End of date range (inclusive)"
+          },
+          {
+            "name": "CustomerID",
+            "required": false,
+            "default": "null",
+            "description": "Optional customer ID filter"
+          }
+        ]
+      },
+      "permissions": [
+        {
+          "role": "authenticated",
+          "actions": [
+            {
+              "action": "execute"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+## `--parameters.description`
+
+Stored procedures only. Comma-separated list of parameter descriptions aligned to `--parameters.name`.
+
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add GetOrdersByDateRange \
+  --source dbo.usp_GetOrdersByDateRange \
+  --source.type stored-procedure \
+  --permissions "authenticated:execute" \
+  --parameters.name "StartDate,EndDate" \
+  --parameters.description "Beginning of date range (inclusive),End of date range (inclusive)"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add GetOrdersByDateRange ^
+  --source dbo.usp_GetOrdersByDateRange ^
+  --source.type stored-procedure ^
+  --permissions "authenticated:execute" ^
+  --parameters.name "StartDate,EndDate" ^
+  --parameters.description "Beginning of date range (inclusive),End of date range (inclusive)"
+```
+
+---
+
+## `--parameters.required`
+
+Stored procedures only. Comma-separated list of `true`/`false` values aligned to `--parameters.name`.
+
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add GetOrdersByDateRange \
+  --source dbo.usp_GetOrdersByDateRange \
+  --source.type stored-procedure \
+  --permissions "authenticated:execute" \
+  --parameters.name "StartDate,EndDate" \
+  --parameters.required "true,true"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add GetOrdersByDateRange ^
+  --source dbo.usp_GetOrdersByDateRange ^
+  --source.type stored-procedure ^
+  --permissions "authenticated:execute" ^
+  --parameters.name "StartDate,EndDate" ^
+  --parameters.required "true,true"
+```
+
+---
+
+## `--parameters.default`
+
+Stored procedures only. Comma-separated list of default values aligned to `--parameters.name`.
+
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add GetOrdersByDateRange \
+  --source dbo.usp_GetOrdersByDateRange \
+  --source.type stored-procedure \
+  --permissions "authenticated:execute" \
+  --parameters.name "CustomerID" \
+  --parameters.default "null"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add GetOrdersByDateRange ^
+  --source dbo.usp_GetOrdersByDateRange ^
+  --source.type stored-procedure ^
+  --permissions "authenticated:execute" ^
+  --parameters.name "CustomerID" ^
+  --parameters.default "null"
+```
+
+---
+
 ## `--fields.exclude`
 
 Comma-separated list of fields to exclude.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -328,7 +717,7 @@ dab add Book \
   --fields.exclude "internal_flag,secret_note"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -370,7 +759,7 @@ Comma-separated list of fields to expose.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -379,7 +768,7 @@ dab add Book \
   --fields.include "id,title,price"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -404,6 +793,7 @@ dab add Book ^
             {
               "action": "read",
               "fields": {
+                "exclude": [],
                 "include": [ "id", "title", "price" ]
               }
             }
@@ -415,13 +805,145 @@ dab add Book ^
 }
 ```
 
+## `--fields.name`
+
+Name of the database column to describe.
+
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add Products \
+  --source dbo.Products \
+  --permissions "anonymous:*" \
+  --fields.name "ProductID,ProductName" \
+  --fields.alias "product_id,product_name" \
+  --fields.description "Unique identifier for each product,Display name of the product" \
+  --fields.primary-key "true,false"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add Products ^
+  --source dbo.Products ^
+  --permissions "anonymous:*" ^
+  --fields.name "ProductID,ProductName" ^
+  --fields.alias "product_id,product_name" ^
+  --fields.description "Unique identifier for each product,Display name of the product" ^
+  --fields.primary-key "true,false"
+```
+
+---
+
+### Resulting config
+
+> [!NOTE]
+> In the current 2.0.0-rc release, the CLI accepts `--fields.name`, `--fields.alias`, `--fields.description`, and `--fields.primary-key` but doesn't yet persist entity-level field metadata to the configuration file. The team expects to resolve this behavior before GA.
+
+## `--fields.alias`
+
+Alias for the field. Use a comma-separated list aligned to `--fields.name`.
+
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add Products \
+  --source dbo.Products \
+  --permissions "anonymous:*" \
+  --fields.name "ProductID" \
+  --fields.alias "product_id"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add Products ^
+  --source dbo.Products ^
+  --permissions "anonymous:*" ^
+  --fields.name "ProductID" ^
+  --fields.alias "product_id"
+```
+
+---
+
+## `--fields.description`
+
+Description for the field. Use a comma-separated list aligned to `--fields.name`.
+
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add Products \
+  --source dbo.Products \
+  --permissions "anonymous:*" \
+  --fields.name "ProductID" \
+  --fields.description "Unique identifier"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add Products ^
+  --source dbo.Products ^
+  --permissions "anonymous:*" ^
+  --fields.name "ProductID" ^
+  --fields.description "Unique identifier"
+```
+
+---
+
+## `--fields.primary-key`
+
+Primary key flag for the field. Use a comma-separated list of `true`/`false` values aligned to `--fields.name`.
+
+[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add Products \
+  --source dbo.Products \
+  --permissions "anonymous:*" \
+  --fields.name "ProductID" \
+  --fields.primary-key "true"
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add Products ^
+  --source dbo.Products ^
+  --permissions "anonymous:*" ^
+  --fields.name "ProductID" ^
+  --fields.primary-key "true"
+```
+
+---
+
+> [!NOTE]
+> In the current 2.0.0-rc release, the CLI accepts `--fields.primary-key` but doesn't yet persist entity-level field metadata to the configuration file. To specify primary key fields for views, use [`--source.key-fields`](#--sourcekey-fields) instead.
+
 ## `--graphql`
 
 Control GraphQL exposure.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -430,7 +952,7 @@ dab add Book \
   --graphql book:books
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -469,7 +991,7 @@ Stored procedures only. GraphQL operation type. Default is `mutation`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add BookProc \
@@ -479,7 +1001,7 @@ dab add BookProc \
   --graphql.operation Query
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add BookProc ^
@@ -503,22 +1025,219 @@ dab add BookProc ^
       ],
       "graphql": {
         "enabled": true,
-        "operation": "query"
+        "operation": "query",
+        "type": {
+          "singular": "BookProc",
+          "plural": "BookProcs"
+        }
       }
     }
   }
 }
 ```
 
+## `--rest`
+
+Control REST exposure.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --rest BooksApi
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --rest BooksApi
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": { "type": "table", "object": "dbo.Books" },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ],
+      "rest": {
+        "enabled": true,
+        "path": "/BooksApi"
+      }
+    }
+  }
+}
+```
+
+## `--rest.methods`
+
+Stored procedures only. HTTP verbs allowed for execution: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`. Defaults to POST. Ignored for tables/views.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add BookProc \
+  --source dbo.MyProc \
+  --source.type stored-procedure \
+  --permissions "admin:execute" \
+  --rest true \
+  --rest.methods GET,POST
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add BookProc ^
+  --source dbo.MyProc ^
+  --source.type stored-procedure ^
+  --permissions "admin:execute" ^
+  --rest true ^
+  --rest.methods GET,POST
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "BookProc": {
+      "source": { "type": "stored-procedure", "object": "dbo.MyProc" },
+      "permissions": [
+        { "role": "admin", "actions": [ { "action": "execute" } ] }
+      ],
+      "rest": {
+        "enabled": true,
+        "methods": [ "get", "post" ]
+      }
+    }
+  }
+}
+```
+
+## `--mcp.dml-tools`
+
+Enable or disable DML tools for this entity in MCP. Default: `true`. When set to `false`, the entity is excluded from the MCP DML tool surface. When `mcp` is omitted entirely, DML tools are enabled by default.
+
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --mcp.dml-tools true
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --mcp.dml-tools true
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "table",
+        "object": "dbo.Books"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ],
+      "mcp": true
+    }
+  }
+}
+```
+
+## `--mcp.custom-tool`
+
+Register a stored procedure entity as a named MCP tool. Valid only when `--source.type` is `stored-procedure`. When `true`, DAB dynamically registers the procedure in the MCP `tools/list` response and agents can call it through `tools/call`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add GetBookById \
+  --source dbo.get_book_by_id \
+  --source.type stored-procedure \
+  --permissions "anonymous:execute" \
+  --mcp.custom-tool true
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add GetBookById ^
+  --source dbo.get_book_by_id ^
+  --source.type stored-procedure ^
+  --permissions "anonymous:execute" ^
+  --mcp.custom-tool true
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "GetBookById": {
+      "source": {
+        "type": "stored-procedure",
+        "object": "dbo.get_book_by_id"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "execute" } ] }
+      ],
+      "mcp": {
+        "custom-tool": true
+      }
+    }
+  }
+}
+```
+
+> [!IMPORTANT]
+> `--mcp.custom-tool` is valid only for stored-procedure entities. Using it with table or view entities causes a validation error.
+
 ## `--permissions`
 
 Defines role→actions pairs.
 
-`--permissions` isn't repeatable. To add more roles, run `dab add` with one role and then run `dab update` for additional roles.
+`--permissions` isn't repeatable. To add more roles, run `dab add` with one role and then run `dab update` for more roles.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -529,7 +1248,7 @@ dab update Book \
   --permissions "authenticated:create,read,update,delete"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -542,373 +1261,13 @@ dab update Book ^
 
 ---
 
-## `--parameters.name`
-
-Stored procedures only. Comma-separated list of parameter names.
-
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add GetOrdersByDateRange \
-  --source dbo.usp_GetOrdersByDateRange \
-  --source.type stored-procedure \
-  --permissions "authenticated:execute" \
-  --description "Retrieves all orders placed within a specified date range" \
-  --parameters.name "StartDate,EndDate,CustomerID" \
-  --parameters.description "Beginning of date range (inclusive),End of date range (inclusive),Optional customer ID filter" \
-  --parameters.required "true,true,false" \
-  --parameters.default ",,null"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add GetOrdersByDateRange ^
-  --source dbo.usp_GetOrdersByDateRange ^
-  --source.type stored-procedure ^
-  --permissions "authenticated:execute" ^
-  --description "Retrieves all orders placed within a specified date range" ^
-  --parameters.name "StartDate,EndDate,CustomerID" ^
-  --parameters.description "Beginning of date range (inclusive),End of date range (inclusive),Optional customer ID filter" ^
-  --parameters.required "true,true,false" ^
-  --parameters.default ",,null"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "GetOrdersByDateRange": {
-      "description": "Retrieves all orders placed within a specified date range",
-      "source": {
-        "object": "dbo.usp_GetOrdersByDateRange",
-        "type": "stored-procedure",
-        "parameters": [
-          {
-            "name": "StartDate",
-            "required": true,
-            "description": "Beginning of date range (inclusive)"
-          },
-          {
-            "name": "EndDate",
-            "required": true,
-            "description": "End of date range (inclusive)"
-          },
-          {
-            "name": "CustomerID",
-            "required": false,
-            "default": "null",
-            "description": "Optional customer ID filter"
-          }
-        ]
-      },
-      "permissions": [
-        {
-          "role": "authenticated",
-          "actions": [
-            {
-              "action": "execute"
-            }
-          ]
-        }
-      ]
-    }
-  }
-}
-```
-
-## `--parameters.description`
-
-Stored procedures only. Comma-separated list of parameter descriptions aligned to `--parameters.name`.
-
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add GetOrdersByDateRange \
-  --source dbo.usp_GetOrdersByDateRange \
-  --source.type stored-procedure \
-  --permissions "authenticated:execute" \
-  --parameters.name "StartDate,EndDate" \
-  --parameters.description "Beginning of date range (inclusive),End of date range (inclusive)"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add GetOrdersByDateRange ^
-  --source dbo.usp_GetOrdersByDateRange ^
-  --source.type stored-procedure ^
-  --permissions "authenticated:execute" ^
-  --parameters.name "StartDate,EndDate" ^
-  --parameters.description "Beginning of date range (inclusive),End of date range (inclusive)"
-```
-
----
-
-## `--parameters.required`
-
-Stored procedures only. Comma-separated list of `true`/`false` values aligned to `--parameters.name`.
-
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add GetOrdersByDateRange \
-  --source dbo.usp_GetOrdersByDateRange \
-  --source.type stored-procedure \
-  --permissions "authenticated:execute" \
-  --parameters.name "StartDate,EndDate" \
-  --parameters.required "true,true"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add GetOrdersByDateRange ^
-  --source dbo.usp_GetOrdersByDateRange ^
-  --source.type stored-procedure ^
-  --permissions "authenticated:execute" ^
-  --parameters.name "StartDate,EndDate" ^
-  --parameters.required "true,true"
-```
-
----
-
-## `--parameters.default`
-
-Stored procedures only. Comma-separated list of default values aligned to `--parameters.name`.
-
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add GetOrdersByDateRange \
-  --source dbo.usp_GetOrdersByDateRange \
-  --source.type stored-procedure \
-  --permissions "authenticated:execute" \
-  --parameters.name "CustomerID" \
-  --parameters.default "null"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add GetOrdersByDateRange ^
-  --source dbo.usp_GetOrdersByDateRange ^
-  --source.type stored-procedure ^
-  --permissions "authenticated:execute" ^
-  --parameters.name "CustomerID" ^
-  --parameters.default "null"
-```
-
----
-
-## `--fields.name`
-
-Name of the database column to describe.
-
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add Products \
-  --source dbo.Products \
-  --permissions "anonymous:*" \
-  --fields.name "ProductID,ProductName" \
-  --fields.alias "product_id,product_name" \
-  --fields.description "Unique identifier for each product,Display name of the product" \
-  --fields.primary-key "true,false"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add Products ^
-  --source dbo.Products ^
-  --permissions "anonymous:*" ^
-  --fields.name "ProductID,ProductName" ^
-  --fields.alias "product_id,product_name" ^
-  --fields.description "Unique identifier for each product,Display name of the product" ^
-  --fields.primary-key "true,false"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "Products": {
-      "source": { "type": "table", "object": "dbo.Products" },
-      "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "*" } ] }
-      ],
-      "fields": [
-        {
-          "name": "ProductID",
-          "alias": "product_id",
-          "description": "Unique identifier for each product",
-          "primary-key": true
-        },
-        {
-          "name": "ProductName",
-          "alias": "product_name",
-          "description": "Display name of the product",
-          "primary-key": false
-        }
-      ]
-    }
-  }
-}
-```
-
-## `--fields.alias`
-
-Alias for the field. Use a comma-separated list aligned to `--fields.name`.
-
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add Products \
-  --source dbo.Products \
-  --permissions "anonymous:*" \
-  --fields.name "ProductID" \
-  --fields.alias "product_id"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add Products ^
-  --source dbo.Products ^
-  --permissions "anonymous:*" ^
-  --fields.name "ProductID" ^
-  --fields.alias "product_id"
-```
-
----
-
-## `--fields.description`
-
-Description for the field. Use a comma-separated list aligned to `--fields.name`.
-
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add Products \
-  --source dbo.Products \
-  --permissions "anonymous:*" \
-  --fields.name "ProductID" \
-  --fields.description "Unique identifier"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add Products ^
-  --source dbo.Products ^
-  --permissions "anonymous:*" ^
-  --fields.name "ProductID" ^
-  --fields.description "Unique identifier"
-```
-
----
-
-## `--fields.primary-key`
-
-Primary key flag for the field. Use a comma-separated list of `true`/`false` values aligned to `--fields.name`.
-
-> [!NOTE]
-> This option is available only in the v1.7 prerelease CLI (currently RC). Install with `dotnet tool install microsoft.dataapibuilder --prerelease`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add Products \
-  --source dbo.Products \
-  --permissions "anonymous:*" \
-  --fields.name "ProductID" \
-  --fields.primary-key "true"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add Products ^
-  --source dbo.Products ^
-  --permissions "anonymous:*" ^
-  --fields.name "ProductID" ^
-  --fields.primary-key "true"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "Products": {
-      "source": { "type": "table", "object": "dbo.Products" },
-      "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "*" } ] }
-      ],
-      "fields": [
-        {
-          "name": "ProductID",
-          "primary-key": true
-        }
-      ]
-    }
-  }
-}
-```
-
 ## `--policy-database`
 
 Database-level policy.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -917,7 +1276,7 @@ dab add Book \
   --policy-database "region eq 'US'"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -959,7 +1318,7 @@ Request-level policy.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add Book \
@@ -968,7 +1327,7 @@ dab add Book \
   --policy-request "@claims.role == 'admin'"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add Book ^
@@ -1004,264 +1363,20 @@ dab add Book ^
 }
 ```
 
-## `--rest`
-
-Control REST exposure.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add Book \
-  --source dbo.Books \
-  --permissions "anonymous:read" \
-  --rest BooksApi
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add Book ^
-  --source dbo.Books ^
-  --permissions "anonymous:read" ^
-  --rest BooksApi
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "Book": {
-      "source": { "type": "table", "object": "dbo.Books" },
-      "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "read" } ] }
-      ],
-      "rest": {
-        "enabled": true,
-        "path": "/BooksApi"
-      }
-    }
-  }
-}
-```
-
-## `--rest.methods`
-
-Stored procedures only. HTTP verbs allowed for execution: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`. Defaults to POST. Ignored for tables/views.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add BookProc \
-  --source dbo.MyProc \
-  --source.type stored-procedure \
-  --permissions "admin:execute" \
-  --rest true \
-  --rest.methods GET,POST
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add BookProc ^
-  --source dbo.MyProc ^
-  --source.type stored-procedure ^
-  --permissions "admin:execute" ^
-  --rest true ^
-  --rest.methods GET,POST
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "BookProc": {
-      "source": { "type": "stored-procedure", "object": "dbo.MyProc" },
-      "permissions": [
-        { "role": "admin", "actions": [ { "action": "execute" } ] }
-      ],
-      "rest": {
-        "enabled": true,
-        "methods": [ "get", "post" ]
-      }
-    }
-  }
-}
-```
-
-## `-s, --source`
-
-Required. Name of the database object: table, view, container, or stored procedure.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add Book \
-  --source dbo.Books \
-  --permissions "anonymous:read"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add Book ^
-  --source dbo.Books ^
-  --permissions "anonymous:read"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "Book": {
-      "source": {
-        "type": "table",
-        "object": "dbo.Books"
-      },
-      "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "read" } ] }
-      ]
-    }
-  }
-}
-```
-
-## `--source.key-fields`
-
-The field(s) to be used as primary keys. Required for views when generated through the CLI.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add BookView \
-  --source dbo.MyView \
-  --source.type view \
-  --source.key-fields "id,region" \
-  --permissions "anonymous:read"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add BookView ^
-  --source dbo.MyView ^
-  --source.type view ^
-  --source.key-fields "id,region" ^
-  --permissions "anonymous:read"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "BookView": {
-      "source": {
-        "type": "view",
-        "object": "dbo.MyView",
-        "key-fields": [ "id", "region" ]
-      },
-      "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "read" } ] }
-      ]
-    }
-  }
-}
-```
-
-## `--source.params`
-
-Stored procedures only. Comma-separated `name:value` pairs. Not allowed for tables or views.
-
-> [!NOTE]
-> In the v1.7 prerelease CLI (currently RC), `--source.params` is deprecated. Use `--parameters.name`, `--parameters.default`, and related `--parameters.*` options instead.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add BookProc \
-  --source dbo.MyProc \
-  --source.type stored-procedure \
-  --source.params "year:2024,active:true" \
-  --permissions "admin:execute"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add BookProc ^
-  --source dbo.MyProc ^
-  --source.type stored-procedure ^
-  --source.params "year:2024,active:true" ^
-  --permissions "admin:execute"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "BookProc": {
-      "source": {
-        "type": "stored-procedure",
-        "object": "dbo.MyProc",
-        "parameters": [
-          {
-            "name": "year",
-            "required": false,
-            "default": "2024"
-          },
-          {
-            "name": "active",
-            "required": false,
-            "default": "True"
-          }
-        ]
-      },
-      "permissions": [
-        { "role": "admin", "actions": [ { "action": "execute" } ] }
-      ]
-    }
-  }
-}
-```
-
 ## `--help`
 
 Display this help screen.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add \
   --help
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add ^
@@ -1276,14 +1391,14 @@ Display version information.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab add \
   --version
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab add ^
@@ -1291,47 +1406,3 @@ dab add ^
 ```
 
 ---
-
-## `--source.type`
-
-Type of database object. Default: `table`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab add Book \
-  --source dbo.Books \
-  --source.type table \
-  --permissions "anonymous:read"
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab add Book ^
-  --source dbo.Books ^
-  --source.type table ^
-  --permissions "anonymous:read"
-```
-
----
-
-### Resulting config
-
-```json
-{
-  "entities": {
-    "Book": {
-      "source": {
-        "type": "table",
-        "object": "dbo.Books"
-      },
-      "permissions": [
-        { "role": "anonymous", "actions": [ { "action": "read" } ] }
-      ]
-    }
-  }
-}
-```

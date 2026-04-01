@@ -7,7 +7,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: overview
-ms.date: 01/08/2026
+ms.date: 03/24/2026
 #Customer Intent: As a developer, I want to learn more about DAB, so that I can determine if it's the right tool for my scenario.
 ---
 
@@ -61,6 +61,7 @@ Data API builder supports multiple authentication providers:
 
 | Provider | Use case |
 |----------|----------|
+| [**Unauthenticated**](concept/security/authenticate-unauthenticated.md) | DAB sits behind a trusted front end that handles identity (default) |
 | **Microsoft Entra ID** | Production apps using Microsoft identity |
 | **Custom JWT** | Third-party identity providers (Okta, Auth0, Keycloak) |
 | **App Service** | Apps running behind Azure App Service EasyAuth |

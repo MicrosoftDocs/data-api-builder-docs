@@ -18,5 +18,7 @@
   href: how-to-add-descriptions.md
 - name: Configure authentication
   href: how-to-configure-authentication.md
+- name: Configure custom tools
+  href: how-to-configure-custom-tools.md
 - name: Data manipulation tools
   href: data-manipulation-language-tools.md

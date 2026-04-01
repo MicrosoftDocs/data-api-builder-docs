@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 06/06/2025
+ms.date: 03/24/2026
 show_latex: true
 ---
 
@@ -30,6 +30,10 @@ The `data-source` section defines the database access details. It also defines d
 |[data-source.health.enabled](#health-data-source)|Enables the health check endpoint|
 |[data-source.health.name](#health-data-source)|Identifier used in the health report|
 |[data-source.health.threshold-ms](#health-data-source)|Maximum duration in milliseconds for health check query|
+|[data-source.user-delegated-auth](#user-delegated-auth)|Object configuring On-Behalf-Of (OBO) user-delegated authentication (mssql only)|
+|[data-source.user-delegated-auth.enabled](#user-delegated-auth)|Enables OBO authentication|
+|[data-source.user-delegated-auth.provider](#user-delegated-auth)|OBO identity provider (currently `EntraId` only)|
+|[data-source.user-delegated-auth.database-audience](#user-delegated-auth)|Target audience for the downstream SQL token|
 
 ## Format overview
 
@@ -50,6 +54,11 @@ The `data-source` section defines the database access details. It also defines d
       "enabled": <true> (default) | <false>,
       "name": <string>,
       "threshold-ms": <integer; default: 1000>
+    },
+    "user-delegated-auth": {
+      "enabled": <true> | <false> (default),
+      "provider": <string>,
+      "database-audience": <string>
     }
   },
   "data-source-files": ["<string>"]
@@ -60,7 +69,7 @@ The `data-source` section defines the database access details. It also defines d
 
 |Parent|Property|Type|Required|Default|
 |-|-|-|-|-|
-|`$root`|`database-source`|object|✔️ Yes|-|
+|`$root`|`data-source`|object|✔️ Yes|-|
 
 ### Nested properties
 
@@ -156,7 +165,7 @@ END;
 Use environment variables to keep plain text secrets out of your configuration file. 
 
 > [!TIP]
-> Data API builder supports both the [`@env()` function`](../reference-functions.md#env) and [`.env` files](https://www.dotenv.org/docs/security/env.html). 
+> Data API builder supports both the [`@env()` function](../concept/config/env-function.md) and [`.env` files](https://www.dotenv.org/docs/security/env.html).
 
 ```json
 "data-source": {
@@ -179,7 +188,7 @@ Managed Service Identities (MSI) are supported with `DefaultAzureCredential` def
 
 #### User-Assigned Managed Identities (UAMI)
 
-For User Assigned Managed Identity, append the *Authentication* and *User Id* properties to your connection string while substituting in your User Assigned Managed Identity's client id: `Authentication=Active Directory Managed Identity; User Id=<UMI_CLIENT_ID>;`.
+For User Assigned Managed Identity, append the *Authentication* and *User ID* properties to your connection string while substituting in your User Assigned Managed Identity's client ID: `Authentication=Active Directory Managed Identity; User Id=<UMI_CLIENT_ID>;`.
 
 #### System-Assigned Managed Identity (SAMI)
 
@@ -223,3 +232,77 @@ The simplest possible query—specific to the database type—is executed agains
   }
 }
 ```
+
+## User-delegated auth
+
+|Parent|Property|Type|Required|Default|
+|-|-|-|-|-|
+|`data-source`|`user-delegated-auth`|object|No|–|
+
+On-Behalf-Of (OBO) user-delegated authentication for SQL Server and Azure SQL. When enabled, DAB exchanges the incoming user token for a downstream SQL token so the database authenticates as the actual calling user. This feature is supported only for `mssql` data sources and requires Entra ID authentication upstream.
+
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+
+### Nested properties
+
+|Parent|Property|Type|Required|Default|
+|-|-|-|-|-|
+|`data-source.user-delegated-auth`|`enabled`|boolean|No|false|
+|`data-source.user-delegated-auth`|`provider`|enum (`EntraId`)|No|`EntraId`|
+|`data-source.user-delegated-auth`|`database-audience`|string|Yes (when enabled)|None|
+
+- `enabled`—turns OBO on or off.
+- `provider`—the identity provider for the token exchange. Currently only `EntraId` is supported.
+- `database-audience`—the target audience for the downstream SQL token (for example, `https://database.windows.net`).
+
+### Required environment variables
+
+When OBO is enabled, DAB reads the following environment variables for the token exchange:
+
+| Variable | Description |
+|----------|-------------|
+| `DAB_OBO_CLIENTID` | Application (client) ID of the Entra ID app registration |
+| `DAB_OBO_CLIENTSECRET` | Client secret for the app registration |
+| `DAB_OBO_TENANTID` | Entra ID tenant ID |
+
+### Per-user connection pooling
+
+When OBO is enabled, DAB maintains separate SQL connection pools per user so that one user's access token is never reused for another user's request.
+
+> [!NOTE]
+> Per-user connection pooling applies only when OBO authentication is active. Standard deployments are unaffected.
+
+### Format
+
+```json
+{
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string": "@env('SQL_CONNECTION_STRING')",
+    "user-delegated-auth": {
+      "enabled": <true> | <false> (default),
+      "provider": <string>,
+      "database-audience": <string>
+    }
+  }
+}
+```
+
+### Example
+
+```json
+{
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string": "@env('SQL_CONNECTION_STRING')",
+    "user-delegated-auth": {
+      "enabled": true,
+      "provider": "EntraId",
+      "database-audience": "https://database.windows.net"
+    }
+  }
+}
+```
+
+> [!IMPORTANT]
+> OBO is supported only for `mssql`. The `database-audience` property is required when OBO is enabled. Running this configuration against a non-MSSQL data source fails validation.

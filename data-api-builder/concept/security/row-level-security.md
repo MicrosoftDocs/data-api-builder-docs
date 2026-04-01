@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 01/21/2026
+ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to implement row-level security, so that I can ensure that users only see records intended for them.
 ---
 
@@ -18,6 +18,9 @@ Use the **session context** feature of SQL to implement row-level security in Da
 
 > [!IMPORTANT]
 > Session context with SQL Server row-level security differs from Data API builder database policies. Database policies (for example, `--policy-database "@item.owner eq @claims.user_id"`) are translated into WHERE clauses by Data API builder, while session context forwards claims to SQL Server so that SQL-native row-level security handles the filtering.
+
+> [!TIP]
+> DAB 2.0, which is currently in preview, also supports On-Behalf-Of (OBO) user-delegated authentication for SQL Server, which exchanges the incoming user token for a downstream SQL token so the database authenticates as the actual calling user. OBO enables row-level security policies that depend on the real user identity. For more information, see [user-delegated auth](../../configuration/data-source.md#user-delegated-auth) and [what's new](../../whats-new/version-2-0.md).
 
 ## Prerequisites
 
@@ -76,7 +79,7 @@ Create a table with fictitious data to use in this example scenario.
     SELECT * FROM dbo.Revenues
     ```
 
-1. Create a function named `RevenuesPredicate`. This function will filter results based on the current session context.
+1. Create a function named `RevenuesPredicate`. This function filters results based on the current session context.
 
     ```sql
     CREATE FUNCTION dbo.RevenuesPredicate(@accessible_role varchar(max))
@@ -95,7 +98,7 @@ Create a table with fictitious data to use in this example scenario.
     ```
 
 > [!NOTE]
-> The `WITH SCHEMABINDING` clause is required for functions used in security policies so underlying schema changes do not invalidate the predicate.
+> The `WITH SCHEMABINDING` clause is required for functions used in security policies so underlying schema changes don't invalidate the predicate.
 
 ## (Optional) Create a stored procedure
 
@@ -249,7 +252,7 @@ DROP TABLE IF EXISTS dbo.Revenues;
 
 - **No results returned**: Verify the security policy is active (`SELECT * FROM sys.security_policies`), check the session context value (`SELECT SESSION_CONTEXT(N'roles')`), and confirm `--set-session-context true` is set in your Data API builder configuration.
 - **All rows returned**: Confirm the security policy isn't disabled (`WITH STATE = OFF`) and that the predicate returns `1` only for authorized rows.
-- **Performance issues**: Index the predicate column (`accessible_role`), and consider temporarily disabling the policy to isolate performance impact.
+- **Performance issues**: Index the predicate column (`accessible_role`), and consider temporarily disabling the policy to isolate performance effect.
 
 ## Related content
 

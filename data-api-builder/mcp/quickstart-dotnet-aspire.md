@@ -138,7 +138,7 @@ IResourceBuilder<ContainerResource> WithSqlCommander(IResourceBuilder<SqlServerD
     });
 
 IResourceBuilder<ContainerResource> AddMcpServer(IResourceBuilder<SqlServerDatabaseResource> db) => db
-    .ApplicationBuilder.AddContainer("sql-mcp-server", "azure-databases/data-api-builder", "1.7")
+    .ApplicationBuilder.AddContainer("sql-mcp-server", "azure-databases/data-api-builder", "2.0.0-rc")
     .WithImageRegistry("mcr.microsoft.com")
     .WithHttpEndpoint(targetPort: 5000, name: "http")
     .WithEnvironment("MSSQL_CONNECTION_STRING", db)

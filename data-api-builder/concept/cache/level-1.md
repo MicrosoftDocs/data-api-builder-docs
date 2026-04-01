@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 07/16/2025
+ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to use level 1 cache to ease queries against my database
 ---
 
@@ -40,15 +40,19 @@ Each entity must also opt in to use cache:
 "MyEntity": {
   "cache": {
     "enabled": true,
-    "ttl-seconds": 30
+    "ttl-seconds": 30,
+    "level": "L1"
   }
 }
 ```
 
 * `enabled`: Required. Enables caching for this specific entity.
 * `ttl-seconds`: Optional. If not specified, inherits from the global time-to-live (TTL) value.
+* `level`: Optional. Controls which cache tiers are used. `L1` uses in-memory cache only; `L1L2` (default) uses both in-memory and distributed cache.
 
 See [entity cache settings](../../configuration/entities.md#cache-entity-name-entities).
+
+[!INCLUDE[Note - DAB 2.0 preview](../../includes/note-dab-2-preview.md)]
 
 ## Behavior
 

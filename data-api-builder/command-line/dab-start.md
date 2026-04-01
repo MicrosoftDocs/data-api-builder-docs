@@ -20,17 +20,22 @@ Start the Data API builder runtime with an existing configuration file.
 dab start [options]
 ```
 
-### Quick glance
+## Quick glance
 
-| Option                                        | Summary                                                                                            |
-| --------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| [`-c, --config`](#-c---config)                | Use a specific config file (defaults to `dab-config.json` or environment-specific file if present) |
-| [`--LogLevel <level>`](#--loglevel-level)     | Specifies logging level as provided value.                                                         |
-| [`--mcp-stdio`](#--mcp-stdio)                 | *(Model Context Protocol (MCP))* Starts DAB as an MCP standard input/output (stdio) server instead of an HTTP server. Requires `mcp.enabled: true` in config. |
-| [`--no-https-redirect`](#--no-https-redirect) | Disables automatic HTTP→HTTPS redirection                                                          |
-| [`--verbose`](#--verbose)                     | Sets log level to Information                                                                      |
-| [`--help`](#--help)                           | Display the help screen.                                                                           |
-| [`--version`](#--version)                     | Display version information.                                                                       |
+| Option | Summary |
+| - | - |
+| [`-c, --config`](#-c---config) | Use a specific config file (defaults to `dab-config.json` or environment-specific file if present) |
+
+### Head section
+
+| Option | Summary |
+| - | - |
+| [`--LogLevel <level>`](#--loglevel-level) | Specifies logging level as provided value. |
+| [`--mcp-stdio`](#--mcp-stdio) | *(Model Context Protocol (MCP))* Starts DAB as an MCP server that uses standard input and output (STDIO) instead of HTTP. Requires `mcp.enabled: true` in config. |
+| [`--no-https-redirect`](#--no-https-redirect) | Disables automatic HTTP→HTTPS redirection |
+| [`--verbose`](#--verbose) | Sets logging level to Informational |
+| [`--help`](#--help) | Display the help screen. |
+| [`--version`](#--version) | Display version information. |
 
 ## `-c, --config`
 
@@ -38,94 +43,66 @@ Path to config file. Defaults to `dab-config.json` unless `dab-config.<DAB_ENVIR
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab start \
   --config ./settings/dab-config.json
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab start ^
   --config .\settings\dab-config.json
 ```
-
 ---
-
 ## `--LogLevel <level>`
 
 Specifies logging level as provided value. For possible values, see [Log levels](https://go.microsoft.com/fwlink/?linkid=2263106).
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab start \
   --LogLevel Warning
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab start ^
   --LogLevel Warning
 ```
-
 ---
-
 ## `--no-https-redirect`
 
 Disables automatic HTTP→HTTPS redirection.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab start \
   --no-https-redirect
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab start ^
   --no-https-redirect
 ```
-
 ---
-
-## `--verbose`
-
-Sets the minimum log level to `Information`.
-
-### Example
-
-#### [Bash](#tab/bash)
-
-```bash
-dab start \
-  --verbose
-```
-
-#### [Command Prompt](#tab/cmd)
-
-```cmd
-dab start ^
-  --verbose
-```
-
----
-
 ## `--mcp-stdio`
 
 > [!NOTE]
-> This option is a **Model Context Protocol (MCP) feature** which was introduced in release 1.7. It requires `"mcp": { "enabled": true }` in the `runtime` section of your `dab-config.json`. For full MCP configuration details, see [SQL MCP Server overview](../mcp/overview.md).
+> This option is a **Model Context Protocol (MCP) feature** available in release `1.7` and later. It requires `"mcp": { "enabled": true }` in the `runtime` section of your `dab-config.json`. For full MCP configuration details, see [SQL MCP Server overview](../mcp/overview.md).
 
-Starts Data API builder as an MCP standard input/output (stdio) server instead of binding to an HTTP port. In this mode, DAB communicates with an MCP client (such as GitHub Copilot, Visual Studio (VS) Code, or any MCP-compatible AI agent) entirely over standard input/output (stdin/stdout) using the [Model Context Protocol](https://modelcontextprotocol.io/). No HTTP server or network port is exposed.
+Starts Data API builder as an MCP server that uses standard input and output instead of binding to an HTTP port. In this mode, DAB communicates with an MCP client (such as GitHub Copilot, Visual Studio (VS) Code, or any MCP-compatible AI agent) entirely over `stdin` and `stdout` by using the [Model Context Protocol](https://modelcontextprotocol.io/). No HTTP server or network port is exposed.
 
 This flag also accepts an optional positional `role:<role-name>` argument that specifies the DAB permission role under which all MCP tool calls execute. The role must match a name defined in the `permissions` section of your entity configuration. If omitted, the role defaults to `anonymous`.
 
@@ -159,7 +136,7 @@ MCP must be enabled in your `dab-config.json` before using `--mcp-stdio`:
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 # Default anonymous role
@@ -179,7 +156,7 @@ dab start \
   --LogLevel Information
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 :: Default anonymous role
@@ -198,12 +175,10 @@ dab start ^
   --config .\dab-config.json ^
   --LogLevel Information
 ```
-
 ---
-
 ### MCP client configuration
 
-Because DAB runs as a subprocess communicating over standard input/output (stdio), your MCP client must launch DAB as a child process and pipe its stdin/stdout. A typical MCP client configuration for Visual Studio (VS) Code or a compatible agent looks like:
+Because DAB runs as a subprocess that communicates over standard input and output, your MCP client must launch DAB as a child process and pipe `stdin` and `stdout`. A typical MCP client configuration for Visual Studio (VS) Code or a compatible agent looks like:
 
 ```json
 {
@@ -223,46 +198,60 @@ Because DAB runs as a subprocess communicating over standard input/output (stdio
 }
 ```
 
-For a complete walkthrough, see [standard input/output (stdio) transport for SQL MCP Server](../mcp/stdio-transport.md).
+For a complete walkthrough, see [standard input and output transport for SQL MCP Server](../mcp/stdio-transport.md).
 
+## `--verbose`
+
+Sets the logging level to Informational. This is a convenience flag equivalent to `--LogLevel Information`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab start \
+  --verbose
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab start ^
+  --verbose
+```
 ---
-
 ## `--help`
 
 Display the help screen.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab start --help
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab start --help
 ```
-
 ---
-
 ## `--version`
 
 Display version information.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab start --version
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab start --version
 ```
-
----

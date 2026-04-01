@@ -11,32 +11,105 @@
       href: whats-new/TOC.yml
     - name: Feature availability
       href: feature-availability.md
+    - name: Database-specific features
+      displayName: session context, SESSION_CONTEXT, Cosmos DB, authorize directive, database version, unsupported data types
+      href: reference-database-specific-features.md
 - name: Quickstarts
   items:
-    - name: Local SQL database
-      href: quickstart/mssql.md
-      displayName: mssql, local, sql server, database
-    - name: Local Cosmos emulator
-      href: quickstart/nosql.md
-      displayName: cosmos, nosql, local, database
-    - name: Local PostgreSQL
-      href: quickstart/postgresql.md
-      displayName: postgres, pg, local, database
-    - name: Local MySQL
-      href: quickstart/mysql.md
-      displayName: mysql, local, database
-    - name: Azure SQL database
-      href: quickstart/azure-sql.md
-      displayName: azure, sql server, database, cloud
-    - name: Azure Cosmos DB 
-      href: quickstart/azure-cosmos-db-nosql.md
-      displayName: azure, cosmos, nosql, cloud, database
-    - name: Enable the Command Query Responsibility Segregation (CQRS) pattern
-      href: https://youtu.be/pSuMIvXRM1Q?t=142
-      displayName: architecture, design, htap, read, write
-- name: SQL Model Context Protocol (MCP) Server
+    - name: Overview
+      href: quickstart/index.yml
+      displayName: quickstart, get started, landing
+    - name: SQL Databases
+      href: quickstart/basic-sql.md
+      displayName: mssql, sql server, postgres, postgresql, mysql, local, database
+    - name: NoSQL Databases
+      href: quickstart/basic-nosql.md
+      displayName: cosmos, nosql, local, database, emulator
+- name: SQL MCP Server
   href: mcp/TOC.yml
-- name: Visual Studio Code extension
+- name: REST Endpoint
+  items:
+    - name: Overview
+      href: concept/rest/index.yml
+      displayName: REST, HTTP, API, endpoints, landing
+    - name: Call REST endpoints
+      href: concept/rest/overview.md
+      displayName: HTTP, GET, POST, PATCH, DELETE, verbs, REST API
+    - name: Test with OpenAPI
+      href: concept/rest/openapi.md
+      displayName: OpenAPI, Swagger, API docs, schema definition, HTTP interface
+    - name: Use If-Match header
+      href: concept/rest/http-if-match.md
+      displayName: HTTP, conditional, update-only, etag
+    - name: Use Location header
+      href: concept/rest/http-location.md
+      displayName: HTTP, redirect, created, POST
+    - name: Paginate with $after
+      href: keywords/after-rest.md
+      displayName: page, pagination, cursor
+    - name: Filter with $filter
+      href: keywords/filter-rest.md
+      displayName: predicate, where, limit
+    - name: Limit with $first
+      href: keywords/first-rest.md
+      displayName: pagination, top, page
+    - name: Sort with $orderby
+      href: keywords/orderby-rest.md
+      displayName: sort, bubble, arrange, align
+    - name: Project with $select
+      href: keywords/select-rest.md
+      displayName: projection, choose, columns, items
+    - name: Database views
+      href: concept/rest/views.md
+      displayName: views, SQL, read-only, REST
+    - name: Stored procedures
+      href: concept/rest/stored-procedures.md
+      displayName: stored procedures, procs, SQL, REST
+    - name: Configure query timeout
+      href: concept/database/timeout.md
+      displayName: timeout, command timeout, connection string, long-running
+- name: GraphQL Endpoint
+  items:
+    - name: Overview
+      href: concept/graphql/index.yml
+      displayName: GraphQL, API, endpoints, landing
+    - name: Call GraphQL endpoints
+      href: concept/graphql/overview.md
+      displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
+    - name: Aggregate data
+      href: concept/graphql/aggregate-data.md
+      displayName: aggregation, groupBy, sum, avg, min, max, graphql
+    - name: Insert multiple records
+      href: concept/graphql/multiple-mutations.md
+      displayName: batch, transaction, graphql, createMany, mutation
+    - name: Define entity relationships
+      href: concept/graphql/relationships.md
+      displayName: relationships, foreign key, navigation, linking, cardinality
+    - name: Paginate with after
+      href: keywords/after-graphql.md
+      displayName: page, pagination, cursor
+    - name: Filter results
+      href: keywords/filter-graphql.md
+      displayName: predicate, where, limit
+    - name: Limit with first
+      href: keywords/first-graphql.md
+      displayName: pagination, top, page
+    - name: Sort with orderby
+      href: keywords/orderby-graphql.md
+      displayName: sort, bubble, arrange, align
+    - name: Project with select
+      href: keywords/select-graphql.md
+      displayName: projection, choose, columns, items
+    - name: Database views
+      href: concept/graphql/views.md
+      displayName: views, SQL, read-only, GraphQL
+    - name: Stored procedures
+      href: concept/graphql/stored-procedures.md
+      displayName: stored procedures, procs, SQL, GraphQL, execute prefix
+    - name: Configure query timeout
+      href: concept/database/timeout.md
+      displayName: timeout, command timeout, connection string, long-running
+- name: VSCode extensions
   href: vscode-extension/toc.yml
 - name: Command-Line interface
   items:
@@ -49,6 +122,15 @@
     - name: dab add
       displayName: command line, terminal, local
       href: command-line/dab-add.md
+    - name: dab add-telemetry
+      displayName: command line, terminal, local, telemetry, opentelemetry, application insights
+      href: command-line/dab-add-telemetry.md
+    - name: dab auto-config
+      displayName: command line, terminal, local, autoentities
+      href: command-line/dab-auto-config.md
+    - name: dab auto-config-simulate
+      displayName: command line, terminal, local, autoentities, simulate
+      href: command-line/dab-auto-config-simulate.md
     - name: dab configure
       displayName: command line, terminal, local
       href: command-line/dab-configure.md
@@ -70,8 +152,17 @@
 - name: Configuration file
   items:
     - name: Overview
-      href: configuration/index.md
-      displayName: Config, JSON
+      items:
+        - name: Configuration schema overview
+          href: configuration/index.md
+          displayName: Config, JSON
+        - name: Data source files
+          href: configuration/index.md#data-source-files
+        - name: Autoentities
+          displayName: auto-config, auto entities, pattern, MSSQL
+          href: configuration/autoentities.md
+        - name: JSON Schema
+          href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
     - name: Data source
       items:
         - name: Database type
@@ -80,8 +171,6 @@
           href: configuration/data-source.md#data-source
         - name: Options (data source)
           href: configuration/data-source.md#data-source
-    - name: Data source files
-      href: configuration/index.md#data-source-files
     - name: Runtime
       href: configuration/runtime.md#runtime
     - name: Runtime / GraphQL 
@@ -154,6 +243,12 @@
           href: configuration/runtime.md#pagination-runtime
     - name: Entities
       items:
+        - name: Description (entity)
+          displayName: entity description, human-readable
+          href: configuration/entities.md#description-entity-name-entities
+        - name: Fields (entity)
+          displayName: field, alias, primary-key, description, mappings replacement
+          href: configuration/entities.md#fields-entity-name-entities
         - name: Source (entity)
           items:
             - name: Object (entity source)
@@ -209,6 +304,9 @@
             - name: Time-to-live in seconds
               displayName: TTL (entity cache)
               href: configuration/entities.md#cache-entity-name-entities
+            - name: Level (entity cache)
+              displayName: L1, L1L2, cache level
+              href: configuration/entities.md#cache-entity-name-entities
         - name: Permissions (entity)
           items:
             - name: Role (entity permissions)
@@ -224,76 +322,19 @@
             - name: Policy (entity permissions)
               href: configuration/entities.md#nested-properties-1
               displayName: policy, claims, predicate, item, database
-    - name: JSON Schema
-      href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
 - name: How-to
   items:
     - name: Run DAB
       items:
         - name: Run in a container
-          href: how-to/run-container.md
+          href: deployment/local-container.md
           displayName: docker, container, dab, run
         - name: Run from source
-          href: how-to/run-from-source.md
+          href: deployment/run-from-source.md
           displayName: source, github, OSS, build, run
         - name: Set up Azure Cosmos DB
-          href: how-to/set-up-cosmosdb.md
+          href: concept/database/set-up-cosmosdb.md
           displayName: cosmos, nosql, schema, graphql, authorize
-    - name: GraphQL API
-      items:
-        - name: Call GraphQL endpoints
-          href: concept/api/graphql.md
-          displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
-        - name: Aggregate data
-          href: how-to/aggregate-data.md
-          displayName: aggregation, groupBy, sum, avg, min, max, graphql
-        - name: Insert multiple records
-          href: how-to/multiple-mutations.md
-          displayName: batch, transaction, graphql, createMany, mutation
-        - name: Paginate with after
-          href: keywords/after-graphql.md
-          displayName: page, pagination, cursor
-        - name: Filter results
-          href: keywords/filter-graphql.md
-          displayName: predicate, where, limit
-        - name: Limit with first
-          href: keywords/first-graphql.md
-          displayName: pagination, top, page
-        - name: Sort with orderby
-          href: keywords/orderby-graphql.md
-          displayName: sort, bubble, arrange, align
-        - name: Project with select
-          href: keywords/select-graphql.md
-          displayName: projection, choose, columns, items
-    - name: REST API
-      items:
-        - name: Call REST endpoints
-          href: concept/api/rest.md
-          displayName: HTTP, GET, POST, PATCH, DELETE, verbs, REST API
-        - name: Test with OpenAPI
-          href: concept/api/openapi.md
-          displayName: OpenAPI, Swagger, API docs, schema definition, HTTP interface
-        - name: Use If-Match header
-          href: concept/api/http-if-match.md
-          displayName: HTTP
-        - name: Use Location header
-          href: concept/api/http-location.md
-          displayName: HTTP
-        - name: Paginate with $after
-          href: keywords/after-rest.md
-          displayName: page, pagination, cursor
-        - name: Filter with $filter
-          href: keywords/filter-rest.md
-          displayName: predicate, where, limit
-        - name: Limit with $first
-          href: keywords/first-rest.md
-          displayName: pagination, top, page
-        - name: Sort with $orderby
-          href: keywords/orderby-rest.md
-          displayName: sort, bubble, arrange, align
-        - name: Project with $select
-          href: keywords/select-rest.md
-          displayName: projection, choose, columns, items
     - name: Data caching
       items:
         - name: Use level 1 cache
@@ -319,23 +360,12 @@
         - name: Use akv() function
           href: concept/config/akv-function.md
           displayName: functions, helpers, filters, expressions, macros, @akv, azure key vault
+        - name: Use auto configuration
+          href: concept/config/auto-config.md
+          displayName: auto configuration, autoentities, patterns, templates
         - name: Use multiple data sources
-          href: concept/config/multi-data-source.md
+          href: concept/config/multi-config.md
           displayName: multiple databases, cross-DB, data source, federation
-    - name: Database structures
-      items:
-        - name: Use database views
-          href: concept/database/views.md
-          displayName: views, SQL, read-only
-        - name: Use stored procedures
-          href: concept/database/stored-procedures.md
-          displayName: stored procedures, procs, SQL, read-only
-        - name: Use table relationships
-          href: concept/database/relationships.md
-          displayName: relationships, foreign key, navigation, linking, cardinality
-        - name: Configure query timeout
-          href: how-to/configure-timeout.md
-          displayName: timeout, command timeout, connection string, long-running, stored procedure, query, sql server, postgresql, mysql, cosmos db, mssql
     - name: Monitoring and telemetry
       items:
         - name: Use Application Insights
@@ -356,51 +386,57 @@
     - name: Security
       items:
         - name: Configure Entra ID authentication
-          href: concept/security/how-to-authenticate-entra.md
+          href: concept/security/authenticate-entra.md
           displayName: AAD, Microsoft Entra ID, Azure AD, SSO, OAuth, JWT, token
         - name: Configure custom JWT authentication
-          href: concept/security/how-to-authenticate-custom.md
+          href: concept/security/authenticate-custom.md
           displayName: Okta, Auth0, JWT, third-party, custom IdP
         - name: Configure App Service authentication
-          href: concept/security/how-to-authenticate-app-service.md
+          href: concept/security/authenticate-easy-auth.md
           displayName: EasyAuth, App Service, X-MS-CLIENT-PRINCIPAL
         - name: Configure Simulator authentication
-          href: concept/security/how-to-authenticate-simulator.md
+          href: concept/security/authenticate-simulator.md
           displayName: local auth, simulated auth, development, testing
+        - name: Configure Unauthenticated provider
+          href: concept/security/authenticate-unauthenticated.md
+          displayName: anonymous, no auth, unauthenticated, default provider, pass-through
+        - name: Configure On-Behalf-Of authentication
+          href: concept/security/authenticate-on-behalf-of.md
+          displayName: OBO, on-behalf-of, user-delegated, pass-through, mssql, Entra ID
         - name: Configure entity permissions
           href: concept/security/authorization.md
           displayName: roles, claims, policies, access control, permissions, authorization
         - name: Configure database policies
-          href: concept/security/how-to-configure-database-policies.md
+          href: concept/security/database-policies.md
           displayName: policies, predicates, row-level, filtering, claims, OData
         - name: Implement row-level security
           href: concept/security/row-level-security.md
           displayName: RLS, predicates, SQL security, claim-based access
+        - name: Understand role inheritance
+          href: concept/security/role-inheritance.md
+          displayName: role inheritance, permission inheritance, anonymous, authenticated, named role
     - name: Deploy and Host
       items:
         - name: Deployment overview
-          href: deployment/index.md
-          displayName: deployment, hosting, summary, intro
-        - name: Deployment checklist
-          href: deployment/checklist.md
-          displayName: deployment, validation, steps, readiness
-        - name: Hosting options
-          href: deployment/hosting-options.md
-          displayName: hosting, container, azure, options
+          href: deployment/overview.md
+          displayName: deployment, hosting, checklist, options
         - name: Deploy to Container Apps (Portal)
-          href: deployment/how-to-publish-container-apps.md
+          href: deployment/azure-container-apps.md
           displayName: azure, container apps, publish, deploy, aca
         - name: Deploy to Container Apps (CLI)
           href: tutorial-deploy-container-app-cli.md
           displayName: azure, deploy, ACA, container, cli
         - name: Deploy to Container Instances
-          href: deployment/how-to-publish-container-instances.md
+          href: deployment/azure-container-instances.md
           displayName: azure, container instances, publish, deploy, aci
+        - name: Deploy to Azure Kubernetes Service
+          href: deployment/azure-kubernetes-service.md
+          displayName: azure, aks, kubernetes, publish, deploy
         - name: Configuration best practices
-          href: deployment/best-practices-configuration.md
+          href: concept/config/best-practices.md
           displayName: configuration, deployment, settings, optimize
         - name: Security best practices
-          href: deployment/best-practices-security.md
+          href: concept/security/best-practices.md
           displayName: security, deployment, hardening, guidance
 - name: Samples
   items:
@@ -410,26 +446,39 @@
     - name: Library app with Blazor and Azure SQL
       href: /samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
       displayName: blazor, aspnet, webassembly, azure sql, sample
-    - name: Library app with Azure SQL
-      href: /samples/azure-samples/dab-swa-library-demo/sample
-      displayName: azure sql, sample, dab
-    - name: Todo app with Static Web Apps (SWA) and Azure SQL
-      href: /samples/azure-samples/dab-swa-todo/sample
-      displayName: todo, dab, sample, azure sql
+    - name: Enable the CQRS pattern
+      href: https://youtu.be/pSuMIvXRM1Q?t=142
+      displayName: architecture, design, htap, read, write, cqrs
 - name: Troubleshooting
   items:
     - name: FAQ
       displayName: frequently asked questions, Q&A
       href: faq.yml
-    - name: Installation
-      href: /troubleshoot/azure/data-api-builder/installation?context=/azure/data-api-builder/context/context
-    - name: Runtime
-      href: /troubleshoot/azure/data-api-builder/usage?context=/azure/data-api-builder/context/context
+    - name: SQL Server
+      href: troubleshooting/mssql.md
+      displayName: sql server, mssql, connection, login, azure sql
+    - name: PostgreSQL
+      href: troubleshooting/postgresql.md
+      displayName: postgres, postgresql, connection, schema, ssl
+    - name: MySQL
+      href: troubleshooting/mysql.md
+      displayName: mysql, connection, access denied, column type
+    - name: Azure Cosmos DB
+      href: troubleshooting/cosmos.md
+      displayName: cosmos, nosql, emulator, certificate, graphql schema
+    - name: REST API
+      href: troubleshooting/rest.md
+      displayName: rest, 404, 405, filter, cors, odata
+    - name: GraphQL API
+      href: troubleshooting/graphql.md
+      displayName: graphql, schema, mutation, introspection, relationship
+    - name: SQL MCP Server
+      href: troubleshooting/mcp.md
+      displayName: mcp, stdio, tool, agent, authentication, foundry
     - name: Known issues
       displayName: bugs
       href: https://github.com/azure/data-api-builder/labels/known-issue
     - name: Support
       displayName: ticket, css, feedback, help, assistance
-
       href: https://github.com/Azure/data-api-builder/blob/main/SUPPORT.md
 
