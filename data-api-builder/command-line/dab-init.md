@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 09/29/2025
+ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to initialize a Data API builder configuration, so that I can begin defining APIs for my database.
 ---
 
@@ -22,67 +22,68 @@ dab init [options]
 
 If the target config file already exists, the command overwrites it. There's no merge. Use version control or backups if you need to preserve the previous file.
 
-### Quick glance
+## Quick glance
 
-| Option                         | Summary                                           |
-| ------------------------------ | ------------------------------------------------- |
+| Option | Summary |
+| - | - |
 | [`-c, --config`](#-c---config) | Output config file name (default dab-config.json) |
 
-#### Authentication
+#### Authentication section
 
-| Option                               | Summary                                   |
-| ------------------------------------ | ----------------------------------------- |
-| [`--auth.audience`](#--authaudience) | JSON Web Token (JWT) audience claim       |
-| [`--auth.issuer`](#--authissuer)     | JSON Web Token (JWT) issuer claim         |
-| [`--auth.provider`](#--authprovider) | Identity provider |
+| Option | Summary |
+| - | - |
+| [`--auth.audience`](#--authaudience) | JSON Web Token (JWT) audience claim |
+| [`--auth.issuer`](#--authissuer) | JSON Web Token (JWT) issuer claim |
+| [`--auth.provider`](#--authprovider) | Identity provider (default `Unauthenticated`) |
 
-#### Data Source
+#### Data Source section
 
-| Option                                                      | Summary                                                                                |
-| ----------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [`--connection-string`](#--connection-string)               | Database connection string (supports `@env()`)                                         |
-| [`--cosmosdb_nosql-container`](#--cosmosdb_nosql-container) | Cosmos DB NoSQL container name (optional)                                              |
-| [`--cosmosdb_nosql-database`](#--cosmosdb_nosql-database)   | Cosmos DB NoSQL database name (required for cosmosdb_nosql)                            |
-| [`--database-type`](#--database-type)                       | Database type: `mssql`, `mysql`, `postgresql`, `cosmosdb_postgresql`, `cosmosdb_nosql` |
-| [`--set-session-context`](#--set-session-context)           | Enable SQL Server session context (mssql only)                                         |
+| Option | Summary |
+| - | - |
+| [`--connection-string`](#--connection-string) | Database connection string (supports `@env()`) |
+| [`--cosmosdb_nosql-container`](#--cosmosdb_nosql-container) | Cosmos DB NoSQL container name (optional) |
+| [`--cosmosdb_nosql-database`](#--cosmosdb_nosql-database) | Cosmos DB NoSQL database name (required for cosmosdb_nosql) |
+| [`--database-type`](#--database-type) | Database type: `mssql`, `mysql`, `postgresql`, `cosmosdb_postgresql`, `cosmosdb_nosql` |
+| [`--set-session-context`](#--set-session-context) | Enable SQL Server session context (mssql only) |
 
-#### GraphQL
+#### GraphQL section
 
-| Option                                                                  | Summary                                                      |
-| ----------------------------------------------------------------------- | ------------------------------------------------------------ |
-| [`--graphql.disabled`](#--graphqldisabled)                              | Deprecated. Disables GraphQL (use `--graphql.enabled false`) |
-| [`--graphql.enabled`](#--graphqlenabled)                                | Enable GraphQL (default true)                                |
-| [`--graphql.multiple-create.enabled`](#--graphqlmultiple-createenabled) | Allow multiple create mutations (default false)              |
-| [`--graphql.path`](#--graphqlpath)                                      | GraphQL endpoint prefix (default /graphql)                   |
-| [`--graphql-schema`](#--graphql-schema)                                 | Path to GraphQL schema (required for cosmosdb_nosql)         |
+| Option | Summary |
+| - | - |
+| [`--graphql.disabled`](#--graphqldisabled) | Deprecated. Disables GraphQL (use `--graphql.enabled false`) |
+| [`--graphql.enabled`](#--graphqlenabled) | Enable GraphQL (default true) |
+| [`--graphql.multiple-create.enabled`](#--graphqlmultiple-createenabled) | Allow multiple create mutations (default false) |
+| [`--graphql.path`](#--graphqlpath) | GraphQL endpoint prefix (default /graphql) |
+| [`--graphql-schema`](#--graphql-schema) | Path to GraphQL schema (required for cosmosdb_nosql) |
 
-#### Host and authentication
+#### Host and authentication section
 
-| Option                                         | Summary                                                   |
-| ---------------------------------------------- | --------------------------------------------------------- |
-| [`--host-mode`](#--host-mode)                  | Host mode: Development or Production (default Production) |
-| [`--cors-origin`](#--cors-origin)              | Allowed origins list (comma-separated)                    |
-| [`--runtime.base-route`](#--runtimebase-route) | Global prefix for all endpoints                           |
+| Option | Summary |
+| - | - |
+| [`--host-mode`](#--host-mode) | Host mode: Development or Production (default Production) |
+| [`--cors-origin`](#--cors-origin) | Allowed origins list (comma-separated) |
+| [`--runtime.base-route`](#--runtimebase-route) | Global prefix for all endpoints |
 
-#### MCP
+#### MCP section
 
-| Option                             | Summary                                              |
-| ---------------------------------- | ---------------------------------------------------- |
+| Option | Summary |
+| - | - |
+| [`--mcp.aggregate-records.query-timeout`](#--mcpaggregate-recordsquery-timeout) | Aggregate-records tool timeout in seconds (default 30, range 1–600) |
 | [`--mcp.disabled`](#--mcpdisabled) | Deprecated. Disables MCP (use `--mcp.enabled false`) |
-| [`--mcp.enabled`](#--mcpenabled)   | Enable MCP (default true)                            |
-| [`--mcp.path`](#--mcppath)         | MCP endpoint prefix (default /mcp)                   |
+| [`--mcp.enabled`](#--mcpenabled) | Enable MCP (default true) |
+| [`--mcp.path`](#--mcppath) | MCP endpoint prefix (default /mcp) |
 
 > [!Note]
-> MCP capability will be part of version 1.7.
+> MCP capability is available in version `1.7` and later.
 
-#### REST
+#### REST section
 
-| Option                                                     | Summary                                                                           |
-| ---------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| [`--rest.disabled`](#--restdisabled)                       | Deprecated. Disables REST (use `--rest.enabled false`)                            |
-| [`--rest.enabled`](#--restenabled)                         | Enable REST (default true, prefer over `--rest.disabled`)                         |
-| [`--rest.path`](#--restpath)                               | REST endpoint prefix (default /api, ignored for cosmosdb_nosql)                   |
-| [`--rest.request-body-strict`](#--restrequest-body-strict) | Enforce strict request body validation (default true, ignored for cosmosdb_nosql) |
+| Option | Summary |
+| - | - |
+| [`--rest.disabled`](#--restdisabled) | Deprecated. Disables REST (use `--rest.enabled false`) |
+| [`--rest.enabled`](#--restenabled) | Enable REST (default true, prefer over `--rest.disabled`) |
+| [`--rest.path`](#--restpath) | REST endpoint prefix (default /api, ignored for cosmosdb_nosql) |
+| [`--rest.request-body-strict`](#--restrequest-body-strict) | Enforce strict request body validation (default false, ignored for cosmosdb_nosql) |
 
 > [!IMPORTANT]
 > Don't mix the new `--*.enabled` flags and the legacy `--*.disabled` flags for the same subsystem in the same command. Prefer the `--*.enabled` pattern; the `--rest.disabled`, `--graphql.disabled`, and `--mcp.disabled` options log warnings and will be removed in future versions.
@@ -93,7 +94,7 @@ Output configuration file name. Default is `dab-config.json`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -101,23 +102,21 @@ dab init \
   --config dab-config.local.json
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --config dab-config.local.json
 ```
-
 ---
-
 ### Resulting config
 
 ```json
 {
   "data-source": {
     "database-type": "mssql",
-    "connection-string": "@env('MSSQL_CONNECTION_STRING')"
+    "connection-string": ""
   }
 }
 ```
@@ -128,7 +127,7 @@ JSON Web Token (JWT) audience claim.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -136,23 +135,25 @@ dab init \
   --auth.audience "https://example.com/api"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --auth.audience "https://example.com/api"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
 {
   "runtime": {
-    "authentication": {
-      "audience": "https://example.com/api"
+    "host": {
+      "authentication": {
+        "jwt": {
+          "audience": "https://example.com/api"
+        }
+      }
     }
   }
 }
@@ -164,7 +165,7 @@ JSON Web Token (JWT) issuer claim.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -172,23 +173,25 @@ dab init \
   --auth.issuer "https://login.microsoftonline.com/{tenant-id}/v2.0"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --auth.issuer "https://login.microsoftonline.com/{tenant-id}/v2.0"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
 {
   "runtime": {
-    "authentication": {
-      "issuer": "https://login.microsoftonline.com/{tenant-id}/v2.0"
+    "host": {
+      "authentication": {
+        "jwt": {
+          "issuer": "https://login.microsoftonline.com/{tenant-id}/v2.0"
+        }
+      }
     }
   }
 }
@@ -196,35 +199,54 @@ dab init ^
 
 ## `--auth.provider`
 
-Identity provider. 
+Identity provider. Default is `Unauthenticated`.
+
+When `Unauthenticated` is active, DAB doesn't inspect or validate any JWT. All requests run as `anonymous`. Another service can authenticate or filter requests before they reach DAB, but DAB still authorizes only as `anonymous`. To use a different provider, set it explicitly.
+
+For configuration guidance, see [Configure the Unauthenticated provider](../concept/security/authenticate-unauthenticated.md).
+
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+
+Valid values: `Unauthenticated`, `StaticWebApps`, `EntraID`, `AzureAD`, `AppService`, `Simulator`, `Custom`.
+
+> [!IMPORTANT]
+> Providers other than `Unauthenticated`, `StaticWebApps`, and `Simulator` require `--auth.audience` and `--auth.issuer`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
   --database-type mssql \
-  --auth.provider AzureAD
+  --auth.provider AzureAD \
+  --auth.audience "https://example.com/api" \
+  --auth.issuer "https://login.microsoftonline.com/{tenant-id}/v2.0"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
-  --auth.provider AzureAD
+  --auth.provider AzureAD ^
+  --auth.audience "https://example.com/api" ^
+  --auth.issuer "https://login.microsoftonline.com/{tenant-id}/v2.0"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
 {
   "runtime": {
-    "authentication": {
-      "provider": "AzureAD"
+    "host": {
+      "authentication": {
+        "provider": "AzureAD",
+        "jwt": {
+          "audience": "https://example.com/api",
+          "issuer": "https://login.microsoftonline.com/{tenant-id}/v2.0"
+        }
+      }
     }
   }
 }
@@ -236,7 +258,7 @@ Database connection string. Supports `@env()`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -244,16 +266,14 @@ dab init \
   --connection-string "@env('MSSQL_CONNECTION_STRING')"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --connection-string "@env('MSSQL_CONNECTION_STRING')"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -270,7 +290,7 @@ Comma-separated list of allowed origins.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -278,23 +298,23 @@ dab init \
   --cors-origin "https://app.example.com,https://admin.example.com"
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --cors-origin "https://app.example.com,https://admin.example.com"
 ```
-
 ---
-
 ### Resulting config
 
 ```json
 {
   "runtime": {
-    "cors": {
-      "origins": [ "https://app.example.com", "https://admin.example.com" ]
+    "host": {
+      "cors": {
+        "origins": [ "https://app.example.com", "https://admin.example.com" ]
+      }
     }
   }
 }
@@ -306,7 +326,7 @@ Cosmos DB NoSQL container name.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -314,16 +334,14 @@ dab init \
   --cosmosdb_nosql-container MyContainer
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type cosmosdb_nosql ^
   --cosmosdb_nosql-container MyContainer
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -343,7 +361,7 @@ Cosmos DB NoSQL database name. Required for `cosmosdb_nosql`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -351,16 +369,14 @@ dab init \
   --cosmosdb_nosql-database MyDb
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type cosmosdb_nosql ^
   --cosmosdb_nosql-database MyDb
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -380,22 +396,20 @@ Specifies the target database engine. Supported values: `mssql`, `mysql`, `postg
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
   --database-type mssql
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -416,7 +430,7 @@ Enable GraphQL endpoint. Default is `true`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -424,16 +438,14 @@ dab init \
   --graphql.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --graphql.enabled false
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -452,7 +464,7 @@ Allows creating multiple rows in a single mutation. Default is `false`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -460,23 +472,23 @@ dab init \
   --graphql.multiple-create.enabled true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --graphql.multiple-create.enabled true
 ```
-
 ---
-
 ### Resulting config
 
 ```json
 {
   "runtime": {
     "graphql": {
-      "multiple-create": { "enabled": true }
+      "multiple-mutations": {
+        "create": { "enabled": true }
+      }
     }
   }
 }
@@ -488,7 +500,7 @@ GraphQL endpoint prefix. Default is `/graphql`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -496,16 +508,14 @@ dab init \
   --graphql.path /gql
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --graphql.path /gql
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -524,7 +534,7 @@ Path to a GraphQL schema file. Required for `cosmosdb_nosql`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -532,22 +542,21 @@ dab init \
   --graphql-schema ./schema.gql
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type cosmosdb_nosql ^
   --graphql-schema ./schema.gql
 ```
-
 ---
-
 ### Resulting config
 
 ```json
 {
-  "runtime": {
-    "graphql": {
+  "data-source": {
+    "database-type": "cosmosdb_nosql",
+    "options": {
       "schema": "./schema.gql"
     }
   }
@@ -562,7 +571,7 @@ Valid values: `Development`, `Production`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -570,16 +579,14 @@ dab init \
   --host-mode development
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --host-mode development
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -587,6 +594,44 @@ dab init ^
   "runtime": {
     "host": {
       "mode": "development"
+    }
+  }
+}
+```
+
+## `--mcp.aggregate-records.query-timeout`
+
+Execution timeout in seconds for the aggregate-records MCP tool. Default is `30`. Range: `1`–`600`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab init \
+  --database-type mssql \
+  --mcp.aggregate-records.query-timeout 60
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab init ^
+  --database-type mssql ^
+  --mcp.aggregate-records.query-timeout 60
+```
+---
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "dml-tools": {
+        "aggregate-records": {
+          "query-timeout": 60
+        }
+      }
     }
   }
 }
@@ -602,7 +647,7 @@ Enable MCP endpoint. Default is `true`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -610,16 +655,14 @@ dab init \
   --mcp.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --mcp.enabled false
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -638,7 +681,7 @@ MCP endpoint prefix. Default is `/mcp`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -646,16 +689,14 @@ dab init \
   --mcp.path /model
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --mcp.path /model
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -678,7 +719,7 @@ Enable REST endpoint. Default is `true`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -686,16 +727,14 @@ dab init \
   --rest.enabled false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --rest.enabled false
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -717,7 +756,7 @@ REST endpoint prefix. Default is `/api`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -725,16 +764,14 @@ dab init \
   --rest.path /rest
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --rest.path /rest
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -749,7 +786,7 @@ dab init ^
 
 ## `--rest.request-body-strict`
 
-Controls handling of extra fields in request bodies. Default is `true`.
+Controls handling of extra fields in request bodies. Default is `false`.
 
 * `true`: Rejects extraneous fields (HTTP 400).
 * `false`: Ignores extra fields.
@@ -759,7 +796,7 @@ Controls handling of extra fields in request bodies. Default is `true`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -767,16 +804,14 @@ dab init \
   --rest.request-body-strict false
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --rest.request-body-strict false
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -793,26 +828,29 @@ dab init ^
 
 Global prefix prepended to all endpoints. Must begin with `/`.
 
+> [!IMPORTANT]
+> This option requires the authentication provider to be `StaticWebApps`. Set `--auth.provider StaticWebApps` alongside `--runtime.base-route`.
+
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
   --database-type mssql \
+  --auth.provider StaticWebApps \
   --runtime.base-route /v1
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
+  --auth.provider StaticWebApps ^
   --runtime.base-route /v1
 ```
-
 ---
-
 ### Resulting config
 
 ```json
@@ -829,7 +867,7 @@ Enable sending data to SQL Server using session context. Only valid for `mssql`.
 
 ### Example
 
-#### [Bash](#tab/bash)
+#### [Bash](#tab/bash-cli)
 
 ```bash
 dab init \
@@ -837,22 +875,21 @@ dab init \
   --set-session-context true
 ```
 
-#### [Command Prompt](#tab/cmd)
+#### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab init ^
   --database-type mssql ^
   --set-session-context true
 ```
-
 ---
-
 ### Resulting config
 
 ```json
 {
-  "runtime": {
-    "mssql": {
+  "data-source": {
+    "database-type": "mssql",
+    "options": {
       "set-session-context": true
     }
   }

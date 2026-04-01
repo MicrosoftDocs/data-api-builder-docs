@@ -4,12 +4,14 @@ description: Learn how to configure inbound authentication from your client to S
 author: jnixon
 ms.author: jnixon
 ms.topic: how-to
-ms.date: 01/09/2026
+ms.date: 03/24/2026
 ---
 
 # Configure authentication for SQL MCP Server
 
 [!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
+
+[!INCLUDE[Note - SQL MCP Server 2.0 preview](includes/note-sql-mcp-server-2-preview.md)]
 
 SQL MCP Server exposes a Model Context Protocol (MCP) endpoint in Data API builder. Some authentication options use JSON Web Tokens (JWTs).
 
@@ -43,7 +45,7 @@ SQL MCP Server supports multiple data sources through `data-source-files`. Each 
 
 ![Diagram showing outbound authentication from SQL MCP Server to multiple databases with per-database credentials.](media/how-to-configure-authentication/multiple-outbound-authentication.svg)
 
-For more information, see [Add more than one data source](../concept/config/multi-data-source.md) and [Data source configuration](../configuration/data-source.md).
+For more information, see [Add more than one data source](../concept/config/multi-config.md) and [Data source configuration](../configuration/data-source.md).
 
 ### Configure the database connection
 
@@ -60,10 +62,10 @@ SQL MCP Server supports SQL authentication with a username and password. This ap
 
 ```json
 {
-	"data-source": {
-		"database-type": "mssql",
-		"connection-string": "@env('SQL_CONNECTION_STRING')"
-	}
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string": "@env('SQL_CONNECTION_STRING')"
+  }
 }
 ```
 
@@ -140,7 +142,9 @@ After you configure Foundry, you must configure SQL MCP Server to accept the sam
 ### Foundry authentication modes
 
 #### Unauthenticated
-Configure SQL MCP Server to treat requests as `anonymous` (for example, set `provider: AppService` or omit `runtime.host.authentication`) and grant only the `anonymous` permissions you intend.
+Starting in DAB 2.0, the default authentication provider is `Unauthenticated`. Configure SQL MCP Server to treat requests as `anonymous` by using the default `Unauthenticated` provider (or set `provider: AppService`) and grant only the `anonymous` permissions you intend.
+
+For the underlying DAB authentication behavior, see [Configure the Unauthenticated provider](../concept/security/authenticate-unauthenticated.md).
 
 ![Diagram showing the Foundry unauthenticated authentication flow.](media/how-to-configure-authentication/foundry-unauthenticated.svg)
 
@@ -215,6 +219,6 @@ dab update ^
 
 - [Data source configuration](../configuration/data-source.md)
 - [Runtime configuration: authentication provider](../configuration/runtime.md)
-- [Local authentication (Simulator/AppService)](../concept/security/how-to-authenticate-simulator.md)
-- [Azure authentication (JWT/roles)](../concept/security/how-to-authenticate-entra.md)
+- [Local authentication (Simulator/AppService)](../concept/security/authenticate-simulator.md)
+- [Azure authentication (JWT/roles)](../concept/security/authenticate-entra.md)
 - [Foundry MCP authentication guidance](/azure/ai-foundry/agents/how-to/mcp-authentication)

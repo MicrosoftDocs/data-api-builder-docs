@@ -10,8 +10,30 @@ metadata:
   ms.reviewer: sidandrews
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 09/24/2025
+  ms.date: 03/24/2026
 landingContent:
+- title: Version 2.0
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: Release notes
+      url: version-2-0.md
+    - text: "Introducing: Auto configuration"
+      url: version-2-0.md#introducing-auto-configuration
+    - text: "Introducing: On-Behalf-Of (OBO) user-delegation"
+      url: version-2-0.md#introducing-on-behalf-of-obo-user-delegation
+    - text: "Introducing: Custom MCP tools"
+      url: version-2-0.md#introducing-custom-mcp-tools
+    - text: "Introducing: the Unauthenticated provider"
+      url: version-2-0.md#introducing-the-new-unauthenticated-provider
+    - text: "Introducing: Role inheritance"
+      url: version-2-0.md#introducing-role-inheritance
+    - text: "Enhancement: Advanced REST paths"
+      url: version-2-0.md#introducing-advanced-rest-paths
+    - text: "Enhancement: Permission-aware OpenAPI"
+      url: version-2-0.md#introducing-permission-aware-openapi
+    - text: "Enhancement: OpenTelemetry defaults and tracing"
+      url: version-2-0.md#default-opentelemetry-settings-in-dab-init
 - title: Version 1.7
   linkLists:
   - linkListType: whats-new
@@ -50,13 +72,13 @@ landingContent:
       url: version-1-5.md#http-cache-headers
     - text: Enhanced - Custom OpenTelemetry Metrics
       url: version-1-5.md#enhanced-opentelemetry
-    - text: Enhanced - EntraId Auth Provider
+    - text: Enhanced - Entra ID Auth Provider
       url: version-1-5.md#enhanced-entra-id-auth-provider
 - title: Version 1.4
   linkLists:
   - linkListType: whats-new
     links:
-    - text: Introducing - Open Telemetry
+    - text: Introducing - OpenTelemetry
       url: version-1-4.md
     - text: Enhancement - Cosmos Schema Generation now with Multi-Container Support
       url: version-1-4.md

@@ -142,13 +142,13 @@
     },
     {
       "source_path_from_root": "/data-api-builder/security-considerations.md",
-      "redirect_url": "/azure/data-api-builder/best-practices-security",
-      "redirect_document_id": true
+      "redirect_url": "/azure/data-api-builder/concept/security/best-practices",
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/best-practices.md",
-      "redirect_url": "/azure/data-api-builder/best-practices-configuration",
-      "redirect_document_id": true
+      "redirect_url": "/azure/data-api-builder/concept/config/best-practices",
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/views-and-stored-procedures.md",
@@ -182,37 +182,37 @@
     },
     {
       "source_path_from_root": "/data-api-builder/get-started/get-started-with-data-api-builder.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/get-started/get-started-azure-sql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/get-started/get-started-azure-cosmos-db.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-cosmos-db-nosql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/get-started/get-started-azure-postgresql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/get-started/get-started-azure-mysql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/run-using-container.md",
-      "redirect_url": "/azure/data-api-builder/how-to/run-container",
+      "redirect_url": "/azure/data-api-builder/deployment/local-container",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/run-from-source-code.md",
-      "redirect_url": "/azure/data-api-builder/how-to/run-from-source",
+      "redirect_url": "/azure/data-api-builder/deployment/run-from-source",
       "redirect_document_id": true
     },
     {
@@ -317,32 +317,32 @@
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-deploy-container-app.md",
-      "redirect_url": "/azure/data-api-builder/deployment/how-to-publish-container-apps",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-container-apps",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-deploy-container-instance.md",
-      "redirect_url": "/azure/data-api-builder/deployment/how-to-publish-container-instances",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-container-instances",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-deploy-static-web-app.md",
-      "redirect_url": "/azure/data-api-builder/deployment/hosting-options",
+      "redirect_url": "/azure/data-api-builder/deployment/overview",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/deployment/how-to-host-static-web-apps.md",
-      "redirect_url": "/azure/data-api-builder/deployment/hosting-options",
+      "redirect_url": "/azure/data-api-builder/deployment/overview",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/best-practices-security.md",
-      "redirect_url": "/azure/data-api-builder/deployment/best-practices-security",
+      "redirect_url": "/azure/data-api-builder/concept/security/best-practices",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/best-practices-configuration.md",
-      "redirect_url": "/azure/data-api-builder/deployment/best-practices-configuration",
+      "redirect_url": "/azure/data-api-builder/concept/config/best-practices",
       "redirect_document_id": true
     },
     {
@@ -367,7 +367,7 @@
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-multiple-mutations.md",
-      "redirect_url": "/azure/data-api-builder/how-to/multiple-mutations",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/multiple-mutations",
       "redirect_document_id": true
     },
     {
@@ -377,12 +377,12 @@
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-run-container.md",
-      "redirect_url": "/azure/data-api-builder/how-to/run-container",
+      "redirect_url": "/azure/data-api-builder/deployment/local-container",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-run-from-source.md",
-      "redirect_url": "/azure/data-api-builder/how-to/run-from-source",
+      "redirect_url": "/azure/data-api-builder/deployment/run-from-source",
       "redirect_document_id": false
     },
     {
@@ -392,42 +392,42 @@
     },
     {
       "source_path_from_root": "/data-api-builder/azure-cosmos-db-nosql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-cosmos-db-nosql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/azure-sql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/mssql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/mssql",
-      "redirect_document_id": true
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/mysql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/mysql",
-      "redirect_document_id": true
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/nosql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/nosql",
-      "redirect_document_id": true
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/postgresql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/postgresql",
-      "redirect_document_id": true
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/database-objects.md",
-      "redirect_url": "/azure/data-api-builder/concept/database/views",
+      "redirect_url": "/azure/data-api-builder/concept/rest/views",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/relationships.md",
-      "redirect_url": "/azure/data-api-builder/concept/database/relationships",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/relationships",
       "redirect_document_id": true
     },
     {
@@ -437,17 +437,17 @@
     },
     {
       "source_path_from_root": "/data-api-builder/graphql.md",
-      "redirect_url": "/azure/data-api-builder/concept/api/graphql",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/overview",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/openapi.md",
-      "redirect_url": "/azure/data-api-builder/concept/api/openapi",
+      "redirect_url": "/azure/data-api-builder/concept/rest/openapi",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/rest.md",
-      "redirect_url": "/azure/data-api-builder/concept/api/rest",
+      "redirect_url": "/azure/data-api-builder/concept/rest/overview",
       "redirect_document_id": true
     },
     {
@@ -472,32 +472,32 @@
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart-azure-cosmos-db-nosql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-cosmos-db-nosql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart-azure-sql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/azure-sql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart-sql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/mssql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart-mysql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/mysql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart-nosql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/nosql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/quickstart-postgresql.md",
-      "redirect_url": "/azure/data-api-builder/quickstart/postgresql",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
       "redirect_document_id": false
     },
     {
@@ -536,13 +536,263 @@
       "redirect_document_id": false
     },
     {
-      "source_path_from_root": "/data-api-builder/reference-database-specific-features.md",
-      "redirect_url": "/azure/data-api-builder/feature-availability",
+      "source_path_from_root": "/data-api-builder/vscode-extension/agent.md",
+      "redirect_url": "/azure/data-api-builder/vscode-extension/overview",
       "redirect_document_id": false
     },
     {
-      "source_path_from_root": "/data-api-builder/vscode-extension/agent.md",
-      "redirect_url": "/azure/data-api-builder/vscode-extension/overview",
+      "source_path_from_root": "/data-api-builder/how-to/aggregate-data.md",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/aggregate-data",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to/configure-timeout.md",
+      "redirect_url": "/azure/data-api-builder/concept/database/timeout",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to/multiple-mutations.md",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/multiple-mutations",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to/run-container.md",
+      "redirect_url": "/azure/data-api-builder/deployment/local-container",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to/run-from-source.md",
+      "redirect_url": "/azure/data-api-builder/deployment/run-from-source",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/how-to/set-up-cosmosdb.md",
+      "redirect_url": "/azure/data-api-builder/concept/database/set-up-cosmosdb",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/how-to-publish-container-apps.md",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-container-apps",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/how-to-publish-container-instances.md",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-container-instances",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/how-to-publish-aks.md",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-kubernetes-service",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/aks.md",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-kubernetes-service",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/container-apps.md",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-container-apps",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/container-instances.md",
+      "redirect_url": "/azure/data-api-builder/deployment/azure-container-instances",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/run-container.md",
+      "redirect_url": "/azure/data-api-builder/deployment/local-container",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/best-practices-configuration.md",
+      "redirect_url": "/azure/data-api-builder/concept/config/best-practices",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/best-practices-security.md",
+      "redirect_url": "/azure/data-api-builder/concept/security/best-practices",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/index.md",
+      "redirect_url": "/azure/data-api-builder/deployment/overview",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/checklist.md",
+      "redirect_url": "/azure/data-api-builder/deployment/overview",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/hosting-options.md",
+      "redirect_url": "/azure/data-api-builder/deployment/overview",
+      "redirect_document_id": false
+    },
+    {
+      "redirect_url": "/azure/data-api-builder/concept/security/authenticate-easy-auth",
+      "source_path_from_root": "/data-api-builder/concept/security/how-to-authenticate-app-service.md",
+      "redirect_document_id": false
+    },
+    {
+      "redirect_url": "/azure/data-api-builder/concept/security/authenticate-custom",
+      "source_path_from_root": "/data-api-builder/concept/security/how-to-authenticate-custom.md",
+      "redirect_document_id": false
+    },
+    {
+      "redirect_url": "/azure/data-api-builder/concept/security/authenticate-entra",
+      "source_path_from_root": "/data-api-builder/concept/security/how-to-authenticate-entra.md",
+      "redirect_document_id": false
+    },
+    {
+      "redirect_url": "/azure/data-api-builder/concept/security/authenticate-on-behalf-of",
+      "source_path_from_root": "/data-api-builder/concept/security/how-to-authenticate-on-behalf-of.md",
+      "redirect_document_id": false
+    },
+    {
+      "redirect_url": "/azure/data-api-builder/concept/security/authenticate-simulator",
+      "source_path_from_root": "/data-api-builder/concept/security/how-to-authenticate-simulator.md",
+      "redirect_document_id": false
+    },
+    {
+      "redirect_url": "/azure/data-api-builder/concept/security/authenticate-unauthenticated",
+      "source_path_from_root": "/data-api-builder/concept/security/how-to-authenticate-unauthenticated.md",
+      "redirect_document_id": false
+    },
+    {
+      "redirect_url": "/azure/data-api-builder/concept/security/database-policies",
+      "source_path_from_root": "/data-api-builder/concept/security/how-to-configure-database-policies.md",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/security/authenticate-app-service.md",
+      "redirect_url": "/azure/data-api-builder/concept/security/authenticate-easy-auth",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/security/configure-database-policies.md",
+      "redirect_url": "/azure/data-api-builder/concept/security/database-policies",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/database/configure-timeout.md",
+      "redirect_url": "/azure/data-api-builder/concept/database/timeout",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/rest.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/overview",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/graphql.md",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/overview",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/openapi.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/openapi",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/http-if-match.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/http-if-match",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/http-location.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/http-location",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/multiple-mutations.md",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/multiple-mutations",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/database/aggregate-data.md",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/aggregate-data",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/database/views.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/views",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/database/stored-procedures.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/stored-procedures",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/database/relationships.md",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/relationships",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/relationships.md",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/relationships",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/stored-procedures.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/stored-procedures",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/views.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/views",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/api/timeout.md",
+      "redirect_url": "/azure/data-api-builder/concept/database/timeout",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/config/multi-data-source.md",
+      "redirect_url": "/azure/data-api-builder/concept/config/multi-config",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/rest/rest.md",
+      "redirect_url": "/azure/data-api-builder/concept/rest/overview",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/concept/graphql/graphql.md",
+      "redirect_url": "/azure/data-api-builder/concept/graphql/overview",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/quickstart/mssql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/quickstart/mysql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/quickstart/postgresql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/quickstart/azure-sql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-sql",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/quickstart/nosql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/quickstart/azure-cosmos-db-nosql.md",
+      "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
       "redirect_document_id": false
     }
   ]

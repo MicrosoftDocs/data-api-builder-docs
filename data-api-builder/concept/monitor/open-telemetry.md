@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 01/23/2026
+ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to trace my activity through connected logs, so I can debug distributed operations. 
 ---
 
@@ -82,6 +82,9 @@ DAB creates OpenTelemetry "activities" for:
 - **GraphQL operations**
 - **Database queries** (per entity)
 - **Internal middleware steps** (for example, request handling, error tracking)
+- **MCP tool execution** (each data manipulation language (DML) tool call and custom tool invocation)
+
+[!INCLUDE[Note - DAB 2.0 preview](../../includes/note-dab-2-preview.md)]
 
 Each activity includes detailed tags (metadata), such as:
 - `http.method`, `http.url`, `http.querystring`, `status.code`
@@ -189,11 +192,12 @@ The OpenTelemetry SDK controls export timing. It exports traces when activities 
 
 ## Implementation notes
 
-* Traces and metrics cover all REST, GraphQL, and database operations
+* Traces and metrics cover all REST, GraphQL, MCP, and database operations
 * Middleware and error handlers also emit telemetry
 * Context is propagated through requests
 
 ## Related content
 
+- [`dab add-telemetry` CLI reference](../../command-line/dab-add-telemetry.md)
 - [Runtime configuration](../../configuration/runtime.md)
 - [Use Azure Application Insights](application-insights.md)

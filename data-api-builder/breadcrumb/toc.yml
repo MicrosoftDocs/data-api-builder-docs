@@ -15,4 +15,4 @@
       items:
         - name: Deployment guide
           tocHref: /azure/data-api-builder/deployment/
-          topicHref: /azure/data-api-builder/deployment/index
+          topicHref: /azure/data-api-builder/deployment/overview

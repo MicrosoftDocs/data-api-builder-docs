@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 06/06/2025
+ms.date: 03/24/2026
 show_latex: true
 ---
 
@@ -57,7 +57,7 @@ Configuration settings that determine runtime behavior.
 
 |Property|Default|Description|
 |-|-|-|
-|[runtime.host.authentication.provider](#provider-authentication-host-runtime)|`null`|Authentication provider|
+|[runtime.host.authentication.provider](#provider-authentication-host-runtime)|`Unauthenticated`|Authentication provider|
 |[runtime.host.authentication.jwt.audience](#jwt-authentication-host-runtime)|`null`|JWT audience|
 |[runtime.host.authentication.jwt.issuer](#jwt-authentication-host-runtime)|`null`|JWT issuer|
 
@@ -67,23 +67,61 @@ Configuration settings that determine runtime behavior.
 |-|-|-|
 |[runtime.cache.enabled](#cache-runtime)|`false`|Enables caching of responses globally|
 |[runtime.cache.ttl-seconds](#cache-runtime)|`5`|Time to live (seconds) for global cache|
+|[runtime.cache.level-2.enabled](#cache-runtime)|`false`|Enables distributed level 2 cache globally|
+|[runtime.cache.level-2.provider](#cache-runtime)|`"redis"`|Distributed cache provider for level 2 cache|
+|[runtime.cache.level-2.connection-string](#cache-runtime)|`null`|Connection string for the level 2 cache provider|
+|[runtime.cache.level-2.partition](#cache-runtime)|`null`|Optional partition name for isolating distributed cache space|
+
+### Compression settings
+
+|Property|Default|Description|
+|-|-|-|
+|[runtime.compression.level](#compression-runtime)|`optimal`|HTTP response compression level (`optimal`, `fastest`, or `none`)|
 
 ### Telemetry settings
 
 |Property|Default|Description|
 |-|-|-|
 |[runtime.telemetry.application-insights.connection-string](#telemetry-runtime)|`null`|Application Insights connection string|
-|[runtime.telemetry.application-insights.enabled](#telemetry-runtime)|`false`|Enables or disables Application Insights telemetry|
+|[runtime.telemetry.application-insights.enabled](#telemetry-runtime)|`true`|Enables or disables Application Insights telemetry|
 |[runtime.telemetry.open-telemetry.endpoint](#telemetry-runtime)|`null`|OpenTelemetry collector URL|
 |[runtime.telemetry.open-telemetry.headers](#telemetry-runtime)|`{}`|OpenTelemetry export headers|
 |[runtime.telemetry.open-telemetry.service-name](#telemetry-runtime)|`"dab"`|OpenTelemetry service name|
 |[runtime.telemetry.open-telemetry.exporter-protocol](#telemetry-runtime)|`"grpc"`|OpenTelemetry protocol ("grpc" or "httpprotobuf")|
 |[runtime.telemetry.open-telemetry.enabled](#telemetry-runtime)|`true`|Enables or disables OpenTelemetry|
+|[runtime.telemetry.open-telemetry.enabled](#telemetry-runtime)|`true`|Enables or disables OpenTelemetry|
+|[runtime.telemetry.azure-log-analytics.enabled](#azure-log-analytics-telemetry)|`false`|Enables or disables Azure Log Analytics|
+|[runtime.telemetry.azure-log-analytics.dab-identifier](#azure-log-analytics-telemetry)|`"DabLogs"`|Identifier for DAB in Azure Log Analytics|
+|[runtime.telemetry.azure-log-analytics.flush-interval-seconds](#azure-log-analytics-telemetry)|`5`|Interval between log batch pushes (seconds)|
+|[runtime.telemetry.azure-log-analytics.auth.custom-table-name](#azure-log-analytics-telemetry)|`null`|Custom table name for Azure Log Analytics|
+|[runtime.telemetry.azure-log-analytics.auth.dcr-immutable-id](#azure-log-analytics-telemetry)|`null`|Data collection rule immutable ID|
+|[runtime.telemetry.azure-log-analytics.auth.dce-endpoint](#azure-log-analytics-telemetry)|`null`|Data collection endpoint URL|
+|[runtime.telemetry.file.enabled](#file-telemetry)|`false`|Enables or disables file sink logging|
+|[runtime.telemetry.file.path](#file-telemetry)|`"/logs/dab-log.txt"`|File path for telemetry logs|
+|[runtime.telemetry.file.rolling-interval](#file-telemetry)|`"Day"`|Rolling interval for log files|
+|[runtime.telemetry.file.retained-file-count-limit](#file-telemetry)|`1`|Maximum number of retained log files|
+|[runtime.telemetry.file.file-size-limit-bytes](#file-telemetry)|`1048576`|Maximum file size in bytes before rolling|
 |[runtime.telemetry.log-level.namespace](#telemetry-runtime)|`null`|Namespace-specific log level override|
 |[runtime.health.enabled](#health-runtime)|`true`|Enables or disables the health check endpoint globally|
 |[runtime.health.roles](#health-runtime)|`null`|Allowed roles for the comprehensive health endpoint|
 |[runtime.health.cache-ttl-seconds](#health-runtime)|`5`|Time to live (seconds) for the health check report cache entry|
 |[runtime.health.max-query-parallelism](#health-runtime)|`4`|Maximum concurrent health check queries (range: 1-8)|
+
+### MCP settings
+
+|Property|Default|Description|
+|-|-|-|
+|[runtime.mcp.enabled](#mcp-runtime)|`true`|Enables or disables the MCP endpoint globally|
+|[runtime.mcp.path](#mcp-runtime)|`"/mcp"`|Base path for the MCP endpoint|
+|[runtime.mcp.description](#mcp-runtime)|`null`|Server description sent to MCP clients during initialization|
+|[runtime.mcp.dml-tools](#mcp-runtime)|`true`|Enables or disables all DML tools, or an object for per-tool control|
+|[runtime.mcp.dml-tools.describe-entities](#mcp-runtime)|`true`|Enables the describe_entities tool|
+|[runtime.mcp.dml-tools.create-record](#mcp-runtime)|`true`|Enables the create_record tool|
+|[runtime.mcp.dml-tools.read-records](#mcp-runtime)|`true`|Enables the read_records tool|
+|[runtime.mcp.dml-tools.update-record](#mcp-runtime)|`true`|Enables the update_record tool|
+|[runtime.mcp.dml-tools.delete-record](#mcp-runtime)|`true`|Enables the delete_record tool|
+|[runtime.mcp.dml-tools.execute-entity](#mcp-runtime)|`true`|Enables the execute_entity tool|
+|[runtime.mcp.dml-tools.aggregate-records](#mcp-runtime)|`true`|Enables the aggregate_records tool (boolean or object with query-timeout)|
 
 ## Format overview
 
@@ -118,7 +156,7 @@ Configuration settings that determine runtime behavior.
         "allow-credentials": <true>|<false> (default: `false`)
       },
       "authentication": {
-        "provider": <string> (default: "AppService"),
+        "provider": <string> (default: "Unauthenticated"),
         "jwt": {
           "audience": "<string>",
           "issuer": "<string>"
@@ -126,32 +164,76 @@ Configuration settings that determine runtime behavior.
       }
     }
   },
-  "cache": {
-    "enabled": <true>|<false> (default: `false`),
-    "ttl-seconds": <integer> (default: `5`)
-  },
-  "telemetry": {
-    "application-insights": {
-      "connection-string": "<string>",
-      "enabled": <true>|<false> (default: `true`)
+    "compression": {
+      "level": <"optimal"> (default) | <"fastest"> | <"none">
     },
-    "open-telemetry": {
-      "endpoint": "<string>",
-      "headers": "<string>",
-      "service-name": <string> (default: "dab"),
-      "exporter-protocol": <"grpc"> (default) | <"httpprotobuf">,
-      "enabled": <true>|<false> (default: `true`)
+    "cache": {
+      "enabled": <true>|<false> (default: `false`),
+      "ttl-seconds": <integer> (default: `5`),
+      "level-2": {
+        "enabled": <true>|<false> (default: `false`),
+        "provider": <"redis">,
+        "connection-string": <string>,
+        "partition": <string>
+      }
     },
-    "log-level": {
-      // namespace keys
-      "<namespace>": <"trace"|"debug"|"information"|"warning"|"error"|"critical"|"none"|null>
+    "telemetry": {
+      "application-insights": {
+        "connection-string": "<string>",
+        "enabled": <true>|<false> (default: `true`)
+      },
+      "open-telemetry": {
+        "endpoint": "<string>",
+        "headers": "<string>",
+        "service-name": <string> (default: "dab"),
+        "exporter-protocol": <"grpc"> (default) | <"httpprotobuf">,
+        "enabled": <true>|<false> (default: `true`)
+      },
+      "azure-log-analytics": {
+        "enabled": <true>|<false> (default: `false`),
+        "dab-identifier": <string> (default: "DabLogs"),
+        "flush-interval-seconds": <integer> (default: `5`),
+        "auth": {
+          "custom-table-name": <string>,
+          "dcr-immutable-id": <string>,
+          "dce-endpoint": <string>
+        }
+      },
+      "file": {
+        "enabled": <true>|<false> (default: `false`),
+        "path": <string> (default: "/logs/dab-log.txt"),
+        "rolling-interval": <string> (default: "Day"),
+        "retained-file-count-limit": <integer> (default: `1`),
+        "file-size-limit-bytes": <integer> (default: `1048576`)
+      },
+      "log-level": {
+        // namespace keys
+        "<namespace>": <"trace"|"debug"|"information"|"warning"|"error"|"critical"|"none"|null>
+      }
+    },
+    "health": {
+      "enabled": <true>|<false> (default: `true`),
+      "roles": [ "<string>" ],
+      "cache-ttl-seconds": <integer> (default: `5`),
+      "max-query-parallelism": <integer> (default: `4`)
+    },
+    "mcp": {
+      "enabled": <true>|<false> (default: `true`),
+      "path": <string> (default: `"/mcp"`),
+      "description": <string>,
+      "dml-tools": <true>|<false> | {
+        "describe-entities": <true>|<false> (default: `true`),
+        "create-record": <true>|<false> (default: `true`),
+        "read-records": <true>|<false> (default: `true`),
+        "update-record": <true>|<false> (default: `true`),
+        "delete-record": <true>|<false> (default: `true`),
+        "execute-entity": <true>|<false> (default: `true`),
+        "aggregate-records": <true>|<false> | {
+          "enabled": <true>|<false> (default: `true`),
+          "query-timeout": <integer> (default: `30`)
+        }
+      }
     }
-  },
-  "health": {
-    "enabled": <true>|<false> (default: `true`),
-    "roles": [ "<string>" ],
-    "cache-ttl-seconds": <integer> (default: `5`),
-    "max-query-parallelism": <integer> (default: `4`)
   }
 }
 ```
@@ -245,8 +327,9 @@ Global GraphQL configuration.
       "allow-introspection": <true> (default) | <false>,
       "multiple-mutations": {
         "create": {
-          "enabled": <true> (default) | <false>
+          "enabled": <true> | <false> (default)
         }
+      }
     }
   }
 }
@@ -442,7 +525,7 @@ Global CORS configuration.
   "runtime": {
     "host": {
       "cors": {
-        "allow-credentials": <true> (default) | <false>,
+        "allow-credentials": <true> | <false> (default),
         "origins": ["<array-of-strings>"]
       }
     }
@@ -457,31 +540,38 @@ Global CORS configuration.
 
 | Parent                        | Property   | Type                                                         | Required | Default      |
 | ----------------------------- | ---------- | ------------------------------------------------------------ | -------- | ------------ |
-| `runtime.host.authentication` | `provider` | enum (`AppService` \| `EntraId` \|  `Custom` \| `Simulator`) | ❌ No     | None |
+| `runtime.host.authentication` | `provider` | enum (`Unauthenticated` \| `StaticWebApps` \| `AppService` \| `EntraId` \| `Custom` \| `Simulator`) | ❌ No     | `Unauthenticated` |
 
-Selects the authentication method. Each provider validates identity differently. For step-by-step setup, see the how-to guides linked below.
+Selects the authentication method. Each provider validates identity differently. For step-by-step setup, see the how-to guides in the following table.
+
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
 ### Provider summary
 
 | Provider | Use case | Identity source | How-to guide |
 |----------|----------|-----------------|--------------|
-| *(omitted)* | Anonymous-only access | None | — |
-| `AppService` | Azure-hosted apps (EasyAuth) | `X-MS-CLIENT-PRINCIPAL` header | [Configure App Service authentication](../concept/security/how-to-authenticate-app-service.md) |
-| `EntraID` | Microsoft Entra ID (Azure AD) | JWT bearer token | [Configure Entra ID authentication](../concept/security/how-to-authenticate-entra.md) |
-| `Custom` | Third-party IdPs (Okta, Auth0) | JWT bearer token | [Configure custom JWT authentication](../concept/security/how-to-authenticate-custom.md) |
-| `Simulator` | Local testing only | Simulated | [Configure Simulator authentication](../concept/security/how-to-authenticate-simulator.md) |
+| `Unauthenticated` | DAB sits behind a trusted front end (default) | None—all requests run as `anonymous` | [Configure the Unauthenticated provider](../concept/security/authenticate-unauthenticated.md) |
+| `AppService` | Azure-hosted apps (EasyAuth) | `X-MS-CLIENT-PRINCIPAL` header | [Configure App Service authentication](../concept/security/authenticate-easy-auth.md) |
+| `EntraID` | Microsoft Entra ID (Azure AD) | JWT bearer token | [Configure Entra ID authentication](../concept/security/authenticate-entra.md) |
+| `Custom` | Third-party IdPs (Okta, Auth0) | JWT bearer token | [Configure custom JWT authentication](../concept/security/authenticate-custom.md) |
+| `Simulator` | Local testing only | Simulated | [Configure Simulator authentication](../concept/security/authenticate-simulator.md) |
 
 > [!NOTE]
 > The `EntraId` provider was previously named `AzureAd`. The old name still works for compatibility.
 
-### Anonymous-only (no provider)
+### Unauthenticated (default)
 
-When the `authentication` section is omitted, DAB operates in anonymous-only mode. All requests are assigned the `Anonymous` system role.
+When `Unauthenticated` is set (or no provider is specified), DAB doesn't inspect or validate any JWT. All requests run as the `anonymous` role. A front-end service such as Azure API Management or an application gateway can still handle authentication or access policy before requests reach DAB, but DAB continues to authorize only as `anonymous`.
+
+> [!IMPORTANT]
+> When `Unauthenticated` is active, `authenticated` and custom roles defined in entity permissions are never activated. If your config contains those roles, DAB emits a warning at startup.
 
 ```json
 {
   "host": {
-    // authentication section omitted
+    "authentication": {
+      "provider": "Unauthenticated"
+    }
   }
 }
 ```
@@ -571,8 +661,10 @@ Global JSON Web Token (JWT) configuration.
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime.host.authentication.jwt` | `audience` | string | ❌ No | None |
-| `runtime.host.authentication.jwt` | `issuer` | string | ❌ No | None |
+| `runtime.host.authentication.jwt` | `audience` | string | ✔️ Yes* | None |
+| `runtime.host.authentication.jwt` | `issuer` | string | ✔️ Yes* | None |
+
+\* Both `audience` and `issuer` are required when the `jwt` object is present. The `jwt` object itself is required when the provider is `EntraID`, `AzureAD`, or `Custom`.
 
 ### Format
 
@@ -775,6 +867,64 @@ query {
 }
 ```
 
+## Compression (runtime)
+
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime` | `compression` | object | ❌ No | - |
+
+HTTP response compression configuration. When enabled, DAB compresses response bodies to reduce payload sizes and improve transfer speeds.
+
+### Nested properties
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime.compression` | `level` | string | ❌ No | `"optimal"` |
+
+### Supported values for `level`
+
+| Value | Description | Compression savings | Performance impact |
+|---|---|---|---|
+| `optimal` | Balances ratio and speed (default) | Gzip: 90.5% / Brotli: 92.2% | Moderate CPU usage, slight latency increase |
+| `fastest` | Prioritizes speed over ratio | Gzip: 89.8% / Brotli: 91.1% | Low CPU usage, minimal latency |
+| `none` | No compression | 0% (baseline: 12,673 bytes) | None |
+
+### Client HTTP headers
+
+Compression is invoked by the client's `Accept-Encoding` header. Supported algorithms are Gzip and Brotli. The `level` setting configures the compression strategy when both the client and server support multiple algorithms.
+
+#### Supported headers
+| HTTP Header | Algorithm Used |
+|-------------------------|---------------------------|
+| `Accept-Encoding: gzip` | Gzip |
+| `Accept-Encoding: br` | Brotli |
+
+### Format
+
+```json
+{
+  "runtime": {
+    "compression": {
+      "level": <"optimal"> (default) | <"fastest"> | <"none">
+    }
+  }
+}
+```
+
+### Example
+
+```json
+{
+  "runtime": {
+    "compression": {
+      "level": "optimal"
+    }
+  }
+}
+```
+
 ## Cache (runtime)
 
 | Parent | Property | Type | Required | Default |
@@ -789,9 +939,20 @@ Global Cache configuration.
 |-|-|-|-|-|
 | `runtime.cache` | `enabled` | boolean | ❌ No | False |
 | `runtime.cache` | `ttl-seconds` | integer | ❌ No | 5 |
+| `runtime.cache` | `level-2` | object | ❌ No | - |
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime.cache.level-2` | `enabled` | boolean | ❌ No | False |
+| `runtime.cache.level-2` | `provider` | string | ❌ No | `redis` |
+| `runtime.cache.level-2` | `connection-string` | string | ❌ No | None |
+| `runtime.cache.level-2` | `partition` | string | ❌ No | None |
 
 > [!TIP]
 > The entity-level `cache.ttl-seconds` property defaults to this global value. 
+
+> [!TIP]
+> For end-to-end setup, cache-level behavior, and Redis examples, see [Implement level 2 cache](../concept/cache/level-2.md).
 
 ### Format
 
@@ -800,7 +961,13 @@ Global Cache configuration.
   "runtime": {
     "cache":  {
       "enabled": <boolean>,
-      "ttl-seconds": <integer>
+      "ttl-seconds": <integer>,
+      "level-2": {
+        "enabled": <boolean>,
+        "provider": "redis",
+        "connection-string": <string>,
+        "partition": <string>
+      }
     }
   }
 }
@@ -808,6 +975,8 @@ Global Cache configuration.
 
 > [!IMPORTANT]
 > If global `enabled` is `false`, individual entity-level `enabled` doesn't matter.
+
+When `level-2.enabled` is `true`, DAB uses the configured distributed cache provider in addition to local in-memory cache. An entity configured with cache level `L1L2` checks local cache first, then distributed cache, before going to the database.
 
 ## Telemetry (runtime)
 
@@ -824,8 +993,10 @@ Global telemetry configuration.
 | `runtime.telemetry` | `log-level` | dictionary | ❌ No | None |
 | `runtime.telemetry` | [`application-insights`](#application-insights-telemetry) | object | ❌ No | - |
 | `runtime.telemetry` | [`open-telemetry`](#opentelemetry-telemetry) | object | ❌ No | - |
+| `runtime.telemetry` | [`azure-log-analytics`](#azure-log-analytics-telemetry) | object | ❌ No | - |
+| `runtime.telemetry` | [`file`](#file-telemetry) | object | ❌ No | - |
 
-Configures logging verbosity per namespace. This follows standard .NET logging conventions and allows granular control, though it assumes some familiarity with Data API builder internals. Data API builder is open source: [https://aka.ms/dab](https://aka.ms/dab)
+Configures logging verbosity per namespace. This configuration follows standard .NET logging conventions and allows granular control, though it assumes some familiarity with Data API builder internals. Data API builder is open source: [https://aka.ms/dab](https://aka.ms/dab)
 
 ### Format
 
@@ -873,7 +1044,7 @@ Configures logging to [Application Insights](../concept/monitor/application-insi
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `runtime.telemetry.application-insights` | `enabled` | boolean | ❌ No | False |
+| `runtime.telemetry.application-insights` | `enabled` | boolean | ❌ No | `true` |
 | `runtime.telemetry.application-insights` | `connection-string` | string | ✔️ Yes | None |
 
 ### Format
@@ -954,6 +1125,258 @@ Learn more about [OTEL_EXPORTER_OTLP_HEADERS](https://opentelemetry.io/docs/lang
 > [!NOTE]
 > gRPC (`4317`) is faster and supports streaming but requires more setup steps. HTTP/protobuf (`4318`) is simpler and easier to debug but less efficient. 
 
+## Azure Log Analytics (telemetry)
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime.telemetry` | `azure-log-analytics` | object | ❌ No | - |
+
+Configures logging to Azure Log Analytics via a data collection endpoint. When enabled, DAB sends telemetry data in batches at a configurable interval.
+
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+
+### Nested properties
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime.telemetry.azure-log-analytics` | `enabled` | boolean | ❌ No | `false` |
+| `runtime.telemetry.azure-log-analytics` | `dab-identifier` | string | ❌ No | `"DabLogs"` |
+| `runtime.telemetry.azure-log-analytics` | `flush-interval-seconds` | integer | ❌ No | `5` |
+| `runtime.telemetry.azure-log-analytics` | `auth` | object | ✔️ Yes* | - |
+
+\* `auth` is required when `enabled` is `true`.
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime.telemetry.azure-log-analytics.auth` | `custom-table-name` | string | ✔️ Yes* | `null` |
+| `runtime.telemetry.azure-log-analytics.auth` | `dcr-immutable-id` | string | ✔️ Yes* | `null` |
+| `runtime.telemetry.azure-log-analytics.auth` | `dce-endpoint` | string | ✔️ Yes* | `null` |
+
+\* Required when `enabled` is `true`.
+
+- **`dab-identifier`**—a label passed to Log Analytics to help differentiate which logs come from Data API builder.
+- **`flush-interval-seconds`**—the time interval (in seconds) between sending batches of telemetry data.
+- **`custom-table-name`**—the name of the custom table in Azure Log Analytics where data is stored.
+- **`dcr-immutable-id`**—the immutable ID of the data collection rule that defines how data is collected.
+- **`dce-endpoint`**—the data collection endpoint URL used to send telemetry data.
+
+### Format
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "azure-log-analytics": {
+        "enabled": <true> | <false> (default),
+        "dab-identifier": <string> (default: "DabLogs"),
+        "flush-interval-seconds": <integer> (default: 5),
+        "auth": {
+          "custom-table-name": "<string>",
+          "dcr-immutable-id": "<string>",
+          "dce-endpoint": "<string>"
+        }
+      }
+    }
+  }
+}
+```
+
+### Example
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "azure-log-analytics": {
+        "enabled": true,
+        "dab-identifier": "MyDabInstance",
+        "flush-interval-seconds": 10,
+        "auth": {
+          "custom-table-name": "DabTelemetry_CL",
+          "dcr-immutable-id": "dcr-abc123def456",
+          "dce-endpoint": "https://my-dce.eastus-1.ingest.monitor.azure.com"
+        }
+      }
+    }
+  }
+}
+```
+
+## File (telemetry)
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime.telemetry` | `file` | object | ❌ No | - |
+
+Configures writing telemetry logs to a local file. When enabled, DAB writes structured log output to the specified file path with configurable rolling intervals and size limits.
+
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+
+### Nested properties
+
+| Parent | Property | Type | Required | Default |
+|-|-|-|-|-|
+| `runtime.telemetry.file` | `enabled` | boolean | ❌ No | `false` |
+| `runtime.telemetry.file` | `path` | string | ✔️ Yes* | `"/logs/dab-log.txt"` |
+| `runtime.telemetry.file` | `rolling-interval` | enum | ❌ No | `"Day"` |
+| `runtime.telemetry.file` | `retained-file-count-limit` | integer | ❌ No | `1` |
+| `runtime.telemetry.file` | `file-size-limit-bytes` | integer | ❌ No | `1048576` |
+
+\* `path` is required when `enabled` is `true`.
+
+### Rolling interval values
+
+| Value | Description |
+|---|---|
+| `Minute` | New log file every minute |
+| `Hour` | New log file every hour |
+| `Day` | New log file every day (default) |
+| `Month` | New log file every month |
+| `Year` | New log file every year |
+| `Infinite` | Never roll to a new file |
+
+### Format
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "file": {
+        "enabled": <true> | <false> (default),
+        "path": <string> (default: "/logs/dab-log.txt"),
+        "rolling-interval": <"Day"> (default) | <"Minute"> | <"Hour"> | <"Month"> | <"Year"> | <"Infinite">,
+        "retained-file-count-limit": <integer> (default: 1),
+        "file-size-limit-bytes": <integer> (default: 1048576)
+      }
+    }
+  }
+}
+```
+
+### Example
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "file": {
+        "enabled": true,
+        "path": "/var/log/dab/dab-telemetry.txt",
+        "rolling-interval": "Hour",
+        "retained-file-count-limit": 24,
+        "file-size-limit-bytes": 5242880
+      }
+    }
+  }
+}
+```
+
+## MCP (runtime)
+
+| Parent | Property | Type | Required | Default |
+| - | - | - | - | - |
+| `runtime` | `mcp` | object | ❌ No | - |
+
+Configures the SQL Model Context Protocol (MCP) Server, which exposes database entities as MCP tools for AI agents.
+
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+
+### Nested properties
+
+| Parent | Property | Type | Required | Default |
+| - | - | - | - | - |
+| `runtime.mcp` | `enabled` | boolean | ❌ No | `true` |
+| `runtime.mcp` | `path` | string | ❌ No | `"/mcp"` |
+| `runtime.mcp` | `description` | string | ❌ No | `null` |
+| `runtime.mcp` | `dml-tools` | boolean or object | ❌ No | `true` |
+
+The `dml-tools` property accepts a boolean to enable or disable all tools, or an object to control individual tools:
+
+| Parent | Property | Type | Required | Default |
+| - | - | - | - | - |
+| `runtime.mcp.dml-tools` | `describe-entities` | boolean | ❌ No | `true` |
+| `runtime.mcp.dml-tools` | `create-record` | boolean | ❌ No | `true` |
+| `runtime.mcp.dml-tools` | `read-records` | boolean | ❌ No | `true` |
+| `runtime.mcp.dml-tools` | `update-record` | boolean | ❌ No | `true` |
+| `runtime.mcp.dml-tools` | `delete-record` | boolean | ❌ No | `true` |
+| `runtime.mcp.dml-tools` | `execute-entity` | boolean | ❌ No | `true` |
+| `runtime.mcp.dml-tools` | `aggregate-records` | boolean or object | ❌ No | `true` |
+
+The `aggregate-records` tool accepts a boolean or an object with more settings:
+
+| Parent | Property | Type | Required | Default | Range |
+| - | - | - | - | - | - |
+| `runtime.mcp.dml-tools.aggregate-records` | `enabled` | boolean | ❌ No | `true` | |
+| `runtime.mcp.dml-tools.aggregate-records` | `query-timeout` | integer | ❌ No | `30` | 1–600 seconds |
+
+### Format
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "enabled": <true> (default) | <false>,
+      "path": <string> (default: "/mcp"),
+      "description": <string>,
+      "dml-tools": {
+        "describe-entities": <true> | <false>,
+        "create-record": <true> | <false>,
+        "read-records": <true> | <false>,
+        "update-record": <true> | <false>,
+        "delete-record": <true> | <false>,
+        "execute-entity": <true> | <false>,
+        "aggregate-records": {
+          "enabled": <true> | <false>,
+          "query-timeout": <integer; default: 30>
+        }
+      }
+    }
+  }
+}
+```
+
+### Example
+
+```json
+{
+  "runtime": {
+    "mcp": {
+      "enabled": true,
+      "dml-tools": {
+        "describe-entities": true,
+        "create-record": true,
+        "read-records": true,
+        "update-record": true,
+        "delete-record": true,
+        "execute-entity": true,
+        "aggregate-records": {
+          "enabled": true,
+          "query-timeout": 30
+        }
+      }
+    }
+  }
+}
+```
+
+The `dml-tools` property also accepts a boolean shorthand. Setting `"dml-tools": true` enables all tools; `"dml-tools": false` disables all tools.
+
+When you disable a tool at the runtime level, the tool never appears in the MCP `tools/list` response and can't be invoked, regardless of entity-level permissions. For more information on individual DML tools, see [Data manipulation language (DML) tools](../mcp/data-manipulation-language-tools.md).
+
+### Using the CLI
+
+```bash
+dab configure --runtime.mcp.enabled true
+dab configure --runtime.mcp.path "/mcp"
+dab configure --runtime.mcp.dml-tools.describe-entities.enabled true
+dab configure --runtime.mcp.dml-tools.create-record.enabled true
+dab configure --runtime.mcp.dml-tools.read-records.enabled true
+dab configure --runtime.mcp.dml-tools.update-record.enabled true
+dab configure --runtime.mcp.dml-tools.delete-record.enabled true
+dab configure --runtime.mcp.dml-tools.execute-entity.enabled true
+dab configure --runtime.mcp.dml-tools.aggregate-records.enabled true
+```
+
 ## Health (runtime)
 
 | Parent | Property | Type | Required | Default |
@@ -969,7 +1392,7 @@ Global [health check endpoint](../concept/monitor/health-checks.md) (`/health`) 
 | `runtime.health` | `enabled` | boolean | ❌ No | `true` | |
 | `runtime.health` | `roles` | string array | ✔️ Yes* | `null` | *Required in production mode |
 | `runtime.health` | `cache-ttl-seconds` | integer | ❌ No | `5` | Min: 0 |
-| `runtime.health` | `max-query-parallelism` | integer | ❌ No | `4` | Min: 1, Max: 8 (clamped) |
+| `runtime.health` | `max-query-parallelism` | integer | ❌ No | `4` | Min: One, Max: Eight (clamped) |
 
 ### Behavior in development vs. production
 

@@ -6,7 +6,7 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 01/23/2026
+ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to configure health checks to monitor data sources and endpoints via the /health endpoint.
 ---
 
@@ -261,6 +261,7 @@ Entity health checks run for both REST and GraphQL if enabled. Each appears as a
   "status": "Healthy",
   "version": "1.2.3",
   "app-name": "dab_oss_1.2.3",
+  "currentRole": "admin",
   "timestamp": "2025-01-15T10:30:00Z",
   "configuration": {
     "rest": true,
@@ -301,6 +302,16 @@ Entity health checks run for both REST and GraphQL if enabled. Each appears as a
   ]
 }
 ```
+
+### The `currentRole` field
+
+The health response includes a `currentRole` field indicating the role used to authorize the request. DAB resolves the current role using the following priority:
+
+1. **`X-MS-API-ROLE` header**—if present, the specified role is used.
+1. **`authenticated`**—if the request includes a valid principal (for example, a JWT token) but no `X-MS-API-ROLE` header.
+1. **`anonymous`**—if no principal is present.
+
+[!INCLUDE[Note - DAB 2.0 preview](../../includes/note-dab-2-preview.md)]
 
 ## Other considerations
 

@@ -251,7 +251,7 @@ az acr create `
 Create a file named `Dockerfile` in the same folder as your `dab-config.json`:
 
 ```dockerfile
-FROM mcr.microsoft.com/azure-databases/data-api-builder:1.7
+FROM mcr.microsoft.com/azure-databases/data-api-builder:2.0.0-rc
 COPY dab-config.json /App/dab-config.json
 ```
 
@@ -549,7 +549,7 @@ az acr create `
 
 # Create Dockerfile
 @"
-FROM mcr.microsoft.com/azure-databases/data-api-builder:1.7
+FROM mcr.microsoft.com/azure-databases/data-api-builder:2.0.0-rc
 COPY dab-config.json /App/dab-config.json
 "@ | Out-File -FilePath Dockerfile -Encoding utf8
 
