@@ -77,8 +77,7 @@ set DAB_OBO_TENANT_ID=abcd-1234-efgh-5678
 set DAB_OBO_CLIENT_SECRET=supersecretvalue
 ```
 
-> [!IMPORTANT]
-> Never hard-code these values in your configuration file. Use environment variables or a secret manager.
+---
 
 ## Step 2: Configure the data source
 
@@ -159,7 +158,10 @@ Server=tcp:<server>.database.windows.net,1433;Database=<db>;Encrypt=true;TrustSe
 
 ## Per-user connection pooling
 
-When OBO is enabled, DAB maintains separate SQL connection pools per user so that one user's access token is never reused for another user's request. When row-level security depends on who is connected, you can be confident that connection reuse across users doesn't silently grant the wrong access.
+When OBO is enabled, DAB maintains separate SQL connection pools per user so that one user's access token is never reused for another user's request. When row-level security depends on who is connected, you can be confident that connection reuse across users doesn't silently grant the wrong access. 
+
+> [!NOTE]
+> When using OBO, any custom values you might put in SQL connection string application name field may be truncated.
 
 ## Related content
 
