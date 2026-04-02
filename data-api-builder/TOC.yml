@@ -3,12 +3,30 @@
   items:
     - name: Overview
       href: index.yml
-    - name: What is Data API builder?
+    - name: What is Data API builder (DAB)?
       displayName: overview
       href: overview.md
-    - name: What's new?
+    - name: What's New?
       displayName: changelog, diff, release
-      href: whats-new/TOC.yml
+      items:
+        - name: Overview
+          href: whats-new/index.yml
+        - name: DAB 2.0 (Preview)
+          href: whats-new/version-2-0.md
+        - name: DAB 1.7 (Feature release)
+          href: whats-new/version-1-7.md
+        - name: DAB 1.6 (Stability release)
+          href: whats-new/version-1-6.md
+        - name: DAB 1.5 (Feature release)
+          href: whats-new/version-1-5.md
+        - name: DAB 1.4 (Stability release)
+          href: whats-new/version-1-4.md
+        - name: DAB 1.3 (Feature release)
+          href: whats-new/version-1-3.md
+        - name: DAB 1.2 (Stability release)
+          href: whats-new/version-1-2.md
+        - name: DAB 1.1 (GA)
+          href: whats-new/version-1-1.md
 - name: Quickstart
   items:
     - name: Overview
@@ -35,7 +53,7 @@
     - name: Simulated (Testing)
       href: concept/security/authenticate-simulator.md
       displayName: local auth, simulated auth, development, testing
-    - name: Easy Auth (App Service)
+    - name: Easy Auth (App Services)
       href: concept/security/authenticate-easy-auth.md
       displayName: EasyAuth, App Service, X-MS-CLIENT-PRINCIPAL
     - name: Pass-through (OBO)
@@ -50,18 +68,21 @@
     - name: Entity permissions
       href: concept/security/authorization.md
       displayName: roles, claims, policies, access control, permissions, authorization
-    - name: Role inheritance
+    - name: Role Inheritance
       href: concept/security/role-inheritance.md
       displayName: role inheritance, permission inheritance, anonymous, authenticated, named role
-    - name: Database policies
+    - name: API Policies
       href: concept/security/database-policies.md
       displayName: policies, predicates, row-level, filtering, claims, OData
-    - name: Session context
+    - name: Session Context
       href: reference-database-specific-features.md
       displayName: session context, SESSION_CONTEXT, SQL Server, mssql
-    - name: Row-level security
+    - name: Database RLS
       href: concept/security/row-level-security.md
       displayName: RLS, predicates, SQL security, claim-based access
+    - name: Pass-through (OBO)
+      href: concept/security/authenticate-on-behalf-of.md
+      displayName: OBO, on-behalf-of, user-delegated, pass-through, mssql, Entra ID
     - name: Configuration
       href: configuration/entities.md#permissions-entity-name-entities
       displayName: entity permissions, role, actions, fields, policy
@@ -77,16 +98,16 @@
         - name: Quickstart
           href: quickstart/basic-sql.md
           displayName: mssql, sql server, get started
-        - name: Feature availability
+        - name: Feature Availability
           href: feature-availability.md
           displayName: features, support matrix, database
-        - name: Tables & views
+        - name: Tables & Views
           href: concept/rest/views.md
           displayName: views, SQL, read-only, tables
-        - name: Stored procedures
+        - name: Stored Procedures
           href: concept/rest/stored-procedures.md
           displayName: stored procedures, procs, SQL
-        - name: Session context
+        - name: Session Context
           href: reference-database-specific-features.md
           displayName: session context, SESSION_CONTEXT, SQL Server
         - name: Troubleshooting
@@ -98,7 +119,7 @@
         - name: Quickstart
           href: quickstart/basic-nosql.md
           displayName: cosmos, nosql, emulator, get started
-        - name: Feature availability
+        - name: Feature Availability
           href: feature-availability.md
           displayName: features, support matrix, database
         - name: Set up Cosmos DB
@@ -113,7 +134,7 @@
         - name: Quickstart
           href: quickstart/basic-sql.md
           displayName: postgres, postgresql, get started
-        - name: Feature availability
+        - name: Feature Availability
           href: feature-availability.md
           displayName: features, support matrix, database
         - name: Troubleshooting
@@ -125,20 +146,45 @@
         - name: Quickstart
           href: quickstart/basic-sql.md
           displayName: mysql, get started
-        - name: Feature availability
+        - name: Feature Availability
           href: feature-availability.md
           displayName: features, support matrix, database
         - name: Troubleshooting
           href: troubleshooting/mysql.md
           displayName: mysql, connection, access denied, column type
 - name: SQL MCP Server
-  href: mcp/TOC.yml
+  items:
+    - name: Overview
+      href: mcp/index.yml
+    - name: What is SQL MCP Server?
+      href: mcp/overview.md
+    - name: "Get Started: Visual Studio Code"
+      href: mcp/quickstart-visual-studio-code.md
+    - name: "Get Started: Azure AI Foundry"
+      href: mcp/quickstart-azure-ai-foundry.md
+    - name: "Get Started: .NET Aspire"
+      href: mcp/quickstart-dotnet-aspire.md
+    - name: "Get Started: Azure Container Apps"
+      href: mcp/quickstart-azure-container-apps.md
+    - name: Authentication
+      href: mcp/how-to-configure-authentication.md
+    - name: Stdio Transport
+      href: mcp/stdio-transport.md
+    - name: Semantic Descriptions
+      href: mcp/how-to-add-descriptions.md
+    - name: Data Manipulation Tools
+      href: mcp/data-manipulation-language-tools.md
+    - name: Custom Tools
+      href: mcp/how-to-configure-custom-tools.md
+    - name: Troubleshooting
+      href: troubleshooting/mcp.md
+      displayName: mcp, sql mcp server, transport, tools, permission
 - name: REST Endpoint
   items:
     - name: Overview
       href: concept/rest/index.yml
       displayName: REST, HTTP, API, endpoints, landing
-    - name: Call REST endpoints
+    - name: What is REST Endpoint?
       href: concept/rest/overview.md
       displayName: HTTP, GET, POST, PATCH, DELETE, verbs, REST API
     - name: Keyword $select
@@ -173,7 +219,7 @@
     - name: Overview
       href: concept/graphql/index.yml
       displayName: GraphQL, API, endpoints, landing
-    - name: Call GraphQL endpoints
+    - name: What is GraphQL Endpoint?
       href: concept/graphql/overview.md
       displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
     - name: Keyword select
@@ -284,8 +330,41 @@
     - name: JSON Schema
       href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
 - name: VS Code Extension
-  href: vscode-extension/toc.yml
-- name: Command-Line Interface
+  items:
+    - name: Overview
+      href: vscode-extension/index.yml
+      displayName: VS Code, omnibus, extension
+    - name: What Is the Extension?
+      href: vscode-extension/overview.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Init
+      href: vscode-extension/init.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Add
+      href: vscode-extension/add.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Start
+      href: vscode-extension/start.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Validate
+      href: vscode-extension/validate.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Health
+      href: vscode-extension/health.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Visualize
+      href: vscode-extension/visualize.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Code Gen
+      href: vscode-extension/code-gen.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Docker
+      href: vscode-extension/docker.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Model Context Protocol (MCP)
+      href: vscode-extension/mcp.md
+      displayName: VS Code, omnibus, extension
+- name: Command-Line
   items:
     - name: Overview
       href: command-line/index.yml
@@ -347,6 +426,29 @@
     - name: Run from source
       href: deployment/run-from-source.md
       displayName: source, github, OSS, build, run
+- name: Troubleshooting
+  items:
+    - name: SQL Server
+      href: troubleshooting/mssql.md
+      displayName: sql server, mssql, connection, login, azure sql
+    - name: Azure Cosmos DB
+      href: troubleshooting/cosmos.md
+      displayName: cosmos, nosql, emulator, certificate, graphql schema
+    - name: PostgreSQL
+      href: troubleshooting/postgresql.md
+      displayName: postgres, postgresql, connection, schema, ssl
+    - name: MySQL
+      href: troubleshooting/mysql.md
+      displayName: mysql, connection, access denied, column type
+    - name: REST API
+      href: troubleshooting/rest.md
+      displayName: rest, 404, 405, filter, cors, odata
+    - name: GraphQL API
+      href: troubleshooting/graphql.md
+      displayName: graphql, schema, mutation, introspection, relationship
+    - name: SQL MCP Server
+      href: troubleshooting/mcp.md
+      displayName: mcp, sql mcp server, transport, tools, permission
 - name: Samples
   items:
     - name: Devcontainer with Azure SQL
