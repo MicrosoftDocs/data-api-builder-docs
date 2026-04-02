@@ -12,7 +12,7 @@ ms.date: 03/10/2026
 
 Use the DAB Health extension to query the runtime `/health` endpoint and review status in an interactive report.
 
-![Screenshot of the DAB Health extension displaying the health report in Visual Studio Code.](media/health-screenshot.png)
+![Screenshot of the DAB Health extension displaying the health report in Visual Studio Code.](media/health/health-screenshot.png)
 
 ## Command
 

@@ -12,7 +12,7 @@ ms.date: 03/14/2026
 
 Use the DAB MCP extension to install Data API builder configurations as MCP (Model Context Protocol) servers with one-click setup.
 
-![Screenshot of the DAB MCP extension displaying the Install MCP Server command in Visual Studio Code.](media/mcp-screenshot.png)
+![Screenshot of the DAB MCP extension displaying the Install MCP Server command in Visual Studio Code.](media/mcp/mcp-screenshot.png)
 
 ## Command
 

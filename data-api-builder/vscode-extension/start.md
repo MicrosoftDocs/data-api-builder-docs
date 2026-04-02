@@ -12,7 +12,7 @@ ms.date: 03/10/2026
 
 Use the DAB Start extension to run `dab start` for a selected configuration file from the integrated terminal.
 
-![Screenshot of the DAB Start command launching the Data API builder runtime from Visual Studio Code.](media/start-screenshot.png)
+![Screenshot of the DAB Start command launching the Data API builder runtime from Visual Studio Code.](media/start/start-screenshot.png)
 
 ## Command
 

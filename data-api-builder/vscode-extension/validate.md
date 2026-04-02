@@ -12,7 +12,7 @@ ms.date: 03/10/2026
 
 Use the DAB Validate extension to run configuration validation before runtime startup or deployment.
 
-![Screenshot of the DAB Validate command running and reporting validation output in Visual Studio Code.](media/validate-screenshot.png)
+![Screenshot of the DAB Validate command running and reporting validation output in Visual Studio Code.](media/validate/validate-screenshot.png)
 
 ## Command
 
