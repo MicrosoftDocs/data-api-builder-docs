@@ -27,7 +27,7 @@ Apply OData predicates and filters to API responses. Policies automatically rest
 
 ### Claims-based authorization
 
-Use claims from authentication tokens (e.g., groups, roles, custom attributes) to determine access. Claims provide flexible, granular permission decisions.
+To determine access, use claims from authentication tokens (for example, groups, roles, custom attributes). Claims provide flexible, granular permission decisions.
 
 ## How it works
 
@@ -60,13 +60,13 @@ Data API builder uses multiple authorization layers:
 
 - **Entity-level**: Which entities and operations are accessible
 - **Policy-level**: What data is returned (filtering based on claims)
-- **Row-level**: Database enforces additional row filtering via RLS
+- **Row-level**: Database applies row filtering through RLS
 - **API-level**: HTTP headers and request validation
 
 ## Next steps
 
-- [Entity permissions](authorization.md) — Configure CRUD operations per entity
-- [Role inheritance](role-inheritance.md) — Build role hierarchies
-- [API policies](database-policies.md) — Apply OData filters based on claims
-- [Row-level security](row-level-security.md) — Filter data at the database level
-- [Best practices](best-practices.md) — Security hardening guidance
+- [Entity permissions](authorization.md)—Configure CRUD operations per entity
+- [Role inheritance](role-inheritance.md)—Build role hierarchies
+- [API policies](database-policies.md)—Apply OData filters based on claims
+- [Row-level security](row-level-security.md)—Filter data at the database level
+- [Best practices](best-practices.md)—Security hardening guidance
