@@ -22,3 +22,6 @@
   href: how-to-configure-custom-tools.md
 - name: Data manipulation tools
   href: data-manipulation-language-tools.md
+- name: Troubleshooting
+  href: ../troubleshooting/mcp.md
+  displayName: mcp, stdio, tool, agent, authentication, foundry
