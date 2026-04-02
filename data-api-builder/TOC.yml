@@ -121,7 +121,7 @@
   displayName: auth, login, identity, provider, JWT, token
   items:
     - name: Overview
-      href: concept/security/index.yml
+      href: concept/security/index.md
       displayName: landing, auth, authorization
     - name: Unauthenticated
       href: concept/security/authenticate-unauthenticated.md

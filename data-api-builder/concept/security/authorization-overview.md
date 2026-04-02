@@ -1,6 +1,12 @@
 ---
 title: Authorization overview
 description: Learn how to control what authenticated users can do with Data API builder's fine-grained authorization system.
+author: seesharprun
+ms.author: sidandrews
+ms.reviewer: jerrynixon
+ms.service: data-api-builder
+ms.topic: conceptual
+ms.date: 04/02/2026
 ---
 
 # Authorization overview
