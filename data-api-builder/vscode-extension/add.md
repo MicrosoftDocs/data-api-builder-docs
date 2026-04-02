@@ -12,7 +12,7 @@ ms.date: 03/10/2026
 
 Use the DAB Add extension to discover SQL objects and add them to an existing Data API builder configuration file.
 
-![Screenshot of the DAB Add context menu in Visual Studio Code with table, view, and relationship options.](media/add-screenshot.png)
+![Screenshot of the DAB Add context menu in Visual Studio Code with table, view, and relationship options.](media/add/add-screenshot.png)
 
 ## Commands
 
