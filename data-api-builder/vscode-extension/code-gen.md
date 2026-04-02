@@ -12,7 +12,7 @@ ms.date: 03/10/2026
 
 Use the DAB Code Gen extension to generate C# artifacts from selected entities in a DAB configuration.
 
-![Screenshot of DAB Code Gen generated C# project artifacts in the Visual Studio Code explorer.](media/code-gen-screenshot.png)
+![Screenshot of DAB Code Gen generated C# project artifacts in the Visual Studio Code explorer.](media/code-gen/code-gen-screenshot.png)
 
 ## Command
 

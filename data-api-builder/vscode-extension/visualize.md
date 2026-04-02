@@ -12,7 +12,7 @@ ms.date: 03/10/2026
 
 Use the DAB Visualize extension to generate a Mermaid ER diagram from your configuration file.
 
-![Screenshot of the DAB Visualize output rendered as an ER diagram in Visual Studio Code.](media/visualize-screenshot.png)
+![Screenshot of the DAB Visualize output rendered as an ER diagram in Visual Studio Code.](media/visualize/visualize-screenshot.png)
 
 ## Command
 

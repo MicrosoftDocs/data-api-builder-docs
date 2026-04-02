@@ -12,7 +12,7 @@ ms.date: 03/14/2026
 
 Use the DAB Docker extension to build Docker images and run Data API builder in containers directly from Visual Studio Code.
 
-![Screenshot of the DAB Docker extension displaying commands in Visual Studio Code.](media/docker-screenshot.png)
+![Screenshot of the DAB Docker extension displaying commands in Visual Studio Code.](media/docker/docker-screenshot.png)
 
 ## Commands
 

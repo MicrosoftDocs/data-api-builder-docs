@@ -12,7 +12,7 @@ ms.date: 03/10/2026
 
 Use the DAB Init extension to scaffold a new Data API builder configuration file with practical defaults for local development.
 
-![Screenshot of the DAB Init command creating a new configuration file in Visual Studio Code.](media/init-screenshot.png)
+![Screenshot of the DAB Init command creating a new configuration file in Visual Studio Code.](media/init/init-screenshot.png)
 
 ## Command
 
