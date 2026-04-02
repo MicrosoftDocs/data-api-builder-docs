@@ -216,14 +216,13 @@ The key to this table is that Data API builder can run in any environment with c
 
 Data API builder doesn't support some data types for each database platform. These limitations are typically due to serialization constraints or lack of native support in the underlying database driver.
 
-### SQL Server and Azure SQL
+### Microsoft SQL
 
 | Data type | Description |
 | --- | --- |
 | `geography` | Geospatial data representing Earth's surface. |
 | `geometry` | Planar spatial data using Cartesian coordinates. |
 | `hierarchyid` | Hierarchical data management. |
-| `json` | JSON formatted data (currently in preview). |
 | `rowversion` | Row versioning for concurrency control. |
 | `sql_variant` | Values of various SQL Server-supported data types. |
 | `vector` | Vector data (currently in preview). |

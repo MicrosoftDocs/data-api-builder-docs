@@ -120,6 +120,9 @@
 - name: Authentication
   displayName: auth, login, identity, provider, JWT, token
   items:
+    - name: Overview
+      href: concept/security/index.yml
+      displayName: landing, auth, authorization
     - name: Unauthenticated
       href: concept/security/authenticate-unauthenticated.md
       displayName: pass-through
@@ -144,6 +147,9 @@
 - name: Authorization
   displayName: roles, claims, policies, access control, permissions
   items:
+    - name: Overview
+      href: concept/security/authorization-overview.md
+      displayName: landing, access control, roles, policies
     - name: Entity permissions
       href: concept/security/authorization.md
       displayName: roles, policies, access control
