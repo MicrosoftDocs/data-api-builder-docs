@@ -17,31 +17,34 @@ These tables list the features available in Data API builder (DAB).
 
 | Database | Abbreviation | Min. Version |
 | --- | --- | --- |
-| SQL Server | SQL Family | Version 2016 |
-| Azure SQL | SQL Family | N/A (PaaS) |
-| Microsoft Fabric SQL | SQL Family | N/A (PaaS) |
-| Azure Cosmos DB for NoSQL | Cosmos DB | N/A (PaaS) |
+| SQL Server | MSSQL | Version 2016 |
+| Azure SQL Database | MSSQL | N/A (PaaS) |
+| Azure SQL Managed Instance | MSSQL | N/A (PaaS) |
+| SQL Server on Azure VMs | MSSQL | Version 2016 |
+| Arc-enabled SQL Server | MSSQL | Version 2016 |
+| SQL database in Fabric | MSSQL | N/A (PaaS) |
+| Azure Cosmos DB for NoSQL | COSMOSDB | N/A (PaaS) |
 | PostgreSQL | PGSQL | Version 11 |
+| Azure Database for PostgreSQL Flexible Server | PGSQL | Version 11 |
 | MySQL | MySQL | Version 8 |
-| Azure Synapse Analytics (Dedicated SQL pool) | SQLDW¹ | N/A (PaaS) |
+| Azure Database for MySQL Flexible Server | MySQL | Version 5.7 |
+| Azure Synapse Analytics (Dedicated SQL pool) | DWSQL¹ | N/A (PaaS) |
 
 ## Cloud and hosting environments
 
-The key to this table is that Data API builder can run in any environment with container support.
+Data API builder runs in any environment with container support. The following are common cloud deployment targets:
 
 | Environment | Supported |
 | --- | :---: |
 | Microsoft Azure | ✅ Yes |
 | Amazon Web Services (AWS) | ✅ Yes |
 | Google Cloud Platform (GCP) | ✅ Yes |
-| Oracle Cloud Infrastructure (OCI) | ✅ Yes |
-| IBM Cloud | ✅ Yes |
-| Alibaba Cloud | ✅ Yes |
+| Any other cloud provider | ✅ Yes |
 | On-premises | ✅ Yes |
 
 ## GraphQL
 
-| Feature | SQL Family | Cosmos DB | PGSQL | MySQL | SQLDW¹ |
+| Feature | MSSQL | Cosmos | PGSQL | MySQL | DWSQL¹ |
 | --- | :---: | :---: | :---: | :---: | :---: |
 | [Pagination](keywords/after-graphql.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | Throttling | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
@@ -66,7 +69,7 @@ The key to this table is that Data API builder can run in any environment with c
 
 ## GraphQL Relationship Navigation
 
-| Feature | SQL Family | Cosmos DB | PGSQL | MySQL | SQLDW¹ |
+| Feature | MSSQL | Cosmos | PGSQL | MySQL | DWSQL¹ |
 | --- | :---: | :---: | :---: | :---: | :---: |
 | [One-To-Many / Query](configuration/entities.md#relationships-entity-name-entities) | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✅ Yes |
 | [One-To-Many / Mutation](configuration/entities.md#relationships-entity-name-entities) | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✅ Yes |
@@ -77,7 +80,7 @@ The key to this table is that Data API builder can run in any environment with c
 
 ## REST
 
-| Feature | SQL Family | Cosmos DB² | PGSQL | MySQL | SQLDW¹ |
+| Feature | MSSQL | Cosmos² | PGSQL | MySQL | DWSQL¹ |
 | --- | :---: | :---: | :---: | :---: | :---: |
 | [`PUT`](concept/rest/overview.md) | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✅ Yes |
 | [`POST`](concept/rest/overview.md) | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✅ Yes |
@@ -104,7 +107,7 @@ The key to this table is that Data API builder can run in any environment with c
 
 ## Supported Database Objects
 
-| Feature | SQL Family | Cosmos DB | PGSQL | MySQL | SQLDW¹ |
+| Feature | MSSQL | Cosmos | PGSQL | MySQL | DWSQL¹ |
 | --- | :---: | :---: | :---: | :---: | :---: |
 | Tables | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✅ Yes |
 | Views | ✅ Yes | ✖️ No | ✅ Yes | ✖️ No | ✅ Yes |
@@ -116,7 +119,7 @@ The key to this table is that Data API builder can run in any environment with c
 
 ## Entity Permissions
 
-| Feature | SQL Family | Cosmos DB | PGSQL | MySQL | SQLDW¹ |
+| Feature | MSSQL | Cosmos | PGSQL | MySQL | DWSQL¹ |
 | --- | :---: | :---: | :---: | :---: | :---: |
 | [`C`reate](configuration/entities.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | [`R`ead](configuration/entities.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
@@ -128,7 +131,7 @@ The key to this table is that Data API builder can run in any environment with c
 
 ## Database Policy
 
-| Feature | SQL Family | Cosmos DB | PGSQL | MySQL | SQLDW¹ |
+| Feature | MSSQL | Cosmos | PGSQL | MySQL | DWSQL¹ |
 | --- | :---: | :---: | :---: | :---: | :---: |
 | [`C`reate](concept/security/database-policies.md) | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✅ Yes |
 | [`R`ead](concept/security/database-policies.md) | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✅ Yes |
@@ -141,7 +144,7 @@ The key to this table is that Data API builder can run in any environment with c
 
 ## Authentication Features
 
-| Feature | SQL Family | Cosmos DB | PGSQL | MySQL | SQLDW¹ |
+| Feature | MSSQL | Cosmos | PGSQL | MySQL | DWSQL¹ |
 | --- | :---: | :---: | :---: | :---: | :---: |
 | [UAMI (Entra ID)⁴](concept/security/authenticate-entra.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | [SAMI (Entra ID)⁴](concept/security/authenticate-entra.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
@@ -153,7 +156,7 @@ The key to this table is that Data API builder can run in any environment with c
 
 ## Other Features
 
-| Feature | SQL Family | Cosmos DB | PGSQL | MySQL | SQLDW¹ |
+| Feature | MSSQL | Cosmos | PGSQL | MySQL | DWSQL¹ |
 | --- | :---: | :---: | :---: | :---: | :---: |
 | Native JSON Support | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
 | Native XML Support | ✖️ No | ✖️ No | ✖️ No | ✖️ No | ✖️ No |
@@ -177,7 +180,7 @@ The key to this table is that Data API builder can run in any environment with c
 > [!NOTE]
 > MCP Server features require Data API builder version 1.7 or later.
 
-| Feature | SQL Family | Cosmos DB | PGSQL | MySQL | SQLDW¹ |
+| Feature | MSSQL | Cosmos | PGSQL | MySQL | DWSQL¹ |
 | --- | :---: | :---: | :---: | :---: | :---: |
 | [DML-tool: CREATE](mcp/data-manipulation-language-tools.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | [DML-tool: READ](mcp/data-manipulation-language-tools.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
@@ -199,9 +202,25 @@ The key to this table is that Data API builder can run in any environment with c
 | [READ: `$First`](mcp/data-manipulation-language-tools.md) | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✅ Yes |
 | [READ: `$After`](mcp/data-manipulation-language-tools.md) | ✅ Yes | ✖️ No | ✅ Yes | ✅ Yes | ✅ Yes |
 
-## Azure Support (containers)
+## Container Orchestration Platforms
 
-| Feature | SQL Family | Cosmos DB | PGSQL | MySQL | SQLDW¹ |
+Data API builder runs on any container runtime or orchestration platform. Common platforms include:
+
+| Platform | Supported |
+| --- | :---: |
+| Azure Container Apps (ACA) | ✅ Yes |
+| Azure Container Instances (ACI) | ✅ Yes |
+| Azure Kubernetes Service (AKS) | ✅ Yes |
+| AWS Elastic Container Service (ECS) | ✅ Yes |
+| AWS Elastic Kubernetes Service (EKS) | ✅ Yes |
+| Google Kubernetes Engine (GKE) | ✅ Yes |
+| Kubernetes (any distribution) | ✅ Yes |
+| Docker | ✅ Yes |
+| Any other container runtime | ✅ Yes |
+
+## Azure deployment services
+
+| Feature | MSSQL | Cosmos | PGSQL | MySQL | DWSQL¹ |
 | --- | :---: | :---: | :---: | :---: | :---: |
 | Azure Container Apps | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | Azure Container Instances | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
@@ -216,7 +235,7 @@ The key to this table is that Data API builder can run in any environment with c
 
 Data API builder doesn't support some data types for each database platform. These limitations are typically due to serialization constraints or lack of native support in the underlying database driver.
 
-### SQL Server and Azure SQL
+### MSSQL
 
 | Data type | Description |
 | --- | --- |
@@ -259,9 +278,9 @@ Azure Cosmos DB for NoSQL is schema-agnostic, so data type restrictions don't ap
 
 ## Footnotes
 
-¹ SQLDW reflects support for Dedicated SQL pool only. Serverless SQL pool isn't supported.
+¹ DWSQL reflects support for Dedicated SQL pool only. Serverless SQL pool isn't supported.
 
-² Cosmos DB is supported in DAB via GraphQL. DAB doesn't generate REST endpoints for Cosmos DB because the API for NoSQL provides a native REST API. For more information, see [Azure Cosmos DB: REST API Reference](/rest/api/cosmos-db/).
+² Cosmos is supported in DAB via GraphQL. DAB doesn't generate REST endpoints for Cosmos because the API for NoSQL provides a native REST API. For more information, see [Azure Cosmos DB: REST API Reference](/rest/api/cosmos-db/).
 
 ³ MCP (Model Context Protocol) is an endpoint-level capability, not database-specific.
 
