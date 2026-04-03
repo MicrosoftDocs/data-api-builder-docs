@@ -24,10 +24,12 @@ landingContent:
         links:
           - text: Runtime authentication provider configuration
             url: ../../configuration/runtime.md#provider-authentication-host-runtime
+          - text: Authentication overview
+            url: authenticate-overview.md
           - text: Authorization overview
             url: authorization-overview.md
           - text: Authorization and roles
-            url: authorization.md
+            url: authorization-overview.md
 
   - title: Unauthenticated provider
     linkLists:

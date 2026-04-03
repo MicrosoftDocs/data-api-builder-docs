@@ -332,12 +332,12 @@
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-deploy-static-web-app.md",
-      "redirect_url": "/azure/data-api-builder/deployment/overview",
+      "redirect_url": "/azure/data-api-builder/deployment",
       "redirect_document_id": true
     },
     {
       "source_path_from_root": "/data-api-builder/deployment/how-to-host-static-web-apps.md",
-      "redirect_url": "/azure/data-api-builder/deployment/overview",
+      "redirect_url": "/azure/data-api-builder/deployment",
       "redirect_document_id": false
     },
     {
@@ -622,17 +622,22 @@
     },
     {
       "source_path_from_root": "/data-api-builder/deployment/index.md",
-      "redirect_url": "/azure/data-api-builder/deployment/overview",
+      "redirect_url": "/azure/data-api-builder/deployment",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/deployment/checklist.md",
-      "redirect_url": "/azure/data-api-builder/deployment/overview",
+      "redirect_url": "/azure/data-api-builder/deployment",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/deployment/hosting-options.md",
-      "redirect_url": "/azure/data-api-builder/deployment/overview",
+      "redirect_url": "/azure/data-api-builder/deployment",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/overview.md",
+      "redirect_url": "/azure/data-api-builder/deployment",
       "redirect_document_id": false
     },
     {

@@ -250,7 +250,7 @@
   displayName: hosting, publish, deploy, cloud
   items:
     - name: Overview
-      href: deployment/overview.md
+      href: deployment/index.yml
       displayName: deployment, hosting, checklist, options
     - name: Container Apps (Portal)
       href: deployment/azure-container-apps.md
