@@ -242,9 +242,10 @@ Data API builder doesn't support some data types for each database platform. The
 | `geography` | Geospatial data representing Earth's surface. |
 | `geometry` | Planar spatial data using Cartesian coordinates. |
 | `hierarchyid` | Hierarchical data management. |
+| `json` |JSON formatted data. |
 | `rowversion` | Row versioning for concurrency control. |
 | `sql_variant` | Values of various SQL Server-supported data types. |
-| `vector` | Vector data (currently in preview). |
+| `vector` | Vector data. |
 | `xml` | XML formatted data. |
 
 ### PostgreSQL
