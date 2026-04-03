@@ -66,7 +66,7 @@ To use a role other than `Anonymous` or `Authenticated`, the `X-MS-API-ROLE` hea
 Provider notes:
 
 - EasyAuth providers (for example, `AppService`): platform-injected headers (such as `X-MS-CLIENT-PRINCIPAL`) establish authentication rather than a bearer token.
-- `Simulator`: requests are treated as authenticated for development/testing, without validating a real token.
+- `Simulator`: requests are treated as `authenticated` for development/testing, without validating a real token.
 
 ## System roles
 
