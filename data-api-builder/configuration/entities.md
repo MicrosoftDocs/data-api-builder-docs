@@ -95,7 +95,7 @@ Configuration settings for database entities.
 
 |Property|Description|
 |-|-|
-|[`entities.entity-name.mcp`](#mcp-entity-name-entities)|Boolean shorthand or object to control Model Context Protocol (MCP) participation for the entity|
+|[`entities.entity-name.mcp`](#mcp-entity-name-entities)|Object that controls Model Context Protocol (MCP) participation for the entity|
 |[`entities.entity-name.mcp.dml-tools`](#mcp-entity-name-entities)|Enables or disables data manipulation language (DML) tools for the entity|
 |[`entities.entity-name.mcp.custom-tool`](#mcp-entity-name-entities)|Registers the stored procedure as a named MCP tool (stored-procedure entities only)|
 
@@ -173,7 +173,7 @@ Configuration settings for database entities.
         "ttl-seconds": <integer>,
         "level": "L1" | "L1L2" // default: "L1L2"
       },
-      "mcp": <boolean> | {
+      "mcp": {
         "dml-tools": <boolean>,       // default: true
         "custom-tool": <boolean>      // stored-procedure only; default: false
       }
@@ -1237,27 +1237,11 @@ Enables and configures health checks for the entity.
 
 |Parent|Property|Type|Required|Default|
 |-|-|-|-|-|
-|`entities.{entity-name}`|`mcp`|boolean or object|❌ No|`true`|
+|`entities.{entity-name}`|`mcp`|object|❌ No|enabled by default when omitted|
 
 Controls MCP participation for the entity. When MCP is enabled globally, entities participate by default. Use this property to opt out or to enable custom MCP tools for stored-procedure entities.
 
 [!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
-
-### Boolean shorthand
-
-Use the boolean shorthand to enable or disable all DML tools for the entity:
-
-```json
-{
-  "entities": {
-    "Book": {
-      "mcp": true
-    }
-  }
-}
-```
-
-Setting `"mcp": false` removes the entity from all MCP tool surfaces.
 
 ### Object format
 

@@ -1359,7 +1359,7 @@ The `aggregate-records` tool accepts a boolean or an object with more settings:
 }
 ```
 
-The `dml-tools` property also accepts a boolean shorthand. Setting `"dml-tools": true` enables all tools; `"dml-tools": false` disables all tools.
+To enable or disable all DML tools at once, set `"dml-tools"` to `true` or `false`.
 
 When you disable a tool at the runtime level, the tool never appears in the MCP `tools/list` response and can't be invoked, regardless of entity-level permissions. For more information on individual DML tools, see [Data manipulation language (DML) tools](../mcp/data-manipulation-language-tools.md).
 
@@ -1368,12 +1368,12 @@ When you disable a tool at the runtime level, the tool never appears in the MCP 
 ```bash
 dab configure --runtime.mcp.enabled true
 dab configure --runtime.mcp.path "/mcp"
-dab configure --runtime.mcp.dml-tools.describe-entities.enabled true
-dab configure --runtime.mcp.dml-tools.create-record.enabled true
-dab configure --runtime.mcp.dml-tools.read-records.enabled true
-dab configure --runtime.mcp.dml-tools.update-record.enabled true
-dab configure --runtime.mcp.dml-tools.delete-record.enabled true
-dab configure --runtime.mcp.dml-tools.execute-entity.enabled true
+dab configure --runtime.mcp.dml-tools.describe-entities true
+dab configure --runtime.mcp.dml-tools.create-record true
+dab configure --runtime.mcp.dml-tools.read-records true
+dab configure --runtime.mcp.dml-tools.update-record true
+dab configure --runtime.mcp.dml-tools.delete-record true
+dab configure --runtime.mcp.dml-tools.execute-entity true
 dab configure --runtime.mcp.dml-tools.aggregate-records.enabled true
 ```
 

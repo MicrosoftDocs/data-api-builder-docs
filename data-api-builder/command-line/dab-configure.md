@@ -74,13 +74,13 @@ dab configure [options]
 | [`--runtime.mcp.enabled`](#--runtimemcpenabled) | Enable or disable MCP endpoint. |
 | [`--runtime.mcp.path`](#--runtimemcppath) | Customize the MCP endpoint path. |
 | [`--runtime.mcp.description`](#--runtimemcpdescription) | Set the MCP server description. |
-| [`--runtime.mcp.dml-tools.enabled`](#--runtimemcpdml-toolsenabled) | Enable or disable all MCP DML tools. |
-| [`--runtime.mcp.dml-tools.describe-entities.enabled`](#--runtimemcpdml-toolsdescribe-entitiesenabled) | Enable or disable the describe-entities tool. |
-| [`--runtime.mcp.dml-tools.create-record.enabled`](#--runtimemcpdml-toolscreate-recordenabled) | Enable or disable the create-record tool. |
-| [`--runtime.mcp.dml-tools.read-records.enabled`](#--runtimemcpdml-toolsread-recordsenabled) | Enable or disable the read-records tool. |
-| [`--runtime.mcp.dml-tools.update-record.enabled`](#--runtimemcpdml-toolsupdate-recordenabled) | Enable or disable the update-record tool. |
-| [`--runtime.mcp.dml-tools.delete-record.enabled`](#--runtimemcpdml-toolsdelete-recordenabled) | Enable or disable the delete-record tool. |
-| [`--runtime.mcp.dml-tools.execute-entity.enabled`](#--runtimemcpdml-toolsexecute-entityenabled) | Enable or disable the execute-entity tool. |
+| [`--runtime.mcp.dml-tools`](#--runtimemcpdml-tools) | Enable or disable all MCP DML tools. |
+| [`--runtime.mcp.dml-tools.describe-entities`](#--runtimemcpdml-toolsdescribe-entities) | Enable or disable the describe-entities tool. |
+| [`--runtime.mcp.dml-tools.create-record`](#--runtimemcpdml-toolscreate-record) | Enable or disable the create-record tool. |
+| [`--runtime.mcp.dml-tools.read-records`](#--runtimemcpdml-toolsread-records) | Enable or disable the read-records tool. |
+| [`--runtime.mcp.dml-tools.update-record`](#--runtimemcpdml-toolsupdate-record) | Enable or disable the update-record tool. |
+| [`--runtime.mcp.dml-tools.delete-record`](#--runtimemcpdml-toolsdelete-record) | Enable or disable the delete-record tool. |
+| [`--runtime.mcp.dml-tools.execute-entity`](#--runtimemcpdml-toolsexecute-entity) | Enable or disable the execute-entity tool. |
 | [`--runtime.mcp.dml-tools.aggregate-records.enabled`](#--runtimemcpdml-toolsaggregate-recordsenabled) | Enable or disable the aggregate-records tool. |
 | [`--runtime.mcp.dml-tools.aggregate-records.query-timeout`](#--runtimemcpdml-toolsaggregate-recordsquery-timeout) | Execution timeout in seconds for aggregate-records. |
 
@@ -865,7 +865,7 @@ dab configure ^
 }
 ```
 
-## `--runtime.mcp.dml-tools.enabled`
+## `--runtime.mcp.dml-tools`
 
 Enable DAB's MCP DML tools endpoint.
 
@@ -879,14 +879,14 @@ For more information on MCP DML tools, see [SQL MCP Server data manipulation lan
 
 ```bash
 dab configure \
-  --runtime.mcp.dml-tools.enabled false
+  --runtime.mcp.dml-tools false
 ```
 
 #### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
-  --runtime.mcp.dml-tools.enabled false
+  --runtime.mcp.dml-tools false
 ```
 
 ---
@@ -903,7 +903,7 @@ dab configure ^
 }
 ```
 
-## `--runtime.mcp.dml-tools.describe-entities.enabled`
+## `--runtime.mcp.dml-tools.describe-entities`
 
 Enable DAB's MCP describe entities tool.
 
@@ -915,14 +915,14 @@ Enable DAB's MCP describe entities tool.
 
 ```bash
 dab configure \
-  --runtime.mcp.dml-tools.describe-entities.enabled false
+  --runtime.mcp.dml-tools.describe-entities false
 ```
 
 #### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
-  --runtime.mcp.dml-tools.describe-entities.enabled false
+  --runtime.mcp.dml-tools.describe-entities false
 ```
 
 ---
@@ -941,7 +941,7 @@ dab configure ^
 }
 ```
 
-## `--runtime.mcp.dml-tools.create-record.enabled`
+## `--runtime.mcp.dml-tools.create-record`
 
 Enable DAB's MCP create record tool.
 
@@ -953,14 +953,14 @@ Enable DAB's MCP create record tool.
 
 ```bash
 dab configure \
-  --runtime.mcp.dml-tools.create-record.enabled false
+  --runtime.mcp.dml-tools.create-record false
 ```
 
 #### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
-  --runtime.mcp.dml-tools.create-record.enabled false
+  --runtime.mcp.dml-tools.create-record false
 ```
 
 ---
@@ -979,7 +979,7 @@ dab configure ^
 }
 ```
 
-## `--runtime.mcp.dml-tools.read-records.enabled`
+## `--runtime.mcp.dml-tools.read-records`
 
 Enable DAB's MCP read record tool.
 
@@ -991,14 +991,14 @@ Enable DAB's MCP read record tool.
 
 ```bash
 dab configure \
-  --runtime.mcp.dml-tools.read-records.enabled false
+  --runtime.mcp.dml-tools.read-records false
 ```
 
 #### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
-  --runtime.mcp.dml-tools.read-records.enabled false
+  --runtime.mcp.dml-tools.read-records false
 ```
 
 ---
@@ -1017,7 +1017,7 @@ dab configure ^
 }
 ```
 
-## `--runtime.mcp.dml-tools.update-record.enabled`
+## `--runtime.mcp.dml-tools.update-record`
 
 Enable DAB's MCP update record tool.
 
@@ -1029,14 +1029,14 @@ Enable DAB's MCP update record tool.
 
 ```bash
 dab configure \
-  --runtime.mcp.dml-tools.update-record.enabled false
+  --runtime.mcp.dml-tools.update-record false
 ```
 
 #### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
-  --runtime.mcp.dml-tools.update-record.enabled false
+  --runtime.mcp.dml-tools.update-record false
 ```
 
 ---
@@ -1055,7 +1055,7 @@ dab configure ^
 }
 ```
 
-## `--runtime.mcp.dml-tools.delete-record.enabled`
+## `--runtime.mcp.dml-tools.delete-record`
 
 Enable DAB's MCP delete record tool.
 
@@ -1067,14 +1067,14 @@ Enable DAB's MCP delete record tool.
 
 ```bash
 dab configure \
-  --runtime.mcp.dml-tools.delete-record.enabled false
+  --runtime.mcp.dml-tools.delete-record false
 ```
 
 #### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
-  --runtime.mcp.dml-tools.delete-record.enabled false
+  --runtime.mcp.dml-tools.delete-record false
 ```
 
 ---
@@ -1093,7 +1093,7 @@ dab configure ^
 }
 ```
 
-## `--runtime.mcp.dml-tools.execute-entity.enabled`
+## `--runtime.mcp.dml-tools.execute-entity`
 
 Enable DAB's MCP execute entity tool.
 
@@ -1105,14 +1105,14 @@ Enable DAB's MCP execute entity tool.
 
 ```bash
 dab configure \
-  --runtime.mcp.dml-tools.execute-entity.enabled false
+  --runtime.mcp.dml-tools.execute-entity false
 ```
 
 #### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
-  --runtime.mcp.dml-tools.execute-entity.enabled false
+  --runtime.mcp.dml-tools.execute-entity false
 ```
 
 ---
