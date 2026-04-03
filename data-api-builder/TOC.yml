@@ -267,6 +267,9 @@
     - name: Run locally (container)
       href: deployment/local-container.md
       displayName: docker, container, dab, run
+    - name: Run locally (CLI)
+      href: command-line/dab-start.md
+      displayName: CLI, dab start, run, command line
     - name: Run from source
       href: deployment/run-from-source.md
       displayName: source, github, OSS, build, run

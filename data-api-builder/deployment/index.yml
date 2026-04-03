@@ -23,7 +23,7 @@ landingContent:
       - linkListType: reference
         links:
           - text: Runtime host and authentication configuration
-            url: ../configuration/runtime.md#host-runtime
+            url: ../configuration/runtime.md#runtime
           - text: Data source connection-string configuration
             url: ../configuration/data-source.md#data-source
       - linkListType: sample
@@ -42,7 +42,7 @@ landingContent:
       - linkListType: reference
         links:
           - text: Runtime host and authentication configuration
-            url: ../configuration/runtime.md#host-runtime
+            url: ../configuration/runtime.md#runtime
           - text: Environment variable function (@env)
             url: ../concept/config/env-function.md
       - linkListType: sample
@@ -61,7 +61,7 @@ landingContent:
       - linkListType: reference
         links:
           - text: Runtime host and authentication configuration
-            url: ../configuration/runtime.md#host-runtime
+            url: ../configuration/runtime.md#runtime
           - text: Data source connection-string configuration
             url: ../configuration/data-source.md#data-source
       - linkListType: sample
@@ -82,7 +82,7 @@ landingContent:
           - text: Configuration file reference
             url: ../configuration/index.md
           - text: Runtime host and authentication configuration
-            url: ../configuration/runtime.md#host-runtime
+            url: ../configuration/runtime.md#runtime
           - text: Data source connection-string configuration
             url: ../configuration/data-source.md#data-source
       - linkListType: sample
@@ -103,7 +103,26 @@ landingContent:
           - text: Configuration file reference
             url: ../configuration/index.md
           - text: Runtime host and authentication configuration
-            url: ../configuration/runtime.md#host-runtime
+            url: ../configuration/runtime.md#runtime
+      - linkListType: sample
+        links:
+          - text: Quickstart (SQL)
+            url: ../quickstart/basic-sql.md
+          - text: Quickstart (NoSQL)
+            url: ../quickstart/basic-nosql.md
+
+  - title: Run locally (CLI)
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Run with the CLI
+            url: ../command-line/dab-start.md
+      - linkListType: reference
+        links:
+          - text: Configuration file reference
+            url: ../configuration/index.md
+          - text: Runtime host and authentication configuration
+            url: ../configuration/runtime.md#runtime
       - linkListType: sample
         links:
           - text: Quickstart (SQL)
@@ -122,7 +141,7 @@ landingContent:
           - text: Configuration file reference
             url: ../configuration/index.md
           - text: Runtime host and authentication configuration
-            url: ../configuration/runtime.md#host-runtime
+            url: ../configuration/runtime.md#runtime
       - linkListType: sample
         links:
           - text: Source code repository (GitHub)
