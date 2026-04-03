@@ -284,7 +284,7 @@ Configure DML tools globally in the runtime section of your `dab-config.json`:
 }
 ```
 
-Each DML tool can also accept an object with an `enabled` property. The `aggregate-records` tool additionally supports a `query-timeout` property:
+Each tool property under `runtime.mcp.dml-tools` accepts `true` or `false`. The `aggregate-records` tool also supports an object format with `enabled` and `query-timeout`:
 
 ```json
 {
@@ -308,7 +308,7 @@ Each DML tool can also accept an object with an `enabled` property. The `aggrega
 }
 ```
 
-The `dml-tools` property also accepts a boolean shorthand. Setting `"dml-tools": true` enables all tools; `"dml-tools": false` disables all tools.
+To enable or disable all DML tools at once, set `"dml-tools"` to `true` or `false`.
 
 ### Using the CLI
 
@@ -317,13 +317,14 @@ Set properties individually using the Data API builder CLI:
 ```bash
 dab configure --runtime.mcp.enabled true
 dab configure --runtime.mcp.path "/mcp"
-dab configure --runtime.mcp.dml-tools.describe-entities.enabled true
-dab configure --runtime.mcp.dml-tools.create-record.enabled true
-dab configure --runtime.mcp.dml-tools.read-records.enabled true
-dab configure --runtime.mcp.dml-tools.update-record.enabled true
-dab configure --runtime.mcp.dml-tools.delete-record.enabled true
-dab configure --runtime.mcp.dml-tools.execute-entity.enabled true
+dab configure --runtime.mcp.dml-tools.describe-entities true
+dab configure --runtime.mcp.dml-tools.create-record true
+dab configure --runtime.mcp.dml-tools.read-records true
+dab configure --runtime.mcp.dml-tools.update-record true
+dab configure --runtime.mcp.dml-tools.delete-record true
+dab configure --runtime.mcp.dml-tools.execute-entity true
 dab configure --runtime.mcp.dml-tools.aggregate-records.enabled true
+dab configure --runtime.mcp.dml-tools.aggregate-records.query-timeout 30
 ```
 
 ### Disabling tools
@@ -341,24 +342,7 @@ When a tool is disabled globally, the tool is hidden from the `list_tools` respo
 
 ## Entity settings
 
-Entities participate in MCP automatically unless you explicitly restrict them. The `mcp` property on an entity controls its MCP participation. You can use a boolean shorthand or an object format.
-
-### Boolean shorthand
-
-```json
-{
-  "entities": {
-    "Products": {
-      "mcp": true
-    },
-    "SensitiveData": {
-      "mcp": false
-    }
-  }
-}
-```
-
-Setting `"mcp": true` enables DML tools for the entity. Setting `"mcp": false` disables MCP entirely for the entity.
+Entities participate in MCP automatically unless you explicitly restrict them. The `mcp` property on an entity controls its MCP participation. Use the object format for explicit control.
 
 ### Object format
 

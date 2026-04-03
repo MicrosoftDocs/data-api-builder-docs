@@ -1454,14 +1454,16 @@ dab update ^
 {
   "entities": {
     "Book": {
-      "mcp": false
+      "mcp": {
+        "dml-tools": false
+      }
     }
   }
 }
 ```
 
 > [!NOTE]
-> When `--mcp.dml-tools` is used alone, the CLI writes the `mcp` property as a boolean shorthand. When combined with `--mcp.custom-tool`, both properties appear in an object form.
+> When `--mcp.dml-tools` is used, set `mcp` using object form so the configuration is explicit.
 
 ## `--mcp.custom-tool`
 

@@ -1171,7 +1171,9 @@ dab add Book ^
       "permissions": [
         { "role": "anonymous", "actions": [ { "action": "read" } ] }
       ],
-      "mcp": true
+      "mcp": {
+        "dml-tools": true
+      }
     }
   }
 }
