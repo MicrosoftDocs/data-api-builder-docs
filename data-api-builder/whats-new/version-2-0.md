@@ -331,7 +331,7 @@ Entity: Order
 
 ### Read the docs
 
-- [Role inheritance](../concept/security/authorization.md#role-inheritance)
+- [Role inheritance](../concept/security/authorization-overview.md#role-inheritance)
 - [Entity permissions](../configuration/entities.md#role-inheritance)
 - [`--show-effective-permissions`](../command-line/dab-configure.md#--show-effective-permissions)
 

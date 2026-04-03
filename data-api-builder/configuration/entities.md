@@ -284,7 +284,7 @@ In DAB 2.0 preview, `parameters` supports a structured array format with richer 
 Specifies the role name to which permissions apply. Use system roles (`Anonymous`, `Authenticated`) or custom roles defined in your identity provider.
 
 > [!TIP]
-> For detailed information on role evaluation, system roles, and the `X-MS-API-ROLE` header, see [Authorization and roles](../concept/security/authorization.md).
+> For detailed information on role evaluation, system roles, and the `X-MS-API-ROLE` header, see [Authorization overview](../concept/security/authorization-overview.md).
 
 ### Format
 

@@ -330,7 +330,7 @@ When you're ready to deploy, replace the Simulator provider with a production pr
 
 ## Related content
 
-- [Authorization and roles](authorization.md)
+- [Authorization overview](authorization-overview.md)
 - [Configure App Service authentication](authenticate-easy-auth.md)
 - [Configure Microsoft Entra ID authentication](authenticate-entra.md)
 - [Runtime configuration reference](../../configuration/runtime.md)

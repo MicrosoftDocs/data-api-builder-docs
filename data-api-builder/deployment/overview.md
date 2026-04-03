@@ -79,7 +79,7 @@ Before deploying your DAB solution, run through this checklist covering connecti
 | | Recommendation |
 | --- | --- |
 | **&#9744;** | **[Configure your authentication provider.](../concept/security/authenticate-unauthenticated.md)** Starting in DAB 2.0, the default authentication provider is `Unauthenticated`, which means DAB doesn't inspect or validate any JSON Web Token (JWT). All requests run as `anonymous`. If your deployment requires JWT-based authentication, set the provider explicitly (for example, `--auth.provider EntraID`). For more information, see [runtime authentication configuration](../configuration/runtime.md#provider-authentication-host-runtime). |
-| **&#9744;** | **[Define entity-level permissions.](../concept/security/authorization.md)** Configure which roles can perform which actions on each entity. |
+| **&#9744;** | **[Define entity-level permissions.](../concept/security/authorization-overview.md)** Configure which roles can perform which actions on each entity. |
 | **&#9744;** | **[Set up database policies for row-level security.](../concept/security/database-policies.md)** If you need to restrict data access at the row level based on user claims, configure database policies. |
 | **&#9744;** | **[Review security best practices.](../concept/security/best-practices.md)** Before going to production, review the security best practices guide. |
 

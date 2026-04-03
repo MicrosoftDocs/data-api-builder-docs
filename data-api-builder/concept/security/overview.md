@@ -99,7 +99,7 @@ Entities have **no permissions by default**. You must explicitly grant access:
 }
 ```
 
-For detailed configuration, see [Authorization and roles](authorization.md).
+For detailed configuration, see [Authorization overview](authorization-overview.md).
 
 ## Row-level and field-level security
 
@@ -108,7 +108,7 @@ Go beyond entity-level permissions with fine-grained access control:
 | Feature | Description | Guide |
 |---------|-------------|-------|
 | **Database policies (row-level security)** | Translate policy expressions into query predicates that filter rows based on claims or session context | [Implement row-level security](row-level-security.md) |
-| **Field-level security** | Include or exclude specific columns per role | [Field access](authorization.md#field-access) |
+| **Field-level security** | Include or exclude specific columns per role | [Field access](authorization-overview.md#field-access) |
 | **On-Behalf-Of (OBO)** | Exchange the incoming user token for a downstream SQL token so the database authenticates as the actual calling user (mssql only) | [User-delegated auth](../../configuration/data-source.md#user-delegated-auth) |
 
 ## Role inheritance
@@ -155,12 +155,12 @@ For details, see [Security best practices](best-practices.md).
 | Run behind Azure App Service | [Configure App Service authentication](authenticate-easy-auth.md) |
 | Test permissions locally | [Configure Simulator authentication](authenticate-simulator.md) |
 | Restrict rows by user | [Implement row-level security](row-level-security.md) |
-| Understand role assignment | [Authorization and roles](authorization.md) |
+| Understand role assignment | [Authorization overview](authorization-overview.md) |
 
 ## Related content
 
 - [Configure the Unauthenticated provider](authenticate-unauthenticated.md)
 - [Configure Microsoft Entra ID authentication](authenticate-entra.md)
-- [Authorization and roles](authorization.md)
+- [Authorization overview](authorization-overview.md)
 - [Security best practices](best-practices.md)
 - [Runtime configuration reference](../../configuration/runtime.md)

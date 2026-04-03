@@ -177,7 +177,7 @@ If you need those capabilities, use a provider that supplies identity to DAB.
 ## Related content
 
 - [Secure your Data API builder solution](index.md)
-- [Authorization and roles](authorization.md)
+- [Authorization overview](authorization-overview.md)
 - [Configure App Service authentication](authenticate-easy-auth.md)
 - [Configure Microsoft Entra ID authentication](authenticate-entra.md)
 - [Runtime configuration reference](../../configuration/runtime.md#provider-authentication-host-runtime)

@@ -149,10 +149,7 @@
   items:
     - name: Overview
       href: concept/security/authorization-overview.md
-      displayName: landing, access control, roles, policies
-    - name: Entity permissions
-      href: concept/security/authorization.md
-      displayName: roles, policies, access control
+      displayName: landing, access control, roles, policies, entity permissions
     - name: Role Inheritance
       href: concept/security/role-inheritance.md
       displayName: permission inheritance, anonymous, authenticated
