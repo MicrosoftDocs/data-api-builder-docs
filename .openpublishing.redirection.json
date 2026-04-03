@@ -333,7 +333,7 @@
     {
       "source_path_from_root": "/data-api-builder/how-to-deploy-static-web-app.md",
       "redirect_url": "/azure/data-api-builder/deployment",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/deployment/how-to-host-static-web-apps.md",
@@ -618,11 +618,6 @@
     {
       "source_path_from_root": "/data-api-builder/deployment/best-practices-security.md",
       "redirect_url": "/azure/data-api-builder/concept/security/best-practices",
-      "redirect_document_id": false
-    },
-    {
-      "source_path_from_root": "/data-api-builder/deployment/index.md",
-      "redirect_url": "/azure/data-api-builder/deployment",
       "redirect_document_id": false
     },
     {
