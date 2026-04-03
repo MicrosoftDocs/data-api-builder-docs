@@ -324,7 +324,7 @@ additionalContent:
           summary: Authentication providers, authorization roles, and row-level security.
           links:
             - text: Security overview
-              url: concept/security/index.md
+              url: concept/security/index.yml
             - text: Authorization and roles
               url: concept/security/authorization.md
             - text: Microsoft Entra ID

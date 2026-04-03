@@ -270,7 +270,7 @@ dab init --database-type mssql --connection-string "Server=localhost;Database=my
 ### Read the docs
 
 - [Configure the Unauthenticated provider](../concept/security/authenticate-unauthenticated.md)
-- [Choose your authentication provider](../concept/security/index.md#choose-your-authentication-provider)
+- [Choose your authentication provider](../concept/security/overview.md#choose-your-authentication-provider)
 - [`dab init --auth.provider`](../command-line/dab-init.md#--authprovider)
 
 ## Introducing: Role inheritance
