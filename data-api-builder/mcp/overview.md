@@ -174,19 +174,19 @@ The SQL MCP Server is enabled by default in the Data API builder configuration. 
 }
 ```
 
-The `dml-tools` property can be a boolean (enable or disable all tools) or an object with per-tool toggles. The `aggregate-records` tool can also accept an object with `enabled` and `query-timeout` (1–600 seconds, default 30) properties. For the full configuration reference, see [MCP runtime configuration](../configuration/runtime.md#mcp-runtime).
+Set `dml-tools` to `true` or `false` to enable or disable all tools, or use an object with per-tool toggles. The `aggregate-records` tool can also accept an object with `enabled` and `query-timeout` (1–600 seconds, default 30) properties. For the full configuration reference, see [MCP runtime configuration](../configuration/runtime.md#mcp-runtime).
 
 The CLI also lets you set every property individually or programmatically through scripting. 
 
 ```bash
 dab configure --runtime.mcp.enabled true
 dab configure --runtime.mcp.path "/mcp"
-dab configure --runtime.mcp.dml-tools.describe-entities.enabled true
-dab configure --runtime.mcp.dml-tools.create-record.enabled true
-dab configure --runtime.mcp.dml-tools.read-records.enabled true
-dab configure --runtime.mcp.dml-tools.update-record.enabled true
-dab configure --runtime.mcp.dml-tools.delete-record.enabled true
-dab configure --runtime.mcp.dml-tools.execute-entity.enabled true
+dab configure --runtime.mcp.dml-tools.describe-entities true
+dab configure --runtime.mcp.dml-tools.create-record true
+dab configure --runtime.mcp.dml-tools.read-records true
+dab configure --runtime.mcp.dml-tools.update-record true
+dab configure --runtime.mcp.dml-tools.delete-record true
+dab configure --runtime.mcp.dml-tools.execute-entity true
 dab configure --runtime.mcp.dml-tools.aggregate-records.enabled true
 ```
 
@@ -198,19 +198,18 @@ Developers may want to restrict specific actions even when roles or entity permi
 
 You also don't need to enable MCP on each entity. Entities participate automatically unless you choose to restrict them. The `mcp` property exists so you can exclude an entity from MCP or narrow its capabilities, but you don't need to set anything for normal use. The defaults handle everything.
 
-You can use a boolean shorthand or an object format:
+Use object format for entity-level MCP configuration:
 
 ```json
 "entities": {
   "Products": {
-    "mcp": true
-  },
-  "SensitiveData": {
-    "mcp": false
-  },
-  "Orders": {
     "mcp": {
       "dml-tools": true
+    }
+  },
+  "SensitiveData": {
+    "mcp": {
+      "dml-tools": false
     }
   }
 }
