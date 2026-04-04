@@ -799,6 +799,16 @@
       "source_path_from_root": "/data-api-builder/quickstart/azure-cosmos-db-nosql.md",
       "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
       "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/whats-new/version-0.md",
+      "redirect_url": "/azure/data-api-builder/whats-new",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/includes/database-isolation-levels.md",
+      "redirect_url": "/azure/data-api-builder/feature-availability",
+      "redirect_document_id": false
     }
   ]
 }

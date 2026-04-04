@@ -463,6 +463,9 @@
     - name: Known issues
       displayName: bugs
       href: https://github.com/azure/data-api-builder/labels/known-issue
+    - name: Third-party notices
+      displayName: licenses, dependencies, legal
+      href: ../ThirdPartyNotices.md
     - name: Support
       displayName: ticket, css, feedback, help, assistance
       href: https://github.com/Azure/data-api-builder/blob/main/SUPPORT.md
