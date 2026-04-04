@@ -1,0 +1,150 @@
+### YamlMime:Landing
+
+title: Deployment options
+summary: Compare deployment options for Data API builder and jump to option-specific guides, configuration references, and related samples.
+
+metadata:
+  title: Deployment options for Data API builder
+  description: Compare deployment options for Data API builder across Azure Container Apps, Azure Container Instances, Azure Kubernetes Service, local Docker, and source-based hosting.
+  author: seesharprun
+  ms.author: sidandrews
+  ms.reviewer: jerrynixon
+  ms.service: data-api-builder
+  ms.topic: landing-page
+  ms.date: 04/03/2026
+
+landingContent:
+  - title: Azure Container Apps (Portal)
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: Deploy to Azure Container Apps
+            url: azure-container-apps.md
+      - linkListType: reference
+        links:
+          - text: Runtime host and authentication configuration
+            url: ../configuration/runtime.md#runtime
+          - text: Data source connection-string configuration
+            url: ../configuration/data-source.md#data-source
+      - linkListType: sample
+        links:
+          - text: AdventureWorks tutorial (Container Apps with Azure CLI)
+            url: ../tutorial-deploy-container-app-cli.md
+          - text: Run in a local container first
+            url: local-container.md
+
+  - title: Azure Container Apps (CLI tutorial)
+    linkLists:
+      - linkListType: tutorial
+        links:
+          - text: "Tutorial: Deploy to Azure Container Apps with Azure CLI"
+            url: ../tutorial-deploy-container-app-cli.md
+      - linkListType: reference
+        links:
+          - text: Runtime host and authentication configuration
+            url: ../configuration/runtime.md#runtime
+          - text: Environment variable function (@env)
+            url: ../concept/config/env-function.md
+      - linkListType: sample
+        links:
+          - text: Quickstart (SQL)
+            url: ../quickstart/basic-sql.md
+          - text: Quickstart (NoSQL)
+            url: ../quickstart/basic-nosql.md
+
+  - title: Azure Container Instances
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: Deploy to Azure Container Instances
+            url: azure-container-instances.md
+      - linkListType: reference
+        links:
+          - text: Runtime host and authentication configuration
+            url: ../configuration/runtime.md#runtime
+          - text: Data source connection-string configuration
+            url: ../configuration/data-source.md#data-source
+      - linkListType: sample
+        links:
+          - text: Run in a local container first
+            url: local-container.md
+          - text: Quickstart (SQL)
+            url: ../quickstart/basic-sql.md
+
+  - title: Azure Kubernetes Service (AKS / Kub)
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: Deploy to Azure Kubernetes Service
+            url: azure-kubernetes-service.md
+      - linkListType: reference
+        links:
+          - text: Configuration file reference
+            url: ../configuration/index.md
+          - text: Runtime host and authentication configuration
+            url: ../configuration/runtime.md#runtime
+          - text: Data source connection-string configuration
+            url: ../configuration/data-source.md#data-source
+      - linkListType: sample
+        links:
+          - text: Run in a local container first
+            url: local-container.md
+          - text: Health checks
+            url: ../concept/monitor/health-checks.md
+
+  - title: Local Docker container
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Run in a Docker container
+            url: local-container.md
+      - linkListType: reference
+        links:
+          - text: Configuration file reference
+            url: ../configuration/index.md
+          - text: Runtime host and authentication configuration
+            url: ../configuration/runtime.md#runtime
+      - linkListType: sample
+        links:
+          - text: Quickstart (SQL)
+            url: ../quickstart/basic-sql.md
+          - text: Quickstart (NoSQL)
+            url: ../quickstart/basic-nosql.md
+
+  - title: Run locally (CLI)
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Run with the CLI
+            url: ../command-line/dab-start.md
+      - linkListType: reference
+        links:
+          - text: Configuration file reference
+            url: ../configuration/index.md
+          - text: Runtime host and authentication configuration
+            url: ../configuration/runtime.md#runtime
+      - linkListType: sample
+        links:
+          - text: Quickstart (SQL)
+            url: ../quickstart/basic-sql.md
+          - text: Quickstart (NoSQL)
+            url: ../quickstart/basic-nosql.md
+
+  - title: Run from source
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Build and run source code
+            url: run-from-source.md
+      - linkListType: reference
+        links:
+          - text: Configuration file reference
+            url: ../configuration/index.md
+          - text: Runtime host and authentication configuration
+            url: ../configuration/runtime.md#runtime
+      - linkListType: sample
+        links:
+          - text: Source code repository (GitHub)
+            url: https://github.com/azure/data-api-builder
+          - text: Run in a Docker container
+            url: local-container.md

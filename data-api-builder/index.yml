@@ -324,9 +324,11 @@ additionalContent:
           summary: Authentication providers, authorization roles, and row-level security.
           links:
             - text: Security overview
-              url: concept/security/index.md
+              url: concept/security/index.yml
+            - text: Authentication overview
+              url: concept/security/authenticate-overview.md
             - text: Authorization and roles
-              url: concept/security/authorization.md
+              url: concept/security/authorization-overview.md
             - text: Microsoft Entra ID
               url: concept/security/authenticate-entra.md
             - text: Custom JWT (Okta, Auth0, Keycloak)

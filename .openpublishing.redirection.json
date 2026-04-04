@@ -1,6 +1,11 @@
 {
   "redirections": [
     {
+      "source_path_from_root": "/data-api-builder/concept/security/authorization.md",
+      "redirect_url": "/azure/data-api-builder/concept/security/authorization-overview",
+      "redirect_document_id": false
+    },
+    {
       "source_path_from_root": "/data-api-builder/concept/security/authentication-azure.md",
       "redirect_url": "/azure/data-api-builder/concept/security/authorization",
       "redirect_document_id": false
@@ -327,12 +332,12 @@
     },
     {
       "source_path_from_root": "/data-api-builder/how-to-deploy-static-web-app.md",
-      "redirect_url": "/azure/data-api-builder/deployment/overview",
-      "redirect_document_id": true
+      "redirect_url": "/azure/data-api-builder/deployment",
+      "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/deployment/how-to-host-static-web-apps.md",
-      "redirect_url": "/azure/data-api-builder/deployment/overview",
+      "redirect_url": "/azure/data-api-builder/deployment",
       "redirect_document_id": false
     },
     {
@@ -616,18 +621,18 @@
       "redirect_document_id": false
     },
     {
-      "source_path_from_root": "/data-api-builder/deployment/index.md",
-      "redirect_url": "/azure/data-api-builder/deployment/overview",
-      "redirect_document_id": false
-    },
-    {
       "source_path_from_root": "/data-api-builder/deployment/checklist.md",
-      "redirect_url": "/azure/data-api-builder/deployment/overview",
+      "redirect_url": "/azure/data-api-builder/deployment",
       "redirect_document_id": false
     },
     {
       "source_path_from_root": "/data-api-builder/deployment/hosting-options.md",
-      "redirect_url": "/azure/data-api-builder/deployment/overview",
+      "redirect_url": "/azure/data-api-builder/deployment",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/deployment/overview.md",
+      "redirect_url": "/azure/data-api-builder/deployment",
       "redirect_document_id": false
     },
     {
@@ -793,6 +798,16 @@
     {
       "source_path_from_root": "/data-api-builder/quickstart/azure-cosmos-db-nosql.md",
       "redirect_url": "/azure/data-api-builder/quickstart/basic-nosql",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/whats-new/version-0.md",
+      "redirect_url": "/azure/data-api-builder/whats-new",
+      "redirect_document_id": false
+    },
+    {
+      "source_path_from_root": "/data-api-builder/includes/database-isolation-levels.md",
+      "redirect_url": "/azure/data-api-builder/feature-availability",
       "redirect_document_id": false
     }
   ]

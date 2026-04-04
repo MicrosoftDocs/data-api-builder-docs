@@ -371,7 +371,7 @@ Data API builder validates these aspects of the JWT:
 
 ## Related content
 
-- [Authorization and roles](authorization.md)
+- [Authorization overview](authorization-overview.md)
 - [Configure Microsoft Entra ID authentication](authenticate-entra.md)
 - [Configure Simulator authentication for testing](authenticate-simulator.md)
 - [Runtime configuration reference](../../configuration/runtime.md)

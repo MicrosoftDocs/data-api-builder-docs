@@ -30,6 +30,16 @@ These tables list the features available in Data API builder (DAB).
 | Azure Database for MySQL Flexible Server | MySQL | Version 5.7 |
 | Azure Synapse Analytics (Dedicated SQL pool) | DWSQL¹ | N/A (PaaS) |
 
+## Default transaction isolation levels
+
+Data API builder uses the following default transaction isolation levels.
+
+| Database type | Isolation level | More information |
+| --- | --- | --- |
+| Microsoft SQL | Read Committed | [Azure SQL](/sql/t-sql/language-elements/transaction-isolation-levels) |
+| PostgreSQL | Read Committed | [PostgreSQL](https://www.postgresql.org/docs/current/transaction-iso.html#XACT-READ-COMMITTED) |
+| MySQL | Repeatable Read | [MySQL](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html#isolevel_repeatable-read) |
+
 ## Cloud and hosting environments
 
 Data API builder runs in any environment with container support. The following are common cloud deployment targets:
@@ -235,17 +245,17 @@ Data API builder runs on any container runtime or orchestration platform. Common
 
 Data API builder doesn't support some data types for each database platform. These limitations are typically due to serialization constraints or lack of native support in the underlying database driver.
 
-### MSSQL
+### Microsoft SQL
 
 | Data type | Description |
 | --- | --- |
 | `geography` | Geospatial data representing Earth's surface. |
 | `geometry` | Planar spatial data using Cartesian coordinates. |
 | `hierarchyid` | Hierarchical data management. |
-| `json` | JSON formatted data (currently in preview). |
+| `json` |JSON formatted data. |
 | `rowversion` | Row versioning for concurrency control. |
 | `sql_variant` | Values of various SQL Server-supported data types. |
-| `vector` | Vector data (currently in preview). |
+| `vector` | Vector data. |
 | `xml` | XML formatted data. |
 
 ### PostgreSQL

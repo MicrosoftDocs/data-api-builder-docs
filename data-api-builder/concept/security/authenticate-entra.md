@@ -494,7 +494,7 @@ Data API builder determines the request's role using this logic:
 
 ## Related content
 
-- [Authorization and roles](authorization.md)
+- [Authorization overview](authorization-overview.md)
 - [Configure Simulator authentication for testing](authenticate-simulator.md)
 - [Configure App Service authentication](authenticate-easy-auth.md)
 - [Runtime configuration reference](../../configuration/runtime.md)

@@ -173,7 +173,7 @@ For full options, see [`--show-effective-permissions`](../../command-line/dab-co
 
 ## Related content
 
-- [Authorization and roles](authorization.md)
+- [Authorization overview](authorization-overview.md)
 - [Configure database policies](database-policies.md)
 - [Configure the Unauthenticated provider](authenticate-unauthenticated.md)
 - [`--show-effective-permissions` reference](../../command-line/dab-configure.md#--show-effective-permissions)

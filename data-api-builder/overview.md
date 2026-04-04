@@ -67,7 +67,7 @@ Data API builder supports multiple authentication providers:
 | **App Service** | Apps running behind Azure App Service EasyAuth |
 | **Simulator** | Local development and testing |
 
-For step-by-step configuration guides, see [Security overview](concept/security/index.md).
+For step-by-step configuration guides, see [Security overview](concept/security/index.yml).
 
 ## Architecture
 
