@@ -121,6 +121,9 @@
   displayName: auth, login, identity, provider, JWT, token
   items:
     - name: Overview
+      href: concept/security/authenticate-overview.md
+      displayName: landing, auth, providers
+    - name: Security landing
       href: concept/security/index.yml
       displayName: landing, auth, authorization
     - name: Unauthenticated
@@ -192,12 +195,12 @@
         - name: Session Context
           href: reference-database-specific-features.md
           displayName: SESSION_CONTEXT, MSSQL
-        - name: Troubleshooting
-          href: troubleshooting/mssql.md
-          displayName: connection, login, credentials
         - name: Query Timeout
           href: concept/database/timeout.md
           displayName: performance
+        - name: Troubleshooting
+          href: troubleshooting/mssql.md
+          displayName: connection, login, credentials
     - name: Azure Cosmos DB
       displayName: cosmos, nosql, document database
       items:
@@ -210,12 +213,12 @@
         - name: Set up Cosmos DB
           href: concept/database/set-up-cosmosdb.md
           displayName: schema, authorization
-        - name: Troubleshooting
-          href: troubleshooting/cosmos.md
-          displayName: emulator, certificate, schema
         - name: Query Timeout
           href: concept/database/timeout.md
           displayName: performance
+        - name: Troubleshooting
+          href: troubleshooting/cosmos.md
+          displayName: emulator, certificate, schema
     - name: PostgreSQL
       displayName: postgres, pgsql
       items:
@@ -225,12 +228,12 @@
         - name: Feature Availability
           href: feature-availability.md
           displayName: support matrix
-        - name: Troubleshooting
-          href: troubleshooting/postgresql.md
-          displayName: connection, schema, SSL
         - name: Query Timeout
           href: concept/database/timeout.md
           displayName: performance
+        - name: Troubleshooting
+          href: troubleshooting/postgresql.md
+          displayName: connection, schema, SSL
     - name: MySQL
       displayName: mysql, mariadb
       items:
@@ -240,12 +243,12 @@
         - name: Feature Availability
           href: feature-availability.md
           displayName: support matrix
-        - name: Troubleshooting
-          href: troubleshooting/mysql.md
-          displayName: connection, credentials
         - name: Query Timeout
           href: concept/database/timeout.md
           displayName: performance
+        - name: Troubleshooting
+          href: troubleshooting/mysql.md
+          displayName: connection, credentials
 - name: Deployment
   displayName: hosting, publish, deploy, cloud
   items:
