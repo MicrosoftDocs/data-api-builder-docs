@@ -645,7 +645,7 @@ Simulates authentication for local development and testing.
 
 ### Role selection
 
-For all providers except Simulator, the `X-MS-API-ROLE` header selects which role to use from the authenticated user's claims. If omitted, the request uses the `Authenticated` system role. For details on role evaluation, see [Authorization and roles](../concept/security/authorization.md).
+For all providers except Simulator, the `X-MS-API-ROLE` header selects which role to use from the authenticated user's claims. If omitted, the request uses the `Authenticated` system role. For details on role evaluation, see [Authorization overview](../concept/security/authorization-overview.md).
 
 ## JWT (Authentication host runtime)
 

@@ -322,6 +322,6 @@ If the engine reports a policy parsing error:
 
 ## Related content
 
-- [Authorization and roles](authorization.md)
+- [Authorization overview](authorization-overview.md)
 - [Row-level security with session context](row-level-security.md)
 - [Configuration reference: Permissions](../../configuration/entities.md#permissions-entity-name-entities)

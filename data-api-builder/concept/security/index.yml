@@ -1,0 +1,121 @@
+### YamlMime:Landing
+
+title: Security and authentication
+summary: Compare authentication providers, find required configuration, and jump to CLI setup and authorization guidance.
+
+metadata:
+  title: Security and authentication for Data API builder
+  description: Understand authentication models and providers in Data API builder, with links to configuration, CLI options, and related authorization guidance.
+  author: seesharprun
+  ms.author: sidandrews
+  ms.reviewer: jerrynixon
+  ms.service: data-api-builder
+  ms.topic: landing-page
+  ms.date: 04/03/2026
+
+landingContent:
+  - title: Security fundamentals
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: Security overview and concepts
+            url: overview.md
+      - linkListType: reference
+        links:
+          - text: Runtime authentication provider configuration
+            url: ../../configuration/runtime.md#provider-authentication-host-runtime
+          - text: Authentication overview
+            url: authenticate-overview.md
+          - text: Authorization overview
+            url: authorization-overview.md
+          - text: Authorization and roles
+            url: authorization-overview.md
+
+  - title: Unauthenticated provider
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Configure the Unauthenticated provider
+            url: authenticate-unauthenticated.md
+      - linkListType: reference
+        links:
+          - text: Runtime provider setting
+            url: ../../configuration/runtime.md#provider-authentication-host-runtime
+          - text: CLI option for auth provider
+            url: ../../command-line/dab-init.md#--authprovider
+
+  - title: Microsoft Entra ID provider
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Configure Microsoft Entra ID authentication
+            url: authenticate-entra.md
+      - linkListType: reference
+        links:
+          - text: Runtime provider setting
+            url: ../../configuration/runtime.md#provider-authentication-host-runtime
+          - text: CLI option for auth provider
+            url: ../../command-line/dab-init.md#--authprovider
+
+  - title: Custom OAuth and JWT provider
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Configure custom JWT authentication
+            url: authenticate-custom.md
+      - linkListType: reference
+        links:
+          - text: Runtime provider setting
+            url: ../../configuration/runtime.md#provider-authentication-host-runtime
+          - text: CLI option for auth provider
+            url: ../../command-line/dab-init.md#--authprovider
+
+  - title: Easy Auth (App Service) provider
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Configure App Service authentication
+            url: authenticate-easy-auth.md
+      - linkListType: reference
+        links:
+          - text: Runtime provider setting
+            url: ../../configuration/runtime.md#provider-authentication-host-runtime
+          - text: CLI option for auth provider
+            url: ../../command-line/dab-init.md#--authprovider
+
+  - title: Simulator provider
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Configure Simulator authentication
+            url: authenticate-simulator.md
+      - linkListType: reference
+        links:
+          - text: Runtime provider setting
+            url: ../../configuration/runtime.md#provider-authentication-host-runtime
+          - text: CLI option for auth provider
+            url: ../../command-line/dab-init.md#--authprovider
+
+  - title: On-Behalf-Of (OBO) flow
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Configure OBO authentication
+            url: authenticate-on-behalf-of.md
+      - linkListType: reference
+        links:
+          - text: Runtime provider setting
+            url: ../../configuration/runtime.md#provider-authentication-host-runtime
+          - text: User-delegated auth in data source config
+            url: ../../configuration/data-source.md#user-delegated-auth
+
+  - title: Quick start paths
+    linkLists:
+      - linkListType: quickstart
+        links:
+          - text: Security quick start links
+            url: overview.md#quick-start-guides
+      - linkListType: concept
+        links:
+          - text: Choose your authentication provider
+            url: overview.md#choose-your-authentication-provider

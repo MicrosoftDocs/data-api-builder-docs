@@ -378,7 +378,7 @@ For anonymous access to work, your entity must have permissions for the `anonymo
 
 ## Related content
 
-- [Authorization and roles](authorization.md)
+- [Authorization overview](authorization-overview.md)
 - [Row-level security with session context](row-level-security.md)
 - [Configure Microsoft Entra ID authentication](authenticate-entra.md)
 - [Configure Simulator authentication for testing](authenticate-simulator.md)

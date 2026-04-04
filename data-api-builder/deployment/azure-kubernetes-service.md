@@ -242,6 +242,6 @@ az group delete \
 
 - [Deploy to Azure Container Apps](azure-container-apps.md)
 - [Deploy to Azure Container Instances](azure-container-instances.md)
-- [Hosting options overview](overview.md)
+- [Deployment options overview](index.yml)
 - [Health checks](../concept/monitor/health-checks.md)
 - [Deployment best practices: security](../concept/security/best-practices.md)

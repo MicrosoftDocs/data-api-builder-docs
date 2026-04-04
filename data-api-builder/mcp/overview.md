@@ -11,7 +11,7 @@ ms.date: 03/24/2026
 
 [!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
-SQL MCP Server gives developers a simple, predictable, and secure way to bring AI agents into their data workflows. SQL MCP Server accomplishes this goal without exposing the database or relying on fragile natural language parsing. The server builds on Data API builder's [entity abstraction](../configuration/entities.md), [RBAC](../concept/security/authorization.md), [caching](/azure/data-api-builder/concept/cache/level-1), and telemetry to deliver a production-ready surface that works the same across REST, GraphQL, and MCP. You configure it once, and the engine handles the rest.
+SQL MCP Server gives developers a simple, predictable, and secure way to bring AI agents into their data workflows. SQL MCP Server accomplishes this goal without exposing the database or relying on fragile natural language parsing. The server builds on Data API builder's [entity abstraction](../configuration/entities.md), [RBAC](../concept/security/authorization-overview.md), [caching](/azure/data-api-builder/concept/cache/level-1), and telemetry to deliver a production-ready surface that works the same across REST, GraphQL, and MCP. You configure it once, and the engine handles the rest.
 
 ![Diagram showing how SQL MCP Server connects AI agents to SQL databases through the Data API builder abstraction layer.](media/overview/architecture-summary.svg)
 
@@ -103,7 +103,7 @@ DDL (Data Definition Language) is the database language used to create and alter
 
 ## Support for RBAC
 
-SQL MCP Server benefits from the same proven [role-based access control (RBAC)](../concept/security/authorization.md) system used throughout Data API builder. Each entity in your configuration defines which roles may read, create, update, or delete data, and which fields are included or excluded for those roles. These rules apply automatically to every MCP tool, ensuring security remains consistent across REST, GraphQL, and MCP with no extra configuration required.
+SQL MCP Server benefits from the same proven [role-based access control (RBAC)](../concept/security/authorization-overview.md) system used throughout Data API builder. Each entity in your configuration defines which roles may read, create, update, or delete data, and which fields are included or excluded for those roles. These rules apply automatically to every MCP tool, ensuring security remains consistent across REST, GraphQL, and MCP with no extra configuration required.
 
 > [!IMPORTANT]
 > Role-based constraints apply at every step of agent interaction.

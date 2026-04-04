@@ -3,12 +3,30 @@
   items:
     - name: Overview
       href: index.yml
-    - name: What is Data API builder?
+    - name: What is Data API builder (DAB)?
       displayName: overview
       href: overview.md
-    - name: What's new?
+    - name: What's New?
       displayName: changelog, diff, release
-      href: whats-new/TOC.yml
+      items:
+        - name: Overview
+          href: whats-new/index.yml
+        - name: DAB 2.0 (Preview)
+          href: whats-new/version-2-0.md
+        - name: DAB 1.7 (Feature release)
+          href: whats-new/version-1-7.md
+        - name: DAB 1.6 (Stability release)
+          href: whats-new/version-1-6.md
+        - name: DAB 1.5 (Feature release)
+          href: whats-new/version-1-5.md
+        - name: DAB 1.4 (Stability release)
+          href: whats-new/version-1-4.md
+        - name: DAB 1.3 (Feature release)
+          href: whats-new/version-1-3.md
+        - name: DAB 1.2 (Stability release)
+          href: whats-new/version-1-2.md
+        - name: DAB 1.1 (GA)
+          href: whats-new/version-1-1.md
 - name: Quickstart
   items:
     - name: Overview
@@ -16,26 +34,111 @@
       displayName: quickstart, get started, landing
     - name: SQL Databases
       href: quickstart/basic-sql.md
-      displayName: mssql, sql server, postgres, postgresql, mysql, local, database
+      displayName: mssql, sql server, postgres, mysql
     - name: NoSQL Databases
       href: quickstart/basic-nosql.md
-      displayName: cosmos, nosql, local, database, emulator
+      displayName: cosmos, nosql, emulator
+- name: Configuration
+  displayName: config, JSON, schema, settings
+  items:
+    - name: Schema overview
+      href: configuration/index.md
+      displayName: JSON
+    - name: Data source files
+      href: configuration/index.md#data-source-files
+      displayName: multi-file, federation
+    - name: "Property: Data Source"
+      href: configuration/data-source.md#data-source
+      displayName: connection string
+    - name: "Property: Runtime"
+      href: configuration/runtime.md#runtime
+      displayName: host, port
+    - name: "Property: Entities"
+      href: configuration/entities.md
+      displayName: mappings, permissions
+    - name: "Property: Autoentities"
+      href: configuration/autoentities.md
+      displayName: patterns, MSSQL
+    - name: Environment variables
+      href: concept/config/env-function.md
+      displayName: "@env, function"
+    - name: Azure Key Vault references
+      href: concept/config/akv-function.md
+      displayName: "@akv, secrets, function"
+    - name: Multiple data sources
+      href: concept/config/multi-config.md
+      displayName: federation
+    - name: Environment-specific configs
+      href: concept/config/environments.md
+      displayName: "@env, dev, prod"
+    - name: Auto configuration
+      href: concept/config/auto-config.md
+      displayName: patterns
+    - name: Best practices
+      href: concept/config/best-practices.md
+      displayName: deployment, optimization
+    - name: JSON Schema
+      href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
+- name: Command-Line
+  items:
+    - name: Overview
+      href: command-line/index.yml
+      displayName: CLI, terminal
+    - name: Installation
+      href: command-line/install.md
+      displayName: setup, download
+    - name: dab init
+      displayName: initialize, create
+      href: command-line/dab-init.md
+    - name: dab add
+      displayName: database, table
+      href: command-line/dab-add.md
+    - name: dab start
+      displayName: run, server
+      href: command-line/dab-start.md
+    - name: dab configure
+      displayName: config, settings
+      href: command-line/dab-configure.md
+    - name: dab validate
+      displayName: check, CI/CD
+      href: command-line/dab-validate.md
+    - name: dab update
+      displayName: upgrade, migrate
+      href: command-line/dab-update.md
+    - name: dab export
+      displayName: cosmos, backup
+      href: command-line/dab-export.md
+    - name: dab auto-config
+      displayName: autoentities
+      href: command-line/dab-auto-config.md
+    - name: dab auto-config-simulate
+      displayName: autoentities, preview
+      href: command-line/dab-auto-config-simulate.md
+    - name: dab add-telemetry
+      displayName: OpenTelemetry, Application Insights
+      href: command-line/dab-add-telemetry.md
 - name: Authentication
   displayName: auth, login, identity, provider, JWT, token
   items:
+    - name: Overview
+      href: concept/security/authenticate-overview.md
+      displayName: landing, auth, providers
+    - name: Security landing
+      href: concept/security/index.yml
+      displayName: landing, auth, authorization
     - name: Unauthenticated
       href: concept/security/authenticate-unauthenticated.md
-      displayName: anonymous, no auth, default provider, pass-through
+      displayName: pass-through
     - name: Authenticated (Entra)
       href: concept/security/authenticate-entra.md
-      displayName: AAD, Microsoft Entra ID, Azure AD, SSO, OAuth, JWT, token
+      displayName: Microsoft Entra, Oauth, JWT
     - name: Authenticated (OAuth)
       href: concept/security/authenticate-custom.md
-      displayName: Okta, Auth0, JWT, third-party, custom IdP
+      displayName: Okta, Auth0, custom IdP
     - name: Simulated (Testing)
       href: concept/security/authenticate-simulator.md
-      displayName: local auth, simulated auth, development, testing
-    - name: Easy Auth (App Service)
+      displayName: development
+    - name: Easy Auth (App Services)
       href: concept/security/authenticate-easy-auth.md
       displayName: EasyAuth, App Service, X-MS-CLIENT-PRINCIPAL
     - name: Pass-through (OBO)
@@ -43,31 +146,34 @@
       displayName: OBO, on-behalf-of, user-delegated, pass-through, mssql, Entra ID
     - name: Configuration
       href: configuration/runtime.md#provider-authentication-host-runtime
-      displayName: claims, predicate, item, JWT, audience, issuer
+      displayName: JWT, audience, issuer
 - name: Authorization
   displayName: roles, claims, policies, access control, permissions
   items:
-    - name: Entity permissions
-      href: concept/security/authorization.md
-      displayName: roles, claims, policies, access control, permissions, authorization
-    - name: Role inheritance
+    - name: Overview
+      href: concept/security/authorization-overview.md
+      displayName: landing, access control, roles, policies, entity permissions
+    - name: Role Inheritance
       href: concept/security/role-inheritance.md
-      displayName: role inheritance, permission inheritance, anonymous, authenticated, named role
-    - name: Database policies
+      displayName: permission inheritance, anonymous, authenticated
+    - name: API Policies
       href: concept/security/database-policies.md
-      displayName: policies, predicates, row-level, filtering, claims, OData
-    - name: Session context
+      displayName: predicates, filtering, OData
+    - name: Session Context
       href: reference-database-specific-features.md
-      displayName: session context, SESSION_CONTEXT, SQL Server, mssql
-    - name: Row-level security
+      displayName: SESSION_CONTEXT, MSSQL
+    - name: Database RLS
       href: concept/security/row-level-security.md
-      displayName: RLS, predicates, SQL security, claim-based access
+      displayName: RLS, SQL security
+    - name: Pass-through (OBO)
+      href: concept/security/authenticate-on-behalf-of.md
+      displayName: OBO, on-behalf-of, user-delegated, pass-through, mssql, Entra ID
     - name: Configuration
       href: configuration/entities.md#permissions-entity-name-entities
-      displayName: entity permissions, role, actions, fields, policy
+      displayName: entity permissions, role, actions
     - name: Best practices
       href: concept/security/best-practices.md
-      displayName: security, hardening, guidance
+      displayName: hardening, compliance
 - name: Data Sources
   displayName: database, SQL, NoSQL, connection
   items:
@@ -76,86 +182,150 @@
       items:
         - name: Quickstart
           href: quickstart/basic-sql.md
-          displayName: mssql, sql server, get started
-        - name: Feature availability
+          displayName: MSSQL, SQL Server
+        - name: Feature Availability
           href: feature-availability.md
-          displayName: features, support matrix, database
-        - name: Tables & views
+          displayName: support matrix
+        - name: Tables & Views
           href: concept/rest/views.md
-          displayName: views, SQL, read-only, tables
-        - name: Stored procedures
+          displayName: read-only
+        - name: Stored Procedures
           href: concept/rest/stored-procedures.md
-          displayName: stored procedures, procs, SQL
-        - name: Session context
+          displayName: SQL
+        - name: Session Context
           href: reference-database-specific-features.md
-          displayName: session context, SESSION_CONTEXT, SQL Server
+          displayName: SESSION_CONTEXT, MSSQL
+        - name: Query Timeout
+          href: concept/database/timeout.md
+          displayName: performance
         - name: Troubleshooting
           href: troubleshooting/mssql.md
-          displayName: sql server, mssql, connection, login, azure sql
+          displayName: connection, login, credentials
     - name: Azure Cosmos DB
       displayName: cosmos, nosql, document database
       items:
         - name: Quickstart
           href: quickstart/basic-nosql.md
-          displayName: cosmos, nosql, emulator, get started
-        - name: Feature availability
+          displayName: Cosmos DB, NoSQL
+        - name: Feature Availability
           href: feature-availability.md
-          displayName: features, support matrix, database
+          displayName: support matrix
         - name: Set up Cosmos DB
           href: concept/database/set-up-cosmosdb.md
-          displayName: cosmos, nosql, schema, graphql, authorize
+          displayName: schema, authorization
+        - name: Query Timeout
+          href: concept/database/timeout.md
+          displayName: performance
         - name: Troubleshooting
           href: troubleshooting/cosmos.md
-          displayName: cosmos, nosql, emulator, certificate, graphql schema
+          displayName: emulator, certificate, schema
     - name: PostgreSQL
       displayName: postgres, pgsql
       items:
         - name: Quickstart
           href: quickstart/basic-sql.md
-          displayName: postgres, postgresql, get started
-        - name: Feature availability
+          displayName: PostgreSQL
+        - name: Feature Availability
           href: feature-availability.md
-          displayName: features, support matrix, database
+          displayName: support matrix
+        - name: Query Timeout
+          href: concept/database/timeout.md
+          displayName: performance
         - name: Troubleshooting
           href: troubleshooting/postgresql.md
-          displayName: postgres, postgresql, connection, schema, ssl
+          displayName: connection, schema, SSL
     - name: MySQL
       displayName: mysql, mariadb
       items:
         - name: Quickstart
           href: quickstart/basic-sql.md
-          displayName: mysql, get started
-        - name: Feature availability
+          displayName: MySQL
+        - name: Feature Availability
           href: feature-availability.md
-          displayName: features, support matrix, database
+          displayName: support matrix
+        - name: Query Timeout
+          href: concept/database/timeout.md
+          displayName: performance
         - name: Troubleshooting
           href: troubleshooting/mysql.md
-          displayName: mysql, connection, access denied, column type
+          displayName: connection, credentials
+- name: Deployment
+  displayName: hosting, publish, deploy, cloud
+  items:
+    - name: Overview
+      href: deployment/index.yml
+      displayName: deployment, hosting, checklist, options
+    - name: Container Apps (Portal)
+      href: deployment/azure-container-apps.md
+      displayName: azure, container apps, publish, deploy, aca
+    - name: Container Apps (CLI)
+      href: tutorial-deploy-container-app-cli.md
+      displayName: azure, deploy, ACA, container, cli
+    - name: Container Instances
+      href: deployment/azure-container-instances.md
+      displayName: azure, container instances, publish, deploy, aci
+    - name: Azure Kubernetes Service
+      href: deployment/azure-kubernetes-service.md
+      displayName: azure, aks, kubernetes, publish, deploy
+    - name: Run locally (container)
+      href: deployment/local-container.md
+      displayName: docker, container, dab, run
+    - name: Run locally (CLI)
+      href: command-line/dab-start.md
+      displayName: CLI, dab start, run, command line
+    - name: Run from source
+      href: deployment/run-from-source.md
+      displayName: source, github, OSS, build, run
 - name: SQL MCP Server
-  href: mcp/TOC.yml
+  items:
+    - name: Overview
+      href: mcp/index.yml
+    - name: What is SQL MCP Server?
+      href: mcp/overview.md
+    - name: "Get Started: Visual Studio Code"
+      href: mcp/quickstart-visual-studio-code.md
+    - name: "Get Started: Azure AI Foundry"
+      href: mcp/quickstart-azure-ai-foundry.md
+    - name: "Get Started: .NET Aspire"
+      href: mcp/quickstart-dotnet-aspire.md
+    - name: "Get Started: Azure Container Apps"
+      href: mcp/quickstart-azure-container-apps.md
+    - name: Authentication
+      href: mcp/how-to-configure-authentication.md
+    - name: Stdio Transport
+      href: mcp/stdio-transport.md
+    - name: Semantic Descriptions
+      href: mcp/how-to-add-descriptions.md
+    - name: Data Manipulation Tools
+      href: mcp/data-manipulation-language-tools.md
+    - name: Custom Tools
+      href: mcp/how-to-configure-custom-tools.md
+    - name: Troubleshooting
+      href: troubleshooting/mcp.md
+      displayName: mcp, sql mcp server, transport, tools, permission
 - name: REST Endpoint
   items:
     - name: Overview
       href: concept/rest/index.yml
       displayName: REST, HTTP, API, endpoints, landing
-    - name: Call REST endpoints
+    - name: What is REST Endpoint?
       href: concept/rest/overview.md
       displayName: HTTP, GET, POST, PATCH, DELETE, verbs, REST API
     - name: Keyword $select
       href: keywords/select-rest.md
-      displayName: projection, choose, columns, items
+      displayName: projection, columns
     - name: Keyword $filter
       href: keywords/filter-rest.md
-      displayName: predicate, where, limit
+      displayName: predicate, limit
     - name: Keyword $first
       href: keywords/first-rest.md
-      displayName: pagination, top, page
+      displayName: pagination, top
     - name: Keyword $orderby
       href: keywords/orderby-rest.md
-      displayName: sort, bubble, arrange, align
+      displayName: sort
     - name: Keyword $after
       href: keywords/after-rest.md
-      displayName: page, pagination, cursor
+      displayName: pagination, cursor
     - name: If-Match header
       href: concept/rest/http-if-match.md
       displayName: HTTP, conditional, update-only, etag
@@ -173,57 +343,77 @@
     - name: Overview
       href: concept/graphql/index.yml
       displayName: GraphQL, API, endpoints, landing
-    - name: Call GraphQL endpoints
+    - name: What is GraphQL Endpoint?
       href: concept/graphql/overview.md
       displayName: GraphQL, query, mutation, introspection, schema, nitro, banana cake pop, hot chocolate
     - name: Keyword select
       href: keywords/select-graphql.md
-      displayName: projection, choose, columns, items
+      displayName: projection, columns
     - name: Keyword filter
       href: keywords/filter-graphql.md
-      displayName: predicate, where, limit
+      displayName: predicate, limit
     - name: Keyword first
       href: keywords/first-graphql.md
-      displayName: pagination, top, page
+      displayName: pagination, top
     - name: Keyword orderby
       href: keywords/orderby-graphql.md
-      displayName: sort, bubble, arrange, align
+      displayName: sort
     - name: Keyword after
       href: keywords/after-graphql.md
-      displayName: page, pagination, cursor
+      displayName: pagination, cursor
     - name: Aggregate data
       href: concept/graphql/aggregate-data.md
-      displayName: aggregation, groupBy, sum, avg, min, max, graphql
+      displayName: groupBy, sum, avg, min, max
     - name: Multiple mutations
       href: concept/graphql/multiple-mutations.md
-      displayName: batch, transaction, graphql, createMany, mutation
+      displayName: batch, transaction, createMany
     - name: Database views
       href: concept/graphql/views.md
-      displayName: views, SQL, read-only, GraphQL
+      displayName: read-only
     - name: Stored procedures
       href: concept/graphql/stored-procedures.md
-      displayName: stored procedures, procs, SQL, GraphQL, execute prefix
+      displayName: SQL, execute prefix
     - name: Relationships
       href: concept/graphql/relationships.md
-      displayName: relationships, foreign key, navigation, linking, cardinality
+      displayName: foreign key, navigation, linking
     - name: Troubleshooting
       href: troubleshooting/graphql.md
       displayName: graphql, schema, mutation, introspection, relationship
-- name: Caching
-  displayName: cache, performance, redis, memory
+- name: VS Code Extension
   items:
-    - name: Level 1 cache (in-memory)
-      href: concept/cache/level-1.md
-      displayName: level 1 cache, L1, entity cache, query result, fusioncache, memory
-    - name: Level 2 cache (distributed)
-      href: concept/cache/level-2.md
-      displayName: level 2 cache, L2, global cache, prefetch, fusioncache, redis
-    - name: Cache-Control headers
-      href: concept/cache/http-headers.md
-      displayName: cache headers, HTTP, control, TTL, freshness
-    - name: Query timeout
-      href: concept/database/timeout.md
-      displayName: timeout, command timeout, connection string, long-running
+    - name: Overview
+      href: vscode-extension/index.yml
+      displayName: VS Code, omnibus, extension
+    - name: What Is the Extension?
+      href: vscode-extension/overview.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Init
+      href: vscode-extension/init.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Add
+      href: vscode-extension/add.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Start
+      href: vscode-extension/start.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Validate
+      href: vscode-extension/validate.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Health
+      href: vscode-extension/health.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Visualize
+      href: vscode-extension/visualize.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Code Gen
+      href: vscode-extension/code-gen.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Docker
+      href: vscode-extension/docker.md
+      displayName: VS Code, omnibus, extension
+    - name: DAB Model Context Protocol (MCP)
+      href: vscode-extension/mcp.md
+      displayName: VS Code, omnibus, extension
 - name: Monitoring & Telemetry
   displayName: observability, logging, tracing, diagnostics
   items:
@@ -238,115 +428,22 @@
       displayName: OTEL, tracing, distributed trace, metrics
     - name: Health checks
       href: concept/monitor/health-checks.md
-      displayName: health, health endpoint, ping, liveness, readiness, monitor, probe
+      displayName: endpoint, liveness, readiness, probe
     - name: Log levels
       href: concept/monitor/log-levels.md
       displayName: logging, trace, info, debug, warn, error
-- name: Configuration
-  displayName: config, JSON, schema, settings
+- name: Response Caching
+  displayName: cache, performance, redis, memory
   items:
-    - name: Schema overview
-      href: configuration/index.md
-      displayName: Config, JSON
-    - name: Data source files
-      href: configuration/index.md#data-source-files
-      displayName: multi-file, data source files
-    - name: Data source
-      href: configuration/data-source.md#data-source
-      displayName: database type, connection string, options
-    - name: Runtime
-      href: configuration/runtime.md#runtime
-      displayName: runtime, host, mode
-    - name: Entities
-      href: configuration/entities.md
-      displayName: entity, source, mappings, permissions
-    - name: Autoentities
-      href: configuration/autoentities.md
-      displayName: auto-config, auto entities, pattern, MSSQL
-    - name: Environment variables
-      href: concept/config/env-function.md
-      displayName: environment, config, dev, prod, variables, @env
-    - name: Azure Key Vault references
-      href: concept/config/akv-function.md
-      displayName: functions, helpers, @akv, azure key vault
-    - name: Multiple data sources
-      href: concept/config/multi-config.md
-      displayName: multiple databases, cross-DB, data source, federation
-    - name: Environment-specific configs
-      href: concept/config/environments.md
-      displayName: environment, config, dev, prod, @env, variables
-    - name: Auto configuration
-      href: concept/config/auto-config.md
-      displayName: auto configuration, autoentities, patterns, templates
-    - name: Best practices
-      href: concept/config/best-practices.md
-      displayName: configuration, deployment, settings, optimize
-    - name: JSON Schema
-      href: https://github.com/Azure/data-api-builder/blob/main/schemas/dab.draft.schema.json
-- name: VS Code Extension
-  href: vscode-extension/toc.yml
-- name: Command-Line Interface
-  items:
-    - name: Overview
-      href: command-line/index.yml
-      displayName: CLI, command line, terminal, local
-    - name: Installation
-      href: command-line/install.md
-      displayName: CLI, command-line, install
-    - name: dab init
-      displayName: command line, terminal, local
-      href: command-line/dab-init.md
-    - name: dab add
-      displayName: command line, terminal, local
-      href: command-line/dab-add.md
-    - name: dab start
-      displayName: command line, terminal, local
-      href: command-line/dab-start.md
-    - name: dab configure
-      displayName: command line, terminal, local
-      href: command-line/dab-configure.md
-    - name: dab validate
-      displayName: command line, terminal, local, CI, CICD, CI/CD, pipeline, devops
-      href: command-line/dab-validate.md
-    - name: dab update
-      displayName: command line, terminal, local
-      href: command-line/dab-update.md
-    - name: dab export
-      displayName: command line, terminal, local, cosmos
-      href: command-line/dab-export.md
-    - name: dab auto-config
-      displayName: command line, terminal, local, autoentities
-      href: command-line/dab-auto-config.md
-    - name: dab auto-config-simulate
-      displayName: command line, terminal, local, autoentities, simulate
-      href: command-line/dab-auto-config-simulate.md
-    - name: dab add-telemetry
-      displayName: command line, terminal, local, telemetry, opentelemetry, application insights
-      href: command-line/dab-add-telemetry.md
-- name: Deployment
-  displayName: hosting, publish, deploy, cloud
-  items:
-    - name: Overview
-      href: deployment/overview.md
-      displayName: deployment, hosting, checklist, options
-    - name: Container Apps (Portal)
-      href: deployment/azure-container-apps.md
-      displayName: azure, container apps, publish, deploy, aca
-    - name: Container Apps (CLI)
-      href: tutorial-deploy-container-app-cli.md
-      displayName: azure, deploy, ACA, container, cli
-    - name: Container Instances
-      href: deployment/azure-container-instances.md
-      displayName: azure, container instances, publish, deploy, aci
-    - name: Azure Kubernetes Service
-      href: deployment/azure-kubernetes-service.md
-      displayName: azure, aks, kubernetes, publish, deploy
-    - name: Run locally (container)
-      href: deployment/local-container.md
-      displayName: docker, container, dab, run
-    - name: Run from source
-      href: deployment/run-from-source.md
-      displayName: source, github, OSS, build, run
+    - name: Level 1 cache (in-memory)
+      href: concept/cache/level-1.md
+      displayName: L1, entity cache, query result, FusionCache
+    - name: Level 2 cache (distributed)
+      href: concept/cache/level-2.md
+      displayName: L2, global cache, prefetch, redis
+    - name: Cache-Control headers
+      href: concept/cache/http-headers.md
+      displayName: cache headers, HTTP, control, TTL, freshness
 - name: Samples
   items:
     - name: Devcontainer with Azure SQL

@@ -1,22 +1,50 @@
 ---
-title: Authorization and roles
-description: Define role-based authorization workflow in Data API builder for custom-defined roles and permissions.
+title: Authorization overview
+description: Learn how to control what authenticated users can do in Data API builder using role-based permissions, policies, and row-level security.
 author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: concept-article
-ms.date: 03/24/2026
-# Customer Intent: As a developer, I want to configure roles, so that I can use roles to authorize certain endpoints.
+ms.topic: conceptual
+ms.date: 04/02/2026
 ---
 
-# Authorization and roles in Data API builder
+# Authorization overview
 
-Data API builder uses a role-based authorization workflow. Any incoming request, authenticated or not, is assigned to a role. Roles can be [System Roles](#system-roles) or [User Roles](#user-roles). The assigned role is then checked against the defined [permissions](#permissions) specified in the configuration to understand what actions, fields, and policies are available for that role on the requested entity.
+Authorization determines what authenticated users are allowed to do in your Data API builder application. While authentication verifies *who* a user is, authorization controls *what* they can access and modify.
 
-![Illustration of how Data API builder selects a role and evaluates permissions for a request.](media/authorization/authorization-role-evaluation.svg)
+Data API builder uses a **role-based authorization workflow**. Any incoming request, authenticated or not, is assigned to a role. Roles can be [System Roles](#system-roles) or [User Roles](#user-roles). The assigned role is then checked against the defined [permissions](#permissions) specified in the configuration to understand what actions, fields, and policies are available for that role on the requested entity.
 
-### Determining the user's role
+## Key authorization concepts
+
+### Entity permissions
+
+Control CRUD operations (Create, Read, Update, Delete) at the entity level. Each role can be granted or denied specific actions on specific entities.
+
+### Role-based access control
+
+Assign users to roles and grant permissions based on role membership. Roles simplify management of large user groups with similar access patterns.
+
+### Row-level security (RLS)
+
+Filter data based on user identity or session context. Users see only the rows they're authorized to access, enforced at the database level.
+
+### API policies
+
+Apply OData predicates and filters to API responses. Policies automatically restrict query results based on user claims and identity.
+
+### Claims-based authorization
+
+To determine access, use claims from authentication tokens (for example, groups, roles, custom attributes). Claims provide flexible, granular permission decisions.
+
+## How it works
+
+1. **User authenticates** using one of the supported authentication methods
+2. **System extracts claims** from the authentication token (roles, groups, organization, etc.)
+3. **Authorization rules are evaluated** against the user's claims and the requested resource
+4. **Access is granted or denied** based on entity permissions, policies, and row-level security rules
+
+## Determining the user's role
 
 No role has default permissions. Once Data API builder determines a role, the entity's `permissions` must define `actions` for that role for the request to be successful.
 
@@ -38,17 +66,17 @@ To use a role other than `Anonymous` or `Authenticated`, the `X-MS-API-ROLE` hea
 Provider notes:
 
 - EasyAuth providers (for example, `AppService`): platform-injected headers (such as `X-MS-CLIENT-PRINCIPAL`) establish authentication rather than a bearer token.
-- `Simulator`: requests are treated as authenticated for development/testing, without validating a real token.
+- `Simulator`: requests are treated as `authenticated` for development/testing, without validating a real token.
 
-### System roles
+## System roles
 
 System roles are built-in roles recognized by Data API builder. A system role is autoassigned to a requestor regardless of the requestor's role membership denoted in their access tokens. There are two system roles: `Anonymous` and `Authenticated`.
 
-#### Anonymous system role
+### Anonymous system role
 
 The `Anonymous` system role is assigned to requests executed by unauthenticated users. Runtime configuration defined entities must include permissions for the `Anonymous` role if unauthenticated access is desired.
 
-##### Example
+#### Example
 
 The following Data API builder runtime configuration demonstrates explicitly configuring the system role `Anonymous` to include *read* access to the Book entity:
 
@@ -66,11 +94,11 @@ The following Data API builder runtime configuration demonstrates explicitly con
 
 When a client application sends a request accessing the Book entity on behalf of an unauthenticated user, the app shouldn't include the `Authorization` HTTP header.
 
-#### Authenticated system role
+### Authenticated system role
 
 The `Authenticated` system role is assigned to requests executed by authenticated users.
 
-##### Example
+#### Example
 
 The following Data API builder runtime configuration demonstrates explicitly configuring the system role `Authenticated` to include *read* access to the Book entity:
 
@@ -86,14 +114,14 @@ The following Data API builder runtime configuration demonstrates explicitly con
 }
 ```
 
-### User roles
+## User roles
 
 User roles are nonsystem roles that are assigned to users within the identity provider you set in the runtime config. For Data API builder to evaluate a request in the context of a user role, two requirements must be met:
 
 1. The authenticated principal must include role claims that list a user's role membership (for example, the JWT `roles` claim).
 1. The client app must include the HTTP header `X-MS-API-ROLE` with requests and set the header's value as the desired user role.
 
-#### Role evaluation example
+### Role evaluation example
 
 The following example demonstrates requests made to the `Book` entity that is configured in the Data API builder runtime configuration as follows:
 
@@ -152,7 +180,77 @@ The syntax for defining permissions is described in the [runtime configuration a
 
 By default, an entity has no permissions configured, which means no one can access the entity. Additionally, Data API builder ignores database objects when they aren't referenced in the runtime configuration.
 
-### Role inheritance
+### Actions
+
+**Actions** describe the accessibility of an entity within the scope of a role. Actions can be specified individually or with the wildcard shortcut: `*` (asterisk). The wildcard shortcut represents all actions supported for the entity type:
+
+- Tables and Views: `create`, `read`, `update`, `delete`
+- Stored Procedures: `execute`
+
+For more information about actions, see the [configuration file](../../configuration/entities.md#actions-string-array-permissions-entity-name-entities) documentation.
+
+### Field access
+
+You can configure which fields should be accessible for an action. For example, you can set which fields to **include** and **exclude** from the `read` action.
+
+The following example prevents users in the `free-access` role from performing read operations on `Column3`. References to `Column3` in GET requests (REST endpoint) or queries (GraphQL endpoint) result in a rejected request:
+
+```json
+    "book": {
+      "source": "dbo.books",
+      "permissions": [
+        {
+          "role": "free-access",
+          "actions": [
+            "create",
+            "update",
+            "delete",
+            {
+              "action": "read",
+              "fields": {
+                "include": [ "Column1", "Column2" ],
+                "exclude": [ "Column3" ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+```
+
+> [!NOTE]
+> To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you must use the `@authorize` directive in your supplied [GraphQL schema file](../../reference-database-specific-features.md). However, for GraphQL mutations and filters in GraphQL queries, the permissions configuration still enforces access control as described here.
+
+### Database policies (item-level security)
+
+**Database policies** let you filter results at the row level. Policies translate to query predicates that the database evaluates, ensuring users access only authorized records.
+
+| Supported actions | Not supported |
+|-------------------|---------------|
+| `read`, `update`, `delete` | `create`, `execute` |
+
+> [!NOTE]
+> Azure Cosmos DB for NoSQL doesn't currently support database policies.
+
+For detailed configuration steps, syntax reference, and examples, see [Configure database policies](database-policies.md).
+
+#### Quick example
+
+```json
+{
+  "role": "consumer",
+  "actions": [
+    {
+      "action": "read",
+      "policy": {
+        "database": "@item.ownerId eq @claims.userId"
+      }
+    }
+  ]
+}
+```
+
+## Role inheritance
 
 DAB 2.0 introduces role inheritance so you don't need to repeat the same permission block across every role. The inheritance chain is:
 
@@ -198,8 +296,6 @@ To allow unauthenticated access to an entity, the `Anonymous` role must be expli
 }
 ```
 
-With role inheritance, when `anonymous` has read access, `authenticated` and unconfigured named roles inherit that access automatically. You don't need to grant permissions to both system roles explicitly unless you want different actions per role.
-
 When read operations should be restricted to authenticated users only, the following permissions configuration should be set, resulting in the rejection of unauthenticated requests:
 
 ```json
@@ -229,100 +325,18 @@ In the following example, the user role `administrator` is the only defined role
 > [!NOTE]
 > To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you must use the `@authorize` directive in your supplied [GraphQL schema file](../../reference-database-specific-features.md). However, for GraphQL mutations and filters in GraphQL queries, the permissions configuration still enforces access control as described previously.
 
-#### Actions
+## Layered security model
 
-**Actions** describe the accessibility of an entity within the scope of a role. Actions can be specified individually or with the wildcard shortcut: `*` (asterisk). The wildcard shortcut represents all actions supported for the entity type:
+Data API builder uses multiple authorization layers:
 
-- Tables and Views: `create`, `read`, `update`, `delete`
-- Stored Procedures: `execute`
+- **Entity-level**: Which entities and operations are accessible
+- **Policy-level**: What data is returned (filtering based on claims)
+- **Row-level**: Database applies row filtering through RLS
+- **API-level**: HTTP headers and request validation
 
-For more information about actions, see the [configuration file](../../configuration/entities.md#actions-string-array-permissions-entity-name-entities) documentation.
+## Next steps
 
-#### Field access
-
-You can configure which fields should be accessible for an action. For example, you can set which fields to **include** and **exclude** from the `read` action.
-
-The following example prevents users in the `free-access` role from performing read operations on `Column3`. References to `Column3` in GET requests (REST endpoint) or queries (GraphQL endpoint) result in a rejected request:
-
-```json
-    "book": {
-      "source": "dbo.books",
-      "permissions": [
-        {
-          "role": "free-access",
-          "actions": [
-            "create",
-            "update",
-            "delete",
-            {
-              "action": "read",
-              "fields": {
-                "include": [ "Column1", "Column2" ],
-                "exclude": [ "Column3" ]
-              }
-            }
-          ]
-        }
-      ]
-    }
-```
-
-> [!NOTE]
-> To enforce access control for GraphQL queries when using Data API builder with Azure Cosmos DB, you must use the `@authorize` directive in your supplied [GraphQL schema file](../../reference-database-specific-features.md). However, for GraphQL mutations and filters in GraphQL queries, the permissions configuration still enforces access control as described here.
-
-#### Item level security
-
-**Database policies** let you filter results at the row level. Policies translate to query predicates that the database evaluates, ensuring users access only authorized records.
-
-| Supported actions | Not supported |
-|-------------------|---------------|
-| `read`, `update`, `delete` | `create`, `execute` |
-
-> [!NOTE]
-> Azure Cosmos DB for NoSQL doesn't currently support database policies.
-
-For detailed configuration steps, syntax reference, and examples, see [Configure database policies](database-policies.md).
-
-##### Quick example
-
-```json
-{
-  "role": "consumer",
-  "actions": [
-    {
-      "action": "read",
-      "policy": {
-        "database": "@item.ownerId eq @claims.userId"
-      }
-    }
-  ]
-}
-```
-
-## Role inheritance
-
-DAB 2.0 introduces role inheritance for entity permissions. The inheritance chain is `named-role → authenticated → anonymous`. If a role isn't explicitly configured for an entity, DAB walks up the chain until it finds a permission block. Define permissions once on `anonymous` and every broader role gets the same access automatically—no duplication required.
-
-```json
-{
-  "entities": {
-    "Book": {
-      "source": "dbo.books",
-      "permissions": [
-        { "role": "anonymous", "actions": [ "read" ] }
-      ]
-    }
-  }
-}
-```
-
-With this configuration, `anonymous`, `authenticated`, and any unconfigured named role can all read `Book`.
-
-For full details and examples, see [Role inheritance](role-inheritance.md).
-
-## Related content
-
-- [Role inheritance](role-inheritance.md)
-- [Configure database policies for row-level filtering](database-policies.md)
-- [Configure Microsoft Entra ID authentication](authenticate-entra.md)
-- [Configure Simulator authentication for local testing](authenticate-simulator.md)
+- [Role inheritance](role-inheritance.md)—Build role hierarchies
+- [API policies](database-policies.md)—Apply OData filters based on claims
+- [Row-level security](row-level-security.md)—Filter data at the database level
+- [Best practices](best-practices.md)—Security hardening guidance
