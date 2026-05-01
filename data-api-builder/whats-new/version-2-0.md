@@ -35,7 +35,7 @@ It's worth noting that `autoentities` aren't a shift in DAB to a schema-driven A
 dab auto-config my-def \
 	--patterns.include "dbo.%" \
 	--patterns.exclude "dbo.internal%" \
-	--patterns.name "{schema}_{table}" \
+	--patterns.name "{schema}_{object}" \
 	--permissions "anonymous:read"
 
 dab auto-config my-def \
@@ -55,7 +55,7 @@ dab auto-config my-def \
 			"patterns": {
 				"include": [ "dbo.%" ],
 				"exclude": [ "dbo.internal%" ],
-				"name": "{schema}_{table}"
+				"name": "{schema}_{object}"
 			},
 			"template": {
 				"rest": { "enabled": true },
