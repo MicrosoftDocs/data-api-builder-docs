@@ -53,7 +53,7 @@ Configuration settings for automatic entity generation based on pattern-matching
       "patterns": {
         "include": [ "<string>" ],    // default: ["%.%"]
         "exclude": [ "<string>" ],    // default: null
-        "name": "<string>"            // default: "{object}"
+        "name": "<string>"            // default: "{schema}_{object}"
       },
       "template": {
         "rest": { "enabled": <boolean> },      // default: true
@@ -126,7 +126,7 @@ Defines include, exclude, and naming rules that determine which database objects
 |-|-|-|-|-|
 | `autoentities.<definition-name>.patterns` | `include` | string array | ❌ No | `["%.%"]` |
 | `autoentities.<definition-name>.patterns` | `exclude` | string array | ❌ No | `null` |
-| `autoentities.<definition-name>.patterns` | `name` | string | ❌ No | `"{object}"` |
+| `autoentities.<definition-name>.patterns` | `name` | string | ❌ No | `"{schema}_{object}"` |
 
 - **`include`**—One or more MSSQL `LIKE` patterns specifying which database objects to include. Use `%` as a wildcard. The pattern format is `schema.object` (for example, `dbo.%` matches all objects in the `dbo` schema). When `null` or omitted, defaults to `["%.%"]` (all objects in all schemas).
 
@@ -172,7 +172,7 @@ With this configuration, every table in the `dbo` schema (except those matching 
 
 | Parent | Property | Type | Required | Default |
 |-|-|-|-|-|
-| `autoentities.<definition-name>.patterns` | `name` | string | ❌ No | `"{object}"` |
+| `autoentities.<definition-name>.patterns` | `name` | string | ❌ No | `"{schema}_{object}"` |
 
 Controls how matched database objects are named as entities. Supports two placeholders:
 
@@ -181,7 +181,7 @@ Controls how matched database objects are named as entities. Supports two placeh
 | `{schema}` | The schema name of the matched database object |
 | `{object}` | The object name of the matched database object |
 
-When omitted, the default `"{object}"` means the entity name matches the database object name directly.
+When omitted, the default `"{schema}_{object}"` combines the schema and object name with an underscore, helping keep generated entity names unique across schemas.
 
 ### Format
 
@@ -201,8 +201,8 @@ When omitted, the default `"{object}"` means the entity name matches the databas
 
 | Pattern | Database object | Entity name |
 |-|-|-|
-| `"{object}"` | `dbo.Products` | `Products` |
 | `"{schema}_{object}"` | `dbo.Products` | `dbo_Products` |
+| `"{object}"` | `dbo.Products` | `Products` |
 | `"{schema}.{object}"` | `sales.Orders` | `sales.Orders` |
 
 ## REST (template definition-name `autoentities`)
