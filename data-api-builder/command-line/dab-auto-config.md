@@ -44,7 +44,7 @@ dab auto-config <definition-name> [options]
 | --- | --- |
 | [`--template.rest.enabled`](#--templaterestenabled) | Enable/disable REST for matched entities. Default: `true`. |
 | [`--template.graphql.enabled`](#--templategraphqlenabled) | Enable/disable GraphQL for matched entities. Default: `true`. |
-| [`--template.mcp.dml-tool`](#--templatemcpdml-tool) | Enable/disable Model Context Protocol (MCP) data manipulation language (DML) tools for matched entities. Default: `true`. |
+| [`--template.mcp.dml-tools`](#--templatemcpdml-tools) | Enable/disable Model Context Protocol (MCP) data manipulation language (DML) tools for matched entities. Default: `true`. |
 | [`--template.health.enabled`](#--templatehealthenabled) | Enable/disable health checks for matched entities. Default: `true`. |
 | [`--template.cache.enabled`](#--templatecacheenabled) | Enable/disable caching for matched entities. Default: `false`. |
 | [`--template.cache.ttl-seconds`](#--templatecachettl-seconds) | Cache time-to-live in seconds. Default: `null`. |
@@ -391,7 +391,7 @@ dab auto-config my-def ^
 }
 ```
 
-## `--template.mcp.dml-tool`
+## `--template.mcp.dml-tools`
 
 Enable or disable MCP DML tools for all matched entities. Allowed values: `true`, `false`. Default: `true`.
 
@@ -402,7 +402,7 @@ Enable or disable MCP DML tools for all matched entities. Allowed values: `true`
 ```bash
 dab auto-config my-def \
   --patterns.include "dbo.%" \
-  --template.mcp.dml-tool true \
+  --template.mcp.dml-tools true \
   --permissions "anonymous:read"
 ```
 
@@ -411,7 +411,7 @@ dab auto-config my-def \
 ```cmd
 dab auto-config my-def ^
   --patterns.include "dbo.%" ^
-  --template.mcp.dml-tool true ^
+  --template.mcp.dml-tools true ^
   --permissions "anonymous:read"
 ```
 

@@ -210,7 +210,7 @@ When `autoentities` is present, the `entities` section is no longer required. Th
 | `template.graphql` | object | ❌ No | None | GraphQL settings for matched entities. |
 | `template.graphql.enabled` | boolean | ❌ No | `true` | Enable GraphQL. |
 | `template.health` | object | ❌ No | None | Health-check settings for matched entities. |
-| `template.health.enabled` | boolean | ❌ No | `false` | Enable health checks. |
+| `template.health.enabled` | boolean | ❌ No | `true` | Enable health checks. |
 | `template.cache` | object | ❌ No | None | Cache settings for matched entities. |
 | `template.cache.enabled` | boolean | ❌ No | `false` | Enable response caching. |
 | `template.cache.ttl-seconds` | integer | ❌ No | `null` | Cache time-to-live in seconds. |

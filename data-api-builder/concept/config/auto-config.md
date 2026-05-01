@@ -36,7 +36,7 @@ Each `autoentities` definition is a named configuration block that combines a se
         "rest": { "enabled": true },
         "graphql": { "enabled": true },
         "mcp": { "dml-tools": true },
-        "health": { "enabled": false },
+        "health": { "enabled": true },
         "cache": { "enabled": false }
        },
       "permissions": [ 
@@ -209,7 +209,7 @@ dab auto-config my-def \
 
 ### Health checks
 
-When enabled, DAB includes matched entities in its health check endpoint, verifying database connectivity for each entity.
+Health checks are enabled by default. When enabled, DAB includes matched entities in its health check endpoint, verifying database connectivity for each entity. Set `template.health.enabled` to `false` to exclude matched entities from health checks.
 
 #### Command line
 
