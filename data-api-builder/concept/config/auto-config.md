@@ -30,13 +30,13 @@ Each `autoentities` definition is a named configuration block that combines a se
       "patterns": { 
         "include": [ "dbo.table1", "dbo.table2" ], 
         "exclude": [ ], 
-        "name": "{schema}{object}" 
+        "name": "{schema}_{object}"
       },
       "template": { 
         "rest": { "enabled": true },
         "graphql": { "enabled": true },
         "mcp": { "dml-tools": true },
-        "health": { "enabled": false },
+        "health": { "enabled": true },
         "cache": { "enabled": false }
        },
       "permissions": [ 
@@ -123,7 +123,7 @@ In this example, all objects in the `dbo` schema are included except objects who
 
 ### Entity naming
 
-The `name` property is an interpolation pattern that controls how matched database objects are named as entities. It supports `{schema}` and `{object}` placeholders. You can also include literal strings alongside placeholders. The default is `{object}`, which uses the database object name directly.
+The `name` property is an interpolation pattern that controls how matched database objects are named as entities. It supports `{schema}` and `{object}` placeholders. You can also include literal strings alongside placeholders. The default is `{schema}_{object}`, which combines the database schema and object name with an underscore.
 
 #### Examples
 
@@ -131,8 +131,8 @@ The following examples assume a database object `dbo.Products`:
 
 | Pattern | Resulting entity name | Description |
 | --- | --- | --- |
-| `{object}` | `Products` | Default. Object name only. |
-| `{schema}_{object}` | `dbo_Products` | Schema and object separated by underscore. |
+| `{schema}_{object}` | `dbo_Products` | Default. Schema and object separated by underscore. |
+| `{object}` | `Products` | Object name only. |
 | `{schema}-{object}` | `dbo-Products` | Schema and object separated by hyphen. |
 | `{schema}.{object}` | `dbo.Products` | Schema and object separated by dot. |
 | `api_{object}` | `api_Products` | Literal prefix with object name. |
@@ -209,7 +209,7 @@ dab auto-config my-def \
 
 ### Health checks
 
-When enabled, DAB includes matched entities in its health check endpoint, verifying database connectivity for each entity.
+Health checks are enabled by default. When enabled, DAB includes matched entities in its health check endpoint, verifying database connectivity for each entity. Set `template.health.enabled` to `false` to exclude matched entities from health checks.
 
 #### Command line
 

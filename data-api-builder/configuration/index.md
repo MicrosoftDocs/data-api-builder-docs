@@ -201,7 +201,7 @@ When `autoentities` is present, the `entities` section is no longer required. Th
 | `patterns` | object | ✔️ Yes | None | Defines include, exclude, and naming rules. |
 | `patterns.include` | string array | ❌ No | `["%.%"]` | MSSQL `LIKE` patterns for objects to include. |
 | `patterns.exclude` | string array | ❌ No | `null` | MSSQL `LIKE` patterns for objects to exclude. |
-| `patterns.name` | string | ❌ No | `"{object}"` | Interpolation pattern using `{schema}` and `{object}`. |
+| `patterns.name` | string | ❌ No | `"{schema}_{object}"` | Interpolation pattern using `{schema}` and `{object}`. |
 | `template` | object | ❌ No | None | Default configuration applied to all matched entities. |
 | `template.mcp` | object | ❌ No | None | MCP settings for matched entities. |
 | `template.mcp.dml-tools` | boolean | ❌ No | `true` | Enable MCP data manipulation language (DML) tools. |
@@ -210,7 +210,7 @@ When `autoentities` is present, the `entities` section is no longer required. Th
 | `template.graphql` | object | ❌ No | None | GraphQL settings for matched entities. |
 | `template.graphql.enabled` | boolean | ❌ No | `true` | Enable GraphQL. |
 | `template.health` | object | ❌ No | None | Health-check settings for matched entities. |
-| `template.health.enabled` | boolean | ❌ No | `false` | Enable health checks. |
+| `template.health.enabled` | boolean | ❌ No | `true` | Enable health checks. |
 | `template.cache` | object | ❌ No | None | Cache settings for matched entities. |
 | `template.cache.enabled` | boolean | ❌ No | `false` | Enable response caching. |
 | `template.cache.ttl-seconds` | integer | ❌ No | `null` | Cache time-to-live in seconds. |
