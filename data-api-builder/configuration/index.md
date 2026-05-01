@@ -201,7 +201,7 @@ When `autoentities` is present, the `entities` section is no longer required. Th
 | `patterns` | object | ✔️ Yes | None | Defines include, exclude, and naming rules. |
 | `patterns.include` | string array | ❌ No | `["%.%"]` | MSSQL `LIKE` patterns for objects to include. |
 | `patterns.exclude` | string array | ❌ No | `null` | MSSQL `LIKE` patterns for objects to exclude. |
-| `patterns.name` | string | ❌ No | `"{object}"` | Interpolation pattern using `{schema}` and `{object}`. |
+| `patterns.name` | string | ❌ No | `"{schema}_{object}"` | Interpolation pattern using `{schema}` and `{object}`. |
 | `template` | object | ❌ No | None | Default configuration applied to all matched entities. |
 | `template.mcp` | object | ❌ No | None | MCP settings for matched entities. |
 | `template.mcp.dml-tools` | boolean | ❌ No | `true` | Enable MCP data manipulation language (DML) tools. |

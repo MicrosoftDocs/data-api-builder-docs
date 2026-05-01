@@ -35,7 +35,7 @@ dab auto-config <definition-name> [options]
 | `<definition-name>` | Required. Name of the `autoentities` definition to configure. |
 | [`--patterns.include`](#--patternsinclude) | T-SQL `LIKE` patterns to include database objects. Default: `%.%`. |
 | [`--patterns.exclude`](#--patternsexclude) | T-SQL `LIKE` patterns to exclude database objects. Default: `null`. |
-| [`--patterns.name`](#--patternsname) | Interpolation syntax for entity naming. Default: `{object}`. |
+| [`--patterns.name`](#--patternsname) | Interpolation syntax for entity naming. Default: `{schema}_{object}`. |
 | [`--permissions`](#--permissions) | Permissions in `role:actions` format. Default: `null`. |
 
 ### Template section
@@ -225,7 +225,7 @@ dab auto-config my-def ^
 
 ## `--patterns.name`
 
-Interpolation syntax for entity naming. Supports `{schema}` and `{object}` placeholders. Must be unique for each generated entity. Default: `{object}`.
+Interpolation syntax for entity naming. Supports `{schema}` and `{object}` placeholders. Must be unique for each generated entity. Default: `{schema}_{object}`.
 
 ### Example
 
