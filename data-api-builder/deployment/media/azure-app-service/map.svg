@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" viewBox="0 0 2877 142">
+  <style>
+    .shp{fill-rule:evenodd;clip-rule:evenodd;}
+    .active{fill:#F4364C}
+    .inactive{fill:#0078D4}
+    .txt{fill:#FFF;font-family:&quot;Aptos&quot;,&quot;SegoeUI&quot;,&quot;ArialMT&quot;,Arial,Helvetica,sans-serif;font-size:55px}
+  </style>
+  <path class="shp inactive" d="M0 0h452l71 71-71 71H0l71-71L0 0z"/>
+  <text class="txt" transform="translate(158 86)">Overview</text>
+  <path class="shp inactive" d="M471 0h452l71 71-71 71H471l71-71-71-71z"/>
+  <text class="txt" transform="translate(685 86)">Plan</text>
+  <path class="shp inactive" d="M941 0h452l71 71-71 71H941l71-71-71-71z"/>
+  <text class="txt" transform="translate(1116 86)">Prepare</text>
+  <path class="shp active" d="M1412 0h452l71 71-71 71h-452l71-71-71-71z"/>
+  <text class="txt" transform="translate(1591 86)">Publish</text>
+  <path class="shp inactive" d="M1883 0h452l71 71-71 71h-452l71-71-71-71z"/>
+  <text class="txt" transform="translate(2058 86)">Monitor</text>
+  <path class="shp inactive" d="M2354 0h452l71 71-71 71h-452l71-71-71-71z"/>
+  <text class="txt" transform="translate(2514 86)">Optimize</text>
+</svg>

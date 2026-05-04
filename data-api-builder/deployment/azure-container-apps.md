@@ -12,9 +12,9 @@ ms.date: 06/11/2025
 
 # Deploy Data API builder to Azure Container Apps
 
-:::image type="complex" source="media/azure-container-apps/map.svg" border="false" alt-text="Diagram of the current location ('Publish') in the sequence of the deployment guide.":::
-Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Publish' location is currently highlighted.
-:::image-end:::
+This guide shows you how to deploy Data API builder (DAB) to Azure Container Apps using a custom container image built with Azure Container Registry. Container Apps provides serverless scaling, built-in ingress, and environment-based isolation.
+
+![Diagram of the overall architecture after deployment to Azure Container Apps is complete.](media/azure-container-apps/deploy-container-apps.svg)
 
 ## Prerequisites
 
@@ -112,9 +112,9 @@ Create the container app using the custom image that already includes `dab-confi
     | **App**         | **Ingress type**                  | Select **HTTP**                                 |
     | **App**         | **Target port**                   | Enter `5000`                                    |
 
-    :::image type="content" source="media/azure-container-apps/create-container-app.png" alt-text="Screenshot of the 'Create Container App' page's 'Container' tab in the Azure portal.":::
+    ![Screenshot of the 'Create Container App' page's 'Container' tab in the Azure portal.](media/azure-container-apps/create-container-app.png)
 
-    :::image type="content" source="media/azure-container-apps/create-container-app-environment.png" alt-text="Screenshot of the 'Create Container Apps Environment' page's 'Basics' tab in the Azure portal.":::
+    ![Screenshot of the 'Create Container Apps Environment' page's 'Basics' tab in the Azure portal.](media/azure-container-apps/create-container-app-environment.png)
 
     > [!TIP]
     > We recommend using a connection string that doesn't include authorization keys. Instead, use managed identities and role-based access control to manage access between your database and host. For more information, see [Azure services that use managed identities](/entra/identity/managed-identities-azure-resources/managed-identities-status).    
