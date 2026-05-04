@@ -110,8 +110,8 @@ conceptualContent:
             - text: "Quickstart: Azure AI Foundry"
               url: mcp/quickstart-azure-ai-foundry.md
               itemType: quickstart
-            - text: "Quickstart: .NET Aspire"
-              url: mcp/quickstart-dotnet-aspire.md
+            - text: "Quickstart: Aspire"
+              url: mcp/quickstart-aspire.md
               itemType: quickstart
             - text: "Quickstart: Azure Container Apps"
               url: mcp/quickstart-azure-container-apps.md

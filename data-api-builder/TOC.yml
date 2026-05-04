@@ -317,8 +317,8 @@
           href: mcp/quickstart-visual-studio-code.md
         - name: Azure AI Foundry
           href: mcp/quickstart-azure-ai-foundry.md
-        - name: .NET Aspire
-          href: mcp/quickstart-dotnet-aspire.md
+        - name: Aspire
+          href: mcp/quickstart-aspire.md
         - name: Azure Container Apps
           href: mcp/quickstart-azure-container-apps.md
     - name: Authentication

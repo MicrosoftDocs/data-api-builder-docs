@@ -217,7 +217,7 @@ DAB's new relative `nextLink` option lets developers configure the engine to emi
 
 ## Health checks
 
-To deliver a faster composite status, Data API builder health checks now run in parallel. This reduces latency in multi-source deployments, especially when several endpoints are involved and health checks are used to determine the deployment status of the DAB container, such as in the .NET Aspire application host.
+To deliver a faster composite status, Data API builder health checks now run in parallel. This reduces latency in multi-source deployments, especially when several endpoints are involved and health checks are used to determine the deployment status of the DAB container, such as in the Aspire application host.
 
 **Example Health DOP configuration:**
 
