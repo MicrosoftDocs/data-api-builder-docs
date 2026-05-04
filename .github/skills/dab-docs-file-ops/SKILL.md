@@ -16,25 +16,36 @@ data-api-builder/
 ├── breadcrumb/toc.yml          # Breadcrumb navigation
 ├── TOC.yml                     # Main table of contents
 ├── index.yml                   # Landing page (superset of links)
+├── overview.md                 # Product overview
 ├── .openpublishing.redirection.json  # Redirect rules (repo root)
 ├── command-line/
 │   └── index.yml               # CLI landing page
 ├── deployment/
 │   └── index.yml               # Deployment landing page
 ├── concept/
-│   ├── api/
 │   ├── cache/
 │   ├── config/
 │   ├── database/
+│   ├── graphql/
+│   │   └── index.yml           # GraphQL landing page
 │   ├── monitor/
+│   ├── rest/
+│   │   └── index.yml           # REST landing page
 │   └── security/
-│       └── index.md            # Security overview
+│       └── index.yml           # Security landing page
 ├── configuration/
-├── whats-new/
-├── quickstart/
 ├── mcp/
+│   └── index.yml               # MCP landing page
+├── quickstart/
+│   └── index.yml               # Quickstart landing page
+├── troubleshooting/
 ├── vscode-extension/
-└── keywords/
+│   └── index.yml               # VS Code extension landing page
+├── whats-new/
+│   └── index.yml               # What's new landing page
+├── includes/                   # Shared include snippets
+├── keywords/
+└── media/                      # Root-level media (used by overview.md)
 ```
 
 ## Checklist
@@ -106,12 +117,21 @@ The redirect file is `.openpublishing.redirection.json` at the repo root.
 
 - Files in `command-line/` use the `dab-` prefix (e.g., `dab-add.md`, `dab-init.md`).
 - Files everywhere else do NOT use prefixes like `how-to-` or `dab-`.
-- Media folders match their parent file's name (e.g., `authenticate-entra.md` → `media/authenticate-entra/`).
+- Do not use abbreviations in filenames (use `azure-container-apps.md`, not `aca.md`).
+- Media folders match their parent file's name (e.g., `deployment/azure-app-service.md` → `deployment/media/azure-app-service/`).
+- Each doc gets its own media subfolder — do not share media folders between docs.
+
+### Image rules
+
+- Use **standard Markdown image syntax** `![alt text](path)` for all images.
+- Do NOT use `:::image` DocFX syntax in any form.
+- Every image must have descriptive alt text (10–250 characters, starting with "Diagram showing" or "Screenshot of", ending with a period).
+- When renaming a file, rename the media subfolder to match the new filename.
 
 ### Link format rules
 
 - Same-folder links: just the filename (e.g., `sibling-file.md`).
-- Cross-folder links: relative paths (e.g., `../concept/api/graphql.md`).
+- Cross-folder links: relative paths (e.g., `../concept/graphql/overview.md`).
 - Links in `.yml` files use `url:` (relative) or `href:` (relative) — no leading `/azure/`.
 - Links in the redirect file use absolute URL paths starting with `/azure/data-api-builder/`.
 
@@ -120,11 +140,11 @@ The redirect file is `.openpublishing.redirection.json` at the repo root.
 Use these to find all references before and after a file operation:
 
 ```powershell
-# Find all references to a filename (excluding redirect source entries)
+# Find all references to a filename
 git --no-pager grep -n "old-filename" -- "*.md" "*.yml"
 
 # Find redirect entries targeting the old URL
-grep -n "old-path/old-filename" .openpublishing.redirection.json
+git --no-pager grep -n "old-path/old-filename" -- ".openpublishing.redirection.json"
 
 # Verify no stale references remain after the operation
 git --no-pager grep -n "old-filename" -- "*.md" "*.yml"
@@ -144,3 +164,16 @@ Get-Content .openpublishing.redirection.json -Raw | ConvertFrom-Json | Out-Null;
 7. **Verify** no stale references remain (step 6).
 
 Always complete all steps before reporting the operation as done.
+
+## Review workflow
+
+After completing the file operation, spin up a **sub-agent using a different model** to verify:
+
+1. No broken links remain across `.md`, `.yml`, and `.json` files.
+2. Redirect entries are correct and no chains exist.
+3. TOC and index.yml entries point to valid files.
+4. Media references in all affected files resolve correctly.
+
+Evaluate the reviewer's feedback critically. Implement valid findings; discard nitpicks.
+
+After implementing reviewer feedback, use the `dab-docs-audit` skill for a final compliance check.
