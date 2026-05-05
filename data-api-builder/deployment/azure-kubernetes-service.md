@@ -12,11 +12,13 @@ ms.date: 03/26/2026
 
 # Deploy Data API builder to Azure Kubernetes Service
 
-Azure Kubernetes Service (AKS) lets you run Data API builder in a managed Kubernetes cluster alongside your other workloads. This guide walks through building a custom container image that includes your configuration file, pushing it to Azure Container Registry (ACR), and deploying it to AKS with a Kubernetes manifest.
+This guide shows you how to deploy Data API builder (DAB) to Azure Kubernetes Service (AKS) using a custom container image pushed to Azure Container Registry. AKS provides managed Kubernetes with built-in scaling, health probes, and secret management.
+
+![Diagram of the overall architecture after deployment to Azure Kubernetes Service is complete.](media/azure-kubernetes-service/deploy-kubernetes-service.svg)
 
 ## Prerequisites
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - [Azure CLI](/cli/azure/install-azure-cli) installed
 - [kubectl](/azure/aks/tutorial-kubernetes-deploy-cluster#install-the-kubernetes-cli) installed
 - [Docker](https://docs.docker.com/get-docker/) installed
@@ -30,7 +32,7 @@ Azure Kubernetes Service (AKS) lets you run Data API builder in a managed Kubern
 
 1. Initialize a base configuration file using [`dab init`](../command-line/dab-init.md). Use the `@env()` function for the connection string so the secret is injected at runtime, not baked into the image.
 
-    ```bash
+    ```dotnetcli
     dab init \
       --database-type mssql \
       --connection-string "@env('DATABASE_CONNECTION_STRING')"
@@ -38,7 +40,7 @@ Azure Kubernetes Service (AKS) lets you run Data API builder in a managed Kubern
 
 1. Add at least one entity using [`dab add`](../command-line/dab-add.md). Repeat for each table or view you want to expose.
 
-    ```bash
+    ```dotnetcli
     dab add Books \
       --source dbo.Books \
       --permissions "anonymous:read"

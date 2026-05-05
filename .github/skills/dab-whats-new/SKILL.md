@@ -14,8 +14,12 @@ Use this skill to turn a feature list into a polished Learn-style Data API build
 These apply unconditionally.
 
 - Use Learn-compliant DocFX Markdown.
-- Use site-relative links only (starting with `/`).
+- Use **standard Markdown image syntax** `![alt text](path)` for all images. Do not use `:::image` DocFX syntax.
+- Use relative paths for links within the repo (e.g., `../command-line/dab-init.md`). Use site-relative paths starting with `/` only for cross-service Microsoft Learn links (e.g., `/cli/azure/install-azure-cli`). Never use absolute `https://learn.microsoft.com/...` URLs.
 - Write in present tense.
+- Write in **second person** ("you", "your"). Never use first person ("we", "our", "let's").
+- Use **active voice**. Avoid passive constructions.
+- Do not say "we recommend" — use "Consider..." or a direct imperative instead.
 - Do not speculate or promise content beyond the supplied release scope.
 - Do not pad with marketing language, hype, or vague adjectives.
 - Do not turn the page into a raw changelog unless explicitly asked.
@@ -35,7 +39,22 @@ Required inputs:
 
 ## Document anatomy
 
-1. YAML frontmatter: `title`, `description`, author metadata, `ms.service: data-api-builder`, `ms.topic: whats-new`, `ms.date`
+1. YAML frontmatter — use this template:
+
+    ```yaml
+    ---
+    title: "What's new in Data API builder version X.Y (Month Year)"
+    description: <75–300 characters summarizing the release>
+    author: <GitHub username>
+    ms.author: <Microsoft alias>
+    ms.reviewer: <Microsoft alias>
+    ms.service: data-api-builder
+    ms.topic: whats-new
+    ms.date: <MM/DD/YYYY>
+    # Customer Intent: As a developer, I want to learn what's new in DAB X.Y so that I can take advantage of new features.
+    ---
+    ```
+
 2. H1: `# What's new in Data API builder version X.Y (Month Year)`
 3. Optional release-status note (preview, RC, or other caveats)
 4. One or two sentence summary paragraph on release themes
@@ -84,7 +103,18 @@ These are preferred patterns, not hard rules, but they make the page consistent 
 - Favor CLI examples for command-driven features, JSON fragments for config-shape features, and text output blocks for console-behavior changes.
 - Use realistic but compact entity and schema names.
 - Do not include near-duplicate samples.
-- Fenced code blocks must have explicit languages: `bash`, `sh`, `json`, `text`, `csv`.
+- Fenced code blocks must have explicit language tags:
+
+  | Content | Tag |
+  |---|---|
+  | DAB CLI commands (`dab init`, `dab add`, etc.) | `dotnetcli` |
+  | .NET CLI commands (`dotnet tool install`) | `dotnetcli` |
+  | Azure CLI commands (`az group create`) | `azurecli` |
+  | PowerShell | `powershell` |
+  | Bash / shell | `bash` |
+  | JSON configuration | `json` |
+  | YAML | `yaml` |
+  | Plain text / output | `text` |
 - Use tabs only when variants are materially different (for example, Bash vs. Windows Command Prompt). Keep tab IDs consistent across the page and close tab groups with `---`.
 
 ## Procedure
@@ -93,6 +123,12 @@ These are preferred patterns, not hard rules, but they make the page consistent 
 2. Group features by user impact and identify the headline items.
 3. Draft frontmatter, H1, status note, summary paragraph, and each feature section using the pattern above.
 4. Insert `[PLACEHOLDER]` for any missing CLI, config, or link inputs and list them at the top.
+5. **Integrate into the repo:**
+   - Add the file to `TOC.yml` under the "What's New?" section.
+   - Add the file to `whats-new/index.yml`.
+   - Update `whats-new/index.yml` metadata if it lists versions explicitly.
+6. **Review:** Spin up a sub-agent using a different model to check technical accuracy, style compliance, link correctness, and peer consistency with existing whats-new pages. Implement valid feedback; discard nitpicks.
+7. **Audit:** Use the `dab-docs-audit` skill for a final compliance check against Microsoft Learn publishing requirements.
 
 ## Output
 

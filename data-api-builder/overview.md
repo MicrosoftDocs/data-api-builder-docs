@@ -86,7 +86,7 @@ You configure Data API builder with a single JSON file. In the file, you define:
 
 ![Diagram of container hosting options for Data API builder.](media/overview/container-service.svg)
 
-DAB works great with Azure Container Apps, Azure Container Instances, Azure Kubernetes Service, and Azure Web Apps for Containers. DAB works with these services while fully supporting custom, on-premises deployments.
+DAB works great with Azure App Service, Azure Container Apps, Azure Container Instances, Azure Kubernetes Service, and Azure Web Apps for Containers. DAB works with these services while fully supporting custom, on-premises deployments. For a full comparison, see [deployment options](deployment/index.yml).
 
 ## Integrations and capabilities
 

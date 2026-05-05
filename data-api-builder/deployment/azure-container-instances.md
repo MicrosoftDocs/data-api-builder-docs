@@ -12,11 +12,9 @@ ms.date: 06/11/2025
 
 # Deploy Data API builder to Azure Container Instances
 
-:::image type="complex" source="media/azure-container-instances/map.svg" border="false" alt-text="Diagram of the current location ('Publish') in the sequence of the deployment guide.":::
-Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Publish' location is currently highlighted.
-:::image-end:::
+This guide shows you how to deploy Data API builder (DAB) to Azure Container Instances using a custom container image built with Azure Container Registry. Container Instances provides a fast way to run a container in Azure without managing virtual machines or adopting an orchestrator.
 
-Deploy the Data API builder quickly to Azure using a custom container image that includes your configuration. This guide includes steps to build a custom image and run it in Azure Container Instances.
+![Diagram of the overall architecture after deployment to Azure Container Instances is complete.](media/azure-container-instances/deploy-container-instances.svg)
 
 ## Prerequisites
 

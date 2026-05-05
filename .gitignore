@@ -10,5 +10,6 @@ _repo.*/
 
 # DocFX output (dest in data-api-builder/docfx.json)
 data-api-builder/data-api-builder-docs/
+docfx-output.log
 
 .openpublishing.buildcore.ps1
