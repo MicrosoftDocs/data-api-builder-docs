@@ -5,39 +5,41 @@ summary: Compare deployment options for Data API builder and jump to option-spec
 
 metadata:
   title: Deployment options for Data API builder
-  description: Compare deployment options for Data API builder across Azure Container Apps, Azure Container Instances, Azure Kubernetes Service, local Docker, and source-based hosting.
+  description: Compare deployment options for Data API builder across Azure App Service, Azure Container Apps, Azure Container Instances, Azure Kubernetes Service, local Docker, and source-based hosting.
   author: seesharprun
   ms.author: sidandrews
   ms.reviewer: jerrynixon
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 04/03/2026
+  ms.date: 05/04/2026
 
 landingContent:
-  - title: Azure Container Apps (Portal)
+  - title: Azure App Service
     linkLists:
-      - linkListType: overview
+      - linkListType: how-to-guide
         links:
-          - text: Deploy to Azure Container Apps
-            url: azure-container-apps.md
+          - text: Deploy to Azure App Service
+            url: azure-app-service.md
       - linkListType: reference
         links:
           - text: Runtime host and authentication configuration
             url: ../configuration/runtime.md#runtime
-          - text: Data source connection-string configuration
-            url: ../configuration/data-source.md#data-source
+          - text: Easy Auth (App Service) authentication
+            url: ../concept/security/authenticate-easy-auth.md
       - linkListType: sample
         links:
-          - text: AdventureWorks tutorial (Container Apps with Azure CLI)
-            url: ../tutorial-deploy-container-app-cli.md
-          - text: Run in a local container first
-            url: local-container.md
+          - text: Quickstart (SQL)
+            url: ../quickstart/basic-sql.md
+          - text: Quickstart (NoSQL)
+            url: ../quickstart/basic-nosql.md
 
-  - title: Azure Container Apps (CLI tutorial)
+  - title: Azure Container Apps
     linkLists:
-      - linkListType: tutorial
+      - linkListType: how-to-guide
         links:
-          - text: "Tutorial: Deploy to Azure Container Apps with Azure CLI"
+          - text: Deploy to Azure Container Apps
+            url: azure-container-apps.md
+          - text: "Tutorial: Deploy with Azure CLI"
             url: ../tutorial-deploy-container-app-cli.md
       - linkListType: reference
         links:
@@ -47,14 +49,14 @@ landingContent:
             url: ../concept/config/env-function.md
       - linkListType: sample
         links:
+          - text: Run in a local container first
+            url: local-container.md
           - text: Quickstart (SQL)
             url: ../quickstart/basic-sql.md
-          - text: Quickstart (NoSQL)
-            url: ../quickstart/basic-nosql.md
 
   - title: Azure Container Instances
     linkLists:
-      - linkListType: overview
+      - linkListType: how-to-guide
         links:
           - text: Deploy to Azure Container Instances
             url: azure-container-instances.md
@@ -71,9 +73,9 @@ landingContent:
           - text: Quickstart (SQL)
             url: ../quickstart/basic-sql.md
 
-  - title: Azure Kubernetes Service (AKS / Kub)
+  - title: Azure Kubernetes Service
     linkLists:
-      - linkListType: overview
+      - linkListType: how-to-guide
         links:
           - text: Deploy to Azure Kubernetes Service
             url: azure-kubernetes-service.md
@@ -81,16 +83,14 @@ landingContent:
         links:
           - text: Configuration file reference
             url: ../configuration/index.md
-          - text: Runtime host and authentication configuration
-            url: ../configuration/runtime.md#runtime
-          - text: Data source connection-string configuration
-            url: ../configuration/data-source.md#data-source
+          - text: Health checks
+            url: ../concept/monitor/health-checks.md
       - linkListType: sample
         links:
           - text: Run in a local container first
             url: local-container.md
-          - text: Health checks
-            url: ../concept/monitor/health-checks.md
+          - text: Deployment best practices
+            url: ../concept/security/best-practices.md
 
   - title: Local Docker container
     linkLists:

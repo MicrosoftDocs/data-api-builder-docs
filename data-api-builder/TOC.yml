@@ -261,6 +261,9 @@
     - name: Container Apps (CLI)
       href: tutorial-deploy-container-app-cli.md
       displayName: azure, deploy, ACA, container, cli
+    - name: App Service (code)
+      href: deployment/azure-app-service.md
+      displayName: azure, app service, publish, deploy, code, no container
     - name: Container Instances
       href: deployment/azure-container-instances.md
       displayName: azure, container instances, publish, deploy, aci

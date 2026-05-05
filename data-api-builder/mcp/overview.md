@@ -257,6 +257,7 @@ MCP tool execution is fully instrumented with OpenTelemetry (OTEL) spans. Each M
 - [Configure authentication for SQL MCP Server](how-to-configure-authentication.md)
 - [Data manipulation tools in SQL MCP Server](data-manipulation-language-tools.md)
 - [Deploy SQL MCP Server to Azure Container Apps](quickstart-azure-container-apps.md)
+- [Deploy SQL MCP Server to Azure App Service](../deployment/azure-app-service.md)
 - [Get started with SQL MCP Server in Visual Studio Code](quickstart-visual-studio-code.md)
 - [Get started with SQL MCP Server in .NET Aspire](quickstart-dotnet-aspire.md)
 - [Get started with SQL MCP Server in Azure AI Foundry](quickstart-azure-ai-foundry.md)
