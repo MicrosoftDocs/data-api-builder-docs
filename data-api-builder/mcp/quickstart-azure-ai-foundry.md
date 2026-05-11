@@ -4,6 +4,7 @@ description: Learn how to connect SQL MCP Server to Azure AI Foundry agents usin
 author: jnixon
 ms.author: jnixon
 ms.topic: quickstart
+ms.collection: ce-skilling-ai-copilot
 ms.date: 12/22/2025
 ---
 
