@@ -5,7 +5,7 @@ author: jerrynixon
 ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
-ms.topic: conceptual
+ms.topic: article
 ms.date: 03/27/2026
 # Customer Intent: As a developer, I want to understand role inheritance so that I can configure entity permissions without repeating the same permission block across every role.
 ---
