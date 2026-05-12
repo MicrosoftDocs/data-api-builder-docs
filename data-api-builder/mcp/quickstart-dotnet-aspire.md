@@ -1,10 +1,10 @@
 ---
 title: Quickstart - .NET Aspire
 description: Start SQL MCP Server with .NET Aspire. Build container-based solutions with SQL database, Data API builder, and MCP Inspector. Get started now.
-author: jnixon
+author: jerrynixon
 ms.author: jnixon
 ms.topic: quickstart
-ms.date: 12/22/2025
+ms.date: 05/11/2026
 ---
 
 # Quickstart: Use SQL MCP Server with .NET Aspire
@@ -138,7 +138,7 @@ IResourceBuilder<ContainerResource> WithSqlCommander(IResourceBuilder<SqlServerD
     });
 
 IResourceBuilder<ContainerResource> AddMcpServer(IResourceBuilder<SqlServerDatabaseResource> db) => db
-    .ApplicationBuilder.AddContainer("sql-mcp-server", "azure-databases/data-api-builder", "2.0.0-rc")
+    .ApplicationBuilder.AddContainer("sql-mcp-server", "azure-databases/data-api-builder", "2.0.1-rc")
     .WithImageRegistry("mcr.microsoft.com")
     .WithHttpEndpoint(targetPort: 5000, name: "http")
     .WithEnvironment("MSSQL_CONNECTION_STRING", db)

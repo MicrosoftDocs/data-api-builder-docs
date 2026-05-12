@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 03/24/2026
+ms.date: 05/11/2026
 # Customer Intent: As a developer, I want to add entities to my Data API builder configuration, so that I can expose database objects as APIs.
 ---
 
@@ -44,7 +44,9 @@ dab add <entity-name> [options]
 | Option | Summary |
 | - | - |
 | [`--cache.enabled`](#--cacheenabled) | Enable/disable caching for entity. |
-| [`--cache.ttl`](#--cachettl) | Cache time-to-live in seconds. |
+| [`--cache.ttl-seconds`](#--cachettl-seconds) | Cache time-to-live in seconds. |
+| [`--cache.level`](#--cachelevel) | Cache level: `L1` or `L1L2`. Default: `L1L2`. |
+| [`--health.enabled`](#--healthenabled) | Enable health checks for this entity. Default: `true`. |
 | [`--description`](#--description) | Free-form description for entity. |
 
 ### Parameters section
@@ -428,7 +430,7 @@ dab add Book ^
 }
 ```
 
-## `--cache.ttl`
+## `--cache.ttl-seconds`
 
 Cache time-to-live in seconds.
 
@@ -440,7 +442,7 @@ Cache time-to-live in seconds.
 dab add Book \
   --source dbo.Books \
   --permissions "anonymous:read" \
-  --cache.ttl 300
+  --cache.ttl-seconds 300
 ```
 
 #### [Command Prompt](#tab/cmd-cli)
@@ -449,7 +451,7 @@ dab add Book \
 dab add Book ^
   --source dbo.Books ^
   --permissions "anonymous:read" ^
-  --cache.ttl 300
+  --cache.ttl-seconds 300
 ```
 
 ---
@@ -469,6 +471,100 @@ dab add Book ^
       ],
       "cache": {
         "ttl-seconds": 300
+      }
+    }
+  }
+}
+```
+
+## `--cache.level`
+
+Cache level for this entity. Valid values are `L1` and `L1L2`. Default is `L1L2`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --cache.level L1
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --cache.level L1
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "table",
+        "object": "dbo.Books"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ],
+      "cache": {
+        "level": "L1"
+      }
+    }
+  }
+}
+```
+
+## `--health.enabled`
+
+Enable or disable health checks for this entity. Default is `true`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab add Book \
+  --source dbo.Books \
+  --permissions "anonymous:read" \
+  --health.enabled false
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab add Book ^
+  --source dbo.Books ^
+  --permissions "anonymous:read" ^
+  --health.enabled false
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "entities": {
+    "Book": {
+      "source": {
+        "type": "table",
+        "object": "dbo.Books"
+      },
+      "permissions": [
+        { "role": "anonymous", "actions": [ { "action": "read" } ] }
+      ],
+      "health": {
+        "enabled": false
       }
     }
   }
@@ -842,7 +938,7 @@ dab add Products ^
 ### Resulting config
 
 > [!NOTE]
-> In the current 2.0.0-rc release, the CLI accepts `--fields.name`, `--fields.alias`, `--fields.description`, and `--fields.primary-key` but doesn't yet persist entity-level field metadata to the configuration file. The team expects to resolve this behavior before GA.
+> In the current Data API builder 2.0 preview CLI, the CLI accepts `--fields.name`, `--fields.alias`, `--fields.description`, and `--fields.primary-key` but doesn't yet persist entity-level field metadata to the configuration file. The team expects to resolve this behavior before GA.
 
 ## `--fields.alias`
 
@@ -935,7 +1031,7 @@ dab add Products ^
 ---
 
 > [!NOTE]
-> In the current 2.0.0-rc release, the CLI accepts `--fields.primary-key` but doesn't yet persist entity-level field metadata to the configuration file. To specify primary key fields for views, use [`--source.key-fields`](#--sourcekey-fields) instead.
+> In the current Data API builder 2.0 preview CLI, the CLI accepts `--fields.primary-key` but doesn't yet persist entity-level field metadata to the configuration file. To specify primary key fields for views, use [`--source.key-fields`](#--sourcekey-fields) instead.
 
 ## `--graphql`
 
