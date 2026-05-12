@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 03/24/2026
+ms.date: 05/11/2026
 # Customer Intent: As a developer, I want to initialize a Data API builder configuration, so that I can begin defining APIs for my database.
 ---
 
@@ -43,7 +43,7 @@ If the target config file already exists, the command overwrites it. There's no 
 | [`--connection-string`](#--connection-string) | Database connection string (supports `@env()`) |
 | [`--cosmosdb_nosql-container`](#--cosmosdb_nosql-container) | Cosmos DB NoSQL container name (optional) |
 | [`--cosmosdb_nosql-database`](#--cosmosdb_nosql-database) | Cosmos DB NoSQL database name (required for cosmosdb_nosql) |
-| [`--database-type`](#--database-type) | Database type: `mssql`, `mysql`, `postgresql`, `cosmosdb_postgresql`, `cosmosdb_nosql` |
+| [`--database-type`](#--database-type) | Database type: `mssql`, `dwsql`, `mysql`, `postgresql`, `cosmosdb_postgresql`, `cosmosdb_nosql` |
 | [`--set-session-context`](#--set-session-context) | Enable SQL Server session context (mssql only) |
 
 #### GraphQL section
@@ -52,7 +52,7 @@ If the target config file already exists, the command overwrites it. There's no 
 | - | - |
 | [`--graphql.disabled`](#--graphqldisabled) | Deprecated. Disables GraphQL (use `--graphql.enabled false`) |
 | [`--graphql.enabled`](#--graphqlenabled) | Enable GraphQL (default true) |
-| [`--graphql.multiple-create.enabled`](#--graphqlmultiple-createenabled) | Allow multiple create mutations (default false) |
+| [`--graphql.multiple-mutations.create.enabled`](#--graphqlmultiple-mutationscreateenabled) | Allow multiple create mutations (default false) |
 | [`--graphql.path`](#--graphqlpath) | GraphQL endpoint prefix (default /graphql) |
 | [`--graphql-schema`](#--graphql-schema) | Path to GraphQL schema (required for cosmosdb_nosql) |
 
@@ -73,7 +73,7 @@ If the target config file already exists, the command overwrites it. There's no 
 | [`--mcp.enabled`](#--mcpenabled) | Enable MCP (default true) |
 | [`--mcp.path`](#--mcppath) | MCP endpoint prefix (default /mcp) |
 
-> [!Note]
+> [!NOTE]
 > MCP capability is available in version `1.7` and later.
 
 #### REST section
@@ -392,7 +392,7 @@ dab init ^
 
 ## `--database-type`
 
-Specifies the target database engine. Supported values: `mssql`, `mysql`, `postgresql`, `cosmosdb_postgresql`, `cosmosdb_nosql`.
+Specifies the target database engine. Supported values: `mssql`, `dwsql`, `mysql`, `postgresql`, `cosmosdb_postgresql`, `cosmosdb_nosql`.
 
 ### Example
 
@@ -458,7 +458,7 @@ dab init ^
 }
 ```
 
-## `--graphql.multiple-create.enabled`
+## `--graphql.multiple-mutations.create.enabled`
 
 Allows creating multiple rows in a single mutation. Default is `false`.
 
@@ -469,7 +469,7 @@ Allows creating multiple rows in a single mutation. Default is `false`.
 ```bash
 dab init \
   --database-type mssql \
-  --graphql.multiple-create.enabled true
+  --graphql.multiple-mutations.create.enabled true
 ```
 
 #### [Command Prompt](#tab/cmd-cli)
@@ -477,7 +477,7 @@ dab init \
 ```cmd
 dab init ^
   --database-type mssql ^
-  --graphql.multiple-create.enabled true
+  --graphql.multiple-mutations.create.enabled true
 ```
 ---
 ### Resulting config
@@ -751,7 +751,7 @@ dab init ^
 
 REST endpoint prefix. Default is `/api`.
 
-> [!Note]
+> [!NOTE]
 > Ignored for `cosmosdb_nosql`.
 
 ### Example
@@ -791,7 +791,7 @@ Controls handling of extra fields in request bodies. Default is `false`.
 * `true`: Rejects extraneous fields (HTTP 400).
 * `false`: Ignores extra fields.
 
-> [!Note]
+> [!NOTE]
 > Ignored for `cosmosdb_nosql`.
 
 ### Example

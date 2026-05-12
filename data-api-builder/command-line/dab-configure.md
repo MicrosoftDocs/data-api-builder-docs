@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 03/24/2026
+ms.date: 05/11/2026
 # Customer Intent: As a developer, I want to configure runtime and data source settings in Data API builder, so that my API runs correctly.
 ---
 
@@ -44,10 +44,14 @@ dab configure [options]
 | [`--data-source.options.database`](#--data-sourceoptionsdatabase) | Database name for Cosmos DB for NoSql. |
 | [`--data-source.options.container`](#--data-sourceoptionscontainer) | Container name for Cosmos DB for NoSql. |
 | [`--data-source.options.schema`](#--data-sourceoptionsschema) | Schema path for Cosmos DB for NoSql. |
-| [`--data-source.options.set-session-context`](#--data-sourceoptionsset-session-context) | Enable session context. |
+| [`--data-source.options.set-session-context`](#--data-sourceoptionsset-session-context) | Enable or disable session context. Default: `false`. |
+| [`--data-source.health.enabled`](#--data-sourcehealthenabled) | Enable or disable the data source health check. |
 | [`--data-source.health.name`](#--data-sourcehealthname) | Identifier for data source in health check report. |
+| [`--data-source.health.threshold-ms`](#--data-sourcehealththreshold-ms) | Health check query threshold in milliseconds. |
 | [`--data-source.user-delegated-auth.enabled`](#--data-sourceuser-delegated-authenabled) | Enable OBO user-delegated authentication. |
+| [`--data-source.user-delegated-auth.provider`](#--data-sourceuser-delegated-authprovider) | Set the OBO identity provider. |
 | [`--data-source.user-delegated-auth.database-audience`](#--data-sourceuser-delegated-authdatabase-audience) | Target audience for the downstream SQL token. |
+| [`--data-source-files`](#--data-source-files) | Reference additional data source config files. |
 
 ### GraphQL section
 
@@ -67,6 +71,14 @@ dab configure [options]
 | [`--runtime.rest.path`](#--runtimerestpath) | Customize the REST endpoint path. |
 | [`--runtime.rest.request-body-strict`](#--runtimerestrequest-body-strict) | Enforce strict REST request body validation. |
 
+### Pagination section
+
+| Option | Summary |
+| - | - |
+| [`--runtime.pagination.max-page-size`](#--runtimepaginationmax-page-size) | Maximum page size for paginated results. |
+| [`--runtime.pagination.default-page-size`](#--runtimepaginationdefault-page-size) | Default page size for paginated results. |
+| [`--runtime.pagination.next-link-relative`](#--runtimepaginationnext-link-relative) | Use relative URLs in REST pagination next links. |
+
 ### MCP section
 
 | Option | Summary |
@@ -81,7 +93,7 @@ dab configure [options]
 | [`--runtime.mcp.dml-tools.update-record`](#--runtimemcpdml-toolsupdate-record) | Enable or disable the update-record tool. |
 | [`--runtime.mcp.dml-tools.delete-record`](#--runtimemcpdml-toolsdelete-record) | Enable or disable the delete-record tool. |
 | [`--runtime.mcp.dml-tools.execute-entity`](#--runtimemcpdml-toolsexecute-entity) | Enable or disable the execute-entity tool. |
-| [`--runtime.mcp.dml-tools.aggregate-records.enabled`](#--runtimemcpdml-toolsaggregate-recordsenabled) | Enable or disable the aggregate-records tool. |
+| [`--runtime.mcp.dml-tools.aggregate-records`](#--runtimemcpdml-toolsaggregate-records) | Enable or disable the aggregate-records tool. |
 | [`--runtime.mcp.dml-tools.aggregate-records.query-timeout`](#--runtimemcpdml-toolsaggregate-recordsquery-timeout) | Execution timeout in seconds for aggregate-records. |
 
 ### Cache section
@@ -97,11 +109,21 @@ dab configure [options]
 | Option | Summary |
 | - | - |
 | [`--runtime.host.mode`](#--runtimehostmode) | Set host mode: Development or Production. |
+| [`--runtime.host.max-response-size-mb`](#--runtimehostmax-response-size-mb) | Maximum response size in megabytes. |
 | [`--runtime.host.cors.origins`](#--runtimehostcorsorigins) | Allowed CORS origins. |
 | [`--runtime.host.cors.allow-credentials`](#--runtimehostcorsallow-credentials) | Set CORS allow-credentials. |
 | [`--runtime.host.authentication.provider`](#--runtimehostauthenticationprovider) | Authentication provider. |
 | [`--runtime.host.authentication.jwt.audience`](#--runtimehostauthenticationjwtaudience) | JWT audience claim. |
 | [`--runtime.host.authentication.jwt.issuer`](#--runtimehostauthenticationjwtissuer) | JWT issuer claim. |
+
+### Health section
+
+| Option | Summary |
+| - | - |
+| [`--runtime.health.enabled`](#--runtimehealthenabled) | Enable or disable the global health endpoint. |
+| [`--runtime.health.cache-ttl-seconds`](#--runtimehealthcache-ttl-seconds) | Cache TTL for health check reports. |
+| [`--runtime.health.max-query-parallelism`](#--runtimehealthmax-query-parallelism) | Maximum concurrent health check queries. |
+| [`--runtime.health.roles`](#--runtimehealthroles) | Roles allowed to view comprehensive health results. |
 
 ### Effective permissions
 
@@ -124,6 +146,7 @@ dab configure [options]
 
 | Option | Summary |
 | - | - |
+| [`--runtime.telemetry.log-level`](#--runtimetelemetrylog-level) | Configure logging verbosity by namespace. |
 | [`--runtime.telemetry.azure-log-analytics.enabled`](#--runtimetelemetryazure-log-analyticsenabled) | Enable Azure Log Analytics telemetry. |
 | [`--runtime.telemetry.azure-log-analytics.dab-identifier`](#--runtimetelemetryazure-log-analyticsdab-identifier) | Distinguish log origin. |
 | [`--runtime.telemetry.azure-log-analytics.flush-interval-seconds`](#--runtimetelemetryazure-log-analyticsflush-interval-seconds) | Flush cadence in seconds. |
@@ -167,7 +190,9 @@ Database type.
 Allowed values:
 
 - `MSSQL`
+- `DWSQL`
 - `PostgreSQL`
+- `CosmosDB_PostgreSQL`
 - `CosmosDB_NoSQL`
 - `MySQL`
 
@@ -228,6 +253,38 @@ dab configure ^
   "data-source": {
     "connection-string": "Server=myserver;Database=mydb;User Id=myuser;Password=mypassword;"
   }
+}
+```
+
+## `--data-source-files`
+
+Reference additional data source configuration files from the root configuration file.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --data-source-files ./dab-config.sales.json
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --data-source-files ./dab-config.sales.json
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "data-source-files": [
+    "./dab-config.sales.json"
+  ]
 }
 ```
 
@@ -339,8 +396,8 @@ Enable session context.
 
 Allowed values:
 
-- `true` (default)
-- `false`
+- `true`
+- `false` (default)
 
 ### Example
 
@@ -367,6 +424,40 @@ dab configure ^
   "data-source": {
     "options": {
       "set-session-context": false
+    }
+  }
+}
+```
+
+## `--data-source.health.enabled`
+
+Enable or disable the health check for the data source. Default is `true`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --data-source.health.enabled false
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --data-source.health.enabled false
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "data-source": {
+    "health": {
+      "enabled": false
     }
   }
 }
@@ -406,6 +497,40 @@ dab configure ^
 }
 ```
 
+## `--data-source.health.threshold-ms`
+
+Maximum duration in milliseconds for the data source health check query. Default is `1000`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --data-source.health.threshold-ms 750
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --data-source.health.threshold-ms 750
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "data-source": {
+    "health": {
+      "threshold-ms": 750
+    }
+  }
+}
+```
+
 ## `--data-source.user-delegated-auth.enabled`
 
 Enable or disable On-Behalf-Of (OBO) user-delegated authentication. Supported only for `mssql` data sources.
@@ -437,6 +562,42 @@ dab configure ^
   "data-source": {
     "user-delegated-auth": {
       "enabled": true
+    }
+  }
+}
+```
+
+## `--data-source.user-delegated-auth.provider`
+
+Set the identity provider for On-Behalf-Of (OBO) user-delegated authentication. Currently, only `EntraId` is supported.
+
+[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --data-source.user-delegated-auth.provider EntraId
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --data-source.user-delegated-auth.provider EntraId
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "data-source": {
+    "user-delegated-auth": {
+      "provider": "EntraId"
     }
   }
 }
@@ -752,6 +913,108 @@ dab configure ^
   "runtime": {
     "rest": {
       "request-body-strict": true
+    }
+  }
+}
+```
+
+## `--runtime.pagination.max-page-size`
+
+Maximum page size for paginated results. Default is `100000`. Minimum is `1`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --runtime.pagination.max-page-size 50000
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --runtime.pagination.max-page-size 50000
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "pagination": {
+      "max-page-size": 50000
+    }
+  }
+}
+```
+
+## `--runtime.pagination.default-page-size`
+
+Default page size for paginated results. Default is `100`. Minimum is `1`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --runtime.pagination.default-page-size 50
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --runtime.pagination.default-page-size 50
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "pagination": {
+      "default-page-size": 50
+    }
+  }
+}
+```
+
+## `--runtime.pagination.next-link-relative`
+
+Use relative URLs instead of absolute URLs in REST pagination `nextLink` values. Default is `false`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --runtime.pagination.next-link-relative true
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --runtime.pagination.next-link-relative true
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "pagination": {
+      "next-link-relative": true
     }
   }
 }
@@ -1131,7 +1394,7 @@ dab configure ^
 }
 ```
 
-## `--runtime.mcp.dml-tools.aggregate-records.enabled`
+## `--runtime.mcp.dml-tools.aggregate-records`
 
 Enable DAB's MCP aggregate records tool.
 
@@ -1143,14 +1406,14 @@ Enable DAB's MCP aggregate records tool.
 
 ```bash
 dab configure \
-  --runtime.mcp.dml-tools.aggregate-records.enabled false
+  --runtime.mcp.dml-tools.aggregate-records false
 ```
 
 #### [Command Prompt](#tab/cmd-cli)
 
 ```cmd
 dab configure ^
-  --runtime.mcp.dml-tools.aggregate-records.enabled false
+  --runtime.mcp.dml-tools.aggregate-records false
 ```
 
 ---
@@ -1362,6 +1625,40 @@ dab configure ^
 }
 ```
 
+## `--runtime.host.max-response-size-mb`
+
+Maximum size in megabytes for a database response in a single result. Default is `158`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --runtime.host.max-response-size-mb 256
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --runtime.host.max-response-size-mb 256
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "host": {
+      "max-response-size-mb": 256
+    }
+  }
+}
+```
+
 ## `--runtime.host.cors.origins`
 
 Overwrite allowed origins in CORS. Provide values as a space-separated list.
@@ -1550,6 +1847,142 @@ dab configure ^
           "issuer": "https://login.microsoftonline.com/common/v2.0"
         }
       }
+    }
+  }
+}
+```
+
+## `--runtime.health.enabled`
+
+Enable or disable the global health endpoint. Default is `true`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --runtime.health.enabled true
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --runtime.health.enabled true
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "health": {
+      "enabled": true
+    }
+  }
+}
+```
+
+## `--runtime.health.cache-ttl-seconds`
+
+Time to live in seconds for cached health check reports. Default is `5`. Minimum is `0`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --runtime.health.cache-ttl-seconds 10
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --runtime.health.cache-ttl-seconds 10
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "health": {
+      "cache-ttl-seconds": 10
+    }
+  }
+}
+```
+
+## `--runtime.health.max-query-parallelism`
+
+Maximum concurrent health check queries. Default is `4`. Values are clamped to the supported range of `1` through `8`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --runtime.health.max-query-parallelism 6
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --runtime.health.max-query-parallelism 6
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "health": {
+      "max-query-parallelism": 6
+    }
+  }
+}
+```
+
+## `--runtime.health.roles`
+
+Roles allowed to view comprehensive health results. In production mode, configure at least one role.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --runtime.health.roles admin support
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --runtime.health.roles admin support
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "health": {
+      "roles": [ "admin", "support" ]
     }
   }
 }
@@ -1761,6 +2194,47 @@ dab configure ^
       "delay-seconds": 2,
       "max-delay-seconds": 30,
       "network-timeout-seconds": 20
+    }
+  }
+}
+```
+
+## `--runtime.telemetry.log-level`
+
+Configure logging verbosity by namespace. Use `default` for the global fallback level or specify a namespace or class name after `--runtime.telemetry.log-level.`.
+
+Allowed values: `Trace`, `Debug`, `Information`, `Warning`, `Error`, `Critical`, `None`.
+
+### Example
+
+#### [Bash](#tab/bash-cli)
+
+```bash
+dab configure \
+  --runtime.telemetry.log-level.default Warning \
+  --runtime.telemetry.log-level.Azure.DataApiBuilder.Core Information
+```
+
+#### [Command Prompt](#tab/cmd-cli)
+
+```cmd
+dab configure ^
+  --runtime.telemetry.log-level.default Warning ^
+  --runtime.telemetry.log-level.Azure.DataApiBuilder.Core Information
+```
+
+---
+
+### Resulting config
+
+```json
+{
+  "runtime": {
+    "telemetry": {
+      "log-level": {
+        "default": "warning",
+        "Azure.DataApiBuilder.Core": "information"
+      }
     }
   }
 }
