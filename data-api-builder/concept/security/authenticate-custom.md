@@ -1,12 +1,13 @@
 ---
 title: Configure custom JWT authentication (Okta, Auth0)
 description: Learn how to configure Data API builder with third-party identity providers like Okta or Auth0 using the Custom authentication provider.
-author: seesharprun
-ms.author: sidandrews
-ms.reviewer: jerrynixon
+author: jerrynixon
+ms.author: jnixon
+ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 01/21/2026
+ms.date: 05/13/2026
+# Customer Intent: As a developer, I want to configure Data API builder with a third-party identity provider like Okta or Auth0 so that I can authenticate users with custom JWT tokens.
 ---
 
 # Configure custom JWT authentication (Okta, Auth0)
@@ -17,7 +18,7 @@ Data API builder supports third-party identity providers through the Custom auth
 
 With a custom identity provider, your client app handles user authentication and then sends the access token to Data API builder:
 
-![Illustration of the custom JWT authentication flow with a third-party identity provider.](media/authenticate-custom/sequence-custom-jwt.svg)
+![Diagram showing the custom JWT authentication flow with a third-party identity provider.](media/authenticate-custom/sequence-custom-jwt.svg)
 
 | Phase | What happens |
 |-------|--------------|
@@ -76,7 +77,7 @@ The exact steps depend on your provider. Here are the key values you need:
 1. Your issuer is `https://<your-tenant>.auth0.com/`.
 
 > [!IMPORTANT]
-> Data API builder uses a fixed claim type of `roles` for role-based authorization. This value can't be configured. If your identity provider emits roles in a different claim (such as `groups` or `permissions`), you must configure your provider to also emit a `roles` claim, or use a post-login action to copy values into a `roles` claim.
+> Data API builder uses a fixed claim type of `roles` for role-based authorization. This value can't be configured. If your identity provider emits roles in a different claim (such as `groups` or `permissions`), configure it to also emit a `roles` claim. Auth0 users should review the [known namespacing conflict](#auth0-add-roles-with-an-action) before proceeding.
 
 ## Step 2: Configure Data API builder
 
@@ -207,20 +208,28 @@ DAB expects roles in a `roles` claim. Configure your identity provider to includ
 
 ### Auth0: Add roles with an Action
 
+Auth0 requires custom claims to use collision-resistant, namespaced names (for example, `https://example.com/roles`). Non-namespaced claims that collide with reserved names are silently excluded from the token. For more information, see [Create custom claims](https://auth0.com/docs/secure/tokens/json-web-tokens/create-custom-claims) in the Auth0 documentation.
+
+Data API builder expects the exact claim name `roles`, not a namespaced variant. Whether Auth0 accepts a non-namespaced `roles` claim depends on your tenant configuration.
+
 1. In the Auth0 Dashboard, go to **Actions** > **Library**.
 1. Create a new Action (Post Login trigger).
 1. Add code to include roles:
 
-```javascript
-exports.onExecutePostLogin = async (event, api) => {
-  const roles = event.authorization?.roles || [];
-  if (roles.length > 0) {
-    api.accessToken.setCustomClaim('roles', roles);
-  }
-};
-```
+    ```javascript
+    exports.onExecutePostLogin = async (event, api) => {
+      const roles = event.authorization?.roles || [];
+      if (roles.length > 0) {
+        api.accessToken.setCustomClaim('roles', roles);
+      }
+    };
+    ```
 
-4. Deploy the Action and add it to your Login flow.
+1. Deploy the Action and add it to your Login flow.
+1. [Verify the decoded access token](#step-5-test-the-configuration) at [jwt.io](https://jwt.io) and confirm the `roles` claim is present.
+
+> [!WARNING]
+> Auth0 may silently drop the non-namespaced `roles` claim depending on your tenant settings. If the claim is missing from the token, check **Settings** > **Advanced** in the Auth0 Dashboard for namespace enforcement. Tenants that require namespaced claims are currently incompatible with Data API builder's role-based authorization for custom roles. The built-in `authenticated` and `anonymous` roles still work because they don't depend on a `roles` claim.
 
 > [!TIP]
 > For detailed guidance on configuring JWT claims with Okta, see [Customize tokens returned from Okta](https://developer.okta.com/docs/guides/customize-tokens-returned-from-okta/main/).
@@ -278,9 +287,10 @@ Data API builder validates these aspects of the JWT:
 | `403 Forbidden` | Role not in token | Add the role to your IdP configuration |
 | `403 Forbidden` | No `roles` claim found | Configure your IdP to include a `roles` claim |
 | `403 Forbidden` | Wrong claim name | DAB uses claim type `roles` (fixed, not configurable) |
+| `403 Forbidden` | Auth0 custom claim silently dropped | Auth0 may drop non-namespaced custom claims. Verify the `roles` claim exists in the decoded token at [jwt.io](https://jwt.io). See [Auth0: Add roles with an Action](#auth0-add-roles-with-an-action) |
 
 > [!IMPORTANT]
-> DAB currently uses the claim type `roles` for all role checks. This value is hardcoded and can't be changed to `groups`, `permissions`, or other claim names. Configure your identity provider to emit roles in a claim named `roles`.
+> The claim type `roles` is hardcoded for all role checks and can't be changed. Configure your identity provider to emit a claim named exactly `roles`. Auth0 users should review the [namespacing conflict](#auth0-add-roles-with-an-action).
 
 ### Common issuer formats
 
