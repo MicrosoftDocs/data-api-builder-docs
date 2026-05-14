@@ -214,14 +214,14 @@ If a variable is set but contains an invalid value, DAB falls through to the nex
 | `ASPNETCORE_URLS=http://*:8080` | `8080` |
 | `ASPNETCORE_HTTP_PORTS=7071` | `7071` |
 | `DEFAULT_PORT=6000` | `6000` |
-| None of the above set | `5000` |
+| No environment variable set | `5000` |
 
 > [!NOTE]
-> `DEFAULT_PORT` is a DAB-specific environment variable. It's not recognized by .NET, Azure Container Apps, or other hosting platforms. Use it only as a fallback for custom deployment scenarios.
+> `DEFAULT_PORT` is a DAB-specific environment variable. .NET, Azure Container Apps, and other hosting platforms don't recognize it. Use it only as a fallback for custom deployment scenarios.
 
 ## Platform support
 
-DAB container images are built for x86-64 (amd64) only. ARM64 is not currently supported.
+DAB container images are built for x86-64 (amd64) only. ARM64 isn't currently supported.
 
 ## Related content
 
