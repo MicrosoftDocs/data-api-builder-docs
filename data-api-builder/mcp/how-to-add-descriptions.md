@@ -502,7 +502,7 @@ done
 
 ## Use with local models
 
-For schema pre-injection patterns, prompt discipline rules, and a complete Python harness example for connecting local LLMs (Ollama, llama.cpp) to SQL MCP Server, see [Use SQL MCP Server with local models](./use-local-models.md).
+For schema pre-injection patterns, prompt discipline rules, and a complete Python harness example for connecting local LLMs (Ollama, llama.cpp) to SQL MCP Server, see [Use SQL MCP Server with local models](use-local-models.md).
 
 ## Related content
 

@@ -65,7 +65,7 @@ dab update ServerInventory \
 
 Small models hallucinate similar but incorrect filter values. If a column stores a fixed set of values, list them in the description. For example, a model receiving `"Valid values: Prod, Dev, Test, UAT"` can reason that "production" maps to `Prod` rather than guessing `Production`.
 
-For more patterns and CLI examples, see [constrained and enum-like values](./how-to-add-descriptions.md#constrained-and-enum-like-values).
+For more patterns and CLI examples, see [constrained and enum-like values](how-to-add-descriptions.md#constrained-and-enum-like-values).
 
 > [!NOTE]
 > The `dab update` CLI treats commas as argument separators. If your description contains commas, edit `dab-config.json` directly instead.
@@ -94,7 +94,7 @@ pip install mcp ollama
 import asyncio
 import json
 from mcp import ClientSession
-from mcp.client.streamable_http import streamablehttp_client
+from mcp.client.streamable_http import streamable_http_client
 import ollama
 
 MCP_URL = "http://localhost:5000/mcp"
@@ -116,7 +116,7 @@ async def get_schema(session: ClientSession) -> str:
     return "\n".join(lines)
 
 async def run(user_question: str):
-    async with streamablehttp_client(MCP_URL) as (read, write, _):
+    async with streamable_http_client(MCP_URL) as (read, write, _):
         async with ClientSession(read, write) as session:
             await session.initialize()
 
@@ -218,11 +218,11 @@ Tool-calling fidelity and answer discipline are different problems. DAB ensures 
 
 | Topic | Details |
 |-------|---------|
-| **Hardware** | Tool calling works on modest hardware. An 8B model with 8 GB VRAM on an Nvidia GPU produces useful results with ~30-second response times. |
+| **Hardware** | Tool calling works on modest hardware. An 8B-parameter model on a consumer Nvidia GPU (8 GB VRAM) produces useful results. Expect latency in the tens of seconds per question, which suits batch workloads. |
 | **Batch vs. interactive** | Small models are well-suited for batch processing (performance reports, inventory queries) where latency tolerance is higher. |
-| **Tool availability** | `aggregate_records` is available in version 2.0 preview and later only. On version 1.7.x, count and aggregation queries force the model to read all matching rows. See [tool availability by version](./data-manipulation-language-tools.md#tool-availability-by-version). |
-| **Transport** | Local models connect via streamable HTTP to `/mcp`. The [stdio transport](./stdio-transport.md) is an alternative for single-process setups. |
-| **Authentication** | For local development, use `anonymous` permissions. For production, configure [authentication](./how-to-configure-authentication.md) appropriate to your environment. |
+| **Tool availability** | `aggregate_records` is available in version 2.0 preview and later only. On version 1.7.x, count and aggregation queries force the model to read all matching rows. See [tool availability by version](data-manipulation-language-tools.md#tool-availability-by-version). |
+| **Transport** | Local models connect via streamable HTTP to `/mcp`. The [stdio transport](stdio-transport.md) is an alternative for single-process setups. |
+| **Authentication** | For local development, use `anonymous` permissions. For production, configure [authentication](how-to-configure-authentication.md) appropriate to your environment. |
 
 ## Related content
 

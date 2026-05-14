@@ -255,7 +255,7 @@ MCP tool execution is fully instrumented with OpenTelemetry (OTEL) spans. Each M
 
 ## Use with local models
 
-SQL MCP Server works with any MCP-compatible client, including local LLMs served through Ollama or similar tools. For setup instructions, a Python harness example, schema pre-injection, and prompt guidance for small models, see [Use SQL MCP Server with local models](./use-local-models.md).
+SQL MCP Server works with any MCP-compatible client, including local LLMs served through Ollama or similar tools. For setup instructions, a Python harness example, schema pre-injection, and prompt guidance for small models, see [Use SQL MCP Server with local models](use-local-models.md).
 
 ## Related content
 
