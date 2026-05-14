@@ -273,6 +273,9 @@
     - name: Run locally (container)
       href: deployment/local-container.md
       displayName: docker, container, dab, run
+    - name: Air-gapped environments
+      href: deployment/air-gapped.md
+      displayName: offline, air-gapped, disconnected, no internet
     - name: Run locally (CLI)
       href: command-line/dab-start.md
       displayName: CLI, dab start, run, command line
@@ -299,6 +302,9 @@
       href: mcp/stdio-transport.md
     - name: Semantic Descriptions
       href: mcp/how-to-add-descriptions.md
+    - name: Local Models
+      href: mcp/use-local-models.md
+      displayName: ollama, local LLM, on-premises, air-gapped, python
     - name: Data Manipulation Tools
       href: mcp/data-manipulation-language-tools.md
     - name: Custom Tools

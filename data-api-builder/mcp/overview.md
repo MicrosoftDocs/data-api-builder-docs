@@ -1,10 +1,12 @@
 ---
 title: SQL MCP Server overview
 description: Learn how SQL MCP Server enables AI agents to safely interact with SQL databases. Configure your data source and expose tables, views, and stored procedures through MCP tools.
-author: jnixon
+author: jerrynixon
 ms.author: jnixon
+ms.reviewer: sidandrews
+ms.service: data-api-builder
 ms.topic: overview
-ms.date: 03/24/2026
+ms.date: 05/14/2026
 ---
 
 # What is SQL MCP Server?
@@ -251,9 +253,14 @@ MCP tool execution is fully instrumented with OpenTelemetry (OTEL) spans. Each M
 
 [!INCLUDE[Note - SQL MCP Server 2.0 preview](includes/note-sql-mcp-server-2-preview.md)]
 
+## Use with local models
+
+SQL MCP Server works with any MCP-compatible client, including local LLMs served through Ollama or similar tools. For setup instructions, a Python harness example, schema pre-injection, and prompt guidance for small models, see [Use SQL MCP Server with local models](./use-local-models.md).
+
 ## Related content
 
 - [Adding semantic descriptions to SQL MCP Server](how-to-add-descriptions.md)
+- [Use SQL MCP Server with local models](use-local-models.md)
 - [Configure authentication for SQL MCP Server](how-to-configure-authentication.md)
 - [Data manipulation tools in SQL MCP Server](data-manipulation-language-tools.md)
 - [Deploy SQL MCP Server to Azure Container Apps](quickstart-azure-container-apps.md)

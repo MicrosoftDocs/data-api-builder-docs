@@ -4,7 +4,7 @@ description: Learn how to start a SQL Model Context Protocol (MCP) Server locall
 author: jnixon
 ms.author: jnixon
 ms.topic: quickstart
-ms.date: 03/04/2026
+ms.date: 05/14/2026
 ---
 
 # Quickstart: Use SQL MCP Server with Visual Studio Code locally
@@ -108,7 +108,10 @@ dab init --database-type mssql --connection-string "@env('MSSQL_CONNECTION_STRIN
 dab add Products --source dbo.Products --permissions "anonymous:read" --description "Toy store products with inventory, price, and cost."
 ```
 
-### Optionally add field descriptions
+### Add field descriptions
+
+> [!WARNING]
+> Without field descriptions, agents only see entity names and may guess column names incorrectly. Always add field metadata for useful agent behavior.
 
 ```bash
 dab update Products --fields.name Id --fields.primary-key true --fields.description "Product Id"
