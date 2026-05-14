@@ -288,14 +288,16 @@
       href: mcp/index.yml
     - name: What is SQL MCP Server?
       href: mcp/overview.md
-    - name: "Get Started: Visual Studio Code"
-      href: mcp/quickstart-visual-studio-code.md
-    - name: "Get Started: Azure AI Foundry"
-      href: mcp/quickstart-azure-ai-foundry.md
-    - name: "Get Started: .NET Aspire"
-      href: mcp/quickstart-dotnet-aspire.md
-    - name: "Get Started: Azure Container Apps"
-      href: mcp/quickstart-azure-container-apps.md
+    - name: Get Started
+      items:
+        - name: Visual Studio Code
+          href: mcp/quickstart-visual-studio-code.md
+        - name: Azure AI Foundry
+          href: mcp/quickstart-azure-ai-foundry.md
+        - name: .NET Aspire
+          href: mcp/quickstart-dotnet-aspire.md
+        - name: Azure Container Apps
+          href: mcp/quickstart-azure-container-apps.md
     - name: Authentication
       href: mcp/how-to-configure-authentication.md
     - name: Stdio Transport
