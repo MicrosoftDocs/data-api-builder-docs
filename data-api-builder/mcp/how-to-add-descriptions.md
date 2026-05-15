@@ -1,10 +1,12 @@
 ---
-title: Add Descriptions to Entities
+title: Add descriptions to entities
 description: Learn how to add semantic descriptions to SQL MCP Server entities, fields, and parameters to improve AI agent accuracy. Includes CLI examples and best practices.
-author: jnixon
+author: jerrynixon
 ms.author: jnixon
+ms.reviewer: sidandrews
+ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 12/22/2025
+ms.date: 05/14/2026
 ---
 
 # Add descriptions to SQL MCP Server entities
@@ -158,6 +160,30 @@ dab update Products \
   --fields.name ReorderLevel \
   --fields.description "Minimum stock level that triggers automatic reorder (must be positive integer)"
 ```
+
+### Constrained and enum-like values
+
+When a column stores a fixed set of valid values, list them in the description. Without explicit valid values, agents may hallucinate similar but incorrect strings (for example, `Production` instead of the valid value `Prod`).
+
+```bash
+# List valid values explicitly
+dab update Servers \
+  --fields.name Environment \
+  --fields.description "Deployment environment. Valid values: Prod, Dev, Test, UAT"
+
+# Boolean-like status fields
+dab update Orders \
+  --fields.name Status \
+  --fields.description "Order status. Valid values: Pending, Approved, Shipped, Cancelled"
+
+# Category fields
+dab update Products \
+  --fields.name Category \
+  --fields.description "Product category. Valid values: Electronics, Furniture, Office Supplies, Appliances"
+```
+
+> [!TIP]
+> If a column has a small fixed set of values, always include them in the description. This single step prevents the most common source of incorrect agent queries.
 
 ## Parameter descriptions
 
@@ -473,6 +499,10 @@ for field in "${fields[@]}"; do
   fi
 done
 ```
+
+## Use with local models
+
+For schema pre-injection patterns, prompt discipline rules, and a complete Python harness example for connecting local LLMs (Ollama, llama.cpp) to SQL MCP Server, see [Use SQL MCP Server with local models](use-local-models.md).
 
 ## Related content
 

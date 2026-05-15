@@ -1,10 +1,12 @@
 ---
 title: SQL MCP Server overview
 description: Learn how SQL MCP Server enables AI agents to safely interact with SQL databases. Configure your data source and expose tables, views, and stored procedures through MCP tools.
-author: jnixon
+author: jerrynixon
 ms.author: jnixon
+ms.reviewer: sidandrews
+ms.service: data-api-builder
 ms.topic: overview
-ms.date: 03/24/2026
+ms.date: 05/14/2026
 ---
 
 # What is SQL MCP Server?
@@ -154,45 +156,9 @@ dab add {entity-name} \                          # object alias (Employees)
 
 ### Runtime settings
 
-The SQL MCP Server is enabled by default in the Data API builder configuration. In most cases, you don't need to add any settings. The server automatically follows the same permissions and security rules as your API and database. Configure MCP only when you want to narrow or restrict what agents can do.
+SQL MCP Server is enabled by default. In most cases, you don't need to add any MCP settings. The server automatically follows the same permissions and security rules as your API and database. Configure MCP only when you want to narrow or restrict what agents can do — for example, disabling `delete-record` to prevent data loss or disabling `aggregate-records` on large tables.
 
-```json
-"runtime": {
-  "mcp": {
-    "enabled": true,              // default: true
-    "path": "/mcp",               // default: /mcp
-    "dml-tools": {
-      "describe-entities": true,  // default: true
-      "create-record": true,      // default: true
-      "read-records": true,       // default: true
-      "update-record": true,      // default: true
-      "delete-record": true,      // default: true
-      "execute-entity": true,     // default: true
-      "aggregate-records": true   // default: true
-    }
-  }
-}
-```
-
-Set `dml-tools` to `true` or `false` to enable or disable all tools, or use an object with per-tool toggles. The `aggregate-records` tool can also accept an object with `enabled` and `query-timeout` (1–600 seconds, default 30) properties. For the full configuration reference, see [MCP runtime configuration](../configuration/runtime.md#mcp-runtime).
-
-The CLI also lets you set every property individually or programmatically through scripting. 
-
-```bash
-dab configure --runtime.mcp.enabled true
-dab configure --runtime.mcp.path "/mcp"
-dab configure --runtime.mcp.dml-tools.describe-entities true
-dab configure --runtime.mcp.dml-tools.create-record true
-dab configure --runtime.mcp.dml-tools.read-records true
-dab configure --runtime.mcp.dml-tools.update-record true
-dab configure --runtime.mcp.dml-tools.delete-record true
-dab configure --runtime.mcp.dml-tools.execute-entity true
-dab configure --runtime.mcp.dml-tools.aggregate-records.enabled true
-```
-
-#### Why disable individual tools?
-
-Developers may want to restrict specific actions even when roles or entity permissions allow them. Disabling a tool at the runtime level ensures it never appears to agents. For example, turning off `delete_record` hides delete capability completely, regardless of configuration elsewhere. This scenario is uncommon but useful when strict operational boundaries are required.
+For the full runtime configuration reference — including per-tool toggles, query timeouts, and CLI commands — see [Runtime configuration](data-manipulation-language-tools.md#runtime-configuration).
 
 ### Entity settings
 
@@ -243,7 +209,7 @@ Each tool respects role-based access control (RBAC), entity permissions, and pol
 
 ## Custom MCP tools
 
-In addition to the built-in DML tools, SQL MCP Server supports custom MCP tools derived from stored procedures. When you set `"custom-tool": true` on a stored-procedure entity, DAB registers it as a named tool via MCP `tools/list` and `tools/call`. This approach lets agents discover and invoke stored procedures directly by name, complementing the generic `execute_entity` DML tool.
+In addition to the built-in DML tools, SQL MCP Server supports [custom tools derived from stored procedures](how-to-configure-custom-tools.md). Set `"custom-tool": true` on a stored-procedure entity to register it as a named MCP tool.
 
 ## OpenTelemetry tracing for MCP
 
@@ -251,9 +217,14 @@ MCP tool execution is fully instrumented with OpenTelemetry (OTEL) spans. Each M
 
 [!INCLUDE[Note - SQL MCP Server 2.0 preview](includes/note-sql-mcp-server-2-preview.md)]
 
+## Use with local models
+
+SQL MCP Server works with any MCP-compatible client, including local LLMs served through Ollama or similar tools. For setup instructions, a Python harness example, schema pre-injection, and prompt guidance for small models, see [Use SQL MCP Server with local models](use-local-models.md).
+
 ## Related content
 
 - [Adding semantic descriptions to SQL MCP Server](how-to-add-descriptions.md)
+- [Use SQL MCP Server with local models](use-local-models.md)
 - [Configure authentication for SQL MCP Server](how-to-configure-authentication.md)
 - [Data manipulation tools in SQL MCP Server](data-manipulation-language-tools.md)
 - [Deploy SQL MCP Server to Azure Container Apps](quickstart-azure-container-apps.md)

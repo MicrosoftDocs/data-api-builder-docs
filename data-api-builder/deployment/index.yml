@@ -5,13 +5,13 @@ summary: Compare deployment options for Data API builder and jump to option-spec
 
 metadata:
   title: Deployment options for Data API builder
-  description: Compare deployment options for Data API builder across Azure App Service, Azure Container Apps, Azure Container Instances, Azure Kubernetes Service, local Docker, and source-based hosting.
-  author: seesharprun
-  ms.author: sidandrews
+  description: Compare deployment options for Data API builder across Azure App Service, Azure Container Apps, Azure Container Instances, Azure Kubernetes Service, local Docker, air-gapped environments, and source-based hosting.
+  author: jerrynixon
+  ms.author: jnixon
   ms.reviewer: jerrynixon
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 05/04/2026
+  ms.date: 05/14/2026
 
 landingContent:
   - title: Azure App Service
@@ -148,3 +148,16 @@ landingContent:
             url: https://github.com/azure/data-api-builder
           - text: Run in a Docker container
             url: local-container.md
+
+  - title: Air-gapped environments
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Deploy in air-gapped environments
+            url: air-gapped.md
+      - linkListType: reference
+        links:
+          - text: Install the CLI
+            url: ../command-line/install.md
+          - text: Port resolution
+            url: local-container.md#port-resolution
