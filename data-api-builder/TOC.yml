@@ -273,6 +273,9 @@
     - name: Run locally (container)
       href: deployment/local-container.md
       displayName: docker, container, dab, run
+    - name: Air-gapped environments
+      href: deployment/air-gapped.md
+      displayName: offline, air-gapped, disconnected, no internet
     - name: Run locally (CLI)
       href: command-line/dab-start.md
       displayName: CLI, dab start, run, command line
@@ -285,20 +288,25 @@
       href: mcp/index.yml
     - name: What is SQL MCP Server?
       href: mcp/overview.md
-    - name: "Get Started: Visual Studio Code"
-      href: mcp/quickstart-visual-studio-code.md
-    - name: "Get Started: Azure AI Foundry"
-      href: mcp/quickstart-azure-ai-foundry.md
-    - name: "Get Started: .NET Aspire"
-      href: mcp/quickstart-dotnet-aspire.md
-    - name: "Get Started: Azure Container Apps"
-      href: mcp/quickstart-azure-container-apps.md
+    - name: Get Started
+      items:
+        - name: Visual Studio Code
+          href: mcp/quickstart-visual-studio-code.md
+        - name: Azure AI Foundry
+          href: mcp/quickstart-azure-ai-foundry.md
+        - name: .NET Aspire
+          href: mcp/quickstart-dotnet-aspire.md
+        - name: Azure Container Apps
+          href: mcp/quickstart-azure-container-apps.md
     - name: Authentication
       href: mcp/how-to-configure-authentication.md
     - name: Stdio Transport
       href: mcp/stdio-transport.md
     - name: Semantic Descriptions
       href: mcp/how-to-add-descriptions.md
+    - name: Local Models
+      href: mcp/use-local-models.md
+      displayName: ollama, local LLM, on-premises, air-gapped, python
     - name: Data Manipulation Tools
       href: mcp/data-manipulation-language-tools.md
     - name: Custom Tools

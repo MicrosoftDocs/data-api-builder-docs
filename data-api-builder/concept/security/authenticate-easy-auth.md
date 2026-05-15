@@ -1,12 +1,12 @@
 ---
 title: Configure App Service authentication (EasyAuth)
 description: Learn how to configure Data API builder with Azure App Service authentication, including local testing with the X-MS-CLIENT-PRINCIPAL header.
-author: seesharprun
-ms.author: sidandrews
+author: jerrynixon
+ms.author: jnixon
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 01/21/2026
+ms.date: 05/14/2026
 ---
 
 # Configure App Service authentication (EasyAuth)
@@ -15,6 +15,9 @@ Azure App Service provides built-in authentication (often called "EasyAuth") tha
 
 > [!IMPORTANT]
 > The `AppService` provider trusts identity headers forwarded by EasyAuth. Ensure clients can't bypass EasyAuth and reach Data API builder directly.
+
+> [!WARNING]
+> Use the `AppService` authentication provider only when hosting in Azure App Service or Azure Functions on App Service. Setting this provider on a bare Windows host or non-App Service environment causes startup failures because the required EasyAuth infrastructure is absent. For local testing, simulate EasyAuth by sending the `X-MS-CLIENT-PRINCIPAL` header manually. See [Test locally with X-MS-CLIENT-PRINCIPAL](#step-4-test-locally-with-x-ms-client-principal).
 
 ## Authentication flow
 

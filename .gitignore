@@ -12,4 +12,7 @@ _repo.*/
 data-api-builder/data-api-builder-docs/
 docfx-output.log
 
+# Working files
+temp/
+
 .openpublishing.buildcore.ps1

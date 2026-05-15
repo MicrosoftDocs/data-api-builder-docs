@@ -1,10 +1,12 @@
 ---
-title: Data Manipulation Language Tools (DML)
+title: Data manipulation language tools (DML)
 description: Reference guide for the seven DML tools that SQL MCP Server exposes to AI agents.
-author: jnixon
+author: jerrynixon
 ms.author: jnixon
+ms.reviewer: sidandrews
+ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 03/24/2026
+ms.date: 05/14/2026
 ---
 
 # Data manipulation language (DML) tools in SQL MCP Server
@@ -12,6 +14,9 @@ ms.date: 03/24/2026
 [!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
 SQL Model Context Protocol (MCP) Server exposes seven Data Manipulation Language (DML) tools to AI agents. These tools provide a typed CRUD surface for database operations—creating, reading, updating, and deleting records, aggregating data, plus executing stored procedures. All tools respect role-based access control (RBAC), entity permissions, and policies defined in your configuration.
+
+> [!WARNING]
+> For agents to query entities effectively, configure field metadata in your entities. Without field names and descriptions, agents see only entity names and may guess column names incorrectly. See [Add descriptions to entities](./how-to-add-descriptions.md) for details.
 
 ## What are DML tools?
 
@@ -28,6 +33,23 @@ The seven DML tools are:
 - `aggregate_records` - Performs aggregation queries
 
 [!INCLUDE[Note - SQL MCP Server 2.0 preview](includes/note-sql-mcp-server-2-preview.md)]
+
+### Tool availability by version
+
+Not all tools are available in every version. Verify the tools available in your installed version before relying on documented behavior.
+
+| Tool | 1.7.x | 2.0 preview+ | Enabled by default |
+|------|-------|-------------|-------------------|
+| `describe_entities` | Yes | Yes | Yes |
+| `create_record` | Yes | Yes | Yes |
+| `read_records` | Yes | Yes | Yes |
+| `update_record` | Yes | Yes | Yes |
+| `delete_record` | Yes | Yes | Yes |
+| `execute_entity` | Yes | Yes | Yes |
+| `aggregate_records` | No | Yes | Yes |
+
+> [!NOTE]
+> If you use version 1.7.x, `aggregate_records` isn't available. Agents attempting count or aggregation queries must read all matching rows instead. Upgrade to version 2.0 preview or later for native aggregation support.
 
 When DML tools are enabled globally and for an entity, SQL MCP Server exposes them through the MCP protocol. Agents never interact directly with your database schema - they work through the Data API builder abstraction layer.
 
@@ -55,8 +77,7 @@ When an agent calls `list_tools`, SQL MCP Server returns:
 
 Returns the entities available to the current role. Each entry includes field names, descriptions, and allowed operations. This tool doesn't query the database. Instead, it reads from the in-memory configuration built from your config file.
 
-> [!IMPORTANT]
-> The `fields` information in `describe_entities` is derived from the `fields` data you provide in the configuration. Because field metadata is optional, if you don't include it, agents only see entity names with an empty `fields` array. It's a best practice to include both field names and field descriptions in your configuration. This metadata gives agents more context to generate accurate queries and updates. Learn more about [field descriptions here](./how-to-add-descriptions.md#field-descriptions).
+Field metadata comes from the `fields` data in your configuration. If you don't include it, agents see only entity names with an empty `fields` array. See [Add descriptions to entities](how-to-add-descriptions.md) for setup guidance.
 
 > [!NOTE]
 > The response includes field `name` and `description` values from your configuration. Data types and primary key indicators aren't included in the current response. Stored procedure parameters also aren't listed. Agents rely on entity and field descriptions—along with error feedback—to determine correct usage.
@@ -147,7 +168,7 @@ Queries a table or view. Supports filtering, sorting, pagination, and field sele
 
 #### Pagination response
 
-When more results are available, the response includes an `after` cursor. Pass this value as the `after` parameter in the next request to fetch the next page.
+When more results are available, the response includes an `after` cursor. To fetch the next page, pass this value as the `after` parameter in the next request.
 
 ```json
 {
@@ -156,7 +177,7 @@ When more results are available, the response includes an `after` cursor. Pass t
 }
 ```
 
-The presence of the `after` field indicates more pages exist. When `after` is absent, you've reached the last page.
+The presence of the `after` field indicates more pages exist. When `after` is absent, the response contains the last page.
 
 > [!IMPORTANT]
 > Results from `read_records` are automatically cached using Data API builder's caching system. You can configure cache [time-to-live (TTL) globally](../configuration/runtime.md#cache-runtime) or [per-entity](../configuration/entities.md#cache) to reduce database load.
@@ -223,7 +244,7 @@ Performs aggregation queries on tables and views. Supports common aggregate func
 | `first` | integer | No | Maximum number of grouped results to return. |
 | `after` | string | No | Continuation cursor for paginating grouped results. |
 
-#### Example: count with groupby and having
+#### Example: count with group by and having
 
 ```json
 {
@@ -367,26 +388,7 @@ If you don't specify `mcp` on an entity, DML tools default to enabled when MCP i
 
 ### Custom tools for stored procedures
 
-For stored-procedure entities, use the `custom-tool` property to register the procedure as a named MCP tool:
-
-```json
-{
-  "entities": {
-    "GetBookById": {
-      "source": {
-        "type": "stored-procedure",
-        "object": "dbo.get_book_by_id"
-      },
-      "mcp": {
-        "custom-tool": true
-      }
-    }
-  }
-}
-```
-
-> [!IMPORTANT]
-> The `custom-tool` property is only valid for stored-procedure entities. Setting it on a table or view entity results in a configuration error.
+For stored-procedure entities, you can also register the procedure as a named MCP tool using the `custom-tool` property. See [Configure custom MCP tools](how-to-configure-custom-tools.md) for setup instructions.
 
 ### Scope of per-tool control
 

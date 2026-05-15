@@ -221,7 +221,10 @@ dab-config.json
 > [!IMPORTANT]
 > The `dab-config.json` file must be in the same directory where you run `aspire run`, because the bind mount uses a relative path (`./dab-config.json`).
 
-Optionally, add field descriptions. This metadata can help language models understand your schema.
+> [!WARNING]
+> Without field descriptions, agents only see entity names and may guess column names incorrectly. Always add field metadata for useful agent behavior.
+
+Add field descriptions to your entities:
 
 ```bash
 dab update Products --fields.name Id --fields.primary-key true --fields.description "Product Id"

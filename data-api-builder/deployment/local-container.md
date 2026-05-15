@@ -1,12 +1,12 @@
 ---
 title: Run in a Docker container
 description: Use the Docker container image in Microsoft Container Registry to run Data API builder locally or in an Azure hosting service.
-author: seesharprun
-ms.author: sidandrews
+author: jerrynixon
+ms.author: jnixon
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 06/11/2025
+ms.date: 05/14/2026
 # Customer Intent: As a developer, I want to use the Docker container image, so that I can run Data API builder anywhere in a portable fashion.
 ---
 
@@ -195,6 +195,33 @@ Build a custom image that includes `dab-config.json`, then run the image locally
     > [!NOTE]
     > This guide uses an HTTP connection. When running a Data API builder container in Docker, you see that only the HTTP endpoint is mapped. If you want your Docker container to support HTTPS for local development, you need to provide your own SSL/TLS certificate and private key files required for SSL/TLS encryption and expose the HTTPS port.
     > A reverse proxy can also be used to enforce that clients connect to your server over HTTPS to ensure that the communication channel is encrypted before forwarding the request to your container.
+
+## Port resolution
+
+Data API builder determines which HTTP port to use for internal operations (health checks, internal HTTP calls) using this precedence:
+
+| Priority | Environment variable | Notes |
+|----------|---------------------|-------|
+| 1 | `ASPNETCORE_URLS` | Parses the first port from the URL list (for example, `http://*:8080`). |
+| 2 | `ASPNETCORE_HTTP_PORTS` | .NET 8+ container variable. Uses the first port specified. |
+| 3 | `DEFAULT_PORT` | DAB-specific fallback. Not recognized by .NET or Azure Container Apps. |
+| 4 | *(none set)* | Defaults to port `5000`. |
+
+If a variable is set but contains an invalid value, DAB falls through to the next option.
+
+| Scenario | Port used |
+|----------|-----------|
+| `ASPNETCORE_URLS=http://*:8080` | `8080` |
+| `ASPNETCORE_HTTP_PORTS=7071` | `7071` |
+| `DEFAULT_PORT=6000` | `6000` |
+| No environment variable set | `5000` |
+
+> [!NOTE]
+> `DEFAULT_PORT` is a DAB-specific environment variable. .NET, Azure Container Apps, and other hosting platforms don't recognize it. Use it only as a fallback for custom deployment scenarios.
+
+## Platform support
+
+DAB container images are built for x86-64 (amd64) only. ARM64 isn't currently supported.
 
 ## Related content
 

@@ -48,6 +48,8 @@ landingContent:
             url: how-to-add-descriptions.md
           - text: Configure authentication
             url: how-to-configure-authentication.md
+          - text: Use with local models
+            url: use-local-models.md
   - title: Data manipulation tools
     linkLists:
       - linkListType: reference
