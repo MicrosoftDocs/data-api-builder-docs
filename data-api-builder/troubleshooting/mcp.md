@@ -34,9 +34,9 @@ Any MCP-compliant client can connect to DAB's MCP server. Tested clients include
 
 ### MCP server not listed in client
 
-**Symptom:** The AI client does not show DAB tools or the MCP server does not appear in the client's server list.
+**Symptom:** The AI client doesn't show DAB tools or the MCP server doesn't appear in the client's server list.
 
-**Cause:** The client is configured for stdio transport but DAB is not registered as an MCP server in the client's configuration file, or the DAB process is not running.
+**Cause:** The client is configured for stdio transport but DAB isn't registered as an MCP server in the client's configuration file, or the DAB process isn't running.
 
 **Resolution:** Add DAB to the client's MCP server configuration. For VS Code GitHub Copilot, add an entry to `.vscode/mcp.json` with the `command` set to `dab` and `args` set to `["start", "--no-https-redirect"]`. Confirm DAB is running and that the `runtime.mcp.enabled` field is set to `true` in `dab-config.json`.
 
@@ -44,7 +44,7 @@ Any MCP-compliant client can connect to DAB's MCP server. Tested clients include
 
 **Symptom:** The AI client receives a permission denied or unauthorized error when invoking a DAB tool.
 
-**Cause:** The anonymous or system role does not have the required action configured for the entity in `dab-config.json`.
+**Cause:** The anonymous or system role doesn't have the required action configured for the entity in `dab-config.json`.
 
 **Resolution:** Check the `permissions` array for the entity. Ensure the role used by the MCP client (typically `anonymous` for unauthenticated local use) has the necessary `read`, `create`, `update`, or `delete` actions. Use `dab update --permissions` to add the required actions, then restart DAB.
 
@@ -52,7 +52,7 @@ Any MCP-compliant client can connect to DAB's MCP server. Tested clients include
 
 **Symptom:** The AI agent cannot determine what tools are available or produces incorrect tool calls because it lacks context about the entities.
 
-**Cause:** The entity and field descriptions are not set in `dab-config.json`, so the MCP server exposes tools with no descriptive metadata for the language model to use.
+**Cause:** The entity and field descriptions aren't set in `dab-config.json`, so the MCP server exposes tools with no descriptive metadata for the language model to use.
 
 **Resolution:** Add descriptions to each entity and its fields in `dab-config.json` using the `description` property. Clear descriptions improve the language model's ability to select the correct tool and construct valid queries. Use `dab update --description` to set entity-level descriptions from the command line.
 
@@ -64,10 +64,10 @@ Any MCP-compliant client can connect to DAB's MCP server. Tested clients include
 
 **Resolution:** Configure DAB to accept Microsoft Entra tokens by setting `host.authentication.provider` to `StaticWebApps` or `AzureAD` and providing the correct audience. Ensure the Foundry agent's managed identity is assigned the appropriate role in the DAB permission model and that the identity has database access. For Azure SQL back ends, create a database user for the managed identity with `CREATE USER [agent-identity] FROM EXTERNAL PROVIDER`.
 
-### Aggregations are not available for Cosmos DB entities via MCP tools
+### Aggregations aren't available for Cosmos DB entities via MCP tools
 
 **Symptom:** An AI agent attempting to aggregate data (count, sum, average) from a Cosmos DB-backed entity receives no result or an error.
 
-**Cause:** Data API builder does not support aggregation operations for Azure Cosmos DB. MCP tool calls that translate to aggregate queries will fail for Cosmos DB entities. This is a known limitation tracked in [GitHub issue #2849](https://github.com/Azure/data-api-builder/issues/2849).
+**Cause:** Data API builder doesn't support aggregation operations for Azure Cosmos DB. MCP tool calls that translate to aggregate queries will fail for Cosmos DB entities. This is a known limitation tracked in [GitHub issue #2849](https://github.com/Azure/data-api-builder/issues/2849).
 
 **Resolution:** Direct the agent to retrieve the full result set and perform aggregations in the calling application or agent logic. Follow the GitHub issue for updates on when Cosmos DB aggregation support is added.
