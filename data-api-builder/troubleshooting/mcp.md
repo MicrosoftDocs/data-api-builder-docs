@@ -6,7 +6,9 @@ ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: troubleshooting
-ms.date: 03/29/2026
+ms.date: 05/22/2026
+ms.update-cycle: 180-days
+ms.collection: ce-skilling-ai-copilot
 ---
 
 # SQL MCP Server troubleshooting
