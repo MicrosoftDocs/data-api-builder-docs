@@ -5,7 +5,7 @@ author: seesharprun
 ms.author: sidandrews
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
-ms.topic: conceptual
+ms.topic: article
 ms.date: 04/03/2026
 ---
 

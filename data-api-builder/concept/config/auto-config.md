@@ -5,7 +5,7 @@ author: jerrynixon
 ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
-ms.topic: conceptual
+ms.topic: article
 ms.date: 03/24/2026
 # Customer Intent: As a developer, I want to understand how autoentities patterns and templates work so I can wire up an entire schema without writing individual entity blocks.
 ---
