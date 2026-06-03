@@ -12,12 +12,12 @@ metadata:
     Data API builder generates secure REST and GraphQL endpoints over your database.
     It supports SQL Server, Azure SQL, Azure Cosmos DB, PostgreSQL, MySQL, and Azure SQL Data Warehouse.
     Use the built-in SQL MCP server to connect AI agents to your data.
-  author: seesharprun
-  ms.author: sidandrews
-  ms.reviewer: jerrynixon
+  author: jerrynixon
+  ms.author: jnixon
+  ms.reviewer: sidandrews
   ms.service: data-api-builder
   ms.topic: hub-page
-  ms.date: 03/29/2026
+  ms.date: 05/28/2026
 
 # =============================================================================
 # HIGHLIGHTED CONTENT - Top 8 cards (2 rows of 4)
@@ -259,8 +259,9 @@ additionalContent:
     - title: Data API builder 
       items:
         - title: Quickstarts
-          summary: Step-by-step setup for SQL Server, PostgreSQL, MySQL, and Azure Cosmos DB.
           links:
+            - text: Quickstart overview
+              url: quickstart/index.yml
             - text: "Quickstart: SQL Server"
               url: quickstart/basic-sql.md?tabs=mssql
             - text: "Quickstart: PostgreSQL"
@@ -269,6 +270,8 @@ additionalContent:
               url: quickstart/basic-sql.md?tabs=mysql
             - text: "Quickstart: Azure Cosmos DB"
               url: quickstart/basic-nosql.md
+            - text: Microsoft SQL security
+              url: quickstart/microsoft-sql-security.md
             - text: Frequently asked questions
               url: faq.yml
 

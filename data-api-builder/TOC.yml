@@ -32,12 +32,35 @@
     - name: Overview
       href: quickstart/index.yml
       displayName: quickstart, get started, landing
-    - name: SQL Databases
+    - name: Basic SQL
       href: quickstart/basic-sql.md
       displayName: mssql, sql server, postgres, mysql
-    - name: NoSQL Databases
+    - name: Basic NoSQL
       href: quickstart/basic-nosql.md
       displayName: cosmos, nosql, emulator
+    - name: Microsoft SQL security
+      items:
+        - name: Overview
+          href: quickstart/microsoft-sql-security.md
+          displayName: decision tree, choose, authentication, authorization, azure sql, mssql
+        - name: Username/password
+          href: quickstart/authentication-sql-credentials.md
+          displayName: sql auth, password, azure sql, mssql
+        - name: Managed identity
+          href: quickstart/authentication-managed-identity.md
+          displayName: passwordless, managed identity, SAMI, azure sql, mssql
+        - name: Microsoft Entra
+          href: quickstart/authentication-microsoft-entra-provider.md
+          displayName: Entra ID, JWT, audience, issuer, anonymous
+        - name: DAB policies
+          href: quickstart/authorization-database-policies.md
+          displayName: authorization, policy, claims, MSAL, bearer
+        - name: SQL row-level security
+          href: quickstart/authorization-sql-row-level-security.md
+          displayName: RLS, session context, policy, claims, SQL Server
+        - name: On-behalf-of to Azure SQL
+          href: quickstart/authentication-on-behalf-of.md
+          displayName: OBO, user-delegated, pass-through, Azure SQL, Entra ID
 - name: Configuration
   displayName: config, JSON, schema, settings
   items:

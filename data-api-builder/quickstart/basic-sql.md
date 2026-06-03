@@ -2,13 +2,13 @@
 title: |
   Quickstart: Use Data API builder with SQL
 description: Get started quickly using Data API builder with a local Docker-hosted SQL database.
-author: seesharprun
-ms.author: sidandrews
+author: jerrynixon
+ms.author: jnixon
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: quickstart
-ms.date: 03/29/2026
-#Customer Intent: As a developer, I want to use Data API builder with my local SQL database so I can quickly develop my API before deploying it.
+ms.date: 06/02/2026
+# Customer Intent: As a developer, I want to use Data API builder with my local SQL database so I can quickly develop my API before deploying it.
 ---
 
 # Quickstart: Use Data API builder with SQL
@@ -423,6 +423,261 @@ docker stop dab-mysql && docker rm dab-mysql
 ```
 
 ---
+
+## Use GitHub Copilot to recreate this quickstart
+
+Open the workspace where you want to create the sample in Visual Studio Code, switch GitHub Copilot to agent mode, and paste this prompt.
+
+````copilot-prompt
+You are GitHub Copilot running in agent mode. Recreate the Data API builder basic SQL quickstart as a complete, runnable local project in the current VS Code workspace under `quickstart-00-basic-sql`. Build a local Docker-based sample that starts one database engine, creates and seeds a `todos` database, configures Data API builder (DAB), exposes REST, GraphQL, and MCP endpoints, adds MCP Inspector for DAB MCP testing, and creates a small static web app that calls DAB. Keep the implementation minimal, but make the web interface neat and approachable: responsive layout, accessible labels, clear loading and error states, and simple styling that is polished rather than austere.
+
+Source repository guidance: no dedicated Azure-Samples repository currently appears for this basic SQL quickstart. However, https://github.com/Azure-Samples/dab-2.0-quickstart-web_anon-api_anon-db_sql_auth is very close and features such as the database and the web site can be reused. If internet access is available, review that site and reuse shared file patterns when they match this local Docker quickstart. Otherwise, implement from this article and the current Data API builder docs. Do not invent a different architecture or add extra services beyond this prompt.
+
+Minimize user interaction. Use the defaults in this prompt and make reasonable best guesses for noncritical choices. Do not ask for a root folder or project folder name; use the current VS Code workspace and the default subfolder. Ask only when you need approval for resource changes, secrets, permissions, materially higher cost, external account choices, or an ambiguous requirement that affects the architecture.
+
+Start with a short plan and proceed with safe defaults before you create files or run commands. Use SQL Server, the default `todos` schema and seed data, SQL Commander, the listed non-default host ports, and local Docker only unless the user explicitly asks for a different database engine or an Azure extension. Ask only these questions if the values aren't already available from the environment or prior context:
+
+- If you want an Azure extension, which Azure subscription, primary region, fallback region, and resource group should it use? Default fallback region: `westus2`.
+
+Show a short checklist before implementation. Include phases for project scaffold, Docker Compose, database initialization, DAB configuration, web app, MCP Inspector, validation, and cleanup. Proceed with local files and local Docker validation without asking for extra confirmation. Do not create Azure resources for this quickstart unless the user explicitly asks for an Azure extension and approves the exact Azure command set.
+
+After you start, continue working without asking status-check questions. If a command, build, container, endpoint, or validation step fails, inspect the error, adjust the project, rerun the step, and continue. Keep iterating until the sample runs end-to-end or you hit a blocker that requires user action.
+
+Use cost-first defaults. The default solution is local Docker only with no Azure cost. If the user asks for an Azure extension, choose the cheapest option that satisfies the selected database engine: use a free Azure SQL database offer when SQL Server is selected and the subscription and region support it; otherwise choose the lowest-cost Azure database option that supports the selected SQL Server, PostgreSQL, or MySQL scenario. Use Azure Container Apps consumption, minimal CPU and memory, Basic Azure Container Registry, minimal Log Analytics retention, and no always-on or dedicated plans unless required. Prioritize finishing the project. Treat regional provisioning limits as expected adjustment points, not failures: if the primary region can't provision a required service or free SQL option, use the approved fallback region such as `westus2`, and continue the deployment. Ask the user only when both the primary and fallback regions can't satisfy the requirements, when a change would materially increase cost, when a new permission is required, or when you need approval for Azure commands that create or change resources beyond the already-approved plan.
+
+Verify prerequisites and report only missing items: Docker Desktop running, .NET SDK, DAB CLI, and a shell that can run Docker Compose. Use the DAB CLI docs while building: https://learn.microsoft.com/azure/data-api-builder/command-line/.
+
+Use these docs during implementation:
+
+- DAB CLI reference: https://learn.microsoft.com/azure/data-api-builder/command-line/
+- `dab init`: https://learn.microsoft.com/azure/data-api-builder/command-line/dab-init
+- `dab add`: https://learn.microsoft.com/azure/data-api-builder/command-line/dab-add
+- `dab validate`: https://learn.microsoft.com/azure/data-api-builder/command-line/dab-validate
+- `dab start`: https://learn.microsoft.com/azure/data-api-builder/command-line/dab-start
+- DAB MCP overview: https://learn.microsoft.com/azure/data-api-builder/mcp/overview
+- DAB configuration: https://learn.microsoft.com/azure/data-api-builder/configuration/
+
+Create this structure under the sample folder:
+
+- `docker-compose.yml` for the selected database, DAB, MCP Inspector, and the web app.
+- `.env` for local passwords and connection strings.
+- `.gitignore` with `.env`, `**/bin`, and `**/obj`.
+- `database/` for selected-engine initialization scripts.
+- `data-api/dab-config.json` for DAB configuration.
+- `web-app/` for static HTML, CSS, and JavaScript.
+- `mcp-inspector/README.md` with the auto-connect URL.
+- `README.md` with run, validation, troubleshooting, and cleanup steps.
+
+Handle secrets first. Add `.env` to `.gitignore` before writing passwords. Use `DATABASE_PASSWORD` and `DATABASE_CONNECTION_STRING`. Never print secret values. Use `@env('DATABASE_CONNECTION_STRING')` in `dab-config.json`. Avoid `$` in Docker Compose passwords because Compose treats `$` as variable interpolation.
+
+Use Docker Compose, not raw `docker run`, for the generated project. Containers must talk by service name, not `localhost`. Mount `data-api/dab-config.json` into DAB read-only at `/App/dab-config.json`. Use health checks and `depends_on` so DAB starts after the selected database is healthy.
+
+Implement database initialization explicitly. For PostgreSQL and MySQL, mount selected-engine scripts into `/docker-entrypoint-initdb.d` for first-run initialization. For SQL Server, add a one-shot init service or setup script that waits for the `db` service to become healthy and then runs `sqlcmd` to create the `todos` database, table, and seed rows. Do not assume the database health check creates the database or schema.
+
+Use one of these selected-engine configurations.
+
+SQL Server:
+
+```yaml
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "14330:1433"
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "${DATABASE_PASSWORD}" -C -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 10
+```
+
+PostgreSQL:
+
+```yaml
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "54320:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+```
+
+MySQL:
+
+```yaml
+services:
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "33060:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+```
+
+Use the selected database engine only. Do not scaffold all three engines unless the user asks for a matrix sample.
+
+Use the matching schema and connection details.
+
+SQL Server:
+
+```sql
+CREATE DATABASE todos;
+GO
+USE todos;
+GO
+CREATE TABLE dbo.todos (id int PRIMARY KEY, title nvarchar(100) NOT NULL, completed bit NOT NULL DEFAULT 0);
+INSERT INTO dbo.todos VALUES (1, 'Walk the dog', 0), (2, 'Feed the fish', 0), (3, 'Comb the cat', 1);
+```
+
+```text
+DATABASE_CONNECTION_STRING=Server=db;Database=todos;User Id=sa;Password=<password>;TrustServerCertificate=true;Encrypt=true;
+```
+
+PostgreSQL:
+
+```sql
+CREATE DATABASE todos;
+\c todos
+CREATE TABLE todos (id int PRIMARY KEY, title varchar(100) NOT NULL, completed boolean NOT NULL DEFAULT false);
+INSERT INTO todos VALUES (1, 'Walk the dog', false), (2, 'Feed the fish', false), (3, 'Comb the cat', true);
+```
+
+```text
+DATABASE_CONNECTION_STRING=Host=db;Port=5432;Database=todos;User ID=postgres;Password=<password>;
+```
+
+MySQL:
+
+```sql
+CREATE DATABASE todos;
+USE todos;
+CREATE TABLE todos (id int PRIMARY KEY, title varchar(100) NOT NULL, completed bool NOT NULL DEFAULT false);
+INSERT INTO todos VALUES (1, 'Walk the dog', false), (2, 'Feed the fish', false), (3, 'Comb the cat', true);
+```
+
+```text
+DATABASE_CONNECTION_STRING=Server=db;Port=3306;Database=todos;User=root;Password=<password>;
+```
+
+Use the DAB CLI workflow for the selected engine and validate after each config change.
+
+SQL Server:
+
+```dotnetcli
+dab init --config data-api/dab-config.json --database-type mssql --host-mode Development --connection-string "@env('DATABASE_CONNECTION_STRING')" --rest.enabled true --graphql.enabled true --mcp.enabled true
+dab add Todo --config data-api/dab-config.json --source dbo.todos --source.type table --permissions "anonymous:*" --mcp.dml-tools true
+dab validate --config data-api/dab-config.json
+```
+
+PostgreSQL:
+
+```dotnetcli
+dab init --config data-api/dab-config.json --database-type postgresql --host-mode Development --connection-string "@env('DATABASE_CONNECTION_STRING')" --rest.enabled true --graphql.enabled true --mcp.enabled true
+dab add Todo --config data-api/dab-config.json --source public.todos --source.type table --permissions "anonymous:*" --mcp.dml-tools true
+dab validate --config data-api/dab-config.json
+```
+
+MySQL:
+
+```dotnetcli
+dab init --config data-api/dab-config.json --database-type mysql --host-mode Development --connection-string "@env('DATABASE_CONNECTION_STRING')" --rest.enabled true --graphql.enabled true --mcp.enabled true
+dab add Todo --config data-api/dab-config.json --source todos --source.type table --permissions "anonymous:*" --mcp.dml-tools true
+dab validate --config data-api/dab-config.json
+```
+
+Use this DAB container pattern in Compose:
+
+```yaml
+  data-api:
+    image: mcr.microsoft.com/azure-databases/data-api-builder:latest
+    environment:
+      DATABASE_CONNECTION_STRING: ${DATABASE_CONNECTION_STRING}
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data-api/dab-config.json:/App/dab-config.json:ro
+    depends_on:
+      db:
+        condition: service_healthy
+```
+
+Configure DAB CORS before you start the browser-based web app. Do not leave `runtime.host.cors.origins` as `[]`. Set it to include the exact web app origin, including scheme and port, such as `http://localhost:8000` for this Docker Compose web app. Keep `allow-credentials` set to `false` unless the sample explicitly uses browser credentials or cookies. Direct REST, GraphQL, or Swagger requests can succeed even when the browser blocks JavaScript fetch calls, so browser-origin CORS must be configured and validated separately.
+
+Add MCP Inspector with the auto-connect URL. Use Streamable HTTP and omit auth only for local development.
+
+```yaml
+  mcp-inspector:
+    image: ghcr.io/modelcontextprotocol/inspector:latest
+    environment:
+      HOST: 0.0.0.0
+      MCP_AUTO_OPEN_ENABLED: "false"
+      DANGEROUSLY_OMIT_AUTH: "true"
+    ports:
+      - "6274:6274"
+      - "6277:6277"
+    depends_on:
+      - data-api
+```
+
+```text
+http://localhost:6274/?transport=streamable-http&serverUrl=http%3A%2F%2Fdata-api%3A5000%2Fmcp
+```
+
+Use the Compose service name `data-api` in the MCP Inspector auto-connect URL because MCP Inspector runs in the Compose network. Also document a host-side MCP URL for VS Code or direct browser testing:
+
+```text
+http://localhost:5000/mcp
+```
+
+For SQL Server only, include SQL Commander if the user wants a database browser. Use env var `ConnectionStrings__db` and include `TrustServerCertificate=true`.
+
+```yaml
+  sql-commander:
+    image: jerrynixon/sql-commander:latest
+    environment:
+      ConnectionStrings__db: ${DATABASE_CONNECTION_STRING}
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+```
+
+Build the static web app with minimal code and a polished UI. It should show the todo list, loading state, empty state, error state, API base URL, and quick links to REST, GraphQL, Swagger, and MCP Inspector. Keep dependencies minimal; use plain HTML, CSS, and JavaScript unless the user asks for a framework.
+
+Validate before reporting success:
+
+- `docker compose up -d` starts the selected database, DAB, MCP Inspector, and web app.
+- The selected database health check passes.
+- The `todos` database and table exist with three seeded rows.
+- A direct database query returns the three seeded todo rows.
+- `dab validate --config data-api/dab-config.json` exits with code 0.
+- DAB `/health` returns a 2xx response.
+- REST returns the three todo rows at `http://localhost:5000/api/Todo`.
+- GraphQL returns the three todo rows.
+- Swagger opens at `http://localhost:5000/swagger`.
+- A browser-origin request from the web app origin, for example `http://localhost:8000`, receives an `Access-Control-Allow-Origin` response header that matches that origin.
+- MCP Inspector opens with the auto-connect URL and can list DAB tools.
+- The web site returns a successful HTTP response.
+- The web app displays the todo rows and looks neat, not austere.
+- `README.md` includes run, validation, troubleshooting, and cleanup steps.
+
+Do not report final URLs, asset locations, or a success summary until you directly verify database connectivity and query results, a 2xx DAB health response, and a successful web site response. This validation ensures the sample works without requiring the developer to check.
+````
 
 ## Next step
 
