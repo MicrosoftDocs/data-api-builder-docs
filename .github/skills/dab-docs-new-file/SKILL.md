@@ -50,6 +50,25 @@ data-api-builder/
 
 Complete every applicable step when adding a new file. Do not skip steps.
 
+### 0. Confirm author identity with selectable defaults
+
+Before creating or editing any `.md` file, confirm the GitHub username and Microsoft alias with a low-friction choice.
+
+For a new file:
+
+- Inspect peer files in the target folder and collect existing `author` / `ms.author` pairs.
+- Offer those pairs as selectable defaults so the user can reuse the same author identity without retyping.
+- Include an option to enter a different GitHub username and Microsoft alias.
+- Do not guess or use placeholders for `author` or `ms.author`.
+
+For any existing `.md` page you edit while adding cross-references or related content:
+
+- Read the page frontmatter first.
+- Treat the existing `author` and `ms.author` values as the default author identity.
+- Offer a choice to keep the existing values or enter different values.
+- If either value is missing, offer `author` / `ms.author` pairs from peer files as selectable suggestions and allow a custom entry.
+- If the user keeps the existing values, update only `ms.date` unless other frontmatter must change.
+
 ### 1. Choose the correct location
 
 - [ ] Identify which **folder** the file belongs in based on content type.
@@ -64,8 +83,8 @@ Every `.md` file must start with YAML frontmatter. Use this template:
 ---
 title: <Title in sentence case>
 description: <One-sentence description, 75–300 characters, no brand names at start>
-author: <GitHub username>
-ms.author: <Microsoft alias>
+author: <confirmed GitHub username from author identity selection>
+ms.author: <confirmed Microsoft alias from author identity selection>
 ms.reviewer: <Microsoft alias of reviewer>
 ms.service: data-api-builder
 ms.topic: <topic-type>

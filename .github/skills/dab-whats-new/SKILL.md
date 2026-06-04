@@ -27,7 +27,23 @@ These apply unconditionally.
 
 ## Inputs
 
-If inputs are missing, draft immediately with explicit `[PLACEHOLDER]` markers and list what is missing at the top of the draft. Do not stall waiting for complete inputs.
+If inputs are missing, draft immediately with explicit `[PLACEHOLDER]` markers and list what is missing at the top of the draft. Do not use placeholders for `author` or `ms.author`, and do not stall waiting for complete non-author inputs.
+
+Before creating or revising a `.md` page, confirm the GitHub username and Microsoft alias with a low-friction choice.
+
+For an existing what's-new page:
+
+- Read the page frontmatter first.
+- Treat the existing `author` and `ms.author` values as the default author identity.
+- Offer a choice to keep the existing values or enter different values.
+- If either value is missing, offer `author` / `ms.author` pairs from nearby what's-new pages as selectable suggestions and allow a custom entry.
+- If the user keeps the existing values, update only `ms.date` unless other frontmatter must change.
+
+For a new what's-new page:
+
+- Inspect nearby what's-new pages and offer their `author` / `ms.author` pairs as selectable defaults.
+- Include an option to enter a different GitHub username and Microsoft alias.
+- Do not guess or use placeholders for `author` or `ms.author`.
 
 Required inputs:
 
@@ -45,8 +61,8 @@ Required inputs:
     ---
     title: "What's new in Data API builder version X.Y (Month Year)"
     description: <75–300 characters summarizing the release>
-    author: <GitHub username>
-    ms.author: <Microsoft alias>
+    author: <confirmed GitHub username from author identity selection>
+    ms.author: <confirmed Microsoft alias from author identity selection>
     ms.reviewer: <Microsoft alias>
     ms.service: data-api-builder
     ms.topic: whats-new

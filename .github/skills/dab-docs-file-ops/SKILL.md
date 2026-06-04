@@ -52,6 +52,19 @@ data-api-builder/
 
 Complete every applicable step for each file operation. Do not skip steps.
 
+### 0. Confirm author identity when Markdown files change
+
+Before editing any `.md` file as part of a rename, move, delete, link fix, or cross-reference update, confirm the GitHub username and Microsoft alias with a low-friction choice.
+
+For an existing page:
+
+- Read the page frontmatter first.
+- Treat the existing `author` and `ms.author` values as the default author identity.
+- Offer a choice to keep the existing values or enter different values.
+- If the user keeps the existing values, update only `ms.date` unless other frontmatter must change.
+- If either value is missing, offer `author` / `ms.author` pairs from peer files as selectable suggestions and allow a custom entry.
+- Do not guess or silently replace `author` or `ms.author`.
+
 ### 1. Execute the file operation
 
 - [ ] Use `git mv` for renames and moves (preserves git history).

@@ -193,6 +193,6 @@ These are the most commonly triggered platform validation rules in this repo. Fl
 4. **Verify images** — check that referenced media files exist on disk.
 5. **Compare against peers** — read 1–2 peer files in the same folder for structural comparison.
 6. **Produce the findings report** using the output format above.
-7. **If fixing**: Apply edits for blocking and compliance issues. Leave polish items for the author to decide.
+7. **If fixing**: Before editing any `.md` file, confirm the author identity with a selectable default. Read the existing page frontmatter, offer to keep the current `author` / `ms.author` pair, and offer a custom-entry option. If either value is missing, offer `author` / `ms.author` pairs from peer files as selectable suggestions and allow a custom entry. Never guess or silently replace `author` or `ms.author`. If the user keeps the existing identity, update only `ms.date` unless other frontmatter must change. Apply edits for blocking and compliance issues. Leave polish items for the author to decide.
 
 Do not make edits unless explicitly asked. The default output is a findings report only.

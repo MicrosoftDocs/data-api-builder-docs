@@ -1,25 +1,26 @@
 ---
-title: Configuration schema - Data Source section
-description: The Data API Builder configuration file's Data Source top-level section with details for each property.
-author: jnixon
-ms.author: sidandrews
+title: Configuration schema - Data source section
+description: The Data API Builder configuration file's Data source top-level section with details for each property.
+author: jerrynixon
+ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 03/24/2026
+ms.date: 05/28/2026
 show_latex: true
+# Customer Intent: As a developer, I want to understand data source configuration so that I can connect Data API builder to my database correctly.
 ---
 
 # Data source
 
 The `data-source` section defines the database access details. It also defines database options.
 
-### Data source settings
+## Data source settings
 
 |Property|Description|
 |-|-|
 |[data-source](#data-source-1)|Object containing database connectivity settings|
-|[data-source.database-type](#data-source-1)|Database used in the backend: `mssql`, `postgresql`, `mysql`, `cosmosdb_nosql`, `cosmosdb_postgresql`|
+|[data-source.database-type](#data-source-1)|Database used by the back end: `mssql`, `postgresql`, `mysql`, `cosmosdb_nosql`, `cosmosdb_postgresql`|
 |[data-source.connection-string](#data-source-1)|Connection string for the selected database type|
 |[data-source.options](#data-source-1)|Database-specific properties (for example, options for SQL Server, Cosmos DB, etc.)|
 |[data-source.options.database](#data-source-1)|Name of the Azure Cosmos DB for NoSQL database (required when `database-type = cosmosdb_nosql`)|
@@ -122,9 +123,9 @@ The `data-source` section defines the database access details. It also defines d
 ```
 
  > [!NOTE]
- > We use [`SqlClient`](https://www.nuget.org/packages/Microsoft.Data.SqlClient) for Azure SQL and SQL Server, which supports [these](/dotnet/api/system.data.sqlclient.sqlconnection.connectionstring) connection strings variants.
+ > Data API builder uses [`SqlClient`](https://www.nuget.org/packages/Microsoft.Data.SqlClient) for Azure SQL and SQL Server, which supports [these](/dotnet/api/system.data.sqlclient.sqlconnection.connectionstring) connection string variants.
 
- #### Consuming `SESSION_CONTEXT`
+#### Use `SESSION_CONTEXT`
 
 For Azure SQL and SQL Server, Data API builder can include Claims info in SQL's [`SESSION_CONTEXT`](../reference-database-specific-features.md#session_context).
 
@@ -182,17 +183,17 @@ Data API builder uses Exponential Backoff to retry database requests after trans
 |-|-|-|-|-|-|
 |Seconds|2s|4s|8s|16s|32s|
 
-### Managed Service Identities (MSI)
+### Managed service identities (MSI)
 
-Managed Service Identities (MSI) are supported with `DefaultAzureCredential` defined in [`Azure.Identity`](https://www.nuget.org/packages/Azure.Identity) library. Learn more about [Managed identities in Microsoft Entra for Azure SQL](/azure/azure-sql/database/authentication-azure-ad-user-assigned-managed-identity?view=azuresql&preserve-view=true).
+Managed service identities (MSI) are supported with `DefaultAzureCredential` defined in the [`Azure.Identity`](https://www.nuget.org/packages/Azure.Identity) library. Learn more about [Managed identities in Microsoft Entra for Azure SQL](/azure/azure-sql/database/authentication-azure-ad-user-assigned-managed-identity?view=azuresql&preserve-view=true).
 
-#### User-Assigned Managed Identities (UAMI)
+#### User-assigned managed identities (UAMI)
 
-For User Assigned Managed Identity, append the *Authentication* and *User ID* properties to your connection string while substituting in your User Assigned Managed Identity's client ID: `Authentication=Active Directory Managed Identity; User Id=<UMI_CLIENT_ID>;`.
+For user-assigned managed identity, append the *Authentication* and *User ID* properties to your connection string while substituting in your user-assigned managed identity's client ID: `Authentication=Active Directory Managed Identity; User Id=<UMI_CLIENT_ID>;`.
 
-#### System-Assigned Managed Identity (SAMI)
+#### System-assigned managed identity (SAMI)
 
-For System Assigned Managed Identity, append the *Authentication* property and exclude the *UserId* and *Password* arguments from your connection string: `Authentication=Active Directory Managed Identity;`. 
+For system-assigned managed identity, append the *Authentication* property and exclude the *UserId* and *Password* arguments from your connection string: `Authentication=Active Directory Managed Identity;`. 
 
 
 ## Health (Data source)
@@ -239,7 +240,7 @@ The simplest possible query—specific to the database type—is executed agains
 |-|-|-|-|-|
 |`data-source`|`user-delegated-auth`|object|No|–|
 
-On-Behalf-Of (OBO) user-delegated authentication for SQL Server and Azure SQL. When enabled, DAB exchanges the incoming user token for a downstream SQL token so the database authenticates as the actual calling user. This feature is supported only for `mssql` data sources and requires Entra ID authentication upstream.
+On-Behalf-Of (OBO) user-delegated authentication for SQL Server and Azure SQL. When enabled, DAB exchanges the incoming user token for a downstream SQL token so the database authenticates as the actual calling user. This feature is supported only for `mssql` data sources and requires Microsoft Entra ID authentication upstream.
 
 [!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
 
@@ -261,9 +262,9 @@ When OBO is enabled, DAB reads the following environment variables for the token
 
 | Variable | Description |
 |----------|-------------|
-| `DAB_OBO_CLIENTID` | Application (client) ID of the Entra ID app registration |
-| `DAB_OBO_CLIENTSECRET` | Client secret for the app registration |
-| `DAB_OBO_TENANTID` | Entra ID tenant ID |
+| `DAB_OBO_CLIENT_ID` | Application (client) ID of the Microsoft Entra ID app registration |
+| `DAB_OBO_CLIENT_SECRET` | Client secret for the app registration |
+| `DAB_OBO_TENANT_ID` | Microsoft Entra ID tenant ID |
 
 ### Per-user connection pooling
 

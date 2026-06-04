@@ -1,17 +1,17 @@
 ### YamlMime:Landing
 
 title: Data API builder quickstarts
-summary: Get up and running with Data API builder in minutes. Each quickstart uses Docker to run a local database and walks you through creating REST or GraphQL API endpoints with the DAB CLI.
+summary: Get up and running with Data API builder in minutes. Start with local SQL or NoSQL databases, then explore Microsoft SQL security with Azure-ready samples.
 
 metadata:
   title: Data API builder quickstarts
-  description: Quickstart guides for using Data API builder with SQL Server, Azure SQL, PostgreSQL, MySQL, Azure Cosmos DB for NoSQL, Azure Cosmos DB for PostgreSQL, Microsoft Fabric SQL, and Azure Synapse Analytics.
-  author: seesharprun
-  ms.author: sidandrews
-  ms.reviewer: jerrynixon
+  description: Quickstart guides for using Data API builder with SQL Server, Azure SQL, PostgreSQL, MySQL, Azure Cosmos DB for NoSQL, Microsoft Fabric SQL, Azure Synapse Analytics, and Microsoft SQL security patterns.
+  author: jerrynixon
+  ms.author: jnixon
+  ms.reviewer: sidandrews
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 03/30/2026
+  ms.date: 05/29/2026
 
 landingContent:
   - title: "SQL Server (mssql)"
@@ -34,6 +34,18 @@ landingContent:
         links:
           - text: Get started with SQL Server
             url: basic-sql.md?tabs=mssql
+          - text: Username/password
+            url: authentication-sql-credentials.md
+          - text: Managed identity
+            url: authentication-managed-identity.md
+          - text: Microsoft Entra
+            url: authentication-microsoft-entra-provider.md
+          - text: DAB policies
+            url: authorization-database-policies.md
+          - text: SQL row-level security
+            url: authorization-sql-row-level-security.md
+          - text: On-behalf-of to Azure SQL
+            url: authentication-on-behalf-of.md
       - linkListType: sample
         links:
           - text: Devcontainer with Azure SQL
@@ -136,3 +148,29 @@ landingContent:
         links:
           - text: Feature availability
             url: ../feature-availability.md
+  - title: "Microsoft SQL security"
+    linkLists:
+      - linkListType: quickstart
+        links:
+          - text: Choose a security sample
+            url: microsoft-sql-security.md
+          - text: Username/password
+            url: authentication-sql-credentials.md
+          - text: Managed identity
+            url: authentication-managed-identity.md
+          - text: Microsoft Entra
+            url: authentication-microsoft-entra-provider.md
+          - text: DAB policies
+            url: authorization-database-policies.md
+          - text: SQL row-level security
+            url: authorization-sql-row-level-security.md
+          - text: On-behalf-of to Azure SQL
+            url: authentication-on-behalf-of.md
+      - linkListType: reference
+        links:
+          - text: Microsoft Entra authentication
+            url: ../concept/security/authenticate-entra.md
+          - text: Authorization overview
+            url: ../concept/security/authorization-overview.md
+          - text: Configure on-behalf-of authentication
+            url: ../concept/security/authenticate-on-behalf-of.md
