@@ -1,17 +1,17 @@
 ---
-title: Quickstart - .NET Aspire
-description: Start SQL MCP Server with .NET Aspire. Build container-based solutions with SQL database, Data API builder, and MCP Inspector. Get started now.
+title: Quickstart - Aspire
+description: Start SQL MCP Server with Aspire. Build container-based solutions with SQL database, Data API builder, and MCP Inspector. Get started now.
 author: jerrynixon
 ms.author: jnixon
 ms.topic: quickstart
 ms.date: 05/11/2026
 ---
 
-# Quickstart: Use SQL MCP Server with .NET Aspire
+# Quickstart: Use SQL MCP Server with Aspire
 
 [!INCLUDE[Section - Quickstart selector](includes/section-quickstart-selector.md)]
 
-![Diagram that shows the Aspire solution with SQL Server, SQL MCP Server, and MCP Inspector.](media/quickstart-dotnet-aspire/diagram.svg)
+![Diagram that shows the Aspire solution with SQL Server, SQL MCP Server, and MCP Inspector.](media/quickstart-aspire/diagram.svg)
 
 [!INCLUDE[Note - SQL MCP availability](includes/note-availability.md)]
 
@@ -194,7 +194,7 @@ This code configures the following resources:
     └── MCP Inspector (inspector)
 ```
 
-![Diagram showing the Aspire resources and their connections.](media/quickstart-dotnet-aspire/dashboard-resources-connections.png)
+![Diagram showing the Aspire resources and their connections.](media/quickstart-aspire/dashboard-resources-connections.png)
 
 ### 5. Create your dab-config.json file
 
@@ -249,7 +249,7 @@ aspire run
 
 When the dashboard opens, you see links for Swagger, MCP, and Inspector.
 
-![Screenshot of the Aspire dashboard showing the running environment.](media/quickstart-dotnet-aspire/dashboard-running-environment.png)
+![Screenshot of the Aspire dashboard showing the running environment.](media/quickstart-aspire/dashboard-running-environment.png)
 
 #### Expected URLs
 

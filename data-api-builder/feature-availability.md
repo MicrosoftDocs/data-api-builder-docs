@@ -182,7 +182,7 @@ Data API builder runs in any environment with container support. The following a
 | [OpenTelemetry](concept/monitor/open-telemetry.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | [Health Endpoints](concept/monitor/health-checks.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | [Custom Log Levels](concept/monitor/log-levels.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
-| [.NET Aspire](mcp/quickstart-dotnet-aspire.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| [Aspire](mcp/quickstart-aspire.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | [MCP³](mcp/overview.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 
 ## MCP Server

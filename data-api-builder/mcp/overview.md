@@ -230,5 +230,5 @@ SQL MCP Server works with any MCP-compatible client, including local LLMs served
 - [Deploy SQL MCP Server to Azure Container Apps](quickstart-azure-container-apps.md)
 - [Deploy SQL MCP Server to Azure App Service](../deployment/azure-app-service.md)
 - [Get started with SQL MCP Server in Visual Studio Code](quickstart-visual-studio-code.md)
-- [Get started with SQL MCP Server in .NET Aspire](quickstart-dotnet-aspire.md)
+- [Get started with SQL MCP Server in Aspire](quickstart-aspire.md)
 - [Get started with SQL MCP Server in Azure AI Foundry](quickstart-azure-ai-foundry.md)

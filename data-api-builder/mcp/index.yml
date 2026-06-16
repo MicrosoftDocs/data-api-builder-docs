@@ -30,8 +30,8 @@ landingContent:
         links:
           - text: Visual Studio Code
             url: quickstart-visual-studio-code.md
-          - text: .NET Aspire
-            url: quickstart-dotnet-aspire.md
+          - text: Aspire
+            url: quickstart-aspire.md
           - text: Azure AI Foundry
             url: quickstart-azure-ai-foundry.md
           - text: Azure Container Apps

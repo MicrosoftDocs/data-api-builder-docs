@@ -72,7 +72,7 @@ Use `dab add-telemetry` to add OpenTelemetry settings to your config.
 1. Confirm that traces and metrics are arriving for REST, GraphQL, or database calls.
 
 > [!NOTE]
-> The .NET Aspire dashboard is an ideal part of the developer loop. It includes built-in views for OpenTelemetry traces and metrics.
+> The Aspire dashboard is an ideal part of the developer loop. It includes built-in views for OpenTelemetry traces and metrics.
 
 ## Data API builder traces
 
