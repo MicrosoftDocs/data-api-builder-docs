@@ -1,12 +1,12 @@
 ---
 title: Configure SQL Server command timeout for DAB
 description: Learn how to configure query timeout for Data API builder to allow longer-running database operations to complete.
-author: seesharprun
-ms.author: sidandrews
+author: jerrynixon
+ms.author: jnixon
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 03/11/2026
+ms.date: 06/19/2026
 # Customer Intent: As a developer, I want to configure query timeout for my database in DAB so my long-running stored procedures and queries can complete successfully.
 ---
 
@@ -98,7 +98,7 @@ For long-running queries, consider:
 MCP operations use both the connection string timeout and an extra MCP-specific timeout. Whichever is shorter triggers first.
 
 > [!NOTE]
-> The `aggregate-records` feature is part of Data API builder 2.0, which is currently in preview.
+> The `aggregate-records` feature is available in Data API builder 2.0 and later.
 
 ```json
 {

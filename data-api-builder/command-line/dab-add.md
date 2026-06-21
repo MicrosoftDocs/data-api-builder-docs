@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 05/11/2026
+ms.date: 06/19/2026
 # Customer Intent: As a developer, I want to add entities to my Data API builder configuration, so that I can expose database objects as APIs.
 ---
 
@@ -575,7 +575,7 @@ dab add Book ^
 
 Free-text description of the entity.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+[!INCLUDE[Note - DAB 2.0 CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -622,7 +622,7 @@ dab add Book ^
 
 Stored procedures only. Comma-separated list of parameter names.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+[!INCLUDE[Note - DAB 2.0 CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -706,7 +706,7 @@ dab add GetOrdersByDateRange ^
 
 Stored procedures only. Comma-separated list of parameter descriptions aligned to `--parameters.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+[!INCLUDE[Note - DAB 2.0 CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -738,7 +738,7 @@ dab add GetOrdersByDateRange ^
 
 Stored procedures only. Comma-separated list of `true`/`false` values aligned to `--parameters.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+[!INCLUDE[Note - DAB 2.0 CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -770,7 +770,7 @@ dab add GetOrdersByDateRange ^
 
 Stored procedures only. Comma-separated list of default values aligned to `--parameters.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+[!INCLUDE[Note - DAB 2.0 CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -905,7 +905,7 @@ dab add Book ^
 
 Name of the database column to describe.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+[!INCLUDE[Note - DAB 2.0 CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -935,16 +935,36 @@ dab add Products ^
 
 ---
 
-### Resulting config
+### Relevant config excerpt
 
-> [!NOTE]
-> In the current Data API builder 2.0 preview CLI, the CLI accepts `--fields.name`, `--fields.alias`, `--fields.description`, and `--fields.primary-key` but doesn't yet persist entity-level field metadata to the configuration file. The team expects to resolve this behavior before GA.
+```json
+{
+  "entities": {
+    "Products": {
+      "fields": [
+        {
+          "name": "ProductID",
+          "alias": "product_id",
+          "description": "Unique identifier for each product",
+          "primary-key": true
+        },
+        {
+          "name": "ProductName",
+          "alias": "product_name",
+          "description": "Display name of the product",
+          "primary-key": false
+        }
+      ]
+    }
+  }
+}
+```
 
 ## `--fields.alias`
 
 Alias for the field. Use a comma-separated list aligned to `--fields.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+[!INCLUDE[Note - DAB 2.0 CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -974,7 +994,7 @@ dab add Products ^
 
 Description for the field. Use a comma-separated list aligned to `--fields.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+[!INCLUDE[Note - DAB 2.0 CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -1004,7 +1024,7 @@ dab add Products ^
 
 Primary key flag for the field. Use a comma-separated list of `true`/`false` values aligned to `--fields.name`.
 
-[!INCLUDE[Note - DAB 2.0 RC CLI](../includes/note-dab-2-preview-cli.md)]
+[!INCLUDE[Note - DAB 2.0 CLI](../includes/note-dab-2-preview-cli.md)]
 
 ### Example
 
@@ -1031,7 +1051,7 @@ dab add Products ^
 ---
 
 > [!NOTE]
-> In the current Data API builder 2.0 preview CLI, the CLI accepts `--fields.primary-key` but doesn't yet persist entity-level field metadata to the configuration file. To specify primary key fields for views, use [`--source.key-fields`](#--sourcekey-fields) instead.
+> In DAB 2.0 and later, prefer `--fields.primary-key` for view key fields. The [`--source.key-fields`](#--sourcekey-fields) option remains available for compatibility, but the resulting configuration uses the `fields` array.
 
 ## `--graphql`
 
@@ -1230,7 +1250,7 @@ dab add BookProc ^
 
 Enable or disable DML tools for this entity in MCP. Default: `true`. When set to `false`, the entity is excluded from the MCP DML tool surface. When `mcp` is omitted entirely, DML tools are enabled by default.
 
-[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+[!INCLUDE[Note - DAB 2.0](../includes/note-dab-2-preview.md)]
 
 ### Example
 

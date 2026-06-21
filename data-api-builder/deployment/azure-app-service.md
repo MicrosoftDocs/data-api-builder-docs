@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 05/04/2026
+ms.date: 06/19/2026
 # Customer Intent: As a developer, I want to deploy Data API builder to Azure App Service so that I can host REST and GraphQL endpoints without managing containers.
 ---
 
@@ -69,13 +69,10 @@ Use a local .NET tool manifest so the deployment package includes DAB as a proje
 1. Install Data API builder as a local tool.
 
     ```dotnetcli
-    dotnet tool install microsoft.dataapibuilder --prerelease
+    dotnet tool install microsoft.dataapibuilder
     ```
 
 1. Verify the manifest exists at `.config/dotnet-tools.json`.
-
-    > [!NOTE]
-    > The `--prerelease` flag installs the latest Data API builder prerelease version. Remove the flag to install the latest stable release instead.
 
 ## Test locally
 

@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 05/14/2026
+ms.date: 06/19/2026
 # Customer Intent: As a developer in a regulated or air-gapped environment, I want to connect a local LLM to SQL MCP Server so that I can query databases without cloud AI services.
 ---
 
@@ -202,7 +202,7 @@ Tool-calling fidelity and answer discipline are different problems. DAB ensures 
 |-------|---------|
 | **Hardware** | Tool calling works on modest hardware. An 8B-parameter model on a consumer Nvidia GPU (8 GB video RAM) produces useful results. Expect latency in the tens of seconds per question, which suits batch workloads. |
 | **Batch vs. interactive** | Small models are well-suited for batch processing (performance reports, inventory queries) where latency tolerance is higher. |
-| **Tool availability** | `aggregate_records` is available in version 2.0 preview and later only. On version 1.7.x, count and aggregation queries force the model to read all matching rows. See [tool availability by version](data-manipulation-language-tools.md#tool-availability-by-version). |
+| **Tool availability** | The `aggregate_records` tool is available in version 2.0 and later only. On version 1.7.x, count and aggregation queries force the model to read all matching rows. See [tool availability by version](data-manipulation-language-tools.md#tool-availability-by-version). |
 | **Transport** | Local models connect via streamable HTTP to `/mcp`. The [standard input/output (stdio) transport](stdio-transport.md) is an alternative for single-process setups. |
 | **Authentication** | For local development, use `anonymous` permissions. For production, configure [authentication](how-to-configure-authentication.md) appropriate to your environment. |
 
