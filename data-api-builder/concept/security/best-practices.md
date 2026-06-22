@@ -1,24 +1,22 @@
 ---
 title: Security best practices
 description: Review a list of current best practices and recommendations for security and connectivity in Data API builder.
-author: seesharprun
-ms.author: sidandrews
+author: jerrynixon
+ms.author: jnixon
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: best-practice
-ms.date: 03/24/2026
+ms.date: 06/19/2026
 # Customer Intent: As a developer, I want to review best practices, so that I can configure my API using current best practices.
 ---
 
 # Security best practices in Data API builder
 
-:::image type="complex" source="media/best-practices/map.svg" border="false" alt-text="Diagram of the current location ('Optimize') in the sequence of the deployment guide.":::
-Diagram of the sequence of the deployment guide including these locations, in order: Overview, Plan, Prepare, Publish, Monitor, and Optimization. The 'Optimize' location is currently highlighted.
-:::image-end:::
+![Diagram showing the Optimize location in the sequence of the deployment guide.](media/best-practices/map.svg)
 
 This article includes the current recommended best practices for security in the Data API builder. This article doesn't include an exhaustive list of every security consideration for your Data API builder solution.
 
-## Disable Legacy Versions of TLS at the Server Level
+## Disable legacy versions of TLS at the server level
 
 Data sent between a client and Data API builder should occur over a secure connection to protect sensitive or valuable information. A secure connection is typically established using Transport Layer Security (TLS) protocols.
 
@@ -66,7 +64,7 @@ TLS 1.2 is enabled by default on the latest versions of .NET and many of the lat
 
 ## Configure authentication for production
 
-Starting in DAB 2.0, which is currently in preview, the default authentication provider is `Unauthenticated`. This means DAB doesn't inspect or validate any JSON Web Token (JWT), and all requests run as `anonymous`. Another service in front of DAB can authenticate callers or restrict access, but DAB still authorizes only as `anonymous`.
+Starting in DAB 2.0, the default authentication provider is `Unauthenticated`. This authentication provider means DAB doesn't inspect or validate any JSON Web Token (JWT), and all requests run as `anonymous`. Another service in front of DAB can authenticate callers or restrict access, but DAB still authorizes only as `anonymous`.
 
 > [!IMPORTANT]
 > If you expose DAB directly to clients, configure a production-grade authentication provider (such as `EntraID` or `Custom`) rather than relying on `Unauthenticated`. When `Unauthenticated` is active, `authenticated` and custom roles defined in entity permissions are never activated.

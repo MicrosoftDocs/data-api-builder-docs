@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: concept-article
-ms.date: 05/14/2026
+ms.date: 06/19/2026
 ---
 
 # Data manipulation language (DML) tools in SQL MCP Server
@@ -32,13 +32,13 @@ The seven DML tools are:
 - `execute_entity` - Runs stored procedures
 - `aggregate_records` - Performs aggregation queries
 
-[!INCLUDE[Note - SQL MCP Server 2.0 preview](includes/note-sql-mcp-server-2-preview.md)]
+[!INCLUDE[Note - SQL MCP Server 2.0](includes/note-sql-mcp-server-2-preview.md)]
 
 ### Tool availability by version
 
 Not all tools are available in every version. Verify the tools available in your installed version before relying on documented behavior.
 
-| Tool | 1.7.x | 2.0 preview+ | Enabled by default |
+| Tool | 1.7.x | 2.0+ | Enabled by default |
 |------|-------|-------------|-------------------|
 | `describe_entities` | Yes | Yes | Yes |
 | `create_record` | Yes | Yes | Yes |
@@ -49,7 +49,7 @@ Not all tools are available in every version. Verify the tools available in your
 | `aggregate_records` | No | Yes | Yes |
 
 > [!NOTE]
-> If you use version 1.7.x, `aggregate_records` isn't available. Agents attempting count or aggregation queries must read all matching rows instead. Upgrade to version 2.0 preview or later for native aggregation support.
+> If you use version 1.7.x, `aggregate_records` isn't available. Agents attempting count or aggregation queries must read all matching rows instead. Upgrade to version 2.0 or later for native aggregation support.
 
 When DML tools are enabled globally and for an entity, SQL MCP Server exposes them through the MCP protocol. Agents never interact directly with your database schema - they work through the Data API builder abstraction layer.
 
