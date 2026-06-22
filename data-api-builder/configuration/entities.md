@@ -6,7 +6,7 @@ ms.author: jnixon
 ms.reviewer: sidandrews
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 03/24/2026
+ms.date: 06/19/2026
 show_latex: true
 ---
 
@@ -238,7 +238,7 @@ The database source details of the entity.
 
 ### Parameters array format
 
-In DAB 2.0 preview, `parameters` supports a structured array format with richer metadata. Each parameter is an object with the following properties:
+In DAB 2.0 and later, `parameters` supports a structured array format with richer metadata. Each parameter is an object with the following properties:
 
 | Property | Type | Required | Description |
 |-|-|-|-|
@@ -273,7 +273,7 @@ In DAB 2.0 preview, `parameters` supports a structured array format with richer 
 > [!WARNING]
 > The dictionary format for `parameters` (for example, `{ "id": 0 }`) is deprecated in DAB 2.0. Use the preceding array format. The old format is still accepted for backward compatibility but will be removed in a future release.
 
-[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+[!INCLUDE[Note - DAB 2.0](../includes/note-dab-2-preview.md)]
 
 ## Permissions (entity-name entities)
 
@@ -333,7 +333,7 @@ named-role → authenticated → anonymous
 
 This means you can define permissions once on `anonymous` and every broader role gets the same access automatically, with no duplication required.
 
-[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+[!INCLUDE[Note - DAB 2.0](../includes/note-dab-2-preview.md)]
 
 #### Example
 
@@ -693,7 +693,7 @@ Lets developers selectively include entities in the GraphQL schema.
 \* The `methods` property is only for `stored-procedure`
 endpoints. 
 
-[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+[!INCLUDE[Note - DAB 2.0](../includes/note-dab-2-preview.md)]
 
 ### Format
 
@@ -718,7 +718,7 @@ endpoints.
 
 An optional human-readable description of the entity. This value is surfaced in generated API documentation and as a comment in the GraphQL schema.
 
-[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+[!INCLUDE[Note - DAB 2.0](../includes/note-dab-2-preview.md)]
 
 ### Format
 
@@ -756,7 +756,7 @@ An optional human-readable description of the entity. This value is surfaced in 
 
 Defines metadata for individual database fields, including aliases, descriptions, and primary key designations. The `fields` array replaces both `mappings` (via the `alias` property) and `source.key-fields` (via the `primary-key` property) in a single, unified structure.
 
-[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+[!INCLUDE[Note - DAB 2.0](../includes/note-dab-2-preview.md)]
 
 ### Nested properties
 
@@ -920,7 +920,7 @@ The `level` property controls which cache tiers are used:
 | `L1` | In-memory cache only. Fastest, but not shared across instances. |
 | `L1L2` | In-memory cache plus distributed (Redis) cache. Shared across scaled-out instances. Default. |
 
-[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+[!INCLUDE[Note - DAB 2.0](../includes/note-dab-2-preview.md)]
 
 > [!NOTE]
 > When not specified, `ttl-seconds` inherits the global value set under `runtime.cache`.
@@ -1241,7 +1241,7 @@ Enables and configures health checks for the entity.
 
 Controls MCP participation for the entity. When MCP is enabled globally, entities participate by default. Use this property to opt out or to enable custom MCP tools for stored-procedure entities.
 
-[!INCLUDE[Note - DAB 2.0 preview](../includes/note-dab-2-preview.md)]
+[!INCLUDE[Note - DAB 2.0](../includes/note-dab-2-preview.md)]
 
 ### Object format
 

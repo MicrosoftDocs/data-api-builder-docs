@@ -1,12 +1,12 @@
 ---
 title: Implement row-level security with session context
 description: Use the session context feature of SQL and Data API builder to manually implement row-level security in your APIs.
-author: seesharprun
-ms.author: sidandrews
+author: jerrynixon
+ms.author: jnixon
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 03/24/2026
+ms.date: 06/19/2026
 # Customer Intent: As a developer, I want to implement row-level security, so that I can ensure that users only see records intended for them.
 ---
 
@@ -20,7 +20,7 @@ Use the **session context** feature of SQL to implement row-level security in Da
 > Session context with SQL Server row-level security differs from Data API builder database policies. Database policies (for example, `--policy-database "@item.owner eq @claims.user_id"`) are translated into WHERE clauses by Data API builder, while session context forwards claims to SQL Server so that SQL-native row-level security handles the filtering.
 
 > [!TIP]
-> DAB 2.0, which is currently in preview, also supports On-Behalf-Of (OBO) user-delegated authentication for SQL Server, which exchanges the incoming user token for a downstream SQL token so the database authenticates as the actual calling user. OBO enables row-level security policies that depend on the real user identity. For more information, see [user-delegated auth](../../configuration/data-source.md#user-delegated-auth) and [what's new](../../whats-new/version-2-0.md).
+> DAB 2.0 and later also support On-Behalf-Of (OBO) user-delegated authentication for SQL Server, which exchanges the incoming user token for a downstream SQL token so the database authenticates as the actual calling user. OBO enables row-level security policies that depend on the real user identity. For more information, see [user-delegated auth](../../configuration/data-source.md#user-delegated-auth) and [what's new](../../whats-new/version-2-0.md).
 
 ## Prerequisites
 

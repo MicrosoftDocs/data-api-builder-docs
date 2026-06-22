@@ -4,7 +4,7 @@ description: Learn how to deploy SQL MCP Server to Azure Container Apps and conn
 author: jerrynixon
 ms.author: jnixon
 ms.topic: quickstart
-ms.date: 05/11/2026
+ms.date: 06/19/2026
 ---
 
 # Quickstart: Use SQL MCP Server with Azure Container Apps
@@ -251,7 +251,7 @@ az acr create `
 Create a file named `Dockerfile` in the same folder as your `dab-config.json`:
 
 ```dockerfile
-FROM mcr.microsoft.com/azure-databases/data-api-builder:2.0.1-rc
+FROM mcr.microsoft.com/azure-databases/data-api-builder:2.0.8
 COPY dab-config.json /App/dab-config.json
 ```
 
@@ -549,7 +549,7 @@ az acr create `
 
 # Create Dockerfile
 @"
-FROM mcr.microsoft.com/azure-databases/data-api-builder:2.0.1-rc
+FROM mcr.microsoft.com/azure-databases/data-api-builder:2.0.8
 COPY dab-config.json /App/dab-config.json
 "@ | Out-File -FilePath Dockerfile -Encoding utf8
 
