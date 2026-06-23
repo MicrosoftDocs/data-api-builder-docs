@@ -111,7 +111,7 @@ author: <GitHub username>
 ms.author: <Microsoft alias>
 ms.reviewer: <Microsoft alias>
 ms.service: data-api-builder
-ms.topic: <how-to | concept | quickstart | tutorial | whats-new | reference>
+ms.topic: <how-to | concept-article | quickstart | tutorial | whats-new | reference>
 ms.date: <MM/DD/YYYY>
 # Customer Intent: As a <role>, I want to <action> so that I can <outcome>.
 ---

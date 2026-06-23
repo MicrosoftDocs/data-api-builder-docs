@@ -32,7 +32,7 @@ Run every check in this list against each file being audited. Report findings gr
 | `ms.author` present | Required. Must be a Microsoft alias (without @microsoft.com). |
 | `ms.reviewer` present | Expected in this repo. |
 | `ms.service` | Must be `data-api-builder`. |
-| `ms.topic` | Must be one of: `how-to`, `concept`, `quickstart`, `tutorial`, `whats-new`, `reference`, `landing-page`, `faq`. |
+| `ms.topic` | Must use a Microsoft Learn-valid topic value. For concept articles, use `concept-article`, not `concept`. Common values in this repo include `concept-article`, `how-to`, `quickstart`, `tutorial`, `whats-new`, `reference`, `landing-page`, and `faq`. |
 | `ms.date` | Required. Format `MM/DD/YYYY`. Should reflect the last substantial edit. |
 | `# Customer Intent` comment | Expected in this repo. Format: `As a <role>, I want to <action> so that I can <outcome>.` |
 | No extra/unknown fields | Flag unexpected metadata fields. |
@@ -184,6 +184,7 @@ These are the most commonly triggered platform validation rules in this repo. Fl
 | `article-toc-connection` | `.md` file not connected to the TOC |
 | `docs-link-absolute` | Absolute `https://learn.microsoft.com/...` link used |
 | `h1-missing` | No H1 heading in the article |
+| `ms-topic-invalid` | Invalid `ms.topic` value. Flag `ms.topic: concept` and replace it with `ms.topic: concept-article`. |
 
 ## Procedure
 
