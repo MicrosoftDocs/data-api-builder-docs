@@ -1,583 +1,769 @@
 ---
 title: Aggregate data with GraphQL
-description: Use Data API builder GraphQL aggregation and groupBy to summarize data without extra back-end code.
-author: seesharprun
-ms.author: sidandrews
-ms.reviewer: jerrynixon
+description: Learn how Data API builder translates GraphQL aggregate queries into SQL queries for counts, sums, averages, grouped values, filters, and views.
+author: JerryNixon
+ms.author: jnixon
+ms.reviewer: sidandrews
 ms.service: data-api-builder
-ms.topic: how-to
-ms.date: 01/27/2026
-# Customer Intent: As a developer, I want to run GraphQL aggregations (sum, average, min, max) so I can summarize data without custom APIs.
+ms.topic: concept-article
+ms.date: 06/23/2026
+# Customer Intent: As a developer, I want to aggregate data with GraphQL so that I can query summary values without writing custom SQL endpoints.
 ---
 
-# Aggregate data with GraphQL in Data API builder
+# Aggregate data with GraphQL
 
-Data API builder (DAB) supports GraphQL aggregation and grouping for SQL family databases and Azure Synapse Analytics (Dedicated SQL pool). Aggregations let you summarize numeric fields and group results without writing custom API code. Aggregation and `groupBy` aren't available for Azure Cosmos DB for NoSQL, PostgreSQL, or MySQL.
+Data API builder supports GraphQL aggregation for SQL Server family and Azure Synapse Analytics Dedicated SQL pool entities. Use the `groupBy` field on a collection query to calculate `sum`, `avg`, `min`, `max`, and `count` values.
 
-## Prerequisites
+The examples in this article use SQL Server and GraphQL entities with read permission. Data API builder generates SQL like the statements shown in each scenario. Parameter values appear as query parameters at runtime. The `sum`, `avg`, `min`, and `max` functions apply to numeric fields. The `count` function works on any field.
 
-- Supported database:
-  - SQL Server 2016 or later
-  - Azure SQL Database
-  - Azure SQL Managed Instance
-  - Microsoft Fabric SQL
-  - Azure Synapse Analytics (Dedicated SQL pool only)
-- Data API builder CLI. [Install the CLI](../../command-line/install.md)
-- A DAB configuration file with your entity exposed through GraphQL.
-- A GraphQL client (for example, Banana Cake Pop or GraphQL Playground) to run queries.
+> [!IMPORTANT]
+> Aggregation isn't available for Azure Cosmos DB for NoSQL, PostgreSQL, or MySQL.
 
-## Supported databases
+Aggregation is enabled by default. To turn it off, set `enable-aggregation` to `false` under `runtime.graphql` in your configuration file. Aggregation queries return one page of groups, 100 by default. Use the `first` argument on the collection query to change the maximum, for example `books(first: 500)`. Set the default with `runtime.pagination.default-page-size`.
 
-| Database | Aggregation support |
-| --- | --- |
-| SQL Server / Azure SQL / Microsoft Fabric SQL | ✅ Yes |
-| Azure Synapse (Dedicated SQL pool) | ✅ Yes |
-| Azure Synapse (Serverless SQL pool) | ❌ No |
-| PostgreSQL | ❌ No |
-| MySQL | ❌ No |
-| Azure Cosmos DB for NoSQL | ❌ No |
+## GraphQL schema additions
 
-## Aggregate functions
+When you enable aggregation, Data API builder adds aggregation fields and generated types to each supported GraphQL collection. The exact generated type names are entity-specific and visible through GraphQL introspection, but the query syntax is consistent across entities.
 
-DAB supports the following aggregate functions:
+The following snippets show syntax formats, not complete GraphQL queries.
 
-| Function | Applies to | Description |
-| --- | --- | --- |
-| `sum` | Numeric fields only | Total of all values |
-| `average` | Numeric fields only | Mean of all values |
-| `min` | Numeric fields only | Minimum value |
-| `max` | Numeric fields only | Maximum value |
-| `count` | Any field | Count of non-null values |
+### `groupBy`
 
-### Constraints
+Returns grouped rows for the collection. Select this member instead of `items` in an aggregation query.
 
-- `sum`, `average`, `min`, and `max` only work on numeric data types (int, decimal, float, etc.).
-- `count` works on any data type, including strings and dates.
-- If a table has no numeric columns, DAB doesn't generate aggregation nodes for that entity. You can still use `count` on non-numeric fields.
-
-### Optional modifiers
-
-| Modifier | Purpose | Example |
-| --- | --- | --- |
-| `distinct: true` | Count unique values only | Count distinct customers |
-| `having: { ... }` | Filter groups after aggregation | Show groups with sum > 1000 |
-
-## Run the DAB runtime
-
-Start DAB with your configuration file so the GraphQL endpoint is available.
-
-```dotnetcli
-dab start
+```text
+<collection> { groupBy { ... } }
 ```
 
-## Query aggregated results
+### `groupBy(fields: [...])`
 
-This section walks through a complete example showing the table schema, GraphQL query, generated SQL, and JSON response.
+Lists the entity fields to group by. Omit `fields` to aggregate all rows into one group.
 
-### Table schema
+```text
+<collection> { groupBy(fields: [<field>, ...]) { ... } }
+```
+
+### `fields`
+
+Returns the grouped field values for each row in the aggregation result.
+
+```text
+groupBy(fields: [<field>]) { fields { <field> } }
+```
+
+### `aggregations`
+
+Contains the aggregate function selections for each group.
+
+```text
+groupBy { aggregations { <alias>: <function>(field: <field>) } }
+```
+
+### `sum`, `avg`, `min`, and `max`
+
+Aggregate numeric fields.
+
+```text
+aggregations { <alias>: sum(field: <numeric-field>) }
+aggregations { <alias>: avg(field: <numeric-field>) }
+aggregations { <alias>: min(field: <numeric-field>) }
+aggregations { <alias>: max(field: <numeric-field>) }
+```
+
+### `count`
+
+Counts values for a field.
+
+```text
+aggregations { <alias>: count(field: <field>) }
+```
+
+### `field`
+
+Identifies the entity field to aggregate. Field names are enum values, not strings.
+
+```text
+<function>(field: <field>)
+```
+
+### `having`
+
+Filters groups after Data API builder calculates the aggregate value.
+
+```text
+aggregations { <alias>: <function>(field: <field>, having: { <operator>: <value> }) }
+```
+
+### `distinct`
+
+Counts unique values when used with `count`.
+
+```text
+aggregations { <alias>: count(field: <field>, distinct: true) }
+```
+
+Data API builder generates entity-specific GraphQL types behind these members, including group row types, grouped field types, aggregate selection types, field enums, and `having` input types. You don't need to name those generated types in a query.
+
+## Samples
+
+The following samples show the SQL table, GraphQL query, resulting SQL, and resulting output for common aggregation patterns.
+
+### Aggregate all rows in a table
+
+Use this pattern when you want one summary row for the whole entity.
+
+#### SQL table
 
 ```sql
-CREATE TABLE books (
-    id INT PRIMARY KEY,
-    title NVARCHAR(200),
-    year INT,
-    pages INT
+CREATE TABLE dbo.Books (
+    id INT NOT NULL PRIMARY KEY,
+    title NVARCHAR(200) NOT NULL,
+    [year] INT NOT NULL,
+    pages INT NOT NULL
 );
+
+INSERT INTO dbo.Books (id, title, [year], pages) VALUES
+    (1, N'GraphQL Basics', 2023, 120),
+    (2, N'Advanced APIs', 2023, 450),
+    (3, N'Data Patterns', 2023, 390),
+    (4, N'Cloud APIs', 2024, 140),
+    (5, N'Runtime Internals', 2024, 510),
+    (6, N'Query Tuning', 2024, 250);
 ```
 
-### GraphQL query
+| id | title | year | pages |
+| --- | --- | --- | --- |
+| 1 | GraphQL Basics | 2023 | 120 |
+| 2 | Advanced APIs | 2023 | 450 |
+| 3 | Data Patterns | 2023 | 390 |
+| 4 | Cloud APIs | 2024 | 140 |
+| 5 | Runtime Internals | 2024 | 510 |
+| 6 | Query Tuning | 2024 | 250 |
 
-Use GraphQL to group rows and return aggregate values for numeric fields.
-
-```graphql
-{
-  books(
-    groupBy: { fields: ["year"] }
-  ) {
-    items {
-      year
-    }
-    aggregates {
-      pages {
-        sum
-        average
-        min
-        max
-      }
-    }
-  }
-}
-```
-
-- `groupBy.fields` groups rows by the specified columns.
-- `aggregates` exposes aggregate functions for numeric fields (for example, `pages`).
-- The GraphQL schema only exposes aggregates for fields that support them; use schema introspection in your client to confirm available aggregate fields and functions.
-
-### Generated SQL
-
-DAB translates the GraphQL query into T-SQL:
-
-```sql
-SELECT 
-    [year],
-    SUM([pages]) AS [sum],
-    AVG([pages]) AS [average],
-    MIN([pages]) AS [min],
-    MAX([pages]) AS [max]
-FROM [dbo].[books]
-GROUP BY [year]
-FOR JSON PATH, INCLUDE_NULL_VALUES
-```
-
-### JSON response
-
-```json
-{
-  "data": {
-    "books": {
-      "items": [
-        { "year": 2023 },
-        { "year": 2024 }
-      ],
-      "aggregates": {
-        "pages": [
-          { "sum": 3200, "average": 320, "min": 120, "max": 450 },
-          { "sum": 4500, "average": 300, "min": 140, "max": 510 }
-        ]
-      }
-    }
-  }
-}
-```
-
-The `items` and `aggregates` arrays align by index—the first element in `aggregates.pages` corresponds to the first group in `items`.
-
-## Aggregate without grouping
-
-Calculate aggregates across all rows when you omit `groupBy`.
-
-### GraphQL query
+#### GraphQL query
 
 ```graphql
 {
   books {
-    aggregates {
-      pages {
-        sum
-        average
-        min
-        max
-        count
-      }
-      id {
-        count
+    groupBy {
+      aggregations {
+        totalPages: sum(field: pages)
+        averagePages: avg(field: pages)
+        shortestBook: min(field: pages)
+        longestBook: max(field: pages)
+        bookCount: count(field: id)
       }
     }
   }
 }
 ```
 
-### Generated SQL
+#### Resulting SQL
 
 ```sql
-SELECT
-    SUM([pages]) AS [sum],
-    AVG([pages]) AS [average],
-    MIN([pages]) AS [min],
-    MAX([pages]) AS [max],
-    COUNT([pages]) AS [count],
-    COUNT([id]) AS [count]
-FROM [dbo].[books]
-FOR JSON PATH, INCLUDE_NULL_VALUES
+SELECT TOP 100
+    SUM([table0].[pages]) AS [totalPages],
+    AVG([table0].[pages]) AS [averagePages],
+    MIN([table0].[pages]) AS [shortestBook],
+    MAX([table0].[pages]) AS [longestBook],
+    COUNT([table0].[id]) AS [bookCount]
+FROM [dbo].[Books] AS [table0]
+WHERE 1 = 1
+FOR JSON PATH, INCLUDE_NULL_VALUES;
 ```
 
-### JSON response
+#### Resulting output
 
 ```json
 {
   "data": {
     "books": {
-      "aggregates": {
-        "pages": {
-          "sum": 15420,
-          "average": 308,
-          "min": 120,
-          "max": 850,
-          "count": 50
-        },
-        "id": {
-          "count": 50
+      "groupBy": [
+        {
+          "aggregations": {
+            "totalPages": 1860,
+            "averagePages": 310,
+            "shortestBook": 120,
+            "longestBook": 510,
+            "bookCount": 6
+          }
         }
-      }
+      ]
     }
   }
 }
 ```
 
-Without `groupBy`, the response returns a single object (not an array) because all rows collapse into one result.
+| totalPages | averagePages | shortestBook | longestBook | bookCount |
+| --- | --- | --- | --- | --- |
+| 1860 | 310 | 120 | 510 | 6 |
 
-## Group by one or more fields
+### Group rows by one field
 
-Group rows by one or more columns and return aggregates per group.
+Use `groupBy(fields: [...])` to return one aggregate row per field value. Field names are GraphQL enum values, not strings.
 
-### Table schema
+#### SQL table
 
 ```sql
-CREATE TABLE sales (
-    id INT PRIMARY KEY,
-    year INT,
-    category NVARCHAR(50),
-    revenue DECIMAL(10,2),
-    quantity INT
+CREATE TABLE dbo.Books (
+  id INT NOT NULL PRIMARY KEY,
+  title NVARCHAR(200) NOT NULL,
+  [year] INT NOT NULL,
+  pages INT NOT NULL
 );
+
+INSERT INTO dbo.Books (id, title, [year], pages) VALUES
+  (1, N'GraphQL Basics', 2023, 120),
+  (2, N'Advanced APIs', 2023, 450),
+  (3, N'Data Patterns', 2023, 390),
+  (4, N'Cloud APIs', 2024, 140),
+  (5, N'Runtime Internals', 2024, 510),
+  (6, N'Query Tuning', 2024, 250);
 ```
 
-### GraphQL query
+| id | title | year | pages |
+| --- | --- | --- | --- |
+| 1 | GraphQL Basics | 2023 | 120 |
+| 2 | Advanced APIs | 2023 | 450 |
+| 3 | Data Patterns | 2023 | 390 |
+| 4 | Cloud APIs | 2024 | 140 |
+| 5 | Runtime Internals | 2024 | 510 |
+| 6 | Query Tuning | 2024 | 250 |
+
+#### GraphQL query
 
 ```graphql
 {
-  sales(
-    groupBy: { fields: ["year", "category"] }
-  ) {
-    items {
-      year
-      category
-    }
-    aggregates {
-      revenue {
-        sum
-        average
-      }
-      quantity {
-        sum
+  books(orderBy: { year: ASC }) {
+    groupBy(fields: [year]) {
+      fields { year }
+      aggregations {
+        totalPages: sum(field: pages)
+        averagePages: avg(field: pages)
       }
     }
   }
 }
 ```
 
-### Generated SQL
+#### Resulting SQL
 
 ```sql
-SELECT
-    [year],
-    [category],
-    SUM([revenue]) AS [sum],
-    AVG([revenue]) AS [average],
-    SUM([quantity]) AS [sum]
-FROM [dbo].[sales]
-GROUP BY [year], [category]
-FOR JSON PATH, INCLUDE_NULL_VALUES
+SELECT TOP 100
+    [table0].[year] AS [year],
+    SUM([table0].[pages]) AS [totalPages],
+    AVG([table0].[pages]) AS [averagePages]
+FROM [dbo].[Books] AS [table0]
+WHERE 1 = 1
+GROUP BY [table0].[year]
+ORDER BY [table0].[year] ASC
+FOR JSON PATH, INCLUDE_NULL_VALUES;
 ```
 
-### JSON response
+#### Resulting output
 
 ```json
 {
   "data": {
-    "sales": {
-      "items": [
-        { "year": 2023, "category": "Books" },
-        { "year": 2023, "category": "Electronics" },
-        { "year": 2024, "category": "Books" }
-      ],
-      "aggregates": {
-        "revenue": [
-          { "sum": 45000.00, "average": 150.00 },
-          { "sum": 120000.00, "average": 600.00 },
-          { "sum": 52000.00, "average": 173.33 }
-        ],
-        "quantity": [
-          { "sum": 300 },
-          { "sum": 200 },
-          { "sum": 300 }
-        ]
-      }
+    "books": {
+      "groupBy": [
+        {
+          "fields": {
+            "year": 2023
+          },
+          "aggregations": {
+            "totalPages": 960,
+            "averagePages": 320
+          }
+        },
+        {
+          "fields": {
+            "year": 2024
+          },
+          "aggregations": {
+            "totalPages": 900,
+            "averagePages": 300
+          }
+        }
+      ]
     }
   }
 }
 ```
 
-The response returns arrays for `items` and aggregates in the same order so you can align groups with their aggregated values.
+| year | totalPages | averagePages |
+| --- | --- | --- |
+| 2023 | 960 | 320 |
+| 2024 | 900 | 300 |
 
-## HAVING to filter aggregated results
+### Group rows from a view
 
-Use `having` to filter groups after aggregation. This filter is equivalent to SQL's `HAVING` clause.
+Aggregation also works for view-backed entities. Configure a key field for the view so Data API builder can expose it as an entity.
 
-### Table schema
+#### SQL view
 
 ```sql
-CREATE TABLE products (
-    id INT PRIMARY KEY,
-    category NVARCHAR(50),
-    price DECIMAL(10,2)
+CREATE TABLE dbo.Employees (
+  id INT NOT NULL PRIMARY KEY,
+  name NVARCHAR(100) NOT NULL,
+  department NVARCHAR(50) NOT NULL,
+  title NVARCHAR(100) NOT NULL,
+  age INT NOT NULL
 );
+
+INSERT INTO dbo.Employees (id, name, department, title, age) VALUES
+  (1, N'Ada', N'Engineering', N'Developer', 29),
+  (2, N'Ben', N'Engineering', N'Architect', 41),
+  (3, N'Cora', N'Sales', N'Account manager', 34),
+  (4, N'Diego', N'Sales', N'Sales lead', 52),
+  (5, N'Ema', N'Support', N'Support engineer', 25),
+  (6, N'Finn', N'Support', N'Support lead', 38),
+  (7, N'Gia', N'Engineering', N'Engineering manager', 45);
+
+CREATE VIEW dbo.EmployeeAgeReport
+AS
+SELECT id, department, age
+FROM dbo.Employees;
 ```
 
-### GraphQL query
+| id | department | age |
+| --- | --- | --- |
+| 1 | Engineering | 29 |
+| 2 | Engineering | 41 |
+| 3 | Sales | 34 |
+| 4 | Sales | 52 |
+| 5 | Support | 25 |
+| 6 | Support | 38 |
+| 7 | Engineering | 45 |
+
+Configure the view with `id` as the key field:
+
+```dotnetcli
+dab add EmployeeAgeReport --source dbo.EmployeeAgeReport --source.type view --source.key-fields id --permissions "anonymous:read"
+```
+
+#### GraphQL query
 
 ```graphql
 {
-  products(
-    groupBy: { fields: ["category"] }
-  ) {
-    items { category }
-    aggregates {
-      price {
-        sum(having: { gt: 10000 })
-        average
+  employeeAgeReports(orderBy: { department: ASC }) {
+    groupBy(fields: [department]) {
+      fields { department }
+      aggregations {
+        youngest: min(field: age)
+        oldest: max(field: age)
+        employeeCount: count(field: id)
       }
     }
   }
 }
 ```
 
-### Generated SQL
+#### Resulting SQL
 
 ```sql
-SELECT
-    [category],
-    SUM([price]) AS [sum],
-    AVG([price]) AS [average]
-FROM [dbo].[products]
-GROUP BY [category]
-HAVING SUM([price]) > 10000
-FOR JSON PATH, INCLUDE_NULL_VALUES
+SELECT TOP 100
+  [table0].[department] AS [department],
+  MIN([table0].[age]) AS [youngest],
+  MAX([table0].[age]) AS [oldest],
+  COUNT([table0].[id]) AS [employeeCount]
+FROM [dbo].[EmployeeAgeReport] AS [table0]
+WHERE 1 = 1
+GROUP BY [table0].[department]
+ORDER BY [table0].[department] ASC
+FOR JSON PATH, INCLUDE_NULL_VALUES;
 ```
 
-### JSON response
+#### Resulting output
 
-Only categories where the sum exceeds 10000 are returned:
+```json
+{
+  "data": {
+    "employeeAgeReports": {
+      "groupBy": [
+        {
+          "fields": {
+            "department": "Engineering"
+          },
+          "aggregations": {
+            "youngest": 29,
+            "oldest": 45,
+            "employeeCount": 3
+          }
+        },
+        {
+          "fields": {
+            "department": "Sales"
+          },
+          "aggregations": {
+            "youngest": 34,
+            "oldest": 52,
+            "employeeCount": 2
+          }
+        },
+        {
+          "fields": {
+            "department": "Support"
+          },
+          "aggregations": {
+            "youngest": 25,
+            "oldest": 38,
+            "employeeCount": 2
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+| department | youngest | oldest | employeeCount |
+| --- | --- | --- | --- |
+| Engineering | 29 | 45 | 3 |
+| Sales | 34 | 52 | 2 |
+| Support | 25 | 38 | 2 |
+
+### Filter rows before aggregation
+
+Use `filter` on the collection query to limit source rows before Data API builder groups and aggregates them.
+
+#### SQL view
+
+```sql
+CREATE TABLE dbo.Employees (
+  id INT NOT NULL PRIMARY KEY,
+  name NVARCHAR(100) NOT NULL,
+  department NVARCHAR(50) NOT NULL,
+  title NVARCHAR(100) NOT NULL,
+  age INT NOT NULL
+);
+
+INSERT INTO dbo.Employees (id, name, department, title, age) VALUES
+  (1, N'Ada', N'Engineering', N'Developer', 29),
+  (2, N'Ben', N'Engineering', N'Architect', 41),
+  (3, N'Cora', N'Sales', N'Account manager', 34),
+  (4, N'Diego', N'Sales', N'Sales lead', 52),
+  (5, N'Ema', N'Support', N'Support engineer', 25),
+  (6, N'Finn', N'Support', N'Support lead', 38),
+  (7, N'Gia', N'Engineering', N'Engineering manager', 45);
+
+CREATE VIEW dbo.EmployeeAgeReport
+AS
+SELECT id, department, age
+FROM dbo.Employees;
+```
+
+| id | department | age |
+| --- | --- | --- |
+| 1 | Engineering | 29 |
+| 2 | Engineering | 41 |
+| 3 | Sales | 34 |
+| 4 | Sales | 52 |
+| 5 | Support | 25 |
+| 6 | Support | 38 |
+| 7 | Engineering | 45 |
+
+#### GraphQL query
+
+```graphql
+{
+  employeeAgeReports(filter: { age: { gt: 30 } }, orderBy: { department: ASC }) {
+    groupBy(fields: [department]) {
+      fields { department }
+      aggregations {
+        youngest: min(field: age)
+        oldest: max(field: age)
+        employeeCount: count(field: id)
+      }
+    }
+  }
+}
+```
+
+#### Resulting SQL
+
+```sql
+SELECT TOP 100
+  [table0].[department] AS [department],
+  MIN([table0].[age]) AS [youngest],
+  MAX([table0].[age]) AS [oldest],
+  COUNT([table0].[id]) AS [employeeCount]
+FROM [dbo].[EmployeeAgeReport] AS [table0]
+WHERE [table0].[age] > @param1
+GROUP BY [table0].[department]
+ORDER BY [table0].[department] ASC
+FOR JSON PATH, INCLUDE_NULL_VALUES;
+```
+
+For this query, `@param1` is `30`.
+
+#### Resulting output
+
+```json
+{
+  "data": {
+    "employeeAgeReports": {
+      "groupBy": [
+        {
+          "fields": {
+            "department": "Engineering"
+          },
+          "aggregations": {
+            "youngest": 41,
+            "oldest": 45,
+            "employeeCount": 2
+          }
+        },
+        {
+          "fields": {
+            "department": "Sales"
+          },
+          "aggregations": {
+            "youngest": 34,
+            "oldest": 52,
+            "employeeCount": 2
+          }
+        },
+        {
+          "fields": {
+            "department": "Support"
+          },
+          "aggregations": {
+            "youngest": 38,
+            "oldest": 38,
+            "employeeCount": 1
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+| department | youngest | oldest | employeeCount |
+| --- | --- | --- | --- |
+| Engineering | 41 | 45 | 2 |
+| Sales | 34 | 52 | 2 |
+| Support | 38 | 38 | 1 |
+
+### Filter groups by using `having`
+
+Use `having` on an aggregate function to filter groups after aggregation. This pattern maps to a SQL `HAVING` clause.
+
+#### SQL table
+
+```sql
+CREATE TABLE dbo.Products (
+    id INT NOT NULL PRIMARY KEY,
+    category NVARCHAR(50) NOT NULL,
+    price DECIMAL(10,2) NOT NULL
+);
+
+INSERT INTO dbo.Products (id, category, price) VALUES
+    (1, N'Electronics', 5000.00),
+    (2, N'Electronics', 10000.00),
+    (3, N'Furniture', 4000.00),
+    (4, N'Furniture', 8000.00),
+    (5, N'Books', 100.00),
+    (6, N'Books', 200.00);
+```
+
+| id | category | price |
+| --- | --- | --- |
+| 1 | Electronics | 5000.00 |
+| 2 | Electronics | 10000.00 |
+| 3 | Furniture | 4000.00 |
+| 4 | Furniture | 8000.00 |
+| 5 | Books | 100.00 |
+| 6 | Books | 200.00 |
+
+#### GraphQL query
+
+```graphql
+{
+  products(orderBy: { category: ASC }) {
+    groupBy(fields: [category]) {
+      fields { category }
+      aggregations {
+        totalValue: sum(field: price, having: { gt: 10000 })
+        averagePrice: avg(field: price)
+      }
+    }
+  }
+}
+```
+
+#### Resulting SQL
+
+```sql
+SELECT TOP 100
+    [table0].[category] AS [category],
+    SUM([table0].[price]) AS [totalValue],
+    AVG([table0].[price]) AS [averagePrice]
+FROM [dbo].[Products] AS [table0]
+WHERE 1 = 1
+GROUP BY [table0].[category]
+HAVING SUM([table0].[price]) > @param1
+ORDER BY [table0].[category] ASC
+FOR JSON PATH, INCLUDE_NULL_VALUES;
+```
+
+For this query, `@param1` is `10000`.
+
+#### Resulting output
 
 ```json
 {
   "data": {
     "products": {
-      "items": [
-        { "category": "Electronics" },
-        { "category": "Furniture" }
-      ],
-      "aggregates": {
-        "price": [
-          { "sum": 15000.00, "average": 300.00 },
-          { "sum": 12000.00, "average": 400.00 }
-        ]
-      }
+      "groupBy": [
+        {
+          "fields": {
+            "category": "Electronics"
+          },
+          "aggregations": {
+            "totalValue": 15000,
+            "averagePrice": 7500
+          }
+        },
+        {
+          "fields": {
+            "category": "Furniture"
+          },
+          "aggregations": {
+            "totalValue": 12000,
+            "averagePrice": 6000
+          }
+        }
+      ]
     }
   }
 }
 ```
 
-### HAVING operators
-
-| Operator | SQL equivalent | Example |
+| category | totalValue | averagePrice |
 | --- | --- | --- |
-| `eq` | `=` | `having: { eq: 100 }` |
-| `neq` | `<>` | `having: { neq: 0 }` |
-| `gt` | `>` | `having: { gt: 1000 }` |
-| `gte` | `>=` | `having: { gte: 500 }` |
-| `lt` | `<` | `having: { lt: 100 }` |
-| `lte` | `<=` | `having: { lte: 50 }` |
+| Electronics | 15000 | 7500 |
+| Furniture | 12000 | 6000 |
 
-> [!NOTE]
-> Each `having` filter applies independently to its aggregate function. You can't create cross-aggregate conditions like "sum > 1000 OR count < 10" in a single GraphQL query.
+### Count distinct values
 
-## DISTINCT in aggregations
+Use `distinct: true` with `count` to count unique values in each group.
 
-Count unique values with `distinct: true`.
-
-### Table schema
+#### SQL table
 
 ```sql
-CREATE TABLE orders (
-    id INT PRIMARY KEY,
-    customer_id INT,
-    product_id INT
+CREATE TABLE dbo.Orders (
+    id INT NOT NULL PRIMARY KEY,
+    customer_id INT NOT NULL,
+    product_id INT NOT NULL
 );
+
+INSERT INTO dbo.Orders (id, customer_id, product_id) VALUES
+    (1, 101, 1),
+    (2, 101, 2),
+    (3, 101, 2),
+    (4, 101, 3),
+    (5, 101, 4),
+    (6, 101, 5),
+    (7, 102, 1),
+    (8, 102, 1),
+    (9, 102, 2),
+    (10, 102, 3);
 ```
 
-### GraphQL query
+| id | customer_id | product_id |
+| --- | --- | --- |
+| 1 | 101 | 1 |
+| 2 | 101 | 2 |
+| 3 | 101 | 2 |
+| 4 | 101 | 3 |
+| 5 | 101 | 4 |
+| 6 | 101 | 5 |
+| 7 | 102 | 1 |
+| 8 | 102 | 1 |
+| 9 | 102 | 2 |
+| 10 | 102 | 3 |
+
+#### GraphQL query
 
 ```graphql
 {
-  orders(
-    groupBy: { fields: ["customer_id"] }
-  ) {
-    items { customer_id }
-    aggregates {
-      product_id {
-        count(distinct: true)
-        count
+  orders(orderBy: { customer_id: ASC }) {
+    groupBy(fields: [customer_id]) {
+      fields { customer_id }
+      aggregations {
+        uniqueProducts: count(field: product_id, distinct: true)
+        totalOrders: count(field: id)
       }
     }
   }
 }
 ```
 
-### Generated SQL
+#### Resulting SQL
 
 ```sql
-SELECT
-    [customer_id],
-    COUNT(DISTINCT [product_id]) AS [count],
-    COUNT([product_id]) AS [count]
-FROM [dbo].[orders]
-GROUP BY [customer_id]
-FOR JSON PATH, INCLUDE_NULL_VALUES
+SELECT TOP 100
+    [table0].[customer_id] AS [customer_id],
+    COUNT(DISTINCT ([table0].[product_id])) AS [uniqueProducts],
+    COUNT([table0].[id]) AS [totalOrders]
+FROM [dbo].[Orders] AS [table0]
+WHERE 1 = 1
+GROUP BY [table0].[customer_id]
+ORDER BY [table0].[customer_id] ASC
+FOR JSON PATH, INCLUDE_NULL_VALUES;
 ```
 
-### JSON response
+#### Resulting output
 
 ```json
 {
   "data": {
     "orders": {
-      "items": [
-        { "customer_id": 101 },
-        { "customer_id": 102 }
-      ],
-      "aggregates": {
-        "product_id": [
-          { "count": 5 },
-          { "count": 3 }
-        ]
-      }
+      "groupBy": [
+        {
+          "fields": {
+            "customer_id": 101
+          },
+          "aggregations": {
+            "uniqueProducts": 5,
+            "totalOrders": 6
+          }
+        },
+        {
+          "fields": {
+            "customer_id": 102
+          },
+          "aggregations": {
+            "uniqueProducts": 3,
+            "totalOrders": 4
+          }
+        }
+      ]
     }
   }
 }
 ```
 
-The first `count` (with `distinct: true`) returns unique products per customer. The second `count` returns total orders.
+| customer_id | uniqueProducts | totalOrders |
+| --- | --- | --- |
+| 101 | 5 | 6 |
+| 102 | 3 | 4 |
 
-> [!NOTE]
-> When you request multiple aggregates on the same field, DAB returns them in the order you specified. Use aliases (for example, `uniqueProducts: count(distinct: true)`) to make responses self-documenting.
+## Common mistakes
 
-## Combine filters with aggregation
-
-Apply `filter` to rows before grouping, and `having` to groups after aggregation. Understanding the order of operations is critical:
-
-1. **Filter** (SQL `WHERE`) removes rows before grouping
-1. **Group by** collects remaining rows into groups
-1. **Aggregate** calculates sum/avg/min/max/count per group
-1. **Having** removes groups that don't match the condition
-
-### GraphQL query
-
-```graphql
-{
-  sales(
-    filter: { year: { gte: 2023 } }
-    groupBy: { fields: ["region"] }
-  ) {
-    items { region }
-    aggregates {
-      revenue { sum average }
-    }
-  }
-}
-```
-
-### Generated SQL
-
-```sql
-SELECT
-    [region],
-    SUM([revenue]) AS [sum],
-    AVG([revenue]) AS [average]
-FROM [dbo].[sales]
-WHERE [year] >= 2023
-GROUP BY [region]
-FOR JSON PATH, INCLUDE_NULL_VALUES
-```
-
-> [!TIP]
-> Use `filter` to exclude rows before aggregation. Use `having` to filter groups after aggregation.
-
-## Use aliases with aggregations
-
-Create meaningful field names using GraphQL aliases.
-
-```graphql
-{
-  products(
-    groupBy: { fields: ["category"] }
-  ) {
-    items { category }
-    aggregates {
-      price {
-        totalRevenue: sum
-        avgPrice: average
-        cheapest: min
-        mostExpensive: max
-        productCount: count
-      }
-    }
-  }
-}
-```
-
-## Schema introspection
-
-Use introspection to see which aggregates are available for an entity.
-
-```graphql
-{
-  __type(name: "BooksAggregates") {
-    fields {
-      name
-      type { name }
-    }
-  }
-}
-```
-
-Numeric fields expose `sum`, `average`, `min`, `max`, and `count`. Non-numeric fields expose `count`.
-
-## Tips and limitations
-
-- Aggregation and `groupBy` apply to SQL Server, Azure SQL, Microsoft Fabric SQL, and Azure Synapse Dedicated SQL pool only.
-- Aggregates run on numeric fields; `count` works on any field. Tables without numeric columns only expose `count`.
-- Grouping applies to fields on the same entity (no cross-entity groupBy).
-- Large aggregations can be expensive; index your groupBy columns and filter rows before grouping when possible.
-- Create indexes on frequently used `groupBy` columns to improve query performance.
-
-## Troubleshooting
-
-### Error: Field doesn't support aggregation
-
-**Cause**: Using `sum`, `average`, `min`, or `max` on a non-numeric field.
-
-**Solution**:
-
-- Use schema introspection to verify field types.
-- Use `count` for non-numeric fields.
-- Check field mappings if using custom field names.
-
-### Error: Aggregation nodes not found
-
-**Cause**: Entity has no numeric columns.
-
-**Solution**:
-
-- Verify table schema has at least one numeric column.
-- Use `count` aggregates on non-numeric fields if needed.
-
-### Slow aggregation queries
-
-**Cause**: Large tables without proper indexes.
-
-**Solution**:
-
-- Create indexes on `groupBy` columns.
-- Use `filter` to limit rows before aggregation.
-- Use `having` to reduce the number of groups returned.
+- Select `groupBy` inside the collection field. Don't pass `groupBy` as a collection argument.
+- Use `aggregations`, not `aggregates`.
+- Use `avg`, not `average`.
+- Use field enum values, such as `fields: [year]`. Don't quote field names.
+- Don't select `items` and `groupBy` in the same collection query.
+- When you group by fields, select only the same fields inside the `fields` object.
 
 ## Related content
 
-- [GraphQL in Data API builder](graphql.md)
+- [GraphQL in Data API builder](overview.md)
+- [Database views in the GraphQL API](views.md)
+- [Use filters with GraphQL](../../keywords/filter-graphql.md)
+- [Order GraphQL query results](../../keywords/orderby-graphql.md)
 - [Feature availability](../../feature-availability.md)
-
-## Next step
-
-> [!div class="nextstepaction"]
-> [Check feature availability](../../feature-availability.md)
