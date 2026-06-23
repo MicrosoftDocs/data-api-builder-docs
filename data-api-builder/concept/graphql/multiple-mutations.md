@@ -1,13 +1,13 @@
 ---
 title: Multiple mutations in GraphQL
 description: Use multiple mutations in Data API builder to batch related GraphQL mutations together as a single operation.
-author: seesharprun
-ms.author: sidandrews
+author: JerryNixon
+ms.author: jnixon
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: how-to
-ms.date: 06/11/2025
-# Customer Intent: As a developer, I want to implement multiple mutations, so that I can rudimentary transactions.
+ms.date: 06/22/2026
+# Customer Intent: As a developer, I want to implement multiple mutations so that I can create related records in one operation.
 ---
 
 # Multiple mutations in GraphQL for Data API builder
@@ -300,5 +300,5 @@ To wrap up things, use the DAB CLI to run the API and test the GraphQL endpoint 
 
 ## Related content
 
-- [Relationships](../api/relationships.md)
-- [GraphQL](graphql.md)
+- [Relationships](../../configuration/entities.md#relationships-entity-name-entities)
+- [GraphQL](overview.md)
