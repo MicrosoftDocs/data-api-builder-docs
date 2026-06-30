@@ -293,6 +293,9 @@
     - name: Azure Kubernetes Service
       href: deployment/azure-kubernetes-service.md
       displayName: azure, aks, kubernetes, publish, deploy
+    - name: Hosted MCP
+      href: /azure/logic-apps/connector-namespace/hosted-mcp-quickstart?pivots=sql
+      displayName: azure, logic apps, connector namespace, hosted mcp, publish, deploy
     - name: Run locally (container)
       href: deployment/local-container.md
       displayName: docker, container, dab, run
