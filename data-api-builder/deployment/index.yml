@@ -92,6 +92,19 @@ landingContent:
           - text: Deployment best practices
             url: ../concept/security/best-practices.md
 
+  - title: Hosted MCP in Connector Namespace
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: "Quickstart: Create a hosted MCP server in a connector namespace"
+            url: /azure/logic-apps/connector-namespace/hosted-mcp-quickstart?pivots=sql
+      - linkListType: reference
+        links:
+          - text: Azure Connector Namespace overview
+            url: /azure/logic-apps/connector-namespace/connector-namespace-overview
+          - text: Hosted MCP servers
+            url: /azure/logic-apps/connector-namespace/connector-namespace-hosted-mcp
+
   - title: Local Docker container
     linkLists:
       - linkListType: how-to-guide
