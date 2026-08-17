@@ -1,12 +1,12 @@
 ---
 title: Feature availability
 description: Review available features in Data API builder for Azure Databases. This article includes features across multiple databases and API platforms.
-author: seesharprun
-ms.author: sidandrews
+author: jerrynixon
+ms.author: jnixon
 ms.reviewer: jerrynixon
 ms.service: data-api-builder
 ms.topic: reference
-ms.date: 03/26/2026
+ms.date: 08/17/2026
 ---
 
 # Feature availability for Data API builder
@@ -198,6 +198,7 @@ Data API builder runs in any environment with container support. The following a
 | [DML-tool: DELETE](mcp/data-manipulation-language-tools.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | [DML-tool: EXECUTE](mcp/data-manipulation-language-tools.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | [DML-tool: DESCRIBE](mcp/data-manipulation-language-tools.md) | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| [DML-tool: AGGREGATE](mcp/data-manipulation-language-tools.md#aggregate_records) | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✅ Yes |
 | [Stored Procedure as Tool](mcp/data-manipulation-language-tools.md) | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✅ Yes |
 | [Custom MCP Tools](mcp/data-manipulation-language-tools.md#custom-tools-for-stored-procedures) | ✅ Yes | ✖️ No | ✖️ No | ✖️ No | ✅ Yes |
 | Server Instructions | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
@@ -295,5 +296,4 @@ Azure Cosmos DB for NoSQL is schema-agnostic, so data type restrictions don't ap
 ³ MCP (Model Context Protocol) is an endpoint-level capability, not database-specific.
 
 ⁴ Managed identity support uses Azure `DefaultAzureCredential`, which supports both System-Assigned (SAMI) and User-Assigned (UAMI) managed identities. UAMI requires setting the `AZURE_CLIENT_ID` environment variable.
-
 ⚠️ **Partial** for Cosmos DB mutations means basic create, update, and delete operations are supported, but not all mutation types (such as multi-mutation) are available.
