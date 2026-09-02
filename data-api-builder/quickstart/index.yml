@@ -11,7 +11,7 @@ metadata:
   ms.reviewer: sidandrews
   ms.service: data-api-builder
   ms.topic: landing-page
-  ms.date: 05/29/2026
+  ms.date: 09/02/2026
 
 landingContent:
   - title: "SQL Server (mssql)"
@@ -46,12 +46,6 @@ landingContent:
             url: authorization-sql-row-level-security.md
           - text: On-behalf-of to Azure SQL
             url: authentication-on-behalf-of.md
-      - linkListType: sample
-        links:
-          - text: Devcontainer with Azure SQL
-            url: /samples/microsoft/vscode-remote-try-dab/devcontainer
-          - text: Library app with Blazor and Azure SQL
-            url: /samples/azure-samples/azure-sql-library-app-blazor/azure-sql-library-app-blazor
       - linkListType: reference
         links:
           - text: Database-specific features
